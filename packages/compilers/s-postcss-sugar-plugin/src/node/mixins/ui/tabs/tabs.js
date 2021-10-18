@@ -37,7 +37,7 @@ export default function ({ params, atRule, applyNoScopes, replaceWith, }) {
     const vars = [];
     if (finalParams.outline) {
         vars.push(`
-        & > * {
+        & > *:focus:not(:hover) {
           @sugar.outline;
         }
       `);

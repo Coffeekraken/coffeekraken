@@ -48,12 +48,16 @@ export default function ({
 
     vars.push(`
         opacity: ${__themeVar('helpers.disabled.opacity')} !important;
-        cursor: not-allowed !important;
-        user-select: none !important;
-
+        
         &:hover, &:focus, &:active {
             opacity: ${__themeVar('helpers.disabled.opacity')} !important;
         }
+
+        &, * {
+            cursor: not-allowed !important;
+            user-select: none !important;
+        }
+
     `);
 
     replaceWith(vars);

@@ -1,18 +1,18 @@
 import __SProcess from '@coffeekraken/s-process';
 import __SMarkdownBuilderBuildParamsInterface from '../node/interface/SMarkdownBuilderBuildParamsInterface';
 import __SMarkdownBuilder from '../node/SMarkdownBuilder';
+import __SPromise from '@coffeekraken/s-promise';
 
+export default function build(stringArgs = '') {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        const builder = new __SMarkdownBuilder({
+            builder: {
+                interface: __SMarkdownBuilderBuildParamsInterface,
+            },
+        });
 
-export default async function build(stringArgs = '') {
-
-    const builder = new __SMarkdownBuilder();
-
-    const pro = await __SProcess.from(
-        builder.build.bind(builder)
-    , {
-        process: {
-          interface: __SMarkdownBuilderBuildParamsInterface
-        }   
+        const promise = builder.build(stringArgs);
+        pipe(promise);
+        resolve(await promise);
     });
-    pro.run(stringArgs);
 }

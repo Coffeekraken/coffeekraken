@@ -130,7 +130,7 @@ export default function ({
             *                   <a tabindex="0">${__faker.name.findName()}</a>
             *               </li>
             *           </ul>
-            *           <li>
+            *           <li class="s-disabled">
         *                   <i class="s-icon:file"></i>
         *                   <a tabindex="0">${__faker.name.findName()}</a>
         *               </li>
@@ -259,6 +259,7 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
       .s-fs-tree {
+        @sugar.color(${finalParams.defaultColor});
         @sugar.ui.fsTree();
       }
   `);

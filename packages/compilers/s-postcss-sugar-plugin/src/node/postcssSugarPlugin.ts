@@ -158,7 +158,7 @@ const plugin = (settings: any = {}) => {
                 const { default: processorFn } = await import(
                     `${__dirname()}/postProcessors/${path}`
                 );
-                processorFn({
+                await processorFn({
                     root,
                     sharedData,
                 });

@@ -31,6 +31,7 @@
     "fantasticon": "^1.2.2",
     "glob": "^7.1.6",
     "known-css-properties": "^0.23.0",
+    "oslllo-svg-fixer": "^1.4.1",
     "parse-function": "^5.6.10",
     "precss": "^4.0.0",
     "yaml": "^1.10.2"

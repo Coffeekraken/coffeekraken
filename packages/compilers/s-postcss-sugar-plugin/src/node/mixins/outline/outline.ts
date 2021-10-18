@@ -3,11 +3,19 @@ import __astNodesToString from '../../utils/astNodesToString';
 import __theme from '../../utils/theme';
 
 class postcssSugarPluginStateOutlineMixinInterface extends __SInterface {
-    static definition = {};
+    static definition = {
+        where: {
+            type: 'String',
+            values: ['after', 'before', 'element'],
+            default: 'after',
+        },
+    };
 }
 export { postcssSugarPluginStateOutlineMixinInterface as interface };
 
-export interface postcssSugarPluginStateOutlineMixinParams {}
+export interface postcssSugarPluginStateOutlineMixinParams {
+    where: 'after' | 'before' | 'element';
+}
 
 /**
  * @name           outline
@@ -41,10 +49,14 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams = <postcssSugarPluginStateOutlineMixinParams>{
+        where: 'after',
         ...(params ?? {}),
     };
 
     const vars: string[] = [];
+
+    let sel = `&:${finalParams.where}`;
+    if (finalParams.where === 'element') sel = '&';
 
     vars.push(`
 
@@ -59,14 +71,21 @@ export default function ({
 
         position: relative;
         
-        &:after {
+        ${sel} {
             animation: s-outline-in sugar.theme(timing.default) sugar.theme(easing.default) forwards;
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            border-radius: sugar.theme(ui.outline.borderRadius);
             box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.3);
+            
+            ${
+                finalParams.where !== 'element'
+                    ? `
+                border-radius: sugar.theme(ui.outline.borderRadius);
+                content: '';
+                position: absolute;
+                top: 0; left: 0;
+                width: 100%; height: 100%;
+            `
+                    : ''
+            }
         }
     `);
 

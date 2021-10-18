@@ -1,4 +1,4 @@
-import __SBuilder from '@coffeekraken/s-builder';
+import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
@@ -47,7 +47,7 @@ import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilder
 
 export interface ISMarkdownBuilderSettings {}
 
-export interface ISMarkdownBuilderCtorSettings {
+export interface ISMarkdownBuilderCtorSettings extends ISBuilderCtorSettings {
     markdownBuilder: Partial<ISMarkdownBuilderSettings>;
 }
 
@@ -91,6 +91,24 @@ export default class SMarkdownBuilder extends __SBuilder {
     static _registeredLayouts: any = {};
     static _registeredPartials: any = {};
     static _registeredSections: any = {};
+    static _registeredTransformers: any = {};
+
+    /**
+     * @name              registerTransformer
+     * @type                Function
+     * @static
+     *
+     * This static method allows you to register a new transformer
+     *
+     * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static registerTransformer(name: string, transformerPath: string): void {
+        // @ts-ignore
+        this._registeredTransformers[name] = transformerPath;
+    }
 
     /**
      * @name              registerHelper
@@ -123,7 +141,10 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerLayout(name: string, layout: Record<'markdown' | 'html', string>): void {
+    static registerLayout(
+        name: string,
+        layout: Record<'markdown' | 'html', string>,
+    ): void {
         // @ts-ignore
         this._registeredLayouts[name] = {
             ...layout,
@@ -144,7 +165,10 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerPartial(name: string, partial: Record<'markdown' | 'html', string>): void {
+    static registerPartial(
+        name: string,
+        partial: Record<'markdown' | 'html', string>,
+    ): void {
         // @ts-ignore
         this._registeredPartials[name] = partial;
     }
@@ -162,7 +186,10 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerSection(name: string, section: Record<'markdown' | 'html', string>): void {
+    static registerSection(
+        name: string,
+        section: Record<'markdown' | 'html', string>,
+    ): void {
         // @ts-ignore
         this._registeredSections[name] = {
             ...section,
@@ -218,6 +245,16 @@ export default class SMarkdownBuilder extends __SBuilder {
 
         // register layouts from config
         const config = __SSugarConfig.get('markdownBuilder');
+        if (config.transformers) {
+            Object.keys(config.transformers).forEach((transformerName) => {
+                const transformerPath = config.transformers[transformerName];
+                // @ts-ignore
+                this.constructor.registerTransformer(
+                    transformerName,
+                    transformerPath,
+                );
+            });
+        }
         if (config.helpers) {
             Object.keys(config.helpers).forEach((helperName) => {
                 const helperPath = config.helpers[helperName];
@@ -263,7 +300,9 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _build(params: ISMarkdownBuilderBuildParams): Promise<ISMarkdownBuilderResult[]> {
+    _build(
+        params: ISMarkdownBuilderBuildParams,
+    ): Promise<ISMarkdownBuilderResult[]> {
         if (params.preset && params.preset.length) {
             return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
                 const buildedPresets = {};
@@ -278,7 +317,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const newParams = <ISMarkdownBuilderBuildParams>(
                         __deepMerge(
                             __SMarkdownBuilderBuildParamsInterface.defaults(),
-                            __SSugarConfig.get(`markdownBuilder.presets.${preset}`),
+                            __SSugarConfig.get(
+                                `markdownBuilder.presets.${preset}`,
+                            ),
                         )
                     );
 
@@ -304,16 +345,25 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     if (params.inPath) {
                         params.inDir = __folderPath(params.inPath);
-                        params.glob = __path.relative(params.inDir, params.inPath);
+                        params.glob = __path.relative(
+                            params.inDir,
+                            params.inPath,
+                        );
                         // @ts-ignore
                         delete params.inPath;
                     }
 
                     // register helpers and layouts in handlebars
                     // @ts-ignore
-                    Object.keys(this.constructor._registeredLayouts ?? []).forEach((layoutName) => {
+                    Object.keys(
+                        this.constructor._registeredLayouts ?? [],
+                    ).forEach((layoutName) => {
                         // @ts-ignore
-                        if (!this.constructor._registeredLayouts[layoutName]?.[params.target]) {
+                        if (
+                            !this.constructor._registeredLayouts[layoutName]?.[
+                                params.target
+                            ]
+                        ) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
                             );
@@ -321,14 +371,28 @@ export default class SMarkdownBuilder extends __SBuilder {
                         // @ts-ignore
                         const layoutStr = __fs
                             // @ts-ignore
-                            .readFileSync(this.constructor._registeredLayouts[layoutName][params.target], 'utf8')
+                            .readFileSync(
+                                this.constructor._registeredLayouts[layoutName][
+                                    params.target
+                                ],
+                                'utf8',
+                            )
                             .toString();
-                        handlebars.registerPartial(`layout-${layoutName}`, layoutStr);
+                        handlebars.registerPartial(
+                            `layout-${layoutName}`,
+                            layoutStr,
+                        );
                     });
                     // @ts-ignore
-                    Object.keys(this.constructor._registeredSections ?? []).forEach((sectionName) => {
+                    Object.keys(
+                        this.constructor._registeredSections ?? [],
+                    ).forEach((sectionName) => {
                         // @ts-ignore
-                        if (!this.constructor._registeredSections[sectionName]?.[params.target]) {
+                        if (
+                            !this.constructor._registeredSections[
+                                sectionName
+                            ]?.[params.target]
+                        ) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
                             );
@@ -336,14 +400,28 @@ export default class SMarkdownBuilder extends __SBuilder {
                         // @ts-ignore
                         const sectionStr = __fs
                             // @ts-ignore
-                            .readFileSync(this.constructor._registeredSections[sectionName][params.target], 'utf8')
+                            .readFileSync(
+                                this.constructor._registeredSections[
+                                    sectionName
+                                ][params.target],
+                                'utf8',
+                            )
                             .toString();
-                        handlebars.registerPartial(`section-${sectionName}`, sectionStr);
+                        handlebars.registerPartial(
+                            `section-${sectionName}`,
+                            sectionStr,
+                        );
                     });
                     // @ts-ignore
-                    Object.keys(this.constructor._registeredPartials ?? []).forEach((partialName) => {
+                    Object.keys(
+                        this.constructor._registeredPartials ?? [],
+                    ).forEach((partialName) => {
                         // @ts-ignore
-                        if (!this.constructor._registeredPartials[partialName]?.[params.target]) {
+                        if (
+                            !this.constructor._registeredPartials[
+                                partialName
+                            ]?.[params.target]
+                        ) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
                             );
@@ -351,16 +429,33 @@ export default class SMarkdownBuilder extends __SBuilder {
                         // @ts-ignore
                         const partialStr = __fs
                             // @ts-ignore
-                            .readFileSync(this.constructor._registeredPartials[partialName][params.target], 'utf8')
+                            .readFileSync(
+                                this.constructor._registeredPartials[
+                                    partialName
+                                ][params.target],
+                                'utf8',
+                            )
                             .toString();
                         handlebars.registerPartial(partialName, partialStr);
                     });
                     // @ts-ignore
-                    for (let i = 0; i < Object.keys(this.constructor._registeredHelpers ?? []).length; i++) {
+                    for (
+                        let i = 0;
+                        i <
+                        Object.keys(this.constructor._registeredHelpers ?? [])
+                            .length;
+                        i++
+                    ) {
                         // @ts-ignore
-                        const helperName = Object.keys(this.constructor._registeredHelpers ?? [])[i];
+                        const helperName = Object.keys(
+                            this.constructor._registeredHelpers ?? [],
+                        )[i];
                         // @ts-ignore
-                        const helperFn = (await import(this.constructor._registeredHelpers[helperName])).default;
+                        const helperFn = (
+                            await import(
+                                this.constructor._registeredHelpers[helperName]
+                            )
+                        ).default;
                         handlebars.registerHelper(helperName, helperFn);
                     }
 
@@ -379,7 +474,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                     }
 
                     // either no outDir with inDir or inverse...
-                    if (params.save && ((params.outDir && !params.inDir) || (!params.outDir && params.inDir))) {
+                    if (
+                        params.save &&
+                        ((params.outDir && !params.inDir) ||
+                            (!params.outDir && params.inDir))
+                    ) {
                         throw new Error(
                             `<red>[${this.constructor.name}]</red> The param "<yellow>outDir</yellow>" MUST be used alongside the params "<yellow>inDir</yellow>" and "<yellow>glob</yellow>"`,
                         );
@@ -395,11 +494,17 @@ export default class SMarkdownBuilder extends __SBuilder {
                         outPath: params.outPath,
                     };
                     if (__fs.existsSync(path)) {
-                        sourceObj.inputStr = __path.relative(process.cwd(), path);
+                        sourceObj.inputStr = __path.relative(
+                            process.cwd(),
+                            path,
+                        );
                         // @ts-ignore
                         sourceObj.files.push(path);
                     } else if (__SGlob.isGlob(path)) {
-                        sourceObj.inputStr = __path.relative(process.cwd(), path);
+                        sourceObj.inputStr = __path.relative(
+                            process.cwd(),
+                            path,
+                        );
                         // @ts-ignore
                         sourceObj.files = __SGlob.resolve(path, {
                             SFile: false,
@@ -410,7 +515,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                         );
                     }
                     if (sourceObj.outDir) {
-                        sourceObj.outputStr = __path.relative(process.cwd(), sourceObj.outDir) || '.';
+                        sourceObj.outputStr =
+                            __path.relative(process.cwd(), sourceObj.outDir) ||
+                            '.';
                     }
 
                     emit('log', {
@@ -447,27 +554,39 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const filePath = sourceObj.files[j];
 
                         const buildObj = {
-                            data: __fs.readFileSync(filePath, 'utf8').toString(),
+                            data: __fs
+                                .readFileSync(filePath, 'utf8')
+                                .toString(),
                             output: '',
                         };
                         if (sourceObj.outPath) {
                             buildObj.output = sourceObj.outPath;
                         } else if (sourceObj.inDir && sourceObj.outDir) {
-                            buildObj.output = `${sourceObj.outDir}/${__path.relative(sourceObj.inDir, filePath)}`;
+                            buildObj.output = `${
+                                sourceObj.outDir
+                            }/${__path.relative(sourceObj.inDir, filePath)}`;
                         }
 
                         let currentTransformedString = buildObj.data;
 
-                        const tplFn = handlebars.compile(currentTransformedString);
+                        const tplFn = handlebars.compile(
+                            currentTransformedString,
+                        );
                         currentTransformedString = tplFn(viewData);
 
                         // marked if html is the target
                         if (params.target === 'html') {
-                            currentTransformedString = __marked(currentTransformedString, {});
+                            currentTransformedString = __marked(
+                                currentTransformedString,
+                                {},
+                            );
                         }
 
                         if (params.save) {
-                            __writeFileSync(buildObj.output, currentTransformedString);
+                            __writeFileSync(
+                                buildObj.output,
+                                currentTransformedString,
+                            );
                             const file = new __SFile(buildObj.output);
                             emit('log', {
                                 value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
@@ -476,7 +595,9 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         const res: ISMarkdownBuilderResult = {
                             inputFile: __SFile.new(filePath),
-                            outputFile: params.save ? __SFile.new(buildObj.output) : undefined,
+                            outputFile: params.save
+                                ? __SFile.new(buildObj.output)
+                                : undefined,
                             code: currentTransformedString,
                         };
 

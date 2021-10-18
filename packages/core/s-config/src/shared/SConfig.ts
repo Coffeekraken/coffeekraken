@@ -136,8 +136,13 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static _registeredPostprocess: any = {};
-    static registerPostprocess(configId: string, configKey: string, postprocessFn: ISConfigPostprocessFn) {
-        if (!this._registeredPostprocess[configId]) this._registeredPostprocess[configId] = {};
+    static registerPostprocess(
+        configId: string,
+        configKey: string,
+        postprocessFn: ISConfigPostprocessFn,
+    ) {
+        if (!this._registeredPostprocess[configId])
+            this._registeredPostprocess[configId] = {};
         this._registeredPostprocess[configId][configKey] = postprocessFn;
     }
 
@@ -156,8 +161,13 @@ export default class SConfig {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static _registeredPreprocesses: any = {};
-    static registerPreprocess(configId: string, configKey: string, preprocessFn: ISConfigPreprocessFn) {
-        if (!this._registeredPreprocesses[configId]) this._registeredPreprocesses[configId] = {};
+    static registerPreprocess(
+        configId: string,
+        configKey: string,
+        preprocessFn: ISConfigPreprocessFn,
+    ) {
+        if (!this._registeredPreprocesses[configId])
+            this._registeredPreprocesses[configId] = {};
         this._registeredPreprocesses[configId][configKey] = preprocessFn;
     }
 
@@ -187,7 +197,9 @@ export default class SConfig {
     constructor(name, settings: ISConfigSettings = {}) {
         // store the name
         if (!/^[a-zA-Z0-9_-]+$/.test(name)) {
-            throw new Error(`The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`);
+            throw new Error(
+                `The name of an SConfig instance can contain only letters like [a-zA-Z0-9_-]...`,
+            );
         }
 
         // save the settings name
@@ -198,7 +210,10 @@ export default class SConfig {
             {
                 env: {
                     env: __SEnv.get('env') ?? 'dev',
-                    platform: __SEnv.get('platform') ?? __isNode() ? 'node' : 'browser',
+                    platform:
+                        __SEnv.get('platform') ?? __isNode()
+                            ? 'node'
+                            : 'browser',
                 },
                 adapters: [],
                 defaultAdapter: null,
@@ -219,7 +234,9 @@ export default class SConfig {
         this._settings.adapters.forEach((adapter) => {
             if (!adapter instanceof __SConfigAdapter) {
                 throw new Error(
-                    `You have specified the adapter "${adapter.name || 'unknown'}" as adapter for your "${
+                    `You have specified the adapter "${
+                        adapter.name || 'unknown'
+                    }" as adapter for your "${
                         this.id
                     }" SConfig instance but this adapter does not extends the SConfigAdapter class...`,
                 );
@@ -243,30 +260,48 @@ export default class SConfig {
             this._settings.defaultAdapter = Object.keys(this._adapters)[0];
         }
 
+        function resolveConfig(string, matches, config, path) {
+            return () => {
+                for (let i = 0; i < matches.length; i++) {
+                    const match = matches[i];
+                    const value = __get(
+                        config,
+                        match.replace('[config.', '').replace(']', ''),
+                    );
+
+                    if (value === undefined) {
+                        throw new Error(
+                            `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`,
+                        );
+                    }
+                    if (string === match) return value;
+
+                    // if (match.includes('storage.src.rootDir')) {
+                    //     console.log('MA', match, value);
+                    // }
+
+                    string = string.replace(match, value);
+                }
+
+                // @todo        find a way to avoid this redondant part
+                if (string.includes('[config.')) {
+                    const mtchs = string.match(/\[config.[a-zA-Z0-9.\-_]+\]/gm);
+                    mtchs.forEach((mt) => {
+                        const p = mt
+                            .replace(/^\[config\./, '')
+                            .replace(/\]$/, '');
+                        string = string.replace(mt, __get(config, p));
+                    });
+                }
+
+                return string;
+            };
+        }
+
         // register the default resolver "[config...]"
         this._settings.resolvers.unshift({
             match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
-            resolve(string, matches, config, path) {
-                return () => {
-                    for (let i = 0; i < matches.length; i++) {
-                        const match = matches[i];
-                        const value = __get(config, match.replace('[config.', '').replace(']', ''));
-
-                        // if (match.includes('config.themeDefaultLight')) {
-                        //     // console.log('MA', match, value);
-                        // }
-
-                        if (value === undefined) {
-                            throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`,
-                            );
-                        }
-                        if (string === match) return value;
-                        string = string.replace(match, value);
-                    }
-                    return string;
-                };
-            },
+            resolve: resolveConfig,
         });
 
         // register the default resolver "[extends...]"
@@ -276,8 +311,16 @@ export default class SConfig {
                 return () => {
                     for (let i = 0; i < matches.length; i++) {
                         const match = matches[i];
-                        const ext = __get(config, path.slice(0, 1)[0] + '.extends');
-                        const value = __get(config, `${ext}.${match.replace('[extends.', '').replace(']', '')}`);
+                        const ext = __get(
+                            config,
+                            path.slice(0, 1)[0] + '.extends',
+                        );
+                        const value = __get(
+                            config,
+                            `${ext}.${match
+                                .replace('[extends.', '')
+                                .replace(']', '')}`,
+                        );
                         if (value === undefined) {
                             throw new Error(
                                 `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" extends config value does not exiats...`,
@@ -301,7 +344,9 @@ export default class SConfig {
                         // console.log(`${path.slice(0, 1)[0]}.${match.replace('[this.', '').replace(']', '')}`);
                         const value = __get(
                             config,
-                            `${path.slice(0, 1)[0]}.${match.replace('[this.', '').replace(']', '')}`,
+                            `${path.slice(0, 1)[0]}.${match
+                                .replace('[this.', '')
+                                .replace(']', '')}`,
                         );
                         if (value === undefined) {
                             throw new Error(
@@ -373,13 +418,20 @@ export default class SConfig {
             );
         }
 
-        if (!isUpdate && Object.keys(this._adapters[adapter].config).length !== 0) {
+        if (
+            !isUpdate &&
+            Object.keys(this._adapters[adapter].config).length !== 0
+        ) {
             return this._adapters[adapter].config;
         }
 
         let config = {};
 
-        const loadedConfig = await this._adapters[adapter].instance.load(isUpdate, this._settings.env, config);
+        const loadedConfig = await this._adapters[adapter].instance.load(
+            isUpdate,
+            this._settings.env,
+            config,
+        );
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
             config[configId] = loadedConfig[configId];
@@ -388,13 +440,19 @@ export default class SConfig {
         // filter depending on platform
         Object.keys(config).forEach((configId) => {
             const configObj = config[configId];
-            if (configObj.metas?.platform && configObj.metas.platform.indexOf(__SEnv.get('platform')) === -1) {
+            if (
+                configObj.metas?.platform &&
+                configObj.metas.platform.indexOf(__SEnv.get('platform')) === -1
+            ) {
                 delete config[configId];
             }
         });
 
         function extendsConfigIfNeeded(configToExtends, configName) {
-            if (configToExtends.extends && typeof configToExtends.extends === 'string') {
+            if (
+                configToExtends.extends &&
+                typeof configToExtends.extends === 'string'
+            ) {
                 const extend = configToExtends.extends;
 
                 if (!config[extend]) {
@@ -403,10 +461,16 @@ export default class SConfig {
                     );
                 }
 
-                const extendsConfig = extendsConfigIfNeeded(Object.assign({}, config[extend]), configName);
+                const extendsConfig = extendsConfigIfNeeded(
+                    Object.assign({}, config[extend]),
+                    configName,
+                );
 
                 // delete configToExtends.extends;
-                const newExtendedConfig = __deepMerge(extendsConfig, configToExtends);
+                const newExtendedConfig = __deepMerge(
+                    extendsConfig,
+                    configToExtends,
+                );
                 // delete newExtendedConfig.extends;
 
                 return newExtendedConfig;
@@ -417,7 +481,10 @@ export default class SConfig {
 
         // make a simple [] correspondance check
         __deepMap(config, ({ prop, value, path }) => {
-            if (typeof value === 'string' && value.split('[').length !== value.split(']').length) {
+            if (
+                typeof value === 'string' &&
+                value.split('[').length !== value.split(']').length
+            ) {
                 throw new Error(
                     `<red>[${this.constructor.name}]</red> We think that you've made a mistake in your config file at path "<yellow>${path}</yellow>" with the value "<cyan>${value}</cyan>"`,
                 );
@@ -425,25 +492,40 @@ export default class SConfig {
         });
 
         if (this.constructor._registeredPreprocesses[this.id]) {
-            for (let k = 0; k < Object.keys(this.constructor._registeredPreprocesses[this.id]).length; k++) {
-                const configKey = Object.keys(this.constructor._registeredPreprocesses[this.id])[k];
-                config[configKey] = await this.constructor._registeredPreprocesses[this.id][configKey](
-                    config[configKey],
-                    config,
-                );
+            for (
+                let k = 0;
+                k <
+                Object.keys(this.constructor._registeredPreprocesses[this.id])
+                    .length;
+                k++
+            ) {
+                const configKey = Object.keys(
+                    this.constructor._registeredPreprocesses[this.id],
+                )[k];
+                config[configKey] =
+                    await this.constructor._registeredPreprocesses[this.id][
+                        configKey
+                    ](config[configKey], config);
             }
         }
 
         // handle the "extends" global property
         Object.keys(config).forEach((configName) => {
-            config[configName] = extendsConfigIfNeeded(config[configName], configName);
+            config[configName] = extendsConfigIfNeeded(
+                config[configName],
+                configName,
+            );
         });
 
         // resolve environment properties like @dev
         config = this._resolveEnvironments(config);
 
         this._settings.resolvers.forEach((resolverObj) => {
-            config = this._resolveInternalReferences(config, config, resolverObj);
+            config = this._resolveInternalReferences(
+                config,
+                config,
+                resolverObj,
+            );
         });
 
         this._restPaths
@@ -470,17 +552,27 @@ export default class SConfig {
             });
 
         if (this.constructor._registeredPostprocess[this.id]) {
-            for (let k = 0; k < Object.keys(this.constructor._registeredPostprocess[this.id]).length; k++) {
-                const configKey = Object.keys(this.constructor._registeredPostprocess[this.id])[k];
-                config[configKey] = await this.constructor._registeredPostprocess[this.id][configKey](
-                    config[configKey],
-                    config,
-                );
+            for (
+                let k = 0;
+                k <
+                Object.keys(this.constructor._registeredPostprocess[this.id])
+                    .length;
+                k++
+            ) {
+                const configKey = Object.keys(
+                    this.constructor._registeredPostprocess[this.id],
+                )[k];
+                config[configKey] =
+                    await this.constructor._registeredPostprocess[this.id][
+                        configKey
+                    ](config[configKey], config);
             }
         }
 
         if (config instanceof Promise) {
-            throw new Error('Promise based SConfig is not already implemented...');
+            throw new Error(
+                'Promise based SConfig is not already implemented...',
+            );
         } else if (__isPlainObject(config)) {
             this._adapters[adapter].config = config;
             this._adapters[adapter].config.$ = {
@@ -498,7 +590,9 @@ export default class SConfig {
     _resolveEnvironments(config) {
         return __applyScope(
             config,
-            __SEnv.get('env') === 'production' ? ['prod', 'production'] : ['dev', 'development'],
+            __SEnv.get('env') === 'production'
+                ? ['prod', 'production']
+                : ['dev', 'development'],
         );
     }
 
@@ -532,7 +626,9 @@ export default class SConfig {
                 );
             }
 
-            this._adapters[adapter].instance.save(this._adapters[adapter].config);
+            this._adapters[adapter].instance.save(
+                this._adapters[adapter].config,
+            );
         }
 
         // all saved correctly
@@ -551,10 +647,12 @@ export default class SConfig {
 
         if (__isPlainObject(originalValue)) {
             Object.keys(originalValue).forEach((key) => {
-                originalValue[key] = this._resolveInternalReferences(originalValue[key], config, resolverObj, [
-                    ...path,
-                    key,
-                ]);
+                originalValue[key] = this._resolveInternalReferences(
+                    originalValue[key],
+                    config,
+                    resolverObj,
+                    [...path, key],
+                );
             });
         } else if (Array.isArray(originalValue)) {
             originalValue = new Proxy(originalValue, {
@@ -573,7 +671,12 @@ export default class SConfig {
                         return target._processed[name];
                     }
 
-                    const res = this._resolveInternalReferences(target[name], config, resolverObj, path);
+                    const res = this._resolveInternalReferences(
+                        target[name],
+                        config,
+                        resolverObj,
+                        path,
+                    );
                     target[name] = res;
                     target._processed[name] = res;
                     return target[name];
@@ -587,7 +690,15 @@ export default class SConfig {
             const matches = originalValue.match(resolverObj.match);
 
             if (matches && matches.length) {
-                const resolvedValue = resolverObj.resolve(originalValue, matches, config, path);
+                const resolvedValue = resolverObj.resolve(
+                    originalValue,
+                    matches,
+                    config,
+                    path,
+                );
+
+                // if (path.indexOf('fontsDir') !== -1)
+                //     console.log(path, matches, resolvedValue);
 
                 if (typeof resolvedValue === 'function') {
                     const target = __get(config, path.slice(0, -1).join('.'));
@@ -601,7 +712,12 @@ export default class SConfig {
                     }
                     originalValue = __get(config, path.join('.'));
                 } else {
-                    originalValue = this._resolveInternalReferences(resolvedValue, config, resolverObj, path);
+                    originalValue = this._resolveInternalReferences(
+                        resolvedValue,
+                        config,
+                        resolverObj,
+                        path,
+                    );
                 }
             }
         }
@@ -624,7 +740,12 @@ export default class SConfig {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get(path, adapter = this._settings.defaultAdapter, settings = {}, _level = 0) {
+    get(
+        path,
+        adapter = this._settings.defaultAdapter,
+        settings = {},
+        _level = 0,
+    ) {
         settings = __deepMerge(this._settings, settings);
 
         if (adapter && !this._adapters[adapter]) {
@@ -641,7 +762,10 @@ export default class SConfig {
 
         const originalValue = __get(this._adapters[adapter].config, path);
 
-        if (settings.throwErrorOnUndefinedConfig && originalValue === undefined) {
+        if (
+            settings.throwErrorOnUndefinedConfig &&
+            originalValue === undefined
+        ) {
             throw new Error(
                 `You try to get the config "${path}" on the "${this.id}" SConfig instance but this config does not exists...`,
             );
@@ -677,7 +801,10 @@ export default class SConfig {
         // check if we allow new config or not
         if (
             !this._settings.allowNew &&
-            __get(this._adapters[this._settings.defaultAdapter].config, path) === undefined
+            __get(
+                this._adapters[this._settings.defaultAdapter].config,
+                path,
+            ) === undefined
         ) {
             throw new Error(
                 `You try to set the config "${path}" on the "${this.id}" SConfig instance but this config does not exists and this instance does not allow for new config creation...`,

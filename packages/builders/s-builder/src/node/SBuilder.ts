@@ -119,7 +119,9 @@ class SBuilder extends __SClass implements ISBuilder {
             promise.emit('log', {
                 value: `<green>[success]</green> Build ${
                     this.constructor.name
-                } finished <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`,
+                } finished <green>successfully</green> in <yellow>${
+                    duration.end().formatedDuration
+                }</yellow>`,
             });
         });
 

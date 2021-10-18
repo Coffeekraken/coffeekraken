@@ -59,9 +59,13 @@ class SSugarCliParamsInterface extends __SInterface {
  * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-const cliParams = SSugarCliParamsInterface.apply(process.argv.slice(2).join(' '));
+const cliParams = SSugarCliParamsInterface.apply(
+    process.argv.slice(2).join(' '),
+);
 if (cliParams.bench) {
-    __SBench.env.activateBench(cliParams.bench === true ? '*' : cliParams.bench);
+    __SBench.env.activateBench(
+        cliParams.bench === true ? '*' : cliParams.bench,
+    );
 }
 
 // __SLog.filter({
@@ -86,7 +90,10 @@ class SSugarCli {
     constructor() {
         __SBench.start('sugar.cli');
 
-        this._command = process.argv && process.argv[2] ? process.argv[2].split(' ')[0] : '';
+        this._command =
+            process.argv && process.argv[2]
+                ? process.argv[2].split(' ')[0]
+                : '';
         this._stack = this._command.split('.')[0];
         this._action = this._command.split('.')[1] || null;
         this._args =
@@ -96,7 +103,10 @@ class SSugarCli {
                     // @todo      support for command with 1 sub param like: --something "--else"
                     if (arg.includes(' ')) {
                         return `"${arg}"`;
-                    } else if (arg.slice(0, 2) !== '--' && arg.slice(0, 1) !== '-') {
+                    } else if (
+                        arg.slice(0, 2) !== '--' &&
+                        arg.slice(0, 1) !== '-'
+                    ) {
                         return `"${arg}"`;
                     }
                     return arg;
@@ -143,11 +153,12 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('markdownBuilder'));
-            // return;
+            // console.log(__SSugarConfig.get('storage.src.fontsDir'));
 
             // clean somr folders like tmp, etc...
-            __fsExtra.emptyDirSync(__SSugarConfig.get('storage.package.tmpDir'));
+            __fsExtra.emptyDirSync(
+                __SSugarConfig.get('storage.package.tmpDir'),
+            );
 
             __SBench.step('sugar.cli', 'afterLoadConfig');
 
@@ -214,13 +225,21 @@ class SSugarCli {
     }
 
     async _process() {
-        const defaultStackAction = this._availableCli.defaultByStack[this._stack];
+        const defaultStackAction =
+            this._availableCli.defaultByStack[this._stack];
 
-        if (!this._availableCli.endpoints[`${this._stack}.${this._action ?? defaultStackAction}`]) {
+        if (
+            !this._availableCli.endpoints[
+                `${this._stack}.${this._action ?? defaultStackAction}`
+            ]
+        ) {
             this._displayHelpAfterError();
             process.exit();
         }
-        const cliObj = this._availableCli.endpoints[`${this._stack}.${this._action ?? defaultStackAction}`];
+        const cliObj =
+            this._availableCli.endpoints[
+                `${this._stack}.${this._action ?? defaultStackAction}`
+            ];
 
         // @ts-ignore
         if (cliObj.processPath) {
@@ -244,7 +263,9 @@ class SSugarCli {
         for (let i = 0; i < Object.keys(this._sugarJsons).length; i++) {
             const packageName = Object.keys(this._sugarJsons)[i];
             const sugarJson = this._sugarJsons[packageName];
-            const packageJson = await import(sugarJson.metas.path.replace('/sugar.json', '/package.json'));
+            const packageJson = await import(
+                sugarJson.metas.path.replace('/sugar.json', '/package.json')
+            );
             if (!sugarJson.cli) continue;
             sugarJson.cli.forEach((cliObj) => {
                 if (!cliObj.actions) {
@@ -254,38 +275,52 @@ class SSugarCli {
                 }
 
                 if (cliObj.interactive) {
-                    Object.keys(cliObj.interactive).forEach((interactiveName) => {
-                        const interactiveObj = cliObj.interactive[interactiveName];
+                    Object.keys(cliObj.interactive).forEach(
+                        (interactiveName) => {
+                            const interactiveObj =
+                                cliObj.interactive[interactiveName];
 
-                        // skip cli that are scoped in package when not in a package
-                        if (interactiveObj.scope === 'package' && !__SEnv.packageJson) {
-                            return;
-                        }
+                            // skip cli that are scoped in package when not in a package
+                            if (
+                                interactiveObj.scope === 'package' &&
+                                !__SEnv.packageJson
+                            ) {
+                                return;
+                            }
 
-                        const cliPath = __path.resolve(
-                            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
-                            interactiveObj.process,
-                        );
-
-                        let interfacePath;
-                        if (interactiveObj.interface) {
-                            interfacePath = __path.resolve(
-                                sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
-                                interactiveObj.interface,
-                            );
-                        }
-
-                        if (!__fs.existsSync(cliPath))
-                            throw new Error(
-                                `[sugar.cli] Sorry but the references interactive cli file "${cliPath}" does not exists...`,
+                            const cliPath = __path.resolve(
+                                sugarJson.metas.path.replace(
+                                    /\/sugar\.json$/,
+                                    '',
+                                ),
+                                interactiveObj.process,
                             );
 
-                        this._availableInteractiveCli[`${cliObj.stack}.${interactiveName}`] = {
-                            ...interactiveObj,
-                            processPath: cliPath,
-                            interfacePath,
-                        };
-                    });
+                            let interfacePath;
+                            if (interactiveObj.interface) {
+                                interfacePath = __path.resolve(
+                                    sugarJson.metas.path.replace(
+                                        /\/sugar\.json$/,
+                                        '',
+                                    ),
+                                    interactiveObj.interface,
+                                );
+                            }
+
+                            if (!__fs.existsSync(cliPath))
+                                throw new Error(
+                                    `[sugar.cli] Sorry but the references interactive cli file "${cliPath}" does not exists...`,
+                                );
+
+                            this._availableInteractiveCli[
+                                `${cliObj.stack}.${interactiveName}`
+                            ] = {
+                                ...interactiveObj,
+                                processPath: cliPath,
+                                interfacePath,
+                            };
+                        },
+                    );
                 }
 
                 Object.keys(cliObj.actions).forEach((action) => {
@@ -308,16 +343,22 @@ class SSugarCli {
                         throw new Error(
                             `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`,
                         );
-                    if (!this._action && cliObj.defaultAction && action === cliObj.defaultAction) {
-                        this._availableCli.defaultByStack[cliObj.stack] = action;
+                    if (
+                        !this._action &&
+                        cliObj.defaultAction &&
+                        action === cliObj.defaultAction
+                    ) {
+                        this._availableCli.defaultByStack[cliObj.stack] =
+                            action;
                     }
 
-                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] = {
-                        packageJson,
-                        ...actionObj,
-                        processPath: cliPath,
-                        interfacePath,
-                    };
+                    this._availableCli.endpoints[`${cliObj.stack}.${action}`] =
+                        {
+                            packageJson,
+                            ...actionObj,
+                            processPath: cliPath,
+                            interfacePath,
+                        };
                 });
             });
         }
@@ -370,7 +411,9 @@ class SSugarCli {
             !__SEnv.packageJson
                 ? `<yellow>█</yellow> This process is running <yellow>outside of an existing package</yellow>.`
                 : '',
-            !__SEnv.packageJson ? `<yellow>█</yellow> Not all the features will be available...` : '',
+            !__SEnv.packageJson
+                ? `<yellow>█</yellow> Not all the features will be available...`
+                : '',
             '<yellow>█</yellow>',
         ]
             .filter((l) => l !== '')
@@ -387,7 +430,9 @@ class SSugarCli {
         this._newStep();
 
         const choices: string[] = [];
-        for (const [name, obj] of Object.entries(this._availableInteractiveCli)) {
+        for (const [name, obj] of Object.entries(
+            this._availableInteractiveCli,
+        )) {
             choices.push(`> ${obj.title}`);
         }
 
@@ -397,7 +442,9 @@ class SSugarCli {
             choices,
         });
 
-        for (const [name, obj] of Object.entries(this._availableInteractiveCli)) {
+        for (const [name, obj] of Object.entries(
+            this._availableInteractiveCli,
+        )) {
             if (res === `> ${obj.title}`) {
                 const pro = (await import(obj.processPath)).default;
 
@@ -424,7 +471,9 @@ class SSugarCli {
     writeLog(log: string) {
         let currentLog = '';
         if (__fs.existsSync(`${process.cwd()}/sugar.log`)) {
-            currentLog = __fs.readFileSync(`${process.cwd()}/sugar.log`, 'utf8').toString();
+            currentLog = __fs
+                .readFileSync(`${process.cwd()}/sugar.log`, 'utf8')
+                .toString();
             currentLog += '\n\n';
         }
         currentLog += log;
@@ -462,7 +511,8 @@ class SSugarCli {
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
-            sortedByStack[_stack][_action] = this._availableCli.endpoints[stackAction];
+            sortedByStack[_stack][_action] =
+                this._availableCli.endpoints[stackAction];
         });
 
         Object.keys(sortedByStack).forEach((stack) => {
@@ -480,11 +530,15 @@ class SSugarCli {
 
                 this.log(
                     `Action      : <yellow>${action}</yellow> ${
-                        this._availableCli.defaultByStack[stack] === action ? '(default)' : ''
+                        this._availableCli.defaultByStack[stack] === action
+                            ? '(default)'
+                            : ''
                     }`,
                 );
                 this.log(`Description : ${actionObj.description}`);
-                this.log(`Example     : <magenta>sugar</magenta> <cyan>${stack}</cyan>.<yellow>${action}</yellow> ...`);
+                this.log(
+                    `Example     : <magenta>sugar</magenta> <cyan>${stack}</cyan>.<yellow>${action}</yellow> ...`,
+                );
                 this.log(' ');
             });
 
@@ -499,7 +553,9 @@ class SSugarCli {
                 this._action ?? 'default'
             }</cyan>" command does not exists...`,
         );
-        logArray.push(`Here's the list of <green>available commands</green> in your context:`);
+        logArray.push(
+            `Here's the list of <green>available commands</green> in your context:`,
+        );
         logArray.push(' ');
         this.log(logArray.join('\n'));
         this._displayHelp();

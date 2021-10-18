@@ -85,7 +85,9 @@ export default function ({
         switch (finalParams.style) {
             case 'solid':
                 vars.push(`
-                    @sugar.outline($on: hover, $where: element);
+                    &:hover {
+                        @sugar.outline($where: element);
+                    }
                 `);
                 break;
         }

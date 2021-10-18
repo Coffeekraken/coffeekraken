@@ -236,6 +236,42 @@ export default function (env, config) {
   0px 49px 52px rgba(0, 0, 0, 0.04)`,
         },
 
+        color: {
+            /**
+             * @name                extension
+             * @namespace           config.theme.themes.default.color
+             * @type                Color
+             * @default             #2b3438
+             *
+             * Specify the <primary>extension</s-color> color value.
+             *
+             * @since             2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            extension: {
+                color: '[theme.color.accent.color]',
+                blade: '#ff2d20',
+                php: '#8892BF',
+                js: '#f7df1e',
+                ts: '#0374C1',
+                node: '#68A063',
+                css: '#498FE1',
+                scss: '#CF649A',
+                sass: '#CF649A',
+                json: '#000000',
+                jpg: '#B2C0E1',
+                jpeg: '#B2C0E1',
+                pdf: '#E7786E',
+                doc: '#60D7FD',
+                psd: '#F9D659',
+                mp3: '#E98C61',
+                png: '#C29DFB',
+                aac: '#B1C5C9',
+                zip: '#9CC04E',
+                dmg: '#E36E4B',
+            },
+        },
+
         size: {
             /**
              * @name          default

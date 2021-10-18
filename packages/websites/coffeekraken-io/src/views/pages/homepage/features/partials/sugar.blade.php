@@ -119,7 +119,7 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
             <div>
                 <div class="s-mie:-50">
                     @include('generic.code.example', ['examples' => [
-                        'js' => 'iimport isEmail from \'@@coffeekraken/sugar/shared/is/email\';
+                        'js' => 'import isEmail from \'@@coffeekraken/sugar/shared/is/email\';
 import isColor from \'@@coffeekraken/sugar/shared/is/color\';
 isEmail(\'hello@world.com\'); // true
 isColor(\'rgba(10,20,30,1)\'); // true'

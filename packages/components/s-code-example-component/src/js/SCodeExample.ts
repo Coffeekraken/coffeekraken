@@ -120,10 +120,13 @@ export default class SCodeExample extends __SLitComponent {
             }
 
             let rawCode = __decodeHtmlEntities($template.innerHTML);
-            const formatedCode = __prettier.format(rawCode, {
-                parser,
-                plugins: [__prettierCss, __prettierHtml, __prettierJs],
-            });
+            let formatedCode = rawCode;
+            try {
+                formatedCode = __prettier.format(rawCode, {
+                    parser,
+                    plugins: [__prettierCss, __prettierHtml, __prettierJs],
+                });
+            } catch (e) {}
             this._items = [
                 ...this._items,
                 {

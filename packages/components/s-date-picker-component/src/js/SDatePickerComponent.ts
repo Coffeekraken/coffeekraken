@@ -22,7 +22,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 /**
  * @name                Date Picker
  * @namespace           js
- * @type                Webcomponent
+ * @type                CustomElement
  * @interface           ./interface/SDatePickerComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/forms/s-date-picker
  * @install             npm i @coffeekraken/s-date-picker-component

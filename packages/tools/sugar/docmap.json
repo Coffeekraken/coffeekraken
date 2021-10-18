@@ -9,10 +9,38 @@
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-side-panel-component"
         ],
         "map": {
+            "@coffeekraken.sugar.doc.rEADME": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.sugar.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README",
+                "relPath": "src/README",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.index": {
                 "name": "index",
                 "description": "This file is the \"initialisation\" one for the sugar node toolkit.\nIt's optional to include it but if you do, you will get these features \"for free\":\n- Logging: Get the powerfull options of the SLog class without any change in your codebase",
@@ -2615,6 +2643,43 @@
                 "relPath": "src/node/fs/extension.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.fs.fileHash": {
+                "name": "fileHash",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get back an integrity hash for the passed file.\nThis mean that if a file returns the same integrity hash twice, the folder or files in it\nhas not been updated...",
+                "namespace": "@coffeekraken.sugar.node.fs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import fileHash from '@coffeekraken/sugar/node/fs/fileHash';\nfileHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "fileHash.ts",
+                "extension": "ts",
+                "relPath": "src/node/fs/fileHash.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.fs.filename": {
                 "name": "filename",
                 "type": "Function",
@@ -2916,7 +2981,7 @@
                 "relPath": "src/node/fs/moveSync.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.ts.fs.pool": {
+            "@coffeekraken.sugar.node.fs.pool": {
                 "name": "pool",
                 "type": "Function",
                 "platform": [
@@ -2930,7 +2995,7 @@
                     }
                 ],
                 "description": "This function simply take as parameter a glob (or array of globs) pattern(s)\nand return an SPromise instance through which you can subscribe to events like:\n- ready: Emitted once the pool is ready\n- file: Emitted for each file founded, added or updated\n- files: Emitted with a list of founded files\n- update: Emitted when a file has been updated\n- unlink: Emitted when a file has been deleted\n- add: Emitted when a file has been added",
-                "namespace": "@coffeekraken.sugar.ts.fs",
+                "namespace": "@coffeekraken.sugar.node.fs",
                 "status": "beta",
                 "example": [
                     {
@@ -4204,7 +4269,7 @@
                 "relPath": "src/node/package/rootPath.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.path.absolute": {
+            "@coffeekraken.sugar.node.path.absolute": {
                 "name": "absolute",
                 "type": "Function",
                 "platform": [
@@ -4218,7 +4283,7 @@
                     }
                 ],
                 "description": "This function take as input either a string or an array of string and transform the pathes to absolute\ndepending on the second argument which is the \"from\" one.",
-                "namespace": "@coffeekraken.sugar.js.path",
+                "namespace": "@coffeekraken.sugar.node.path",
                 "status": "beta",
                 "example": [
                     {
@@ -4792,7 +4857,7 @@
                 "relPath": "src/node/path/packageTmpDir.ts",
                 "children": {}
             },
-            "@coffeekraken.sugar.js.path.relative": {
+            "@coffeekraken.sugar.node.path.relative": {
                 "name": "relative",
                 "type": "Function",
                 "platform": [
@@ -4806,7 +4871,7 @@
                     }
                 ],
                 "description": "This function take as input either a string or an array of string and transform the pathes to relative\ndepending on the second argument which is the \"from\" one.",
-                "namespace": "@coffeekraken.sugar.js.path",
+                "namespace": "@coffeekraken.sugar.node.path",
                 "status": "beta",
                 "example": [
                     {

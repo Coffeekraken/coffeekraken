@@ -69,7 +69,7 @@ export default function ({
 
     if (finalParams.outline) {
         vars.push(`
-        & > * {
+        & > *:focus:not(:hover) {
           @sugar.outline;
         }
       `);

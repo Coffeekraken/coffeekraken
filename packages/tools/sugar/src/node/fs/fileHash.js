@@ -1,0 +1,10 @@
+import __crypto from 'crypto';
+import __fs from 'fs';
+export default function fileHash(filePath, settings = {}) {
+    settings = Object.assign({ recursive: true }, settings);
+    const fileBuffer = __fs.readFileSync(filePath);
+    const hashSum = __crypto.createHash('sha256');
+    hashSum.update(fileBuffer);
+    return hashSum.digest('base64');
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZmlsZUhhc2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJmaWxlSGFzaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFFBQVEsTUFBTSxRQUFRLENBQUM7QUFDOUIsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBb0N0QixNQUFNLENBQUMsT0FBTyxVQUFVLFFBQVEsQ0FDNUIsUUFBZ0IsRUFDaEIsV0FBdUMsRUFBRTtJQUV6QyxRQUFRLG1CQUNKLFNBQVMsRUFBRSxJQUFJLElBQ1osUUFBUSxDQUNkLENBQUM7SUFDRixNQUFNLFVBQVUsR0FBRyxJQUFJLENBQUMsWUFBWSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQy9DLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLENBQUM7SUFDOUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsQ0FBQztJQUMzQixPQUFPLE9BQU8sQ0FBQyxNQUFNLENBQUMsUUFBUSxDQUFDLENBQUM7QUFDcEMsQ0FBQyJ9

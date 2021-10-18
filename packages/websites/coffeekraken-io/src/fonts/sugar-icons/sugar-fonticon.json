@@ -1,3 +1,23 @@
 {
-    "vue": 61697
+    "display-preview": 61697,
+    "file-css": 61698,
+    "file-html": 61699,
+    "file-js": 61700,
+    "file-md": 61701,
+    "file-php": 61702,
+    "file-ts": 61703,
+    "folder-opened": 61704,
+    "folder": 61705,
+    "lang-css": 61706,
+    "lang-html": 61707,
+    "lang-js": 61708,
+    "lang-md": 61709,
+    "lang-php": 61710,
+    "lang-ts": 61711,
+    "support-chromium": 61712,
+    "support-edge": 61713,
+    "support-firefox": 61714,
+    "support-rtl": 61715,
+    "support-safari": 61716,
+    "vue": 61717
 }

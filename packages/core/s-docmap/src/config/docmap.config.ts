@@ -65,12 +65,16 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             globs: [
+                '*:/.*@namespace.*/gm',
+                '*.md:/.*@namespace.*/gm',
                 `src/**{5}/*.!(md):/.*@namespace.*/gm`,
                 `dist/css/*:/.*@namespace.*/gm`,
                 `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
             ],
             '@dev': {
                 globs: [
+                    '*:/.*@namespace.*/gm',
+                    '*.md:/.*@namespace.*/gm',
                     `src/**{5}/*.!(md):/.*@namespace.*/gm`,
                     `dist/css/*:/.*@namespace.*/gm`,
                     `src/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
@@ -88,7 +92,11 @@ export default function (env, config) {
              * @since       2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            exclude: ['**/__tests__/**/*', '**/__tests__.wip/**/*', '**/__wip__/**/*'],
+            exclude: [
+                '**/__tests__/**/*',
+                '**/__tests__.wip/**/*',
+                '**/__wip__/**/*',
+            ],
 
             /**
              * @name        noExtends

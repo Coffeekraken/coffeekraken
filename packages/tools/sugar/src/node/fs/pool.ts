@@ -12,7 +12,7 @@ import __fs from 'fs';
 
 /**
  * @name                pool
- * @namespace            ts.fs
+ * @namespace            node.fs
  * @type                Function
  * @async
  * @platform        ts
@@ -46,147 +46,162 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IPoolSettings {
-  SFile: boolean;
-  updateTimeout: number;
-  cwd: string;
-  exclude: string[];
-  watch: boolean;
-  [key: string]: any;
+    SFile: boolean;
+    updateTimeout: number;
+    cwd: string;
+    exclude: string[];
+    watch: boolean;
+    [key: string]: any;
 }
 function pool(input, settings?: Partial<IPoolSettings>) {
-  const filesStack: Record<string, string | __SFile> = {};
+    const filesStack: Record<string, string | __SFile> = {};
 
-  return new __SPromise(
-    ({ resolve, reject, emit, cancel, on }) => {
-      const set = <IPoolSettings>__deepMerge(
-        {
-          SFile: true,
-          updateTimeout: 500,
-          cwd: process.cwd(),
-          watch: false,
-          exclude: [],
-          ignored: ['**/node_modules/**/*', '**/.git/**/*'],
-          ignoreInitial: false,
-          watchDependencies: true
-          // usePolling: true,
-          // useFsEvents: true,
-          // persistent: true
+    return new __SPromise(
+        ({ resolve, reject, emit, cancel, on }) => {
+            const set = <IPoolSettings>__deepMerge(
+                {
+                    SFile: true,
+                    updateTimeout: 500,
+                    cwd: process.cwd(),
+                    watch: false,
+                    exclude: [],
+                    ignored: ['**/node_modules/**/*', '**/.git/**/*'],
+                    ignoreInitial: false,
+                    watchDependencies: true,
+                    // usePolling: true,
+                    // useFsEvents: true,
+                    // persistent: true
+                },
+                settings || {},
+            );
+
+            if (!Array.isArray(input)) input = [input];
+            input = input.map((i) => {
+                return i.path ?? i;
+            });
+            input = __replacePathTokens(input);
+
+            // expand glob
+            const expandedGlobs: string[] = __expandGlob(input).map((l) => {
+                return l
+                    .split(':')[0]
+                    .replace(set.cwd + '/', '')
+                    .replace(set.cwd, '');
+            });
+
+            // using chokidar to watch files
+            const watcher = __chokidar.watch(expandedGlobs, {
+                ...set,
+                ignored: [...set.ignored, ...(set.exclude ?? [])],
+            });
+
+            watcher
+                .on('add', (path) => {
+                    if (
+                        filesStack[path] ||
+                        !__fs.existsSync(`${set.cwd}/${path}`)
+                    )
+                        return;
+                    // make sure it's not exists already
+                    if (!filesStack[path]) {
+                        if (set.SFile)
+                            filesStack[path] = __SFile.new(
+                                `${set.cwd}/${path}`,
+                            );
+                        else filesStack[path] = path;
+                    }
+                    emit('add', filesStack[path]);
+                    emit('file', filesStack[path]);
+                })
+                .on('change', (path) => {
+                    console.log('change', path);
+
+                    if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
+                    if (!filesStack[path]) {
+                        if (set.SFile)
+                            filesStack[path] = __SFile.new(
+                                `${set.cwd}/${path}`,
+                            );
+                        else filesStack[path] = path;
+                    }
+                    emit('update', filesStack[path]);
+                    emit('file', filesStack[path]);
+                })
+                .on('unlink', (path) => {
+                    // @ts-ignore
+                    if (filesStack[path] && filesStack[path].path) {
+                        // @ts-ignore
+                        emit('unlink', filesStack[path].path);
+                    } else if (
+                        filesStack[path] &&
+                        typeof filesStack[path] === 'string'
+                    ) {
+                        emit('unlink', filesStack[path]);
+                    }
+                    delete filesStack[path];
+                })
+                .on('ready', () => {
+                    const files = watcher.getWatched();
+
+                    const filesPaths: string[] = [];
+                    const finalFiles: (__SFile | string)[] = [];
+                    Object.keys(files).forEach((path) => {
+                        files[path].forEach((fileName) => {
+                            filesPaths.push(`${path}/${fileName}`);
+                        });
+                    });
+                    filesPaths
+                        .filter((filePath) => {
+                            return __matchGlob(filePath, input, {
+                                cwd: set.cwd,
+                            });
+                        })
+                        .forEach((filePath) => {
+                            if (set.SFile)
+                                finalFiles.push(
+                                    __SFile.new(`${set.cwd}/${filePath}`),
+                                );
+                            else finalFiles.push(filePath);
+                            emit('file', finalFiles[finalFiles.length - 1]);
+                            // save file in file stack
+                            filesStack[filePath] =
+                                finalFiles[finalFiles.length - 1];
+                        });
+
+                    // filesPaths.forEach(async (filePath) => {
+                    //   // watch dependencies
+                    //   if (set.watchDependencies) {
+                    //     console.log('watch ', filePath);
+                    //     const depListPromise = __dependencyList(filePath, {
+                    //       watch: true,
+                    //       exclude: ['**/node_modules/**']
+                    //     });
+                    //     depListPromise.on('update', ({ path, list }) => {
+                    //       console.log('UP', path, list);
+                    //     });
+                    //     // console.log(await depListPromise);
+                    //   }
+                    // });
+
+                    emit('ready', finalFiles);
+                    if (finalFiles.length && !set.ignoreInitial) {
+                        emit('files', finalFiles);
+                    }
+                    if (!set.watch) {
+                        watcher.close();
+                        resolve(finalFiles);
+                    }
+                })
+
+                // handle cancel
+                .on('cancel', () => {
+                    watcher.close();
+                });
         },
-        settings || {}
-      );
-
-      if (!Array.isArray(input)) input = [input];
-      input = input.map((i) => {
-        return i.path ?? i;
-      });
-      input = __replacePathTokens(input);
-
-      // expand glob
-      const expandedGlobs: string[] = __expandGlob(input).map((l) => {
-        return l
-          .split(':')[0]
-          .replace(set.cwd + '/', '')
-          .replace(set.cwd, '');
-      });
-
-      // using chokidar to watch files
-      const watcher = __chokidar.watch(expandedGlobs, {
-        ...set,
-        ignored: [...set.ignored, ...(set.exclude ?? [])]
-      });
-
-      watcher
-        .on('add', (path) => {
-          if (filesStack[path] || !__fs.existsSync(`${set.cwd}/${path}`))
-            return;
-          // make sure it's not exists already
-          if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
-            else filesStack[path] = path;
-          }
-          emit('add', filesStack[path]);
-          emit('file', filesStack[path]);
-        })
-        .on('change', (path) => {
-          console.log('change', path);
-
-          if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
-          if (!filesStack[path]) {
-            if (set.SFile) filesStack[path] = __SFile.new(`${set.cwd}/${path}`);
-            else filesStack[path] = path;
-          }
-          emit('update', filesStack[path]);
-          emit('file', filesStack[path]);
-        })
-        .on('unlink', (path) => {
-          // @ts-ignore
-          if (filesStack[path] && filesStack[path].path) {
-            // @ts-ignore
-            emit('unlink', filesStack[path].path);
-          } else if (filesStack[path] && typeof filesStack[path] === 'string') {
-            emit('unlink', filesStack[path]);
-          }
-          delete filesStack[path];
-        })
-        .on('ready', () => {
-          const files = watcher.getWatched();
-
-          const filesPaths: string[] = [];
-          const finalFiles: (__SFile | string)[] = [];
-          Object.keys(files).forEach((path) => {
-            files[path].forEach((fileName) => {
-              filesPaths.push(`${path}/${fileName}`);
-            });
-          });
-          filesPaths
-            .filter((filePath) => {
-              return __matchGlob(filePath, input, {
-                cwd: set.cwd
-              });
-            })
-            .forEach((filePath) => {
-              if (set.SFile)
-                finalFiles.push(__SFile.new(`${set.cwd}/${filePath}`));
-              else finalFiles.push(filePath);
-              emit('file', finalFiles[finalFiles.length - 1]);
-              // save file in file stack
-              filesStack[filePath] = finalFiles[finalFiles.length - 1];
-            });
-
-          // filesPaths.forEach(async (filePath) => {
-          //   // watch dependencies
-          //   if (set.watchDependencies) {
-          //     console.log('watch ', filePath);
-          //     const depListPromise = __dependencyList(filePath, {
-          //       watch: true,
-          //       exclude: ['**/node_modules/**']
-          //     });
-          //     depListPromise.on('update', ({ path, list }) => {
-          //       console.log('UP', path, list);
-          //     });
-          //     // console.log(await depListPromise);
-          //   }
-          // });
-
-          emit('ready', finalFiles);
-          if (finalFiles.length && !set.ignoreInitial) {
-            emit('files', finalFiles);
-          }
-          if (!set.watch) {
-            watcher.close();
-            resolve(finalFiles);
-          }
-        })
-
-        // handle cancel
-        .on('cancel', () => {
-          watcher.close();
-        });
-    },
-    {
-      eventEmitter: {}
-    }
-  );
+        {
+            eventEmitter: {},
+        },
+    );
 }
 
 export default pool;

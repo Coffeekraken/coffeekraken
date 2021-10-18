@@ -1,81 +1,92 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import __SDuration from '@coffeekraken/s-duration';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __srcCssDir from '@coffeekraken/sugar/node/path/srcCssDir';
-import __childProcess from 'child_process';
+import { generateFonts } from 'fantasticon';
+import __svgFixer from 'oslllo-svg-fixer';
 import __fs from 'fs';
 import __path from 'path';
 import __postcss from 'postcss';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 export default function ({ root, sharedData }) {
-    const duration = new __SDuration();
-    const dirName = typeof root.source.input.file === 'string' ? __path.dirname(root.source.input.file) : __dirname();
-    if (!sharedData.iconsSourcePaths || sharedData.iconsSourcePaths.indexOf(dirName) === -1)
-        return;
-    if (!sharedData.iconsInputDir)
-        return;
-    const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
-    // prepend the icons import
-    const importFontUrl = __path.relative(__srcCssDir(), fantasticonConfig.outputDir);
-    root.nodes.unshift(__postcss.parse(`
+    return __awaiter(this, void 0, void 0, function* () {
+        const duration = new __SDuration();
+        if (!sharedData.icons || !sharedData.icons.length)
+            return;
+        const fantasticonConfig = __SSugarConfig.get('icons.fantasticon');
+        // prepend the icons import
+        const importFontUrl = __path.relative(__srcCssDir(), fantasticonConfig.outputDir);
+        root.nodes.unshift(__postcss.parse(`
         @import url(${importFontUrl}/${fantasticonConfig.name}.css);
     `));
-    // handle cached hash
-    const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
-    if (__fs.existsSync(hashCacheFilePath) && __fs.existsSync(sharedData.iconsInputDir)) {
-        const hash = __folderHash(sharedData.iconsInputDir);
-        const cachedHash = __fs.readFileSync(hashCacheFilePath, 'utf8').toString();
-        // console.log('Dirname', dirName);
-        // console.log('Hash', hash, 'Cached Hash', cachedHash);
-        if (hash === cachedHash) {
-            // delete the temp icons folder for fresh new compilation
-            try {
-                __fs.rmSync(sharedData.iconsInputDir, { recursive: true });
-            }
-            catch (e) { }
-            // console.log(`<cyan>[fonticons]</cyan> No need to regenerate icons font`);
-            return;
+        const inputDir = `${__packageCacheDir()}/icons/sugarIcons`;
+        // delete input folder
+        try {
+            __fs.rmSync(inputDir, { recursive: true });
         }
-    }
-    __ensureDirSync(fantasticonConfig.outputDir);
-    try {
-        console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
-        __childProcess.execSync(`npx fantasticon -o ${fantasticonConfig.outputDir} -n ${fantasticonConfig.name} --normalize --selector .s-icon --prefix '--' ${sharedData.iconsInputDir}`, {
-            stdio: 'pipe',
-            cwd: __packageRootDir(),
+        catch (e) { }
+        __ensureDirSync(inputDir);
+        __ensureDirSync(fantasticonConfig.outputDir);
+        // copy icons inside folder
+        sharedData.icons.forEach((iconObj) => {
+            __fs.copyFileSync(iconObj.path, `${inputDir}/${iconObj.as}.${__extension(iconObj.path)}`);
         });
-    }
-    catch (e) {
-        throw new Error(e);
-    }
-    // read folder icons
-    const iconsFilenames = __fs.readdirSync(sharedData.iconsInputDir);
-    if (!iconsFilenames.length)
-        return;
-    // generate the scoped icons selector
-    const iconsSelectorsArray = [];
-    iconsFilenames.forEach((filename) => {
-        iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}:before`);
+        // get actual folder hash
+        const folderHash = __folderHash(inputDir);
+        // handle cached hash
+        const hashCacheFilePath = `${__packageCacheDir()}/postcss/iconsFolderHash.txt`;
+        if (__fs.existsSync(hashCacheFilePath)) {
+            const cachedFolderHash = __fs
+                .readFileSync(hashCacheFilePath, 'utf8')
+                .toString();
+            if (cachedFolderHash === folderHash) {
+                // same icons, nothing to generate again
+                console.log(`<yellow>[fonticons]</yellow> All icon(s) are up to date`);
+                return;
+            }
+        }
+        console.log(`<yellow>[fonticons]</yellow> Generate icons font...`);
+        // fix svg's just to be sure
+        const fixResult = yield __svgFixer(inputDir, inputDir).fix();
+        const result = yield generateFonts({
+            inputDir,
+            outputDir: fantasticonConfig.outputDir,
+            name: fantasticonConfig.name,
+            normalize: true,
+            selector: '.s-icon',
+            prefix: '--',
+        });
+        // read folder icons
+        const iconsFilenames = __fs.readdirSync(inputDir);
+        if (!iconsFilenames.length)
+            return;
+        // generate the scoped icons selector
+        const iconsSelectorsArray = [];
+        iconsFilenames.forEach((filename) => {
+            iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}:before`);
+        });
+        const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
+        let cssStr = __fs.readFileSync(cssPath, 'utf8').toString();
+        // replace some parts in the output css
+        cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
+        cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArray.join(',')} {\nposition: relative;\n`);
+        // rewrite the css file
+        __fs.writeFileSync(cssPath, cssStr);
+        // saving folder hash
+        __writeFileSync(hashCacheFilePath, folderHash);
+        console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
     });
-    const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
-    let cssStr = __fs.readFileSync(cssPath, 'utf8').toString();
-    // replace some parts in the output css
-    cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
-    cssStr = cssStr.replace(/\.s-icon:before\s?{/, `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop: 0.25em;`);
-    // rewrite the css file
-    __fs.writeFileSync(cssPath, cssStr);
-    // saving folder hash
-    const folderHash = __folderHash(sharedData.iconsInputDir);
-    __writeFileSync(hashCacheFilePath, folderHash);
-    // delete the temp icons folder for fresh new compilation
-    try {
-        __fs.rmSync(sharedData.iconsInputDir, { recursive: true });
-    }
-    catch (e) { }
-    console.log(`<green>[fonticons]</green> Sugar fonticons generated <green>successfully</green> in <cyan>${duration.end().formatedDuration}</cyan>`);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9udGljb25zLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9udGljb25zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sV0FBVyxNQUFNLDBCQUEwQixDQUFDO0FBQ25ELE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBQzFELE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8sWUFBWSxNQUFNLHdDQUF3QyxDQUFDO0FBQ2xFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8saUJBQWlCLE1BQU0sK0NBQStDLENBQUM7QUFDOUUsT0FBTyxnQkFBZ0IsTUFBTSw4Q0FBOEMsQ0FBQztBQUM1RSxPQUFPLFdBQVcsTUFBTSx5Q0FBeUMsQ0FBQztBQUNsRSxPQUFPLGNBQWMsTUFBTSxlQUFlLENBQUM7QUFDM0MsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUMxQixPQUFPLFNBQVMsTUFBTSxTQUFTLENBQUM7QUFDaEMsT0FBTyxTQUFTLE1BQU0scUNBQXFDLENBQUM7QUFFNUQsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUU7SUFDekMsTUFBTSxRQUFRLEdBQUcsSUFBSSxXQUFXLEVBQUUsQ0FBQztJQUVuQyxNQUFNLE9BQU8sR0FBRyxPQUFPLElBQUksQ0FBQyxNQUFNLENBQUMsS0FBSyxDQUFDLElBQUksS0FBSyxRQUFRLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLENBQUMsQ0FBQyxDQUFDLFNBQVMsRUFBRSxDQUFDO0lBRWxILElBQUksQ0FBQyxVQUFVLENBQUMsZ0JBQWdCLElBQUksVUFBVSxDQUFDLGdCQUFnQixDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUMsS0FBSyxDQUFDLENBQUM7UUFBRSxPQUFPO0lB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZm9udGljb25zLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZm9udGljb25zLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sV0FBVyxNQUFNLDBCQUEwQixDQUFDO0FBQ25ELE9BQU8sY0FBYyxNQUFNLDhCQUE4QixDQUFDO0FBRTFELE9BQU8sV0FBVyxNQUFNLHVDQUF1QyxDQUFDO0FBRWhFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8sWUFBWSxNQUFNLHdDQUF3QyxDQUFDO0FBQ2xFLE9BQU8sZUFBZSxNQUFNLDJDQUEyQyxDQUFDO0FBQ3hFLE9BQU8saUJBQWlCLE1BQU0sK0NBQStDLENBQUM7QUFFOUUsT0FBTyxXQUFXLE1BQU0seUNBQXlDLENBQUM7QUFFbEUsT0FBTyxFQUFFLGFBQWEsRUFBRSxNQUFNLGFBQWEsQ0FBQztBQUM1QyxPQUFPLFVBQVUsTUFBTSxrQkFBa0IsQ0FBQztBQUMxQyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxNQUFNLE1BQU0sTUFBTSxDQUFDO0FBQzFCLE9BQU8sU0FBUyxNQUFNLFNBQVMsQ0FBQztBQUVoQyxNQUFNLENBQUMsT0FBTyxXQUFpQixFQUFFLElBQUksRUFBRSxVQUFVLEVBQUU7O1FBQy9DLE1BQU0sUUFBUSxHQUFHLElBQUksV0FBVyxFQUFFLENBQUM7UUFFbkMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxLQUFLLElBQUksQ0FBQyxVQUFVLENBQUMsS0FBSyxDQUFDLE1BQU07WUFBRSxPQUFPO1FBRTFELE1BQU0saUJBQWlCLEdBQUcsY0FBYyxDQUFDLEdBQUcsQ0FBQyxtQkFBbUIsQ0FBQyxDQUFDO1FBRWxFLDJCQUEyQjtRQUMzQixNQUFNLGFBQWEsR0FBRyxNQUFNLENBQUMsUUFBUSxDQUNqQyxXQUFXLEVBQUUsRUFDYixpQkFBaUIsQ0FBQyxTQUFTLENBQzlCLENBQUM7UUFDRixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8s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

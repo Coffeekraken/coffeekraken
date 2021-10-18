@@ -44,9 +44,9 @@
 
         </section>
 
-        <section class="s-container markdown">
+        <section class="s-container styleguide">
 
-            <div class="s-layout:122222:gutter-between:gutter-50">
+            <div class="s-layout:12222:gutter-between:gutter-50">
 
                 <nav class="__nav s-pb:50">
 
@@ -55,7 +55,7 @@
                     </h5>
 
                     @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main'])
+                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
                     
                 </nav>
 

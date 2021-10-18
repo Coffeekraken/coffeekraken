@@ -12,7 +12,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 /**
  * @name                Range
  * @namespace           js
- * @type                Webcomponent
+ * @type                CustomElement
  * @interface           ./interface/SRangeComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/forms/s-range
  * @install             npm i @coffeekraken/s-range-component

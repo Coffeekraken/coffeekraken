@@ -512,7 +512,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         menuObj.slug[slug];
                 });
                 finalMenu.packages[packageName] = {
-                    name: packageJson.name,
+                    name: packageName,
                     tree: __deepMap(menuObj.tree, ({ prop, value }) => {
                         if (prop === 'slug') return `/${packageName}${value}`;
                         return value;

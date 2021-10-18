@@ -39,13 +39,28 @@ body {
   fab:vuejs:vuejs
   fa:tasks:tasks
   fa:hammer:todo
-  fa:folder
-  fa:folder-open
   fa:file-pdf
   fa:file-image
   fa:file-code
   fa:file-archive
   fa:file
+  fs:src/icons/coffeekraken/lang/lang-js.svg
+  fs:src/icons/coffeekraken/lang/lang-ts.svg
+  fs:src/icons/coffeekraken/lang/lang-css.svg
+  fs:src/icons/coffeekraken/lang/lang-html.svg
+  fs:src/icons/coffeekraken/lang/lang-php.svg
+  fs:src/icons/coffeekraken/lang/lang-html.svg
+  fs:src/icons/coffeekraken/lang/lang-md.svg
+  fs:src/icons/coffeekraken/file/file-js.svg
+  fs:src/icons/coffeekraken/file/file-ts.svg
+  fs:src/icons/coffeekraken/file/file-css.svg
+  fs:src/icons/coffeekraken/file/file-html.svg
+  fs:src/icons/coffeekraken/file/file-php.svg
+  fs:src/icons/coffeekraken/file/file-html.svg
+  fs:src/icons/coffeekraken/file/file-md.svg
+  fs:src/icons/coffeekraken/fs/folder.svg
+  fs:src/icons/coffeekraken/fs/folder-opened.svg
+  fs:src/icons/coffeekraken/display/display-preview.svg
   fs:src/icons/read-direction.svg:support-rtl
   fs:src/icons/edge.svg:support-edge
   fs:src/icons/chrome.svg:support-chromium

@@ -55,9 +55,6 @@
                     </h5>
 
                     <api-nav></api-nav>
-
-                    {{-- @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
-                    @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main']) --}}
                     
                 </nav>
 

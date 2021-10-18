@@ -1,6 +1,4 @@
-<ul class="s-list:ul folder-nav" id="{{ $id }}">
-
-    {{-- <pre>@php var_dump($id) @endphp</pre> --}}
+<ul class="s-fs-tree">
 
     @foreach ($menu as $item)
         
@@ -9,16 +7,17 @@
         @endphp
 
         @if (is_object($item))
-            <li class="{{ $item->slug ? '__slug' : '__toggle' }}">
+            <li id="{{ $subId }}">
                 @if ($item->slug)
+                    <i class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent"></i>
                     <a href="{{ $item->slug }}">
                 @else
+                    <i class="s-icon:folder-opened s-tc:info s-when:active"></i>
+                    <i class="s-icon:folder"></i>
                     <span s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
                 @endif
                 @if ($item->name)
-                    <h5>
-                        {{ $item->name }}
-                    </h5>
+                    {{ $item->name }}
                 @endif
                 @if ($item->slug)
                     </a>
@@ -36,7 +35,5 @@
             {{-- World --}}
         @endif
 
-        {{-- <pre> @php var_dump($item) @endphp </pre> --}}
-        {{-- @include('pages.markdown.menu', $item) --}}
     @endforeach
 </ul>

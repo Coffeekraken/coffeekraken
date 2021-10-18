@@ -5,7 +5,7 @@ import __packageRootDir from './packageRootDir';
 
 /**
  * @name            absolute
- * @namespace            js.path
+ * @namespace            node.path
  * @type            Function
  * @platform        ts
  * @platform        node
@@ -33,32 +33,32 @@ import __packageRootDir from './packageRootDir';
  */
 
 interface IAbsoluteSettings {
-  glob?: boolean;
-  relative?: boolean;
+    glob?: boolean;
+    relative?: boolean;
 }
 
 function absolute(
-  path,
-  from = __packageRootDir(),
-  settings: IAbsoluteSettings = {}
+    path,
+    from = __packageRootDir(),
+    settings: IAbsoluteSettings = {},
 ) {
-  settings = {
-    glob: true,
-    ...settings
-  };
-  const isArray = Array.isArray(path);
-  if (!isArray) path = [path];
+    settings = {
+        glob: true,
+        ...settings,
+    };
+    const isArray = Array.isArray(path);
+    if (!isArray) path = [path];
 
-  path = path.map((p) => {
-    if (__path.isAbsolute(p)) return p;
-    if (__isGlob(p)) {
-      if (settings.glob) return __path.resolve(from, p);
-      return p;
-    } else if (__isPath(p)) return __path.resolve(from, p);
-    return p;
-  });
-  if (isArray) return path;
-  return path[0];
+    path = path.map((p) => {
+        if (__path.isAbsolute(p)) return p;
+        if (__isGlob(p)) {
+            if (settings.glob) return __path.resolve(from, p);
+            return p;
+        } else if (__isPath(p)) return __path.resolve(from, p);
+        return p;
+    });
+    if (isArray) return path;
+    return path[0];
 }
 
 export default absolute;

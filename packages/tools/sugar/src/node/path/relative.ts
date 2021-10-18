@@ -5,7 +5,7 @@ import __packageRootDir from './packageRootDir';
 
 /**
  * @name            relative
- * @namespace            js.path
+ * @namespace            node.path
  * @type            Function
  * @platform        ts
  * @platform        node
@@ -33,36 +33,36 @@ import __packageRootDir from './packageRootDir';
  */
 
 interface IRelativeSettings {
-  glob?: boolean;
-  absolute?: boolean;
+    glob?: boolean;
+    absolute?: boolean;
 }
 
 function relative(
-  path,
-  from = __packageRootDir(),
-  settings: IRelativeSettings = {}
+    path,
+    from = __packageRootDir(),
+    settings: IRelativeSettings = {},
 ) {
-  settings = {
-    glob: true,
-    absolute: true,
-    ...settings
-  };
-  const isArray = Array.isArray(path);
-  if (!isArray) path = [path];
+    settings = {
+        glob: true,
+        absolute: true,
+        ...settings,
+    };
+    const isArray = Array.isArray(path);
+    if (!isArray) path = [path];
 
-  path = path.map((p) => {
-    if (__isGlob(p)) {
-      if (settings.glob) return __path.relative(from, p);
-      return p;
-    } else if (__path.isAbsolute(p)) {
-      if (settings.absolute) return __path.relative(from, p);
-      return p;
-    } else if (__isPath(p)) return __path.relative(from, p);
-    return p;
-  });
+    path = path.map((p) => {
+        if (__isGlob(p)) {
+            if (settings.glob) return __path.relative(from, p);
+            return p;
+        } else if (__path.isAbsolute(p)) {
+            if (settings.absolute) return __path.relative(from, p);
+            return p;
+        } else if (__isPath(p)) return __path.relative(from, p);
+        return p;
+    });
 
-  if (isArray) return path;
-  return path[0];
+    if (isArray) return path;
+    return path[0];
 }
 
 export default relative;

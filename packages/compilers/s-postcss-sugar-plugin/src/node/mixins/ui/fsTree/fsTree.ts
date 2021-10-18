@@ -62,6 +62,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
             font-size: sugar.scalable(1rem);
+            user-select: none;
 
             ul, ol {
                 margin-inline-start: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
@@ -95,13 +96,29 @@ export default function ({
                     display: block;
                     border-radius: sugar.theme(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
-                    cursor: pointer;
+
+                    &:not(.s-disabled &) {
+                        cursor: pointer;
+                    }
                 }
 
                 & > i {
                     position: absolute;
                     top: sugar.theme(ui.fsTree.paddingBlock, true);
                     left: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                }
+
+                & > i.s-when--active {
+                    display: none;
+                }
+                &.active, &[active] {
+                    & > i.s-when--active {
+                        display: inline-block;
+
+                        & + i {
+                            display: none;
+                        }
+                    }
                 }
 
                 &.active > *:not(ul):not(ol):not(i) {
@@ -114,7 +131,7 @@ export default function ({
                 }
 
 
-                & > [tabindex]:focus:not(:hover) {
+                & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
                     @sugar.outline;
                 }
 
@@ -122,7 +139,7 @@ export default function ({
 
                     > ul > li:before,
                     > ol > li:before {
-                        background-color: sugar.color(current);
+                        background-color: sugar.color(current, --alpha 0.5);
                     }
                 }
             }
@@ -159,7 +176,7 @@ export default function ({
             default:
                 vars.push(`
 
-                    li {
+                    li:not(.s-disabled) {
                         a:hover,
                         span:hover {
                             background-color: sugar.color(current, surface);

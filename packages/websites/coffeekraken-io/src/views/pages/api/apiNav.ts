@@ -6,6 +6,7 @@ import { property } from 'lit/decorators.js';
 import __SRequest from '@coffeekraken/s-request';
 import __set from '@coffeekraken/sugar/shared/object/set';
 import __get from '@coffeekraken/sugar/shared/object/get';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 export interface IApiNavComponentProps {}
 
@@ -25,21 +26,60 @@ export default class ApiNav extends __SLitComponent {
     _menuStack = {};
     _menuStates = {};
 
+    @property()
+    _loaded = false;
+
     async firstUpdated() {
         const request = new __SRequest({
             url: '/api/docmap',
             method: 'get',
         });
-        const res = await request.send();
 
+        // restore state
+        this._menuStates = JSON.parse(
+            window.localStorage.getItem('apiNavStates') ?? '{}',
+        );
+
+        const cachedNav = JSON.parse(
+            window.localStorage.getItem('apiNav') ?? '{}',
+        );
+        if (Object.keys(cachedNav).length) {
+            this._menuStack = cachedNav;
+            this._loaded = true;
+        }
+
+        const res = await request.send();
+        const types = [];
+        res.data.map = __filter(res.data.map, (key, item) => {
+            const supportedTypes = [
+                'function',
+                'class',
+                // 'cssfontface',
+                'cssmixin',
+                'cssfunction',
+                'object',
+                // 'cssclass',
+                'customelement',
+                'feature',
+            ];
+
+            if (types.indexOf(item.type) === -1) types.push(item.type);
+
+            if (supportedTypes.indexOf(item.type.toLowerCase()) === -1)
+                return false;
+            return true;
+        });
+
+        console.log(types);
+
+        this._menuStack = {};
         Object.keys(res.data.map).forEach((namespace) => {
             __set(this._menuStack, namespace, res.data.map[namespace]);
         });
 
-        // restore state
-        this._menuStates = JSON.parse(
-            window.localStorage.getItem('apiNav') ?? '{}',
-        );
+        // save new nav
+        window.localStorage.setItem('apiNav', JSON.stringify(this._menuStack));
+        this._loaded = true;
 
         this.requestUpdate();
     }
@@ -59,7 +99,10 @@ export default class ApiNav extends __SLitComponent {
         }
 
         // save state
-        window.localStorage.setItem('apiNav', JSON.stringify(this._menuStates));
+        window.localStorage.setItem(
+            'apiNavStates',
+            JSON.stringify(this._menuStates),
+        );
 
         this.requestUpdate();
     }
@@ -72,15 +115,22 @@ export default class ApiNav extends __SLitComponent {
             }${itemName}`;
 
             if (itemObj.name && itemObj.namespace) {
+                let icon = itemObj.platform[0].name;
+
                 return html`
                     <li>
-                        <i class="s-icon:file-code"></i>
+                        <i
+                            class="s-icon:file-${icon} s-tc:extension-${icon}"
+                        ></i>
                         <a href="/api/${itemNamespace}">${itemObj.name}</a>
                     </li>
                 `;
             } else {
                 return html`
                     <li class="${this._isAcive(itemNamespace) ? 'active' : ''}">
+                        <i
+                            class="s-icon:folder-opened s-tc:info s-when:active"
+                        ></i>
                         <i class="s-icon:folder"></i>
                         <span
                             @click=${() => {
@@ -110,6 +160,18 @@ export default class ApiNav extends __SLitComponent {
     }
 
     render() {
+        if (!this._loaded) {
+            return html`
+                <div class="s-until:sibling:mounted">
+                    <i class="s-loader:spinner s-color:accent"></i>
+                    &nbsp;
+                    <p class="s-typo:p s-display:inline-block">
+                        Loading API navigation.<br />Please wait...
+                    </p>
+                </div>
+            `;
+        }
+
         return html`
             <div class="${this.componentUtils.className('')}">
                 ${this._renderList(this._menuStack)}

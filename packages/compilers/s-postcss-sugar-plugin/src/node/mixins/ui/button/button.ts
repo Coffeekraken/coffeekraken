@@ -32,6 +32,26 @@ export interface IPostcssSugarPluginUiButtonParams {
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
+
+/**
+ * @name          button
+ * @namespace     ui.button
+ * @type          CssMixin
+ * @interface     ./button          interface
+ * @platform      css
+ * @status        beta
+ *
+ * Apply the button style to any element
+ *
+ * @example     css
+ * .my-button {
+ *    @sugar.ui.button;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 export default function ({
     params,
     atRule,

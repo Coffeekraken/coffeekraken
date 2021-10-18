@@ -38,12 +38,12 @@ export default class SColorPicker extends __SLitComponent {
         );
     }
     firstUpdated() {
-        console.log(this.props);
-
         const pickr = __Pickr.create({
             el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'
-            container: this.shadowRoot?.querySelector('.s-color-picker__picker-wrapper'),
+            container: this.shadowRoot?.querySelector(
+                '.s-color-picker__picker-wrapper',
+            ),
             default: this.props.value,
             // autoReposition: false,
             comparison: false,
@@ -146,14 +146,21 @@ export default class SColorPicker extends __SLitComponent {
     render() {
         return html`
             <div class="${this.componentUtils.className('')}">
-                <div class="${this.componentUtils.className('__picker-wrapper')}"></div>
-                <div class="${this.componentUtils.className('__preview')}"></div>
+                <div
+                    class="${this.componentUtils.className('__picker-wrapper')}"
+                ></div>
+                <div
+                    class="${this.componentUtils.className('__preview')}"
+                ></div>
             </div>
         `;
     }
 }
 
-export function define(props: Partial<ISColorPickerComponentProps> = {}, tagName = 's-color-picker') {
+export function define(
+    props: Partial<ISColorPickerComponentProps> = {},
+    tagName = 's-color-picker',
+) {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, SColorPicker);
 }

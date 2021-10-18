@@ -29,14 +29,18 @@ export default async function interfaceTag(data, blockSettings) {
     const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
 
     let name = stringArray[0],
+        importName = stringArray[1] ? stringArray[1].trim() : 'default',
         path,
         relPath;
 
-    const potentialPath = __path.resolve(__folderPath(blockSettings.filepath), name);
+    const potentialPath = __path.resolve(
+        __folderPath(blockSettings.filepath),
+        name,
+    );
 
     if (__fs.existsSync(potentialPath)) {
         const int = await import(potentialPath);
-        return int.default.toObject();
+        return int[importName].toObject();
     }
 
     return {

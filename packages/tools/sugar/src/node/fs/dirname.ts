@@ -1,6 +1,5 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import __callsites from 'callsites';
+import __folderPath from './folderPath';
 
 /**
  * @name            dirname
@@ -26,5 +25,5 @@ import __callsites from 'callsites';
  */
 export default function () {
     // @ts-ignore
-    return fileURLToPath(__callsites()[1].getFileName()).split('/').slice(0, -1).join('/');
+    return __folderPath(__callsites()[1].getFileName());
 }

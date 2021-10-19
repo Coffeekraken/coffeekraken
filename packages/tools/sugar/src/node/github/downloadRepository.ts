@@ -69,6 +69,7 @@ export default function downloadRepository(
 
         const url = `https://codeload.github.com/${repository}/zip/${settings.branch}`;
         const file = __fs.createWriteStream(dest);
+
         const request = __https
             .get(url, function (response) {
                 response.pipe(file);
@@ -78,6 +79,7 @@ export default function downloadRepository(
                     if (settings?.unzip) {
                         const newDest = dest.split('/').slice(0, -1).join('/');
                         const destFolderPath = dest.replace(/\.g?zip$/, '');
+                        __fsExtra.removeSync(destFolderPath);
                         await __unzip(dest, {
                             dest: newDest,
                         });

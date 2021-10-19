@@ -25,30 +25,30 @@ To illustrate this, we will take as example of overriding the javascript sources
 -   Create the file `.sugar/storage.config.js`
 -   Fill it like so
 
-{{#> s-code-example lang='js'}}
+```js
 export default (env, config) => {
-return {
-src: {
-jsDir: "your new absolute directory path"
-}
-}
-}
-{{/s-code-example}}
+    return {
+        src: {
+            jsDir: 'your new absolute directory path',
+        },
+    };
+};
+```
 
 ### User level overriding
 
 -   Create the file `.local/.sugar/storage.config.js`
 -   Fill it like so
 
-{{#> s-code-example lang='js'}}
+```js
 export default (env, config) => {
-return {
-src: {
-jsDir: "your new absolute directory path"
-}
-}
-}
-{{/s-code-example}}
+    return {
+        src: {
+            jsDir: 'your new absolute directory path',
+        },
+    };
+};
+```
 
 > You'll see that the process is the same. The only difference is where are stored files. Note that the `.local` folder MUST be added in your **.gitignore file** if you're not using our development toolchain.
 

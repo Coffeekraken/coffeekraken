@@ -72,13 +72,13 @@ yarn add @coffeekraken/s-sugar-config
 
 Then, here's an example to access the "storage" configurations. (more on built-in configurations on the [@coffeekraken/s-sugar-config](https:/www.npmjs.com/package/@coffeekraken/s-sugar-config) package page)
 
-{{#> s-code-example lang='js'}}
+```js
 // import the package
 import **SSugarConfig from '@coffeekraken/s-sugar-config';
 // access your configurations using dot pathes like:
 **SSugarConfig.get('storage.package.rootDir');
 \_\_SSugarConfig.get('storage.src.jsDir');
 // etc...
-{{/s-code-example}}
+```
 
 {{/layout-doc }}

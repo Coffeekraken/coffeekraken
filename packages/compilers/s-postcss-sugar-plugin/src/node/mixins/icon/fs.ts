@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __fs from 'fs';
 import __path from 'path';
-import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
@@ -57,7 +57,7 @@ export default function ({
 
     // reading the icon file
     const potentialFilePathFromRoot = __path.resolve(
-        __packageRootDir(),
+        __packageRoot(),
         finalParams.path,
     );
     const potentialFilePathFromFile = __path.resolve(

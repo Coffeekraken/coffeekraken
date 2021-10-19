@@ -1,19 +1,15 @@
 import __SBuilder from '@coffeekraken/s-builder';
-import __SBench from '@coffeekraken/s-bench';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
-import __SGlob, { IResolveGlobSettings } from '@coffeekraken/s-glob';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SFile from '@coffeekraken/s-file';
-import __sharp from 'sharp';
-import __srcImgDir from '@coffeekraken/sugar/node/path/srcImgDir';
+import __SGlob, { IResolveGlobSettings } from '@coffeekraken/s-glob';
+import __SPromise from '@coffeekraken/s-promise';
 import __ensureDirSync from '@coffeekraken/sugar/node/fs/ensureDirSync';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __imageSize from 'image-size';
 import __minimatch from 'minimatch';
 import __path from 'path';
-
+import __sharp from 'sharp';
 import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
 
 /**
@@ -24,12 +20,12 @@ import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuil
  * @platform        node
  * @platform        ts
  * @status          beta
- * 
+ *
  * This class allows you to compress the more popular images formats like
  * "png", "jpg", "svg", "gif", etc... using the WONDERFULL sharp library.
- * 
+ *
  * @param           {ISImagesBuilderCtorSettings}         [settings={}]           Some settings to configure your image compression process
- * 
+ *
  * @example         js
  * import SImagesBuilder from '@coffeekraken/s-image-compressor';
  * const builder = new SImagesBuilder({
@@ -38,7 +34,7 @@ import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuil
  *      }
  * });
  * await builder.build('src/** /*.jpg');
- * 
+ *
  * @see             https://www.npmjs.com/package/sharp
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -84,24 +80,21 @@ export interface ISImagesBuilderStats {
     gbytes: number | string;
 }
 
-
-
 export interface ISImagesBuilderResult {
     source: ISImagesBuilderResultItem;
     builded: ISImagesBuilderResultItem;
     webp: ISImagesBuilderResultItem;
-    files: Record<string, ISImagesBuilderImageResult>
+    files: Record<string, ISImagesBuilderImageResult>;
 }
 
 export default class SImagesBuilder extends __SBuilder {
-    
     /**
      * @name            imagesBuilderSettings
      * @type            ISImagesBuilderSettings
      * @get
-     * 
+     *
      * Access the images compressor settings
-     * 
+     *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
@@ -113,18 +106,21 @@ export default class SImagesBuilder extends __SBuilder {
      * @name            constructor
      * @type            Function
      * @constructor
-     * 
+     *
      * Constructor
-     * 
+     *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     constructor(settings?: Partial<ISImagesBuilderCtorSettings>) {
-
-        super(__deepMerge({
-            imagesBuilder: {
-            }
-        }, settings ?? {}));
+        super(
+            __deepMerge(
+                {
+                    imagesBuilder: {},
+                },
+                settings ?? {},
+            ),
+        );
     }
 
     /**
@@ -132,312 +128,395 @@ export default class SImagesBuilder extends __SBuilder {
      * @type            Function
      * @private
      * @async
-     * 
+     *
      * This method allows you to compress some images by passing one or more globs
      * as parameters and if needed some ISImagesBuilderSettings settings to override
      * these passed in the constructor
-     * 
+     *
      * @param       {ISImagesBuilderBuildParams}              params            The parameters to build the images correctly. These parameters are passed by the SBuilder class
      * @param       {Partial<ISImagesBuilderSettings>}       [settings={}]       Some settings to override the ones passed in the constructor if needed
      * @return      {SPromise<ISImagesBuilderResult>}        A promise resolved with the ISImagesBuilderResult object that store all the builded files stats, etc...
-     * 
+     *
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _build(params: ISImagesBuilderBuildParams, settings?: Partial<ISImagesBuilderSettings>): Promise<ISImagesBuilderResult> {
-        return new __SPromise(async ({resolve, reject, emit}) => {
+    _build(
+        params: ISImagesBuilderBuildParams,
+        settings?: Partial<ISImagesBuilderSettings>,
+    ): Promise<ISImagesBuilderResult> {
+        return new __SPromise(
+            async ({ resolve, reject, emit }) => {
+                const finalSettings = <ISImagesBuilderSettings>__deepMerge(
+                    {
+                        resolveGlob: {},
+                    },
+                    this.imagesBuilderSettings,
+                    settings ?? {},
+                );
 
-            const finalSettings = <ISImagesBuilderSettings>__deepMerge(
-                {
-                    resolveGlob: {}
-                },
-                this.imagesBuilderSettings,
-                settings ?? {}
-            );
+                // @ts-ignore
+                params = __SImagesBuilderBuildParamsInterface.apply(
+                    params ?? {},
+                );
 
-            // @ts-ignore
-            params = __SImagesBuilderBuildParamsInterface.apply(params ?? {});
-
-            // clear if needed
-            if (params.clear) {
+                // clear if needed
+                if (params.clear) {
                     __removeSync(params.outDir);
                     __ensureDirSync(params.outDir);
-            }
-
-            // preparing files stack that store source AND output SFile instances
-            const filesStack = {};
-
-            // init stats variables
-            const sourceStats = {
-                bytes: 0
-            };
-            const buildedStats = {
-                bytes: 0
-            };
-            const webpStats = {
-                bytes: 0
-            };
-
-            emit('log', {
-                value: `<yellow>[build]</yellow> Starting images Build`
-            });
-
-            function printParams(paramsObj) {
-                if (paramsObj.glob) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Glob        : <yellow>${paramsObj.glob}</yellow>`
-                    });
                 }
-                if (paramsObj.inDir) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Input       : <cyan>${__path.relative(process.cwd(), paramsObj.inDir)}</cyan>`
-                    });
-                }
-                if (paramsObj.outDir) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(process.cwd(), paramsObj.outDir)}</cyan>`
-                    });
-                }
-                if (paramsObj.quality) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Quality     : <green>${paramsObj.quality}</green>`
-                    });
-                }
-                if (paramsObj.webp !== undefined) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Webp        : ${paramsObj.webp ? '<green>true</green>' : '<red>false</red>'}`
-                    });
-                }
-                if (paramsObj.width || paramsObj.height) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Size        : <yellow>${paramsObj.width ? paramsObj.width : '...'}/${paramsObj.height ? paramsObj.height : '...'}</yellow>`
-                    });
-                }
-                if (paramsObj.resolution) {
-                    emit('log', {
-                        value: `<yellow>○</yellow> Resolution${paramsObj.resolution.length > 1 ? 's' : ' '} : ${paramsObj.resolution.map(res => {
-                            return `<magenta>${res}x</magenta>`
-                        }).join(', ')}`
-                    });
-                }
-            }
 
-            printParams(params);
+                // preparing files stack that store source AND output SFile instances
+                const filesStack = {};
 
-            if (params.specificParams) {
-                Object.keys(params.specificParams).forEach(glob => {
-                    const customParamsObj = params.specificParams[glob];
-                    emit('log', {
-                        value: `<cyan>[${glob}]</cyan> Specific params`
-                    });
-                    printParams(customParamsObj);
-                });
-            }
-
-
-            // resolving globs
-            await __SGlob.resolve(`${params.inDir}/${params.glob}`, {
-                ...finalSettings.resolveGlob ?? {},
-                cwd: params.inDir
-            }).forEach(file => {
-
-                sourceStats.bytes += file.stats.bytes;
-
-                filesStack[file.path] = {
-                    source: file,
-                    builded: []
+                // init stats variables
+                const sourceStats = {
+                    bytes: 0,
                 };
-            });
-    
+                const buildedStats = {
+                    bytes: 0,
+                };
+                const webpStats = {
+                    bytes: 0,
+                };
 
+                emit('log', {
+                    value: `<yellow>[build]</yellow> Starting images Build`,
+                });
 
-            for (let i=0; i < Object.keys(filesStack).length; i++) {
+                function printParams(paramsObj) {
+                    if (paramsObj.glob) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Glob        : <yellow>${paramsObj.glob}</yellow>`,
+                        });
+                    }
+                    if (paramsObj.inDir) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Input       : <cyan>${__path.relative(
+                                process.cwd(),
+                                paramsObj.inDir,
+                            )}</cyan>`,
+                        });
+                    }
+                    if (paramsObj.outDir) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
+                                process.cwd(),
+                                paramsObj.outDir,
+                            )}</cyan>`,
+                        });
+                    }
+                    if (paramsObj.quality) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Quality     : <green>${paramsObj.quality}</green>`,
+                        });
+                    }
+                    if (paramsObj.webp !== undefined) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Webp        : ${
+                                paramsObj.webp
+                                    ? '<green>true</green>'
+                                    : '<red>false</red>'
+                            }`,
+                        });
+                    }
+                    if (paramsObj.width || paramsObj.height) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Size        : <yellow>${
+                                paramsObj.width ? paramsObj.width : '...'
+                            }/${
+                                paramsObj.height ? paramsObj.height : '...'
+                            }</yellow>`,
+                        });
+                    }
+                    if (paramsObj.resolution) {
+                        emit('log', {
+                            value: `<yellow>○</yellow> Resolution${
+                                paramsObj.resolution.length > 1 ? 's' : ' '
+                            } : ${paramsObj.resolution
+                                .map((res) => {
+                                    return `<magenta>${res}x</magenta>`;
+                                })
+                                .join(', ')}`,
+                        });
+                    }
+                }
 
-                const path = Object.keys(filesStack)[i];
-
-                let imgParams = params;
-
-                const file = filesStack[path].source;
+                printParams(params);
 
                 if (params.specificParams) {
-                    for (let l=0; l<Object.keys(params.specificParams).length; l++) {
-                        const glob = Object.keys(params.specificParams)[l];
-                        const specificParams = params.specificParams[glob];
-                        if (__minimatch(file.relPath, glob)) {
-                            imgParams = <ISImagesBuilderBuildParams>__deepMerge(params, specificParams);
+                    Object.keys(params.specificParams).forEach((glob) => {
+                        const customParamsObj = params.specificParams[glob];
+                        emit('log', {
+                            value: `<cyan>[${glob}]</cyan> Specific params`,
+                        });
+                        printParams(customParamsObj);
+                    });
+                }
+
+                // resolving globs
+                await __SGlob
+                    .resolve(`${params.inDir}/${params.glob}`, {
+                        ...(finalSettings.resolveGlob ?? {}),
+                        cwd: params.inDir,
+                    })
+                    .forEach((file) => {
+                        sourceStats.bytes += file.stats.bytes;
+
+                        filesStack[file.path] = {
+                            source: file,
+                            builded: [],
+                        };
+                    });
+
+                for (let i = 0; i < Object.keys(filesStack).length; i++) {
+                    const path = Object.keys(filesStack)[i];
+
+                    let imgParams = params;
+
+                    const file = filesStack[path].source;
+
+                    if (params.specificParams) {
+                        for (
+                            let l = 0;
+                            l < Object.keys(params.specificParams).length;
+                            l++
+                        ) {
+                            const glob = Object.keys(params.specificParams)[l];
+                            const specificParams = params.specificParams[glob];
+                            if (__minimatch(file.relPath, glob)) {
+                                imgParams = <ISImagesBuilderBuildParams>(
+                                    __deepMerge(params, specificParams)
+                                );
+                            }
+                        }
+                    }
+
+                    const outPath = `${imgParams.outDir}/${file.relPath}`;
+
+                    // remove file
+                    __removeSync(outPath);
+
+                    // ensure directory
+                    __ensureDirSync(__folderPath(outPath));
+
+                    // shared manipulations
+                    const imageSize = __imageSize(file.path);
+
+                    const idealSize = <
+                        {
+                            width: number;
+                            height: number;
+                        }
+                    >imageSize;
+
+                    if (imgParams.width && idealSize.width > imgParams.width) {
+                        const percent =
+                            (100 / idealSize.width) * imgParams.width;
+                        idealSize.width = imgParams.width;
+                        idealSize.height = Math.round(
+                            (idealSize.height / 100) * percent,
+                        );
+                    }
+                    if (
+                        imgParams.height &&
+                        idealSize.height > imgParams.height
+                    ) {
+                        const percent =
+                            (100 / idealSize.height) * imgParams.height;
+                        idealSize.height = imgParams.height;
+                        idealSize.width = Math.round(
+                            (idealSize.width / 100) * percent,
+                        );
+                    }
+
+                    const imgsArray = [
+                        {
+                            size: idealSize,
+                            resolution: 1,
+                            outPath,
+                        },
+                    ];
+
+                    for (let k = 0; k < imgParams.resolution.length; k++) {
+                        const resolution = imgParams.resolution[k];
+                        if (resolution === 1) continue;
+                        if (file.extension === 'svg') continue;
+
+                        imgsArray.push({
+                            size: {
+                                width: idealSize.width * resolution,
+                                height: idealSize.height * resolution,
+                            },
+                            resolution,
+                            outPath: outPath.replace(
+                                /\.([a-zA-Z]+)$/,
+                                `@${resolution}x.$1`,
+                            ),
+                        });
+                    }
+
+                    for (let j = 0; j < imgsArray.length; j++) {
+                        const imgObj = imgsArray[j];
+
+                        const outputFn =
+                            file.extension === 'jpg' ? 'jpeg' : file.extension;
+
+                        const img = __sharp(path);
+
+                        if (!img[outputFn]) {
+                            await img
+                                .resize(imgObj.size)
+                                .toFile(imgObj.outPath);
+                            continue;
+                        }
+
+                        await img
+                            .resize(imgObj.size)
+                            [outputFn]({
+                                quality: params.quality,
+                            })
+                            .toFile(imgObj.outPath);
+                        const buildedFile = __SFile.new(outPath);
+                        buildedStats.bytes += buildedFile.stats.bytes;
+                        filesStack[path].builded.push(buildedFile);
+
+                        if (params.webp) {
+                            const webpOutPath = imgObj.outPath.replace(
+                                /\.[a-zA-Z0-9]+/,
+                                '.webp',
+                            );
+                            await __sharp(path)
+                                .resize(imgObj.size)
+                                .webp({
+                                    quality: params.quality,
+                                })
+                                .toFile(webpOutPath);
+                            const webpFile = __SFile.new(webpOutPath);
+                            webpStats.bytes += webpFile.stats.bytes;
+                            filesStack[path].builded.push(webpFile);
                         }
                     }
                 }
 
-                const outPath = `${imgParams.outDir}/${file.relPath}`;
+                const buildedGainedBytes =
+                        sourceStats.bytes - buildedStats.bytes,
+                    webpFromSourceGainedBytes =
+                        sourceStats.bytes - webpStats.bytes,
+                    webpFromBuildedGainedBytes =
+                        buildedStats.bytes - webpStats.bytes;
 
-                // remove file
-                __removeSync(outPath);
-
-                // ensure directory
-                __ensureDirSync(__folderPath(outPath));
-
-                // shared manipulations
-                const imageSize = __imageSize(file.path);
-
-                const idealSize = <{
-                    width: number;
-                    height: number;
-                }>imageSize;
-
-                if (imgParams.width && idealSize.width > imgParams.width) {
-                    const percent = 100 / idealSize.width * imgParams.width;
-                    idealSize.width = imgParams.width;
-                    idealSize.height = Math.round(idealSize.height / 100 * percent);
-                }
-                if (imgParams.height && idealSize.height > imgParams.height) {
-                    const percent = 100 / idealSize.height * imgParams.height;
-                    idealSize.height = imgParams.height;
-                    idealSize.width = Math.round(idealSize.width / 100 * percent);
-                }
-
-                const imgsArray = [{
-                    size: idealSize,
-                    resolution: 1,
-                    outPath
-                }];
-
-                for (let k = 0; k < imgParams.resolution.length; k++) {
-                    const resolution = imgParams.resolution[k];
-                    if (resolution === 1) continue;
-                    if (file.extension === 'svg') continue;
-
-                    imgsArray.push({
-                        size: {
-                            width: idealSize.width * resolution,
-                            height: idealSize.height * resolution
+                const result: ISImagesBuilderResult = {
+                    source: {
+                        bytes: sourceStats.bytes.toFixed(2),
+                        kbytes: (sourceStats.bytes * 0.001).toFixed(2),
+                        mbytes: (sourceStats.bytes * 0.000001).toFixed(2),
+                        gbytes: (sourceStats.bytes * 0.00000001).toFixed(2),
+                    },
+                    builded: {
+                        fromSourceGain: {
+                            percentage:
+                                100 -
+                                Math.round(
+                                    (100 / sourceStats.bytes) *
+                                        buildedStats.bytes,
+                                ),
+                            bytes: buildedGainedBytes.toFixed(2),
+                            kbytes: (buildedGainedBytes * 0.001).toFixed(2),
+                            mbytes: (buildedGainedBytes * 0.000001).toFixed(2),
+                            gbytes: (buildedGainedBytes * 0.00000001).toFixed(
+                                2,
+                            ),
                         },
-                        resolution,
-                        outPath: outPath.replace(/\.([a-zA-Z]+)$/, `@${resolution}x.$1`)
+                        bytes: buildedStats.bytes.toFixed(2),
+                        kbytes: (buildedStats.bytes * 0.001).toFixed(2),
+                        mbytes: (buildedStats.bytes * 0.000001).toFixed(2),
+                        gbytes: (buildedStats.bytes * 0.00000001).toFixed(2),
+                    },
+                    webp: {
+                        fromSourceGain: {
+                            percentage:
+                                100 -
+                                Math.round(
+                                    (100 / sourceStats.bytes) * webpStats.bytes,
+                                ),
+                            bytes: webpFromSourceGainedBytes.toFixed(2),
+                            kbytes: (webpFromSourceGainedBytes * 0.001).toFixed(
+                                2,
+                            ),
+                            mbytes: (
+                                webpFromSourceGainedBytes * 0.000001
+                            ).toFixed(2),
+                            gbytes: (
+                                webpFromSourceGainedBytes * 0.00000001
+                            ).toFixed(2),
+                        },
+                        fromBuildedGain: {
+                            percentage:
+                                100 -
+                                Math.round(
+                                    (100 / buildedStats.bytes) *
+                                        webpStats.bytes,
+                                ),
+                            bytes: webpFromBuildedGainedBytes.toFixed(2),
+                            kbytes: (
+                                webpFromBuildedGainedBytes * 0.001
+                            ).toFixed(2),
+                            mbytes: (
+                                webpFromBuildedGainedBytes * 0.000001
+                            ).toFixed(2),
+                            gbytes: (
+                                webpFromBuildedGainedBytes * 0.00000001
+                            ).toFixed(2),
+                        },
+                        bytes: webpStats.bytes.toFixed(2),
+                        kbytes: (webpStats.bytes * 0.001).toFixed(2),
+                        mbytes: (webpStats.bytes * 0.000001).toFixed(2),
+                        gbytes: (webpStats.bytes * 0.00000001).toFixed(2),
+                    },
+
+                    files: filesStack,
+                };
+
+                emit('log', {
+                    value: `<green>[success]</green> Images build success!`,
+                });
+                emit('log', {
+                    value: `<yellow>[source]</yellow>  Sources files : <yellow>${result.source.mbytes}mb</yellow>`,
+                });
+                emit('log', {
+                    // @ts-ignore
+                    value: `<yellow>[builded]</yellow> Builded files : <yellow>${result.builded.mbytes}mb</yellow>`,
+                });
+                emit('log', {
+                    // @ts-ignore
+                    value: `<white>                       </white> : <cyan>-${result.builded.fromSourceGain.percentage}%</cyan> from source`,
+                });
+                if (params.webp) {
+                    emit('log', {
+                        // @ts-ignore
+                        value: `<yellow>[webp]</yellow>    Webp files    : <yellow>${result.webp.mbytes}mb</yellow>`,
                     });
-
+                    emit('log', {
+                        // @ts-ignore
+                        value: `<white>                       </white> : <cyan>-${result.webp.fromSourceGain.percentage}%</cyan> from source`,
+                    });
+                    emit('log', {
+                        // @ts-ignore
+                        value: `<white>                       </white> : <cyan>-${result.webp.fromBuildedGain.percentage}%</cyan> from builded`,
+                    });
                 }
-
-                for (let j = 0; j<imgsArray.length; j++) {
-
-                    const imgObj = imgsArray[j];
-
-                    const outputFn = file.extension === 'jpg' ? 'jpeg' : file.extension;
-
-                    const img = __sharp(path);
-
-                    if (!img[outputFn]) {
-                        await img.resize(imgObj.size).toFile(imgObj.outPath);
-                        continue;
-                    } 
-
-                    await img.resize(imgObj.size)[outputFn]({
-                        quality: params.quality
-                    }).toFile(imgObj.outPath);
-                    const buildedFile = __SFile.new(outPath);
-                    buildedStats.bytes += buildedFile.stats.bytes;   
-                    filesStack[path].builded.push(buildedFile);
-
-                    if (params.webp) {
-                        const webpOutPath = imgObj.outPath.replace(/\.[a-zA-Z0-9]+/, '.webp');
-                        await __sharp(path).resize(imgObj.size).webp({
-                            quality: params.quality
-                        }).toFile(webpOutPath);
-                         const webpFile = __SFile.new(webpOutPath);
-                        webpStats.bytes += webpFile.stats.bytes;   
-                        filesStack[path].builded.push(webpFile);
-                    }
-                }
-            }
-
-            const buildedGainedBytes = sourceStats.bytes - buildedStats.bytes,
-                    webpFromSourceGainedBytes = sourceStats.bytes - webpStats.bytes,
-                  webpFromBuildedGainedBytes = buildedStats.bytes - webpStats.bytes;
-
-            const result: ISImagesBuilderResult = {
-                source: {
-                    bytes: sourceStats.bytes.toFixed(2),
-                    kbytes: (sourceStats.bytes * 0.001).toFixed(2),
-                    mbytes: (sourceStats.bytes * 0.000001).toFixed(2),
-                    gbytes: (sourceStats.bytes * 0.00000001).toFixed(2),
-                },
-                builded: {
-                    fromSourceGain: {
-                        percentage: 100 - Math.round(100 / sourceStats.bytes * buildedStats.bytes),
-                        bytes: (buildedGainedBytes).toFixed(2),
-                        kbytes: (buildedGainedBytes * 0.001).toFixed(2),
-                        mbytes: (buildedGainedBytes * 0.000001).toFixed(2),
-                        gbytes: (buildedGainedBytes * 0.00000001).toFixed(2)
-                    },
-                    bytes: buildedStats.bytes.toFixed(2),
-                    kbytes: (buildedStats.bytes * 0.001).toFixed(2),
-                    mbytes: (buildedStats.bytes * 0.000001).toFixed(2),
-                    gbytes: (buildedStats.bytes * 0.00000001).toFixed(2),
-                },
-                webp: {
-                    fromSourceGain: {
-                        percentage: 100 - Math.round(100 / sourceStats.bytes * webpStats.bytes),
-                        bytes: (webpFromSourceGainedBytes).toFixed(2),
-                        kbytes: (webpFromSourceGainedBytes * 0.001).toFixed(2),
-                        mbytes: (webpFromSourceGainedBytes * 0.000001).toFixed(2),
-                        gbytes: (webpFromSourceGainedBytes * 0.00000001).toFixed(2)
-                    },
-                    fromBuildedGain: {
-                        percentage: 100 - Math.round(100 / buildedStats.bytes * webpStats.bytes),
-                        bytes: (webpFromBuildedGainedBytes).toFixed(2),
-                        kbytes: (webpFromBuildedGainedBytes * 0.001).toFixed(2),
-                        mbytes: (webpFromBuildedGainedBytes * 0.000001).toFixed(2),
-                        gbytes: (webpFromBuildedGainedBytes * 0.00000001).toFixed(2)
-                    },
-                    bytes: webpStats.bytes.toFixed(2),
-                    kbytes: (webpStats.bytes * 0.001).toFixed(2),
-                    mbytes: (webpStats.bytes * 0.000001).toFixed(2),
-                    gbytes: (webpStats.bytes * 0.00000001).toFixed(2),
-                },
-                
-                files: filesStack
-            };
-
-            emit('log', {
-                value: `<green>[success]</green> Images build success!`
-            });
-            emit('log', {
-                value: `<yellow>[source]</yellow>  Sources files : <yellow>${result.source.mbytes}mb</yellow>`
-            });
-            emit('log', {
-                // @ts-ignore
-                value: `<yellow>[builded]</yellow> Builded files : <yellow>${result.builded.mbytes}mb</yellow>`
-            });
-            emit('log', {
-                // @ts-ignore
-                value: `<white>                       </white> : <cyan>-${result.builded.fromSourceGain.percentage}%</cyan> from source`
-            });
-            if (params.webp) {
                 emit('log', {
                     // @ts-ignore
-                    value: `<yellow>[webp]</yellow>    Webp files    : <yellow>${result.webp.mbytes}mb</yellow>`
-                });
-                emit('log', {
-                    // @ts-ignore
-                    value: `<white>                       </white> : <cyan>-${result.webp.fromSourceGain.percentage}%</cyan> from source`
-                });
-                emit('log', {
-                    // @ts-ignore
-                    value: `<white>                       </white> : <cyan>-${result.webp.fromBuildedGain.percentage}%</cyan> from builded`
-                });
-            }
-            emit('log', {
-                    // @ts-ignore
-                    value: `<cyan>[info]</cyan> Note that only images at resolution <magenta>1x</magenta> are used for stats...`
+                    value: `<cyan>[info]</cyan> Note that only images at resolution <magenta>1x</magenta> are used for stats...`,
                 });
 
-            resolve(result);
-
-        }, {
-            metas: {
-                id: this.constructor.name
-            }
-        });
+                resolve(result);
+            },
+            {
+                metas: {
+                    id: this.constructor.name,
+                },
+            },
+        );
     }
-
 }

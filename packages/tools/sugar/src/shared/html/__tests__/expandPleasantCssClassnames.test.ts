@@ -1,9 +1,7 @@
 import __expandPleasantCssClassnames from '../expandPleasantCssClassnames';
 
-describe('@coffeekraken.sugar.shared.html.expandPleasantCssClassnames', () => {
-
+describe('sugar.shared.html.expandPleasantCssClassnames', () => {
     it('Should expand simple html content successfully', () => {
-
         const html = `
 
             <body class="something:cool">
@@ -24,9 +22,15 @@ describe('@coffeekraken.sugar.shared.html.expandPleasantCssClassnames', () => {
 
         expect(processed.includes('s-typo:something')).toBe(true);
         expect(processed.includes('something something--cool')).toBe(true);
-        expect(processed.includes('s-typo s-typo--h1 s-font s-font--40 s-font--bold')).toBe(true);
-        expect(processed.includes('"s-typo s-typo--p s-font s-font--20 s-typo___desktop s-typo--h2___desktop s-typo--bold___desktop')).toBe(true);
-
-    })
-
+        expect(
+            processed.includes(
+                's-typo s-typo--h1 s-font s-font--40 s-font--bold',
+            ),
+        ).toBe(true);
+        expect(
+            processed.includes(
+                '"s-typo s-typo--p s-font s-font--20 s-typo___desktop s-typo--h2___desktop s-typo--bold___desktop',
+            ),
+        ).toBe(true);
+    });
 });

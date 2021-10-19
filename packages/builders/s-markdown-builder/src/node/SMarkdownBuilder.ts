@@ -4,6 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import handleError from '@coffeekraken/sugar/node/error/handleError';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
@@ -568,6 +569,47 @@ export default class SMarkdownBuilder extends __SBuilder {
                         }
 
                         let currentTransformedString = buildObj.data;
+
+                        // processing transformers
+                        Object.keys(
+                            // @ts-ignore
+                            this.constructor._registeredTransformers,
+                        ).forEach((transformerId) => {
+                            const transformerObj =
+                                // @ts-ignore
+                                this.constructor._registeredTransformers[
+                                    transformerId
+                                ];
+
+                            if (!transformerObj[params.target]) return;
+
+                            const matches = [
+                                ...currentTransformedString.matchAll(
+                                    transformerObj.match,
+                                ),
+                            ];
+
+                            if (!matches.length) return;
+
+                            const transformerStr = __fs
+                                .readFileSync(
+                                    transformerObj[params.target],
+                                    'utf8',
+                                )
+                                .toString();
+                            const tplFn = handlebars.compile(transformerStr);
+
+                            matches.forEach((match) => {
+                                const result = tplFn({
+                                    data: match,
+                                });
+                                currentTransformedString =
+                                    currentTransformedString.replace(
+                                        match[0],
+                                        result,
+                                    );
+                            });
+                        });
 
                         const tplFn = handlebars.compile(
                             currentTransformedString,

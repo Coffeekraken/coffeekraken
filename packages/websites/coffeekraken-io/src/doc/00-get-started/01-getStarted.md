@@ -46,3 +46,5 @@ You can as well access to the help by taping:
 ```shell
 sugar --help
 ```
+
+{{/layout-doc }}

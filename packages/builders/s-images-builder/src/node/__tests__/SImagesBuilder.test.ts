@@ -1,18 +1,19 @@
 import __SImagesBuilder from '../SImagesBuilder';
 import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
-
     it('Should compress simple jpg files correctly', async (done) => {
+        await __SSugarConfig.load();
 
         const outDir = `${__packageTmpDir()}/SImagesBuilder/tests`;
 
         const builder = new __SImagesBuilder({
             imagesBuilder: {
                 resolveGlob: {
-                    defaultExcludes: false
-                }
-            }
+                    defaultExcludes: false,
+                },
+            },
         });
 
         const promise = builder.build({
@@ -21,14 +22,13 @@ describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
             outDir,
             quality: 20,
             width: 100,
-            webp: false
+            webp: false,
         });
-        promise.on('log', log => {
+        promise.on('log', (log) => {
             console.log(log.value);
         });
         await promise;
 
         done();
     });
-
 });

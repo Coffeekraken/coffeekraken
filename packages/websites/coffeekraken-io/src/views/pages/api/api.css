@@ -1,6 +1,14 @@
 #api {
     --s-fs-tree-inline-space-ratio: 1;
 
+    .__nav {
+        position: sticky;
+        overflow: auto;
+        top: 80px;
+        max-height: calc(100vh - 80px - 66px);
+        @sugar.scrollbar;
+    }
+
     .toolbar {
         position: fixed;
         bottom: 0;

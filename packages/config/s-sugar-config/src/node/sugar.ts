@@ -1,6 +1,9 @@
 // @ts-nocheck
 
-import __SConfig, { SConfigFolderAdapter, ISConfigEnvObj } from '@coffeekraken/s-config';
+import __SConfig, {
+    SConfigFolderAdapter,
+    ISConfigEnvObj,
+} from '@coffeekraken/s-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __get from '@coffeekraken/sugar/shared/object/get';
@@ -110,7 +113,9 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get filesRealPaths(): string[] {
-        return this._registeredConfigFilesPaths.map((f) => __fs.realpathSync(f));
+        return this._registeredConfigFilesPaths.map((f) =>
+            __fs.realpathSync(f),
+        );
     }
 
     /**
@@ -140,7 +145,9 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get foldersRealPaths(): string[] {
-        return this._registeredConfigFolderPaths.map((f) => __fs.realpathSync(f.path));
+        return this._registeredConfigFolderPaths.map((f) =>
+            __fs.realpathSync(f.path),
+        );
     }
 
     /**
@@ -175,7 +182,10 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async load(envOrId?: ISConfigEnvObj | string, id?: string): ISSugarConfigLoadedObj {
+    static async load(
+        envOrId?: ISConfigEnvObj | string,
+        id?: string,
+    ): ISSugarConfigLoadedObj {
         id = id ?? (typeof envOrId === 'string' ? envOrId : undefined);
         if (!id) {
             if (__isPlainObject(envOrId)) {
@@ -187,12 +197,13 @@ export default class SSugarConfig extends __SClass {
         let env;
         if (__isPlainObject(envOrId)) env = envOrId;
 
-        if (this._sSugarConfigInstances[id])
+        if (this._sSugarConfigInstances[id]) {
             return {
                 id,
                 config: this._sSugarConfigInstances[id].get('.'),
                 instance: this._sSugarConfigInstances[id],
             };
+        }
 
         this._sSugarConfigInstances[id] = new this({
             metas: {
@@ -245,8 +256,13 @@ export default class SSugarConfig extends __SClass {
         if (!this._rootSugarJson) {
             const rootSugarJsonPath = `${__packageRoot()}/sugar.json`;
             if (__fs.existsSync(rootSugarJsonPath)) {
-                this._rootSugarJson = sugarJson.sanitizeJson(await import(rootSugarJsonPath));
-                if (this._rootSugarJson.extends && !Array.isArray(this._rootSugarJson.extends))
+                this._rootSugarJson = sugarJson.sanitizeJson(
+                    await import(rootSugarJsonPath),
+                );
+                if (
+                    this._rootSugarJson.extends &&
+                    !Array.isArray(this._rootSugarJson.extends)
+                )
                     this._rootSugarJson.extends = [this._rootSugarJson.extends];
             }
         }
@@ -259,7 +275,10 @@ export default class SSugarConfig extends __SClass {
                 if (jsonObj.config && jsonObj.config.folders) {
                     jsonObj.config.folders.forEach((folderObj) => {
                         this.registerFolder(
-                            __path.resolve(jsonObj.metas.folderPath, folderObj.path),
+                            __path.resolve(
+                                jsonObj.metas.folderPath,
+                                folderObj.path,
+                            ),
                             folderObj.scope,
                             packageName,
                         );
@@ -378,23 +397,11 @@ export default class SSugarConfig extends __SClass {
                                     })
                                     .map((obj) => obj.path),
                             ],
-                            // extends: [
-                            //   // @ts-ignore
-                            //   ...this._registeredConfigFolderPaths
-                            //     .filter((obj) => {
-                            //       if (
-                            //         this._rootSugarJson &&
-                            //         obj.scope === 'extends' &&
-                            //         this._rootSugarJson.extends.indexOf(obj.packageName) !== -1
-                            //       ) {
-                            //         return true;
-                            //       }
-                            //       return false;
-                            //     })
-                            //     .map((obj) => obj.path)
-                            // ],
                             repo: [
-                                `${__packageRoot(process.cwd(), true)}/[folderName]`,
+                                `${__packageRoot(
+                                    process.cwd(),
+                                    true,
+                                )}/[folderName]`,
                                 // @ts-ignore
                                 ...this.constructor._registeredConfigFolderPaths
                                     .filter((obj) => obj.scope === 'repo')
@@ -408,7 +415,9 @@ export default class SSugarConfig extends __SClass {
                                     .map((obj) => obj.path),
                             ],
                             user: [
-                                `${__packageRoot(process.cwd())}/.local/[folderName]`,
+                                `${__packageRoot(
+                                    process.cwd(),
+                                )}/.local/[folderName]`,
                                 // @ts-ignore
                                 ...this.constructor._registeredConfigFolderPaths
                                     .filter((obj) => obj.scope === 'user')
@@ -425,7 +434,9 @@ export default class SSugarConfig extends __SClass {
                         return __memoize(() => {
                             for (let i = 0; i < matches.length; i++) {
                                 const match = matches[i];
-                                const valuePath = match.replace('[theme.', '').replace(']', '');
+                                const valuePath = match
+                                    .replace('[theme.', '')
+                                    .replace(']', '');
 
                                 const value = __get(
                                     config,

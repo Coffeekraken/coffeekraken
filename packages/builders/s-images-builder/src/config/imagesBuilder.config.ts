@@ -71,27 +71,27 @@ export default function (env, config) {
          * @name            width
          * @namespace       config.imagesBuilder
          * @type            Number
-         * @default         undefined
+         * @default         null
          *
          * Specify a max width you want your resolution 1 images to target
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        width: undefined,
+        width: null,
 
         /**
          * @name            height
          * @namespace       config.imagesBuilder
-         * @type            Boolean
-         * @default         true
+         * @type            Number
+         * @default         null
          *
          * Specify a max height you want your resolution 1 images to target
          *
          * @since       2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        height: undefined,
+        height: null,
 
         /**
          * @name            resolution

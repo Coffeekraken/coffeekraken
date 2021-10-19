@@ -39,19 +39,19 @@ In order for this transformation to happen, you'll need to use one of these tran
 
 **expandPleasantCssClassnames**: This will take your classes string and expand theme:
 
-{{#> s-code-example lang='js'}}
+```js
 import expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
 expandPleasantCssClassnames('...');
-{{/s-code-example}}
+```
 
 #### Js
 
 **expandPleasantCssClassnamesLive**: This will monitor your app and transform classes live when they appears into the HTML.
 
-{{#> s-code-example lang='js'}}
+```js
 import expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 expandPleasantCssClassnamesLive();
-{{/s-code-example}}
+```
 
 > Note that this can be very useful but may occurs some "layout shift" at page display time
 
@@ -59,9 +59,9 @@ expandPleasantCssClassnamesLive();
 
 **\Sugar\html\expandPleasantCssClassnames**: This will transform all the classes from the HTML string passed.
 
-{{#> s-code-example lang='php'}}
+```js
 $processed = \Sugar\html\expandPleasantCssClassnames('...');
-{{/s-code-example}}
+```
 
 #### Specifications
 

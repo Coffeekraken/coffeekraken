@@ -432,6 +432,7 @@ export default class SConfig {
             this._settings.env,
             config,
         );
+
         Object.keys(loadedConfig).forEach((configId) => {
             if (!loadedConfig[configId]) return;
             config[configId] = loadedConfig[configId];

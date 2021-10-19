@@ -1,6 +1,4 @@
 // @ts-nocheck
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs-extra';
 import __packageRoot from './packageRoot';
 /**
  * @name                            packageRootDir
@@ -28,15 +26,13 @@ import __packageRoot from './packageRoot';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function (from, highest = false) {
-    if (from) {
-        return __packageRoot(from, highest);
-    }
-    const packageRootDir = __SugarConfig.get('storage.package.rootDir');
-    if (packageRootDir !== undefined) {
-        __fs.ensureDirSync(packageRootDir);
-        return packageRootDir;
-    }
-    return '/';
+global.packageRootDirs = {};
+export default function (from = process.cwd(), highest = false) {
+    const storageKey = `${from}-${highest ? 'highest' : ''}`;
+    if (!from && global.packageRootDirs[storageKey])
+        return global.packageRootDirs[storageKey];
+    const path = __packageRoot(from, highest);
+    global.packageRootDirs[storageKey] = path;
+    return path;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZVJvb3REaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWNrYWdlUm9vdERpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sOEJBQThCLENBQUM7QUFDekQsT0FBTyxJQUFJLE1BQU0sVUFBVSxDQUFDO0FBQzVCLE9BQU8sYUFBYSxNQUFNLGVBQWUsQ0FBQztBQUUxQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUVILE1BQU0sQ0FBQyxPQUFPLFdBQVcsSUFBYSxFQUFFLE9BQU8sR0FBRyxLQUFLO0lBRXJELElBQUksSUFBSSxFQUFFO1FBQ1IsT0FBTyxhQUFhLENBQUMsSUFBSSxFQUFFLE9BQU8sQ0FBQyxDQUFDO0tBQ3JDO0lBRUQsTUFBTSxjQUFjLEdBQUcsYUFBYSxDQUFDLEdBQUcsQ0FBQyx5QkFBeUIsQ0FBQyxDQUFDO0lBQ3BFLElBQUksY0FBYyxLQUFLLFNBQVMsRUFBRTtRQUNoQyxJQUFJLENBQUMsYUFBYSxDQUFDLGNBQWMsQ0FBQyxDQUFDO1FBQ25DLE9BQU8sY0FBYyxDQUFDO0tBQ3ZCO0lBRUQsT0FBTyxHQUFHLENBQUM7QUFDYixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicGFja2FnZVJvb3REaXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJwYWNrYWdlUm9vdERpci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBSWQsT0FBTyxhQUFhLE1BQU0sZUFBZSxDQUFDO0FBRTFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBeUJHO0FBQ0gsTUFBTSxDQUFDLGVBQWUsR0FBRyxFQUFFLENBQUM7QUFDNUIsTUFBTSxDQUFDLE9BQU8sV0FDVixPQUFlLE9BQU8sQ0FBQyxHQUFHLEVBQUUsRUFDNUIsT0FBTyxHQUFHLEtBQUs7SUFFZixNQUFNLFVBQVUsR0FBRyxHQUFHLElBQUksSUFBSSxPQUFPLENBQUMsQ0FBQyxDQUFDLFNBQVMsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUM7SUFFekQsSUFBSSxDQUFDLElBQUksSUFBSSxNQUFNLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQztRQUMzQyxPQUFPLE1BQU0sQ0FBQyxlQUFlLENBQUMsVUFBVSxDQUFDLENBQUM7SUFFOUMsTUFBTSxJQUFJLEdBQUcsYUFBYSxDQUFDLElBQUksRUFBRSxPQUFPLENBQUMsQ0FBQztJQUMxQyxNQUFNLENBQUMsZUFBZSxDQUFDLFVBQVUsQ0FBQyxHQUFHLElBQUksQ0FBQztJQUUxQyxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

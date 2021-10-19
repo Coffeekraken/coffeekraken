@@ -18,7 +18,7 @@ export default function (env, config) {
         presets: {},
         transformers: {
             code: {
-                match: /```[a-z]+(.*)```/gm,
+                match: /```([a-zA-Z0-9]+)\n([^```]+)\n```/gm,
                 markdown: __path.resolve(
                     __dirname(),
                     '../transformers/code/code.md',

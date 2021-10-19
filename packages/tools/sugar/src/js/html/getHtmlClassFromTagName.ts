@@ -29,14 +29,15 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getHtmlClassFromTagName(tagName: string): HTMLElement {
-  if (!tagName) return HTMLElement;
+    if (!tagName) return HTMLElement;
 
-  const tagNameUpperFirst = __upperFirst(tagName);
-  if (window[`HTML${tagNameUpperFirst}Element`])
-    return window[`HTML${tagNameUpperFirst}Element`];
+    const tagNameUpperFirst = __upperFirst(tagName);
+    if (window[`HTML${tagNameUpperFirst}Element`])
+        return window[`HTML${tagNameUpperFirst}Element`];
 
-  if (__htmlTagToHtmlClassMap[tagName]) return __htmlTagToHtmlClassMap[tagName];
+    if (__htmlTagToHtmlClassMap[tagName])
+        return __htmlTagToHtmlClassMap[tagName];
 
-  return HTMLElement;
+    return window.HTMLElement;
 }
 export default getHtmlClassFromTagName;

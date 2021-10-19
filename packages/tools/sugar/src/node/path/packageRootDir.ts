@@ -30,18 +30,18 @@ import __packageRoot from './packageRoot';
  * @since         2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+global.packageRootDirs = {};
+export default function (
+    from: string = process.cwd(),
+    highest = false,
+): string {
+    const storageKey = `${from}-${highest ? 'highest' : ''}`;
 
-export default function (from?: string, highest = false): string {
+    if (!from && global.packageRootDirs[storageKey])
+        return global.packageRootDirs[storageKey];
 
-  if (from) {
-    return __packageRoot(from, highest);
-  }
+    const path = __packageRoot(from, highest);
+    global.packageRootDirs[storageKey] = path;
 
-  const packageRootDir = __SugarConfig.get('storage.package.rootDir');
-  if (packageRootDir !== undefined) {
-    __fs.ensureDirSync(packageRootDir);
-    return packageRootDir;
-  }
-
-  return '/';
+    return path;
 }

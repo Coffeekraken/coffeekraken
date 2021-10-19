@@ -1,5 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
-import __SDescriptor, { ISDescriptorResult, ISDescriptorRules, ISDescriptorSettings } from '@coffeekraken/s-descriptor';
+import __SDescriptor, {
+    ISDescriptorResult,
+    ISDescriptorRules,
+    ISDescriptorSettings,
+} from '@coffeekraken/s-descriptor';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -92,19 +96,29 @@ export default class SInterface extends __SClass {
      */
     // static definition: ISDescriptorRules = {};
     // @ts-ignore
-    static _definition: ISDescriptorRules = {};
-    static get definition() {
-        if (!this._definition.help) {
-            this._definition.help = {
-                type: 'Boolean',
-                description: `Display the help for this "<yellow>${this.name}</yellow>" interface...`,
-                default: false,
-            };
-        }
+    static _definition: ISDescriptorRules;
+    // static get definition() {
+    //     console.log('SSS');
+    //     if (!this._definition.help) {
+    //         this._definition.help = {
+    //             type: 'Boolean',
+    //             description: `Display the help for this "<yellow>${this.name}</yellow>" interface...`,
+    //             default: false,
+    //         };
+    //     }
+    //     return this._definition;
+    // }
+    // static set definition(value) {
+    //     this._definition = value;
+    // }
+
+    static cached() {
         return this._definition;
     }
-    static set definition(value) {
-        this._definition = value;
+    static cache(definition) {
+        if (this._definition) return this._definition;
+        this._definition = definition;
+        return this._definition;
     }
 
     /**
@@ -215,12 +229,14 @@ export default class SInterface extends __SClass {
             // @ts-ignore
             global._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            global._registeredInterfacesTypes[n.replace('interface', '')] = this;
+            global._registeredInterfacesTypes[n.replace('interface', '')] =
+                this;
         } else if (window !== undefined) {
             // @ts-ignore
             window._registeredInterfacesTypes[n] = this;
             // @ts-ignore
-            window._registeredInterfacesTypes[n.replace('interface', '')] = this;
+            window._registeredInterfacesTypes[n.replace('interface', '')] =
+                this;
         }
     }
 
@@ -253,7 +269,9 @@ export default class SInterface extends __SClass {
         return {
             name: this.name,
             description: this.description ?? '',
-            definition: <ISInterfaceDefinitionProperty>Object.assign({}, this.definition),
+            definition: <ISInterfaceDefinitionProperty>(
+                Object.assign({}, this.definition)
+            ),
         };
     }
 
@@ -297,7 +315,10 @@ export default class SInterface extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static apply(objectOrString: any, settings?: Partial<ISInterfaceSettings>): any {
+    static apply(
+        objectOrString: any,
+        settings?: Partial<ISInterfaceSettings>,
+    ): any {
         // instanciate a new SInterface
         const int = new this({
             interface: settings ?? {},
@@ -324,7 +345,10 @@ export default class SInterface extends __SClass {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static render(renderer = 'terminal', settings?: Partial<ISInterfaceRendererSettings>): string {
+    static render(
+        renderer = 'terminal',
+        settings?: Partial<ISInterfaceRendererSettings>,
+    ): string {
         const set = <ISInterfaceRendererSettings>__deepMerge(
             {
                 renderer: 'terminal',
@@ -343,7 +367,10 @@ export default class SInterface extends __SClass {
         }
 
         // instanciate the renderer and render the interface
-        const rendererInstance = new (<any>this)._registeredRenderers[renderer](this, set);
+        const rendererInstance = new (<any>this)._registeredRenderers[renderer](
+            this,
+            set,
+        );
         return rendererInstance.render();
     }
 
@@ -388,7 +415,9 @@ export default class SInterface extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     apply(objectOrString: any, settings?: Partial<ISInterfaceSettings>): any {
-        const set = <ISInterfaceSettings>__deepMerge(this.interfaceSettings, settings ?? {});
+        const set = <ISInterfaceSettings>(
+            __deepMerge(this.interfaceSettings, settings ?? {})
+        );
 
         let objectOnWhichToApplyInterface = objectOrString;
 
@@ -401,8 +430,19 @@ export default class SInterface extends __SClass {
                     const defArgName = Object.keys(this._definition)[i];
                     const obj = this._definition[defArgName];
                     if (obj.explicit) {
-                        if (obj.alias && ` ${objectOrString} `.match(new RegExp(`\\s-${obj.alias}\\s`))) return;
-                        else if (` ${objectOrString} `.match(new RegExp(`\\s--${argName}\\s`))) return;
+                        if (
+                            obj.alias &&
+                            ` ${objectOrString} `.match(
+                                new RegExp(`\\s-${obj.alias}\\s`),
+                            )
+                        )
+                            return;
+                        else if (
+                            ` ${objectOrString} `.match(
+                                new RegExp(`\\s--${argName}\\s`),
+                            )
+                        )
+                            return;
                         delete objectOnWhichToApplyInterface[argName];
                     }
                 }
@@ -414,8 +454,12 @@ export default class SInterface extends __SClass {
                     const defArgName = Object.keys(this._definition)[i];
                     const obj = this._definition[defArgName];
                     if (!obj.alias) continue;
-                    if (obj.alias === argName && objectOnWhichToApplyInterface[defArgName] === undefined) {
-                        objectOnWhichToApplyInterface[defArgName] = objectOnWhichToApplyInterface[argName];
+                    if (
+                        obj.alias === argName &&
+                        objectOnWhichToApplyInterface[defArgName] === undefined
+                    ) {
+                        objectOnWhichToApplyInterface[defArgName] =
+                            objectOnWhichToApplyInterface[argName];
                         delete objectOnWhichToApplyInterface[argName];
                     }
                 }
@@ -425,7 +469,8 @@ export default class SInterface extends __SClass {
                 if (argName === `${i}`) {
                     const definitionKeys = Object.keys(this._definition);
                     if (definitionKeys[i]) {
-                        objectOnWhichToApplyInterface[definitionKeys[i]] = objectOnWhichToApplyInterface[argName];
+                        objectOnWhichToApplyInterface[definitionKeys[i]] =
+                            objectOnWhichToApplyInterface[argName];
                     }
                     delete objectOnWhichToApplyInterface[argName];
                 }
@@ -442,10 +487,15 @@ export default class SInterface extends __SClass {
 
         // handle base obj
         if (set.baseObj) {
-            objectOnWhichToApplyInterface = __deepMerge(set.baseObj, objectOnWhichToApplyInterface);
+            objectOnWhichToApplyInterface = __deepMerge(
+                set.baseObj,
+                objectOnWhichToApplyInterface,
+            );
         }
 
-        const descriptorResult: ISDescriptorResult = descriptor.apply(objectOnWhichToApplyInterface);
+        const descriptorResult: ISDescriptorResult = descriptor.apply(
+            objectOnWhichToApplyInterface,
+        );
 
         if (descriptorResult.hasIssues()) {
             throw new Error(descriptorResult.toString());

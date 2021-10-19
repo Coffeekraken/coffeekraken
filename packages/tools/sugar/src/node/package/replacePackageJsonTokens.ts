@@ -1,4 +1,4 @@
-import __packageJson from './json';
+import __packageJson from './jsonSync';
 import __flatten from '../../shared/object/flatten';
 
 /**
@@ -34,6 +34,7 @@ export default function replacePackageJsonTokens(
 
     // search for tokens
     const tokensMatches = string.match(/%packageJson\.[a-zA-Z0-9\.]+;?/gm);
+
     if (!tokensMatches) return string;
 
     const packageJson = __packageJson();

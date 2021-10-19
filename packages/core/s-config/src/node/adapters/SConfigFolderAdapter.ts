@@ -76,12 +76,27 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                         fileName: '[name].config.js',
                         folderName: '.sugar',
                         scopes: {
-                            default: [__path.resolve(__dirname(), '../../config')],
+                            default: [
+                                __path.resolve(__dirname(), '../../config'),
+                            ],
                             module: [],
                             extends: [],
-                            repo: [`${__packageRootDir(process.cwd(), true)}/[folderName]`],
-                            package: [`${__packageRootDir(process.cwd())}/[folderName]`],
-                            user: [`${__packageRootDir(process.cwd())}/.local/[folderName]`],
+                            repo: [
+                                `${__packageRootDir(
+                                    process.cwd(),
+                                    true,
+                                )}/[folderName]`,
+                            ],
+                            package: [
+                                `${__packageRootDir(
+                                    process.cwd(),
+                                )}/[folderName]`,
+                            ],
+                            user: [
+                                `${__packageRootDir(
+                                    process.cwd(),
+                                )}/.local/[folderName]`,
+                            ],
                         },
                         savingScope: 'user',
                     },
@@ -91,39 +106,56 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         );
 
         // handle configs
-        this.configFolderAdapterSettings.folderName = this.configFolderAdapterSettings.folderName.replace(
-            '[name]',
-            this.name,
-        );
+        this.configFolderAdapterSettings.folderName =
+            this.configFolderAdapterSettings.folderName.replace(
+                '[name]',
+                this.name,
+            );
 
         // handle each scopes
-        Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
-            let scopeFoldersPathArray = this.configFolderAdapterSettings.scopes[scope];
+        Object.keys(this.configFolderAdapterSettings.scopes).forEach(
+            (scope) => {
+                let scopeFoldersPathArray =
+                    this.configFolderAdapterSettings.scopes[scope];
 
-            if (scopeFoldersPathArray) {
-                if (!Array.isArray(scopeFoldersPathArray)) scopeFoldersPathArray = [scopeFoldersPathArray];
-                scopeFoldersPathArray = scopeFoldersPathArray.map((path) => {
-                    return path.replace('[folderName]', this.configFolderAdapterSettings.folderName);
-                });
-            }
+                if (scopeFoldersPathArray) {
+                    if (!Array.isArray(scopeFoldersPathArray))
+                        scopeFoldersPathArray = [scopeFoldersPathArray];
+                    scopeFoldersPathArray = scopeFoldersPathArray.map(
+                        (path) => {
+                            return path.replace(
+                                '[folderName]',
+                                this.configFolderAdapterSettings.folderName,
+                            );
+                        },
+                    );
+                }
 
-            // append to the scoped folders path array
-            this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
-        });
+                // append to the scoped folders path array
+                this._scopedFoldersPaths[scope] = scopeFoldersPathArray;
+            },
+        );
 
         const watchPaths: string[] = [];
-        Object.keys(this.configFolderAdapterSettings.scopes).forEach((scope) => {
-            if (this._scopedFoldersPaths[scope]) {
-                this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[scope].filter((path) => {
-                    if (__fs.existsSync(path) && this._foldersPaths.indexOf(path) === -1) {
-                        watchPaths.push(path);
-                        this._foldersPaths.push(path);
-                        return true;
-                    }
-                    return false;
-                });
-            }
-        });
+        Object.keys(this.configFolderAdapterSettings.scopes).forEach(
+            (scope) => {
+                if (this._scopedFoldersPaths[scope]) {
+                    this._scopedFoldersPaths[scope] = this._scopedFoldersPaths[
+                        scope
+                    ].filter((path) => {
+                        if (
+                            __fs.existsSync(path) &&
+                            this._foldersPaths.indexOf(path) === -1
+                        ) {
+                            watchPaths.push(path);
+                            this._foldersPaths.push(path);
+                            return true;
+                        }
+                        return false;
+                    });
+                }
+            },
+        );
 
         // watch for changes
         __chokidar
@@ -137,7 +169,12 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
             .on('add', (p) => this.update(p));
     }
 
-    async _load(folderPaths, clearCache = false, env: ISConfigEnvObj, configObj) {
+    async _load(
+        folderPaths,
+        clearCache = false,
+        env: ISConfigEnvObj,
+        configObj,
+    ) {
         const configObj = {};
 
         folderPaths = __unique(folderPaths);
@@ -152,23 +189,39 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
                 if (!file.match(/\.js(on)?$/)) continue;
 
-                if (!file.includes(this.configFolderAdapterSettings.fileName.replace('[name]', ''))) {
+                if (
+                    !file.includes(
+                        this.configFolderAdapterSettings.fileName.replace(
+                            '[name]',
+                            '',
+                        ),
+                    )
+                ) {
                     continue;
                 }
 
                 const configFilePath = `${path}/${file}`;
+
                 // @TODO      check for delete cache with import
                 const importedConfig = await import(configFilePath);
+
                 let configData = importedConfig.default;
-                if (typeof configData === 'function') configData = configData(env, configObj);
+                if (typeof configData === 'function')
+                    configData = configData(env, configObj);
 
                 const configKey = file.replace('.config.js', '');
 
                 if (!configData) continue;
 
-                configObj[configKey] = __deepMerge(configObj[configKey], configData);
+                configObj[configKey] = __deepMerge(
+                    configObj[configKey],
+                    configData,
+                );
 
-                if (importedConfig.postprocess && typeof importedConfig.postprocess === 'function') {
+                if (
+                    importedConfig.postprocess &&
+                    typeof importedConfig.postprocess === 'function'
+                ) {
                     __SConfig.registerPostprocess(
                         this.configAdapterSettings.name,
                         configKey,
@@ -176,8 +229,15 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                     );
                 }
 
-                if (importedConfig.preprocess && typeof importedConfig.preprocess === 'function') {
-                    __SConfig.registerPreprocess(this.configAdapterSettings.name, configKey, importedConfig.preprocess);
+                if (
+                    importedConfig.preprocess &&
+                    typeof importedConfig.preprocess === 'function'
+                ) {
+                    __SConfig.registerPreprocess(
+                        this.configAdapterSettings.name,
+                        configKey,
+                        importedConfig.preprocess,
+                    );
                 }
             }
         }
@@ -187,13 +247,22 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
     async load(clearCache = false, env: ISConfigEnvObj, configObj) {
         try {
-            for (let i = 0; i < Object.keys(this._scopedFoldersPaths).length; i++) {
+            for (
+                let i = 0;
+                i < Object.keys(this._scopedFoldersPaths).length;
+                i++
+            ) {
                 const scope = Object.keys(this._scopedFoldersPaths)[i];
 
                 const scopedFoldersPaths = this._scopedFoldersPaths[scope];
 
                 if (scopedFoldersPaths && scopedFoldersPaths.length) {
-                    this._scopedSettings[scope] = await this._load(scopedFoldersPaths, clearCache, env, configObj);
+                    this._scopedSettings[scope] = await this._load(
+                        scopedFoldersPaths,
+                        clearCache,
+                        env,
+                        configObj,
+                    );
                 }
             }
         } catch (e) {
@@ -202,7 +271,10 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
 
         let resultSettings: any = {};
         Object.keys(this._scopedSettings).forEach((scope) => {
-            resultSettings = __deepMerge(resultSettings, this._scopedSettings[scope]);
+            resultSettings = __deepMerge(
+                resultSettings,
+                this._scopedSettings[scope],
+            );
         });
 
         return resultSettings;

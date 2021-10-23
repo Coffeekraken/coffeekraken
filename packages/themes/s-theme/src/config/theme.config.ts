@@ -46,7 +46,7 @@ export function postprocess(themeConfig, config) {
                     {},
                     themeObj.color[themeObj.defaultColor],
                 );
-            } else 
+            } else {
                 const firstColor =
                     themeObj.color[Object.keys(themeObj.color)[0]];
                 themeObj.color.current = Object.assign({}, firstColor);

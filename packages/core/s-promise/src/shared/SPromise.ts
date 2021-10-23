@@ -7,7 +7,10 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SLog from '@coffeekraken/s-log';
-import __treatAsValue, { ITreatAsValueProxy, ITreatAsValueSettings } from './treatAsValue';
+import __treatAsValue, {
+    ITreatAsValueProxy,
+    ITreatAsValueSettings,
+} from './treatAsValue';
 
 /**
  * @name                  SPromise
@@ -49,7 +52,12 @@ import __treatAsValue, { ITreatAsValueProxy, ITreatAsValueSettings } from './tre
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 
-type ISPromiseStateType = 'pending' | 'resolved' | 'rejected' | 'canceled' | 'destroyed';
+type ISPromiseStateType =
+    | 'pending'
+    | 'resolved'
+    | 'rejected'
+    | 'canceled'
+    | 'destroyed';
 
 export interface ISPromiseProxies {
     resolve: any[];
@@ -107,7 +115,10 @@ export interface ISPromise extends Promise, ISEventEmitter {
     finally(...args: any): ISPromise;
 }
 
-class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEmitter {
+class SPromise
+    extends __SClass.extends(Promise)
+    implements ISPromise, ISEventEmitter
+{
     /**
      * @name        treatAsValue
      * @type        Function
@@ -123,7 +134,10 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
      * @since      2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static treatAsValue(promise: Promise<any>, settings: ITreatAsValueSettings = {}): ITreatAsValueProxy {
+    static treatAsValue(
+        promise: Promise<any>,
+        settings: ITreatAsValueSettings = {},
+    ): ITreatAsValueProxy {
         return __treatAsValue(promise, settings);
     }
 
@@ -186,7 +200,9 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
                         },
                     },
                 },
-                typeof executorFnOrSettings === 'object' ? executorFnOrSettings : {},
+                typeof executorFnOrSettings === 'object'
+                    ? executorFnOrSettings
+                    : {},
                 settings ?? {},
             ),
             (resolve, reject) => {
@@ -218,12 +234,24 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
 
         this.expose(this._eventEmitter, {
             as: 'eventEmitter',
-            props: ['on', 'off', 'emit', 'pipe', 'pipeError', 'pipeFrom', 'pipeTo', 'eventEmitterSettings'],
+            props: [
+                'on',
+                'off',
+                'emit',
+                'pipe',
+                'pipeError',
+                'pipeFrom',
+                'pipeTo',
+                'eventEmitterSettings',
+            ],
         });
 
         this._resolvers = <ISPromiseResolvers>resolvers;
 
-        if ((<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout !== -1) {
+        if (
+            (<ISPromiseConstructorSettings>this._settings).promise
+                .destroyTimeout !== -1
+        ) {
             this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this.destroy();
@@ -233,7 +261,10 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
 
         // start the promise executor by passing it
         // an API correctly bound to this instance
-        executorFn = typeof executorFnOrSettings === 'function' ? executorFnOrSettings : null;
+        executorFn =
+            typeof executorFnOrSettings === 'function'
+                ? executorFnOrSettings
+                : null;
         if (executorFn) {
             const api = {};
             __getMethods(this).forEach((func) => {
@@ -322,7 +353,10 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    registerProxy(point: 'resolve' | 'reject' | 'resolve,reject' | 'reject,resolve', proxy: any): void {
+    registerProxy(
+        point: 'resolve' | 'reject' | 'resolve,reject' | 'reject,resolve',
+        proxy: any,
+    ): void {
         const ar = point.split(',').map((l) => l.trim());
         ar.forEach((a) => {
             this._settings.promise.proxies[a].push(proxy);
@@ -556,7 +590,9 @@ class SPromise extends __SClass.extends(Promise) implements ISPromise, ISEventEm
             // update the status
             this._promiseState = 'canceled';
             // exec the wanted stacks
-            const stacksOrderArray = stacksOrder.split(',').map((l) => l.trim());
+            const stacksOrderArray = stacksOrder
+                .split(',')
+                .map((l) => l.trim());
             for (let i = 0; i < stacksOrderArray.length; i++) {
                 const stack = stacksOrderArray[i];
                 arg = await this.eventEmitter.emit(stack, arg);

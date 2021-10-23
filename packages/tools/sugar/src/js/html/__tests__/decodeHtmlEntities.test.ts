@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import __decodeHtmlEntities from '../decodeHtmlEntities';
 
 describe('sugar.js.html.decodeHtmlEntities', () => {

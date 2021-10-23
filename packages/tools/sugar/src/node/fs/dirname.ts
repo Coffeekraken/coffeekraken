@@ -1,5 +1,6 @@
+import { dirname } from 'path';
+import { fileURLToPath } from 'url';
 import __callsites from 'callsites';
-import __folderPath from './folderPath';
 
 /**
  * @name            dirname
@@ -24,6 +25,13 @@ import __folderPath from './folderPath';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function () {
+    if (process.env.NODE_ENV === 'test') {
+        // @ts-ignore
+        return __callsites()[1].getFileName().split('/').slice(0, -1).join('/');
+    }
     // @ts-ignore
-    return __folderPath(__callsites()[1].getFileName());
+    return fileURLToPath(__callsites()[1].getFileName())
+        .split('/')
+        .slice(0, -1)
+        .join('/');
 }

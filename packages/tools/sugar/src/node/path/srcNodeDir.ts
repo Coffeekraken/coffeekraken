@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __require from '../esm/require';
+// import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            srcNodeDir
@@ -30,17 +31,18 @@ import __fs from 'fs-extra';
 export interface ISrcNodeDirSettings {}
 
 export default interface ISrcNodeDir {
-  (settings?: ISrcNodeDirSettings): string;
+    (settings?: ISrcNodeDirSettings): string;
 }
 
 export default function (settings: ISrcNodeDirSettings = {}) {
-  settings = {
-    ...settings
-  };
-  const srcNodeDir = __SugarConfig.get('storage.src.nodeDir');
-  if (srcNodeDir !== undefined) {
-    __fs.ensureDirSync(srcNodeDir);
-    return srcNodeDir;
-  }
-  return undefined;
+    settings = {
+        ...settings,
+    };
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const srcNodeDir = __SSugarConfig.get('storage.src.nodeDir');
+    if (srcNodeDir !== undefined) {
+        __fs.ensureDirSync(srcNodeDir);
+        return srcNodeDir;
+    }
+    return undefined;
 }

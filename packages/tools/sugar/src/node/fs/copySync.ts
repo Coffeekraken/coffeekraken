@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        copySync
@@ -12,14 +11,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @status          beta
  *
  * Copy a file or directory (sync)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to copy
  * @param       {String}              dest          The destination path
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import copySync from '@coffeekraken/node/fs/copySync';
@@ -32,8 +26,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function copySync(src, dest) {
-  src = __replacePathTokens(src);
-  dest = __replacePathTokens(dest);
-  __fs.copySync(src, dest);
+    __fs.copySync(src, dest);
 }
 export default copySync;

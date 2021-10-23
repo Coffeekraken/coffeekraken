@@ -1,7 +1,5 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs-extra';
 import __packageRoot from './packageRoot';
 
 /**

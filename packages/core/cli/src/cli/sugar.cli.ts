@@ -153,7 +153,8 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('storage.src.fontsDir'));
+            // console.log(__SSugarConfig.get('purgecss.content')[2]);
+            // return;
 
             // clean somr folders like tmp, etc...
             __fsExtra.emptyDirSync(

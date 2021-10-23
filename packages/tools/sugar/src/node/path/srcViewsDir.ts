@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __require from '../esm/require';
+// import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            srcViewsDir
@@ -30,17 +31,18 @@ import __fs from 'fs-extra';
 export interface ISrcViewsDirSettings {}
 
 export default interface ISrcViewsDir {
-  (settings?: ISrcViewsDirSettings): string;
+    (settings?: ISrcViewsDirSettings): string;
 }
 
 export default function (settings: ISrcViewsDirSettings = {}) {
-  settings = {
-    ...settings
-  };
-  const srcViewsDir = __SugarConfig.get('storage.src.viewsDir');
-  if (srcViewsDir !== undefined) {
-    __fs.ensureDirSync(srcViewsDir);
-    return srcViewsDir;
-  }
-  return undefined;
+    settings = {
+        ...settings,
+    };
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const srcViewsDir = __SSugarConfig.get('storage.src.viewsDir');
+    if (srcViewsDir !== undefined) {
+        __fs.ensureDirSync(srcViewsDir);
+        return srcViewsDir;
+    }
+    return undefined;
 }

@@ -1,5 +1,7 @@
 // @ts-nocheck
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+
+import __require from '../esm/require';
+// import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            packageLocalDir
@@ -25,8 +27,9 @@ import __fs from 'fs-extra';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 const fn: IpackageLocalDir = function () {
-  const path = __SugarConfig.get('storage.package.localDir');
-  __fs.ensureDirSync(path);
-  return path;
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const path = __SSugarConfig.get('storage.package.localDir');
+    __fs.ensureDirSync(path);
+    return path;
 };
 export default fn;

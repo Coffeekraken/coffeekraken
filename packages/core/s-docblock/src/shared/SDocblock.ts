@@ -155,7 +155,7 @@ class SDocblock extends __SClass implements ISDocblock {
                 throw new Error(
                     `Sorry but in a none node environement the SDocblock class can take only a String to parse and not a file path like "<yellow>${source}</yellow>"...`,
                 );
-            const __fs = __require()('fs');
+            const __fs = __require('fs');
             if (!__fs.existsSync(source))
                 throw new Error(
                     `Sorry but the passed source path "<yellow>${source}</yellow>" does not exists on the filesystem...`,

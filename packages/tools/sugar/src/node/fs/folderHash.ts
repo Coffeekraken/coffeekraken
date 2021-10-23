@@ -1,3 +1,4 @@
+import { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 import __sha256 from '../../shared/crypt/sha256';
 import __isDirectory from '../is/directory';
@@ -20,9 +21,9 @@ import __fileHash from './fileHash';
  * @param           {IFolderHashSettings}       [settings={}]       Some settings to configure your hash generation process
  * @return          {String}                            The calculated folder hash
  *
- * @todo        tests
- *
  * @setting         {Boolean}           [recursive=true]            Specify if you want to generate a hash using also the children or not
+ * @setting         {String}            [algo='sha356']             The algorithm to use
+ * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
  * @example         js
  * import folderHash from '@coffeekraken/sugar/node/fs/folderHash';
@@ -35,6 +36,8 @@ import __fileHash from './fileHash';
 
 export interface IFolderHashSettings {
     recursive: boolean;
+    algo: string;
+    digest: BinaryToTextEncoding;
 }
 
 export default function folderHash(
@@ -43,6 +46,8 @@ export default function folderHash(
 ): string {
     settings = {
         recursive: true,
+        algo: 'sha256',
+        digest: 'base64',
         ...settings,
     };
     const paths: string[] = [];
@@ -61,7 +66,7 @@ export default function folderHash(
     const filesHashes: string[] = [];
 
     paths.forEach((path) => {
-        filesHashes.push(__fileHash(path));
+        filesHashes.push(__fileHash(path, settings));
     });
 
     return __sha256.encrypt(filesHashes.join('-'));

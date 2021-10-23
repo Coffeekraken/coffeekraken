@@ -59,13 +59,14 @@ $metasOg = $metas->og ? $metas->og : $frontspec->metas->og ? $frontspec->metas->
       @endif
     @endforeach
   @endif
+  <!-- @TODO -->
   <!-- head -->
-  @if ($frontspec && $frontspec->head)
+  {{-- @if ($frontspec && $frontspec->head)
     @foreach ($frontspec->head as $id=>$raw)
       <!-- {{ $id }} -->
       {!! $raw !!}
     @endforeach
-  @endif
+  @endif --}}
   @yield('head')
 </head>
 <body>

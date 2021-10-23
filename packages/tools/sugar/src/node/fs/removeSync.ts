@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        removeSync
@@ -9,10 +8,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @type          Function
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (sync)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file/directory path to delete
  *
@@ -31,7 +29,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function removeSync(path) {
-  path = __replacePathTokens(path);
-  return __fs.removeSync(path);
+    return __fs.removeSync(path);
 }
 export default removeSync;

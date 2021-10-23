@@ -16,10 +16,6 @@ import __extension from './extension';
  * @param           {Boolean}             [withExtension=true]        Tell if we want the filename with or without the extension
  * @return          {String}                                  The requested filename
  *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
  * @example       js
  * import filename from '@coffeekraken/sugar/node/fs/filename';
  * filename('hello/world.js'); // => world.js
@@ -28,10 +24,10 @@ import __extension from './extension';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function filename(path, withExtension = true) {
-  let filename = path.split('/').pop();
-  if (!withExtension) {
-    filename = filename.replace(__extension(filename), '');
-  }
-  return filename;
+    let filename = path.split('/').pop();
+    if (!withExtension) {
+        filename = filename.replace(`.${__extension(filename)}`, '');
+    }
+    return filename;
 }
 export default filename;

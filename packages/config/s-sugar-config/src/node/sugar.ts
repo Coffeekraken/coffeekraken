@@ -1,20 +1,19 @@
 // @ts-nocheck
 
+import __SClass from '@coffeekraken/s-class';
 import __SConfig, {
-    SConfigFolderAdapter,
     ISConfigEnvObj,
+    SConfigFolderAdapter,
 } from '@coffeekraken/s-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
+import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __fs from 'fs';
 import __path from 'path';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __memoize from '@coffeekraken/sugar/shared/function/memoize';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
-import __SClass from '@coffeekraken/s-class';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name                  sugar
@@ -431,27 +430,19 @@ export default class SSugarConfig extends __SClass {
                 {
                     match: /\[theme.[a-zA-Z0-9.\-_:]+\]/gm,
                     resolve(string, matches, config, path) {
-                        return __memoize(() => {
-                            for (let i = 0; i < matches.length; i++) {
-                                const match = matches[i];
-                                const valuePath = match
-                                    .replace('[theme.', '')
-                                    .replace(']', '');
-
-                                const value = __get(
-                                    config,
-                                    `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`,
-                                );
-                                // if (value === undefined) {
-                                //     throw new Error(
-                                //         `LL <red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" theme config value does not exiats...`,
-                                //     );
-                                // }
-                                if (string === match) return value;
-                                string = string.replace(match, value);
-                            }
-                            return string;
-                        });
+                        for (let i = 0; i < matches.length; i++) {
+                            const match = matches[i];
+                            const valuePath = match
+                                .replace('[theme.', '')
+                                .replace(']', '');
+                            const value = __get(
+                                config,
+                                `theme.themes.${config.theme.theme}-${config.theme.variant}.${valuePath}`,
+                            );
+                            if (string === match) return value;
+                            string = string.replace(match, value);
+                        }
+                        return string;
                     },
                 },
             ],

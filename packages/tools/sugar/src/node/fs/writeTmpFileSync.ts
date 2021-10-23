@@ -1,10 +1,9 @@
 // @ts-nocheck
 
 import __writeFileSync from './writeFileSync';
-import __packageTmpDir from '../path/packageTmpDir';
+import __require from '../esm/require';
 import __path from 'path';
 import __uniqid from '../../shared/string/uniqid';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        writeTmpFileSync
@@ -13,19 +12,17 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @async
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Create a temporary file on the disk with the passed content and returns the path
  * to it.
- * 
+ *
  * @param       {String}              data          The data to write in the file
  * @param       {IWriteTmpFileSyncSettings}         [settings={}]           Some settings to customize your temp file creation
  * @return      {Promise}                           A promise that will be resolved when the writeTmpFileSync is completed with the path to it
  *
  * @setting         {String}            [path=null]         A path relative to the temp folder to store your file
- * 
- * @todo      interface
- * @todo      doc
+ *
  * @todo      tests
  *
  * @example       js
@@ -40,15 +37,21 @@ export interface IWriteTmpFileSyncSettings {
     path: string;
 }
 
-function writeTmpFileSync(data, settings: Partial<IWriteTmpFileSyncSettings> = {}) {
-
+function writeTmpFileSync(
+    data,
+    settings: Partial<IWriteTmpFileSyncSettings> = {},
+) {
     settings = {
         path: undefined,
-        ...settings
+        ...settings,
     };
 
-    let path = __path.resolve(__packageTmpDir(), settings.path ?? __uniqid() + '.tmp' );
-    path = __replacePathTokens(path);
+    const __packageTmpDir = __require('../path/packageTmpDir').default;
+
+    let path = __path.resolve(
+        __packageTmpDir(),
+        settings.path ?? __uniqid() + '.tmp',
+    );
     __writeFileSync(path, data);
     return path;
 }

@@ -2,7 +2,6 @@
 
 import __getSize from 'get-folder-size';
 import __filesize from 'filesize';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name                            folderSize
@@ -14,33 +13,27 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @status          beta
  *
  * Calculate the size of the passed folder and return it through a promise, either in raw format, either in human readdable one...
- * Support the ```replacePathTokens``` tokens
  *
  * @param             {String}                folderPath                  The folder path to calculate the size
- * @param             {Boolean}               [rawFormat=false]           If true, will return the folder size in raw format
+ * @param             {Boolean|Any}               [format={}]               False if you want raw size, an object that will be sent to [filesize](https://www.npmjs.com/package/filesize) package to format your data
  * @return            {Promise}                                           A promise that will be resolved once the folder size has been calculated
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example           js
  * import folderSize from '@coffeekraken/sugar/node/fs/folderSize';
- * folderSize('my/cool/folder').then((size) => {
- *      // do something...
- * });
+ * await folderSize('my/cool/folder');
+ * await folderSize('my/cool/folder', false); // no formatting
  *
+ *
+ * @see             https://www.npmjs.com/package/filesize
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function folderSize(folderPath, rawFormat = false) {
-  folderPath = __replacePathTokens(folderPath);
-
-  return new Promise(({ resolve, reject }) => {
-    __getSize(folderPath, (error, size) => {
-      if (error) throw error;
-      resolve(rawFormat ? size : __filesize(size));
+function folderSize(folderPath: string, format = {}) {
+    return new Promise((resolve, reject) => {
+        __getSize(folderPath, (error, size) => {
+            if (error) throw error;
+            resolve(format === false ? size : __filesize(size, format));
+        });
     });
-  });
 }
 export default folderSize;

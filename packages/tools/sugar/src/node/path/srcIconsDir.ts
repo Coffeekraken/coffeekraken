@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __require from '../esm/require';
+// import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            srcIconsDir
@@ -30,17 +31,18 @@ import __fs from 'fs-extra';
 export interface ISrcIconsDirSettings {}
 
 export default interface ISrcIconsDir {
-  (settings?: ISrcIconsDirSettings): string;
+    (settings?: ISrcIconsDirSettings): string;
 }
 
 export default function (settings: ISrcIconsDirSettings = {}) {
-  settings = {
-    ...settings
-  };
-  const srcIconsDir = __SugarConfig.get('storage.src.iconsDir');
-  if (srcIconsDir !== undefined) {
-    __fs.ensureDirSync(srcIconsDir);
-    return srcIconsDir;
-  }
-  return undefined;
+    settings = {
+        ...settings,
+    };
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const srcIconsDir = __SSugarConfig.get('storage.src.iconsDir');
+    if (srcIconsDir !== undefined) {
+        __fs.ensureDirSync(srcIconsDir);
+        return srcIconsDir;
+    }
+    return undefined;
 }

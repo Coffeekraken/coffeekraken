@@ -3,7 +3,6 @@
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs';
-import __replacePathTokens from '../path/replacePathTokens';
 import __stringify from '../../shared/json/stringify';
 
 /**
@@ -12,18 +11,13 @@ import __stringify from '../../shared/json/stringify';
  * @type          Function
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Write a JSON file. If don't exist, will be created as well as the directory structure if needed... (sync)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
  * @param       {String}              object          The object to write in the JSON file
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeJsonSync()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import writeJsonSync from '@coffeekraken/node/fs/writeJsonSync';
@@ -35,10 +29,9 @@ import __stringify from '../../shared/json/stringify';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeJsonSync(path, data, options = {}) {
-  path = __replacePathTokens(path);
-  const folderPath = __folderPath(path);
-  __ensureDirSync(folderPath);
-  const jsonStr = __stringify(data, null, 4);
-  __fs.writeFileSync(path, jsonStr);
+    const folderPath = __folderPath(path);
+    __ensureDirSync(folderPath);
+    const jsonStr = __stringify(data, null, 4);
+    __fs.writeFileSync(path, jsonStr);
 }
 export default writeJsonSync;

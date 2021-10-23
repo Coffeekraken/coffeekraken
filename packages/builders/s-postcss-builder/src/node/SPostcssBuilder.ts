@@ -109,6 +109,8 @@ export default class SPostcssBuilder extends __SBuilder {
                 settings ?? {},
             ),
         );
+        console.log(__SSugarConfig.get('purgecss.content'));
+        throw 'ff';
     }
 
     /**
@@ -126,12 +128,16 @@ export default class SPostcssBuilder extends __SBuilder {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _build(params: ISPostcssBuilderBuildParams): Promise<ISPostcssBuilderResult> {
+    _build(
+        params: ISPostcssBuilderBuildParams,
+    ): Promise<ISPostcssBuilderResult> {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
                 let finalCss;
 
-                const defaultParams = <ISPostcssBuilderBuildParams>__SPostcssBuilderBuildParamsInterface.defaults();
+                const defaultParams = <ISPostcssBuilderBuildParams>(
+                    __SPostcssBuilderBuildParamsInterface.defaults()
+                );
 
                 // handle prod shortcut
                 if (params.prod) {
@@ -142,7 +148,10 @@ export default class SPostcssBuilder extends __SBuilder {
                 // handle default output
                 if (params.output && params.output === defaultParams.output) {
                     if (params.prod) {
-                        params.output = params.output.replace(/\.css/, '.prod.css');
+                        params.output = params.output.replace(
+                            /\.css/,
+                            '.prod.css',
+                        );
                     }
                 }
 
@@ -159,7 +168,9 @@ export default class SPostcssBuilder extends __SBuilder {
                 });
                 emit('log', {
                     value: `<yellow>○</yellow> Environment : ${
-                        params.prod ? '<green>production</green>' : '<yellow>development</yellow>'
+                        params.prod
+                            ? '<green>production</green>'
+                            : '<yellow>development</yellow>'
                     }`,
                 });
                 if (params.output) {
@@ -172,31 +183,44 @@ export default class SPostcssBuilder extends __SBuilder {
                 }
                 emit('log', {
                     value: `<yellow>○</yellow> Minify      : ${
-                        params.minify ? '<green>true</green>' : '<red>false</red>'
+                        params.minify
+                            ? '<green>true</green>'
+                            : '<red>false</red>'
                     }`,
                 });
                 emit('log', {
                     value: `<yellow>○</yellow> Purge       : ${
-                        params.purge ? '<green>true</green>' : '<red>false</red>'
+                        params.purge
+                            ? '<green>true</green>'
+                            : '<red>false</red>'
                     }`,
                 });
                 emit('log', {
                     value: `<yellow>○</yellow> Plugins     :`,
                 });
-                this.postcssBuilderSettings.postcss.plugins.forEach((pluginName) => {
-                    emit('log', {
-                        value: `<yellow>|------------</yellow> : ${pluginName}`,
-                    });
-                });
+                this.postcssBuilderSettings.postcss.plugins.forEach(
+                    (pluginName) => {
+                        emit('log', {
+                            value: `<yellow>|------------</yellow> : ${pluginName}`,
+                        });
+                    },
+                );
 
                 // resolve plugins paths
                 const plugins: any[] = [];
-                for (let i = 0; i < this.postcssBuilderSettings.postcss.plugins.length; i++) {
+                for (
+                    let i = 0;
+                    i < this.postcssBuilderSettings.postcss.plugins.length;
+                    i++
+                ) {
                     const p = this.postcssBuilderSettings.postcss.plugins[i];
                     if (typeof p === 'string') {
                         const { default: plugin } = await import(p);
                         const fn = plugin.default ?? plugin;
-                        const options = this.postcssBuilderSettings.postcss.pluginsOptions[p] ?? {};
+                        const options =
+                            this.postcssBuilderSettings.postcss.pluginsOptions[
+                                p
+                            ] ?? {};
                         plugins.push(fn(options));
                     } else {
                         plugins.push(p);
@@ -209,7 +233,9 @@ export default class SPostcssBuilder extends __SBuilder {
                     from,
                 });
                 if (!result.css) {
-                    throw new Error(`<red>[${this.constructor.name}.build]</red> Something went wrong...`);
+                    throw new Error(
+                        `<red>[${this.constructor.name}.build]</red> Something went wrong...`,
+                    );
                 }
 
                 finalCss = result.css;
@@ -224,16 +250,24 @@ export default class SPostcssBuilder extends __SBuilder {
                     const content: any[] = [];
                     const globs: string[] = [];
 
-                    this.postcssBuilderSettings.purgecss.content.forEach((contentObj) => {
-                        if (typeof contentObj === 'string') {
-                            globs.push(contentObj);
-                        } else {
-                            if (contentObj.raw) {
-                                contentObj.raw = __expandPleasantCssClassnames(contentObj.raw);
+                    console.log(params);
+                    console.log(this.postcssBuilderSettings.purgecss.content);
+
+                    this.postcssBuilderSettings.purgecss.content.forEach(
+                        (contentObj) => {
+                            if (typeof contentObj === 'string') {
+                                globs.push(contentObj);
+                            } else {
+                                if (contentObj.raw) {
+                                    contentObj.raw =
+                                        __expandPleasantCssClassnames(
+                                            contentObj.raw,
+                                        );
+                                }
+                                content.push(contentObj);
                             }
-                            content.push(contentObj);
-                        }
-                    });
+                        },
+                    );
                     const files = __SGlob.resolve(globs);
                     files.forEach((file) => {
                         content.push({
@@ -273,7 +307,9 @@ export default class SPostcssBuilder extends __SBuilder {
                 }
 
                 const res: ISPostcssBuilderResult = {
-                    outputFile: params.output ? __SFile.new(params.output) : undefined,
+                    outputFile: params.output
+                        ? __SFile.new(params.output)
+                        : undefined,
                     css: finalCss,
                     map: null,
                 };

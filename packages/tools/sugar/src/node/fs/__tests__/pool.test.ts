@@ -2,41 +2,92 @@ import __path from 'path';
 import __pool from '../pool';
 import __SFile from '@coffeekraken/s-file';
 import __removeSync from '../removeSync';
+import __packageTmpDir from '../../path/packageTmpDir';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __wait from '../../../shared/time/wait';
 
 describe('sugar.node.fs.pool', () => {
-  it('Should correctly start a pool and listen for updates, deletion, etc...', (done) => {
-    __removeSync('%tmpDir/poolTests');
+    it('Should correctly start a pool and listen for updates, deletion, etc...', async (done) => {
+        await __SSugarConfig.load();
 
-    const initialFile = new __SFile(`%tmpDir/poolTests/new.txt`, {
-      file: {
-        checkExistence: false
-      }
-    });
-    initialFile.writeSync('Hello world');
+        const poolTestFolderPath = `${__packageTmpDir()}/tests/pool`;
 
-    const newFile = new __SFile(`%tmpDir/poolTests/coco/other.txt`, {
-      file: {
-        checkExistence: false
-      }
-    });
+        __removeSync(poolTestFolderPath);
 
-    const pool = __pool('%tmpDir/poolTests/**/*');
+        const initialFile = new __SFile(`${poolTestFolderPath}/initial.txt`, {
+            file: {
+                checkExistence: false,
+            },
+        });
+        initialFile.writeSync('Hello world');
 
-    let deletedCount = 0;
+        const newFile = new __SFile(`${poolTestFolderPath}/coco/new.txt`, {
+            file: {
+                checkExistence: false,
+            },
+        });
 
-    pool.on('unlink', (path) => {
-      deletedCount++;
-      if (deletedCount === 2) done();
+        const pool = __pool(`${poolTestFolderPath}/**/*`, {
+            watch: true,
+        });
+
+        let events = {
+            ready: false,
+            file: false,
+            files: false,
+            change: false,
+            update: false,
+            unlink: false,
+            add: false,
+        };
+
+        pool.on('ready', async (path) => {
+            events.ready = true;
+
+            // add
+            await newFile.write('hello world');
+
+            await __wait(100);
+
+            // update / change
+            await newFile.write('plop');
+
+            await __wait(100);
+
+            // unlink
+            await newFile.unlink();
+
+            await __wait(100);
+
+            expect(events).toEqual({
+                ready: true,
+                file: true,
+                files: true,
+                change: true,
+                update: true,
+                unlink: true,
+                add: true,
+            });
+
+            done();
+        });
+        pool.on('file', (file) => {
+            events.file = true;
+        });
+        pool.on('files', (files) => {
+            events.files = true;
+        });
+        pool.on('change', (file) => {
+            events.change = true;
+        });
+        pool.on('update', (file) => {
+            events.update = true;
+        });
+        pool.on('unlink', (file) => {
+            events.unlink = true;
+        });
+        pool.on('add', (file) => {
+            events.add = true;
+        });
     });
-    pool.on('add', (file) => {
-      setTimeout(() => {
-        initialFile.unlinkSync();
-        newFile.unlinkSync();
-      }, 500);
-    });
-    pool.on('files', (files) => {
-      expect(files.length).toBe(1);
-      newFile.writeSync('Hello world');
-    });
-  });
 });

@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __require from '../esm/require';
+// import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            distJsDir
@@ -30,17 +31,18 @@ import __fs from 'fs-extra';
 export interface IDistJsDirSettings {}
 
 export default interface IDistJsDir {
-  (settings?: IDistJsDirSettings): string;
+    (settings?: IDistJsDirSettings): string;
 }
 
 export default function (settings: IDistJsDirSettings = {}) {
-  settings = {
-    ...settings
-  };
-  const distJsDir = __SugarConfig.get('storage.dist.jsDir');
-  if (distJsDir !== undefined) {
-    __fs.ensureDirSync(distJsDir);
-    return distJsDir;
-  }
-  return undefined;
+    settings = {
+        ...settings,
+    };
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const distJsDir = __SSugarConfig.get('storage.dist.jsDir');
+    if (distJsDir !== undefined) {
+        __fs.ensureDirSync(distJsDir);
+        return distJsDir;
+    }
+    return undefined;
 }

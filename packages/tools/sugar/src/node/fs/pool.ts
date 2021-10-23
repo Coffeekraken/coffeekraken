@@ -1,14 +1,12 @@
-import __deepMerge from '../../shared/object/deepMerge';
-import __chokidar from 'chokidar';
-import __expandGlob from '../../shared/glob/expandGlob';
 import __SFile from '@coffeekraken/s-file';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SPromise from '@coffeekraken/s-promise';
-import __replacePathTokens from '../path/replacePathTokens';
-import __matchGlob from '../glob/matchGlob';
-import __hotkey from '../keyboard/hotkey';
-import __path from 'path';
+import __chokidar from 'chokidar';
 import __fs from 'fs';
-// import __dependencyList from './dependencyList';
+import __require from '../esm/require';
+import __expandGlob from '../../shared/glob/expandGlob';
+import __deepMerge from '../../shared/object/deepMerge';
+import __matchGlob from '../glob/matchGlob';
 
 /**
  * @name                pool
@@ -24,6 +22,7 @@ import __fs from 'fs';
  * - ready: Emitted once the pool is ready
  * - file: Emitted for each file founded, added or updated
  * - files: Emitted with a list of founded files
+ * - change: Emitted when a file has been updated (alias to update)
  * - update: Emitted when a file has been updated
  * - unlink: Emitted when a file has been deleted
  * - add: Emitted when a file has been added
@@ -33,13 +32,25 @@ import __fs from 'fs';
  * @param       {IPoolSettings}             [settings={}]       Some settings to configure your pool. Support all the chokidar settings
  * @return      {SPromise}                                      An SPromise instance through which you can subscribe to events and cancel the pool
  *
+ * @setting             {Boolean}       [SFile=true]        Specify if you want to get back SFile instances or just string path
+ * @setting             {String}        [cwd=process.cwd()]     Specify the cwd
+ * @setting             {String[]}      [exclude=[]]            Specify some file(s), path(s) to exclude
+ * @setting             {Boolean}       [watch=false]           Specify if you want to watch files or not
+ * @setting             {IChokidarSettings}     [chokidar={}]       Specify some settings to pass to chokidar in order to watch files
+ *
  * @example         js
  * import pool from '@coffeekraken/sugar/node/fs/pool';
- * pool('/something/cool/** /*').on('file', file => {
+ * const myPool = pool('/something/cool/** /*', {
+ *  watch: true
+ * }):
+ * pool.on('file', file => {
  *      // do something with each files
- * }).on('update', (file) => {
+ * })
+ * pool.on('update', (file) => {
  *      // do something with updated files
  * });
+ * // when you want to stop your pool watching process
+ * pool.cancel();
  *
  * @see             https://www.npmjs.com/package/chokidar
  * @since       2.0.0
@@ -47,39 +58,55 @@ import __fs from 'fs';
  */
 export interface IPoolSettings {
     SFile: boolean;
-    updateTimeout: number;
     cwd: string;
     exclude: string[];
     watch: boolean;
+    chokidar: Partial<IChokidarSettings>;
     [key: string]: any;
 }
+
+export interface IChokidarSettings {
+    persistent: boolean;
+    ignored: string;
+    ignoreInitial: boolean;
+    followSymlinks: boolean;
+    cwd: string;
+    disableGlobbing: boolean;
+    usePolling: boolean;
+    interval: number;
+    binaryInterval: number;
+    alwaysStat: boolean;
+    depth: number;
+    awaitWriteFinish: any;
+    ignorePermissionErrors: boolean;
+    atomic: boolean;
+}
+
 function pool(input, settings?: Partial<IPoolSettings>) {
     const filesStack: Record<string, string | __SFile> = {};
 
     return new __SPromise(
-        ({ resolve, reject, emit, cancel, on }) => {
+        async ({ resolve, reject, emit, cancel, on }) => {
+            await __SSugarConfig.load();
+
             const set = <IPoolSettings>__deepMerge(
                 {
                     SFile: true,
-                    updateTimeout: 500,
                     cwd: process.cwd(),
                     watch: false,
+                    chokidar: {},
                     exclude: [],
                     ignored: ['**/node_modules/**/*', '**/.git/**/*'],
-                    ignoreInitial: false,
-                    watchDependencies: true,
-                    // usePolling: true,
-                    // useFsEvents: true,
-                    // persistent: true
                 },
                 settings || {},
             );
+
+            set.chokidar.cwd = set.cwd;
 
             if (!Array.isArray(input)) input = [input];
             input = input.map((i) => {
                 return i.path ?? i;
             });
-            input = __replacePathTokens(input);
 
             // expand glob
             const expandedGlobs: string[] = __expandGlob(input).map((l) => {
@@ -91,7 +118,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
 
             // using chokidar to watch files
             const watcher = __chokidar.watch(expandedGlobs, {
-                ...set,
+                ...set.chokidar,
                 ignored: [...set.ignored, ...(set.exclude ?? [])],
             });
 
@@ -114,8 +141,6 @@ function pool(input, settings?: Partial<IPoolSettings>) {
                     emit('file', filesStack[path]);
                 })
                 .on('change', (path) => {
-                    console.log('change', path);
-
                     if (!__fs.existsSync(`${set.cwd}/${path}`)) return;
                     if (!filesStack[path]) {
                         if (set.SFile)
@@ -125,6 +150,7 @@ function pool(input, settings?: Partial<IPoolSettings>) {
                         else filesStack[path] = path;
                     }
                     emit('update', filesStack[path]);
+                    emit('change', filesStack[path]);
                     emit('file', filesStack[path]);
                 })
                 .on('unlink', (path) => {
@@ -167,21 +193,6 @@ function pool(input, settings?: Partial<IPoolSettings>) {
                             filesStack[filePath] =
                                 finalFiles[finalFiles.length - 1];
                         });
-
-                    // filesPaths.forEach(async (filePath) => {
-                    //   // watch dependencies
-                    //   if (set.watchDependencies) {
-                    //     console.log('watch ', filePath);
-                    //     const depListPromise = __dependencyList(filePath, {
-                    //       watch: true,
-                    //       exclude: ['**/node_modules/**']
-                    //     });
-                    //     depListPromise.on('update', ({ path, list }) => {
-                    //       console.log('UP', path, list);
-                    //     });
-                    //     // console.log(await depListPromise);
-                    //   }
-                    // });
 
                     emit('ready', finalFiles);
                     if (finalFiles.length && !set.ignoreInitial) {

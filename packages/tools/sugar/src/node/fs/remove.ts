@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        remove
@@ -9,17 +8,12 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @type          Function
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Removes a file or directory. The directory can have contents. If the path does not exist, silently does nothing. Like rm -rf (async)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file/directory path to delete
  * @return      {Promise}                           A promise that will be resolved when the remove is completed
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import remove from '@coffeekraken/node/fs/remove';
@@ -32,7 +26,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function remove(path) {
-  path = __replacePathTokens(path);
-  return __fs.remove(path);
+    return __fs.remove(path);
 }
 export default remove;

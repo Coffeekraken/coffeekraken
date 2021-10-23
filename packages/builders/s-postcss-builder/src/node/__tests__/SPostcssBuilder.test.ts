@@ -1,21 +1,22 @@
 import __SPostcssBuilder from '../SPostcssBuilder';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('@coffeekraken.s-postcss-builder', () => {
-
     it('Should build a pretty complexe postcss file', async (done) => {
+        await __SSugarConfig.load();
 
         const builder = new __SPostcssBuilder({
             postcssBuilder: {
                 purgecss: {
-                    content: [`${__dirname}/__data__/index.html`]
-                }
-            }
+                    content: [`${__dirname}/__data__/index.html`],
+                },
+            },
         });
 
         const promise = builder.build({
             input: `${__dirname}/__data__/index.css`,
             purge: true,
-            minify: true
+            minify: true,
         });
         promise.on('log', (log) => {
             console.log(log.value);
@@ -28,5 +29,4 @@ describe('@coffeekraken.s-postcss-builder', () => {
 
         done();
     });
-
 });

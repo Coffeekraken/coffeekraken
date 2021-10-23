@@ -3,7 +3,6 @@
 import __folderPath from './folderPath';
 import __ensureDirSync from './ensureDirSync';
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        writeFile
@@ -12,19 +11,14 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @async
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * CWrite a file. If don't exist, will be created as well as the directory structure if needed... ( (async)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              path           The file path to write
  * @param       {String}              data          The data to write in the file
  * @param       {Object}              [options={}]  options are what you'd pass to [fs.writeFile()](https://nodejs.org/api/fs.html#fs_fs_writefile_file_data_options_callback)
  * @return      {Promise}                           A promise that will be resolved when the writeFile is completed
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import writeFile from '@coffeekraken/node/fs/writeFile';
@@ -37,9 +31,11 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function writeFile(path, data, options = {}) {
-  path = __replacePathTokens(path);
-  const folderPath = __folderPath(path);
-  __ensureDirSync(folderPath);
-  return __fs.outputFile(path, data, options);
+    return new Promise(async (resolve) => {
+        const folderPath = __folderPath(path);
+        __ensureDirSync(folderPath);
+        await __fs.outputFile(path, data, options);
+        resolve(path);
+    });
 }
 export default writeFile;

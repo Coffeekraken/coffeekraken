@@ -13,6 +13,7 @@ import { createRequire } from 'module';
  * This function allows you to get back an fully functional "require" function in
  * an ESM context.
  *
+ * @param       {String}            package         The package you want to require
  * @return      {Function}                  The "require" cjs fully functional function
  *
  * @example         js
@@ -22,9 +23,9 @@ import { createRequire } from 'module';
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function require() {
+export default function require(pkg: string) {
     // @ts-ignore
     const rr = createRequire(__callsites()[1].getFileName());
     const r = __esm({});
-    return rr;
+    return rr(pkg);
 }

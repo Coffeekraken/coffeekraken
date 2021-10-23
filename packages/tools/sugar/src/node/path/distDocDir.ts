@@ -1,6 +1,7 @@
 // @ts-nocheck
 
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __require from '../esm/require';
+// import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            distDocDir
@@ -30,17 +31,18 @@ import __fs from 'fs-extra';
 export interface IDistDocDirSettings {}
 
 export default interface IDistDocDir {
-  (settings?: IDistDocDirSettings): string;
+    (settings?: IDistDocDirSettings): string;
 }
 
 export default function (settings: IDistDocDirSettings = {}) {
-  settings = {
-    ...settings
-  };  
-  const distDocDir = __SugarConfig.get('storage.dist.docDir');
-  if (distDocDir !== undefined) {
-    __fs.ensureDirSync(distDocDir);
-    return distDocDir;
-  }
-  return undefined;
+    settings = {
+        ...settings,
+    };
+    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
+    const distDocDir = __SSugarConfig.get('storage.dist.docDir');
+    if (distDocDir !== undefined) {
+        __fs.ensureDirSync(distDocDir);
+        return distDocDir;
+    }
+    return undefined;
 }

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        ensureFileSync
@@ -12,13 +11,8 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @status          beta
  *
  * Ensure that the passed file exists. If not, will be created... (async)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              file           The file to ensure that it exists...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import ensureFileSync from '@coffeekraken/node/fs/ensureFileSync';
@@ -31,7 +25,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ensureFileSync(file) {
-  file = __replacePathTokens(file);
-  __fs.ensureFileSync(file);
+    __fs.ensureFileSync(file);
 }
 export default ensureFileSync;

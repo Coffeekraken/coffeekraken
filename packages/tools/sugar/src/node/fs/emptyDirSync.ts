@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        emptyDirSync
@@ -12,13 +11,8 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @status          beta
  *
  * Empty a directory (sync)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              dir           The directory path to empty
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import emptyDirSync from '@coffeekraken/node/fs/emptyDirSync';
@@ -31,7 +25,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function emptyDirSync(dir) {
-  dir = __replacePathTokens(dir);
-  __fs.emptyDirSync(dir);
+    __fs.emptyDirSync(dir);
 }
 export default emptyDirSync;

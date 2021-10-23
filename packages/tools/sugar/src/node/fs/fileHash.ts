@@ -1,4 +1,4 @@
-import __crypto from 'crypto';
+import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
 
 /**
@@ -18,9 +18,9 @@ import __fs from 'fs';
  * @param           {IFileHashSettings}       [settings={}]       Some settings to configure your hash generation process
  * @return          {String}                            The calculated folder hash
  *
- * @todo        tests
- *
  * @setting         {Boolean}           [recursive=true]            Specify if you want to generate a hash using also the children or not
+ * @setting         {String}            [algo='sha356']             The algorithm to use
+ * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
  * @example         js
  * import fileHash from '@coffeekraken/sugar/node/fs/fileHash';
@@ -33,18 +33,22 @@ import __fs from 'fs';
 
 export interface IFileHashSettings {
     recursive: boolean;
+    algo: string;
+    digest: BinaryToTextEncoding;
 }
 
 export default function fileHash(
     filePath: string,
     settings: Partial<IFileHashSettings> = {},
 ): string {
-    settings = {
+    settings = <IFileHashSettings>{
         recursive: true,
+        algo: 'sha256',
+        digest: 'base64',
         ...settings,
     };
     const fileBuffer = __fs.readFileSync(filePath);
-    const hashSum = __crypto.createHash('sha256');
+    const hashSum = __crypto.createHash(<string>settings.algo);
     hashSum.update(fileBuffer);
-    return hashSum.digest('base64');
+    return hashSum.digest(<BinaryToTextEncoding>settings.digest);
 }

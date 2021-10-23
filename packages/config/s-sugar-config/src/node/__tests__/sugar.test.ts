@@ -8,4 +8,11 @@ describe('s-sugar-config.node.sugar', () => {
         );
         expect(value).toBe('1.5em');
     });
+    it('Should get a postprocessed value correctly', async () => {
+        // await __SugarConfig.load();
+        const value = __SugarConfig.get(
+            'theme.themes.default-dark.color.current.color',
+        );
+        expect(value).toBe('hsla(198,10,50,1)');
+    });
 });

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        move
@@ -9,18 +8,13 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @type          Function
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Moves a file or directory, even across devices (async)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              src           The source path to move
  * @param       {String}              dest          The destination path
  * @return      {Promise}                           A promise that will be resolved once the file/directory has been moved...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import move from '@coffeekraken/node/fs/move';
@@ -33,8 +27,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function move(src, dest) {
-  src = __replacePathTokens(src);
-  dest = __replacePathTokens(dest);
-  return __fs.move(src, dest);
+    return __fs.move(src, dest);
 }
 export default move;

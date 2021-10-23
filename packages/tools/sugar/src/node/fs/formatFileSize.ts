@@ -8,18 +8,14 @@ import __filesize from 'filesize';
  * @type                                    Function
  * @platform        ts
  * @platform        node
- * @status          beta
+ * @status          stable
  *
  * Transform into human readable string a file size from a number (float or integer) or string.
  * This function use the wonderfull "filesize" npm package under the houd.
  *
  * @param               {Number|String}             size              The size to transform
- * @param               {Object}                    [settings={}]     The "filesize" settings to customize the output
+ * @param               {Object}                    [settings={}]     The "filesize" settings to customize the output. See [filesize](https://www.npmjs.com/package/filesize) settings
  * @return              {String}                                      The human readable version of the passed size
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example             js
  * import formatFilesize from '@coffeekraken/sugar/node/fs/formatFileSize';
@@ -30,6 +26,6 @@ import __filesize from 'filesize';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function formatFileSize(size, settings = {}) {
-  return __filesize(size, settings);
+    return __filesize(size, settings);
 }
 export default formatFileSize;

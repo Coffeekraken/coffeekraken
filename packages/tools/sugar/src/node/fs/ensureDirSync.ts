@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __fs from 'fs-extra';
-import __replacePathTokens from '../path/replacePathTokens';
 
 /**
  * @name        ensureDirSync
@@ -12,14 +11,9 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @status          beta
  *
  * Ensure that the passed directory exists. If not, will be created recursively... (sync)
- * Support the ```replacePathTokens``` tokens
  *
  * @param       {String}              dir           The directory to ensure that it exists...
  * @return      {Promise}                           A promise that will be resolved once the directory has been created if needed...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
  *
  * @example       js
  * import ensureDirSync from '@coffeekraken/node/fs/ensureDirSync';
@@ -32,7 +26,6 @@ import __replacePathTokens from '../path/replacePathTokens';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ensureDirSync(dir) {
-  dir = __replacePathTokens(dir);
-  __fs.ensureDirSync(dir);
+    __fs.ensureDirSync(dir);
 }
 export default ensureDirSync;

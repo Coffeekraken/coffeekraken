@@ -15,54 +15,57 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 class SProcessSettingsInterface extends __SInterface {
     static get definition() {
-        return {
-            asyncStart: {
-                type: 'Boolean',
-                alias: 'a',
-                default: __SSugarConfig.get('process.asyncStart'),
-            },
-            killOnError: {
-                type: 'Boolean',
-                default: __SSugarConfig.get('process.killOnError'),
-            },
-            emitErrorAsEvent: {
-                type: 'Boolean',
-                default: __SSugarConfig.get('process.emitErrorAsEvent'),
-            },
-            stdio: {
-                type: 'String|SStdio|Boolean',
-                alias: 's',
-                default: __SSugarConfig.get('process.stdio'),
-            },
-            decorators: {
-                type: 'Boolean',
-                alias: 'd',
-                default: __SSugarConfig.get('process.decorators'),
-            },
-            throw: {
-                type: 'Boolean',
-                alias: 't',
-                default: __SSugarConfig.get('process.throw'),
-            },
-            exitAtEnd: {
-                type: 'Boolean',
-                alias: 'e',
-                default: __SSugarConfig.get('process.exitAtEnd'),
-            },
-            runAsChild: {
-                type: 'Boolean',
-                alias: 'c',
-                default: __SSugarConfig.get('process.runAsChild'),
-            },
-            processPath: {
-                type: 'String',
-                default: __SSugarConfig.get('process.processPath'),
-            },
-            notification: {
-                type: 'Object',
-                default: __SSugarConfig.get('process.notification'),
-            },
-        };
+        return (
+            this.cached() ??
+            this.cache({
+                asyncStart: {
+                    type: 'Boolean',
+                    alias: 'a',
+                    default: __SSugarConfig.get('process.asyncStart'),
+                },
+                killOnError: {
+                    type: 'Boolean',
+                    default: __SSugarConfig.get('process.killOnError'),
+                },
+                emitErrorAsEvent: {
+                    type: 'Boolean',
+                    default: __SSugarConfig.get('process.emitErrorAsEvent'),
+                },
+                stdio: {
+                    type: 'String|SStdio|Boolean',
+                    alias: 's',
+                    default: __SSugarConfig.get('process.stdio'),
+                },
+                decorators: {
+                    type: 'Boolean',
+                    alias: 'd',
+                    default: __SSugarConfig.get('process.decorators'),
+                },
+                throw: {
+                    type: 'Boolean',
+                    alias: 't',
+                    default: __SSugarConfig.get('process.throw'),
+                },
+                exitAtEnd: {
+                    type: 'Boolean',
+                    alias: 'e',
+                    default: __SSugarConfig.get('process.exitAtEnd'),
+                },
+                runAsChild: {
+                    type: 'Boolean',
+                    alias: 'c',
+                    default: __SSugarConfig.get('process.runAsChild'),
+                },
+                processPath: {
+                    type: 'String',
+                    default: __SSugarConfig.get('process.processPath'),
+                },
+                notification: {
+                    type: 'Object',
+                    default: __SSugarConfig.get('process.notification'),
+                },
+            })
+        );
     }
 }
 export default SProcessSettingsInterface;

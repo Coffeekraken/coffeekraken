@@ -25,7 +25,10 @@ import { createRequire } from 'module';
  */
 export default function require(pkg: string) {
     // @ts-ignore
-    const rr = createRequire(__callsites()[1].getFileName());
-    const r = __esm({});
+    let filePath = __callsites()[1]
+        .getFileName()
+        ?.replace(/^file:\/\//, '');
+    const rr = createRequire(<string>filePath);
+    // const r = __esm({});
     return rr(pkg);
 }

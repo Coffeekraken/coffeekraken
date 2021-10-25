@@ -1,8 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
+import __SColor from '@coffeekraken/s-color';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __get from '@coffeekraken/sugar/shared/object/get';
-import __SSugarJson from '@coffeekraken/s-sugar-json';
-import __SColor from '@coffeekraken/s-color';
 
 /**
  * @name            STheme
@@ -252,7 +251,8 @@ export default class STheme extends __SClass {
 
         theme = <string>(theme ?? __SSugarConfig.get('theme.theme'));
 
-        if (this._instanciatedThemes[`${theme}-${variant}`]) return this._instanciatedThemes[`${theme}-${variant}`];
+        if (this._instanciatedThemes[`${theme}-${variant}`])
+            return this._instanciatedThemes[`${theme}-${variant}`];
 
         const themes = __SSugarConfig.get('theme.themes');
 
@@ -264,7 +264,10 @@ export default class STheme extends __SClass {
                     themes,
                 ).join(',')}</green>`,
             );
-        this._instanciatedThemes[`${theme}-${variant}`] = new STheme(theme, variant);
+        this._instanciatedThemes[`${theme}-${variant}`] = new STheme(
+            theme,
+            variant,
+        );
         return this._instanciatedThemes[`${theme}-${variant}`];
     }
 
@@ -283,6 +286,12 @@ export default class STheme extends __SClass {
 
         this.name = theme ?? __SSugarConfig.get('theme.theme');
         this.variant = variant ?? __SSugarConfig.get('theme.variant');
+
+        if (!__SSugarConfig.get(`theme.themes.${this.name}-${this.variant}`)) {
+            throw new Error(
+                `Sorry but the requested theme "<yellow>${this.name}-${this.variant}</yellow>" does not exists...`,
+            );
+        }
     }
 
     /**
@@ -391,7 +400,9 @@ export default class STheme extends __SClass {
      * @since             2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    async loopOnColors(callback: ISThemeLoopOnColorsCallback): Promise<boolean> {
+    async loopOnColors(
+        callback: ISThemeLoopOnColorsCallback,
+    ): Promise<boolean> {
         const colorsObj = this.config('color');
         let triggeredStop = false;
 
@@ -432,7 +443,10 @@ export default class STheme extends __SClass {
                     variant = !stateName.match(/^:/) ? stateName : '',
                     res;
 
-                let variantColorObj = Object.assign({}, colorObj[originalStateName]);
+                let variantColorObj = Object.assign(
+                    {},
+                    colorObj[originalStateName],
+                );
                 if (state !== 'default')
                     variantColorObj = {
                         ...defaultColorObj,

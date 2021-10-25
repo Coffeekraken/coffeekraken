@@ -1,5 +1,8 @@
 import __SDuration from '@coffeekraken/s-duration';
-import __SEventEmitter, { ISEventEmitter, ISEventEmitterConstructorSettings } from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, {
+    ISEventEmitter,
+    ISEventEmitterConstructorSettings,
+} from '@coffeekraken/s-event-emitter';
 import { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
@@ -25,6 +28,7 @@ import {
     ISProcessResultObject,
     ISProcessSettings,
 } from './ISProcess';
+import __require from '@coffeekraken/sugar/node/esm/require';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
@@ -209,7 +213,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                         },
                     );
                 }
-                process(params: Partial<ISProcessParams>, settings: Partial<ISProcessSettings>): Promise<any> {
+                process(
+                    params: Partial<ISProcessParams>,
+                    settings: Partial<ISProcessSettings>,
+                ): Promise<any> {
                     // @ts-ignore
                     return <Promise<any>>what(params, settings ?? {});
                 }
@@ -221,33 +228,21 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             let requireValue;
 
             try {
-                requireValue = (await import(potentialPath)).default; // eslint-disable-line
-            } catch (e) {} // eslint-disable-line
-
-            if (requireValue) {
-                // pass this value back to the from method
-                return this.from(
-                    requireValue,
-                    __deepMerge(
-                        {
-                            process: {
-                                processPath: potentialPath,
-                            },
-                        },
-                        settings,
-                    ),
-                );
-            } else {
-                const { default: __SCommandProcess } = await import('./SCommandProcess'); // eslint-disable-line
-                // considere the passed string as a command
-                const commandProcess = new __SCommandProcess(
-                    {
-                        command: what,
-                    },
-                    settings,
-                );
-                return commandProcess;
+                requireValue = (await import(potentialPath))?.default;
+                return requireValue;
+            } catch (e) {
+                console.log(e);
             }
+
+            const __SCommandProcess = __require('./SCommandProcess');
+            // considere the passed string as a command
+            const commandProcess = new __SCommandProcess(
+                {
+                    command: what,
+                },
+                settings,
+            );
+            return commandProcess;
         }
         throw new Error(
             [
@@ -281,7 +276,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         initialParams: Partial<ISCommandProcessParams> = {},
         settings?: Partial<ISCommandProcessCtorSettings>,
     ): Promise<SProcess> {
-        const { default: __SCommandProcess } = await import('./SCommandProcess'); // eslint-disable-line
+        const { default: __SCommandProcess } = await import(
+            './SCommandProcess'
+        ); // eslint-disable-line
         return new __SCommandProcess(initialParams, settings);
     }
 
@@ -318,7 +315,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(initialParams?: Partial<ISProcessParams>, settings?: ISProcessCtorSettings) {
+    constructor(
+        initialParams?: Partial<ISProcessParams>,
+        settings?: ISProcessCtorSettings,
+    ) {
         super(
             <ISEventEmitterConstructorSettings>__deepMerge(
                 {
@@ -334,7 +334,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         // get the definition from interface or settings
         this.paramsInterface = this.processSettings.interface;
         if (!this.paramsInterface) {
-            this.paramsInterface = (<any>this).constructor.interface ?? this.getInterface('params');
+            this.paramsInterface =
+                (<any>this).constructor.interface ??
+                this.getInterface('params');
         }
 
         // handle process exit
@@ -375,7 +377,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      */
     get lastExecutionObj(): ISProcessProcessObj | -1 {
         if (!this.executionsStack.length) return -1;
-        return <ISProcessProcessObj>this.executionsStack[this.executionsStack.length - 1];
+        return <ISProcessProcessObj>(
+            this.executionsStack[this.executionsStack.length - 1]
+        );
     }
 
     /**
@@ -424,14 +428,21 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _duration: any;
-    run(paramsOrStringArgs: string | Partial<ISProcessParams> = {}, settings: Partial<ISProcessSettings> = {}) {
-        const processSettings = <ISProcessSettings>__deepMerge(this.processSettings, settings);
+    run(
+        paramsOrStringArgs: string | Partial<ISProcessParams> = {},
+        settings: Partial<ISProcessSettings> = {},
+    ) {
+        const processSettings = <ISProcessSettings>(
+            __deepMerge(this.processSettings, settings)
+        );
 
         if (this.currentExecutionObj !== undefined) {
             if (processSettings.throw === true) {
                 throw new Error(
                     `Sorry but you can not execute multiple process of the "<yellow>${
-                        this.metas.name || this.metas.id || this.constructor.name
+                        this.metas.name ||
+                        this.metas.id ||
+                        this.constructor.name
                     }</yellow>" SProcess instance...`,
                 );
             }
@@ -440,7 +451,12 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
         (async () => {
             if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-                this.stdio = await __SStdio.existingOrNew('default', this, processSettings.stdio, {});
+                this.stdio = await __SStdio.existingOrNew(
+                    'default',
+                    this,
+                    processSettings.stdio,
+                    {},
+                );
                 if (this._processPromise) {
                     this._processPromise._eventEmitter.start();
                 }
@@ -477,7 +493,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         }
 
         // @ts-ignore
-        let paramsObj: Partial<ISProcessParams> = __isPlainObject(paramsOrStringArgs) ? paramsOrStringArgs : {};
+        let paramsObj: Partial<ISProcessParams> = __isPlainObject(
+            paramsOrStringArgs,
+        )
+            ? paramsOrStringArgs
+            : {};
 
         if (this.paramsInterface) {
             paramsObj = this.paramsInterface.apply(paramsOrStringArgs, {
@@ -508,7 +528,10 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         if (processSettings.runAsChild && !__isChildProcess()) {
             // build the command to run depending on the passed command in the constructor and the params
             const commandToRun = __buildCommandLine(
-                `node ${__path.resolve(__dirname(), 'runAsChild.cli.js')} [arguments]`,
+                `node --experimental-specifier-resolution=node ${__path.resolve(
+                    __dirname(),
+                    'runAsChild.cli.js',
+                )} [arguments]`,
                 {
                     ...this._params,
                     _settings: processSettings,
@@ -521,10 +544,19 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             });
         } else {
             // run the actual process using the "process" method
-            this._processPromise = (<any>this).process(this._params, processSettings);
+            this._processPromise = (<any>this).process(
+                this._params,
+                processSettings,
+            );
 
-            if (__isChildProcess() && this._processPromise && this._processPromise.pipeTo) {
-                this._processPromise.pipeTo(process);
+            if (
+                __isChildProcess() &&
+                this._processPromise &&
+                this._processPromise.pipeTo
+            ) {
+                this._processPromise.pipeTo(process, {
+                    exclude: [],
+                });
             }
         }
 
@@ -550,8 +582,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     if (this.currentExecutionObj) {
                         this.currentExecutionObj.stderr.push(data);
                     }
-                    if (!this.processSettings.killOnError && metas.event === 'error') return;
-                    // this.kill(data);
+                    if (
+                        !this.processSettings.killOnError &&
+                        metas.event === 'error'
+                    )
+                        return;
                 });
 
             // updating state when needed
@@ -567,10 +602,22 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     'close.killed:1',
                 ].join(','),
                 (data, metas) => {
-                    if (metas.event === 'resolve' || metas.event === 'close.success') this.state('success');
-                    else if (metas.event === 'reject' || metas.event === 'error' || metas.event === 'close.error')
+                    if (
+                        metas.event === 'resolve' ||
+                        metas.event === 'close.success'
+                    )
+                        this.state('success');
+                    else if (
+                        metas.event === 'reject' ||
+                        metas.event === 'error' ||
+                        metas.event === 'close.error'
+                    )
                         this.state('error');
-                    else if (metas.event === 'cancel' || metas.event === 'close.killed') this.state('killed');
+                    else if (
+                        metas.event === 'cancel' ||
+                        metas.event === 'close.killed'
+                    )
+                        this.state('killed');
                     else this.state('idle');
                 },
             );
@@ -607,14 +654,18 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     .then((value) => {
                         this.state('success');
                         resolve(<ISProcessResultObject>{
-                            ...this.executionsStack[this.executionsStack.length - 1],
+                            ...this.executionsStack[
+                                this.executionsStack.length - 1
+                            ],
                             value,
                         });
                     })
                     .catch((error) => {
                         this.state('error');
                         resolve(<ISProcessResultObject>{
-                            ...this.executionsStack[this.executionsStack.length - 1],
+                            ...this.executionsStack[
+                                this.executionsStack.length - 1
+                            ],
                             error,
                         });
                     });
@@ -629,7 +680,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
     state(value?: string) {
         if (!value) return this._state;
-        if (['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(value) === -1) {
+        if (
+            ['idle', 'ready', 'running', 'killed', 'error', 'success'].indexOf(
+                value,
+            ) === -1
+        ) {
             throw new Error(
                 `Sorry but the "<yellow>state</yellow>" property setted to "<magenta>${__toString(
                     value,
@@ -722,7 +777,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
         if (state === 'success' || state === 'killed' || state === 'error') {
             // push the currentExecutionObj into the execution stack
-            this.executionsStack.push(Object.assign({}, this.currentExecutionObj));
+            this.executionsStack.push(
+                Object.assign({}, this.currentExecutionObj),
+            );
             // reset the currentExecutionObj
             this.currentExecutionObj = undefined;
         }
@@ -831,7 +888,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     log(...logs: ISLog[]) {
         logs.forEach((log) => {
             if (this.currentExecutionObj) {
-                this.currentExecutionObj.stdout.push(log.value || log.toString());
+                this.currentExecutionObj.stdout.push(
+                    log.value || log.toString(),
+                );
             }
             this.emit('log', log);
         });
@@ -850,7 +909,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
     error(...errors: ISLog[]) {
         errors.forEach((error) => {
             if (this.currentExecutionObj) {
-                this.currentExecutionObj.stderr.push(error.value || error.toString());
+                this.currentExecutionObj.stderr.push(
+                    error.value || error.toString(),
+                );
             }
             this.emit('error', error);
         });

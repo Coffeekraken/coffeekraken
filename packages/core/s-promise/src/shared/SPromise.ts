@@ -69,10 +69,12 @@ export interface ISPromiseSettings {
     proxies: ISPromiseProxies;
     preventRejectOnThrow: boolean;
     treatCancelAs: string;
+    resolveAtResolveEvent: boolean;
+    rejectAtRejectEvent: boolean;
     [key: string]: any;
 }
 
-export interface ISPromiseConstructorSettings {
+export interface ISPromiseCtorSettings {
     [key: string]: any;
     promise: Partial<ISPromiseSettings>;
 }
@@ -90,10 +92,6 @@ export interface ISPromiseCancelFn {
 export interface ISPromiseResolvers {
     reject: any;
     resolve: any;
-}
-
-export interface ISPromiseCtor extends Promise {
-    new (settings?: ISPromiseConstructorSettings): ISPromise;
 }
 
 export interface ISPromise extends Promise, ISEventEmitter {
@@ -180,7 +178,10 @@ class SPromise
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(executorFnOrSettings = {}, settings?) {
+    constructor(
+        executorFnOrSettings = {},
+        settings?: Partial<ISPromiseCtorSettings>,
+    ) {
         // @ts-ignore
         let executorFn,
             _this,
@@ -194,6 +195,8 @@ class SPromise
                         destroyTimeout: 1,
                         preventRejectOnThrow: true,
                         emitErrorEventOnThrow: true,
+                        resolveAtResolveEvent: false,
+                        rejectAtRejectEvent: false,
                         proxies: {
                             resolve: [],
                             reject: [],
@@ -249,13 +252,13 @@ class SPromise
         this._resolvers = <ISPromiseResolvers>resolvers;
 
         if (
-            (<ISPromiseConstructorSettings>this._settings).promise
-                .destroyTimeout !== -1
+            (<ISPromiseCtorSettings>this._settings).promise.destroyTimeout !==
+            -1
         ) {
             this.on('finally', (v, m) => {
                 setTimeout(() => {
                     this.destroy();
-                }, (<ISPromiseConstructorSettings>this._settings).promise.destroyTimeout);
+                }, (<ISPromiseCtorSettings>this._settings).promise.destroyTimeout);
             });
         }
 
@@ -285,6 +288,17 @@ class SPromise
                     this.reject(e);
                 }
             })();
+        }
+
+        if (this.promiseSettings.resolveAtResolveEvent) {
+            this.on('resolve', (data, metas) => {
+                this.resolve(data);
+            });
+        }
+        if (this.promiseSettings.rejectAtRejectEvent) {
+            this.on('reject', (data, metas) => {
+                this.reject(data);
+            });
         }
 
         // this.catch((e) => {

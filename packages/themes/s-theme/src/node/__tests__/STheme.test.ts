@@ -1,7 +1,9 @@
 import __STheme from '../STheme';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('s-theme.node.STheme', () => {
-    it('Should instanciate correctly the default theme', (done) => {
+    it('Should instanciate correctly the default theme', async (done) => {
+        await __SSugarConfig.load();
         new __STheme();
         done();
     });

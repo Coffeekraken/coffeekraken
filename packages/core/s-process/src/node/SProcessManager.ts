@@ -29,7 +29,8 @@ import __SProcessManagerProcessWrapper, {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISProcessManagerProcessSettings extends ISProcessManagerProcessWrapperSettings {}
+export interface ISProcessManagerProcessSettings
+    extends ISProcessManagerProcessWrapperSettings {}
 
 export interface ISProcessManagerCtorSettings {
     processManager: Partial<ISProcessManagerSettings>;
@@ -125,16 +126,22 @@ class SProcessManager extends __SEventEmitter {
                 `<yellow>[${this.constructor.name}.attach]</yellow> Sorry but a process with the id "<magenta>${id}</magenta>" is already attached to this process manager`,
             );
 
-        const instanceId = this.constructor.name === 'SProcessManager' ? `SPM.${id}` : `${this.constructor.name}.${id}`;
-        const processManagerProcess = new __SProcessManagerProcessWrapper(processInstance, {
-            metas: {
-                color: __getColorFor(instanceId, {
-                    scope: this.constructor.name,
-                }),
-                id: instanceId,
+        const instanceId =
+            this.constructor.name === 'SProcessManager'
+                ? `SPM.${id}`
+                : `${this.constructor.name}.${id}`;
+        const processManagerProcess = new __SProcessManagerProcessWrapper(
+            processInstance,
+            {
+                metas: {
+                    color: __getColorFor(instanceId, {
+                        scope: this.constructor.name,
+                    }),
+                    id: instanceId,
+                },
+                processManagerProcess: settings ?? {},
             },
-            processManagerProcess: settings ?? {},
-        });
+        );
 
         // register process for stdio
         this.pipe(processManagerProcess, {
@@ -184,7 +191,11 @@ class SProcessManager extends __SEventEmitter {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    run(processId, paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
+    run(
+        processId,
+        paramsOrStringArgs = {},
+        settings: Partial<ISProcessSettings> = {},
+    ) {
         if (!this._processesStack[processId])
             throw new Error(
                 `<red>[${this.constructor.name}.run]</red> Sorry but no process exists with the id "<magenta>${processId}</magenta>"`,
@@ -195,7 +206,10 @@ class SProcessManager extends __SEventEmitter {
         });
 
         // run the process
-        const promise = this._processesStack[processId].run(paramsOrStringArgs, settings);
+        const promise = this._processesStack[processId].run(
+            paramsOrStringArgs,
+            settings,
+        );
         return promise;
     }
 }

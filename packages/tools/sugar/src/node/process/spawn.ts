@@ -54,10 +54,18 @@ export interface ISpawnSettings extends SpawnOptions {
 }
 
 export interface ISpawn {
-    (command: string, args?: string[], settings?: Partial<ISpawnSettings>): ISPromise;
+    (
+        command: string,
+        args?: string[],
+        settings?: Partial<ISpawnSettings>,
+    ): ISPromise;
 }
 
-export default function spawn(command: string, args?: string[] = [], settings?: Partial<ISpawnSettings>): __SPromise {
+export default function spawn(
+    command: string,
+    args?: string[] = [],
+    settings?: Partial<ISpawnSettings>,
+): __SPromise {
     let childProcess;
 
     const promise = new __SPromise(async ({ resolve, reject, emit }) => {
@@ -83,7 +91,9 @@ export default function spawn(command: string, args?: string[] = [], settings?: 
             env: {
                 ...process.env,
                 ...(settings.env || {}),
-                CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL ? process.env.CHILD_PROCESS_LEVEL + 1 : 1,
+                CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
+                    ? process.env.CHILD_PROCESS_LEVEL + 1
+                    : 1,
                 NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
                 IS_CHILD_PROCESS: true,
             },
@@ -96,14 +106,15 @@ export default function spawn(command: string, args?: string[] = [], settings?: 
         // handle the process.send pattern
         if (settings.pipeEvents) {
             childProcess.on('message', (dataObj) => {
-                // console.log('MESSAGE', dataObj);
                 if (!dataObj.value || !dataObj.metas) return;
                 if (dataObj.metas.event === 'resolve') {
                     resolveValue = dataObj.value;
                     childProcess.kill('SIGINT');
+                    resolve(dataObj.value);
                 } else if (dataObj.metas.event === 'reject') {
                     rejectValue = dataObj.value;
                     childProcess.kill('SIGINT');
+                    reject(dataObj.value);
                 } else {
                     emit(dataObj.metas.event, dataObj.value, dataObj.metas);
                 }
@@ -136,12 +147,14 @@ export default function spawn(command: string, args?: string[] = [], settings?: 
         childProcess.on('close', (code, signal) => {
             if (isEnded) return;
             isEnded = true;
-
             // build the result object
             const resultObj = {
                 code,
                 signal,
-                value: resolveValue || rejectValue || `${stdout.toString()}\n${stderr.toString()}`,
+                value:
+                    resolveValue ||
+                    rejectValue ||
+                    `${stdout.toString()}\n${stderr.toString()}`,
                 stdout,
                 stderr,
                 spawn: true,
@@ -181,7 +194,7 @@ export default function spawn(command: string, args?: string[] = [], settings?: 
                 return reject(resultObj);
             }
         });
-    });
+    }, {});
 
     return promise;
 }

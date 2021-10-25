@@ -221,6 +221,24 @@ export default class SSugarConfig extends __SClass {
     }
 
     /**
+     * @name            isLoaded
+     * @type            Function
+     *
+     * This static method allows you to test if the default or a particular configuration
+     * is loaded or not
+     *
+     * @param       {String}        [id="default"]      The configuration id you want to get the config from
+     * @return      {Boolean}                           true if is loaded, false if not
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static isLoaded(id = 'default'): boolean {
+        if (!this._sSugarConfigInstances[id]) return false;
+        return true;
+    }
+
+    /**
      * @name            get
      * @type            Function
      *

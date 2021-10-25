@@ -4,7 +4,6 @@ import __SFile from '@coffeekraken/s-file';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
-import __toRegex from 'to-regex';
 import __expandGlob from '../../shared/glob/expandGlob';
 import __deepMerge from '../../shared/object/deepMerge';
 import __isDirectory from '../is/directory';
@@ -40,131 +39,135 @@ import __excludeGlobs from '../path/excludeGlobs';
  */
 
 export interface IResolveGlobSettings {
-  cwd: string;
-  symlinks: boolean;
-  nodir: boolean;
-  contentRegExp: RegExp;
-  SFile: boolean;
-  exclude: string|string[];
-  defaultExcludes: boolean;
+    cwd: string;
+    symlinks: boolean;
+    nodir: boolean;
+    contentRegExp: RegExp;
+    SFile: boolean;
+    exclude: string | string[];
+    defaultExcludes: boolean;
 }
 
-export default function resolveGlob(globs: string | string[], settings: Partial<IResolveGlobSettings> = {}): __SFile[] | string[] {
-  settings = __deepMerge(
-    {
-      cwd: settings.cwd || process.cwd(),
-      symlinks: true,
-      nodir: false,
-      contentRegExp: undefined,
-      SFile: true,
-      exclude: [],
-      defaultExcludes: true
-    },
-    settings
-  );
+export default function resolveGlob(
+    globs: string | string[],
+    settings: Partial<IResolveGlobSettings> = {},
+): __SFile[] | string[] {
+    settings = __deepMerge(
+        {
+            cwd: settings.cwd || process.cwd(),
+            symlinks: true,
+            nodir: false,
+            contentRegExp: undefined,
+            SFile: true,
+            exclude: [],
+            defaultExcludes: true,
+        },
+        settings,
+    );
 
-  const filesArray: __SFile[] | string[] = [];
+    const filesArray: __SFile[] | string[] = [];
 
-  if (!Array.isArray(globs)) globs = [globs];
+    if (!Array.isArray(globs)) globs = [globs];
 
-  for (let i = 0; i < globs.length; i++) {
-    const glob = globs[i];
+    for (let i = 0; i < globs.length; i++) {
+        const glob = globs[i];
 
-    let cwd = settings.cwd,
-      globPattern,
-      searchReg = settings.contentRegExp;
+        let cwd = settings.cwd,
+            globPattern,
+            searchReg = settings.contentRegExp;
 
-    // make sure it's a glob pattern
-    if (__fs.existsSync(glob)) {
-
-      if (settings.SFile) {
-        const sFile = __SFile.new(glob, {
-          file: {
-            cwd
-          }
-        });
-        filesArray.push(sFile);
-      } else {
-        filesArray.push(glob);
-      }
-      continue;
-    }
-
-    const splits = glob.split(':').map((split) => {
-      return split.replace(`${cwd}/`, '').replace(cwd, '');
-    });
-    if (splits[1]) {
-      // searchReg = __toRegex(splits[1]);
-
-      const innerReg = splits[1].replace(/^\//, '').replace(/\/[a-zA-Z]{0,10}$/, '');
-      let flags = splits[1].match(/\/[a-zA-Z]{1,10}$/g);
-      if (flags) {
-        flags = flags[0].replace('/', '');
-      }
-      searchReg = new RegExp(innerReg, flags);
-    }
-    globPattern = splits[0];
-
-    globPattern = __path.resolve(cwd, globPattern);
-    const finalPatterns = __expandGlob(globPattern);
-
-    let pathes = [];
-    finalPatterns.forEach((pattern) => {
-      pathes = pathes.concat(
-        __glob.sync(pattern, {
-          cwd,
-          nodir: settings.nodir,
-          dot: true,
-          follow: settings.symlinks,
-          ignore: [
-            ...(settings.exclude ?? []),
-            ...settings.defaultExcludes ? __excludeGlobs() : []
-          ],
-          ...settings
-        })
-      );
-    });
-
-    // check if need to search for inline content
-    if (searchReg) {
-      pathes = pathes.filter((path) => {
-        if (__isDirectory(path)) return false;
-        try {
-          const content = __fs.readFileSync(path, 'utf8').toString();
-          const matches = content.match(searchReg);
-
-          // if (path.includes('/doc/getStarted')) {
-          //   console.log(path, searchReg, searchReg.test(content), matches);
-          // }
-
-          if (matches && matches.length) {
-            return true;
-          }
-          return false;
-        } catch(e) {
-          return false;
+        // make sure it's a glob pattern
+        if (__fs.existsSync(glob)) {
+            if (settings.SFile) {
+                const sFile = __SFile.new(glob, {
+                    file: {
+                        cwd,
+                    },
+                });
+                filesArray.push(sFile);
+            } else {
+                filesArray.push(glob);
+            }
+            continue;
         }
-      });
+
+        const splits = glob.split(':').map((split) => {
+            return split.replace(`${cwd}/`, '').replace(cwd, '');
+        });
+        if (splits[1]) {
+            // searchReg = __toRegex(splits[1]);
+
+            const innerReg = splits[1]
+                .replace(/^\//, '')
+                .replace(/\/[a-zA-Z]{0,10}$/, '');
+            let flags = splits[1].match(/\/[a-zA-Z]{1,10}$/g);
+            if (flags) {
+                flags = flags[0].replace('/', '');
+            }
+            searchReg = new RegExp(innerReg, flags);
+        }
+        globPattern = splits[0];
+
+        globPattern = __path.resolve(cwd, globPattern);
+        const finalPatterns = __expandGlob(globPattern);
+
+        let pathes = [];
+        finalPatterns.forEach((pattern) => {
+            pathes = pathes.concat(
+                __glob.sync(pattern, {
+                    cwd,
+                    nodir: settings.nodir,
+                    dot: true,
+                    follow: settings.symlinks,
+                    ignore: [
+                        ...(settings.exclude ?? []),
+                        ...(settings.defaultExcludes ? __excludeGlobs() : []),
+                    ],
+                    ...settings,
+                }),
+            );
+        });
+
+        // check if need to search for inline content
+        if (searchReg) {
+            pathes = pathes.filter((path) => {
+                if (__isDirectory(path)) return false;
+                try {
+                    const content = __fs.readFileSync(path, 'utf8').toString();
+                    const matches = content.match(searchReg);
+
+                    // if (path.includes('/doc/getStarted')) {
+                    //   console.log(path, searchReg, searchReg.test(content), matches);
+                    // }
+
+                    if (matches && matches.length) {
+                        return true;
+                    }
+                    return false;
+                } catch (e) {
+                    return false;
+                }
+            });
+        }
+
+        pathes.forEach((path) => {
+            if (__isDirectory(path)) {
+                filesArray.push(path);
+                return;
+            }
+            if (settings.SFile) {
+                const sFile = __SFile.new(path, {
+                    file: {
+                        cwd,
+                    },
+                });
+                filesArray.push(sFile);
+            } else {
+                filesArray.push(path);
+            }
+        });
     }
 
-    pathes.forEach((path) => {
-      if (__isDirectory(path)) {
-        filesArray.push(path);
-        return;
-      }
-      if (settings.SFile) {
-        const sFile = __SFile.new(path, {
-          file: {
-            cwd
-          }
-        });
-        filesArray.push(sFile);
-      } else {
-        filesArray.push(path);
-      }
-    });
-  }
-
-  // resolve the promise
-  return filesArray;
+    // resolve the promise
+    return filesArray;
 }

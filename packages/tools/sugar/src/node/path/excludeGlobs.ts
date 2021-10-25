@@ -26,8 +26,9 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-
 export default function (): string[] {
-  const excludeGlobs = __SugarConfig.get('storage.exclude');
-  return excludeGlobs ?? [];
+    if (__SugarConfig.isLoaded()) {
+        return __SugarConfig.get('storage.exclude');
+    }
+    return [];
 }

@@ -228,7 +228,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    parse() {
+    parse(): Promise<any> {
         return new Promise(async (resolve) => {
             // some variables
             let currentTag: string;

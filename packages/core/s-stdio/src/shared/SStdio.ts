@@ -1,16 +1,9 @@
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __minimatch from 'minimatch';
-import { ISPromise } from '@coffeekraken/s-promise';
 import __SClass, { ISClass } from '@coffeekraken/s-class';
-import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __isClass from '@coffeekraken/sugar/shared/is/class';
-import __isPath from '@coffeekraken/sugar/node/is/path';
-import __childProcess from 'child_process';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
-
-import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
+import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import { ISPromise } from '@coffeekraken/s-promise';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -180,7 +173,11 @@ class SStdio extends __SClass implements ISStdio {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerComponent(component: ISStdioComponent, settings?: any, as?: string) {
+    static registerComponent(
+        component: ISStdioComponent,
+        settings?: any,
+        as?: string,
+    ) {
         // make sure this component has an "id" specified
         if (component.id === undefined && as === null) {
             throw `Sorry but you try to register a component that does not have a built-in static "id" property and you don't have passed the "as" argument to override it...`;
@@ -191,11 +188,12 @@ class SStdio extends __SClass implements ISStdio {
             this.registeredComponents[this.name] = {};
 
         // save the component inside the stack
-        this.registeredComponents[this.name][as || component.id || 'default'] = {
-            component,
-            settings: settings || {},
-            as,
-        };
+        this.registeredComponents[this.name][as || component.id || 'default'] =
+            {
+                component,
+                settings: settings || {},
+                as,
+            };
     }
 
     /**
@@ -217,7 +215,12 @@ class SStdio extends __SClass implements ISStdio {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async existingOrNew(id: string, sources, stdio: any = 'inherit', settings = {}) {
+    static async existingOrNew(
+        id: string,
+        sources,
+        stdio: any = 'inherit',
+        settings = {},
+    ) {
         // @ts-ignore
         if (this._instanciatedStdio[id]) return this._instanciatedStdio[id];
         return this.new(id, sources, stdio, settings);
@@ -254,7 +257,12 @@ class SStdio extends __SClass implements ISStdio {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async new(id: string, sources, stdio: any = 'inherit', settings = {}) {
+    static async new(
+        id: string,
+        sources,
+        stdio: any = 'inherit',
+        settings = {},
+    ) {
         const { default: n } = await import('./new');
         return n(id, sources, stdio, settings);
     }
@@ -298,7 +306,11 @@ class SStdio extends __SClass implements ISStdio {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(id: string, sources: ISEventEmitter | ISEventEmitter[], settings: ISStdioCtorSettings = {}) {
+    constructor(
+        id: string,
+        sources: ISEventEmitter | ISEventEmitter[],
+        settings: ISStdioCtorSettings = {},
+    ) {
         super(
             __deepMerge(
                 {
@@ -309,13 +321,29 @@ class SStdio extends __SClass implements ISStdio {
                         spaceBetween: 0,
                         spaceAround: 0,
                         globalEvents: true,
-                        events: ['log', '*.log', 'warn', '*.warn', 'error', '*.error', 'reject', '*.reject'],
+                        events: [
+                            'log',
+                            '*.log',
+                            'warn',
+                            '*.warn',
+                            'error',
+                            '*.error',
+                            'reject',
+                            '*.reject',
+                        ],
                         mapTypesToEvents: {
                             heading: [],
-                            error: ['error', '*.error', 'reject', '*.reject', 'cancel', '*.cancel'],
+                            error: [
+                                'error',
+                                '*.error',
+                                'reject',
+                                '*.reject',
+                                'cancel',
+                                '*.cancel',
+                            ],
                             warning: ['warn', '*.warn'],
                         },
-                        types: __SugarConfig.get('log.types'),
+                        types: __SSugarConfig.get('log.types'),
                         metas: {
                             time: false,
                         },
@@ -410,7 +438,9 @@ class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     registerSource(source, settings?: Partial<ISStdioSettings>) {
-        const set = (<ISStdioSettings>__deepMerge(this._settings.stdio || {}, settings ?? {})) as ISStdioSettings;
+        const set = (<ISStdioSettings>(
+            __deepMerge(this._settings.stdio || {}, settings ?? {})
+        )) as ISStdioSettings;
         // subscribe to data
 
         // "ask" event
@@ -522,12 +552,14 @@ class SStdio extends __SClass implements ISStdio {
             }
 
             // get the correct component to pass to the _log method
-            const componentObj = (<any>this).constructor.registeredComponents[this.constructor.name][
-                log.as || 'default'
-            ];
+            const componentObj = (<any>this).constructor.registeredComponents[
+                this.constructor.name
+            ][log.as || 'default'];
             if (!componentObj)
                 throw new Error(
-                    `Sorry but the requested "<yellow>${log.as || 'default'}</yellow>" in the "<cyan>${
+                    `Sorry but the requested "<yellow>${
+                        log.as || 'default'
+                    }</yellow>" in the "<cyan>${
                         this.constructor.name
                     }</cyan>" stdio class does not exists...`,
                 );
@@ -562,7 +594,9 @@ class SStdio extends __SClass implements ISStdio {
      */
     // _isCleared = true;
     async ask(askObj: Partial<ISLogAsk>) {
-        let ask = <ISLogAsk>__deepMerge(this.stdioSettings.defaultAskObj, askObj);
+        let ask = <ISLogAsk>(
+            __deepMerge(this.stdioSettings.defaultAskObj, askObj)
+        );
 
         // @ts-ignore
         const answer = await this._ask(ask);

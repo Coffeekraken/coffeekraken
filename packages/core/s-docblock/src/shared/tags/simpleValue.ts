@@ -27,6 +27,7 @@ function simpleValue(data, blockSettings) {
     ) {
         return true;
     }
+
     const value = new String(data.value);
     value.render = true;
     return value;

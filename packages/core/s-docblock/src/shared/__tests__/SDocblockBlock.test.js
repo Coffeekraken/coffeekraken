@@ -1,6 +1,15 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import __SDocblockBlock from '../SDocblockBlock';
 describe('s-docblock.shared.SDocblockBlock', () => {
-    it('Should parse a complete docblock correctly', () => {
+    it('Should parse a complete docblock correctly', () => __awaiter(void 0, void 0, void 0, function* () {
         const block = `
         /**
  * @name            SProcessPipe
@@ -38,7 +47,9 @@ describe('s-docblock.shared.SDocblockBlock', () => {
  */
         `;
         const docblock = new __SDocblockBlock(block);
-        expect(docblock.toObject()).toEqual({
+        const obj = yield docblock.parse();
+        const seializedObj = JSON.parse(JSON.stringify(obj));
+        expect(seializedObj).toEqual({
             name: 'SProcessPipe',
             namespace: 'node.process',
             type: 'Class',
@@ -49,16 +60,18 @@ describe('s-docblock.shared.SDocblockBlock', () => {
             param: {
                 processes: {
                     name: 'processes',
-                    type: 'ISProcessSettings',
+                    type: ['ISProcessSettings'],
                     description: 'The processes you want to pipe',
-                    default: undefined
+                    default: undefined,
+                    defaultStr: '',
                 },
                 settings: {
                     name: 'settings',
-                    type: 'ISProcessSettings',
+                    type: ['ISProcessSettings'],
                     description: 'Some settings to configure your process pipe instance',
-                    default: {}
-                }
+                    default: {},
+                    defaultStr: '{}',
+                },
             },
             example: [
                 {
@@ -78,14 +91,14 @@ describe('s-docblock.shared.SDocblockBlock', () => {
                         ']);\n' +
                         'const res = await processPipe.run({\n' +
                         "   something: 'coco'\n" +
-                        '});'
-                }
+                        '});',
+                },
             ],
             since: '2.0.0',
             author: {
                 name: 'Olivier Bossel',
                 email: 'olivier.bossel@gmail.com',
-                url: 'https://olivierbossel.com'
+                url: 'https://olivierbossel.com',
             },
             raw: '/**\n' +
                 '*\n' +
@@ -122,8 +135,8 @@ describe('s-docblock.shared.SDocblockBlock', () => {
                 '* @since           2.0.0\n' +
                 '* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n' +
                 '\n' +
-                '*/'
+                '*/',
         });
-    });
+    }));
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrQmxvY2sudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNEb2NibG9ja0Jsb2NrLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxnQkFBZ0IsTUFBTSxtQkFBbUIsQ0FBQztBQUVqRCxRQUFRLENBQUMsa0NBQWtDLEVBQUUsR0FBRyxFQUFFO0lBRTlDLEVBQUUsQ0FBQyw0Q0FBNEMsRUFBRSxHQUFHLEVBQUU7UUFFbEQsTUFBTSxLQUFLLEdBQUc7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBbUNiLENBQUM7UUFFRixNQUFNLFFBQVEsR0FBRyxJQUFJLGdCQUFnQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRTdDLE1BQU0sQ0FBQyxRQUFRLENBQUMsUUFBUSxFQUFFLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDbEMsSUFBSSxFQUFFLGNBQWM7WUFDcEIsU0FBUyxFQUFFLGNBQWM7WUFDekIsSUFBSSxFQUFFLE9BQU87WUFDYixXQUFXLEVBQUUsOERBQThEO2dCQUN6RSwyRUFBMkU7Z0JBQzNFLDBEQUEwRDtnQkFDMUQsMEVBQTBFO1lBQzVFLEtBQUssRUFBRTtnQkFDTCxTQUFTLEVBQUU7b0JBQ1QsSUFBSSxFQUFFLFdBQVc7b0JBQ2pCLElBQUksRUFBRSxtQkFBbUI7b0JBQ3pCLFdBQVcsRUFBRSxnQ0FBZ0M7b0JBQzdDLE9BQU8sRUFBRSxTQUFTO2lCQUNuQjtnQkFDRCxRQUFRLEVBQUU7b0JBQ1IsSUFBSSxFQUFFLFVBQVU7b0JBQ2hCLElBQUksRUFBRSxtQkFBbUI7b0JBQ3pCLFdBQVcsRUFBRSx1REFBdUQ7b0JBQ3BFLE9BQU8sRUFBRSxFQUFFO2lCQUNaO2FBQ0Y7WUFDRCxPQUFPLEVBQUU7Z0JBQ1A7b0JBQ0UsUUFBUSxFQUFFLElBQUk7b0JBQ2QsSUFBSSxFQUFFLHFFQUFxRTt3QkFDekUsc0NBQXNDO3dCQUN0QyxpQ0FBaUM7d0JBQ2pDLHlCQUF5Qjt3QkFDekIsTUFBTTt3QkFDTixLQUFLO3dCQUNMLDBDQUEwQzt3QkFDMUMsb0JBQW9CO3dCQUNwQixxREFBcUQ7d0JBQ3JELHVCQUF1Qjt3QkFDdkIsU0FBUzt3QkFDVCxzQkFBc0I7d0JBQ3RCLE9BQU87d0JBQ1AsdUNBQXVDO3dCQUN2Qyx3QkFBd0I7d0JBQ3hCLEtBQUs7aUJBQ1I7YUFDRjtZQUNELEtBQUssRUFBRSxPQUFPO1lBQ2QsTUFBTSxFQUFFO2dCQUNOLElBQUksRUFBRSxnQkFBZ0I7Z0JBQ3RCLEtBQUssRUFBRSwwQkFBMEI7Z0JBQ2pDLEdBQUcsRUFBRSwyQkFBMkI7YUFDakM7WUFDRCxHQUFHLEVBQUUsT0FBTztnQkFDVixLQUFLO2dCQUNMLG1DQUFtQztnQkFDbkMsd0NBQXdDO2dCQUN4Qyw0QkFBNEI7Z0JBQzVCLEtBQUs7Z0JBQ0wsZ0VBQWdFO2dCQUNoRSw2RUFBNkU7Z0JBQzdFLDREQUE0RDtnQkFDNUQsOEVBQThFO2dCQUM5RSxLQUFLO2dCQUNMLHFHQUFxRztnQkFDckcsd0lBQXdJO2dCQUN4SSxLQUFLO2dCQUNMLHlCQUF5QjtnQkFDekIsdUVBQXVFO2dCQUN2RSx3Q0FBd0M7Z0JBQ3hDLG1DQUFtQztnQkFDbkMsMkJBQTJCO2dCQUMzQixRQUFRO2dCQUNSLE9BQU87Z0JBQ1AsNENBQTRDO2dCQUM1QyxzQkFBc0I7Z0JBQ3RCLHVEQUF1RDtnQkFDdkQseUJBQXlCO2dCQUN6QixXQUFXO2dCQUNYLHdCQUF3QjtnQkFDeEIsU0FBUztnQkFDVCx5Q0FBeUM7Z0JBQ3pDLDBCQUEwQjtnQkFDMUIsU0FBUztnQkFDVCxLQUFLO2dCQUNMLDRCQUE0QjtnQkFDNUIsc0ZBQXNGO2dCQUN0RixJQUFJO2dCQUNKLElBQUk7U0FDUCxDQUFDLENBQUM7SUFDUCxDQUFDLENBQUMsQ0FBQztBQUVQLENBQUMsQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU0RvY2Jsb2NrQmxvY2sudGVzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNEb2NibG9ja0Jsb2NrLnRlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxnQkFBZ0IsTUFBTSxtQkFBbUIsQ0FBQztBQUVqRCxRQUFRLENBQUMsa0NBQWtDLEVBQUUsR0FBRyxFQUFFO0lBQzlDLEVBQUUsQ0FBQyw0Q0FBNEMsRUFBRSxHQUFTLEVBQUU7UUFDeEQsTUFBTSxLQUFLLEdBQUc7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBbUNiLENBQUM7UUFFRixNQUFNLFFBQVEsR0FBRyxJQUFJLGdCQUFnQixDQUFDLEtBQUssQ0FBQyxDQUFDO1FBRTdDLE1BQU0sR0FBRyxHQUFHLE1BQU0sUUFBUSxDQUFDLEtBQUssRUFBRSxDQUFDO1FBQ25DLE1BQU0sWUFBWSxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsSUFBSSxDQUFDLFNBQVMsQ0FBQyxHQUFHLENBQUMsQ0FBQyxDQUFDO1FBRXJELE1BQU0sQ0FBQyxZQUFZLENBQUMsQ0FBQyxPQUFPLENBQUM7WUFDekIsSUFBSSxFQUFFLGNBQWM7WUFDcEIsU0FBUyxFQUFFLGNBQWM7WUFDekIsSUFBSSxFQUFFLE9BQU87WUFDYixXQUFXLEVBQ1AsOERBQThEO2dCQUM5RCwyRUFBMkU7Z0JBQzNFLDBEQUEwRDtnQkFDMUQsMEVBQTBFO1lBQzlFLEtBQUssRUFBRTtnQkFDSCxTQUFTLEVBQUU7b0JBQ1AsSUFBSSxFQUFFLFdBQVc7b0JBQ2pCLElBQUksRUFBRSxDQUFDLG1CQUFtQixDQUFDO29CQUMzQixXQUFXLEVBQUUsZ0NBQWdDO29CQUM3QyxPQUFPLEVBQUUsU0FBUztvQkFDbEIsVUFBVSxFQUFFLEVBQUU7aUJBQ2pCO2dCQUNELFFBQVEsRUFBRTtvQkFDTixJQUFJLEVBQUUsVUFBVTtvQkFDaEIsSUFBSSxFQUFFLENBQUMsbUJBQW1CLENBQUM7b0JBQzNCLFdBQVcsRUFDUCx1REFBdUQ7b0JBQzNELE9BQU8sRUFBRSxFQUFFO29CQUNYLFVBQVUsRUFBRSxJQUFJO2lCQUNuQjthQUNKO1lBQ0QsT0FBTyxFQUFFO2dCQUNMO29CQUNJLFFBQVEsRUFBRSxJQUFJO29CQUNkLElBQUksRUFDQSxxRUFBcUU7d0JBQ3JFLHNDQUFzQzt3QkFDdEMsaUNBQWlDO3dCQUNqQyx5QkFBeUI7d0JBQ3pCLE1BQU07d0JBQ04sS0FBSzt3QkFDTCwwQ0FBMEM7d0JBQzFDLG9CQUFvQjt3QkFDcEIscURBQXFEO3dCQUNyRCx1QkFBdUI7d0JBQ3ZCLFNBQVM7d0JBQ1Qsc0JBQXNCO3dCQUN0QixPQUFPO3dCQUNQLHVDQUF1Qzt3QkFDdkMsd0JBQXdCO3dCQUN4QixLQUFLO2lCQUNaO2FBQ0o7WUFDRCxLQUFLLEVBQUUsT0FBTztZQUNkLE1BQU0sRUFBRTtnQkFDSixJQUFJLEVBQUUsZ0JBQWdCO2dCQUN0QixLQUFLLEVBQUUsMEJBQTBCO2dCQUNqQyxHQUFHLEVBQUUsMkJBQTJCO2FBQ25DO1lBQ0QsR0FBRyxFQUNDLE9BQU87Z0JBQ1AsS0FBSztnQkFDTCxtQ0FBbUM7Z0JBQ25DLHdDQUF3QztnQkFDeEMsNEJBQTRCO2dCQUM1QixLQUFLO2dCQUNMLGdFQUFnRTtnQkFDaEUsNkVBQTZFO2dCQUM3RSw0REFBNEQ7Z0JBQzVELDhFQUE4RTtnQkFDOUUsS0FBSztnQkFDTCxxR0FBcUc7Z0JBQ3JHLHdJQUF3STtnQkFDeEksS0FBSztnQkFDTCx5QkFBeUI7Z0JBQ3pCLHVFQUF1RTtnQkFDdkUsd0NBQXdDO2dCQUN4QyxtQ0FBbUM7Z0JBQ25DLDJCQUEyQjtnQkFDM0IsUUFBUTtnQkFDUixPQUFPO2dCQUNQLDRDQUE0QztnQkFDNUMsc0JBQXNCO2dCQUN0Qix1REFBdUQ7Z0JBQ3ZELHlCQUF5QjtnQkFDekIsV0FBVztnQkFDWCx3QkFBd0I7Z0JBQ3hCLFNBQVM7Z0JBQ1QseUNBQXlDO2dCQUN6QywwQkFBMEI7Z0JBQzFCLFNBQVM7Z0JBQ1QsS0FBSztnQkFDTCw0QkFBNEI7Z0JBQzVCLHNGQUFzRjtnQkFDdEYsSUFBSTtnQkFDSixJQUFJO1NBQ1gsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMsQ0FBQyxDQUFDIn0=

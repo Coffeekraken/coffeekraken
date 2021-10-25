@@ -23,6 +23,8 @@ import __argsToString from './argsToString';
  * - alias (true) {Boolean}: Specify if you want to make use of the aliases in your generated command
  * @return      {String}                      The builded command string
  *
+ * @setting         {Boolean}       [keepFalsy=false]           Specify if you want to keep falsy arguments in your command line or not
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -59,12 +61,24 @@ import __argsToString from './argsToString';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export interface IBuildCommandLineSettings {
+    keepFalsy: boolean;
+}
+
 export default function buildCommandLine(
-  command: string,
-  args: Record<string, unknown> = {}
+    command: string,
+    args: Record<string, unknown> = {},
+    settings?: Partial<IBuildCommandLineSettings>,
 ) {
-  // loop on args
-  const string = __argsToString(args);
-  const cmdString = command.replace('[arguments]', string);
-  return cmdString;
+    settings = {
+        keepFalsy: false,
+        ...(settings ?? {}),
+    };
+    // loop on args
+    const string = __argsToString(args, {
+        keepFalsy: settings.keepFalsy,
+    });
+    const cmdString = command.replace('[arguments]', string);
+    return cmdString;
 }

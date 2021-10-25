@@ -3,6 +3,7 @@ import __SEventEmitter, {
     ISEventEmitter,
     ISEventEmitterConstructorSettings,
 } from '@coffeekraken/s-event-emitter';
+import __fs from 'fs';
 import { ISLog } from '@coffeekraken/s-log';
 import __SPromise from '@coffeekraken/s-promise';
 import __SStdio from '@coffeekraken/s-stdio';
@@ -30,6 +31,7 @@ import {
 } from './ISProcess';
 import __require from '@coffeekraken/sugar/node/esm/require';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __SFeature from '@coffeekraken/s-feature';
 
 /**
  * @name                SProcess
@@ -225,24 +227,24 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         }
         if (typeof what === 'string') {
             const potentialPath = __path.resolve(what);
-            let requireValue;
 
-            try {
-                requireValue = (await import(potentialPath))?.default;
-                return requireValue;
-            } catch (e) {
-                console.log(e);
+            if (__fs.existsSync(potentialPath)) {
+                const requireValue = (await import(potentialPath))?.default;
+                if (requireValue) {
+                    return await this.from(requireValue, settings);
+                }
+            } else {
+                // considere the passed string as a command
+                const __SCommandProcess = (await import('./SCommandProcess'))
+                    ?.default;
+                const commandProcess = new __SCommandProcess(
+                    {
+                        command: what,
+                    },
+                    settings,
+                );
+                return commandProcess;
             }
-
-            const __SCommandProcess = __require('./SCommandProcess');
-            // considere the passed string as a command
-            const commandProcess = new __SCommandProcess(
-                {
-                    command: what,
-                },
-                settings,
-            );
-            return commandProcess;
         }
         throw new Error(
             [
@@ -535,6 +537,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 {
                     ...this._params,
                     _settings: processSettings,
+                },
+                {
+                    keepFalsy: true,
                 },
             );
 

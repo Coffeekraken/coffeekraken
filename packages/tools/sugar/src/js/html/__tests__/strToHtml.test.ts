@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import __strToHtml from '../strToHtml';
 
 describe('sugar.js.html.strToHtml', () => {

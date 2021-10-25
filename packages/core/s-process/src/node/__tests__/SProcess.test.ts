@@ -65,6 +65,9 @@ describe('s-process', () => {
 
     it('Should initiate correctly a file path based process', async (done) => {
         const pro = await __SProcess.from(`${__dirname}/functionBasedProcess`);
+
+        console.log(pro);
+
         const res = await pro.run({
             something: 'cool',
         });

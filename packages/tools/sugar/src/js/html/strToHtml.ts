@@ -12,11 +12,7 @@
  *
  * @param    {HTMLElement}    html    The string to convert to dom nodes
  * @return    {HTMLElement}    The dom nodes representation of the passed string
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
+ * *
  * @example    js
  * import strToHtml from '@coffeekraken/sugar/js/html/strToHtml'
  * const myString = '<p>Hello World</p>'
@@ -26,15 +22,15 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function strToHtml(string: string): HTMLElement | string {
-  if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement('div');
-    cont.innerHTML = string;
-    if (cont.children.length === 1) {
-      return cont.children[0];
-    } else {
-      return cont;
+    if (document !== undefined && document.createElement !== undefined) {
+        const cont = document.createElement('div');
+        cont.innerHTML = string;
+        if (cont.children.length === 1) {
+            return cont.children[0];
+        } else {
+            return cont;
+        }
     }
-  }
-  return string;
+    return string;
 }
 export default strToHtml;

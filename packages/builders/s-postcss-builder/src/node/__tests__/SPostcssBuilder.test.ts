@@ -18,9 +18,6 @@ describe('@coffeekraken.s-postcss-builder', () => {
             purge: true,
             minify: true,
         });
-        promise.on('log', (log) => {
-            console.log(log.value);
-        });
 
         const res = await promise;
 

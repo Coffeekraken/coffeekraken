@@ -109,8 +109,6 @@ export default class SPostcssBuilder extends __SBuilder {
                 settings ?? {},
             ),
         );
-        console.log(__SSugarConfig.get('purgecss.content'));
-        throw 'ff';
     }
 
     /**
@@ -249,9 +247,6 @@ export default class SPostcssBuilder extends __SBuilder {
                     // get content to use
                     const content: any[] = [];
                     const globs: string[] = [];
-
-                    console.log(params);
-                    console.log(this.postcssBuilderSettings.purgecss.content);
 
                     this.postcssBuilderSettings.purgecss.content.forEach(
                         (contentObj) => {

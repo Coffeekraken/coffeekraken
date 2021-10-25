@@ -41,69 +41,74 @@ import __isPlainObject from '../is/plainObject';
 // TODO: support required args
 
 function argsToString(args, settings = {}) {
-  settings = __deepMerge(
-    {
-      valueQuote: '"'
-    },
-    settings
-  );
+    settings = __deepMerge(
+        {
+            valueQuote: '"',
+            keepFalsy: false,
+        },
+        settings,
+    );
 
-  let string = '';
-  Object.keys(args).forEach((key) => {
-    const argValue = args[key];
-    let str = '';
+    let string = '';
+    Object.keys(args).forEach((key) => {
+        const argValue = args[key];
+        let str = '';
 
-    if (Array.isArray(argValue)) {
-      argValue.forEach((value) => {
-        let valueStr;
-        if (value === true) {
-          valueStr = '';
+        if (Array.isArray(argValue)) {
+            argValue.forEach((value) => {
+                let valueStr;
+                if (value === true) {
+                    valueStr = '';
+                } else {
+                    valueStr =
+                        value.toString !== undefined &&
+                        typeof value.toString === 'function'
+                            ? value.toString()
+                            : __toString(value);
+                    if (typeof __parse(valueStr) === 'string')
+                        valueStr = `"${valueStr}"`;
+                }
+                if (settings.valueQuote === '"')
+                    valueStr = valueStr.replace(/"/g, '\\"');
+                if (settings.valueQuote === "'")
+                    valueStr = valueStr.replace(/'/g, "\\'");
+                if (settings.valueQuote === '`')
+                    valueStr = valueStr.replace(/`/g, '\\`');
+                string += ` --${key} ${valueStr}`;
+            });
+        } else if (__isPlainObject(argValue)) {
+            let valueStr = JSON.stringify(argValue);
+            if (settings.valueQuote === '"')
+                valueStr = valueStr.replace(/"/g, '\\"');
+            if (settings.valueQuote === "'")
+                valueStr = valueStr.replace(/'/g, "\\'");
+            if (settings.valueQuote === '`')
+                valueStr = valueStr.replace(/`/g, '\\`');
+            string += ` --${key} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
         } else {
-          valueStr =
-            value.toString !== undefined && typeof value.toString === 'function'
-              ? value.toString()
-              : __toString(value);
-          if (typeof __parse(valueStr) === 'string') valueStr = `"${valueStr}"`;
+            if (argValue === false) {
+                if (!settings.keepFalsy) return;
+                str = 'false';
+            }
+            if (argValue === true) {
+                str = '';
+            } else {
+                str =
+                    argValue.toString !== undefined &&
+                    typeof argValue.toString === 'function'
+                        ? argValue.toString()
+                        : __toString(argValue);
+                if (typeof __parse(str) === 'string')
+                    if (settings.valueQuote === '"')
+                        str = str.replace(/"/g, '\\"');
+                if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
+                if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
+
+                str = `${settings.valueQuote}${str}${settings.valueQuote}`;
+            }
+            string += ` --${key} ${str}`;
         }
-        if (settings.valueQuote === '"')
-          valueStr = valueStr.replace(/"/g, '\\"');
-        if (settings.valueQuote === "'")
-          valueStr = valueStr.replace(/'/g, "\\'");
-        if (settings.valueQuote === '`')
-          valueStr = valueStr.replace(/`/g, '\\`');
-
-        string += ` --${key} ${valueStr}`;
-      });
-    } else if (__isPlainObject(argValue)) {
-      let valueStr = JSON.stringify(argValue);
-
-      if (settings.valueQuote === '"') valueStr = valueStr.replace(/"/g, '\\"');
-      if (settings.valueQuote === "'") valueStr = valueStr.replace(/'/g, "\\'");
-      if (settings.valueQuote === '`') valueStr = valueStr.replace(/`/g, '\\`');
-
-      string += ` --${key} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
-    } else {
-      if (argValue === false) {
-        return;
-      }
-      if (argValue === true) {
-        str = '';
-      } else {
-        str =
-          argValue.toString !== undefined &&
-          typeof argValue.toString === 'function'
-            ? argValue.toString()
-            : __toString(argValue);
-        if (typeof __parse(str) === 'string')
-          if (settings.valueQuote === '"') str = str.replace(/"/g, '\\"');
-        if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
-        if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
-
-        str = `${settings.valueQuote}${str}${settings.valueQuote}`;
-      }
-      string += ` --${key} ${str}`;
-    }
-  });
-  return string.replace(/(\s){2,999999}/gm, ' ');
+    });
+    return string.replace(/(\s){2,999999}/gm, ' ');
 }
 export default argsToString;

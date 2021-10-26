@@ -4,7 +4,6 @@ import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __require from '@coffeekraken/sugar/node/esm/require';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -86,7 +85,7 @@ export interface ISStdioTypes {
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SStdio extends __SClass implements ISStdio {
+export default class SStdio extends __SClass implements ISStdio {
     /**
      * @name      sources
      * @type      Array<SPromise>
@@ -200,6 +199,7 @@ class SStdio extends __SClass implements ISStdio {
     /**
      * @name            existingOrNew
      * @type            Function
+     * @async
      *
      * This static method allows you to get back either an existing stdio instance or a new one
      *
@@ -229,6 +229,7 @@ class SStdio extends __SClass implements ISStdio {
     /**
      * @name            new
      * @type            Function
+     * @async
      *
      * This static method is a sugar to instanciate an stdio by specifying some sources,
      * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -257,10 +258,11 @@ class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static new(id: string, sources, stdio: any = 'inherit', settings = {}) {
-        // @ts-ignore
-        const n = __require('./new').default;
-        // const { default: n } = await import('./new');
-        return n(id, sources, stdio, settings);
+        return new Promise(async (resolve) => {
+            const __new = (await import('./new')).default;
+            // @ts-ignore
+            return __new(id, sources, stdio, settings);
+        });
     }
 
     /**
@@ -612,5 +614,3 @@ class SStdio extends __SClass implements ISStdio {
         return this._isDisplayed;
     }
 }
-
-export default SStdio;

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __require from '../esm/require';
-// import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            distNodeDir
@@ -38,7 +37,6 @@ export default function (settings: IDistNodeDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const distNodeDir = __SSugarConfig.get('storage.dist.nodeDir');
     if (distNodeDir !== undefined) {
         __fs.ensureDirSync(distNodeDir);

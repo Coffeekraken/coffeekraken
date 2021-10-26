@@ -4,6 +4,7 @@ import __writeFileSync from './writeFileSync';
 import __require from '../esm/require';
 import __path from 'path';
 import __uniqid from '../../shared/string/uniqid';
+import __packageTmpDir from '../path/packageTmpDir';
 
 /**
  * @name        writeTmpFileSync
@@ -45,8 +46,6 @@ function writeTmpFileSync(
         path: undefined,
         ...settings,
     };
-
-    const __packageTmpDir = __require('../path/packageTmpDir').default;
 
     let path = __path.resolve(
         __packageTmpDir(),

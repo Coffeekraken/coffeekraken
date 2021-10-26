@@ -1,7 +1,5 @@
 // @ts-nocheck
-
-import __require from '../esm/require';
-// import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 
 /**
@@ -32,7 +30,6 @@ import __fs from 'fs-extra';
  */
 
 export default function () {
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const tmpDir = __SSugarConfig.get('storage.package.tmpDir');
     if (tmpDir !== undefined) {
         __fs.ensureDirSync(tmpDir);

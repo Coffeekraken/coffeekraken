@@ -1,7 +1,7 @@
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __require from '@coffeekraken/sugar/node/esm/require';
+import __STerminalStdio from '../node/terminal/STerminalStdio';
 
 /**
  * @name            new
@@ -32,7 +32,7 @@ import __require from '@coffeekraken/sugar/node/esm/require';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function _new(
+export default async function _new(
     id: string,
     sources,
     stdio: any = 'inherit',
@@ -50,15 +50,13 @@ export default function _new(
         //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
         //   );
         // @ts-ignore
-        const Cls = __require(stdio).default;
+        const Cls = (await import(stdio)).default;
+        console.log('CL', Cls);
         stdioInstance = new Cls(id, sources, settings);
     } else if (typeof stdio === 'string') {
         switch (stdio) {
             case 'inherit':
                 if (__isNode()) {
-                    const __STerminalStdio = __require(
-                        '../node/terminal/STerminalStdio',
-                    ).default;
                     stdioInstance = new __STerminalStdio(id, sources, settings);
                 } else {
                     throw new Error(
@@ -71,9 +69,6 @@ export default function _new(
                     throw new Error(
                         `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`,
                     );
-                const __STerminalStdio = __require(
-                    '../node/terminal/STerminalStdio',
-                ).default;
                 stdioInstance = new __STerminalStdio(id, sources, settings);
                 break;
             // case 'blessed':

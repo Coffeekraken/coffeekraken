@@ -64,7 +64,11 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(id: string, sources: ISEventEmitter | ISEventEmitter[], settings?: ISTerminalStdioCtorSettings) {
+    constructor(
+        id: string,
+        sources: ISEventEmitter | ISEventEmitter[],
+        settings?: ISTerminalStdioCtorSettings,
+    ) {
         super(
             id,
             sources,
@@ -114,7 +118,10 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         }
 
         let needId = false;
-        if (logObj.metas?.emitter?.metas?.id && this._currentLogId !== logObj.metas?.emitter?.metas?.id) {
+        if (
+            logObj.metas?.emitter?.metas?.id &&
+            this._currentLogId !== logObj.metas?.emitter?.metas?.id
+        ) {
             needId = true;
             this._currentLogId = logObj.metas.emitter.metas.id;
         }
@@ -128,15 +135,17 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         // handle metas if needed
         if (!logObj.nude) {
             if (logObj.metas?.emitter) {
-                lineStart = `<bg${__upperFirst(logObj.metas.emitter.metas.color || 'yellow')}> </bg${__upperFirst(
+                lineStart = `<bg${__upperFirst(
+                    logObj.metas.emitter.metas.color || 'yellow',
+                )}> </bg${__upperFirst(
                     logObj.metas.emitter.metas.color || 'yellow',
                 )}>`;
-                idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${logObj.metas.emitter.metas.id}</${
+                idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${
+                    logObj.metas.emitter.metas.id
+                }</${logObj.metas.emitter.metas.color || 'yellow'}>`;
+                idSeparator = `<${
                     logObj.metas.emitter.metas.color || 'yellow'
-                }>`;
-                idSeparator = `<${logObj.metas.emitter.metas.color || 'yellow'}> │ </${
-                    logObj.metas.emitter.metas.color || 'yellow'
-                }>`;
+                }> │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
             }
         }
         if (logObj.marginTop && typeof logObj.marginTop === 'number') {
@@ -154,7 +163,11 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         const idLength = __countLine(__parseHtml(idStr)),
             idSeparatorLength = __countLine(__parseHtml(idSeparator)),
             lineStartLength = __countLine(__parseHtml(lineStart));
-        const maxLineLenght = process.stdout.columns - idLength - idSeparatorLength - lineStartLength;
+        const maxLineLenght =
+            process.stdout.columns -
+            idLength -
+            idSeparatorLength -
+            lineStartLength;
 
         let finalLines: string[] = [];
 
@@ -175,7 +188,9 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
                 needId = false;
                 return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
             } else {
-                return `${lineStart}${' '.repeat(idLength)}${idSeparator}${line.trim()}`;
+                return `${lineStart}${' '.repeat(
+                    idLength,
+                )}${idSeparator}${line.trim()}`;
             }
         });
 

@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __require from '../esm/require';
-// import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            distFontsDir
@@ -38,7 +37,6 @@ export default function (settings: IDistFontsDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const distFontsDir = __SSugarConfig.get('storage.dist.fontsDir');
     if (distFontsDir !== undefined) {
         __fs.ensureDirSync(distFontsDir);

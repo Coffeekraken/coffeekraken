@@ -1,7 +1,6 @@
 // @ts-nocheck
 
-import __require from '../esm/require';
-// import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            packageCacheDir
@@ -38,7 +37,6 @@ export default function (settings: IPackageCacheDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const packageCacheDir = __SSugarConfig.get('storage.package.cacheDir');
     if (packageCacheDir !== undefined) {
         __fs.ensureDirSync(packageCacheDir);

@@ -29,7 +29,7 @@ export default function require(pkg: string) {
         .getFileName()
         ?.replace(/^file:\/\//, '');
     const rr = createRequire(<string>filePath);
-    // const r = __esm({});
+    const r = __esm({});
     const requiredPkg = rr(pkg);
     return requiredPkg;
 }

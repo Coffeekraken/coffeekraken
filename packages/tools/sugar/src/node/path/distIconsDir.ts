@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __require from '../esm/require';
-// import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            distIconsDir
@@ -38,7 +38,6 @@ export default function (settings: IDistIconsDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const distIconsDir = __SSugarConfig.get('storage.dist.iconsDir');
     if (distIconsDir !== undefined) {
         __fs.ensureDirSync(distIconsDir);

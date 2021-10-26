@@ -1,6 +1,5 @@
 // @ts-nocheck
-import __require from '../esm/require';
-// import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __fs from 'fs-extra';
 /**
  * @name                            srcImgDir
@@ -37,7 +36,6 @@ export default function (settings: ISrcImgDirSettings = {}) {
     settings = {
         ...settings,
     };
-    const __SSugarConfig = __require('@coffeekraken/s-sugar-config').default;
     const srcImgDir = __SSugarConfig.get('storage.src.imgDir');
     if (srcImgDir !== undefined) {
         __fs.ensureDirSync(srcImgDir);

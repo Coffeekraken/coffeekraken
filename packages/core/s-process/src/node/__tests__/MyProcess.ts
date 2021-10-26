@@ -43,6 +43,7 @@ export default class MyProcess extends __SProcess {
                     __isChildProcess() ? 'from child process' : ''
                 }`,
             });
+
             // @ts-ignore
             if (params.crash) {
                 await __wait(params.crashTimeout);

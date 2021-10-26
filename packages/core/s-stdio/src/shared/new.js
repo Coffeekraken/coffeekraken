@@ -1,19 +1,10 @@
-var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
-    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
-    return new (P || (P = Promise))(function (resolve, reject) {
-        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
-        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
-        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
-        step((generator = generator.apply(thisArg, _arguments || [])).next());
-    });
-};
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __require from '@coffeekraken/sugar/node/esm/require';
 /**
  * @name            new
  * @type            Function
- * @async
  *
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -41,56 +32,53 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function _new(id, sources, stdio = 'inherit', settings = {}) {
-    return __awaiter(this, void 0, void 0, function* () {
-        if (!Array.isArray(sources))
-            sources = [sources];
-        let stdioInstance;
-        if (__isClass(stdio)) {
-            stdioInstance = new stdio(id, sources, settings);
-        }
-        else if (__isNode() && __isPath(stdio, true)) {
-            // if (!__isNode())
-            //   throw new Error(
-            //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
-            //   );
-            // @ts-ignore
-            let { default: Cls } = yield import(stdio); // eslint-disable-line
-            Cls = Cls.default || Cls;
-            stdioInstance = new Cls(id, sources, settings);
-        }
-        else if (typeof stdio === 'string') {
-            switch (stdio) {
-                case 'inherit':
-                    if (__isNode()) {
-                        const { default: __STerminalStdio } = yield import('../node/terminal/STerminalStdio');
-                        stdioInstance = new __STerminalStdio(id, sources, settings);
-                    }
-                    else {
-                        throw new Error(`<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`);
-                    }
-                    break;
-                case 'terminal':
-                    if (!__isNode())
-                        throw new Error(`<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`);
-                    const { default: __STerminalStdio } = yield import('../node/terminal/STerminalStdio');
+    if (!Array.isArray(sources))
+        sources = [sources];
+    let stdioInstance;
+    if (__isClass(stdio)) {
+        stdioInstance = new stdio(id, sources, settings);
+    }
+    else if (__isNode() && __isPath(stdio, true)) {
+        // if (!__isNode())
+        //   throw new Error(
+        //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
+        //   );
+        // @ts-ignore
+        const Cls = __require(stdio).default;
+        stdioInstance = new Cls(id, sources, settings);
+    }
+    else if (typeof stdio === 'string') {
+        switch (stdio) {
+            case 'inherit':
+                if (__isNode()) {
+                    const __STerminalStdio = __require('../node/terminal/STerminalStdio').default;
                     stdioInstance = new __STerminalStdio(id, sources, settings);
-                    break;
-                // case 'blessed':
-                //   if (!__isNode())
-                //     throw new Error(
-                //       `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>SBlessedStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
-                //     );
-                //   const { default: __SBlessedStdio } = await import('../node/terminal/SBlessedStdio');
-                //   stdioInstance = new __SBlessedStdio(sources, {
-                //     ...settings,
-                //     attach: true
-                //   });
-                //   break;
-                default:
-                    break;
-            }
+                }
+                else {
+                    throw new Error(`<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`);
+                }
+                break;
+            case 'terminal':
+                if (!__isNode())
+                    throw new Error(`<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`);
+                const __STerminalStdio = __require('../node/terminal/STerminalStdio').default;
+                stdioInstance = new __STerminalStdio(id, sources, settings);
+                break;
+            // case 'blessed':
+            //   if (!__isNode())
+            //     throw new Error(
+            //       `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>SBlessedStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`
+            //     );
+            //   const { default: __SBlessedStdio } = await import('../node/terminal/SBlessedStdio');
+            //   stdioInstance = new __SBlessedStdio(sources, {
+            //     ...settings,
+            //     attach: true
+            //   });
+            //   break;
+            default:
+                break;
         }
-        return stdioInstance;
-    });
+    }
+    return stdioInstance;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sUUFBUSxNQUFNLGtDQUFrQyxDQUFDO0FBQ3hELE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBRTFEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTZCRztBQUNILE1BQU0sQ0FBQyxPQUFPLFVBQWdCLElBQUksQ0FBQyxFQUFVLEVBQUUsT0FBTyxFQUFFLFFBQWEsU0FBUyxFQUFFLFFBQVEsR0FBRyxFQUFFOztRQUN6RixJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7WUFBRSxPQUFPLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUVqRCxJQUFJLGFBQWtCLENBQUM7UUFFdkIsSUFBSSxTQUFTLENBQUMsS0FBSyxDQUFDLEVBQUU7WUFDbEIsYUFBYSxHQUFHLElBQUksS0FBSyxDQUFDLEVBQUUsRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUM7U0FDcEQ7YUFBTSxJQUFJLFFBQVEsRUFBRSxJQUFJLFFBQVEsQ0FBQyxLQUFLLEVBQUUsSUFBSSxDQUFDLEVBQUU7WUFDNUMsbUJBQW1CO1lBQ25CLHFCQUFxQjtZQUNyQixnSUFBZ0k7WUFDaEksT0FBTztZQUNQLGFBQWE7WUFDYixJQUFJLEVBQUUsT0FBTyxFQUFFLEdBQUcsRUFBRSxHQUFHLE1BQU0sTUFBTSxDQUFDLEtBQUssQ0FBQyxDQUFDLENBQUMsc0JBQXNCO1lBQ2xFLEdBQUcsR0FBRyxHQUFHLENBQUMsT0FBTyxJQUFJLEdBQUcsQ0FBQztZQUN6QixhQUFhLEdBQUcsSUFBSSxHQUFHLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQztTQUNsRDthQUFNLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUSxFQUFFO1lBQ2xDLFFBQVEsS0FBSyxFQUFFO2dCQUNYLEtBQUssU0FBUztvQkFDVixJQUFJLFFBQVEsRUFBRSxFQUFFO3dCQUNaLE1BQU0sRUFBRSxPQUFPLEVBQUUsZ0JBQWdCLEVBQUUsR0FBRyxNQUFNLE1BQU0sQ0FBQyxpQ0FBaUMsQ0FBQyxDQUFDO3dCQUN0RixhQUFhLEdBQUcsSUFBSSxnQkFBZ0IsQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO3FCQUMvRDt5QkFBTTt3QkFDSCxNQUFNLElBQUksS0FBSyxDQUNYLHdHQUF3RyxDQUMzRyxDQUFDO3FCQUNMO29CQUNELE1BQU07Z0JBQ1YsS0FBSyxVQUFVO29CQUNYLElBQUksQ0FBQyxRQUFRLEVBQUU7d0JBQ1gsTUFBTSxJQUFJLEtBQUssQ0FDWCw2SUFBNkksQ0FDaEosQ0FBQztvQkFDTixNQUFNLEVBQUUsT0FBTyxFQUFFLGdCQUFnQixFQUFFLEdBQUcsTUFBTSxNQUFNLENBQUMsaUNBQWlDLENBQUMsQ0FBQztvQkFDdEYsYUFBYSxHQUFHLElBQUksZ0JBQWdCLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQztvQkFDNUQsTUFBTTtnQkFDVixrQkFBa0I7Z0JBQ2xCLHFCQUFxQjtnQkFDckIsdUJBQXVCO2dCQUN2QixxSkFBcUo7Z0JBQ3JKLFNBQVM7Z0JBQ1QseUZBQXlGO2dCQUN6RixtREFBbUQ7Z0JBQ25ELG1CQUFtQjtnQkFDbkIsbUJBQW1CO2dCQUNuQixRQUFRO2dCQUNSLFdBQVc7Z0JBQ1g7b0JBQ0ksTUFBTTthQUNiO1NBQ0o7UUFFRCxPQUFPLGFBQWEsQ0FBQztJQUN6QixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sUUFBUSxNQUFNLGtDQUFrQyxDQUFDO0FBQ3hELE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sU0FBUyxNQUFNLHNDQUFzQyxDQUFDO0FBRTdEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBVSxJQUFJLENBQ3hCLEVBQVUsRUFDVixPQUFPLEVBQ1AsUUFBYSxTQUFTLEVBQ3RCLFFBQVEsR0FBRyxFQUFFO0lBRWIsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1FBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7SUFFakQsSUFBSSxhQUFrQixDQUFDO0lBRXZCLElBQUksU0FBUyxDQUFDLEtBQUssQ0FBQyxFQUFFO1FBQ2xCLGFBQWEsR0FBRyxJQUFJLEtBQUssQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO0tBQ3BEO1NBQU0sSUFBSSxRQUFRLEVBQUUsSUFBSSxRQUFRLENBQUMsS0FBSyxFQUFFLElBQUksQ0FBQyxFQUFFO1FBQzVDLG1CQUFtQjtRQUNuQixxQkFBcUI7UUFDckIsZ0lBQWdJO1FBQ2hJLE9BQU87UUFDUCxhQUFhO1FBQ2IsTUFBTSxHQUFHLEdBQUcsU0FBUyxDQUFDLEtBQUssQ0FBQyxDQUFDLE9BQU8sQ0FBQztRQUNyQyxhQUFhLEdBQUcsSUFBSSxHQUFHLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQztLQUNsRDtTQUFNLElBQUksT0FBTyxLQUFLLEtBQUssUUFBUSxFQUFFO1FBQ2xDLFFBQVEsS0FBSyxFQUFFO1lBQ1gsS0FBSyxTQUFTO2dCQUNWLElBQUksUUFBUSxFQUFFLEVBQUU7b0JBQ1osTUFBTSxnQkFBZ0IsR0FBRyxTQUFTLENBQzlCLGlDQUFpQyxDQUNwQyxDQUFDLE9BQU8sQ0FBQztvQkFDVixhQUFhLEdBQUcsSUFBSSxnQkFBZ0IsQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO2lCQUMvRDtxQkFBTTtvQkFDSCxNQUFNLElBQUksS0FBSyxDQUNYLHdHQUF3RyxDQUMzRyxDQUFDO2lCQUNMO2dCQUNELE1BQU07WUFDVixLQUFLLFVBQVU7Z0JBQ1gsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQkFDWCxNQUFNLElBQUksS0FBSyxDQUNYLDZJQUE2SSxDQUNoSixDQUFDO2dCQUNOLE1BQU0sZ0JBQWdCLEdBQUcsU0FBUyxDQUM5QixpQ0FBaUMsQ0FDcEMsQ0FBQyxPQUFPLENBQUM7Z0JBQ1YsYUFBYSxHQUFHLElBQUksZ0JBQWdCLENBQUMsRUFBRSxFQUFFLE9BQU8sRUFBRSxRQUFRLENBQUMsQ0FBQztnQkFDNUQsTUFBTTtZQUNWLGtCQUFrQjtZQUNsQixxQkFBcUI7WUFDckIsdUJBQXVCO1lBQ3ZCLHFKQUFxSjtZQUNySixTQUFTO1lBQ1QseUZBQXlGO1lBQ3pGLG1EQUFtRDtZQUNuRCxtQkFBbUI7WUFDbkIsbUJBQW1CO1lBQ25CLFFBQVE7WUFDUixXQUFXO1lBQ1g7Z0JBQ0ksTUFBTTtTQUNiO0tBQ0o7SUFFRCxPQUFPLGFBQWEsQ0FBQztBQUN6QixDQUFDIn0=

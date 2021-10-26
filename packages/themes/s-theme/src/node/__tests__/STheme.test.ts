@@ -2,10 +2,9 @@ import __STheme from '../STheme';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('s-theme.node.STheme', () => {
-    it('Should instanciate correctly the default theme', async (done) => {
+    it('Should instanciate correctly the default theme', async () => {
         await __SSugarConfig.load();
         new __STheme();
-        done();
     });
     it('Should throw an error if the passed theme does not exists', (done) => {
         try {

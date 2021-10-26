@@ -59,7 +59,12 @@ export interface ISDescriptorDescription {
 }
 
 export interface ISDescriptorRuleApplyFn {
-    (value: any, params: any, ruleSettings: any, settings: ISDescriptorSettings): ISDescriptorResultObj;
+    (
+        value: any,
+        params: any,
+        ruleSettings: any,
+        settings: ISDescriptorSettings,
+    ): ISDescriptorResultObj;
 }
 
 export interface ISDescriptorRule {
@@ -227,9 +232,14 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    apply(value: any, settings?: Partial<ISDescriptorSettings>): ISDescriptorResult {
+    apply(
+        value: any,
+        settings?: Partial<ISDescriptorSettings>,
+    ): ISDescriptorResult {
         // handle settings
-        const set = <ISDescriptorSettings>__deepMerge(this.descriptorSettings, settings || {});
+        const set = <ISDescriptorSettings>(
+            __deepMerge(this.descriptorSettings, settings || {})
+        );
 
         // ensure we can apply the descriptor
         if (value === undefined || value === null) value = {};
@@ -240,7 +250,11 @@ class SDescriptor extends __SClass implements ISDescriptor {
             finalValuesObj = {};
 
         // initialize the descriptor result instance
-        this._descriptorResult = new __SDescriptorResult(this, finalValuesObj, Object.assign({}, set));
+        this._descriptorResult = new __SDescriptorResult(
+            this,
+            finalValuesObj,
+            Object.assign({}, set),
+        );
 
         const rules = set.rules;
 
@@ -249,18 +263,24 @@ class SDescriptor extends __SClass implements ISDescriptor {
             throw new Error(
                 `Sorry but this descriptor "<yellow>${
                     this.metas.name
-                }</yellow>" does not accept values of type "<cyan>${__typeof(value)}</cyan>" but only "<green>${
-                    set.type
-                }</green>"...`,
+                }</yellow>" does not accept values of type "<cyan>${__typeof(
+                    value,
+                )}</cyan>" but only "<green>${set.type}</green>"...`,
             );
         }
 
         // check the type to validate correctly the value
         if (Array.isArray(value) && !set.arrayAsValue) {
             // loop on each items
-            throw new Error(`Sorry but the support for arrays like values has not been integrated for not...`);
+            throw new Error(
+                `Sorry but the support for arrays like values has not been integrated for not...`,
+            );
             // value.forEach((item) => {});
-        } else if (typeof value === 'object' && value !== null && value !== undefined) {
+        } else if (
+            typeof value === 'object' &&
+            value !== null &&
+            value !== undefined
+        ) {
             // loop on each object properties
             Object.keys(rules).forEach((propName) => {
                 // const ruleObj = rules[propName];
@@ -283,7 +303,11 @@ class SDescriptor extends __SClass implements ISDescriptor {
             Object.keys(valuesObjToProcess).forEach((propName) => {
                 const ruleObj = rules[propName];
                 // complete
-                if (valuesObjToProcess[propName] === undefined && set.defaults && ruleObj.default !== undefined) {
+                if (
+                    valuesObjToProcess[propName] === undefined &&
+                    set.defaults &&
+                    ruleObj.default !== undefined
+                ) {
                     valuesObjToProcess[propName] = ruleObj.default;
                 }
 
@@ -291,19 +315,32 @@ class SDescriptor extends __SClass implements ISDescriptor {
                 if (ruleObj.interface !== undefined) {
                     const interfaceValue = valuesObjToProcess[propName];
                     // _console.log('VAL', valuesObjToProcess[propName], propName);
-                    valuesObjToProcess[propName] = ruleObj.interface.apply(interfaceValue || {}, {});
+                    valuesObjToProcess[propName] = ruleObj.interface.apply(
+                        interfaceValue || {},
+                        {},
+                    );
                 }
 
                 // validate the property
-                const validationResult = this._validate(valuesObjToProcess[propName], propName, ruleObj, set);
+                const validationResult = this._validate(
+                    valuesObjToProcess[propName],
+                    propName,
+                    ruleObj,
+                    set,
+                );
 
-                if (validationResult !== undefined && validationResult !== null) {
+                if (
+                    validationResult !== undefined &&
+                    validationResult !== null
+                ) {
                     __set(finalValuesObj, propName, validationResult);
                 }
             });
         } else {
             console.warn(value);
-            throw new Error(`You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`);
+            throw new Error(
+                `You can apply an <yellow>SDescriptor</yellow> only on an Object like value...`,
+            );
         }
 
         if (this._descriptorResult.hasIssues()) {
@@ -326,14 +363,21 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _validate(value: any, propName: string, rulesObj: any, settings: ISDescriptorSettings): ISDescriptorResult | true {
+    _validate(
+        value: any,
+        propName: string,
+        rulesObj: any,
+        settings: ISDescriptorSettings,
+    ): ISDescriptorResult | true {
         if (rulesObj === undefined) return value;
 
         if (rulesObj.required === undefined || rulesObj.required === false) {
             if (value === undefined || value === null) return value;
         }
 
-        let rulesNamesInOrder = Object.keys(rulesObj).filter((l) => l !== 'default');
+        let rulesNamesInOrder = Object.keys(rulesObj).filter(
+            (l) => l !== 'default',
+        );
         rulesNamesInOrder = rulesNamesInOrder
             .sort((a, b) => {
                 const objA = (<any>this).constructor._registeredRules[a];
@@ -352,15 +396,25 @@ class SDescriptor extends __SClass implements ISDescriptor {
         rulesNamesInOrder.forEach((ruleName) => {
             const ruleValue = rulesObj[ruleName];
             // make sure we have this rule registered
-            if ((<any>this).constructor._registeredRules[ruleName] === undefined) {
+            if (
+                (<any>this).constructor._registeredRules[ruleName] === undefined
+            ) {
                 if (settings.throwOnMissingRule) {
                     throw new Error(`Sorry but you try to validate a value using the "<yellow>${ruleName}</yellow>" rule but this rule is not registered. Here's the available rules:
-              - ${Object.keys((<any>this).constructor._registeredRules).join('\n- ')}`);
+              - ${Object.keys((<any>this).constructor._registeredRules).join(
+                  '\n- ',
+              )}`);
                 }
             } else {
-                const ruleObj = (<any>this).constructor._registeredRules[ruleName];
-                const params = ruleObj.processParams !== undefined ? ruleObj.processParams(ruleValue) : ruleValue;
-                const ruleSettings = ruleObj.settings !== undefined ? ruleObj.settings : {};
+                const ruleObj = (<any>this).constructor._registeredRules[
+                    ruleName
+                ];
+                const params =
+                    ruleObj.processParams !== undefined
+                        ? ruleObj.processParams(ruleValue)
+                        : ruleValue;
+                const ruleSettings =
+                    ruleObj.settings !== undefined ? ruleObj.settings : {};
                 // check if the rule accept this type of value
                 // _console.log('AAA', propName, value, params);
                 // if (ruleObj.accept && __isOfType(value, ruleObj.accept) !== true)
@@ -370,9 +424,19 @@ class SDescriptor extends __SClass implements ISDescriptor {
                 if (ruleSettings.mapOnArray && Array.isArray(resultValue)) {
                     let newResultValue: any[] = [];
                     resultValue.forEach((v) => {
-                        const processedValue = this._processRule(v, ruleObj, propName, params, ruleSettings, settings);
+                        const processedValue = this._processRule(
+                            v,
+                            ruleObj,
+                            propName,
+                            params,
+                            ruleSettings,
+                            settings,
+                        );
                         if (Array.isArray(processedValue)) {
-                            newResultValue = [...newResultValue, ...processedValue];
+                            newResultValue = [
+                                ...newResultValue,
+                                ...processedValue,
+                            ];
                         } else {
                             newResultValue.push(processedValue);
                         }
@@ -403,7 +467,12 @@ class SDescriptor extends __SClass implements ISDescriptor {
             name: `${settings.name}.${propName}`,
         });
 
-        if (params && params.type && params.type.toLowerCase() === 'boolean' && ruleResult === true) {
+        if (
+            params &&
+            params.type &&
+            params.type.toLowerCase() === 'boolean' &&
+            ruleResult === true
+        ) {
             return true;
         }
 

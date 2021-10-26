@@ -7,7 +7,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 jest.setTimeout(30000);
 
 describe('s-process', () => {
-    it('Should start a simple process correctly', async (done) => {
+    it('Should start a simple process correctly', async () => {
         await __SSugarConfig.load();
 
         const pro = new __MyProcess(
@@ -28,9 +28,8 @@ describe('s-process', () => {
             crashTimeout: 100,
             isChildProcess: false,
         });
-        done();
     });
-    it('Should start a simple process as child correctly', async (done) => {
+    it('Should start a simple process as child correctly', async () => {
         const pro = new __MyProcess(
             {
                 param1: 'World',
@@ -53,20 +52,18 @@ describe('s-process', () => {
             crashTimeout: 100,
             isChildProcess: true,
         });
-        done();
     });
 
-    it('Should initiate correctly a command based process', async (done) => {
+    it('Should initiate correctly a command based process', async () => {
         const pro = await __SProcess.from('ls -la');
         const res = await pro.run();
         expect(res.state).toBe('success');
-        done();
     });
 
-    it('Should initiate correctly a file path based process', async (done) => {
-        const pro = await __SProcess.from(`${__dirname}/functionBasedProcess`);
+    it('Should initiate correctly a file path based process', async () => {
+        await __SSugarConfig.load();
 
-        console.log(pro);
+        const pro = await __SProcess.from(`${__dirname}/functionBasedProcess`);
 
         const res = await pro.run({
             something: 'cool',
@@ -82,11 +79,11 @@ describe('s-process', () => {
         expect(res1.state).toBe('success');
         expect(res1.value.something).toBe('else');
         expect(res1.value.state).toBe('success');
-
-        done();
     });
 
-    it('Should initiate correctly a file path based process as a child process', async (done) => {
+    it('Should initiate correctly a file path based process as a child process', async () => {
+        await __SSugarConfig.load();
+
         const pro = await __SProcess.from(`${__dirname}/functionBasedProcess`, {
             process: {
                 runAsChild: true,
@@ -100,55 +97,50 @@ describe('s-process', () => {
         expect(res.value.something).toBe('cool');
         expect(res.value.state).toBe('success');
         expect(res.value.isChildProcess).toBe(true);
-
-        done();
     });
 
-    it('Should initiate correctly a promise based process', async (done) => {
-        const pro = await __SProcess.from(
-            new Promise((resolve, reject) => {
-                resolve({
-                    hello: 'world',
-                });
-            }),
-        );
-        const res = await pro.run();
+    // it('Should initiate correctly a promise based process', async () => {
+    //     const pro = await __SProcess.from(
+    //         new Promise((resolve, reject) => {
+    //             resolve({
+    //                 hello: 'world',
+    //             });
+    //         }),
+    //     );
+    //     const res = await pro.run();
 
-        expect(res.state).toBe('success');
-        expect(res.value.hello).toBe('world');
+    //     expect(res.state).toBe('success');
+    //     expect(res.value.hello).toBe('world');
 
-        done();
-    });
+    // });
 
-    it('Should initiate correctly a Promise based process and reject it', async (done) => {
-        const pro = await __SProcess.from(
-            new Promise((resolve, reject) => {
-                reject({
-                    hello: 'world',
-                });
-            }),
-        );
-        const res = await pro.run();
+    // it('Should initiate correctly a Promise based process and reject it', async () => {
+    //     const pro = await __SProcess.from(
+    //         new Promise((resolve, reject) => {
+    //             reject({
+    //                 hello: 'world',
+    //             });
+    //         }),
+    //     );
+    //     const res = await pro.run();
 
-        expect(res.state).toBe('error');
-        expect(res.error.hello).toBe('world');
+    //     expect(res.state).toBe('error');
+    //     expect(res.error.hello).toBe('world');
 
-        done();
-    });
+    // });
 
-    it('Should initiate correctly a Promise based process and throw an error from', async (done) => {
-        const promise = new Promise((resolve, reject) => {
-            // @ts-ignore
-            throw new Error({
-                hello: 'world',
-            });
-        });
+    // it('Should initiate correctly a Promise based process and throw an error from', async () => {
+    //     const promise = new Promise((resolve, reject) => {
+    //         // @ts-ignore
+    //         throw new Error({
+    //             hello: 'world',
+    //         });
+    //     });
 
-        const pro = await __SProcess.from(promise);
-        const res = await pro.run();
+    //     const pro = await __SProcess.from(promise);
+    //     const res = await pro.run();
 
-        expect(res.state).toBe('error');
+    //     expect(res.state).toBe('error');
 
-        done();
-    });
+    // });
 });

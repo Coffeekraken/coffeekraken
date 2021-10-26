@@ -3,25 +3,30 @@ import __fs from 'fs';
 import __tmpDir from '../../path/systemTmpDir';
 
 describe('sugar.node.github.downloadRepository', () => {
-    it('Should download a repository successfully', async (done) => {
-        const repo = await __downloadRepository('Coffeekraken/gridle', {});
+    it('Should download a repository successfully', async () => {
+        const repo = await __downloadRepository(
+            'Coffeekraken/download-test-repo',
+            {
+                branch: 'main',
+            },
+        );
 
         expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-gridle-master.zip`,
+            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main.zip`,
         });
-
-        done();
     }, 999999);
 
-    it('Should download a repository and unzip it successfully', async (done) => {
-        const repo = await __downloadRepository('Coffeekraken/gridle', {
-            unzip: true,
-        });
+    it('Should download a repository and unzip it successfully', async () => {
+        const repo = await __downloadRepository(
+            'Coffeekraken/download-test-repo',
+            {
+                branch: 'main',
+                unzip: true,
+            },
+        );
 
         expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-gridle-master`,
+            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main`,
         });
-
-        done();
     }, 999999);
 });

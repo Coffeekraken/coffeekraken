@@ -3,7 +3,7 @@ import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
-    it('Should compress simple jpg files correctly', async (done) => {
+    it('Should compress simple jpg files correctly', async () => {
         await __SSugarConfig.load();
 
         const outDir = `${__packageTmpDir()}/SImagesBuilder/tests`;
@@ -28,7 +28,5 @@ describe('@coffeekraken.s-images-builder.SImagesBuilder', () => {
             console.log(log.value);
         });
         await promise;
-
-        done();
     });
 });

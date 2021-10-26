@@ -4,6 +4,7 @@ import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __require from '@coffeekraken/sugar/node/esm/require';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -199,7 +200,6 @@ class SStdio extends __SClass implements ISStdio {
     /**
      * @name            existingOrNew
      * @type            Function
-     * @async
      *
      * This static method allows you to get back either an existing stdio instance or a new one
      *
@@ -215,7 +215,7 @@ class SStdio extends __SClass implements ISStdio {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async existingOrNew(
+    static existingOrNew(
         id: string,
         sources,
         stdio: any = 'inherit',
@@ -229,7 +229,6 @@ class SStdio extends __SClass implements ISStdio {
     /**
      * @name            new
      * @type            Function
-     * @async
      *
      * This static method is a sugar to instanciate an stdio by specifying some sources,
      * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -252,18 +251,15 @@ class SStdio extends __SClass implements ISStdio {
      * import SStdio from '@coffeekraken/s-stdio';
      * import spawn from '@coffeekraken/sugar/node/process/spawn';
      * const proc = spawn('ls -la');
-     * await SStdio.new('default', proc);
+     * SStdio.new('default', proc);
      *
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async new(
-        id: string,
-        sources,
-        stdio: any = 'inherit',
-        settings = {},
-    ) {
-        const { default: n } = await import('./new');
+    static new(id: string, sources, stdio: any = 'inherit', settings = {}) {
+        // @ts-ignore
+        const n = __require('./new').default;
+        // const { default: n } = await import('./new');
         return n(id, sources, stdio, settings);
     }
 

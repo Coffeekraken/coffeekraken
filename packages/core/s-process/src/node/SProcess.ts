@@ -226,12 +226,22 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             return new SFunctionProcess();
         }
         if (typeof what === 'string') {
-            const potentialPath = __path.resolve(what);
+            let potentialPath = __path.resolve(what);
+            if (!potentialPath.match(/\.js$/)) potentialPath += '.js';
 
             if (__fs.existsSync(potentialPath)) {
                 const requireValue = (await import(potentialPath))?.default;
                 if (requireValue) {
-                    return await this.from(requireValue, settings);
+                    const pro = await this.from(
+                        requireValue,
+                        __deepMerge(settings, {
+                            process: {
+                                processPath: potentialPath,
+                            },
+                        }),
+                    );
+
+                    return pro;
                 }
             } else {
                 // considere the passed string as a command
@@ -241,7 +251,11 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     {
                         command: what,
                     },
-                    settings,
+                    __deepMerge(settings, {
+                        process: {
+                            processPath: __path.resolve('./SCommandProcess.js'),
+                        },
+                    }),
                 );
                 return commandProcess;
             }
@@ -451,19 +465,14 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             return;
         }
 
-        (async () => {
-            if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
-                this.stdio = await __SStdio.existingOrNew(
-                    'default',
-                    this,
-                    processSettings.stdio,
-                    {},
-                );
-                if (this._processPromise) {
-                    this._processPromise._eventEmitter.start();
-                }
-            }
-        })();
+        if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
+            this.stdio = __SStdio.existingOrNew(
+                'default',
+                this,
+                processSettings.stdio,
+                {},
+            );
+        }
 
         this._duration = new __SDuration();
 
@@ -567,11 +576,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
 
         // handle SPromise based processes
         if (this._processPromise instanceof __SPromise) {
-            // make event emitter async to wait for stdio to be ready
-            if (!__isChildProcess() && processSettings.stdio) {
-                this._processPromise.eventEmitterSettings.asyncStart = true;
-            }
-
             this.pipe(<ISEventEmitter>(<unknown>this._processPromise), {});
 
             // listen for "data" and "log" events

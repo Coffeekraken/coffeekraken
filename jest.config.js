@@ -14,6 +14,6 @@ module.exports = {
     testMatch: ['**/__tests__/**/*.test.[jt]s?(x)'],
     transform: {
         '\\.jsx?$': 'babel-jest',
-        '\\.js$': 'jest-esm-transformer',
+        // '\\.js$': 'jest-esm-transformer',
     },
 };

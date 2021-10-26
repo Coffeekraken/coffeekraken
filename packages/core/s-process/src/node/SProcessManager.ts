@@ -91,7 +91,7 @@ class SProcessManager extends __SEventEmitter {
 
         if (this.processManagerSettings.stdio) {
             (async () => {
-                this._stdio = await __SStdio.existingOrNew(
+                this._stdio = __SStdio.existingOrNew(
                     'default',
                     this,
                     this.processManagerSettings.stdio,
@@ -210,6 +210,13 @@ class SProcessManager extends __SEventEmitter {
             paramsOrStringArgs,
             settings,
         );
+
+        // console.log(processId, this._processesStack[processId]);
+
+        // promise.then((res) => {
+        //     console.log('___SS', res);
+        // });
+
         return promise;
     }
 }

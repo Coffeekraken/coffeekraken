@@ -99,6 +99,7 @@
         "micromatch": "^4.0.2",
         "minimatch": "^3.0.4",
         "mobile-detect": "^1.4.5",
+        "module": "^1.2.5",
         "node-ipc-store": "^1.0.8",
         "object-encode": "^1.0.2",
         "open-graph-scraper": "^4.9.0",

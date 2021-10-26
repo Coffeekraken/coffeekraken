@@ -2,7 +2,7 @@ import __SPostcssBuilder from '../SPostcssBuilder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('@coffeekraken.s-postcss-builder', () => {
-    it('Should build a pretty complexe postcss file', async (done) => {
+    it('Should build a pretty complexe postcss file', async () => {
         await __SSugarConfig.load();
 
         const builder = new __SPostcssBuilder({
@@ -23,7 +23,5 @@ describe('@coffeekraken.s-postcss-builder', () => {
 
         expect(res.map).toEqual(null);
         expect(res.css).not.toBeNull();
-
-        done();
     });
 });

@@ -1,3 +1,7 @@
+/**
+ * @jest-environment jsdom
+ */
+
 import __getTagNameFromHtmlClass from '../getTagNameFromHtmlClass';
 
 describe('sugar.js.html.getTagNameFromHtmlClass', () => {

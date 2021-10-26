@@ -1,6 +1,8 @@
 // @ts-nocheck
 
-import __SEventEmitter, { ISEventEmitterPipeSettingsFilterFn } from '@coffeekraken/s-event-emitter';
+import __SEventEmitter, {
+    ISEventEmitterPipeSettingsFilterFn,
+} from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SProcess from './SProcess';
 import __SPromise from '@coffeekraken/s-promise';
@@ -28,7 +30,8 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISProcessManagerProcessWrapperExecution extends ISDurationObject {}
+export interface ISProcessManagerProcessWrapperExecution
+    extends ISDurationObject {}
 
 export interface ISProcessManagerProcessWrapperProcessRestartSettings {
     on: string;
@@ -48,7 +51,9 @@ export interface ISProcessManagerProcessWrapperCtorSettings {
 
 export interface ISProcessManagerProcessWrapperSettings {
     stdio: string;
-    restart: Partial<ISProcessManagerProcessWrapperProcessRestartSettings> | boolean;
+    restart:
+        | Partial<ISProcessManagerProcessWrapperProcessRestartSettings>
+        | boolean;
     log: ISProcessManagerProcessWrapperProcessLogSettings;
 }
 
@@ -102,7 +107,10 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      *
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(processInstance, settings?: Partial<ISProcessManagerProcessWrapperCtorSettings>) {
+    constructor(
+        processInstance,
+        settings?: Partial<ISProcessManagerProcessWrapperCtorSettings>,
+    ) {
         super(
             __deepMerge(
                 {
@@ -128,7 +136,9 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         };
         if (this.processManagerProcessSettings.restart === true) {
             this.processManagerProcessSettings.restart = restartDefaultSettings;
-        } else if (__isPlainObject(this.processManagerProcessSettings.restart)) {
+        } else if (
+            __isPlainObject(this.processManagerProcessSettings.restart)
+        ) {
             this.processManagerProcessSettings.restart = {
                 ...restartDefaultSettings,
                 ...this.processManagerProcessSettings.restart,
@@ -159,7 +169,8 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                 if (this.processManagerProcessSettings.restart.maxEvery > 0) {
                     if (
                         this.processInstance.lastExecutionObj.endTime +
-                            this.processManagerProcessSettings.restart.maxEvery >=
+                            this.processManagerProcessSettings.restart
+                                .maxEvery >=
                         Date.now()
                     ) {
                         this.emit('log', {
@@ -167,8 +178,13 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                             value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has crashed before the <cyan>maxEvery</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxEvery}ms</magenta>`,
                         });
                         // resolving the global run promise
-                        if (this._restartingProcessResolve && !this._isDetached) {
-                            this._restartingProcessResolve(this.processInstance.executionsStack);
+                        if (
+                            this._restartingProcessResolve &&
+                            !this._isDetached
+                        ) {
+                            this._restartingProcessResolve(
+                                this.processInstance.executionsStack,
+                            );
                         }
                         return;
                     }
@@ -185,23 +201,33 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                             value: `The process "<yellow>${this.metas.id}</yellow>" will not being restarted cause it has reached the <cyan>maxTimes</cyan> setting setted to <magenta>${this.processManagerProcessSettings.restart.maxTimes}</magenta>`,
                         });
                         // resolving the global run promise
-                        if (this._restartingProcessResolve && !this._isDetached) {
-                            this._restartingProcessResolve(this.processInstance.executionsStack);
+                        if (
+                            this._restartingProcessResolve &&
+                            !this._isDetached
+                        ) {
+                            this._restartingProcessResolve(
+                                this.processInstance.executionsStack,
+                            );
                         }
                         return;
                     }
                 }
 
-                let newProcessArgs = Object.assign({}, this.processInstance.lastExecutionObj.params);
+                let newProcessArgs = Object.assign(
+                    {},
+                    this.processInstance.lastExecutionObj.params,
+                );
 
                 // tweak params if a function is passed through settings
                 if (
                     this.processManagerProcessSettings.restart.before &&
-                    typeof this.processManagerProcessSettings.restart.before === 'function'
+                    typeof this.processManagerProcessSettings.restart.before ===
+                        'function'
                 ) {
-                    newProcessArgs = await this.processManagerProcessSettings.restart.before(
-                        this.processInstance.lastExecutionObj,
-                    );
+                    newProcessArgs =
+                        await this.processManagerProcessSettings.restart.before(
+                            this.processInstance.lastExecutionObj,
+                        );
                 }
 
                 // of the "before" callback returns a nullysh value, do not restart
@@ -213,7 +239,9 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
 
                     // resolving the global run promise
                     if (this._restartingProcessResolve && !this._isDetached) {
-                        this._restartingProcessResolve(this.processInstance.executionsStack);
+                        this._restartingProcessResolve(
+                            this.processInstance.executionsStack,
+                        );
                     }
 
                     return;
@@ -223,7 +251,8 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                     this.emit(`log`, {
                         group: `s-process-manager-process-wrapper-${this.metas.id}`,
                         value: `Waiting <cyan>${
-                            this.processManagerProcessSettings.restart.delay / 1000
+                            this.processManagerProcessSettings.restart.delay /
+                            1000
                         }s</cyan> before restart...`,
                     });
                 await __wait(this.processManagerProcessSettings.restart.delay);
@@ -254,17 +283,24 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      */
     detach(): void {
         this._isDetached = true;
-        if (this._currentProcessPromise) this._currentProcessPromise.off('restartHandler');
+        if (this._currentProcessPromise)
+            this._currentProcessPromise.off('restartHandler');
     }
 
     _run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {
         if (this._isDetached) return;
         const promise = this.processInstance.run(paramsOrStringArgs, settings);
         // handle restart
-        if (this.processManagerProcessSettings.restart) this._handleRestartFor(promise);
+        if (this.processManagerProcessSettings.restart)
+            this._handleRestartFor(promise);
         // promise.on('*', (e) => {
         //     console.log('_', e);
         // });
+
+        // promise.then((res) => {
+        //     console.log('A___A', res);
+        // });
+
         this.pipe(promise, {
             overrideEmitter: true,
         });
@@ -299,7 +335,11 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
             const res = await this._run(paramsOrStringArgs, settings);
 
             // if restart is setted, do not resolve the promis
-            if (!this.processManagerProcessSettings.restart && !this._isDetached) {
+            if (
+                !this.processManagerProcessSettings.restart &&
+                !this._isDetached
+            ) {
+                // console.log('AAAAAAAAAAAA', res);
                 resolve(res);
             }
         });

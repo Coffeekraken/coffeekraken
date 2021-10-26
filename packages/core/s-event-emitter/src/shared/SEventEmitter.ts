@@ -130,7 +130,11 @@ export interface ISEventEmitter extends ISClass {
     _eventsStacks: ISEventEmitterEventsStacks;
     eventEmitterSettings: ISEventEmitterSettings;
     on(stack: string, callback: ISEventEmitterCallbackFn): ISEventEmitter;
-    emit(stack: string, value: any, metas?: ISEventEmitterMetas): ISEventEmitter;
+    emit(
+        stack: string,
+        value: any,
+        metas?: ISEventEmitterMetas,
+    ): ISEventEmitter;
 }
 class SEventEmitter extends SClass implements ISEventEmitter {
     static usableAsMixin = true;
@@ -197,7 +201,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         };
 
         // make sure it's a valid emitter
-        if (!sourceSEventEmitter || !sourceSEventEmitter.on || typeof sourceSEventEmitter.on !== 'function')
+        if (
+            !sourceSEventEmitter ||
+            !sourceSEventEmitter.on ||
+            typeof sourceSEventEmitter.on !== 'function'
+        )
             return sourceSEventEmitter;
 
         // listen for all on the source promise
@@ -215,13 +223,15 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
             // strip ansi
             if (set.stripAnsi) {
-                if (value && value.value && typeof value.value === 'string') value.value = __stripAnsi(value.value);
+                if (value && value.value && typeof value.value === 'string')
+                    value.value = __stripAnsi(value.value);
                 else if (typeof value === 'string') value = __stripAnsi(value);
             }
 
             // trim
             if (set.trim) {
-                if (value && value.value && typeof value.value === 'string') value.value = value.value.trim();
+                if (value && value.value && typeof value.value === 'string')
+                    value.value = value.value.trim();
                 else if (typeof value === 'string') value = value.trim();
             }
 
@@ -229,7 +239,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             if (set.keepLineBreak === false) {
                 if (value && value.value && typeof value.value === 'string')
                     value.value = value.value.replace(/\r?\n|\r/g, '');
-                else if (typeof value === 'string') value = value.replace(/\r?\n|\r/g, '');
+                else if (typeof value === 'string')
+                    value = value.replace(/\r?\n|\r/g, '');
             }
 
             // check if need to process the value
@@ -238,7 +249,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 if (Array.isArray(res) && res.length === 2) {
                     value = res[0];
                     metas = res[1];
-                } else if (typeof res === 'object' && res.value !== undefined && res.metas !== undefined) {
+                } else if (
+                    typeof res === 'object' &&
+                    res.value !== undefined &&
+                    res.metas !== undefined
+                ) {
                     value = res.value;
                     metas = res.metas;
                 } else {
@@ -277,14 +292,22 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 };
 
                 if (destSEventEmitter instanceof SEventEmitter) {
-                    if (set.overrideEmitter === 'bind' && destSEventEmitter.eventEmitterSettings.bind) {
-                        emitMetas.emitter = destSEventEmitter.eventEmitterSettings.bind;
+                    if (
+                        set.overrideEmitter === 'bind' &&
+                        destSEventEmitter.eventEmitterSettings.bind
+                    ) {
+                        emitMetas.emitter =
+                            destSEventEmitter.eventEmitterSettings.bind;
                     } else if (set.overrideEmitter === true) {
                         emitMetas.emitter = destSEventEmitter;
                     }
                 }
 
-                if (destSEventEmitter === process && __isChildProcess() && process.send) {
+                if (
+                    destSEventEmitter === process &&
+                    __isChildProcess() &&
+                    process.send
+                ) {
                     if (value.value && value.value instanceof Error) {
                         value.value = __toString(value.value);
                     }
@@ -297,7 +320,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         metas: emitMetas,
                     });
                 } else {
-                    (<SEventEmitter>destSEventEmitter).emit(metas.event, value, emitMetas);
+                    (<SEventEmitter>destSEventEmitter).emit(
+                        metas.event,
+                        value,
+                        emitMetas,
+                    );
                 }
             }
         });
@@ -518,12 +545,16 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _createMetas(event: string, metas: Partial<ISEventEmitterMetas> = {}): ISEventEmitterMetas {
+    _createMetas(
+        event: string,
+        metas: Partial<ISEventEmitterMetas> = {},
+    ): ISEventEmitterMetas {
         return <ISEventEmitterMetas>__deepMerge(
             {
                 event: event,
                 name: event,
-                emitter: this.eventEmitterSettings.bind ?? metas?.emitter ?? this,
+                emitter:
+                    this.eventEmitterSettings.bind ?? metas?.emitter ?? this,
                 originalEmitter: metas?.originalEmitter ?? this,
                 time: Date.now(),
                 level: 0,
@@ -538,26 +569,23 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
             const isFirstLevel = !metasObj.level;
 
-            // check if need to force object
-            // if (
-            //     (this.eventEmitterSettings.forceObject === true ||
-            //         (Array.isArray(this.eventEmitterSettings.forceObject) &&
-            //             this.eventEmitterSettings.forceObject.indexOf(event) !== -1)) &&
-            //     !__isPlainObject(value)
-            // ) {
-            //     value = {
-            //         value,
-            //     };
-            // }
-
             // defaults
             if (__isPlainObject(value)) {
                 // get the default object to extends
-                Object.keys(this.eventEmitterSettings.defaults).forEach((key) => {
-                    const parts = key.split(',').map((l) => l.trim());
-                    if (parts.indexOf(event) === -1 && parts.indexOf('*') === -1) return;
-                    value = __deepMerge(value, this.eventEmitterSettings.defaults?.[key]);
-                });
+                Object.keys(this.eventEmitterSettings.defaults).forEach(
+                    (key) => {
+                        const parts = key.split(',').map((l) => l.trim());
+                        if (
+                            parts.indexOf(event) === -1 &&
+                            parts.indexOf('*') === -1
+                        )
+                            return;
+                        value = __deepMerge(
+                            value,
+                            this.eventEmitterSettings.defaults?.[key],
+                        );
+                    },
+                );
             }
 
             const CastClass = this.eventEmitterSettings.castByEvent[event];
@@ -607,12 +635,19 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         // if is an ask event, set the askId in metas
         if (logObj.event === 'ask') {
             // @ts-ignore
-            this.constructor.global.on(`answer.${logObj.metas.askId}:1`, (answer, metas) => {
-                logObj.resolve(answer);
-            });
+            this.constructor.global.on(
+                `answer.${logObj.metas.askId}:1`,
+                (answer, metas) => {
+                    logObj.resolve(answer);
+                },
+            );
             this._emitEvents(logObj.event, logObj.value, logObj.metas);
         } else {
-            const res = await this._emitEvents(logObj.event, logObj.value, Object.assign({}, logObj.metas));
+            const res = await this._emitEvents(
+                logObj.event,
+                logObj.value,
+                Object.assign({}, logObj.metas),
+            );
             logObj.resolve(res);
         }
     }
@@ -633,7 +668,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      */
     _registerNewEventsStacks(events) {
         // split the events order
-        if (typeof events === 'string') events = events.split(',').map((s) => s.trim());
+        if (typeof events === 'string')
+            events = events.split(',').map((s) => s.trim());
         events.forEach((event) => {
             if (!this._eventsStacks[event]) {
                 this._eventsStacks[event] = {
@@ -674,7 +710,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         // save the passed "id" to be able to use it later to apply
         // some actions like "off", etc... directly on this event registration
         if (settings.id) {
-            if (!this._onStackById[settings.id]) this._onStackById[settings.id] = [];
+            if (!this._onStackById[settings.id])
+                this._onStackById[settings.id] = [];
             this._onStackById[settings.id].push({
                 event,
                 callback,
@@ -757,10 +794,15 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    async _emitEventStack(event: string, initialValue: any, metasObj: ISEventEmitterMetas) {
+    async _emitEventStack(
+        event: string,
+        initialValue: any,
+        metasObj: ISEventEmitterMetas,
+    ) {
         let currentCallbackReturnedValue = initialValue;
 
-        if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0) return currentCallbackReturnedValue;
+        if (!this._eventsStacks || Object.keys(this._eventsStacks).length === 0)
+            return currentCallbackReturnedValue;
 
         if (!this._eventsStacks[event]) {
             // make sure the event exist
@@ -771,25 +813,38 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         const eventStackObj = this._eventsStacks[event];
 
         if (eventStackObj && eventStackObj.callStack) {
-            eventStackArray = <any>[...eventStackArray, ...eventStackObj.callStack];
+            eventStackArray = <any>[
+                ...eventStackArray,
+                ...eventStackObj.callStack,
+            ];
         }
 
         // check if the stack is a glob pattern
         Object.keys(this._eventsStacks).forEach((stackName) => {
-            if (stackName === event) return;
-            if (__minimatch(event, stackName) && this._eventsStacks[stackName] !== undefined) {
+            if (stackName === event) return currentCallbackReturnedValue;
+            if (
+                __minimatch(event, stackName) &&
+                this._eventsStacks[stackName] !== undefined
+            ) {
                 // the glob pattern match the emited stack so add it to the stack array
-                eventStackArray = <any>[...eventStackArray, ...this._eventsStacks[stackName].callStack];
+                eventStackArray = <any>[
+                    ...eventStackArray,
+                    ...this._eventsStacks[stackName].callStack,
+                ];
             }
         });
 
         // filter the catchStack
-        eventStackArray.map((item: ISEventEmitterEventStackItem) => item.called++);
-        eventStackArray = eventStackArray.filter((item: ISEventEmitterEventStackItem) => {
-            if (item.callNumber === -1) return true;
-            if (item.called <= item.callNumber) return true;
-            return false;
-        });
+        eventStackArray.map(
+            (item: ISEventEmitterEventStackItem) => item.called++,
+        );
+        eventStackArray = eventStackArray.filter(
+            (item: ISEventEmitterEventStackItem) => {
+                if (item.callNumber === -1) return true;
+                if (item.called <= item.callNumber) return true;
+                return false;
+            },
+        );
 
         for (let i = 0; i < eventStackArray.length; i++) {
             // get the actual item in the array
@@ -798,14 +853,25 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             if (!item.callback) return currentCallbackReturnedValue;
 
             // check if we have a filter setted
-            if (item.filter && !item.filter(currentCallbackReturnedValue, metasObj)) continue;
+            if (
+                item.filter &&
+                !item.filter(currentCallbackReturnedValue, metasObj)
+            )
+                continue;
             // check if need to process the value
             if (item.processor) {
-                const res = item.processor(currentCallbackReturnedValue, metasObj);
+                const res = item.processor(
+                    currentCallbackReturnedValue,
+                    metasObj,
+                );
                 if (Array.isArray(res) && res.length === 2) {
                     currentCallbackReturnedValue = res[0];
                     metasObj = res[1];
-                } else if (typeof res === 'object' && res.value !== undefined && res.metas !== undefined) {
+                } else if (
+                    typeof res === 'object' &&
+                    res.value !== undefined &&
+                    res.metas !== undefined
+                ) {
                     currentCallbackReturnedValue = res.value;
                     metasObj = res.metas;
                 } else {
@@ -820,7 +886,11 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 metasObj?.askId
                     ? (answer) => {
                           // @ts-ignore
-                          this.constructor.global.emit(`answer.${metasObj.askId}`, answer, metasObj);
+                          this.constructor.global.emit(
+                              `answer.${metasObj.askId}`,
+                              answer,
+                              metasObj,
+                          );
                       }
                     : undefined,
             );
@@ -849,20 +919,29 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    _emitEvents(events: string | string[], initialValue: any, metas: ISEventEmitterMetas) {
+    _emitEvents(
+        events: string | string[],
+        initialValue: any,
+        metas: ISEventEmitterMetas,
+    ) {
         return new Promise(async (resolve, reject) => {
             // @TODO      check why need this...
             if (!events) return this;
 
             // check if the stacks is "*"
-            if (typeof events === 'string') events = events.split(',').map((s) => s.trim());
+            if (typeof events === 'string')
+                events = events.split(',').map((s) => s.trim());
 
             let currentStackResult = initialValue;
 
             for (let i = 0; i < events.length; i++) {
                 // if (!metas) metas = this._createMetas(events[i]);
 
-                const stackResult = await this._emitEventStack(events[i], currentStackResult, metas);
+                const stackResult = await this._emitEventStack(
+                    events[i],
+                    currentStackResult,
+                    metas,
+                );
                 if (stackResult !== undefined) {
                     currentStackResult = stackResult;
                 }
@@ -909,7 +988,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             settings,
         );
 
-        if (typeof events === 'string') events = events.split(',').map((s) => s.trim());
+        if (typeof events === 'string')
+            events = events.split(',').map((s) => s.trim());
 
         // loop on each events
         events.forEach((name) => {

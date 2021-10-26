@@ -1,11 +1,11 @@
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __require from '@coffeekraken/sugar/node/esm/require';
 
 /**
  * @name            new
  * @type            Function
- * @async
  *
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
@@ -32,7 +32,12 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @since     2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function _new(id: string, sources, stdio: any = 'inherit', settings = {}) {
+export default function _new(
+    id: string,
+    sources,
+    stdio: any = 'inherit',
+    settings = {},
+) {
     if (!Array.isArray(sources)) sources = [sources];
 
     let stdioInstance: any;
@@ -45,14 +50,15 @@ export default async function _new(id: string, sources, stdio: any = 'inherit', 
         //     `<yellow>[SStdio.new]</<yellow> Sorry but to use a path based stdio, you must be in a <magenta>node</magenta> context...`
         //   );
         // @ts-ignore
-        let { default: Cls } = await import(stdio); // eslint-disable-line
-        Cls = Cls.default || Cls;
+        const Cls = __require(stdio).default;
         stdioInstance = new Cls(id, sources, settings);
     } else if (typeof stdio === 'string') {
         switch (stdio) {
             case 'inherit':
                 if (__isNode()) {
-                    const { default: __STerminalStdio } = await import('../node/terminal/STerminalStdio');
+                    const __STerminalStdio = __require(
+                        '../node/terminal/STerminalStdio',
+                    ).default;
                     stdioInstance = new __STerminalStdio(id, sources, settings);
                 } else {
                     throw new Error(
@@ -65,7 +71,9 @@ export default async function _new(id: string, sources, stdio: any = 'inherit', 
                     throw new Error(
                         `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`,
                     );
-                const { default: __STerminalStdio } = await import('../node/terminal/STerminalStdio');
+                const __STerminalStdio = __require(
+                    '../node/terminal/STerminalStdio',
+                ).default;
                 stdioInstance = new __STerminalStdio(id, sources, settings);
                 break;
             // case 'blessed':

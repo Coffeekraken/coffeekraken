@@ -10,21 +10,22 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 import __downloadRepository from '../downloadRepository';
 import __tmpDir from '../../path/systemTmpDir';
 describe('sugar.node.github.downloadRepository', () => {
-    it('Should download a repository successfully', (done) => __awaiter(void 0, void 0, void 0, function* () {
-        const repo = yield __downloadRepository('Coffeekraken/gridle', {});
-        expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-gridle-master.zip`,
+    it('Should download a repository successfully', () => __awaiter(void 0, void 0, void 0, function* () {
+        const repo = yield __downloadRepository('Coffeekraken/download-test-repo', {
+            branch: 'main',
         });
-        done();
+        expect(repo).toEqual({
+            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main.zip`,
+        });
     }), 999999);
-    it('Should download a repository and unzip it successfully', (done) => __awaiter(void 0, void 0, void 0, function* () {
-        const repo = yield __downloadRepository('Coffeekraken/gridle', {
+    it('Should download a repository and unzip it successfully', () => __awaiter(void 0, void 0, void 0, function* () {
+        const repo = yield __downloadRepository('Coffeekraken/download-test-repo', {
+            branch: 'main',
             unzip: true,
         });
         expect(repo).toEqual({
-            dest: `${__tmpDir()}/downloads/coffeekraken-gridle-master`,
+            dest: `${__tmpDir()}/downloads/coffeekraken-download-test-repo-main`,
         });
-        done();
     }), 999999);
 });
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG93bmxvYWRSZXBvc2l0b3J5LnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb3dubG9hZFJlcG9zaXRvcnkudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLG9CQUFvQixNQUFNLHVCQUF1QixDQUFDO0FBRXpELE9BQU8sUUFBUSxNQUFNLHlCQUF5QixDQUFDO0FBRS9DLFFBQVEsQ0FBQyxzQ0FBc0MsRUFBRSxHQUFHLEVBQUU7SUFDbEQsRUFBRSxDQUFDLDJDQUEyQyxFQUFFLENBQU8sSUFBSSxFQUFFLEVBQUU7UUFDM0QsTUFBTSxJQUFJLEdBQUcsTUFBTSxvQkFBb0IsQ0FBQyxxQkFBcUIsRUFBRSxFQUFFLENBQUMsQ0FBQztRQUVuRSxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSwyQ0FBMkM7U0FDakUsQ0FBQyxDQUFDO1FBRUgsSUFBSSxFQUFFLENBQUM7SUFDWCxDQUFDLENBQUEsRUFBRSxNQUFNLENBQUMsQ0FBQztJQUVYLEVBQUUsQ0FBQyx3REFBd0QsRUFBRSxDQUFPLElBQUksRUFBRSxFQUFFO1FBQ3hFLE1BQU0sSUFBSSxHQUFHLE1BQU0sb0JBQW9CLENBQUMscUJBQXFCLEVBQUU7WUFDM0QsS0FBSyxFQUFFLElBQUk7U0FDZCxDQUFDLENBQUM7UUFFSCxNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSx1Q0FBdUM7U0FDN0QsQ0FBQyxDQUFDO1FBRUgsSUFBSSxFQUFFLENBQUM7SUFDWCxDQUFDLENBQUEsRUFBRSxNQUFNLENBQUMsQ0FBQztBQUNmLENBQUMsQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG93bmxvYWRSZXBvc2l0b3J5LnRlc3QuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkb3dubG9hZFJlcG9zaXRvcnkudGVzdC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7Ozs7QUFBQSxPQUFPLG9CQUFvQixNQUFNLHVCQUF1QixDQUFDO0FBRXpELE9BQU8sUUFBUSxNQUFNLHlCQUF5QixDQUFDO0FBRS9DLFFBQVEsQ0FBQyxzQ0FBc0MsRUFBRSxHQUFHLEVBQUU7SUFDbEQsRUFBRSxDQUFDLDJDQUEyQyxFQUFFLEdBQVMsRUFBRTtRQUN2RCxNQUFNLElBQUksR0FBRyxNQUFNLG9CQUFvQixDQUNuQyxpQ0FBaUMsRUFDakM7WUFDSSxNQUFNLEVBQUUsTUFBTTtTQUNqQixDQUNKLENBQUM7UUFFRixNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSxxREFBcUQ7U0FDM0UsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLEVBQUUsTUFBTSxDQUFDLENBQUM7SUFFWCxFQUFFLENBQUMsd0RBQXdELEVBQUUsR0FBUyxFQUFFO1FBQ3BFLE1BQU0sSUFBSSxHQUFHLE1BQU0sb0JBQW9CLENBQ25DLGlDQUFpQyxFQUNqQztZQUNJLE1BQU0sRUFBRSxNQUFNO1lBQ2QsS0FBSyxFQUFFLElBQUk7U0FDZCxDQUNKLENBQUM7UUFFRixNQUFNLENBQUMsSUFBSSxDQUFDLENBQUMsT0FBTyxDQUFDO1lBQ2pCLElBQUksRUFBRSxHQUFHLFFBQVEsRUFBRSxpREFBaUQ7U0FDdkUsQ0FBQyxDQUFDO0lBQ1AsQ0FBQyxDQUFBLEVBQUUsTUFBTSxDQUFDLENBQUM7QUFDZixDQUFDLENBQUMsQ0FBQyJ9

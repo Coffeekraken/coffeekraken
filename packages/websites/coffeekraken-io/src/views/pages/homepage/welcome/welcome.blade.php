@@ -24,16 +24,16 @@
         {{ \Sugar\string\generateRandomString(20000, '01 ') }}
     </div>
 
-    <div class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-02">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-03">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-04">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-05">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-06">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-02">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-03">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-04">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-05">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-06">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     
-    <div class="__grains"></div>
+    <div class="__grains" layer amount="0.03"></div>
 
     {{--
     <svg class="__blobs" width="100%" height="100%" viewbox="0 0 100 100" preserveaspectratio="none">

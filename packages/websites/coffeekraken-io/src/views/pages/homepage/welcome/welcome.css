@@ -120,12 +120,14 @@
         left: 0;
         width: 100%;
         height: 100%;
-        background: url('/src/img/coffee-grains-light.png');
+        background-image: url('/src/img/coffee-grains-light.png');
         background-size: contain;
         background-position: 50% 50%;
+        pointer-events: none;
 
         @sugar.theme.when (dark) {
-            background: url('/src/img/coffee-grains-dark.png');
+            filter: drop-shadow(100px 100px 50px rgba(0, 0, 0, 0.3));
+            background-image: url('/src/img/coffee-grains-dark.png');
         }
     }
 
@@ -140,7 +142,7 @@
         overflow: hidden;
         user-select: none;
         opacity: 0.5;
-        box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.1);
+        box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.05);
         font-size: 40px;
         color: rgba(0, 0, 0, 0);
 
@@ -152,6 +154,7 @@
                 rgba(255, 255, 255, 0),
                 25deg
             );
+            box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.1);
         }
     }
     .__template-01 {
@@ -172,8 +175,12 @@
         height: 150px;
         transform: translate(calc(-50% - 320px), calc(-50% + 210px))
             rotateY(20deg) perspective(200px) rotateX(20deg);
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
         font-size: 40px;
+        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
+
+        @sugar.theme.when (dark) {
+            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
+        }
     }
     .__template-04 {
         width: 350px;
@@ -187,8 +194,12 @@
         height: 250px;
         transform: translate(calc(-50% + 520px), calc(-50% + 40px))
             rotateY(20deg) perspective(200px) rotateX(20deg) rotateZ(-7deg);
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
         font-size: 50px;
+        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
+
+        @sugar.theme.when (dark) {
+            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
+        }
     }
     .__template-06 {
         width: 150px;
@@ -202,8 +213,12 @@
         height: 100px;
         transform: translate(calc(-50% + 980px), calc(-50% + 40px))
             rotateY(30deg) perspective(200px) rotateX(-35deg) rotateZ(15deg);
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
         font-size: 40px;
+        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
+
+        @sugar.theme.when (dark) {
+            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
+        }
     }
     .__template-08 {
         width: 600px;

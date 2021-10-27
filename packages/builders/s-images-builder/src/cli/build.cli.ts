@@ -1,18 +1,18 @@
 import __SProcess from '@coffeekraken/s-process';
-import ____SImagesBuilderBuildParamsInterface from '../node/interface/SImagesBuilderBuildParamsInterface';
+import __SImagesBuilderBuildParamsInterface from '../node/interface/SImagesBuilderBuildParamsInterface';
 import __SImagesBuilder from '../node/SImagesBuilder';
 
+import __SPromise from '@coffeekraken/s-promise';
 
-export default async function build(stringArgs = '') {
-
-    const builder = new __SImagesBuilder();
-
-    const pro = await __SProcess.from(
-        builder.build.bind(builder)
-    , {
-        process: {
-          interface: ____SImagesBuilderBuildParamsInterface
-        }   
+export default function build(stringArgs = '') {
+    return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
+        const builder = new __SImagesBuilder({
+            builder: {
+                interface: __SImagesBuilderBuildParamsInterface,
+            },
+        });
+        const promise = builder.build(stringArgs);
+        pipe(promise);
+        resolve(await promise);
     });
-    await pro.run(stringArgs);
 }

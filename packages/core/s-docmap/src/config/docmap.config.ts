@@ -69,7 +69,7 @@ export default function (env, config) {
                 '*.md:/.*@namespace.*/gm',
                 `src/**{5}/*.!(md):/.*@namespace.*/gm`,
                 `dist/css/*:/.*@namespace.*/gm`,
-                `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
+                // `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
             ],
             '@dev': {
                 globs: [

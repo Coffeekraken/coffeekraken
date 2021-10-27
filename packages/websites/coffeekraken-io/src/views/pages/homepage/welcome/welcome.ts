@@ -2,6 +2,7 @@
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 (() => {
+    return;
     class Welcome {
         $layers;
         constructor($welcome) {

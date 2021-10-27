@@ -35,6 +35,7 @@ export default function (env, config) {
                 '../node/helpers/isSectionWanted',
             ),
             isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense'),
+            get: __path.resolve(__dirname(), '../node/helpers/get'),
             sanitizeValue: __path.resolve(
                 __dirname(),
                 '../node/helpers/sanitizeValue',
@@ -161,6 +162,16 @@ export default function (env, config) {
                     '../partials/shields/shields.md',
                 ),
                 data: '[config.shieldsio]',
+            },
+            interface: {
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/interface/interface.md',
+                ),
+                html: __path.resolve(
+                    __dirname(),
+                    '../partials/interface/interface.md',
+                ),
             },
             'doc-menu': {
                 markdown: __path.resolve(

@@ -3,6 +3,7 @@
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __fs from 'fs';
 import __path from 'path';
+import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 
 /**
  * @name              interface
@@ -33,19 +34,13 @@ export default async function interfaceTag(data, blockSettings) {
         path,
         relPath;
 
-    const potentialPath = __path.resolve(
-        __folderPath(blockSettings.filepath),
-        name,
+    const potentialPath = __checkPathWithMultipleExtensions(
+        __path.resolve(__folderPath(blockSettings.filepath), name),
+        ['js'],
     );
 
-    if (__fs.existsSync(potentialPath)) {
-        const int = await import(potentialPath);
-        return int[importName].toObject();
-    }
+    if (!potentialPath) return {};
 
-    return {
-        name,
-        path,
-        relPath,
-    };
+    const int = await import(potentialPath);
+    return int[importName].toObject();
 }

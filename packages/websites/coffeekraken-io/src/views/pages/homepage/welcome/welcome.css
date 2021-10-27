@@ -114,6 +114,17 @@
         }
     }
 
+    @keyframes grains-in {
+        0 {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.5);
+        }
+        100% {
+            transform: scale(1);
+        }
+    }
     .__grains {
         position: absolute;
         top: 0;
@@ -124,6 +135,8 @@
         background-size: contain;
         background-position: 50% 50%;
         pointer-events: none;
+        transform: scale(1);
+        animation: grains-in 120s ease-out 1s infinite;
 
         @sugar.theme.when (dark) {
             filter: drop-shadow(100px 100px 50px rgba(0, 0, 0, 0.3));

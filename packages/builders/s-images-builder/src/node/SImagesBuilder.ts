@@ -1,4 +1,4 @@
-import __SBuilder from '@coffeekraken/s-builder';
+import __SBuilder, { ISBuilderCtorSettings } from '@coffeekraken/s-builder';
 import __SFile from '@coffeekraken/s-file';
 import __SGlob, { IResolveGlobSettings } from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
@@ -16,6 +16,7 @@ import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuil
  * @name            SImagesBuilder
  * @namespace       node
  * @type            Class
+ * @interface       ./interface/SImagesBuilderBuildParamsInterface
  * @extends         SBuilder
  * @platform        node
  * @platform        ts
@@ -57,7 +58,7 @@ export interface ISImagesBuilderBuildParams {
     specificParams: Record<string, ISImagesBuilderBuildParams>;
 }
 
-export interface ISImagesBuilderCtorSettings {
+export interface ISImagesBuilderCtorSettings extends ISBuilderCtorSettings {
     imagesBuilder: Partial<ISImagesBuilderSettings>;
 }
 

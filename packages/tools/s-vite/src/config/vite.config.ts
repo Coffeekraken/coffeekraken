@@ -1,6 +1,13 @@
 import __ipAddress from '@coffeekraken/sugar/node/network/utils/ipAddress';
 import __path from 'path';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+
+export async function preprocess(rawViteConfig, rawConfig) {
+    const config = (await __loadConfigFile('vite.config.js')) ?? {};
+    return __deepMerge(rawViteConfig, config);
+}
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -36,13 +43,16 @@ export default function (env, config) {
         server: {
             host: '127.0.0.1',
             port: 3000,
-            hostname: 'http://[config.vite.server.host]:[config.vite.server.port]',
+            hostname:
+                'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
             disableGlobbing: false,
         },
         css: {},
-        rewrites: [__path.resolve(`${__dirname()}/../node/rewrites/handlebars`)],
+        rewrites: [
+            __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),
+        ],
     };
 }

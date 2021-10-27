@@ -535,11 +535,14 @@ export default class SMarkdownBuilder extends __SBuilder {
                         });
                     }
 
+                    const docmap = await new __SDocmap().read();
+
                     // take some datas like packagejson, etc...
                     const viewData = {
                         config: __SSugarConfig.get('.'),
                         flatConfig: __flatten(__SSugarConfig.get('.')),
-                        docMenu: (await new __SDocmap().read()).menu,
+                        docMenu: docmap.menu,
+                        docmap,
                         time: {
                             year: new Date().getFullYear(),
                             month: new Date().getMonth(),

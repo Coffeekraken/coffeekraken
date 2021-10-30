@@ -1,1 +1,16 @@
-<h1>Hello interface</h1>
+{{#with (get docmap.map namespace)}} {{this.interface.name}} {{/with}}
+
+<dl>
+    {{#each (get docmap.map namespace false 'interface.definition')}}
+    <dt class="s-font:40 s-mbe:30">
+        <header class="s-flex s-bg:main-surface s-radius">
+            <div class="s-flex-item:grow s-tc:accent s-p:30">{{ @key }}</div>
+            {{#if this.default}}
+            <div class="s-tc:info s-p:30">{{ configValue this.default }}</div>
+            {{/if}}
+            <div class="s-typo:bold s-p:30">{{ this.type }}</div>
+        </header>
+        <p class="s-typo:p s-p:30">{{{ this.description }}}</p>
+    </dt>
+    {{/each}}
+</dl>

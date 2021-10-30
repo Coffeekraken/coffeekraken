@@ -1,118 +1,23 @@
 #homepage-welcome {
-    /* height: 70vh;
-  min-height: 600px; */
     height: 100vh;
     text-align: center;
     position: relative;
     z-index: 10;
-    overflow: hidden;
-    /* background-position: 0 0;
-    background-size: cover;
-    animation: subnav-bkg 240s linear;
-    animation-fill-mode: both;
-    animation-iteration-count: infinite; */
-
     margin-top: -80px;
     display: flex;
     align-items: center;
+    margin-bottom: 150px;
 
     @sugar.theme.when (dark) {
         /* background: sugar.color(main, surface) !important; */
     }
 
-    .s-remap-complementary-accent {
+    /* .s-remap-complementary-accent {
         @sugar.color.remap (complementary, accent);
     }
     .s-remap-accent-complementary {
         @sugar.color.remap (accent, complementary);
-    }
-
-    .__canvas {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        mix-blend-mode: color;
-    }
-    #welcome-canvas-2 {
-        /* display: none */
-    }
-
-    .__background {
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 90%;
-        background-size: cover;
-        background-position: 50% 50%;
-        opacity: 1;
-        background: linear-gradient(
-            10deg,
-            sugar.color(main, --alpha 0.1),
-            sugar.color(main, --alpha 0) 40%
-        );
-    }
-
-    .__bg-01,
-    .__bg-02 {
-        opacity: 1;
-        width: 100%;
-        height: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        white-space: wrap;
-        user-select: none;
-        background-size: cover;
-        background-position: 50% 50%;
-    }
-    @keyframes bg-appear {
-        from {
-            opacity: 0;
-        }
-        to {
-            opacity: 1;
-        }
-    }
-    .__bg-01 {
-        background: url('/src/img/bg-coffee-01.jpg');
-        background: sugar.color(complementary);
-        clip-path: url(#welcome-clip-path-01);
-        opacity: 0;
-        animation: bg-appear 0.5s ease-out 1s forwards;
-        pointer-events: none;
-        /* mix-blend-mode: overlay; */
-    }
-    .__bg-02 {
-        /* background: url('/src/img/landscape-03.jpg'); */
-        background: sugar.color(accent);
-        clip-path: url(#welcome-clip-path-02);
-        opacity: 0;
-        animation: bg-appear 0.5s ease-out 1s forwards;
-        pointer-events: none;
-        /* mix-blend-mode: overlay; */
-    }
-    .__code {
-        width: 100%;
-        height: 90%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        overflow: hidden;
-    }
-    .__code {
-        display: none;
-        color: rgba(0, 0, 0, 0.02);
-        @sugar.font.family (code);
-        mix-blend-mode: overlay;
-        pointer-events: none;
-
-        @sugar.theme.when (dark) {
-            color: rgba(255, 255, 255, 0);
-        }
-    }
+    } */
 
     @keyframes grains-in {
         0 {
@@ -137,6 +42,7 @@
         pointer-events: none;
         transform: scale(1);
         animation: grains-in 120s ease-out 1s infinite;
+        opacity: 0.3;
 
         @sugar.theme.when (dark) {
             filter: drop-shadow(100px 100px 50px rgba(0, 0, 0, 0.3));
@@ -265,8 +171,72 @@
         }
     }
 
-    .__content {
-        /* @sugar.align.abs (center);
-    margin-left: -100px; */
+    .__footer {
+        position: absolute;
+        bottom: 0;
+        left: 50%;
+        width: 100%;
+        transform: translate(-50%, 50%);
+        background: sugar.color(main, surface);
+        border-radius: sugar.border.radius();
+        background: linear-gradient(
+            90deg,
+            sugar.color(main, --lighten 27 --alpha 0),
+            sugar.color(main, --lighten 23),
+            sugar.color(main, --lighten 27 --alpha 0)
+        );
+        background: linear-gradient(
+            90deg,
+            sugar.color(main, --lighten 48 --alpha 1),
+            sugar.color(main, --lighten 50),
+            sugar.color(main, --lighten 48 --alpha 1)
+        );
+        background: sugar.color(main, --lighten 49);
+        /* box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05); */
+        padding: sugar.padding(50);
+        font-family: sugar.font.family(code);
+        font-size: sugar.font.size(60);
+        user-select: none;
+
+        @sugar.theme.when (dark) {
+            text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
+            background: linear-gradient(
+                90deg,
+                sugar.color(main, --darken 27 --alpha 0),
+                sugar.color(main, --darken 23),
+                sugar.color(main, --darken 27 --alpha 0)
+            );
+            box-shadow: none;
+        }
+
+        .__bracket {
+            font-size: sugar.font.size(100);
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            opacity: 0.1;
+
+            @sugar.theme.when (dark) {
+                text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
+            }
+        }
+        .__first {
+            display: inline-block;
+            transform: translateX(-10%) rotateY(30deg) perspective(10px)
+                rotateX(-1deg) rotateZ(2deg);
+            transform: translateX(-10%);
+        }
+        .__second {
+            display: inline-block;
+            transform: translateX(10%) rotateY(30deg) perspective(10px)
+                rotateX(1deg) rotateZ(2deg);
+            transform: translateX(10%);
+        }
+        .__bracket-start {
+            transform: translate(calc(-300px - 100%), -50%);
+        }
+        .__bracket-end {
+            transform: translate(300px, -50%);
+        }
     }
 }

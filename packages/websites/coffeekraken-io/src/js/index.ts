@@ -4,9 +4,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 // import '@coffeekraken/s-inline-svg-component';
 // import '@coffeekraken/s-request-component';
 import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-example-component';
-// import {
-//     define as __SConfigExplorerWebcomponent,
-// } from '@coffeekraken/s-config-explorer-component';
+import { define as __SConfigExplorerWebcomponent } from '@coffeekraken/s-config-explorer-component';
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
@@ -36,7 +34,7 @@ __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
 
 // webcomponents
 __SCodeExampleWebcomponent();
-// __SConfigExplorerWebcomponent();
+__SConfigExplorerWebcomponent();
 __SSidePanelWebcomponent();
 __SColorPickerWebcomponent();
 __SDatePickerWebcomponent();

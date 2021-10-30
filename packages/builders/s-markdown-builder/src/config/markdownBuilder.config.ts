@@ -35,7 +35,29 @@ export default function (env, config) {
                 '../node/helpers/isSectionWanted',
             ),
             isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense'),
+            file: __path.resolve(__dirname(), '../node/helpers/file'),
+            rootRelative: __path.resolve(
+                __dirname(),
+                '../node/helpers/rootRelative',
+            ),
+            configValue: __path.resolve(
+                __dirname(),
+                '../node/helpers/configValue',
+            ),
+            configFiles: __path.resolve(
+                __dirname(),
+                '../node/helpers/configFiles',
+            ),
+            configFileNameFromDocmapPath: __path.resolve(
+                __dirname(),
+                '../node/helpers/configFileNameFromDocmapPath',
+            ),
+            config: __path.resolve(__dirname(), '../node/helpers/config'),
             get: __path.resolve(__dirname(), '../node/helpers/get'),
+            jsonStringify: __path.resolve(
+                __dirname(),
+                '../node/helpers/jsonStringify',
+            ),
             sanitizeValue: __path.resolve(
                 __dirname(),
                 '../node/helpers/sanitizeValue',
@@ -170,8 +192,35 @@ export default function (env, config) {
                 ),
                 html: __path.resolve(
                     __dirname(),
-                    '../partials/interface/interface.md',
+                    '../partials/interface/interface.html',
                 ),
+            },
+            configFiles: {
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/configFiles/configFiles.md',
+                ),
+                html: __path.resolve(
+                    __dirname(),
+                    '../partials/configFiles/configFiles.md',
+                ),
+            },
+            config: {
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/config/config.md',
+                ),
+                html: __path.resolve(
+                    __dirname(),
+                    '../partials/config/config.html',
+                ),
+            },
+            file: {
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/file/file.md',
+                ),
+                html: __path.resolve(__dirname(), '../partials/file/file.md'),
             },
             'doc-menu': {
                 markdown: __path.resolve(

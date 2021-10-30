@@ -114,7 +114,7 @@
         background: linear-gradient(
             5deg,
             sugar.color(main, --alpha 0),
-            sugar.color(main, --alpha 0.1)
+            sugar.color(main, --alpha 0.03)
         );
     }
 

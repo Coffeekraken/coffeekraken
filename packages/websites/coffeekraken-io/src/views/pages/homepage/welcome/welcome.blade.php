@@ -20,9 +20,9 @@
             </div>
         </div>
     </div> --}}
-    <div class="__code">
+    {{-- <div class="__code">
         {{ \Sugar\string\generateRandomString(20000, '01 ') }}
-    </div>
+    </div> --}}
 
     <div layer amount="0" class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-02">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
@@ -34,6 +34,14 @@
     <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     
     <div class="__grains" layer amount="0.03"></div>
+
+    <div class="__footer">
+        <span class="__bracket __bracket-start">{</span>
+        <span class="__first">'Take what <span class="s-tc:accent">you need</span>':</span>
+        <br>
+        <span class="__second">'<span class="s-tc:accent">leave the rest</span> aside'</span>
+        <span class="__bracket __bracket-end">}</span>
+    </div>
 
     {{--
     <svg class="__blobs" width="100%" height="100%" viewbox="0 0 100 100" preserveaspectratio="none">

@@ -4,7 +4,6 @@
 @section('content')
  
     @include('pages.homepage.welcome.welcome')
-
     
     @include('pages.homepage.features.features')
     

@@ -4,9 +4,11 @@ import __SDocMap from '@coffeekraken/s-docmap';
 import __SPromise from '@coffeekraken/s-promise';
 import __marked from 'marked';
 import __fs from 'fs';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import { page404 } from '@coffeekraken/s-view-renderer';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 /**
  * @name                markdown

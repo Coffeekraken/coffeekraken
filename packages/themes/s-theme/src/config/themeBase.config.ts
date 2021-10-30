@@ -1596,7 +1596,7 @@ export default function (env, config) {
                 defaultColor: 'main',
                 depth: '[theme.depth.default]',
                 rhythmVertical: {
-                    'margin-bottom': 40,
+                    'margin-bottom': 60,
                 },
             },
             form: {
@@ -1882,7 +1882,7 @@ export default function (env, config) {
                 'line-height': 1,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 40,
+                    'margin-bottom': 50,
                 },
             },
             h2: {
@@ -1891,7 +1891,7 @@ export default function (env, config) {
                 'line-height': 1,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             h3: {
@@ -1900,7 +1900,7 @@ export default function (env, config) {
                 'line-height': 1,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             h4: {
@@ -1909,7 +1909,7 @@ export default function (env, config) {
                 'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             h5: {
@@ -1918,7 +1918,7 @@ export default function (env, config) {
                 'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 20,
+                    'margin-bottom': 40,
                 },
             },
             h6: {
@@ -1927,7 +1927,7 @@ export default function (env, config) {
                 'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 20,
+                    'margin-bottom': 40,
                 },
             },
             p: {
@@ -1936,7 +1936,7 @@ export default function (env, config) {
                 'line-height': 1.5,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             lead: {
@@ -1945,14 +1945,14 @@ export default function (env, config) {
                 'line-height': 1.2,
                 'max-width': '55ch',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             hr: {
                 color: '[theme.color.main.color]',
                 opacity: 0.2,
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             pre: {
@@ -1965,15 +1965,16 @@ export default function (env, config) {
                 borderRadius: '[theme.ui.default.borderRadius]',
                 depth: '[theme.ui.default.depth]',
                 rhythmVertical: {
-                    'margin-bottom': 30,
+                    'margin-bottom': 50,
                 },
             },
             'code:not(pre > code)': {
                 display: 'inline-block',
                 'font-family': 'code',
                 color: ['main', 'text'],
-                'background-color': ['main', 'surface'],
-                paddingInline: 0,
+                'background-color': ['accent', 'surface'],
+                borderRadius: 10,
+                paddingInline: 10,
                 paddingBlock: 0,
             },
             a: {

@@ -4,7 +4,7 @@ import __SFile from '@coffeekraken/s-file';
 import __SGlob from '@coffeekraken/s-glob';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import handleError from '@coffeekraken/sugar/node/error/handleError';
+import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __writeTmpFileSync from '@coffeekraken/sugar/node/fs/writeTmpFileSync';
@@ -558,11 +558,19 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const filePath = sourceObj.files[j];
 
                         const buildObj = {
-                            data: __fs
-                                .readFileSync(filePath, 'utf8')
-                                .toString(),
+                            data: '',
                             output: '',
                         };
+
+                        if (__extension(filePath) === 'js') {
+                            const fn = (await import(filePath)).default;
+                            buildObj.data = fn(viewData);
+                        } else {
+                            buildObj.data = __fs
+                                .readFileSync(filePath, 'utf8')
+                                .toString();
+                        }
+
                         if (sourceObj.outPath) {
                             buildObj.output = sourceObj.outPath;
                         } else if (sourceObj.inDir && sourceObj.outDir) {
@@ -572,6 +580,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                         }
 
                         let currentTransformedString = buildObj.data;
+
+                        const tplFn = handlebars.compile(
+                            currentTransformedString,
+                        );
+                        currentTransformedString = tplFn(viewData);
 
                         // processing transformers
                         Object.keys(
@@ -613,11 +626,6 @@ export default class SMarkdownBuilder extends __SBuilder {
                                     );
                             });
                         });
-
-                        const tplFn = handlebars.compile(
-                            currentTransformedString,
-                        );
-                        currentTransformedString = tplFn(viewData);
 
                         // marked if html is the target
                         if (params.target === 'html') {

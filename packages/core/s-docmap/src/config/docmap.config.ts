@@ -146,6 +146,7 @@ export default function (env, config) {
                 'name',
                 'type',
                 'menu',
+                'default',
                 'platform',
                 'description',
                 'namespace',

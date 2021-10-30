@@ -32,7 +32,7 @@ export default function (env) {
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            rootDir: `${__packageRoot()}`,
+            rootDir: `${__packageRoot(process.cwd())}`,
 
             /**
              * @name            localDir

@@ -4,9 +4,10 @@ body {
 
 #header {
     position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
+    top: 50px;
+    left: 50%;
+    transform: translate(-50%, 0);
+    width: calc(1280px + sugar.padding(30) * 2);
     z-index: 999;
     height: 80px;
     display: flex;
@@ -14,11 +15,24 @@ body {
     background: sugar.color(main, --alpha 0);
     transition: all ease-in-out 0.2s;
     @sugar.depth (0);
+    background: sugar.color(main, surface);
+    border-radius: sugar.border.radius();
+    box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05);
+
+    background: sugar.color(main, surface);
+
+    @sugar.theme.when (dark) {
+        background: linear-gradient(
+            90deg,
+            sugar.color(main, --darken 23),
+            sugar.color(main, --darken 27)
+        );
+    }
 
     &:not(#homepage &),
     body.scrolled & {
-        background: sugar.color(main, surface);
-        @sugar.depth (10);
+        top: 0;
+        width: calc(1280px + sugar.padding(40) * 2);
     }
 
     /* #homepage & {
@@ -31,8 +45,14 @@ body {
         flex-grow: 1;
     }
 
+    a {
+        text-align: left;
+    }
+
     svg {
-        height: 35px;
+        height: 50px;
+        transform-origin: 0 50%;
+        transform: scale(0.8);
     }
     svg .main {
         fill: sugar.color(main, text);
@@ -254,6 +274,7 @@ body {
 }
 
 #settings .s-side-panel__container {
+    display: none;
     background-color: sugar.color(main, background);
     min-width: 300px;
     width: 33vw;

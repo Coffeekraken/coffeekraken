@@ -49,7 +49,7 @@
         max-height: 99999px !important;
     }
 }
-[default-style] .s-code-example__content {
+:not([bare]) .s-code-example__content {
     transition: sugar.theme(ui.code.transition);
     border-radius: sugar.theme(ui.code.borderRadius);
     @sugar.depth (sugar.theme(ui.code.depth));
@@ -71,7 +71,7 @@
         pointer-events: all;
     }
 }
-[default-style] .s-code-example__more-bar {
+:not([bare]) .s-code-example__more-bar {
     text-align: center;
     padding-inline: sugar.theme(ui.default.paddingInline);
     padding-block: sugar.theme(ui.default.paddingBlock);

@@ -18,7 +18,7 @@ export default function (env, config) {
         presets: {},
         transformers: {
             code: {
-                match: /```([a-zA-Z0-9]+)\n([^```]+)\n```/gm,
+                match: /^```([a-zA-Z0-9]+)\n([\s\S]*?)```$/gm,
                 markdown: __path.resolve(
                     __dirname(),
                     '../transformers/code/code.md',
@@ -35,6 +35,8 @@ export default function (env, config) {
                 '../node/helpers/isSectionWanted',
             ),
             isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense'),
+            ifMatch: __path.resolve(__dirname(), '../node/helpers/ifMatch'),
+            ifEqual: __path.resolve(__dirname(), '../node/helpers/ifEqual'),
             file: __path.resolve(__dirname(), '../node/helpers/file'),
             rootRelative: __path.resolve(
                 __dirname(),

@@ -34,9 +34,9 @@ export class SComponentDefaultInterface extends __SInterface {
             default: true,
             physical: true,
         },
-        defaultStyle: {
+        bare: {
             type: 'Boolean',
-            default: true,
+            default: false,
             physical: true,
         },
     };
@@ -56,7 +56,7 @@ export interface ISComponentDefaultProps {
     id: string;
     mountWhen: 'directly' | 'inViewport';
     adoptStyle: boolean;
-    defaultStyle: boolean;
+    bare: boolean;
 }
 
 export default class SComponent extends __SClass {
@@ -94,7 +94,9 @@ export default class SComponent extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     get name(): string {
-        return this.componentUtilsSettings.name ?? this.node.tagName.toLowerCase();
+        return (
+            this.componentUtilsSettings.name ?? this.node.tagName.toLowerCase()
+        );
     }
 
     /**
@@ -184,7 +186,11 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(node: HTMLElement, props: any, settings: Partial<ISComponentUtilsCtorSettings> = {}) {
+    constructor(
+        node: HTMLElement,
+        props: any,
+        settings: Partial<ISComponentUtilsCtorSettings> = {},
+    ) {
         super(
             __deepMerge(
                 {
@@ -287,7 +293,10 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    adoptStyleInShadowRoot($shadowRoot: HTMLElement, $context: HTMLElement | typeof document): Promise<any> {
+    adoptStyleInShadowRoot(
+        $shadowRoot: HTMLElement,
+        $context: HTMLElement | typeof document,
+    ): Promise<any> {
         return __adoptStyleInShadowRoot($shadowRoot, $context);
     }
 
@@ -317,7 +326,8 @@ export default class SComponent extends __SClass {
                     else value = props[key].nodeValue;
                 }
                 if (!value) return;
-                passedProps[__camelCase(props[key]?.name ?? key)] = __autoCast(value);
+                passedProps[__camelCase(props[key]?.name ?? key)] =
+                    __autoCast(value);
             });
         } else {
             j;
@@ -341,10 +351,17 @@ export default class SComponent extends __SClass {
             set(obj, prop, value) {
                 const propDef = _this.InterfaceToApply.definition[prop];
                 if (propDef?.physical) {
-                    if (value === false || value === undefined || value === null) {
+                    if (
+                        value === false ||
+                        value === undefined ||
+                        value === null
+                    ) {
                         _this.node.removeAttribute(__dashCase(prop));
                     } else {
-                        _this.node.setAttribute(__dashCase(prop), String(value));
+                        _this.node.setAttribute(
+                            __dashCase(prop),
+                            String(value),
+                        );
                     }
                 }
                 obj[prop] = value;
@@ -452,11 +469,13 @@ export default class SComponent extends __SClass {
             .split(' ')
             .map(
                 (clsName) =>
-                    `${this.node.tagName.toLowerCase()}${clsName && !clsName.match(/^__/) ? '-' : ''}${clsName}`,
+                    `${this.node.tagName.toLowerCase()}${
+                        clsName && !clsName.match(/^__/) ? '-' : ''
+                    }${clsName}`,
             )
             .join(' ');
 
-        if (style && this.props.defaultStyle) {
+        if (style && !this.props.bare) {
             clsString += ` ${style}`;
         }
 

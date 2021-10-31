@@ -153,7 +153,7 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('purgecss.content')[2]);
+            // console.log(__SSugarConfig.get('docmap.build'));
             // return;
 
             // clean somr folders like tmp, etc...

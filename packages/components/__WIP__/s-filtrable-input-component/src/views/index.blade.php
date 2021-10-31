@@ -7,7 +7,7 @@
       <div style="height: 3000px; background: red;"></div>
       <br>
       <br>
-      <s-filtrable-input filtrable="title,body" value="title" default-style>
+      <s-filtrable-input filtrable="title,body" value="title">
         <input type="text" class="s-form-input" value="Coco" />
         @php print('<template id="item">
             <h4 class="s-font-title s-color-accent-foreground">{{title}}</h4>
@@ -31,7 +31,7 @@
       <div style="height: 3000px; background: red;"></div>
       <br>
       <br>
-      <s-filtrable-input class="s-cs-remap-accent-success" filtrable="title,body" value="title" default-style>
+      <s-filtrable-input class="s-cs-remap-accent-success" filtrable="title,body" value="title">
         <input type="text" class="s-form-input" value="Coco" id="hello" />
         @php print('<template id="item">
             <h4 class="s-font-title s-color-accent-foreground">{{title}}</h4>

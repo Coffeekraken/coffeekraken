@@ -19,5 +19,5 @@ s-range {
     transition: none;
 }
 
-s-range[default-style] {
+s-range:not([bare]) {
 }

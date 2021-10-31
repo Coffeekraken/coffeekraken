@@ -6,12 +6,12 @@
     <ol>
     @foreach ($block->cssClass as $cls)
         <li class="s-font:40 s-mbe:30">
-            <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-tc:accent s-p:20">
+            <header class="s-flex s-bg:main-surface s-radius">
+                <div class="s-flex-item:grow s-tc:accent s-p:30">
                     {{ $cls->name }}
                 </div>
             </header>
-            <p class="s-typo:p s-p:20">{!! $cls->description !!}</p> 
+            <p class="s-typo:p s-p:30">{!! $cls->description !!}</p> 
         </li>                                   
     @endforeach
     </ol>

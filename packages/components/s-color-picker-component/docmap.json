@@ -4,18 +4,68 @@
     "generated": {
         "extends": [
             "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/s-activate-component",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-date-picker-component",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-inline-svg-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-range-component",
-            "@coffeekraken/s-request-component",
             "@coffeekraken/s-side-panel-component",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-color-picker-component.js.colorPicker": {
+                "name": "Color Picker",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/s-color-picker"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the Pickr options are available through properties. Check out the api documentation for more details...",
+                "namespace": "@coffeekraken.s-color-picker-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<label class=\"s-label s-mb--30\">\n     Simply color picker\n     <s-color-picker></s-color-picker>\n</label>"
+                    },
+                    {
+                        "language": "js",
+                        "code": "import { define } from '@coffeekraken/s-color-picker-component';\ndefine();"
+                    }
+                ],
+                "interface": {
+                    "name": "SColorPickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "value": {
+                            "type": "String",
+                            "default": "#ff0000"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColorPickerComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SColorPickerComponent.ts",
+                "children": {}
+            }
+        }
     }
 }

@@ -13,6 +13,46 @@ export interface ISColorPickerComponentProps {
     value: string;
 }
 
+/**
+ * @name                Color Picker
+ * @namespace           js
+ * @type                CustomElement
+ * @interface           ./interface/SColorPickerComponentInterface.js
+ * @menu                Styleguide / Forms              /styleguide/forms/s-color-picker
+ * @install             npm i @coffeekraken/s-color-picker-component
+ * @platform            html
+ * @status              beta
+ *
+ * This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like
+ * sugar theming support as well as some events and more.
+ * Almost all the Pickr options are available through properties. Check out the api documentation for more details...
+ *
+ * @feature           All the Pickr features are supported
+ * @feature           Full support for sugar theming system for easy integration
+ *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
+ * @event           change              Emitted when the color is changing inside the picker
+ * @event           show                Emitted when the color picker is shown
+ * @event           hide                Emitted when the color picker is hided
+ *
+ * @example         html
+ * <label class="s-label s-mb--30">
+ *      Simply color picker
+ *      <s-color-picker></s-color-picker>
+ * </label>
+ *
+ * @example         js
+ * import { define } from '@coffeekraken/s-color-picker-component';
+ * define();
+ *
+ * @see             https://www.npmjs.com/package/@simonwep/pickr
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SColorPicker extends __SLitComponent {
     static get properties() {
         return __SLitComponent.properties({}, __SColorPickerComponentInterface);

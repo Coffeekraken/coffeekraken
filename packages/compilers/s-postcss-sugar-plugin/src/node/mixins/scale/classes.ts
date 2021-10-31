@@ -78,7 +78,7 @@ export default function ({
             .map((scaleName) => {
                 return ` * <!-- ${scaleName} scale -->
             * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${scaleName} ratio</h3>
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale ${scaleName}</h3>
             *   <div class="s-scale:${scaleName}">
             *       <a class="s-btn">${__faker.name.findName()}</a>
             *   </div>

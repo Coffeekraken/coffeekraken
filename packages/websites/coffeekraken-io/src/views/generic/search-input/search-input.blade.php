@@ -48,7 +48,7 @@
             @{{#if example}}
                 @{{#with example.[0]}}
                     <div style="width: 60%" class="__code s-p:50 s-flex:align-center">
-                        <s-code-example default-style style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
+                        <s-code-example style="max-width:100%;" class="s-depth:50 s-flex-item:grow:shrink">
                             <template lang="@{{ this.language }}">
                                 @{{ this.code }}                    
                             </template>       

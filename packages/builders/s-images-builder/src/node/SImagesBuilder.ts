@@ -28,7 +28,7 @@ import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuil
  * @param           {ISImagesBuilderCtorSettings}         [settings={}]           Some settings to configure your image compression process
  *
  * @example         js
- * import SImagesBuilder from '@coffeekraken/s-image-compressor';
+ * import SImagesBuilder from '@coffeekraken/s-image-builder';
  * const builder = new SImagesBuilder({
  *      imagesBuilder: {
  *          // some settings...

@@ -465,7 +465,6 @@ export default class DocNav extends __SLitComponent {
                                                   ${this._renderExample
                                                       ? html`
                                                             <s-code-example
-                                                                default-style
                                                                 style="max-width:100%;"
                                                                 class="s-depth:50 s-flex-item:grow:shrink"
                                                             >

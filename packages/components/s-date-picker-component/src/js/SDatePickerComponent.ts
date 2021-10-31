@@ -50,7 +50,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
- *          default-style
  *      ></s-date-picker>
  * </label>
  *
@@ -62,7 +61,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
- *          default-style
  *      ></s-date-picker>
  * </label>
  *
@@ -73,7 +71,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         class="s-color:complementary\:deep s-width--50"
  *         name="myDatePicker3"
  *         disable-weekends
- *         default-style
  *     ></s-date-picker>
  * </label>
  *
@@ -85,7 +82,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         min-date="2021-08-10"
  *         name="myDatePicker1"
  *         rtl
- *         default-style
  *     ></s-date-picker>
  * </label>
  *
@@ -96,7 +92,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         class="s-color:success\:deep s-width--50"
  *         name="myDatePicker4"
  *         number-of-months="2"
- *         default-style
  *     ></s-date-picker>
  * </label>
  *
@@ -114,13 +109,12 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *		c-13,11.6-21.2,28.4-21.2,47.1c0,34.7,28.3,63,63,63s63-28.3,63-63C307.5,284.5,299.3,267.7,286.3,256.1z M244.5,198.6
  *		c11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3
  *		c-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>"
- *         default-style
  *     ></s-date-picker>
  * </label>
  *
  * @example         js
- * import { webcomponent as SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
- * SDatePickerWebcomponent();
+ * import { define } from '@coffeekraken/s-date-picker-component';
+ * define();
  *
  * @todo            Support for the "showWeekNumber" setting
  *

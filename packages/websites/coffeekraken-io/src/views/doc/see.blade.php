@@ -5,10 +5,10 @@
     </h4>
 
     @foreach ($block->see as $see)
-        <section class="s-bg:ui-surface s-border:radius">
+        <section class="s-bg:main-surface s-radius">
             @if ($see->og)
                 <div class="s-layout:122">
-                    <div class="s-ratio:1 s-bg:accent s-border:radius">
+                    <div class="s-ratio:1 s-bg:accent s-radius">
                         <img src="{{ $see->og->ogImage->url }}" />
                     </div>
                     <div class="s-p:50">

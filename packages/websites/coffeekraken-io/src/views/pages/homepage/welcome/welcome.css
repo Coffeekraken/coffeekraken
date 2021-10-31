@@ -1,6 +1,6 @@
 #homepage-welcome {
     height: 100vh;
-    text-align: center;
+    text-align: left;
     position: relative;
     z-index: 10;
     margin-top: -80px;
@@ -149,13 +149,15 @@
 
     .__content {
         position: absolute;
+        z-index: 10;
         top: 50%;
         left: 50%;
+        width: 1280px;
         transform: translate(-50%, -50%);
-        padding: sugar.padding(50);
     }
 
     .__logo {
+        display: none;
         height: 70px;
         margin: 0 auto sugar.margin(50) auto;
 
@@ -173,6 +175,7 @@
 
     .__footer {
         position: absolute;
+        text-align: center;
         bottom: 0;
         left: 50%;
         width: 100%;

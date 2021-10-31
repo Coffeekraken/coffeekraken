@@ -17,7 +17,7 @@ s-date-picker {
     cursor: pointer;
 }
 
-s-date-picker[default-style] {
+s-date-picker:not([bare]) {
     &:not([rtl]) {
         .s-date-picker__input {
             border-top-right-radius: 0;

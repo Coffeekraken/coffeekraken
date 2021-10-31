@@ -3,8 +3,11 @@ import __SInterface from '@coffeekraken/s-interface';
 export default class SCodeExampleInterface extends __SInterface {
     static definition = {
         theme: {
+            description:
+                'Specify the theme you want to use for your code example',
             type: 'String',
-            default: 'https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css',
+            default:
+                'https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css',
         },
         active: {
             type: 'String',

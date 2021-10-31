@@ -27,7 +27,6 @@ export interface ISCodeExampleComponentProps {
     active: string;
     toolbar: 'copy'[];
     toolbarPosition: 'content' | 'nav';
-    defaultStyleClass: any;
     lines: number;
     moreLabel: string;
     lessLabel: string;
@@ -35,6 +34,52 @@ export interface ISCodeExampleComponentProps {
     more: boolean;
 }
 
+/**
+ * @name                Code Example
+ * @namespace           js
+ * @type                CustomElement
+ * @interface           ./interface/SCodeExampleComponentInterface.js
+ * @menu                Styleguide / UI              /styleguide/ui/s-code-example
+ * @install             npm i @coffeekraken/s-code-example-component
+ * @platform            html
+ * @status              beta
+ *
+ * This component represent a code example that make sure your passed code(s) is displayed well using under the hood the AMAZING [highlightjs](https://highlightjs.org/) library.
+ *
+ * @feature           Can display out of the bos codes like `bash`, `shell`, `css`, `js`, `php` and `html`
+ * @feature           Possibility to add some languages through the property `languages`
+ * @feature           Full support for sugar theming system for easy integration
+ *
+ * @support         chromium
+ * @support         firefox
+ * @support         safari
+ * @support         edge
+ *
+ * @example         html
+ * <s-code-example>
+ *      <template lang="js">
+ * function $initHighlight(block, cls) {
+ * try {
+ *   if (cls.search(/\bno\-highlight\b/) != -1)
+ *     return process(block, true, 0x0F) +
+ *            ` class="${cls}"`;
+ * } catch (e) {
+ * }
+ * for (var i = 0 / 2; i < classes.length; i++) {
+ *   if (checkCondition(classes[i]) === undefined)
+ *     console.log('undefined');
+ * }
+ *      </template>
+ * </s-code-example>
+ *
+ * @example         js
+ * import { define } from '@coffeekraken/s-code-example-component';
+ * define();
+ *
+ * @see             https://highlightjs.org/
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SCodeExample extends __SLitComponent {
     static get properties() {
         return __SLitComponent.properties({}, __SCodeExampleComponentInterface);
@@ -217,9 +262,9 @@ export default class SCodeExample extends __SLitComponent {
                     // @ts-ignore
                     this.mounted
                 }"
-                ?default-style="${
+                ?bare="${
                     // @ts-ignore
-                    this.defaultStyle
+                    this.bare
                 }"
                 toolbar-position="${
                     // @ts-ignore
@@ -300,9 +345,9 @@ export default class SCodeExample extends __SLitComponent {
                             >
                             <code lang="${item.lang ??
                             item.id}" class="language-${item.lang} ${item.lang} ${this
-                                .props.defaultStyle
-                                ? 'hljs'
-                                : ''}">${
+                                .props.bare
+                                ? ''
+                                : 'hljs'}">${
                                 // @ts-ignore
                                 item.code.trim()
                             }</code>

@@ -14,6 +14,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __get from '@coffeekraken/sugar/shared/object/get';
 import __fs from 'fs';
 import __path from 'path';
+import __SDocblock from '@coffeekraken/s-docblock';
 
 /**
  * @name                  sugar
@@ -47,6 +48,11 @@ export interface ISSugarConfigLoadedObj {
     id: string;
     config: any;
     instance: SSugarConfig;
+}
+
+export interface ISugarConfigToDocblocksResult {
+    path: string;
+    docblocks: any[];
 }
 
 export interface ISSugarConfigCtorSettings {
@@ -239,6 +245,40 @@ export default class SSugarConfig extends __SClass {
     }
 
     /**
+     * @name            toDocblocks
+     * @type            Function
+     * @static
+     * @async
+     *
+     * This function take a config id as parameter and returns an array of docblocks parsed objects
+     *
+     * @param       {String}        configId            The configuration if you want to get docblocks back for
+     * @return      {ISugarConfigToDocblocksResult[]}                         An array containing ISugarConfigToDocblocksResult objects
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static async toDocblocks(configId: string): any[] {
+        // get the file path(s) for this config id
+        configId = configId.replace('.config.js', '');
+        const paths = this.filesPaths.filter((path) => {
+            return path.includes(`${configId}.config.js`);
+        });
+
+        const results = [];
+        for (let i = 0; i < paths.length; i++) {
+            const path = paths[i];
+            const docblock = new __SDocblock(path);
+            await docblock.parse();
+            results.push({
+                path,
+                docblocks: docblock.toObject(),
+            });
+        }
+        return results;
+    }
+
+    /**
      * @name            get
      * @type            Function
      *
@@ -366,6 +406,23 @@ export default class SSugarConfig extends __SClass {
      */
     get(dotpath: string): any {
         return this._configInstance.get(dotpath);
+    }
+
+    /**
+     * @name            toDocblocks
+     * @type            Function
+     * @async
+     *
+     * This function take a config id as parameter and returns an array of docblocks parsed objects
+     *
+     * @param       {String}        configId            The configuration if you want to get docblocks back for
+     * @return      {Any[]}                         An array of docblocks objects
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toDocblocks(configId: string): any[] {
+        return this.constructor.toDocblocks(configId);
     }
 
     /**

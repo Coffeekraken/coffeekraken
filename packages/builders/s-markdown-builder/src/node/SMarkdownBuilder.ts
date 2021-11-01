@@ -12,6 +12,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __fs from 'fs';
 import __handlebars from 'handlebars';
+import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __marked from 'marked';
 import __path from 'path';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
@@ -335,6 +336,9 @@ export default class SMarkdownBuilder extends __SBuilder {
             return new __SPromise(
                 async ({ resolve, reject, emit }) => {
                     const handlebars = __handlebars.create();
+
+                    // helpers
+                    registerHelpers(handlebars);
 
                     const buildedFiles: ISMarkdownBuilderResult[] = [];
 

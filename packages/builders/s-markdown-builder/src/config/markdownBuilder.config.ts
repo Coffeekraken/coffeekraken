@@ -29,42 +29,7 @@ export default function (env, config) {
                 ),
             },
         },
-        helpers: {
-            isSectionWanted: __path.resolve(
-                __dirname(),
-                '../node/helpers/isSectionWanted',
-            ),
-            isLicense: __path.resolve(__dirname(), '../node/helpers/isLicense'),
-            ifMatch: __path.resolve(__dirname(), '../node/helpers/ifMatch'),
-            ifEqual: __path.resolve(__dirname(), '../node/helpers/ifEqual'),
-            file: __path.resolve(__dirname(), '../node/helpers/file'),
-            rootRelative: __path.resolve(
-                __dirname(),
-                '../node/helpers/rootRelative',
-            ),
-            configValue: __path.resolve(
-                __dirname(),
-                '../node/helpers/configValue',
-            ),
-            configFiles: __path.resolve(
-                __dirname(),
-                '../node/helpers/configFiles',
-            ),
-            configFileNameFromDocmapPath: __path.resolve(
-                __dirname(),
-                '../node/helpers/configFileNameFromDocmapPath',
-            ),
-            config: __path.resolve(__dirname(), '../node/helpers/config'),
-            get: __path.resolve(__dirname(), '../node/helpers/get'),
-            jsonStringify: __path.resolve(
-                __dirname(),
-                '../node/helpers/jsonStringify',
-            ),
-            sanitizeValue: __path.resolve(
-                __dirname(),
-                '../node/helpers/sanitizeValue',
-            ),
-        },
+        helpers: {},
         partials: {
             's-code-example': {
                 markdown: __path.resolve(

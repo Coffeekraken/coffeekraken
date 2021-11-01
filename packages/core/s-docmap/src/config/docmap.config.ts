@@ -67,7 +67,7 @@ export default function (env, config) {
             globs: [
                 '*:/.*@namespace.*/gm',
                 '*.md:/.*@namespace.*/gm',
-                `src/**{5}/*.!(md):/.*@namespace.*/gm`,
+                `src/**{5}/!(*.md|*.ts):/.*@namespace.*/gm`,
                 `dist/css/*:/.*@namespace.*/gm`,
                 // `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
             ],
@@ -75,7 +75,7 @@ export default function (env, config) {
                 globs: [
                     '*:/.*@namespace.*/gm',
                     '*.md:/.*@namespace.*/gm',
-                    `src/**{5}/*.!(md):/.*@namespace.*/gm`,
+                    `src/**{5}/!(*.md|*.ts):/.*@namespace.*/gm`,
                     `dist/css/*:/.*@namespace.*/gm`,
                     `src/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
                 ],

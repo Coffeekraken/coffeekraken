@@ -3,7 +3,7 @@ import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __set from '@coffeekraken/sugar/shared/object/set';
 
-export default async function api(express, config) {
+export default async function api(express, settings, config) {
     // register handler
     config.handlers['api'] = `${__dirname()}/apiHandler`;
 

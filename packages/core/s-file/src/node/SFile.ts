@@ -128,7 +128,7 @@ export interface ISFileObject {
     content: string;
 }
 export interface ISFileToObjectFn {
-    (): ISFileObject;
+    (readContent: boolean): ISFileObject;
 }
 export interface ISFileUpdateFn {
     (): void;
@@ -604,8 +604,8 @@ class SFile extends __SEventEmitter implements ISFile {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    toObject(): ISFileObject {
-        return <ISFileObject>{
+    toObject(readContent = true): ISFileObject {
+        const obj = <ISFileObject>{
             exists: this.exists,
             cwd: this.cwd,
             path: this.path,
@@ -614,8 +614,9 @@ class SFile extends __SEventEmitter implements ISFile {
             extension: this.extension,
             dirPath: this.dirPath,
             stats: this.stats,
-            content: this.readSync(),
         };
+        if (readContent) obj.content = this.readSync();
+        return obj;
     }
 
     /**

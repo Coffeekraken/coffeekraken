@@ -1,0 +1,151 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-view-renderer.config.views.rootDirs": {
+                "name": "rootDirs",
+                "type": "string[]",
+                "default": "['[config.storage.src.rootDir]/views']",
+                "description": "Specify the roots views directories",
+                "namespace": "@coffeekraken.s-view-renderer.config.views",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js"
+            },
+            "@coffeekraken.s-view-renderer.config.views.cacheDir": {
+                "name": "cacheDir",
+                "type": "String",
+                "default": "[config.storage.package.cacheDir]",
+                "description": "Specify the views template rendering cache directory",
+                "namespace": "@coffeekraken.s-view-renderer.config.views",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js"
+            },
+            "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.extensions": {
+                "name": "extensions",
+                "type": "String",
+                "default": "['blade.php']",
+                "description": "Store which extensions match this engine",
+                "namespace": "@coffeekraken.s-view-renderer.config.views.engines.bladePhp",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js"
+            },
+            "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.path": {
+                "name": "path",
+                "type": "String",
+                "description": "Store the path where to find the blade.php template engine",
+                "namespace": "@coffeekraken.s-view-renderer.config.views.engines.bladePhp",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js"
+            },
+            "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.extensions": {
+                "name": "extensions",
+                "type": "String",
+                "default": "['js','json']",
+                "description": "Store which extensions match this handler",
+                "namespace": "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js"
+            },
+            "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.path": {
+                "name": "path",
+                "type": "String",
+                "default": "__path.resolve(__dirname(), '../node/dataHandlers/js.js')",
+                "description": "Store the path to the jsJson handler",
+                "namespace": "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "views.config.js",
+                "extension": "config",
+                "relPath": "src/config/views.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-view-renderer.s-view.dataHandlers.js": {
+                "name": "js",
+                "type": "Function",
+                "description": "This function simply take the .data.js file path and return\nthe resulting object",
+                "namespace": "@coffeekraken.s-view-renderer.s-view.dataHandlers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "js.js",
+                "extension": "js",
+                "relPath": "src/node/dataHandlers/js.js",
+                "children": {}
+            },
+            "@coffeekraken.s-view-renderer.s-render.engines.bladeViewEngine": {
+                "name": "bladeViewEngine",
+                "type": "ISViewEngine",
+                "description": "This is the blade.php view engine that allows you\nto render .blade.php views.",
+                "namespace": "@coffeekraken.s-view-renderer.s-render.engines",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "bladeViewEngine.js",
+                "extension": "js",
+                "relPath": "src/node/engines/blade/bladeViewEngine.js",
+                "children": {}
+            }
+        }
+    }
+}

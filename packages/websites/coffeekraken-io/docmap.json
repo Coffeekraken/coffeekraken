@@ -9,10 +9,12 @@
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-view-renderer",
             "@coffeekraken/sugar"
         ],
         "map": {

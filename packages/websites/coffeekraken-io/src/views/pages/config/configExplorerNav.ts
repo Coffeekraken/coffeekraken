@@ -1,0 +1,177 @@
+// @ts-nocheck
+
+import __SLitComponent from '@coffeekraken/s-lit-component';
+import { html } from 'lit';
+import { property } from 'lit/decorators.js';
+import __SRequest from '@coffeekraken/s-request';
+import __set from '@coffeekraken/sugar/shared/object/set';
+import __get from '@coffeekraken/sugar/shared/object/get';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+
+export interface IConfigExplorerNavComponentProps {}
+
+export default class ConfigExplorerNav extends __SLitComponent {
+    constructor() {
+        super({
+            litComponent: {
+                shadowDom: false,
+            },
+            componentUtils: {
+                // interface: __ConfigExplorerNavComponentInterface,
+            },
+        });
+    }
+
+    _openedNamespaces = [];
+    _menuStack = {};
+    _menuStates = {};
+
+    @property()
+    _loaded = false;
+
+    async firstUpdated() {
+        const request = new __SRequest({
+            url: '/api/docmap',
+            method: 'get',
+        });
+
+        // restore state
+        this._menuStates = JSON.parse(
+            window.localStorage.getItem('ConfigExplorerNavStates') ?? '{}',
+        );
+
+        const cachedNav = JSON.parse(
+            window.localStorage.getItem('ConfigExplorerNav') ?? '{}',
+        );
+        if (Object.keys(cachedNav).length) {
+            this._menuStack = cachedNav;
+            this._loaded = true;
+        }
+
+        const res = await request.send();
+        const types = [];
+        res.data.map = __filter(res.data.map, (key, item) => {
+            if (key.includes('imagesBuilder')) console.log('S', key);
+
+            if (!key.match(/[a-zA-Z0-9]+\.config\.[a-zA-Z0-9]+/)) return false;
+
+            const configId = key.replace(/.*\.config\./, '');
+            // console.log(configId, key);
+
+            return true;
+        });
+
+        return;
+
+        this._menuStack = {};
+        Object.keys(res.data.map).forEach((namespace) => {
+            __set(this._menuStack, namespace, res.data.map[namespace]);
+        });
+
+        // save new nav
+        window.localStorage.setItem(
+            'ConfigExplorerNav',
+            JSON.stringify(this._menuStack),
+        );
+        this._loaded = true;
+
+        this.requestUpdate();
+    }
+
+    _isAcive(namespace) {
+        return this._menuStates[namespace]?.opened;
+    }
+
+    _toggle(namespace) {
+        if (!this._menuStates[namespace]) {
+            this._menuStates[namespace] = {
+                opened: true,
+            };
+        } else {
+            this._menuStates[namespace].opened =
+                !this._menuStates[namespace].opened;
+        }
+
+        // save state
+        window.localStorage.setItem(
+            'ConfigExplorerNavStates',
+            JSON.stringify(this._menuStates),
+        );
+
+        this.requestUpdate();
+    }
+
+    _renderList(obj, currentNamespace = '') {
+        const items = Object.keys(obj).map((itemName) => {
+            const itemObj = obj[itemName];
+            const itemNamespace = `${
+                currentNamespace ? `${currentNamespace}.` : ''
+            }${itemName}`;
+
+            if (itemObj.name && itemObj.namespace) {
+                let icon = itemObj.platform[0].name;
+
+                return html`
+                    <li>
+                        <i
+                            class="s-icon:file-${icon} s-tc:extension-${icon}"
+                        ></i>
+                        <a href="/api/${itemNamespace}">${itemObj.name}</a>
+                    </li>
+                `;
+            } else {
+                return html`
+                    <li class="${this._isAcive(itemNamespace) ? 'active' : ''}">
+                        <i
+                            class="s-icon:folder-opened s-tc:info s-when:active"
+                        ></i>
+                        <i class="s-icon:folder"></i>
+                        <span
+                            @click=${() => {
+                                this._toggle(itemNamespace);
+                            }}
+                        >
+                            ${itemName}
+                        </span>
+                        ${this._menuStates[itemNamespace]?.opened
+                            ? html`
+                                  ${this._renderList(
+                                      __get(this._menuStack, itemNamespace),
+                                      itemNamespace,
+                                  )}
+                              `
+                            : ''}
+                    </li>
+                `;
+            }
+        });
+
+        return html`
+            <ul class="${!currentNamespace ? 's-fs-tree' : ''}">
+                ${items}
+            </ul>
+        `;
+    }
+
+    render() {
+        if (!this._loaded) {
+            return html`
+                <div class="s-until:sibling:mounted">
+                    <i class="s-loader:spinner s-color:accent"></i>
+                    &nbsp;
+                    <p class="s-typo:p s-display:inline-block">
+                        Loading API navigation.<br />Please wait...
+                    </p>
+                </div>
+            `;
+        }
+
+        return html`
+            <div class="${this.componentUtils.className('')}">
+                ${this._renderList(this._menuStack)}
+            </div>
+        `;
+    }
+}
+
+customElements.define('config-explorer-nav', ConfigExplorerNav);

@@ -21,9 +21,19 @@
                 </a>
                 @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->tree->documentation, 'class' => '__subnav-doc'])
                 @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
-                <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">
+                @include('layouts.header.partials.menuItem', ['menuItem' => (Object)[
+                    'name' => 'API',
+                    'config' => (Object)[
+                        'name' => 'Config',
+                        'explorer' => (Object)[
+                            'name' => 'Config Explorer',
+                            'slug' => '/config/explorer'
+                        ]
+                    ]
+                ], 'class' => ''])
+                {{-- <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">
                     <span>API</span>
-                </a>
+                </a> --}}
 
             </nav>
         </div>

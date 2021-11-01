@@ -9,7 +9,7 @@ import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                views
- * @namespace           s-frontendServer.handlers
+ * @namespace           node.modules.view
  * @type                Function
  * @status              wip
  *
@@ -27,16 +27,17 @@ import __SBench from '@coffeekraken/s-bench';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default async function view(req, res, settings = {}) {
+    let viewPath;
+    if (!req.params[0]) viewPath = settings.indexView ?? 'index';
+    else viewPath = req.params[0].split('/').join('.');
 
-  const viewPath = req.params[0].split('/').join('.');
+    const viewInstance = new __SViewRenderer(viewPath);
 
-  const viewInstance = new __SViewRenderer(viewPath);
+    const result = await viewInstance.render({
+        ...(res.templateData ?? {}),
+    });
 
-  const result = await viewInstance.render({
-    ...(res.templateData ?? {})
-  });
-
-  res.status(200);
-  res.type('text/html');
-  res.send(result.value);
+    res.status(200);
+    res.type('text/html');
+    res.send(result.value);
 }

@@ -430,14 +430,20 @@ class SView extends __SClass implements ISViewRenderer {
         );
 
         const defaultEngines = __SugarConfig.get('views.engines') || {};
-        Object.keys(defaultEngines).forEach((ext) => {
-            SView.registerEngine(defaultEngines[ext], ext);
+        Object.keys(defaultEngines).forEach((id) => {
+            const engineObj = defaultEngines[id];
+            engineObj.extensions.forEach((ext) => {
+                SView.registerEngine(engineObj.path, ext);
+            });
         });
 
         const defaultDataHandlers =
             __SugarConfig.get('views.dataHandlers') || {};
-        Object.keys(defaultDataHandlers).forEach((ext) => {
-            SView.registerDataHandler(defaultDataHandlers[ext], ext);
+        Object.keys(defaultDataHandlers).forEach((id) => {
+            const handlerObj = defaultDataHandlers[id];
+            handlerObj.extensions.forEach((ext) => {
+                SView.registerDataHandler(handlerObj.path, ext);
+            });
         });
 
         this._originalViewPath = viewPath;

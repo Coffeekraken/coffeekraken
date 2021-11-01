@@ -90,16 +90,83 @@ export default function (env, config) {
 
         proxy: {
             assets: {
+                /**
+                 * @name            route
+                 * @namespace       config.frontendServer.proxy.assets
+                 * @type            String
+                 * @default         [config.storage.serve.rootDir]
+                 *
+                 * Specify which route to proxy for the assets
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 route: '[config.storage.serve.rootDir]',
                 settings: {
+                    /**
+                     * @name        target
+                     * @namespace   config.frontendServer.proxy.assets.settings
+                     * @type         String
+                     * @default         [config.vite.server.hostname]
+                     *
+                     * Specify where to redirect the assets requests
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     target: '[config.vite.server.hostname]',
+
+                    /**
+                     * @name        changeOrigin
+                     * @namespace       config.frontendServer.proxy.assets.settings
+                     * @type        Boolean
+                     * @default         true
+                     *
+                     * Specify if you want the redirection to change the origin or not
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     changeOrigin: true,
                 },
             },
             vitePing: {
+                /**
+                 * @name            route
+                 * @namespace       config.frontendServer.proxy.vitePing
+                 * @type            String
+                 * @default         [config.storage.serve.rootDir]
+                 *
+                 * Specify which route to proxy for the vitePing
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 route: '/__vite_ping',
                 settings: {
+                    /**
+                     * @name        target
+                     * @namespace   config.frontendServer.proxy.vitePing.settings
+                     * @type         String
+                     * @default         [config.vite.server.hostname]
+                     *
+                     * Specify where to redirect the vitePing requests
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     target: '[config.vite.server.hostname]',
+                    /**
+                     * @name        changeOrigin
+                     * @namespace       config.frontendServer.proxy.vitePing.settings
+                     * @type        Boolean
+                     * @default         true
+                     *
+                     * Specify if you want the redirection to change the origin or not
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     changeOrigin: true,
                 },
             },
@@ -107,89 +174,252 @@ export default function (env, config) {
 
         middlewares: {
             bench: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.bench
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
+                 *
+                 * Specify where to find the "bench" middleware
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 path: `${__dirname()}/../node/middleware/benchMiddleware`,
                 settings: {},
             },
             request: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.request
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/requestMiddleware
+                 *
+                 * Specify where to find the "request" middleware
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 path: `${__dirname()}/../node/middleware/requestMiddleware`,
                 settings: {},
             },
-            frontspec: {
-                path: `${__dirname()}/../node/middleware/frontspecMiddleware`,
-                settings: {},
-            },
-            docmap: {
-                path: `${__dirname()}/../node/middleware/docmapMiddleware`,
-                settings: {},
-            },
             env: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.env
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/envMiddleware
+                 *
+                 * Specify where to find the "env" middleware
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 path: `${__dirname()}/../node/middleware/envMiddleware`,
                 settings: {},
             },
             packageJson: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.packageJson
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/packageJsonMiddleware
+                 *
+                 * Specify where to find the "packageJson" middleware
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
                 settings: {},
             },
         },
 
         modules: {
-            docmapRoutes: `${__dirname()}/../node/modules/docmap/docmap`,
-            styleguideRoutes: `${__dirname()}/../node/modules/styleguide/styleguide`,
-            apiRoutes: `${__dirname()}/../node/modules/api/api`,
+            docmap: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/docmap/docmap
+                 *
+                 * Specify where to find the "docmap" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/docmap/docmap`,
+                settings: {},
+            },
+            styleguide: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.styleguide
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/styleguide/styleguide
+                 *
+                 * Specify where to find the "styleguide" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/styleguide/styleguide`,
+                settings: {},
+            },
+            config: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.config
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/config/config
+                 *
+                 * Specify where to find the "config" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/config/config`,
+                settings: {},
+            },
+            frontspec: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.frontspec
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/frontspec/frontspec
+                 *
+                 * Specify where to find the "frontspec" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/frontspec/frontspec`,
+                settings: {},
+            },
+            api: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.api
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/api/api
+                 *
+                 * Specify where to find the "api" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/api/api`,
+                settings: {},
+            },
+            view: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.view
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/view/view
+                 *
+                 * Specify where to find the "view" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/view/view`,
+
+                settings: {
+                    /**
+                     * @name            slug
+                     * @namespace       config.frontendServer.modules.view.settings
+                     * @type            String
+                     * @default     /view/*
+                     *
+                     * Specify the slug you want that trigger the view handler
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    slug: '/view/*',
+
+                    /**
+                     * @name        indexView
+                     * @namespace       config.frontendServer.modules.view.settings
+                     * @type            String
+                     * @default         index
+                     *
+                     * Specify the dotpath of the view that has to be used as "index" when the path is just "/"
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    indexView: 'index',
+                },
+            },
         },
 
         routes: {
             '/': {
-                handler: 'index',
-            },
-            '/view/*': {
+                /**
+                 * @name        handler
+                 * @namespace   config.frontendServer.routes.'/'
+                 * @type        String
+                 * @default         view
+                 *
+                 * Specify which handle to use for requests on "/"
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 handler: 'view',
             },
             '/doc/api/*': {
+                /**
+                 * @name        handler
+                 * @namespace   config.frontendServer.routes.'/doc/api/*'
+                 * @type        String
+                 * @default         doc
+                 *
+                 * Specify which handle to use for requests on "/doc/api/*"
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 handler: 'doc',
             },
             '/api/config': {
+                /**
+                 * @name        handler
+                 * @namespace   config.frontendServer.routes.'/api/config'
+                 * @type        String
+                 * @default         view
+                 *
+                 * Specify which handle to use for requests on "/api/config"
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 handler: 'config',
             },
             '/api/docmap': {
+                /**
+                 * @name        handler
+                 * @namespace   config.frontendServer.routes.'/api/docmap'
+                 * @type        String
+                 * @default         view
+                 *
+                 * Specify which handle to use for requests on "/api/docmap"
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 handler: 'docmap',
-            },
-            '/styleguide/*': {
-                handler: 'styleguide',
-            },
-            '/*/*/styleguide/*': {
-                handler: 'styleguide',
             },
         },
 
         handlers: {
             /**
-             * @name            index
-             * @namespace       config.frontendServer.handlers
-             * @type            Object
-             *
-             * Store all the "index" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            index: `${__dirname()}/../node/handlers/index`,
-
-            /**
-             * @name            view
-             * @namespace       config.frontendServer.handlers
-             * @type            Object
-             *
-             * Store all the "view" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            view: `${__dirname()}/../node/handlers/view`,
-            /**
              * @name            doc
              * @namespace       config.frontendServer.handlers
-             * @type            Object
+             * @type            String
+             * @default         ${__dirname()}/../node/handlers/doc
              *
              * Store all the "doc" configuration access like the route, the title, etc...
              *
@@ -200,7 +430,8 @@ export default function (env, config) {
             /**
              * @name            markdown
              * @namespace       config.frontendServer.handlers
-             * @type            Object
+             * @type            String
+             * @default         ${__dirname()}/../node/handlers/markdown
              *
              * Store all the "markdown" configuration access like the route, the title, etc...
              *
@@ -209,20 +440,10 @@ export default function (env, config) {
              */
             markdown: `${__dirname()}/../node/handlers/markdown`,
             /**
-             * @name            styleguide
-             * @namespace       config.frontendServer.handlers
-             * @type            Object
-             *
-             * Store all the "styleguide" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            styleguide: `${__dirname()}/../node/handlers/styleguide`,
-            /**
              * @name            docmap
              * @namespace       config.frontendServer.handlers
-             * @type            Object
+             * @type            String
+             * @default         ${__dirname()}/../node/handlers/docmap
              *
              * Store all the "api doc" configuration access like the route, the title, etc...
              *
@@ -230,18 +451,6 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             docmap: `${__dirname()}/../node/handlers/docmap`,
-
-            /**
-             * @name            config
-             * @namespace       config.frontendServer.handlers
-             * @type            Object
-             *
-             * Store all the "api doc" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            config: `${__dirname()}/../node/handlers/config`,
         },
     };
 }

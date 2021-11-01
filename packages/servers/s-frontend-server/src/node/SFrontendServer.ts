@@ -104,20 +104,23 @@ export default class SFrontendServer extends __SClass {
                         const moduleId = Object.keys(
                             frontendServerConfig.modules,
                         )[i];
-                        const modulePath = __path.resolve(
-                            frontendServerConfig.modules[moduleId],
-                        );
+                        const moduleObj =
+                            frontendServerConfig.modules[moduleId];
                         let module;
                         try {
-                            module = await import(modulePath);
+                            module = await import(moduleObj.path);
                         } catch (e) {
                             console.log(e);
                             throw new Error(
-                                `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${modulePath}</cyan>"`,
+                                `<red>${this.constructor.name}</red> Sorry but a module called "<yellow>startServer.${moduleId}</yellow>" has been registered but does not exists under "<cyan>${moduleObj.path}</cyan>"`,
                             );
                         }
                         await pipe(
-                            module.default(express, frontendServerConfig),
+                            module.default(
+                                express,
+                                moduleObj.settings,
+                                frontendServerConfig,
+                            ),
                         );
                     }
                 }
@@ -211,6 +214,8 @@ export default class SFrontendServer extends __SClass {
 
                             const handlerPath =
                                 frontendServerConfig.handlers[routeObj.handler];
+                            if (!handlerPath) return;
+
                             const { default: handlerFn } = await import(
                                 handlerPath
                             );

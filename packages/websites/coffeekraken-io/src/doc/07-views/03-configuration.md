@@ -16,4 +16,16 @@
 
 # Views configurations
 
+The views are generated through our `@coffeekraken/s-view-renderer` package and served using our `@coffeekraken/s-frontendServer` package.
+
+This mean that the configurations stands into two configuration files that you can see bellow:
+
+## `views.config.js`
+
+{{> config path='@coffeekraken.s-view-renderer.config.views'}}
+
+## `frontendServer.config.js`
+
+{{> config path='@coffeekraken.s-frontend-server.config.frontendServer'}}
+
 {{/layout-doc }}

@@ -40,19 +40,42 @@ export default function (env) {
          */
         timeFormat: 'h:mm:ss',
 
-        /**
-         * @name            i18n
-         * @namespace       config.datetime
-         * @type            ISDatetimeConfigI18n
-         *
-         * This specify some traductions for date and time display like days of the week, months names, etc...
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
         i18n: {
+            /**
+             * @name            previousMonth
+             * @namespace       config.datetime.i18n
+             * @type            String
+             * @default         Previous Month
+             *
+             * This specify the "previous month" translation
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             previousMonth: 'Previous Month',
+            /**
+             * @name            nextMonth
+             * @namespace       config.datetime.i18n
+             * @type            String
+             * @default         Next Month
+             *
+             * This specify the "next month" translation
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             nextMonth: 'Next Month',
+            /**
+             * @name            months
+             * @namespace       config.datetime.i18n
+             * @type            String
+             * @default         ['January','February','March','April','May','June','July','August','September','October','November','December']
+             *
+             * This specify the "months" translation
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             months: [
                 'January',
                 'February',
@@ -67,7 +90,37 @@ export default function (env) {
                 'November',
                 'December',
             ],
-            weekdays: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+            /**
+             * @name            weekdays
+             * @namespace       config.datetime.i18n
+             * @type            String
+             * @default         ['Sunday','Monday','Tuesday','Wednesday','Thursday','Friday','Saturday']
+             *
+             * This specify the "weekdays" translation
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            weekdays: [
+                'Sunday',
+                'Monday',
+                'Tuesday',
+                'Wednesday',
+                'Thursday',
+                'Friday',
+                'Saturday',
+            ],
+            /**
+             * @name            weekdaysShort
+             * @namespace       config.datetime.i18n
+             * @type            String
+             * @default         ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat']
+             *
+             * This specify the "weekdays shorts" translation
+             *
+             * @since           2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         },
     };

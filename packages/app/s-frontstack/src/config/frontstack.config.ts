@@ -1,188 +1,427 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
-const recipe = 'default';
-
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {
-        recipe,
+        defaultRecipe: 'default',
 
         exclude: [],
 
         recipes: {
-            default: {
-                title: 'Default',
-                description: 'Default s-frontstack recipe ',
-                templateDir: __path.resolve(`${__dirname()}/../templates/default`),
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        description: 'Start the development stack',
-                        actions: {
-                            frontendServer: '[config.frontstack.actions.frontendServer]',
-                            vite: '[config.frontstack.actions.vite]',
-                        },
-                    },
-                    prod: {
-                        description: 'Start the production testing stack',
-                        sharedParams: {
-                            env: 'production',
-                        },
-                        actions: {
-                            frontendServer: '[config.frontstack.actions.frontendServer]',
-                        },
-                    },
-                    build: {
-                        description: 'Build your final production ready dist package',
-                        actions: {
-                            postcssBuild: '[config.frontstack.actions.postcssBuild]',
-                            viteBuild: '[config.frontstack.actions.viteBuild]',
-                            imagesBuild: '[config.frontstack.actions.imagesBuild]',
-                            docBuild: '[config.frontstack.actions.docBuild]',
-                            docmapBuild: '[config.frontstack.actions.docmapBuild]',
-                        },
-                    },
-                },
-            },
-            litElement: {
-                title: 'LitElement component',
-                description: 'LitElement webcomponent recipe',
-                templateDir: __path.resolve(`${__dirname()}/../templates/litElement`),
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        description: 'Start the development stack',
-                        actions: {
-                            vite: '[config.frontstack.actions.vite]',
-                        },
-                    },
-                    build: {
-                        description: 'Build your final production ready dist package',
-                        actions: {
-                            viteBuild: {
-                                action: '[config.frontstack.actions.viteBuild]',
-                                params: {
-                                    lib: true,
-                                },
-                            },
-                            // docBuild: '[config.frontstack.actions.docBuild]',
-                            // docmapBuild: '[config.frontstack.actions.docmapBuild]',
-                        },
-                    },
-                },
-            },
-            sFeature: {
-                title: 'HTML feature',
-                description: 'HTML feature based on the SFeature class',
-                templateDir: __path.resolve(`${__dirname()}/../templates/sFeature`),
-                defaultStack: 'dev',
-                stacks: {
-                    dev: {
-                        description: 'Start the development stack',
-                        actions: {
-                            vite: '[config.frontstack.actions.vite]',
-                        },
-                    },
-                    build: {
-                        description: 'Build your final production ready dist package',
-                        actions: {
-                            viteBuild: {
-                                action: '[config.frontstack.actions.viteBuild]',
-                                params: {
-                                    lib: true,
-                                },
-                            },
-                            // docBuild: '[config.frontstack.actions.docBuild]',
-                            // docmapBuild: '[config.frontstack.actions.docmapBuild]',
-                        },
-                    },
-                },
-            },
+            /**
+             * @name            default
+             * @namespace       config.frontstack.recipes
+             * @type            String
+             * @default         [config.frontstackRecipeDefault]
+             *
+             * Specify the default recipe
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            default: '[config.frontstackRecipeDefault]',
+            /**
+             * @name            litElement
+             * @namespace       config.frontstack.recipes
+             * @type            String
+             * @default         [config.frontstackRecipeLitElement]
+             *
+             * Specify the litElement recipe
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            litElement: '[config.frontstackRecipeLitElement]',
         },
 
         actions: {
             frontendServer: {
-                id: 'frontendServer',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.frontendServer
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the frontend server action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Frontend server',
-                description: 'Frontend server using the @coffeekraken/s-frontend-server package',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.frontendServer
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontend server action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Frontend server using the @coffeekraken/s-frontend-server package',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.frontendServer
+                 * @type            String
+                 * @default        sugar frontendServer.start
+                 *
+                 * Specify the frontend server action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 process: 'sugar frontendServer.start',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.frontendServer.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the frontend server action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             postcssBuild: {
-                id: 'postcssBuild',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the postcss build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'PostCSS build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the postcss build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 description: 'Build css using the amazing PostCSS package',
-                process: 'sugar postcss.build',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.postcssBuild
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the postcss build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar postcss.build',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.postcssBuild.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the postcss build action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             imagesBuild: {
-                id: 'imagesBuild',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the images build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Images build action',
-                description: 'Build your images with ease. Compress, resize, webp version, etc...',
-                process: 'sugar images.build',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the images build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Build your images with ease. Compress, resize, webp version, etc...',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.imagesBuild
+                 * @type            String
+                 * @default        sugar images.build
+                 *
+                 * Specify the images build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar images.build',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.imagesBuild.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the images build action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             vite: {
-                id: 'vite',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.vite
+                 * @type            String
+                 * @default        Vite development stack
+                 *
+                 * Specify the vite action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Vite development stack',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.vite
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the vite action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 description: 'Allow to build files easily while developing',
-                process: 'sugar vite',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.vite
+                 * @type            String
+                 * @default        sugar vite
+                 *
+                 * Specify the vite action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar vite',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.vite.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the vite action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             viteBuild: {
-                id: 'viteBuild',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.viteBuild
+                 * @type            String
+                 * @default        Vite build stasck
+                 *
+                 * Specify the vite build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Vite build stack',
-                description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
-                process: 'sugar vite.build',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.viteBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the vite build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.viteBuild
+                 * @type            String
+                 * @default        sugar vite.build
+                 *
+                 * Specify the vite build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar vite.build',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.viteBuild.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the vite build action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             docBuild: {
-                id: 'docBuild',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.docBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Markdown doc build stack',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.docBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 description:
                     'Allow to build markdown documentation with special features files easily. Take care of src/README and src/doc/**/*.md files',
-                process: 'sugar markdown.build -p readme -p doc',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docBuild
+                 * @type            String
+                 * @default        sugar markdown.build -p readme -p doc
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar markdown.build -p readme -p doc',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.docBuild.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the doc build action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },
             },
             docmapBuild: {
-                id: 'docmapBuild',
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 title: 'Docmap build action',
-                description: 'Allow to build and maintain up to date the docmap.json file',
-                process: 'sugar docmap.build --noExtends',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to build and maintain up to date the docmap.json file',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        sugar docmap.build --noExtends
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: 'sugar docmap.build --noExtends',
                 params: {},
                 settings: {
                     processManager: {
+                        /**
+                         * @name            restart
+                         * @namespace       config.frontstack.actions.docmapBuild.settings.processManager
+                         * @type            String
+                         * @default        true
+                         *
+                         * Specify the docmap build action restart behavior
+                         *
+                         * @since       2.0.0
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         */
                         restart: true,
                     },
                 },

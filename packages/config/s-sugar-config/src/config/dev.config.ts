@@ -2,7 +2,7 @@ export default {
     colors: {
         /**
          * @name                yellow
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #ffdc89
          *
@@ -15,7 +15,7 @@ export default {
 
         /**
          * @name                cyan
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #65c1cd
          *
@@ -28,7 +28,7 @@ export default {
 
         /**
          * @name                green
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #a7cb8b
          *
@@ -41,7 +41,7 @@ export default {
 
         /**
          * @name                magenta
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #d190e3
          *
@@ -54,7 +54,7 @@ export default {
 
         /**
          * @name                red
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e78287
          *
@@ -67,7 +67,7 @@ export default {
 
         /**
          * @name                blue
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #71bdf2
          *
@@ -80,7 +80,7 @@ export default {
 
         /**
          * @name                primary
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #ffdc89
          *
@@ -93,7 +93,7 @@ export default {
 
         /**
          * @name                secondary
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #65c1cd
          *
@@ -106,7 +106,7 @@ export default {
 
         /**
          * @name                grey
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *
@@ -119,7 +119,7 @@ export default {
 
         /**
          * @name                gray
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *
@@ -132,7 +132,7 @@ export default {
 
         /**
          * @name                black
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #343a43
          *
@@ -145,7 +145,7 @@ export default {
 
         /**
          * @name                white
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *

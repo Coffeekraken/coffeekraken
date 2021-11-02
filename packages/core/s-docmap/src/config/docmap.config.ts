@@ -10,6 +10,7 @@ export default function (env, config) {
              * @name          input
              * @namespace     config.docmap.read
              * @type          String
+             * @default         ${__packageRoot()}/docmap.json
              *
              * Specify the path of the docmap.json source file to read
              *
@@ -39,7 +40,7 @@ export default function (env, config) {
              * @name          glob
              * @namespace     config.docmap.installSnapshot
              * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap/* /
+             * @default       [config.storage.package.rootDir]/.docmap/*
              *
              * Specify where to find the snapshot(s) to install. It must refer
              * to folder(s) where a docmap.json and a package.json exists...
@@ -55,6 +56,7 @@ export default function (env, config) {
              * @name            globs
              * @namespace       config.docmap.build
              * @type                Array<String>
+             * @default             ['*:\/.*@namespace.*\/gm','*.md:\/.*@namespace.*\/gm',`src/**{5}/!(*.md|*.ts):\/.*@namespace.*\/gm`,`dist/css/*:/.*@namespace.*\/gm`]
              *
              * Specify the input globs to use in order to find files that will
              * be used for docmap generation.
@@ -85,6 +87,7 @@ export default function (env, config) {
              * @name        exclude
              * @namespace   config.docmap.build
              * @type        Array<String>
+             * @default         ['**\/__tests__/**\/*','**\/__tests__.wip/**\/*','**\/__wip__/**\/*']
              *
              * Specify some regex to apply on different docblock and path properties
              * to exclude some files from the buildd docMap json
@@ -111,23 +114,24 @@ export default function (env, config) {
              */
             noExtends: false,
 
-            /**
-             * @name        filters
-             * @namespace   config.docmap.build
-             * @type        Object<String>
-             *
-             * Specify some regex to apply on different docblock properties
-             * to exclude some files from the buildd docmap json
-             *
-             * @example     js
-             * {
-             *    namespace: /#\{.*\}/gm
-             * }
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             filters: {
+                /**
+                 * @name        namespace
+                 * @namespace   config.docmap.build.filters
+                 * @type        Object<String>
+                 * @default       /#\{.*\}/gm
+                 *
+                 * Specify some regex to apply on different docblock properties
+                 * to exclude some files from the buildd docmap json
+                 *
+                 * @example     js
+                 * {
+                 *    namespace: /#\{.*\}/gm
+                 * }
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 namespace: /#\{.*\}/gm,
             },
 
@@ -135,7 +139,7 @@ export default function (env, config) {
              * @name        fields
              * @namespace     config.docmap.build
              * @type        Array<String>
-             * @default     ['name','type','description','namespace','status','static','since']
+             * @default     ['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
              *
              * Specify which docblock fields you want to integrate to your docmap.json items
              *

@@ -47,7 +47,9 @@ export interface ISFrontstackActionWrapper {
 export interface ISFrontstackRecipestack {
     description: string;
     sharedParams: any;
-    actions: Record<string, ISFrontstackAction> | Record<string, ISFrontstackActionWrapper>;
+    actions:
+        | Record<string, ISFrontstackAction>
+        | Record<string, ISFrontstackActionWrapper>;
 }
 
 export interface ISFrontstackRecipe {
@@ -130,13 +132,16 @@ export default class SFrontstack extends __SClass {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
                 const actionsObj = frontstackConfig.actions;
 
-                const finalParams: ISFrontstackActionParams = __SFrontstackActionInterface.apply(params);
+                const finalParams: ISFrontstackActionParams =
+                    __SFrontstackActionInterface.apply(params);
 
                 const availableActions = Object.keys(actionsObj);
 
                 if (availableActions.indexOf(finalParams.action) === -1) {
                     throw new Error(
-                        `<red>[${this.constructor.name}.action]</red> Sorry but the requested action "<yellow>${
+                        `<red>[${
+                            this.constructor.name
+                        }.action]</red> Sorry but the requested action "<yellow>${
                             finalParams.action
                         }</yellow>" does not exists. Here's the list of available action(s):\n${availableActions
                             .map((r) => `- <yellow>${r}</yellow>`)
@@ -200,13 +205,17 @@ export default class SFrontstack extends __SClass {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
-                const recipesObj = frontstackConfig['recipes'];
+                const recipesObj = frontstackConfig.recipes;
 
-                const finalParams = __SFrontstackRecipeParamsInterface.apply(params);
+                const finalParams =
+                    __SFrontstackRecipeParamsInterface.apply(params);
 
                 if (!finalParams.recipe) {
                     const sugarJson = new __SSugarJson().current();
-                    finalParams.recipe = sugarJson.recipe;
+                    if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
+                }
+                if (!finalParams.recipe) {
+                    finalParams.recipe = frontstackConfig.defaultRecipe;
                 }
 
                 if (!finalParams.recipe) {
@@ -231,7 +240,8 @@ export default class SFrontstack extends __SClass {
                             `<red>[recipe]</red> Sorry but you MUST specify a "<yellow>stack</yellow>" to use in the requested "<cyan>${finalParams.recipe}</cyan>" recipe`,
                         );
                     }
-                    finalParams.stack = recipesObj[finalParams.recipe].defaultStack;
+                    finalParams.stack =
+                        recipesObj[finalParams.recipe].defaultStack;
                 }
 
                 emit('log', {
@@ -251,7 +261,10 @@ export default class SFrontstack extends __SClass {
                     recipesObj[finalParams.recipe];
 
                 // check the recipe stacks
-                if (!recipeObj.stacks || !Object.keys(recipeObj.stacks).length) {
+                if (
+                    !recipeObj.stacks ||
+                    !Object.keys(recipeObj.stacks).length
+                ) {
                     throw new Error(
                         `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}</yellow>" configuration object missed the requested "<yellow>stacks</yellow>" property that list the stacks to execute`,
                     );
@@ -265,7 +278,8 @@ export default class SFrontstack extends __SClass {
                 // make sure this recipe has some actions
                 if (
                     !recipeObj.stacks[finalParams.stack].actions ||
-                    !Object.keys(recipeObj.stacks[finalParams.stack].actions).length
+                    !Object.keys(recipeObj.stacks[finalParams.stack].actions)
+                        .length
                 ) {
                     throw new Error(
                         `<red>[recipe]</red> Sorry but the requested "<yellow>${finalParams.recipe}.stacks.${finalParams.stack}.actions</yellow>" configuration object missed the requested "<yellow>actions</yellow>" property that list the actions to execute`,
@@ -292,8 +306,13 @@ export default class SFrontstack extends __SClass {
 
                 // loop on each actions for this recipe
                 if (recipeObj.stacks[finalParams.stack].actions) {
-                    Object.keys(recipeObj.stacks[finalParams.stack].actions).forEach(async (actionName) => {
-                        if (finalParams.exclude && finalParams.exclude.indexOf(actionName) !== -1) {
+                    Object.keys(
+                        recipeObj.stacks[finalParams.stack].actions,
+                    ).forEach(async (actionName) => {
+                        if (
+                            finalParams.exclude &&
+                            finalParams.exclude.indexOf(actionName) !== -1
+                        ) {
                             emit('log', {
                                 type: 'verbose',
                                 value: `Excluding the action "<yellow>${actionName}</yellow>"`,
@@ -304,24 +323,37 @@ export default class SFrontstack extends __SClass {
                         // @ts-ignore
                         let actionObj =
                             // @ts-ignore
-                            recipeObj.stacks[finalParams.stack].actions[actionName];
+                            recipeObj.stacks[finalParams.stack].actions[
+                                actionName
+                            ];
                         let actionSpecificParams = {},
                             actionParams = {};
 
-                        if (actionObj.action && !actionObj.process && !actionObj.command) {
+                        if (
+                            actionObj.action &&
+                            !actionObj.process &&
+                            !actionObj.command
+                        ) {
                             actionSpecificParams = actionObj.params ?? {};
                             actionObj = actionObj.action;
                         }
                         actionParams = actionObj.params ?? {};
 
-                        const finalActionParams = __deepMerge(actionParams, actionSpecificParams);
+                        const finalActionParams = __deepMerge(
+                            actionParams,
+                            actionSpecificParams,
+                        );
 
                         // build shared params cli string
-                        const paramsStr = __argsToString(finalActionParams).trim();
+                        const paramsStr =
+                            __argsToString(finalActionParams).trim();
 
                         const actionId = actionObj.id ?? actionName;
                         // create a process from the recipe object
-                        const finalCommand = (actionObj.command ?? actionObj.process).trim() + ' ' + paramsStr;
+                        const finalCommand =
+                            (actionObj.command ?? actionObj.process).trim() +
+                            ' ' +
+                            paramsStr;
 
                         emit('log', {
                             value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
@@ -390,7 +422,8 @@ export default class SFrontstack extends __SClass {
             ({ resolve, reject, emit }) => {
                 const recipes = this.listRecipes();
 
-                const finalParams = __SFrontstackListParamsInterface.apply(params);
+                const finalParams =
+                    __SFrontstackListParamsInterface.apply(params);
 
                 let recipe, stack;
                 if (finalParams.recipeStack) {
@@ -409,9 +442,9 @@ export default class SFrontstack extends __SClass {
                     }
                     for (const [name, obj] of Object.entries(recipes)) {
                         emit('log', {
-                            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${
-                                obj.description
-                            }`,
+                            value: `- <cyan>${name}</cyan>${' '.repeat(
+                                largerName.length - name.length,
+                            )} : ${obj.description}`,
                         });
                     }
 
@@ -434,11 +467,13 @@ export default class SFrontstack extends __SClass {
                     for (const name in recipes[recipe].stacks) {
                         if (name.length > largerName.length) largerName = name;
                     }
-                    for (const [name, obj] of Object.entries(recipes[recipe].stacks)) {
+                    for (const [name, obj] of Object.entries(
+                        recipes[recipe].stacks,
+                    )) {
                         emit('log', {
-                            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${
-                                obj.description
-                            }`,
+                            value: `- <cyan>${name}</cyan>${' '.repeat(
+                                largerName.length - name.length,
+                            )} : ${obj.description}`,
                         });
                     }
 
@@ -461,11 +496,13 @@ export default class SFrontstack extends __SClass {
                     for (const name in recipes[recipe].stacks[stack].actions) {
                         if (name.length > largerName.length) largerName = name;
                     }
-                    for (const [name, obj] of Object.entries(recipes[recipe].stacks[stack].actions)) {
+                    for (const [name, obj] of Object.entries(
+                        recipes[recipe].stacks[stack].actions,
+                    )) {
                         emit('log', {
-                            value: `- <cyan>${name}</cyan>${' '.repeat(largerName.length - name.length)} : ${
-                                obj.description
-                            }`,
+                            value: `- <cyan>${name}</cyan>${' '.repeat(
+                                largerName.length - name.length,
+                            )} : ${obj.description}`,
                         });
                     }
 

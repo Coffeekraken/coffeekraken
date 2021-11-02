@@ -8,6 +8,7 @@ export default function (env, config) {
              * @name          input
              * @namespace     config.docmap.read
              * @type          String
+             * @default         ${__packageRoot()}/docmap.json
              *
              * Specify the path of the docmap.json source file to read
              *
@@ -35,7 +36,7 @@ export default function (env, config) {
              * @name          glob
              * @namespace     config.docmap.installSnapshot
              * @type          String
-             * @default       [config.storage.package.rootDir]/.docmap/* /
+             * @default       [config.storage.package.rootDir]/.docmap/*
              *
              * Specify where to find the snapshot(s) to install. It must refer
              * to folder(s) where a docmap.json and a package.json exists...
@@ -50,6 +51,7 @@ export default function (env, config) {
              * @name            globs
              * @namespace       config.docmap.build
              * @type                Array<String>
+             * @default             ['*:\/.*@namespace.*\/gm','*.md:\/.*@namespace.*\/gm',`src/**{5}/!(*.md|*.ts):\/.*@namespace.*\/gm`,`dist/css/*:/.*@namespace.*\/gm`]
              *
              * Specify the input globs to use in order to find files that will
              * be used for docmap generation.
@@ -79,6 +81,7 @@ export default function (env, config) {
              * @name        exclude
              * @namespace   config.docmap.build
              * @type        Array<String>
+             * @default         ['**\/__tests__/**\/*','**\/__tests__.wip/**\/*','**\/__wip__/**\/*']
              *
              * Specify some regex to apply on different docblock and path properties
              * to exclude some files from the buildd docMap json
@@ -103,30 +106,31 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             noExtends: false,
-            /**
-             * @name        filters
-             * @namespace   config.docmap.build
-             * @type        Object<String>
-             *
-             * Specify some regex to apply on different docblock properties
-             * to exclude some files from the buildd docmap json
-             *
-             * @example     js
-             * {
-             *    namespace: /#\{.*\}/gm
-             * }
-             *
-             * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             filters: {
+                /**
+                 * @name        namespace
+                 * @namespace   config.docmap.build.filters
+                 * @type        Object<String>
+                 * @default       /#\{.*\}/gm
+                 *
+                 * Specify some regex to apply on different docblock properties
+                 * to exclude some files from the buildd docmap json
+                 *
+                 * @example     js
+                 * {
+                 *    namespace: /#\{.*\}/gm
+                 * }
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 namespace: /#\{.*\}/gm,
             },
             /**
              * @name        fields
              * @namespace     config.docmap.build
              * @type        Array<String>
-             * @default     ['name','type','description','namespace','status','static','since']
+             * @default     ['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
              *
              * Specify which docblock fields you want to integrate to your docmap.json items
              *
@@ -176,4 +180,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7ZUFTRztZQUNILEtBQUssRUFBRSxHQUFHLGFBQWEsRUFBRSxjQUFjO1NBQzFDO1FBRUQsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRSwwQ0FBMEM7U0FDckQ7UUFFRCxlQUFlLEVBQUU7WUFDYjs7Ozs7Ozs7Ozs7ZUFXRztZQUNILElBQUksRUFBRSw0Q0FBNEM7U0FDckQ7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7Ozs7O2VBWUc7WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsc0JBQXNCO2dCQUN0Qix5QkFBeUI7Z0JBQ3pCLDJDQUEyQztnQkFDM0MsK0JBQStCO2dCQUMvQix1REFBdUQ7YUFDMUQ7WUFDRCxNQUFNLEVBQUU7Z0JBQ0osS0FBSyxFQUFFO29CQUNILHNCQUFzQjtvQkFDdEIseUJBQXlCO29CQUN6QiwyQ0FBMkM7b0JBQzNDLCtCQUErQjtvQkFDL0Isa0RBQWtEO2lCQUNyRDthQUNKO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFNBQVMsRUFBRSxLQUFLO1lBRWhCOzs7Ozs7Ozs7Ozs7Ozs7ZUFlRztZQUNILE9BQU8sRUFBRTtnQkFDTCxTQUFTLEVBQUUsV0FBVzthQUN6QjtZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUU7Z0JBQ0osTUFBTTtnQkFDTixNQUFNO2dCQUNOLE1BQU07Z0JBQ04sU0FBUztnQkFDVCxVQUFVO2dCQUNWLGFBQWE7Z0JBQ2IsV0FBVztnQkFDWCxRQUFRO2dCQUNSLFNBQVM7Z0JBQ1QsV0FBVztnQkFDWCxZQUFZO2dCQUNaLFFBQVE7Z0JBQ1IsT0FBTztnQkFDUCxRQUFRO2FBQ1g7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLDhDQUE4QztTQUMxRDtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxhQUFhLEVBQUUsY0FBYztTQUMxQztRQUVELFFBQVEsRUFBRTtZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUUsMENBQTBDO1NBQ3JEO1FBRUQsZUFBZSxFQUFFO1lBQ2I7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsNENBQTRDO1NBQ3JEO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7Ozs7ZUFhRztZQUNILEtBQUssRUFBRTtnQkFDSCxzQkFBc0I7Z0JBQ3RCLHlCQUF5QjtnQkFDekIsMkNBQTJDO2dCQUMzQywrQkFBK0I7Z0JBQy9CLHVEQUF1RDthQUMxRDtZQUNELE1BQU0sRUFBRTtnQkFDSixLQUFLLEVBQUU7b0JBQ0gsc0JBQXNCO29CQUN0Qix5QkFBeUI7b0JBQ3pCLDJDQUEyQztvQkFDM0MsK0JBQStCO29CQUMvQixrREFBa0Q7aUJBQ3JEO2FBQ0o7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFNBQVMsRUFBRSxLQUFLO1lBRWhCLE9BQU8sRUFBRTtnQkFDTDs7Ozs7Ozs7Ozs7Ozs7OzttQkFnQkc7Z0JBQ0gsU0FBUyxFQUFFLFdBQVc7YUFDekI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLE1BQU07Z0JBQ04sTUFBTTtnQkFDTixNQUFNO2dCQUNOLFNBQVM7Z0JBQ1QsVUFBVTtnQkFDVixhQUFhO2dCQUNiLFdBQVc7Z0JBQ1gsUUFBUTtnQkFDUixTQUFTO2dCQUNULFdBQVc7Z0JBQ1gsWUFBWTtnQkFDWixRQUFRO2dCQUNSLE9BQU87Z0JBQ1AsUUFBUTthQUNYO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1lBRVY7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSw4Q0FBOEM7U0FDMUQ7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

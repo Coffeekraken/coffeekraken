@@ -12,6 +12,7 @@ export default function (env) {
              * @name            tmpDir
              * @namespace       config.storage.system
              * @type            String
+             * @default         __systemTmpDir()
              *
              * Configure where is located the system "temp" folder
              *
@@ -92,7 +93,7 @@ export default function (env) {
              * @name            rootDir
              * @namespace       config.storage
              * @type            String
-             * @default         ${__packageRoot()}
+             * @default         ${__packageRoot(__dirname())}
              *
              * Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder
              *

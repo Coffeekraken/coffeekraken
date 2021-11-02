@@ -1,3 +1,0 @@
-```{{ lang }}
-{{> @partial-block }}
-```

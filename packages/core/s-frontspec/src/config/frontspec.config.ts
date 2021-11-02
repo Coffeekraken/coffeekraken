@@ -14,18 +14,19 @@ export async function prepare(config) {
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {
-        /**
-         * @name      head
-         * @namespace     config.frontspec.default
-         * @type      Object
-         *
-         * Specify some items you want to integrate to the head tag. It can be everything you want
-         *
-         * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
         head: {
             '@dev': {
+                /**
+                 * @name      viteClient
+                 * @namespace     config.frontspec.head.@dev
+                 * @type      Object
+                 * @default     vite client script
+                 *
+                 * Specify some items you want to integrate to the head tag. It can be everything you want
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 viteClient: `
           <script>
             document.addEventListener("DOMContentLoaded", function() {

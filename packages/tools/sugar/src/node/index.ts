@@ -22,11 +22,5 @@ __handleError();
 
 // exit cleanup
 __onProcessExit(() => {
-  return __exitCleanup;
+    return __exitCleanup;
 });
-
-// SFile classes
-// __registerSFileClasses();
-
-// Logging
-// new __SLog(__SugarConfig.get('log'));

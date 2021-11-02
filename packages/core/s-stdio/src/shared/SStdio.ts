@@ -15,16 +15,9 @@ export interface ISStdioSettingsMetas {
 
 export interface ISStdioSettings {
     id: string;
-    maxItems: number;
-    events: string[];
-    spaceBetween: number;
-    spaceAround: number;
-    globalEvents: boolean;
     filter: typeof Function;
     processor: typeof Function;
-    types: string[];
     metas: ISStdioSettingsMetas;
-    mapTypesToEvents: Record<string, string[]>;
     defaultLogObj: Partial<ISLog>;
     defaultAskObj: Partial<ISLogAsk>;
 }
@@ -315,33 +308,6 @@ export default class SStdio extends __SClass implements ISStdio {
                     stdio: {
                         filter: null,
                         processor: null,
-                        maxItems: -1,
-                        spaceBetween: 0,
-                        spaceAround: 0,
-                        globalEvents: true,
-                        events: [
-                            'log',
-                            '*.log',
-                            'warn',
-                            '*.warn',
-                            'error',
-                            '*.error',
-                            'reject',
-                            '*.reject',
-                        ],
-                        mapTypesToEvents: {
-                            heading: [],
-                            error: [
-                                'error',
-                                '*.error',
-                                'reject',
-                                '*.reject',
-                                'cancel',
-                                '*.cancel',
-                            ],
-                            warning: ['warn', '*.warn'],
-                        },
-                        types: __SSugarConfig.get('log.types'),
                         metas: {
                             time: false,
                         },
@@ -454,24 +420,6 @@ export default class SStdio extends __SClass implements ISStdio {
             'log',
             (data, metas) => {
                 if (data === undefined || data === null) return;
-                // // handle the type depending on the passed stack
-                // const types = Object.keys(set.mapTypesToEvents);
-                // for (let i = 0; i < types.length; i++) {
-                //     const stacks = set.mapTypesToEvents[types[i]];
-                //     const stacksGlob = Array.isArray(stacks) && stacks.length ? `*(${stacks.join('|')})` : stacks;
-                //     // @ts-ignore
-                //     if (stacksGlob.length && __minimatch(metas.event, stacksGlob)) {
-                //         if (typeof data !== 'object') {
-                //             data = {
-                //                 type: types[i],
-                //                 value: data,
-                //             };
-                //         } else if (!data.type) {
-                //             data.type = types[i];
-                //         }
-                //         break;
-                //     }
-                // }
 
                 // save metas into logObj
                 data.metas = metas;
@@ -529,7 +477,6 @@ export default class SStdio extends __SClass implements ISStdio {
 
             if (log.clear === true) {
                 this._isClearing = true;
-                // console.log('CLEAR', log.type);
                 // @ts-ignore
                 if (!this.clear || typeof this.clear !== 'function')
                     throw new Error(

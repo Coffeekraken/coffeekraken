@@ -1,147 +1,158 @@
 export default function (env, config) {
     return {
+        /**
+         * @name            extends
+         * @namespace       config.themeCoffeekrakenDark
+         * @type            String
+         * @default         themeDarkBase
+         *
+         * Specify which theme this one extends from
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
         extends: 'themeDarkBase',
         color: {
-            /**
-             * @name                main
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #776D91
-             *
-             * Specify the <s-color="main">main</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             main: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.main
+                 * @type                Color
+                 * @default             #776D91
+                 *
+                 * Specify the <s-color="main">main</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#776D91',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                ui
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #7a738c
-             *
-             * Specify the <s-color="ui">ui</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             ui: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.ui
+                 * @type                Color
+                 * @default             #7a738c
+                 *
+                 * Specify the <s-color="ui">ui</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#7a738c',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                accent
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ffbb00
-             *
-             * Specify the <s-color="accent">accent</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             accent: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.accent
+                 * @type                Color
+                 * @default             #ffbb00
+                 *
+                 * Specify the <s-color="accent">accent</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ffbb00',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                complementary
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #5100ff
-             *
-             * Specify the <s-color="complementary">complementary</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             complementary: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.complementary
+                 * @type                Color
+                 * @default             #5100ff
+                 *
+                 * Specify the <s-color="complementary">complementary</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#5100ff',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                success
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #91ff00
-             *
-             * Specify the <s-color="success">success</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             success: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.success
+                 * @type                Color
+                 * @default             #91ff00
+                 *
+                 * Specify the <s-color="success">success</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#91ff00',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                warning
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ffd500
-             *
-             * Specify the <s-color="warning">warning</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             warning: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.warning
+                 * @type                Color
+                 * @default             #ffd500
+                 *
+                 * Specify the <s-color="warning">warning</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ffd500',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                error
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ff003b
-             *
-             * Specify the <s-color="error">error</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             error: {
+                /**
+                 * @name                error
+                 * @namespace           config.themeCoffeekrakenDark.color.error
+                 * @type                Color
+                 * @default             #ff003b
+                 *
+                 * Specify the <s-color="error">error</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ff003b',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                info
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #00ffff
-             *
-             * Specify the <s-color="info">info</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             info: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.info
+                 * @type                Color
+                 * @default             #00ffff
+                 *
+                 * Specify the <s-color="info">info</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#00ffff',
                 '...': '[extends.colorSchemas]',
             },
 
-            /**
-             * @name                extension
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #2b3438
-             *
-             * Specify the <primary>extension</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             extension: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeCoffeekrakenDark.color.extension
+                 * @type                Color
+                 * @default             [theme.color.accent.color]
+                 *
+                 * Specify the <primary>extension</s-color> color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '[theme.color.accent.color]',
                 blade: '#ff2d20',
                 php: '#8892BF',

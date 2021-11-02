@@ -61,18 +61,32 @@ export default function (env, config) {
         /**
          * @name          theme
          * @namespace     config.theme
+         * @default         default
+         *
+         * Specify the theme to use in your project. You can also specify it through a `sugar.json` file
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         theme: 'default',
 
         /**
          * @name          variant
          * @namespace     config.theme
+         * @default         light
+         *
+         * Specify the theme variant to use in your project. You can also specify it through a `sugar.json` file
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         variant: 'light',
 
         /**
          * @name          cssVariables
          * @namespace     config.theme
+         * @type          String[]
+         * @default       ['*']
          *
          * Specify which config(s) you want to be printed in your css as variables.
          * If we have a configuration available like "some.thing.cool", the outgoing variable
@@ -90,6 +104,7 @@ export default function (env, config) {
          * @name          themes
          * @namespace     config.theme
          * @type          Object
+         * @default         {}
          *
          * Store all the themes inside a property each like "default", "myCoolTheme", etc...
          *

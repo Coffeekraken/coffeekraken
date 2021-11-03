@@ -13,7 +13,13 @@
             define();
         </script>
 
-        <s-filtrable-input value="" filtrable="title,body">
+        <template lang="json" id="source">
+            [{ "title": "item 1", "description": "Hello world item 1" }, {
+            "title": "item 2", "description": "Hello world item 1" }, { "title":
+            "item 3", "description": "Hello world item 1" }]
+        </template>
+
+        <s-filtrable-input items="#source" value="" filtrable="title,body">
             <input type="text" />
         </s-filtrable-input>
     </body>

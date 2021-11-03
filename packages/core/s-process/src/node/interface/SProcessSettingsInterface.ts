@@ -60,10 +60,10 @@ class SProcessSettingsInterface extends __SInterface {
                     type: 'String',
                     default: __SSugarConfig.get('process.processPath'),
                 },
-                notification: {
-                    type: 'Object',
-                    default: __SSugarConfig.get('process.notification'),
-                },
+                // notification: {
+                //     type: 'Object',
+                //     default: __SSugarConfig.get('process.notification'),
+                // },
             })
         );
     }

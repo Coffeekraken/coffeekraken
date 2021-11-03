@@ -57,6 +57,7 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.scrollbar.classes;',
         '@sugar.width.classes;',
         '@sugar.components.classes;',
+        '@sugar.whiteSpace.classes;',
     ];
 
     replaceWith(cssArray);

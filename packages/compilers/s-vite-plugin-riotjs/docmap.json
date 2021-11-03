@@ -1,0 +1,53 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-vite-plugin-riotjs.node.sVitePluginRiotjs": {
+                "name": "sVitePluginRiotjs",
+                "type": "Function",
+                "description": "This plugin allows you to use the awesome RiotJs library\nto build your webcomponent using vite frontend development stack.",
+                "namespace": "@coffeekraken.s-vite-plugin-riotjs.node",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "sVitePluginRiotjs.js",
+                "extension": "js",
+                "relPath": "src/node/sVitePluginRiotjs.js",
+                "children": {}
+            }
+        }
+    }
+}

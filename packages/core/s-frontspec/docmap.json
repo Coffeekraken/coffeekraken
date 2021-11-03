@@ -1,0 +1,75 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-frontspec.config.frontspec.head.@dev.viteClient": {
+                "name": "viteClient",
+                "type": "Object",
+                "default": "vite client script",
+                "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
+                "namespace": "@coffeekraken.s-frontspec.config.frontspec.head.@dev",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontspec.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontspec.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-frontspec.node.interface.sFrontspecParamsInterface": {
+                "name": "SFrontspecParamsInterface",
+                "type": "Class",
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
+                "namespace": "@coffeekraken.s-frontspec.node.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFrontspecParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SFrontspecParamsInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

@@ -1,0 +1,288 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder": {
+                "name": "firstDocblockWithNamespaceInFolder",
+                "type": "Function",
+                "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
+                "namespace": "@coffeekraken.s-docblock.sugar.node.docblock",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';\nfirstDocblockWithNamespaceInFolder('my/cool/folder');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "firstDocblocksWithNamespaceInFolder.js",
+                "extension": "js",
+                "relPath": "src/node/utils/firstDocblocksWithNamespaceInFolder.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.author": {
+                "name": "author",
+                "type": "Function",
+                "description": "Parse the author tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "author.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/author.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.caniuse": {
+                "name": "caniuse",
+                "type": "Function",
+                "description": "Parse the caniuse tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "filename": "caniuse.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/caniuse.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.contributor": {
+                "name": "contributor",
+                "type": "Function",
+                "description": "Parse the contributor tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "filename": "contributor.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/contributor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.cssClass": {
+                "name": "cssClass",
+                "type": "Function",
+                "description": "Parse the cssClass tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "cssClass.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/cssClass.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.description": {
+                "name": "description",
+                "type": "Function",
+                "description": "Parse the description tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "description.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/description.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.example": {
+                "name": "example",
+                "type": "Function",
+                "description": "Parse the example tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "example.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/example.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.interface": {
+                "name": "interface",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "Parse the interface tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "interface.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/interface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.menuTag": {
+                "name": "menuTag",
+                "type": "Function",
+                "description": "Parse the menu tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "menu.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/menu.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.param": {
+                "name": "param",
+                "type": "Function",
+                "description": "Parse the param tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "param.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/param.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.return": {
+                "name": "return",
+                "type": "Function",
+                "description": "Parse the return tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "return.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/return.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.see": {
+                "name": "see",
+                "type": "Function",
+                "description": "Parse the see tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "see.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/see.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.simpleRepeatableValue": {
+                "name": "simpleRepeatableValue",
+                "type": "Function",
+                "description": "Parse the simpleRepeatableValue tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "simpleRepeatableValue.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/simpleRepeatableValue.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.simpleValue": {
+                "name": "simpleValue",
+                "type": "Function",
+                "description": "Parse the simpleValue tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "simpleValue.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/simpleValue.js",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.tags.snippet": {
+                "name": "snippet",
+                "type": "Function",
+                "description": "Parse the snippet tag",
+                "namespace": "@coffeekraken.s-docblock.shared.tags",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "snippet.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/snippet.js",
+                "children": {}
+            }
+        }
+    }
+}

@@ -6,7 +6,7 @@
     <ol>
     @foreach ($block->cssClass as $cls)
         <li class="s-font:40 s-mbe:30">
-            <header class="s-flex s-bg:main-surface s-radius">
+            <header class="s-flex s-bg:main-surface s-radius s-depth:100">
                 <div class="s-flex-item:grow s-tc:accent s-p:30">
                     {{ $cls->name }}
                 </div>

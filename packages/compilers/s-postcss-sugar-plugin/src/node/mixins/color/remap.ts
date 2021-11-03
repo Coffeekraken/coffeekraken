@@ -59,7 +59,9 @@ export default function ({
         ...params,
     };
 
-    const cssArray: string[] = [...__remapColorVars(finalParams.color, finalParams.toColor)];
+    const cssArray: string[] = [
+        ...__remapColorVars(finalParams.color, finalParams.toColor),
+    ];
 
     if (atRule.parent.type === 'root') {
         cssArray.unshift(':root {');

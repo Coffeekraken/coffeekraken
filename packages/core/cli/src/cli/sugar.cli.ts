@@ -256,6 +256,8 @@ class SSugarCli {
             // @ts-ignore
             const proPromise = processFn(args);
             this._eventEmitter.pipe(proPromise, {});
+            await proPromise;
+            process.exit();
         }
     }
 

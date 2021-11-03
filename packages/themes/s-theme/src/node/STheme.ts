@@ -412,26 +412,31 @@ export default class STheme extends __SClass {
 
             const defaultColorObj = Object.assign({}, colorObj.default ?? {});
 
-            if (colorObj.color) {
-                const c = new __SColor(colorObj.color);
-                callback({
-                    name: colorName,
-                    variant: '',
-                    state: '',
-                    // @ts-ignore
-                    value: {
-                        color: colorObj.color,
-                        variable: `--s-theme-color-${colorName}`,
-                        r: c.r,
-                        g: c.g,
-                        b: c.b,
-                        h: c.h,
-                        s: c.s,
-                        l: c.l,
-                        a: c.a,
-                    },
-                });
+            if (!colorObj.color) {
+                throw new Error(
+                    `Sorry but your color "<yellow>${colorName}</yellow>" does not provide a "<cyan>color</cyan>" property and this is required...`,
+                );
             }
+
+            const c = new __SColor(colorObj.color);
+
+            callback({
+                name: colorName,
+                variant: '',
+                state: '',
+                // @ts-ignore
+                value: {
+                    color: colorObj.color,
+                    variable: `--s-theme-color-${colorName}`,
+                    r: c.r,
+                    g: c.g,
+                    b: c.b,
+                    h: c.h,
+                    s: c.s,
+                    l: c.l,
+                    a: c.a,
+                },
+            });
 
             Object.keys(colorObj).forEach((stateName, j) => {
                 if (triggeredStop) return;
@@ -456,6 +461,10 @@ export default class STheme extends __SClass {
                 if (stateName === 'color') {
                 } else if (stateName.match(/^:/)) {
                     Object.keys(variantColorObj).forEach((variant) => {
+                        const newColor = c.apply(
+                            variantColorObj[variant],
+                            true,
+                        );
                         res = callback(<ISThemeLoopOnColorsColor>{
                             name: colorName,
                             state: state === 'default' ? '' : state,
@@ -466,6 +475,13 @@ export default class STheme extends __SClass {
                                         ? `--s-theme-color-${colorName}-${state}-${variant}`
                                         : `--s-theme-color-${colorName}-${variant}`,
                                 ...variantColorObj[variant],
+                                r: newColor.r,
+                                g: newColor.g,
+                                b: newColor.b,
+                                h: newColor.h,
+                                s: newColor.s,
+                                l: newColor.l,
+                                a: newColor.a,
                             },
                         });
                         if (res === false || res === -1) {
@@ -473,6 +489,7 @@ export default class STheme extends __SClass {
                         }
                     });
                 } else {
+                    const newColor = c.apply(variantColorObj, true);
                     res = callback(<ISThemeLoopOnColorsColor>{
                         name: colorName,
                         variant,
@@ -482,6 +499,13 @@ export default class STheme extends __SClass {
                                 ? `--s-theme-color-${colorName}-${state}-${variant}`
                                 : `--s-theme-color-${colorName}-${variant}`,
                             ...variantColorObj,
+                            r: newColor.r,
+                            g: newColor.g,
+                            b: newColor.b,
+                            h: newColor.h,
+                            s: newColor.s,
+                            l: newColor.l,
+                            a: newColor.a,
                         },
                     });
                     if (res === false || res === -1) {

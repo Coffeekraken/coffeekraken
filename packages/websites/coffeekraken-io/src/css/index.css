@@ -34,6 +34,11 @@ body {
   fa:search:search
   fa:radiation:nothing
   fa:download:import
+  fab:discord:discord
+  fab:github:github
+  fab:facebook:facebook
+  fab:twitter:twitter
+  fab:instagram:instagram
   fa:cloud-download-alt:install
   fa:cogs:settings
   fab:vuejs:vuejs
@@ -81,7 +86,7 @@ body {
 
 [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
         [class*='s-btn']) {
-    border-radius: 100px !important;
+    /* border-radius: 100px !important; */
     border: none !important;
 }
 

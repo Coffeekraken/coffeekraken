@@ -39,10 +39,5 @@
         </div>
 
     </div>
-        
-
-    <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
-        <ck-settings mount-when="inViewport"></ck-settings> 
-    </s-side-panel>
 
 </header>

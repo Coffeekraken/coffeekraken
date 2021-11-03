@@ -3,16 +3,32 @@
     "extends": [],
     "generated": {
         "extends": [
+            "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
             "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -28,9 +44,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "astNodesToString.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/astNodesToString.ts",
+                "filename": "astNodesToString.js",
+                "extension": "js",
+                "relPath": "src/node/utils/astNodesToString.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.isInScope": {
@@ -50,32 +66,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "isInScope.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/isInScope.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-sugar-plugin.node.utils.jsObjectToCssProperties": {
-                "name": "jsObjectToCssProperties",
-                "type": "Function",
-                "description": "This function allows you to pass a javascript object that contain css properties\nand it will returns the processed css string. Some properties can accept internal theme configuration\nsettings like `font-size`, `color`, etc...:\n\n- `font-family`\n- `font-size`\n- `color`\n- `background-color`\n- `border-radius`: And all border-radius properties like `border-top-left-radius`, etc...\n- `border-width`\n- `transition`\n- `margin`: And all the margins properties like `margin-inline`, etc...\n- `padding`: And all the paddings properties like `padding-block`, etc...\n- `depth`: Special property that will apply nice shadows depending on your theme configuration\n- `default-color`: Apply the default color using `@sugar.color` mixin",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import jsObjectToCssProperties from '@coffeekraken/s-postcss-sugar-plugin';\njsObjectToCssProperties({\n     color: 'primary',\n     margin: '10px'\n}); // => color: #f0f0f0; margin: 10px;"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "jsObjectToCssProperties.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/jsObjectToCssProperties.ts",
+                "filename": "isInScope.js",
+                "extension": "js",
+                "relPath": "src/node/utils/isInScope.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.themeInstance": {
@@ -89,9 +82,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "theme.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/theme.ts",
+                "filename": "theme.js",
+                "extension": "js",
+                "relPath": "src/node/utils/theme.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.themeVar": {
@@ -111,9 +104,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeVar.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/themeVar.ts",
+                "filename": "themeVar.js",
+                "extension": "js",
+                "relPath": "src/node/utils/themeVar.js",
                 "children": {}
             }
         }

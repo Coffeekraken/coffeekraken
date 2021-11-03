@@ -104,7 +104,7 @@ export default async function ({ root, sharedData }) {
     cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
     cssStr = cssStr.replace(
         /\.s-icon:before\s?{/,
-        `${iconsSelectorsArray.join(',')} {\nposition: relative;\n`,
+        `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop:0.2em;\n`,
     );
 
     // rewrite the css file

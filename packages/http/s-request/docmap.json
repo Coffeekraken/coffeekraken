@@ -1,0 +1,243 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-request.sugar.js.http.request": {
+                "name": "request",
+                "type": "Function",
+                "description": "Easily create and send an http request. This will return an instance of the SAjax class.",
+                "namespace": "@coffeekraken.s-request.sugar.js.http",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import request from '@coffeekraken/sugar/js/http/request';\nrequest({\n   url: 'https://api.github.com/something/cool',\n   method: 'get'\n}).then(response => {\n   // do something...\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "request.js",
+                "extension": "js",
+                "relPath": "src/shared/request.js",
+                "children": {}
+            },
+            "@coffeekraken.s-request.sugar.js.http.sRequestConfig": {
+                "name": "SRequestConfig",
+                "type": "Class",
+                "description": "Class that represent an ajax request that will be passed to an SRequest instance.\nAll the axios settings are supported by this class",
+                "namespace": "@coffeekraken.s-request.sugar.js.http",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "const request = new SRequestConfig({\n \turl : '/api/...',\n \tmethod : 'GET',\n \tdata : {\n \t\tmyVar : 'myVal'\n \t}\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SRequestConfig.js",
+                "extension": "js",
+                "relPath": "src/shared/SRequestConfig.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor"
+                    },
+                    "url": {
+                        "name": "url",
+                        "type": "String",
+                        "default": "null",
+                        "description": "The url to call",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "baseURL": {
+                        "name": "baseURL",
+                        "type": "String",
+                        "default": "null",
+                        "description": "Specify the base url to call like \"https://api.github.com/2.0\" for example.\nIf the \"url\" setting is absolute, this setting will don't have any impact on your request...",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "method": {
+                        "name": "method",
+                        "type": "String",
+                        "default": "GET",
+                        "description": "The request method to use like GET, POST, DELETE or PUT",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "headers": {
+                        "name": "headers",
+                        "type": "Object",
+                        "default": "{}",
+                        "description": "Specify some headers to add to the request",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "{\n   'X-Requested-With': 'XMLHttpRequest'\n}"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "params": {
+                        "name": "params",
+                        "type": "Object",
+                        "default": "{}",
+                        "description": "Specify some params to be sent through the URL.\nMust be a plain object or a URLSearchParams object",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "{\n   myCoolData: 'Hello world'\n}"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "data": {
+                        "name": "data",
+                        "type": "String|Object|ArrayBuffer|ArrayBufferView|URLSearchParams|FormData|File|Blob|Stream|Buffer",
+                        "default": "{}",
+                        "description": "Specify some data you want to send with the request.\nThis setting is available only for 'PUT', 'POST', and 'PATCH' requests...",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "{\n   firstName: 'Fred'\n}"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "timeout": {
+                        "name": "timeout",
+                        "type": "Number",
+                        "default": "0 (no timeout)",
+                        "description": "Specify time to wait before aborting the actual request. If setted in number format, this will mean milliseconds.\nYou can also specify this settings using string format like so: '2s', '1h', '4m', etc...",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "sendInterval": {
+                        "name": "sendInterval",
+                        "type": "Number",
+                        "default": "1000",
+                        "description": "Set the interval time between each requests if the sendCount setting is specified.\nIf setted in number format, this is taken as millisenconds. You can also set the interval\nin string format like '34s', '1h', '10ms', '2d', etc...",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "sendCount": {
+                        "name": "sendCount",
+                        "type": "Number",
+                        "default": "1",
+                        "description": "Set how many times the request has to be sent",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "everyResponse": {
+                        "name": "everyResponse",
+                        "type": "Function",
+                        "default": "null",
+                        "description": "Specify a function to call on every response. The parameters passed to the function are:\n- response {Object}: The actual request response\n- requestIdx {Number}: The request index",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "responseType": {
+                        "name": "responseType",
+                        "type": "String",
+                        "default": "json",
+                        "description": "Indicates the type of data that the server will respond with",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

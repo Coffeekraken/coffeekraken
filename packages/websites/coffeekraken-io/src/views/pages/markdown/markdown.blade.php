@@ -5,26 +5,6 @@
 
     <div id="markdown">
 
-        <section class="toolbar">
-
-            <div class="s-container">
-
-                <div class="s-flex:align-center">
-
-                    <div class="s-font:40">
-                        <span>Documentation</span>
-                        &nbsp;&nbsp;
-                        @include('generic.support.icons', ['supports' => $firstBlock->support])
-                    </div>
-
-                    @include('generic.toolbar.toolbar-join-us')
-
-                </div>
-
-            </div>
-
-        </section>
-
         <section class="s-container markdown">
 
             <div class="s-layout:1222:gutter-between:gutter-50">

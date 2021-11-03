@@ -1,4 +1,0 @@
-import SCompiler from './SCompiler';
-export * from './SCompiler';
-export default SCompiler;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sYUFBYSxDQUFDO0FBRXBDLGNBQWMsYUFBYSxDQUFDO0FBRTVCLGVBQWUsU0FBUyxDQUFDIn0=

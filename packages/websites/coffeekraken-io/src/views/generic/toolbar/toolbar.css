@@ -13,26 +13,3 @@
         font-size: 1em;
     }
 }
-
-.toolbar__issue {
-    .s-tooltip {
-        background-image: url('/src/img/issue-tooltip-bkg.jpg');
-        background-size: cover;
-        background-position: bottom center;
-        min-width: 50ch;
-        padding: sugar.space(30);
-
-        &:before {
-            content: '';
-            display: block;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            z-index: 0;
-
-            @sugar.gradient (sugar.color(current, surface), rgba(0,0,0,0));
-        }
-    }
-}

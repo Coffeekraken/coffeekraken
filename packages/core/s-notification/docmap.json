@@ -1,0 +1,77 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-notification.sugar.node.notification.adapters.nodeSNotificationAdapter": {
+                "name": "nodeSNotificationAdapter",
+                "type": "ISNotificationAdapter",
+                "description": "This represent the node notification adapter for the SNotification class.\nIt uses the awesome node-notifier package behind the scene.",
+                "namespace": "@coffeekraken.s-notification.sugar.node.notification.adapters",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "nodeSNotificationAdapter.js",
+                "extension": "js",
+                "relPath": "src/node/adapters/nodeSNotificationAdapter.js",
+                "children": {}
+            },
+            "@coffeekraken.s-notification.sugar.js.notification.interface.sNotificationSettingsInterface": {
+                "name": "SNotificationSettingsInterface",
+                "type": "Class",
+                "description": "Interface that describe the settings object you can pass to the SNofication constructor",
+                "namespace": "@coffeekraken.s-notification.sugar.js.notification.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SNotificationSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SNotificationSettingsInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

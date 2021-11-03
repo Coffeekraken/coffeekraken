@@ -3224,6 +3224,18 @@ export default function (env, config) {
                  */
                 defaultColor: 'main',
                 /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      solid
+                 *
+                 * Specify the default style for ui's.
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: 'solid',
+                /**
                  * @name          depth
                  * @namespace     config.themeBase.ui.default
                  * @type          String
@@ -3336,6 +3348,18 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: 'accent',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      solid
+                 *
+                 * Specify the default style for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: 'solid',
                 /**
                  * @name          depth
                  * @namespace     config.themeBase.ui.form
@@ -3524,7 +3548,18 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
                 /**
                  * @name          defaultColor
                  * @namespace     config.themeBase.ui.button
@@ -3537,7 +3572,17 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                formatText: true,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             avatar: {
@@ -3590,7 +3635,29 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             colorPicker: {
@@ -3666,9 +3733,54 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for colorPicker items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             datePicker: {
                 /**
@@ -3743,9 +3855,54 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: ['theme.ui.form.defaultColor'],
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for datePicker items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             input: {
                 /**
@@ -3820,10 +3977,54 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                outline: '[theme.ui.outline.active]',
-                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for input items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             radio: {
                 /**
@@ -3886,8 +4087,30 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for radio items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
                 /**
                  * @name          defaultColor
                  * @namespace     config.themeBase.ui.radio
@@ -3900,9 +4123,30 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             checkbox: {
                 /**
@@ -3965,7 +4209,17 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for checkbox items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
                 /**
                  * @name          defaultColor
@@ -3979,9 +4233,42 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             range: {
                 /**
@@ -4056,10 +4343,54 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for range items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             label: {
                 /**
@@ -4134,9 +4465,42 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.label
+                 * @type          Number
+                 * @default      inline
+                 *
+                 * Specify the default style for your label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'inline',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for label items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.label
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             select: {
                 /**
@@ -4199,7 +4563,17 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for select items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
                 /**
                  * @name          defaultColor
@@ -4213,9 +4587,42 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             switch: {
                 /**
@@ -4254,7 +4661,17 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 transition: '[theme.ui.default.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for switch items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
                 /**
                  * @name          defaultColor
@@ -4268,8 +4685,42 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.form.defaultColor]',
-                defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             dropdown: {
                 /**
@@ -4344,9 +4795,42 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for dropdown items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
             },
             list: {
                 /**
@@ -4421,10 +4905,53 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                bulletChar: '●',
-                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.list
+                 * @type          Number
+                 * @default      ul
+                 *
+                 * Specify the default style for your list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'ul',
-                formatText: true,
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for list items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          bulletChar
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      ●
+                 *
+                 * Specify if the bullet character to use
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                bulletChar: '●',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.list
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             fsTree: {
@@ -4500,9 +5027,53 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                bulletChar: '●',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for fsTree items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          bulletChar
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      ●
+                 *
+                 * Specify if the bullet character to use
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                bulletChar: '●',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tabs: {
@@ -4578,9 +5149,54 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for tabs items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: 0,
-                defaultStyle: 'solid',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.tabe
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your tabe ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             terminal: {
                 /**
@@ -4655,7 +5271,41 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for terminal items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tooltip: {
@@ -4731,20 +5381,43 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for tooltip items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          arrowSize
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          Object
+                 * @default      20px
+                 *
+                 * Specify if the arrow size of the tooltips
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 arrowSize: '20px',
             },
-            // pre: {
-            //   paddingInline: '[theme.ui.default.paddingInline]',
-            //        paddingBlock: '[theme.ui.default.paddingBlock]',
-            //   borderRadius: '[theme.ui.default.borderRadius]',
-            //   transition: '[theme.ui.default.transition]',
-            //   depth: '[theme.ui.default.depth]',
-            //   lineHeight: 2,
-            //   styles: ['default'],
-            //   defaultColor: '[theme.ui.default.defaultColor]',
-            //   'rhythmVertical': '[theme.ui.default.rhythmVertical]'
-            // },
             code: {
                 /**
                  * @name          paddingInline
@@ -4818,8 +5491,41 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.code
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for code items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                styles: ['default:default'],
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.code
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             blockquote: {
@@ -4895,9 +5601,41 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for blockquote items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
-                formatText: true,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             table: {
@@ -4973,9 +5711,41 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.table
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for table items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: 0,
-                defaultStyle: 'solid',
-                formatText: true,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.table
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             badge: {
@@ -5051,93 +5821,269 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for badge items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: 0,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             loader: {
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loader
+                 * @type          String
+                 * @default      1s
+                 *
+                 * Specify the duration of a loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 duration: '1s',
+                /**
+                 * @name          easing
+                 * @namespace     config.themeBase.ui.loader
+                 * @type          String
+                 * @default      linear
+                 *
+                 * Specify the easing of a loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 easing: 'linear',
             },
             loaderSpinner: {
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loaderSpinner
+                 * @type          String
+                 * @default      [theme.ui.loader.duration]
+                 *
+                 * Specify the duration of the spinner loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 duration: '[theme.ui.loader.duration]',
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loaderSpinner
+                 * @type          String
+                 * @default      [theme.ui.loader.easing]
+                 *
+                 * Specify the easing of the spinner loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 easing: '[theme.ui.loader.easing]',
             },
         },
 
         typo: {
+            /**
+             * @name          h1
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h1 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h1: {
                 'font-family': 'title',
                 'font-size': 90,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h2
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h2 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h2: {
                 'font-family': 'title',
                 'font-size': 80,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h3
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h3 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h3: {
                 'font-family': 'title',
                 'font-size': 70,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h4
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h4 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h4: {
                 'font-family': 'title',
                 'font-size': 60,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h5
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h5 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h5: {
                 'font-family': 'title',
                 'font-size': 50,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
+            /**
+             * @name          h6
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h6 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h6: {
                 'font-family': 'title',
                 'font-size': 40,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
+            /**
+             * @name          p
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the p typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             p: {
                 'font-family': 'default',
                 'font-size': 30,
-                'line-height': 1.5,
+                'line-height': 1.8,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          lead
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the lead typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             lead: {
                 'font-family': 'default',
                 'font-size': 50,
-                'line-height': 1.2,
+                'line-height': 1.6,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          hr
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the hr typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             hr: {
                 color: '[theme.color.main.color]',
                 opacity: 0.2,
@@ -5145,6 +6091,17 @@ export default function (env, config) {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          pre
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the pre typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             pre: {
                 'font-family': 'code',
                 color: ['main', 'text'],
@@ -5158,6 +6115,17 @@ export default function (env, config) {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          code
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the code typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             'code:not(pre > code)': {
                 display: 'inline-block',
                 'font-family': 'code',
@@ -5167,47 +6135,201 @@ export default function (env, config) {
                 paddingInline: 10,
                 paddingBlock: 0,
             },
+            /**
+             * @name          a
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the a typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             a: {
                 color: 'accent',
             },
+            /**
+             * @name          quote
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the quote typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             quote: {
                 'font-family': 'quote',
             },
+            /**
+             * @name          b
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the b typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             b: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          bold
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the bold typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             bold: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          strong
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the strong typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             strong: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          i
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the i typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             i: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          italic
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the italic typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             italic: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          em
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the em typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             em: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          small
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the small typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             small: {
                 'font-size': '0.5em',
             },
+            /**
+             * @name          mark
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the mark typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             mark: {
                 'background-color': '[theme.color.accent.color]',
                 color: '[theme.color.accent.foreground]',
             },
+            /**
+             * @name          del
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the del typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             del: {
                 'text-decoration': 'line-through',
             },
+            /**
+             * @name          ins
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the ins typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             ins: {
                 'text-decoration': 'underline',
             },
+            /**
+             * @name          sub
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the sub typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             sub: {
                 'vertical-align': 'sub',
                 'font-size': '0.6em',
             },
+            /**
+             * @name          sup
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the sup typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             sup: {
                 'vertical-align': 'sup',
                 'font-size': '0.6em',

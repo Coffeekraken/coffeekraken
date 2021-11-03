@@ -1,0 +1,69 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-promise.SPromise.js.treatAsValue": {
+                "name": "treatAsValue",
+                "type": "Function",
+                "description": "This function allows you to wrap a promise in a ```resolve``` call to prevent\nthis promise to be treated as a \"chaining\" promise but to be treated as\nnormal value passed in the resolve call.",
+                "namespace": "@coffeekraken.s-promise.SPromise.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import treatAsValue from '@coffeekraken/sugar/js/promise/treatAsValue';\nawait new Promise(resolve => {\n     const myPromise = new Promise(resolve => {});\n     resolve(treatAsValue(myPromise));\n}); // => myPromise"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "treatAsValue.js",
+                "extension": "js",
+                "relPath": "src/shared/treatAsValue.js",
+                "children": {}
+            }
+        }
+    }
+}

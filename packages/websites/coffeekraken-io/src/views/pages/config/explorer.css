@@ -1,0 +1,9 @@
+.config-explorer {
+    .__nav {
+        position: sticky;
+        overflow: auto;
+        top: 80px;
+        max-height: calc(100vh - 80px);
+        @sugar.scrollbar;
+    }
+}

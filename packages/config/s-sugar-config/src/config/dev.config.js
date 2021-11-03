@@ -2,7 +2,7 @@ export default {
     colors: {
         /**
          * @name                yellow
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #ffdc89
          *
@@ -14,7 +14,7 @@ export default {
         yellow: '#ffdc89',
         /**
          * @name                cyan
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #65c1cd
          *
@@ -26,7 +26,7 @@ export default {
         cyan: '#65c1cd',
         /**
          * @name                green
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #a7cb8b
          *
@@ -38,7 +38,7 @@ export default {
         green: '#a7cb8b',
         /**
          * @name                magenta
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #d190e3
          *
@@ -50,7 +50,7 @@ export default {
         magenta: '#d190e3',
         /**
          * @name                red
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e78287
          *
@@ -62,7 +62,7 @@ export default {
         red: '#e78287',
         /**
          * @name                blue
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #71bdf2
          *
@@ -74,7 +74,7 @@ export default {
         blue: '#71bdf2',
         /**
          * @name                primary
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #ffdc89
          *
@@ -86,7 +86,7 @@ export default {
         primary: '#ffdc89',
         /**
          * @name                secondary
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #65c1cd
          *
@@ -98,7 +98,7 @@ export default {
         secondary: '#65c1cd',
         /**
          * @name                grey
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *
@@ -110,7 +110,7 @@ export default {
         grey: '#e2e5e9',
         /**
          * @name                gray
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *
@@ -122,7 +122,7 @@ export default {
         gray: '#e2e5e9',
         /**
          * @name                black
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #343a43
          *
@@ -134,7 +134,7 @@ export default {
         black: '#343a43',
         /**
          * @name                white
-         * @namespace           config.terminal.colors
+         * @namespace           config.dev.colors
          * @type                Color
          * @default             #e2e5e9
          *

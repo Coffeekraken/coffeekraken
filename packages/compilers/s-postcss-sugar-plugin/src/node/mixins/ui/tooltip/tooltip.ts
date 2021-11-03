@@ -79,8 +79,6 @@ export default function ({
           position: absolute;
           z-index: 500;
           display: block;
-          text-align: center;
-          white-space: nowrap;
           max-width: 9999999px !important;
           pointer-events: none;
       `);

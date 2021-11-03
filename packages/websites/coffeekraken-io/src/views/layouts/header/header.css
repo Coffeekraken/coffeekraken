@@ -274,7 +274,6 @@ body {
 }
 
 #settings .s-side-panel__container {
-    display: none;
     background-color: sugar.color(main, background);
     min-width: 300px;
     width: 33vw;

@@ -467,7 +467,7 @@ class SColor extends __SClass {
     }
     set r(value) {
         value = parseInt(value);
-        value = value > 255 ? 255 : value;
+        value = value > 255 ? 255 : value < 0 ? 0 : value;
         this._r = value;
     }
 
@@ -488,7 +488,7 @@ class SColor extends __SClass {
     }
     set g(value) {
         value = parseInt(value);
-        value = value > 255 ? 255 : value;
+        value = value > 255 ? 255 : value < 0 ? 0 : value;
         this._g = value;
     }
 
@@ -509,7 +509,7 @@ class SColor extends __SClass {
     }
     set b(value) {
         value = parseInt(value);
-        value = value > 255 ? 255 : value;
+        value = value > 255 ? 255 : value < 0 ? 0 : value;
         this._b = value;
     }
 
@@ -530,8 +530,7 @@ class SColor extends __SClass {
     }
     set a(value) {
         value = parseFloat(value);
-        value = value > 1 ? (1 / 100) * value : value;
-        value = value > 1 ? 1 : value;
+        value = value > 1 ? 1 : value < 0 ? 0 : value;
         this._a = value;
     }
 
@@ -553,7 +552,7 @@ class SColor extends __SClass {
     set l(value) {
         const hsl = this._convert2('hsl');
         value = parseInt(value);
-        value = value > 100 ? 100 : value;
+        value = value > 100 ? 100 : value < 0 ? 0 : value;
         hsl.l = value;
         const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
         this.r = rgba.r;
@@ -579,7 +578,7 @@ class SColor extends __SClass {
     set s(value) {
         const hsl = this._convert2('hsl');
         value = parseInt(value);
-        value = value > 100 ? 100 : value;
+        value = value > 100 ? 100 : value < 0 ? 0 : value;
         hsl.s = value;
         const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
         this.r = rgba.r;
@@ -605,7 +604,7 @@ class SColor extends __SClass {
     set h(value) {
         const hsl = this._convert2('hsl');
         value = parseInt(value);
-        value = value > 360 ? 360 : value;
+        value = value > 360 ? 360 : value < 0 ? 0 : value;
         hsl.h = value;
         const rgba = __hsla2rgba(hsl.h, hsl.s, hsl.l);
         this.r = rgba.r;
@@ -882,6 +881,8 @@ class SColor extends __SClass {
             return n;
         }
         this.a += amount;
+        if (this.a < 0) this.a = 0;
+        else if (this.a > 1) this.a = 0;
         return this;
     }
 
@@ -908,6 +909,8 @@ class SColor extends __SClass {
             return n;
         }
         this.l -= amount;
+        if (this.l < 0) this.l = 0;
+        else if (this.l > 100) this.l = 100;
         return this;
     }
 
@@ -934,6 +937,8 @@ class SColor extends __SClass {
             return n;
         }
         this.l += amount;
+        if (this.l < 0) this.l = 0;
+        else if (this.l > 100) this.l = 100;
         return this;
     }
 
@@ -964,6 +969,9 @@ class SColor extends __SClass {
         } else {
             this.l = lightness;
         }
+
+        if (this.l < 0) this.l = 0;
+        else if (this.l > 100) this.l = 100;
 
         return this;
     }

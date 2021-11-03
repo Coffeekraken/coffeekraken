@@ -460,7 +460,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
     }
 
     /**
-     * @name          pipeError
+     * @name          pipeErrors
      * @type          Function
      *
      * This is the exact same as the original ```pipe``` method. It's just pipe only the errors.
@@ -471,7 +471,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    pipeError(input: ISEventEmitter, settings?: ISEventEmitterPipeSettings) {
+    pipeErrors(input: ISEventEmitter, settings?: ISEventEmitterPipeSettings) {
         SEventEmitter.pipe(input, <any>this, {
             ...settings,
             events: 'error',

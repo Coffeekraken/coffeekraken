@@ -1,0 +1,126 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-bench.shared.sBenchEnv": {
+                "name": "SBenchEnv",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to access the SBench environment parameters like:\n- the current process want some bench?\n- which bench are activated\n- some methods to check if for example the bench \"request\" is wanted",
+                "namespace": "@coffeekraken.s-bench.shared",
+                "status": "alpha",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SBench, { SBenchEnv } from '@coffeekraken/s-bench';\n\nSBench.start('myCoolProcess');\nSBenchEnv."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SBenchEnv.js",
+                "extension": "js",
+                "relPath": "src/shared/SBenchEnv.js",
+                "children": {
+                    "activateBench": {
+                        "name": "activateBench",
+                        "type": "Function",
+                        "description": "This method allows you to activate one or more bench in the current process",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "activatedBench": {
+                        "name": "activatedBench",
+                        "type": "Function",
+                        "description": "This method allows you to get back the list of activated bench(s)",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isBenchActive": {
+                        "name": "isBenchActive",
+                        "type": "Function",
+                        "description": "This method allows you to check if a particular bench id is active",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

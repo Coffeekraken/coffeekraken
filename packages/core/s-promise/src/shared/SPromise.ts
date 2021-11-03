@@ -242,7 +242,7 @@ class SPromise
                 'off',
                 'emit',
                 'pipe',
-                'pipeError',
+                'pipeErrors',
                 'pipeFrom',
                 'pipeTo',
                 'eventEmitterSettings',

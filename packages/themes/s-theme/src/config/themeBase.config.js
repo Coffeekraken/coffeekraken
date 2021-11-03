@@ -1,25 +1,102 @@
 export default function (env, config) {
     return {
         easing: {
+            /**
+             * @name                default
+             * @namespace           config.themeBase.easing
+             * @type                String
+             * @default             cubic-bezier(0.700, 0.000, 0.305, 0.995)
+             *
+             * Specify the "default" easing for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             default: 'cubic-bezier(0.700, 0.000, 0.305, 0.995)',
         },
         timing: {
+            /**
+             * @name                slow
+             * @namespace           config.themeBase.timing
+             * @type                String
+             * @default             0.6s
+             *
+             * Specify the "slow" timing  for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             slow: '.6s',
+            /**
+             * @name                default
+             * @namespace           config.themeBase.timing
+             * @type                String
+             * @default             0.3s
+             *
+             * Specify the "default" timing  for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             default: '.3s',
+            /**
+             * @name                fast
+             * @namespace           config.themeBase.timing
+             * @type                String
+             * @default             0.1s
+             *
+             * Specify the "fast" timing  for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             fast: '.1s',
         },
         transition: {
+            /**
+             * @name                slow
+             * @namespace           config.themeBase.transition
+             * @type                String
+             * @default             all [theme.timing.slow] [theme.easing.default]
+             *
+             * Specify the "slow" transition for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             slow: 'all [theme.timing.slow] [theme.easing.default]',
+            /**
+             * @name                default
+             * @namespace           config.themeBase.transition
+             * @type                String
+             * @default             all [theme.timing.default] [theme.easing.default]
+             *
+             * Specify the "default" transition for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             default: 'all [theme.timing.default] [theme.easing.default]',
+            /**
+             * @name                fast
+             * @namespace           config.themeBase.transition
+             * @type                String
+             * @default             all [theme.timing.fast] [theme.easing.default]
+             *
+             * Specify the "fast" transition for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             fast: 'all [theme.timing.fast] [theme.easing.default]',
         },
         helpers: {
             clearfix: {
                 /**
                  * @name            default
-                 * @namespace       theme.helpers.clearfix
+                 * @namespace       config.themeBase.helpers.clearfix
                  * @type            String
-                 * @values          'overflow' | 'facebook' | 'float' | 'micro' | 'after'
+                 * @values          'overflow','facebook','float','micro','after'
                  * @default         overflow
                  *
                  * Specify which clearfix method has to be used as the default one
@@ -32,7 +109,7 @@ export default function (env, config) {
             disabled: {
                 /**
                  * @name            opacity
-                 * @namespace       theme.helpers.disabled
+                 * @namespace       config.themeBase.helpers.disabled
                  * @type            Number
                  * @default         0.3
                  *
@@ -47,7 +124,7 @@ export default function (env, config) {
             truncate: {
                 /**
                  * @name               count
-                 * @namespace           theme.helpers.truncate
+                 * @namespace           config.themeBase.helpers.truncate
                  * @type                Number
                  * @default             10
                  *
@@ -63,161 +140,1310 @@ export default function (env, config) {
         layout: {
             container: {
                 default: {
+                    /**
+                     * @name                max-width
+                     * @namespace           config.themeBase.layout.container.default
+                     * @type                String
+                     * @default             1280px
+                     *
+                     * Specify the "default" container max-width for your theme
+                     *
+                     * @since               2.0.0
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'max-width': '1280px',
                 },
                 full: {
+                    /**
+                     * @name                max-width
+                     * @namespace           config.themeBase.layout.container.full
+                     * @type                String
+                     * @default             none
+                     *
+                     * Specify the "full" container max-width for your theme
+                     *
+                     * @since               2.0.0
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'max-width': 'none',
                 },
             },
             grid: {
+                /**
+                 * @name                1
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             1
+                 *
+                 * Specify the 1 column grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 1: 1,
+                /**
+                 * @name                2
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             2
+                 *
+                 * Specify the 2 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 2: 2,
+                /**
+                 * @name                3
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             3
+                 *
+                 * Specify the 3 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 3: 3,
+                /**
+                 * @name                4
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             4
+                 *
+                 * Specify the 4 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 4: 4,
+                /**
+                 * @name                5
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             5
+                 *
+                 * Specify the 5 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 5: 5,
+                /**
+                 * @name                6
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             6
+                 *
+                 * Specify the 6 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 6: 6,
+                /**
+                 * @name                7
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             7
+                 *
+                 * Specify the 7 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 7: 7,
+                /**
+                 * @name                8
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             8
+                 *
+                 * Specify the 8 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 8: 8,
+                /**
+                 * @name                9
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             9
+                 *
+                 * Specify the 9 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 9: 9,
+                /**
+                 * @name                10
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             10
+                 *
+                 * Specify the 10 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 10: 10,
+                /**
+                 * @name                11
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             11
+                 *
+                 * Specify the 11 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 11: 11,
+                /**
+                 * @name                12
+                 * @namespace           config.themeBase.layout.grid
+                 * @type                Number
+                 * @default             12
+                 *
+                 * Specify the 12 columns grid for your theme
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 12: 12,
             },
             layout: {
+                /**
+                 * @name                1
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1
+                 *
+                 * Specify the 1 layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '1': '1',
+                /**
+                 * @name                12
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2
+                 *
+                 * Specify the 2 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '12': '1 2',
+                /**
+                 * @name                123
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '123': '1 2 3',
+                /**
+                 * @name                1234
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 4
+                 *
+                 * Specify the 4 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '1234': '1 2 3 4',
+                /**
+                 * @name                122
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2
+                 *
+                 * Specify the 2 columns (1/3 - 2/3) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '122': '1 2 2',
+                /**
+                 * @name                122
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 1 2
+                 *
+                 * Specify the 2 columns (2/3 - 1/3) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '112': '1 1 2',
+                /**
+                 * @name                1222
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2 2
+                 *
+                 * Specify the 2 columns (1/4 - 3/4) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '1222': '1 2 2 2',
+                /**
+                 * @name                1112
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 1 1 2
+                 *
+                 * Specify the 2 columns (3/4 - 1/4) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '1112': '1 1 1 2',
+                /**
+                 * @name                12222
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2 2 2
+                 *
+                 * Specify the 2 columns (1/5 - 4/5) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '12222': '1 2 2 2 2',
+                /**
+                 * @name                11112
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 1 1 1 2
+                 *
+                 * Specify the 2 columns (4/5 - 1/5) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '11112': '1 1 1 1 2',
+                /**
+                 * @name                122222
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2 2 2 2
+                 *
+                 * Specify the 2 columns (1/6 - 5/6) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '122222': '1 2 2 2 2 2',
+                /**
+                 * @name                111112
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 1 1 1 1 2
+                 *
+                 * Specify the 2 columns (1/6 - 5/6) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '111112': '1 1 1 1 1 2',
+                /**
+                 * @name                12345
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 4 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '12345': '1 2 3 4 5',
+                /**
+                 * @name                123456
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 4 5 6
+                 *
+                 * Specify the 6 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '123456': '1 2 3 4 5 6',
             },
         },
         ratio: {
+            /**
+             * @name                1
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             1
+             *
+             * Specify the ratio 1/1 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '1': 1,
+            /**
+             * @name                21-9
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             21/9
+             *
+             * Specify the ratio 21/9 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '21-9': 21 / 9,
+            /**
+             * @name                16-9
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             16/9
+             *
+             * Specify the ratio 16/9 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '16-9': 16 / 9,
+            /**
+             * @name                2-3
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             2/3
+             *
+             * Specify the ratio 2/3 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '2-3': 2 / 3,
+            /**
+             * @name                4-3
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             4/3
+             *
+             * Specify the ratio 4/3 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '4-3': 4 / 3,
+            /**
+             * @name                3-4
+             * @namespace           config.themeBase.ratio
+             * @type                Number
+             * @default             3/4
+             *
+             * Specify the ratio 3/4 for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '3-4': 3 / 4,
         },
         scalable: {
+            /**
+             * @name                margin
+             * @namespace           config.themeBase.scalable
+             * @type                Boolean
+             * @default             false
+             *
+             * Specify if the "margins" are scalable in your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             margin: false,
+            /**
+             * @name                padding
+             * @namespace           config.themeBase.scalable
+             * @type                Boolean
+             * @default             true
+             *
+             * Specify if the "paddings" are scalable in your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             padding: true,
+            /**
+             * @name                font
+             * @namespace           config.themeBase.scalable
+             * @type                Boolean
+             * @default             true
+             *
+             * Specify if the "fonts" are scalable in your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             font: true,
         },
         scale: {
+            /**
+             * @name                01
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.1
+             *
+             * Specify the 01 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '01': 0.1,
+            /**
+             * @name                02
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.2
+             *
+             * Specify the 02 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '02': 0.2,
+            /**
+             * @name                03
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.3
+             *
+             * Specify the 03 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '03': 0.3,
+            /**
+             * @name                04
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.4
+             *
+             * Specify the 04 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '04': 0.4,
+            /**
+             * @name                05
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.5
+             *
+             * Specify the 05 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '05': 0.5,
+            /**
+             * @name                06
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.6
+             *
+             * Specify the 06 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '06': 0.6,
+            /**
+             * @name                07
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.7
+             *
+             * Specify the 07 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '07': 0.7,
+            /**
+             * @name                08
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.8
+             *
+             * Specify the 08 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '08': 0.8,
+            /**
+             * @name                09
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             0.9
+             *
+             * Specify the 09 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '09': 0.9,
+            /**
+             * @name                10
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1
+             *
+             * Specify the 10 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '10': 1,
+            /**
+             * @name                11
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.1
+             *
+             * Specify the 11 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '11': 1.1,
+            /**
+             * @name                12
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.2
+             *
+             * Specify the 12 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '12': 1.2,
+            /**
+             * @name                13
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.3
+             *
+             * Specify the 13 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '13': 1.3,
+            /**
+             * @name                14
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.4
+             *
+             * Specify the 14 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '14': 1.4,
+            /**
+             * @name                15
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.5
+             *
+             * Specify the 15 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '15': 1.5,
+            /**
+             * @name                16
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.6
+             *
+             * Specify the 16 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '16': 1.6,
+            /**
+             * @name                17
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.7
+             *
+             * Specify the 17 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '17': 1.7,
+            /**
+             * @name                18
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.8
+             *
+             * Specify the 18 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '18': 1.8,
+            /**
+             * @name                19
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             1.9
+             *
+             * Specify the 19 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '19': 1.9,
+            /**
+             * @name                20
+             * @namespace           config.themeBase.scale
+             * @type                Number
+             * @default             2
+             *
+             * Specify the 20 scale for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '20': 2,
         },
         opacity: {
+            /**
+             * @name                0
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0
+             *
+             * Specify the 0 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '0': 0,
+            /**
+             * @name                10
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.1
+             *
+             * Specify the 10 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '10': 0.1,
+            /**
+             * @name                20
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.2
+             *
+             * Specify the 20 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '20': 0.2,
+            /**
+             * @name                30
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.3
+             *
+             * Specify the 30 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '30': 0.3,
+            /**
+             * @name                40
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.4
+             *
+             * Specify the 40 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '40': 0.4,
+            /**
+             * @name                50
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.5
+             *
+             * Specify the 50 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '50': 0.5,
+            /**
+             * @name                60
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.6
+             *
+             * Specify the 60 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '60': 0.6,
+            /**
+             * @name                70
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.7
+             *
+             * Specify the 70 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '70': 0.7,
+            /**
+             * @name                80
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.8
+             *
+             * Specify the 80 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '80': 0.8,
+            /**
+             * @name                90
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             0.9
+             *
+             * Specify the 90 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '90': 0.9,
+            /**
+             * @name                100
+             * @namespace           config.themeBase.opacity
+             * @type                Number
+             * @default             1
+             *
+             * Specify the 100 opacity for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '100': 1,
         },
         width: {
+            /**
+             * @name                0
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             0
+             *
+             * Specify the 0 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '0': '0',
+            /**
+             * @name                10
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             10%
+             *
+             * Specify the 10 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '10': '10%',
+            /**
+             * @name                20
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             20%
+             *
+             * Specify the 20 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '20': '20%',
+            /**
+             * @name                30
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             30%
+             *
+             * Specify the 30 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '30': '30%',
+            /**
+             * @name                40
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             40%
+             *
+             * Specify the 40 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '40': '40%',
+            /**
+             * @name                50
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             50%
+             *
+             * Specify the 50 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '50': '50%',
+            /**
+             * @name                60
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             60%
+             *
+             * Specify the 60 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '60': '60%',
+            /**
+             * @name                70
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             70%
+             *
+             * Specify the 70 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '70': '70%',
+            /**
+             * @name                80
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             80%
+             *
+             * Specify the 80 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '80': '80%',
+            /**
+             * @name                90
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             90%
+             *
+             * Specify the 90 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '90': '90%',
+            /**
+             * @name                100
+             * @namespace           config.themeBase.width
+             * @type                String
+             * @default             100%
+             *
+             * Specify the 100 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '100': '100%',
+        },
+        height: {
+            /**
+             * @name                0
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             0
+             *
+             * Specify the 0 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '0': '0',
+            /**
+             * @name                10
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             10%
+             *
+             * Specify the 10 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '10': '10%',
+            /**
+             * @name                20
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             20%
+             *
+             * Specify the 20 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '20': '20%',
+            /**
+             * @name                30
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             30%
+             *
+             * Specify the 30 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '30': '30%',
+            /**
+             * @name                40
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             40%
+             *
+             * Specify the 40 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '40': '40%',
+            /**
+             * @name                50
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             50%
+             *
+             * Specify the 50 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '50': '50%',
+            /**
+             * @name                60
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             60%
+             *
+             * Specify the 60 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '60': '60%',
+            /**
+             * @name                70
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             70%
+             *
+             * Specify the 70 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '70': '70%',
+            /**
+             * @name                80
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             80%
+             *
+             * Specify the 80 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '80': '80%',
+            /**
+             * @name                90
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             90%
+             *
+             * Specify the 90 height for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            '90': '90%',
+            /**
+             * @name                100
+             * @namespace           config.themeBase.height
+             * @type                String
+             * @default             100%
+             *
+             * Specify the 100 width for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             '100': '100%',
         },
         depth: {
+            /**
+             * @name                default
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             [theme.depth.50]
+             *
+             * Specify the default depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             default: '[theme.depth.50]',
+            /**
+             * @name                0
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             0
+             *
+             * Specify the 0 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             0: '0',
+            /**
+             * @name                10
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 10 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             10: `0px 0.6px 0.4px rgba(0, 0, 0, 0.006),
   0px 1.3px 1px rgba(0, 0, 0, 0.008),
   0px 2.5px 1.9px rgba(0, 0, 0, 0.01),
   0px 4.5px 3.4px rgba(0, 0, 0, 0.012),
   0px 8.4px 6.3px rgba(0, 0, 0, 0.014),
   0px 20px 15px rgba(0, 0, 0, 0.02)`,
+            /**
+             * @name                20
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 20 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             20: `0px 0.6px 0.4px rgba(0, 0, 0, 0.006),
   0px 1.3px 1px rgba(0, 0, 0, 0.008),
   0px 2.5px 1.9px rgba(0, 0, 0, 0.01),
   0px 4.5px 3.4px rgba(0, 0, 0, 0.012),
   0px 8.4px 6.3px rgba(0, 0, 0, 0.014),
   0px 20px 15px rgba(0, 0, 0, 0.02)`,
+            /**
+             * @name                30
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 30 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             30: `0px 0.6px 0.4px rgba(0, 0, 0, 0.008),
   0px 1.3px 1px rgba(0, 0, 0, 0.012),
   0px 2.5px 1.9px rgba(0, 0, 0, 0.015),
   0px 4.5px 3.4px rgba(0, 0, 0, 0.018),
   0px 8.4px 6.3px rgba(0, 0, 0, 0.022),
   0px 20px 15px rgba(0, 0, 0, 0.03)`,
+            /**
+             * @name                40
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 40 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             40: `0px 0.8px 0.6px rgba(0, 0, 0, 0.008),
   0px 2px 1.3px rgba(0, 0, 0, 0.012),
   0px 3.8px 2.5px rgba(0, 0, 0, 0.015),
   0px 6.7px 4.5px rgba(0, 0, 0, 0.018),
   0px 12.5px 8.4px rgba(0, 0, 0, 0.022),
   0px 30px 20px rgba(0, 0, 0, 0.03)`,
+            /**
+             * @name                50
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 50 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             50: `0px 1px 0.8px rgba(0, 0, 0, 0.011),
   0px 2.3px 2px rgba(0, 0, 0, 0.016),
   0px 4.4px 3.8px rgba(0, 0, 0, 0.02),
   0px 7.8px 6.7px rgba(0, 0, 0, 0.024),
   0px 14.6px 12.5px rgba(0, 0, 0, 0.029),
   0px 35px 30px rgba(0, 0, 0, 0.04)`,
+            /**
+             * @name                60
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 60 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             60: `0px 1px 0.7px rgba(0, 0, 0, 0.011),
   0px 2.3px 1.7px rgba(0, 0, 0, 0.016),
   0px 4.4px 3.1px rgba(0, 0, 0, 0.02),
   0px 7.8px 5.6px rgba(0, 0, 0, 0.024),
   0px 14.6px 10.4px rgba(0, 0, 0, 0.029),
   0px 35px 25px rgba(0, 0, 0, 0.04)`,
+            /**
+             * @name                70
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 70 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             70: `0px 1.1px 0.8px rgba(0, 0, 0, 0.011),
   0px 2.7px 2px rgba(0, 0, 0, 0.016),
   0px 5px 3.8px rgba(0, 0, 0, 0.02),
   0px 8.9px 6.7px rgba(0, 0, 0, 0.024),
   0px 16.7px 12.5px rgba(0, 0, 0, 0.029),
   0px 40px 30px rgba(0, 0, 0, 0.04)`,
+            /**
+             * @name                80
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 80 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             80: `0px 1.1px 1px rgba(0, 0, 0, 0.011),
   0px 2.7px 2.3px rgba(0, 0, 0, 0.016),
   0px 5px 4.4px rgba(0, 0, 0, 0.02),
   0px 8.9px 7.8px rgba(0, 0, 0, 0.024),
   0px 16.7px 14.6px rgba(0, 0, 0, 0.029),
   0px 40px 35px rgba(0, 0, 0, 0.04)`,
+            /**
+             * @name                90
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 90 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             90: `0px 1.4px 1.1px rgba(0, 0, 0, 0.011),
   0px 3.3px 2.7px rgba(0, 0, 0, 0.016),
   0px 6.1px 5px rgba(0, 0, 0, 0.02),
   0px 10.9px 8.9px rgba(0, 0, 0, 0.024),
   0px 20.5px 16.7px rgba(0, 0, 0, 0.029),
   0px 49px 40px rgba(0, 0, 0, 0.04)`,
+            /**
+             * @name                100
+             * @namespace           config.themeBase.depth
+             * @type                String
+             * @default             ...
+             *
+             * Specify the 100 depth for your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             100: `0px 1.4px 1.4px rgba(0, 0, 0, 0.011),
   0px 3.3px 3.5px rgba(0, 0, 0, 0.016),
   0px 6.1px 6.5px rgba(0, 0, 0, 0.02),
@@ -226,48 +1452,257 @@ export default function (env, config) {
   0px 49px 52px rgba(0, 0, 0, 0.04)`,
         },
         color: {
-            /**
-             * @name                extension
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #2b3438
-             *
-             * Specify the <primary>extension</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             extension: {
+                /**
+                 * @name                color
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             [theme.color.accent.color]
+                 *
+                 * Specify the color extension value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '[theme.color.accent.color]',
+                /**
+                 * @name                blade
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #ff2d20
+                 *
+                 * Specify the blade extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 blade: '#ff2d20',
+                /**
+                 * @name                php
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #8892BF
+                 *
+                 * Specify the php extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 php: '#8892BF',
+                /**
+                 * @name                js
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #f7df1e
+                 *
+                 * Specify the js extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 js: '#f7df1e',
+                /**
+                 * @name                ts
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #0374C1
+                 *
+                 * Specify the ts extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 ts: '#0374C1',
+                /**
+                 * @name                node
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #68A063
+                 *
+                 * Specify the node extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 node: '#68A063',
+                /**
+                 * @name                css
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #498FE1
+                 *
+                 * Specify the css extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 css: '#498FE1',
+                /**
+                 * @name                scss
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #CF649A
+                 *
+                 * Specify the scss extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 scss: '#CF649A',
+                /**
+                 * @name                sass
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #CF649A
+                 *
+                 * Specify the sass extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 sass: '#CF649A',
+                /**
+                 * @name                json
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #000000
+                 *
+                 * Specify the json extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 json: '#000000',
+                /**
+                 * @name                jpg
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #B2C0E1
+                 *
+                 * Specify the jpg extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 jpg: '#B2C0E1',
+                /**
+                 * @name                jpeg
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #B2C0E1
+                 *
+                 * Specify the jpeg extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 jpeg: '#B2C0E1',
+                /**
+                 * @name                pdf
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #E7786E
+                 *
+                 * Specify the pdf extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 pdf: '#E7786E',
+                /**
+                 * @name                doc
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #60D7FD
+                 *
+                 * Specify the doc extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 doc: '#60D7FD',
+                /**
+                 * @name                psd
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #F9D659
+                 *
+                 * Specify the psd extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 psd: '#F9D659',
+                /**
+                 * @name                mp3
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #E98C61
+                 *
+                 * Specify the mp3 extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 mp3: '#E98C61',
+                /**
+                 * @name                png
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #C29DFB
+                 *
+                 * Specify the png extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 png: '#C29DFB',
+                /**
+                 * @name                aac
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #B1C5C9
+                 *
+                 * Specify the aac extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 aac: '#B1C5C9',
+                /**
+                 * @name                zip
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #9CC04E
+                 *
+                 * Specify the zip extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 zip: '#9CC04E',
+                /**
+                 * @name                dmg
+                 * @namespace           config.themeBase.color.extension
+                 * @type                Color
+                 * @default             #E36E4B
+                 *
+                 * Specify the dmg extension color value
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 dmg: '#E36E4B',
             },
         },
         size: {
             /**
              * @name          default
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       16px
              *
-             * Declare the font size <s-color="accent">default</s-color>
+             * Declare the font size "default"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -275,11 +1710,11 @@ export default function (env, config) {
             default: '16px',
             /**
              * @name          0
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       0.25rem
              *
-             * Declare the font size <s-color="accent">50</s-color>
+             * Declare the font size "50"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -287,11 +1722,11 @@ export default function (env, config) {
             0: '0.25rem',
             /**
              * @name          5
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       0.5rem
              *
-             * Declare the font size <s-color="accent">50</s-color>
+             * Declare the font size "50"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -299,11 +1734,11 @@ export default function (env, config) {
             5: '0.5rem',
             /**
              * @name          10
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       0.65rem
              *
-             * Declare the font size <s-color="accent">10</s-color>
+             * Declare the font size "10"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -311,11 +1746,11 @@ export default function (env, config) {
             10: '0.65rem',
             /**
              * @name          20
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       0.75rem
              *
-             * Declare the font size <s-color="accent">20</s-color>
+             * Declare the font size "20"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -323,11 +1758,11 @@ export default function (env, config) {
             20: '0.75rem',
             /**
              * @name          30
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       1rem
              *
-             * Declare the font size <s-color="accent">30</s-color>
+             * Declare the font size "30"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -335,11 +1770,11 @@ export default function (env, config) {
             30: '1rem',
             /**
              * @name          40
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       1.25rem
              *
-             * Declare the font size <s-color="accent">40</s-color>
+             * Declare the font size "40"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -347,11 +1782,11 @@ export default function (env, config) {
             40: '1.25rem',
             /**
              * @name          50
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       1.50rem
              *
-             * Declare the font size <s-color="accent">50</s-color>
+             * Declare the font size "50"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -359,11 +1794,11 @@ export default function (env, config) {
             50: '1.50em',
             /**
              * @name          60
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       2rem
              *
-             * Declare the font size <s-color="accent">60</s-color>
+             * Declare the font size "60"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -371,11 +1806,11 @@ export default function (env, config) {
             60: '2rem',
             /**
              * @name          70
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       2.5rem
              *
-             * Declare the font size <s-color="accent">70</s-color>
+             * Declare the font size "70"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -383,11 +1818,11 @@ export default function (env, config) {
             70: '2.5rem',
             /**
              * @name          80
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       3rem
              *
-             * Declare the font size <s-color="accent">80</s-color>
+             * Declare the font size "80"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -395,11 +1830,11 @@ export default function (env, config) {
             80: '3rem',
             /**
              * @name          90
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       4rem
              *
-             * Declare the font size <s-color="accent">90</s-color>
+             * Declare the font size "90"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -407,11 +1842,11 @@ export default function (env, config) {
             90: '4rem',
             /**
              * @name          100
-             * @namespace     config.theme.themes.default.size
+             * @namespace     config.themeBase.size
              * @type          String
              * @default       5rem
              *
-             * Declare the font size <s-color="accent">100</s-color>
+             * Declare the font size "100"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -419,100 +1854,216 @@ export default function (env, config) {
             100: '5rem',
         },
         font: {
-            /**
-             * @name            family
-             * @namespace       config.theme.themes.default.font
-             * @type            Object
-             *
-             * Store the font family that will be available in the project
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             family: {
-                /**
-                 * @name            default
-                 * @namespace       config.theme.themes.default.fonts.family
-                 * @type            Object
-                 *
-                 * Declare the <s-color="accent">default</s-color> font face
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
                 default: {
+                    /**
+                     * @name            font-family
+                     * @namespace       config.themeBase.font.family.default
+                     * @type            String
+                     * @default         "Titillium Web"
+                     *
+                     * Declare the "default" font-family
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-family': '"Titillium Web"',
+                    /**
+                     * @name            font-weight
+                     * @namespace       config.themeBase.font.family.default
+                     * @type            Number
+                     * @default         400
+                     *
+                     * Declare the "default" font-weight
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-weight': 400,
+                    /**
+                     * @name            import
+                     * @namespace       config.themeBase.font.family.default
+                     * @type            String
+                     * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap
+                     *
+                     * Declare the "default" import
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
                 },
-                /**
-                 * @name            title
-                 * @namespace       config.theme.themes.default.fonts.family
-                 * @type            Object
-                 *
-                 * Declare the <s-color="accent">title</s-color> font face
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
                 title: {
+                    /**
+                     * @name            font-family
+                     * @namespace       config.themeBase.font.family.title
+                     * @type            String
+                     * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                     *
+                     * Declare the "default" font-family
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-family': '"Titillium Web"',
+                    /**
+                     * @name            font-weight
+                     * @namespace       config.themeBase.font.family.title
+                     * @type            String
+                     * @default         600
+                     *
+                     * Declare the "default" font-weight
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-weight': 600,
+                    /**
+                     * @name            import
+                     * @namespace       config.themeBase.font.family.title
+                     * @type            String
+                     * @default         https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap
+                     *
+                     * Declare the "default" import
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
                 },
-                /**
-                 * @name            quote
-                 * @namespace       config.theme.themes.default.fonts.family
-                 * @type            Object
-                 *
-                 * Declare the <s-color="accent">quote</s-color> font face
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
                 quote: {
+                    /**
+                     * @name            font-family
+                     * @namespace       config.themeBase.font.family.quote
+                     * @type            String
+                     * @default         "Palatino, Times, Georgia, serif"
+                     *
+                     * Declare the "quote" font-family
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-family': '"Palatino, Times, Georgia, serif"',
+                    /**
+                     * @name            font-weight
+                     * @namespace       config.themeBase.font.family.quote
+                     * @type            String
+                     * @default         normal
+                     *
+                     * Declare the "quote" font-weight
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-weight': 'normal',
+                    /**
+                     * @name            font-style
+                     * @namespace       config.themeBase.font.family.quote
+                     * @type            String
+                     * @default         normal"
+                     *
+                     * Declare the "quote" font-style
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-style': 'normal',
+                    /**
+                     * @name            font-display
+                     * @namespace       config.themeBase.font.family.quote
+                     * @type            String
+                     * @default         auto
+                     *
+                     * Declare the "quote" font-display
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-display': 'auto',
+                    /**
+                     * @name            cap-height
+                     * @namespace       config.themeBase.font.family.quote
+                     * @type            Number
+                     * @default         0.65
+                     *
+                     * Declare the "quote" cap-height
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'cap-height': 0.65,
                 },
-                /**
-                 * @name            code
-                 * @namespace       config.theme.themes.default.fonts.family
-                 * @type            Object
-                 *
-                 * Declare the <s-color="accent">code</s-color> font face
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
                 code: {
+                    /**
+                     * @name            font-family
+                     * @namespace       config.themeBase.font.family.code
+                     * @type            String
+                     * @default         "Menlo, Monaco, Consolas, Courier New, monospace"
+                     *
+                     * Declare the "code" font-family
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
+                    /**
+                     * @name            font-weight
+                     * @namespace       config.themeBase.font.family.code
+                     * @type            String
+                     * @default         normal
+                     *
+                     * Declare the "code" font-weight
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-weight': 'normal',
+                    /**
+                     * @name            font-style
+                     * @namespace       config.themeBase.font.family.code
+                     * @type            String
+                     * @default         normal
+                     *
+                     * Declare the "code" font-style
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-style': 'normal',
+                    /**
+                     * @name            font-display
+                     * @namespace       config.themeBase.font.family.code
+                     * @type            String
+                     * @default         auto
+                     *
+                     * Declare the "code" font-display
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'font-display': 'auto',
+                    /**
+                     * @name            cap-height
+                     * @namespace       config.themeBase.font.family.code
+                     * @type            Number
+                     * @default         0.65
+                     *
+                     * Declare the "code" cap-height
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'cap-height': 0.65,
                 },
             },
-            /**
-             * @name            size
-             * @namespace       config.theme.themes.default.font
-             * @type            Object
-             *
-             * Store the font size that will be available in the project
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             size: {
                 /**
                  * @name          default
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.default]
                  *
-                 * Declare the font size <s-color="accent">default</s-color>
+                 * Declare the "default" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -520,11 +2071,11 @@ export default function (env, config) {
                 default: '[theme.size.default]',
                 /**
                  * @name          0
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.0]
                  *
-                 * Declare the font size <s-color="accent">0</s-color>
+                 * Declare the "0" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -532,11 +2083,11 @@ export default function (env, config) {
                 0: '[theme.size.0]',
                 /**
                  * @name          5
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.5]
                  *
-                 * Declare the font size <s-color="accent">5</s-color>
+                 * Declare the "5" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -544,11 +2095,11 @@ export default function (env, config) {
                 5: '[theme.size.5]',
                 /**
                  * @name          10
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.10]
                  *
-                 * Declare the font size <s-color="accent">10</s-color>
+                 * Declare the "10" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -556,11 +2107,11 @@ export default function (env, config) {
                 10: '[theme.size.10]',
                 /**
                  * @name          20
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.20]
                  *
-                 * Declare the font size <s-color="accent">20</s-color>
+                 * Declare the "20" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -568,11 +2119,11 @@ export default function (env, config) {
                 20: '[theme.size.20]',
                 /**
                  * @name          30
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.30]
                  *
-                 * Declare the font size <s-color="accent">30</s-color>
+                 * Declare the "30" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -580,11 +2131,11 @@ export default function (env, config) {
                 30: '[theme.size.30]',
                 /**
                  * @name          40
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.40]
                  *
-                 * Declare the font size <s-color="accent">40</s-color>
+                 * Declare the "40" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -592,11 +2143,11 @@ export default function (env, config) {
                 40: '[theme.size.40]',
                 /**
                  * @name          50
-                 * @namespace     config.theme.themes.default.font.size
+                 * @namespace     config.themeBase.font.size
                  * @type          String
                  * @default       [theme.size.50]
                  *
-                 * Declare the font size <s-color="accent">50</s-color>
+                 * Declare the "50" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -608,7 +2159,7 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.60]
                  *
-                 * Declare the font size <s-color="accent">60</s-color>
+                 * Declare the "60" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -620,7 +2171,7 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.70]
                  *
-                 * Declare the font size <s-color="accent">70</s-color>
+                 * Declare the "70" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -632,7 +2183,7 @@ export default function (env, config) {
                  * @type          String
                  * @default       [theme.size.80]
                  *
-                 * Declare the font size <s-color="accent">80</s-color>
+                 * Declare the "80" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -644,19 +2195,19 @@ export default function (env, config) {
                  * @type          String
                  * @default      [theme.size.90]
                  *
-                 * Declare the font size <s-color="accent">90</s-color>
+                 * Declare the "90" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 90: '[theme.size.90]',
                 /**
-                 * @name          10
+                 * @name          100
                  * @namespace     config.theme.themes.default.font.size
                  * @type          String
                  * @default      [theme.size.100]
                  *
-                 * Declare the font size <s-color="accent">100</s-color>
+                 * Declare the "100" font size
                  *
                  * @since         2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -668,11 +2219,11 @@ export default function (env, config) {
             width: {
                 /**
                  * @name              default
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           [theme.border.width.10]
                  *
-                 * Specify the <s-color="accent">default</s-color> border width
+                 * Specify the "default" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -680,11 +2231,11 @@ export default function (env, config) {
                 default: '[theme.border.width.10]',
                 /**
                  * @name              0
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           0
                  *
-                 * Specify the <s-color="accent">0</s-color> border width
+                 * Specify the "0" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -692,11 +2243,11 @@ export default function (env, config) {
                 0: '0px',
                 /**
                  * @name              10
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           1px
                  *
-                 * Specify the <s-color="accent">10</s-color> border width
+                 * Specify the "10" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -704,11 +2255,11 @@ export default function (env, config) {
                 10: '1px',
                 /**
                  * @name              20
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           2px
                  *
-                 * Specify the <s-color="accent">20</s-color> border width
+                 * Specify the "20" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -716,11 +2267,11 @@ export default function (env, config) {
                 20: '2px',
                 /**
                  * @name              30
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           4px
                  *
-                 * Specify the <s-color="accent">30</s-color> border width
+                 * Specify the "30" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -728,11 +2279,11 @@ export default function (env, config) {
                 30: '4px',
                 /**
                  * @name              40
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           6px
                  *
-                 * Specify the <s-color="accent">40</s-color> border width
+                 * Specify the "40" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -740,11 +2291,11 @@ export default function (env, config) {
                 40: '6px',
                 /**
                  * @name              50
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           8px
                  *
-                 * Specify the <s-color="accent">50</s-color> border width
+                 * Specify the "50" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -752,11 +2303,11 @@ export default function (env, config) {
                 50: '8px',
                 /**
                  * @name              60
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           12px
                  *
-                 * Specify the <s-color="accent">60</s-color> border width
+                 * Specify the "60" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -764,11 +2315,11 @@ export default function (env, config) {
                 60: '12px',
                 /**
                  * @name              70
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           16px
                  *
-                 * Specify the <s-color="accent">70</s-color> border width
+                 * Specify the "70" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -776,11 +2327,11 @@ export default function (env, config) {
                 70: '16px',
                 /**
                  * @name              80
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           20px
                  *
-                 * Specify the <s-color="accent">80</s-color> border width
+                 * Specify the "80" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -788,11 +2339,11 @@ export default function (env, config) {
                 80: '20px',
                 /**
                  * @name              90
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           24px
                  *
-                 * Specify the <s-color="accent">90</s-color> border width
+                 * Specify the "90" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -800,11 +2351,11 @@ export default function (env, config) {
                 90: '24px',
                 /**
                  * @name              100
-                 * @namespace         config.theme.themes.border.width
+                 * @namespace         config.themeBase.border.width
                  * @type              Number
                  * @default           30px
                  *
-                 * Specify the <s-color="accent">90</s-color> border width
+                 * Specify the "90" border width
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -814,11 +2365,11 @@ export default function (env, config) {
             radius: {
                 /**
                  * @name              default
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           10px
                  *
-                 * Specify the <s-color="accent">0</s-color> border radius
+                 * Specify the "0" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -826,11 +2377,11 @@ export default function (env, config) {
                 default: '10px',
                 /**
                  * @name              0
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           0
                  *
-                 * Specify the <s-color="accent">0</s-color> border radius
+                 * Specify the "0" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -838,11 +2389,11 @@ export default function (env, config) {
                 0: '0',
                 /**
                  * @name              10
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           4px
                  *
-                 * Specify the <s-color="accent">10</s-color> border radius
+                 * Specify the "10" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -850,11 +2401,11 @@ export default function (env, config) {
                 10: '4px',
                 /**
                  * @name              20
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           8px
                  *
-                 * Specify the <s-color="accent">20</s-color> border radius
+                 * Specify the "20" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -862,11 +2413,11 @@ export default function (env, config) {
                 20: '8px',
                 /**
                  * @name              30
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           12px
                  *
-                 * Specify the <s-color="accent">30</s-color> border radius
+                 * Specify the "30" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -874,11 +2425,11 @@ export default function (env, config) {
                 30: '12px',
                 /**
                  * @name              40
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           16px
                  *
-                 * Specify the <s-color="accent">40</s-color> border radius
+                 * Specify the "40" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -886,11 +2437,11 @@ export default function (env, config) {
                 40: '16px',
                 /**
                  * @name              50
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           20px
                  *
-                 * Specify the <s-color="accent">50</s-color> border radius
+                 * Specify the "50" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -898,11 +2449,11 @@ export default function (env, config) {
                 50: '20px',
                 /**
                  * @name              60
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           26px
                  *
-                 * Specify the <s-color="accent">60</s-color> border radius
+                 * Specify the "60" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -910,11 +2461,11 @@ export default function (env, config) {
                 60: '26px',
                 /**
                  * @name              70
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           32px
                  *
-                 * Specify the <s-color="accent">70</s-color> border radius
+                 * Specify the "70" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -922,11 +2473,11 @@ export default function (env, config) {
                 70: '32px',
                 /**
                  * @name              80
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           40px
                  *
-                 * Specify the <s-color="accent">80</s-color> border radius
+                 * Specify the "80" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -934,11 +2485,11 @@ export default function (env, config) {
                 80: '40px',
                 /**
                  * @name              90
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           50px
                  *
-                 * Specify the <s-color="accent">90</s-color> border radius
+                 * Specify the "90" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -946,11 +2497,11 @@ export default function (env, config) {
                 90: '50px',
                 /**
                  * @name              100
-                 * @namespace         config.theme.themes.default.border.radius
+                 * @namespace         config.themeBase.border.radius
                  * @type              Number
                  * @default           60px
                  *
-                 * Specify the <s-color="accent">90</s-color> border radius
+                 * Specify the "90" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -961,11 +2512,11 @@ export default function (env, config) {
         space: {
             /**
              * @name            default
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         3rem
              *
-             * Specify the <primary>default</s-color> space used for padding and margin
+             * Specify the "default" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -973,11 +2524,11 @@ export default function (env, config) {
             default: '3rem',
             /**
              * @name            0
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         0
              *
-             * Specify the <primary>0</s-color> space used for padding and margin
+             * Specify the "0" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -985,11 +2536,11 @@ export default function (env, config) {
             0: '0',
             /**
              * @name            10
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         0.375rem
              *
-             * Specify the <primary>10</s-color> space used for padding and margin
+             * Specify the "10" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -997,11 +2548,11 @@ export default function (env, config) {
             10: '0.375rem',
             /**
              * @name            20
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         0.75rem
              *
-             * Specify the <primary>20</s-color> space used for padding and margin
+             * Specify the "20" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1009,11 +2560,11 @@ export default function (env, config) {
             20: '0.75rem',
             /**
              * @name            30
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         1.5rem
              *
-             * Specify the <primary>30</s-color> space used for padding and margin
+             * Specify the "30" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1021,11 +2572,11 @@ export default function (env, config) {
             30: '1.5rem',
             /**
              * @name            40
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         2.25rem
              *
-             * Specify the <primary>40</s-color> space used for padding and margin
+             * Specify the "40" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1033,11 +2584,11 @@ export default function (env, config) {
             40: '2.25rem',
             /**
              * @name            50
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         3rem
              *
-             * Specify the <primary>50</s-color> space used for padding and margin
+             * Specify the "50" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1045,11 +2596,11 @@ export default function (env, config) {
             50: '3rem',
             /**
              * @name            60
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         3.75rem
              *
-             * Specify the <primary>60</s-color> space used for padding and margin
+             * Specify the "60" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1057,11 +2608,11 @@ export default function (env, config) {
             60: '3.75rem',
             /**
              * @name            70
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         4.5rem
              *
-             * Specify the <primary>70</s-color> space used for padding and margin
+             * Specify the "70" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1069,11 +2620,11 @@ export default function (env, config) {
             70: '4.5rem',
             /**
              * @name            80
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         5.25
              *
-             * Specify the <primary>80</s-color> space used for padding and margin
+             * Specify the "80" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1081,11 +2632,11 @@ export default function (env, config) {
             80: '5.25',
             /**
              * @name            90
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         6rem
              *
-             * Specify the <primary>90</s-color> space used for padding and margin
+             * Specify the "90" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1093,11 +2644,11 @@ export default function (env, config) {
             90: '6rem',
             /**
              * @name            100
-             * @namespace       config.theme.themes.default.space
+             * @namespace       config.themeBase.space
              * @type            String
              * @default         6.75rem
              *
-             * Specify the <primary>100</s-color> space used for padding and margin
+             * Specify the "100" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1107,11 +2658,11 @@ export default function (env, config) {
         margin: {
             /**
              * @name            default
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.default]
              *
-             * Specify the <primary>default</s-color> space used for padding and margin
+             * Specify the "default" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1119,11 +2670,11 @@ export default function (env, config) {
             default: '[theme.space.default]',
             /**
              * @name            0
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.0]
              *
-             * Specify the <primary>0</s-color> space used for padding and margin
+             * Specify the "0" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1131,11 +2682,11 @@ export default function (env, config) {
             0: '[theme.space.0]',
             /**
              * @name            10
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.10]
              *
-             * Specify the <primary>10</s-color> space used for padding and margin
+             * Specify the "10" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1143,11 +2694,11 @@ export default function (env, config) {
             10: '[theme.space.10]',
             /**
              * @name            20
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.20]
              *
-             * Specify the <primary>20</s-color> space used for padding and margin
+             * Specify the "20" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1155,11 +2706,11 @@ export default function (env, config) {
             20: '[theme.space.20]',
             /**
              * @name            30
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.30]
              *
-             * Specify the <primary>30</s-color> space used for padding and margin
+             * Specify the "30" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1167,11 +2718,11 @@ export default function (env, config) {
             30: '[theme.space.30]',
             /**
              * @name            40
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.40]
              *
-             * Specify the <primary>40</s-color> space used for padding and margin
+             * Specify the "40" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1179,11 +2730,11 @@ export default function (env, config) {
             40: '[theme.space.40]',
             /**
              * @name            50
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.50]
              *
-             * Specify the <primary>50</s-color> space used for padding and margin
+             * Specify the "50" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1191,11 +2742,11 @@ export default function (env, config) {
             50: '[theme.space.50]',
             /**
              * @name            60
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.60]
              *
-             * Specify the <primary>60</s-color> space used for padding and margin
+             * Specify the "60" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1203,11 +2754,11 @@ export default function (env, config) {
             60: '[theme.space.60]',
             /**
              * @name            70
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.70]
              *
-             * Specify the <primary>70</s-color> space used for padding and margin
+             * Specify the "70" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1215,11 +2766,11 @@ export default function (env, config) {
             70: '[theme.space.70]',
             /**
              * @name            80
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.80]
              *
-             * Specify the <primary>80</s-color> space used for padding and margin
+             * Specify the "80" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1227,11 +2778,11 @@ export default function (env, config) {
             80: '[theme.space.80]',
             /**
              * @name            90
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the <primary>90</s-color> space used for padding and margin
+             * Specify the "90" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1239,11 +2790,11 @@ export default function (env, config) {
             90: '[theme.space.90]',
             /**
              * @name            100
-             * @namespace       config.theme.themes.default.margin
+             * @namespace       config.themeBase.margin
              * @type            String
              * @default         [theme.space.100]
              *
-             * Specify the <primary>100</s-color> space used for padding and margin
+             * Specify the "100" space used for margins
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1253,11 +2804,11 @@ export default function (env, config) {
         padding: {
             /**
              * @name            default
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.default]
              *
-             * Specify the <primary>default</s-color> space used for padding and padding
+             * Specify the "default" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1265,11 +2816,11 @@ export default function (env, config) {
             default: '[theme.space.default]',
             /**
              * @name            0
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.0]
              *
-             * Specify the <primary>0</s-color> space used for padding and padding
+             * Specify the "0" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1277,11 +2828,11 @@ export default function (env, config) {
             0: '[theme.space.0]',
             /**
              * @name            10
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.10]
              *
-             * Specify the <primary>10</s-color> space used for padding and padding
+             * Specify the "10" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1289,11 +2840,11 @@ export default function (env, config) {
             10: '[theme.space.10]',
             /**
              * @name            20
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.20]
              *
-             * Specify the <primary>20</s-color> space used for padding and padding
+             * Specify the "20" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1301,11 +2852,11 @@ export default function (env, config) {
             20: '[theme.space.20]',
             /**
              * @name            30
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.30]
              *
-             * Specify the <primary>30</s-color> space used for padding and padding
+             * Specify the "30" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1313,11 +2864,11 @@ export default function (env, config) {
             30: '[theme.space.30]',
             /**
              * @name            40
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.40]
              *
-             * Specify the <primary>40</s-color> space used for padding and padding
+             * Specify the "40" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1325,11 +2876,11 @@ export default function (env, config) {
             40: '[theme.space.40]',
             /**
              * @name            50
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.50]
              *
-             * Specify the <primary>50</s-color> space used for padding and padding
+             * Specify the "50" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1337,11 +2888,11 @@ export default function (env, config) {
             50: '[theme.space.50]',
             /**
              * @name            60
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.60]
              *
-             * Specify the <primary>60</s-color> space used for padding and padding
+             * Specify the "60" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1349,11 +2900,11 @@ export default function (env, config) {
             60: '[theme.space.60]',
             /**
              * @name            70
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.70]
              *
-             * Specify the <primary>70</s-color> space used for padding and padding
+             * Specify the "70" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1361,11 +2912,11 @@ export default function (env, config) {
             70: '[theme.space.70]',
             /**
              * @name            80
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.80]
              *
-             * Specify the <primary>80</s-color> space used for padding and padding
+             * Specify the "80" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1373,11 +2924,11 @@ export default function (env, config) {
             80: '[theme.space.80]',
             /**
              * @name            90
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the <primary>90</s-color> space used for padding and padding
+             * Specify the "90" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1385,11 +2936,11 @@ export default function (env, config) {
             90: '[theme.space.90]',
             /**
              * @name            100
-             * @namespace       config.theme.themes.default.padding
+             * @namespace       config.themeBase.padding
              * @type            String
              * @default         [theme.space.90]
              *
-             * Specify the <primary>100</s-color> space used for padding and padding
+             * Specify the "100" space used for paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -1399,7 +2950,7 @@ export default function (env, config) {
         media: {
             /**
              * @name              defaultAction
-             * @namespace         config.theme.themes.default.media
+             * @namespace         config.themeBase.media
              * @type              String
              * @values            >,<,=,>=,<=
              * @default           >=
@@ -1414,7 +2965,7 @@ export default function (env, config) {
             defaultAction: '>=',
             /**
              * @name              defaultQuery
-             * @namespace         config.theme.themes.default.media
+             * @namespace         config.themeBase.media
              * @type              String
              * @default           screen
              *
@@ -1427,7 +2978,7 @@ export default function (env, config) {
             queries: {
                 /**
                  * @name          mobile
-                 * @namespace     config.theme.themes.default.media.queries
+                 * @namespace     config.themeBase.media.queries
                  * @type          Object
                  * @default       {'min-width': 0, 'max-width': 639}
                  *
@@ -1442,7 +2993,7 @@ export default function (env, config) {
                 },
                 /**
                  * @name          tablet
-                 * @namespace     config.theme.themes.default.media.queries
+                 * @namespace     config.themeBase.media.queries
                  * @type          Object
                  * @default       {'min-width': 640, 'max-width': 1279}
                  *
@@ -1457,7 +3008,7 @@ export default function (env, config) {
                 },
                 /**
                  * @name          desktop
-                 * @namespace     config.theme.themes.default.media.queries
+                 * @namespace     config.themeBase.media.queries
                  * @type          Object
                  * @default       {'min-width': 1280, 'max-width': null}
                  *
@@ -1474,370 +3025,2953 @@ export default function (env, config) {
         },
         components: {
             's-code-example': {
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.components.s-code-example
+                 * @type          Object
+                 * @default       [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the vertical rhythm props for the "s-code-example" component
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
         },
         ui: {
             default: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      1.5em
+                 *
+                 * Specify the default padding inline for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '1.5em',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      0.75em
+                 *
+                 * Specify the default padding block for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '0.75em',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      [theme.border.radius.default]
+                 *
+                 * Specify the default border radius for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.border.radius.default]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      [theme.border.width.default]
+                 *
+                 * Specify the default border width for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.border.width.default]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      [theme.transition.fast]
+                 *
+                 * Specify the default transition for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.transition.fast]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      main
+                 *
+                 * Specify the default color for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: 'main',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      solid
+                 *
+                 * Specify the default style for ui's.
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: 'solid',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.default
+                 * @type          String
+                 * @default      [theme.depth.default]
+                 *
+                 * Specify the default depth for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.depth.default]',
                 rhythmVertical: {
+                    /**
+                     * @name          margin-bottom
+                     * @namespace     config.themeBase.ui.default.rhythmVertical
+                     * @type          Number
+                     * @default      60
+                     *
+                     * Specify the default margin bottom when in vertical rhythm scope for ui's
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'margin-bottom': 60,
                 },
             },
             form: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      0.75em
+                 *
+                 * Specify the default padding inline for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '0.75em',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      0.375em
+                 *
+                 * Specify the default padding block for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '0.375em',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      [theme.border.radius.default]
+                 *
+                 * Specify the default border radius for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.border.radius.default]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      [theme.border.width.default]
+                 *
+                 * Specify the default border width for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.border.width.default]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      [theme.transition.fast]
+                 *
+                 * Specify the default transition for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.transition.fast]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the outline is enabled for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      accent
+                 *
+                 * Specify the default color for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: 'accent',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      solid
+                 *
+                 * Specify the default style for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: 'solid',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.form
+                 * @type          String
+                 * @default      [theme.depth.default]
+                 *
+                 * Specify the default depth for form items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.depth.default]',
                 rhythmVertical: {
+                    /**
+                     * @name          margin-bottom
+                     * @namespace     config.themeBase.ui.form.rhythmVertical
+                     * @type          Number
+                     * @default      40
+                     *
+                     * Specify the default margin bottom for form items when in vertical rhythm scope
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
                     'margin-bottom': 40,
                 },
             },
             outline: {
+                /**
+                 * @name          active
+                 * @namespace     config.themeBase.ui.outline
+                 * @type          Boolean
+                 * @default      true
+                 *
+                 * Specify if the outline is activated by default for ui elements
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 active: true,
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.outline
+                 * @type          String
+                 * @default      10px
+                 *
+                 * Specify the border width for outline ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '10px',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.outline
+                 * @type          String
+                 * @default      [theme.border.radius.default]
+                 *
+                 * Specify the border radius for outline ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.border.radius.default]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.outline
+                 * @type          String
+                 * @default      all .2s ease-out
+                 *
+                 * Specify the transition for outline ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: 'all .2s ease-out',
             },
             scrollbar: {
+                /**
+                 * @name          size
+                 * @namespace     config.themeBase.ui.scrollbar
+                 * @type          String
+                 * @default      2px
+                 *
+                 * Specify the size (width/height) for scrollbar
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 size: '2px',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.scrollbar
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for scrollbar
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
             },
             button: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Boolean
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if you want the outline on your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Number
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.button
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                formatText: true,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.button
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your button ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             avatar: {
-                borderWidth: '2px',
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          String
+                 * @default      2px
+                 *
+                 * Specify the default border width for avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                borderWidth: '2px',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          Number
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for your avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.avatar
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your avatar ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             colorPicker: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for colorPicker items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.colorPicker
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your colorPicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             datePicker: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: ['theme.ui.form.defaultColor'],
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for datePicker items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.datePicker
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your datePicker ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             input: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
-                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.defaultColor]
+                 *
+                 * Specify the default color for input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.input
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for input items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.input
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your input ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             radio: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      0.5em
+                 *
+                 * Specify the default border radius for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '0.5em',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for radio items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          String
+                 * @default      [theme.ui.form.defaultColor]
+                 *
+                 * Specify the default color for radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.radio
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your radio ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             checkbox: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      0.2em
+                 *
+                 * Specify the default border radius for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '0.2em',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for checkbox items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.checkbox
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your checkbox ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             range: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.defaultColor]
+                 *
+                 * Specify the default color for range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.range
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for range items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.range
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your range ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             label: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.label
+                 * @type          Number
+                 * @default      inline
+                 *
+                 * Specify the default style for your label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'inline',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.label
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for label items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.form.depth]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.label
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your label ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             select: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.paddingInline]
+                 *
+                 * Specify the default padding inline for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.form.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.paddingBlock]
+                 *
+                 * Specify the default padding block for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.form.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.form.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for select items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.select
+                 * @type          String
+                 * @default      [theme.ui.form.defaultColor]
+                 *
+                 * Specify the default color for select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.select
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your select ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             switch: {
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.borderRadius]
+                 *
+                 * Specify the default border radius for switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.form.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.borderWidth]
+                 *
+                 * Specify the default border width for switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.form.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.transition]
+                 *
+                 * Specify the default transition for switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.depth]
+                 *
+                 * Specify the default depth for switch items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.form.depth]',
-                defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                rhythmVertical: '[theme.ui.default.rhythmVertical]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          String
+                 * @default      [theme.ui.form.defaultColor]
+                 *
+                 * Specify the default color for switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.form.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Number
+                 * @default      [theme.ui.form.defaultStyle]
+                 *
+                 * Specify the default style for your switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.form.defaultStyle]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.switch
+                 * @type          Object
+                 * @default      [theme.ui.form.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your switch ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.form.rhythmVertical]',
             },
             dropdown: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                outline: '[theme.ui.outline.active]',
-                depth: '[theme.ui.default.depth]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your dropdown ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for dropdown items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.dropdown
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
             },
             list: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                bulletChar: '●',
-                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.list
+                 * @type          Number
+                 * @default      ul
+                 *
+                 * Specify the default style for your list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultStyle: 'ul',
-                formatText: true,
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for list items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          bulletChar
+                 * @namespace     config.themeBase.ui.list
+                 * @type          String
+                 * @default      ●
+                 *
+                 * Specify if the bullet character to use
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                bulletChar: '●',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.list
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your list ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             fsTree: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                bulletChar: '●',
-                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for fsTree items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          bulletChar
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          String
+                 * @default      ●
+                 *
+                 * Specify if the bullet character to use
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                bulletChar: '●',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.fsTree
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your fsTree ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tabs: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your tabs ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for tabs items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: 0,
-                defaultStyle: 'solid',
+                /**
+                 * @name          outline
+                 * @namespace     config.themeBase.ui.tabs
+                 * @type          Object
+                 * @default      [theme.ui.outline.active]
+                 *
+                 * Specify if the focus outline is activated for this ui element
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                outline: '[theme.ui.outline.active]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.tabe
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your tabe ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             terminal: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for terminal items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.terminal
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your terminal ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             tooltip: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your tooltip ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for tooltip items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          arrowSize
+                 * @namespace     config.themeBase.ui.tooltip
+                 * @type          Object
+                 * @default      20px
+                 *
+                 * Specify if the arrow size of the tooltips
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 arrowSize: '20px',
             },
-            // pre: {
-            //   paddingInline: '[theme.ui.default.paddingInline]',
-            //        paddingBlock: '[theme.ui.default.paddingBlock]',
-            //   borderRadius: '[theme.ui.default.borderRadius]',
-            //   transition: '[theme.ui.default.transition]',
-            //   depth: '[theme.ui.default.depth]',
-            //   lineHeight: 2,
-            //   styles: ['default'],
-            //   defaultColor: '[theme.ui.default.defaultColor]',
-            //   'rhythmVertical': '[theme.ui.default.rhythmVertical]'
-            // },
             code: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.padding.50]
+                 *
+                 * Specify the default padding inline for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.padding.50]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.padding.50]
+                 *
+                 * Specify the default padding block for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.padding.50]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.code
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.code
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for code items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: '[theme.ui.default.depth]',
-                styles: ['default:default'],
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.code
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your code ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             blockquote: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for blockquote items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: '[theme.ui.default.depth]',
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.blockquote
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your blockquote ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             table: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.paddingInline]
+                 *
+                 * Specify the default padding inline for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '[theme.ui.default.paddingInline]',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.paddingBlock]
+                 *
+                 * Specify the default padding block for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '[theme.ui.default.paddingBlock]',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.border.width.10]
+                 *
+                 * Specify the default border width for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.border.width.10]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                depth: 0,
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 defaultColor: '[theme.ui.default.defaultColor]',
-                defaultStyle: 'solid',
-                formatText: true,
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.table
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.table
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for table items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                depth: 0,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.table
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your table ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             badge: {
+                /**
+                 * @name          paddingInline
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default         0.65em
+                 *
+                 * Specify the default padding inline for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingInline: '.65em',
+                /**
+                 * @name          paddingBlock
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      0.35em
+                 *
+                 * Specify the default padding block for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 paddingBlock: '.35em',
+                /**
+                 * @name          borderRadius
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.borderRadius]
+                 *
+                 * Specify the default border radius for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderRadius: '[theme.ui.default.borderRadius]',
+                /**
+                 * @name          borderWidth
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.borderWidth]
+                 *
+                 * Specify the default border width for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 borderWidth: '[theme.ui.default.borderWidth]',
+                /**
+                 * @name          transition
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.transition]
+                 *
+                 * Specify the default transition for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 transition: '[theme.ui.default.transition]',
-                defaultStyle: 'solid',
+                /**
+                 * @name          defaultColor
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.defaultColor]
+                 *
+                 * Specify the default color for badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultColor: '[theme.ui.default.defaultColor]',
+                /**
+                 * @name          defaultStyle
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          Number
+                 * @default      [theme.ui.default.defaultStyle]
+                 *
+                 * Specify the default style for your badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                defaultStyle: '[theme.ui.default.defaultStyle]',
+                /**
+                 * @name          depth
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          String
+                 * @default      [theme.ui.default.depth]
+                 *
+                 * Specify the default depth for badge items
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 depth: 0,
+                /**
+                 * @name          rhythmVertical
+                 * @namespace     config.themeBase.ui.badge
+                 * @type          Object
+                 * @default      [theme.ui.default.rhythmVertical]
+                 *
+                 * Specify the default vertical rhythm for your badge ui
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
             loader: {
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loader
+                 * @type          String
+                 * @default      1s
+                 *
+                 * Specify the duration of a loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 duration: '1s',
+                /**
+                 * @name          easing
+                 * @namespace     config.themeBase.ui.loader
+                 * @type          String
+                 * @default      linear
+                 *
+                 * Specify the easing of a loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 easing: 'linear',
             },
             loaderSpinner: {
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loaderSpinner
+                 * @type          String
+                 * @default      [theme.ui.loader.duration]
+                 *
+                 * Specify the duration of the spinner loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 duration: '[theme.ui.loader.duration]',
+                /**
+                 * @name          duration
+                 * @namespace     config.themeBase.ui.loaderSpinner
+                 * @type          String
+                 * @default      [theme.ui.loader.easing]
+                 *
+                 * Specify the easing of the spinner loader
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 easing: '[theme.ui.loader.easing]',
             },
         },
         typo: {
+            /**
+             * @name          h1
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h1 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h1: {
                 'font-family': 'title',
                 'font-size': 90,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h2
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h2 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h2: {
                 'font-family': 'title',
                 'font-size': 80,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h3
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h3 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h3: {
                 'font-family': 'title',
                 'font-size': 70,
-                'line-height': 1,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h4
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h4 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h4: {
                 'font-family': 'title',
                 'font-size': 60,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          h5
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h5 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h5: {
                 'font-family': 'title',
                 'font-size': 50,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
+            /**
+             * @name          h6
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the h6 typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             h6: {
                 'font-family': 'title',
                 'font-size': 40,
-                'line-height': 1.2,
+                'line-height': 1.3,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 40,
                 },
             },
+            /**
+             * @name          p
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the p typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             p: {
                 'font-family': 'default',
                 'font-size': 30,
-                'line-height': 1.5,
+                'line-height': 1.8,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          lead
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the lead typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             lead: {
                 'font-family': 'default',
                 'font-size': 50,
-                'line-height': 1.2,
+                'line-height': 1.6,
                 'max-width': '55ch',
                 rhythmVertical: {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          hr
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the hr typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             hr: {
                 color: '[theme.color.main.color]',
                 opacity: 0.2,
@@ -1845,6 +5979,17 @@ export default function (env, config) {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          pre
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the pre typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             pre: {
                 'font-family': 'code',
                 color: ['main', 'text'],
@@ -1858,6 +6003,17 @@ export default function (env, config) {
                     'margin-bottom': 50,
                 },
             },
+            /**
+             * @name          code
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the code typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             'code:not(pre > code)': {
                 display: 'inline-block',
                 'font-family': 'code',
@@ -1867,47 +6023,201 @@ export default function (env, config) {
                 paddingInline: 10,
                 paddingBlock: 0,
             },
+            /**
+             * @name          a
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the a typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             a: {
                 color: 'accent',
             },
+            /**
+             * @name          quote
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the quote typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             quote: {
                 'font-family': 'quote',
             },
+            /**
+             * @name          b
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the b typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             b: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          bold
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the bold typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             bold: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          strong
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the strong typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             strong: {
                 'font-weight': 'bold',
             },
+            /**
+             * @name          i
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the i typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             i: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          italic
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the italic typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             italic: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          em
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the em typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             em: {
                 'font-style': 'italic',
             },
+            /**
+             * @name          small
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the small typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             small: {
                 'font-size': '0.5em',
             },
+            /**
+             * @name          mark
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the mark typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             mark: {
                 'background-color': '[theme.color.accent.color]',
                 color: '[theme.color.accent.foreground]',
             },
+            /**
+             * @name          del
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the del typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             del: {
                 'text-decoration': 'line-through',
             },
+            /**
+             * @name          ins
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the ins typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             ins: {
                 'text-decoration': 'underline',
             },
+            /**
+             * @name          sub
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the sub typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             sub: {
                 'vertical-align': 'sub',
                 'font-size': '0.6em',
             },
+            /**
+             * @name          sup
+             * @namespace     config.themeBase.typo
+             * @type          Object
+             * @default      {}
+             *
+             * Specify the css object for the sup typo element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
             sup: {
                 'vertical-align': 'sup',
                 'font-size': '0.6em',
@@ -1915,4 +6225,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0osT0FBTyxFQUFFLDBDQUEwQztTQUN0RDtRQUVELE1BQU0sRUFBRTtZQUNKLElBQUksRUFBRSxLQUFLO1lBQ1gsT0FBTyxFQUFFLEtBQUs7WUFDZCxJQUFJLEVBQUUsS0FBSztTQUNkO1FBRUQsVUFBVSxFQUFFO1lBQ1IsSUFBSSxFQUFFLGdEQUFnRDtZQUN0RCxPQUFPLEVBQUUsbURBQW1EO1lBQzVELElBQUksRUFBRSxnREFBZ0Q7U0FDekQ7UUFFRCxPQUFPLEVBQUU7WUFDTCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILE9BQU8sRUFBRSxVQUFVO2FBQ3RCO1lBQ0QsUUFBUSxFQUFFO2dCQUNOOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxPQUFPLEVBQUUsR0FBRzthQUNmO1lBQ0QsUUFBUSxFQUFFO2dCQUNOOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxLQUFLLEVBQUUsRUFBRTthQUNaO1NBQ0o7UUFFRCxNQUFNLEVBQUU7WUFDSixTQUFTLEVBQUU7Z0JBQ1AsT0FBTyxFQUFFO29CQUNMLFdBQVcsRUFBRSxRQUFRO2lCQUN4QjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0YsV0FBVyxFQUFFLE1BQU07aUJBQ3RCO2FBQ0o7WUFDRCxJQUFJLEVBQUU7Z0JBQ0YsQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0osQ0FBQyxFQUFFLENBQUM7Z0JBQ0os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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSwwQ0FBMEM7U0FDdEQ7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7WUFDWDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEtBQUs7WUFDZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7U0FDZDtRQUVELFVBQVUsRUFBRTtZQUNSOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1lBQ3REOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsbURBQW1EO1lBQzVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1NBQ3pEO1FBRUQsT0FBTyxFQUFFO1lBQ0wsUUFBUSxFQUFFO2dCQUNOOzs7Ozs7Ozs7OzttQkFXRztnQkFDSCxPQUFPLEVBQUUsVUFBVTthQUN0QjtZQUNELFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsT0FBTyxFQUFFLEdBQUc7YUFDZjtZQUNELFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsS0FBSyxFQUFFLEVBQUU7YUFDWjtTQUNKO1FBRUQsTUFBTSxFQUFFO1lBQ0osU0FBUyxFQUFFO2dCQUNQLE9BQU8sRUFBRTtvQkFDTDs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxXQUFXLEVBQUUsUUFBUTtpQkFDeEI7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFdBQVcsRUFBRSxNQUFNO2lCQUN0QjthQUNKO1lBQ0QsSUFBSSxFQUFF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VDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7U0FDVjtRQUVELE9BQU8sRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsQ0FBQztZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsQ0FBQztTQUNYO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHO1lBQ1I7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxNQUFNO1NBQ2hCO1FBRUQsTUFBTSxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHO1lBQ1I7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxNQUFNO1NBQ2hCO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxrQkFBa0I7WUFDM0I7Ozs7Ozs7Ozs7ZUFVRztZQUNILENBQUMsRUFBRSxHQUFHO1lBQ047Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRTs7Ozs7b0NBS29CO1lBQ3hCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUU7Ozs7O29DQUtvQjtZQUN4Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLb0I7WUFDeEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRTs7Ozs7b0NBS29CO1lBQ3hCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUU7Ozs7O29DQUtvQjtZQUN4Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLb0I7WUFDeEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRTs7Ozs7b0NBS29CO1lBQ3hCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxFQUFFLEVBQUU7Ozs7O29DQUtvQjtZQUN4Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFOzs7OztvQ0FLb0I7WUFDeEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRTs7Ozs7b0NBS21CO1NBQzNCO1FBRUQsS0FBSyxFQUFFO1lBQ0gsU0FBUyxFQUFFO2dCQUNQOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSw0QkFBNEI7Z0JBQ25DOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsU0FBUztnQkFDYjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsU0FBUztnQkFDYjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsU0FBUztnQkFDZjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUztnQkFDZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsU0FBUzthQUNqQjtTQUNKO1FBRUQsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxNQUFNO1lBRWY7Ozs7Ozs7Ozs7ZUFVRztZQUNILENBQUMsRUFBRSxTQUFTO1lBRVo7Ozs7Ozs7Ozs7ZUFVRztZQUNILENBQUMsRUFBRSxRQUFRO1lBRVg7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxTQUFTO1lBRWI7Ozs7Ozs7Ozs7ZUFVRztZQUNILEVBQUUsRUFBRSxTQUFTO1lBRWI7Ozs7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

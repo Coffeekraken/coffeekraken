@@ -1,9 +1,20 @@
 export default function (env, config) {
     return {
+        /**
+         * @name            extends
+         * @namespace        config.themeDefaultDark
+         * @type            String
+         * @default         themeDarkBase
+         *
+         * Specify which theme this one extends from
+         *
+         * @since           2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
         extends: 'themeDarkBase',
         /**
          * @name            defaultColor
-         * @namespace        config.theme.themes.themeDefaultDark
+         * @namespace        config.themeDefaultDark
          * @type            String
          * @default         main
          *
@@ -14,112 +25,189 @@ export default function (env, config) {
          */
         defaultColor: 'main',
         color: {
-            /**
-             * @name                main
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             hsla(198,10,50,1)
-             *
-             * Specify the <s-color="main">main</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             main: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.main
+                 * @type                Color
+                 * @default             hsla(198,10,50,1)
+                 *
+                 * Specify the "main" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: 'hsla(198,10,50,1)',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.main
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                accent
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ffbb00
-             *
-             * Specify the <s-color="accent">accent</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             accent: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.accent
+                 * @type                Color
+                 * @default             #ffbb00
+                 *
+                 * Specify the "accent" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ffbb00',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.accent
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                complementary
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #5100ff
-             *
-             * Specify the <s-color="complementary">complementary</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             complementary: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.complementary
+                 * @type                Color
+                 * @default             #5100ff
+                 *
+                 * Specify the "complementary" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#5100ff',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.complementary
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                success
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #91ff00
-             *
-             * Specify the <s-color="success">success</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             success: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.success
+                 * @type                Color
+                 * @default             #91ff00
+                 *
+                 * Specify the "success" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#91ff00',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.success
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                warning
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ffd500
-             *
-             * Specify the <s-color="warning">warning</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             warning: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.warning
+                 * @type                Color
+                 * @default             #ffd500
+                 *
+                 * Specify the "warning" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ffd500',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.warning
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                error
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #ff003b
-             *
-             * Specify the <s-color="error">error</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             error: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.error
+                 * @type                Color
+                 * @default             #ff003b
+                 *
+                 * Specify the "error" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#ff003b',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.error
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
-            /**
-             * @name                info
-             * @namespace           config.theme.themes.default.color
-             * @type                Color
-             * @default             #00ffff
-             *
-             * Specify the <s-color="info">info</s-color> color value.
-             *
-             * @since             2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
             info: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultDark.color.info
+                 * @type                Color
+                 * @default             #00ffff
+                 *
+                 * Specify the "info" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 color: '#00ffff',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultDark.color.info
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
                 '...': '[extends.colorSchemas]',
             },
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0RGFyay5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZURlZmF1bHREYXJrLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLE9BQU87UUFDSCxPQUFPLEVBQUUsZUFBZTtRQUV4Qjs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFLE1BQU07UUFFcEIsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRTtnQkFDRixLQUFLLEVBQUUsbUJBQW1CO2dCQUMxQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRTtnQkFDSixLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxhQUFhLEVBQUU7Z0JBQ1gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFO2dCQUNMLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRTtnQkFDTCxLQUFLLEVBQUUsU0FBUztnQkFDaEIsS0FBSyxFQUFFLHdCQUF3QjthQUNsQztZQUVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCLEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLEtBQUssRUFBRSxTQUFTO2dCQUNoQixLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0RGFyay5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZURlZmF1bHREYXJrLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGVBQWU7UUFFeEI7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxNQUFNO1FBRXBCLEtBQUssRUFBRTtZQUNILElBQUksRUFBRTtnQkFDRjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsbUJBQW1CO2dCQUMxQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsYUFBYSxFQUFFO2dCQUNYOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

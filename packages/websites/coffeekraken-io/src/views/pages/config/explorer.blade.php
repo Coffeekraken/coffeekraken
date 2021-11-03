@@ -3,7 +3,8 @@
 
 @section('content')
     
-    <section class="s-container markdown">
+    <section class="s-container config-explorer">
+
 
             <div class="s-layout:1222:gutter-between:gutter-50">
 
@@ -35,31 +36,41 @@
                             $configId = str_replace('.config.js', '', $filename);
                         @endphp
 
+                        <h1 class="s-typo:h1 s-mbe:20">
+                            {{ $configId }}
+                        </h1>
+                        <h3 class="s-typo:code s-font:40 s-p:10 s-mbe:50">
+                            <i class="s-icon:file"></i> {{ $filename }}
+                        </h3>
+
                         @foreach($requestedConfig as $configObj)
 
                             <ol>
                             @foreach ($configObj->docblocks as $docblock)
 
                                 <li class="s-font:40 s-mbe:30">
-                                    <header class="s-flex s-bg:main-surface s-radius">
-                                        <div class="s-flex-item:grow s-tc:accent s-p:30">
+                                    <header class="s-flex s-bg:main-surface s-radius s-depth:100">
+                                        <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
 
                                             @php
                                                 $dotpath = end(explode($configId.'.', $docblock->namespace.'.'.$docblock->name));
 
                                             @endphp
-
-                                            {{ $dotpath }}
+                                            <span class="s-font:code">
+                                                {{ $dotpath }}
+                                            </span>
                                         </div>
-                                        <div class="s-typo:bold s-p:30">
+                                        <div class="s-typo:bold s-p:30 s-tc:info">
                                             {{ $docblock->type }}
                                         </div>
-                                        @if ($docblock->default != null or $docblock->default == 0)
-                                            <div class="s-tc:info s-p:30">
+                                    </header>
+                                    @if ($docblock->default != null or $docblock->default == 0)
+                                        <div class="s-pi:30 s-mbs:40">
+                                            <div class="s-typo:code">
                                                 {{ $docblock->default }}
                                             </div>
-                                        @endif
-                                    </header>
+                                        </div>
+                                    @endif
                                     <p class="s-typo:p s-p:30">{!! $docblock->description !!}</p> 
                                 </li>                                   
 
@@ -73,6 +84,7 @@
                 </div>
 
             </div>
+
         </section>
 
 @endsection

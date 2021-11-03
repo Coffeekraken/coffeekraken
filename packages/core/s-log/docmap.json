@@ -1,0 +1,77 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-log.shared.iSLogAsk": {
+                "name": "ISLogAsk",
+                "type": "Interface",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface define the shape a an log ask object that can be used\nacross some other services/classes like SStdio, and others dependings\non the needs...",
+                "namespace": "@coffeekraken.s-log.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { ISLogAsk } from '@coffeekraken/s-log';\nfunction myCoolFunction(ask: ISLogAsk): void {\n   // do something...\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "ISLogAsk.js",
+                "extension": "js",
+                "relPath": "src/shared/ISLogAsk.js",
+                "children": {}
+            }
+        }
+    }
+}

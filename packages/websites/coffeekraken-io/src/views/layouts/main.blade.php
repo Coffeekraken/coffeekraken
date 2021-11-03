@@ -16,6 +16,14 @@
     
     @yield('content')
 
+    @include('generic.tools.tools')
+
+    <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
+        <ck-settings mount-when="inViewport"></ck-settings> 
+    </s-side-panel>
+
+    <ck-search></ck-search>
+
     @include('layouts.footer.footer')
 
     </div>

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <link rel="stylesheet" href="./src//css/index.css" />
+        <title>Svelte + TS + Vite App</title>
+    </head>
+    <body>
+        <script type="module">
+            import { define } from './src/js/index';
+            define();
+        </script>
+
+        <s-filtrable-input value="" filtrable="title,body">
+            <input type="text" />
+        </s-filtrable-input>
+    </body>
+</html>

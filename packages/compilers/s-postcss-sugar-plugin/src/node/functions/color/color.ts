@@ -54,14 +54,19 @@ export interface IPostcssSugarPluginColorParams {
     variant: string;
 }
 
-export default function color({ params }: { params: Partial<IPostcssSugarPluginColorParams> }) {
+export default function color({
+    params,
+}: {
+    params: Partial<IPostcssSugarPluginColorParams>;
+}) {
     const finalParams: IPostcssSugarPluginColorParams = {
         color: '',
         variant: undefined,
         ...params,
     };
 
-    if (finalParams.color.match(/^(hsla?|rgba?|hsv)\(/)) return finalParams.color;
+    if (finalParams.color.match(/^(hsla?|rgba?|hsv)\(/))
+        return finalParams.color;
     if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
     let colorName = finalParams.color;
@@ -78,7 +83,10 @@ export default function color({ params }: { params: Partial<IPostcssSugarPluginC
     let modifierParams = {};
     if (finalParams.variant && finalParams.variant.match(/^--/)) {
         modifierParams = colorVariantNameInterface.apply(finalParams.variant);
-    } else if (finalParams.variant && finalParams.variant.trim().match(/[a-zA-Z0-9_-]+/)) {
+    } else if (
+        finalParams.variant &&
+        finalParams.variant.trim().match(/[a-zA-Z0-9_-]+/)
+    ) {
         colorVariantName = finalParams.variant;
     }
 
@@ -99,7 +107,8 @@ export default function color({ params }: { params: Partial<IPostcssSugarPluginC
             colorVariantNameVar += `-${colorVariantName}`;
         }
 
-        colorVariantNameVar = '--' + colorVariantNameVar.replace(/-{2,999}/gm, '-');
+        colorVariantNameVar =
+            '--' + colorVariantNameVar.replace(/-{2,999}/gm, '-');
 
         let finalValue = colorVar;
 
@@ -117,9 +126,11 @@ export default function color({ params }: { params: Partial<IPostcssSugarPluginC
             : modifierParams.darken
             ? modifierParams.darken * -1
             : undefined;
-        if (lightnessOffset === undefined) lightnessOffset = `var(${colorVariantNameVar}-lightness-offset, 0)`;
+        if (lightnessOffset === undefined)
+            lightnessOffset = `var(${colorVariantNameVar}-lightness-offset, 0)`;
 
-        let alpha = modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
+        let alpha =
+            modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
 
         finalValue = `hsla(
       calc(
@@ -130,7 +141,7 @@ export default function color({ params }: { params: Partial<IPostcssSugarPluginC
       calc(
         (
           var(${colorVar}-s, 0)
-          + 
+          +
           ${saturationOffset}
         )
         * 1%
@@ -143,7 +154,11 @@ export default function color({ params }: { params: Partial<IPostcssSugarPluginC
         )
         * 1%
       ),
-      ${modifierParams.alpha !== undefined ? modifierParams.alpha : `var(${colorVariantNameVar}-a, 1)`}
+      ${
+          modifierParams.alpha !== undefined
+              ? modifierParams.alpha
+              : `var(${colorVariantNameVar}-a, 1)`
+      }
     )`;
 
         finalValue = finalValue

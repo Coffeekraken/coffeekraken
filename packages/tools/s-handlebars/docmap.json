@@ -1,0 +1,441 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-handlebars.node.registerHelpers": {
+                "name": "registerHelpers",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to register all the helpers provided in this package\ndirectly on your handlebars instance.",
+                "namespace": "@coffeekraken.s-handlebars.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { registerHelpers } from '@coffeekraken/s-handlebars';\nimport __handlebars from 'handlebars';\nregisterHelpers(__handlebard);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "registerHelpers.js",
+                "extension": "js",
+                "relPath": "src/node/registerHelpers.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {
+                "name": "configFileNameFromDocmapPath",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to get the .config file name from a passed docmap path",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "configFileNameFromDocmapPath.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/configFileNameFromDocmapPath.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.configFiles": {
+                "name": "configFiles",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to get the SFile object representation of each config files that correspond to the passed configId",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "configFiles.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/configFiles.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.configFromDocmap": {
+                "name": "configFromDocmap",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to extract from the passed docmap some config",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "configFromDocmap.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/configFromDocmap.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.configValue": {
+                "name": "configValue",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to \"sanitize\" some configuration values makes absolute paths to relative, etc...",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "configValue.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/configValue.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.get": {
+                "name": "get",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to get get a value deep into the passed object using dotpath syntax",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "get.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/get.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.ifEqual": {
+                "name": "ifEqual",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This represent the `match` handlebars helper that allows you to execute a passed regex on the passed string",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "{{#each object}}\n{{ifEqual 'my-cool-string' 'something' }}\n <h1>Hello world</h1>\n{{/ifEqual}}\n{{/each}}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "ifEqual.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/ifEqual.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.ifMatch": {
+                "name": "ifMatch",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This represent the `match` handlebars helper that allows you to execute a passed regex on the passed string",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "{{#each object}}\n{{ifMatch 'my-cool-string' '.-cool-.*' }}\n <h1>Hello world</h1>\n{{/ifMatch}}\n{{/each}}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "ifMatch.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/ifMatch.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.islicense": {
+                "name": "islicense",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to make an conditional check if a license is specified in your package.json file",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "isLicense.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/isLicense.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
+                "name": "jsonStringify",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to stringify an object",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "jsonStringify.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/jsonStringify.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.rootRelative": {
+                "name": "rootRelative",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to remove in a path the absolute part and get only the relative part of it",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "rootRelative.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/rootRelative.js",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.sfile": {
+                "name": "sfile",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This helper allows you to get an SFile instance back from the passed file path",
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "sfile.js",
+                "extension": "js",
+                "relPath": "src/node/helpers/sfile.js",
+                "children": {}
+            }
+        }
+    }
+}

@@ -30,6 +30,8 @@ function namespace(data, blockSettings) {
     }
 
     let namespace = data.value;
+    if (!namespace) return data.value;
+
     if (blockSettings.packageJson) {
         namespace = __namespaceCompliant(
             `${blockSettings.packageJson.name.replace(

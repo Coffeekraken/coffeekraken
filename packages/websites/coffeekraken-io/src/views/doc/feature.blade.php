@@ -6,7 +6,7 @@
 
     <ul class="s-list:ul:accent s-mbe:50">
         @foreach ($block->feature as $feature)
-            <li class="s-typo:lead">
+            <li>
                 {!! $feature !!}
             </li>
         @endforeach

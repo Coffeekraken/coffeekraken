@@ -30,7 +30,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function markdown(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe, pipeError }) => {
+    return new __SPromise(async ({ resolve, reject, pipe, pipeErrors }) => {
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
         const menu = docmapJson.menu;
@@ -52,7 +52,7 @@ export default function markdown(req, res, settings = {}) {
                 .toString();
 
             const builder = new __SMarkdownBuilder();
-            const res = await pipeError(
+            const res = await pipeErrors(
                 builder.build({
                     inRaw: markdownStr,
                     target: 'html',

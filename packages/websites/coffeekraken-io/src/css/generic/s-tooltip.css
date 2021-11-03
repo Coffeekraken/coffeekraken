@@ -1,9 +1,3 @@
 .s-tooltip {
     @sugar.depth (100);
 }
-
-.s-tooltip--discord {
-    background: url('/src/img/discord-illustration-bkg.png');
-    background-position: 50% 50%;
-    background-size: cover;
-}

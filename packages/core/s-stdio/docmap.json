@@ -1,0 +1,382 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-stdio.sugar.node.stdio.sStdio": {
+                "name": "SStdio",
+                "type": "Class",
+                "description": "This class represent the base one for all the \"Stdio\"\ncompatible setting.",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SStdio from '@coffeekraken/s-stdio';\nclass MyCoolStdio extends SStdio {\n   constructor(sources, settings = {}) {\n     super(sources, settings);\n     // do something...\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SStdio.js",
+                "extension": "js",
+                "relPath": "src/shared/SStdio.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Access the stdio id",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "log": {
+                        "name": "log",
+                        "type": "Function",
+                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerComponent": {
+                        "name": "registerComponent",
+                        "type": "Function",
+                        "description": "This static method allows you to register a new Stdio component\nthat you will be able to use then through the \"type\" property of\nthe logObj passed to the STerminalStdio instance.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "existingOrNew": {
+                        "name": "existingOrNew",
+                        "type": "Function",
+                        "description": "This static method allows you to get back either an existing stdio instance or a new one",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "new": {
+                        "name": "new",
+                        "type": "Function",
+                        "description": "This static method is a sugar to instanciate an stdio by specifying some sources,\nand either a path to a SStdio class, an SStdio class directly or a pre-registered\nstdio id like:\n- inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio\n- terminal: STerminalStdio (node only)\n- console: SConsoleStdio (browser only)\n- blessed: SBlessedStdio (node only)",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "import SStdio from '@coffeekraken/s-stdio';\nimport spawn from '@coffeekraken/sugar/node/process/spawn';\nconst proc = spawn('ls -la');\nSStdio.new('default', proc);"
+                            }
+                        ],
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "stdioSettings": {
+                        "name": "stdioSettings",
+                        "type": "ISStdioSettings",
+                        "description": "Access the stdio settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "display": {
+                        "name": "display",
+                        "type": "Function",
+                        "description": "This method tells the stdio instance that it has been showned.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "hide": {
+                        "name": "hide",
+                        "type": "Function",
+                        "description": "This method tells the stdio instance that it has been hided",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerSource": {
+                        "name": "registerSource",
+                        "type": "Function",
+                        "description": "This method simply listen to the process and log the values getted\nfrom it into the panel",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "ask": {
+                        "name": "ask",
+                        "type": "Function",
+                        "description": "This method is the one called to ask something.\nIt will call the ```_ask``` method that each implementation of the\nSStdio class MUST have",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isDisplayed": {
+                        "name": "isDisplayed",
+                        "type": "Boolean",
+                        "description": "true if the stdio if actually displayed, false if not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registeredComponents": {
+                        "name": "registeredComponents",
+                        "type": "ISStdioRegisteredComponents",
+                        "description": "Store the registered stdio components",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components.defaultBlessedStdioComponent": {
+                "name": "defaultBlessedStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Blessed stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "warningBlessedStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/blessed/components/warningBlessedStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components.headingBlessedStdioComponent": {
+                "name": "headingBlessedStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Blessed stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "headingBlessedStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/blessed/components/headingBlessedStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components.timeBlessedStdioComponent": {
+                "name": "timeBlessedStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Blessed stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.blessed.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "timeBlessedStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/blessed/components/timeBlessedStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.defaultTerminalStdioComponent": {
+                "name": "defaultTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "defaultTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/defaultTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.errorTerminalStdioComponent": {
+                "name": "errorTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "errorTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/errorTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.fileTerminalStdioComponent": {
+                "name": "fileTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "fileTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/fileTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.headingTerminalStdioComponent": {
+                "name": "headingTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "headingTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/headingTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.separatorTerminalStdioComponent": {
+                "name": "separatorTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "separatorTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/separatorTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.timeTerminalStdioComponent": {
+                "name": "timeTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "timeTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/timeTerminalStdioComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.warningTerminalStdioComponent": {
+                "name": "warningTerminalStdioComponent",
+                "type": "ISStdioComponent",
+                "description": "Terminal stdio component",
+                "namespace": "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "warningTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/warningTerminalStdioComponent.js",
+                "children": {}
+            }
+        }
+    }
+}

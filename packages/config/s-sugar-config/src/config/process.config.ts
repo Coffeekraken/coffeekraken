@@ -122,18 +122,5 @@ export default function (env) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         processPath: null,
-
-        /**
-         * @name      notification
-         * @namespace       config.process
-         * @type        Boolean
-         * @default         '[config.notification]'
-         *
-         * Notification settings
-         *
-         * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        notification: '[config.notification]',
     };
 }

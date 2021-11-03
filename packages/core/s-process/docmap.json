@@ -1,0 +1,385 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-process.s-process.sCommandProcess": {
+                "name": "SCommandProcess",
+                "type": "Class",
+                "description": "This class represent an SProcess started with a simple bash command like \"ls -la\" or whatever",
+                "namespace": "@coffeekraken.s-process.s-process",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { SCommandProcess } from '@coffeekreken/s-process';\nconst commandProcess = new SCommandProcess();\ncommandProcess.run('npm i');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SCommandProcess.js",
+                "extension": "js",
+                "relPath": "src/node/SCommandProcess.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "commandProcessSettings": {
+                        "name": "commandProcessSettings",
+                        "type": "ISCommandProcessSettings",
+                        "description": "Access the command process settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "process": {
+                        "name": "process",
+                        "type": "Function",
+                        "description": "Run the actual command through a ```spawn``` call.\nThe spawn function used here is the sugar one stored in \"sugar.node.process.spawn\"",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-process.sugar.node.process.sProcess": {
+                "name": "SProcess",
+                "type": "Class",
+                "description": "This class represent an SProcess run iteration that store things like\nthe value, the startTime, endTime, duration, state, etc...",
+                "namespace": "@coffeekraken.s-process.sugar.node.process",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcess.js",
+                "extension": "js",
+                "relPath": "src/node/SProcess.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "stdio": {
+                        "name": "stdio",
+                        "type": "SProcessOutput",
+                        "description": "Access the stdio class initiated if exists",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "state": {
+                        "name": "state",
+                        "type": "String",
+                        "description": "Access the process state like 'idle', 'ready', 'running', 'killed', 'error', 'success'",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "executionsStack": {
+                        "name": "executionsStack",
+                        "type": "ISProcessProcessObj[]",
+                        "description": "This array store each executions informations in separated objects\nthat store the duration, startTime, endTime, state, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "from": {
+                        "name": "from",
+                        "type": "Function",
+                        "description": "This static method allows you to pass arguments like:\n- file path: Will require it, check what's returned from and instanciate an SProcess depending on that\n- command string: Will instanciate a new SCommandProcess instance and returns it for you to run it\n- function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value\n- SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance\n- SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class\nOnce you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to\nexecute your process",
+                        "static": "true",
+                        "since": "true",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "fromCommand": {
+                        "name": "fromCommand",
+                        "type": "Function",
+                        "description": "Initialize an SCommandProcess instance on which you can call the standard \"run\" method\nand execute a command by passing inside the params object the ```command``` prop.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "run": {
+                        "name": "run",
+                        "type": "Function",
+                        "description": "Static \"run\" function to use as a shortcut of the new, and run call",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "lastExecutionObj": {
+                        "name": "lastExecutionObj",
+                        "type": "ISProcessProcessObj",
+                        "description": "Get the last execution object",
+                        "since": "2.0.0"
+                    },
+                    "process": {
+                        "name": "process",
+                        "type": "Function",
+                        "description": "This is the method you have to implement in you SProcess class. It will be called\nwhen you call the ```run``` method with the params, etc...\nYou have to return an SPromise instance in order that the SProcess class is able to keep\ntrack of your process state, logs, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "ready": {
+                        "name": "ready",
+                        "type": "Function",
+                        "description": "This method allows you to set the process in the \"ready\" state.\nThis will make the stdio initialize, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "kill": {
+                        "name": "kill",
+                        "type": "Function",
+                        "description": "This method will simply kill the process and call the \"cancel\" method\non the SPromise super instance as well as on the passed \"promise\" instance",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "cancel": {
+                        "name": "cancel",
+                        "type": "Function",
+                        "description": "This method allows you to cancel the process",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isRunning": {
+                        "name": "isRunning",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process is currently running or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isIdle": {
+                        "name": "isIdle",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process is currently idle or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isReady": {
+                        "name": "isReady",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process is currently ready or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isKilled": {
+                        "name": "isKilled",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process has been killed or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isError": {
+                        "name": "isError",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process is in error state or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isSuccess": {
+                        "name": "isSuccess",
+                        "type": "Function",
+                        "description": "This method allows you to check if the process is in success state or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "log": {
+                        "name": "log",
+                        "type": "Function",
+                        "description": "This method allows you to log a message that will be catched by the parent manager class",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "error": {
+                        "name": "error",
+                        "type": "Function",
+                        "description": "This method allows you to error a message that will be catched by the parent manager class",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-process.sugar.node.process.interface.sCommandProcessInterface": {
+                "name": "SCommandProcessInterface",
+                "type": "Class",
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SCommandProcessInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SCommandProcessInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-process.sugar.node.process.interface.sProcessInterface": {
+                "name": "SProcessInterface",
+                "type": "Class",
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SProcessInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-process.sugar.node.process.interface.sProcessSettingsInterface": {
+                "name": "SProcessSettingsInterface",
+                "type": "Class",
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SProcessSettingsInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

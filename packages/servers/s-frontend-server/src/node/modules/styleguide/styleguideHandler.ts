@@ -31,7 +31,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function styleguide(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject, pipe, pipeError }) => {
+    return new __SPromise(async ({ resolve, reject }) => {
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
         const styleguideMenu = docmapJson.menu.custom.styleguide;

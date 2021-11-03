@@ -1,0 +1,153 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-config.node.config.SConfig.set": {
+                "name": "set",
+                "type": "Function",
+                "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
+                "namespace": "@coffeekraken.s-config.node.config.SConfig",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "config.set('log.frontend.mail.host', 'coffeekraken.io');"
+                    }
+                ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConfig.js",
+                "extension": "js",
+                "relPath": "src/shared/SConfig.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Init the config instance by passing a name and a settings object to configure your instance",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "config": {
+                        "name": "config",
+                        "type": "Object",
+                        "description": "Store the loaded config obect",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "load": {
+                        "name": "load",
+                        "type": "Function",
+                        "description": "Load the config from the default adapter or from the passed adapter",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "const config = await config.load();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "save": {
+                        "name": "save",
+                        "type": "Function",
+                        "description": "Save the config through all the registered adapters or just the one specify in params",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "await config.save();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "get": {
+                        "name": "get",
+                        "type": "Function",
+                        "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "await config.get('log.frontend.mail.host'); // => gmail.google.com"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerPostprocess": {
+                        "name": "registerPostprocess",
+                        "type": "Function",
+                        "description": "This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerPreprocess": {
+                        "name": "registerPreprocess",
+                        "type": "Function",
+                        "description": "This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

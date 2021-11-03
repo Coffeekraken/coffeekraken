@@ -1,0 +1,139 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-env.config.env.env": {
+                "name": "env",
+                "type": "String",
+                "default": "process.env.NODE_ENV ?? window.env.ENV ?? 'dev`",
+                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
+                "namespace": "@coffeekraken.s-env.config.env",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "env.config.js",
+                "extension": "config",
+                "relPath": "src/config/env.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-env.s-env.shared.sEnv": {
+                "name": "SEnv",
+                "type": "Class",
+                "description": "This class allows you to access, set and update environment variables seemlessly on node\nand browser env.\nYou can also check if the environment is a dev one or a production using the\nhelpfull ```is``` function like so: ```sEnv.is('prod')```",
+                "namespace": "@coffeekraken.s-env.s-env.shared",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEnv from '@coffeekraken/s-env';\nthis.get('something');\nSEnv.is('prod');\nSEnv.is('production');\nSEnv.is('dev');\n// etc..."
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SEnv.js",
+                "extension": "js",
+                "relPath": "src/shared/SEnv.js",
+                "children": {
+                    "is": {
+                        "name": "is",
+                        "type": "Function",
+                        "description": "This static method allows you to check if the environment\nis \"dev\", \"development\", \"prod\" or \"production\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "get": {
+                        "name": "get",
+                        "type": "Function",
+                        "description": "This static method allows you to access an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "set": {
+                        "name": "set",
+                        "type": "Function",
+                        "description": "This static method allows you to set an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "delete": {
+                        "name": "delete",
+                        "type": "Function",
+                        "description": "This static method allows you to delete an env variable.\nThe variables keys are stored in UPPERCASE but you can use lowercase as well",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "packageJson": {
+                        "name": "packageJson",
+                        "type": "Object",
+                        "description": "Access the package.json content from the current package the process\nruns in.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

@@ -6,7 +6,7 @@ export default function (env) {
          * @name            rootDir
          * @namespace       sugar.config.npm
          * @type            String
-         * @default         `${__packageRoot()}/node_modules`
+         * @default         [config.storage.package.rootDir]/node_modules
          *
          * Specify the "node_modules" directory path
          *

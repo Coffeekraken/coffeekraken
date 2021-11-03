@@ -14,7 +14,8 @@ import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expan
 
 import { define as __DocNavComponent } from './components/docNav';
 import { define as __VersionSelector } from './components/VersionSelector';
-import { define as __CkSettingsWebcomponent } from './components/CkSettings';
+import { define as __CKSearchComponent } from './components/CKSearch';
+import { define as __CKSettingsComponent } from './components/CkSettings';
 
 import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { register as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
@@ -22,7 +23,8 @@ import { register as __sFormValidateFeature } from '@coffeekraken/s-form-validat
 // internal components
 __DocNavComponent();
 __VersionSelector();
-__CkSettingsWebcomponent();
+__CKSearchComponent();
+__CKSettingsComponent();
 
 __SLitComponent.setDefaultProps('*', {
     mountWhen: 'inViewport',

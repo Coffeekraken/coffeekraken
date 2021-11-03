@@ -33,7 +33,7 @@ export interface IPostcssSugarPluginUiCheckboxClassesParams {
     styles: 'solid'[];
     defaultColor: string;
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf','vr')[];
+    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiCheckboxClassesInterface as interface };

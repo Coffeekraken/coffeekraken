@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __themeVar from '../../utils/themeVar';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           clearfix
@@ -32,7 +31,7 @@ class postcssSugarPluginClearfixInterface extends __SInterface {
         clearfix: {
             type: 'String',
             values: ['overflow', 'facebook', 'micro', 'after'],
-            default: __theme().config('helpers.clearfix.default'),
+            default: __STheme.config('helpers.clearfix.default'),
         },
     };
 }

@@ -1,9 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme, { themeDefinition } from '../../utils/theme';
 import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginStateHoverMixinInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 export { postcssSugarPluginStateHoverMixinInterface as interface };
 
@@ -33,24 +32,24 @@ export interface postcssSugarPluginStateHoverMixinParams {}
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<postcssSugarPluginStateHoverMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<postcssSugarPluginStateHoverMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams = <postcssSugarPluginStateHoverMixinParams>{
-    className: '',
-    ...(params ?? {})
-  };
+    const finalParams = <postcssSugarPluginStateHoverMixinParams>{
+        className: '',
+        ...(params ?? {}),
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`&:hover {`);
-  vars.push(__astNodesToString(atRule.nodes));
-  vars.push(`}`);
+    vars.push(`&:hover {`);
+    vars.push(__astNodesToString(atRule.nodes));
+    vars.push(`}`);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

@@ -1,14 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiLabelInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['inline', 'float'],
-            default: __theme().config('ui.label.defaultStyle'),
+            default: __STheme.config('ui.label.defaultStyle'),
         },
         scope: {
             type: {
@@ -31,17 +29,15 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLabelParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelParams = {
-        style: __theme().config('ui.label.defaultStyle'),
+        style: __STheme.config('ui.label.defaultStyle'),
         scope: ['bare', 'lnf'],
         ...params,
     };

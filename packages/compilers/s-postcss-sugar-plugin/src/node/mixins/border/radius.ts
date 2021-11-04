@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __themeVar from '../../utils/themeVar';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          radius
@@ -16,7 +15,7 @@ import __themeVar from '../../utils/themeVar';
  * @return      {Css}                   The generated css
  *
  * @todo      Add multiple values support like @sugar.border.radius(10 20);
- * 
+ *
  * @example       css
  * .my-element {
  *    @sugar.border.radius(10);
@@ -27,35 +26,37 @@ import __themeVar from '../../utils/themeVar';
  */
 
 class postcssSugarPluginBorderRadiusMixinInterface extends __SInterface {
-  static definition = {
-    radius: {
-      type: 'Number|String',
-      required: true,
-      default: __theme().config('border.radius.default')
-    }
-  };
+    static definition = {
+        radius: {
+            type: 'Number|String',
+            required: true,
+            default: __STheme.config('border.radius.default'),
+        },
+    };
 }
 
 export interface IPostcssSugarPluginBorderRadiusMixinParams {
-  radius: string | number;
+    radius: string | number;
 }
 
 export { postcssSugarPluginBorderRadiusMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginBorderRadiusMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginBorderRadiusMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginBorderRadiusMixinParams = {
-    radius: 0,
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginBorderRadiusMixinParams = {
+        radius: 0,
+        ...params,
+    };
 
-  const vars: string[] = [`border-radius: sugar.border.radius(${finalParams.radius});`];
-  replaceWith(vars);
+    const vars: string[] = [
+        `border-radius: sugar.border.radius(${finalParams.radius});`,
+    ];
+    replaceWith(vars);
 }

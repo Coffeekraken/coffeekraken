@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -138,7 +138,7 @@ export default function ({
     }
 
     let currentName;
-    __theme().loopOnColors(({ name, variant, value }) => {
+    __STheme.getTheme().loopOnColors(({ name, variant, value }) => {
         if (currentName !== name) {
             // default gradients
             vars.push(`
@@ -165,16 +165,18 @@ export default function ({
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
-                  $end: ${name}--${__theme().config('gradient.defaultVariant')},
-                  $type: ${__theme().config('gradient.defaultType')},
-                  $angle: ${__theme().config('gradient.defaultAngle')}
+                  $end: ${name}--${__STheme.config('gradient.defaultVariant')},
+                  $type: ${__STheme.config('gradient.defaultType')},
+                  $angle: ${__STheme.config('gradient.defaultAngle')}
               );
           }
       `);
         }
         currentName = name;
 
-        const startColorClassName = `s-gradient:start-${name}${variant === 'default' ? '' : `-${variant}`}`;
+        const startColorClassName = `s-gradient:start-${name}${
+            variant === 'default' ? '' : `-${variant}`
+        }`;
         vars.push(`/**
         * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
@@ -185,9 +187,10 @@ export default function ({
         * This class allows you to apply a "<yellow>${name}</yellow>" gradient start color to any HTMLElement
         *
         * @example        html
-        * <div class="s-ratio\:16-9 ${startColorClassName.replace(':', ':')}\:end-${name}${
-            next.variant === 'default' ? '' : `-${next.variant}`
-        }">
+        * <div class="s-ratio\:16-9 ${startColorClassName.replace(
+            ':',
+            ':',
+        )}\:end-${name}${next.variant === 'default' ? '' : `-${next.variant}`}">
         *     <div class="s-center-abs">I'm a cool depth button</div>
         * </div>
         *
@@ -198,7 +201,9 @@ export default function ({
           --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
       }`);
 
-        const endColorClassName = `s-gradient:end-${name}${variant === 'default' ? '' : `-${variant}`}`;
+        const endColorClassName = `s-gradient:end-${name}${
+            variant === 'default' ? '' : `-${variant}`
+        }`;
         vars.push(`/**
       * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
@@ -211,7 +216,10 @@ export default function ({
         }</yellow>" gradient end color to any HTMLElement
       *
       * @example        html
-      * <div class="s-ratio\:16-9 ${endColorClassName.replace(':', ':')}\:start-${name}${
+      * <div class="s-ratio\:16-9 ${endColorClassName.replace(
+          ':',
+          ':',
+      )}\:start-${name}${
             previous.variant === 'default' ? '' : `-${previous.variant}`
         } ${endColorClassName}">
       *     <div class="s-center-abs">I'm a cool depth button</div>

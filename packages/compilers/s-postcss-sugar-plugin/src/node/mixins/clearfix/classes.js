@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 /**
  * @name           classes
  * @namespace      node.mixins.clearfix
@@ -22,7 +22,7 @@ class postcssSugarPluginClearfixClassesInterface extends __SInterface {
 postcssSugarPluginClearfixClassesInterface.definition = {
     defaultClearfix: {
         type: 'String',
-        default: __theme().config('helpers.clearfix.default'),
+        default: __STheme.config('helpers.clearfix.default'),
     },
 };
 export { postcssSugarPluginClearfixClassesInterface as interface };
@@ -52,7 +52,9 @@ export default function ({ params, atRule, replaceWith, }) {
         * 
         ${clearfixes
         .map((clearfixName) => {
-        return ` * @cssClass     s-clearfixs-clearfix${clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`}            Apply the ${clearfixName} clearfix`;
+        return ` * @cssClass     s-clearfixs-clearfix${clearfixName === finalParams.defaultClearfix
+            ? ``
+            : `:${clearfixName}`}            Apply the ${clearfixName} clearfix`;
     })
         .join('\n')}
         * 
@@ -62,7 +64,9 @@ export default function ({ params, atRule, replaceWith, }) {
         return ` * <!-- ${clearfixName} style -->
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
-            *   <div class="s-clearfix${clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`} s-bg:ui">
+            *   <div class="s-clearfix${clearfixName === finalParams.defaultClearfix
+            ? ``
+            : `:${clearfixName}`} s-bg:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
             * </div>
@@ -76,7 +80,9 @@ export default function ({ params, atRule, replaceWith, }) {
     `);
     clearfixes.forEach((clearfixName) => {
         vars.push(`/**
-                * @name          s-clearfix${clearfixName === finalParams.defaultClearfix ? '' : `:${clearfixName}`}
+                * @name          s-clearfix${clearfixName === finalParams.defaultClearfix
+            ? ''
+            : `:${clearfixName}`}
                 * @namespace          sugar.css.clearfix
                 * @type               CssClass
                 * @platform         css
@@ -85,15 +91,19 @@ export default function ({ params, atRule, replaceWith, }) {
                 * This class allows you to apply a "<yellow>${clearfixName}</yellow>" clearfix to any HTMLElement
                 * 
                 * @example        html
-                * <div class="s-clearfix${clearfixName === finalParams.defaultClearfix ? '' : `:${clearfixName}`}">I'm a cool clearfix element</div>
+                * <div class="s-clearfix${clearfixName === finalParams.defaultClearfix
+            ? ''
+            : `:${clearfixName}`}">I'm a cool clearfix element</div>
                 * 
                 * @since        2.0.0
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-                .s-clearfix${clearfixName === finalParams.defaultClearfix ? `${notStr}` : `--${clearfixName}`} {
+                .s-clearfix${clearfixName === finalParams.defaultClearfix
+            ? `${notStr}`
+            : `--${clearfixName}`} {
                     @sugar.clearfix(${clearfixName});
                 }`);
     });
     replaceWith(vars);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sbUJBQW1CLENBQUM7QUFFeEM7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7O0FBQzFELHFEQUFVLEdBQUc7SUFDaEIsZUFBZSxFQUFFO1FBQ2IsSUFBSSxFQUFFLFFBQVE7UUFDZCxPQUFPLEVBQUUsT0FBTyxFQUFFLENBQUMsTUFBTSxDQUFDLDBCQUEwQixDQUFDO0tBQ3hEO0NBQ0osQ0FBQztBQU9OLE9BQU8sRUFBRSwwQ0FBMEMsSUFBSSxTQUFTLEVBQUUsQ0FBQztBQUVuRSxNQUFNLENBQUMsT0FBTyxXQUFXLEVBQ3JCLE1BQU0sRUFDTixNQUFNLEVBQ04sV0FBVyxHQUtkO0lBQ0csTUFBTSxXQUFXLG1CQUNiLGVBQWUsRUFBRSxVQUFVLElBQ3hCLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQWEsRUFBRSxDQUFDO0lBQzFCLE1BQU0sVUFBVSxHQUFHLENBQUMsVUFBVSxFQUFFLFVBQVUsRUFBRSxPQUFPLEVBQUUsT0FBTyxDQUFDLENBQUM7SUFDOUQsTUFBTSxNQUFNLEdBQUcsVUFBVTtTQUNwQixNQUFNLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLENBQUMsS0FBSyxXQUFXLENBQUMsZUFBZSxDQUFDO1NBQ2hELEdBQUcsQ0FBQyxDQUFDLENBQUMsRUFBRSxFQUFFLENBQUMscUJBQXFCLENBQUMsR0FBRyxDQUFDO1NBQ3JDLElBQUksQ0FBQyxFQUFFLENBQUMsQ0FBQztJQUVkLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7VUFnQkosVUFBVTtTQUNQLEdBQUcsQ0FBQyxDQUFDLFlBQVksRUFBRSxFQUFFO1FBQ2xCLE9BQU8sd0NBQ0gsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxZQUFZLEVBQ3hFLHlCQUF5QixZQUFZLFdBQVcsQ0FBQztJQUNyRCxDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7VUFHYixVQUFVO1NBQ1AsR0FBRyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7UUFDbEIsT0FBTyxXQUFXLFlBQVk7OzZEQUVlLFlBQVk7d0NBRXpELFlBQVksS0FBSyxXQUFXLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksWUFBWSxFQUN4RTs7OztlQUlHLENBQUM7SUFDSixDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtsQixDQUFDLENBQUM7SUFFSCxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7UUFDaEMsSUFBSSxDQUFDLElBQUksQ0FBQzs2Q0FDMkIsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsSUFBSSxZQUFZLEVBQUU7Ozs7Ozs4REFNckQsWUFBWTs7OzBDQUl0RCxZQUFZLEtBQUssV0FBVyxDQUFDLGVBQWUsQ0FBQyxDQUFDLENBQUMsRUFBRSxDQUFDLENBQUMsQ0FBQyxJQUFJLFlBQVksRUFDeEU7Ozs7OzZCQUthLFlBQVksS0FBSyxXQUFXLENBQUMsZUFBZSxDQUFDLENBQUMsQ0FBQyxHQUFHLE1BQU0sRUFBRSxDQUFDLENBQUMsQ0FBQyxLQUFLLFlBQVksRUFBRTtzQ0FDdkUsWUFBWTtrQkFDaEMsQ0FBQyxDQUFDO0lBQ2hCLENBQUMsQ0FBQyxDQUFDO0lBRUgsV0FBVyxDQUFDLElBQUksQ0FBQyxDQUFDO0FBQ3RCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0M7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7O0FBQzFELHFEQUFVLEdBQUc7SUFDaEIsZUFBZSxFQUFFO1FBQ2IsSUFBSSxFQUFFLFFBQVE7UUFDZCxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQywwQkFBMEIsQ0FBQztLQUN2RDtDQUNKLENBQUM7QUFPTixPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixlQUFlLEVBQUUsVUFBVSxJQUN4QixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUMxQixNQUFNLFVBQVUsR0FBRyxDQUFDLFVBQVUsRUFBRSxVQUFVLEVBQUUsT0FBTyxFQUFFLE9BQU8sQ0FBQyxDQUFDO0lBQzlELE1BQU0sTUFBTSxHQUFHLFVBQVU7U0FDcEIsTUFBTSxDQUFDLENBQUMsQ0FBQyxFQUFFLEVBQUUsQ0FBQyxDQUFDLEtBQUssV0FBVyxDQUFDLGVBQWUsQ0FBQztTQUNoRCxHQUFHLENBQUMsQ0FBQyxDQUFDLEVBQUUsRUFBRSxDQUFDLHFCQUFxQixDQUFDLEdBQUcsQ0FBQztTQUNyQyxJQUFJLENBQUMsRUFBRSxDQUFDLENBQUM7SUFFZCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O1VBZ0JKLFVBQVU7U0FDUCxHQUFHLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUNsQixPQUFPLHdDQUNILFlBQVksS0FBSyxXQUFXLENBQUMsZUFBZTtZQUN4QyxDQUFDLENBQUMsRUFBRTtZQUNKLENBQUMsQ0FBQyxJQUFJLFlBQVksRUFDMUIseUJBQXlCLFlBQVksV0FBVyxDQUFDO0lBQ3JELENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7OztVQUdiLFVBQVU7U0FDUCxHQUFHLENBQUMsQ0FBQyxZQUFZLEVBQUUsRUFBRTtRQUNsQixPQUFPLFdBQVcsWUFBWTs7NkRBRWUsWUFBWTt3Q0FFekQsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxFQUFFO1lBQ0osQ0FBQyxDQUFDLElBQUksWUFBWSxFQUMxQjs7OztlQUlHLENBQUM7SUFDSixDQUFDLENBQUM7U0FDRCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7OztLQUtsQixDQUFDLENBQUM7SUFFSCxVQUFVLENBQUMsT0FBTyxDQUFDLENBQUMsWUFBWSxFQUFFLEVBQUU7UUFDaEMsSUFBSSxDQUFDLElBQUksQ0FBQzs2Q0FFRSxZQUFZLEtBQUssV0FBVyxDQUFDLGVBQWU7WUFDeEMsQ0FBQyxDQUFDLEVBQUU7WUFDSixDQUFDLENBQUMsSUFBSSxZQUFZLEVBQzFCOzs7Ozs7OERBTThDLFlBQVk7OzswQ0FJdEQsWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxFQUFFO1lBQ0osQ0FBQyxDQUFDLElBQUksWUFBWSxFQUMxQjs7Ozs7NkJBTUksWUFBWSxLQUFLLFdBQVcsQ0FBQyxlQUFlO1lBQ3hDLENBQUMsQ0FBQyxHQUFHLE1BQU0sRUFBRTtZQUNiLENBQUMsQ0FBQyxLQUFLLFlBQVksRUFDM0I7c0NBQ3NCLFlBQVk7a0JBQ2hDLENBQUMsQ0FBQztJQUNoQixDQUFDLENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxJQUFJLENBQUMsQ0FBQztBQUN0QixDQUFDIn0=

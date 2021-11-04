@@ -1,10 +1,8 @@
 // @ts-nocheck
 
-import __SInterface from '@coffeekraken/s-interface';
 import __SColor from '@coffeekraken/s-color';
-import __theme from '../../utils/theme';
+import __SInterface from '@coffeekraken/s-interface';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
-import __minifyVar from '../../utils/minifyVar';
 
 class colorVariantNameInterface extends __SInterface {
     static definition = {
@@ -45,6 +43,10 @@ class postcssSugarPluginColorInterface extends __SInterface {
             type: 'String',
             alias: 'v',
         },
+        modifier: {
+            type: 'String',
+            alias: 'm',
+        },
     };
 }
 export { postcssSugarPluginColorInterface as interface };
@@ -52,6 +54,7 @@ export { postcssSugarPluginColorInterface as interface };
 export interface IPostcssSugarPluginColorParams {
     name: string;
     variant: string;
+    modifier: string;
 }
 
 export default function color({
@@ -62,6 +65,7 @@ export default function color({
     const finalParams: IPostcssSugarPluginColorParams = {
         color: '',
         variant: undefined,
+        modifier: undefined,
         ...params,
     };
 
@@ -70,8 +74,14 @@ export default function color({
     if (finalParams.color.match(/^var\(--/)) return finalParams.color;
 
     let colorName = finalParams.color;
-    let colorVariantName = finalParams.variant ? finalParams.variant : '';
+    let colorVariantName = finalParams.variant ?? '';
+    let colorModifier = finalParams.modifier ?? '';
     let colorStateName = '';
+
+    if (colorVariantName.match(/^--[a-z]+/)) {
+        colorModifier = colorVariantName;
+        colorVariantName = undefined;
+    }
 
     const nameParts = finalParams.color.split(':');
 
@@ -81,19 +91,14 @@ export default function color({
     }
 
     let modifierParams = {};
-    if (finalParams.variant && finalParams.variant.match(/^--/)) {
-        modifierParams = colorVariantNameInterface.apply(finalParams.variant);
-    } else if (
-        finalParams.variant &&
-        finalParams.variant.trim().match(/[a-zA-Z0-9_-]+/)
-    ) {
-        colorVariantName = finalParams.variant;
+    if (colorModifier) {
+        modifierParams = colorVariantNameInterface.apply(colorModifier);
     }
 
     if (__isColor(colorName)) {
         const color = new __SColor(colorName);
-        if (finalParams.variant) {
-            color.apply(finalParams.variant);
+        if (colorModifier) {
+            color.apply(colorModifier);
         }
         return color.toString();
     } else {
@@ -103,7 +108,7 @@ export default function color({
         if (colorStateName) {
             colorVariantNameVar += `-${colorStateName}`;
         }
-        if (finalParams.variant && !finalParams.variant.match(/^--/)) {
+        if (colorVariantName) {
             colorVariantNameVar += `-${colorVariantName}`;
         }
 
@@ -112,53 +117,55 @@ export default function color({
 
         let finalValue = colorVar;
 
+        const hParts = [
+            `var(${colorVar}-h, 0)`,
+            `var(${colorVariantNameVar}-spin ,${modifierParams.spin ?? 0})`,
+        ];
+
+        const sParts = [`var(${colorVar}-s, 0)`];
+        if (colorVariantName) {
+            sParts.push(`var(${colorVariantNameVar}-saturation-offset, 0)`);
+        }
         let saturationOffset = modifierParams.saturate
             ? modifierParams.saturate
             : modifierParams.desaturate
             ? modifierParams.desaturate * -1
             : undefined;
-        if (saturationOffset === undefined) {
-            saturationOffset = `var(${colorVariantNameVar}-saturation-offset, 0)`;
+        if (saturationOffset !== undefined) {
+            sParts.push(saturationOffset);
         }
 
+        const lParts = [`var(${colorVar}-l, 0)`];
+        if (colorVariantName) {
+            lParts.push(`var(${colorVariantNameVar}-lightness-offset, 0)`);
+        }
         let lightnessOffset = modifierParams.lighten
             ? modifierParams.lighten
             : modifierParams.darken
             ? modifierParams.darken * -1
             : undefined;
-        if (lightnessOffset === undefined)
-            lightnessOffset = `var(${colorVariantNameVar}-lightness-offset, 0)`;
+        if (lightnessOffset !== undefined) {
+            lParts.push(lightnessOffset);
+        }
 
         let alpha =
             modifierParams.alpha !== undefined ? modifierParams.alpha : 1;
 
         finalValue = `hsla(
-      calc(
-        var(${colorVar}-h, 0)
-        +
-        var(${colorVariantNameVar}-spin ,${modifierParams.spin ?? 0})
-      ),
-      calc(
-        (
-          var(${colorVar}-s, 0)
-          +
-          ${saturationOffset}
-        )
-        * 1%
-      ),
-      calc(
-        (
-          var(${colorVar}-l, 0)
-          +
-          ${lightnessOffset}
-        )
-        * 1%
-      ),
-      ${
-          modifierParams.alpha !== undefined
-              ? modifierParams.alpha
-              : `var(${colorVariantNameVar}-a, 1)`
-      }
+            calc(
+                ${hParts.join(' + ')}
+            ),
+            calc(
+                (${sParts.join(' + ')}) * 1%
+            ),
+            calc(
+                (${lParts.join(' + ')}) * 1%
+            ),
+            ${
+                modifierParams.alpha !== undefined
+                    ? modifierParams.alpha
+                    : `var(${colorVariantNameVar}-a, 1)`
+            }
     )`;
 
         finalValue = finalValue

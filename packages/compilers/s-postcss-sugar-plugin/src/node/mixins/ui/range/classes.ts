@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
     static definition = {
@@ -11,7 +11,7 @@ class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.range.defaultStyle'),
+            default: __STheme.config('ui.range.defaultStyle'),
         },
     };
 }

@@ -1,5 +1,7 @@
 // import __postcss from 'postcss';
 import __SBench from '@coffeekraken/s-bench';
+import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __STheme from '@coffeekraken/s-theme';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __unquote from '@coffeekraken/sugar/shared/string/unquote';
@@ -8,8 +10,6 @@ import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
-import __theme from './utils/theme';
-import __jsObjectToCssProperties from './utils/jsObjectToCssProperties';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
@@ -97,38 +97,105 @@ const plugin = (settings: any = {}) => {
         functionsStack = {},
         postProcessorsRegisteredFn: Function[] = [];
 
-    async function _load() {
-        // list all mixins
-        const mixinsPaths = __glob.sync(`mixins/**/*.js`, {
-            cwd: __dirname(),
+    async function _loadFolder(folderPath, type: 'mixins' | 'functions') {
+        const paths = __glob.sync(`${folderPath}/**/*.js`, {
+            // cwd: __dirname(),
+            cwd: '',
         });
-        for (let i = 0; i < mixinsPaths.length; i++) {
-            const path = mixinsPaths[i];
-            const { default: mixin, interface: int } = await import(
-                `./${path}`
-            );
-            mixinsStack[
-                `${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`
-            ] = {
-                mixin,
-                interface: int,
-            };
+        for (let i = 0; i < paths.length; i++) {
+            const path = paths[i];
+            const { default: fn, interface: int } = await import(`${path}`);
+            if (type === 'mixins') {
+                mixinsStack[
+                    `${path
+                        .replace(`${folderPath}/`, '')
+                        .replace(/\//gm, '.')
+                        .replace(/\.js$/, '')
+                        .toLowerCase()}`
+                ] = {
+                    mixin: fn,
+                    interface: int,
+                };
+                mixinsStack[
+                    `${path
+                        .replace(`${folderPath}/`, '')
+                        .replace(/\//gm, '.')
+                        .replace(/\.js$/, '')}`
+                ] = {
+                    mixin: fn,
+                    interface: int,
+                };
+            } else {
+                functionsStack[
+                    `${path
+                        .replace(`${folderPath}/`, '')
+                        .replace(/\//gm, '.')
+                        .replace(/\.js$/, '')
+                        .toLowerCase()}`
+                ] = {
+                    fn,
+                    interface: int,
+                };
+                functionsStack[
+                    `${path
+                        .replace(`${folderPath}/`, '')
+                        .replace(/\//gm, '.')
+                        .replace(/\.js$/, '')}`
+                ] = {
+                    fn,
+                    interface: int,
+                };
+            }
+        }
+    }
+
+    async function _load() {
+        // func sugar json
+        const sugarJsonInstance = new __SSugarJson();
+        const sugarJson = await sugarJsonInstance.read();
+
+        for (let i = 0; i < Object.keys(sugarJson).length; i++) {
+            const packageName = Object.keys(sugarJson)[i];
+
+            const packageSugarJson = sugarJson[packageName];
+            if (!packageSugarJson.postcss) continue;
+
+            // mixins loading
+            const mixinsFolders =
+                packageSugarJson.postcss.folders?.mixins ?? [];
+            for (let j = 0; j < mixinsFolders.length; j++) {
+                const folderObj = mixinsFolders[j];
+
+                if (!folderObj.path) continue;
+                const finalPath = __path.resolve(
+                    packageSugarJson.metas.folderPath,
+                    folderObj.path,
+                );
+
+                await _loadFolder(finalPath, 'mixins');
+            }
+
+            // functions loading
+            const functionsFolders =
+                packageSugarJson.postcss.folders?.functions ?? [];
+            for (let j = 0; j < functionsFolders.length; j++) {
+                const folderObj = functionsFolders[j];
+
+                if (!folderObj.path) continue;
+                const finalPath = __path.resolve(
+                    packageSugarJson.metas.folderPath,
+                    folderObj.path,
+                );
+
+                await _loadFolder(finalPath, 'functions');
+            }
         }
 
+        // list all mixins
+        await _loadFolder(`${__dirname()}/mixins`, 'mixins');
+
         // list all functions
-        const functionsPaths = __glob.sync(`functions/**/*.js`, {
-            cwd: __dirname(),
-        });
-        for (let i = 0; i < functionsPaths.length; i++) {
-            const path = functionsPaths[i];
-            const { default: fn, interface: int } = await import(`./${path}`);
-            functionsStack[
-                `${path.split('/').slice(1).join('.').replace(/\.js$/, '')}`
-            ] = {
-                fn,
-                interface: int,
-            };
-        }
+        await _loadFolder(`${__dirname()}/functions`, 'functions');
 
         return true;
     }
@@ -214,7 +281,6 @@ const plugin = (settings: any = {}) => {
                         const root = __getRoot(atRule);
                         root.append(css);
                     },
-                    jsObjectToCssProperties: __jsObjectToCssProperties,
                     postcssApi,
                     sourcePath,
                     sharedData,

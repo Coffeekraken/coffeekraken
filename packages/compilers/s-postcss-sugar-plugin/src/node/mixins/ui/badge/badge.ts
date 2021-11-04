@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBadgeInterface extends __SInterface {
     static definition = {
@@ -45,7 +43,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
-        style: __theme().config('ui.button.defaultStyle') ?? 'solid',
+        style: __STheme.config('ui.button.defaultStyle') ?? 'solid',
         shape: 'default',
         scope: ['bare', 'lnf', 'shape'],
         ...params,

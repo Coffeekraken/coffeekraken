@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
@@ -12,12 +11,12 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.fsTree.defaultColor'),
+            default: __STheme.config('ui.fsTree.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.fsTree.defaultStyle') ?? 'solid',
+            default: __STheme.config('ui.fsTree.defaultStyle') ?? 'solid',
         },
         scope: {
             type: {
@@ -43,13 +42,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFsTreelassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreelassesParams = {
@@ -235,7 +232,7 @@ export default function ({
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
-        * This class represent an "<yellow>${__theme().config(
+        * This class represent an "<yellow>${__STheme.config(
             'ui.fsTree.defaultStyle',
         )}</yellow>" filesystem tree
         * 
@@ -295,8 +292,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 .s-fs-tree {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.fsTree.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.fsTree.rhythmVertical'),
                     )}
                 } 
             }

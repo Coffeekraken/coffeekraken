@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -25,7 +25,7 @@ class postcssSugarPluginRatioClassesInterface extends __SInterface {
     static definition = {
         count: {
             type: 'Number',
-            default: __theme().config('helpers.truncate.count'),
+            default: __STheme.config('helpers.truncate.count'),
         },
     };
 }

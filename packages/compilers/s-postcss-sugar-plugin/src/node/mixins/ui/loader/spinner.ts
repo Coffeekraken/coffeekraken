@@ -1,8 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
     static definition = {
@@ -12,11 +9,11 @@ class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
         },
         duration: {
             type: 'String',
-            default: __theme().config('ui.loaderSpinner.duration'),
+            default: __STheme.config('ui.loaderSpinner.duration'),
         },
         easing: {
             type: 'String',
-            default: __theme().config('ui.loaderSpinner.easing'),
+            default: __STheme.config('ui.loaderSpinner.easing'),
         },
     };
 }

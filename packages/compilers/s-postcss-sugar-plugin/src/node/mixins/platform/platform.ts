@@ -1,10 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
-import __theme from '../../utils/theme';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __fs from 'fs';
-import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __base64 from '@coffeekraken/sugar/shared/crypt/base64';
+import __fs from 'fs';
 
 /**
  * @name           platform
@@ -29,13 +26,13 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  */
 
 class postcssSugarPluginAssetPlatformInterface extends __SInterface {
-  static definition = {
-      platform: {
-          type: 'String',
-          values: ['js','node','ts','php'],
-        required: true
-      }
-  };
+    static definition = {
+        platform: {
+            type: 'String',
+            values: ['js', 'node', 'ts', 'php'],
+            required: true,
+        },
+    };
 }
 
 export interface IPostcssSugarPluginAssetPlatformParams {
@@ -45,34 +42,45 @@ export interface IPostcssSugarPluginAssetPlatformParams {
 export { postcssSugarPluginAssetPlatformInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginAssetPlatformParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginAssetPlatformParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginAssetPlatformParams = {
-    platform: '',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginAssetPlatformParams = {
+        platform: '',
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  if (!__fs.readFileSync(`${__dirname()}/platforms/${finalParams.platform}.svg`)) {
-      throw new Error(`<red>[s-postcss-sugar-plugin]</red> Sorry but the requested platform "<yellow>${finalParams.platform}</yellow>" does not exists...`);
-  }
-  const svgStr = __fs.readFileSync(`${__dirname()}/platforms/${finalParams.platform}.svg`, 'utf8');
+    if (
+        !__fs.readFileSync(
+            `${__dirname()}/platforms/${finalParams.platform}.svg`,
+        )
+    ) {
+        throw new Error(
+            `<red>[s-postcss-sugar-plugin]</red> Sorry but the requested platform "<yellow>${finalParams.platform}</yellow>" does not exists...`,
+        );
+    }
+    const svgStr = __fs.readFileSync(
+        `${__dirname()}/platforms/${finalParams.platform}.svg`,
+        'utf8',
+    );
 
-  vars.push(`
+    vars.push(`
     display: inline-block;
     vertical-align: middle;
     width: 1em;
     height: 1em;
     background-size: contain;
-    background-image: url("data:image/svg+xml;base64,${__base64.encrypt(svgStr)}");
+    background-image: url("data:image/svg+xml;base64,${__base64.encrypt(
+        svgStr,
+    )}");
   `);
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

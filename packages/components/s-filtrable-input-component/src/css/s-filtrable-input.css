@@ -1,6 +1,10 @@
 .s-filtrable-input {
+    font-size: sugar.scalable(1rem);
     display: inline-block;
     position: relative;
+
+    .s-filtrable-input__input {
+    }
 
     .s-filtrable-input__list {
         position: absolute;
@@ -8,10 +12,15 @@
         left: 0;
         overflow-x: hidden;
         overflow-y: auto;
-        /* opacity: 0; */
+        opacity: 0;
         max-width: calc(100vw - 100px);
         pointer-events: none;
         margin: 20px 0;
+    }
+
+    &:focus-within .s-filtrable-input__list {
+        pointer-events: all;
+        opacity: 1;
     }
 
     &.s-filtrable-input--top {
@@ -30,14 +39,14 @@
 
     .s-filtrable-input__list-item {
         position: relative;
+        user-select: none;
+    }
 
-        /* s-filtrable-input:not([interactive]) & {
-            cursor: pointer;
-
-            * {
-              pointer-events: none;
-            }
-          } */
+    &:not([interactive]) .s-filtrable-input__list-item {
+        cursor: pointer;
+        * {
+            pointer-events: none;
+        }
     }
 
     /* @sugar.scope.lnf {

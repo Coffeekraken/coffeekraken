@@ -1,7 +1,5 @@
-import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __remapColorVars from '../../utils/remapColorVars';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginColorRemapMixinInterface extends __SInterface {
     static definition = {
@@ -60,7 +58,7 @@ export default function ({
     };
 
     const cssArray: string[] = [
-        ...__remapColorVars(finalParams.color, finalParams.toColor),
+        ...__STheme.remapCssColorVars(finalParams.color, finalParams.toColor),
     ];
 
     if (atRule.parent.type === 'root') {

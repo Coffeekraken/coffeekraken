@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -44,7 +44,7 @@ export default function ({
         ...params,
     };
 
-    const ratioObj = __theme().config('ratio');
+    const ratioObj = __STheme.config('ratio');
 
     const vars: string[] = [];
 

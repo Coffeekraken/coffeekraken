@@ -1,10 +1,7 @@
 // @ts-nocheck
 
 import __SInterface from '@coffeekraken/s-interface';
-import __SColor from '@coffeekraken/s-color';
-import __theme from '../../utils/theme';
-import __isColor from '@coffeekraken/sugar/shared/is/color';
-import __themeVar from '../../utils/themeVar';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginThemeInterface extends __SInterface {
     static definition = {
@@ -46,18 +43,18 @@ export default function theme({
     };
     if (finalParams.return === 'var') {
         if (finalParams.scalable) {
-            return `sugar.scalable(${__themeVar(
+            return `sugar.scalable(${__STheme.cssVar(
                 finalParams.dotPath,
                 finalParams.fallback,
             )})`;
         } else {
-            return __themeVar(finalParams.dotPath, finalParams.fallback);
+            return __STheme.cssVar(finalParams.dotPath, finalParams.fallback);
         }
     } else {
         if (finalParams.scalable) {
-            return `sugar.scalable(${__theme().config(finalParams.dotPath)})`;
+            return `sugar.scalable(${__STheme.config(finalParams.dotPath)})`;
         } else {
-            return __theme().config(finalParams.dotPath);
+            return __STheme.config(finalParams.dotPath);
         }
     }
 }

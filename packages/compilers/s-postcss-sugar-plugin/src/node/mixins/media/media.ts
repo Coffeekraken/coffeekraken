@@ -1,10 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
-import __flatten from '@coffeekraken/sugar/shared/object/flatten';
-import __postCss from 'postcss';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __postcss from 'postcss';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
     static definition = {
@@ -67,7 +62,7 @@ export default function ({
     atRule: any;
     postcssApi: any;
 }) {
-    const mediaConfig = __theme().config('media');
+    const mediaConfig = __STheme.config('media');
 
     const queries: string[] = [];
 

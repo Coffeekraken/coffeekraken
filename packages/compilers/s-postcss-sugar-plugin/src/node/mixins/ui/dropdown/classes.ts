@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
@@ -10,12 +10,12 @@ class postcssSugarPluginUiDropdownClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.dropdown.defaultColor'),
+            default: __STheme.config('ui.dropdown.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.dropdown.defaultStyle'),
+            default: __STheme.config('ui.dropdown.defaultStyle'),
         },
         scope: {
             type: {

@@ -1,18 +1,16 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiButtonInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid', 'gradient', 'outline', 'text'],
-            default: __theme().config('ui.button.defaultStyle'),
+            default: __STheme.config('ui.button.defaultStyle'),
         },
         outline: {
             type: 'Boolean',
-            default: __theme().config('ui.button.outline'),
+            default: __STheme.config('ui.button.outline'),
         },
         scope: {
             type: {
@@ -56,19 +54,17 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     sharedData,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     sharedData: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        style: __theme().config('ui.button.defaultStyle'),
+        style: __STheme.config('ui.button.defaultStyle'),
         outline: true,
         scope: ['bare', 'lnf'],
         ...params,

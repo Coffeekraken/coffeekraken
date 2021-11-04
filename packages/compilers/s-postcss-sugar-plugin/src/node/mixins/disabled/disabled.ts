@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __themeVar from '../../utils/themeVar';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           depth
@@ -47,10 +46,10 @@ export default function ({
     const vars: string[] = [];
 
     vars.push(`
-        opacity: ${__themeVar('helpers.disabled.opacity')} !important;
+        opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
         
         &:hover, &:focus, &:active {
-            opacity: ${__themeVar('helpers.disabled.opacity')} !important;
+            opacity: ${__STheme.cssVar('helpers.disabled.opacity')} !important;
         }
 
         &, * {

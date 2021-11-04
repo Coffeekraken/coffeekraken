@@ -1,8 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
 
 class postcssSugarPluginUiNavbarClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginUiNavbarClassesParams {}
@@ -10,20 +9,20 @@ export interface IPostcssSugarPluginUiNavbarClassesParams {}
 export { postcssSugarPluginUiNavbarClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiNavbarClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiNavbarClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiNavbarClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiNavbarClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [
-    `
+    const vars: string[] = [
+        `
         /**
          * @name            s-navbar
          * @namespace       sugar.css.ui.navbar
@@ -74,8 +73,8 @@ export default function ({
         .s-navbar__grow {
             flex-grow: 1 !important;
         }
-  `
-  ];
+  `,
+    ];
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

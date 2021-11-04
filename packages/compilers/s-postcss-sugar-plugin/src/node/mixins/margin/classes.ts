@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -43,7 +43,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const marginsObj = __theme().config('margin');
+    const marginsObj = __STheme.config('margin');
 
     vars.push(`
       /**

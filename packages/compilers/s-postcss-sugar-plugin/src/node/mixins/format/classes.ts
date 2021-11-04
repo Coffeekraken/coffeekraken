@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -43,15 +43,15 @@ export default function ({
 
     const vars: string[] = [];
 
-    const typoFormatElements = Object.keys(__theme().config('typo')).map(
+    const typoFormatElements = Object.keys(__STheme.config('typo')).map(
         (typo) => {
             return `${typo}`;
         },
     );
 
-    const uiFormatElements = Object.keys(__theme().config('ui'))
+    const uiFormatElements = Object.keys(__STheme.config('ui'))
         .filter((ui) => {
-            const uiObj = __theme().config('ui')[ui];
+            const uiObj = __STheme.config('ui')[ui];
             return uiObj.formatText === true;
         })
         .map((ui) => {
@@ -136,18 +136,18 @@ export default function ({
         */
     `);
 
-    const typoRhythmElements = Object.keys(__theme().config('typo'))
+    const typoRhythmElements = Object.keys(__STheme.config('typo'))
         .filter((typo) => {
-            const typoObj = __theme().config('typo')[typo];
+            const typoObj = __STheme.config('typo')[typo];
             return typoObj.rhythmVertical !== undefined;
         })
         .map((typo) => {
             return `${typo}`;
         });
 
-    const uiRhythmElements = Object.keys(__theme().config('ui'))
+    const uiRhythmElements = Object.keys(__STheme.config('ui'))
         .filter((ui) => {
-            const uiObj = __theme().config('ui')[ui];
+            const uiObj = __STheme.config('ui')[ui];
             return uiObj.rhythmVertical !== undefined;
         })
         .map((ui) => {

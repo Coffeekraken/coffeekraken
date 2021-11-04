@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -42,7 +42,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const opacityObj = __theme().config('opacity');
+    const opacityObj = __STheme.config('opacity');
 
     Object.keys(opacityObj).forEach((opacity) => {
         const opacityCls = `s-opacity:${opacity}`;
@@ -56,7 +56,7 @@ export default function ({
     * This class allows you to apply the "<yellow>${opacity}</yellow>" opacity style around any HTMLElement
     * 
     * @example      html
-    * <span class="${opacityCls.replace(':', ':')}">Something cool</span>
+    * <span class="${opacityCls}">Something cool</span>
     * 
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

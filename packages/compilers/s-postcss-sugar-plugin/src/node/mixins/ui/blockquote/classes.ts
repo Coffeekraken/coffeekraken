@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
@@ -12,12 +11,12 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.blockquote.defaultColor'),
+            default: __STheme.config('ui.blockquote.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.blockquote.defaultStyle'),
+            default: __STheme.config('ui.blockquote.defaultStyle'),
         },
         scope: {
             type: {
@@ -43,13 +42,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
@@ -242,8 +239,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 blockquote, .s-blockquote {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.blockquote.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.blockquote.rhythmVertical'),
                     )}
                 } 
             }

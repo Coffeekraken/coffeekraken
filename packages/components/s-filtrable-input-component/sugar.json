@@ -1,3 +1,20 @@
 {
-  "recipe": "litElement"
+    "recipe": "litElement",
+    "config": {
+        "folders": [
+            {
+                "scope": "default",
+                "path": "./src/config"
+            }
+        ]
+    },
+    "postcss": {
+        "folders": {
+            "mixins": [
+                {
+                    "path": "./src/node/postcss/mixins"
+                }
+            ]
+        }
+    }
 }

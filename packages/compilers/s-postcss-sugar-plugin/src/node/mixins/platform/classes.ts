@@ -1,8 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __fs from 'fs';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __fs from 'fs';
 
 /**
  * @name           classes
@@ -24,44 +22,48 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  */
 
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
-  static definition = {
-    platforms: {
-      type: 'Array<String>'
-    }
-  };
+    static definition = {
+        platforms: {
+            type: 'Array<String>',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginPlatformClassesParams {
-  platforms: string[];
+    platforms: string[];
 }
 
 export { postcssSugarPluginPlatformClassesMixinInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginPlatformClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginPlatformClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginPlatformClassesParams = {
-    platforms: [],
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginPlatformClassesParams = {
+        platforms: [],
+        ...params,
+    };
 
-  // list all the available platforms in the folder
-  const files = __fs.readdirSync(`${__dirname()}/platforms`);
+    // list all the available platforms in the folder
+    const files = __fs.readdirSync(`${__dirname()}/platforms`);
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  files.forEach(filename => {
-    const name = filename.split('.')[0];
+    files.forEach((filename) => {
+        const name = filename.split('.')[0];
 
-    if (finalParams.platforms.length && finalParams.platforms.indexOf(name) === -1) return;
+        if (
+            finalParams.platforms.length &&
+            finalParams.platforms.indexOf(name) === -1
+        )
+            return;
 
-    vars.push(`
+        vars.push(`
         
         /**
          * @name            s-platform:${name}
@@ -83,8 +85,7 @@ export default function ({
         }
 
   `);
+    });
 
-  });
-
-  replaceWith(vars);
+    replaceWith(vars);
 }

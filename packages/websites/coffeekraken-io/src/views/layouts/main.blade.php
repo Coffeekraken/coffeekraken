@@ -22,7 +22,7 @@
         <ck-settings mount-when="inViewport"></ck-settings> 
     </s-side-panel>
 
-    <ck-search></ck-search>
+    {{-- <ck-search></ck-search> --}}
 
     @include('layouts.footer.footer')
 

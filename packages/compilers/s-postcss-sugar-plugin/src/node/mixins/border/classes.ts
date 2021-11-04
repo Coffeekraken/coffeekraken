@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginBorderRadiusClassesMixinInterface extends __SInterface {
     static definition = {};
@@ -38,9 +38,8 @@ export default function ({
     const finalParams: IPostcssSugarPluginBorderRadiusClassesMixinParams = {
         ...params,
     };
-    3;
-    const radiusesObj = __theme().config('border.radius');
-    const widthsObj = __theme().config('border.width');
+    const radiusesObj = __STheme.config('border.radius');
+    const widthsObj = __STheme.config('border.width');
 
     const vars: string[] = [];
 

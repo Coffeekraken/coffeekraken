@@ -1,6 +1,5 @@
-import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
@@ -44,17 +43,17 @@ export default function ({ params, atRule, replaceWith }) {
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(__theme().baseColors())
+        ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-color:${colorName}       Apply the ${colorName} color for the "current" color`;
             })
             .join('\n')}
-        ${Object.keys(__theme().baseColors())
+        ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-tc:${colorName}       Apply the ${colorName} text color`;
             })
             .join('\n')}
-        ${Object.keys(__theme().baseColors())
+        ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 return ` * @cssClass            s-bg:${colorName}       Apply the ${colorName} background color`;
             })
@@ -63,7 +62,7 @@ export default function ({ params, atRule, replaceWith }) {
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
-        ${Object.keys(__theme().baseColors())
+        ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 return ` * <div class="s-tc:${colorName} s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
             })
@@ -72,7 +71,7 @@ export default function ({ params, atRule, replaceWith }) {
         *
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Background color</h3>
-        ${Object.keys(__theme().baseColors())
+        ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
                 return ` * <div class="s-bg:${colorName} s-p:10 s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
             })
@@ -84,7 +83,7 @@ export default function ({ params, atRule, replaceWith }) {
         */
     `);
 
-    Object.keys(__theme().baseColors()).forEach((colorName) => {
+    Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
         cssArray.push(`
       /**
        * @name        s-color:${colorName}
@@ -109,7 +108,7 @@ export default function ({ params, atRule, replaceWith }) {
     `);
     });
 
-    __theme().loopOnColors((colorObj) => {
+    __STheme.getTheme().loopOnColors((colorObj) => {
         const colorName = colorObj.name;
         let modifierStr = '';
         if (colorObj.variant) modifierStr = `-${colorObj.variant}`;

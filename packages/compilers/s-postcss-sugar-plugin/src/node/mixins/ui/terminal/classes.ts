@@ -1,9 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
 
 class postcssSugarPluginUiTerminalClassesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginUiTerminalClassesParams {}
@@ -11,20 +9,20 @@ export interface IPostcssSugarPluginUiTerminalClassesParams {}
 export { postcssSugarPluginUiTerminalClassesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginUiTerminalClassesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginUiTerminalClassesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginUiTerminalClassesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginUiTerminalClassesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [
-    `
+    const vars: string[] = [
+        `
         /**
          * @name            s-terminal
          * @namespace       sugar.css.ui.terminal
@@ -45,8 +43,8 @@ export default function ({
         .s-terminal {
             @sugar.ui.terminal;
         }
-  `
-  ];
+  `,
+    ];
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

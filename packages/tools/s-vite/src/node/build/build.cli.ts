@@ -1,13 +1,11 @@
-import __SProcess from '@coffeekraken/s-process';
+import __SPromise from '@coffeekraken/s-promise';
 import __SVite from '../SVite';
-import __SViteBuildInterface from './interface/SViteBuildInterface';
 
-export default async function build(stringArgs = '') {
-  const vite = new __SVite();
-  const pro = await __SProcess.from(vite.build.bind(vite), {
-    process: {
-      interface: __SViteBuildInterface
-    }
-  });
-  pro.run(stringArgs);
+export default function build(stringArgs = '') {
+    return new __SPromise(async ({ resolve, pipe }) => {
+        const vite = new __SVite();
+        const buildPromise = vite.build(stringArgs);
+        pipe(buildPromise);
+        resolve(await buildPromise);
+    });
 }

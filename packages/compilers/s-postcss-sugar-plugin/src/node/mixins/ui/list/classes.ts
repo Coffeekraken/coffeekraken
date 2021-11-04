@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
@@ -12,12 +11,12 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.list.defaultColor'),
+            default: __STheme.config('ui.list.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['ul'],
-            default: __theme().config('ui.list.defaultStyle') ?? 'ul',
+            default: __STheme.config('ui.list.defaultStyle') ?? 'ul',
         },
         scope: {
             type: {
@@ -43,13 +42,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListClassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
@@ -176,7 +173,7 @@ export default function ({
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
-        * This class represent an "<yellow>${__theme().config(
+        * This class represent an "<yellow>${__STheme.config(
             'ui.list.defaultStyle',
         )}</yellow>" list
         * 
@@ -357,8 +354,8 @@ export default function ({
             @sugar.rhythm.vertical {
                 ul, .s-list--ul,
                 ol, .s-list--ol {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.list.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.list.rhythmVertical'),
                     )}
                 } 
             }

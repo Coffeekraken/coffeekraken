@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../utils/themeVar';
 
 /**
  * @name           theme

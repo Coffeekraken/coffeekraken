@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginComponentsClassesInterface extends __SInterface {
     static definition = {
@@ -32,12 +32,10 @@ export { postcssSugarPluginComponentsClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: any;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: any = {
@@ -47,13 +45,13 @@ export default function ({
 
     const cssArray: string[] = [];
 
-    const componentsObj = __theme().config('components');
+    const componentsObj = __STheme.config('components');
 
     Object.keys(componentsObj).forEach((selector) => {
         if (finalParams.scope.indexOf('bare') !== -1) {
             cssArray.push(`
           ${selector} {
-            ${jsObjectToCssProperties(componentsObj[selector], {
+            ${__STheme.jsObjectToCssProperties(componentsObj[selector], {
                 exclude: ['rhythmVertical'],
             })}
           }
@@ -64,7 +62,7 @@ export default function ({
             cssArray.push(`
           @sugar.rhythm.vertical {
             ${selector} {
-              ${jsObjectToCssProperties(
+              ${__STheme.jsObjectToCssProperties(
                   componentsObj[selector].rhythmVertical ?? {},
               )}
             }

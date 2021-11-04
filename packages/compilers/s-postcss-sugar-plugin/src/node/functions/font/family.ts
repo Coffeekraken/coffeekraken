@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
 import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
-import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
     static definition = {

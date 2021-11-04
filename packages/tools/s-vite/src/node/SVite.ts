@@ -16,6 +16,7 @@ import __rewritesPlugin from './plugins/rewritesPlugin';
 import __SViteStartInterface from './start/interface/SViteStartInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
+import __SViteBuildInterface from './build/interface/SViteBuildInterface';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -79,7 +80,9 @@ export default class SVite extends __SClass {
         );
 
         // register some riotjs preprocessors
-        __sRiotjsPluginPostcssPreprocessor(__SugarConfig.get('postcss.plugins'));
+        __sRiotjsPluginPostcssPreprocessor(
+            __SugarConfig.get('postcss.plugins'),
+        );
     }
 
     /**
@@ -129,7 +132,9 @@ export default class SVite extends __SClass {
                 const server = await __viteServer(config);
                 const listen = await server.listen();
                 emit('log', {
-                    value: [`<yellow>Vite</yellow> server started <green>successfully</green>`].join('\n'),
+                    value: [
+                        `<yellow>Vite</yellow> server started <green>successfully</green>`,
+                    ].join('\n'),
                 });
                 emit('log', {
                     value: [
@@ -156,11 +161,13 @@ export default class SVite extends __SClass {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    build(params: ISViteBuildParams) {
+    build(params: ISViteBuildParams | String) {
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const viteConfig = __SugarConfig.get('vite');
                 const duration = new __SDuration();
+
+                params = __SViteBuildInterface.apply(params);
 
                 // if (params.watch) {
                 //   throw new Error('The watch feature is not implemented yet...');
@@ -170,8 +177,10 @@ export default class SVite extends __SClass {
                 const results = {};
 
                 // types shortcuts
-                if (params.lib && params.type.indexOf('lib') === -1) params.type = ['lib'];
-                if (params.bundle && params.type.indexOf('bundle') === -1) params.type = ['bundle'];
+                if (params.lib && params.type.indexOf('lib') === -1)
+                    params.type = ['lib'];
+                if (params.bundle && params.type.indexOf('bundle') === -1)
+                    params.type = ['bundle'];
 
                 for (let i = 0; i < params.type.length; i++) {
                     const buildType = params.type[i];
@@ -209,7 +218,9 @@ export default class SVite extends __SClass {
 
                     // plugins
                     if (params.minify) {
-                        config.build.rollupOptions.plugins.push(__uglifyPlugin());
+                        config.build.rollupOptions.plugins.push(
+                            __uglifyPlugin(),
+                        );
                     }
                     if (params.analyze) {
                         config.build.rollupOptions.plugins.push(
@@ -222,7 +233,9 @@ export default class SVite extends __SClass {
 
                     // plugins
                     if (!config.plugins) config.plugins = [];
-                    config.plugins.unshift(__rewritesPlugin(config.rewrites ?? []));
+                    config.plugins.unshift(
+                        __rewritesPlugin(config.rewrites ?? []),
+                    );
 
                     // resolve plugins paths
                     const plugins: any[] = [];
@@ -255,7 +268,9 @@ export default class SVite extends __SClass {
                     if (buildType.toLowerCase() === 'lib') {
                         config.build.rollupOptions.external = [
                             ...(config.build.rollupOptions.external ?? []),
-                            ...Object.keys(__listNodeModulesPackages({ monorepo: true })),
+                            ...Object.keys(
+                                __listNodeModulesPackages({ monorepo: true }),
+                            ),
                             'vue',
                         ];
                     }
@@ -285,7 +300,11 @@ export default class SVite extends __SClass {
                                 ...(config.build.rollupOptions.output ?? {}),
                             }),
                         );
-                        outputsFilenames.push(`${buildType === 'bundle' ? 'index' : buildType}.${format}.js`);
+                        outputsFilenames.push(
+                            `${
+                                buildType === 'bundle' ? 'index' : buildType
+                            }.${format}.js`,
+                        );
                     });
 
                     // prod filename
@@ -301,14 +320,18 @@ export default class SVite extends __SClass {
                         });
                         emit('log', {
                             value: `<yellow>○</yellow> Environment : ${
-                                params.prod ? '<green>production</green>' : '<yellow>development</yellow>'
+                                params.prod
+                                    ? '<green>production</green>'
+                                    : '<yellow>development</yellow>'
                             }`,
                         });
                         outputsFilenames.forEach((filename) => {
                             emit('log', {
                                 value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
                                     process.cwd(),
-                                    `${__path.resolve(viteConfig.build.outDir)}/${filename}`,
+                                    `${__path.resolve(
+                                        viteConfig.build.outDir,
+                                    )}/${filename}`,
                                 )}</cyan>`,
                             });
                         });
@@ -319,7 +342,9 @@ export default class SVite extends __SClass {
                             value: `<yellow>○</yellow> Target      : ${config.build.target}`,
                         });
                         emit('log', {
-                            value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(',')}`,
+                            value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(
+                                ',',
+                            )}`,
                         });
                     }
 
@@ -362,7 +387,9 @@ export default class SVite extends __SClass {
                     // @TODO        check to replace this dirty fix
                     let outCode = res[0].output[0].code;
                     // var SCodeExample_vue_vue_type_style_index_0_scoped_true_lang
-                    const cssVarMatches = outCode.match(/var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm);
+                    const cssVarMatches = outCode.match(
+                        /var\s[a-zA-Z0-9-_]+type_style[a-zA-Z0-9-_]+/gm,
+                    );
                     if (cssVarMatches) {
                         cssVarMatches.forEach((match) => {
                             const varName = match.replace(/var\s?/, '').trim();
@@ -393,9 +420,14 @@ export default class SVite extends __SClass {
                             const baseOutputConfig = outputs[i],
                                 baseOutputFilenames = outputsFilenames[i];
 
-                            __writeFileSync(`${baseOutputConfig.dir}/${baseOutputFilenames}`, output.code);
+                            __writeFileSync(
+                                `${baseOutputConfig.dir}/${baseOutputFilenames}`,
+                                output.code,
+                            );
 
-                            const file = new __SFile(`${baseOutputConfig.dir}/${baseOutputFilenames}`);
+                            const file = new __SFile(
+                                `${baseOutputConfig.dir}/${baseOutputFilenames}`,
+                            );
 
                             emit('log', {
                                 value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,

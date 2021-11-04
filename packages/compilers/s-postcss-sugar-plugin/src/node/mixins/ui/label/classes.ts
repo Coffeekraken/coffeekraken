@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
@@ -12,7 +12,7 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
         defaultStyle: {
             type: 'String',
             values: ['inline', 'float'],
-            default: __theme().config('ui.label.defaultStyle'),
+            default: __STheme.config('ui.label.defaultStyle'),
         },
     };
 }
@@ -27,12 +27,10 @@ export { postcssSugarPluginUiLabelClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLabelClassesParams>;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelClassesParams = {

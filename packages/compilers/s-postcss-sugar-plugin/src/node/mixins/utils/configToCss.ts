@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name            configToCss
@@ -72,10 +71,11 @@ export default function ({
         ...params,
     };
 
-    const configObj = __theme().config(params.dotPath);
+    // @ts-ignore
+    const configObj = __STheme.config(params.dotPath);
 
     const vars: string[] = [
-        __jsObjectToCssProperties(configObj, {
+        __STheme.jsObjectToCssProperties(configObj, {
             exclude: finalParams.exclude,
             only: finalParams.only,
         }),

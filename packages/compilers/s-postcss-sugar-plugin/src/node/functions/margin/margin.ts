@@ -1,18 +1,17 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __minifyVar from '../../utils/minifyVar';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMarginFunctionInterface extends __SInterface {
     static definition = {
         margin: {
             type: 'String',
-            values: Object.keys(__theme().config('margin')),
+            values: Object.keys(__STheme.config('margin')),
             default: 'default',
             required: true,
         },
         scalable: {
             type: 'Boolean',
-            default: __theme().config('scalable.margin'),
+            default: __STheme.config('scalable.margin'),
         },
     };
 }

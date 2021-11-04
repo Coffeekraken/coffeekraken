@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
 
 class postcssSugarPluginUiClassesInterface extends __SInterface {
     static definition = {};

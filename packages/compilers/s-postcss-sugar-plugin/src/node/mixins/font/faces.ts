@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           faces
@@ -21,7 +21,7 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginFontFacesInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 
 export interface IPostcssSugarPluginFontFacesParams {}
@@ -29,26 +29,26 @@ export interface IPostcssSugarPluginFontFacesParams {}
 export { postcssSugarPluginFontFacesInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginFontFacesParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginFontFacesParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginFontFacesParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginFontFacesParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  const fontsFamiliesObj = __theme().config('font.family');
-  Object.keys(fontsFamiliesObj).forEach((fontName) => {
-    const fontObj = fontsFamiliesObj[fontName];
-    
-    if (fontObj.import) {
-      vars.push(`/**
+    const fontsFamiliesObj = __STheme.config('font.family');
+    Object.keys(fontsFamiliesObj).forEach((fontName) => {
+        const fontObj = fontsFamiliesObj[fontName];
+
+        if (fontObj.import) {
+            vars.push(`/**
         * @name               ${fontName}
         * @namespace          sugar.css.font
         * @type               CssFontFace
@@ -62,8 +62,8 @@ export default function ({
         */
         @import url("${fontObj.import}");
       `);
-    }
-  });
+        }
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

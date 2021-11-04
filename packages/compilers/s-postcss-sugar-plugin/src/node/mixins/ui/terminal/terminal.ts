@@ -1,8 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiTerminalInterface extends __SInterface {
     static definition = {};
@@ -35,8 +32,8 @@ export default function ({
       }
 
       @sugar.rhythm.vertical {
-        ${__jsObjectToCssProperties(
-            __theme().config('ui.terminal.rhythmVertical'),
+        ${__STheme.jsObjectToCssProperties(
+            __STheme.config('ui.terminal.rhythmVertical'),
         )}
     } 
 

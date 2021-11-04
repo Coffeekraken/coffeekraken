@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
-import __postcss from 'postcss';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -81,7 +79,7 @@ export default function ({
         ...params,
     };
 
-    const mediaConfig = __theme().config('media');
+    const mediaConfig = __STheme.config('media');
 
     const medias = finalParams.query
         ? finalParams.query.split(' ').map((l) => l.trim())

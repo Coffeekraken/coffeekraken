@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __jsObjectToCssProperties from '../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -44,7 +43,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const widthObj = __theme().config('width');
+    const widthObj = __STheme.config('width');
 
     vars.push(`
       /**

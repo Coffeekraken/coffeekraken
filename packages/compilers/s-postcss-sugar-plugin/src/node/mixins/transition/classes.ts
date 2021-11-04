@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __faker from 'faker';
+import __STheme from '@coffeekraken/s-theme';
 import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 
 /**
@@ -43,7 +42,7 @@ export default function ({
         ...params,
     };
 
-    const transitionObj = __theme().config('transition');
+    const transitionObj = __STheme.config('transition');
 
     const vars: string[] = [];
 

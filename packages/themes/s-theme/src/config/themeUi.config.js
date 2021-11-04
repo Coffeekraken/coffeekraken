@@ -1,0 +1,2766 @@
+export default (env, config) => {
+    if (env.platform !== 'node')
+        return;
+    return {
+        default: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      1.5em
+             *
+             * Specify the default padding inline for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '1.5em',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      0.75em
+             *
+             * Specify the default padding block for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '0.75em',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      [theme.border.radius.default]
+             *
+             * Specify the default border radius for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.border.radius.default]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      [theme.border.width.default]
+             *
+             * Specify the default border width for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.border.width.default]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      [theme.transition.fast]
+             *
+             * Specify the default transition for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.transition.fast]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      main
+             *
+             * Specify the default color for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: 'main',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      solid
+             *
+             * Specify the default style for ui's.
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: 'solid',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      [theme.depth.default]
+             *
+             * Specify the default depth for ui's
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.depth.default]',
+            rhythmVertical: {
+                /**
+                 * @name          margin-bottom
+                 * @namespace     config.themeUi.default.rhythmVertical
+                 * @type          Number
+                 * @default      60
+                 *
+                 * Specify the default margin bottom when in vertical rhythm scope for ui's
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                'margin-bottom': 60,
+            },
+        },
+        form: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      0.75em
+             *
+             * Specify the default padding inline for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '0.75em',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      0.375em
+             *
+             * Specify the default padding block for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '0.375em',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      [theme.border.radius.default]
+             *
+             * Specify the default border radius for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.border.radius.default]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      [theme.border.width.default]
+             *
+             * Specify the default border width for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.border.width.default]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      [theme.transition.fast]
+             *
+             * Specify the default transition for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.transition.fast]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the outline is enabled for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      accent
+             *
+             * Specify the default color for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: 'accent',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      solid
+             *
+             * Specify the default style for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: 'solid',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.form
+             * @type          String
+             * @default      [theme.depth.default]
+             *
+             * Specify the default depth for form items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.depth.default]',
+            rhythmVertical: {
+                /**
+                 * @name          margin-bottom
+                 * @namespace     config.themeUi.form.rhythmVertical
+                 * @type          Number
+                 * @default      40
+                 *
+                 * Specify the default margin bottom for form items when in vertical rhythm scope
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                'margin-bottom': 40,
+            },
+        },
+        outline: {
+            /**
+             * @name          active
+             * @namespace     config.themeUi.outline
+             * @type          Boolean
+             * @default      true
+             *
+             * Specify if the outline is activated by default for ui elements
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            active: true,
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.outline
+             * @type          String
+             * @default      10px
+             *
+             * Specify the border width for outline ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '10px',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.outline
+             * @type          String
+             * @default      [theme.border.radius.default]
+             *
+             * Specify the border radius for outline ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.border.radius.default]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.outline
+             * @type          String
+             * @default      all .2s ease-out
+             *
+             * Specify the transition for outline ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: 'all .2s ease-out',
+        },
+        scrollbar: {
+            /**
+             * @name          size
+             * @namespace     config.themeUi.scrollbar
+             * @type          String
+             * @default      2px
+             *
+             * Specify the size (width/height) for scrollbar
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            size: '2px',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.scrollbar
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for scrollbar
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+        },
+        button: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.button
+             * @type          Boolean
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if you want the outline on your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.button
+             * @type          Number
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.button
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.button
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.button
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        avatar: {
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.avatar
+             * @type          String
+             * @default      2px
+             *
+             * Specify the default border width for avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '2px',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.avatar
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.avatar
+             * @type          Number
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for your avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.avatar
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.avatar
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.avatar
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        colorPicker: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.colorPicker
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.colorPicker
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for colorPicker items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.colorPicker
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.colorPicker
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your colorPicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        datePicker: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: ['theme.ui.form.defaultColor'],
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.datePicker
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.datePicker
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for datePicker items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.datePicker
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.datePicker
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your datePicker ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        input: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default color for input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.input
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: 'solid',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.input
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for input items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.input
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.input
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your input ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        radio: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      0.5em
+             *
+             * Specify the default border radius for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '0.5em',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for radio items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.radio
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.radio
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default color for radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.radio
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.radio
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your radio ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        checkbox: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      0.2em
+             *
+             * Specify the default border radius for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '0.2em',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for checkbox items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.checkbox
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.checkbox
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.checkbox
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.checkbox
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        range: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default color for range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.range
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.range
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for range items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.range
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.range
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        label: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.label
+             * @type          Number
+             * @default      inline
+             *
+             * Specify the default style for your label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: 'inline',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.label
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for label items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.label
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your label ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        select: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.paddingInline]
+             *
+             * Specify the default padding inline for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.form.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.paddingBlock]
+             *
+             * Specify the default padding block for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.form.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.form.transition]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for select items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default color for select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.select
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.select
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.select
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        switch: {
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.borderRadius]
+             *
+             * Specify the default border radius for switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.form.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.borderWidth]
+             *
+             * Specify the default border width for switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.form.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.transition]
+             *
+             * Specify the default transition for switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.depth]
+             *
+             * Specify the default depth for switch items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.form.depth]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.switch
+             * @type          String
+             * @default      [theme.ui.form.defaultColor]
+             *
+             * Specify the default color for switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.form.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.switch
+             * @type          Number
+             * @default      [theme.ui.form.defaultStyle]
+             *
+             * Specify the default style for your switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.switch
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.switch
+             * @type          Object
+             * @default      [theme.ui.form.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.form.rhythmVertical]',
+        },
+        dropdown: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.dropdown
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your dropdown ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.dropdown
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for dropdown items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.dropdown
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+        },
+        list: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.list
+             * @type          Number
+             * @default      ul
+             *
+             * Specify the default style for your list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: 'ul',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for list items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          bulletChar
+             * @namespace     config.themeUi.list
+             * @type          String
+             * @default      ●
+             *
+             * Specify if the bullet character to use
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            bulletChar: '●',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.list
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your list ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        fsTree: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.fsTree
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for fsTree items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          bulletChar
+             * @namespace     config.themeUi.fsTree
+             * @type          String
+             * @default      ●
+             *
+             * Specify if the bullet character to use
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            bulletChar: '●',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.fsTree
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your fsTree ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        tabs: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.tabs
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.tabs
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for tabs items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: 0,
+            /**
+             * @name          outline
+             * @namespace     config.themeUi.tabs
+             * @type          Object
+             * @default      [theme.ui.outline.active]
+             *
+             * Specify if the focus outline is activated for this ui element
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            outline: '[theme.ui.outline.active]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.tabe
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your tabe ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        terminal: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.terminal
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.terminal
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for terminal items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.terminal
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your terminal ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        tooltip: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.tooltip
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for tooltip items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          arrowSize
+             * @namespace     config.themeUi.tooltip
+             * @type          Object
+             * @default      20px
+             *
+             * Specify if the arrow size of the tooltips
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            arrowSize: '20px',
+        },
+        code: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding inline for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.padding.50]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.padding.50]
+             *
+             * Specify the default padding block for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.padding.50]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.code
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.code
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for code items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.code
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your code ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        blockquote: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.blockquote
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for blockquote items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: '[theme.ui.default.depth]',
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.blockquote
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        table: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.paddingInline]
+             *
+             * Specify the default padding inline for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '[theme.ui.default.paddingInline]',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.paddingBlock]
+             *
+             * Specify the default padding block for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '[theme.ui.default.paddingBlock]',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.border.width.10]
+             *
+             * Specify the default border width for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.border.width.10]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.table
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.table
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for table items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: 0,
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.table
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        badge: {
+            /**
+             * @name          paddingInline
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default         0.65em
+             *
+             * Specify the default padding inline for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingInline: '.65em',
+            /**
+             * @name          paddingBlock
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      0.35em
+             *
+             * Specify the default padding block for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            paddingBlock: '.35em',
+            /**
+             * @name          borderRadius
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.borderRadius]
+             *
+             * Specify the default border radius for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderRadius: '[theme.ui.default.borderRadius]',
+            /**
+             * @name          borderWidth
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.borderWidth]
+             *
+             * Specify the default border width for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            borderWidth: '[theme.ui.default.borderWidth]',
+            /**
+             * @name          transition
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.transition]
+             *
+             * Specify the default transition for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            transition: '[theme.ui.default.transition]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.defaultColor]
+             *
+             * Specify the default color for badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: '[theme.ui.default.defaultColor]',
+            /**
+             * @name          defaultStyle
+             * @namespace     config.themeUi.badge
+             * @type          Number
+             * @default      [theme.ui.default.defaultStyle]
+             *
+             * Specify the default style for your badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          depth
+             * @namespace     config.themeUi.badge
+             * @type          String
+             * @default      [theme.ui.default.depth]
+             *
+             * Specify the default depth for badge items
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            depth: 0,
+            /**
+             * @name          rhythmVertical
+             * @namespace     config.themeUi.badge
+             * @type          Object
+             * @default      [theme.ui.default.rhythmVertical]
+             *
+             * Specify the default vertical rhythm for your badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            rhythmVertical: '[theme.ui.default.rhythmVertical]',
+        },
+        loader: {
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loader
+             * @type          String
+             * @default      1s
+             *
+             * Specify the duration of a loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            duration: '1s',
+            /**
+             * @name          easing
+             * @namespace     config.themeUi.loader
+             * @type          String
+             * @default      linear
+             *
+             * Specify the easing of a loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            easing: 'linear',
+        },
+        loaderSpinner: {
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderSpinner
+             * @type          String
+             * @default      [theme.ui.loader.duration]
+             *
+             * Specify the duration of the spinner loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            duration: '[theme.ui.loader.duration]',
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderSpinner
+             * @type          String
+             * @default      [theme.ui.loader.easing]
+             *
+             * Specify the easing of the spinner loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            easing: '[theme.ui.loader.easing]',
+        },
+    };
+};
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVVaS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVVpLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxlQUFlLENBQUMsR0FBRyxFQUFFLE1BQU0sRUFBRSxFQUFFO0lBQzNCLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUNwQyxPQUFPO1FBQ0gsT0FBTyxFQUFFO1lBQ0w7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRSxPQUFPO1lBQ3RCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxZQUFZLEVBQUUsUUFBUTtZQUN0Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLCtCQUErQjtZQUM3Qzs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLDhCQUE4QjtZQUMzQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLHlCQUF5QjtZQUNyQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLE1BQU07WUFDcEI7Ozs7Ozs7Ozs7ZUFVRztZQUNILFlBQVksRUFBRSxPQUFPO1lBQ3JCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsdUJBQXVCO1lBRTlCLGNBQWMsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxlQUFlLEVBQUUsRUFBRTthQUN0QjtTQUNKO1FBQ0QsSUFBSSxFQUFFO1lBQ0Y7Ozs7Ozs7Ozs7ZUFVRztZQUNILGFBQWEsRUFBRSxRQUFRO1lBQ3ZCOzs7Ozs7Ozs7O2VBVUc7WUFDSCxZQUFZLEVBQUUsU0FBUztZQUN2Qjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLCtCQUErQjtZQUM3Qzs7Ozs7Ozs7OztlQVVHO1lBQ0gsV0FBVyxFQUFFLDhCQUE4QjtZQUMzQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLHlCQUF5QjtZQUNyQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLDJCQUEyQjtZQUNwQzs7Ozs7Ozs7OztlQVVH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

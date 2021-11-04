@@ -1,14 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiTabInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.tabs.defaultStyle'),
+            default: __STheme.config('ui.tabs.defaultStyle'),
         },
         grow: {
             type: 'Boolean',
@@ -21,7 +19,7 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
         },
         outline: {
             type: 'Boolean',
-            default: __theme().config('ui.tabs.outline'),
+            default: __STheme.config('ui.tabs.outline'),
         },
         scope: {
             type: {
@@ -56,7 +54,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-        style: __theme().config('ui.tabs.defaultStyle'),
+        style: __STheme.config('ui.tabs.defaultStyle'),
         grow: false,
         direction: 'horizontal',
         outline: true,

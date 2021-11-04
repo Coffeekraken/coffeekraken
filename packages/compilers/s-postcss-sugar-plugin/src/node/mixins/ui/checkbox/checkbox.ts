@@ -1,14 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiCheckboxInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.checkbox.defaultStyle'),
+            default: __STheme.config('ui.checkbox.defaultStyle'),
         },
         scope: {
             type: {
@@ -31,13 +29,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {

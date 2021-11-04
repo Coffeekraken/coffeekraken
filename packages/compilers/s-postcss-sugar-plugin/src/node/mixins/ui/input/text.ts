@@ -1,19 +1,16 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import sugar from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.input.defaultStyle'),
+            default: __STheme.config('ui.input.defaultStyle'),
         },
         outline: {
             type: 'Boolean',
-            default: __theme().config('ui.input.outline'),
+            default: __STheme.config('ui.input.outline'),
         },
         scope: {
             type: {

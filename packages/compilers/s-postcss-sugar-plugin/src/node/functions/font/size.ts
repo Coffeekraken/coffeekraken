@@ -1,7 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
-import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
     static definition = {
@@ -12,7 +11,7 @@ class postcssSugarPluginFontSizeInterface extends __SInterface {
         },
         scalable: {
             type: 'Boolean',
-            default: __theme().config('scalable.font'),
+            default: __STheme.config('scalable.font'),
         },
     };
 }

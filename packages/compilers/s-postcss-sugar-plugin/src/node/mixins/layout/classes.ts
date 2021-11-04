@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 /**
@@ -43,7 +43,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const layoutConfig = __theme().config('layout');
+    const layoutConfig = __STheme.config('layout');
 
     const containers = layoutConfig.container;
     Object.keys(containers).forEach((containerName) => {
@@ -135,7 +135,7 @@ export default function ({
     `);
     });
 
-    const spaces = __theme().config('space');
+    const spaces = __STheme.config('space');
 
     Object.keys(spaces).forEach((spaceName) => {
         const clsX = `s-layout:gutter-x-${spaceName}`.replace('-default', '');

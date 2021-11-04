@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
@@ -12,7 +12,7 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.radio.defaultStyle'),
+            default: __STheme.config('ui.radio.defaultStyle'),
         },
         scope: {
             type: {
@@ -38,13 +38,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRangeClassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
@@ -261,8 +259,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 input[type="radio"], .s-radio {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.radio.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.radio.rhythmVertical'),
                     )}
                 } 
             }

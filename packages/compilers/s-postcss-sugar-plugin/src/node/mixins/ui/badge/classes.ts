@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
     static definition = {
@@ -11,7 +11,7 @@ class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
         defaultStyle: {
             type: 'String',
             values: ['solid', 'outline'],
-            default: __theme().config('ui.badge.defaultStyle') ?? 'solid',
+            default: __STheme.config('ui.badge.defaultStyle') ?? 'solid',
         },
     };
 }

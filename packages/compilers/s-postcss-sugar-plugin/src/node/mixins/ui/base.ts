@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../utils/themeVar';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBaseInterface extends __SInterface {
     static definition = {
@@ -62,7 +61,7 @@ export default function ({
             }.borderWidth);
             border-radius: sugar.theme(ui.${finalParams.name}.borderRadius);
             transition: sugar.theme(ui.${finalParams.name}.transition);
-            @sugar.depth(${__theme().config(`ui.${finalParams.name}.depth`)});
+            @sugar.depth(${__STheme.config(`ui.${finalParams.name}.depth`)});
             cursor: auto !important;
 
             &::placeholder {

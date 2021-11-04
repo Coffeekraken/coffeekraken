@@ -1,15 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import sugar from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.dropdown.defaultStyle'),
+            default: __STheme.config('ui.dropdown.defaultStyle'),
         },
         position: {
             type: 'String',

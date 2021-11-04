@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
@@ -11,12 +11,12 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.switch.defaultColor'),
+            default: __STheme.config('ui.switch.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.switch.defaultStyle') ?? 'solid',
+            default: __STheme.config('ui.switch.defaultStyle') ?? 'solid',
         },
         scope: {
             type: {
@@ -42,13 +42,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiSwitchClassesMixinParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchClassesMixinParams = {
@@ -220,7 +218,9 @@ export default function ({
         @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(
             ',',
         )}');
-        ${jsObjectToCssProperties(__theme().config('ui.switch.rhythmVertical'))}
+        ${__STheme.jsObjectToCssProperties(
+            __STheme.config('ui.switch.rhythmVertical'),
+        )}
       }
     `);
     });

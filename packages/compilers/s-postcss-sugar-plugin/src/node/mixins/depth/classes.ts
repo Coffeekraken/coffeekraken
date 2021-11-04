@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -40,7 +40,7 @@ export default function ({
         ...params,
     };
 
-    const depthsObj = __theme().config('depth');
+    const depthsObj = __STheme.config('depth');
 
     const vars: string[] = [];
 

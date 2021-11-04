@@ -1,6 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __astNodesToString from '../../utils/astNodesToString';
-import __theme from '../../utils/theme';
 
 class postcssSugarPluginStateOutlineWhenMixinInterface extends __SInterface {
     static definition = {

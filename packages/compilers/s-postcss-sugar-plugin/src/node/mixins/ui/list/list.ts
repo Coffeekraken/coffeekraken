@@ -1,15 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import __jsObjectToCssProperties from '../../../utils/jsObjectToCssProperties';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiListInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['ul', 'ol', 'icon'],
-            default: __theme().config('ui.list.defaultStyle'),
+            default: __STheme.config('ui.list.defaultStyle'),
         },
         scope: {
             type: {
@@ -33,13 +30,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListParams = {
@@ -134,9 +129,7 @@ export default function ({
                 vars.push(`
                     & > * {
                         ${bulletSelector} {
-                            content: "${__theme().config(
-                                'ui.list.bulletChar',
-                            )}";
+                            content: "${__STheme.config('ui.list.bulletChar')}";
                             margin-top: 0.25em;
                             font-size: 0.7em;
                         }

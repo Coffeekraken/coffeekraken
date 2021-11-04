@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
@@ -10,7 +10,7 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
         },
         defaultStyle: {
             type: 'String',
-            default: __theme().config('ui.input.defaultStyle'),
+            default: __STheme.config('ui.input.defaultStyle'),
         },
     };
 }
@@ -25,12 +25,10 @@ export { postcssSugarPluginUiFormClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormClassesParams>;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormClassesParams = {

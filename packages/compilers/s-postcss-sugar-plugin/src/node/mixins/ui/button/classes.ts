@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
@@ -11,12 +11,12 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.button.defaultColor'),
+            default: __STheme.config('ui.button.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid', 'gradient', 'outline', 'text'],
-            default: __theme().config('ui.button.defaultStyle') ?? 'solid',
+            default: __STheme.config('ui.button.defaultStyle') ?? 'solid',
         },
         scope: {
             type: {
@@ -41,12 +41,10 @@ export { postcssSugarPluginUiButtonClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
@@ -290,8 +288,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 button, .s-btn {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.button.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.button.rhythmVertical'),
                     )}
                 } 
             }

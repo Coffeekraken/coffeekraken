@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
@@ -11,12 +11,12 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.checkbox.defaultColor'),
+            default: __STheme.config('ui.checkbox.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.checkbox.defaultStyle'),
+            default: __STheme.config('ui.checkbox.defaultStyle'),
         },
         scope: {
             type: {
@@ -42,13 +42,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiCheckboxClassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxClassesParams = {
@@ -270,8 +268,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 input[type="checkbox"], .s-checkbox {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.checkbox.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.checkbox.rhythmVertical'),
                     )}
                 } 
             }

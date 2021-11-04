@@ -1,6 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __themeVar from '../../utils/themeVar';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name          width
@@ -31,7 +30,7 @@ class postcssSugarPluginBorderwidthMixinInterface extends __SInterface {
         width: {
             type: 'Number|String',
             required: true,
-            default: __theme().config('border.width.default'),
+            default: __STheme.config('border.width.default'),
         },
     };
 }

@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiTableClassesInterface extends __SInterface {
@@ -10,12 +10,12 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.table.defaultColor'),
+            default: __STheme.config('ui.table.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.table.defaultStyle'),
+            default: __STheme.config('ui.table.defaultStyle'),
         },
         scope: {
             type: {
@@ -40,12 +40,10 @@ export { postcssSugarPluginUiTableClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTableClassesParams>;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
@@ -212,7 +210,7 @@ export default function ({
 
     finalParams.styles.forEach((style) => {
         const isDefaultStyle =
-            __theme().config('ui.table.defaultStyle') === style;
+            __STheme.config('ui.table.defaultStyle') === style;
 
         const styleCls = isDefaultStyle ? '' : `.s-table--${style}`;
         const cls = `.s-table${styleCls}`;
@@ -282,7 +280,7 @@ export default function ({
       */
         @sugar.format.text {
           table {
-              @sugar.color(${__theme().config('ui.table.defaultColor')});
+              @sugar.color(${__STheme.config('ui.table.defaultColor')});
               @sugar.ui.table;
           }
         } 
@@ -334,8 +332,8 @@ export default function ({
       */
         @sugar.rhythm.vertical {
           table, .s-table {
-              ${jsObjectToCssProperties(
-                  __theme().config('ui.table.rhythmVertical'),
+              ${__STheme.jsObjectToCssProperties(
+                  __STheme.config('ui.table.rhythmVertical'),
               )}
           }
         } 

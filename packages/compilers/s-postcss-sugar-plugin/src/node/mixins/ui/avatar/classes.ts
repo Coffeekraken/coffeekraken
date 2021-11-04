@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
     static definition = {
@@ -10,12 +10,12 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.avatar.defaultColor'),
+            default: __STheme.config('ui.avatar.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.avatar.defaultStyle'),
+            default: __STheme.config('ui.avatar.defaultStyle'),
         },
         scope: {
             type: {

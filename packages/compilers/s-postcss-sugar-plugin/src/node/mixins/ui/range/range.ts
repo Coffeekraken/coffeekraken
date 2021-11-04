@@ -1,14 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiRangeInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.range.defaultStyle'),
+            default: __STheme.config('ui.range.defaultStyle'),
         },
         scope: {
             type: {

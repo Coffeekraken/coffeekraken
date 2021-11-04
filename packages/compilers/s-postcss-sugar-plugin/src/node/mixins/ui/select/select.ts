@@ -1,15 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __themeVar from '../../../utils/themeVar';
-import __isInScope from '../../../utils/isInScope';
-import __theme from '../../../utils/theme';
-import sugar from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiFormSelectInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.select.defaultStyle'),
+            default: __STheme.config('ui.select.defaultStyle'),
         },
         scope: {
             type: {
@@ -33,13 +30,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {

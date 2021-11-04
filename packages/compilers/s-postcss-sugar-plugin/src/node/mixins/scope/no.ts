@@ -1,7 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
 import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
-import __isInScope from '../../utils/isInScope';
-import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginScopeNoMixinInterface extends __SInterface {
     static definition = {

@@ -10,16 +10,27 @@
     <body>
         <script type="module">
             import { define } from './src/js/index';
-            define();
+            define({
+                items: ({ value }) => {
+                    return [
+                        { value: 'item 1', description: 'Hello world item 1' },
+                        {
+                            value: 'item 2',
+                            description: 'Hello world item 1',
+                        },
+                        { value: 'item 3', description: 'Hello world item 1' },
+                    ];
+                },
+            });
         </script>
 
         <template lang="json" id="source">
-            [{ "title": "item 1", "description": "Hello world item 1" }, {
-            "title": "item 2", "description": "Hello world item 1" }, { "title":
+            [{ "value": "item 1", "description": "Hello world item 1" }, {
+            "value": "item 2", "description": "Hello world item 1" }, { "value":
             "item 3", "description": "Hello world item 1" }]
         </template>
 
-        <s-filtrable-input items="#source" value="" filtrable="title,body">
+        <s-filtrable-input filtrable="value,body">
             <input type="text" />
         </s-filtrable-input>
     </body>

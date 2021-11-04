@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
@@ -12,7 +12,7 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.tabs.defaultStyle') ?? 'solid',
+            default: __STheme.config('ui.tabs.defaultStyle') ?? 'solid',
         },
     };
 }
@@ -74,7 +74,9 @@ export default function ({
                 return ` * <!-- ${style} style -->
             * <div class="s-font:30 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
-            *   <ul class="s-tabs${style === finalParams.defaultStyle ? '' : `:${style}`} s-color:accent">
+            *   <ul class="s-tabs${
+                style === finalParams.defaultStyle ? '' : `:${style}`
+            } s-color:accent">
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
@@ -167,14 +169,18 @@ export default function ({
 
     finalParams.styles.forEach((style) => {
         vars.push(`/**
-        * @name           s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}
+        * @name           s-tabs${
+            finalParams.defaultStyle === style ? '' : `:${style}`
+        }
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
         * 
         * This class represent a "<yellow>${style}</yellow>" tabs
         * 
         * @example        html
-        * <div class="s-tabs${finalParams.defaultStyle === style ? '' : `:${style}`}">
+        * <div class="s-tabs${
+            finalParams.defaultStyle === style ? '' : `:${style}`
+        }">
         *    <div class="active">An active tab</div>
         *    <div>A tab</div>
         * </div>

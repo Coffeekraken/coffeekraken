@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -32,12 +32,10 @@ export { postcssSugarPluginTypoClassesInterface as interface };
 export default function ({
     params,
     atRule,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginTypoClassesParams>;
     atRule: any;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginTypoClassesParams = {
@@ -46,7 +44,7 @@ export default function ({
 
     const vars: string[] = [];
 
-    const typosObj = __theme().config('typo');
+    const typosObj = __STheme.config('typo');
 
     vars.push(`
       /**
@@ -96,7 +94,7 @@ export default function ({
         const typoObj = typosObj[typoName];
         const cls = `s-typo:${typoName}`;
 
-        const css = jsObjectToCssProperties(typoObj, {
+        const css = __STheme.jsObjectToCssProperties(typoObj, {
             exclude: ['rhythmVertical'],
         });
 
@@ -161,7 +159,9 @@ export default function ({
             */
         @sugar.rhythm.vertical {
             ${typoName}, .${typoName} {
-                ${jsObjectToCssProperties(typoObj.rhythmVertical ?? {})}
+                ${__STheme.jsObjectToCssProperties(
+                    typoObj.rhythmVertical ?? {},
+                )}
             }
         }`);
     });

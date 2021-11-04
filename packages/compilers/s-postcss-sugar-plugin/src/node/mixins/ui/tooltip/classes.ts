@@ -1,5 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {

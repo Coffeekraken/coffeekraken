@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
@@ -10,12 +10,12 @@ class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
         },
         defaultColor: {
             type: 'String',
-            default: __theme().config('ui.select.defaultColor'),
+            default: __STheme.config('ui.select.defaultColor'),
         },
         defaultStyle: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.select.defaultStyle'),
+            default: __STheme.config('ui.select.defaultStyle'),
         },
         scope: {
             type: {
@@ -41,13 +41,11 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectClassesParams>;
     atRule: any;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectClassesParams = {
@@ -253,7 +251,7 @@ export default function ({
 
     finalParams.styles.forEach((style) => {
         const isDefaultStyle =
-            __theme().config('ui.select.defaultStyle') === style;
+            __STheme.config('ui.select.defaultStyle') === style;
 
         const styleCls = isDefaultStyle ? '' : `.s-select--${style}`;
         const cls = `.s-select${styleCls}`;
@@ -346,8 +344,8 @@ export default function ({
         */
             @sugar.rhythm.vertical {
                 select, .s-select {
-                    ${jsObjectToCssProperties(
-                        __theme().config('ui.select.rhythmVertical'),
+                    ${__STheme.jsObjectToCssProperties(
+                        __STheme.config('ui.select.rhythmVertical'),
                     )}
                 } 
             }

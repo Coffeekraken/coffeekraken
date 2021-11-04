@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 /**
@@ -42,7 +42,7 @@ export default function ({
         ...params,
     };
 
-    const scaleObj = __theme().config('ui.scrollbar');
+    const scaleObj = __STheme.config('ui.scrollbar');
 
     const vars: string[] = [];
 

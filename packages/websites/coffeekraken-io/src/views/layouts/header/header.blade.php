@@ -8,7 +8,8 @@
             </a>
             <div class="s-flex-item:order-10 s-flex:align-center">
                 <form action="/doc/api" method="get" name="search" id="search-form">
-                    <input class="s-input" type="text" name="search" placeholder="Search API doc..." />
+                    <ck-search></ck-search>
+                        {{-- <input class="s-input" type="text" name="search" placeholder="Search API doc..." /> --}}
                 </form>
                 <version-selector class="s-mis:20"></vewelrsion-selector>
                 <a href="javascript:void" class="s-mis:20" id="settings-opener">

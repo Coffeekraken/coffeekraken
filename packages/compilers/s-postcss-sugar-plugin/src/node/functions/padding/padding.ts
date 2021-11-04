@@ -1,18 +1,17 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __minifyVar from '../../utils/minifyVar';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginPaddingFunctionInterface extends __SInterface {
     static definition = {
         padding: {
             type: 'String',
-            values: Object.keys(__theme().config('padding')),
+            values: Object.keys(__STheme.config('padding')),
             default: 'default',
             required: true,
         },
         scalable: {
             type: 'Boolean',
-            default: __theme().config('scalable.padding'),
+            default: __STheme.config('scalable.padding'),
         },
     };
 }

@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -23,7 +23,7 @@ class postcssSugarPluginClearfixClassesInterface extends __SInterface {
     static definition = {
         defaultClearfix: {
             type: 'String',
-            default: __theme().config('helpers.clearfix.default'),
+            default: __STheme.config('helpers.clearfix.default'),
         },
     };
 }
@@ -74,7 +74,9 @@ export default function ({
         ${clearfixes
             .map((clearfixName) => {
                 return ` * @cssClass     s-clearfixs-clearfix${
-                    clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`
+                    clearfixName === finalParams.defaultClearfix
+                        ? ``
+                        : `:${clearfixName}`
                 }            Apply the ${clearfixName} clearfix`;
             })
             .join('\n')}
@@ -86,7 +88,9 @@ export default function ({
             * <div class="s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
             *   <div class="s-clearfix${
-                clearfixName === finalParams.defaultClearfix ? `` : `:${clearfixName}`
+                clearfixName === finalParams.defaultClearfix
+                    ? ``
+                    : `:${clearfixName}`
             } s-bg:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
@@ -102,7 +106,11 @@ export default function ({
 
     clearfixes.forEach((clearfixName) => {
         vars.push(`/**
-                * @name          s-clearfix${clearfixName === finalParams.defaultClearfix ? '' : `:${clearfixName}`}
+                * @name          s-clearfix${
+                    clearfixName === finalParams.defaultClearfix
+                        ? ''
+                        : `:${clearfixName}`
+                }
                 * @namespace          sugar.css.clearfix
                 * @type               CssClass
                 * @platform         css
@@ -112,13 +120,19 @@ export default function ({
                 * 
                 * @example        html
                 * <div class="s-clearfix${
-                    clearfixName === finalParams.defaultClearfix ? '' : `:${clearfixName}`
+                    clearfixName === finalParams.defaultClearfix
+                        ? ''
+                        : `:${clearfixName}`
                 }">I'm a cool clearfix element</div>
                 * 
                 * @since        2.0.0
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
-                .s-clearfix${clearfixName === finalParams.defaultClearfix ? `${notStr}` : `--${clearfixName}`} {
+                .s-clearfix${
+                    clearfixName === finalParams.defaultClearfix
+                        ? `${notStr}`
+                        : `--${clearfixName}`
+                } {
                     @sugar.clearfix(${clearfixName});
                 }`);
     });

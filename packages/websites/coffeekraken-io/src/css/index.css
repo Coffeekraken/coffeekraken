@@ -3,6 +3,7 @@
 
 @sugar.init;
 @sugar.classes;
+@sugar.ui.filtrableinput.classes;
 
 /* 
 @sugar.media.classes(tablet, tablet) {

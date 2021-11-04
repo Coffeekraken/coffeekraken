@@ -153,7 +153,11 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('docmap.build'));
+            // console.log(
+            //     __SSugarConfig.get(
+            //         'theme.themes.default-light.ui.filtrableInput',
+            //     ),
+            // );
             // return;
 
             // clean somr folders like tmp, etc...

@@ -1,12 +1,12 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiFsTreeInterface extends __SInterface {
     static definition = {
         style: {
             type: 'String',
             values: ['solid'],
-            default: __theme().config('ui.fsTree.defaultStyle'),
+            default: __STheme.config('ui.fsTree.defaultStyle'),
         },
         scope: {
             type: {
@@ -31,14 +31,12 @@ export default function ({
     atRule,
     atRootStart,
     applyNoScopes,
-    jsObjectToCssProperties,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFsTreeParams>;
     atRule: any;
     atRootStart: Function;
     applyNoScopes: Function;
-    jsObjectToCssProperties: Function;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreeParams = {

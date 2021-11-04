@@ -1,6 +1,4 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
-import __minifyVar from '../../utils/minifyVar';
 
 class postcssSugarPluginScalableFunctionInterface extends __SInterface {
     static definition = {
@@ -16,7 +14,11 @@ export interface IPostcssSugarPluginScalableFunctionParams {
     value: string | number;
 }
 
-export default function ({ params }: { params: Partial<IPostcssSugarPluginScalableFunctionParams> }) {
+export default function ({
+    params,
+}: {
+    params: Partial<IPostcssSugarPluginScalableFunctionParams>;
+}) {
     const finalParams: IPostcssSugarPluginScalableFunctionParams = {
         value: '',
         ...params,

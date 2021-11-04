@@ -1,7 +1,4 @@
-import __theme from '../../utils/theme';
 import __SInterface from '@coffeekraken/s-interface';
-import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
-import __remapColorVars from '../../utils/remapColorVars';
 
 class postcssSugarPluginColorMixinInterface extends __SInterface {
     static definition = {

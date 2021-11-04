@@ -1,5 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
-import __theme from '../../utils/theme';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           container
@@ -23,50 +23,54 @@ import __theme from '../../utils/theme';
  */
 
 class postcssSugarPluginLayoutContainerInterface extends __SInterface {
-  static definition = {
-    name: {
-      type: 'String',
-      required: true,
-      default: 'default'
-    }
-  };
+    static definition = {
+        name: {
+            type: 'String',
+            required: true,
+            default: 'default',
+        },
+    };
 }
 
 export interface IPostcssSugarPluginLayoutContainerParams {
-  name: string;
+    name: string;
 }
 
 export { postcssSugarPluginLayoutContainerInterface as interface };
 
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<IPostcssSugarPluginLayoutContainerParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<IPostcssSugarPluginLayoutContainerParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginLayoutContainerParams = {
-    name: 'default',
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginLayoutContainerParams = {
+        name: 'default',
+        ...params,
+    };
 
-  const vars: string[] = [
-    `
+    const vars: string[] = [
+        `
     margin: auto;
-  `
-  ];
+  `,
+    ];
 
-  const containerConfig = __theme().config(`layout.container.${finalParams.name}`);
+    const containerConfig = __STheme.config(
+        `layout.container.${finalParams.name}`,
+    );
 
-  if (!containerConfig) {
-    throw new Error(`<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`);
-  }
+    if (!containerConfig) {
+        throw new Error(
+            `<red>[mixins.layout.container]</red> Sorry but the requested "<yellow>${finalParams.name}</yellow>" does not exists in the "<cyan>config.theme.layout.container</cyan>" configuration`,
+        );
+    }
 
-  Object.keys(containerConfig).forEach((key) => {
-    vars.push(`${key}: ${containerConfig[key]};`);
-  });
+    Object.keys(containerConfig).forEach((key) => {
+        vars.push(`${key}: ${containerConfig[key]};`);
+    });
 
-  replaceWith(vars);
+    replaceWith(vars);
 }

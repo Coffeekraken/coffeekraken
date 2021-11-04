@@ -11,10 +11,7 @@
                     <ck-search></ck-search>
                         {{-- <input class="s-input" type="text" name="search" placeholder="Search API doc..." /> --}}
                 </form>
-                <version-selector class="s-mis:20"></vewelrsion-selector>
-                <a href="javascript:void" class="s-mis:20" id="settings-opener">
-                    <i class="s-icon:settings"></i>
-                </a>
+                <version-selector class="s-mis:20 s-scale:11"></vewelrsion-selector>
             </div>
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:40">
                 <a class="s-typo:bold __main-link" href="/#features" title="Features">

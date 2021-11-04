@@ -1,4 +1,15 @@
 <div class="tools">
+
+    <div class="tools__settings s-tooltip-container">
+        <a class="s-btn:block s-color:main" id="settings-opener">
+            <i class="s-icon:settings"></i>
+        </a>
+        <div class="s-tooltip:inline-start s-text:center">
+        <i class="s-icon:settings s-font:100 s-mbe:30"></i><br>
+            Display website settings
+        </div>
+    </div>
+
     <div class="tools__issue s-tooltip-container">
         <a class="s-btn:block s-color:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>

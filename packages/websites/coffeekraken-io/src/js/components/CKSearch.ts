@@ -98,13 +98,13 @@ export default class CKSearch extends __SLitComponent {
         return html`
             <div class="ck-search">
                 <div class="__background"></div>
-                <div class="__content">
+                <div class="__content s-color:accent">
                     <ck-search-input>
                         <input
                             placeholder="Keywords based search..."
                             type="text"
                             name="search"
-                            class="s-input s-scale:11"
+                            class="s-input s-color:accent s-scale:11"
                         />
                     </ck-search-input>
                 </div>

@@ -100,10 +100,20 @@ export default function ({
             z-index: 0;
             content: '';
             position: absolute;
-            top: calc(50% + ${typeof finalParams.y === 'number' ? finalParams.y + 'px' : finalParams.y});
-            left: calc(50% + ${typeof finalParams.x === 'number' ? finalParams.x + 'px' : finalParams.x});
+            top: calc(50% + ${
+                typeof finalParams.y === 'number'
+                    ? finalParams.y + 'px'
+                    : finalParams.y
+            });
+            left: calc(50% + ${
+                typeof finalParams.x === 'number'
+                    ? finalParams.x + 'px'
+                    : finalParams.x
+            });
             width: 100%; height: 100%;
-            background: linear-gradient(${finalParams.angle}, ${finalParams.startColor}, ${finalParams.endColor});
+            background: linear-gradient(${finalParams.angle}, ${
+        finalParams.startColor
+    }, ${finalParams.endColor});
             filter: blur(${finalParams.blur});
             transform: translate(-50%, -50%) scale(${finalParams.spread});
 
@@ -112,5 +122,5 @@ export default function ({
         }
     `);
 
-    replaceWith(vars);
+    return vars;
 }

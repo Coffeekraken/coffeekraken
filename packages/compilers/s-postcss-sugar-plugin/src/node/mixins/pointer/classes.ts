@@ -115,5 +115,5 @@ export default function ({
         pointer-events: fill;
     }`);
 
-    replaceWith(vars);
+    return vars;
 }

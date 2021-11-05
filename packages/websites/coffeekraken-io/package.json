@@ -6,6 +6,7 @@
     "type": "module",
     "scripts": {
         "dev": "sugar frontstack",
+        "prod": "sugar frontstack prod",
         "build": "sugar frontstack build"
     },
     "repository": {

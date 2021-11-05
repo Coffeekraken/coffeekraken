@@ -101,5 +101,5 @@ export default function ({
         vars.push(depthCss);
     });
 
-    replaceWith(vars);
+    return vars;
 }

@@ -18,7 +18,6 @@ import __fs from 'fs';
  * @param           {IFileHashSettings}       [settings={}]       Some settings to configure your hash generation process
  * @return          {String}                            The calculated folder hash
  *
- * @setting         {Boolean}           [recursive=true]            Specify if you want to generate a hash using also the children or not
  * @setting         {String}            [algo='sha356']             The algorithm to use
  * @setting         {BinaryToTextEncoding}      [digest='base64']       How to digest the hash
  *
@@ -42,7 +41,6 @@ export default function fileHash(
     settings: Partial<IFileHashSettings> = {},
 ): string {
     settings = <IFileHashSettings>{
-        recursive: true,
         algo: 'sha256',
         digest: 'base64',
         ...settings,

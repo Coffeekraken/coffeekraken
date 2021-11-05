@@ -8,6 +8,13 @@ export interface IPostcssSugarPluginUiNavbarClassesParams {}
 
 export { postcssSugarPluginUiNavbarClassesInterface as interface };
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+export function dependencies() {
+    return {
+        files: [`${__dirname()}/navbar.js`],
+    };
+}
+
 export default function ({
     params,
     atRule,
@@ -76,5 +83,5 @@ export default function ({
   `,
     ];
 
-    replaceWith(vars);
+    return vars;
 }

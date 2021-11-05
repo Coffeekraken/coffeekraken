@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginStateFocusMixinInterface extends __SInterface {
-  static definition = {};
+    static definition = {};
 }
 export { postcssSugarPluginStateFocusMixinInterface as interface };
 
@@ -32,24 +32,24 @@ export interface postcssSugarPluginStateFocusMixinParams {}
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: Partial<postcssSugarPluginStateFocusMixinParams>;
-  atRule: any;
-  replaceWith: Function;
+    params: Partial<postcssSugarPluginStateFocusMixinParams>;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams = <postcssSugarPluginStateFocusMixinParams>{
-    className: '',
-    ...(params ?? {})
-  };
+    const finalParams = <postcssSugarPluginStateFocusMixinParams>{
+        className: '',
+        ...(params ?? {}),
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`&:focus {`);
-  vars.push(__astNodesToString(atRule.nodes));
-  vars.push(`}`);
+    vars.push(`&:focus {`);
+    vars.push(__astNodesToString(atRule.nodes));
+    vars.push(`}`);
 
-  replaceWith(vars);
+    return vars;
 }

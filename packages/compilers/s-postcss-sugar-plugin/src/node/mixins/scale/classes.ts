@@ -118,5 +118,5 @@ export default function ({
         vars.push(scaleCss);
     });
 
-    replaceWith(vars);
+    return vars;
 }

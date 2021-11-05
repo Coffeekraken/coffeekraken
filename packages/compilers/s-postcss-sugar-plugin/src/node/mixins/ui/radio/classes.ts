@@ -34,6 +34,13 @@ export interface IPostcssSugarPluginUiRangeClassesParams {
 
 export { postcssSugarPluginUiRadioClassesInterface as interface };
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+export function dependencies() {
+    return {
+        files: [`${__dirname()}/radio.js`],
+    };
+}
+
 export default function ({
     params,
     atRule,
@@ -267,5 +274,5 @@ export default function ({
         `);
     }
 
-    replaceWith(vars);
+    return vars;
 }

@@ -50,5 +50,5 @@ export default function ({
 
     vars.push(css);
 
-    replaceWith(vars);
+    return vars;
 }

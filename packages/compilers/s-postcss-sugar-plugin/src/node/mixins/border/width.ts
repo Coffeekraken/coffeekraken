@@ -58,5 +58,5 @@ export default function ({
     const vars: string[] = [
         `border-width: sugar.border.width(${finalParams.width});`,
     ];
-    replaceWith(vars);
+    return vars;
 }

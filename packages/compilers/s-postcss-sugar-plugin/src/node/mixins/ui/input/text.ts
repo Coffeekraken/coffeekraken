@@ -90,5 +90,5 @@ export default function ({
             break;
     }
 
-    replaceWith(vars);
+    return vars;
 }

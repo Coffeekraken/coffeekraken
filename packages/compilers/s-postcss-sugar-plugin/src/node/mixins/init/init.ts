@@ -36,7 +36,15 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, replaceWith }: { params: any; atRule: any; replaceWith: Function }) {
+export default function ({
+    params,
+    atRule,
+    replaceWith,
+}: {
+    params: any;
+    atRule: any;
+    replaceWith: Function;
+}) {
     const cssArray = [
         '@sugar.reset;',
         `@sugar.theme(${params.variant}, ${params.theme});`,

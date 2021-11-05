@@ -8,6 +8,13 @@ export interface IPostcssSugarPluginUiTerminalClassesParams {}
 
 export { postcssSugarPluginUiTerminalClassesInterface as interface };
 
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+export function dependencies() {
+    return {
+        files: [`${__dirname()}/terminal.js`],
+    };
+}
+
 export default function ({
     params,
     atRule,
@@ -46,5 +53,5 @@ export default function ({
   `,
     ];
 
-    replaceWith(vars);
+    return vars;
 }

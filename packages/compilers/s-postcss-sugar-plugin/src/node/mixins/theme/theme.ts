@@ -79,5 +79,5 @@ export default function ({
         vars.push(`@sugar.lnf.base;`);
     }
 
-    replaceWith(vars);
+    return vars;
 }

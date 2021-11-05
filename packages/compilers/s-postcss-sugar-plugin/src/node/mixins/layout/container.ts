@@ -72,5 +72,5 @@ export default function ({
         vars.push(`${key}: ${containerConfig[key]};`);
     });
 
-    replaceWith(vars);
+    return vars;
 }

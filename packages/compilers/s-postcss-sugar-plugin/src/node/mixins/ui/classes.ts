@@ -30,17 +30,17 @@ export default function ({
 }) {
     const cssArray = [
         '@sugar.ui.avatar.classes;',
+        '@sugar.ui.badge.classes;',
+        '@sugar.ui.blockquote.classes;',
         '@sugar.ui.button.classes;',
         '@sugar.ui.checkbox.classes;',
         '@sugar.ui.dropdown.classes;',
         '@sugar.ui.fsTree.classes;',
-        '@sugar.ui.blockquote.classes;',
         '@sugar.ui.input.classes;',
         '@sugar.ui.label.classes;',
         '@sugar.ui.list.classes;',
         '@sugar.ui.loader.classes;',
         '@sugar.ui.tabs.classes;',
-        '@sugar.ui.badge.classes;',
         '@sugar.ui.navbar.classes;',
         '@sugar.ui.radio.classes;',
         '@sugar.ui.range.classes;',
@@ -51,5 +51,5 @@ export default function ({
         '@sugar.ui.tooltip.classes;',
     ];
 
-    replaceWith(cssArray);
+    return cssArray;
 }

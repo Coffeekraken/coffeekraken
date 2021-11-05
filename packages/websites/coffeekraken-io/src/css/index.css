@@ -1,17 +1,9 @@
-@sugar.import ('../views/**/*.css');
-@sugar.import ('./generic/**/*.css');
+@import url(./imports.css);
 
 @sugar.init;
 @sugar.classes;
-@sugar.ui.filtrableinput.classes;
 
-/* 
-@sugar.media.classes(tablet, tablet) {
-  @sugar.classes;
-}
-@sugar.media.classes(desktop, desktop) {
-  @sugar.classes;
-} */
+@sugar.ui.filtrableinput.classes;
 
 body {
     @sugar.theme.when (dark) {
@@ -87,7 +79,6 @@ body {
 
 [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
         [class*='s-btn']) {
-    /* border-radius: 100px !important; */
     border: none !important;
 }
 

@@ -694,5 +694,5 @@ export default function ({
                 align-self: stretch;
             }`);
 
-    replaceWith(vars);
+    return vars;
 }

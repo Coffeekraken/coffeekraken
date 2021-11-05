@@ -203,5 +203,5 @@ export default function ({
         overflow: unset;
     }`);
 
-    replaceWith(vars);
+    return vars;
 }

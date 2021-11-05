@@ -49,6 +49,7 @@
 
     .ck-search-input {
         width: 100%;
+        @sugar.color (accent, accent, main);
     }
 
     .ck-search-input__list {

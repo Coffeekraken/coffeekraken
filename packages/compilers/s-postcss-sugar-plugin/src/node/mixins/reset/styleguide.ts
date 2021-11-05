@@ -30,12 +30,8 @@ export { postcssSugarPluginResetStyleguideInterface as interface };
 
 export default function ({
     params,
-    atRule,
-    replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginResetStyleguideClassesParams>;
-    atRule: any;
-    replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginResetStyleguideClassesParams = {
         ratio: 1,
@@ -140,5 +136,5 @@ export default function ({
         */
     `);
 
-    replaceWith(vars);
+    return vars;
 }

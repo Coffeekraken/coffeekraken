@@ -113,5 +113,5 @@ export default function ({
         vars.push(ratioCss);
     });
 
-    replaceWith(vars);
+    return vars;
 }

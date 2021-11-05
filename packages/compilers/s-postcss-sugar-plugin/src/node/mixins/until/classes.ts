@@ -126,5 +126,5 @@ export default function ({
             display: none;
         }`);
 
-    replaceWith(vars);
+    return vars;
 }

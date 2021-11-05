@@ -109,5 +109,5 @@ export default function ({
                 @sugar.scrollbar();
             }`);
 
-    replaceWith(vars);
+    return vars;
 }

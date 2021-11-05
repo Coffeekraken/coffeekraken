@@ -87,5 +87,5 @@ export default function ({
        @sugar.visually.hidden;
     }`);
 
-    replaceWith(vars);
+    return vars;
 }

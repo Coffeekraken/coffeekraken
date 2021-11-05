@@ -120,5 +120,5 @@ export default function ({
         visibility: collapse;
     }`);
 
-    replaceWith(vars);
+    return vars;
 }

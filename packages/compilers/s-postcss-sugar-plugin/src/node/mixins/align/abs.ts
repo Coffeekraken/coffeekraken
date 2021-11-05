@@ -1,16 +1,16 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginAlignInterface extends __SInterface {
-  static definition = {
-    align: {
-      type: 'String',
-      required: true
-    }
-  };
+    static definition = {
+        align: {
+            type: 'String',
+            required: true,
+        },
+    };
 }
 
 export interface IPostcssSugarPluginAlignParams {
-  align: string;
+    align: string;
 }
 
 export { postcssSugarPluginAlignInterface as interface };
@@ -46,54 +46,54 @@ export { postcssSugarPluginAlignInterface as interface };
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function ({
-  params,
-  atRule,
-  replaceWith
+    params,
+    atRule,
+    replaceWith,
 }: {
-  params: IPostcssSugarPluginAlignParams;
-  atRule: any;
-  replaceWith: Function;
+    params: IPostcssSugarPluginAlignParams;
+    atRule: any;
+    replaceWith: Function;
 }) {
-  const finalParams: IPostcssSugarPluginAlignParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginAlignParams = {
+        ...params,
+    };
 
-  const vars: string[] = [];
+    const vars: string[] = [];
 
-  vars.push(`
+    vars.push(`
     position: absolute;
   `);
 
-  let transform = '';
-  const alignSplits = finalParams.align.split(' ').map((l) => l.trim());
+    let transform = '';
+    const alignSplits = finalParams.align.split(' ').map((l) => l.trim());
 
-  if (alignSplits.indexOf('top') !== -1) {
-    vars.push('top: 0;');
-  } else if (alignSplits.indexOf('bottom') !== -1) {
-    vars.push('bottom: 0;');
-  } else if (
-    alignSplits.indexOf('center') !== -1 ||
-    alignSplits.indexOf('center-y') !== -1
-  ) {
-    vars.push('top: 50%;');
-    transform += 'translateY(-50%) ';
-  }
+    if (alignSplits.indexOf('top') !== -1) {
+        vars.push('top: 0;');
+    } else if (alignSplits.indexOf('bottom') !== -1) {
+        vars.push('bottom: 0;');
+    } else if (
+        alignSplits.indexOf('center') !== -1 ||
+        alignSplits.indexOf('center-y') !== -1
+    ) {
+        vars.push('top: 50%;');
+        transform += 'translateY(-50%) ';
+    }
 
-  if (alignSplits.indexOf('left') !== -1) {
-    vars.push('left: 0;');
-  } else if (alignSplits.indexOf('right') !== -1) {
-    vars.push('right: 0;');
-  } else if (
-    alignSplits.indexOf('center') !== -1 ||
-    alignSplits.indexOf('center-x') !== -1
-  ) {
-    vars.push('left: 50%;');
-    transform += 'translateX(-50%)';
-  }
+    if (alignSplits.indexOf('left') !== -1) {
+        vars.push('left: 0;');
+    } else if (alignSplits.indexOf('right') !== -1) {
+        vars.push('right: 0;');
+    } else if (
+        alignSplits.indexOf('center') !== -1 ||
+        alignSplits.indexOf('center-x') !== -1
+    ) {
+        vars.push('left: 50%;');
+        transform += 'translateX(-50%)';
+    }
 
-  if (transform) {
-    vars.push(`transform: ${transform.trim()};`);
-  }
+    if (transform) {
+        vars.push(`transform: ${transform.trim()};`);
+    }
 
-  replaceWith(vars);
+    return vars;
 }

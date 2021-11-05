@@ -93,5 +93,5 @@ export default function ({
     `);
     }
 
-    replaceWith(vars);
+    return vars;
 }

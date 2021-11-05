@@ -2,30 +2,38 @@ import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginColorMixinInterface extends __SInterface {
     static definition = {
-        color: {
+        current: {
             type: 'String',
             required: true,
+        },
+        primary: {
+            type: 'String',
+        },
+        secondary: {
+            type: 'String',
         },
     };
 }
 export { postcssSugarPluginColorMixinInterface as interface };
 
 /**
- * @name           remap
+ * @name           color
  * @namespace      node.mixins.colors
  * @type           PostcssMixin
  * @platform      css
  * @status        beta
  *
- * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "primary" one
+ * This mixin allows you to (re)map the "current", "primary" and "secondary" color to any other colors you want like "accent", "success, "etc...""
+ * Note that is you don't specify any "primary" and "secondary" color, these once will be set to the passed "current" color.
  *
- * @param       {String}        color           The color you want to map on another one
- * @param       {String}        toColor         THe color you want to override with the previous one
+ * @param       {String}        current             The new color you want for the "current" one
+ * @param       {String}        [primary=null]             The new color you want for the "primary" one
+ * @param       {String}        [secondary=null]             The new color you want for the "secondary" one
  * @return      {Css}                     The generated remap css
  *
  * @example         postcss
  * .my-section {
- *      @sugar.color(primary);
+ *      @sugar.color(accent, complementary, success);
  * }
  *
  * @since       2.0.0
@@ -33,7 +41,9 @@ export { postcssSugarPluginColorMixinInterface as interface };
  */
 
 export interface IPostcssSugarPluginColorParams {
-    color: string;
+    current: string;
+    primary?: string;
+    secondary?: string;
 }
 
 export default function ({
@@ -46,15 +56,41 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginColorParams = {
-        color: '',
+        current: '',
+        primary: undefined,
+        secondary: undefined,
         ...params,
     };
 
+    // if (finalParams.current === 'current')
+    //     throw new Error(
+    //         `You cannot remap the "<yellow>current</yellow>" color to "<cyan>current</cyan>"...`,
+    //     );
+    // if (finalParams.primary === 'primary')
+    //     throw new Error(
+    //         `You cannot remap the "<yellow>primary</yellow>" color to "<cyan>primary</cyan>"...`,
+    //     );
+    // if (finalParams.secondary === 'secondary')
+    //     throw new Error(
+    //         `You cannot remap the "<yellow>secondary</yellow>" color to "<cyan>secondary</cyan>"...`,
+    //     );
+
     const cssArray: string[] = [
-        `
-        @sugar.color.remap(current, ${finalParams.color});
-    `,
+        `@sugar.color.remap(current, ${finalParams.current});`,
     ];
+
+    if (finalParams.primary) {
+        cssArray.push(`@sugar.color.remap(primary, ${finalParams.primary});`);
+    } else {
+        cssArray.push(`@sugar.color.remap(primary, ${finalParams.current});`);
+    }
+    if (finalParams.secondary) {
+        cssArray.push(
+            `@sugar.color.remap(secondary, ${finalParams.secondary});`,
+        );
+    } else {
+        cssArray.push(`@sugar.color.remap(secondary, ${finalParams.current});`);
+    }
 
     replaceWith(cssArray);
 }

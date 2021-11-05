@@ -52,5 +52,5 @@ export default function ({
     };
 
     const vars: string[] = [`box-shadow: sugar.depth(${finalParams.depth});`];
-    replaceWith(vars);
+    return vars;
 }

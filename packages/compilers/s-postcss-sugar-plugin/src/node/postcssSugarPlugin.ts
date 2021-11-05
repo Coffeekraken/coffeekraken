@@ -1,6 +1,8 @@
 // import __postcss from 'postcss';
 import __SBench from '@coffeekraken/s-bench';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __STheme from '@coffeekraken/s-theme';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -10,6 +12,10 @@ import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
 import __getRoot from './utils/getRoot';
+import __dependenciesHash from '@coffeekraken/sugar/node/dependencies/dependenciesHash';
+import __cacache from 'cacache';
+import __nodeCache from 'node-cache';
+import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
@@ -19,6 +25,13 @@ const plugin = (settings: any = {}) => {
         },
         settings,
     );
+
+    const nodeCache = new __nodeCache();
+
+    const useCache = false;
+
+    const cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
+    let cacheObj = {};
 
     // load all the styles
 
@@ -57,7 +70,7 @@ const plugin = (settings: any = {}) => {
     }
 
     function replaceWith(atRule, nodes) {
-        nodes = Array.from(nodes);
+        nodes = !Array.isArray(nodes) ? [nodes] : nodes;
 
         let isAllText = true;
         nodes.forEach((n) => {
@@ -104,7 +117,11 @@ const plugin = (settings: any = {}) => {
         });
         for (let i = 0; i < paths.length; i++) {
             const path = paths[i];
-            const { default: fn, interface: int } = await import(`${path}`);
+            const {
+                default: fn,
+                interface: int,
+                dependencies,
+            } = await import(`${path}`);
             if (type === 'mixins') {
                 mixinsStack[
                     `${path
@@ -113,8 +130,10 @@ const plugin = (settings: any = {}) => {
                         .replace(/\.js$/, '')
                         .toLowerCase()}`
                 ] = {
+                    path,
                     mixin: fn,
                     interface: int,
+                    dependencies,
                 };
                 mixinsStack[
                     `${path
@@ -122,8 +141,10 @@ const plugin = (settings: any = {}) => {
                         .replace(/\//gm, '.')
                         .replace(/\.js$/, '')}`
                 ] = {
+                    path,
                     mixin: fn,
                     interface: int,
+                    dependencies,
                 };
             } else {
                 functionsStack[
@@ -133,8 +154,10 @@ const plugin = (settings: any = {}) => {
                         .replace(/\.js$/, '')
                         .toLowerCase()}`
                 ] = {
+                    path,
                     fn,
                     interface: int,
+                    dependencies,
                 };
                 functionsStack[
                     `${path
@@ -142,8 +165,10 @@ const plugin = (settings: any = {}) => {
                         .replace(/\//gm, '.')
                         .replace(/\.js$/, '')}`
                 ] = {
+                    path,
                     fn,
                     interface: int,
+                    dependencies,
                 };
             }
         }
@@ -207,6 +232,19 @@ const plugin = (settings: any = {}) => {
                 __SBench.start('postcssSugarPlugin');
             }
 
+            if (useCache) {
+                try {
+                    const cached = await __cacache.get(
+                        cacheDir,
+                        'postcssSugarPlugin',
+                    );
+                    if (cached) {
+                        console.log('LOADED FROM CACHE');
+                        cacheObj = JSON.parse(cached.data.toString());
+                    }
+                } catch (e) {}
+            }
+
             await _load();
         },
 
@@ -234,8 +272,21 @@ const plugin = (settings: any = {}) => {
             if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
                 console.log(__SBench.end('postcssSugarPlugin').toString());
             }
+
+            root.walkComments((comment) => {
+                comment.remove();
+            });
+
+            if (useCache) {
+                console.log('SAVE IIN CACHE');
+                await __cacache.put(
+                    cacheDir,
+                    'postcssSugarPlugin',
+                    JSON.stringify(cacheObj),
+                );
+            }
         },
-        AtRule(atRule, postcssApi) {
+        async AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {
                 let mixinId = atRule.name.replace(/^sugar\./, '');
 
@@ -247,6 +298,35 @@ const plugin = (settings: any = {}) => {
                     throw new Error(
                         `<red>[postcssSugarPlugin]</red> Sorry but the requested sugar mixin "<yellow>${atRule.name}</yellow>" does not exists...`,
                     );
+                }
+
+                const mixinObj = mixinsStack[mixinId];
+
+                let dependenciesHash;
+                if (useCache) {
+                    dependenciesHash = await __dependenciesHash({
+                        files: [mixinObj.path],
+                        data: {
+                            path: mixinObj.path,
+                            params: atRule.params,
+                        },
+                    });
+
+                    // check cache
+                    try {
+                        const cached = cacheObj[dependenciesHash];
+                        // const cached = await __cacache.get(
+                        //     cacheDir,
+                        //     dependenciesHash,
+                        // );
+                        // const cached = nodeCache.get(dependenciesHash);
+                        if (cached) {
+                            // console.log('From cache', atRule.name, atRule.params);
+                            // replaceWith(atRule, cached.data.toString());
+                            replaceWith(atRule, cached);
+                            return;
+                        }
+                    } catch (e) {}
                 }
 
                 const root = __getRoot(atRule);
@@ -263,7 +343,7 @@ const plugin = (settings: any = {}) => {
                 const params = mixinInterface.apply(sanitizedParams, {});
 
                 delete params.help;
-                mixinFn({
+                let result = mixinFn({
                     params,
                     atRule,
                     findUp,
@@ -290,6 +370,22 @@ const plugin = (settings: any = {}) => {
                     postcss: __postcss,
                     settings,
                 });
+
+                if (result) {
+                    if (!Array.isArray(result)) result = [result];
+                    // result = result.map((r) => __stripDocblocks(r));
+                    replaceWith(atRule, result);
+                }
+
+                if (result && useCache) {
+                    cacheObj[dependenciesHash] = result.join('\n');
+                    // __cacache.put(
+                    //     cacheDir,
+                    //     dependenciesHash,
+                    //     result.join('\n'),
+                    // );
+                    // nodeCache.set(dependenciesHash, result.join('\n'));
+                }
             } else if (atRule.name.match(/^import/)) {
                 // check settings
                 if (!settings.inlineImport) return;
@@ -316,7 +412,7 @@ const plugin = (settings: any = {}) => {
                 atRule.remove();
             }
         },
-        Declaration(decl) {
+        async Declaration(decl) {
             if (!decl.prop || !decl.value) return;
             if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
             const calls = decl.value.match(
@@ -324,7 +420,10 @@ const plugin = (settings: any = {}) => {
             );
 
             if (!calls || !calls.length) return;
-            calls.forEach((sugarStatement) => {
+
+            for (let i = 0; i < calls.length; i++) {
+                let sugarStatement = calls[i];
+
                 // FIX. sugarStatement comes with none corresponding count of "(" and ")"
                 const openingParenthesisCount = (
                     sugarStatement.match(/\(/g) || []
@@ -352,27 +451,66 @@ const plugin = (settings: any = {}) => {
                     fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
                 }
 
-                if (!functionsStack[fnId]) {
+                const fnObject = functionsStack[fnId];
+
+                if (!fnObject) {
                     throw new Error(
                         `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
                     );
                 }
 
                 const functionInterface = functionsStack[fnId].interface;
-                const funcFn = functionsStack[fnId].fn;
                 const params = functionInterface.apply(paramsStatement, {});
                 delete params.help;
 
+                let dependenciesHash;
+                if (useCache) {
+                    dependenciesHash = await __dependenciesHash({
+                        files: [fnObject.path],
+                        data: {
+                            path: fnObject.path,
+                            params,
+                        },
+                    });
+
+                    // check cache
+                    try {
+                        const cached = cacheObj[dependenciesHash];
+                        // const cached = await __cacache.get(
+                        //     cacheDir,
+                        //     dependenciesHash,
+                        // );
+                        // const cached = nodeCache.get(dependenciesHash);
+                        if (cached) {
+                            // console.log(
+                            //     'From cache function',
+                            //     functionName,
+                            //     paramsStatement,
+                            // );
+                            // decl.value = cached.data.toString();
+                            decl.value = cached;
+                            return;
+                        }
+                    } catch (e) {}
+                }
+
                 try {
-                    const result = funcFn({
+                    const result = fnObject.fn({
                         params,
                         settings,
                     });
                     decl.value = decl.value.replace(sugarStatement, result);
+
+                    if (result && useCache) {
+                        // console.log('SET cache FN', functionName, result);
+                        cacheObj[dependenciesHash] = result;
+                        // __cacache.put(cacheDir, dependenciesHash, result);
+                        // nodeCache.set(dependenciesHash, result.join('\n'));
+                    }
                 } catch (e) {
                     console.error(e.message);
                 }
-            });
+            }
         },
     };
 };

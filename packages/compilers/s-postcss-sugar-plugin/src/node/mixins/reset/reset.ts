@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 /**
  * @name           reset
@@ -31,6 +32,12 @@ export interface IPostcssSugarPluginResetParams {}
 
 export { postcssSugarPluginResetInterface as interface };
 
+export function dependencies() {
+    return {
+        files: [`${__dirname()}/destyle.js`, `${__dirname()}/sugar.js`],
+    };
+}
+
 export default function ({
     params,
     atRule,
@@ -51,5 +58,5 @@ export default function ({
       @sugar.reset.sugar;
   `);
 
-    replaceWith(vars);
+    return vars;
 }

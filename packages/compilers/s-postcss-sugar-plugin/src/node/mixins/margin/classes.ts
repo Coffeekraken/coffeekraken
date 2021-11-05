@@ -536,5 +536,5 @@ export default function ({
         margin-block-end: auto;
    }`);
 
-    replaceWith(vars);
+    return vars;
 }

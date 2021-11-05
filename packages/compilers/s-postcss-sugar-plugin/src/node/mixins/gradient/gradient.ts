@@ -114,5 +114,5 @@ export default function ({
     }
     const vars: string[] = [gradientCss];
 
-    replaceWith(vars);
+    return vars;
 }

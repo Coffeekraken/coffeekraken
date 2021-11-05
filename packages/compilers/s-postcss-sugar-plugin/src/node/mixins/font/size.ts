@@ -55,5 +55,5 @@ export default function ({
     const vars: string[] = [];
     vars.push(`font-size: sugar.font.size(${finalParams.size})`);
 
-    replaceWith(vars);
+    return vars;
 }

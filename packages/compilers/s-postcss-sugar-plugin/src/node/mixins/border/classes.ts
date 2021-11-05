@@ -175,5 +175,5 @@ export default function ({
         vars.push(radiusCss);
     });
 
-    replaceWith(vars);
+    return vars;
 }

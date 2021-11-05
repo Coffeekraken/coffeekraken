@@ -51,5 +51,5 @@ export default function ({
     vars.push(__astNodesToString(atRule.nodes));
     vars.push(`}`);
 
-    replaceWith(vars);
+    return vars;
 }

@@ -100,33 +100,33 @@ export default function ({
                 vars.push(`
 
                 .s-filtrable-input__list {
-                    background-color: sugar.color(main, background);
+                    background-color: sugar.color(secondary, background);
                     border-radius: sugar.theme(ui.filtrableInput.borderRadius);
                 }
 
                 .s-filtrable-input__list-item {
-                    background-color: sugar.color(main, surface);  
+                    background-color: sugar.color(secondary, surface);  
                     padding-inline: sugar.theme(ui.filtrableInput.paddingInline);
                     padding-block: sugar.theme(ui.filtrableInput.paddingBlock);
-                    border-top: 1px solid sugar.color(main, surface, --darken 5);
+                    border-top: 1px solid sugar.color(secondary, surface, --darken 5);
 
                     &:hover,
                     &:focus,
                     &:focus:not(.active),
                     &:focus:not(:active) {
                         &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
-                            border-top: 1px solid sugar.color(current, --alpha 0);
-                            background-color: sugar.color(current, --alpha 0.6);
-                            color: sugar.color(current, foreground);
+                            border-top: 1px solid sugar.color(secondary, --alpha 0);
+                            background-color: sugar.color(secondary, --alpha 0.6);
+                            color: sugar.color(secondary, foreground);
                         }
                     }
 
                     &.active,
                     &:active {
                         &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
-                            border-top: 1px solid sugar.color(current) !important;
-                            background-color: sugar.color(current) !important;
-                            color: sugar.color(current, foreground) !important;
+                            border-top: 1px solid sugar.color(primary, surface) !important;
+                            background-color: sugar.color(primary, surface) !important;
+                            color: sugar.color(primary, foreground) !important;
                         }
                     }
 
@@ -153,5 +153,5 @@ export default function ({
         }
     }
 
-    replaceWith(vars);
+    return vars;
 }

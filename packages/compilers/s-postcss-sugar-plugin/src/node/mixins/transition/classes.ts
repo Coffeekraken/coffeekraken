@@ -116,5 +116,5 @@ export default function ({
         vars.push(transitionCss);
     });
 
-    replaceWith(vars);
+    return vars;
 }

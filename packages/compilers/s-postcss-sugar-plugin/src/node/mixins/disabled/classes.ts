@@ -90,5 +90,5 @@ export default function ({
                 @sugar.disabled;
             }`);
 
-    replaceWith(vars);
+    return vars;
 }

@@ -58,5 +58,5 @@ export default function ({
     const vars: string[] = [
         `border-radius: sugar.border.radius(${finalParams.radius});`,
     ];
-    replaceWith(vars);
+    return vars;
 }

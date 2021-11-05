@@ -509,5 +509,7 @@ th {
   `,
     ];
 
-    replaceWith(vars);
+    return vars;
+
+    return vars;
 }

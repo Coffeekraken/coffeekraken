@@ -52,6 +52,30 @@ export function postprocess(themeConfig, config) {
                 themeObj.color.current = Object.assign({}, firstColor);
             }
         }
+        if (!themeObj.color.primary) {
+            if (themeObj.defaultColor) {
+                themeObj.color.primary = Object.assign(
+                    {},
+                    themeObj.color[themeObj.defaultColor],
+                );
+            } else {
+                const firstColor =
+                    themeObj.color[Object.keys(themeObj.color)[0]];
+                themeObj.color.primary = Object.assign({}, firstColor);
+            }
+        }
+        if (!themeObj.color.secondary) {
+            if (themeObj.defaultColor) {
+                themeObj.color.secondary = Object.assign(
+                    {},
+                    themeObj.color[themeObj.defaultColor],
+                );
+            } else {
+                const firstColor =
+                    themeObj.color[Object.keys(themeObj.color)[0]];
+                themeObj.color.secondary = Object.assign({}, firstColor);
+            }
+        }
     });
     return themeConfig;
 }

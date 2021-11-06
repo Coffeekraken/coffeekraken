@@ -16,22 +16,18 @@ import __dependenciesHash from '@coffeekraken/sugar/node/dependencies/dependenci
 import __cacache from 'cacache';
 import __nodeCache from 'node-cache';
 import __stripDocblocks from '@coffeekraken/sugar/shared/string/stripDocblocks';
+import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
 
 let _mixinsPaths;
 const plugin = (settings: any = {}) => {
     settings = __deepMerge(
         {
             inlineImport: true,
+            cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         },
         settings,
     );
-
-    const nodeCache = new __nodeCache();
-
-    const useCache = false;
-
     const cacheDir = `${__packageCacheDir()}/postcssSugarPlugin`;
-    let cacheObj = {};
 
     // load all the styles
 
@@ -45,6 +41,21 @@ const plugin = (settings: any = {}) => {
         const res = checker(node);
         if (!res && node.parent) return findUp(node.parent, checker);
         else if (res) return res;
+        return;
+    }
+
+    async function fromCache(hash, id = 'unknown') {
+        let cached;
+        if (!settings.cache) return;
+        try {
+            cached = await __cacache.get(cacheDir, hash);
+        } catch (e) {}
+        if (cached) {
+            if (id) {
+                return `/* FROMCACHE:${hash}:${id} */`;
+            }
+            return `/* FROMCACHE:${hash} */`;
+        }
         return;
     }
 
@@ -232,18 +243,18 @@ const plugin = (settings: any = {}) => {
                 __SBench.start('postcssSugarPlugin');
             }
 
-            if (useCache) {
-                try {
-                    const cached = await __cacache.get(
-                        cacheDir,
-                        'postcssSugarPlugin',
-                    );
-                    if (cached) {
-                        console.log('LOADED FROM CACHE');
-                        cacheObj = JSON.parse(cached.data.toString());
-                    }
-                } catch (e) {}
-            }
+            // if (useCache) {
+            //     try {
+            //         const cached = await __cacache.get(
+            //             cacheDir,
+            //             'postcssSugarPlugin',
+            //         );
+            //         if (cached) {
+            //             console.log('LOADED FROM CACHE');
+            //             cacheObj = JSON.parse(cached.data.toString());
+            //         }
+            //     } catch (e) {}
+            // }
 
             await _load();
         },
@@ -273,17 +284,92 @@ const plugin = (settings: any = {}) => {
                 console.log(__SBench.end('postcssSugarPlugin').toString());
             }
 
-            root.walkComments((comment) => {
-                comment.remove();
-            });
+            // root.walkComments((comment) => {
+            //     comment.remove();
+            // });
 
-            if (useCache) {
-                console.log('SAVE IIN CACHE');
-                await __cacache.put(
-                    cacheDir,
-                    'postcssSugarPlugin',
-                    JSON.stringify(cacheObj),
-                );
+            // caching system
+            if (settings.cache) {
+                const $comments: any[] = [];
+                root.walkComments(async (comment) => {
+                    $comments.push(comment);
+                });
+                for (let i = 0; i < $comments.length; i++) {
+                    const comment = $comments[i];
+
+                    // handle things to cache
+                    const toCacheMatches = comment.text
+                        .trim()
+                        .match(/^CACHE\:([a-zA-Z0-9_-]+):?(.*)?$/);
+                    if (toCacheMatches) {
+                        const nodes: any[] = [];
+                        const cacheHash = toCacheMatches[1];
+                        const cacheId = toCacheMatches[2] ?? 'unkown';
+                        let endFinded = false,
+                            $current = comment;
+
+                        let protectLoopIdx = 0;
+
+                        while (!endFinded) {
+                            protectLoopIdx++;
+
+                            if (protectLoopIdx >= 9999) {
+                                console.log(
+                                    `[warning] The postcssSugarPlugin cache id "${cacheHash}:${cacheId}" seems to miss his end comment "/* ENDCACHE:${cacheHash} */"...`,
+                                );
+                                break;
+                            }
+
+                            $current = $current.next();
+                            if ($current.type !== 'comment') {
+                                nodes.push($current);
+                                continue;
+                            }
+                            const endCachParts = $current.text
+                                .trim()
+                                .split(':');
+                            if (
+                                endCachParts.length >= 2 &&
+                                endCachParts[0] === 'ENDCACHE'
+                            ) {
+                                endFinded = true;
+                                break;
+                            } else {
+                                nodes.push($current);
+                                continue;
+                            }
+                        }
+
+                        const cacheStr = nodes
+                            .map((n) => n.toString())
+                            .join('\n');
+
+                        console.log(
+                            `[cache] Caching "${cacheId ?? cacheHash}"...`,
+                        );
+
+                        await __cacache.put(cacheDir, cacheHash, cacheStr);
+                    }
+
+                    // handle code coming from cache
+                    const fromCacheMatches = comment.text
+                        .trim()
+                        .match(/^FROMCACHE\:([a-zA-Z0-9_-]+):?(.*)?$/);
+                    if (fromCacheMatches) {
+                        const cacheHash = fromCacheMatches[1];
+                        const cacheId = fromCacheMatches[2] ?? 'unkown';
+                        const cached = await __cacache.get(cacheDir, cacheHash);
+                        if (cached) {
+                            console.log(
+                                `[cache] Getting "${
+                                    cacheId ?? cacheHash
+                                }" from cache...`,
+                            );
+                            // console.log(cached.data.toString());
+                            comment.replaceWith(cached.data.toString());
+                        }
+                    }
+                }
             }
         },
         async AtRule(atRule, postcssApi) {
@@ -302,32 +388,16 @@ const plugin = (settings: any = {}) => {
 
                 const mixinObj = mixinsStack[mixinId];
 
-                let dependenciesHash;
-                if (useCache) {
-                    dependenciesHash = await __dependenciesHash({
-                        files: [mixinObj.path],
-                        data: {
-                            path: mixinObj.path,
-                            params: atRule.params,
-                        },
-                    });
-
-                    // check cache
-                    try {
-                        const cached = cacheObj[dependenciesHash];
-                        // const cached = await __cacache.get(
-                        //     cacheDir,
-                        //     dependenciesHash,
-                        // );
-                        // const cached = nodeCache.get(dependenciesHash);
-                        if (cached) {
-                            // console.log('From cache', atRule.name, atRule.params);
-                            // replaceWith(atRule, cached.data.toString());
-                            replaceWith(atRule, cached);
-                            return;
-                        }
-                    } catch (e) {}
-                }
+                // let dependenciesHash;
+                // if (useCache) {
+                //     dependenciesHash = await __dependenciesHash({
+                //         files: [mixinObj.path],
+                //         data: {
+                //             path: mixinObj.path,
+                //             params: atRule.params,
+                //         },
+                //     });
+                // }
 
                 const root = __getRoot(atRule);
                 const sourcePath =
@@ -343,10 +413,11 @@ const plugin = (settings: any = {}) => {
                 const params = mixinInterface.apply(sanitizedParams, {});
 
                 delete params.help;
-                let result = mixinFn({
+                let result = await mixinFn({
                     params,
                     atRule,
                     findUp,
+                    fromCache,
                     applyNoScopes(scopes = []) {
                         return applyNoScopes(scopes, atRule);
                     },
@@ -373,19 +444,18 @@ const plugin = (settings: any = {}) => {
 
                 if (result) {
                     if (!Array.isArray(result)) result = [result];
-                    // result = result.map((r) => __stripDocblocks(r));
                     replaceWith(atRule, result);
                 }
 
-                if (result && useCache) {
-                    cacheObj[dependenciesHash] = result.join('\n');
-                    // __cacache.put(
-                    //     cacheDir,
-                    //     dependenciesHash,
-                    //     result.join('\n'),
-                    // );
-                    // nodeCache.set(dependenciesHash, result.join('\n'));
-                }
+                // if (result && useCache) {
+                //     // cacheObj[dependenciesHash] = result.join('\n');
+                //     // __cacache.put(
+                //     //     cacheDir,
+                //     //     dependenciesHash,
+                //     //     result.join('\n'),
+                //     // );
+                //     // nodeCache.set(dependenciesHash, result.join('\n'));
+                // }
             } else if (atRule.name.match(/^import/)) {
                 // check settings
                 if (!settings.inlineImport) return;
@@ -463,50 +533,50 @@ const plugin = (settings: any = {}) => {
                 const params = functionInterface.apply(paramsStatement, {});
                 delete params.help;
 
-                let dependenciesHash;
-                if (useCache) {
-                    dependenciesHash = await __dependenciesHash({
-                        files: [fnObject.path],
-                        data: {
-                            path: fnObject.path,
-                            params,
-                        },
-                    });
+                // let dependenciesHash;
+                // if (useCache) {
+                //     dependenciesHash = await __dependenciesHash({
+                //         files: [fnObject.path],
+                //         data: {
+                //             path: fnObject.path,
+                //             params,
+                //         },
+                //     });
 
-                    // check cache
-                    try {
-                        const cached = cacheObj[dependenciesHash];
-                        // const cached = await __cacache.get(
-                        //     cacheDir,
-                        //     dependenciesHash,
-                        // );
-                        // const cached = nodeCache.get(dependenciesHash);
-                        if (cached) {
-                            // console.log(
-                            //     'From cache function',
-                            //     functionName,
-                            //     paramsStatement,
-                            // );
-                            // decl.value = cached.data.toString();
-                            decl.value = cached;
-                            return;
-                        }
-                    } catch (e) {}
-                }
+                //     // // check cache
+                //     // try {
+                //     //     const cached = cacheObj[dependenciesHash];
+                //     //     // const cached = await __cacache.get(
+                //     //     //     cacheDir,
+                //     //     //     dependenciesHash,
+                //     //     // );
+                //     //     // const cached = nodeCache.get(dependenciesHash);
+                //     //     if (cached) {
+                //     //         // console.log(
+                //     //         //     'From cache function',
+                //     //         //     functionName,
+                //     //         //     paramsStatement,
+                //     //         // );
+                //     //         // decl.value = cached.data.toString();
+                //     //         decl.value = cached;
+                //     //         return;
+                //     //     }
+                //     // } catch (e) {}
+                // }
 
                 try {
-                    const result = fnObject.fn({
+                    const result = await fnObject.fn({
                         params,
                         settings,
                     });
                     decl.value = decl.value.replace(sugarStatement, result);
 
-                    if (result && useCache) {
-                        // console.log('SET cache FN', functionName, result);
-                        cacheObj[dependenciesHash] = result;
-                        // __cacache.put(cacheDir, dependenciesHash, result);
-                        // nodeCache.set(dependenciesHash, result.join('\n'));
-                    }
+                    // if (result && useCache) {
+                    //     // console.log('SET cache FN', functionName, result);
+                    //     cacheObj[dependenciesHash] = result;
+                    //     // __cacache.put(cacheDir, dependenciesHash, result);
+                    //     // nodeCache.set(dependenciesHash, result.join('\n'));
+                    // }
                 } catch (e) {
                     console.error(e.message);
                 }

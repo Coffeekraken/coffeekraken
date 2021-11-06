@@ -94,12 +94,16 @@ export default class SFrontspec extends __SPromise {
                 console.log('ER', e);
             }
 
-            let res = __deepMerge(__SSugarConfig.get('frontspec') ?? {}, frontspecJson);
+            let res = __deepMerge(
+                __SSugarConfig.get('frontspec') ?? {},
+                frontspecJson,
+            );
 
             if (res.assets) {
                 Object.keys(res.assets).forEach((type) => {
                     const typeObj = res.assets[type];
                     Object.keys(typeObj).forEach((asset) => {
+                        console.log(asset, __SEnv.env);
                         const assetObj = typeObj[asset];
                         if (assetObj.env && !__SEnv.is(assetObj.env)) {
                             __delete(res.assets, `${type}.${asset}`);
@@ -145,7 +149,10 @@ export default class SFrontspec extends __SPromise {
                     },
                 };
 
-                const filePath = __path.resolve(__packageRootDir(), assetObj.path ?? assetObj.src ?? assetObj.href);
+                const filePath = __path.resolve(
+                    __packageRootDir(),
+                    assetObj.path ?? assetObj.src ?? assetObj.href,
+                );
 
                 if (type === 'css') {
                     fileObj.args.href = fileObj.args.src;

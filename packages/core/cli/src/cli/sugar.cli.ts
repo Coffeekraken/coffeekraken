@@ -115,6 +115,7 @@ class SSugarCli {
 
         // checking and set "NODE_ENV"
         const params = __parseArgs(this._args);
+
         if (params.env) {
             switch (params.env) {
                 case 'dev':

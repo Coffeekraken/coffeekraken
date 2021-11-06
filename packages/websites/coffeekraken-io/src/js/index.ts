@@ -26,64 +26,70 @@ const duration = new __SDuration();
 import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
 import { register as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 
-(async () => {
-    __SLitComponent.setDefaultProps('*', {
-        mountWhen: 'inViewport',
-    });
-    __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
-        mountWhen: 'direct',
-    });
+// (async () => {
+console.log('LOADED');
 
-    // layout related
-    __expandPleasantCssClassnamesLive();
+__SLitComponent.setDefaultProps('*', {
+    mountWhen: 'inViewport',
+});
+__SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
+    mountWhen: 'direct',
+});
 
-    // features
-    __sActivateFeature();
+// layout related
+__expandPleasantCssClassnamesLive();
 
-    // internal components
-    // __DocNavComponent();
-    __VersionSelector();
-    __CKSearchComponent();
+// features
+__sActivateFeature();
 
-    document.addEventListener('scroll', (e) => {
-        if (window.scrollY >= 10) {
-            document.body.classList.add('scrolled');
-        } else {
-            document.body.classList.remove('scrolled');
-        }
-    });
+// internal components
+// __DocNavComponent();
+__VersionSelector();
+__CKSearchComponent();
 
-    await __wait(1500);
+document.addEventListener('scroll', (e) => {
+    if (window.scrollY >= 10) {
+        document.body.classList.add('scrolled');
+    } else {
+        document.body.classList.remove('scrolled');
+    }
+});
 
-    // components
-    __CKSettingsComponent();
-    __SCodeExampleWebcomponent();
-    // __SConfigExplorerWebcomponent();
-    __SSidePanelWebcomponent();
-    __SColorPickerWebcomponent();
-    __SDatePickerWebcomponent();
-    __SRangeWebcomponent();
+// await __wait(1500);
 
-    await __wait(1000);
+console.log('LOADED', 2);
 
-    // features
-    __sFormValidateFeature({
-        customValidations: {
-            coffeekraken: (value, helpers) => {
-                if (value === 'coffeekraken') {
-                    return helpers.message(
-                        'Are you sure? Krakens are dangerous...',
-                    );
-                }
-                return value;
-            },
+// components
+__CKSettingsComponent();
+__SCodeExampleWebcomponent();
+// __SConfigExplorerWebcomponent();
+__SSidePanelWebcomponent();
+__SColorPickerWebcomponent();
+__SDatePickerWebcomponent();
+__SRangeWebcomponent();
+
+// await __wait(1000);
+
+console.log('LOADED', 3);
+
+// features
+__sFormValidateFeature({
+    customValidations: {
+        coffeekraken: (value, helpers) => {
+            if (value === 'coffeekraken') {
+                return helpers.message(
+                    'Are you sure? Krakens are dangerous...',
+                );
+            }
+            return value;
         },
-    });
+    },
+});
 
-    __smoothScroll({
-        scroll: {
-            offset: 188,
-        },
-    });
-    __linksStateAttributes();
-})();
+__smoothScroll({
+    scroll: {
+        offset: 188,
+    },
+});
+__linksStateAttributes();
+// })();

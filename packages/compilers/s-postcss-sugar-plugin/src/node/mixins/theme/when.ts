@@ -63,7 +63,7 @@ export default function ({
         ...(params ?? {}),
     };
 
-    console.log(finalParams);
+    // console.log(finalParams);
 
     const container = new postcssApi.Rule({
         selectors: [

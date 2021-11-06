@@ -344,6 +344,9 @@ export default class SFrontstack extends __SClass {
                             actionSpecificParams,
                         );
 
+                        const sharedParamsStr =
+                            __argsToString(sharedParams).trim();
+
                         // build shared params cli string
                         const paramsStr =
                             __argsToString(finalActionParams).trim();
@@ -353,6 +356,8 @@ export default class SFrontstack extends __SClass {
                         const finalCommand =
                             (actionObj.command ?? actionObj.process).trim() +
                             ' ' +
+                            sharedParamsStr +
+                            ' ' +
                             paramsStr;
 
                         emit('log', {
@@ -361,15 +366,17 @@ export default class SFrontstack extends __SClass {
 
                         const pro = await __SProcess.from(finalCommand);
 
+                        const finalProcessManagerParams = {
+                            ...sharedParams,
+                            ...(actionObj.params ?? {}),
+                        };
+
                         // add the process to the process manager
                         // @TODO    integrate log filter feature
                         processManager.attachProcess(actionId, pro, {});
                         processManager.run(
                             actionId,
-                            {
-                                ...sharedParams,
-                                ...(actionObj.params ?? {}),
-                            },
+                            finalProcessManagerParams,
                             actionObj.settings?.process ?? {},
                         );
                     });

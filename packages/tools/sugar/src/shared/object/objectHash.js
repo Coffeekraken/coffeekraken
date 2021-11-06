@@ -1,0 +1,6 @@
+import __objectHash from 'object-hash';
+export default function objectHash(obj, settings = {}) {
+    settings = Object.assign({}, settings);
+    return __objectHash(obj);
+}
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib2JqZWN0SGFzaC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIm9iamVjdEhhc2gudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sYUFBYSxDQUFDO0FBNEJ2QyxNQUFNLENBQUMsT0FBTyxVQUFVLFVBQVUsQ0FDOUIsR0FBUSxFQUNSLFdBQXlDLEVBQUU7SUFFM0MsUUFBUSxHQUFHLGtCQUNKLFFBQVEsQ0FDZCxDQUFDO0lBQ0YsT0FBTyxZQUFZLENBQUMsR0FBRyxDQUFDLENBQUM7QUFDN0IsQ0FBQyJ9

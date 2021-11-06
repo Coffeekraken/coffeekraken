@@ -52,9 +52,9 @@ $metasOg = $metas->og ? $metas->og : $frontspec->metas->og ? $frontspec->metas->
         @if ($js->raw)
           {!! $js->raw !!}
         @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="{{ Sugar\string\replaceTokens($js->src) }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" {{ $js->nomodule ? 'nomodule' : '' }} src="{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @else
-          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" src="/{{ Sugar\string\replaceTokens($js->src) }}"></script>
+          <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}" {{ $js->nomodule ? 'nomodule' : '' }} src="/{{ Sugar\string\replaceTokens($js->src) }}"></script>
         @endif
       @endif
     @endforeach

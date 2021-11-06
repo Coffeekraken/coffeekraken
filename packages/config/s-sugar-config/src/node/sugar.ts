@@ -15,6 +15,7 @@ import __get from '@coffeekraken/sugar/shared/object/get';
 import __fs from 'fs';
 import __path from 'path';
 import __SDocblock from '@coffeekraken/s-docblock';
+import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 /**
  * @name                  sugar
@@ -279,6 +280,25 @@ export default class SSugarConfig extends __SClass {
     }
 
     /**
+     * @name            hash
+     * @type            String
+     * @static
+     *
+     * This hash accessor gives you access to the actual configuration hash.
+     * You can specify a dot path to get the hash of a sub configuration
+     *
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static hash(dotPath: string = ''): string {
+        const config = this.get(dotPath);
+        return __objectHash(config);
+    }
+
+    /**
      * @name            get
      * @type            Function
      *
@@ -390,6 +410,24 @@ export default class SSugarConfig extends __SClass {
                 settings ?? {},
             ),
         );
+    }
+
+    /**
+     * @name            hash
+     * @type            String
+     *
+     * This hash function gives you access to the actual configuration hash.
+     * You can specify a dot path to get the hash of a sub configuration
+     *
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    hash(dotPath: string = ''): string {
+        const config = this.get(dotPath);
+        return __objectHash(config);
     }
 
     /**

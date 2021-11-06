@@ -180,4 +180,6 @@ export default class ApiNav extends __SLitComponent {
     }
 }
 
-customElements.define('api-nav', ApiNav);
+if (!customElements.get('api-nav')) {
+    customElements.define('api-nav', ApiNav);
+}

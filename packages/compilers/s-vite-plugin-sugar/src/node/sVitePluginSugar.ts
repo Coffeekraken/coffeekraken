@@ -64,10 +64,12 @@ export default function sVitePluginSugar(settings: any = {}) {
         },
         async transform(src, id) {
             if (jsReg.test(id)) {
-                if (id.includes(packageRoot) && id === config.build.rollupOptions?.input) {
+                if (
+                    id.includes(packageRoot) &&
+                    id === config.build.rollupOptions?.input
+                ) {
                     if (!config.build.lib) {
                         src = await _injectEnvVars(src, id);
-                        console.log('not lib');
                     }
                 }
 

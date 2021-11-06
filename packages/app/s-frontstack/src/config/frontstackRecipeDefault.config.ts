@@ -188,7 +188,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    // imagesBuild: '[config.frontstack.actions.imagesBuild]',
                     /**
                      * @name            docBuild
                      * @namespace       config.frontstackRecipeDefault.stacks.build.actions
@@ -200,7 +200,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    docBuild: '[config.frontstack.actions.docBuild]',
+                    // docBuild: '[config.frontstack.actions.docBuild]',
                     /**
                      * @name            docmapBuild
                      * @namespace       config.frontstackRecipeDefault.stacks.build.actions
@@ -212,7 +212,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    docmapBuild: '[config.frontstack.actions.docmapBuild]',
+                    // docmapBuild: '[config.frontstack.actions.docmapBuild]',
                 },
             },
         },

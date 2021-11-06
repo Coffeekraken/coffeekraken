@@ -1,4 +1,8 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __cacache from 'cacache';
+import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
+import __STheme from '@coffeekraken/s-theme';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static definition = {};
@@ -22,7 +26,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, replaceWith }) {
+export default async function ({ params, atRule, fromCache, replaceWith }) {
     const cssArray: string[] = [
         '@sugar.reset.styleguide;',
         '@sugar.ui.classes;',
@@ -60,5 +64,22 @@ export default function ({ params, atRule, replaceWith }) {
         '@sugar.whiteSpace.classes;',
     ];
 
-    replaceWith(cssArray);
+    const hash = `classes-${__objectHash({
+        css: cssArray,
+        theme: __STheme.hash(),
+    })}`;
+
+    // from cache
+    const cached = await fromCache(hash, '@sugar.classes;');
+    if (cached) return cached;
+
+    console.log(
+        '[postcss] Compiling the "<yellow>@sugar.classes;</yellow>" statement. This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....',
+    );
+
+    // add caching statements
+    cssArray.unshift(`/* CACHE:${hash}:@sugar.classes; */`);
+    cssArray.push(`/* ENDCACHE:${hash}:@sugar.classes; */`);
+
+    return cssArray;
 }

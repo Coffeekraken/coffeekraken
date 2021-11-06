@@ -1,5 +1,4 @@
 export default (env, config) => {
-    if (env.platform !== 'node') return;
     return {
         /**
          * @name          h1

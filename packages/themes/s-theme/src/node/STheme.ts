@@ -7,6 +7,7 @@ import __flatten from '@coffeekraken/sugar/shared/object/flatten';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
+import __objectHash from 'object-hash';
 
 /**
  * @name            STheme
@@ -279,6 +280,25 @@ export default class STheme extends __SClass {
             variant,
         );
         return this._instanciatedThemes[`${theme}-${variant}`];
+    }
+
+    /**
+     * @name            hash
+     * @type            String
+     * @static
+     *
+     * This hash accessor gives you access to the actual theme configuration hash.
+     * You can specify a dot path to get the hash of a sub configuration
+     *
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static hash(dotPath: string = ''): string {
+        const config = this.config(dotPath);
+        return __objectHash(config);
     }
 
     /**
@@ -719,6 +739,24 @@ export default class STheme extends __SClass {
             );
         }
         return value;
+    }
+
+    /**
+     * @name            hash
+     * @type            String
+     *
+     * This hash accessor gives you access to the actual theme configuration hash.
+     * You can specify a dot path to get the hash of a sub configuration
+     *
+     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @return          {String}                                    The generated hash for this config
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    hash(dotPath: string = ''): string {
+        const config = this.config(dotPath);
+        return __objectHash(config);
     }
 
     /**

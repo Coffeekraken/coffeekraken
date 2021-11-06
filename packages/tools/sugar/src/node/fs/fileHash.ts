@@ -25,13 +25,11 @@ import __fs from 'fs';
  * import fileHash from '@coffeekraken/sugar/node/fs/fileHash';
  * fileHash('my/cool/folder'); // => YZOrKDx9LCLd8X39PoFTflXGpRU=,
  *
- * @see             https://www.npmjs.com/package/folder-hash
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
 export interface IFileHashSettings {
-    recursive: boolean;
     algo: string;
     digest: BinaryToTextEncoding;
 }

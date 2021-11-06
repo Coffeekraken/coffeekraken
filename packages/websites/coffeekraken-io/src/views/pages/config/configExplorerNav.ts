@@ -174,4 +174,6 @@ export default class ConfigExplorerNav extends __SLitComponent {
     }
 }
 
-customElements.define('config-explorer-nav', ConfigExplorerNav);
+if (!customElements.get('config-explorer-nav')) {
+    customElements.define('config-explorer-nav', ConfigExplorerNav);
+}

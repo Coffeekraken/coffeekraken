@@ -1,4 +1,5 @@
-@import url(./imports.css);
+@sugar.import ('../views/**/*.css');
+@sugar.import ('./generic/**/*.css');
 
 @sugar.init;
 @sugar.classes;

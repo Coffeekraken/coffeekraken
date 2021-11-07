@@ -1,12 +1,17 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginColorSecondaryMixinInterface extends __SInterface {
-    static definition = {
-        color: {
-            type: 'String',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                color: {
+                    type: 'String',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginColorSecondaryMixinInterface as interface };
 

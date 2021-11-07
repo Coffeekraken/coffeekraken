@@ -44,113 +44,120 @@ let isListenerAlreadyAdded = false;
 const isSystemWideAlreadyAdded = false;
 
 export interface IHotkeySettings {
-  once: boolean;
+    once: boolean;
 }
 
 export class HotkeySettingsInterface extends __SInterface {
-  static definition = {
-    once: {
-      type: 'Boolean',
-      description: 'Specify if you want to capture the hotkey just once',
-      default: false
-    },
-    splitChar: {
-      type: 'String',
-      description: 'Define the character to use to split shortcuts',
-      default: '+'
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                once: {
+                    type: 'Boolean',
+                    description:
+                        'Specify if you want to capture the hotkey just once',
+                    default: false,
+                },
+                splitChar: {
+                    type: 'String',
+                    description:
+                        'Define the character to use to split shortcuts',
+                    default: '+',
+                },
+            })
+        );
     }
-  };
 }
 
 function _handleKeypress(ch, keyObj) {
-  if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
-    // @ts-ignore
-    process.emit('custom_exit', 'killed');
-  }
+    if (keyObj && keyObj.ctrl && keyObj.name == 'c') {
+        // @ts-ignore
+        process.emit('custom_exit', 'killed');
+    }
 
-  // loop on each promises registered
-  Object.keys(hotkeyStack).forEach((id) => {
-    const obj = hotkeyStack[id];
-    if (!obj || !obj.key) return;
+    // loop on each promises registered
+    Object.keys(hotkeyStack).forEach((id) => {
+        const obj = hotkeyStack[id];
+        if (!obj || !obj.key) return;
 
-    obj.key
-      .toString()
-      .split(',')
-      .map((m) => m.trim())
-      .forEach((key) => {
-        if (ch && ch.toString() === key) {
-          console.log('RE', key, keyObj);
+        obj.key
+            .toString()
+            .split(',')
+            .map((m) => m.trim())
+            .forEach((key) => {
+                if (ch && ch.toString() === key) {
+                    console.log('RE', key, keyObj);
 
-          obj.promise.emit('press', {
-            key,
-            ctrl: keyObj ? keyObj.ctrl : false,
-            meta: keyObj ? keyObj.meta : false,
-            shift: keyObj ? keyObj.shift : false
-          });
-          return;
-        }
+                    obj.promise.emit('press', {
+                        key,
+                        ctrl: keyObj ? keyObj.ctrl : false,
+                        meta: keyObj ? keyObj.meta : false,
+                        shift: keyObj ? keyObj.shift : false,
+                    });
+                    return;
+                }
 
-        if (!keyObj) return;
+                if (!keyObj) return;
 
-        let pressedKey = keyObj.name;
-        if (keyObj.ctrl)
-          pressedKey = `ctrl${obj.settings.splitChar}${pressedKey}`;
-        if (keyObj.shift)
-          pressedKey = `shift${obj.settings.splitChar}${pressedKey}`;
-        if (keyObj.meta)
-          pressedKey = `alt${obj.settings.splitChar}${pressedKey}`;
+                let pressedKey = keyObj.name;
+                if (keyObj.ctrl)
+                    pressedKey = `ctrl${obj.settings.splitChar}${pressedKey}`;
+                if (keyObj.shift)
+                    pressedKey = `shift${obj.settings.splitChar}${pressedKey}`;
+                if (keyObj.meta)
+                    pressedKey = `alt${obj.settings.splitChar}${pressedKey}`;
 
-        if (pressedKey === key) {
-          obj.promise.emit('press', {
-            key,
-            ctrl: keyObj ? keyObj.ctrl : false,
-            meta: keyObj ? keyObj.meta : false,
-            shift: keyObj ? keyObj.shift : false
-          });
-        }
-      });
-  });
+                if (pressedKey === key) {
+                    obj.promise.emit('press', {
+                        key,
+                        ctrl: keyObj ? keyObj.ctrl : false,
+                        meta: keyObj ? keyObj.meta : false,
+                        shift: keyObj ? keyObj.shift : false,
+                    });
+                }
+            });
+    });
 }
 
 function hotkey(key, settings?: Partial<IHotkeySettings>) {
-  const set: IHotkeySettings = HotkeySettingsInterface.apply(settings);
+    const set: IHotkeySettings = HotkeySettingsInterface.apply(settings);
 
-  const promise = new __SPromise({
-    id: 'hotkey'
-  });
+    const promise = new __SPromise({
+        id: 'hotkey',
+    });
 
-  if (!__isChildProcess()) {
-    const uniqid = `hotkey.${__uniqid()}`;
+    if (!__isChildProcess()) {
+        const uniqid = `hotkey.${__uniqid()}`;
 
-    if (!isListenerAlreadyAdded) {
-      isListenerAlreadyAdded = true;
-      __keypress(process.stdin);
-      process.stdin.on('keypress', _handleKeypress);
-      process.stdin.setRawMode(true);
-      process.stdin.resume();
+        if (!isListenerAlreadyAdded) {
+            isListenerAlreadyAdded = true;
+            __keypress(process.stdin);
+            process.stdin.on('keypress', _handleKeypress);
+            process.stdin.setRawMode(true);
+            process.stdin.resume();
+        }
+
+        promise
+            .on('press', (key) => {
+                if (set.once) {
+                    promise.cancel();
+                }
+            })
+            .on('finally', () => {
+                // delete the callback from the stack
+                delete hotkeyStack[uniqid];
+            });
+
+        // save the emit function in the stack
+        hotkeyStack[uniqid] = {
+            key,
+            promise,
+            settings: set,
+        };
     }
 
-    promise
-      .on('press', (key) => {
-        if (set.once) {
-          promise.cancel();
-        }
-      })
-      .on('finally', () => {
-        // delete the callback from the stack
-        delete hotkeyStack[uniqid];
-      });
-
-    // save the emit function in the stack
-    hotkeyStack[uniqid] = {
-      key,
-      promise,
-      settings: set
-    };
-  }
-
-  // return the promise
-  return promise;
+    // return the promise
+    return promise;
 }
 
 export { HotkeySettingsInterface as SettingsInterface };

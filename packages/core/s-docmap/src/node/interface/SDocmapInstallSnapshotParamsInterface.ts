@@ -10,17 +10,22 @@ import __SInterface from '@coffeekraken/s-interface';
  * @extends             SInterface
  *
  * This class represent the interface that describe the minimum requirement
- * needed to install snapshots 
+ * needed to install snapshots
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SDocmapInstallSnapshotParamsInterface extends __SInterface {
-  static definition = {
-    glob: {
-        type: 'String',
-        default: __SSugarConfig.get('docmap.installSnapshot.glob')
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                glob: {
+                    type: 'String',
+                    default: __SSugarConfig.get('docmap.installSnapshot.glob'),
+                },
+            })
+        );
     }
-  };
 }
 export default SDocmapInstallSnapshotParamsInterface;

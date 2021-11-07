@@ -3,30 +3,35 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.blockquote.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.blockquote.defaultStyle'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.blockquote.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default: __STheme.config('ui.blockquote.defaultStyle'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'vr', 'tf'],
+                    default: ['bare', 'lnf', 'vr', 'tf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiBlockquoteClassesParams {

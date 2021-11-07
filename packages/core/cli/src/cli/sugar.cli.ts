@@ -36,16 +36,21 @@ export interface ISSugarCliAvailableCli {
 }
 
 class SSugarCliParamsInterface extends __SInterface {
-    static definition = {
-        bench: {
-            type: {
-                type: 'Array<String> | Boolean',
-                splitChars: [','],
-            },
-            default: false,
-            explicit: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                bench: {
+                    type: {
+                        type: 'Array<String> | Boolean',
+                        splitChars: [','],
+                    },
+                    default: false,
+                    explicit: true,
+                },
+            })
+        );
+    }
 }
 
 /**

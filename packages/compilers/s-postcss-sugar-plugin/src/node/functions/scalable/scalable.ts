@@ -1,12 +1,17 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginScalableFunctionInterface extends __SInterface {
-    static definition = {
-        value: {
-            type: 'String|Number',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                value: {
+                    type: 'String|Number',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginScalableFunctionInterface as interface };
 

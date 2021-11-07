@@ -2,16 +2,21 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBaseInterface extends __SInterface {
-    static definition = {
-        name: {
-            type: 'String',
-            required: true,
-        },
-        scope: {
-            type: 'String',
-            default: ['bare', 'lnf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                name: {
+                    type: 'String',
+                    required: true,
+                },
+                scope: {
+                    type: 'String',
+                    default: ['bare', 'lnf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiBaseParams {

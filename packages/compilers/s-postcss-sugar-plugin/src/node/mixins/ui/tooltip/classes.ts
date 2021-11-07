@@ -2,7 +2,9 @@ import __SInterface from '@coffeekraken/s-interface';
 import __faker from 'faker';
 
 class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginUiTooltipClassesParams {}

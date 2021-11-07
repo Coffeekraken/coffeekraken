@@ -2,14 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginTransitionFunctionInterface extends __SInterface {
-    static definition = {
-        name: {
-            type: 'String',
-            values: Object.keys(__STheme.config('transition')),
-            default: 'default',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                name: {
+                    type: 'String',
+                    values: Object.keys(__STheme.config('transition')),
+                    default: 'default',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginTransitionFunctionInterface as interface };
 

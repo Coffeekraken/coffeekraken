@@ -7,17 +7,22 @@ import { fab } from '@fortawesome/free-brands-svg-icons';
 import { fas } from '@fortawesome/free-solid-svg-icons';
 
 class postcssSugarPluginIconFaInterface extends __SInterface {
-    static definition = {
-        icon: {
-            type: 'String',
-            required: true,
-        },
-        style: {
-            type: 'String',
-            values: ['solid', 'regular', 'light', 'duotone', 'brands'],
-            default: 'solid',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                icon: {
+                    type: 'String',
+                    required: true,
+                },
+                style: {
+                    type: 'String',
+                    values: ['solid', 'regular', 'light', 'duotone', 'brands'],
+                    default: 'solid',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginIconFaParams {

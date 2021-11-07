@@ -1,6 +1,5 @@
-import { dirname } from 'path';
-import { fileURLToPath } from 'url';
 import __callsites from 'callsites';
+import { fileURLToPath } from 'url';
 
 /**
  * @name            dirname

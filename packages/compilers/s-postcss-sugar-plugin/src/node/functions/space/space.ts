@@ -2,14 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginSpaceFunctionInterface extends __SInterface {
-    static definition = {
-        space: {
-            type: 'String',
-            values: Object.keys(__STheme.config('space')),
-            default: 'default',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                space: {
+                    type: 'String',
+                    values: Object.keys(__STheme.config('space')),
+                    default: 'default',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginSpaceFunctionInterface as interface };
 

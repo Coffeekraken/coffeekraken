@@ -18,7 +18,9 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SViteStartInterface extends __SInterface {
-  static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export default SViteStartInterface;

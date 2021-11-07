@@ -21,7 +21,9 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginPointerClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginPointerClassesParams {}

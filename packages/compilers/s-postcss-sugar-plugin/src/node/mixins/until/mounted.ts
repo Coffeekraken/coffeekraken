@@ -28,17 +28,22 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginmountedMixinInterface extends __SInterface {
-    static definition = {
-        state: {
-            type: 'String',
-            values: ['mounted'],
-            required: true,
-        },
-        sibling: {
-            type: 'Boolean',
-            default: false,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                state: {
+                    type: 'String',
+                    values: ['mounted'],
+                    required: true,
+                },
+                sibling: {
+                    type: 'Boolean',
+                    default: false,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginmountedMixinInterface as interface };
 

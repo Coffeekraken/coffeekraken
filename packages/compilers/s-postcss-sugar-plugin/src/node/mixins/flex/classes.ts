@@ -20,7 +20,9 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginFlexClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginFlexClassesParams {}

@@ -2,20 +2,25 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
-    static definition = {
-        name: {
-            type: 'String',
-            default: 's-loader-spinner',
-        },
-        duration: {
-            type: 'String',
-            default: __STheme.config('ui.loaderSpinner.duration'),
-        },
-        easing: {
-            type: 'String',
-            default: __STheme.config('ui.loaderSpinner.easing'),
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                name: {
+                    type: 'String',
+                    default: 's-loader-spinner',
+                },
+                duration: {
+                    type: 'String',
+                    default: __STheme.config('ui.loaderSpinner.duration'),
+                },
+                easing: {
+                    type: 'String',
+                    default: __STheme.config('ui.loaderSpinner.easing'),
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiLoaderSpinnerMixinParams {

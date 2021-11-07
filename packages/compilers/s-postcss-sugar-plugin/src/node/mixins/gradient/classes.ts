@@ -22,19 +22,24 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginGradientClassesInterface extends __SInterface {
-    static definition = {
-        types: {
-            type: 'String[]',
-            values: ['linear', 'radial'],
-            default: ['linear', 'radial'],
-            alias: 't',
-        },
-        angles: {
-            type: 'Number[]',
-            default: [0, 45, 90, 135, 180, 225, 270],
-            alias: 'a',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                types: {
+                    type: 'String[]',
+                    values: ['linear', 'radial'],
+                    default: ['linear', 'radial'],
+                    alias: 't',
+                },
+                angles: {
+                    type: 'Number[]',
+                    default: [0, 45, 90, 135, 180, 225, 270],
+                    alias: 'a',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginGradientClassesParams {

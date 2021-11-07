@@ -2,25 +2,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiFiltrableInputInterface extends __SInterface {
-    static definition = {
-        style: {
-            type: 'String',
-            values: ['solid', 'gradient', 'outline', 'text'],
-            default: __STheme.config('ui.button.defaultStyle'),
-        },
-        outline: {
-            type: 'Boolean',
-            default: __STheme.config('ui.button.outline'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                style: {
+                    type: 'String',
+                    values: ['solid', 'gradient', 'outline', 'text'],
+                    default: __STheme.config('ui.button.defaultStyle'),
+                },
+                outline: {
+                    type: 'Boolean',
+                    default: __STheme.config('ui.button.outline'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf'],
+                    default: ['bare', 'lnf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssUiFiltrableInputParams {

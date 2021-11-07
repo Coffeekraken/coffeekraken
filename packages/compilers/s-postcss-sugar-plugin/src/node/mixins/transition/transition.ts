@@ -20,13 +20,18 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginTransitionMixinInterface extends __SInterface {
-    static definition = {
-        name: {
-            type: 'String',
-            required: true,
-            default: 'default',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                name: {
+                    type: 'String',
+                    required: true,
+                    default: 'default',
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginTransitionMixinInterface as interface };
 

@@ -45,34 +45,39 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginLayoutInterface extends __SInterface {
-    static definition = {
-        layout: {
-            type: 'String',
-            required: true,
-        },
-        gutter: {
-            type: 'Number',
-        },
-        gutterBetween: {
-            type: 'Boolean',
-            default: false,
-        },
-        align: {
-            type: 'String',
-            values: ['start', 'end', 'center', 'stretch'],
-            default: 'stretch',
-        },
-        justify: {
-            type: 'String',
-            values: ['start', 'end', 'center', 'stretch'],
-            default: 'stretch',
-        },
-        scope: {
-            type: 'Array<String>',
-            values: ['bare', 'lnf', 'gutter', 'align', 'justify'],
-            default: ['bare', 'lnf', 'gutter', 'align', 'justify'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                layout: {
+                    type: 'String',
+                    required: true,
+                },
+                gutter: {
+                    type: 'Number',
+                },
+                gutterBetween: {
+                    type: 'Boolean',
+                    default: false,
+                },
+                align: {
+                    type: 'String',
+                    values: ['start', 'end', 'center', 'stretch'],
+                    default: 'stretch',
+                },
+                justify: {
+                    type: 'String',
+                    values: ['start', 'end', 'center', 'stretch'],
+                    default: 'stretch',
+                },
+                scope: {
+                    type: 'Array<String>',
+                    values: ['bare', 'lnf', 'gutter', 'align', 'justify'],
+                    default: ['bare', 'lnf', 'gutter', 'align', 'justify'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginLayoutParams {

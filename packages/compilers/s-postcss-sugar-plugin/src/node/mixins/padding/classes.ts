@@ -21,7 +21,9 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginPaddingClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginPaddingClassesParams {}

@@ -22,13 +22,18 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginDepthInterface extends __SInterface {
-    static definition = {
-        depth: {
-            type: 'Number|String',
-            required: true,
-            alias: 'd',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                depth: {
+                    type: 'Number|String',
+                    required: true,
+                    alias: 'd',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginDepthParams {

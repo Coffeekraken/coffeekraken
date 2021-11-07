@@ -24,13 +24,18 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
-    static definition = {
-        font: {
-            type: 'String',
-            values: Object.keys(__STheme.config('font.family')),
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                font: {
+                    type: 'String',
+                    values: Object.keys(__STheme.config('font.family')),
+                    required: true,
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginFontFamilyParams {

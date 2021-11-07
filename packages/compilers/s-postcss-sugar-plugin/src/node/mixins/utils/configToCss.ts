@@ -33,18 +33,23 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginUtilsConfigToCssInterface extends __SInterface {
-    static definition = {
-        dotPath: {
-            type: 'String',
-            required: true,
-        },
-        exclude: {
-            type: 'Array<String>',
-        },
-        only: {
-            type: 'Array<String>',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                dotPath: {
+                    type: 'String',
+                    required: true,
+                },
+                exclude: {
+                    type: 'Array<String>',
+                },
+                only: {
+                    type: 'Array<String>',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginConfigToCssParams {

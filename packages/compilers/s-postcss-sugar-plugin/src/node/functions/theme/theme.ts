@@ -4,25 +4,30 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginThemeInterface extends __SInterface {
-    static definition = {
-        dotPath: {
-            type: 'String',
-            required: true,
-        },
-        scalable: {
-            type: 'Boolean',
-            default: false,
-        },
-        return: {
-            type: 'String',
-            values: ['var', 'value'],
-            default: 'var',
-        },
-        fallback: {
-            type: 'Boolean',
-            default: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                dotPath: {
+                    type: 'String',
+                    required: true,
+                },
+                scalable: {
+                    type: 'Boolean',
+                    default: false,
+                },
+                return: {
+                    type: 'String',
+                    values: ['var', 'value'],
+                    default: 'var',
+                },
+                fallback: {
+                    type: 'Boolean',
+                    default: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginThemeInterface as interface };
 

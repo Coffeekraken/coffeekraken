@@ -1,12 +1,17 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginAlignInterface extends __SInterface {
-    static definition = {
-        align: {
-            type: 'String',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                align: {
+                    type: 'String',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginAlignParams {

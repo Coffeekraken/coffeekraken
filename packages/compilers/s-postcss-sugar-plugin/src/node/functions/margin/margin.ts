@@ -2,18 +2,23 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginMarginFunctionInterface extends __SInterface {
-    static definition = {
-        margin: {
-            type: 'String',
-            values: Object.keys(__STheme.config('margin')),
-            default: 'default',
-            required: true,
-        },
-        scalable: {
-            type: 'Boolean',
-            default: __STheme.config('scalable.margin'),
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                margin: {
+                    type: 'String',
+                    values: Object.keys(__STheme.config('margin')),
+                    default: 'default',
+                    required: true,
+                },
+                scalable: {
+                    type: 'Boolean',
+                    default: __STheme.config('scalable.margin'),
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginMarginFunctionInterface as interface };
 

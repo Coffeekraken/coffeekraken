@@ -26,13 +26,18 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginBorderwidthMixinInterface extends __SInterface {
-    static definition = {
-        width: {
-            type: 'Number|String',
-            required: true,
-            default: __STheme.config('border.width.default'),
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                width: {
+                    type: 'Number|String',
+                    required: true,
+                    default: __STheme.config('border.width.default'),
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginBorderwidthMixinParams {

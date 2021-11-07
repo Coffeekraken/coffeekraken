@@ -3,18 +3,23 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.tabs.defaultStyle') ?? 'solid',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default: __STheme.config('ui.tabs.defaultStyle') ?? 'solid',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {

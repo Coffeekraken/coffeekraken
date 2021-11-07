@@ -22,12 +22,17 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginRatioClassesInterface extends __SInterface {
-    static definition = {
-        count: {
-            type: 'Number',
-            default: __STheme.config('helpers.truncate.count'),
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                count: {
+                    type: 'Number',
+                    default: __STheme.config('helpers.truncate.count'),
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginRatioClassesParams {

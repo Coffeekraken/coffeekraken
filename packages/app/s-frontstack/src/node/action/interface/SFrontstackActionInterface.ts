@@ -18,16 +18,21 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SFrontstackActionInterface extends __SInterface {
-  static definition = {
-    action: {
-      type: 'String',
-      requried: true
-    },
-    params: {
-      type: 'String',
-      alias: 'p'
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                action: {
+                    type: 'String',
+                    requried: true,
+                },
+                params: {
+                    type: 'String',
+                    alias: 'p',
+                },
+            })
+        );
     }
-  };
 }
 
 export default SFrontstackActionInterface;

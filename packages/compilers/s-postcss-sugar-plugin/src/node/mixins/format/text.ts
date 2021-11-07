@@ -1,7 +1,9 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginFormatTextlMixinInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 export { postcssSugarPluginFormatTextlMixinInterface as interface };
 

@@ -6,24 +6,29 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 class MyInterface extends __SInterface {
-    static definition = {
-        param1: {
-            type: 'String',
-            default: 'Hello',
-        },
-        param2: {
-            type: 'Boolean',
-            default: true,
-        },
-        crash: {
-            type: 'Boolean',
-            default: false,
-        },
-        crashTimeout: {
-            type: 'Number',
-            default: 100,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                param1: {
+                    type: 'String',
+                    default: 'Hello',
+                },
+                param2: {
+                    type: 'Boolean',
+                    default: true,
+                },
+                crash: {
+                    type: 'Boolean',
+                    default: false,
+                },
+                crashTimeout: {
+                    type: 'Number',
+                    default: 100,
+                },
+            })
+        );
+    }
 }
 
 // @ts-ignore

@@ -3,30 +3,36 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.switch.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.switch.defaultStyle') ?? 'solid',
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'tf'],
-            default: ['bare', 'lnf', 'tf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.switch.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default:
+                        __STheme.config('ui.switch.defaultStyle') ?? 'solid',
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'tf'],
+                    default: ['bare', 'lnf', 'tf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiSwitchClassesMixinParams {

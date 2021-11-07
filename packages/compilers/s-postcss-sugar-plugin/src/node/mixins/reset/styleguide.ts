@@ -19,7 +19,9 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginResetStyleguideInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginResetStyleguideClassesParams {

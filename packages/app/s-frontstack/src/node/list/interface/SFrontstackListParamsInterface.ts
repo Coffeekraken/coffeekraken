@@ -18,11 +18,16 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SFrontstackListParamsInterface extends __SInterface {
-  static definition = {
-    recipeStack: {
-        type: 'String'
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                recipeStack: {
+                    type: 'String',
+                },
+            })
+        );
     }
-  };
 }
 
 export default SFrontstackListParamsInterface;

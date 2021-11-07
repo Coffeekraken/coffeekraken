@@ -2,14 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginOpacityFunctionInterface extends __SInterface {
-    static definition = {
-        opacity: {
-            type: 'String',
-            values: Object.keys(__STheme.config('opacity')),
-            default: '100',
-            required: true,
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                opacity: {
+                    type: 'String',
+                    values: Object.keys(__STheme.config('opacity')),
+                    default: '100',
+                    required: true,
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginOpacityFunctionInterface as interface };
 

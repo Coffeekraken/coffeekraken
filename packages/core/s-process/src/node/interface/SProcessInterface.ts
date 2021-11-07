@@ -15,12 +15,17 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SProcessInterface extends __SInterface {
-  // static extendsArray = ['SProcess', 'SPromise'];
-  static definition = {
-    help: {
-      type: 'Boolean',
-      alias: 'h',
-      default: false
+    // static extendsArray = ['SProcess', 'SPromise'];
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                help: {
+                    type: 'Boolean',
+                    alias: 'h',
+                    default: false,
+                },
+            })
+        );
     }
-  };
 }

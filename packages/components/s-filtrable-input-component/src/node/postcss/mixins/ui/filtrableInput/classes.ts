@@ -3,31 +3,37 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssUiFiltrableInputClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.filtrableInput.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default:
-                __STheme.config('ui.filtrableInput.defaultStyle') ?? 'solid',
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'vr'],
-            default: ['bare', 'lnf', 'vr'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.filtrableInput.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default:
+                        __STheme.config('ui.filtrableInput.defaultStyle') ??
+                        'solid',
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'vr'],
+                    default: ['bare', 'lnf', 'vr'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssUiFiltrableInputClassesParams {

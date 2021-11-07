@@ -27,16 +27,21 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  */
 
 class postcssSugarPluginImportInterface extends __SInterface {
-  static definition = {
-    path: {
-      type: 'String',
-      required: true
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                path: {
+                    type: 'String',
+                    required: true,
+                },
+            })
+        );
     }
-  };
 }
 
 export interface IPostcssSugarPluginImportParams {
-  path: string;
+    path: string;
 }
 
 export { postcssSugarPluginImportInterface as interface };
@@ -47,7 +52,7 @@ export { postcssSugarPluginImportInterface as interface };
  * @type          PostcssMixin
  *
  * This mixin allows you to import files as default import statement does but add the glob support like "something/* * /*.css"
- * 
+ *
  * @param       {String}        path      The path or glob to import
  * @return      {Css}                   The corresponding imported css
  *
@@ -59,55 +64,58 @@ export { postcssSugarPluginImportInterface as interface };
  */
 let _watcher;
 export default function ({
-  params,
-  atRule,
-  postcss
+    params,
+    atRule,
+    postcss,
 }: {
-  params: IPostcssSugarPluginImportParams;
-  atRule: any;
-  postcss: any;
+    params: IPostcssSugarPluginImportParams;
+    atRule: any;
+    postcss: any;
 }) {
-  const finalParams: IPostcssSugarPluginImportParams = {
-    ...params
-  };
+    const finalParams: IPostcssSugarPluginImportParams = {
+        ...params,
+    };
 
-  const dirName =
-    typeof atRule.source.input.file === 'string'
-      ? __path.dirname(atRule.source.input.file)
-      : __dirname();
+    const dirName =
+        typeof atRule.source.input.file === 'string'
+            ? __path.dirname(atRule.source.input.file)
+            : __dirname();
 
-  // resolve globs even if it's a simple path
-  const files = __SGlob.resolve(finalParams.path, {
-    cwd: dirName
-  });
+    // resolve globs even if it's a simple path
+    const files = __SGlob.resolve(finalParams.path, {
+        cwd: dirName,
+    });
 
-  // watch for new / deleted files
-  if (!_watcher) {
-    function triggerUpdate(path) {
-      __SEventEmitter.global.emit('s-postcss-sugar-plugin-import-update', {
-        path: __path.resolve(dirName, path)
-      });
+    // watch for new / deleted files
+    if (!_watcher) {
+        function triggerUpdate(path) {
+            __SEventEmitter.global.emit(
+                's-postcss-sugar-plugin-import-update',
+                {
+                    path: __path.resolve(dirName, path),
+                },
+            );
+        }
+        const watcher = __chokidar.watch(finalParams.path, {
+            cwd: dirName,
+            ignoreInitial: true,
+        });
+        watcher.on('change', (path) => {
+            triggerUpdate(path);
+        });
+        watcher.on('add', (path) => {
+            triggerUpdate(path);
+        });
+        watcher.on('unlink', (path) => {
+            triggerUpdate(path);
+        });
     }
-    const watcher = __chokidar.watch(finalParams.path, {
-      cwd: dirName,
-      ignoreInitial: true
-    });
-    watcher.on('change', (path) => {
-      triggerUpdate(path);
-    });
-    watcher.on('add', (path) => {
-      triggerUpdate(path);
-    });
-    watcher.on('unlink', (path) => {
-      triggerUpdate(path);
-    });
-  }
 
-  files.forEach(file => {
-    const newRule = postcss.parse(`@import url('${file.relPath}');`);
-    newRule.source.input.file = atRule.source.input.file;    
-    atRule.parent.insertAfter(atRule, newRule);
-  });
+    files.forEach((file) => {
+        const newRule = postcss.parse(`@import "${file.relPath}";`);
+        newRule.source.input.file = atRule.source.input.file;
+        atRule.parent.insertAfter(atRule, newRule);
+    });
 
-  atRule.remove();
+    atRule.remove();
 }

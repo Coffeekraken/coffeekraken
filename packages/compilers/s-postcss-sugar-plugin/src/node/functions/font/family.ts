@@ -2,13 +2,18 @@ import __SInterface from '@coffeekraken/s-interface';
 import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
 
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
-    static definition = {
-        name: {
-            type: 'String',
-            required: true,
-            alias: 'n',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                name: {
+                    type: 'String',
+                    required: true,
+                    alias: 'n',
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginFontFamilyInterface as interface };
 

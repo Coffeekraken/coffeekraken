@@ -3,30 +3,35 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.checkbox.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.checkbox.defaultStyle'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'tf', 'vr'],
-            default: ['bare', 'lnf', 'tf', 'vr'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.checkbox.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default: __STheme.config('ui.checkbox.defaultStyle'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'tf', 'vr'],
+                    default: ['bare', 'lnf', 'tf', 'vr'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiCheckboxClassesParams {

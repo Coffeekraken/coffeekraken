@@ -22,43 +22,48 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginShadowGradientInterface extends __SInterface {
-    static definition = {
-        x: {
-            type: 'Number|String',
-            required: true,
-            default: 0,
-        },
-        y: {
-            type: 'Number|String',
-            required: true,
-            default: 0,
-        },
-        blur: {
-            type: 'Number|String',
-            required: true,
-            default: 0,
-        },
-        spread: {
-            type: 'Number|String',
-            required: true,
-            default: 0,
-        },
-        startColor: {
-            type: 'String',
-            required: true,
-            default: 'sugar.color(accent)',
-        },
-        endColor: {
-            type: 'String',
-            required: true,
-            default: 'sugar.color(complementary)',
-        },
-        angle: {
-            type: 'String',
-            required: false,
-            default: '90deg',
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                x: {
+                    type: 'Number|String',
+                    required: true,
+                    default: 0,
+                },
+                y: {
+                    type: 'Number|String',
+                    required: true,
+                    default: 0,
+                },
+                blur: {
+                    type: 'Number|String',
+                    required: true,
+                    default: 0,
+                },
+                spread: {
+                    type: 'Number|String',
+                    required: true,
+                    default: 0,
+                },
+                startColor: {
+                    type: 'String',
+                    required: true,
+                    default: 'sugar.color(accent)',
+                },
+                endColor: {
+                    type: 'String',
+                    required: true,
+                    default: 'sugar.color(complementary)',
+                },
+                angle: {
+                    type: 'String',
+                    required: false,
+                    default: '90deg',
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginShadowGradientParams {

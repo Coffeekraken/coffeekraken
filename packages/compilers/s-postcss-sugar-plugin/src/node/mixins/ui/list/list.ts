@@ -2,21 +2,26 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiListInterface extends __SInterface {
-    static definition = {
-        style: {
-            type: 'String',
-            values: ['ul', 'ol', 'icon'],
-            default: __STheme.config('ui.list.defaultStyle'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf'],
-            default: ['bare', 'lnf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                style: {
+                    type: 'String',
+                    values: ['ul', 'ol', 'icon'],
+                    default: __STheme.config('ui.list.defaultStyle'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf'],
+                    default: ['bare', 'lnf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiListParams {

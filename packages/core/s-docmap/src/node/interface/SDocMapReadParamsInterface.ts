@@ -16,32 +16,37 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SDocMapReadParamsInterface extends __SInterface {
-  static definition = {
-    input: {
-      type: 'String',
-      default: __SSugarConfig.get('docmap.read.input'),
-      alias: 'i'
-    },
-    snapshot: {
-      type: 'String',
-      alias: 's'
-    },
-    snapshotDir: {
-      type: 'String',
-      path: {
-        absolute: true,
-        tokens: true
-      },
-      default: __SSugarConfig.get('docmap.snapshot.outDir')
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                input: {
+                    type: 'String',
+                    default: __SSugarConfig.get('docmap.read.input'),
+                    alias: 'i',
+                },
+                snapshot: {
+                    type: 'String',
+                    alias: 's',
+                },
+                snapshotDir: {
+                    type: 'String',
+                    path: {
+                        absolute: true,
+                        tokens: true,
+                    },
+                    default: __SSugarConfig.get('docmap.snapshot.outDir'),
+                },
+                // cache: {
+                //   type: 'Boolean',
+                //   default: __SSugarConfig.get('docmap.cache')
+                // },
+                // clearCache: {
+                //   type: 'Boolean',
+                //   default: false
+                // }
+            })
+        );
     }
-    // cache: {
-    //   type: 'Boolean',
-    //   default: __SSugarConfig.get('docmap.cache')
-    // },
-    // clearCache: {
-    //   type: 'Boolean',
-    //   default: false
-    // }
-  };
 }
 export default SDocMapReadParamsInterface;

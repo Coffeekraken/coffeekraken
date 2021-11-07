@@ -22,7 +22,9 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginScaleClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginScaleClassesParams {}

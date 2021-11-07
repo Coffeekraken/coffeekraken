@@ -20,7 +20,9 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginDepthClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginDepthClassesParams {}

@@ -3,30 +3,36 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid', 'gradient', 'outline', 'text'],
-            default: ['solid', 'gradient', 'outline', 'text'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.button.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid', 'gradient', 'outline', 'text'],
-            default: __STheme.config('ui.button.defaultStyle') ?? 'solid',
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'tf', 'vr'],
-            default: ['bare', 'lnf', 'tf', 'vr'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid', 'gradient', 'outline', 'text'],
+                    default: ['solid', 'gradient', 'outline', 'text'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.button.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid', 'gradient', 'outline', 'text'],
+                    default:
+                        __STheme.config('ui.button.defaultStyle') ?? 'solid',
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'tf', 'vr'],
+                    default: ['bare', 'lnf', 'tf', 'vr'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiButtonClassesParams {

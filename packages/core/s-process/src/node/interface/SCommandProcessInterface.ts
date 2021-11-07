@@ -16,13 +16,18 @@ import __SProcessInterface from './SProcessInterface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SCommandProcessInterface extends __SInterface {
-  // static extendsArray = ['SProcess', 'SPromise'];
-  static definition = {
-    ...__SProcessInterface.definition,
-    command: {
-      type: 'String',
-      alias: 'c',
-      required: true
+    // static extendsArray = ['SProcess', 'SPromise'];
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                ...__SProcessInterface.definition,
+                command: {
+                    type: 'String',
+                    alias: 'c',
+                    required: true,
+                },
+            })
+        );
     }
-  };
 }

@@ -22,7 +22,9 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginTypoClassesInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginTypoClassesParams {}

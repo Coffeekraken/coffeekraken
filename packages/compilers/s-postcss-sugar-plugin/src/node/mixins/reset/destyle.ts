@@ -22,7 +22,9 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginResetDestyleInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginResetDestyleParams {}

@@ -21,7 +21,9 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginWidthClassesMixinInterface extends __SInterface {
-    static definition = {};
+    static get definition() {
+        return {};
+    }
 }
 
 export interface IPostcssSugarPluginWidthClassesMixinParams {}

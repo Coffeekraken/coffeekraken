@@ -10,21 +10,26 @@ import __SInterface from '@coffeekraken/s-interface';
  * @extends             SInterface
  *
  * This class represent the interface that describe the minimum requirement
- * needed to make a docmap snapshot 
+ * needed to make a docmap snapshot
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SDocMapSnapshotParamsInterface extends __SInterface {
-  static definition = {
-    outDir: {
-        type: 'String',
-        path: {
-          absolute: true,
-          tokens: true
-        },
-        default: __SSugarConfig.get('docmap.snapshot.outDir')
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                outDir: {
+                    type: 'String',
+                    path: {
+                        absolute: true,
+                        tokens: true,
+                    },
+                    default: __SSugarConfig.get('docmap.snapshot.outDir'),
+                },
+            })
+        );
     }
-  };
 }
 export default SDocMapSnapshotParamsInterface;

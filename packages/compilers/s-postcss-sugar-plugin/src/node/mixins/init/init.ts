@@ -2,16 +2,21 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginMediaMixinInterface extends __SInterface {
-    static definition = {
-        theme: {
-            type: 'String',
-            default: __SugarConfig.get('theme.theme'),
-        },
-        variant: {
-            type: 'String',
-            default: __SugarConfig.get('theme.variant'),
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                theme: {
+                    type: 'String',
+                    default: __SugarConfig.get('theme.theme'),
+                },
+                variant: {
+                    type: 'String',
+                    default: __SugarConfig.get('theme.variant'),
+                },
+            })
+        );
+    }
 }
 export { postcssSugarPluginMediaMixinInterface as interface };
 

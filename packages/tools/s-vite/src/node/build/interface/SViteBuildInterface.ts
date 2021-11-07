@@ -18,78 +18,85 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SViteBuildInterface extends __SInterface {
-  static definition = {
-    input: {
-      type: 'String',
-      path: {
-        exists: true,
-        absolute: true
-      },
-      default: `${__SSugarConfig.get('storage.src.jsDir')}/index.ts`,
-      required: true
-    },
-    type: {
-      type: 'Array<String>',
-      values: ['lib', 'bundle', 'module'],
-      default: ['bundle','module'],
-      alias: 't'
-    },
-    format: {
-      type: 'Array<String>',
-      values: ['es','umd','cjs','iife'],
-      default: [],
-      alias: 'f'
-    },
-    verbose: {
-      type: 'Boolean',
-      default: true,
-      alias: 'v'
-    },
-    target: {
-      type: 'String',
-      values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020'],
-      default: undefined
-    },
-    watch: {
-      type: 'Boolean',
-      default: false,
-      alias: 'w'
-    },
-    lib: {
-      type: 'Boolean',
-      default: false,
-      alias: 'l'
-    },
-    bundle: {
-      type: 'Boolean',
-      default: false,
-      alias: 'b'
-    },
-    noWrite: {
-      type: 'Boolean',
-      default: false
-    },
-    prod: {
-      type: 'Boolean',
-      default: false,
-      alias: 'p'
-    },
-    chunks: {
-      type: 'Boolean',
-      default: false,
-      alias: 'c'
-    },
-    minify: {
-      type: 'Boolean',
-      default: false,
-      alias: 'm'
-    },
-    analyze: {
-      type: 'Boolean',
-      default: false,
-      alias: 'a'
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                input: {
+                    type: 'String',
+                    path: {
+                        exists: true,
+                        absolute: true,
+                    },
+                    default: `${__SSugarConfig.get(
+                        'storage.src.jsDir',
+                    )}/index.ts`,
+                    required: true,
+                },
+                type: {
+                    type: 'Array<String>',
+                    values: ['lib', 'bundle', 'module'],
+                    default: ['bundle', 'module'],
+                    alias: 't',
+                },
+                format: {
+                    type: 'Array<String>',
+                    values: ['es', 'umd', 'cjs', 'iife'],
+                    default: [],
+                    alias: 'f',
+                },
+                verbose: {
+                    type: 'Boolean',
+                    default: true,
+                    alias: 'v',
+                },
+                target: {
+                    type: 'String',
+                    values: ['modules', 'esnext', 'es2015', 'es2016', 'es2020'],
+                    default: undefined,
+                },
+                watch: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'w',
+                },
+                lib: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'l',
+                },
+                bundle: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'b',
+                },
+                noWrite: {
+                    type: 'Boolean',
+                    default: false,
+                },
+                prod: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'p',
+                },
+                chunks: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'c',
+                },
+                minify: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'm',
+                },
+                analyze: {
+                    type: 'Boolean',
+                    default: false,
+                    alias: 'a',
+                },
+            })
+        );
     }
-  };
 }
 
 export default SViteBuildInterface;

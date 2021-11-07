@@ -2,30 +2,35 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
-    static definition = {
-        styles: {
-            type: 'String[]',
-            values: ['solid'],
-            default: ['solid'],
-        },
-        defaultColor: {
-            type: 'String',
-            default: __STheme.config('ui.avatar.defaultColor'),
-        },
-        defaultStyle: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.avatar.defaultStyle'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'vr', 'tf'],
-            default: ['bare', 'lnf', 'vr', 'tf'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                styles: {
+                    type: 'String[]',
+                    values: ['solid'],
+                    default: ['solid'],
+                },
+                defaultColor: {
+                    type: 'String',
+                    default: __STheme.config('ui.avatar.defaultColor'),
+                },
+                defaultStyle: {
+                    type: 'String',
+                    values: ['solid'],
+                    default: __STheme.config('ui.avatar.defaultStyle'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'vr', 'tf'],
+                    default: ['bare', 'lnf', 'vr', 'tf'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiAvatarClassesParams {

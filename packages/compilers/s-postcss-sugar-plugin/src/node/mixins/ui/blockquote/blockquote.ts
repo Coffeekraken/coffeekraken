@@ -2,21 +2,26 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
-    static definition = {
-        style: {
-            type: 'String',
-            values: ['solid'],
-            default: __STheme.config('ui.blockquote.defaultStyle'),
-        },
-        scope: {
-            type: {
-                type: 'Array<String>',
-                splitChars: [',', ' '],
-            },
-            values: ['bare', 'lnf', 'vr'],
-            default: ['bare', 'lnf', 'vr'],
-        },
-    };
+    static get definition() {
+        return (
+            this.cached() ??
+            this.cache({
+                style: {
+                    type: 'String',
+                    values: ['solid'],
+                    default: __STheme.config('ui.blockquote.defaultStyle'),
+                },
+                scope: {
+                    type: {
+                        type: 'Array<String>',
+                        splitChars: [',', ' '],
+                    },
+                    values: ['bare', 'lnf', 'vr'],
+                    default: ['bare', 'lnf', 'vr'],
+                },
+            })
+        );
+    }
 }
 
 export interface IPostcssSugarPluginUiBlockquoteParams {

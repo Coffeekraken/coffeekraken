@@ -8,20 +8,17 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
 
 class postcssSugarPluginIconFsMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                path: {
-                    type: 'String',
-                    required: true,
-                },
-                as: {
-                    type: 'String',
-                    required: false,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            path: {
+                type: 'String',
+                required: true,
+            },
+            as: {
+                type: 'String',
+                required: false,
+            },
+        };
     }
 }
 

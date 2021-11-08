@@ -25,6 +25,7 @@
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -44,15 +45,20 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -87,9 +93,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "registerHelpers.js",
-                "extension": "js",
-                "relPath": "src/node/registerHelpers.js",
+                "filename": "registerHelpers.ts",
+                "extension": "ts",
+                "relPath": "src/node/registerHelpers.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFileNameFromDocmapPath": {
@@ -117,9 +123,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFileNameFromDocmapPath.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFileNameFromDocmapPath.js",
+                "filename": "configFileNameFromDocmapPath.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFileNameFromDocmapPath.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFiles": {
@@ -147,9 +153,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFiles.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFiles.js",
+                "filename": "configFiles.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFiles.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configFromDocmap": {
@@ -177,9 +183,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configFromDocmap.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configFromDocmap.js",
+                "filename": "configFromDocmap.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configFromDocmap.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.configValue": {
@@ -207,9 +213,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "configValue.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/configValue.js",
+                "filename": "configValue.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/configValue.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.get": {
@@ -237,9 +243,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "get.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/get.js",
+                "filename": "get.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/get.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.ifEqual": {
@@ -274,9 +280,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "ifEqual.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/ifEqual.js",
+                "filename": "ifEqual.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/ifEqual.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.ifMatch": {
@@ -311,9 +317,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "ifMatch.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/ifMatch.js",
+                "filename": "ifMatch.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/ifMatch.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.islicense": {
@@ -341,9 +347,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "isLicense.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/isLicense.js",
+                "filename": "isLicense.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/isLicense.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.jsonStringify": {
@@ -371,9 +377,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "jsonStringify.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/jsonStringify.js",
+                "filename": "jsonStringify.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/jsonStringify.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.rootRelative": {
@@ -401,9 +407,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "rootRelative.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/rootRelative.js",
+                "filename": "rootRelative.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/rootRelative.ts",
                 "children": {}
             },
             "@coffeekraken.s-handlebars.node.helpers.sfile": {
@@ -431,9 +437,35 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "sfile.js",
-                "extension": "js",
-                "relPath": "src/node/helpers/sfile.js",
+                "filename": "sfile.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/sfile.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-handlebars.node.helpers.shieldsioHandlebarsHelper": {
+                "name": "ShieldsioHandlebarsHelper",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-handlebars.node.helpers",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "shieldsioHandlebarsHelper.ts",
+                "extension": "ts",
+                "relPath": "src/node/helpers/shieldsioHandlebarsHelper.ts",
                 "children": {}
             }
         }

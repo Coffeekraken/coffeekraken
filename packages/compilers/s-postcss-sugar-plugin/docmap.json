@@ -5,33 +5,80 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
+                "name": "cache",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to use the internal cache to speed up your compilations or not",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "postcssSugarPlugin.config.ts",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.ts",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
                 "name": "astNodesToString",
                 "type": "Function",
@@ -44,69 +91,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "astNodesToString.js",
-                "extension": "js",
-                "relPath": "src/node/utils/astNodesToString.js",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-sugar-plugin.node.utils.isInScope": {
-                "name": "isInScope",
-                "type": "Function",
-                "description": "This function allows you to pass either a string like \"*\", \"color\", etc... or\nan array of string like ['color','size'] and you will bet back a simple\nboolean that let you know if the current code execution is in the\nrequested scope specified by the use of the ```@sugar.scope``` mixin directly in your css",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { isInScope } from '@coffeekraken/s-postcss-sugar-plugin';\nisInScope('color'); // => true"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "isInScope.js",
-                "extension": "js",
-                "relPath": "src/node/utils/isInScope.js",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-sugar-plugin.node.utils.themeInstance": {
-                "name": "themeInstance",
-                "type": "STheme",
-                "description": "Gives you access to the current theme STheme instance in order to access\nutilities methods like loopOnColors, etc...",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "theme.js",
-                "extension": "js",
-                "relPath": "src/node/utils/theme.js",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-sugar-plugin.node.utils.themeVar": {
-                "name": "themeVar",
-                "type": "Function",
-                "description": "This function take a simple theme dot path and returns the proper\nvariable string with the value fallback.",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.utils",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import { themeVar } from '@coffeekraken/s-postcss-sugar-plugin';\nthemeVar('ui.button.padding'); // => var(--s-theme-ui-button-padding, 1em 1.2em)"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeVar.js",
-                "extension": "js",
-                "relPath": "src/node/utils/themeVar.js",
+                "filename": "astNodesToString.ts",
+                "extension": "ts",
+                "relPath": "src/node/utils/astNodesToString.ts",
                 "children": {}
             }
         }

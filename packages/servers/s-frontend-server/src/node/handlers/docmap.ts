@@ -39,7 +39,7 @@ export default async function docMap(req, res, settings = {}) {
             const obj = json.map[key];
             if (!obj.platform) return;
             if (!obj.status) return;
-            if (['stable', 'beta', 'alpha'].indexOf(obj.status) === -1) return;
+            // if (['stable', 'beta', 'alpha'].indexOf(obj.status) === -1) return;
             finalJson.map[key] = obj;
         });
 

@@ -6,24 +6,32 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -38,13 +46,19 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -60,9 +74,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js"
+                "relPath": "src/config/views.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.views.cacheDir": {
                 "name": "cacheDir",
@@ -76,9 +90,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js"
+                "relPath": "src/config/views.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.extensions": {
                 "name": "extensions",
@@ -92,9 +106,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js"
+                "relPath": "src/config/views.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.path": {
                 "name": "path",
@@ -107,9 +121,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js"
+                "relPath": "src/config/views.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.extensions": {
                 "name": "extensions",
@@ -123,9 +137,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js"
+                "relPath": "src/config/views.config.ts"
             },
             "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.path": {
                 "name": "path",
@@ -139,10 +153,151 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.js",
+                "filename": "views.config.ts",
                 "extension": "config",
-                "relPath": "src/config/views.config.js",
+                "relPath": "src/config/views.config.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-view-renderer.sugar.node.template.sViews": {
+                "name": "SViews",
+                "type": "Class",
+                "description": "This class represent a template that can be rendered using all the supported render engines listed in the features bellow.",
+                "namespace": "@coffeekraken.s-view-renderer.sugar.node.template",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SViews from '@coffeekraken/sugar/node/template/SViews';\nconst myTemplate = new SViews('my.cool.view', {\n   title: 'Hello'\n}, {\n   engine: 'blade'\n});\nconst result = await myTemplate.render({\n   title: 'World'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SViewRenderer.ts",
+                "extension": "ts",
+                "relPath": "src/node/SViewRenderer.ts",
+                "children": {
+                    "engines": {
+                        "name": "engines",
+                        "type": "Object",
+                        "description": "Store the registered engines using the ```registerEngine``` static method",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "dataHandlers": {
+                        "name": "dataHandlers",
+                        "type": "Object",
+                        "description": "Store the registered dataHandlers using the ```registerDataHandler``` static method",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "defaultRootDirs": {
+                        "name": "defaultRootDirs",
+                        "type": "Array",
+                        "description": "This static property store the default root directories where the class\nwill search for views to render",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getRootDirs": {
+                        "name": "getRootDirs",
+                        "type": "Function",
+                        "description": "This function accept an array of root directories\nand return the final array with the default root directories\nadded correctly",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "render": {
+                        "name": "render",
+                        "type": "Function",
+                        "description": "Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerEngine": {
+                        "name": "registerEngine",
+                        "type": "Function",
+                        "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerDataHandler": {
+                        "name": "registerDataHandler",
+                        "type": "Function",
+                        "description": "This static method can be used to register a compatible __SViewEngine engine class\ninto the available SViews engines.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getViewMetas": {
+                        "name": "getViewMetas",
+                        "type": "Function",
+                        "description": "This static method allows you to give a \"potential\" view path (with or without the extension) and get\nback an object that describe the view with infos like \"type\", \"path\", \"extension\", etc...\nIf nothing is found, you will get ```false``` back.",
+                        "static": "true",
+                        "since": "true",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "viewSettings": {
+                        "name": "viewSettings",
+                        "type": "ISViewRendererSettings",
+                        "description": "Access the template settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-view-renderer.s-view.dataHandlers.js": {
                 "name": "js",
@@ -156,9 +311,31 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "js.js",
-                "extension": "js",
-                "relPath": "src/node/dataHandlers/js.js",
+                "filename": "js.ts",
+                "extension": "ts",
+                "relPath": "src/node/dataHandlers/js.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-view-renderer.s-view.pages.404": {
+                "name": "404",
+                "type": "Function",
+                "description": "This function simply take a data object and render a clean 404 page",
+                "namespace": "@coffeekraken.s-view-renderer.s-view.pages",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import page404 from '@coffeekraken/sugar/node/engines/pages/404';\nconst html = await page404({\n     title: 'Not found',\n     body: 'The page you want does not exists...'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "404.ts",
+                "extension": "ts",
+                "relPath": "src/node/pages/404.ts",
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.s-render.engines.bladeViewEngine": {
@@ -172,9 +349,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "bladeViewEngine.js",
-                "extension": "js",
-                "relPath": "src/node/engines/blade/bladeViewEngine.js",
+                "filename": "bladeViewEngine.ts",
+                "extension": "ts",
+                "relPath": "src/node/engines/blade/bladeViewEngine.ts",
                 "children": {}
             }
         }

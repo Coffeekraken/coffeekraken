@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginUiLoaderClassesClassesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

@@ -2,23 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['solid', 'outline'],
-                    default: ['solid', 'outline'],
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid', 'outline'],
-                    default:
-                        __STheme.config('ui.badge.defaultStyle') ?? 'solid',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid', 'outline'],
+                default: ['solid', 'outline'],
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid', 'outline'],
+                default: __STheme.config('ui.badge.defaultStyle') ?? 'solid',
+            },
+        };
     }
 }
 

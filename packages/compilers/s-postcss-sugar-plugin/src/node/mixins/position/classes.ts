@@ -21,7 +21,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  */
 
 class postcssSugarPluginPositionClassesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

@@ -5,32 +5,29 @@ import __spawn from '../node/process/spawn';
 import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __SDuration from '@coffeekraken/s-duration';
+import __formatEstimation from '@coffeekraken/sugar/shared/time/formatEstimation';
 
 export class SRunCommandInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                command: {
-                    type: 'String',
-                    description: 'Specify the command you want to execute',
-                    alias: 'c',
-                },
-                directory: {
-                    type: 'String',
-                    description:
-                        'Specify where you want to execute this command. Can be a glob to execute command into multiple directories at once',
-                    alias: 'd',
-                },
-                verbose: {
-                    type: 'Boolean',
-                    description:
-                        'Specify if you want each process to log or not',
-                    default: false,
-                    alias: 'v',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            command: {
+                type: 'String',
+                description: 'Specify the command you want to execute',
+                alias: 'c',
+            },
+            directory: {
+                type: 'String',
+                description:
+                    'Specify where you want to execute this command. Can be a glob to execute command into multiple directories at once',
+                alias: 'd',
+            },
+            verbose: {
+                type: 'Boolean',
+                description: 'Specify if you want each process to log or not',
+                default: false,
+                alias: 'v',
+            },
+        };
     }
 }
 
@@ -42,6 +39,8 @@ export default function runCommand(stringArgs = '') {
             let paths: string[] = [];
 
             const duration = new __SDuration();
+
+            let currentDuration = 0;
 
             if (props.directory) {
                 paths = <string[]>__SGlob.resolve(props.directory, {
@@ -84,6 +83,8 @@ export default function runCommand(stringArgs = '') {
                     )}</cyan>`,
                 });
 
+                const start = Date.now();
+
                 const command = __spawn(props.command, [], {
                     cwd: path,
                 });
@@ -91,13 +92,21 @@ export default function runCommand(stringArgs = '') {
                 else pipeErrors(command);
                 const result = await command;
 
+                const end = Date.now();
+                currentDuration += end - start;
+
+                const average = currentDuration / i;
+                const remaining = average * (paths.length - i);
+
                 emit('log', {
                     value: `<green>[command]</green> Command executed <green>successfully</green> in <yellow>${result.formatedDuration}</yellow>`,
                 });
                 emit('log', {
                     value: `<green>[command]</green> <magenta>${
                         paths.length - (i + 1)
-                    }</magenta> folder(s) remaining...`,
+                    }</magenta> folder(s), <cyan>~${__formatEstimation(
+                        remaining,
+                    )}</cyan> remaining...`,
                 });
                 emit('log', {
                     value: ' ',

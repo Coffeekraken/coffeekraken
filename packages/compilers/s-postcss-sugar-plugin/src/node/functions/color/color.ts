@@ -5,58 +5,52 @@ import __SInterface from '@coffeekraken/s-interface';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 class colorVariantNameInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached ??
-            this.cache({
-                saturate: {
-                    type: 'Number|String',
-                    default: 0,
-                },
-                desaturate: {
-                    type: 'Number',
-                    default: 0,
-                },
-                darken: {
-                    type: 'Number',
-                    default: 0,
-                },
-                lighten: {
-                    type: 'Number',
-                    default: 0,
-                },
-                spin: {
-                    type: 'Number',
-                    default: 0,
-                },
-                alpha: {
-                    type: 'Number',
-                    default: 1,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            saturate: {
+                type: 'Number|String',
+                default: 0,
+            },
+            desaturate: {
+                type: 'Number',
+                default: 0,
+            },
+            darken: {
+                type: 'Number',
+                default: 0,
+            },
+            lighten: {
+                type: 'Number',
+                default: 0,
+            },
+            spin: {
+                type: 'Number',
+                default: 0,
+            },
+            alpha: {
+                type: 'Number',
+                default: 1,
+            },
+        };
     }
 }
 
 class postcssSugarPluginColorInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                color: {
-                    type: 'String',
-                    alias: 'c',
-                },
-                variant: {
-                    type: 'String',
-                    alias: 'v',
-                },
-                modifier: {
-                    type: 'String',
-                    alias: 'm',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            color: {
+                type: 'String',
+                alias: 'c',
+            },
+            variant: {
+                type: 'String',
+                alias: 'v',
+            },
+            modifier: {
+                type: 'String',
+                alias: 'm',
+            },
+        };
     }
 }
 export { postcssSugarPluginColorInterface as interface };

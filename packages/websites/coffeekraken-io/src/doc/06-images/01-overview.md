@@ -47,6 +47,4 @@ To do so, simply create a file `.sugar/imageBuilder.config.js` and override the 
 
 {{> config path='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
-<!-- {{> interface namespace='@coffeekraken.s-images-builder.node.sImagesBuilder' }} -->
-
 {{/layout-doc }}

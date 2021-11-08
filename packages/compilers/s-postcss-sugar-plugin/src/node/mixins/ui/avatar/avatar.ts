@@ -1,30 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginUiAvatarInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                shape: {
-                    type: 'String',
-                    values: ['default', 'square', 'rounded'],
-                    default: 'default',
+    static get _definition() {
+        return {
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'rounded'],
+                default: 'default',
+            },
+            style: {
+                type: 'String',
+                value: ['solid'],
+                default: 'solid',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                style: {
-                    type: 'String',
-                    value: ['solid'],
-                    default: 'solid',
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'shape', 'interactive'],
-                    default: ['bare', 'lnf', 'shape'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'shape', 'interactive'],
+                default: ['bare', 'lnf', 'shape'],
+            },
+        };
     }
 }
 

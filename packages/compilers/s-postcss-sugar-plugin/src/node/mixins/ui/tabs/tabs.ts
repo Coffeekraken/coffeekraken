@@ -2,38 +2,35 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiTabInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                style: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.tabs.defaultStyle'),
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.tabs.defaultStyle'),
+            },
+            grow: {
+                type: 'Boolean',
+                default: false,
+            },
+            direction: {
+                type: 'String',
+                values: ['vertical', 'horizontal'],
+                default: 'horizontal',
+            },
+            outline: {
+                type: 'Boolean',
+                default: __STheme.config('ui.tabs.outline'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                grow: {
-                    type: 'Boolean',
-                    default: false,
-                },
-                direction: {
-                    type: 'String',
-                    values: ['vertical', 'horizontal'],
-                    default: 'horizontal',
-                },
-                outline: {
-                    type: 'Boolean',
-                    default: __STheme.config('ui.tabs.outline'),
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'grow', 'direction'],
-                    default: ['bare', 'lnf', 'grow', 'direction'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'grow', 'direction'],
+                default: ['bare', 'lnf', 'grow', 'direction'],
+            },
+        };
     }
 }
 

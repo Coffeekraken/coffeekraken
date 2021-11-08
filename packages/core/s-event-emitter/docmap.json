@@ -5,35 +5,195 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-event-emitter.sugar.js.event.sEventEmitter": {
+                "name": "SEventEmitter",
+                "type": "Class",
+                "namespace": "@coffeekraken.s-event-emitter.sugar.js.event",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SEventEmitter from '@coffeekraken/sugar/js/event/SEventEmitter';"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SEventEmitter.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SEventEmitter.ts",
+                "children": {
+                    "global": {
+                        "name": "global",
+                        "type": "SEventEmitter",
+                        "description": "This static property store a global event emitter instance that you can use to\ncommunicate between processes with ease or simply into a same process\nbetween all of your running things",
+                        "static": "true",
+                        "since": "2.0.0"
+                    },
+                    "pipe": {
+                        "name": "pipe",
+                        "type": "Function",
+                        "description": "This method is the same as the ```pipe```and ```pipeFrom``` one but it's just act as the inverse.\nHere you specify whenre you want to pipe this instance events and not from which you want to pipe them here...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "eventEmitterSettings": {
+                        "name": "eventEmitterSettings",
+                        "type": "ISEventEmitterSettings",
+                        "description": "Access the event emitter settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "const promise = new SEventEmitter(({ resolve, reject, emit }) => {\n   // do something...\n}).then(value => {\n   // do something...\n}).finally(value => {\n   // do something...\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "pipeErrors": {
+                        "name": "pipeErrors",
+                        "type": "Function",
+                        "description": "This is the exact same as the original ```pipe``` method. It's just pipe only the errors.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "pipeFrom": {
+                        "name": "pipeFrom",
+                        "type": "Function",
+                        "description": "This is the exacte same as the original ```pipe``` method. It's just an aliasw.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "start": {
+                        "name": "start",
+                        "type": "Function",
+                        "description": "This method has to be called when you want to start the event emissions.\nThis is usefull only if you set the setting ```asyncStart``` to true.\nUntill you call this method, all the emitted events (those specified in the settings.bufferedEvents stack)\nare store in memory and emitted after.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "emit": {
+                        "name": "emit",
+                        "type": "Function",
+                        "description": "This is the method that allows you to emit the callbacks like \"catch\", \"finally\", etc... without actually resolving the Promise itself",
+                        "example": [],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "on": {
+                        "name": "on",
+                        "type": "Function",
+                        "description": "This method allows the SEventEmitter user to register a function that will be called every time the \"resolve\" one is called in the executor\nThe context of the callback will be the SEventEmitter instance itself so you can call all the methods available like \"resolve\", \"release\", \"on\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SEventEmitter instance through the last parameter like so \"(value, SEventEmitterInstance) => { ... }\".",
+                        "example": [],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "off": {
+                        "name": "off",
+                        "type": "Function",
+                        "description": "This method allows you to unsubscribe to an event by passing the event name an optionally the callback function.\nIf you don't pass the callback function, all the subscribed events the same as the passed one will be unsubscribed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "destroy": {
+                        "name": "destroy",
+                        "type": "Function",
+                        "description": "Destroying the SEventEmitter instance by unregister all the callbacks, etc...",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

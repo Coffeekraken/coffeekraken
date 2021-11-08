@@ -51,20 +51,17 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginIconClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                icons: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' ', '\n'],
-                    },
-                    default: [],
-                    required: true,
+    static get _definition() {
+        return {
+            icons: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' ', '\n'],
                 },
-            })
-        );
+                default: [],
+                required: true,
+            },
+        };
     }
 }
 

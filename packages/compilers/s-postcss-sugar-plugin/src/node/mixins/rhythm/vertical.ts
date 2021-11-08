@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __astNodesToString from '../../utils/astNodesToString';
 
 class postcssSugarPluginRhythmVerticalMixinInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

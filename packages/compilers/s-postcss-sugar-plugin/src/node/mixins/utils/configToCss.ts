@@ -33,22 +33,19 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginUtilsConfigToCssInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                dotPath: {
-                    type: 'String',
-                    required: true,
-                },
-                exclude: {
-                    type: 'Array<String>',
-                },
-                only: {
-                    type: 'Array<String>',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            dotPath: {
+                type: 'String',
+                required: true,
+            },
+            exclude: {
+                type: 'Array<String>',
+            },
+            only: {
+                type: 'Array<String>',
+            },
+        };
     }
 }
 

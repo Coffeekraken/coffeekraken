@@ -5,40 +5,95 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-log.shared.iSLog": {
+                "name": "ISLog",
+                "type": "Interface",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface define the shape a an log object that can be used\nacross some other services/classes like SStdio, and others dependings\non the needs...",
+                "namespace": "@coffeekraken.s-log.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { ISLog } from '@coffeekraken/s-log';\nfunction myCoolFunction(log: ISLog): void {\n   // do something...\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "ISLog.ts",
+                "extension": "ts",
+                "relPath": "src/shared/ISLog.ts",
+                "children": {}
+            },
             "@coffeekraken.s-log.shared.iSLogAsk": {
                 "name": "ISLogAsk",
                 "type": "Interface",
@@ -67,10 +122,283 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "ISLogAsk.js",
-                "extension": "js",
-                "relPath": "src/shared/ISLogAsk.js",
+                "filename": "ISLogAsk.ts",
+                "extension": "ts",
+                "relPath": "src/shared/ISLogAsk.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-log.shared.sLog": {
+                "name": "SLog",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent a log that can be make across the application using the \"emit\"\nfunction of an SPromise instance for example. It has as goal to centralize and harmonize\nwhat a log can be and can do.\nEach log is specified by some characteristic like a \"type\" that can be something like \"SLog.LOG\" or \"SLog.WARN\".\nIt has also the possibility to unactivate some logs depending on different cisronstances like for example the\nfact to set the `SLog.filter([SLog.WARN, SLog.ERROR])` to only let the warn and error logs\nactivated.",
+                "namespace": "@coffeekraken.s-log.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import __SLog from '@coffeekraken/s-log';\nconst myLog = new __SLog({\n   value: 'Hello world',\n   type: __SLog.WARN\n});\n\n// Or thgouth an SPromise emit\nimport __SPromise from '@coffeekraken/s-promise';\nnew __SPromise(({resolve, reject, emit}) => {\n     emit('log', {\n         value: 'Hello world',\n         type: __SLog.ERROR\n     });\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SLog.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SLog.ts",
+                "children": {
+                    "lOG": {
+                        "name": "LOG",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"LOG\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "iNFO": {
+                        "name": "INFO",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"INFO\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "wARN": {
+                        "name": "WARN",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"WARN\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "eRROR": {
+                        "name": "ERROR",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"ERROR\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "vERBOSE": {
+                        "name": "VERBOSE",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"VERBOSE\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "cHILDPROCESS": {
+                        "name": "CHILD_PROCESS",
+                        "type": "Number",
+                        "description": "This static constant tells a log that it is of type \"CHILD_PROCESS\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "filter": {
+                        "name": "filter",
+                        "type": "Function",
+                        "description": "This static method allows you to filter the logs across your entire app\nat once. To do this, simply name your filter and pass an object describing\nwhat you want to apply as filter.\nThese filters will have as consequence to set the \"active\" property of each logs to\ntrue or false.",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "SLog.filter({\n     type: [SLog.WARN, SLog.ERROR], // display only the warnings and the errors\n     decorators: false           // only the logs that does not want decorators\n     // etc...\n});"
+                            }
+                        ],
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "clearFilters": {
+                        "name": "clearFilters",
+                        "type": "Function",
+                        "description": "This static method allows you to reset all the filters applied",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "removeFilter": {
+                        "name": "removeFilter",
+                        "type": "Function",
+                        "description": "This static method allows you to remove a particular filter by its name",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "setDefaultLogObj": {
+                        "name": "setDefaultLogObj",
+                        "type": "Function",
+                        "description": "This static method allows you to set a default log object\nabove every others will be extended.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "value": {
+                        "name": "value",
+                        "type": "Any",
+                        "description": "Access the \"value\" property of the SLog object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "type": {
+                        "name": "type",
+                        "type": "String",
+                        "description": "Access the \"type\" property of the SLog object\nThis specify which type if the log. LOG, INFO, WARN, ERROR or VERBODE",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "active": {
+                        "name": "active",
+                        "type": "Boolean",
+                        "description": "Access the \"active\" property of the SLog object\nThis specify if the log is active depending on parameters like `SLog.filter`.\nCheck the documentation of this static method for more info.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "decorators": {
+                        "name": "decorators",
+                        "type": "Boolean",
+                        "description": "Access the \"decorators\" property of the SLog object.\nThis specify if the log has to be printed with decorators or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "time": {
+                        "name": "time",
+                        "type": "Boolean",
+                        "description": "Access the \"time\" property of the SLog object.\nThis specify if the log has to be printed with his time or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "timestamp": {
+                        "name": "timestamp",
+                        "type": "String",
+                        "description": "Access the \"timestamp\" property of the SLog object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "clear": {
+                        "name": "clear",
+                        "type": "Boolean",
+                        "description": "Access the \"clear\" property of the SLog object.\nThis specify if the previous logs have to be cleared before printing this one",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "temp": {
+                        "name": "temp",
+                        "type": "Boolean",
+                        "description": "Access the \"temp\" property of the SLog object.\nThis specify if this log is a temporary one and if it has to be deleted\nwhen the next log appear.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "as": {
+                        "name": "as",
+                        "type": "String",
+                        "description": "Access the \"as\" property of the SLog object.\nThis specify the optimal way the log has to be displayed.\nThis depends on the logger you use and how it can display logs.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             }
         }
     }

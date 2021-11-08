@@ -3,35 +3,31 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['solid', 'gradient', 'outline', 'text'],
-                    default: ['solid', 'gradient', 'outline', 'text'],
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid', 'gradient', 'outline', 'text'],
+                default: ['solid', 'gradient', 'outline', 'text'],
+            },
+            defaultColor: {
+                type: 'String',
+                default: __STheme.config('ui.button.defaultColor'),
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid', 'gradient', 'outline', 'text'],
+                default: __STheme.config('ui.button.defaultStyle') ?? 'solid',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                defaultColor: {
-                    type: 'String',
-                    default: __STheme.config('ui.button.defaultColor'),
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid', 'gradient', 'outline', 'text'],
-                    default:
-                        __STheme.config('ui.button.defaultStyle') ?? 'solid',
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'tf', 'vr'],
-                    default: ['bare', 'lnf', 'tf', 'vr'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
+            },
+        };
     }
 }
 

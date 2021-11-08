@@ -22,41 +22,38 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginGradientInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                start: {
-                    type: 'String',
-                    required: true,
-                    alias: 's',
-                },
-                end: {
-                    type: 'String',
-                    required: true,
-                    alias: 'e',
-                },
-                type: {
-                    type: 'String',
-                    values: ['linear', 'radial'],
-                    default: 'linear',
-                },
-                x: {
-                    type: 'String',
-                },
-                y: {
-                    type: 'String',
-                },
-                angle: {
-                    type: 'Number | String',
-                    default: 0,
-                },
-                size: {
-                    type: 'String',
-                    default: 'farthest-side',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            start: {
+                type: 'String',
+                required: true,
+                alias: 's',
+            },
+            end: {
+                type: 'String',
+                required: true,
+                alias: 'e',
+            },
+            type: {
+                type: 'String',
+                values: ['linear', 'radial'],
+                default: 'linear',
+            },
+            x: {
+                type: 'String',
+            },
+            y: {
+                type: 'String',
+            },
+            angle: {
+                type: 'Number | String',
+                default: 0,
+            },
+            size: {
+                type: 'String',
+                default: 'farthest-side',
+            },
+        };
     }
 }
 

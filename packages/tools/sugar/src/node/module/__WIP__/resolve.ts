@@ -47,48 +47,43 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  */
 
 export class ResolveSettingsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                dirs: {
-                    type: 'Array<String>',
-                    default: __SSugarConfig.get('module.resolve.dirs'),
-                },
-                extensions: {
-                    type: 'Array<String>',
-                    default: __SSugarConfig.get('module.resolve.extensions'),
-                },
-                fields: {
-                    type: 'Array<String>',
-                    default: __SSugarConfig.get('module.resolve.fields'),
-                },
-                buildInModules: {
-                    type: 'Boolean',
-                    default: __SSugarConfig.get(
-                        'module.resolve.builtInModules',
-                    ),
-                },
-                preferExports: {
-                    type: 'Boolean',
-                    default: __SSugarConfig.get('module.resolve.preferExports'),
-                },
-                method: {
-                    type: 'String',
-                    values: ['import', 'require'],
-                    default: __SSugarConfig.get('module.resolve.method'),
-                },
-                target: {
-                    type: 'String',
-                    values: ['node', 'default'],
-                    default: __SSugarConfig.get('module.resolve.target'),
-                },
-                rootDir: {
-                    type: 'String',
-                    default: __packageRootDir(),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            dirs: {
+                type: 'Array<String>',
+                default: __SSugarConfig.get('module.resolve.dirs'),
+            },
+            extensions: {
+                type: 'Array<String>',
+                default: __SSugarConfig.get('module.resolve.extensions'),
+            },
+            fields: {
+                type: 'Array<String>',
+                default: __SSugarConfig.get('module.resolve.fields'),
+            },
+            buildInModules: {
+                type: 'Boolean',
+                default: __SSugarConfig.get('module.resolve.builtInModules'),
+            },
+            preferExports: {
+                type: 'Boolean',
+                default: __SSugarConfig.get('module.resolve.preferExports'),
+            },
+            method: {
+                type: 'String',
+                values: ['import', 'require'],
+                default: __SSugarConfig.get('module.resolve.method'),
+            },
+            target: {
+                type: 'String',
+                values: ['node', 'default'],
+                default: __SSugarConfig.get('module.resolve.target'),
+            },
+            rootDir: {
+                type: 'String',
+                default: __packageRootDir(),
+            },
+        };
     }
 }
 

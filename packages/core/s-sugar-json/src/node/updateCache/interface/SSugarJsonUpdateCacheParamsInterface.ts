@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SSugarJsonUpdateCacheParamsInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

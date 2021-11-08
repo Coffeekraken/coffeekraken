@@ -21,7 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginFontFacesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

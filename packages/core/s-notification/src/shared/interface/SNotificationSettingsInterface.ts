@@ -13,32 +13,29 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SNotificationSettingsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                adapters: {
-                    type: 'Array<String>',
-                    required: true,
-                    default: __SugarConfig.get('notification.adapters'),
-                },
-                adaptersSettings: {
-                    type: 'Object',
-                    required: true,
-                    default: __SugarConfig.get('notification.adaptersSettings'),
-                },
-                enable: {
-                    type: 'Boolean',
-                    required: true,
-                    default: __SugarConfig.get('notification.enable'),
-                },
-                types: {
-                    type: 'Object',
-                    required: true,
-                    default: __SugarConfig.get('notification.types'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            adapters: {
+                type: 'Array<String>',
+                required: true,
+                default: __SugarConfig.get('notification.adapters'),
+            },
+            adaptersSettings: {
+                type: 'Object',
+                required: true,
+                default: __SugarConfig.get('notification.adaptersSettings'),
+            },
+            enable: {
+                type: 'Boolean',
+                required: true,
+                default: __SugarConfig.get('notification.enable'),
+            },
+            types: {
+                type: 'Object',
+                required: true,
+                default: __SugarConfig.get('notification.types'),
+            },
+        };
     }
 }
 export default SNotificationSettingsInterface;

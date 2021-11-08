@@ -8,7 +8,6 @@ export default (stringArgs = '') => {
         const sitemap = new __SSitemap();
         const buildPromise = sitemap.build(stringArgs);
         pipe(buildPromise);
-        console.log(await buildPromise);
         resolve(await buildPromise);
     });
 };

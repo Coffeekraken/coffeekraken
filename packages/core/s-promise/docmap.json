@@ -5,23 +5,33 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -32,16 +42,222 @@
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-promise.sugar.js.promise.sPromise": {
+                "name": "SPromise",
+                "type": "Class",
+                "description": "This class works the same as the default Promise one. The difference is that you have more control on this one like\nthe possibility to resolve it multiple times. Here's a list of the \"differences\" and the \"features\" that this class provide:",
+                "namespace": "@coffeekraken.s-promise.sugar.js.promise",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SPromise from '@coffeekraken/s-promise';\nfunction myCoolFunction() {\n   return new SPromise(({ resolve, reject, emit }) => {\n       // do something...\n       setInterval(() => {\n           // resolve the promise\n           resolve('something');\n\n       }, 1000);\n   });\n}\n\n// calling the function and get back the SPromise instance\nmyCoolFunction().then(value => {\n   // do something here...\n}).then(1, value => {\n   // do something just once...\n}).catch(error => {\n   // do something with the returned reason of failure...\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SPromise.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SPromise.ts",
+                "children": {
+                    "treatAsValue": {
+                        "name": "treatAsValue",
+                        "type": "Function",
+                        "description": "This method wrap the promise into a revocable proxy to allow\npassing this Promise to methods like ```then```, etc... and make\nthis promise treated as a value and not as a chained promise.\nOnce you have done with this behavior, you just have to call\nthe ```restorePromiseBehavior``` on the returned proxy and\nthe default promise behavior will be restored",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "promiseSettings": {
+                        "name": "promiseSettings",
+                        "type": "ISPromiseSettings",
+                        "description": "Access to the spromise settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "const promise = new SPromise(({ resolve, reject, emit }) => {\n   // do something...\n}).then(value => {\n   // do something...\n}).finally(value => {\n   // do something...\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "promiseState": {
+                        "name": "promiseState",
+                        "type": "String",
+                        "description": "Access the promise state. Can be one of these:\n- pending: When the promise is waiting for resolution or rejection\n- resolved: When the promise has been resolved\n- rejected: When the promise has been rejected\n- canceled: When the promise has been canceled\n- destroyed: When the promise has been destroyed",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "registerProxy": {
+                        "name": "registerProxy",
+                        "type": "Function",
+                        "description": "ALlows you to register a proxy at a certain point of the promise lifecycle like:\n- resolve: Allows you to edit the value that will be sent to the resolve point\n- reject: Allows you to edit the value that will be sent to the reject point",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "is": {
+                        "name": "is",
+                        "type": "Function",
+                        "description": "Check is the promise is on one of the passed status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "isPending": {
+                        "name": "isPending",
+                        "type": "Function",
+                        "description": "Return back true or false depending on the promise status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "isResolved": {
+                        "name": "isResolved",
+                        "type": "Function",
+                        "description": "Return back true or false depending on the promise status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "isRejected": {
+                        "name": "isRejected",
+                        "type": "Function",
+                        "description": "Return back true or false depending on the promise status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "isCanceled": {
+                        "name": "isCanceled",
+                        "type": "Function",
+                        "description": "Return back true or false depending on the promise status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "isDestroyed": {
+                        "name": "isDestroyed",
+                        "type": "Function",
+                        "description": "Return back true or false depending on the promise status",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "resolve": {
+                        "name": "resolve",
+                        "type": "Function",
+                        "description": "This is the \"resolve\" method exposed on the promise itself for convinience",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "reject": {
+                        "name": "reject",
+                        "type": "Function",
+                        "description": "This is the \"reject\" method exposed on the promise itself for convinience",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "cancel": {
+                        "name": "cancel",
+                        "type": "Function",
+                        "description": "This is the \"cancel\" method exposed on the promise itself for convinience",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "catch": {
+                        "name": "catch",
+                        "type": "Function",
+                        "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "new SPromise(({ resolve, reject }) => {\n   // do something...\n   reject('hello world');\n}).catch(value => {\n   // do something with the value that is \"hello world\"\n}).catch(1, value => {\n   // do something that will be executed only once\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "finally": {
+                        "name": "finally",
+                        "type": "Function",
+                        "description": "This method allows the SPromise user to register a function that will be called every time the \"reject\" one is called in the executor\nThe context of the callback will be the SPromise instance itself so you can call all the methods available like \"resolve\", \"catch\", etc using\nthe \"this.resolve('something')\" statusment. In an arrow function like \"(value) => { ... }\", the \"this\" keyword will be bound to the current context where you define\nyour function. You can access to the SPromise instance through the last parameter like so \"(value, sPromiseInstance) => { ... }\".",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "new SPromise(({ resolve, reject, emit }) => {\n   // do something...\n   resolve('hello world');\n}).finally(value => {\n   // do something with the value that is \"hello world\"\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "destroy": {
+                        "name": "destroy",
+                        "type": "Function",
+                        "description": "Destroying the SPromise instance by unregister all the callbacks, etc...",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-promise.SPromise.js.treatAsValue": {
                 "name": "treatAsValue",
                 "type": "Function",
@@ -59,9 +275,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "treatAsValue.js",
-                "extension": "js",
-                "relPath": "src/shared/treatAsValue.js",
+                "filename": "treatAsValue.ts",
+                "extension": "ts",
+                "relPath": "src/shared/treatAsValue.ts",
                 "children": {}
             }
         }

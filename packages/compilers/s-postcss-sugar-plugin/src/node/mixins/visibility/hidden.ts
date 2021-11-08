@@ -22,7 +22,7 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginVisuallyHiddenMixinInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

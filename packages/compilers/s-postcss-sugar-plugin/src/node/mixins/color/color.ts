@@ -1,22 +1,19 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginColorMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                current: {
-                    type: 'String',
-                    required: true,
-                },
-                primary: {
-                    type: 'String',
-                },
-                secondary: {
-                    type: 'String',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            current: {
+                type: 'String',
+                required: true,
+            },
+            primary: {
+                type: 'String',
+            },
+            secondary: {
+                type: 'String',
+            },
+        };
     }
 }
 export { postcssSugarPluginColorMixinInterface as interface };

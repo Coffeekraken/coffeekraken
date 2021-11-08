@@ -5,23 +5,33 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -30,14 +40,24 @@
             "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -59,14 +79,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SCommandProcess.js",
-                "extension": "js",
-                "relPath": "src/node/SCommandProcess.js",
+                "filename": "SCommandProcess.ts",
+                "extension": "ts",
+                "relPath": "src/node/SCommandProcess.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
+                    "commandProcessSettings": {
+                        "name": "commandProcessSettings",
+                        "type": "ISCommandProcessSettings",
+                        "description": "Access the command process settings",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -74,10 +94,10 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "commandProcessSettings": {
-                        "name": "commandProcessSettings",
-                        "type": "ISCommandProcessSettings",
-                        "description": "Access the command process settings",
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -110,14 +130,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SProcess.js",
-                "extension": "js",
-                "relPath": "src/node/SProcess.js",
+                "filename": "SProcess.ts",
+                "extension": "ts",
+                "relPath": "src/node/SProcess.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
+                    "params": {
+                        "name": "params",
+                        "type": "String",
+                        "description": "Access the process params",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -158,6 +178,28 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
+                    "currentExecutionObj": {
+                        "name": "currentExecutionObj",
+                        "type": "ISProcessProcessObj",
+                        "description": "Store the current execution object info like startTime, endTime, duration, state, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "paramsInterface": {
+                        "name": "paramsInterface",
+                        "type": "Object",
+                        "description": "Store the parameters interface to apply on the params object and on the initialParams object.\nCan come from the static ```interfaces.params``` property or the ```settings.interface``` one.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
                     "from": {
                         "name": "from",
                         "type": "Function",
@@ -185,8 +227,18 @@
                     "run": {
                         "name": "run",
                         "type": "Function",
-                        "description": "Static \"run\" function to use as a shortcut of the new, and run call",
-                        "static": "true",
+                        "description": "Run the process by calling the ```process``` method implemented on your\nSProcess class (if exists).\nTake care of starting timers for duration tracking, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -332,6 +384,224 @@
                     }
                 }
             },
+            "@coffeekraken.s-process.s-process.sProcessManager": {
+                "name": "SProcessManager",
+                "type": "Class",
+                "description": "This class represent a process handler class that will fire up some SProcess processes",
+                "namespace": "@coffeekraken.s-process.s-process",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessManager.ts",
+                "extension": "ts",
+                "relPath": "src/node/SProcessManager.ts",
+                "children": {
+                    "processManageSettings": {
+                        "name": "processManageSettings",
+                        "type": "ISProcessManageSettings",
+                        "description": "Access the process manager process settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "attachProcess": {
+                        "name": "attachProcess",
+                        "type": "Function",
+                        "description": "This method allows you to attach a process to the manager with\nhis proper settings like restart, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "detachProcess": {
+                        "name": "detachProcess",
+                        "type": "Function",
+                        "description": "Simple method to detach a process from the manager using his id.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "run": {
+                        "name": "run",
+                        "type": "Function",
+                        "description": "Proxy to the ```run``` method on the passed processInstance for the specified process id",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-process.s-process.sProcessManagerProcessWrapper": {
+                "name": "SProcessManagerProcessWrapper",
+                "type": "Class",
+                "description": "This class represent a process manager process wrapper that handle the actual restarting, watch, etc...",
+                "namespace": "@coffeekraken.s-process.s-process",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessManagerProcessWrapper.ts",
+                "extension": "ts",
+                "relPath": "src/node/SProcessManagerProcessWrapper.ts",
+                "children": {
+                    "initialParams": {
+                        "name": "initialParams",
+                        "type": "Object",
+                        "description": "Store the initial params object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "processInstance": {
+                        "name": "processInstance",
+                        "type": "SProcess",
+                        "description": "Store the actual processInstance passed through the constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "processManagerProcessSettings": {
+                        "name": "processManagerProcessSettings",
+                        "type": "ISProcessManagerProcessWrapperSettings",
+                        "description": "Access the process manager process settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "detach": {
+                        "name": "detach",
+                        "type": "Function",
+                        "description": "This method has to be called by the process manager when this process has been detached\nin order to clear some listeners, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "run": {
+                        "name": "run",
+                        "type": "Function",
+                        "description": "Proxy to the ```run``` method on the passed processInstance",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-process.sugar.node.process.sProcessPipe": {
+                "name": "SProcessPipe",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allowddffffs you to handle easily some process pipes.\nA process pipe is simply multiple processes that will execute one after\nthe other by passing the params to one after the other\nand will be resolved once all the processes have been executed correctly",
+                "namespace": "@coffeekraken.s-process.sugar.node.process",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SProcess, { SProcessPipe } from '@coffeekraken/s-process';\nclass MyProcess extends SProcess {\n constructor(settings = {}) {\n     super(settings);\n }\n}\nconst processPipe = new SProcessPipe([\n   (params) => {\n     // update params to pass to the next process\n     return params;\n   },\n   new MyProcess()\n]);\nconst res = await processPipe.run({\n   something: 'coco'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessPipe.ts",
+                "extension": "ts",
+                "relPath": "src/node/SProcessPipe.ts",
+                "children": {
+                    "processPipeSettings": {
+                        "name": "processPipeSettings",
+                        "type": "ISProcessPipeSettings",
+                        "description": "Access the process pipe settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "run": {
+                        "name": "run",
+                        "type": "Function",
+                        "description": "Execute the processes pipe",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-process.sugar.node.process.interface.sCommandProcessInterface": {
                 "name": "SCommandProcessInterface",
                 "type": "Class",
@@ -343,9 +613,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SCommandProcessInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SCommandProcessInterface.js",
+                "filename": "SCommandProcessInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SCommandProcessInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-process.sugar.node.process.interface.sProcessInterface": {
@@ -359,9 +629,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SProcessInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SProcessInterface.js",
+                "filename": "SProcessInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SProcessInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-process.sugar.node.process.interface.sProcessSettingsInterface": {
@@ -375,9 +645,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SProcessSettingsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SProcessSettingsInterface.js",
+                "filename": "SProcessSettingsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SProcessSettingsInterface.ts",
                 "children": {}
             }
         }

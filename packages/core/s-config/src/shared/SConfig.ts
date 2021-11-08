@@ -282,9 +282,6 @@ export default class SConfig {
                 );
 
                 if (value === undefined) {
-                    console.log(string, match, path);
-                    console.log(Object.keys(config));
-
                     throw new Error(
                         `<red>[${this.constructor.name}]</red> Sorry but the referenced "<yellow>${match}</yellow>" config value does not exiats...`,
                     );

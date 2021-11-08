@@ -13,19 +13,24 @@
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -40,18 +45,506 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-color.shared.sColor": {
+                "name": "SColor",
+                "type": "Class",
+                "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- opacity\n- darken\n- lighten\n- desaturate\n- saturate\n- spin (change hue)\n- transparentize\n- alpha\n- grayscale\n- Conversions\n- rgba\n- hsla\n- hex\n- Print out formats\n- toRgbaString\n- toHslString\n- toHexString\n- toString(format = null)",
+                "namespace": "@coffeekraken.s-color.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SColor from '@coffeekraken/s-color'\nlet myColor = new SColor(#ff0000);\n// get a lighter color\nlet ligtherColor = myColor.lighten(20);\n// print the color to rgba\nconsole.log(lighterColor.toRgbaString());"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SColor.ts",
+                "children": {
+                    "colors": {
+                        "name": "colors",
+                        "type": "Object",
+                        "description": "Static color names map",
+                        "static": "true",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "colorSettings": {
+                        "name": "colorSettings",
+                        "type": "ISColorSettings",
+                        "description": "Access the color settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getColor": {
+                        "name": "getColor",
+                        "type": "Function",
+                        "description": "This method take as parameter the passed color to the constructor and has to return the\nactual real color like color from the static colors listed in the SColor class or maybe\nfrom the Sugar configured colors"
+                    },
+                    "toHex": {
+                        "name": "toHex",
+                        "type": "Function",
+                        "description": "To hex",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHex();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toHsl": {
+                        "name": "toHsl",
+                        "type": "Function",
+                        "description": "To hsl",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHsl();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toRgba": {
+                        "name": "toRgba",
+                        "type": "Function",
+                        "description": "To rgba",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toRgba();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "r": {
+                        "name": "r",
+                        "type": "Number",
+                        "description": "Get/set the red value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.r;\nmyColor.r = 128;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "g": {
+                        "name": "g",
+                        "type": "Number",
+                        "description": "Get/set the green value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.g;\nmyColor.g = 20;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "b": {
+                        "name": "b",
+                        "type": "Number",
+                        "description": "Get/set the blue value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.b;\nmyColor.b = 30;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "a": {
+                        "name": "a",
+                        "type": "Number",
+                        "description": "Get/set the alpha value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.a;\nmyColor.a = 20;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "l": {
+                        "name": "l",
+                        "type": "Number",
+                        "description": "The luminence value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.l;\nmyColor.l = 10;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "s": {
+                        "name": "s",
+                        "type": "Number",
+                        "description": "The saturation value",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.s;\nmyColor.s = 20;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "h": {
+                        "name": "h",
+                        "type": "Number",
+                        "description": "Get/set the hue",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.h;\nmyColor.h = 30;"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "reset": {
+                        "name": "reset",
+                        "type": "Function",
+                        "description": "Reset to the original color",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.reset();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "apply": {
+                        "name": "apply",
+                        "type": "Function",
+                        "description": "This method allows you to apply some updated to your color\nusing the parameters defined in the SColorApplyInterface like\nfor example \"saturate\", \"desaturate\", etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "desaturate": {
+                        "name": "desaturate",
+                        "type": "Function",
+                        "description": "Desaturate",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.desaturate(20);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "saturate": {
+                        "name": "saturate",
+                        "type": "Function",
+                        "description": "Saturate",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.saturate(20);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "grayscale": {
+                        "name": "grayscale",
+                        "type": "Function",
+                        "description": "Return a new SColor instance of the color to grayscale",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.grayscale();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "spin": {
+                        "name": "spin",
+                        "type": "Function",
+                        "description": "Spin the hue on the passed value (max 360)",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.spin(230);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "transparentize": {
+                        "name": "transparentize",
+                        "type": "Function",
+                        "description": "Transparentize",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.transparenize(30);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "alpha": {
+                        "name": "alpha",
+                        "type": "Function",
+                        "description": "Set the alpha",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.alpha(10);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "opacity": {
+                        "name": "opacity",
+                        "type": "Function",
+                        "description": "Set the opacity (alias for alpha)",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.opacity(20);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "opacify": {
+                        "name": "opacify",
+                        "type": "Function",
+                        "description": "Opacify",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.opacify(18);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "darken": {
+                        "name": "darken",
+                        "type": "Function",
+                        "description": "Darken",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.darken(20);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "lighten": {
+                        "name": "lighten",
+                        "type": "Function",
+                        "description": "Lighten",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.lighten(20);"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "invert": {
+                        "name": "invert",
+                        "type": "Function",
+                        "description": "Calculate the best color value that will have the best contrast ratio",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toHexString": {
+                        "name": "toHexString",
+                        "type": "Function",
+                        "description": "To hex string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHexString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toRgbaString": {
+                        "name": "toRgbaString",
+                        "type": "Function",
+                        "description": "To rgba string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toRgbaString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toHslString": {
+                        "name": "toHslString",
+                        "type": "Function",
+                        "description": "To hsl string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHslString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Function",
+                        "description": "To string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-color.sugar.node.svelte.compile.interface.sColorApplyParamsInterface": {
                 "name": "SColorApplyParamsInterface",
                 "type": "Class",
@@ -64,9 +557,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SColorApplyParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/interface/SColorApplyParamsInterface.js",
+                "filename": "SColorApplyParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/shared/interface/SColorApplyParamsInterface.ts",
                 "children": {}
             }
         }

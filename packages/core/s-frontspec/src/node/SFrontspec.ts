@@ -103,7 +103,6 @@ export default class SFrontspec extends __SPromise {
                 Object.keys(res.assets).forEach((type) => {
                     const typeObj = res.assets[type];
                     Object.keys(typeObj).forEach((asset) => {
-                        console.log(asset, __SEnv.env);
                         const assetObj = typeObj[asset];
                         if (assetObj.env && !__SEnv.is(assetObj.env)) {
                             __delete(res.assets, `${type}.${asset}`);

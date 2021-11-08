@@ -19,16 +19,13 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginFixClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                defaultFitSize: {
-                    type: 'String',
-                    default: 'fill',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            defaultFitSize: {
+                type: 'String',
+                default: 'fill',
+            },
+        };
     }
 }
 

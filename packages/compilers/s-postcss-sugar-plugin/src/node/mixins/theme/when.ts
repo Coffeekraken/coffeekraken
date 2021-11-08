@@ -3,20 +3,17 @@ import __astNodesToString from '../../utils/astNodesToString';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                variant: {
-                    type: 'String',
-                    default: __SSugarConfig.get('theme.variant'),
-                },
-                theme: {
-                    type: 'String',
-                    default: __SSugarConfig.get('theme.theme'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            variant: {
+                type: 'String',
+                default: __SSugarConfig.get('theme.variant'),
+            },
+            theme: {
+                type: 'String',
+                default: __SSugarConfig.get('theme.theme'),
+            },
+        };
     }
 }
 export { postcssSugarPluginThemeWhenMixinInterface as interface };

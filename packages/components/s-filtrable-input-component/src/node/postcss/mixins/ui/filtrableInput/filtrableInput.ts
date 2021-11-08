@@ -2,29 +2,26 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssUiFiltrableInputInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                style: {
-                    type: 'String',
-                    values: ['solid', 'gradient', 'outline', 'text'],
-                    default: __STheme.config('ui.button.defaultStyle'),
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid', 'gradient', 'outline', 'text'],
+                default: __STheme.config('ui.button.defaultStyle'),
+            },
+            outline: {
+                type: 'Boolean',
+                default: __STheme.config('ui.button.outline'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                outline: {
-                    type: 'Boolean',
-                    default: __STheme.config('ui.button.outline'),
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf'],
-                    default: ['bare', 'lnf'],
-                },
-            })
-        );
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
+            },
+        };
     }
 }
 
@@ -129,8 +126,8 @@ export default function ({
                     &.active,
                     &:active {
                         &:not(.s-filtrable-input__list-no-item):not(.s-filtrable-input__list-loading) {
-                            border-top: 1px solid sugar.color(primary, surface) !important;
-                            background-color: sugar.color(primary, surface) !important;
+                            border-top: 1px solid sugar.color(primary) !important;
+                            background-color: sugar.color(primary) !important;
                             color: sugar.color(primary, foreground) !important;
                         }
                     }

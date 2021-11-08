@@ -14,36 +14,33 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SClass from '@coffeekraken/s-class';
 
 export class SComponentDefaultInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                id: {
-                    type: 'String',
-                    physical: true,
-                },
-                mounted: {
-                    type: 'Boolean',
-                    default: false,
-                    physical: true,
-                },
-                mountWhen: {
-                    type: 'String',
-                    values: ['directly', 'inViewport'],
-                    default: 'directly',
-                },
-                adoptStyle: {
-                    type: 'Boolean',
-                    default: true,
-                    physical: true,
-                },
-                bare: {
-                    type: 'Boolean',
-                    default: false,
-                    physical: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            id: {
+                type: 'String',
+                physical: true,
+            },
+            mounted: {
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+            mountWhen: {
+                type: 'String',
+                values: ['directly', 'inViewport'],
+                default: 'directly',
+            },
+            adoptStyle: {
+                type: 'Boolean',
+                default: true,
+                physical: true,
+            },
+            bare: {
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+        };
     }
 }
 
@@ -210,9 +207,7 @@ export default class SComponent extends __SClass {
 
         // build the final interface class to apply on props
         let InterfaceToApply = class InlineSComponentUtilsInterface extends __SInterface {
-            static get definition() {
-                return {};
-            }
+            static definition = {};
         };
         // @ts-ignore
         InterfaceToApply.definition = {

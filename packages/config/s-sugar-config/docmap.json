@@ -5,30 +5,59 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -44,9 +73,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "contact.config.js",
+                "filename": "contact.config.ts",
                 "extension": "config",
-                "relPath": "src/config/contact.config.js"
+                "relPath": "src/config/contact.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.contact.email.url": {
                 "name": "url",
@@ -60,9 +89,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "contact.config.js",
+                "filename": "contact.config.ts",
                 "extension": "config",
-                "relPath": "src/config/contact.config.js"
+                "relPath": "src/config/contact.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.contact.email.shield": {
                 "name": "shield",
@@ -76,9 +105,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "contact.config.js",
+                "filename": "contact.config.ts",
                 "extension": "config",
-                "relPath": "src/config/contact.config.js",
+                "relPath": "src/config/contact.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.core.namespace.pattern": {
@@ -93,9 +122,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "core.config.js",
+                "filename": "core.config.ts",
                 "extension": "config",
-                "relPath": "src/config/core.config.js"
+                "relPath": "src/config/core.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.core.namespace.context": {
                 "name": "context",
@@ -109,9 +138,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "core.config.js",
+                "filename": "core.config.ts",
                 "extension": "config",
-                "relPath": "src/config/core.config.js",
+                "relPath": "src/config/core.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.datetime.dateFormat": {
@@ -126,9 +155,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.timeFormat": {
                 "name": "timeFormat",
@@ -142,9 +171,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.previousMonth": {
                 "name": "previousMonth",
@@ -158,9 +187,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.nextMonth": {
                 "name": "nextMonth",
@@ -174,9 +203,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.months": {
                 "name": "months",
@@ -190,9 +219,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdays": {
                 "name": "weekdays",
@@ -206,9 +235,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js"
+                "relPath": "src/config/datetime.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.datetime.i18n.weekdaysShort": {
                 "name": "weekdaysShort",
@@ -222,9 +251,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "datetime.config.js",
+                "filename": "datetime.config.ts",
                 "extension": "config",
-                "relPath": "src/config/datetime.config.js",
+                "relPath": "src/config/datetime.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.yellow": {
@@ -239,9 +268,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.cyan": {
                 "name": "cyan",
@@ -255,9 +284,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.green": {
                 "name": "green",
@@ -271,9 +300,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.magenta": {
                 "name": "magenta",
@@ -287,9 +316,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.red": {
                 "name": "red",
@@ -303,9 +332,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.blue": {
                 "name": "blue",
@@ -319,9 +348,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.primary": {
                 "name": "primary",
@@ -335,9 +364,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.secondary": {
                 "name": "secondary",
@@ -351,9 +380,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.grey": {
                 "name": "grey",
@@ -367,9 +396,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.gray": {
                 "name": "gray",
@@ -383,9 +412,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.black": {
                 "name": "black",
@@ -399,9 +428,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js"
+                "relPath": "src/config/dev.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.dev.colors.white": {
                 "name": "white",
@@ -415,9 +444,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dev.config.js",
+                "filename": "dev.config.ts",
                 "extension": "config",
-                "relPath": "src/config/dev.config.js",
+                "relPath": "src/config/dev.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.discord.server.id": {
@@ -432,9 +461,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "discord.config.js",
+                "filename": "discord.config.ts",
                 "extension": "config",
-                "relPath": "src/config/discord.config.js"
+                "relPath": "src/config/discord.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.discord.server.url": {
                 "name": "url",
@@ -448,9 +477,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "discord.config.js",
+                "filename": "discord.config.ts",
                 "extension": "config",
-                "relPath": "src/config/discord.config.js",
+                "relPath": "src/config/discord.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.git.user.name": {
@@ -465,9 +494,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "git.config.js",
+                "filename": "git.config.ts",
                 "extension": "config",
-                "relPath": "src/config/git.config.js"
+                "relPath": "src/config/git.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.git.user.email": {
                 "name": "email",
@@ -481,9 +510,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "git.config.js",
+                "filename": "git.config.ts",
                 "extension": "config",
-                "relPath": "src/config/git.config.js"
+                "relPath": "src/config/git.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.git.repo.url": {
                 "name": "url",
@@ -497,9 +526,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "git.config.js",
+                "filename": "git.config.ts",
                 "extension": "config",
-                "relPath": "src/config/git.config.js",
+                "relPath": "src/config/git.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.icons.fontawesome.url": {
@@ -514,9 +543,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "icons.config.js",
+                "filename": "icons.config.ts",
                 "extension": "config",
-                "relPath": "src/config/icons.config.js"
+                "relPath": "src/config/icons.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.icons.fantasticon.name": {
                 "name": "name",
@@ -530,9 +559,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "icons.config.js",
+                "filename": "icons.config.ts",
                 "extension": "config",
-                "relPath": "src/config/icons.config.js"
+                "relPath": "src/config/icons.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.icons.fantasticon.outputDir": {
                 "name": "outputDir",
@@ -546,9 +575,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "icons.config.js",
+                "filename": "icons.config.ts",
                 "extension": "config",
-                "relPath": "src/config/icons.config.js",
+                "relPath": "src/config/icons.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.license.layout.headerImageUrl": {
@@ -563,9 +592,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "license.config.js",
+                "filename": "license.config.ts",
                 "extension": "config",
-                "relPath": "src/config/license.config.js",
+                "relPath": "src/config/license.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.log.types": {
@@ -580,9 +609,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "log.config.js",
+                "filename": "log.config.ts",
                 "extension": "config",
-                "relPath": "src/config/log.config.js",
+                "relPath": "src/config/log.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.sugar.config.npm.rootDir": {
@@ -597,9 +626,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "npm.config.js",
+                "filename": "npm.config.ts",
                 "extension": "config",
-                "relPath": "src/config/npm.config.js",
+                "relPath": "src/config/npm.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.process.asyncStart": {
@@ -614,9 +643,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.killOnError": {
                 "name": "killOnError",
@@ -630,9 +659,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.emitErrorAsEvent": {
                 "name": "emitErrorAsEvent",
@@ -646,9 +675,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.stdio": {
                 "name": "stdio",
@@ -662,9 +691,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.decorators": {
                 "name": "decorators",
@@ -678,9 +707,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.throw": {
                 "name": "throw",
@@ -694,9 +723,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.exitAtEnd": {
                 "name": "exitAtEnd",
@@ -710,9 +739,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.runAsChild": {
                 "name": "runAsChild",
@@ -726,9 +755,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js"
+                "relPath": "src/config/process.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.process.processPath": {
                 "name": "processPath",
@@ -742,9 +771,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "process.config.js",
+                "filename": "process.config.ts",
                 "extension": "config",
-                "relPath": "src/config/process.config.js",
+                "relPath": "src/config/process.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.readme.layout.headerImageUrl": {
@@ -759,9 +788,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "readme.config.js",
+                "filename": "readme.config.ts",
                 "extension": "config",
-                "relPath": "src/config/readme.config.js"
+                "relPath": "src/config/readme.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.readme.shields": {
                 "name": "shields",
@@ -775,9 +804,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "readme.config.js",
+                "filename": "readme.config.ts",
                 "extension": "config",
-                "relPath": "src/config/readme.config.js",
+                "relPath": "src/config/readme.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.style": {
@@ -792,9 +821,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.size.url": {
                 "name": "url",
@@ -808,9 +837,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.href.href": {
                 "name": "href",
@@ -824,9 +853,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.url": {
                 "name": "url",
@@ -840,9 +869,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.download.href": {
                 "name": "href",
@@ -856,9 +885,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.url": {
                 "name": "url",
@@ -872,9 +901,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.license.href": {
                 "name": "href",
@@ -888,9 +917,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js",
+                "relPath": "src/config/shieldsio.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.config.shieldsio.shields.discord.url": {
@@ -905,9 +934,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "shieldsio.config.js",
+                "filename": "shieldsio.config.ts",
                 "extension": "config",
-                "relPath": "src/config/shieldsio.config.js"
+                "relPath": "src/config/shieldsio.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.system.tmpDir": {
                 "name": "tmpDir",
@@ -921,9 +950,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.rootDir": {
                 "name": "rootDir",
@@ -937,9 +966,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.localDir": {
                 "name": "localDir",
@@ -953,9 +982,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.cacheDir": {
                 "name": "cacheDir",
@@ -969,9 +998,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.tmpDir": {
                 "name": "tmpDir",
@@ -985,9 +1014,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.package.nodeModulesDir": {
                 "name": "nodeModulesDir",
@@ -1001,9 +1030,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.rootDir": {
                 "name": "rootDir",
@@ -1017,9 +1046,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.jsDir": {
                 "name": "jsDir",
@@ -1033,9 +1062,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.nodeDir": {
                 "name": "nodeDir",
@@ -1049,9 +1078,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.cssDir": {
                 "name": "cssDir",
@@ -1065,9 +1094,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.docDir": {
                 "name": "docDir",
@@ -1081,9 +1110,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.fontsDir": {
                 "name": "fontsDir",
@@ -1097,9 +1126,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.iconsDir": {
                 "name": "iconsDir",
@@ -1113,9 +1142,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.imgDir": {
                 "name": "imgDir",
@@ -1129,9 +1158,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.src.viewsDir": {
                 "name": "viewsDir",
@@ -1145,9 +1174,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.rootDir": {
                 "name": "rootDir",
@@ -1161,9 +1190,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.jsDir": {
                 "name": "jsDir",
@@ -1177,9 +1206,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.nodeDir": {
                 "name": "nodeDir",
@@ -1193,9 +1222,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.cssDir": {
                 "name": "cssDir",
@@ -1209,9 +1238,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.docDir": {
                 "name": "docDir",
@@ -1225,9 +1254,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.fontsDir": {
                 "name": "fontsDir",
@@ -1241,9 +1270,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.iconsDir": {
                 "name": "iconsDir",
@@ -1257,9 +1286,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.imgDir": {
                 "name": "imgDir",
@@ -1273,9 +1302,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.dist.viewsDir": {
                 "name": "viewsDir",
@@ -1289,9 +1318,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.serve.rootDir": {
                 "name": "rootDir",
@@ -1305,9 +1334,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.serve.env-dev.rootDir": {
                 "name": "rootDir",
@@ -1321,9 +1350,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js"
+                "relPath": "src/config/storage.config.ts"
             },
             "@coffeekraken.s-sugar-config.config.storage.exclude": {
                 "name": "exclude",
@@ -1336,9 +1365,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "storage.config.js",
+                "filename": "storage.config.ts",
                 "extension": "config",
-                "relPath": "src/config/storage.config.js",
+                "relPath": "src/config/storage.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-sugar-config.js.sSugarConfig": {
@@ -1369,9 +1398,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sugar.js",
-                "extension": "js",
-                "relPath": "src/js/sugar.js",
+                "filename": "sugar.ts",
+                "extension": "ts",
+                "relPath": "src/js/sugar.ts",
                 "children": {
                     "get": {
                         "name": "get",
@@ -1405,21 +1434,10 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sugar.js",
-                "extension": "js",
-                "relPath": "src/node/sugar.js",
+                "filename": "sugar.ts",
+                "extension": "ts",
+                "relPath": "src/node/sugar.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "filesRealPaths": {
                         "name": "filesRealPaths",
                         "type": "String[]",
@@ -1501,6 +1519,17 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
+                    "hash": {
+                        "name": "hash",
+                        "type": "String",
+                        "description": "This hash function gives you access to the actual configuration hash.\nYou can specify a dot path to get the hash of a sub configuration",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
                     "get": {
                         "name": "get",
                         "type": "Function",
@@ -1522,8 +1551,41 @@
                             "email": "olivier.bossel@gmail.com",
                             "url": "https://olivierbossel.com"
                         }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
                     }
                 }
+            },
+            "@coffeekraken.s-sugar-config.node.sugar": {
+                "name": "sugar",
+                "type": "Class",
+                "description": "This function allows you to access easily the configurations stored in the ```sugar.config.js```.\nThe returned configuration is the result of the default sugar config stored in the toolkit and the\napp defined config stored in current application root folder",
+                "namespace": "@coffeekraken.s-sugar-config.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import sugar from '@coffeekraken/s-sugar-config';\nsugar('scss.unit'); // => rem"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "sugar.ts",
+                "extension": "ts",
+                "relPath": "src/node/sugar.ts"
             },
             "@coffeekraken.s-sugar-config.config.media.galaxy-s3.default": {
                 "name": "default",

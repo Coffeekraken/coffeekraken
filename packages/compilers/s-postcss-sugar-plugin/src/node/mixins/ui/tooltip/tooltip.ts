@@ -1,34 +1,31 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginUiTooltipInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                position: {
-                    type: 'String',
-                    values: [
-                        'block-start',
-                        'inline-end',
-                        'block-end',
-                        'inline-start',
-                    ],
-                    default: 'block-start',
+    static get _definition() {
+        return {
+            position: {
+                type: 'String',
+                values: [
+                    'block-start',
+                    'inline-end',
+                    'block-end',
+                    'inline-start',
+                ],
+                default: 'block-start',
+            },
+            interactive: {
+                type: 'Boolean',
+                default: false,
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                interactive: {
-                    type: 'Boolean',
-                    default: false,
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'position', 'interactive'],
-                    default: ['bare', 'lnf', 'position', 'interactive'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'position', 'interactive'],
+                default: ['bare', 'lnf', 'position', 'interactive'],
+            },
+        };
     }
 }
 

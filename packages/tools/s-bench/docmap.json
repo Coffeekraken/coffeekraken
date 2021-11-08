@@ -12,19 +12,25 @@
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -39,18 +45,165 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-bench.shared.sBench": {
+                "name": "SBench",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to perform some simple benchmarking actions\nlike dividing a process into multiple \"steps\" and track the timing\nbetween these, etc...",
+                "namespace": "@coffeekraken.s-bench.shared",
+                "status": "alpha",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SBench from '@coffeekraken/s-bench';\n\nSBench.start('myCoolProcess');\n// some code...\nSBench.step('myCoolProcess', 'Before compilation');\n// compilation code...\nSBench.step('myCoolProcess', 'After compilation');\nSBench.end('myCoolProcess');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SBench.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SBench.ts",
+                "children": {
+                    "env": {
+                        "name": "env",
+                        "type": "SBenchEnv",
+                        "description": "Access the SBenchEnv object to check activated bench, etc...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "benchEnv": {
+                        "name": "benchEnv",
+                        "type": "Function",
+                        "description": "This static method allows you to get the current bench environment\nthe process is running in. The bench environment",
+                        "static": "true"
+                    },
+                    "getBenchInstanceById": {
+                        "name": "getBenchInstanceById",
+                        "type": "Function",
+                        "description": "This static method allows you to get back a current SBench instance by it's id,\nor get back a new instance that you can use directly",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "start": {
+                        "name": "start",
+                        "type": "Function",
+                        "description": "This method allows you to start a new bench \"session\"",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "step": {
+                        "name": "step",
+                        "type": "Function",
+                        "description": "This method allows you to declare a new step in your bench.\nA step is simple a point in your code like \"after compilation\", etc.\nIt will keep track of each steps and display the time it has taken\nfrom the last step.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "end": {
+                        "name": "end",
+                        "type": "Function",
+                        "description": "This method allows you to end a bencvh \"session\"",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isBenchActive": {
+                        "name": "isBenchActive",
+                        "type": "Function",
+                        "description": "This method allows you to check if a particular bench id is active",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "isActive": {
+                        "name": "isActive",
+                        "type": "Function",
+                        "description": "This method allows you to check if the current bench is active or not.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Function",
+                        "description": "This method allows you to print the bench in string format",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-bench.shared.sBenchEnv": {
                 "name": "SBenchEnv",
                 "type": "Class",
@@ -79,9 +232,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SBenchEnv.js",
-                "extension": "js",
-                "relPath": "src/shared/SBenchEnv.js",
+                "filename": "SBenchEnv.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SBenchEnv.ts",
                 "children": {
                     "activateBench": {
                         "name": "activateBench",
@@ -95,8 +248,8 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "activatedBench": {
-                        "name": "activatedBench",
+                    "activeBench": {
+                        "name": "activeBench",
                         "type": "Function",
                         "description": "This method allows you to get back the list of activated bench(s)",
                         "static": "true",

@@ -2,37 +2,34 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                style: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.dropdown.defaultStyle'),
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.dropdown.defaultStyle'),
+            },
+            position: {
+                type: 'String',
+                values: [
+                    'top',
+                    'top-start',
+                    'top-end',
+                    'bottom',
+                    'bottom-start',
+                    'bottom-end',
+                ],
+                default: 'bottom',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                position: {
-                    type: 'String',
-                    values: [
-                        'top',
-                        'top-start',
-                        'top-end',
-                        'bottom',
-                        'bottom-start',
-                        'bottom-end',
-                    ],
-                    default: 'bottom',
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'position'],
-                    default: ['bare', 'lnf', 'position'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'position'],
+                default: ['bare', 'lnf', 'position'],
+            },
+        };
     }
 }
 

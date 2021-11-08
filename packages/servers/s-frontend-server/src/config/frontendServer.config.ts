@@ -23,14 +23,15 @@ export default function (env, config) {
          * @name              hostname
          * @namespace         config.frontendServer
          * @type              String
-         * @default           __ipAddress()
+         * @default           127.0.0.1
          *
          * Specify the hostname to use for the frontend server
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        hostname: __ipAddress(),
+        // hostname: __ipAddress(),
+        hostname: '127.0.0.1',
 
         /**
          * @name              rootDir
@@ -236,6 +237,21 @@ export default function (env, config) {
         },
 
         modules: {
+            rootFiles: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.rootFiles
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/rootFiles/rootFiles
+                 *
+                 * Specify where to find the "rootFiles" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
+                settings: {},
+            },
             docmap: {
                 /**
                  * @name            path
@@ -398,14 +414,14 @@ export default function (env, config) {
                  */
                 handler: 'config',
             },
-            '/api/docmap': {
+            '/docmap.json': {
                 /**
                  * @name        handler
                  * @namespace   config.frontendServer.routes.'/api/docmap'
                  * @type        String
                  * @default         view
                  *
-                 * Specify which handle to use for requests on "/api/docmap"
+                 * Specify which handle to use for requests on "/docmap.json"
                  *
                  * @since       2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

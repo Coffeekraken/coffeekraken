@@ -17,6 +17,7 @@ export interface ISInterfaceCtorSettings {
 export interface ISInterfaceSettings {
     descriptor?: Partial<ISDescriptorSettings>;
     baseObj?: any;
+    stripUnkown?: boolean;
 }
 
 export interface ISInterfaceDefinitionProperty {
@@ -97,28 +98,14 @@ export default class SInterface extends __SClass {
     // static definition: ISDescriptorRules = {};
     // @ts-ignore
     static _definition: ISDescriptorRules;
-    // static get definition() {
-    //     console.log('SSS');
-    //     if (!this._definition.help) {
-    //         this._definition.help = {
-    //             type: 'Boolean',
-    //             description: `Display the help for this "<yellow>${this.name}</yellow>" interface...`,
-    //             default: false,
-    //         };
-    //     }
-    //     return this._definition;
-    // }
-    // static set definition(value) {
-    //     this._definition = value;
-    // }
-
-    static cached() {
-        return this._definition;
+    static _cachedDefinition: ISDescriptorRules;
+    static get definition() {
+        if (this._cachedDefinition) return this._cachedDefinition;
+        this._cachedDefinition = this._definition;
+        return this._cachedDefinition;
     }
-    static cache(definition) {
-        if (this._definition) return this._definition;
-        this._definition = definition;
-        return this._definition;
+    static set definition(value) {
+        this._cachedDefinition = value;
     }
 
     /**
@@ -389,7 +376,9 @@ export default class SInterface extends __SClass {
         super(
             __deepMerge(
                 {
-                    interface: {},
+                    interface: {
+                        stripUnkown: false,
+                    },
                 },
                 settings ?? {},
             ),
@@ -501,7 +490,14 @@ export default class SInterface extends __SClass {
             throw new Error(descriptorResult.toString());
         }
 
+        let resultObj = descriptorResult.value;
+
+        // if not strip unkown
+        if (!set.stripUnkown) {
+            resultObj = __deepMerge(objectOnWhichToApplyInterface, resultObj);
+        }
+
         // return new result object
-        return descriptorResult.value;
+        return resultObj;
     }
 }

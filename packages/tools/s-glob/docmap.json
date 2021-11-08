@@ -25,10 +25,12 @@
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -43,17 +45,104 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-glob.node.sGlob": {
+                "name": "SGlob",
+                "type": "Class",
+                "description": "This class represent a glob pattern and can be used to resolve some globs and get back\nan array of SFile instances or to extract some part of the pattern, etc...",
+                "namespace": "@coffeekraken.s-glob.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SGlob from '@coffeekraken/sugar/node/glob/SGlob';\nconst glob = new SGlob('my/cool/glob/.js');\nconst files = glob.resolve();\nSGlob.resolve('my/cool/glob/.js');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SGlob.ts",
+                "extension": "ts",
+                "relPath": "src/node/SGlob.ts",
+                "children": {
+                    "isGlob": {
+                        "name": "isGlob",
+                        "type": "Function",
+                        "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "resolve": {
+                        "name": "resolve",
+                        "type": "Function",
+                        "description": "Alias to the ```resolveGlob``` function available in sugar under \"node.glob.resolveGlob\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "extractGlob": {
+                        "name": "extractGlob",
+                        "type": "Function",
+                        "description": "This function simply return you the glob part of the glob(s) passed in constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "extractNoneGlob": {
+                        "name": "extractNoneGlob",
+                        "type": "Function",
+                        "description": "This function simply return you the none glob part of the glob(s) passed in constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

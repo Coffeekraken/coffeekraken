@@ -3,35 +3,31 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['solid'],
-                    default: ['solid'],
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid'],
+                default: ['solid'],
+            },
+            defaultColor: {
+                type: 'String',
+                default: __STheme.config('ui.fsTree.defaultColor'),
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.fsTree.defaultStyle') ?? 'solid',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                defaultColor: {
-                    type: 'String',
-                    default: __STheme.config('ui.fsTree.defaultColor'),
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid'],
-                    default:
-                        __STheme.config('ui.fsTree.defaultStyle') ?? 'solid',
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'tf', 'vr'],
-                    default: ['bare', 'lnf', 'tf', 'vr'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
+            },
+        };
     }
 }
 

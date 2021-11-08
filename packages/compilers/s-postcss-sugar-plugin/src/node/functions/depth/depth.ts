@@ -4,16 +4,13 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginDepthFunctionInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                depth: {
-                    type: 'Number|String',
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            depth: {
+                type: 'Number|String',
+                required: true,
+            },
+        };
     }
 }
 export { postcssSugarPluginDepthFunctionInterface as interface };

@@ -2,29 +2,26 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                style: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.input.defaultStyle'),
+    static get _definition() {
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.input.defaultStyle'),
+            },
+            outline: {
+                type: 'Boolean',
+                default: __STheme.config('ui.input.outline'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                outline: {
-                    type: 'Boolean',
-                    default: __STheme.config('ui.input.outline'),
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf'],
-                    default: ['bare', 'lnf'],
-                },
-            })
-        );
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
+            },
+        };
     }
 }
 

@@ -21,7 +21,7 @@ import __faker from 'faker';
  */
 
 class postcssSugarPluginFormatClassesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

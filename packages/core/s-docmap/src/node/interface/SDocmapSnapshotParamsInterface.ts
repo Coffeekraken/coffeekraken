@@ -16,20 +16,17 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SDocMapSnapshotParamsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                outDir: {
-                    type: 'String',
-                    path: {
-                        absolute: true,
-                        tokens: true,
-                    },
-                    default: __SSugarConfig.get('docmap.snapshot.outDir'),
+    static get _definition() {
+        return {
+            outDir: {
+                type: 'String',
+                path: {
+                    absolute: true,
+                    tokens: true,
                 },
-            })
-        );
+                default: __SSugarConfig.get('docmap.snapshot.outDir'),
+            },
+        };
     }
 }
 export default SDocMapSnapshotParamsInterface;

@@ -1,0 +1,23 @@
+{
+    "config": {
+        "folders": [
+            {
+                "scope": "default",
+                "path": "./src/config"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "static",
+            "description": "Static builder related actions",
+            "defaultAction": "build",
+            "actions": {
+                "build": {
+                    "description": "Build your static website version",
+                    "process": "./src/cli/build.cli.js"
+                }
+            }
+        }
+    ]
+}

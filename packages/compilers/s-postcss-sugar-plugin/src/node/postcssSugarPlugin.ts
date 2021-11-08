@@ -239,7 +239,7 @@ const plugin = (settings: any = {}) => {
     return {
         postcssPlugin: 'sugar',
         async Once() {
-            if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
+            if (__SBench.isBenchActive('postcssSugarPlugin')) {
                 __SBench.start('postcssSugarPlugin');
             }
 
@@ -280,8 +280,8 @@ const plugin = (settings: any = {}) => {
                 });
             }
 
-            if (__SBench.env.isBenchActive('postcssSugarPlugin')) {
-                console.log(__SBench.end('postcssSugarPlugin').toString());
+            if (__SBench.isBenchActive('postcssSugarPlugin')) {
+                __SBench.end('postcssSugarPlugin', true);
             }
 
             // root.walkComments((comment) => {

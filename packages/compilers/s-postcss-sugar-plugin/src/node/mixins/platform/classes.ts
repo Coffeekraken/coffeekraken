@@ -22,15 +22,12 @@ import __fs from 'fs';
  */
 
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                platforms: {
-                    type: 'Array<String>',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            platforms: {
+                type: 'Array<String>',
+            },
+        };
     }
 }
 

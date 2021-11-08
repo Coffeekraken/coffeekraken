@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginBorderRadiusClassesMixinInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

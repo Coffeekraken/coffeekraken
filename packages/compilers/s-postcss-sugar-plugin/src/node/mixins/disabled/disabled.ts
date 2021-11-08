@@ -23,7 +23,7 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginDisabledInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

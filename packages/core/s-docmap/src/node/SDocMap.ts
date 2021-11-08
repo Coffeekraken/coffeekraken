@@ -28,6 +28,8 @@ import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterfa
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
 import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
+import __chokidar from 'chokidar';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
  * @name                SDocMap
@@ -155,6 +157,8 @@ export interface ISDocMap {
 class SDocMap extends __SClass implements ISDocMap {
     static interfaces = {};
 
+    static _cachedDocmapJson = {};
+
     static _registeredFieldsProxy = {};
     /**
      * @name           registerFieldProxy
@@ -257,6 +261,20 @@ class SDocMap extends __SClass implements ISDocMap {
             ...this.constructor._registeredFieldsProxy,
             ...this.docmapSettings.fieldsProxy,
         };
+
+        // watch file
+        // @ts-ignore
+        if (!this.constructor.watcher) {
+            // @ts-ignore
+            this.constructor.watcher = __chokidar.watch(
+                __SSugarConfig.get('docmap.read.input'),
+            );
+            // @ts-ignore
+            this.constructor.watcher.on('change', () => {
+                // @ts-ignore
+                delete this.constructor._cachedDocmapJson.current;
+            });
+        }
     }
 
     /**
@@ -293,6 +311,16 @@ class SDocMap extends __SClass implements ISDocMap {
                         finalParams.snapshotDir,
                         finalParams.snapshot,
                         'docmap.json',
+                    );
+                }
+
+                let docmapVersion = finalParams.snapshot ?? 'current';
+
+                // @ts-ignore
+                if (this.constructor._cachedDocmapJson[docmapVersion]) {
+                    return resolve(
+                        // @ts-ignore
+                        this.constructor._cachedDocmapJson[docmapVersion],
                     );
                 }
 
@@ -437,6 +465,11 @@ class SDocMap extends __SClass implements ISDocMap {
                 this._docmapJson = finalDocmapJson;
 
                 finalDocmapJson.menu = this._extractMenu(finalDocmapJson);
+
+                // cache it in memory
+                // @ts-ignore
+                this.constructor._cachedDocmapJson[docmapVersion] =
+                    finalDocmapJson;
 
                 // return the final docmap
                 resolve(finalDocmapJson);

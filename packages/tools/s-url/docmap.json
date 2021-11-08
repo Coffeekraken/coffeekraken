@@ -25,6 +25,7 @@
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -45,6 +46,8 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
@@ -55,8 +58,201 @@
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-url.sugar.js.url.sUrl": {
+                "name": "SUrl",
+                "type": "Class",
+                "description": "Simple class that is useful to parse a URL (or the current browser URL) and gives you back\nan instance that has all these values availables as well as functions to modify the instancied URL:\n- protocol: The protocol scheme of the URL (e.g. http:).\n- slashes: A boolean which indicates whether the protocol is followed by two forward slashes (//).\n- auth: Authentication information portion (e.g. username:password).\n- username: Username of basic authentication.\n- password: Password of basic authentication.\n- host: Host name with port number.\n- hostname: Host name without port number.\n- port: Optional port number.\n- pathname: URL path.\n- query: Parsed object containing query string\n- queryString: Origin query string from the URL\n- hash: The \"fragment\" portion of the URL including the pound-sign (#).\n- href: The full URL.\n- origin: The origin of the URL.\n- schema: The schema property gives you access to an object containing these properties (only if you have provided the settings.schema setting):\n- match (true) {Boolean}: Tells you if your current url match the passed schema\n- errors (null) {Object}: Gives you access to which param(s) is/are in error\n- params (null) {Object}: Gives you access to each params specified in the schema with their values, etc...\n\nThis class use internally the `url-parse` npm module that you can find here: https://www.npmjs.com/package/url-parse",
+                "namespace": "@coffeekraken.s-url.sugar.js.url",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SUrl from '@coffeekraken/js/url/SUrl';\nconst url = new SUrl('https://github.com/foo/bar');\nconsole.log(url.hostname); // => github.com\nurl.hostname = 'youtube.com';\n\nconst urlWithSchema = new SUrl('https://github.com/hello/world/2', {\n   schema: '{param1:string}/{param2}/{?param3:number}'\n});\nconsole.log(urlWithSchema.schema);\n// {\n//    match: true,\n//    errors: {},\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SUrl.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SUrl.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "schema": {
+                        "name": "schema",
+                        "type": "Object",
+                        "description": "Access the schema parsing result if the settings.schema has been provided.\nThis object contain these properties:\n- params ({}) {Object}: Store the path params found like /{client}/{name}\n- errors ({}) {Object}: Store the parsing errors if has some\n- match (true) {Boolean}: Store if the current url match with the provided schema",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "protocol": {
+                        "name": "protocol",
+                        "type": "String",
+                        "description": "Get/set the protocol",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "slashes": {
+                        "name": "slashes",
+                        "type": "Boolean",
+                        "description": "A boolean which indicates whether the protocol is followed by two forward slashes (//).",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "auth": {
+                        "name": "auth",
+                        "type": "String",
+                        "description": "Authentication information portion (e.g. username:password).",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "username": {
+                        "name": "username",
+                        "type": "String",
+                        "description": "Get/set username of basic authentication",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "password": {
+                        "name": "password",
+                        "type": "String",
+                        "description": "Get/set password of basic authentication",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "host": {
+                        "name": "host",
+                        "type": "String",
+                        "description": "Get/set Host name with port number",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "hostname": {
+                        "name": "hostname",
+                        "type": "String",
+                        "description": "Get/set host name without port number",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "port": {
+                        "name": "port",
+                        "type": "Number",
+                        "description": "Optional port number",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "pathname": {
+                        "name": "pathname",
+                        "type": "String",
+                        "description": "URL path",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "pathnameArray": {
+                        "name": "pathnameArray",
+                        "type": "Array",
+                        "description": "URL path in array format",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "query": {
+                        "name": "query",
+                        "type": "String",
+                        "description": "Parsed object containing query string",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "queryString": {
+                        "name": "queryString",
+                        "type": "String",
+                        "description": "Origin query string from the URL",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "hash": {
+                        "name": "hash",
+                        "type": "String",
+                        "description": "The \"fragment\" portion of the URL including the pound-sign (#)",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "href": {
+                        "name": "href",
+                        "type": "String",
+                        "description": "The full URL",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "origin": {
+                        "name": "origin",
+                        "type": "String",
+                        "description": "The origin of the URL",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Function",
+                        "description": "Return the full URL in string format",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "console.log(myUrl.toString()); // => https://google.com"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

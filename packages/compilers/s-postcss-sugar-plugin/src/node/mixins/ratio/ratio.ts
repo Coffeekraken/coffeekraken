@@ -22,17 +22,14 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginRatioInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                ratio: {
-                    type: 'Number',
-                    required: true,
-                    alias: 'd',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            ratio: {
+                type: 'Number',
+                required: true,
+                alias: 'd',
+            },
+        };
     }
 }
 

@@ -1,100 +1,103 @@
 {
-  "files.exclude": {
-    "**/sugar/js/**": true,
-    "**/sugar/node/**": true,
-    "**/sugar/shared/**": true,
-    "**/*.js": {
-      "when": "$(basename).ts"
+    "files.exclude": {
+        "**/sugar/js/**": true,
+        "**/sugar/node/**": true,
+        "**/sugar/shared/**": true,
+        "**/*.js": {
+            "when": "$(basename).ts"
+        },
+        "**/*.js.map": true
     },
-    "**/*.js.map": true
-  },
-  "files.associations": {
-    "*.riot": "html"
-  },
-  "editor.codeActionsOnSave": {
-    "source.fixAll.eslint": true
-  },
-  "editor.formatOnPaste": true,
-  "editor.formatOnSave": true,
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "todo-tree.general.enableFileWatcher": true,
-  "todo-tree.general.tags": [
-    "@todo",
-    "@fixme",
-    "@fix",
-    "@feature",
-    "stable",
-    "beta",
-    "alpha",
-    "wip"
-  ],
-  "todo-tree.filtering.includeGlobs": ["**/src/**/*.ts"],
-  "todo-tree.filtering.excludeGlobs": [
-    "**/node_modules",
-    "**/.vscode",
-    "**/.github"
-  ],
-  "todo-tree.regex.regex": "((\\*|//|#|<!--|;|/\\*)\\s*($TAGS)|@status\\s*($TAGS))",
-  "todo-tree.filtering.useBuiltInExcludes": true,
-  "todo-tree.highlights.defaultHighlight": {
-    "foreground": "white",
-    "icon": "check",
-    "type": "tag",
-    "borderRadius": "0",
-    "rulerLane": "full"
-  },
-  "todo-tree.highlights.customHighlight": {
-    "stable": {
-      "hideFromTree": true,
-      "gutterIcon": true,
-      "icon": "check-circle-fill",
-      "background": "#C3DC2A",
-      "iconColour": "#C3DC2A"
+    "files.associations": {
+        "*.riot": "html"
     },
-    "beta": {
-      "hideFromTree": true,
-      "gutterIcon": true,
-      "icon": "rocket",
-      "background": "#FCE163",
-      "iconColour": "#FCE163"
+    "editor.codeActionsOnSave": {
+        "source.fixAll.eslint": true
     },
-    "alpha": {
-      "hideFromTree": true,
-      "gutterIcon": true,
-      "icon": "stopwatch",
-      "background": "#F6963E",
-      "iconColour": "#F6963E"
+    "editor.formatOnPaste": true,
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "esbenp.prettier-vscode",
+    "todo-tree.general.enableFileWatcher": true,
+    "todo-tree.general.tags": [
+        "@todo",
+        "@fixme",
+        "@fix",
+        "@feature",
+        "stable",
+        "beta",
+        "alpha",
+        "wip"
+    ],
+    "todo-tree.filtering.includeGlobs": ["**/src/**/*.ts"],
+    "todo-tree.filtering.excludeGlobs": [
+        "**/node_modules",
+        "**/.vscode",
+        "**/.github"
+    ],
+    "todo-tree.regex.regex": "((\\*|//|#|<!--|;|/\\*)\\s*($TAGS)|@status\\s*($TAGS))",
+    "todo-tree.filtering.useBuiltInExcludes": true,
+    "todo-tree.highlights.defaultHighlight": {
+        "foreground": "white",
+        "icon": "check",
+        "type": "tag",
+        "borderRadius": "0",
+        "rulerLane": "full"
     },
-    "wip": {
-      "hideFromTree": true,
-      "gutterIcon": true,
-      "icon": "tools",
-      "background": "#F2515B",
-      "iconColour": "#F2515B"
+    "todo-tree.highlights.customHighlight": {
+        "stable": {
+            "hideFromTree": true,
+            "gutterIcon": true,
+            "icon": "check-circle-fill",
+            "background": "#C3DC2A",
+            "iconColour": "#C3DC2A"
+        },
+        "beta": {
+            "hideFromTree": true,
+            "gutterIcon": true,
+            "icon": "rocket",
+            "background": "#FCE163",
+            "iconColour": "#FCE163"
+        },
+        "alpha": {
+            "hideFromTree": true,
+            "gutterIcon": true,
+            "icon": "stopwatch",
+            "background": "#F6963E",
+            "iconColour": "#F6963E"
+        },
+        "wip": {
+            "hideFromTree": true,
+            "gutterIcon": true,
+            "icon": "tools",
+            "background": "#F2515B",
+            "iconColour": "#F2515B"
+        },
+        "@todo": {
+            "gutterIcon": true,
+            "icon": "list-unordered",
+            "background": "#FDBC3E",
+            "iconColour": "#FDBC3E"
+        },
+        "@fixme": {
+            "gutterIcon": true,
+            "icon": "alert",
+            "background": "#EE6492",
+            "iconColour": "#EE6492"
+        },
+        "@fix": {
+            "gutterIcon": true,
+            "icon": "alert",
+            "background": "#EE6492",
+            "iconColour": "#EE6492"
+        },
+        "@feature": {
+            "gutterIcon": true,
+            "icon": "flame",
+            "background": "#64D5EE",
+            "iconColour": "#64D5EE"
+        }
     },
-    "@todo": {
-      "gutterIcon": true,
-      "icon": "list-unordered",
-      "background": "#FDBC3E",
-      "iconColour": "#FDBC3E"
-    },
-    "@fixme": {
-      "gutterIcon": true,
-      "icon": "alert",
-      "background": "#EE6492",
-      "iconColour": "#EE6492"
-    },
-    "@fix": {
-      "gutterIcon": true,
-      "icon": "alert",
-      "background": "#EE6492",
-      "iconColour": "#EE6492"
-    },
-    "@feature": {
-      "gutterIcon": true,
-      "icon": "flame",
-      "background": "#64D5EE",
-      "iconColour": "#64D5EE"
+    "[xml]": {
+        "editor.defaultFormatter": "redhat.vscode-xml"
     }
-  }
 }

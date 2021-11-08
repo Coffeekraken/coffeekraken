@@ -10,6 +10,7 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import { page404 } from '@coffeekraken/s-view-renderer';
 import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
+import __SBench from '@coffeekraken/s-bench';
 
 /**
  * @name                styleguideHandler
@@ -32,9 +33,15 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  */
 export default function styleguide(req, res, settings = {}) {
     return new __SPromise(async ({ resolve, reject }) => {
+        __SBench.start('handlers.styleguide');
+
+        __SBench.step('handlers.styleguide', 'beforeDocmapRead');
+
         const docmap = new __SDocMap();
         const docmapJson = await docmap.read();
         const styleguideMenu = docmapJson.menu.custom.styleguide;
+
+        __SBench.step('handlers.styleguide', 'afterDocmapRead');
 
         const styleguideObj = styleguideMenu.slug[req.path];
 
@@ -51,6 +58,8 @@ export default function styleguide(req, res, settings = {}) {
         }
 
         const finalReqPath = `/styleguide/${req.path.split('/styleguide/')[1]}`;
+
+        __SBench.step('handlers.styleguide', 'beforeDocblockParsing');
 
         const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
             docblock: {
@@ -69,12 +78,20 @@ export default function styleguide(req, res, settings = {}) {
         await docblocksInstance.parse();
         const docblocks = docblocksInstance.toObject();
 
+        __SBench.step('handlers.styleguide', 'afterDocblockParsing');
+
+        __SBench.step('handlers.styleguide', 'beforeViewRendering');
+
         const docView = new __SViewRenderer('pages.styleguide.styleguide');
 
         const pageHtml = await docView.render({
             ...(res.templateData || {}),
             docblocks,
         });
+
+        __SBench.step('handlers.styleguide', 'afterViewRendering');
+
+        __SBench.end('handlers.styleguide', true);
 
         res.status(200);
         res.type('text/html');

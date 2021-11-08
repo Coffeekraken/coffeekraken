@@ -43,18 +43,15 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                query: {
-                    type: 'String',
-                },
-                mediasOnly: {
-                    type: 'Boolean',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            query: {
+                type: 'String',
+            },
+            mediasOnly: {
+                type: 'Boolean',
+            },
+        };
     }
 }
 

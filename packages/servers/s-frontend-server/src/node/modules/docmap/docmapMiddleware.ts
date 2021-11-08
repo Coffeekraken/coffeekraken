@@ -32,13 +32,21 @@ import __SDocmap from '@coffeekraken/s-docmap';
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+let docmapCache;
 function docmapMiddleware(settings = {}) {
     return async function (req, res, next) {
+        if (!res.templateData) res.templateData = {};
+
+        if (docmapCache) {
+            res.templateData.docmap = docmapCache;
+            return next();
+        }
+
         const docmap = new __SDocmap();
         const docmapJson = await docmap.read();
 
-        if (!res.templateData) res.templateData = {};
         res.templateData.docmap = docmapJson;
+        docmapCache = docmapJson;
 
         __SBench.step('request', 'docmapMiddleware');
 

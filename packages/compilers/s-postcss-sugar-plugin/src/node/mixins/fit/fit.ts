@@ -22,17 +22,14 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginFitInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                size: {
-                    type: 'String',
-                    values: ['fill', 'contain', 'cover', 'none'],
-                    default: 'fill',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            size: {
+                type: 'String',
+                values: ['fill', 'contain', 'cover', 'none'],
+                default: 'fill',
+            },
+        };
     }
 }
 

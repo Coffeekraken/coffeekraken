@@ -31,7 +31,7 @@ export default class ApiNav extends __SLitComponent {
 
     async firstUpdated() {
         const request = new __SRequest({
-            url: '/api/docmap',
+            url: '/docmap.json',
             method: 'get',
         });
 

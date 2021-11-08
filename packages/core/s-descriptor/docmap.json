@@ -5,33 +5,307 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-descriptor.s-descriptor.shared.sDescriptor": {
+                "name": "SDescriptor",
+                "type": "Class",
+                "description": "Make a description...",
+                "namespace": "@coffeekraken.s-descriptor.s-descriptor.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SDescriptor from '@coffeekraken/sugar/js/descriptor/SDescriptor';\nclass MyDescriptor extends SDescriptor {\n   constructor(settings) {\n     super(settings);\n     // do something...\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_SDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/_SDescriptor.ts",
+                "children": {
+                    "rules": {
+                        "name": "rules",
+                        "type": "Object",
+                        "description": "Store the registered rules into a simple object",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "type": {
+                        "name": "type",
+                        "type": "String",
+                        "default": "Object",
+                        "description": "Specify the type of the values that this descriptor is made for.\nCan be:",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "registerRule": {
+                        "name": "registerRule",
+                        "type": "Function",
+                        "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "descriptorSettings": {
+                        "name": "descriptorSettings",
+                        "type": "ISDescriptorSettings",
+                        "description": "Access the descriptor settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "apply": {
+                        "name": "apply",
+                        "type": "Function",
+                        "description": "This method simply apply the descriptor instance on the passed value.\nThe value can be anything depending on the descriptor you use.\nWhen you pass an Array, by default it will apply the descriptor on\neach array items. If you don't want this behavior and the Array passed has to be\ntreated as a single value, pass the \"arrayAsValue\" setting to true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.sDescriptorResult": {
+                "name": "SDescriptorResult",
+                "type": "Class",
+                "description": "This class is the main one that MUST be used as parent one\nwhen creating any descriptor like object, string, etc...",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SDescriptorResult from '@coffeekraken/sugar/js/descriptor/SDescriptorResult';\nclass MyDescriptor extends SDescriptorResult {\n   constructor(settings) {\n     super(settings);\n     // do something...\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SDescriptorResult.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SDescriptorResult.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "hasIssues": {
+                        "name": "hasIssues",
+                        "type": "Function",
+                        "description": "This method return true if theirs no issues, false if not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "add": {
+                        "name": "add",
+                        "type": "Function",
+                        "description": "This method is used to add a rule result to the global descriptor result.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Functio n",
+                        "description": "This method return a string terminal compatible of this result object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toConsole": {
+                        "name": "toConsole",
+                        "type": "Function",
+                        "description": "This method return a string terminal compatible of this result object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.pathRule": {
+                "name": "pathRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "pathRule.ts",
+                "extension": "ts",
+                "relPath": "src/node/rules/pathRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.maxRule": {
+                "name": "maxRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "maxRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/maxRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.minRule": {
+                "name": "minRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "minRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/minRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.requiredRule": {
+                "name": "requiredRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure that your value is not ```undefined```\nor a nullish value like ```null``` or ```''```.",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "requiredRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/requiredRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.typeRule": {
+                "name": "typeRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value does match the passed type like:\n- String | Array<String>\n- Boolean\n- Number\n- etc...",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "typeRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/typeRule.ts",
+                "children": {}
+            }
+        }
     }
 }

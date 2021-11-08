@@ -23,17 +23,14 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                size: {
-                    type: 'String|Number',
-                    values: Object.keys(__STheme.config('font.size')),
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            size: {
+                type: 'String|Number',
+                values: Object.keys(__STheme.config('font.size')),
+                required: true,
+            },
+        };
     }
 }
 

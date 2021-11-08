@@ -22,7 +22,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  */
 
 class postcssSugarPluginTransitionClassesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

@@ -13,6 +13,8 @@ import __path from 'path';
 import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 // import __vhost from 'vhost';
 import __kill from '@coffeekraken/sugar/node/process/kill';
+import __SBench from '@coffeekraken/s-bench';
+import __SDuration from '@coffeekraken/s-duration';
 
 /**
  * @name            SFrontendServer
@@ -94,6 +96,15 @@ export default class SFrontendServer extends __SClass {
 
                 const frontendServerConfig =
                     __SugarConfig.get('frontendServer');
+
+                express.use((req, res, next) => {
+                    if (req.path.substr(-1) == '/' && req.path.length > 1) {
+                        const query = req.url.slice(req.path.length);
+                        res.redirect(301, req.path.slice(0, -1) + query);
+                    } else {
+                        next();
+                    }
+                });
 
                 if (frontendServerConfig.modules) {
                     for (
@@ -196,11 +207,26 @@ export default class SFrontendServer extends __SClass {
                 // logging requests
                 if (logLevelInt >= 4) {
                     express.use((req, res, next) => {
-                        emit('log', {
-                            type: 'detail',
-                            group: `s-frontend-server-${this.metas.id}`,
-                            value: `Request on "<cyan>${req.url}</cyan>"`,
-                        });
+                        // emit('log', {
+                        //     type: 'detail',
+                        //     group: `s-frontend-server-${this.metas.id}`,
+                        //     value: `Request on "<cyan>${req.url}</cyan>"`,
+                        // });
+
+                        const duration = new __SDuration();
+
+                        function afterResponse() {
+                            emit('log', {
+                                value: `<cyan>[request]</cyan> Request on "<cyan>${
+                                    req.url
+                                }</cyan>" served in <yellow>${
+                                    duration.end().formatedDuration
+                                }</yellow>`,
+                            });
+                        }
+
+                        res.on('finish', afterResponse);
+
                         next();
                     });
                 }

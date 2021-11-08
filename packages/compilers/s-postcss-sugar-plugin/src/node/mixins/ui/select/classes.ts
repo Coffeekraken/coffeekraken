@@ -3,33 +3,30 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiFormSelectClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    default: ['solid'],
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                default: ['solid'],
+            },
+            defaultColor: {
+                type: 'String',
+                default: __STheme.config('ui.select.defaultColor'),
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.select.defaultStyle'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                defaultColor: {
-                    type: 'String',
-                    default: __STheme.config('ui.select.defaultColor'),
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.select.defaultStyle'),
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'tf', 'vr'],
-                    default: ['bare', 'lnf', 'tf', 'vr'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
+            },
+        };
     }
 }
 

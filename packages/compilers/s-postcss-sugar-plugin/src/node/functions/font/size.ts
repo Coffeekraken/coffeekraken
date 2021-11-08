@@ -3,21 +3,18 @@ import __STheme from '@coffeekraken/s-theme';
 import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
 
 class postcssSugarPluginFontSizeInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                name: {
-                    type: 'String',
-                    required: true,
-                    alias: 'n',
-                },
-                scalable: {
-                    type: 'Boolean',
-                    default: __STheme.config('scalable.font'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            name: {
+                type: 'String',
+                required: true,
+                alias: 'n',
+            },
+            scalable: {
+                type: 'Boolean',
+                default: __STheme.config('scalable.font'),
+            },
+        };
     }
 }
 export { postcssSugarPluginFontSizeInterface as interface };

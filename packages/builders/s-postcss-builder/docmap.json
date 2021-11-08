@@ -5,30 +5,60 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -44,9 +74,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcss.config.js",
+                "filename": "postcss.config.ts",
                 "extension": "config",
-                "relPath": "src/config/postcss.config.js",
+                "relPath": "src/config/postcss.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.input": {
@@ -61,9 +91,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcssBuilder.config.js",
+                "filename": "postcssBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.js"
+                "relPath": "src/config/postcssBuilder.config.ts"
             },
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.output": {
                 "name": "output",
@@ -77,9 +107,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcssBuilder.config.js",
+                "filename": "postcssBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.js"
+                "relPath": "src/config/postcssBuilder.config.ts"
             },
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.postcss": {
                 "name": "postcss",
@@ -93,9 +123,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcssBuilder.config.js",
+                "filename": "postcssBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.js"
+                "relPath": "src/config/postcssBuilder.config.ts"
             },
             "@coffeekraken.s-postcss-builder.config.postcssBuilder.purgecss": {
                 "name": "purgecss",
@@ -109,9 +139,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcssBuilder.config.js",
+                "filename": "postcssBuilder.config.ts",
                 "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.js",
+                "relPath": "src/config/postcssBuilder.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-postcss-builder.config.purgecss.content": {
@@ -126,10 +156,66 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "purgecss.config.js",
+                "filename": "purgecss.config.ts",
                 "extension": "config",
-                "relPath": "src/config/purgecss.config.js",
+                "relPath": "src/config/purgecss.config.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-postcss-builder.node.sPostcssBuilder": {
+                "name": "SPostcssBuilder",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the postcss builder that you can use to build your postcss files\nwith a simple and efficient API.",
+                "namespace": "@coffeekraken.s-postcss-builder.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SPostcssBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SPostcssBuilder({\n     postcssBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SPostcssBuilder.ts",
+                "extension": "ts",
+                "relPath": "src/node/SPostcssBuilder.ts",
+                "children": {
+                    "postcssBuilderSettings": {
+                        "name": "postcssBuilderSettings",
+                        "type": "ISPostcssBuilderSettings",
+                        "description": "Access the postcss builder settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             }
         }
     }

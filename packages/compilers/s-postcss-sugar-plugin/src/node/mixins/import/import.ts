@@ -27,16 +27,13 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  */
 
 class postcssSugarPluginImportInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                path: {
-                    type: 'String',
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            path: {
+                type: 'String',
+                required: true,
+            },
+        };
     }
 }
 

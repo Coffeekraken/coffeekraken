@@ -5,35 +5,59 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -49,10 +73,67 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontspec.config.js",
+                "filename": "frontspec.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontspec.config.js",
+                "relPath": "src/config/frontspec.config.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-frontspec.node.sFrontspec": {
+                "name": "SFrontspec",
+                "type": "Class",
+                "description": "This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
+                "namespace": "@coffeekraken.s-frontspec.node",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFrontspec from '@coffeekraken/s-frontspec';\nconst frontspec = new SFrontspec({\n outputDir: '/my/cool/directory'\n});\nconst result = await frontspec.read();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFrontspec.ts",
+                "extension": "ts",
+                "relPath": "src/node/SFrontspec.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "read": {
+                        "name": "read",
+                        "type": "Function",
+                        "description": "This static method allows you to search for frontspec.json files and read them to get\nback the content of them in one call. It can take advantage of the cache if\nthe setting.cache property is setted to true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "assetsToServe": {
+                        "name": "assetsToServe",
+                        "type": "Function",
+                        "description": "This method will returns all the files that need to be served using a web server\nthat are defined in the frontspec.json files like some css, js etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-frontspec.node.interface.sFrontspecParamsInterface": {
                 "name": "SFrontspecParamsInterface",
@@ -65,9 +146,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SFrontspecParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontspecParamsInterface.js",
+                "filename": "SFrontspecParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontspecParamsInterface.ts",
                 "children": {}
             }
         }

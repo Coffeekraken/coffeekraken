@@ -18,23 +18,20 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SFrontstackRecipeParamsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                stack: {
-                    type: 'String',
-                    alias: 's',
-                },
-                recipe: {
-                    type: 'String',
-                    alias: 'r',
-                },
-                env: {
-                    type: 'String',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            stack: {
+                type: 'String',
+                alias: 's',
+            },
+            recipe: {
+                type: 'String',
+                alias: 'r',
+            },
+            env: {
+                type: 'String',
+            },
+        };
     }
 }
 

@@ -27,17 +27,14 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginClearfixInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                clearfix: {
-                    type: 'String',
-                    values: ['overflow', 'facebook', 'micro', 'after'],
-                    default: __STheme.config('helpers.clearfix.default'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            clearfix: {
+                type: 'String',
+                values: ['overflow', 'facebook', 'micro', 'after'],
+                default: __STheme.config('helpers.clearfix.default'),
+            },
+        };
     }
 }
 

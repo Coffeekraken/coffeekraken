@@ -48,24 +48,20 @@ export interface IHotkeySettings {
 }
 
 export class HotkeySettingsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                once: {
-                    type: 'Boolean',
-                    description:
-                        'Specify if you want to capture the hotkey just once',
-                    default: false,
-                },
-                splitChar: {
-                    type: 'String',
-                    description:
-                        'Define the character to use to split shortcuts',
-                    default: '+',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            once: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to capture the hotkey just once',
+                default: false,
+            },
+            splitChar: {
+                type: 'String',
+                description: 'Define the character to use to split shortcuts',
+                default: '+',
+            },
+        };
     }
 }
 

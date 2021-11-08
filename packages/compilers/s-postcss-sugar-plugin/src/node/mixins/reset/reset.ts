@@ -25,7 +25,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  */
 
 class postcssSugarPluginResetInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

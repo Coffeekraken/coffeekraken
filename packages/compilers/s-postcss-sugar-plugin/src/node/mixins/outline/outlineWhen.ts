@@ -1,17 +1,14 @@
 import __SInterface from '@coffeekraken/s-interface';
 
 class postcssSugarPluginStateOutlineWhenMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                when: {
-                    type: 'Array<String>',
-                    values: ['hover', 'focus', 'always'],
-                    default: ['focus'],
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            when: {
+                type: 'Array<String>',
+                values: ['hover', 'focus', 'always'],
+                default: ['focus'],
+            },
+        };
     }
 }
 export { postcssSugarPluginStateOutlineWhenMixinInterface as interface };

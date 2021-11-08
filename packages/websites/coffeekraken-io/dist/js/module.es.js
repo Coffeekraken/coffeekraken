@@ -5243,19 +5243,21 @@ else
 class SInterface extends SClass {
   constructor(settings) {
     super(__deepMerge$8({
-      interface: {}
+      interface: {
+        stripUnkown: false
+      }
     }, settings !== null && settings !== void 0 ? settings : {}));
     this._definition = {};
     this._definition = this.constructor.definition;
   }
-  static cached() {
-    return this._definition;
+  static get definition() {
+    if (this._cachedDefinition)
+      return this._cachedDefinition;
+    this._cachedDefinition = this._definition;
+    return this._cachedDefinition;
   }
-  static cache(definition) {
-    if (this._definition)
-      return this._definition;
-    this._definition = definition;
-    return this._definition;
+  static set definition(value) {
+    this._cachedDefinition = value;
   }
   get interfaceSettings() {
     return this._settings.interface;
@@ -5373,7 +5375,11 @@ class SInterface extends SClass {
     if (descriptorResult.hasIssues()) {
       throw new Error(descriptorResult.toString());
     }
-    return descriptorResult.value;
+    let resultObj = descriptorResult.value;
+    if (!set2.stripUnkown) {
+      resultObj = __deepMerge$8(objectOnWhichToApplyInterface, resultObj);
+    }
+    return resultObj;
   }
 }
 SInterface.description = "";
@@ -5608,33 +5614,35 @@ var __awaiter$d = function(thisArg, _arguments, P2, generator) {
   });
 };
 class SComponentDefaultInterface extends SInterface {
-}
-SComponentDefaultInterface.definition = {
-  id: {
-    type: "String",
-    physical: true
-  },
-  mounted: {
-    type: "Boolean",
-    default: false,
-    physical: true
-  },
-  mountWhen: {
-    type: "String",
-    values: ["directly", "inViewport"],
-    default: "directly"
-  },
-  adoptStyle: {
-    type: "Boolean",
-    default: true,
-    physical: true
-  },
-  bare: {
-    type: "Boolean",
-    default: false,
-    physical: true
+  static get _definition() {
+    return {
+      id: {
+        type: "String",
+        physical: true
+      },
+      mounted: {
+        type: "Boolean",
+        default: false,
+        physical: true
+      },
+      mountWhen: {
+        type: "String",
+        values: ["directly", "inViewport"],
+        default: "directly"
+      },
+      adoptStyle: {
+        type: "Boolean",
+        default: true,
+        physical: true
+      },
+      bare: {
+        type: "Boolean",
+        default: false,
+        physical: true
+      }
+    };
   }
-};
+}
 class SComponent extends SClass {
   constructor(node, props, settings = {}) {
     var _a2, _b2;
@@ -8103,14 +8111,21 @@ class SRequest extends SClass {
     if (this._currentRequestSettings.everyResponse) {
       this._currentRequestSettings.everyResponse(Object.assign({}, response), this._requestsCount);
     }
+    const lastResponse = this._responsesArray.slice(-1)[0];
     if (this._requestsCount >= this._currentRequestSettings.sendCount) {
-      this._resolve(this._responsesArray.length <= 1 ? this._responsesArray[0] : this._responsesArray);
+      this._resolve({
+        status: lastResponse.status,
+        statusText: lastResponse.statusText,
+        data: lastResponse.data,
+        count: this._responsesArray.length,
+        response: lastResponse,
+        responses: this._responsesArray
+      });
     } else {
       this._send();
     }
   }
   _onError(error2) {
-    console.log("EEE", error2);
     this._reject(error2);
   }
   _send(requestSettings = {}) {
@@ -8171,7 +8186,7 @@ class ApiNav extends SLitComponent {
   async firstUpdated() {
     var _a2, _b2;
     const request2 = new SRequest({
-      url: "/api/docmap",
+      url: "/docmap.json",
       method: "get"
     });
     this._menuStates = JSON.parse((_a2 = window.localStorage.getItem("apiNavStates")) != null ? _a2 : "{}");
@@ -52640,23 +52655,9 @@ function setState(stateObj) {
   const newState = __deepMerge$8(state, stateObj);
   window.localStorage.setItem("coffeekrakenio", JSON.stringify(newState));
 }
-let _docmap, _docmapPromise;
 function loadDocmap() {
-  var _a2;
   return __awaiter$6(this, void 0, void 0, function* () {
-    const state = getState();
-    if (_docmap)
-      return _docmap;
-    if (_docmapPromise)
-      return (yield _docmapPromise).data;
-    const request2 = new SRequest({
-      url: `/api/docmap?v=${(_a2 = state.version) !== null && _a2 !== void 0 ? _a2 : ""}`,
-      method: "GET"
-    });
-    const promise = request2.send();
-    _docmapPromise = promise;
-    _docmap = (yield promise).data;
-    return _docmap;
+    getState();
   });
 }
 var __decorate = function(decorators, target, key, desc) {
@@ -54523,7 +54524,7 @@ define$2({
     function fetchItems() {
       return __awaiter$3(this, void 0, void 0, function* () {
         const request2 = new SRequest({
-          url: "/api/docmap"
+          url: "/docmap.json"
         });
         const result = yield request2.send();
         searchItems = Object.values(result.data.map);
@@ -55284,67 +55285,69 @@ class SFeature extends SClass {
   }
 }
 class SActivateFeatureInterface extends SInterface {
-}
-SActivateFeatureInterface.definition = {
-  href: {
-    type: "String",
-    default: ""
-  },
-  group: {
-    type: "String"
-  },
-  toggle: {
-    type: {
-      type: "Boolean",
-      nullishAsTrue: true
-    },
-    default: false
-  },
-  history: {
-    type: {
-      type: "Boolean",
-      nullishAsTrue: true
-    },
-    default: false
-  },
-  active: {
-    type: {
-      type: "Boolean",
-      nullishAsTrue: true
-    },
-    default: false,
-    physical: true
-  },
-  activeClass: {
-    type: "String",
-    description: "Specify the class to apply on target(s) when activate",
-    default: "active"
-  },
-  activeAttribute: {
-    type: "String",
-    description: "Specify the attribute to apply on target(s) when activate",
-    default: "active"
-  },
-  saveState: {
-    type: "Boolean",
-    default: false
-  },
-  activateTimeout: {
-    type: "Number",
-    default: 0
-  },
-  unactivateTimeout: {
-    type: "Number",
-    default: 0
-  },
-  trigger: {
-    type: {
-      type: "Array<String>",
-      splitChars: [","]
-    },
-    default: ["click"]
+  static get _definition() {
+    return {
+      href: {
+        type: "String",
+        default: ""
+      },
+      group: {
+        type: "String"
+      },
+      toggle: {
+        type: {
+          type: "Boolean",
+          nullishAsTrue: true
+        },
+        default: false
+      },
+      history: {
+        type: {
+          type: "Boolean",
+          nullishAsTrue: true
+        },
+        default: false
+      },
+      active: {
+        type: {
+          type: "Boolean",
+          nullishAsTrue: true
+        },
+        default: false,
+        physical: true
+      },
+      activeClass: {
+        type: "String",
+        description: "Specify the class to apply on target(s) when activate",
+        default: "active"
+      },
+      activeAttribute: {
+        type: "String",
+        description: "Specify the attribute to apply on target(s) when activate",
+        default: "active"
+      },
+      saveState: {
+        type: "Boolean",
+        default: false
+      },
+      activateTimeout: {
+        type: "Number",
+        default: 0
+      },
+      unactivateTimeout: {
+        type: "Number",
+        default: 0
+      },
+      trigger: {
+        type: {
+          type: "Array<String>",
+          splitChars: [","]
+        },
+        default: ["click"]
+      }
+    };
   }
-};
+}
 var __awaiter = function(thisArg, _arguments, P2, generator) {
   function adopt(value) {
     return value instanceof P2 ? value : new P2(function(resolve2) {
@@ -55519,195 +55522,197 @@ function register$1(props = {}, name = "s-activate") {
   SFeature.registerFeature(name, SActivateFeature, props);
 }
 class SFormValidateFeatureInterface extends SInterface {
-}
-SFormValidateFeatureInterface.definition = {
-  type: {
-    type: "String",
-    default: "text"
-  },
-  on: {
-    type: "Array<String>",
-    values: ["change", "submit", "enter", "reset"],
-    default: ["change", "submit", "enter", "reset"]
-  },
-  wrap: {
-    type: "Boolean",
-    default: true
-  },
-  errorClass: {
-    type: "String",
-    default: "s-form-validate s-form-validate--error s-color--error"
-  },
-  errorMessageClass: {
-    type: "String",
-    default: "s-form-validate__error-message"
-  },
-  validClass: {
-    type: "String",
-    default: "s-form-validate s-form-validate--valid s-color--success"
-  },
-  customValidations: {
-    type: "Object",
-    default: {}
-  },
-  joiOptions: {
-    type: "Object",
-    default: {}
-  },
-  language: {
-    type: "String",
-    default: "fr"
-  },
-  displayError: {
-    type: "Boolean",
-    default: true
-  },
-  alphanum: {
-    type: "Boolean",
-    description: "String: Requires the string value to only contain a-z, A-Z, and 0-9."
-  },
-  base64: {
-    type: "Boolean",
-    description: "String: Requires the string value to be a valid base64 string; does not check the decoded value."
-  },
-  case: {
-    type: "String",
-    values: ["upper", "lower"],
-    description: "String: Sets the required string case"
-  },
-  creditCard: {
-    type: "Boolean",
-    description: "String: Requires the number to be a credit card number (Using Luhn Algorithm)."
-  },
-  dataUri: {
-    type: "Boolean",
-    description: "String: Requires the string value to be a valid data URI string."
-  },
-  domain: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid domain name."
-  },
-  email: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid email address."
-  },
-  guid: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid GUID."
-  },
-  hex: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid hexadecimal string."
-  },
-  hostname: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid hostname as per RFC1123."
-  },
-  insensitive: {
-    type: "Boolean|String",
-    description: "String: Allows the value to match any value in the allowed list or disallowed list in a case insensitive comparison."
-  },
-  ip: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid ip address."
-  },
-  isoDate: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be in valid ISO 8601 date format."
-  },
-  isoDuration: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be in valid ISO 8601 duration format."
-  },
-  length: {
-    type: "Number",
-    description: "String: Specifies the exact string length required"
-  },
-  lowercase: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be all lowercase. If the validation convert option is on (enabled by default), the string will be forced to lowercase."
-  },
-  max: {
-    type: "Number",
-    description: "String: String: Specifies the maximum number of string characters\nDate: Specifies the latest date allowed\nNumber: Specifies the minimum value"
-  },
-  min: {
-    type: "Number",
-    description: "String: String: Specifies the minimum number string characters\nDate: Specifies the oldest date allowed\nNumber: Specifies the minimum value"
-  },
-  normalize: {
-    type: "String",
-    description: "String: Requires the string value to be in a Unicode normalized form. If the validation convert option is on (enabled by default), the string will be normalized."
-  },
-  pattern: {
-    type: "String",
-    description: "String: a regular expression object the string value must match against. Note that if the pattern is a regular expression, for it to match the entire key name, it must begin with ^ and end with $."
-  },
-  token: {
-    type: "Boolean",
-    description: "String: Requires the string value to only contain a-z, A-Z, 0-9, and underscore _."
-  },
-  trim: {
-    type: "Boolean",
-    description: "String: Requires the string value to contain no whitespace before or after. If the validation convert option is on (enabled by default), the string will be trimmed."
-  },
-  truncate: {
-    type: "Boolean",
-    description: "String: Specifies whether the string.max() limit should be used as a truncation."
-  },
-  uppercase: {
-    type: "Boolean",
-    description: "String: Requires the string value to be all uppercase. If the validation convert option is on (enabled by default), the string will be forced to uppercase."
-  },
-  uri: {
-    type: "Boolean|String",
-    description: "String: Requires the string value to be a valid RFC 3986 URI."
-  },
-  greater: {
-    type: "String",
-    description: "String: Date: Specifies that the value must be greater than date (or a reference)\nNumber: Specifies that the value must be greater than limit or a reference."
-  },
-  less: {
-    type: "String",
-    description: "String: Date: Specifies that the value must be less than date (or a reference)\nNumber: Specifies that the value must be less than limit or a reference."
-  },
-  iso: {
-    type: "Boolean",
-    description: "Date: Requires the string value to be in valid ISO 8601 date format."
-  },
-  timestamp: {
-    type: "Boolean|String",
-    description: "Date: Requires the value to be a timestamp interval from Unix Time"
-  },
-  integer: {
-    type: "Boolean",
-    description: "Number: Requires the number to be an integer (no floating point)."
-  },
-  multiple: {
-    type: "Number",
-    description: "Number: Specifies that the value must be a multiple of base (or a reference):"
-  },
-  negative: {
-    type: "Boolean",
-    description: "Number: Requires the number to be negative"
-  },
-  port: {
-    type: "Boolean",
-    description: "Number: Requires the number to be a TCP port, so between 0 and 65535."
-  },
-  positive: {
-    type: "Boolean",
-    description: "Number: Requires the number to be positive"
-  },
-  precision: {
-    type: "Number",
-    description: "Number: Specifies the maximum number of decimal places"
-  },
-  unsafe: {
-    type: "Boolean",
-    description: "Number: By default, numbers must be within JavaScript's safety range (Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER), and when given a string, should be converted without loss of information. You can allow unsafe numbers at your own risks by calling number.unsafe()."
+  static get _definition() {
+    return {
+      type: {
+        type: "String",
+        default: "text"
+      },
+      on: {
+        type: "Array<String>",
+        values: ["change", "submit", "enter", "reset"],
+        default: ["change", "submit", "enter", "reset"]
+      },
+      wrap: {
+        type: "Boolean",
+        default: true
+      },
+      errorClass: {
+        type: "String",
+        default: "s-form-validate s-form-validate--error s-color--error"
+      },
+      errorMessageClass: {
+        type: "String",
+        default: "s-form-validate__error-message"
+      },
+      validClass: {
+        type: "String",
+        default: "s-form-validate s-form-validate--valid s-color--success"
+      },
+      customValidations: {
+        type: "Object",
+        default: {}
+      },
+      joiOptions: {
+        type: "Object",
+        default: {}
+      },
+      language: {
+        type: "String",
+        default: "fr"
+      },
+      displayError: {
+        type: "Boolean",
+        default: true
+      },
+      alphanum: {
+        type: "Boolean",
+        description: "String: Requires the string value to only contain a-z, A-Z, and 0-9."
+      },
+      base64: {
+        type: "Boolean",
+        description: "String: Requires the string value to be a valid base64 string; does not check the decoded value."
+      },
+      case: {
+        type: "String",
+        values: ["upper", "lower"],
+        description: "String: Sets the required string case"
+      },
+      creditCard: {
+        type: "Boolean",
+        description: "String: Requires the number to be a credit card number (Using Luhn Algorithm)."
+      },
+      dataUri: {
+        type: "Boolean",
+        description: "String: Requires the string value to be a valid data URI string."
+      },
+      domain: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid domain name."
+      },
+      email: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid email address."
+      },
+      guid: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid GUID."
+      },
+      hex: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid hexadecimal string."
+      },
+      hostname: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid hostname as per RFC1123."
+      },
+      insensitive: {
+        type: "Boolean|String",
+        description: "String: Allows the value to match any value in the allowed list or disallowed list in a case insensitive comparison."
+      },
+      ip: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid ip address."
+      },
+      isoDate: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be in valid ISO 8601 date format."
+      },
+      isoDuration: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be in valid ISO 8601 duration format."
+      },
+      length: {
+        type: "Number",
+        description: "String: Specifies the exact string length required"
+      },
+      lowercase: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be all lowercase. If the validation convert option is on (enabled by default), the string will be forced to lowercase."
+      },
+      max: {
+        type: "Number",
+        description: "String: String: Specifies the maximum number of string characters\nDate: Specifies the latest date allowed\nNumber: Specifies the minimum value"
+      },
+      min: {
+        type: "Number",
+        description: "String: String: Specifies the minimum number string characters\nDate: Specifies the oldest date allowed\nNumber: Specifies the minimum value"
+      },
+      normalize: {
+        type: "String",
+        description: "String: Requires the string value to be in a Unicode normalized form. If the validation convert option is on (enabled by default), the string will be normalized."
+      },
+      pattern: {
+        type: "String",
+        description: "String: a regular expression object the string value must match against. Note that if the pattern is a regular expression, for it to match the entire key name, it must begin with ^ and end with $."
+      },
+      token: {
+        type: "Boolean",
+        description: "String: Requires the string value to only contain a-z, A-Z, 0-9, and underscore _."
+      },
+      trim: {
+        type: "Boolean",
+        description: "String: Requires the string value to contain no whitespace before or after. If the validation convert option is on (enabled by default), the string will be trimmed."
+      },
+      truncate: {
+        type: "Boolean",
+        description: "String: Specifies whether the string.max() limit should be used as a truncation."
+      },
+      uppercase: {
+        type: "Boolean",
+        description: "String: Requires the string value to be all uppercase. If the validation convert option is on (enabled by default), the string will be forced to uppercase."
+      },
+      uri: {
+        type: "Boolean|String",
+        description: "String: Requires the string value to be a valid RFC 3986 URI."
+      },
+      greater: {
+        type: "String",
+        description: "String: Date: Specifies that the value must be greater than date (or a reference)\nNumber: Specifies that the value must be greater than limit or a reference."
+      },
+      less: {
+        type: "String",
+        description: "String: Date: Specifies that the value must be less than date (or a reference)\nNumber: Specifies that the value must be less than limit or a reference."
+      },
+      iso: {
+        type: "Boolean",
+        description: "Date: Requires the string value to be in valid ISO 8601 date format."
+      },
+      timestamp: {
+        type: "Boolean|String",
+        description: "Date: Requires the value to be a timestamp interval from Unix Time"
+      },
+      integer: {
+        type: "Boolean",
+        description: "Number: Requires the number to be an integer (no floating point)."
+      },
+      multiple: {
+        type: "Number",
+        description: "Number: Specifies that the value must be a multiple of base (or a reference):"
+      },
+      negative: {
+        type: "Boolean",
+        description: "Number: Requires the number to be negative"
+      },
+      port: {
+        type: "Boolean",
+        description: "Number: Requires the number to be a TCP port, so between 0 and 65535."
+      },
+      positive: {
+        type: "Boolean",
+        description: "Number: Requires the number to be positive"
+      },
+      precision: {
+        type: "Number",
+        description: "Number: Specifies the maximum number of decimal places"
+      },
+      unsafe: {
+        type: "Boolean",
+        description: "Number: By default, numbers must be within JavaScript's safety range (Number.MIN_SAFE_INTEGER & Number.MAX_SAFE_INTEGER), and when given a string, should be converted without loss of information. You can allow unsafe numbers at your own risks by calling number.unsafe()."
+      }
+    };
   }
-};
+}
 var joiBrowser_min = {exports: {}};
 (function(module2, exports) {
   !function(e20, t2) {

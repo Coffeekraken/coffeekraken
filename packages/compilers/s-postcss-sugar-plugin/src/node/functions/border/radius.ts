@@ -2,18 +2,15 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginBorderRadiusFunctionInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                radius: {
-                    type: 'String',
-                    values: Object.keys(__STheme.config('border.radius')),
-                    default: 'default',
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            radius: {
+                type: 'String',
+                values: Object.keys(__STheme.config('border.radius')),
+                default: 'default',
+                required: true,
+            },
+        };
     }
 }
 export { postcssSugarPluginBorderRadiusFunctionInterface as interface };

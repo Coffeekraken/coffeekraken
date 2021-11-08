@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

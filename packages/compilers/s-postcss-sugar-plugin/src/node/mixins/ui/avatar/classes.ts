@@ -2,34 +2,31 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['solid'],
-                    default: ['solid'],
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid'],
+                default: ['solid'],
+            },
+            defaultColor: {
+                type: 'String',
+                default: __STheme.config('ui.avatar.defaultColor'),
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.avatar.defaultStyle'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                defaultColor: {
-                    type: 'String',
-                    default: __STheme.config('ui.avatar.defaultColor'),
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.avatar.defaultStyle'),
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'vr', 'tf'],
-                    default: ['bare', 'lnf', 'vr', 'tf'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
+            },
+        };
     }
 }
 

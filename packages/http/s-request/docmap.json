@@ -6,24 +6,32 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -37,14 +45,20 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -66,10 +80,87 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "request.js",
-                "extension": "js",
-                "relPath": "src/shared/request.js",
+                "filename": "request.ts",
+                "extension": "ts",
+                "relPath": "src/shared/request.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-request.shared.sRequest": {
+                "name": "SRequest",
+                "type": "Class",
+                "description": "Class that allows to simply handle ajax requests with ease.\nThis class give some useful features like :\n- Promise support\n- Recursive requests",
+                "namespace": "@coffeekraken.s-request.shared",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SRequest from '@coffeekraken/s-request';\nconst request = new SRequest({\n\t\turl : 'api/...',\n\t\tmethod : 'GET',\n\t\tdata : {\n\t\t\tmyVar : 'myVal'\n\t\t}\n});\n\n// send and listen for data\nrequest.send().then((response) => {\n\t\t// do something with response here...\n}).catch((error) => {\n\t\t// something went wrong...\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRequest.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SRequest.ts",
+                "children": {
+                    "requestSettings": {
+                        "name": "requestSettings",
+                        "type": "ISRequestSettings",
+                        "description": "Access the request settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "retry": {
+                        "name": "retry",
+                        "type": "Function",
+                        "description": "Reset the request settings variables and relaunch the request",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myAjax.retry().then(response => {\n   // do something...\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "send": {
+                        "name": "send",
+                        "type": "Function",
+                        "description": "Send the request and return a promise that will be resolved once all the requests\nhave been made or rejected if one of the requests has returned an error...",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myAjax.send().then(response => {\n   // do something...\n}).catch(error => {\n   // do something...\n});"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-request.sugar.js.http.sRequestConfig": {
                 "name": "SRequestConfig",
@@ -88,15 +179,10 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "SRequestConfig.js",
-                "extension": "js",
-                "relPath": "src/shared/SRequestConfig.js",
+                "filename": "SRequestConfig.ts",
+                "extension": "ts",
+                "relPath": "src/shared/SRequestConfig.ts",
                 "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor"
-                    },
                     "url": {
                         "name": "url",
                         "type": "String",
@@ -235,6 +321,11 @@
                             "email": "olivier.bossel@gmail.com",
                             "url": "https://olivierbossel.com"
                         }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor"
                     }
                 }
             }

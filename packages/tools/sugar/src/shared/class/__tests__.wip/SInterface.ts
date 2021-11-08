@@ -4,20 +4,17 @@ module.exports = (__SInterface) => {
     describe('sugar.js.class.SInterface', () => {
         it('Should pass the interface test correctly', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                required: true,
-                            },
-                            doSomething: {
-                                type: 'Function',
-                                required: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            required: true,
+                        },
+                        doSomething: {
+                            type: 'Function',
+                            required: true,
+                        },
+                    };
                 }
             }
 
@@ -53,20 +50,17 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                required: true,
-                            },
-                            doSomething: {
-                                type: 'Function',
-                                required: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            required: true,
+                        },
+                        doSomething: {
+                            type: 'Function',
+                            required: true,
+                        },
+                    };
                 }
             }
 
@@ -85,21 +79,18 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly when checking for an undefined static function', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                required: true,
-                            },
-                            doSomething: {
-                                type: 'Function',
-                                required: true,
-                                static: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            required: true,
+                        },
+                        doSomething: {
+                            type: 'Function',
+                            required: true,
+                            static: true,
+                        },
+                    };
                 }
             }
 
@@ -134,21 +125,18 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly when checking for an existing static function', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                required: true,
-                            },
-                            doSomething: {
-                                type: 'Function',
-                                required: true,
-                                static: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            required: true,
+                        },
+                        doSomething: {
+                            type: 'Function',
+                            required: true,
+                            static: true,
+                        },
+                    };
                 }
             }
 
@@ -167,17 +155,14 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly passing a value that is not in the allowed once', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                values: ['Hello', 'World'],
-                                required: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            values: ['Hello', 'World'],
+                            required: true,
+                        },
+                    };
                 }
             }
 
@@ -211,17 +196,14 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly passing a value that is in the allowed once', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                values: ['Hello', 'World'],
-                                required: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            values: ['Hello', 'World'],
+                            required: true,
+                        },
+                    };
                 }
             }
 
@@ -239,47 +221,44 @@ module.exports = (__SInterface) => {
 
         it('Should pass the interface test correctly passing a complexe one that need to return a correct error string', () => {
             class MyInterface extends __SInterface {
-                static get definition() {
-                    return (
-                        this.cached() ??
-                        this.cache({
-                            title: {
-                                type: 'String',
-                                values: ['Hello', 'World'],
-                                required: true,
-                            },
-                            body: {
-                                type: 'Boolean',
-                                required: true,
-                            },
-                            header: {
-                                type: 'Array<String>',
-                                required: true,
-                            },
-                            footer: {
-                                type: 'Object<Boolean|Number>',
-                                required: true,
-                            },
-                            medhod1: {
-                                type: 'Function',
-                                required: true,
-                            },
-                            method2: {
-                                type: 'Function',
-                                required: true,
-                            },
-                            staticMethod: {
-                                type: 'Function',
-                                required: true,
-                                static: true,
-                            },
-                            staticMethod2: {
-                                type: 'Function',
-                                required: true,
-                                static: true,
-                            },
-                        })
-                    );
+                static get _definition() {
+                    return {
+                        title: {
+                            type: 'String',
+                            values: ['Hello', 'World'],
+                            required: true,
+                        },
+                        body: {
+                            type: 'Boolean',
+                            required: true,
+                        },
+                        header: {
+                            type: 'Array<String>',
+                            required: true,
+                        },
+                        footer: {
+                            type: 'Object<Boolean|Number>',
+                            required: true,
+                        },
+                        medhod1: {
+                            type: 'Function',
+                            required: true,
+                        },
+                        method2: {
+                            type: 'Function',
+                            required: true,
+                        },
+                        staticMethod: {
+                            type: 'Function',
+                            required: true,
+                            static: true,
+                        },
+                        staticMethod2: {
+                            type: 'Function',
+                            required: true,
+                            static: true,
+                        },
+                    };
                 }
             }
 

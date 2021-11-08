@@ -19,7 +19,7 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 
 class postcssSugarPluginAlignClassesInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

@@ -58,7 +58,7 @@ __sFiltrableInputDefine(
         items: async ({ value }) => {
             async function fetchItems() {
                 const request = new __SRequest({
-                    url: '/api/docmap',
+                    url: '/docmap.json',
                 });
                 const result = await request.send();
                 searchItems = Object.values(result.data.map);

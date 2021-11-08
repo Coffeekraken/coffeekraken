@@ -5,34 +5,59 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -48,10 +73,388 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sFile.config.js",
+                "filename": "sFile.config.ts",
                 "extension": "config",
-                "relPath": "src/config/sFile.config.js",
+                "relPath": "src/config/sFile.config.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-file.sugar.node.fs.sFile": {
+                "name": "SFile",
+                "type": "Class",
+                "description": "This class represent a file in the filesystem. With it you can simply instanciate one by passing the file path,\nand get access to all the nice meta data like:\n- name: The file name\n- path: The full path to the file\n- cwd: The root directory specified through the settings.cwd property\n- relPath: The relative file path from the cwd\n- dirPath: The path to the folder where is the file\n- extension: The file extension\n- stats: An object with file stats like size in mb, kb, etc...\n- exists: true if the file exists on the disk, false otherwise",
+                "namespace": "@coffeekraken.s-file.sugar.node.fs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFile from '@coffeekraken/s-file';\nconst file = new SFile('something/cool/sugar.json');\nfile.extension; // => json\nfile.exists; // => true"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFile.ts",
+                "extension": "ts",
+                "relPath": "src/node/SFile.ts",
+                "children": {
+                    "registerClass": {
+                        "name": "registerClass",
+                        "type": "Function",
+                        "description": "This method allows you to register an SFile(...) class with an extension\nto allows you to instanciate the best one using the ```new``` static\nmethod.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "sourcesFiles": {
+                        "name": "sourcesFiles",
+                        "type": "Record<string, SFile>",
+                        "description": "Store the sources files found using the specified sourcesExtensions in the settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "new": {
+                        "name": "new",
+                        "type": "Function",
+                        "description": "This function take as parameter a file path and an object of settings\nto instanciate the proper SFile(...) class depending on the file extension.\nIf the extension does not correspond to any registered SFile(...) class,\nthe file will be instanciated using the SFile class itself.\n\nTo register a new SFile(...) class mapping, use the ```registerClass``` static\nmethod.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "name": {
+                        "name": "name",
+                        "type": "String",
+                        "description": "Store the full file name",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "nameWithoutExt": {
+                        "name": "nameWithoutExt",
+                        "type": "String",
+                        "description": "Store the file name without the extension",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "path": {
+                        "name": "path",
+                        "type": "String",
+                        "description": "Store the full file path\nSome tokens can be used in the file path like:\n- %packageTmpDir: return the absolute path to the package tmp directory\n- %packageLocalDir: return the absolute path to the package .local directory\n- %packageCacheDir: return the absolute path to the package cache directory\n- %packageRootDir: return the absolute path to the package root directory\n\n- %srcRootDir: return the absolute path to the source root directory\n- %srcJsDir: return the absolute path to the source js directory\n- %srcCssDir: return the absolute path to the source css directory\n- %srcIconsDir: return the absolute path to the source icons directory\n- %srcImgDir: return the absolute path to the source images directory\n- %srcNodeDir: return the absolute path to the source node directory\n- %srcViewsDir: return the absolute path to the source views directory\n\n- %distRootDir: return the absolute path to the dist root directory\n- %distJsDir: return the absolute path to the dist js directory\n- %distCssDir: return the absolute path to the dist css directory\n- %distIconsDir: return the absolute path to the dist icons directory\n- %distImgDir: return the absolute path to the dist images directory\n- %distNodeDir: return the absolute path to the dist node directory\n- %distViewsDir: return the absolute path to the dist views directory",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "cwd": {
+                        "name": "cwd",
+                        "type": "String",
+                        "description": "Store the root directory where the file actually lives.\nThe root directory can be for example ```src/js``` for a file that lives under ```/my/cool/path/src/js/array/sort.js```.\nTo set this property, you need to pass the ```cwd``` setting through the constructor...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "exists": {
+                        "name": "exists",
+                        "type": "Boolean",
+                        "description": "Specify if the file exists on the filesystem or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "relPath": {
+                        "name": "relPath",
+                        "type": "String",
+                        "description": "Store the path relative to the ```cwd``` property. To have access to this property, you MUST\nspecify the settings.cwd through the constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "dirPath": {
+                        "name": "dirPath",
+                        "type": "String",
+                        "description": "Store the path to the folder where the file lives",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "extension": {
+                        "name": "extension",
+                        "type": "String",
+                        "description": "Store the file extension",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "fileSettings": {
+                        "name": "fileSettings",
+                        "type": "ISFileSettings",
+                        "description": "Access the file settings setted in the ```settings.file``` property",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "hash": {
+                        "name": "hash",
+                        "type": "String",
+                        "description": "Get the file `md5` hash",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "stats": {
+                        "name": "stats",
+                        "type": "Object",
+                        "description": "Access the file stats like the updated timestamp, sizes, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "raw": {
+                        "name": "raw",
+                        "type": "String",
+                        "description": "Access the raw file content in string format",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "content": {
+                        "name": "content",
+                        "type": "String",
+                        "description": "Access the file content",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "commits": {
+                        "name": "commits",
+                        "type": "Array<String>",
+                        "description": "Store all the commits made before saving the file",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toObject": {
+                        "name": "toObject",
+                        "type": "Function",
+                        "description": "This method transform this instance into a plain object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "watch": {
+                        "name": "watch",
+                        "type": "Function",
+                        "description": "This method allows you to start watching the file for events like \"update\", etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "unwatch": {
+                        "name": "unwatch",
+                        "type": "Function",
+                        "description": "This method allows you to stop the watching process of the file",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Function",
+                        "description": "Return the string version of the file. Here, the path...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "duplicate": {
+                        "name": "duplicate",
+                        "type": "Function",
+                        "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "duplicateSync": {
+                        "name": "duplicateSync",
+                        "type": "Function",
+                        "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "save": {
+                        "name": "save",
+                        "type": "Function",
+                        "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "saveSync": {
+                        "name": "saveSync",
+                        "type": "Function",
+                        "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "unlink": {
+                        "name": "unlink",
+                        "type": "Function",
+                        "description": "This method allows you to unlink the file asyncronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "unlinkSync": {
+                        "name": "unlinkSync",
+                        "type": "Function",
+                        "description": "This method allows you to unlinkSync the file syncronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "read": {
+                        "name": "read",
+                        "type": "Function",
+                        "description": "This method allows you to read the file asycronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "readSync": {
+                        "name": "readSync",
+                        "type": "Function",
+                        "description": "This method allows you to read the file syncronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "write": {
+                        "name": "write",
+                        "type": "Function",
+                        "description": "This method allows you to write the file asycronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "writeSync": {
+                        "name": "writeSync",
+                        "type": "Function",
+                        "description": "This method allows you to write the file sycronously",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             }
         }
     }

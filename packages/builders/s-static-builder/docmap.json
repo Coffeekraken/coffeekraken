@@ -1,0 +1,284 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-static-builder.config.staticBuilder.input": {
+                "name": "input",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/sitemap.xml",
+                "description": "Specify the input sitemap file to use for building your static website",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/static",
+                "description": "Specify the outDir folder path to save your builded website",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.host": {
+                "name": "host",
+                "type": "String",
+                "default": "http://[config.frontendServer.hostname]:[config.frontendServer.port]",
+                "description": "Specify the host on which to make requests to",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.failAfter": {
+                "name": "failAfter",
+                "type": "Number",
+                "default": "-1",
+                "description": "Specify the number of failures after which the build is considered as rejected. -1 to disable this feature",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout": {
+                "name": "requestTimeout",
+                "type": "Number",
+                "default": "5000",
+                "description": "Specify after how many ms a request has to be considered as failed",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.clear": {
+                "name": "clear",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to clear the \"outDir\" before rebuilding",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.staticBuilder.host]/docmap.json",
+                "description": "Specify the directory/file/url from which to get the asset to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]/docmap.json",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.storage.dist.rootDir]",
+                "description": "Specify the directory/file to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.ts",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-static-builder.node.sStaticBuilder": {
+                "name": "SStaticBuilder",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the postcss builder that you can use to build your postcss files\nwith a simple and efficient API.",
+                "namespace": "@coffeekraken.s-static-builder.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SStaticBuilder from '@coffeekraken/s-static-builder';\nconst builder = new SStaticBuilder({\n     staticBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'sitemap.xml',\n     outDir: 'my/cool/folder'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SStaticBuilder.ts",
+                "extension": "ts",
+                "relPath": "src/node/SStaticBuilder.ts",
+                "children": {
+                    "staticBuilderSettings": {
+                        "name": "staticBuilderSettings",
+                        "type": "ISStaticBuilderSettings",
+                        "description": "Access the postcss builder settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

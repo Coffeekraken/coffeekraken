@@ -6,24 +6,31 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -38,14 +45,20 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -61,9 +74,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekraken.config.js",
+                "filename": "themeCoffeekraken.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekraken.config.js"
+                "relPath": "src/config/themeCoffeekraken.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekraken.variants.dark": {
                 "name": "dark",
@@ -77,9 +90,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekraken.config.js",
+                "filename": "themeCoffeekraken.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekraken.config.js",
+                "relPath": "src/config/themeCoffeekraken.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.extends": {
@@ -94,9 +107,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.main.color": {
                 "name": "color",
@@ -110,9 +123,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.ui.color": {
                 "name": "color",
@@ -126,9 +139,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.accent.color": {
                 "name": "color",
@@ -142,9 +155,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.complementary.color": {
                 "name": "color",
@@ -158,9 +171,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.success.color": {
                 "name": "color",
@@ -174,9 +187,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.warning.color": {
                 "name": "color",
@@ -190,9 +203,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.error.error": {
                 "name": "error",
@@ -206,9 +219,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.info.color": {
                 "name": "color",
@@ -222,9 +235,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js"
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts"
             },
             "@coffeekraken.s-coffeekraken-theme.config.themeCoffeekrakenDark.color.extension.color": {
                 "name": "color",
@@ -238,9 +251,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "themeCoffeekrakenDark.config.js",
+                "filename": "themeCoffeekrakenDark.config.ts",
                 "extension": "config",
-                "relPath": "src/config/themeCoffeekrakenDark.config.js",
+                "relPath": "src/config/themeCoffeekrakenDark.config.ts",
                 "children": {}
             }
         }

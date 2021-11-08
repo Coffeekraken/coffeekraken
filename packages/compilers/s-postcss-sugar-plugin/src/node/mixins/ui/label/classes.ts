@@ -3,22 +3,19 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['inline', 'float'],
-                    default: ['inline', 'float'],
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['inline', 'float'],
-                    default: __STheme.config('ui.label.defaultStyle'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['inline', 'float'],
+                default: ['inline', 'float'],
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['inline', 'float'],
+                default: __STheme.config('ui.label.defaultStyle'),
+            },
+        };
     }
 }
 

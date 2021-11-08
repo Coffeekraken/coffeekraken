@@ -26,17 +26,14 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginBorderRadiusMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                radius: {
-                    type: 'Number|String',
-                    required: true,
-                    default: __STheme.config('border.radius.default'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            radius: {
+                type: 'Number|String',
+                required: true,
+                default: __STheme.config('border.radius.default'),
+            },
+        };
     }
 }
 

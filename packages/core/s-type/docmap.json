@@ -5,23 +5,33 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -33,18 +43,279 @@
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-type.shared.sType": {
+                "name": "SType",
+                "type": "Class",
+                "description": "This class is the main one that MUST be used as parent one\nwhen creating any type like object, string, etc...",
+                "namespace": "@coffeekraken.s-type.shared",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SType from '@coffeekraken/sugar/js/descriptor/SType';\nclass MyDescriptor extends SType {\n   constructor(settings) {\n     super(settings);\n     // do something...\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "_SType.ts",
+                "extension": "ts",
+                "relPath": "src/shared/_SType.ts",
+                "children": {
+                    "typeString": {
+                        "name": "typeString",
+                        "type": "String",
+                        "description": "This store the typeString passed in the constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "types": {
+                        "name": "types",
+                        "type": "IParseTypeStringResultObj[]",
+                        "description": "This specify the type represented by this SType instance",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerType": {
+                        "name": "registerType",
+                        "type": "Function",
+                        "description": "This static method allows you to register a new rule\nby passing a valid ISDescriptorRule object",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "is": {
+                        "name": "is",
+                        "type": "Function",
+                        "description": "This method make a simple check to see if the passed value correspond to the\ntype that this instance represent.\nSame as the ```check``` method, but return only a Boolean.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "check": {
+                        "name": "check",
+                        "type": "Function",
+                        "description": "This method allows you to make sure the passed value correspond with the type(s)\nthis instance represent\nIf all is ok, return true, otherwise return an instance of the STypeResult class that\ndescribe what is wrong",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "cast": {
+                        "name": "cast",
+                        "type": "Function",
+                        "description": "This method allows you to cast the passed value to the wanted type.\n!!! If multiple types are passed in the typeString, the first one that\nis \"castable\" to will be used.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "canHaveChilds": {
+                        "name": "canHaveChilds",
+                        "type": "Function",
+                        "description": "This method simply take a value and return true if can have child(s), false if not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "name": {
+                        "name": "name",
+                        "type": "String",
+                        "description": "Access the descriptor name. Either the value of settings.name, or the constructor name",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Access the descriptor id. Either the value of settings.name, or the constructor name",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-type.sugar.js.type.sTypeResult": {
+                "name": "STypeResult",
+                "type": "Class",
+                "description": "This class represent what you will get back from the ```SType.apply``` method.\nYou will be able to generate some string terminal version of the return as well as some html\nversion if needed",
+                "namespace": "@coffeekraken.s-type.sugar.js.type",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "STypeResult.ts",
+                "extension": "ts",
+                "relPath": "src/shared/STypeResult.ts",
+                "children": {
+                    "typeString": {
+                        "name": "typeString",
+                        "type": "string",
+                        "description": "Access the type in string format",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "value": {
+                        "name": "value",
+                        "type": "string",
+                        "description": "Access the value passed to be type validated",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "received": {
+                        "name": "received",
+                        "type": "ISTypeResultReceived",
+                        "description": "Access the received descriptor object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "expected": {
+                        "name": "expected",
+                        "type": "ISTypeResultExpected",
+                        "description": "Access the expected descriptor object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "issues": {
+                        "name": "issues",
+                        "type": "ISTypeResultIssueObj[]",
+                        "description": "Access the issues array",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "settings": {
+                        "name": "settings",
+                        "type": "ISTypeResultSettings",
+                        "description": "Access the settings object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "hasIssues": {
+                        "name": "hasIssues",
+                        "type": "Function",
+                        "description": "Return true if some issues have been detected, false if not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toString": {
+                        "name": "toString",
+                        "type": "Functio n",
+                        "description": "This method return a string terminal compatible or html of this result object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toConsole": {
+                        "name": "toConsole",
+                        "type": "Function",
+                        "description": "This method simply returns you a terminal compatible string\nof the interface checking result",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-type.sugar.js.type.descriptor.arrayTypeDescriptor": {
                 "name": "arrayTypeDescriptor",
                 "type": "ISTypeDescriptor",
@@ -62,9 +333,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "arrayTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/arrayTypeDescriptor.js",
+                "filename": "arrayTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/arrayTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.bigintTypeDescriptor": {
@@ -84,9 +355,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "bigintTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/bigintTypeDescriptor.js",
+                "filename": "bigintTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/bigintTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.booleanTypeDescriptor": {
@@ -106,9 +377,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "booleanTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/booleanTypeDescriptor.js",
+                "filename": "booleanTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/booleanTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.classTypeDescriptor": {
@@ -128,9 +399,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "classTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/classTypeDescriptor.js",
+                "filename": "classTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/classTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.dateTypeDescriptor": {
@@ -150,9 +421,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "dateTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/dateTypeDescriptor.js",
+                "filename": "dateTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/dateTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.functionTypeDescriptor": {
@@ -172,9 +443,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "functionTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/functionTypeDescriptor.js",
+                "filename": "functionTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/functionTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.integerTypeDescriptor": {
@@ -194,9 +465,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "integerTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/integerTypeDescriptor.js",
+                "filename": "integerTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/integerTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.mapTypeDescriptor": {
@@ -216,9 +487,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "setTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/setTypeDescriptor.js",
+                "filename": "setTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/setTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.nullTypeDescriptor": {
@@ -238,9 +509,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "nullTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/nullTypeDescriptor.js",
+                "filename": "nullTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/nullTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.numberTypeDescriptor": {
@@ -260,9 +531,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "numberTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/numberTypeDescriptor.js",
+                "filename": "numberTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/numberTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.objectTypeDescriptor": {
@@ -282,9 +553,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "objectTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/objectTypeDescriptor.js",
+                "filename": "objectTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/objectTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.stringTypeDescriptor": {
@@ -304,9 +575,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "stringTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/stringTypeDescriptor.js",
+                "filename": "stringTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/stringTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.symbolTypeDescriptor": {
@@ -326,9 +597,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "symbolTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/symbolTypeDescriptor.js",
+                "filename": "symbolTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/symbolTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.undefinedTypeDescriptor": {
@@ -348,9 +619,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "undefinedTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/undefinedTypeDescriptor.js",
+                "filename": "undefinedTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/undefinedTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.weakmapTypeDescriptor": {
@@ -370,9 +641,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "weakmapTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/weakmapTypeDescriptor.js",
+                "filename": "weakmapTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/weakmapTypeDescriptor.ts",
                 "children": {}
             },
             "@coffeekraken.s-type.sugar.js.type.descriptor.weaksetTypeDescriptor": {
@@ -392,9 +663,30 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "weaksetTypeDescriptor.js",
-                "extension": "js",
-                "relPath": "src/shared/descriptors/weaksetTypeDescriptor.js",
+                "filename": "weaksetTypeDescriptor.ts",
+                "extension": "ts",
+                "relPath": "src/shared/descriptors/weaksetTypeDescriptor.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-type.shared.utils.parseTypeString": {
+                "name": "parseTypeString",
+                "type": "Function",
+                "description": "This method simply parse the passed typeString like \"string | number\", or \"string & path\", etc... and return\nan object defining this type string",
+                "namespace": "@coffeekraken.s-type.shared.utils",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { parseTypeString } from '@coffeekraken/s-type';\nparseTypeString('string | path');\n// {\n//   raw: 'string | path',\n//   types: [SType('string'), SType('path')],\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "parseTypeString.ts",
+                "extension": "ts",
+                "relPath": "src/shared/utils/parseTypeString.ts",
                 "children": {}
             }
         }

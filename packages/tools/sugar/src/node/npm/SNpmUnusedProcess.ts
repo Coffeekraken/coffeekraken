@@ -35,31 +35,28 @@ interface ISNpmUnusedProcessParams {
 interface ISNpmUnusedProcess {}
 
 export class SNpmUnusedParamsInterface extends _SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                clean: {
-                    type: 'Boolean',
-                    alias: 'r',
-                    description:
-                        'Specify if you want the found unused dependencies to be reflected back into the package.json file',
-                    default: false,
-                },
-                skipDev: {
-                    type: 'Boolean',
-                    description:
-                        'Specify if you want to skip the "devDependencies" check',
-                    default: false,
-                },
-                skipMissing: {
-                    type: 'Boolean',
-                    description:
-                        'Specify if you want to skip the missing packages check',
-                    default: false,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            clean: {
+                type: 'Boolean',
+                alias: 'r',
+                description:
+                    'Specify if you want the found unused dependencies to be reflected back into the package.json file',
+                default: false,
+            },
+            skipDev: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to skip the "devDependencies" check',
+                default: false,
+            },
+            skipMissing: {
+                type: 'Boolean',
+                description:
+                    'Specify if you want to skip the missing packages check',
+                default: false,
+            },
+        };
     }
 }
 

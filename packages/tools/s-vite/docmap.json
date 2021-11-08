@@ -25,6 +25,7 @@
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -45,6 +46,8 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
@@ -71,9 +74,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.base": {
                 "name": "base",
@@ -87,9 +90,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.mode": {
                 "name": "mode",
@@ -103,9 +106,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.resolve.alias.vue": {
                 "name": "vue",
@@ -119,9 +122,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.plugins": {
                 "name": "plugins",
@@ -135,9 +138,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.publicDir": {
                 "name": "publicDir",
@@ -151,9 +154,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.cacheDir": {
                 "name": "cacheDir",
@@ -167,9 +170,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.clearScreen": {
                 "name": "clearScreen",
@@ -183,9 +186,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.entry": {
                 "name": "entry",
@@ -199,9 +202,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.name": {
                 "name": "name",
@@ -215,9 +218,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.build.outDir": {
                 "name": "outDir",
@@ -231,9 +234,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.host": {
                 "name": "host",
@@ -247,9 +250,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.post": {
                 "name": "post",
@@ -263,9 +266,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js"
+                "relPath": "src/config/vite.config.ts"
             },
             "@coffeekraken.s-vite.config.vite.server.hostname": {
                 "name": "hostname",
@@ -279,9 +282,53 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.js",
+                "filename": "vite.config.ts",
                 "extension": "config",
-                "relPath": "src/config/vite.config.js",
+                "relPath": "src/config/vite.config.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-vite.node.plugins.importCssPlugin": {
+                "name": "importCssPlugin",
+                "type": "Function",
+                "description": "This vite plugin allows you to rewrite some code simply by specifying\nwhich files have to be touched using the ```match``` property and\na ```rewrite``` function that has to return the new code to be used.",
+                "namespace": "@coffeekraken.s-vite.node.plugins",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { rewritePlugin } from '@coffeekraken/s-vite';\n// vite.config.js\n{\n    ...\n    plugins: [\n     rewritePlugin([{\n         match: /something\\.js$/,\n         rewrite(src, id) {\n             return 'hello world';\n         }\n     }])\n   ]\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "importCssPlugin.ts",
+                "extension": "ts",
+                "relPath": "src/node/plugins/importCssPlugin.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-vite.node.plugins.rewritesPlugin": {
+                "name": "rewritesPlugin",
+                "type": "Function",
+                "description": "This vite plugin allows you to rewrite some code simply by specifying\nwhich files have to be touched using the ```match``` property and\na ```rewrite``` function that has to return the new code to be used.",
+                "namespace": "@coffeekraken.s-vite.node.plugins",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import { rewritePlugin } from '@coffeekraken/s-vite';\n// vite.config.js\n{\n    ...\n    plugins: [\n     rewritePlugin([{\n         match: /something\\.js$/,\n         rewrite(src, id) {\n             return 'hello world';\n         }\n     }])\n   ]\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "rewritesPlugin.ts",
+                "extension": "ts",
+                "relPath": "src/node/plugins/rewritesPlugin.ts",
                 "children": {}
             },
             "@coffeekraken.s-vite.s-vite.sViteBuildInterface": {
@@ -296,9 +343,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SViteBuildInterface.js",
-                "extension": "js",
-                "relPath": "src/node/build/interface/SViteBuildInterface.js",
+                "filename": "SViteBuildInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/build/interface/SViteBuildInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-vite.s-vite.sViteStartInterface": {
@@ -313,9 +360,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SViteStartInterface.js",
-                "extension": "js",
-                "relPath": "src/node/start/interface/SViteStartInterface.js",
+                "filename": "SViteStartInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/start/interface/SViteStartInterface.ts",
                 "children": {}
             }
         }

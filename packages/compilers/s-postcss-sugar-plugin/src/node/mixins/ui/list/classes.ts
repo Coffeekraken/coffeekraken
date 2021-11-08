@@ -3,34 +3,31 @@ import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
 
 class postcssSugarPluginUiListClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['ul', 'ol', 'icon'],
-                    default: ['ul', 'ol', 'icon'],
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['ul', 'ol', 'icon'],
+                default: ['ul', 'ol', 'icon'],
+            },
+            defaultColor: {
+                type: 'String',
+                default: __STheme.config('ui.list.defaultColor'),
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['ul'],
+                default: __STheme.config('ui.list.defaultStyle') ?? 'ul',
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-                defaultColor: {
-                    type: 'String',
-                    default: __STheme.config('ui.list.defaultColor'),
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['ul'],
-                    default: __STheme.config('ui.list.defaultStyle') ?? 'ul',
-                },
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'tf', 'vr'],
-                    default: ['bare', 'lnf', 'tf', 'vr'],
-                },
-            })
-        );
+                values: ['bare', 'lnf', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'tf', 'vr'],
+            },
+        };
     }
 }
 

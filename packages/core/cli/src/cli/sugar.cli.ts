@@ -36,20 +36,17 @@ export interface ISSugarCliAvailableCli {
 }
 
 class SSugarCliParamsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                bench: {
-                    type: {
-                        type: 'Array<String> | Boolean',
-                        splitChars: [','],
-                    },
-                    default: false,
-                    explicit: true,
+    static get _definition() {
+        return {
+            bench: {
+                type: {
+                    type: 'Array<String> | Boolean',
+                    splitChars: [','],
                 },
-            })
-        );
+                default: false,
+                explicit: true,
+            },
+        };
     }
 }
 
@@ -166,12 +163,14 @@ class SSugarCli {
             // );
             // return;
 
-            // clean somr folders like tmp, etc...
+            __SBench.step('sugar.cli', 'afterLoadConfig');
+
+            __SBench.step('sugar.cli', 'beforeClearTmpDir');
+            // clean som folders like tmp, etc...
             __fsExtra.emptyDirSync(
                 __SSugarConfig.get('storage.package.tmpDir'),
             );
-
-            __SBench.step('sugar.cli', 'afterLoadConfig');
+            __SBench.step('sugar.cli', 'afterClearTmpDir');
 
             // init stdio and event emitter
             this._eventEmitter = new __SEventEmitter({
@@ -223,15 +222,12 @@ class SSugarCli {
             }
 
             __SBench.step('sugar.cli', 'beforeProcess');
-            const b = __SBench.end('sugar.cli');
-            // console.log(b.toString());
+            __SBench.end('sugar.cli', true);
 
             // normal process
             await this._process();
 
             __SBench.step('sugar.cli', 'afterProcess');
-
-            __SBench.end('sugar.cli');
         })();
     }
 

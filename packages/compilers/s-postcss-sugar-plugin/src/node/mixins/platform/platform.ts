@@ -26,17 +26,14 @@ import __fs from 'fs';
  */
 
 class postcssSugarPluginAssetPlatformInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                platform: {
-                    type: 'String',
-                    values: ['js', 'node', 'ts', 'php'],
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            platform: {
+                type: 'String',
+                values: ['js', 'node', 'ts', 'php'],
+                required: true,
+            },
+        };
     }
 }
 

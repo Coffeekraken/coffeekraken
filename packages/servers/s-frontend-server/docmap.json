@@ -6,23 +6,31 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -37,14 +45,20 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
         "map": {
@@ -60,14 +74,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.hostname": {
                 "name": "hostname",
                 "type": "String",
-                "default": "__ipAddress()",
+                "default": "127.0.0.1",
                 "description": "Specify the hostname to use for the frontend server",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer",
                 "since": "2.0.0",
@@ -76,9 +90,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.rootDir": {
                 "name": "rootDir",
@@ -92,9 +106,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.staticDirs": {
                 "name": "staticDirs",
@@ -108,9 +122,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.viewsDir": {
                 "name": "viewsDir",
@@ -124,9 +138,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.logLevel": {
                 "name": "logLevel",
@@ -140,9 +154,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.assets.route": {
                 "name": "route",
@@ -156,9 +170,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.assets.settings.target": {
                 "name": "target",
@@ -172,9 +186,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.assets.settings.changeOrigin": {
                 "name": "changeOrigin",
@@ -188,9 +202,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.vitePing.route": {
                 "name": "route",
@@ -204,9 +218,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.vitePing.settings.target": {
                 "name": "target",
@@ -220,9 +234,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.proxy.vitePing.settings.changeOrigin": {
                 "name": "changeOrigin",
@@ -236,9 +250,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.bench.path": {
                 "name": "path",
@@ -252,9 +266,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.request.path": {
                 "name": "path",
@@ -268,9 +282,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.env.path": {
                 "name": "path",
@@ -284,9 +298,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.packageJson.path": {
                 "name": "path",
@@ -300,9 +314,25 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
+            },
+            "@coffeekraken.s-frontend-server.config.frontendServer.modules.rootFiles.path": {
+                "name": "path",
+                "type": "String",
+                "default": "${__dirname()}/../node/modules/rootFiles/rootFiles",
+                "description": "Specify where to find the \"rootFiles\" module",
+                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.modules.rootFiles",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontendServer.config.ts",
+                "extension": "config",
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.docmap.path": {
                 "name": "path",
@@ -316,9 +346,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.styleguide.path": {
                 "name": "path",
@@ -332,9 +362,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.config.path": {
                 "name": "path",
@@ -348,9 +378,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.frontspec.path": {
                 "name": "path",
@@ -364,9 +394,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.api.path": {
                 "name": "path",
@@ -380,9 +410,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.path": {
                 "name": "path",
@@ -396,9 +426,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings.slug": {
                 "name": "slug",
@@ -412,9 +442,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.modules.view.settings.indexView": {
                 "name": "indexView",
@@ -428,9 +458,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.routes.handler": {
                 "name": "handler",
@@ -444,9 +474,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.doc.api.handler": {
                 "name": "handler",
@@ -460,9 +490,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.config.handler": {
                 "name": "handler",
@@ -476,15 +506,15 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.docmap.handler": {
                 "name": "handler",
                 "type": "String",
                 "default": "view",
-                "description": "Specify which handle to use for requests on \"/api/docmap\"",
+                "description": "Specify which handle to use for requests on \"/docmap.json\"",
                 "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.docmap",
                 "since": "2.0.0",
                 "author": {
@@ -492,9 +522,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.handlers.doc": {
                 "name": "doc",
@@ -508,9 +538,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.handlers.markdown": {
                 "name": "markdown",
@@ -524,9 +554,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
+                "relPath": "src/config/frontendServer.config.ts"
             },
             "@coffeekraken.s-frontend-server.config.frontendServer.handlers.docmap": {
                 "name": "docmap",
@@ -540,9 +570,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontendServer.config.js",
+                "filename": "frontendServer.config.ts",
                 "extension": "config",
-                "relPath": "src/config/frontendServer.config.js",
+                "relPath": "src/config/frontendServer.config.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express": {
@@ -562,10 +592,55 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "frontend.js",
-                "extension": "js",
-                "relPath": "src/node/frontend.js",
+                "filename": "frontend.ts",
+                "extension": "ts",
+                "relPath": "src/node/frontend.ts",
                 "children": {}
+            },
+            "@coffeekraken.s-frontend-server.s-frontend-server.sFrontendServer": {
+                "name": "SFrontendServer",
+                "type": "Class",
+                "description": "This class represent a frontend server that handle features like documentation, views rendering,\nfrontspec reading middleware, packageJson middleware and more...",
+                "namespace": "@coffeekraken.s-frontend-server.s-frontend-server",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFrontendServer from '@coffeekraken/s-frontend-server';\nconst server = new SFrontendServer();\nserver.run();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFrontendServer.ts",
+                "extension": "ts",
+                "relPath": "src/node/SFrontendServer.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "start": {
+                        "name": "start",
+                        "type": "Function",
+                        "description": "This function take as parameter an Partial<ISFrontendServerParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.doc": {
                 "name": "doc",
@@ -579,9 +654,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "doc.js",
-                "extension": "js",
-                "relPath": "src/node/handlers/doc.js",
+                "filename": "doc.ts",
+                "extension": "ts",
+                "relPath": "src/node/handlers/doc.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.docMap": {
@@ -596,9 +671,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "docmap.js",
-                "extension": "js",
-                "relPath": "src/node/handlers/docmap.js",
+                "filename": "docmap.ts",
+                "extension": "ts",
+                "relPath": "src/node/handlers/docmap.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.index": {
@@ -613,9 +688,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "index.js",
-                "extension": "js",
-                "relPath": "src/node/handlers/index.js",
+                "filename": "index.ts",
+                "extension": "ts",
+                "relPath": "src/node/handlers/index.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.markdown": {
@@ -630,9 +705,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdown.js",
-                "extension": "js",
-                "relPath": "src/node/handlers/markdown.js",
+                "filename": "markdown.ts",
+                "extension": "ts",
+                "relPath": "src/node/handlers/markdown.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.s-frontend-server.sFrontendServerInterface": {
@@ -647,9 +722,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SFrontendServerInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontendServerInterface.js",
+                "filename": "SFrontendServerInterface.ts",
+                "extension": "ts",
+                "relPath": "src/node/interface/SFrontendServerInterface.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.benchEndMiddleware": {
@@ -670,9 +745,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "benchMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/middleware/benchMiddleware.js",
+                "filename": "benchMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/benchMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.envMiddleware": {
@@ -693,9 +768,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "envMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/middleware/envMiddleware.js",
+                "filename": "envMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/envMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.packageJsonMiddleware": {
@@ -716,9 +791,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "packageJsonMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/middleware/packageJsonMiddleware.js",
+                "filename": "packageJsonMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/packageJsonMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.requestMiddleware": {
@@ -739,9 +814,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "requestMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/middleware/requestMiddleware.js",
+                "filename": "requestMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/requestMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.resolveExtensionFreePath": {
@@ -762,9 +837,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "resolveExtensionFreePath.js",
-                "extension": "js",
-                "relPath": "src/node/middleware/resolveExtensionFreePath.js",
+                "filename": "resolveExtensionFreePath.ts",
+                "extension": "ts",
+                "relPath": "src/node/middleware/resolveExtensionFreePath.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error": {
@@ -785,9 +860,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "error.js",
-                "extension": "js",
-                "relPath": "src/node/pages/error.js",
+                "filename": "error.ts",
+                "extension": "ts",
+                "relPath": "src/node/pages/error.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.apiHandler": {
@@ -802,9 +877,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "apiHandler.js",
-                "extension": "js",
-                "relPath": "src/node/modules/api/apiHandler.js",
+                "filename": "apiHandler.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/api/apiHandler.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware": {
@@ -825,9 +900,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "configMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/modules/config/configMiddleware.js",
+                "filename": "configMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/config/configMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.docmapMiddleware": {
@@ -848,9 +923,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "docmapMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/modules/docmap/docmapMiddleware.js",
+                "filename": "docmapMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/docmap/docmapMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.frontspecMiddleware": {
@@ -871,9 +946,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "frontspecMiddleware.js",
-                "extension": "js",
-                "relPath": "src/node/modules/frontspec/frontspecMiddleware.js",
+                "filename": "frontspecMiddleware.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/frontspec/frontspecMiddleware.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.styleguideHandler": {
@@ -888,9 +963,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "styleguideHandler.js",
-                "extension": "js",
-                "relPath": "src/node/modules/styleguide/styleguideHandler.js",
+                "filename": "styleguideHandler.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/styleguide/styleguideHandler.ts",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.node.modules.view.views": {
@@ -905,9 +980,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "viewHandler.js",
-                "extension": "js",
-                "relPath": "src/node/modules/view/viewHandler.js",
+                "filename": "viewHandler.ts",
+                "extension": "ts",
+                "relPath": "src/node/modules/view/viewHandler.ts",
                 "children": {}
             }
         }

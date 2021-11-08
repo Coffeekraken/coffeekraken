@@ -36,7 +36,7 @@ function benchEndMiddleware(settings = {}) {
             __SBench.start('request');
 
             function afterResponse() {
-                __SBench.end('request');
+                __SBench.end('request', true);
             }
 
             res.on('finish', afterResponse);

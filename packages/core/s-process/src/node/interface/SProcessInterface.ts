@@ -16,16 +16,13 @@ import __SInterface from '@coffeekraken/s-interface';
  */
 export default class SProcessInterface extends __SInterface {
     // static extendsArray = ['SProcess', 'SPromise'];
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                help: {
-                    type: 'Boolean',
-                    alias: 'h',
-                    default: false,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            help: {
+                type: 'Boolean',
+                alias: 'h',
+                default: false,
+            },
+        };
     }
 }

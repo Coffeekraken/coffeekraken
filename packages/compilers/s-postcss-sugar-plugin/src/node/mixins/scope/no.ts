@@ -2,19 +2,16 @@ import __SInterface from '@coffeekraken/s-interface';
 import { IPostcssSugarPluginColorParams } from '../../functions/color/color';
 
 class postcssSugarPluginScopeNoMixinInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                scopes: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    required: true,
+    static get _definition() {
+        return {
+            scopes: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-            })
-        );
+                required: true,
+            },
+        };
     }
 }
 export { postcssSugarPluginScopeNoMixinInterface as interface };

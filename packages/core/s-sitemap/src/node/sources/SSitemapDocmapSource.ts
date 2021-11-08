@@ -106,6 +106,7 @@ export default class SSitemapDocmapSource extends __SSitemapSource {
                 2,
             )}-${__pad(date.getDate(), 2)}`;
 
+            // @ts-ignore
             Object.keys(docmap.menu?.slug).forEach((slug) => {
                 items.push({
                     loc: slug,

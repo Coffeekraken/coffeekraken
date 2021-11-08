@@ -2,22 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiRangeClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                styles: {
-                    type: 'String[]',
-                    values: ['solid'],
-                    default: ['solid'],
-                },
-                defaultStyle: {
-                    type: 'String',
-                    values: ['solid'],
-                    default: __STheme.config('ui.range.defaultStyle'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid'],
+                default: ['solid'],
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.range.defaultStyle'),
+            },
+        };
     }
 }
 

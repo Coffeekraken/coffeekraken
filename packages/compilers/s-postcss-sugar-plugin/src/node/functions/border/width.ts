@@ -2,18 +2,15 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginBorderWidthFunctionInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                width: {
-                    type: 'String',
-                    values: Object.keys(__STheme.config('border.width')),
-                    default: 'default',
-                    required: true,
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            width: {
+                type: 'String',
+                values: Object.keys(__STheme.config('border.width')),
+                default: 'default',
+                required: true,
+            },
+        };
     }
 }
 export { postcssSugarPluginBorderWidthFunctionInterface as interface };

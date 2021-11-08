@@ -6,23 +6,31 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
             "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
             "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
             "@coffeekraken/s-images-builder",
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
@@ -34,18 +42,151 @@
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
             "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
             "@coffeekraken/s-view-renderer",
             "@coffeekraken/s-vite-plugin-postcss",
             "@coffeekraken/s-vite-plugin-riotjs",
             "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-feature.shared.sFeature": {
+                "name": "SFeature",
+                "type": "Class",
+                "description": "This class allows you to create \"features\". Feature is like webcomponent but does not provide a\ncustom HTML tag.",
+                "namespace": "@coffeekraken.s-feature.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFeature from '@coffeekraken/s-lit-component';\nconst component = new SFeature('my-cool-component');\ncomponent.className('__something'); // => my-cool-component__something\ncomponent.className('hello'); // => my-cool-component-hello"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SFeature.ts",
+                "extension": "ts",
+                "relPath": "src/js/SFeature.ts",
+                "children": {
+                    "name": {
+                        "name": "name",
+                        "type": "String",
+                        "description": "Store the feature name",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "node": {
+                        "name": "node",
+                        "type": "HTMLElement",
+                        "description": "Store the component node",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "props": {
+                        "name": "props",
+                        "type": "Object",
+                        "description": "Store the component props",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "setDefaultProps": {
+                        "name": "setDefaultProps",
+                        "type": "Function",
+                        "description": "This static method allows you to set some default props for some particular\ncomponent(s). You can target components using simple css selectorl like \"my-component#cool\".\nOnce the component is instanciated, it will check if some defaults are specified and\nextends them with the passed props.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "registerFeature": {
+                        "name": "registerFeature",
+                        "type": "Function",
+                        "description": "This static method allows you to register a new feature\nassociated with an HTMLElement attribute like \"s-activate\", etc...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "featureSettings": {
+                        "name": "featureSettings",
+                        "type": "ISFeatureSettings",
+                        "description": "Access the feature settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "beforePropChange": {
+                        "name": "beforePropChange",
+                        "type": "Function",
+                        "description": "This method allows you to catch a property change before it actually occurs.\nYou can return the value to set it as it is, return another value to set another one\nor returns undefined to prevent the change to be commited.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "afterPropChanged": {
+                        "name": "afterPropChanged",
+                        "type": "Function",
+                        "description": "This method allows you to catch properties updates AFTER it has been commited.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "mount": {
+                        "name": "mount",
+                        "type": "Function",
+                        "description": "This method allows you to actually mount your feature behavior.\nIt will be called depending on the \"mountWhen\" setting setted.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            }
+        }
     }
 }

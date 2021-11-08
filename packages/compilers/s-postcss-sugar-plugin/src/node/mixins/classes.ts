@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
-    static get definition() {
+    static get _definition() {
         return {};
     }
 }

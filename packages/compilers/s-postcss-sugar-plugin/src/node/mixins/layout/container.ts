@@ -23,17 +23,14 @@ import __STheme from '@coffeekraken/s-theme';
  */
 
 class postcssSugarPluginLayoutContainerInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                name: {
-                    type: 'String',
-                    required: true,
-                    default: 'default',
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            name: {
+                type: 'String',
+                required: true,
+                default: 'default',
+            },
+        };
     }
 }
 

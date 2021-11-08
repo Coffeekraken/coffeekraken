@@ -1,0 +1,4 @@
+import SStaticBuilder from './SStaticBuilder';
+export * from './SStaticBuilder';
+export default SStaticBuilder;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxjQUFjLE1BQU0sa0JBQWtCLENBQUM7QUFDOUMsY0FBYyxrQkFBa0IsQ0FBQztBQUNqQyxlQUFlLGNBQWMsQ0FBQyJ9

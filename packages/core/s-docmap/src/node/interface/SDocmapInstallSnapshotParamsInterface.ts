@@ -16,16 +16,13 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 class SDocmapInstallSnapshotParamsInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                glob: {
-                    type: 'String',
-                    default: __SSugarConfig.get('docmap.installSnapshot.glob'),
-                },
-            })
-        );
+    static get _definition() {
+        return {
+            glob: {
+                type: 'String',
+                default: __SSugarConfig.get('docmap.installSnapshot.glob'),
+            },
+        };
     }
 }
 export default SDocmapInstallSnapshotParamsInterface;

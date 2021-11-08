@@ -2,20 +2,17 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginComponentsClassesInterface extends __SInterface {
-    static get definition() {
-        return (
-            this.cached() ??
-            this.cache({
-                scope: {
-                    type: {
-                        type: 'Array<String>',
-                        splitChars: [',', ' '],
-                    },
-                    values: ['bare', 'lnf', 'vr', 'tf'],
-                    default: ['bare', 'lnf', 'vr', 'tf'],
+    static get _definition() {
+        return {
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
                 },
-            })
-        );
+                values: ['bare', 'lnf', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'vr', 'tf'],
+            },
+        };
     }
 }
 export { postcssSugarPluginComponentsClassesInterface as interface };

@@ -1,0 +1,86 @@
+/**
+ * @name    effect-long-shadow
+ * @namespace            scss.effect.mixin
+ * @type      mixin
+ *
+ * Generate a long shadow effect like [this](https://www.google.ch/search?q=long+shadow&espv=2&biw=2560&bih=1316&source=lnms&tbm=isch&sa=X&ved=0ahUKEwjjne6x49LPAhVBHRQKHat8AW8Q_AUIBigB)
+ *
+ * @param 		{Color} 		[$color=rgba(0,0,0,.3)] 			The shadow color
+ * @param 		{String} 		[$type=text] 						The shadow type (text,box)
+ * @param 		{Degree} 		[$angle=135deg] 					The shadow angle
+ * @param 		{Integer} 		[$depth=20] 						The shadow depth
+ * @param 		{Boolean} 		[$fade=false] 						If true, the shadow will fade itself
+ * @param 		{Number} 		[$blur=0] 							The blur amount of the shadow
+ * @param 		{Number} 		[$blur-ratio=0] 					The ratio to blur each depth more
+ *
+ * @example       scss
+ * .my-cool-title {
+ * 		\@include Sugar.effect-long-shadow(
+ * 			$depth : 10
+ * 		);
+ * }
+ * .my-cool-box {
+ * 		\@include Sugar.effect-long-shadow(
+ * 			$type : box
+ * 		);
+ * }
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin effect-long-shadow(
+  $color: rgba(0, 0, 0, 0.3),
+  $type: text,
+  $angle: 135deg,
+  $depth: 20,
+  $fade: false,
+  $blur: 0,
+  $blur-ratio: 0
+) {
+  $color: test-argument('Sugar.effect-long-shadow', 'color', color, $color);
+  $type: test-argument('Sugar.effect-long-shadow', 'type', (text, box), $type);
+  $angle: test-argument('Sugar.effect-long-shadow', 'angle', degree, $angle);
+  $depth: test-argument('Sugar.effect-long-shadow', 'depth', integer, $depth);
+  $fade: test-argument('Sugar.effect-long-shadow', 'fade', boolean, $fade);
+  $blur: test-argument('Sugar.effect-long-shadow', 'blur', number, $blur);
+  $blur-ratio: test-argument(
+    'Sugar.effect-long-shadow',
+    'blur-ratio',
+    number,
+    $blur-ratio
+  );
+
+  $angle: (strip-units($angle) - 90);
+  $x: 1.5 * math-cos($angle) + 0px;
+  $y: 1.5 * math-sin($angle) + 0px;
+  $darken: (color-lightness($color) / $depth)/2;
+  $opacify: 0;
+  $shadow: ();
+
+  $darken: 0;
+
+  @if $fade == true {
+    $opacify: (color-opacity($color) / $depth);
+    transform: translateX(0);
+  }
+
+  @for $i from 1 through $depth {
+    $b: $blur;
+    @if $blur-ratio > 0 {
+      $b: $blur + $i * $blur-ratio;
+    }
+    $shadow: $shadow,
+      $i *
+        $x
+        $i *
+        $y
+        $b
+        hsla(
+          color-hue($color),
+          color-saturation($color),
+          (color-lightness($color) - ($i * $darken)),
+          1 - ($i * $opacify)
+        );
+  }
+  #{$type}-shadow: $shadow;
+}

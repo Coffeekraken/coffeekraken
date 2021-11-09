@@ -1,0 +1,189 @@
+/**
+ * @name              helper-transmation-classes
+ * @namespace            scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "transmation" related helper classes.
+ *
+ * @classname     #{sel(no-transition)}          Disable the transitions **only on the element**
+ * @classname     #{sel(clear-transition)}          Disable the transitions **on the element and all his children**
+ * @classname     #{sel(no-animation)}          Disable the animations **only on the element**
+ * @classname     #{sel(clear-animation)}          Disable the animations **on the element and all his children**
+ * @classname     #{sel(no-transmation)}          Disable the transitions and the animations **only on the element**
+ * @classname     #{sel(clear-transmation)}          Disable the transitions and the animations **on the element and all his children**
+ *
+ * @example         scss
+ * @include Sugar.helper-transmation-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-transmation-classes() {
+  @if class-match-namespace('sugar.helper.transition.no') {
+    /**
+    * @name 		#{sel(no-transition)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.transition.no
+    * @type        Classname
+    *
+    * Disable the transitions **only on the element**
+    *
+    * @example 	html
+    * <div class="#{sel(no-transition)}">
+    * 	I have no more transitions
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(no-transition)} {
+      &,
+      &:before,
+      &:after {
+        transition: none !important;
+      }
+    }
+  }
+  @if class-match-namespace('sugar.helper.transition.clear') {
+    /**
+    * @name 		#{sel(clear-transition)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.transition.clear
+    * @type        Classname
+    *
+    * Disable the transitions **on the element and all his children**
+    *    
+    * @example 	html
+    * <div class="#{sel(clear-transition)}">
+    * 	I have no more transitions
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(clear-transition)} {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        transition: none !important;
+      }
+    }
+  }
+  @if class-match-namespace('sugar.helper.animation.no') {
+    /**
+    * @name 		#{sel(no-animation)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.animation.no
+    * @type        Classname
+    *
+    * Disable the animations **only on the element**
+    *
+    * @example 	html
+    * <div class="#{sel(no-animation)}">
+    * 	I have no more animations
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(no-animation)} {
+      &,
+      &:before,
+      &:after {
+        animation: none !important;
+      }
+    }
+  }
+  @if class-match-namespace('sugar.helper.animation.clear') {
+    /**
+    * @name 		#{sel(clear-animation)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.animation.clear
+    * @type        Classname
+    *
+    * Disable the transitions **on the element and all his children**
+    *
+    * @example 	html
+    * <div class="#{sel(clear-animation)}">
+    * 	I have no more animations
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(clear-animation)} {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        animation: none !important;
+      }
+    }
+  }
+  @if class-match-namespace('sugar.helper.transmation.no') {
+    /**
+    * @name 		#{sel(no-transmation)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.transmation.no
+    * @type        Classname
+    *
+    * Disable the animations and transitions **only on the element**
+    *
+    * @example 	html
+    * <div class="#{sel(no-transmation)}">
+    * 	I have no more animations or transitions
+    * 	<div>But I have</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(no-transmation)} {
+      &,
+      &:before,
+      &:after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  }
+  @if class-match-namespace('sugar.helper.transmation.clear') {
+    /**
+    * @name 		#{sel(clear-transmation)}
+    * @namespace            scss.helper.class
+    * @class-namespace       sugar.helper.transmation.clear
+    * @type        Classname
+    *
+    * Disable the animations and transitions **on the element and all his children**
+    *
+    * @example 	html
+    * <div class="#{sel(clear-transmation)}">
+    * 	I have no more animations or transitions
+    * 	<div>Me neither</div>
+    * </div>
+    *
+    * @since       1.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(clear-transmation)} {
+      &,
+      &:before,
+      &:after,
+      & *,
+      & *:before,
+      & *:after {
+        transition: none !important;
+        animation: none !important;
+      }
+    }
+  }
+}

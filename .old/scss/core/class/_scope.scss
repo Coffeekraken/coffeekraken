@@ -1,0 +1,77 @@
+@use 'sass:meta';
+@use 'sass:map';
+@use 'sass:string';
+/**
+ * @name    scope
+ * @namespace            scss.core.class
+ * @type      mixin
+ *
+ * This mixin allows you to wrap css code and specify which scope it refers to.
+ * This will allows you to generate only the css scope you want like "bare", "style" or "all"
+ *
+ * @param 			{List}<String> 			$scope 		The scope(s) that define the encapsulated css. 
+ * @param           {List}<String>        [$currentScope=setting('classes.scope')]          The current scope(s) to generate
+ *
+ * @example     scss
+ * .my-class {
+ *    \@include Sugar.scope('bare') {
+ *       width: 200px;  
+ *    } 
+ *    \@include Sugar.scope('style') {
+ *       color: red;
+ *    }
+ * }
+ * // etc...
+ *
+ * @since           2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@mixin scope($wantedScope, $currentScope: setting('classes.generate.scope')) {
+  @if scope($wantedScope, $currentScope) {
+    @content;
+  }
+}
+
+@function scope(
+  $wantedScope,
+  $currentScope: setting('classes.generate.scope')
+) {
+  $wantedScope: test-argument(
+    'Sugar.scope',
+    'scope',
+    'string|list-string',
+    $wantedScope
+  );
+  $currentScope: test-argument(
+    'Sugar.scope',
+    'currentScope',
+    'string|list-string',
+    $currentScope
+  );
+
+  @if $currentScope == null {
+    $currentScope: setting('classes.generate.scope');
+  }
+
+  $generate: false;
+
+  @if type-of($currentScope) == list {
+    @each $scp in $currentScope {
+      @if $scp == $wantedScope {
+        $generate: true;
+      }
+    }
+
+    @if list-index($currentScope, $wantedScope) != -1 {
+      $generate: true;
+    }
+  } @else {
+    @if $wantedScope == $currentScope {
+      $generate: true;
+    } @else if $currentScope == 'all' {
+      $generate: true;
+    }
+  }
+
+  @return $generate;
+}

@@ -1,0 +1,84 @@
+/**
+ * @name              helper-user-select-classes
+ * @namespace            scss.helper.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "user-select" related helper classes.
+ *
+ * @classname     #{sel(user-select-none)}       Disable the selection for this element
+ * @classname     #{sel(user-select-all)}       Enable the selection for this element
+ * @classname     #{sel(user-select-text)}       The text can be selected only
+ *
+ * @example         scss
+ * @include Sugar.helper-user-select-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin helper-user-select-classes() {
+  @if class-match-namespace('sugar.helper.user-select.none') {
+    /**
+    * @name 		#{sel(user-select-none)}
+    * @namespace            scss.helper.class
+    * @class-namespace     sugar.helper.user-select.none
+    * @type         Classname
+    *
+    * Disable the selection for this element
+    *
+    * @example 	html
+    * <p class="#{sel(user-select-none)}">
+    *   I cannot be selected
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(user-select-none)} {
+      user-select: none;
+    }
+  }
+
+  @if class-match-namespace('sugar.helper.user-select.all') {
+    /**
+    * @name 		#{sel(user-select-all)}
+    * @namespace            scss.helper.class
+    * @class-namespace     sugar.helper.user-select.all
+    * @type        Classname
+    *
+    * Enable the selection for this element
+    *
+    * @example 	html
+    * <p class="#{sel(user-select-all)}">
+    *   I will be all selected in 1 click
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(user-select-all)} {
+      user-select: all;
+    }
+  }
+
+  @if class-match-namespace('sugar.helper.user-select.text') {
+    /**
+    * @name 		#{sel(user-select-text)}
+    * @namespace            scss.helper.class
+    * @class-namespace     sugar.helper.user-select.text
+    * @type        Classname
+    *
+    * The text can be selected only
+    *
+    * @example 	html
+    * <p class="#{sel(user-select-text)}">
+    *   I cannot be selected
+    * </p>
+    *
+    * @since       2.0.0
+    * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+    */
+    .#{sel(user-select-text)} {
+      user-select: text;
+    }
+  }
+}

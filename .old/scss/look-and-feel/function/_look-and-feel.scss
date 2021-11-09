@@ -1,0 +1,41 @@
+@use "sass:math";
+@use "sass:meta";
+/**
+ * @name      look-and-feel
+ * @namespace            scss.core.look-and-feel
+ * @type    function
+ *
+ * Return a settings.look-and-feel stack value
+ *
+ * @param 		{String} 		$name					The look and feel value name
+ * @return 		{Number} 								The look and feel value in em
+ *
+ * @example
+ * .my-cool-element {
+ * 		padding : Sugar.look-and-feel(padding-horizontal) Sugar.look-and-feel(padding-vertical);
+ * }
+ *
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function look-and-feel($name) {
+  // protect
+  @if not is($name, string) {
+    @error ("the s-look-and-feel name parameter has to be a string corresponding to a look and feel setting...");
+  }
+
+  // initial value
+  $value: setting('look-and-feel.#{$name}');
+
+  // @if meta.type-of($value) != number {
+  //   @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be a number in "em" or unitless');
+  // }
+
+  // // make sure value is in em unit
+  // @if meta.type-of($value) == number and not math.is-unitless($value) and math.unit($value) != em
+  // {
+  //   @error ('Your look-and-feel value "#{$name}" setted to "#{$value}" need to be in "em"');
+  // }
+
+  // return the value
+  @return $value;
+}

@@ -1,0 +1,183 @@
+$PREVENT_COLLAPSE: 0.05;
+$PRECISION: 4;
+
+@function _toScale($value, $fontSize) {
+  @return $value / $fontSize;
+}
+
+@function _leadingTrim($value, $value2, $fontSize) {
+  @return $value - _toScale($value2, $fontSize) + _toScale($PREVENT_COLLAPSE, $fontSize);
+}
+
+@function pow($number, $exponent) {
+  $value: 1;
+
+  @if $exponent > 0 {
+    @for $i from 1 through $exponent {
+      $value: $value * $number;
+    }
+  }
+
+  @return $value;
+}
+
+@function _roundTo($number, $precision, $method: 'round') {
+  @if type-of($number) != number {
+    @error 'Expected value to be a number';
+  }
+
+  @if not $precision {
+    @return $number;
+  }
+
+  @if not is(precision, int) {
+    @error 'Expected precision to be an integer';
+  }
+
+  $isRoundingAndNegative: false;
+  @if $method == 'round' and $number < 0 {
+    $isRoundingAndNegative: true;
+  }
+  @if ($isRoundingAndNegative) {
+    $number: abs($number);
+  }
+
+  $power: pow(10, $precision);
+
+  $result: round($number * $power) / $power;
+
+  @if $isRoundingAndNegative {
+    $result: $result * -1;
+  }
+
+  @return $result;
+}
+
+@mixin createCss($fontMetrics, $lineHeight, $fontSize) {
+
+  $absoluteDescent: abs(map-get($fontMetrics, descent));
+  $capHeightScale: map-get($fontMetrics, capHeight) /
+    map-get($fontMetrics, unitsPerEm);
+  $descentScale: $absoluteDescent / map-get($fontMetrics, unitsPerEm);
+  $ascentScale: map-get($fontMetrics, ascent) /
+    map-get($fontMetrics, unitsPerEm);
+  $lineGapScale: map-get($fontMetrics, lineGap) /
+    map-get($fontMetrics, unitsPerEm);
+
+  $contentArea: map-get($fontMetrics, ascent) + map-get($fontMetrics, lineGap) +
+    $absoluteDescent;
+  $lineHeightScale: $contentArea / map-get($fontMetrics, unitsPerEm);
+  $lineHeightNormal: $lineHeightScale * $fontSize;
+
+  $specifiedLineHeightOffset: 0;
+  @if $lineHeight {
+    $specifiedLineHeightOffset: ($lineHeightNormal - $lineHeight) / 2;
+  }
+
+  $lineHeightValue: 'normal';
+  @if $lineHeight {
+    $lineHeightValue: #{_roundTo($lineHeight, $PRECISION)}px;
+  }
+
+  font-size: #{_roundTo($fontSize, $PRECISION)}px;
+  line-height: #{$lineHeightValue};
+  padding: #{$PREVENT_COLLAPSE}px 0;
+
+  &::before {
+    content: '';
+    margin-top: #{_roundTo(
+        _leadingTrim($ascentScale - $capHeightScale + $lineGapScale / 2, $specifiedLineHeightOffset, $fontSize) * -1,
+        $PRECISION
+      )}em;
+    display: 'block';
+    height: 0;
+  }
+  &::after {
+    content: '';
+    margin-bottom: #{_roundTo(
+        _leadingTrim($descentScale + $lineGapScale / 2, $specifiedLineHeightOffset, $fontSize) * -1,
+        $PRECISION
+      )}em;
+    display: 'block';
+    height: 0;
+  }
+}
+
+@mixin capsize($fontMetrics, $capHeight: null, $leading: null, $fontSize: null, $lineGap: null) {
+  @if $leading and $lineGap {
+    @error 'Only a single line height style can be provided. Please pass either `lineGap` OR `leading`.';
+  }
+
+  @if $capHeight and $fontSize {
+    @error 'Please pass either `capHeight` OR `fontSize`, not both.';
+  }
+
+  $capHeightScale: map-get($fontMetrics, capHeight) /
+    map-get($fontMetrics, unitsPerEm);
+
+  $specifiedFontSize: 0;
+  $specifiedCapHeight: 0;
+
+  @if $capHeight {
+    $specifiedFontSize: $capHeight / $capHeightScale;
+    $specifiedCapHeight: $capHeight;
+  } @else if $fontSize {
+    $specifiedFontSize: $fontSize;
+    $specifiedCapHeight: $fontSize * $capHeightScale;
+  } @else {
+    @error 'Please pass either `capHeight` OR `fontSize`.';
+  }
+
+  $specifiedLineHeight: 0;
+
+  @if $lineGap {
+    $specifiedLineHeight: $specifiedCapHeight + $lineGap;
+  } @else if $leading {
+    $specifiedLineHeight: $leading;
+  }
+
+
+  @include createCss(
+    $fontMetrics,
+    $lineHeight: $specifiedLineHeight,
+    $fontSize: $specifiedFontSize
+  );
+}
+
+$fontMetrics: (
+    capHeight: 692,
+  ascent: 1133,
+  descent: -388,
+  lineGap: 0,
+  unitsPerEm: 1000
+);
+
+/* latin-ext */
+@font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(https://fonts.gstatic.com/s/titilliumweb/v9/NaPecZTIAOhVxoMyOr9n_E7fdM3mDaZRbryhsA.woff2) format('woff2');
+    unicode-range: U+0100-024F, U+0259, U+1E00-1EFF, U+2020, U+20A0-20AB, U+20AD-20CF, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+  /* latin */
+  @font-face {
+    font-family: 'Titillium Web';
+    font-style: normal;
+    font-weight: 400;
+    font-display: swap;
+    src: local('Titillium Web Regular'), local('TitilliumWeb-Regular'), url(https://fonts.gstatic.com/s/titilliumweb/v9/NaPecZTIAOhVxoMyOr9n_E7fdMPmDaZRbrw.woff2) format('woff2');
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA, U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+
+span {
+    color: white;
+  background: red;
+  font-family: 'Titillium Web';
+  position: relative;
+  display: inline-block;
+  top: 60px;
+
+  @include capsize($fontMetrics, $capHeight: 50, $lineGap: 20);
+}

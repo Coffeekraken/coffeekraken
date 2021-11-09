@@ -1,0 +1,26 @@
+/**
+ * @name      math-fact
+ * @namespace            scss.core.math.function
+ * @type      function
+ *
+ * Returns the factorial of desired number
+ *
+ * @param         {Number}          $number         The number to calculate the factorial number
+ * @return        {Number}                          The calculated factorial of the passed number
+ *
+ * @example     scss
+ * Sugar.math-fact(5); // => 120
+ *
+ * @since       1.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+@function math-fact($number) {
+  $number: test-argument('Sugar.math-fact', 'number', number, $number);
+  $fact: 1;
+  @if $number > 0 {
+    @for $i from 1 through $number {
+      $fact: $fact * $i;
+    }
+  }
+  @return $fact;
+}

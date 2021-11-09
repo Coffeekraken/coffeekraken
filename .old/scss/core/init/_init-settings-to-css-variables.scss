@@ -1,0 +1,22 @@
+@use 'sass:map';
+
+@mixin init-settings-to-css-variables() {
+  $settings: $__settings;
+
+  @include define-color-variables();
+  $settings: map-remove($settings, 'colors');
+
+  $flattenSettings: map-flatten($settings, '-');
+  @each $key, $value in $flattenSettings {
+    @if type-of($value) ==
+      number or
+      type-of($value) ==
+      string or
+      type-of($value) ==
+      color
+    {
+      $res: var-define($key, $value);
+    }
+  }
+  @include var-output();
+}

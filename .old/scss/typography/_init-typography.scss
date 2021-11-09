@@ -1,0 +1,3 @@
+@mixin init-typography() {
+  @include init-responsive-sizes();
+}

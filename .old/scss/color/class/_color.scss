@@ -1,0 +1,130 @@
+/**
+ * @name              color-classes
+ * @namespace            scss.color.class
+ * @type              Mixin
+ *
+ * This mixin generate all the "color" related classes.
+ *
+ * @classname       #{sel(c-[color])}        Apply a special color
+ * @classname       #{sel(bg-[color])}        Apply a special background color
+ * @classname       #{sel(c-[color]--[modifier])}        Apply a special color using a modifier
+ * @classname       #{sel(bg-[color]--[modifier])}        Apply a special background color using a modifier
+ *
+ * @example         scss
+ * @include Sugar.color-classes();
+ *
+ * @since         2.0.0
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com>   (https://olivierbossel.com)
+ */
+@mixin color-classes() {
+  @if class-match-namespace('sugar.color') {
+    // colors
+    $colors: setting('colors');
+    @each $name, $color in $colors {
+      @if $name != classes {
+        $modifiers: ();
+        @if type-of($color) == map {
+          $modifiers: map-get($color, modifiers);
+          $color: map-get($color, color);
+        }
+
+        @if class-match-namespace('sugar.color.#{$name}.color') {
+          $cls: unquote(selector('c-#{$name}'));
+          /**
+            * @name       	#{$cls}
+            * @namespace            scss.colo.class
+            * @class-namespace           sugar.color.#{$name}
+            * @type        Classname
+            *
+            * Specify the color to **#{$name}**
+            *
+            * @example 	html
+            * <div class="#{$cls}">
+            * 	I'm in "#{$name}" color
+            * </div>
+            *
+            * @since       1.0.0
+            * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+          .#{$cls} {
+            color: color($name);
+          }
+        }
+
+        @if class-match-namespace('sugar.color.#{$name}.bg') {
+          $cls: unquote(selector('bg-#{$name}'));
+          /**
+            * @name       	#{$cls}
+            * @namespace            scss.color.class
+            * @class-namespace           sugar.color.#{$name}.bg
+            * @type        Classname
+            *
+            * Specify the background color to **#{$name}**
+            *
+            * @example 	html
+            * <div class="#{$cls} p" style="color:white">
+            * 	My background color is "#{$name}"
+            * </div>
+            *
+            * @since       1.0.0
+            * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+          .#{$cls} {
+            background-color: color($name);
+          }
+        }
+
+        // modifiers
+        @if $modifiers {
+          @each $mod-name, $mod in $modifiers {
+            @if class-match-namespace('sugar.color.#{$name}.#{$mod-name}') {
+              $cls: unquote(selector('c-#{$name}--#{$mod-name}'));
+              /**
+                * @name       	#{$cls}
+                * @namespace            scss.color.class
+                * @class-namespace           sugar.color.#{$name}.#{$mod-name}
+                * @type        Classname
+                *
+                * Specify the color to **#{$name}--#{$mod-name}**
+                *
+                * @example 	html
+                * <div class="#{$cls}">
+                * 	I'm in "#{$name}--#{$mod-name}" color
+                * </div>
+                *
+                * @since       1.0.0
+                * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+              .#{$cls} {
+                color: color($name, $mod-name);
+              }
+            }
+
+            @if class-match-namespace('sugar.color.#{$name}.#{$mod-name}.bg') {
+              $cls: unquote(selector('bg-#{$name}--#{$mod-name}'));
+              /**
+                * @name       	#{$cls}
+                * @namespace            scss.color.class
+                * @class-namespace           sugar.color.#{$name}.#{$mod-name}.bg
+                * @type        class
+                *
+                * Specify the background color to **#{$name}--#{$mod-name}**
+                *
+                * @example 	html
+                * <div class="#{$cls} p" style="color:white">
+                * 	My background color is "#{$name}--#{$mod-name}"
+                * </div>
+                *
+                * @since       1.0.0
+                * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+              .#{$cls} {
+                background-color: color($name, $mod-name);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

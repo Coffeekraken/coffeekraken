@@ -156,11 +156,7 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(
-            //     __SSugarConfig.get(
-            //         'theme.themes.default-light.ui.filtrableInput',
-            //     ),
-            // );
+            // console.log(__SSugarConfig.get('docmap.build'));
             // return;
 
             __SBench.step('sugar.cli', 'afterLoadConfig');

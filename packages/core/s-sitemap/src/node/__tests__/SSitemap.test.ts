@@ -5,9 +5,9 @@ describe('s-sitemap.node.SSitemap', () => {
     it('Should generate a simple sitemap from a static source', async () => {
         await __SSugarConfig.load();
         const sitemap = new __SSitemap();
-        sitemap.addSource('docmap');
 
         const resPromise = sitemap.build();
+        // @ts-ignore
         resPromise.on('log', (data) => {
             console.log(data.value);
         });

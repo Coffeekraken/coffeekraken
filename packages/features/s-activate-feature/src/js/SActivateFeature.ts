@@ -53,7 +53,10 @@ export default class SActivateFeature extends __SFeature {
                     `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                 );
             // @ts-ignore
-            if (localStorage.getItem(`s-activate-state-${this.saveStateId}`) === this.props.id) {
+            if (
+                localStorage.getItem(`s-activate-state-${this.saveStateId}`) ===
+                this.props.id
+            ) {
                 this.props.active = true;
             } else {
                 this.props.active = false;
@@ -65,11 +68,16 @@ export default class SActivateFeature extends __SFeature {
         }
 
         let targets;
-        if (this._hrefSelector) targets = Array.from(document.querySelectorAll(this._hrefSelector));
+        if (this._hrefSelector)
+            targets = Array.from(document.querySelectorAll(this._hrefSelector));
         if (targets?.length) this._$targets = targets;
 
         if (this.props.group) {
-            this._$groupElements = Array.from(document.querySelectorAll(`[${this.name}][group="${this.props.group}"]`));
+            this._$groupElements = Array.from(
+                document.querySelectorAll(
+                    `[${this.name}][group="${this.props.group}"]`,
+                ),
+            );
         }
 
         this.props.trigger.forEach((trigger) => {
@@ -157,7 +165,10 @@ export default class SActivateFeature extends __SFeature {
                         `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
                     );
                 // @ts-ignore
-                localStorage.setItem(`s-activate-state-${this.saveStateId}`, this.props.id);
+                localStorage.setItem(
+                    `s-activate-state-${this.saveStateId}`,
+                    this.props.id,
+                );
             }
 
             // history
@@ -189,7 +200,10 @@ export default class SActivateFeature extends __SFeature {
                         $target.classList.add(this.props.activeClass);
                     }
                     if (this.props.activeAttribute) {
-                        $target.setAttribute(this.props.activeAttribute, 'true');
+                        $target.setAttribute(
+                            this.props.activeAttribute,
+                            'true',
+                        );
                     }
                 });
             }
@@ -239,6 +253,9 @@ export default class SActivateFeature extends __SFeature {
     }
 }
 
-export function register(props: Partial<ISActivateFeatureProps> = {}, name = 's-activate') {
-    __SFeature.registerFeature(name, SActivateFeature, props);
+export function define(
+    props: Partial<ISActivateFeatureProps> = {},
+    name = 's-activate',
+) {
+    __SFeature.defineFeature(name, SActivateFeature, props);
 }

@@ -1,11 +1,11 @@
 <!--
-/*
- * @name            Installation
+/**
+ * @name            Get Started
  * @namespace       doc
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation / Get Started           /doc/get-started/installation
+ * @menu            Documentation / Get Started           /doc/get-started/get-started
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

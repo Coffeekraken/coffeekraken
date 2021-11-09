@@ -27,6 +27,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function formatEstimation(estimation: number): string {
+    if (estimation === Infinity) {
+        return '...';
+    }
     if (estimation < 1000) {
         return `${estimation}ms`;
     }

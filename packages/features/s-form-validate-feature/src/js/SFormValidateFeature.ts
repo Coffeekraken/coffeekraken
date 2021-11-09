@@ -475,9 +475,9 @@ export default class SFormValidateFeature extends __SFeature {
     }
 }
 
-export function register(
+export function define(
     props: Partial<ISFormValidateFeatureProps> = {},
     name = 's-form-validate',
 ) {
-    __SFeature.registerFeature(name, SFormValidateFeature, props);
+    __SFeature.defineFeature(name, SFormValidateFeature, props);
 }

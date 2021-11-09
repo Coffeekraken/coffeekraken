@@ -680,6 +680,7 @@ class SFile extends __SEventEmitter implements ISFile {
                 interval:
                     // @ts-ignore
                     this.fileSettings.watch &&
+                    // @ts-ignore
                     this.fileSettings.watch.pollingInterval
                         ? // @ts-ignore
                           this.fileSettings.watch.pollingInterval

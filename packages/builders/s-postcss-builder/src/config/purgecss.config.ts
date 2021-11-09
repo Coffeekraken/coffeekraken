@@ -1,7 +1,7 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess(rawPurgecssConfig, rawConfig) {
+export async function preprocess(env, rawPurgecssConfig, rawConfig) {
     const config = (await __loadConfigFile('purgecss.config.js')) ?? {};
     return __deepMerge(rawPurgecssConfig, config);
 }

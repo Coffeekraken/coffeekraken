@@ -92,8 +92,6 @@ export default class CKSearch extends __SLitComponent {
             },
         });
     }
-
-    async firstUpdated() {}
     render() {
         return html`
             <div class="ck-search">
@@ -101,7 +99,7 @@ export default class CKSearch extends __SLitComponent {
                 <div class="__content s-color:accent">
                     <ck-search-input>
                         <input
-                            placeholder="Keywords based search..."
+                            placeholder="API search..."
                             type="text"
                             name="search"
                             class="s-input s-color:accent s-scale:11"

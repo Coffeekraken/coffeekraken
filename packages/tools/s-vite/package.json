@@ -43,7 +43,7 @@
         "style-loader": "^3.1.0",
         "svelte": "^3.38.2",
         "url-parse": "^1.5.1",
-        "vite": "^2.3.2",
+        "vite": "^2.6.13",
         "vite-plugin-imagemin": "^0.3.2",
         "vite-plugin-singlefile": "^0.5.1"
     },

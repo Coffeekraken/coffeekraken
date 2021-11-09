@@ -4,7 +4,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess(rawViteConfig, rawConfig) {
+export async function preprocess(env, rawViteConfig, rawConfig) {
     const config = (await __loadConfigFile('vite.config.js')) ?? {};
     return __deepMerge(rawViteConfig, config);
 }
@@ -214,6 +214,9 @@ export default function (env, config) {
             proxy: {
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
+            // watch: {
+            //     ignored: [`${__dirname()}/static`],
+            // },
         },
         css: {},
         rewrites: [

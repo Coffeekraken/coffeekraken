@@ -215,9 +215,10 @@ export default class SFiltrableInput extends __SLitComponent {
         if (this.state.preselectedItem) {
             if (
                 typeof this.props.value === 'string' &&
-                this.state.preselectedItem[this.props.value]
+                this.state.preselectedItem?.[this.props.value]
             ) {
                 (<HTMLInputElement>this.$input).value = __stripTags(
+                    // @ts-ignore
                     this.state.preselectedItem[this.props.value],
                 );
             } else if (typeof this.props.value === 'function') {
@@ -238,6 +239,9 @@ export default class SFiltrableInput extends __SLitComponent {
         // @ts-ignore
         this.state.value = this.$input.value;
         this.requestUpdate();
+        // dispatch an event
+        const event = new CustomEvent('select', { detail: this.selectedItem });
+        this.dispatchEvent(event);
     }
     validateAndClose() {
         this.validate();

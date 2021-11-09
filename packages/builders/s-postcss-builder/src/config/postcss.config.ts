@@ -1,7 +1,7 @@
 import __loadConfigFile from '@coffeekraken/sugar/node/config/loadConfigFile';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-export async function preprocess(rawPostcssConfig, rawConfig) {
+export async function preprocess(env, rawPostcssConfig, rawConfig) {
     const config = (await __loadConfigFile('postcss.config.js')) ?? {};
     return __deepMerge(rawPostcssConfig, config);
 }

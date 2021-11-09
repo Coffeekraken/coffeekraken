@@ -165,11 +165,21 @@ export default class SStaticBuilder extends __SBuilder {
                     .toString();
 
                 // parsing xml
-                const xml = await parseStringPromise(xmlStr);
+                let xml = await parseStringPromise(xmlStr);
 
                 let failsCount = 0,
                     failedUrls: string[] = [],
                     currentDuration = 0;
+
+                // xml = {
+                //     urlset: {
+                //         url: [
+                //             {
+                //                 loc: '/api/@coffeekraken.s-theme.config.themeBase.ui.default.paddingInline',
+                //             },
+                //         ],
+                //     },
+                // };
 
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
@@ -187,10 +197,16 @@ export default class SStaticBuilder extends __SBuilder {
                     });
                     const res = await request.send().catch((e) => {
                         emit('log', {
-                            value: `<red>[error]</red> This url "<cyan>${url.loc}</cyan>" cannot be reached...`,
+                            value: `<red>[error]</red> The url "<cyan>${url.loc}</cyan>" cannot be reached...`,
                         });
                         failsCount++;
                         failedUrls.push(url.loc);
+
+                        __writeFileSync(
+                            `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
+                            failedUrls.join('\n'),
+                        );
+
                         if (
                             params.failAfter !== -1 &&
                             failsCount >= params.failAfter
@@ -209,19 +225,22 @@ export default class SStaticBuilder extends __SBuilder {
                     // generating the output path for the current file
                     const outPath = `${params.outDir}${url.loc}`;
 
-                    // saving file
-                    emit('log', {
-                        value: `<green>[build]</green> Saving the page from url "<cyan>${url.loc}</cyan>"...`,
-                    });
                     // @ts-ignore
-                    __writeFileSync(`${outPath}.html`, res.data);
+                    if (res?.data) {
+                        // saving file
+                        emit('log', {
+                            value: `<green>[build]</green> Saving the page from url "<cyan>${url.loc}</cyan>"...`,
+                        });
+                        // @ts-ignore
+                        __writeFileSync(`${outPath}.html`, res.data);
+                    }
 
                     emit('log', {
                         value: `<yellow>[build]</yellow> <magenta>${
                             xml.urlset.url.length - i
-                        }</magenta>, <cyan>~${__formatEstimation(
+                        }</magenta> url(s), <cyan>~${__formatEstimation(
                             average * (xml.urlset.url.length - i),
-                        )}</cyan> remaining page(s)`,
+                        )}</cyan> remaining`,
                     });
 
                     // if (i >= 5) break;
@@ -262,6 +281,7 @@ export default class SStaticBuilder extends __SBuilder {
                                     `<red>[error]</red> The requested asset "<yellow>${assetObj.from}</yellow>" is not reachable...`,
                                 );
                             });
+                            // @ts-ignore
                             let data = res.data;
                             try {
                                 data = JSON.stringify(data);

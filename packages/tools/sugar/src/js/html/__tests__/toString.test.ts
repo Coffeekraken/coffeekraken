@@ -2,6 +2,8 @@
  * @jest-environment jsdom
  */
 
+// @ts-nocheck
+
 import __toString from '../toString';
 
 describe('sugar.js.html.toString', () => {

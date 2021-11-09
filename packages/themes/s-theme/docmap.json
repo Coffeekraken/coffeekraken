@@ -38,6 +38,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",

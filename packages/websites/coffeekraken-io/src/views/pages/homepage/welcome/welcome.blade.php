@@ -1,9 +1,9 @@
 <section id="homepage-welcome">
 
 
-    <div class="__background"></div>
+    {{-- <div class="__background"></div>
     <canvas class="__canvas" id="welcome-canvas"></canvas>
-    <canvas class="__canvas" id="welcome-canvas-2"></canvas>
+    <canvas class="__canvas" id="welcome-canvas-2"></canvas> --}}
     <div class="__content">
         @include('pages.homepage.welcome.partials.content')
     </div>
@@ -33,7 +33,40 @@
     <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     
-    <div class="__grains" layer amount="0.03"></div>
+    <div class="__illustration">
+        <div class="__coffee-cup">
+            <img src="{{ $config->serve->img->url }}/welcome/coffee-cup.png" />
+        </div>
+        <div class="__blob-js" s-parallax amount="0.5" amount-y="0.5" amount-rotate-x="0.1">
+            <img class="__blob-js" src="{{ $config->serve->img->url }}/welcome/blob-js.png" />
+        </div>
+        <div class="__blob-css" s-parallax amount="0.2" amount-y="0.7" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-css.png" />
+        </div>
+        <div class="__blob-ui" s-parallax amount="0.3" amount-y="0.4" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-ui.png" />
+        </div>
+        <div class="__blob-node" s-parallax amount="0.3" amount-y="0.6" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-node.png" />
+        </div>
+        <div class="__blob-cli" s-parallax amount="0.5" amount-y="0.2" amount-rotate-y="0.5" amount-rotate-x="0">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-cli.png" />
+        </div>
+        <div class="__blob-php" s-parallax amount="0.8" amount-y="0.3" amount-rotate-y="0.8" amount-rotate-x="0.2">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-php.png" />
+        </div>
+        <div class="__blob-01" s-parallax amount="0.4" amount-y="0.8" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-01.png" />
+        </div>
+        <div class="__blob-02" s-parallax amount="0.5" amount-y="0.6" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-02.png" />
+        </div>
+        <div class="__blob-03" s-parallax amount="0.5" amount-y="0.2" amount-rotate-x="0.1">
+            <img src="{{ $config->serve->img->url }}/welcome/blob-03.png" />
+        </div>
+    </div>
+
+    {{-- <div class="__grains" layer amount="0.03"></div> --}}
 
     <div class="__footer">
         <span class="__bracket __bracket-start">{</span>

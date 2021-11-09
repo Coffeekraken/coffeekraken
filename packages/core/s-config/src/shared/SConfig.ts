@@ -472,7 +472,7 @@ export default class SConfig {
                 this.config[configKey] =
                     await this.constructor._registeredPreprocesses[this.id][
                         configKey
-                    ](this.config[configKey], this.config);
+                    ](this._settings.env, this.config[configKey], this.config);
             }
         }
 
@@ -559,7 +559,7 @@ export default class SConfig {
                 this.config[configKey] =
                     await this.constructor._registeredPostprocess[this.id][
                         configKey
-                    ](this.config[configKey], this.config);
+                    ](this._settings.env, this.config[configKey], this.config);
             }
         }
 

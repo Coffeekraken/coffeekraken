@@ -37,12 +37,6 @@ export default function api(req, res, settings = {}) {
 
         const namespace = req.path.replace(/^\/api\//, '').trim();
 
-        Object.keys(docmapJson.map).forEach((na) => {
-            if (na.includes('sugar.js.dom.query')) {
-                console.log(na);
-            }
-        });
-
         const docmapObj = docmapJson.map[namespace];
 
         if (!docmapObj || !__fs.existsSync(docmapObj.path)) {

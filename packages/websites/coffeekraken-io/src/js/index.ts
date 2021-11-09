@@ -23,8 +23,9 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 const duration = new __SDuration();
 
-import { register as __sActivateFeature } from '@coffeekraken/s-activate-feature';
-import { register as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sActivateFeature } from '@coffeekraken/s-activate-feature';
+import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 
 // (async () => {
 console.log('LOADED');
@@ -73,6 +74,7 @@ __SRangeWebcomponent();
 console.log('LOADED', 3);
 
 // features
+__sParallaxFeature();
 __sFormValidateFeature({
     customValidations: {
         coffeekraken: (value, helpers) => {

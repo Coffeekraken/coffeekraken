@@ -8,7 +8,7 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __SDuration from '@coffeekraken/s-duration';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 
-export function preprocess(rawThemeConfig, rawConfig) {
+export function preprocess(env, rawThemeConfig, rawConfig) {
     // setting theme from sugar.json
     const sugarJsonInstance = new __SSugarJson();
     const sugarJson = sugarJsonInstance.current();
@@ -33,7 +33,7 @@ export function preprocess(rawThemeConfig, rawConfig) {
     return rawThemeConfig;
 }
 
-export function postprocess(themeConfig, config) {
+export function postprocess(env, themeConfig, config) {
     const themes = themeConfig.themes;
 
     // console.log(themes['default-light']);

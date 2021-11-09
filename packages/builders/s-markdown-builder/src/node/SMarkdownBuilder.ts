@@ -361,10 +361,12 @@ export default class SMarkdownBuilder extends __SBuilder {
                     // register helpers and layouts in handlebars
                     // @ts-ignore
                     Object.keys(
+                        // @ts-ignore
                         this.constructor._registeredLayouts ?? [],
                     ).forEach((layoutName) => {
                         // @ts-ignore
                         if (
+                            // @ts-ignore
                             !this.constructor._registeredLayouts[layoutName]?.[
                                 params.target
                             ]
@@ -377,6 +379,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const layoutStr = __fs
                             // @ts-ignore
                             .readFileSync(
+                                // @ts-ignore
                                 this.constructor._registeredLayouts[layoutName][
                                     params.target
                                 ],
@@ -390,10 +393,12 @@ export default class SMarkdownBuilder extends __SBuilder {
                     });
                     // @ts-ignore
                     Object.keys(
+                        // @ts-ignore
                         this.constructor._registeredSections ?? [],
                     ).forEach((sectionName) => {
                         // @ts-ignore
                         if (
+                            // @ts-ignore
                             !this.constructor._registeredSections[
                                 sectionName
                             ]?.[params.target]
@@ -406,6 +411,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const sectionStr = __fs
                             // @ts-ignore
                             .readFileSync(
+                                // @ts-ignore
                                 this.constructor._registeredSections[
                                     sectionName
                                 ][params.target],
@@ -419,10 +425,12 @@ export default class SMarkdownBuilder extends __SBuilder {
                     });
                     // @ts-ignore
                     Object.keys(
+                        // @ts-ignore
                         this.constructor._registeredPartials ?? [],
                     ).forEach((partialName) => {
                         // @ts-ignore
                         if (
+                            // @ts-ignore
                             !this.constructor._registeredPartials[
                                 partialName
                             ]?.[params.target]
@@ -435,6 +443,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         const partialStr = __fs
                             // @ts-ignore
                             .readFileSync(
+                                // @ts-ignore
                                 this.constructor._registeredPartials[
                                     partialName
                                 ][params.target],
@@ -447,17 +456,20 @@ export default class SMarkdownBuilder extends __SBuilder {
                     for (
                         let i = 0;
                         i <
+                        // @ts-ignore
                         Object.keys(this.constructor._registeredHelpers ?? [])
                             .length;
                         i++
                     ) {
                         // @ts-ignore
                         const helperName = Object.keys(
+                            // @ts-ignore
                             this.constructor._registeredHelpers ?? [],
                         )[i];
                         // @ts-ignore
                         const helperFn = (
                             await import(
+                                // @ts-ignore
                                 this.constructor._registeredHelpers[helperName]
                             )
                         ).default;

@@ -112,7 +112,7 @@ export default class SFeature extends __SClass {
     }
 
     /**
-     * @name              registerFeature
+     * @name              defineFeature
      * @type            Function
      * @static
      *
@@ -126,7 +126,11 @@ export default class SFeature extends __SClass {
      * @since           2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static registerFeature(name: string, feature: typeof SFeature, defaultProps: any = {}) {
+    static defineFeature(
+        name: string,
+        feature: typeof SFeature,
+        defaultProps: any = {},
+    ) {
         this.setDefaultProps(name, defaultProps);
         __querySelectorLive(`[${name}]`, ($elm) => {
             new feature(name, $elm, __SComponentUtils.getDefaultProps(name));
@@ -157,7 +161,11 @@ export default class SFeature extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(name: string, node: HTMLElement, settings: Partial<ISFeatureCtorSettings> = {}) {
+    constructor(
+        name: string,
+        node: HTMLElement,
+        settings: Partial<ISFeatureCtorSettings> = {},
+    ) {
         super(
             __deepMerge(
                 {

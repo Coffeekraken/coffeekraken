@@ -15,9 +15,13 @@ import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities
 import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 
+// @ts-ignore
 import __prettier from 'prettier/esm/standalone.mjs';
+// @ts-ignore
 import __prettierJs from 'prettier/esm/parser-babel.mjs';
+// @ts-ignore
 import __prettierHtml from 'prettier/esm/parser-html.mjs';
+// @ts-ignore
 import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 __SClipboardCopy();

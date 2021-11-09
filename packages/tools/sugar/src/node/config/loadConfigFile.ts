@@ -39,9 +39,9 @@ export interface ILoadConfigFileSettings {
 
 export default async function loadConfigFile(
     filePath: string | string[],
-    settings?: ILoadConfigFileSettings,
-): any {
-    settings = {
+    settings?: Partial<ILoadConfigFileSettings>,
+): Promise<any> {
+    const finalSettings: ILoadConfigFileSettings = {
         rootDir: __packageRoot(),
         throw: false,
         ...(settings ?? {}),
@@ -52,14 +52,16 @@ export default async function loadConfigFile(
 
     for (let i = 0; i < filePathArray.length; i++) {
         if (
-            __fs.existsSync(__path.resolve(settings.rootDir, filePathArray[i]))
+            __fs.existsSync(
+                __path.resolve(finalSettings.rootDir, filePathArray[i]),
+            )
         ) {
             finalFilePath = filePathArray[i];
             break;
         }
     }
 
-    if (settings.throw && !finalFilePath) {
+    if (finalSettings.throw && !finalFilePath) {
         throw new Error(
             `Sorry but none of the passed config files "${filePathArray.join(
                 ',',
@@ -72,13 +74,15 @@ export default async function loadConfigFile(
         case 'js':
         case 'json':
             return (
-                await import(__path.resolve(settings.rootDir, finalFilePath))
+                await import(
+                    __path.resolve(finalSettings.rootDir, finalFilePath)
+                )
             ).default;
             break;
         case 'yml':
             const str = __fs
                 .readFileSync(
-                    __path.resolve(settings.rootDir, finalFilePath),
+                    __path.resolve(finalSettings.rootDir, finalFilePath),
                     'utf8',
                 )
                 .toString();

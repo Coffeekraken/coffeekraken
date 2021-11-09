@@ -49,6 +49,7 @@
         "@coffeekraken/s-lit-component": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/s-markdown-builder": "^2.0.0",
+        "@coffeekraken/s-parallax-feature": "^2.0.0",
         "@coffeekraken/s-postcss-sugar-plugin": "^2.0.0",
         "@coffeekraken/s-process": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
@@ -76,5 +77,8 @@
         "minisearch": "^3.0.4",
         "vue": "^3.1.5",
         "vue3-webcomponent-wrapper": "^0.1.4"
+    },
+    "devDependencies": {
+        "esbuild": "^0.13.13"
     }
 }

@@ -7,6 +7,7 @@ url("./sugar-fonticon.woff?fa11e6accc9d982a83e19d5ba18cf237") format("woff");
 
 .s-icon--display-preview:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--vue:before {
 position: relative;
+top:0.2em;
 
     font-family: sugar-fonticon !important;
     font-style: normal;

@@ -284,7 +284,8 @@ export default class SBench extends __SPromise {
         // @ts-ignore
         const lastTime = !keys.length
             ? this._startTime
-            : this._steps[keys.pop()].time;
+            : // @ts-ignore
+              this._steps[keys.pop()].time;
         const duration = Date.now() - lastTime;
 
         this._steps.push({

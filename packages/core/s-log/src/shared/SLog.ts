@@ -258,7 +258,7 @@ export default class SLog {
     public get value(): any {
         return this._logObj.value;
     }
-    set value(value: any) {
+    public set value(value: any) {
         this._logObj.value = value;
     }
 

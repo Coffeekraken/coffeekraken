@@ -14,36 +14,6 @@
 
     <div id="api">
 
-        <section class="toolbar">
-
-            <div class="s-container">
-
-                <div class="s-flex:align-center">
-
-                    <div class="s-font:40">
-                        <span>{{ $firstBlock->name }}</span>
-                        &nbsp;&nbsp;
-                        <span class="s-font:30">
-                            <span class="s-badge:pill s-color:{{ $statusColor }}">{{ $firstBlock->status ? $firstBlock->status : 'beta' }}</span>
-                        </span>
-                        &nbsp;&nbsp;
-                        @if ($firstBlock->platform)
-                            @foreach ($firstBlock->platform as $platform)
-                                <i class="s-platform:{{ $platform->name }}"></i>
-                            @endforeach
-                        @endif
-                        &nbsp;&nbsp;
-                        @include('generic.support.icons', ['supports' => $firstBlock->support])
-                    </div>
-
-                    @include('generic.toolbar.toolbar-join-us')
-
-                </div>
-
-            </div>
-
-        </section>
-
         <section class="s-container markdown">
 
             <div class="s-layout:1222:gutter-between:gutter-50">

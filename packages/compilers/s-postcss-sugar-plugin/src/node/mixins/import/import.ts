@@ -109,7 +109,7 @@ export default function ({
     }
 
     files.forEach((file) => {
-        const newRule = postcss.parse(`@import "${file.relPath}";`);
+        const newRule = postcss.parse(`@import url("${file.relPath}");`);
         newRule.source.input.file = atRule.source.input.file;
         atRule.parent.insertAfter(atRule, newRule);
     });

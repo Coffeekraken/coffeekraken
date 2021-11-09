@@ -4,12 +4,10 @@
     position: relative;
     z-index: 10;
     margin-top: -80px;
-    display: flex;
-    align-items: center;
     margin-bottom: 150px;
 
     @sugar.theme.when (dark) {
-        /* background: sugar.color(main, surface) !important; */
+        background: sugar.color(main, background) !important;
     }
 
     /* .s-remap-complementary-accent {
@@ -18,6 +16,25 @@
     .s-remap-accent-complementary {
         @sugar.color.remap (accent, complementary);
     } */
+
+    &:before {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 200px;
+    }
+
+    @sugar.theme.when (dark) {
+        &:before {
+            background: linear-gradient(
+                180deg,
+                sugar.color(main, background, --darken 2),
+                sugar.color(main, background)
+            );
+        }
+    }
 
     @keyframes grains-in {
         0 {
@@ -47,6 +64,205 @@
         @sugar.theme.when (dark) {
             filter: drop-shadow(100px 100px 50px rgba(0, 0, 0, 0.3));
             background-image: url('/src/img/coffee-grains-dark.png');
+        }
+    }
+
+    @keyframes coffee-cup {
+        from {
+            opacity: 0;
+            transform: translateX(25px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-js {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-css {
+        from {
+            opacity: 0;
+            transform: translateX(120px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-ui {
+        from {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-node {
+        from {
+            opacity: 0;
+            transform: translateX(-50px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-cli {
+        from {
+            opacity: 0;
+            transform: translateX(40px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-php {
+        from {
+            opacity: 0;
+            transform: translateX(20px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-01 {
+        from {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-02 {
+        from {
+            opacity: 0;
+            transform: translateX(100px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+    @keyframes blob-03 {
+        from {
+            opacity: 0;
+            transform: translateX(80px);
+        }
+        to {
+            opacity: 1;
+            transform: translateX(0);
+        }
+    }
+
+    .__illustration {
+        position: absolute;
+        width: 50%;
+        top: 230px;
+        left: calc(50% + 100px);
+        transform: scale(0.9);
+
+        > * {
+            position: absolute;
+            filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.4));
+        }
+        .__coffee-cup {
+            opacity: 0;
+            animation: coffee-cup 0.6s ease-out 2s forwards;
+        }
+        .__blob-js {
+            top: 51px;
+            left: 9px;
+
+            img {
+                opacity: 0;
+                animation: blob-js 0.6s ease-out 2.3s forwards;
+            }
+        }
+        .__blob-css {
+            top: 36px;
+            left: 329px;
+
+            img {
+                opacity: 0;
+                animation: blob-css 0.7s ease-out 2.2s forwards;
+            }
+        }
+        .__blob-ui {
+            top: 0;
+            left: 270px;
+
+            img {
+                opacity: 0;
+                animation: blob-ui 0.6s ease-out 2.3s forwards;
+            }
+        }
+        .__blob-node {
+            top: 166px;
+            left: -44px;
+
+            img {
+                opacity: 0;
+                animation: blob-node 0.4s ease-out 2.2s forwards;
+            }
+        }
+        .__blob-cli {
+            top: 316px;
+            left: 309px;
+
+            img {
+                opacity: 0;
+                animation: blob-cli 0.6s ease-out 2.1s forwards;
+            }
+        }
+        .__blob-php {
+            top: 383px;
+            left: 283px;
+
+            img {
+                opacity: 0;
+                animation: blob-php 0.5s ease-out 2s forwards;
+            }
+        }
+        .__blob-01 {
+            top: 0;
+            left: 227px;
+
+            img {
+                opacity: 0;
+                animation: blob-01 0.6s ease-out 2.1s forwards;
+            }
+        }
+        .__blob-02 {
+            top: 260px;
+            left: -30px;
+
+            img {
+                opacity: 0;
+                animation: blob-02 0.7s ease-out 2.3s forwards;
+            }
+        }
+        .__blob-03 {
+            top: 320px;
+            left: 550px;
+
+            img {
+                opacity: 0;
+                animation: blob-03 0.6s ease-out 2.3s forwards;
+            }
         }
     }
 

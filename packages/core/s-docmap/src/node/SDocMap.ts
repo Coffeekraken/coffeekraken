@@ -535,6 +535,7 @@ class SDocMap extends __SClass implements ISDocMap {
                     scopedSlugMenu[`/${packageName}${slug}`] =
                         menuObj.slug[slug];
                 });
+                // @ts-ignore
                 finalMenu.packages[packageName] = {
                     name: packageName,
                     tree: __deepMap(menuObj.tree, ({ prop, value }) => {
@@ -551,11 +552,13 @@ class SDocMap extends __SClass implements ISDocMap {
             // @ts-ignore
             finalMenu.custom[menuName].tree = __deepFilter(
                 finalMenu.tree,
+                // @ts-ignore
                 this.docmapSettings.customMenu[menuName],
             );
             // @ts-ignore
             finalMenu.custom[menuName].slug = __deepFilter(
                 finalMenu.slug,
+                // @ts-ignore
                 this.docmapSettings.customMenu[menuName],
             );
 
@@ -564,6 +567,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 // @ts-ignore
                 const packageFilteredTree = __deepFilter(
                     packageObj.tree,
+                    // @ts-ignore
                     this.docmapSettings.customMenu[menuName],
                 );
                 finalMenu.custom[menuName].tree = __deepMerge(
@@ -573,6 +577,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 // @ts-ignore
                 const packageFilteredSlug = __deepFilter(
                     packageObj.slug,
+                    // @ts-ignore
                     this.docmapSettings.customMenu[menuName],
                 );
                 finalMenu.custom[menuName].slug = __deepMerge(

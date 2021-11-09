@@ -130,7 +130,9 @@ export default class SVite extends __SClass {
                 }
 
                 const server = await __viteServer(config);
+
                 const listen = await server.listen();
+
                 emit('log', {
                     value: [
                         `<yellow>Vite</yellow> server started <green>successfully</green>`,
@@ -167,7 +169,8 @@ export default class SVite extends __SClass {
                 const viteConfig = __SugarConfig.get('vite');
                 const duration = new __SDuration();
 
-                params = __SViteBuildInterface.apply(params);
+                const finalParams: ISViteBuildParams =
+                    __SViteBuildInterface.apply(params);
 
                 // if (params.watch) {
                 //   throw new Error('The watch feature is not implemented yet...');
@@ -177,24 +180,27 @@ export default class SVite extends __SClass {
                 const results = {};
 
                 // types shortcuts
-                if (params.lib && params.type.indexOf('lib') === -1)
-                    params.type = ['lib'];
-                if (params.bundle && params.type.indexOf('bundle') === -1)
-                    params.type = ['bundle'];
+                if (finalParams.lib && finalParams.type.indexOf('lib') === -1)
+                    finalParams.type = ['lib'];
+                if (
+                    finalParams.bundle &&
+                    finalParams.type.indexOf('bundle') === -1
+                )
+                    finalParams.type = ['bundle'];
 
-                for (let i = 0; i < params.type.length; i++) {
-                    const buildType = params.type[i];
+                for (let i = 0; i < finalParams.type.length; i++) {
+                    const buildType = finalParams.type[i];
 
                     const config: any = __deepMerge(viteConfig, {
                         logLevel: 'silent',
                         build: {
-                            watch: params.watch ? {} : false,
-                            target: params.target ?? 'modules',
+                            watch: finalParams.watch ? {} : false,
+                            target: finalParams.target ?? 'modules',
                             write: false,
-                            minify: params.minify,
+                            minify: finalParams.minify,
                             cssCodeSplit: false,
                             rollupOptions: {
-                                input: params.input,
+                                input: finalParams.input,
                                 plugins: [],
                                 output: {
                                     compact: true,
@@ -207,8 +213,8 @@ export default class SVite extends __SClass {
                     });
 
                     // shortcuts
-                    if (params.prod) {
-                        params.minify = true;
+                    if (finalParams.prod) {
+                        finalParams.minify = true;
                     }
 
                     // library mode
@@ -217,12 +223,12 @@ export default class SVite extends __SClass {
                     }
 
                     // plugins
-                    if (params.minify) {
+                    if (finalParams.minify) {
                         config.build.rollupOptions.plugins.push(
                             __uglifyPlugin(),
                         );
                     }
-                    if (params.analyze) {
+                    if (finalParams.analyze) {
                         config.build.rollupOptions.plugins.push(
                             __rollupAnalyzerPlugin({
                                 limit: 10,
@@ -251,17 +257,17 @@ export default class SVite extends __SClass {
                     config.plugins = plugins;
 
                     // mode (production, development)
-                    if (params.prod) {
+                    if (finalParams.prod) {
                         config.mode = 'production';
                     }
 
                     // target
                     if (buildType.toLowerCase() === 'bundle') {
-                        config.build.target = params.target ?? 'es2015';
+                        config.build.target = finalParams.target ?? 'es2015';
                     } else if (buildType.toLowerCase() === 'lib') {
-                        config.build.target = params.target ?? 'esnext';
+                        config.build.target = finalParams.target ?? 'esnext';
                     } else if (buildType.toLowerCase() === 'module') {
-                        config.build.target = params.target ?? 'modules';
+                        config.build.target = finalParams.target ?? 'modules';
                     }
 
                     // external packages for library mode
@@ -276,8 +282,8 @@ export default class SVite extends __SClass {
                     }
 
                     // automatic formats
-                    let finalFormats = params.format;
-                    if (!params.format.length) {
+                    let finalFormats = finalParams.format;
+                    if (!finalParams.format.length) {
                         switch (buildType) {
                             case 'bundle':
                                 finalFormats = ['iife'];
@@ -308,19 +314,19 @@ export default class SVite extends __SClass {
                     });
 
                     // prod filename
-                    if (params.prod) {
+                    if (finalParams.prod) {
                         outputsFilenames = outputsFilenames.map((filename) => {
                             return filename.replace(/\.js$/, '.prod.js');
                         });
                     }
 
-                    if (params.verbose) {
+                    if (finalParams.verbose) {
                         emit('log', {
                             value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`,
                         });
                         emit('log', {
                             value: `<yellow>○</yellow> Environment : ${
-                                params.prod
+                                finalParams.prod
                                     ? '<green>production</green>'
                                     : '<yellow>development</yellow>'
                             }`,
@@ -412,7 +418,7 @@ export default class SVite extends __SClass {
                     results[buildType] = res;
 
                     // handle generated bundles
-                    if (!params.noWrite) {
+                    if (!finalParams.noWrite) {
                         // @ts-ignore
                         res.forEach((bundleObj, i) => {
                             const output = bundleObj.output[0];

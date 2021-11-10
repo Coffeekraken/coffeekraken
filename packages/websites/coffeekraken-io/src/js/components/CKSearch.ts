@@ -61,24 +61,31 @@ __sFiltrableInputDefine(
                     url: '/docmap.json',
                 });
                 const result = await request.send();
-                searchItems = Object.values(result.data.map);
+                const items = [];
+
+                Object.keys(result.data.map).forEach((namespace) => {
+                    const item = result.data.map[namespace];
+                    item.fullNamespace = namespace;
+                    items.push(item);
+                });
+
                 window.localStorage.setItem(
                     'ck-search-items',
-                    JSON.stringify(searchItems),
+                    JSON.stringify(items),
                 );
+
+                return items;
             }
 
             const cached = window.localStorage.getItem('ck-search-items');
             if (!cached) {
                 const items = await fetchItems();
                 return items;
+            } else {
+                fetchItems();
+                const items = JSON.parse(cached);
+                return items;
             }
-
-            // update items
-            fetchItems();
-
-            // return cached
-            return JSON.parse(cached);
         },
     },
     'ck-search-input',
@@ -90,6 +97,20 @@ export default class CKSearch extends __SLitComponent {
             litComponent: {
                 shadowDom: false,
             },
+        });
+    }
+    firstUpdated() {
+        this.addEventListener('select', (e) => {
+            const item = e.detail;
+            if (item.menu?.slug) {
+                if (item.package !== window.packageJson.name) {
+                    document.location.href = `${item.package}${item.menu.slug}`;
+                } else {
+                    document.location.href = item.menu.slug;
+                }
+            } else {
+                document.location.href = `/api/${item.fullNamespace}`;
+            }
         });
     }
     render() {

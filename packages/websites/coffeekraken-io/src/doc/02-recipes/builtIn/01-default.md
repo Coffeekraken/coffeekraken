@@ -5,7 +5,7 @@
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation / Recipes / Built-in           /doc/recipes/built-in/default
+ * @menu            Documentation / Recipes / Built-in          /doc/recipes/built-in/default
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -14,7 +14,7 @@
 
 {{#> layout-doc }}
 
-# Default recipe `default`
+# Default (generic) recipe `default`
 
 The `default` built-in recipe has been thinked to be the more versatile as possible for projects like:
 

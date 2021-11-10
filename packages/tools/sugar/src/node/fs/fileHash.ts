@@ -1,5 +1,7 @@
 import __crypto, { BinaryToTextEncoding } from 'crypto';
 import __fs from 'fs';
+import { Buffer } from 'buffer';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name            fileHash
@@ -29,21 +31,40 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface IFileHashIncludeSettings {
+    ctime: boolean;
+}
+
 export interface IFileHashSettings {
     algo: string;
     digest: BinaryToTextEncoding;
+    include: Partial<IFileHashIncludeSettings>;
 }
 
 export default function fileHash(
     filePath: string,
     settings: Partial<IFileHashSettings> = {},
 ): string {
-    settings = <IFileHashSettings>{
-        algo: 'sha256',
-        digest: 'base64',
-        ...settings,
-    };
-    const fileBuffer = __fs.readFileSync(filePath);
+    settings = <IFileHashSettings>__deepMerge(
+        {
+            algo: 'sha256',
+            digest: 'base64',
+            include: {
+                ctime: false,
+            },
+        },
+        settings ?? {},
+    );
+    let fileBuffer = __fs.readFileSync(filePath);
+
+    if (settings.include?.ctime) {
+        try {
+            const ctime = __fs.statSync(filePath).ctime;
+            const buffer = Buffer.from(ctime);
+            fileBuffer = Buffer.concat([fileBuffer, buffer]);
+        } catch (e) {}
+    }
+
     const hashSum = __crypto.createHash(<string>settings.algo);
     hashSum.update(fileBuffer);
     return hashSum.digest(<BinaryToTextEncoding>settings.digest);

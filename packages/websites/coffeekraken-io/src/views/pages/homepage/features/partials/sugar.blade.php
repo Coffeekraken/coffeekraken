@@ -6,16 +6,12 @@
         <div>
             <h3 class="s-typo:h3 s-mbe:30">
                 Sugar toolkit
-                <br>as good as a... <span class="s-tc:accent">Sugar</span>
+                <br>to <span class="s-tc:accent">serve you</span>
             </h3>
-            <p class="s-typo:p s-mbe:50">
-                We all know as developer that a lot of our precious time is taken by the search of
-                a package that cover our small need like for example a function that merge two objects recursively.<br>
-                You will say:
-                "<span class="s-tc:accent">I got my own</span>", or "<span class="s-tc:accent">I have a package that do this</span>"...<br>
-                And we would answer:
-                "<span class="s-tc:complementary">We understand... But what if we can have a lot of these daily features in a simple and reliable package?</span>".
-                <br>
+            <p class="s-typo:lead s-mbe:30">
+                We all know as developer that a lot of our <span class="s-tc:accent">precious time</span> is taken by <span class="s-tc:complementary">searching a package</span> that cover our needs, <span class="s-tc:accent">write our own</span> or even <span class="s-tc:complementary">copy/paste/update</span> some code...
+            </p>
+            <p class="s-typo:p s-mbe:50">                
                 As all of our tools, Sugar is just a toolkit and you can use it if that suits your needs, or totally forget about
                 it and import your own tools.
             </p>

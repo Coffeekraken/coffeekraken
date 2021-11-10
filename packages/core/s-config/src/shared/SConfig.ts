@@ -278,7 +278,7 @@ export default class SConfig {
 
                 const value = __get(
                     config,
-                    match.replace('[config.', '').replace(']', ''),
+                    this.resolveDotPath(match, config, path),
                 );
 
                 if (value === undefined) {
@@ -297,6 +297,11 @@ export default class SConfig {
         // register the default resolver "[config...]"
         this._settings.resolvers.unshift({
             match: /\[config.[a-zA-Z0-9.\-_]+\]/gm,
+            resolveDotPath(match, config, path) {
+                if (!match.match(/^\[config\./)) return;
+                const dotPath = match.replace('[config.', '').replace(']', '');
+                return dotPath;
+            },
             resolve: resolveConfig,
         });
 
@@ -304,15 +309,20 @@ export default class SConfig {
         this._settings.resolvers.unshift({
             name: 'extends',
             match: /\[extends.[a-zA-Z0-9\.\-_]+\]/gm,
+            resolveDotPath(match, config, path) {
+                const ext = __get(config, path[0] + '._extends');
+                if (!ext) return;
+                const dotPath = `${ext}.${match
+                    .replace('[extends.', '')
+                    .replace(']', '')}`;
+
+                return dotPath;
+            },
             resolve(string, matches, config, path) {
                 for (let i = 0; i < matches.length; i++) {
                     const match = matches[i];
 
-                    const ext = __get(config, path[0] + '._extends');
-
-                    const dotPath = `${ext}.${match
-                        .replace('[extends.', '')
-                        .replace(']', '')}`;
+                    const dotPath = this.resolveDotPath(match, config, path);
 
                     let value = __get(config, dotPath);
 
@@ -512,6 +522,21 @@ export default class SConfig {
 
         // console.log(this._restPaths);
 
+        // console.log(this._restPaths);
+
+        Object.keys(this._restPaths).forEach((dotPath) => {
+            const actualConfig = __get(this.config, dotPath),
+                extendsConfig = __get(this.config, this._restPaths[dotPath]);
+            __set(
+                this.config,
+                dotPath,
+                __deepMerge(
+                    Object.assign({}, extendsConfig),
+                    Object.assign({}, actualConfig),
+                ),
+            );
+        });
+
         // this._restPaths
         //     // .sort((first, second) => {
         //     //     if (first.split('.').length < second.split('.').length) return -1;
@@ -631,28 +656,64 @@ export default class SConfig {
         return true;
     }
 
-    _restPaths = [];
+    _restPaths = {};
 
     _resolveInternalReferences(resolverObj, path = [], iteration = 0) {
         let originalValue = __get(this.config, path.join('.'));
 
         iteration++;
 
-        // if (path.indexOf('coco') !== -1)
-        //     console.log(iteration, resolverObj.match, path);
-
-        if (path.indexOf('...') !== -1) {
+        if (path.includes('...')) {
             const p = path.slice(0, path.indexOf('...'));
             const parentObj = __get(this.config, p.join('.'));
-            originalValue = parentObj['...'];
-            // if (this._restPaths.indexOf(p.join('.')) === -1) {
-            //     this._restPaths.push(p.join('.'));
-            // }
+
+            for (let i = 0; i < this._settings.resolvers.length; i++) {
+                const resolver = this._settings.resolvers[i];
+                if (!resolver.resolveDotPath) continue;
+                const dotPath = resolver.resolveDotPath(
+                    parentObj['...'],
+                    this.config,
+                    path,
+                );
+                if (dotPath) {
+                    if (!this._restPaths[p.join('.')]) {
+                        this._restPaths[p.join('.')] = dotPath;
+                    }
+                    break;
+                }
+            }
+
+            return;
 
             // console.log(path);
         }
 
         if (__isPlainObject(originalValue)) {
+            // if (originalValue['...']) {
+            //     originalValue._extend = originalValue['...'];
+            //     delete originalValue['...'];
+            //     this._resolveInternalReferences(
+            //         resolverObj,
+            //         [...path, '_extend'],
+            //         iteration,
+            //     );
+
+            //     if (path.includes('complementary')) {
+            //         console.log(originalValue);
+            //     }
+
+            //     Object.keys(originalValue._extend).forEach((key) => {
+            //         if (__isPlainObject(originalValue._extend)) {
+            //             console.log('efef', key);
+            //         }
+            //     });
+
+            //     // originalValue = __deepMerge(
+            //     //     originalValue._extends,
+            //     //     originalValue,
+            //     // );
+            // }
+
             Object.keys(originalValue).forEach((key) => {
                 this._resolveInternalReferences(
                     resolverObj,
@@ -669,7 +730,6 @@ export default class SConfig {
                 );
             });
         } else if (typeof originalValue === 'string') {
-            // this._settings.resolvers.forEach((resolverObj) => {
             const matches = originalValue.match(resolverObj.match);
 
             if (matches && matches.length) {
@@ -685,9 +745,6 @@ export default class SConfig {
                         this.config,
                         path.slice(0, -1).join('.'),
                     );
-                    // if (path.slice(-1)[0] === 'coco') {
-                    //     console.log(path.join('.'), path.slice(-1)[0]);
-                    // }
 
                     if (path.slice(-1)[0] === '...') {
                         __deepMap(
@@ -710,7 +767,6 @@ export default class SConfig {
                     }
                 }
             }
-            // });
         }
     }
 

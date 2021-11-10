@@ -1,0 +1,43 @@
+.icon-card {
+    aspect-ratio: 1;
+    position: relative;
+    background: sugar.color(accent);
+    border-radius: sugar.border.radius();
+    @sugar.depth (100);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+
+    > div {
+        position: relative;
+        z-index: 1;
+    }
+
+    i {
+        font-size: 100px;
+        margin-block-end: sugar.margin(20);
+    }
+    p {
+    }
+
+    &:after {
+        opacity: 0;
+        border-radius: sugar.border.radius();
+        overflow: hidden;
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-image: url(/src/img/icon-card/test.gif);
+        background-size: cover;
+        background-position: 50% 50%;
+        transition: opacity 0.3s ease-out;
+    }
+
+    &:hover:after {
+        opacity: 1;
+    }
+}

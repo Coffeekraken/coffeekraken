@@ -1,3 +1,5 @@
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+
 export default function (env, config) {
     return {
         /**
@@ -75,6 +77,11 @@ export default function (env, config) {
                  */
                 color: '#5100ff',
                 '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        lighten: 15,
+                    },
+                },
             },
 
             success: {

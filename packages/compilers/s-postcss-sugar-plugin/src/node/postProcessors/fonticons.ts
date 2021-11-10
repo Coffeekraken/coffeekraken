@@ -90,11 +90,13 @@ export default async function ({ root, sharedData }) {
     if (!iconsFilenames.length) return;
 
     // generate the scoped icons selector
-    const iconsSelectorsArray: string[] = [];
+    const iconsSelectorsArrayBefore: string[] = [],
+        iconsSelectorsArray: string[] = [];
     iconsFilenames.forEach((filename) => {
-        iconsSelectorsArray.push(
+        iconsSelectorsArrayBefore.push(
             `.s-icon--${filename.replace(/\.svg$/, '')}:before`,
         );
+        iconsSelectorsArray.push(`.s-icon--${filename.replace(/\.svg$/, '')}`);
     });
 
     const cssPath = `${fantasticonConfig.outputDir}/${fantasticonConfig.name}.css`;
@@ -104,8 +106,17 @@ export default async function ({ root, sharedData }) {
     cssStr = cssStr.replace(/\.s-icon\.--/gm, '.s-icon-');
     cssStr = cssStr.replace(
         /\.s-icon:before\s?{/,
-        `${iconsSelectorsArray.join(',')} {\nposition: relative;\ntop:0.2em;\n`,
+        `${iconsSelectorsArrayBefore.join(',')} {\nposition: relative;\n`,
     );
+
+    cssStr += [
+        `${iconsSelectorsArray.join(',')} {`,
+        'display: inline-block;',
+        'line-height: 1;',
+        'width: 1em;',
+        'height:1em;',
+        '}',
+    ].join('\n');
 
     // rewrite the css file
     __fs.writeFileSync(cssPath, cssStr);

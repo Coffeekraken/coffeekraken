@@ -156,7 +156,11 @@ class SSugarCli {
 
             // load the sugar config
             const config = await __SSugarConfig.load();
-            // console.log(__SSugarConfig.get('docmap.build'));
+            // console.log(
+            //     __SSugarConfig.get(
+            //         'theme.themes.coffeekraken-dark.color.complementary.default',
+            //     ),
+            // );
             // return;
 
             __SBench.step('sugar.cli', 'afterLoadConfig');

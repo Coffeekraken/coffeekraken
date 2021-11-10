@@ -3,6 +3,7 @@ import __fs from 'fs';
 import __sha256 from '../../shared/crypt/sha256';
 import __isDirectory from '../is/directory';
 import __fileHash from './fileHash';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 /**
  * @name            folderHash
@@ -34,22 +35,31 @@ import __fileHash from './fileHash';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
+export interface IFolderHashIncludeSettings {
+    ctime: boolean;
+}
 export interface IFolderHashSettings {
     recursive: boolean;
     algo: string;
     digest: BinaryToTextEncoding;
+    include: Partial<IFolderHashIncludeSettings>;
 }
 
 export default function folderHash(
     folderPath: string,
     settings: Partial<IFolderHashSettings> = {},
 ): string {
-    settings = {
-        recursive: true,
-        algo: 'sha256',
-        digest: 'base64',
-        ...settings,
-    };
+    settings = __deepMerge(
+        {
+            recursive: true,
+            algo: 'sha256',
+            digest: 'base64',
+            include: {
+                ctime: false,
+            },
+        },
+        settings ?? {},
+    );
     const paths: string[] = [];
 
     function readDir(dir) {
@@ -66,6 +76,7 @@ export default function folderHash(
     const filesHashes: string[] = [];
 
     paths.forEach((path) => {
+        if (__isDirectory(path)) return;
         filesHashes.push(__fileHash(path, settings));
     });
 

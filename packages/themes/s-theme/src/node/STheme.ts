@@ -515,7 +515,6 @@ export default class STheme extends __SClass {
             if (colorObj.name === toColorName) {
                 if (toColorVariant) {
                     if (colorObj.variant === toColorVariant) {
-                        console.log(colorObj);
                         vars.push(
                             `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
                         );
@@ -569,6 +568,7 @@ export default class STheme extends __SClass {
      */
     static toCssVars(theme: string, variant?: string): string[] {
         // @ts-ignore
+
         const themeInstance = this.getTheme(theme, variant);
         if (!themeInstance)
             throw new Error(
@@ -611,6 +611,8 @@ export default class STheme extends __SClass {
                             colorObj.value.desaturate * -1
                         };`,
                     );
+                } else {
+                    vars.push(`${baseVariable}-saturation-offset: 0;`);
                 }
                 if (colorObj.value.lighten) {
                     vars.push(
@@ -622,6 +624,8 @@ export default class STheme extends __SClass {
                             colorObj.value.darken * -1
                         };`,
                     );
+                } else {
+                    vars.push(`${baseVariable}-lightness-offset: 0;`);
                 }
                 if (colorObj.value.alpha >= 0 && colorObj.value.alpha <= 1) {
                     vars.push(`${baseVariable}-a: ${colorObj.value.alpha};`);

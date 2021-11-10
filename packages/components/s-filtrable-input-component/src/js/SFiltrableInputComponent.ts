@@ -240,7 +240,11 @@ export default class SFiltrableInput extends __SLitComponent {
         this.state.value = this.$input.value;
         this.requestUpdate();
         // dispatch an event
-        const event = new CustomEvent('select', { detail: this.selectedItem });
+        const event = new CustomEvent('select', {
+            bubbles: true,
+            detail: this.selectedItem,
+        });
+        // @ts-ignore
         this.dispatchEvent(event);
     }
     validateAndClose() {
@@ -334,8 +338,6 @@ export default class SFiltrableInput extends __SLitComponent {
     select(idx) {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
-        // validate and close
-        this.validate();
     }
     selectAndValidate(idx) {
         // set the selected idx

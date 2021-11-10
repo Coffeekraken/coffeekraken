@@ -118,7 +118,9 @@ export default function ({ params, atRule, replaceWith }) {
         cssArray.push(
             [
                 `/**`,
-                ` * @name           s-tc:${colorName}${modifierStr}`,
+                ` * @name           s-tc:${colorName}${
+                    colorObj.variant === 'text' ? '' : modifierStr
+                }`,
                 ` * @namespace      sugar.css.color.${colorName}.${colorObj.variant}`,
                 ` * @type           CssClass`,
                 ` * @platform       css`,
@@ -127,11 +129,15 @@ export default function ({ params, atRule, replaceWith }) {
                 ` * This class allows you to apply the "${colorName}${modifierStr}" text color to an HTMLElement`,
                 ` *`,
                 ` * @example        html`,
-                ` * <h1 class="s-tc\:${colorName}${modifierStr}">`,
+                ` * <h1 class="s-tc\:${colorName}${
+                    colorObj.variant === 'text' ? '' : modifierStr
+                }">`,
                 ` *     Something cool`,
                 ` * </h1>`,
                 ` */`,
-                `.s-tc--${colorName}${modifierStr} {`,
+                `.s-tc--${colorName}${
+                    colorObj.variant === 'text' ? '' : modifierStr
+                } {`,
                 `   color: sugar.color(${colorName}, ${colorObj.variant});`,
                 `}`,
             ].join('\n'),

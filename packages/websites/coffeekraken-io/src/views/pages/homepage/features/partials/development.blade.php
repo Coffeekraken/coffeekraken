@@ -3,19 +3,19 @@
 
         <div class="s-pb:100">
             <h3 class="s-typo:h3 s-mbe:30">Built-in<br />development<br>stack</h3>
-            <p class="s-typo:p s-mbe:30">
-                Coffeekraken has a built-in development stack environment that you can use
-                to <span class="s-tc:accent">simplify and speed up your process</span>. It use under the hood tools like
-                <a class="s-typo:a" href="https://www.npmjs.com/package/vite" title="Vite JS" target="_blanl">Vite</a>,
-                <a class="s-typo:a" href="https://www.npmjs.com/package/postcss" title="PostCSS" target="_blank">PostCSS</a>,
-                <a class="s-typo:a" href="https://www.npmjs.com/package/typescript" title="Typescript" target="_blank">Typescript</a>
-                and some more listed <a class="s-typo:a s-tc:accent" href="/dependencies" title="Coffeekraken dependencies">on the dependencies page</a>.                            
+            <p class="s-typo:lead s-mbe:30">
+                Coffeekraken has a <span class="s-tc:accent">built-in development stack environment</span> that you can use
+                to:
             </p>
-            <p class="s-typo:p s-mbe:30">
-                Don't be afraid by Kraken Pop, to start using our built-in development stack, you just need to enter 3 simple commands that you
-                are more than probably already familiarised with...
-            </p>
-            <a class="s-btn s-color:accent" href="/#get-started" title="Get started!">
+            <ul class="s-list:ol s-mbe:40">
+                <li>Simplify and speed up your process</li>
+                <li>Use the power of the <a href="/doc/@coffeekraken/sugar/README" title="Sugar toolkit">Sugar toolkit</a></li>
+                <li>Make use of the tools you want like <a class="s-typo:a" href="https://www.npmjs.com/package/vite" title="Vite JS" target="_blanl">Vite</a>, <a class="s-typo:a" href="https://www.npmjs.com/package/postcss" title="PostCSS" target="_blank">PostCSS</a>, <a class="s-typo:a" href="https://www.npmjs.com/package/typescript" title="Typescript" target="_blank">Typescript</a>, etc...</li>
+                <li>Don't worry about build and compilation processes</li>
+                <li>Automatically generate documentation from your docblocks</li>
+                <li>An a lot more to discover...</li>
+            </ul>
+            <a class="s-btn s-color:accent" href="doc/get-started/get-started" title="Get started!">
                 Get started!
             </a>
         </div>
@@ -54,31 +54,42 @@ sugar init --recipe riotComponent'
             </div>
 
             <ul class="__recipes-grid">
-                @foreach (['accent','accent','accent','accent'] as $i)
                 <li>
-                    <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
-                        <a href="/" title="">
+                    <a href="/doc/recipes/built-in/default" title="">
+                        <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
                             <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
-                                <i class="s-icon:search s-font:100 s-mbe:20"></i>
-                                <p class="s-p">Search input</p>
+                                <i class="s-icon:brand-coffeekraken s-font:100 s-mbe:20"></i>
+                                <p class="s-p">Default (generic)</p>
                             </div>
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </li>
-                @endforeach
+                <li>
+                    <a href="/doc/recipes/built-in/litElement" title="">
+                        <div class="s-ratio:1 s-bg:complementary s-radius s-depth:50 s-position:relative">
+                            <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
+                                <i class="s-icon:brand-lit s-font:100 s-mbe:20"></i>
+                                <p class="s-p">LitElement</p>
+                            </div>
+                        </div>
+                    </a>
+                </li>
             </ul>
 
         </div> 
         <div>
-            <h4 class="s-typo:h4 s-mbe:30">
+            <h4 class="s-typo:h3 s-mbe:30">
                 Built-in <span class="s-tc:accent">recipes</span>
             </h4>
             <p class="s-typo:lead s-mbe:30">
                 <span class="s-tc:accent">Recipe</span> is the term used by Coffeekraken to define <span class="s-tc:accent">project template</span>.
             </p>
-            <p class="s-typo:p">
-                You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each recipe comes with the development environment, the production testing environment, the full production build process as well as the complete documentation stack.
+            <p class="s-typo:p s-mbe:30">
+                You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each recipe comes with the <span class="s-tc:accent">development environment</span>, <span class="s-tc:complementary">the production testing environment</span> and <span class="s-tc:accent">the full production build process</span>.
             </p>
+            <a class="s-btn s-color:accent" href="/doc/recipes/what-are-recipes" title="What are recipes?">
+                More on recipes!
+            </a>
         </div>   
     </div>
 

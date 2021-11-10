@@ -304,14 +304,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeDarkBase.colorSchemas.default.text
                      * @type          Number
-                     * @default      46
+                     * @default      0
                      *
                      * Specify the lighten value for the "text" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    lighten: 46,
+                    lighten: 0,
                 },
                 placeholder: {
                     /**

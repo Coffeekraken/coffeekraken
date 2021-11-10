@@ -18,7 +18,6 @@ body {
     background: sugar.color(main, surface);
     border-radius: sugar.border.radius();
     box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05);
-
     background: sugar.color(main, surface);
 
     @sugar.theme.when (dark) {
@@ -33,6 +32,8 @@ body {
     body.scrolled & {
         top: 0;
         width: calc(1280px + sugar.padding(40) * 2);
+        border-top-left-radius: 0;
+        border-top-right-radius: 0;
     }
 
     /* #homepage & {

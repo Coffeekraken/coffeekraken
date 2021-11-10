@@ -11,6 +11,15 @@
                     <ck-search></ck-search>
                         {{-- <input class="s-input" type="text" name="search" placeholder="Search API doc..." /> --}}
                 </form>
+
+                <div class="s-tooltip-container s-mis:20">
+                    <a class="s-btn s-color:main s-scale:08" id="settings-opener">
+                        <i class="s-icon:settings"></i>
+                    </a>
+                    <div class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">
+                        Display website settings
+                    </div>
+                </div>
                 {{-- <version-selector class="s-mis:20 s-scale:11"></vewelrsion-selector> --}}
             </div>
             <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:40">

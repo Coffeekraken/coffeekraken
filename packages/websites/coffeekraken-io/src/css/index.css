@@ -7,6 +7,7 @@
 @sugar.ui.filtrableinput.classes;
 
 body {
+    display: block;
     @sugar.theme.when (dark) {
         background-color: sugar.color(main, --darken 30);
     }
@@ -16,7 +17,6 @@ body {
   fa:user:user
   fa:heart:heart
   fa:fire:fire
-  fa:copy:copy
   fa:eye:preview
   fab:css3-alt:css
   fa:box-open:box
@@ -57,7 +57,14 @@ body {
   fs:src/icons/coffeekraken/file/file-php.svg
   fs:src/icons/coffeekraken/file/file-html.svg
   fs:src/icons/coffeekraken/file/file-md.svg
+  fs:src/icons/coffeekraken/brand/brand-lit.svg
+  fs:src/icons/coffeekraken/brand/brand-coffeekraken.svg
   fs:src/icons/coffeekraken/fs/folder.svg
+  fs:src/icons/coffeekraken/html/autocomplete.svg
+  fs:src/icons/coffeekraken/html/range.svg
+  fs:src/icons/coffeekraken/html/code.svg
+  fs:src/icons/coffeekraken/html/datepicker.svg
+  fs:src/icons/coffeekraken/action/copy.svg
   fs:src/icons/coffeekraken/fs/folder-opened.svg
   fs:src/icons/coffeekraken/display/display-preview.svg
   fs:src/icons/read-direction.svg:support-rtl

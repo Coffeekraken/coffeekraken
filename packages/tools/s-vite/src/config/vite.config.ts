@@ -37,6 +37,19 @@ export default function (env, config) {
          */
         base: '/',
         /**
+         * @name          logLevel
+         * @namespace     config.vite
+         * @type          String
+         * @default      error
+         *
+         * Specify the log level
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        logLevel: 'error',
+
+        /**
          * @name          mode
          * @namespace     config.vite
          * @type          String

@@ -3,6 +3,8 @@ import __cacache from 'cacache';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 import __STheme from '@coffeekraken/s-theme';
 import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static get _definition() {
@@ -66,9 +68,17 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
         '@sugar.whiteSpace.classes;',
     ];
 
+    const codeHash = __folderHash(__dirname(), {
+        include: {
+            ctime: true,
+        },
+    });
+    console.log('CODE', codeHash);
+
     const hash = `classes-${__objectHash({
         css: cssArray,
         theme: __STheme.hash(),
+        code: codeHash,
     })}`;
 
     // from cache

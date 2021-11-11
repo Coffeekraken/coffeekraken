@@ -13,9 +13,9 @@ body {
     }
 }
 
-[s-parallax] {
+/* [s-parallax] {
     transition: 0.1s transform linear;
-}
+} */
 
 @sugar.icon.classes (
   fa:user:user

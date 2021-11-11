@@ -1,21 +1,2 @@
 #markdown {
-    .__nav {
-        position: sticky;
-        overflow: auto;
-        top: 80px;
-        max-height: calc(100vh - 80px);
-        @sugar.scrollbar;
-    }
-
-    .toolbar {
-        position: fixed;
-        bottom: 0;
-        left: 50%;
-        top: auto;
-        transform: translate(-50%, 0);
-        width: 1440px;
-        background: sugar.color(main, surface);
-        border-radius: sugar.border.radius();
-        box-shadow: 5px 10px 40px rgba(0, 0, 0, 0.05);
-    }
 }

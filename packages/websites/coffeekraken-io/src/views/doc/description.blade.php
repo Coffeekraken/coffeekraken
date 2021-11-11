@@ -20,7 +20,7 @@
     
     <p class="s-typo:lead s-mbe:50">{!! $block->description !!}</p>
 
-    <div class="s-bg:main-surface s-p:30 s-mbe:50 s-radius s-depth:100 s-flex">
+    <div class="s-bg:main-surface s-p:30 s-mbe:50 s-radius s-depth:100 s-flex:align-center">
         <div class="s-flex-item:grow">
             @if ($block->platform)
                 Platform
@@ -34,12 +34,14 @@
                     </span>
                 @endforeach
             @endif
-            &nbsp;&nbsp;&nbsp;<span class="s-tc:main-background">│</span>&nbsp;&nbsp;&nbsp;
-            Support 
-            &nbsp;
-            <span class="">
-            @include('generic.support.icons', ['supports' => $block->support])
-            </span>
+            @if ($block->support)
+                &nbsp;&nbsp;&nbsp;<span class="s-tc:main-background">│</span>&nbsp;&nbsp;&nbsp;
+                Support 
+                &nbsp;
+                <span class="">
+                @include('generic.support.icons', ['supports' => $block->support])
+                </span>
+            @endif
         </div>
 
         <div>

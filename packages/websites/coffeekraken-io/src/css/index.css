@@ -13,6 +13,10 @@ body {
     }
 }
 
+[s-parallax] {
+    transition: 0.1s transform linear;
+}
+
 @sugar.icon.classes (
   fa:user:user
   fa:heart:heart
@@ -88,6 +92,10 @@ body {
 [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
         [class*='s-btn']) {
     border: none !important;
+}
+
+.s-btn {
+    @sugar.depth (50);
 }
 
 #bkg {

@@ -17,15 +17,26 @@ body {
     @sugar.depth (0);
     background: sugar.color(main, surface);
     border-radius: sugar.border.radius();
-    box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05);
-    background: sugar.color(main, surface);
+    box-shadow: 5px 20px 30px rgba(0, 0, 0, 0.03);
+    background: linear-gradient(
+        90deg,
+        sugar.color(main, --darken 46),
+        sugar.color(main, --darken 48)
+    );
+    background: linear-gradient(
+        90deg,
+        sugar.color(main, surface),
+        sugar.color(main, surface)
+    );
+    /* @sugar.theme (dark); */
 
     @sugar.theme.when (dark) {
+        /* box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05);
         background: linear-gradient(
             90deg,
             sugar.color(main, --darken 23),
             sugar.color(main, --darken 27)
-        );
+        ); */
     }
 
     &:not(#homepage &),

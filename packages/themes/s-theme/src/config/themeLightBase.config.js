@@ -299,29 +299,17 @@ export default function (env, config) {
                 },
                 text: {
                     /**
-                     * @name          darken
+                     * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.text
                      * @type          Number
-                     * @default      15
+                     * @default      0
                      *
-                     * Specify the darken value for the "text" color variant
+                     * Specify the lighten value for the "text" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    darken: 15,
-                    /**
-                     * @name          desaturate
-                     * @namespace     config.themeLightBase.colorSchemas.default.text
-                     * @type          Number
-                     * @default      20
-                     *
-                     * Specify the desaturate value for the "text" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    desaturate: 20,
+                    lighten: 0,
                 },
                 placeholder: {
                     /**
@@ -354,42 +342,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.foreground
                      * @type          Number
-                     * @default      45
+                     * @default      50
                      *
                      * Specify the lighten value for the "foreground" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    darken: 45,
-                },
-                ui: {
-                    /**
-                     * @name          lighten
-                     * @namespace     config.themeLightBase.colorSchemas.default.ui
-                     * @type          Number
-                     * @default      50
-                     *
-                     * Specify the lighten value for the "ui" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
                     lighten: 50,
-                },
-                uiForeground: {
-                    /**
-                     * @name          darken
-                     * @namespace     config.themeLightBase.colorSchemas.default.uiForeground
-                     * @type          Number
-                     * @default      25
-                     *
-                     * Specify the darken value for the "uiForeground" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    darken: 25,
                 },
                 background: {
                     /**
@@ -424,14 +384,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.surface
                      * @type          Number
-                     * @default      49
+                     * @default      48
                      *
                      * Specify the lighten value for the "surface" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    lighten: 49,
+                    lighten: 48,
                 },
                 surfaceForeground: {
                     /**
@@ -446,6 +406,34 @@ export default function (env, config) {
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     darken: 45,
+                },
+                ui: {
+                    /**
+                     * @name          lighten
+                     * @namespace     config.themeLightBase.colorSchemas.default.ui
+                     * @type          Number
+                     * @default      50
+                     *
+                     * Specify the lighten value for the "ui" color variant
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    lighten: 50,
+                },
+                uiForeground: {
+                    /**
+                     * @name          darken
+                     * @namespace     config.themeLightBase.colorSchemas.default.uiForeground
+                     * @type          Number
+                     * @default      25
+                     *
+                     * Specify the darken value for the "uiForeground" color variant
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    darken: 25,
                 },
                 border: {
                     /**
@@ -493,4 +481,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVMaWdodEJhc2UuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWVMaWdodEJhc2UuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsT0FBTztRQUNILE9BQU8sRUFBRSxXQUFXO1FBRXBCLFlBQVksRUFBRTtZQUNWLE9BQU8sRUFBRTtnQkFDTCxHQUFHLEVBQUU7b0JBQ0Q7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsR0FBRyxFQUFFO29CQUNEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLENBQUM7aUJBQ1o7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VC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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVMaWdodEJhc2UuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWVMaWdodEJhc2UuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsT0FBTztRQUNILE9BQU8sRUFBRSxXQUFXO1FBRXBCLFlBQVksRUFBRTtZQUNWLE9BQU8sRUFBRTtnQkFDTCxHQUFHLEVBQUU7b0JBQ0Q7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsR0FBRyxFQUFFO29CQUNEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLEVBQUU7aUJBQ2I7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VCQVVHO29CQUNILE1BQU0sRUFBRSxFQUFFO2lCQUNiO2dCQUNELElBQUksRUFBRTtvQkFDRjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsRUFBRTtpQkFDYjtnQkFDRCxJQUFJLEVBQUU7b0JBQ0Y7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsTUFBTSxFQUFFLENBQUM7aUJBQ1o7Z0JBQ0QsSUFBSSxFQUFFO29CQUNGOzs7Ozs7Ozs7O3VC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

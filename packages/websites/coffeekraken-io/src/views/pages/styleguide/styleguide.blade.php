@@ -1,3 +1,4 @@
+
 @extends('layouts.main')
 @section('title', $title)
 
@@ -18,7 +19,7 @@
 
             <div class="s-layout:12222:gutter-between:gutter-50">
 
-                <nav class="__nav s-pb:50">
+                <nav class="sidemenu s-pb:50">
 
                     <h5 class="s-typo:h5 s-mbe:30">
                         Styleguide

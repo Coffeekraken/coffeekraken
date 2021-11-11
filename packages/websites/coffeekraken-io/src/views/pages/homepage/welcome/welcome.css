@@ -6,6 +6,12 @@
     margin-top: -80px;
     margin-bottom: 150px;
 
+    background: radial-gradient(
+        ellipse at top,
+        sugar.color(main, --lighten 43),
+        transparent
+    );
+
     @sugar.theme.when (dark) {
         background: sugar.color(main, background) !important;
     }
@@ -24,6 +30,12 @@
         left: 0;
         width: 100%;
         height: 200px;
+        background: linear-gradient(
+            180deg,
+            sugar.color(main, background, --darken 1.2),
+            sugar.color(main, --alpha 0)
+        );
+        mask-image: radial-gradient(ellipse at top, black, transparent);
     }
 
     @sugar.theme.when (dark) {
@@ -177,7 +189,11 @@
 
         > * {
             position: absolute;
-            filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.4));
+            filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.07));
+
+            @sugar.theme.when dark {
+                filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.4));
+            }
         }
         .__coffee-cup {
             opacity: 0;
@@ -269,7 +285,7 @@
     .__template {
         text-align: right;
         position: absolute;
-        top: 50%;
+        top: calc(50% - 100px);
         left: 50%;
         transform: translate(-50%, -50%);
         background: rgba(0, 0, 0, 0.02);
@@ -389,6 +405,75 @@
         }
     }
 
+    .__code {
+        mask-image: radial-gradient(ellipse at bottom, black, transparent);
+        font-family: sugar.font.family(code);
+        font-size: 35px;
+        text-align: center;
+        width: calc(
+            sugar.theme(layout.container.default.max-width) / 2 + 400px
+        );
+        position: absolute;
+        bottom: 200px;
+        left: 50%;
+        opacity: 0.1;
+        user-select: none;
+
+        @sugar.theme.when dark {
+            opacity: 0.1;
+        }
+    }
+
+    .__code-0 {
+        animation: code 2s ease-in-out infinite;
+    }
+    .__code-1 {
+        animation: code 3s ease-in-out infinite 0.3s;
+    }
+    .__code-2 {
+        animation: code 2s ease-in-out infinite 0.6s;
+        color: sugar.color(accent);
+    }
+    .__code-3 {
+        animation: code 2.3s ease-in-out infinite;
+    }
+    .__code-4 {
+        animation: code 3.1s ease-in-out infinite;
+        color: sugar.color(complementary);
+    }
+    .__code-5 {
+        animation: code 2.8s ease-in-out infinite;
+    }
+    .__code-6 {
+        animation: code 3.5s ease-in-out infinite 0.3s;
+        color: sugar.color(accent);
+    }
+    .__code-7 {
+        animation: code 2s ease-in-out infinite 0.6s;
+    }
+    .__code-8 {
+        animation: code 5.3s ease-in-out infinite;
+    }
+    .__code-9 {
+        animation: code 3.1s ease-in-out infinite;
+        color: sugar.color(complementary);
+    }
+    .__code-10 {
+        animation: code 3.1s ease-in-out infinite;
+    }
+
+    @keyframes code {
+        0% {
+            opacity: 0;
+        }
+        50% {
+            opacity: 1;
+        }
+        100% {
+            opacity: 0;
+        }
+    }
+
     .__footer {
         position: absolute;
         text-align: center;
@@ -398,31 +483,33 @@
         transform: translate(-50%, 50%);
         background: sugar.color(main, surface);
         border-radius: sugar.border.radius();
-        background: linear-gradient(
+        /* background: linear-gradient(
             90deg,
             sugar.color(main, --lighten 27 --alpha 0),
             sugar.color(main, --lighten 23),
             sugar.color(main, --lighten 27 --alpha 0)
-        );
+        ); */
         background: linear-gradient(
             90deg,
-            sugar.color(main, --lighten 48 --alpha 1),
-            sugar.color(main, --lighten 50),
-            sugar.color(main, --lighten 48 --alpha 1)
+            sugar.color(main, --lighten 48),
+            sugar.color(main, --lighten 49),
+            sugar.color(main, --lighten 48)
         );
-        background: sugar.color(main, --lighten 49);
+        /* background: sugar.color(main, --lighten 49); */
         /* box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05); */
         padding: sugar.padding(50);
         font-family: sugar.font.family(code);
         font-size: sugar.font.size(60);
         user-select: none;
+        /* mask-image: radial-gradient(ellipse at top, black, transparent),
+            radial-gradient(ellipse at bottom, black, transparent); */
 
         @sugar.theme.when (dark) {
             text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
             background: linear-gradient(
                 90deg,
                 sugar.color(main, --darken 27 --alpha 0),
-                sugar.color(main, --darken 23),
+                sugar.color(main, --darken 33),
                 sugar.color(main, --darken 27 --alpha 0)
             );
             box-shadow: none;

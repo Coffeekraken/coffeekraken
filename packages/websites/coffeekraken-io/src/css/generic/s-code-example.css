@@ -9,7 +9,7 @@ s-code-example {
     } */
 }
 
-.s-tabs {
+.s-code-example__tabs {
     margin-bottom: calc(sugar.margin(20) * -1);
     margin-left: calc(sugar.margin(20));
     position: relative;
@@ -19,4 +19,17 @@ s-code-example {
     color: sugar.color(current, text);
     position: relative;
     top: calc(sugar.margin(10) * -1) !important;
+}
+
+.s-code-example-loader {
+    background: sugar.color(main, --lighten 46);
+    border-radius: sugar.border.radius();
+    padding: sugar.padding(30);
+    @sugar.depth (100);
+    text-align: center;
+    /* mask-image: radial-gradient(ellipse at bottom, black, transparent); */
+
+    @sugar.theme.when dark {
+        background: sugar.color(main, surface);
+    }
 }

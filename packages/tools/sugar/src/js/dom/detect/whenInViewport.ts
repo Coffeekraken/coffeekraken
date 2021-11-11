@@ -40,9 +40,12 @@ export interface IWhenInViewportSettings {
     offset: number;
 }
 
-function whenInViewport(elm: HTMLElement, settings: Partials<IWhenInViewportSettings> = {}) {
+function whenInViewport(
+    elm: HTMLElement,
+    settings: Partials<IWhenInViewportSettings> = {},
+) {
     settings = {
-        offset: 250,
+        offset: 10,
         ...settings,
     };
 

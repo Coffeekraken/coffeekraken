@@ -2,7 +2,7 @@
     <div class="s-layout:122:gutter-x:gutter-between">
 
         <div class="s-pb:100">
-            <h3 class="s-typo:h3 s-mbe:30">Built-in<br />development<br>stack</h3>
+            <h3 class="s-typo:h3 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
             <p class="s-typo:lead s-mbe:30">
                 Coffeekraken has a <span class="s-tc:accent">built-in development stack environment</span> that you can use
                 to:
@@ -22,7 +22,8 @@
 
         <div class="s-pb:100 s-vr">
             <img src="/src/img/features-development-logos.svg" class="s-mi:auto s-display:block" />
-            
+        
+
             <div class="s-mbs:50">
                 @include('generic.code.example', ['examples' => [
                     'bash' => '# Install sugar globally
@@ -56,21 +57,17 @@ sugar init --recipe riotComponent'
             <ul class="__recipes-grid">
                 <li>
                     <a href="/doc/recipes/built-in/default" title="">
-                        <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
-                            <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
-                                <i class="s-icon:brand-coffeekraken s-font:100 s-mbe:20"></i>
+                        <div class="icon-card s-color:accent">
+                                <i class="s-icon:brand-coffeekraken"></i>
                                 <p class="s-p">Default (generic)</p>
-                            </div>
                         </div>
                     </a>
                 </li>
                 <li>
                     <a href="/doc/recipes/built-in/litElement" title="">
-                        <div class="s-ratio:1 s-bg:complementary s-radius s-depth:50 s-position:relative">
-                            <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
-                                <i class="s-icon:brand-lit s-font:100 s-mbe:20"></i>
+                        <div class="icon-card s-color:complementary">
+                                <i class="s-icon:brand-lit"></i>
                                 <p class="s-p">LitElement</p>
-                            </div>
                         </div>
                     </a>
                 </li>

@@ -1,14 +1,15 @@
-import __SFeature from '@coffeekraken/s-feature';
+import __SFeature, { ISFeature } from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SParallaxFeatureInterface from './interface/SParallaxFeatureInterface';
 import __getTransformProperties from '@coffeekraken/sugar/js/dom/style/getTransformProperties';
 import * as __rematrix from 'rematrix';
+import __throttle from '@coffeekraken/sugar/shared/function/throttle';
 
 export interface ISParallaxFeatureProps {
     amount: number;
 }
 
-export default class SParallaxFeature extends __SFeature {
+export default class SParallaxFeature extends __SFeature implements ISFeature {
     _matrix;
     _originalTransform;
 
@@ -32,14 +33,15 @@ export default class SParallaxFeature extends __SFeature {
         this._originalTransform = transformStr;
     }
     mount() {
-        // document.addEventListener('touchmove', (e) => {
-        //     const percentage = this._getPositionPercentages(e);
-        //     this._setLayerTransform(percentage);
-        // });
+        const transformFn = __throttle((e) => {
+            if (!this.componentUtils.isInViewport) return;
 
-        document.addEventListener('mousemove', (e) => {
             const percentage = this._getPositionPercentages(e);
             this._setLayerTransform(percentage);
+        }, 100);
+
+        document.addEventListener('mousemove', (e) => {
+            transformFn(e);
         });
     }
 

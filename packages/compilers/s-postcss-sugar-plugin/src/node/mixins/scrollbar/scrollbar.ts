@@ -67,11 +67,11 @@ export default function ({
           height: ${finalParams.size};
       }
       &::-webkit-scrollbar-track {
-          background-color: sugar.color(${finalParams.color}, --darken 30);
+          background-color: ${finalParams.color};
           background: rgba(0,0,0,0);
       }
       &::-webkit-scrollbar-thumb {
-          background-color: sugar.color(${finalParams.color});
+          background-color: ${finalParams.color};
       }
   `);
 

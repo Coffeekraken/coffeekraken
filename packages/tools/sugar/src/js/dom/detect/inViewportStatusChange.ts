@@ -1,9 +1,9 @@
 // @ts-nocheck
 
 import __SPromise from '@coffeekraken/s-promise';
-import __isInViewport from '../isInViewport';
-import __whenInViewport from '../whenInViewport';
-import __whenOutOfViewport from '../whenOutOfViewport';
+import __isInViewport from '../is/inViewport';
+import __whenInViewport from './whenInViewport';
+import __whenOutOfViewport from './whenOutOfViewport';
 
 /**
  * @name      inViewportStatusChange
@@ -18,6 +18,9 @@ import __whenOutOfViewport from '../whenOutOfViewport';
  *
  * @param 		{HTMLElement} 						elm  		The element to monitor
  * @return 		{SPromise} 		                    The SPromise on wich you can register your callbacks. Available callbacks registration function are "enter" and "exit"
+ *
+ * @event       enter               Dispatched when the passed element enters the viewport
+ * @event       leave               Dispatched when the passed element leave the viewport
  *
  * @todo      interface
  * @todo      doc
@@ -34,38 +37,51 @@ import __whenOutOfViewport from '../whenOutOfViewport';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function inViewportStatusChange($elm) {
-  let isFinished = false;
+export interface IInViewportStatusChangeSettings {
+    offset: number;
+}
 
-  return new __SPromise(
-    ({ emit }) => {
-      function _whenIn() {
-        __whenInViewport($elm).then(() => {
-          if (isFinished) return;
-          emit('enter', $elm);
-          _whenOut();
-        });
-      }
-      function _whenOut() {
-        __whenOutOfViewport($elm).then(() => {
-          if (isFinished) return;
-          emit('exit', $elm);
-          _whenIn();
-        });
-      }
+function inViewportStatusChange(
+    $elm,
+    settings?: Partial<IInViewportStatusChangeSettings>,
+) {
+    let isFinished = false;
 
-      // if not in viewport at start
-      if (!__isInViewport($elm)) {
-        _whenOut();
-      } else {
-        _whenIn();
-      }
-    },
-    {
-      id: 'inViewportStatisChange'
-    }
-  ).on('finally', () => {
-    isFinished = true;
-  });
+    settings = {
+        offset: 10,
+        ...(settings ?? {}),
+    };
+
+    return new __SPromise(
+        async ({ emit }) => {
+            function _whenIn() {
+                if (isFinished) return;
+                __whenInViewport($elm, settings).then(() => {
+                    emit('enter', $elm);
+                    _whenOut();
+                });
+            }
+            function _whenOut() {
+                if (isFinished) return;
+                __whenOutOfViewport($elm, settings).then(() => {
+                    emit('leave', $elm);
+                    _whenIn();
+                });
+            }
+
+            if (await __isInViewport($elm, settings)) {
+                emit('enter', $elm);
+                _whenOut();
+            } else {
+                emit('leave', $elm);
+                _whenIn();
+            }
+        },
+        {
+            id: 'inViewportStatisChange',
+        },
+    ).on('finally', () => {
+        isFinished = true;
+    });
 }
 export default inViewportStatusChange;

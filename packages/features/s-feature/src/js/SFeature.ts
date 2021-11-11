@@ -55,7 +55,14 @@ export interface ISFeatureDefaultProps {
     mountWhen: 'directly' | 'inViewport';
 }
 
-export default class SFeature extends __SClass {
+export interface ISFeature {
+    name: string;
+    node: HTMLElement;
+    props: any;
+    componentUtils: __SComponentUtils;
+}
+
+export default class SFeature extends __SClass implements ISFeature {
     /**
      * @name            name
      * @type            String
@@ -192,10 +199,9 @@ export default class SFeature extends __SClass {
 
         (async () => {
             // @ts-ignore
-            const mountedCallback = await this.componentUtils.whenMountState();
+            await this.componentUtils.waitOnMountState();
             // @ts-ignore
             await this.mount?.();
-            mountedCallback();
         })();
     }
 

@@ -300,29 +300,17 @@ export default function (env, config) {
                 },
                 text: {
                     /**
-                     * @name          darken
+                     * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.text
                      * @type          Number
-                     * @default      15
+                     * @default      0
                      *
-                     * Specify the darken value for the "text" color variant
+                     * Specify the lighten value for the "text" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    darken: 15,
-                    /**
-                     * @name          desaturate
-                     * @namespace     config.themeLightBase.colorSchemas.default.text
-                     * @type          Number
-                     * @default      20
-                     *
-                     * Specify the desaturate value for the "text" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    desaturate: 20,
+                    lighten: 0,
                 },
                 placeholder: {
                     /**
@@ -355,42 +343,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.foreground
                      * @type          Number
-                     * @default      45
+                     * @default      50
                      *
                      * Specify the lighten value for the "foreground" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    darken: 45,
-                },
-                ui: {
-                    /**
-                     * @name          lighten
-                     * @namespace     config.themeLightBase.colorSchemas.default.ui
-                     * @type          Number
-                     * @default      50
-                     *
-                     * Specify the lighten value for the "ui" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
                     lighten: 50,
-                },
-                uiForeground: {
-                    /**
-                     * @name          darken
-                     * @namespace     config.themeLightBase.colorSchemas.default.uiForeground
-                     * @type          Number
-                     * @default      25
-                     *
-                     * Specify the darken value for the "uiForeground" color variant
-                     *
-                     * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    darken: 25,
                 },
                 background: {
                     /**
@@ -425,14 +385,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.surface
                      * @type          Number
-                     * @default      49
+                     * @default      48
                      *
                      * Specify the lighten value for the "surface" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    lighten: 49,
+                    lighten: 48,
                 },
                 surfaceForeground: {
                     /**
@@ -447,6 +407,34 @@ export default function (env, config) {
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     darken: 45,
+                },
+                ui: {
+                    /**
+                     * @name          lighten
+                     * @namespace     config.themeLightBase.colorSchemas.default.ui
+                     * @type          Number
+                     * @default      50
+                     *
+                     * Specify the lighten value for the "ui" color variant
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    lighten: 50,
+                },
+                uiForeground: {
+                    /**
+                     * @name          darken
+                     * @namespace     config.themeLightBase.colorSchemas.default.uiForeground
+                     * @type          Number
+                     * @default      25
+                     *
+                     * Specify the darken value for the "uiForeground" color variant
+                     *
+                     * @since       2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    darken: 25,
                 },
                 border: {
                     /**

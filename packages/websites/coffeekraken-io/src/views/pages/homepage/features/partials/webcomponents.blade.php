@@ -51,51 +51,41 @@ Something cool...
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/" title="">
-                    <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
-                        <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
-                            <i class="s-icon:autocomplete s-font:100 s-mbe:20"></i>
+                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                            <i class="s-icon:autocomplete"></i>
                             <p class="s-p">Filtrable Input</p>
-                        </div>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="s-ratio:1 s-bg:complementary s-radius s-depth:50 s-position:relative">
-                        <div class="s-text:center s-tc:complementary-foreground s-align:abs-center">
-                            <i class="s-icon:copy s-font:100 s-mbe:20"></i>
+                    <div class="icon-card s-color:complementary" style="background-image: url(/src/img/icon-card/test.gif);">
+                            <i class="s-icon:copy"></i>
                             <p class="s-p">Clipbord copy</p>
-                        </div>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="s-ratio:1 s-bg:accent s-radius s-depth:50 s-position:relative">
-                        <div class="s-text:center s-tc:accent-foreground s-align:abs-center">
-                            <i class="s-icon:range s-font:100 s-mbe:20"></i>
+                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                            <i class="s-icon:range"></i>
                             <p class="s-p">Range Input</p>
-                        </div>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="s-ratio:1 s-bg:complementary s-radius s-depth:50 s-position:relative">
-                        <div class="s-text:center s-tc:complementary-foreground s-align:abs-center">
-                            <i class="s-icon:code s-font:100 s-mbe:20"></i>
+                    <div class="icon-card s-color:complementary" style="background-image: url(/src/img/icon-card/test.gif);">
+                            <i class="s-icon:code"></i>
                             <p class="s-p">Code Example</p>
-                        </div>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card">
-                        <div>
-                            <i class="s-icon:datepicker s-font:100 s-mbe:20"></i>
+                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                            <i class="s-icon:datepicker"></i>
                             <p class="s-p">Date Picker</p>
-                        </div>
                     </div>
                 </a>
             </li>
@@ -103,8 +93,9 @@ Something cool...
 
         <div class="s-text:center">
             <p class="s-typo:lead s-mi:auto s-mbe:50">
-                These are just some of our webcomponents listed above.<br>
-                A lot of other components are and will be available throught time. Keep updated by joining us.
+                These are just some of our webcomponents.<br>
+                <span class="s-tc:accent">A lot of others</span> are and will be available throught time.<br />
+                <span class="s-tc:complementary">Keep updated by joining us</span>.
             </p>
             <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
                 Check out more of our webcomponents!

@@ -7,6 +7,7 @@
  * @platform          js
  * @platform          ts
  * @status        beta
+ * @async
  *
  * Check if the passed HTMLElement is in the viewport or not
  *
@@ -20,7 +21,7 @@
  *
  * @example  	js
  * import inViewport from '@coffeekraken/sugar/js/dom/is/inViewport'
- * if (inViewport(myCoolHTMLElement) {
+ * if (await inViewport(myCoolHTMLElement) {
  * 		// i'm in the viewport
  * }
  *
@@ -29,36 +30,63 @@
  */
 
 export interface IInViewport {
-  offset: number | Record<string, number>;
+    offset: number | Record<string, number>;
 }
 
-function inViewport(elm: HTMLElement, settings: Partial<IInViewport> = {}): boolean {
+function inViewport(
+    elm: HTMLElement,
+    settings: Partial<IInViewport> = {},
+): boolean {
+    return new Promise((resolve) => {
+        settings = {
+            offset: 10,
+            ...settings,
+        };
 
-  settings = {
-    offset: 50,
-    ...settings
-  };
+        // // handle offset
+        // let offsetTop = settings.offset;
+        // let offsetRight = settings.offset;
+        // let offsetBottom = settings.offset;
+        // let offsetLeft = settings.offset;
+        // if (typeof settings.offset === 'object') {
+        //   offsetTop = settings.offset.top || 0;
+        //   offsetRight = settings.offset.right || 0;
+        //   offsetBottom = settings.offset.bottom || 0;
+        //   offsetLeft = settings.offset.left || 0;
+        // }
+        // const containerHeight =
+        //   window.innerHeight || document.documentElement.clientHeight;
+        // const containerWidth =
+        //   window.innerWidth || document.documentElement.clientWidth;
+        // const rect = elm.getBoundingClientRect();
+        // const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
+        // const isBottomIn = rect.bottom - offsetTop >= 0;
+        // const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
+        // const isRightIn = rect.right - offsetLeft >= 0;
+        // return isTopIn && isBottomIn && isLeftIn && isRightIn;
 
-  // handle offset
-  let offsetTop = settings.offset;
-  let offsetRight = settings.offset;
-  let offsetBottom = settings.offset;
-  let offsetLeft = settings.offset;
-  if (typeof settings.offset === 'object') {
-    offsetTop = settings.offset.top || 0;
-    offsetRight = settings.offset.right || 0;
-    offsetBottom = settings.offset.bottom || 0;
-    offsetLeft = settings.offset.left || 0;
-  }
-  const containerHeight =
-    window.innerHeight || document.documentElement.clientHeight;
-  const containerWidth =
-    window.innerWidth || document.documentElement.clientWidth;
-  const rect = elm.getBoundingClientRect();
-  const isTopIn = rect.top - containerHeight - offsetBottom <= 0;
-  const isBottomIn = rect.bottom - offsetTop >= 0;
-  const isLeftIn = rect.left - containerWidth - offsetRight <= 0;
-  const isRightIn = rect.right - offsetLeft >= 0;
-  return isTopIn && isBottomIn && isLeftIn && isRightIn;
+        const observer = new IntersectionObserver(
+            (entries, observer) => {
+                if (!entries.length) return;
+                const entry = entries[0];
+                if (elm.tagName.toLowerCase() === 'ck-search') {
+                    console.log(entry.intersectionRatio);
+                }
+                if (entry.intersectionRatio > 0) {
+                    resolve(true);
+                } else {
+                    resolve(false);
+                }
+                observer.disconnect();
+            },
+            {
+                root: null, // viewport
+                rootMargin: `${settings.offset}px`,
+                threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
+            },
+        );
+
+        observer.observe(elm);
+    });
 }
 export default inViewport;

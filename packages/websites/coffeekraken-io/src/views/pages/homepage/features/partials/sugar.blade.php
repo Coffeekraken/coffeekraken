@@ -23,7 +23,7 @@
         </div>
     </div>
 
-    <div class="s-pt:100">
+    <div class="s-pbs:100">
 
         <h4 class="s-typo:h4">
             Some example of what <span class="s-tc:accent">Sugar</span> has to offer
@@ -45,7 +45,7 @@
                 </div>
             </div>
             <div>
-                <h5 class="s-typo:h5 s-mbe:30">
+                <h5 class="s-typo:h4 s-mbe:30">
                     A coherant <span class="s-tc:accent">CLI</span> with some cool features
                 </h5>
                 <p class="s-typo:p ">
@@ -58,7 +58,7 @@
 
         <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <h5 class="s-typo:h5 s-mbe:30">
+                <h5 class="s-typo:h4 s-mbe:30">
                     querySelector<span class="s-tc:accent">Live</span>
                 </h5>
                 <p class="s-typo:p ">
@@ -92,7 +92,7 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
                 </div>
             </div>
             <div>
-                <h5 class="s-typo:h5 s-mbe:30">
+                <h5 class="s-typo:h4 s-mbe:30">
                     md5/<span class="s-tc:accent">base64</span>/etc...
                 </h5>
                 <p class="s-typo:p ">
@@ -104,7 +104,7 @@ md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
 
         <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
             <div>
-                <h5 class="s-typo:h5 s-mbe:30">
+                <h5 class="s-typo:h4 s-mbe:30">
                     is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span class="s-tc:accent">PlainObject</span>, etc...)
                 </h5>
                 <p class="s-typo:p ">

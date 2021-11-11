@@ -12,6 +12,8 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SClass from '@coffeekraken/s-class';
+import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
+import __SPromise from '@coffeekraken/s-promise';
 
 export class SComponentDefaultInterface extends __SInterface {
     static get _definition() {
@@ -179,6 +181,21 @@ export default class SComponent extends __SClass {
     _whenMountedPromise;
 
     /**
+     * @name            isInViewport
+     * @type            Boolean
+     * @get
+     *
+     * true if the component is in the viewport, false if not
+     *
+     * @since   2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _isInViewport = false;
+    get isInViewport(): boolean {
+        return this._isInViewport;
+    }
+
+    /**
      * @name            constructor
      * @type            Function
      * @constructor
@@ -205,6 +222,15 @@ export default class SComponent extends __SClass {
         this.node = node;
         this._props = props;
 
+        // listen viewport status update
+        this.inViewportStatusChange
+            .on('enter', () => {
+                this._isInViewport = true;
+            })
+            .on('leave', () => {
+                this._isInViewport = false;
+            });
+
         // build the final interface class to apply on props
         let InterfaceToApply = class InlineSComponentUtilsInterface extends __SInterface {
             static definition = {};
@@ -223,31 +249,46 @@ export default class SComponent extends __SClass {
         this.injectStyle(styleStr ?? '');
 
         // waiting for mount state
-        this._whenMountedPromise = new Promise(async (resolveMounted) => {
-            this._whenMountPromise = new Promise(async (resolveMount) => {
-                // mount component when needed
-                switch (this.props.mountWhen) {
-                    case 'inViewport':
-                        (async () => {
-                            // @ts-ignore
-                            await __whenInViewport(this.node);
-                        })();
-                        break;
-                    case 'direct':
-                    case 'directly':
-                    default:
-                        break;
-                }
-                resolveMount(() => {
-                    this.state = 'mounted';
-                    resolveMounted();
-                });
-            });
+        this._whenMountPromise = new Promise((resolve) => {
+            switch (this.props.mountWhen) {
+                case 'inViewport':
+                    this.inViewportStatusChange.on('enter', () => {
+                        resolve();
+                    });
+                    break;
+                case 'directly':
+                default:
+                    resolve();
+                    break;
+            }
         });
     }
 
     /**
-     * @name           whenMountState
+     * @name           ()
+     * @type            Function
+     * @get
+     * @async
+     *
+     * Detect when the component enters and leave the viewport
+     *
+     * @return          {SPromise}          An SPromise instance through which you want subscribe for events like "enter" and "exit"
+     *
+     * @since           2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    _inViewportStatusChangePromise;
+    get inViewportStatusChange(): __SPromise<HTMLElement> {
+        if (this._inViewportStatusChangePromise)
+            return this._inViewportStatusChangePromise;
+        this._inViewportStatusChangePromise = __inViewportStatusChange(
+            this.node,
+        );
+        return this._inViewportStatusChangePromise;
+    }
+
+    /**
+     * @name           waitOnMountState
      * @type            Function
      * @async
      *
@@ -259,25 +300,8 @@ export default class SComponent extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    whenMountState(): Promise<any> {
+    waitOnMountState(): Promise<any> {
         return this._whenMountPromise;
-    }
-
-    /**
-     * @name           whenMountedState
-     * @type            Function
-     * @async
-     *
-     * This asynv method allows you to wait for the component (node) has reached
-     * his "mounted" state. This state depends fully on the "mountWhen" property
-     *
-     * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
-     *
-     * @since       2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
-    whenMountedState(): Promise<any> {
-        return this._whenMountedPromise;
     }
 
     /**

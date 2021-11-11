@@ -52,6 +52,11 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        darken: 10,
+                    },
+                },
             },
 
             accent: {
@@ -133,6 +138,11 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '...': '[extends.colorSchemas]',
+                default: {
+                    foreground: {
+                        darken: 20,
+                    },
+                },
             },
 
             warning: {

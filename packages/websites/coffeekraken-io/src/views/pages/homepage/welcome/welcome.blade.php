@@ -20,17 +20,29 @@
             </div>
         </div>
     </div> --}}
-    {{-- <div class="__code">
-        {{ \Sugar\string\generateRandomString(20000, '01 ') }}
-    </div> --}}
+    <div class="__code">
+        @php
+
+
+        
+            $code = \Sugar\string\generateRandomString(500, '01 ');
+            $str = str_split($code, 1);
+            $ar = [];
+            foreach($str as $char) {
+                $id = rand(0,10);
+                array_push($ar, '<span class="__code-'.$id.'">'.$char.'</span>');
+            }
+        @endphp
+        <span>{!! implode('',$ar) !!}</span>
+    </div>
 
     <div layer amount="0" class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-02">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-03">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div layer amount="0" class="__template __template-04">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div layer amount="0" class="__template __template-05">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div layer amount="0" class="__template __template-06">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
-    <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    {{-- <div layer amount="0" class="__template __template-04">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
+    {{-- <div layer amount="0" class="__template __template-05">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    <div layer amount="0" class="__template __template-06">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
+    {{-- <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     
     <div class="__illustration">

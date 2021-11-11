@@ -120,7 +120,10 @@ export default class SLitComponent extends LitElement {
         this.componentUtils = new __SComponentUtils(this, this.attributes, {
             componentUtils: {
                 ...(this._settings.componentUtils ?? {}),
-                style: this.constructor.styles?.cssText ?? this._settings.componentUtils?.style ?? '',
+                style:
+                    this.constructor.styles?.cssText ??
+                    this._settings.componentUtils?.style ??
+                    '',
             },
         });
         this.props = this.componentUtils.props;
@@ -162,9 +165,9 @@ export default class SLitComponent extends LitElement {
         };
 
         (async () => {
-            const mountedCallback = await this.componentUtils.whenMountState();
+            await this.componentUtils.waitOnMountState();
+            console.log('MOUNT', this);
             await this.mount();
-            mountedCallback();
         })();
     }
 
@@ -220,7 +223,10 @@ export default class SLitComponent extends LitElement {
         this._shouldUpdate = true;
         // @ts-ignore
         this.requestUpdate();
-        this.componentUtils.injectStyle(this.constructor.styles?.cssText ?? '', this.tagName);
+        this.componentUtils.injectStyle(
+            this.constructor.styles?.cssText ?? '',
+            this.tagName,
+        );
         await __wait();
         if (this.componentUtils.props.adoptStyle && this.shadowRoot) {
             await this.componentUtils.adoptStyleInShadowRoot(this.shadowRoot);

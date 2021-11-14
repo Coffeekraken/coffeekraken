@@ -6,7 +6,6 @@ import __offset from './offset';
  * @namespace            js.dom.offset
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Get the offset top and left of the passed element from his parent top left point
@@ -27,14 +26,14 @@ import __offset from './offset';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function offsetParent(elm: HTMLElement): {
-  top: number;
-  left: number;
+    top: number;
+    left: number;
 } {
-  const parentOffset = __offset(elm.parentNode);
-  const offset = __offset(elm);
-  return {
-    top: offset.top - parentOffset.top,
-    left: offset.left - parentOffset.left
-  };
+    const parentOffset = __offset(elm.parentNode);
+    const offset = __offset(elm);
+    return {
+        top: offset.top - parentOffset.top,
+        left: offset.left - parentOffset.left,
+    };
 }
 export default offsetParent;

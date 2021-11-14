@@ -10,14 +10,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.load
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        betas
  *
  * Detect when a background image has been loaded on an HTMLElement
  *
  * @feature       Promise based API
  * @feature       Callback support
- * 
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to detect the background image load
  * @param     {Function}      [cb=null]       A callback function if you prefer
  * @return    {SPromise}    A promise that will be resolved when the background image has been loaded
@@ -35,38 +34,44 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function backgroundImageLoaded($elm: HTMLElement, cb = null): __SPromise<HTMLElement> {
-  let isCancelled = false,
-    $img;
-  const promise = new __SPromise(
-    ({ resolve, reject, emit }) => {
-      // get the background-image property from computed style
-      const backgroundImage = __getStyleProperty($elm, 'background-image');
-      const matches = backgroundImage.match(/.*url\((.*)\).*/);
-      if (!matches || !matches[1]) {
-        reject('No background image url found...');
-        return;
-      }
-      // process url
-      const url = __unquote(matches[1]);
-      // make a new image with the image set
-      $img = new Image();
-      $img.src = url;
-      // return the promise of image loaded
-      __imageLoaded($img).then(() => {
-        if (!isCancelled) {
-          if (cb) cb($elm);
-          resolve($elm);
-        }
-      });
-    },
-    {
-      id: 'backgroundImageLoaded'
-    }
-  ).on('finally', () => {
-    isCancelled = true;
-  });
-  promise.__$img = $img;
-  return promise;
+function backgroundImageLoaded(
+    $elm: HTMLElement,
+    cb = null,
+): __SPromise<HTMLElement> {
+    let isCancelled = false,
+        $img;
+    const promise = new __SPromise(
+        ({ resolve, reject, emit }) => {
+            // get the background-image property from computed style
+            const backgroundImage = __getStyleProperty(
+                $elm,
+                'background-image',
+            );
+            const matches = backgroundImage.match(/.*url\((.*)\).*/);
+            if (!matches || !matches[1]) {
+                reject('No background image url found...');
+                return;
+            }
+            // process url
+            const url = __unquote(matches[1]);
+            // make a new image with the image set
+            $img = new Image();
+            $img.src = url;
+            // return the promise of image loaded
+            __imageLoaded($img).then(() => {
+                if (!isCancelled) {
+                    if (cb) cb($elm);
+                    resolve($elm);
+                }
+            });
+        },
+        {
+            id: 'backgroundImageLoaded',
+        },
+    ).on('finally', () => {
+        isCancelled = true;
+    });
+    promise.__$img = $img;
+    return promise;
 }
 export default backgroundImageLoaded;

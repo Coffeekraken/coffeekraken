@@ -4,7 +4,6 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @name                            childProcess
  * @namespace            node.is
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -29,4 +28,4 @@ function isChildProcess() {
     return (process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined);
 }
 export default isChildProcess;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLFdBQVcsTUFBTSx5QkFBeUIsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUNILFNBQVMsY0FBYztJQUNyQixJQUFJLFdBQVcsRUFBRTtRQUFFLE9BQU8sS0FBSyxDQUFDO0lBQ2hDLE9BQU8sQ0FDTCxPQUFPLENBQUMsSUFBSSxLQUFLLFNBQVMsSUFBSSxPQUFPLENBQUMsR0FBRyxDQUFDLGdCQUFnQixLQUFLLFNBQVMsQ0FDekUsQ0FBQztBQUNKLENBQUM7QUFDRCxlQUFlLGNBQWMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2hpbGRQcm9jZXNzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY2hpbGRQcm9jZXNzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFDZCxPQUFPLFdBQVcsTUFBTSx5QkFBeUIsQ0FBQztBQUVsRDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBQ0gsU0FBUyxjQUFjO0lBQ25CLElBQUksV0FBVyxFQUFFO1FBQUUsT0FBTyxLQUFLLENBQUM7SUFDaEMsT0FBTyxDQUNILE9BQU8sQ0FBQyxJQUFJLEtBQUssU0FBUyxJQUFJLE9BQU8sQ0FBQyxHQUFHLENBQUMsZ0JBQWdCLEtBQUssU0FBUyxDQUMzRSxDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUsY0FBYyxDQUFDIn0=

@@ -6,7 +6,6 @@ import __packageRootDir from '../path/packageRootDir';
  * @name          rootPath
  * @namespace            node.package
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -28,6 +27,6 @@ import __packageRootDir from '../path/packageRootDir';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function rootPath(from = process.cwd(), highest = false) {
-  return __packageRootDir(from, highest);
+    return __packageRootDir(from, highest);
 }
 export default rootPath;

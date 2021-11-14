@@ -10,7 +10,6 @@ import __deepMerge from 'deepmerge';
  * @namespace            js.object
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -114,7 +113,10 @@ export default function (...args) {
             const desc = Object.getOwnPropertyDescriptor(secondObj, key);
             if (desc.set || desc.get) {
                 Object.defineProperty(newObj, key, desc);
-            } else if (__isPlainObject(newObj[key]) && __isPlainObject(secondObj[key])) {
+            } else if (
+                __isPlainObject(newObj[key]) &&
+                __isPlainObject(secondObj[key])
+            ) {
                 newObj[key] = merge(newObj[key], secondObj[key]);
             } else {
                 newObj[key] = secondObj[key];

@@ -5,7 +5,6 @@
  * @namespace            js.object
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -30,14 +29,14 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function toQueryString(obj) {
-  return (
-    '?' +
-    Object.keys(obj)
-      .reduce(function (a, k) {
-        a.push(k + '=' + encodeURIComponent(obj[k]));
-        return a;
-      }, [])
-      .join('&')
-  );
+    return (
+        '?' +
+        Object.keys(obj)
+            .reduce(function (a, k) {
+                a.push(k + '=' + encodeURIComponent(obj[k]));
+                return a;
+            }, [])
+            .join('&')
+    );
 }
 export default toQueryString;

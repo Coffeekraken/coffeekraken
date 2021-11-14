@@ -5,7 +5,6 @@ import { v4 as __uuidv4 } from 'uuid';
  * @namespace            js.string
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,4 +28,4 @@ function uniqid() {
     return __uuidv4();
 }
 export default uniqid;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxNQUFNO0lBQ2IsT0FBTyxRQUFRLEVBQUUsQ0FBQztBQUNwQixDQUFDO0FBQ0QsZUFBZSxNQUFNLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidW5pcWlkLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidW5pcWlkLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLEVBQUUsRUFBRSxJQUFJLFFBQVEsRUFBRSxNQUFNLE1BQU0sQ0FBQztBQUN0Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLE1BQU07SUFDWCxPQUFPLFFBQVEsRUFBRSxDQUFDO0FBQ3RCLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9

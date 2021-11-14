@@ -6,7 +6,6 @@ import __offset from '../offset/offset';
  * @namespace       js.dom.distance
  * @type            Function
  * @platform          js
- * @platform          ts
  * @status          beta
  *
  * This function take an element as parameter and returns you to distance it has
@@ -22,11 +21,13 @@ import __offset from '../offset/offset';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function fromElementTopToViewportBottom(elm: HTMLElement): number {
-  const offsets = __offset(elm);
-  const scrollTop = __scrollTop();
-  // @ts-ignore
-  const viewportHeight = window.innerHeight;
-  const distance = viewportHeight - offsets.top + scrollTop;
-  return distance;
+export default function fromElementTopToViewportBottom(
+    elm: HTMLElement,
+): number {
+    const offsets = __offset(elm);
+    const scrollTop = __scrollTop();
+    // @ts-ignore
+    const viewportHeight = window.innerHeight;
+    const distance = viewportHeight - offsets.top + scrollTop;
+    return distance;
 }

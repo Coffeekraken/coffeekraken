@@ -3,7 +3,6 @@
  * @namespace            js.is
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -19,6 +18,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isTerminal() {
-  if (process && process.stdout && process.stdout.isTTY) return true;
-  return false;
+    if (process && process.stdout && process.stdout.isTTY) return true;
+    return false;
 }

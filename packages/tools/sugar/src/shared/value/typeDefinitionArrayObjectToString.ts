@@ -5,7 +5,6 @@
  * @namespace            js.value
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -42,20 +41,20 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function typeDefinitionArrayObjectToString(typeDefinitionArrayObj) {
-  const parts = [];
+    const parts = [];
 
-  if (!Array.isArray(typeDefinitionArrayObj))
-    typeDefinitionArrayObj = [typeDefinitionArrayObj];
+    if (!Array.isArray(typeDefinitionArrayObj))
+        typeDefinitionArrayObj = [typeDefinitionArrayObj];
 
-  typeDefinitionArrayObj.forEach((definition) => {
-    let part = definition.type;
-    if (definition.of) {
-      const ofString = typeDefinitionArrayObjectToString(definition.of);
-      part += `<${ofString}>`;
-    }
-    parts.push(part);
-  });
+    typeDefinitionArrayObj.forEach((definition) => {
+        let part = definition.type;
+        if (definition.of) {
+            const ofString = typeDefinitionArrayObjectToString(definition.of);
+            part += `<${ofString}>`;
+        }
+        parts.push(part);
+    });
 
-  return parts.join('|');
+    return parts.join('|');
 }
 export default typeDefinitionArrayObjectToString;

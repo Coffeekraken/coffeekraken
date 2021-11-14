@@ -3,7 +3,6 @@
  * @namespace            shared.array
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -21,5 +20,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function pickRandom(array: any[]): any {
-  return array[Math.round(Math.random() * (array.length - 1))];
+    return array[Math.round(Math.random() * (array.length - 1))];
 }

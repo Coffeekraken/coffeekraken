@@ -6,7 +6,6 @@
  * @type                    Class
  * @import              import SEvent from '@coffeekraken/sugar/js/event/SEvent';
  * @platform          js
- * @platform          ts
  * @status                  stable
  *
  * Proxy class to create custom events that can be dispatched
@@ -15,10 +14,10 @@
  * @setting         {Boolean}       [cancelable=true]           Specify if the event is cancelable or not
  * @setting         {Boolean}           [bubbles=true]          Specify if the event has to bubble or not
  * @setting             {Any}            [detail=null]           Specify some data to emit with the event
- * 
+ *
  * @param           {String}            name            The event name
  * @param           {ISEventSettings}           [settings={}]           Some settings to tweak the event behavior
- * 
+ *
  * @todo            interface
  * @todo            doc
  * @todo            tests

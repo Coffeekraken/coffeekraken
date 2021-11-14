@@ -1,8 +1,0 @@
-import * as __rematrix from 'rematrix';
-export default function getTransformProperties($elm) {
-    const style = getComputedStyle($elm);
-    const transform = style.transform || style.webkitTransform;
-    console.log(__rematrix.toString(__rematrix.fromString(transform)));
-    return {};
-}
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZ2V0VHJhbnNmb3JtUHJvcGVydGllcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImdldFRyYW5zZm9ybVByb3BlcnRpZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxLQUFLLFVBQVUsTUFBTSxVQUFVLENBQUM7QUFpQ3ZDLE1BQU0sQ0FBQyxPQUFPLFVBQVUsc0JBQXNCLENBQzFDLElBQUk7SUFFSixNQUFNLEtBQUssR0FBRyxnQkFBZ0IsQ0FBQyxJQUFJLENBQUMsQ0FBQztJQUNyQyxNQUFNLFNBQVMsR0FBRyxLQUFLLENBQUMsU0FBUyxJQUFJLEtBQUssQ0FBQyxlQUFlLENBQUM7SUFFM0QsT0FBTyxDQUFDLEdBQUcsQ0FBQyxVQUFVLENBQUMsUUFBUSxDQUFDLFVBQVUsQ0FBQyxVQUFVLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxDQUFDO0lBRW5FLE9BQU8sRUFBRSxDQUFDO0FBQ2QsQ0FBQyJ9

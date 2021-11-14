@@ -6,7 +6,6 @@ import __tcpPortUsed from 'tcp-port-used';
  * @namespace            node.http
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -28,13 +27,15 @@ import __tcpPortUsed from 'tcp-port-used';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function isPortFree(port) {
-  return new Promise((resolve) => {
-    __tcpPortUsed.check(port, '127.0.0.1')
-    .then(function(inUse) {
-      resolve(!inUse);
-    }, function() {
-        resolve(false);
+    return new Promise((resolve) => {
+        __tcpPortUsed.check(port, '127.0.0.1').then(
+            function (inUse) {
+                resolve(!inUse);
+            },
+            function () {
+                resolve(false);
+            },
+        );
     });
-  });
 }
 export default isPortFree;

@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Prepend an HTMLElement into another HTMLElement
@@ -26,11 +25,11 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function prependChild(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
-  if (!refElm.firstChild) {
-    refElm.appendChild(elm);
-  } else {
-    refElm.insertBefore(elm, refElm.firstChild);
-  }
-  return elm;
+    if (!refElm.firstChild) {
+        refElm.appendChild(elm);
+    } else {
+        refElm.insertBefore(elm, refElm.firstChild);
+    }
+    return elm;
 }
 export default prependChild;

@@ -9,7 +9,6 @@ import __unquote from '../string/unquote';
  * @namespace            js.cli
  * @type                        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *

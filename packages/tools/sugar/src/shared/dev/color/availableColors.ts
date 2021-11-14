@@ -5,7 +5,6 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @namespace            shared.dev.colors
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -20,33 +19,35 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IAvailableColorsSettings {
-  excludeBasics: boolean;
+    excludeBasics: boolean;
 }
 export default function availableColors(
-  settings?: Partial<IAvailableColorsSettings>
+    settings?: Partial<IAvailableColorsSettings>,
 ) {
-  settings = {
-    excludeBasics: false,
-    ...(settings ?? {})
-  };
+    settings = {
+        excludeBasics: false,
+        ...(settings ?? {}),
+    };
 
-  const _colors = [
-    'yellow',
-    'cyan',
-    'green',
-    'magenta',
-    'red',
-    'blue',
-    'grey',
-    'gray'
-  ];
+    const _colors = [
+        'yellow',
+        'cyan',
+        'green',
+        'magenta',
+        'red',
+        'blue',
+        'grey',
+        'gray',
+    ];
 
-  let colors = _colors;
-  if (settings.excludeBasics) {
-    colors = _colors.filter((c) => {
-      return c !== 'white' && c !== 'black' && c !== 'grey' && c !== 'gray';
-    });
-  }
+    let colors = _colors;
+    if (settings.excludeBasics) {
+        colors = _colors.filter((c) => {
+            return (
+                c !== 'white' && c !== 'black' && c !== 'grey' && c !== 'gray'
+            );
+        });
+    }
 
-  return colors;
+    return colors;
 }

@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,13 +27,13 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isJson(value) {
-  try {
-    const res = JSON.parse(value);
-    if (Object.keys(res).length) return true;
-    return false;
-  } catch (e) {
-    return false;
-  }
-  return true;
+    try {
+        const res = JSON.parse(value);
+        if (Object.keys(res).length) return true;
+        return false;
+    } catch (e) {
+        return false;
+    }
+    return true;
 }
 export default isJson;

@@ -11,7 +11,6 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Monitor when the passed element enter or exit the viewport

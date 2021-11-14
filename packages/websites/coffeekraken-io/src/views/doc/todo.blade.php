@@ -3,7 +3,7 @@
         <i class="s-icon:tasks s-tc:accent"></i>&nbsp;&nbsp;Todo
     </h4>
 
-    <ul class="s-list:ul:accent s-mbe:50">
+    <ul class="s-list:ul:accent s-mbe:100">
         @foreach ($block->todo as $todo)
             @php
                 $todoColor = 'warning';

@@ -7,7 +7,6 @@ import __sprintf from 'sprintf-js';
  * @namespace            js.string
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -32,6 +31,6 @@ import __sprintf from 'sprintf-js';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function _printf(...args) {
-  return __sprintf.sprintf.apply(null, args);
+    return __sprintf.sprintf.apply(null, args);
 }
 export default _printf;

@@ -10,7 +10,6 @@ import __stringify from '../../shared/json/stringify';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          stable
  *

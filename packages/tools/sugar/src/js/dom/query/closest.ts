@@ -7,7 +7,6 @@ import __matches from './matches';
  * @namespace            js.dom.query
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Go up the dom three to find the first element that matches the passed selector
@@ -34,17 +33,17 @@ import __matches from './matches';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function closest($elm: HTMLElement, selector: string | Function): HTMLElement {
-  const originalElm = $elm;
-  $elm = $elm.parentNode;
-  while ($elm && $elm != originalElm.ownerDocument) {
-    if (typeof selector === 'function') {
-      if (selector($elm)) return $elm;
-    } else if (typeof selector === 'string' && __matches($elm, selector)) {
-      return $elm;
-    }
+function closest($elm: HTMLElement, selector: string | Function): HTMLElement {
+    const originalElm = $elm;
     $elm = $elm.parentNode;
-  }
-  return null;
+    while ($elm && $elm != originalElm.ownerDocument) {
+        if (typeof selector === 'function') {
+            if (selector($elm)) return $elm;
+        } else if (typeof selector === 'string' && __matches($elm, selector)) {
+            return $elm;
+        }
+        $elm = $elm.parentNode;
+    }
+    return null;
 }
 export default closest;

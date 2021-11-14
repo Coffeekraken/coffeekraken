@@ -7,7 +7,6 @@ import ISLog from './ISLog';
  * @namespace       shared
  * @type            Class
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

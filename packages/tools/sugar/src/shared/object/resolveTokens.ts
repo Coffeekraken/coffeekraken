@@ -8,7 +8,6 @@ import __get from './get';
  * @namespace            js.object
  * @type                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -35,38 +34,41 @@ import __get from './get';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function resolveTokens(object) {
-  // proxy the object
-  const proxiedObject = __deepProxy(
-    object,
-    (getObj) => {
-      // get the raw value
-      const rawValue = __get(getObj.target, getObj.key);
-      // check if it's a string
-      if (typeof rawValue !== 'string') return rawValue;
-      // check if we have some tokens
-      const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
-      const tokens = rawValue.match(reg);
-      let finalValue = rawValue;
+    // proxy the object
+    const proxiedObject = __deepProxy(
+        object,
+        (getObj) => {
+            // get the raw value
+            const rawValue = __get(getObj.target, getObj.key);
+            // check if it's a string
+            if (typeof rawValue !== 'string') return rawValue;
+            // check if we have some tokens
+            const reg = /\{([a-zA-Z0-9\.-_]+)\}/g;
+            const tokens = rawValue.match(reg);
+            let finalValue = rawValue;
 
-      if (!tokens) return rawValue;
+            if (!tokens) return rawValue;
 
-      tokens.forEach((token) => {
-        finalValue = finalValue.replace(
-          token,
-          __get(
-            object,
-            token.replace('{', '').replace('}', '').replace('this.', '')
-          )
-        );
-      });
+            tokens.forEach((token) => {
+                finalValue = finalValue.replace(
+                    token,
+                    __get(
+                        object,
+                        token
+                            .replace('{', '')
+                            .replace('}', '')
+                            .replace('this.', ''),
+                    ),
+                );
+            });
 
-      return finalValue;
-    },
-    {
-      handleGet: true
-    }
-  );
-  // return the proxied object
-  return proxiedObject;
+            return finalValue;
+        },
+        {
+            handleGet: true,
+        },
+    );
+    // return the proxied object
+    return proxiedObject;
 }
 export default resolveTokens;

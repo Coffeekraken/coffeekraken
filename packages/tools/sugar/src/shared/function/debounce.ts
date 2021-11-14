@@ -5,7 +5,6 @@
  * @namespace            js.function
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -34,15 +33,15 @@
  */
 /*eslint-disable */
 function debounce(fn, delay) {
-  let timer = null;
-  return function () {
-    const context = this,
-      args = arguments;
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-      fn.apply(context, args);
-    }, delay);
-  };
+    let timer = null;
+    return function () {
+        const context = this,
+            args = arguments;
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            fn.apply(context, args);
+        }, delay);
+    };
 }
 /*eslint-enable */
 export default debounce;

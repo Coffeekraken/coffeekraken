@@ -168,7 +168,14 @@ export default class SCodeExample extends __SLitComponent {
                     break;
             }
 
-            let rawCode = __decodeHtmlEntities($template.innerHTML);
+            let rawCode = __decodeHtmlEntities(
+                $template.tagName.toLowerCase() === 'textarea' &&
+                    // @ts-ignore
+                    $template.value
+                    ? // @ts-ignore
+                      $template.value
+                    : $template.innerHTML,
+            );
             let formatedCode = rawCode;
             try {
                 formatedCode = __prettier.format(rawCode, {

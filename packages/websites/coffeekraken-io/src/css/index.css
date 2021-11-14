@@ -6,6 +6,9 @@
 
 @sugar.ui.filtrableinput.classes;
 
+html {
+    overflow-x: hidden;
+}
 body {
     display: block;
     @sugar.theme.when (dark) {
@@ -69,6 +72,7 @@ body {
   fs:src/icons/coffeekraken/html/code.svg
   fs:src/icons/coffeekraken/html/datepicker.svg
   fs:src/icons/coffeekraken/action/copy.svg
+  fs:src/icons/coffeekraken/action/refresh.svg
   fs:src/icons/coffeekraken/fs/folder-opened.svg
   fs:src/icons/coffeekraken/display/display-preview.svg
   fs:src/icons/read-direction.svg:support-rtl

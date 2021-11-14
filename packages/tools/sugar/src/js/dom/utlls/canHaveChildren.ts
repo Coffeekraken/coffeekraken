@@ -5,7 +5,6 @@
  * @namespace            js.dom.utils
  * @type          Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This function take as input either a tagName String like "img", "div", etc... or an HTMLElement node
@@ -27,16 +26,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function canHaveChildren(element: HTMLElement): boolean {
-  if (typeof element === 'string') {
-    element = document.createElement(element);
-  } else if (!(element instanceof HTMLElement)) {
-    throw `The element parameter can be either a string or an HTMLElement node reference... You've passed "${typeof element}"`;
-  }
-  if ('canHaveHTML' in element) return element.canHaveHTML;
-  const tagName = element.tagName;
-  const closeTag = `</${tagName}>`.toLowerCase();
-  if (element.outerHTML.slice((tagName.length + 3) * -1) === closeTag)
-    return true;
-  return false;
+    if (typeof element === 'string') {
+        element = document.createElement(element);
+    } else if (!(element instanceof HTMLElement)) {
+        throw `The element parameter can be either a string or an HTMLElement node reference... You've passed "${typeof element}"`;
+    }
+    if ('canHaveHTML' in element) return element.canHaveHTML;
+    const tagName = element.tagName;
+    const closeTag = `</${tagName}>`.toLowerCase();
+    if (element.outerHTML.slice((tagName.length + 3) * -1) === closeTag)
+        return true;
+    return false;
 }
 export default canHaveChildren;

@@ -4,7 +4,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Detect if is the samsung stock browser that is running the page
@@ -29,4 +28,4 @@ function isSamsumgBrowser(ua = navigator.userAgent) {
     return ua.match(/SamsungBrowser/i) !== null;
 }
 export default isSamsumgBrowser;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Ftc3VuZ0Jyb3dzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1zdW5nQnJvd3Nlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F5Qkc7QUFDSCxTQUFTLGdCQUFnQixDQUFDLEtBQWEsU0FBUyxDQUFDLFNBQVM7SUFDeEQsT0FBTyxFQUFFLENBQUMsS0FBSyxDQUFDLGlCQUFpQixDQUFDLEtBQUssSUFBSSxDQUFDO0FBQzlDLENBQUM7QUFDRCxlQUFlLGdCQUFnQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Ftc3VuZ0Jyb3dzZXIuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzYW1zdW5nQnJvd3Nlci50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXdCRztBQUNILFNBQVMsZ0JBQWdCLENBQUMsS0FBYSxTQUFTLENBQUMsU0FBUztJQUN0RCxPQUFPLEVBQUUsQ0FBQyxLQUFLLENBQUMsaUJBQWlCLENBQUMsS0FBSyxJQUFJLENBQUM7QUFDaEQsQ0FBQztBQUNELGVBQWUsZ0JBQWdCLENBQUMifQ==

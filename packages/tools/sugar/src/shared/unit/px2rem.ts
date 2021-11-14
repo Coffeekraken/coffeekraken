@@ -5,7 +5,6 @@
  * @namespace            js.unit
  * @type                    Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -26,9 +25,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function px2rem(px) {
-  return (
-    px /
-    parseFloat(getComputedStyle(document.documentElement).fontSize || '16px')
-  );
+    return (
+        px /
+        parseFloat(
+            getComputedStyle(document.documentElement).fontSize || '16px',
+        )
+    );
 }
 export default px2rem;

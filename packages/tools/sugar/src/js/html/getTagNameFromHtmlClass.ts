@@ -8,7 +8,6 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @namespace            js.html
  * @type            Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * This function simply return the tagname depending on the passed HTML class
@@ -29,12 +28,12 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getHtmlhtmlClassFromHtmlClass(htmlClass: HTMLElement): string {
-  if (!htmlClass) return false;
+    if (!htmlClass) return false;
 
-  for (const key in __htmlTagToHtmlClassMap) {
-    if (__htmlTagToHtmlClassMap[key] === htmlClass) return key;
-  }
+    for (const key in __htmlTagToHtmlClassMap) {
+        if (__htmlTagToHtmlClassMap[key] === htmlClass) return key;
+    }
 
-  return false;
+    return false;
 }
 export default getHtmlhtmlClassFromHtmlClass;

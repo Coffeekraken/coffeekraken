@@ -4,7 +4,7 @@
         <i class="s-icon:box s-tc:accent"></i>&nbsp;&nbsp;Features
     </h4>
 
-    <ul class="s-list:ul:accent s-mbe:50">
+    <ul class="s-list:ul:accent s-mbe:100">
         @foreach ($block->feature as $feature)
             <li>
                 {!! $feature !!}

@@ -11,7 +11,6 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @namespace            node.fs
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *

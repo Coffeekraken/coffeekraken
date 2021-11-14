@@ -10,7 +10,6 @@ import __isPlainObject from '../is/plainObject';
  * @namespace            js.cli
  * @type                  Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *

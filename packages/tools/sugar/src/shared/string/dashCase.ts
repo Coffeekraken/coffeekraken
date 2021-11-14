@@ -7,7 +7,6 @@ import { paramCase } from 'param-case';
  * @namespace            js.string
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,6 +28,6 @@ import { paramCase } from 'param-case';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function dashCase(text) {
-  return paramCase(text);
+    return paramCase(text);
 }
 export default dashCase;

@@ -5,7 +5,6 @@
  * @namespace            js.string
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,14 +27,14 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function rtrim(string, needle, trimResult = true) {
-  if (string.substr(needle.length * -1) === needle) {
-    if (trimResult) {
-      return string.substr(0, string.length - needle.length).trim();
-    } else {
-      return string.substr(0, string.length - needle.length);
+    if (string.substr(needle.length * -1) === needle) {
+        if (trimResult) {
+            return string.substr(0, string.length - needle.length).trim();
+        } else {
+            return string.substr(0, string.length - needle.length);
+        }
     }
-  }
-  // nothing to trim
-  return string;
+    // nothing to trim
+    return string;
 }
 export default rtrim;

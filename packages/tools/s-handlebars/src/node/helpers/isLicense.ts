@@ -10,7 +10,6 @@ const packageJson = __packageJsonSync();
  * @namespace       node.helpers
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

@@ -6,12 +6,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 
-import {
-    loadDocmap,
-    getCurrentVersion,
-    setState,
-    getState,
-} from '../state/state';
+import { loadDocmap } from '../state/state';
 
 let searchItems;
 __sFiltrableInputDefine(

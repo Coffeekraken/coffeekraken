@@ -7,7 +7,6 @@ import __isGlob from 'is-glob';
  * @namespace            js.is
  * @type                                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,5 +28,5 @@ import __isGlob from 'is-glob';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (string) => {
-  return __isGlob(string);
+    return __isGlob(string);
 };

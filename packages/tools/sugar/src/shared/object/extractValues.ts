@@ -5,7 +5,6 @@
  * @namespace            js.object
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -34,11 +33,11 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function extractValues(arrayOfObjects, keyName) {
-  const finalArray = [];
-  arrayOfObjects.forEach((object) => {
-    if (object[keyName] === undefined) return;
-    finalArray.push(object[keyName]);
-  });
-  return finalArray;
+    const finalArray = [];
+    arrayOfObjects.forEach((object) => {
+        if (object[keyName] === undefined) return;
+        finalArray.push(object[keyName]);
+    });
+    return finalArray;
 }
 export default extractValues;

@@ -8,7 +8,6 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @name                    isInPackage
  * @namespace            node.path
  * @type                    Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -27,31 +26,32 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isInPackage(name, from = process.cwd(), highest = false) {
-  const packageRootDir = __packageRootDir(from);
-  if (!packageRootDir) return false;
+    const packageRootDir = __packageRootDir(from);
+    if (!packageRootDir) return false;
 
-  if (!__fs.existsSync(`${packageRootDir}/package.json`)) return false;
-  const pkg = __readJsonSync(`${packageRootDir}/package.json`);
+    if (!__fs.existsSync(`${packageRootDir}/package.json`)) return false;
+    const pkg = __readJsonSync(`${packageRootDir}/package.json`);
 
-  let names = name;
-  if (typeof names === 'string') names = names.split(',').map((f) => f.trim());
-  for (let i = 0; i < names.length; i++) {
-    if (names[i] === pkg.name) {
-      return true;
+    let names = name;
+    if (typeof names === 'string')
+        names = names.split(',').map((f) => f.trim());
+    for (let i = 0; i < names.length; i++) {
+        if (names[i] === pkg.name) {
+            return true;
+        }
     }
-  }
 
-  const newPath = packageRootDir
-    .split('/')
-    .slice(0, -1)
-    // .filter((i) => i !== '')
-    .join('/');
+    const newPath = packageRootDir
+        .split('/')
+        .slice(0, -1)
+        // .filter((i) => i !== '')
+        .join('/');
 
-  // no package found... check if we need to check higher
-  if (highest) {
-    return isInPackage(name, newPath, highest);
-  }
+    // no package found... check if we need to check higher
+    if (highest) {
+        return isInPackage(name, newPath, highest);
+    }
 
-  return false;
+    return false;
 }
 export default isInPackage;

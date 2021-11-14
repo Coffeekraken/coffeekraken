@@ -5,7 +5,6 @@ import __stripAnsi from 'strip-ansi';
  * @namespace            js.string
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -23,5 +22,5 @@ import __stripAnsi from 'strip-ansi';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function stripAnsi(string) {
-  return __stripAnsi(string);
+    return __stripAnsi(string);
 }

@@ -3,23 +3,23 @@
         <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;Parameters
     </h4>
 
-    <ol>
+    <ol class="s-mbe:100">
     @foreach ($block->param as $param)
         <li class="s-font:40 s-mbe:30">
-            <header class="s-flex s-bg:ui-surface">
-                <div class="s-flex-item:grow s-tc:accent s-p:20">
+            <header class="s-flex:align-center s-bg:main-surface s-radius s-depth:100 s-mbe:20">
+                <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
                     {{ $param->name }}
                 </div>
-                <div class="s-typo:bold s-p:20">
-                    {{ implode(' | ', $param->type) }}
-                </div>
-                @if ($param->defaultStr)
-                    <div class="s-tc:info s-p:20">
-                        {{ $param->defaultStr }}
+                <div>
+                    <div class="s-typo:code">
+                        {{ $param->default == 1 ? 'true' : $param->default }}
                     </div>
-                @endif
+                </div>
+                <div class="s-typo:bold s-p:30 s-tc:info">
+                    {{ implode($param->type,'|') }}
+                </div>
             </header>
-            <p class="s-typo:p s-p:20">{!! $param->description !!}</p> 
+            <p class="s-typo:p s-pi:30 s-pb:20">{!! $param->description !!}</p> 
         </li>                                   
     @endforeach
     </ol>

@@ -9,7 +9,6 @@ import __replaceTags from '../html/replaceTags';
  * @namespace            js.console
  * @type                                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -25,18 +24,18 @@ import __replaceTags from '../html/replaceTags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function parseHtml(message) {
-  let isArray = false;
-  if (Array.isArray(message)) {
-    isArray = true;
-  } else {
-    message = [message];
-  }
+    let isArray = false;
+    if (Array.isArray(message)) {
+        isArray = true;
+    } else {
+        message = [message];
+    }
 
-  message = message.map((m) => {
-    return __replaceTags(m, __tagsMap);
-  });
+    message = message.map((m) => {
+        return __replaceTags(m, __tagsMap);
+    });
 
-  if (isArray) return message;
-  return message[0];
+    if (isArray) return message;
+    return message[0];
 }
 export default parseHtml;

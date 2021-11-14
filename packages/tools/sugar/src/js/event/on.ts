@@ -7,7 +7,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.event
  * @type          Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function
@@ -31,16 +30,16 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function on(name: string, callback: Function): void {
-  // check that the global SPromise exists
-  if (!window._sugarEventSPromise)
-    window._sugarEventSPromise = new __SPromise({
-      id: 'sugarEventSPromise'
-    });
-  // subscribe to the event
-  window._sugarEventSPromise.on(name, callback);
-  // return the unsubscribe function
-  return () => {
-    window._sugarEventSPromise.off(name, callback);
-  };
+    // check that the global SPromise exists
+    if (!window._sugarEventSPromise)
+        window._sugarEventSPromise = new __SPromise({
+            id: 'sugarEventSPromise',
+        });
+    // subscribe to the event
+    window._sugarEventSPromise.on(name, callback);
+    // return the unsubscribe function
+    return () => {
+        window._sugarEventSPromise.off(name, callback);
+    };
 }
 export default on;

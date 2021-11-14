@@ -9,7 +9,6 @@ import __stringify from '../../shared/json/stringify';
  * @name        writeJsonSync
  * @namespace            node.fs
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          stable
  *

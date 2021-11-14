@@ -5,7 +5,6 @@ import __get from '@coffeekraken/sugar/shared/object/get';
  * @namespace       node.helpers
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

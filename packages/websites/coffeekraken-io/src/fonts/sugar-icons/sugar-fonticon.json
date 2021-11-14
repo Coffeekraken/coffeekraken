@@ -21,10 +21,11 @@
     "lang-php": 61716,
     "lang-ts": 61717,
     "range": 61718,
-    "support-chromium": 61719,
-    "support-edge": 61720,
-    "support-firefox": 61721,
-    "support-rtl": 61722,
-    "support-safari": 61723,
-    "vue": 61724
+    "refresh": 61719,
+    "support-chromium": 61720,
+    "support-edge": 61721,
+    "support-firefox": 61722,
+    "support-rtl": 61723,
+    "support-safari": 61724,
+    "vue": 61725
 }

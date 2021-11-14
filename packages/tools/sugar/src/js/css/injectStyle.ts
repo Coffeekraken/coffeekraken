@@ -6,7 +6,6 @@ import __uniqid from '../../shared/string/uniqid';
  * @namespace            js.css
  * @type            Function
  * @platform          js
- * @platform          ts
  * @status              beta
  *
  * Inject a passed style string in the DOM
@@ -25,7 +24,11 @@ import __uniqid from '../../shared/string/uniqid';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function injectStyle(style: string, id: string = `injected-style-${__uniqid()}`, node = document.head) {
+function injectStyle(
+    style: string,
+    id: string = `injected-style-${__uniqid()}`,
+    node = document.head,
+) {
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
     $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);

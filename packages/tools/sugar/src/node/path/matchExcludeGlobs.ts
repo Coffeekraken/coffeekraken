@@ -7,7 +7,6 @@ import __excludeGlobs from './excludeGlobs';
  * @name                    matchExcludeGlobs
  * @namespace            node.path
  * @type                    Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -28,8 +27,8 @@ import __excludeGlobs from './excludeGlobs';
  */
 export default function matchExcludeGlobs(path: string): boolean {
     const excludeGlobs = __excludeGlobs();
-    for (let i=0; i<excludeGlobs.length; i++) {
+    for (let i = 0; i < excludeGlobs.length; i++) {
         if (__minimatch(excludeGlobs[i], path)) return true;
-    }  
+    }
     return false;
 }

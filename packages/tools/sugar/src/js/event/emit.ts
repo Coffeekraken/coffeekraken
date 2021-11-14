@@ -7,7 +7,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.event
  * @type          Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This function can ben used to emit an event globally.
@@ -28,12 +27,12 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function emit(name: string, value: any): void {
-  // check that the global SPromise exists
-  if (!window._sugarEventSPromise)
-    window._sugarEventSPromise = new __SPromise({
-      id: 'sugarEventSPromise'
-    });
-  // emit to the event
-  window._sugarEventSPromise.emit(name, value);
+    // check that the global SPromise exists
+    if (!window._sugarEventSPromise)
+        window._sugarEventSPromise = new __SPromise({
+            id: 'sugarEventSPromise',
+        });
+    // emit to the event
+    window._sugarEventSPromise.emit(name, value);
 }
 export default emit;

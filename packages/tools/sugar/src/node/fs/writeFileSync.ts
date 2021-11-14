@@ -8,7 +8,6 @@ import __fs from 'fs-extra';
  * @name        writeFileSync
  * @namespace            node.fs
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          stable
  *

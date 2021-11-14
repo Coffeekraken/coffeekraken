@@ -7,7 +7,6 @@ import __isValidPath from 'is-valid-path';
  * @namespace           node.is
  * @type                            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,9 +27,9 @@ import __isValidPath from 'is-valid-path';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function path(path) {
-  // check if the path is valid or not
-  if (!__isValidPath(path)) return false;
-  // otherwise, all is ok
-  return true;
+    // check if the path is valid or not
+    if (!__isValidPath(path)) return false;
+    // otherwise, all is ok
+    return true;
 }
 export default path;

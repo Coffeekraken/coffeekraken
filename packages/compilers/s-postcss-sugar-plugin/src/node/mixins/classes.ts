@@ -73,7 +73,6 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
             ctime: true,
         },
     });
-    console.log('CODE', codeHash);
 
     const hash = `classes-${__objectHash({
         css: cssArray,
@@ -86,7 +85,7 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
     if (cached) return cached;
 
     console.log(
-        '[postcss] Compiling the "<yellow>@sugar.classes;</yellow>" statement. This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....',
+        '<yellow>[postcss]</yellow> Compiling the "<yellow>@sugar.classes;</yellow>" statement. This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....',
     );
 
     // add caching statements

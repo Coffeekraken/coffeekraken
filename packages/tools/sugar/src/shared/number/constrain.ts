@@ -5,7 +5,6 @@
  * @namespace            js.number
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,8 +27,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function constrain(value, min = null, max = null) {
-  if (min !== null && value < min) value = min;
-  if (max !== null && value > max) value = max;
-  return value;
+    if (min !== null && value < min) value = min;
+    if (max !== null && value > max) value = max;
+    return value;
 }
 export default constrain;

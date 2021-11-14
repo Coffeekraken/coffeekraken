@@ -1,4 +1,7 @@
-import { ISMarkdownBuilderToken, ISMarkdownBuilderTokenExtractResult } from '../SMarkdownBuilder';
+import {
+    ISMarkdownBuilderToken,
+    ISMarkdownBuilderTokenExtractResult,
+} from '../SMarkdownBuilder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
@@ -6,37 +9,33 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @namespace       node.helpers
  * @type            Function
  * @platform        node
- * @platform        ts
  * @status          beta
- * 
+ *
  * This token allows to transform code like:
  * ```js
  * console.log('coco');
  * ```
  * Into an s-code-example tag when targeting html
- * 
+ *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export interface ISMarkdownBuilderShieldsioHandlebarsHelperSettings {
+export interface ISMarkdownBuilderShieldsioHandlebarsHelperSettings {}
 
-}
-
-export default function ShieldsioHandlebarsHelper(settings?: Partial<ISMarkdownBuilderShieldsioHandlebarsHelperSettings>): Function {
-
+export default function ShieldsioHandlebarsHelper(
+    settings?: Partial<ISMarkdownBuilderShieldsioHandlebarsHelperSettings>,
+): Function {
     const shieldsConfig = __SSugarConfig.get('shieldsio');
 
     return function (context, options) {
-
         const shields: string[] = [];
 
-         shieldsConfig.shields.forEach(shield => {
-            shields.push(`![${shield}](https://shields.io/${shieldsConfig.urls[shield]})`);
+        shieldsConfig.shields.forEach((shield) => {
+            shields.push(
+                `![${shield}](https://shields.io/${shieldsConfig.urls[shield]})`,
+            );
         });
 
-
         return shields.join(' ');
-
-    }
-
+    };
 }

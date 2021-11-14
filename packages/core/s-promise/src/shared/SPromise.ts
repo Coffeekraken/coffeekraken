@@ -14,7 +14,7 @@ import __treatAsValue, {
 
 /**
  * @name                  SPromise
- * @namespace           sugar.js.promise
+ * @namespace           shared
  * @type                  Class
  * @status                beta
  *

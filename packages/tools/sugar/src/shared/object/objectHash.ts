@@ -5,7 +5,6 @@ import __objectHash from 'object-hash';
  * @namespace       node.fs
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

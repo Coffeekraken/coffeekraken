@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Wrap the content of the passed `$parent` inside a the passed HTMLElement `$wrapper`
@@ -37,13 +36,13 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel@gmail.com)
  */
 function wrapInner($parent: HTMLElement, $wrapper: HTMLElement): HTMLElement {
-  if (typeof $wrapper === 'string') {
-    $wrapper = document.createElement($wrapper);
-  }
-  $parent.appendChild($wrapper);
-  while ($parent.firstChild !== $wrapper) {
-    $wrapper.appendChild($parent.firstChild);
-  }
-  return $parent;
+    if (typeof $wrapper === 'string') {
+        $wrapper = document.createElement($wrapper);
+    }
+    $parent.appendChild($wrapper);
+    while ($parent.firstChild !== $wrapper) {
+        $wrapper.appendChild($parent.firstChild);
+    }
+    return $parent;
 }
 export default wrapInner;

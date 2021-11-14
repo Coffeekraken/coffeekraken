@@ -9,7 +9,6 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @namespace            js.dom.scroll
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Scroll to the location hash if an hash is present.
@@ -19,7 +18,7 @@ import __deepMerge from '../../../shared/object/deepMerge';
  *
  * @param       {IScrollToLocationHashSettings}       [settings={}]       Some settings to tweak the scroll behavior
  * @return      {Promise}                     A promise resolved once the scroll has ended
- * 
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -33,33 +32,37 @@ import __deepMerge from '../../../shared/object/deepMerge';
  */
 
 export interface IScrollToLocationHashSettings {
-  scroll: Partial<IScrollToSettings>;
+    scroll: Partial<IScrollToSettings>;
 }
 
-function scrollToLocationHash(settings: Partial<IScrollToLocationHashSettings> = {}): Promise<any> {
+function scrollToLocationHash(
+    settings: Partial<IScrollToLocationHashSettings> = {},
+): Promise<any> {
+    settings = __deepMerge(
+        {
+            scroll: {},
+        },
+        settings,
+    );
 
-  settings = __deepMerge({
-    scroll: {}
-  }, settings);
+    // check if we have an hash in the url
+    const hash = document.location.hash;
 
-  // check if we have an hash in the url
-  const hash = document.location.hash;
+    // if not, do nothing
+    if (!hash) return;
 
-  // if not, do nothing
-  if (!hash) return;
+    // try to get the hash target in the page
+    const targetElm = document.querySelector(hash);
 
-  // try to get the hash target in the page
-  const targetElm = document.querySelector(hash);
+    // if no target found, do nothing
+    if (!targetElm) return;
 
-  // if no target found, do nothing
-  if (!targetElm) return;
+    // tell the browser that we handle the scroll restoration manually
+    if ('scrollRestoration' in history) {
+        history.scrollRestoration = 'manual';
+    }
 
-  // tell the browser that we handle the scroll restoration manually
-  if ('scrollRestoration' in history) {
-    history.scrollRestoration = 'manual';
-  }
-
-  // scroll to target
-  return __scrollTo(targetElm, settings.scroll);
+    // scroll to target
+    return __scrollTo(targetElm, settings.scroll);
 }
 export default scrollToLocationHash;

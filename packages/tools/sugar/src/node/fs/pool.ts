@@ -13,7 +13,6 @@ import __matchGlob from '../glob/matchGlob';
  * @namespace            node.fs
  * @type                Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *

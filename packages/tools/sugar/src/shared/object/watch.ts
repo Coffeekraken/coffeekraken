@@ -8,7 +8,6 @@ import __uniqid from '../string/uniqid';
  * @namespace            js.object
  * @type                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        wip
  *
@@ -35,7 +34,7 @@ import __uniqid from '../string/uniqid';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function watch(target, settings = {}) {
-  const watchedObj = new __SWatch(target, settings);
-  return watchedObj;
+    const watchedObj = new __SWatch(target, settings);
+    return watchedObj;
 }
 export default watch;

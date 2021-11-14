@@ -8,7 +8,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @namespace       node.fs
  * @type            Function
  * @platform        node
- * @platform        ts
  * @platform        node
  * @status          beta
  *

@@ -5,7 +5,6 @@
  * @namespace            js.dom.utils
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Exit the fullscreen mode
@@ -24,12 +23,12 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function exitFullscreen(): Promise<any> {
-  if (document.cancelFullScreen) {
-    return document.cancelFullScreen();
-  } else if (document.mozCancelFullScreen) {
-    return document.mozCancelFullScreen();
-  } else if (document.webkitCancelFullScreen) {
-    return document.webkitCancelFullScreen();
-  }
+    if (document.cancelFullScreen) {
+        return document.cancelFullScreen();
+    } else if (document.mozCancelFullScreen) {
+        return document.mozCancelFullScreen();
+    } else if (document.webkitCancelFullScreen) {
+        return document.webkitCancelFullScreen();
+    }
 }
 export default exitFullscreen;

@@ -4,7 +4,6 @@ import __tmpDir from 'temp-dir';
  * @name                            systemTmpDir
  * @namespace            node.path
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -27,4 +26,4 @@ export default function () {
     const tmpDir = __tmpDir;
     return tmpDir;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3lzdGVtVG1wRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3lzdGVtVG1wRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFHaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0FzQkc7QUFFSCxNQUFNLENBQUMsT0FBTztJQUNWLE1BQU0sTUFBTSxHQUFHLFFBQVEsQ0FBQztJQUN4QixPQUFPLE1BQU0sQ0FBQztBQUNsQixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3lzdGVtVG1wRGlyLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic3lzdGVtVG1wRGlyLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFHaEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXFCRztBQUVILE1BQU0sQ0FBQyxPQUFPO0lBQ1YsTUFBTSxNQUFNLEdBQUcsUUFBUSxDQUFDO0lBQ3hCLE9BQU8sTUFBTSxDQUFDO0FBQ2xCLENBQUMifQ==

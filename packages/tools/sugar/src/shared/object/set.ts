@@ -8,7 +8,6 @@ import __unquote from '../string/unquote';
  * @namespace            js.object
  * @type                                        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -31,35 +30,35 @@ import __unquote from '../string/unquote';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (obj, path, value, settings = {}) => {
-  settings = {
-    ...settings
-  };
+    settings = {
+        ...settings,
+    };
 
-  if (!path || path === '' || path === '.') {
-    obj = value;
-    return;
-  }
-
-  path = path.replace(/\[(\w+)\]/g, '.[$1]');
-  // path = path.replace(/^\./, '');
-  const a = __unquote(path)
-    .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
-    .map((p) => __unquote(p));
-  let o = obj;
-  while (a.length - 1) {
-    const n = a.shift();
-    if (!(n in o)) {
-      if (a[0].match(/^\[[0-9]+\]$/)) o[n] = [];
-      else o[n] = {};
+    if (!path || path === '' || path === '.') {
+        obj = value;
+        return;
     }
-    o = o[n];
-  }
 
-  if (a[0].match(/^\[[0-9]+\]$/)) {
-    if (!Array.isArray(o)) o = [];
-    o.push(value);
-  } else {
-    o[a[0]] = value;
-  }
-  return __get(obj, path);
+    path = path.replace(/\[(\w+)\]/g, '.[$1]');
+    // path = path.replace(/^\./, '');
+    const a = __unquote(path)
+        .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
+        .map((p) => __unquote(p));
+    let o = obj;
+    while (a.length - 1) {
+        const n = a.shift();
+        if (!(n in o)) {
+            if (a[0].match(/^\[[0-9]+\]$/)) o[n] = [];
+            else o[n] = {};
+        }
+        o = o[n];
+    }
+
+    if (a[0].match(/^\[[0-9]+\]$/)) {
+        if (!Array.isArray(o)) o = [];
+        o.push(value);
+    } else {
+        o[a[0]] = value;
+    }
+    return __get(obj, path);
 };

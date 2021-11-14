@@ -33,24 +33,4 @@
         top: 208px;
         /* max-height: calc(100vh - 140px); */
     }
-
-    .toolbar {
-        position: fixed;
-        bottom: 0;
-        top: auto;
-        width: 100%;
-
-        &:after {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            /* background: red; */
-            pointer-events: none;
-            @sugar.depth (10);
-            transform: rotate(180deg);
-        }
-    }
 }

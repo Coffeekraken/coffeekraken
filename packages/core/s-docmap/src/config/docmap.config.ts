@@ -158,6 +158,7 @@ export default function (env, config) {
                 'example',
                 'interface',
                 'styleguide',
+                'async',
                 'static',
                 'since',
                 'author',

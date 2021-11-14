@@ -6,7 +6,6 @@ import __filesize from 'filesize';
  * @name                                    formatFileSize
  * @namespace            node.fs
  * @type                                    Function
- * @platform        ts
  * @platform        node
  * @status          stable
  *

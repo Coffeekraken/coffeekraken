@@ -5,7 +5,6 @@
  * @namespace            js.object
  * @type                        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -33,19 +32,19 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function filter(object, filter) {
-  // init the new object to return
-  const result = {};
+    // init the new object to return
+    const result = {};
 
-  // loop on the object keys
-  Object.keys(object).forEach((propertyName) => {
-    // pass the property in the filter function
-    if (filter(propertyName, object[propertyName])) {
-      // add the property in the new object
-      result[propertyName] = object[propertyName];
-    }
-  });
+    // loop on the object keys
+    Object.keys(object).forEach((propertyName) => {
+        // pass the property in the filter function
+        if (filter(propertyName, object[propertyName])) {
+            // add the property in the new object
+            result[propertyName] = object[propertyName];
+        }
+    });
 
-  // return the filtered object
-  return result;
+    // return the filtered object
+    return result;
 }
 export default filter;

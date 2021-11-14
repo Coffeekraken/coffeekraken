@@ -7,7 +7,6 @@ import __globParent from 'glob-parent';
  * @namespace            js.glob
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *
@@ -29,7 +28,7 @@ import __globParent from 'glob-parent';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function extractNoneGlob(string) {
-  const parent = __globParent(string);
-  return parent;
+    const parent = __globParent(string);
+    return parent;
 }
 export default extractNoneGlob;

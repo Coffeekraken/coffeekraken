@@ -5,7 +5,6 @@ import __argsToString from './argsToString';
  * @namespace            js.cli
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              wip
  *

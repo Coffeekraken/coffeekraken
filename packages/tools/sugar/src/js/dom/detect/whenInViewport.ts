@@ -8,7 +8,6 @@ import __whenVisible from './whenVisible';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Monitor an HTMLElement to be notified when it is in the viewport

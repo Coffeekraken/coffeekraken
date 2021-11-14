@@ -4,7 +4,6 @@
  * @namespace            js.dom.distance
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        stable
  *
  * Get the amount of scroll left
@@ -21,7 +20,7 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivier.bossel@gmail.com)
  */
 function scrollLeft() {
-    return window.pageXOffset || document.scrollLeft || document.body.scrollLeft;
+    return (window.pageXOffset || document.scrollLeft || document.body.scrollLeft);
 }
 export default scrollLeft;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsTGVmdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNjcm9sbExlZnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW9CRztBQUNILFNBQVMsVUFBVTtJQUNqQixPQUFPLE1BQU0sQ0FBQyxXQUFXLElBQUksUUFBUSxDQUFDLFVBQVUsSUFBSSxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQztBQUMvRSxDQUFDO0FBQ0QsZUFBZSxVQUFVLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsTGVmdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInNjcm9sbExlZnQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBbUJHO0FBQ0gsU0FBUyxVQUFVO0lBQ2YsT0FBTyxDQUNILE1BQU0sQ0FBQyxXQUFXLElBQUksUUFBUSxDQUFDLFVBQVUsSUFBSSxRQUFRLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FDeEUsQ0FBQztBQUNOLENBQUM7QUFDRCxlQUFlLFVBQVUsQ0FBQyJ9

@@ -9,7 +9,6 @@ import deepMerge from '../../shared/object/deepMerge';
  * @namespace            js.feature
  * @type      Feature
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Add support for the `lazy-src` attribute on `img` elements.
@@ -35,20 +34,22 @@ import deepMerge from '../../shared/object/deepMerge';
  */
 
 export interface IImagesLazySrcAttributeSettings {
-  offset: number;
+    offset: number;
 }
 
-function imagesLazySrcAttribute(settings: Partial<IImagesLazySrcAttributeSettings> = {}): void {
-  settings = deepMerge(
-    {
-      offset: 50
-    },
-    settings
-  );
-  querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
-    whenInViewport($imgElm, settings.offset).then(() => {
-      $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
+function imagesLazySrcAttribute(
+    settings: Partial<IImagesLazySrcAttributeSettings> = {},
+): void {
+    settings = deepMerge(
+        {
+            offset: 50,
+        },
+        settings,
+    );
+    querySelectorLive('img[lazy-src]:not([is])', ($imgElm) => {
+        whenInViewport($imgElm, settings.offset).then(() => {
+            $imgElm.setAttribute('src', $imgElm.getAttribute('lazy-src'));
+        });
     });
-  });
 }
 export default imagesLazySrcAttribute;

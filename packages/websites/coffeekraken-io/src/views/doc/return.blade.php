@@ -3,16 +3,21 @@
         <i class="s-icon:return s-tc:accent"></i>&nbsp;&nbsp;Return
     </h4>
 
-    <header class="s-flex s-bg:ui-surface">
-        <div class="s-typo:bold s-p:20">
-            {{ implode(' | ', $block->return->type) }}
+    <header class="s-flex s-bg:main-surface s-radius s-depth:100 s-mbe:20">
+        <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
+           {!! $block->return->description !!}
         </div>
-        @if ($block->return->defaultStr)
-            <div class="s-tc:info s-p:20">
-                {{ $block->return->defaultStr }}
-            </div>
-        @endif
+        <div class="s-typo:bold s-p:30 s-tc:info">
+            {{ implode($block->return->type,'|') }}
+        </div>
     </header>
-    <p class="s-typo:p s-p:20">{!! $block->return->description !!}</p> 
+    @if ($block->return->default != null)
+        <div class="s-pi:30 s-mbs:40 s-mbe:20">
+            <div class="s-typo:code">
+                {{ $block->return->default }}
+            </div>
+        </div>
+    @endif
+    <p class="s-mbe:100"></p>
 
 @endif

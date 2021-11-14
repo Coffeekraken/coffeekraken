@@ -5,7 +5,6 @@ import __flatten from '../../shared/object/flatten';
  * @name            replacePackageJsonTokens
  * @namespace            node.path
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

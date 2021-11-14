@@ -7,7 +7,6 @@ import distanceBetween from './distanceBetween';
  * @namespace            js.geom.2d
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *
@@ -35,17 +34,17 @@ import distanceBetween from './distanceBetween';
  * @see    https://stackoverflow.com/questions/8515900/how-to-constrain-movement-within-the-area-of-a-circle
  */
 function circleConstrain(center, radius, point) {
-  const dist = distanceBetween(center, point);
-  if (dist <= radius) {
-    return point;
-  } else {
-    const x = point.x - center.x;
-    const y = point.y - center.y;
-    const radians = Math.atan2(y, x);
-    return {
-      x: Math.cos(radians) * radius + center.x,
-      y: Math.sin(radians) * radius + center.y
-    };
-  }
+    const dist = distanceBetween(center, point);
+    if (dist <= radius) {
+        return point;
+    } else {
+        const x = point.x - center.x;
+        const y = point.y - center.y;
+        const radians = Math.atan2(y, x);
+        return {
+            x: Math.cos(radians) * radius + center.x,
+            y: Math.sin(radians) * radius + center.y,
+        };
+    }
 }
 export default circleConstrain;

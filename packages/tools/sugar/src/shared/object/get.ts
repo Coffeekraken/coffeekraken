@@ -8,7 +8,6 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @namespace            js.object
  * @type                          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -49,7 +48,9 @@ function get(obj, path, settings = {}) {
             const before = parts.slice(0, i);
             const after = parts.slice(i + 1);
             potentialPaths.push([...before, ...after].join('.'));
-            potentialPaths.push([...before, ...after.filter((a) => !a.match(/\?$/))].join('.'));
+            potentialPaths.push(
+                [...before, ...after.filter((a) => !a.match(/\?$/))].join('.'),
+            );
         }
     }
 
@@ -68,7 +69,9 @@ function __get(obj, path, settings = {}) {
     };
     if (obj[path] !== undefined) return obj[path];
     if (!path || path === '' || path === '.') return obj;
-    const a = path.split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm).map((p) => __unquote(p));
+    const a = path
+        .split(/(?!\B"[^"]*)\.(?![^"]*"\B)/gm)
+        .map((p) => __unquote(p));
     let o = obj;
 
     while (a.length) {

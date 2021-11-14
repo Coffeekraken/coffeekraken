@@ -5,7 +5,6 @@
  * @namespace           shared.dev.types
  * @type                    Array
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              wip
  *
@@ -20,14 +19,14 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default [
-  'Number',
-  'String',
-  'Symbol',
-  'Boolean',
-  'Null',
-  'Undefined',
-  'Object',
-  'Array',
-  'JSON',
-  'Function'
+    'Number',
+    'String',
+    'Symbol',
+    'Boolean',
+    'Null',
+    'Undefined',
+    'Object',
+    'Array',
+    'JSON',
+    'Function',
 ];

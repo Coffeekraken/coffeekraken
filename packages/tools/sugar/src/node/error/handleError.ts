@@ -8,7 +8,6 @@ import __toString from '../../shared/string/toString';
  * @name                    handleError
  * @namespace            node.error
  * @type                    Function
- * @platform        ts
  * @platform        node
  * @status          wip
  *
@@ -50,7 +49,8 @@ function handleError() {
 }
 
 function __handleChildProcessErrors(error) {
-    if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+    if (error.toString().includes(`Cannot read property 'itop' of null`))
+        return;
     if (error.instanceId) return;
     if (!error) return;
     const errorStringArray = [error.stack];
@@ -58,7 +58,8 @@ function __handleChildProcessErrors(error) {
 }
 
 function __handleMainProcessErrors(error) {
-    if (error.toString().includes(`Cannot read property 'itop' of null`)) return;
+    if (error.toString().includes(`Cannot read property 'itop' of null`))
+        return;
     if (error.instanceId) return;
 
     if (error instanceof Buffer) {
@@ -69,7 +70,11 @@ function __handleMainProcessErrors(error) {
         if (typeof error === 'string') {
             console.log(__parseHtml(error));
         } else if (typeof error === 'object' && error.name && error.message) {
-            console.log(__parseHtml([error.name, error.message, error.stack].join('\n\n')));
+            console.log(
+                __parseHtml(
+                    [error.name, error.message, error.stack].join('\n\n'),
+                ),
+            );
         } else {
             console.log(__parseHtml(__toString(error)));
         }

@@ -4,7 +4,6 @@
  * @namespace            js.unit
  * @type                    Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,4 +28,4 @@ function px2rem(px) {
         parseFloat(getComputedStyle(document.documentElement).fontSize || '16px'));
 }
 export default px2rem;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHgycmVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHgycmVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsU0FBUyxNQUFNLENBQUMsRUFBRTtJQUNoQixPQUFPLENBQ0wsRUFBRTtRQUNGLFVBQVUsQ0FBQyxnQkFBZ0IsQ0FBQyxRQUFRLENBQUMsZUFBZSxDQUFDLENBQUMsUUFBUSxJQUFJLE1BQU0sQ0FBQyxDQUMxRSxDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUsTUFBTSxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHgycmVtLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsicHgycmVtLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F1Qkc7QUFDSCxTQUFTLE1BQU0sQ0FBQyxFQUFFO0lBQ2QsT0FBTyxDQUNILEVBQUU7UUFDRixVQUFVLENBQ04sZ0JBQWdCLENBQUMsUUFBUSxDQUFDLGVBQWUsQ0FBQyxDQUFDLFFBQVEsSUFBSSxNQUFNLENBQ2hFLENBQ0osQ0FBQztBQUNOLENBQUM7QUFDRCxlQUFlLE1BQU0sQ0FBQyJ9

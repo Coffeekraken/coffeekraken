@@ -5,7 +5,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.event
  * @type          Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This function can ben used to emit an event globally.
@@ -29,10 +28,10 @@ function emit(name, value) {
     // check that the global SPromise exists
     if (!window._sugarEventSPromise)
         window._sugarEventSPromise = new __SPromise({
-            id: 'sugarEventSPromise'
+            id: 'sugarEventSPromise',
         });
     // emit to the event
     window._sugarEventSPromise.emit(name, value);
 }
 export default emit;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVtaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0F3Qkc7QUFDSCxTQUFTLElBQUksQ0FBQyxJQUFZLEVBQUUsS0FBVTtJQUNwQyx3Q0FBd0M7SUFDeEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxtQkFBbUI7UUFDN0IsTUFBTSxDQUFDLG1CQUFtQixHQUFHLElBQUksVUFBVSxDQUFDO1lBQzFDLEVBQUUsRUFBRSxvQkFBb0I7U0FDekIsQ0FBQyxDQUFDO0lBQ0wsb0JBQW9CO0lBQ3BCLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxJQUFJLENBQUMsSUFBSSxFQUFFLEtBQUssQ0FBQyxDQUFDO0FBQy9DLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZW1pdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImVtaXQudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sVUFBVSxNQUFNLHlCQUF5QixDQUFDO0FBRWpEOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXVCRztBQUNILFNBQVMsSUFBSSxDQUFDLElBQVksRUFBRSxLQUFVO0lBQ2xDLHdDQUF3QztJQUN4QyxJQUFJLENBQUMsTUFBTSxDQUFDLG1CQUFtQjtRQUMzQixNQUFNLENBQUMsbUJBQW1CLEdBQUcsSUFBSSxVQUFVLENBQUM7WUFDeEMsRUFBRSxFQUFFLG9CQUFvQjtTQUMzQixDQUFDLENBQUM7SUFDUCxvQkFBb0I7SUFDcEIsTUFBTSxDQUFDLG1CQUFtQixDQUFDLElBQUksQ0FBQyxJQUFJLEVBQUUsS0FBSyxDQUFDLENBQUM7QUFDakQsQ0FBQztBQUNELGVBQWUsSUFBSSxDQUFDIn0=

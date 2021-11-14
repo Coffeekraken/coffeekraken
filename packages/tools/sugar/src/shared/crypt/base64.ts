@@ -11,7 +11,6 @@ import __atob from 'atob';
  * @namespace            js.crypt
  * @type            Object
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              beta
  *
@@ -24,37 +23,37 @@ import __atob from 'atob';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
-  /**
-   * @name        encrypt
-   * @type        Function
-   *
-   * Encrypt
-   *
-   * @param       {String}       message        The message to encrypt
-   * @return      {String}                       The encrypted message
-   *
-   * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  encrypt: function (message) {
-    if (typeof message !== 'string') message = toString(message);
-    return __btoa(message);
-  },
+    /**
+     * @name        encrypt
+     * @type        Function
+     *
+     * Encrypt
+     *
+     * @param       {String}       message        The message to encrypt
+     * @return      {String}                       The encrypted message
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    encrypt: function (message) {
+        if (typeof message !== 'string') message = toString(message);
+        return __btoa(message);
+    },
 
-  /**
-   * @name        decrypt
-   * @type        Function
-   *
-   * Decrypt
-   *
-   * @param       {String}      message         The message to decrypt
-   * @return      {String}                      The decrypted message
-   *
-   * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-   */
-  decrypt: function (message) {
-    message = __atob(message);
-    return parse(message);
-  }
+    /**
+     * @name        decrypt
+     * @type        Function
+     *
+     * Decrypt
+     *
+     * @param       {String}      message         The message to decrypt
+     * @return      {String}                      The decrypted message
+     *
+     * @since         2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    decrypt: function (message) {
+        message = __atob(message);
+        return parse(message);
+    },
 };

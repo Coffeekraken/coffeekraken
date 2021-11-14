@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type                            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -25,9 +24,9 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function windows() {
-  if (process && process.platform) {
-    return process.platform === 'win32';
-  }
-  return navigator.platform.toUpperCase().indexOf('WIN') > -1;
+    if (process && process.platform) {
+        return process.platform === 'win32';
+    }
+    return navigator.platform.toUpperCase().indexOf('WIN') > -1;
 }
 export default windows;

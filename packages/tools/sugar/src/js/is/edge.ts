@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Detect if is edge
@@ -27,6 +26,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isEdge(ua: string = navigator.userAgent): boolean {
-  return ua.indexOf('Edg/') > -1;
+    return ua.indexOf('Edg/') > -1;
 }
 export default isEdge;

@@ -5,7 +5,6 @@
  * @namespace            js.easing
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -21,19 +20,19 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function availableEasingsArray() {
-  return [
-    'easeInOutCubic',
-    'easeInOutQuad',
-    'easeInOutQuart',
-    'easeInOutQuint',
-    'easeInCubic',
-    'easeInQuad',
-    'easeInQuart',
-    'easeInQuint',
-    'easeOutCubic',
-    'easeOutQuad',
-    'easeOutQuart',
-    'easeOutQuint'
-  ];
+    return [
+        'easeInOutCubic',
+        'easeInOutQuad',
+        'easeInOutQuart',
+        'easeInOutQuint',
+        'easeInCubic',
+        'easeInQuad',
+        'easeInQuart',
+        'easeInQuint',
+        'easeOutCubic',
+        'easeOutQuad',
+        'easeOutQuart',
+        'easeOutQuint',
+    ];
 }
 export default availableEasingsArray;

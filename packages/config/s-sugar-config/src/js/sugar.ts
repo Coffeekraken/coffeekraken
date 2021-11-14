@@ -5,7 +5,6 @@ import __get from '@coffeekraken/sugar/shared/object/get';
  * @namespace           js
  * @type                Class
  * @platform            js
- * @platform            ts
  * @status              beta
  *
  * This class allows you to access your sugar configurations that are

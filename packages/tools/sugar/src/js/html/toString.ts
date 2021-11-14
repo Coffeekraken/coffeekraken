@@ -5,7 +5,6 @@
  * @namespace            js.html
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Return the string version of a dom node or the dom node and his children
@@ -27,11 +26,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function toStringFn(html: HTMLElement, deep: boolean = true): string {
-  if (document !== undefined && document.createElement !== undefined) {
-    const cont = document.createElement('div');
-    cont.appendChild(html.cloneNode(deep));
-    return cont.innerHTML;
-  }
-  return html;
+    if (document !== undefined && document.createElement !== undefined) {
+        const cont = document.createElement('div');
+        cont.appendChild(html.cloneNode(deep));
+        return cont.innerHTML;
+    }
+    return html;
 }
 export default toStringFn;

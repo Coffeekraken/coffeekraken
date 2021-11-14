@@ -5,7 +5,6 @@
  * @namespace            js.dom.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  * @async
  *

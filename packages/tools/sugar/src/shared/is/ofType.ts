@@ -7,7 +7,6 @@ import __SType from '@coffeekraken/s-type';
  * @namespace            js.is
  * @type              Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -36,12 +35,12 @@ import __SType from '@coffeekraken/s-type';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ofType(value, typeString, settings = {}) {
-  settings = {
-    verbose: false,
-    ...settings
-  };
-  const typeInstance = new __SType(typeString, settings);
-  const res: boolean = typeInstance.is(value);
-  return res;
+    settings = {
+        verbose: false,
+        ...settings,
+    };
+    const typeInstance = new __SType(typeString, settings);
+    const res: boolean = typeInstance.is(value);
+    return res;
 }
 export default ofType;

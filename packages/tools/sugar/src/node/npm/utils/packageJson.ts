@@ -7,7 +7,6 @@ import __fs from 'fs';
  * @name                packageJson
  * @namespace            node.npm.utils
  * @type                Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -26,30 +25,30 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 interface IPackageJsonSettings {
-  rootDir: string;
+    rootDir: string;
 }
 
 export default function packageJson(
-  name: string,
-  settings?: Partial<IPackageJsonSettings>
+    name: string,
+    settings?: Partial<IPackageJsonSettings>,
 ): any {
-  const set = <IPackageJsonSettings>__deepMerge({
-    rootDir: __SugarConfig.get('npm.rootDir')
-  });
+    const set = <IPackageJsonSettings>__deepMerge({
+        rootDir: __SugarConfig.get('npm.rootDir'),
+    });
 
-  // check if the package exists
-  if (
-    !__fs.existsSync(`${set.rootDir}/${name}`) ||
-    !__fs.existsSync(`${set.rootDir}/${name}/package.json`)
-  ) {
-    throw new Error(
-      `packageJson: Sorry but the package named "<yellow>${name}</yellow>" from which you try to get the package.json content seems to not exists...`
+    // check if the package exists
+    if (
+        !__fs.existsSync(`${set.rootDir}/${name}`) ||
+        !__fs.existsSync(`${set.rootDir}/${name}/package.json`)
+    ) {
+        throw new Error(
+            `packageJson: Sorry but the package named "<yellow>${name}</yellow>" from which you try to get the package.json content seems to not exists...`,
+        );
+    }
+
+    // read the file
+    const json = JSON.parse(
+        __fs.readFileSync(`${set.rootDir}/${name}/package.json`, 'utf8'),
     );
-  }
-
-  // read the file
-  const json = JSON.parse(
-    __fs.readFileSync(`${set.rootDir}/${name}/package.json`, 'utf8')
-  );
-  return json;
+    return json;
 }

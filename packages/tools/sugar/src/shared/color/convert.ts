@@ -11,7 +11,6 @@ import __rgba2hex from './rgba2hex';
  * @namespace            js.color
  * @type                  Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *

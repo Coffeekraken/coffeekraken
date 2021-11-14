@@ -6,7 +6,6 @@ import __set from './set';
  * @namespace            js.object
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -36,11 +35,11 @@ import __set from './set';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function deepize(object) {
-  const finalObject = {};
-  for (const key in object) {
-    __set(finalObject, key, object[key]);
-  }
-  return finalObject;
+    const finalObject = {};
+    for (const key in object) {
+        __set(finalObject, key, object[key]);
+    }
+    return finalObject;
 }
 
 // console.log(

@@ -6,7 +6,6 @@ import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
  * @namespace       node.helpers
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

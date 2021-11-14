@@ -5,7 +5,6 @@
  * @namespace            js.dom.offset
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Get the offset top and left of the passed element from the document top left point
@@ -26,21 +25,21 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function offset(elm: HTMLElement): {
-  top: number;
-  left: number;
+    top: number;
+    left: number;
 } {
-  const box = elm.getBoundingClientRect(),
-    body = document.body,
-    docEl = document.documentElement,
-    scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop,
-    scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft,
-    clientTop = docEl.clientTop || body.clientTop || 0,
-    clientLeft = docEl.clientLeft || body.clientLeft || 0,
-    top = box.top + scrollTop - clientTop,
-    left = box.left + scrollLeft - clientLeft;
-  return {
-    top: Math.round(top),
-    left: Math.round(left)
-  };
+    const box = elm.getBoundingClientRect(),
+        body = document.body,
+        docEl = document.documentElement,
+        scrollTop = window.pageYOffset || docEl.scrollTop || body.scrollTop,
+        scrollLeft = window.pageXOffset || docEl.scrollLeft || body.scrollLeft,
+        clientTop = docEl.clientTop || body.clientTop || 0,
+        clientLeft = docEl.clientLeft || body.clientLeft || 0,
+        top = box.top + scrollTop - clientTop,
+        left = box.left + scrollLeft - clientLeft;
+    return {
+        top: Math.round(top),
+        left: Math.round(left),
+    };
 }
 export default offset;

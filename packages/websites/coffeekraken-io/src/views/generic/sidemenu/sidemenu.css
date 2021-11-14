@@ -2,6 +2,11 @@
     position: sticky;
     overflow: auto;
     top: 80px;
-    max-height: calc(100vh - 80px - 66px);
+    max-height: calc(100vh - 80px);
     @sugar.scrollbar ($color: sugar.color(main, --alpha 0.1));
+
+    [actual] {
+        font-weight: bold;
+        color: sugar.color(accent);
+    }
 }

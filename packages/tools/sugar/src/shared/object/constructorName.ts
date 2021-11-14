@@ -5,7 +5,6 @@
  * @namespace            js.object
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -30,6 +29,8 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function constructorName(obj) {
-  return obj.constructor && obj.constructor.name ? obj.constructor.name : null;
+    return obj.constructor && obj.constructor.name
+        ? obj.constructor.name
+        : null;
 }
 export default constructorName;

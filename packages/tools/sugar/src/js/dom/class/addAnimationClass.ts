@@ -6,7 +6,6 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @namespace            js.dom.class
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Add a class that trigger an animation and remove it at the end
@@ -29,13 +28,13 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function addAnimationClass($elm, cls) {
-  // make sure the cls argument is an Array
-  if (!Array.isArray(cls)) cls = [cls];
-  // add the class to the element
-  cls.forEach((_cls) => {
-    $elm.classList.add(_cls);
-  });
-  // remove the class at the end of the animation
-  return __removeClassesOnAnimationEnd($elm, cls);
+    // make sure the cls argument is an Array
+    if (!Array.isArray(cls)) cls = [cls];
+    // add the class to the element
+    cls.forEach((_cls) => {
+        $elm.classList.add(_cls);
+    });
+    // remove the class at the end of the animation
+    return __removeClassesOnAnimationEnd($elm, cls);
 }
 export default addAnimationClass;

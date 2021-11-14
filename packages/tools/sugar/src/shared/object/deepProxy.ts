@@ -11,7 +11,6 @@ import __deepMerge from '../object/deepMerge';
  * @namespace            js.object
  * @type                            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        wip
  *
@@ -52,157 +51,160 @@ import __deepMerge from '../object/deepMerge';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function deepProxy(object, handlerFn, settings = {}) {
-  const preproxy = new WeakMap();
-  let isRevoked = false;
-  settings = __deepMerge(
-    {
-      deep: true,
-      handleSet: true,
-      handleGet: false,
-      handleDelete: true
-    },
-    settings
-  );
+    const preproxy = new WeakMap();
+    let isRevoked = false;
+    settings = __deepMerge(
+        {
+            deep: true,
+            handleSet: true,
+            handleGet: false,
+            handleDelete: true,
+        },
+        settings,
+    );
 
-  function makeHandler(path) {
-    return {
-      set(target, key, value) {
-        if (isRevoked || !settings.handleSet) return true;
+    function makeHandler(path) {
+        return {
+            set(target, key, value) {
+                if (isRevoked || !settings.handleSet) return true;
 
-        if (settings.deep && typeof value === 'object') {
-          value = proxify(value, [...path, key]);
-        }
+                if (settings.deep && typeof value === 'object') {
+                    value = proxify(value, [...path, key]);
+                }
 
-        const oldValue = target[key];
+                const oldValue = target[key];
 
-        target[key] = value;
+                target[key] = value;
 
-        handlerFn({
-          object,
-          target,
-          key,
-          path: [...path, key].join('.'),
-          action: 'set',
-          fullAction: `Object.set`,
-          oldValue,
-          value
-        });
+                handlerFn({
+                    object,
+                    target,
+                    key,
+                    path: [...path, key].join('.'),
+                    action: 'set',
+                    fullAction: `Object.set`,
+                    oldValue,
+                    value,
+                });
 
-        return true;
-      },
-
-      get(target, key, receiver) {
-        if (Reflect.has(target, key)) {
-          if (!settings.handleGet) return target[key];
-
-          const value = handlerFn({
-            object,
-            target,
-            key,
-            path: [...path, key].join('.'),
-            action: 'get',
-            fullAction: 'Object.get'
-          });
-          if (key === 'revoke') return receiver.revoke;
-          if (value === undefined) return target[key];
-          return value;
-        }
-        return undefined;
-      },
-
-      deleteProperty(target, key) {
-        if (isRevoked || !settings.handleDelete) return true;
-
-        if (Reflect.has(target, key)) {
-          // unproxy(target, key);
-          const oldValue = target[key];
-          const deleted = Reflect.deleteProperty(target, key);
-          if (deleted) {
-            handlerFn({
-              object,
-              target,
-              key,
-              path: [...path, key].join('.'),
-              action: 'delete',
-              fullAction: 'Object.delete',
-              oldValue
-            });
-          }
-          return deleted;
-        }
-        return false;
-      }
-    };
-  }
-
-  function proxify(obj, path) {
-    if (obj === null) return obj;
-
-    if (settings.deep) {
-      for (const key of Object.keys(obj)) {
-        if (Array.isArray(obj[key])) {
-          obj[key] = __proxy(obj[key]);
-          obj[key].watch(
-            Object.getOwnPropertyNames(Array.prototype),
-            (watchObj) => {
-              handlerFn({
-                path: [...path, key].join('.'),
-                ...watchObj
-              });
-            }
-          );
-        } else if (typeof obj[key] === 'object') {
-          obj[key] = proxify(obj[key], [...path, key]);
-        }
-      }
-    }
-
-    const p = Proxy.revocable(obj, makeHandler(path));
-
-    // preproxy.set(p, obj);
-    const revokePropertyObj = {
-      writable: true,
-      configurable: false,
-      enumerable: true,
-      value: () => {
-        // make a shallow copy of the proxy object
-        let __copy = __clone(p.proxy, { deep: true });
-        // mark the proxy as revoked
-        isRevoked = true;
-        // sanitize the copy
-        __copy = __deepMap(__copy, ({ value, prop }) => {
-          if (prop === 'revoke' && typeof value === 'function') {
-            return -1;
-          }
-          return value;
-        });
-        // deep revoke the proxies
-        setTimeout(() => {
-          __deepMap(
-            p.proxy,
-            ({ value, prop }) => {
-              if (prop === 'revoke' && typeof value === 'function') {
-                value();
-              }
+                return true;
             },
-            {}
-          );
-          // revoke the proxy at first level
-          p.revoke();
-        });
-        // return the shallow copy
-        return __copy;
-      }
-    };
-    if (Array.isArray(p.proxy)) {
-      p.proxy.revoke = revokePropertyObj.value;
-    } else {
-      Object.defineProperties(p.proxy, {
-        revoke: revokePropertyObj
-      });
+
+            get(target, key, receiver) {
+                if (Reflect.has(target, key)) {
+                    if (!settings.handleGet) return target[key];
+
+                    const value = handlerFn({
+                        object,
+                        target,
+                        key,
+                        path: [...path, key].join('.'),
+                        action: 'get',
+                        fullAction: 'Object.get',
+                    });
+                    if (key === 'revoke') return receiver.revoke;
+                    if (value === undefined) return target[key];
+                    return value;
+                }
+                return undefined;
+            },
+
+            deleteProperty(target, key) {
+                if (isRevoked || !settings.handleDelete) return true;
+
+                if (Reflect.has(target, key)) {
+                    // unproxy(target, key);
+                    const oldValue = target[key];
+                    const deleted = Reflect.deleteProperty(target, key);
+                    if (deleted) {
+                        handlerFn({
+                            object,
+                            target,
+                            key,
+                            path: [...path, key].join('.'),
+                            action: 'delete',
+                            fullAction: 'Object.delete',
+                            oldValue,
+                        });
+                    }
+                    return deleted;
+                }
+                return false;
+            },
+        };
     }
-    return p.proxy;
-  }
-  return proxify(object, []);
+
+    function proxify(obj, path) {
+        if (obj === null) return obj;
+
+        if (settings.deep) {
+            for (const key of Object.keys(obj)) {
+                if (Array.isArray(obj[key])) {
+                    obj[key] = __proxy(obj[key]);
+                    obj[key].watch(
+                        Object.getOwnPropertyNames(Array.prototype),
+                        (watchObj) => {
+                            handlerFn({
+                                path: [...path, key].join('.'),
+                                ...watchObj,
+                            });
+                        },
+                    );
+                } else if (typeof obj[key] === 'object') {
+                    obj[key] = proxify(obj[key], [...path, key]);
+                }
+            }
+        }
+
+        const p = Proxy.revocable(obj, makeHandler(path));
+
+        // preproxy.set(p, obj);
+        const revokePropertyObj = {
+            writable: true,
+            configurable: false,
+            enumerable: true,
+            value: () => {
+                // make a shallow copy of the proxy object
+                let __copy = __clone(p.proxy, { deep: true });
+                // mark the proxy as revoked
+                isRevoked = true;
+                // sanitize the copy
+                __copy = __deepMap(__copy, ({ value, prop }) => {
+                    if (prop === 'revoke' && typeof value === 'function') {
+                        return -1;
+                    }
+                    return value;
+                });
+                // deep revoke the proxies
+                setTimeout(() => {
+                    __deepMap(
+                        p.proxy,
+                        ({ value, prop }) => {
+                            if (
+                                prop === 'revoke' &&
+                                typeof value === 'function'
+                            ) {
+                                value();
+                            }
+                        },
+                        {},
+                    );
+                    // revoke the proxy at first level
+                    p.revoke();
+                });
+                // return the shallow copy
+                return __copy;
+            },
+        };
+        if (Array.isArray(p.proxy)) {
+            p.proxy.revoke = revokePropertyObj.value;
+        } else {
+            Object.defineProperties(p.proxy, {
+                revoke: revokePropertyObj,
+            });
+        }
+        return p.proxy;
+    }
+    return proxify(object, []);
 }
 export default deepProxy;

@@ -8,7 +8,6 @@ import __filesize from 'filesize';
  * @namespace            node.fs
  * @type                            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *

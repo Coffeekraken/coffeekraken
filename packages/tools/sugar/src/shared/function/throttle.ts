@@ -5,7 +5,6 @@
  * @namespace            js.function
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -33,17 +32,17 @@
  */
 /*eslint-disable */
 function throttle(fn, threshhold) {
-  threshhold || (threshhold = 250);
-  let last;
-  return function () {
-    const context = this;
-    const now = new Date(),
-      args = arguments;
-    if (!last || last <= now - threshhold) {
-      last = now;
-      fn.apply(context, args);
-    }
-  };
+    threshhold || (threshhold = 250);
+    let last;
+    return function () {
+        const context = this;
+        const now = new Date(),
+            args = arguments;
+        if (!last || last <= now - threshhold) {
+            last = now;
+            fn.apply(context, args);
+        }
+    };
 }
 /*eslint-enable */
 export default throttle;

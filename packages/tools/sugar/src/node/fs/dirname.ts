@@ -6,7 +6,6 @@ import { fileURLToPath } from 'url';
  * @namespace       node.fs
  * @type            Function
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * Return the dirname the same as the __dirname cjs variable.

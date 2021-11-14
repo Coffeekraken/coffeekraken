@@ -5,7 +5,6 @@
  * @namespace            js.array
  * @type                              Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              beta
  *
@@ -29,16 +28,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 interface IAsyncForEach {
-  (value: any, index: number, array: any[]): void;
+    (value: any, index: number, array: any[]): void;
 }
 export default async function asyncForEach(
-  array: any[],
-  asyncFn: IAsyncForEach
+    array: any[],
+    asyncFn: IAsyncForEach,
 ): Promise<any> {
-  return new Promise(async ({ resolve, reject }) => {
-    for (let index = 0; index < array.length; index++) {
-      await asyncFn(array[index], index, array);
-    }
-    resolve();
-  });
+    return new Promise(async ({ resolve, reject }) => {
+        for (let index = 0; index < array.length; index++) {
+            await asyncFn(array[index], index, array);
+        }
+        resolve();
+    });
 }

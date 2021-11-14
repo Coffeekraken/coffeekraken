@@ -6,7 +6,6 @@ import __fs from 'fs-extra';
  * @name        copySync
  * @namespace            node.fs
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

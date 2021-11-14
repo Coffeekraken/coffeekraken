@@ -5,7 +5,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.event
  * @type          Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This function allows you to subscribe to global events triggered by the "sugar.js.event.dispatch" function
@@ -32,7 +31,7 @@ function on(name, callback) {
     // check that the global SPromise exists
     if (!window._sugarEventSPromise)
         window._sugarEventSPromise = new __SPromise({
-            id: 'sugarEventSPromise'
+            id: 'sugarEventSPromise',
         });
     // subscribe to the event
     window._sugarEventSPromise.on(name, callback);
@@ -42,4 +41,4 @@ function on(name, callback) {
     };
 }
 export default on;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQTJCRztBQUNILFNBQVMsRUFBRSxDQUFDLElBQVksRUFBRSxRQUFrQjtJQUMxQyx3Q0FBd0M7SUFDeEMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxtQkFBbUI7UUFDN0IsTUFBTSxDQUFDLG1CQUFtQixHQUFHLElBQUksVUFBVSxDQUFDO1lBQzFDLEVBQUUsRUFBRSxvQkFBb0I7U0FDekIsQ0FBQyxDQUFDO0lBQ0wseUJBQXlCO0lBQ3pCLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxFQUFFLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQzlDLGtDQUFrQztJQUNsQyxPQUFPLEdBQUcsRUFBRTtRQUNWLE1BQU0sQ0FBQyxtQkFBbUIsQ0FBQyxHQUFHLENBQUMsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO0lBQ2pELENBQUMsQ0FBQztBQUNKLENBQUM7QUFDRCxlQUFlLEVBQUUsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoib24uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJvbi50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFFakQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsU0FBUyxFQUFFLENBQUMsSUFBWSxFQUFFLFFBQWtCO0lBQ3hDLHdDQUF3QztJQUN4QyxJQUFJLENBQUMsTUFBTSxDQUFDLG1CQUFtQjtRQUMzQixNQUFNLENBQUMsbUJBQW1CLEdBQUcsSUFBSSxVQUFVLENBQUM7WUFDeEMsRUFBRSxFQUFFLG9CQUFvQjtTQUMzQixDQUFDLENBQUM7SUFDUCx5QkFBeUI7SUFDekIsTUFBTSxDQUFDLG1CQUFtQixDQUFDLEVBQUUsQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDOUMsa0NBQWtDO0lBQ2xDLE9BQU8sR0FBRyxFQUFFO1FBQ1IsTUFBTSxDQUFDLG1CQUFtQixDQUFDLEdBQUcsQ0FBQyxJQUFJLEVBQUUsUUFBUSxDQUFDLENBQUM7SUFDbkQsQ0FBQyxDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUsRUFBRSxDQUFDIn0=

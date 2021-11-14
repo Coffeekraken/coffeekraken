@@ -7,7 +7,6 @@ import __camelize from './camelize';
  * @namespace            js.string
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,6 +27,6 @@ import __camelize from './camelize';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function camelCase(text) {
-  return __camelize(text);
+    return __camelize(text);
 }
 export default camelCase;

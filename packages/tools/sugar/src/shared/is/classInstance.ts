@@ -3,7 +3,6 @@
  * @namespace            shared.is
  * @type         Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -26,11 +25,12 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function classInstance(object) {
-  if (!object) return false;
-  if (typeof object !== 'object') return false;
-  if (object.constructor && object.constructor.name === 'Object') return false;
-  if (Object.prototype.toString.call(object) === '[object Object]')
-    return false;
-  if (object.constructor === Object) return false;
-  return true;
+    if (!object) return false;
+    if (typeof object !== 'object') return false;
+    if (object.constructor && object.constructor.name === 'Object')
+        return false;
+    if (Object.prototype.toString.call(object) === '[object Object]')
+        return false;
+    if (object.constructor === Object) return false;
+    return true;
 }

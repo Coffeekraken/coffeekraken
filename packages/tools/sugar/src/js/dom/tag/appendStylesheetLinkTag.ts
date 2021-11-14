@@ -7,7 +7,6 @@ import linkLoaded from './linkLoaded';
  * @namespace            js.dom.tag
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Append a stylesheet link to the page head
@@ -27,11 +26,11 @@ import linkLoaded from './linkLoaded';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function appendStylesheetLink(href: string): Promise<HTMLLinkElement> {
-  const $link = document.createElement('link');
-  $link.type = 'text/css';
-  $link.rel = 'stylesheet';
-  $link.href = href;
-  document.head.appendChild($link);
-  return linkLoaded($link);
+    const $link = document.createElement('link');
+    $link.type = 'text/css';
+    $link.rel = 'stylesheet';
+    $link.href = href;
+    document.head.appendChild($link);
+    return linkLoaded($link);
 }
 export default appendStylesheetLink;

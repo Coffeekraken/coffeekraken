@@ -8,7 +8,6 @@ import * as __helpers from './helpers/index';
  * @namespace       node
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

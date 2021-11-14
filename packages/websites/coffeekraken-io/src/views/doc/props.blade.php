@@ -3,7 +3,7 @@
         <i class="s-icon:list-ul s-tc:accent"></i>&nbsp;&nbsp;properties
     </h4>
 
-    <ol>
+    <ol class="s-mbe:100">
     @foreach ($block->props as $prop)
         <li class="s-font:40 s-mbe:30">
             <header class="s-flex s-bg:main-surface s-radius">

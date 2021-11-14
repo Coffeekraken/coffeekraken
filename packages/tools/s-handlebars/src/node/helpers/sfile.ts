@@ -5,7 +5,6 @@ import __SFile from '@coffeekraken/s-file';
  * @namespace       node.helpers
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

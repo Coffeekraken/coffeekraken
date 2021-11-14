@@ -8,7 +8,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.load
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Detect when some images are loaded. This function take advantage of the SPromise class
@@ -17,7 +16,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *
  * @feature       Promise based API
  * @feature       Callback support
- * 
+ *
  * @param    {Array<HTMLImageElement>}    $imgs    An array (or nodeList) of HTMLImageElement to detect the load
  * @param     {Function}          [cb=null]       A callback function if you prefer
  * @return    {Promise}    A promise resolved when all images are loaded properly
@@ -39,27 +38,30 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function imagesLoaded($imgs: HTMLImageElement[], cb = null): __SPromise<HTMLImageElement[]> {
-  return new __SPromise(({ resolve, reject, emit }) => {
-    const promises = [],
-      loadedImages = [];
-    Array.from($imgs).forEach(($img) => {
-      promises.push(
-        __imageLoaded($img)
-          .then((_$img) => {
-            loadedImages.push(_$img);
-            emit('img.loaded', _$img);
-            if (loadedImages.length === $imgs.length) {
-              emit('loaded', loadedImages);
-              if (cb) cb(loadedImages);
-              resolve(loadedImages);
-            }
-          })
-          .catch((error) => {
-            reject(error);
-          })
-      );
+function imagesLoaded(
+    $imgs: HTMLImageElement[],
+    cb = null,
+): __SPromise<HTMLImageElement[]> {
+    return new __SPromise(({ resolve, reject, emit }) => {
+        const promises = [],
+            loadedImages = [];
+        Array.from($imgs).forEach(($img) => {
+            promises.push(
+                __imageLoaded($img)
+                    .then((_$img) => {
+                        loadedImages.push(_$img);
+                        emit('img.loaded', _$img);
+                        if (loadedImages.length === $imgs.length) {
+                            emit('loaded', loadedImages);
+                            if (cb) cb(loadedImages);
+                            resolve(loadedImages);
+                        }
+                    })
+                    .catch((error) => {
+                        reject(error);
+                    }),
+            );
+        });
     });
-  });
 }
 export default imagesLoaded;

@@ -1,7 +1,7 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __deepMap from '../../shared/object/deepMap';
 import __dependencyTree, {
-  IDependencyTreeExtendedSettings
+    IDependencyTreeExtendedSettings,
 } from './dependencyTree';
 
 /**
@@ -9,7 +9,6 @@ import __dependencyTree, {
  * @namespace            node.module
  * @type                Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -32,22 +31,22 @@ import __dependencyTree, {
  */
 
 export default function dependencyList(
-  filePath: string,
-  settings?: Partial<IDependencyTreeExtendedSettings>
+    filePath: string,
+    settings?: Partial<IDependencyTreeExtendedSettings>,
 ): any {
-  return new __SPromise(async ({ resolve, pipe }) => {
-    const tree = await pipe(__dependencyTree(filePath, settings));
-    const list: string[] = [];
-    __deepMap(
-      tree,
-      ({ prop, value }) => {
-        if (list.indexOf(prop) === -1) list.push(prop);
-        return value;
-      },
-      {
-        processObjects: true
-      }
-    );
-    resolve(list);
-  });
+    return new __SPromise(async ({ resolve, pipe }) => {
+        const tree = await pipe(__dependencyTree(filePath, settings));
+        const list: string[] = [];
+        __deepMap(
+            tree,
+            ({ prop, value }) => {
+                if (list.indexOf(prop) === -1) list.push(prop);
+                return value;
+            },
+            {
+                processObjects: true,
+            },
+        );
+        resolve(list);
+    });
 }

@@ -7,7 +7,6 @@ import __isPlain from '../is/plainObject';
  * @namespace            js.object
  * @type                              Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -85,9 +84,14 @@ function flatten(object, settings = {}) {
                     toReturn[`${key}[${x}]`] = flatObject[x];
                 } else {
                     const part = key;
-                    if (settings.quoteSeparatedProperties && part.includes(settings.separator)) {
+                    if (
+                        settings.quoteSeparatedProperties &&
+                        part.includes(settings.separator)
+                    ) {
                         toReturn[
-                            `${settings.quoteCharacter}${key}${settings.quoteCharacter}` + settings.separator + x
+                            `${settings.quoteCharacter}${key}${settings.quoteCharacter}` +
+                                settings.separator +
+                                x
                         ] = flatObject[x];
                     } else {
                         toReturn[key + settings.separator + x] = flatObject[x];

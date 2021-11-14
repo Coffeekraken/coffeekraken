@@ -5,7 +5,6 @@
  * @namespace            js.class
  * @type              Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *
@@ -32,16 +31,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getMethods(toCheck) {
-  let props = [];
-  let obj = toCheck;
-  do {
-    const _props = Object.getOwnPropertyNames(obj);
-    if (_props.indexOf('__defineGetter__') !== -1) continue;
-    props = props.concat(_props);
-  } while ((obj = Object.getPrototypeOf(obj)));
+    let props = [];
+    let obj = toCheck;
+    do {
+        const _props = Object.getOwnPropertyNames(obj);
+        if (_props.indexOf('__defineGetter__') !== -1) continue;
+        props = props.concat(_props);
+    } while ((obj = Object.getPrototypeOf(obj)));
 
-  return props.sort().filter(function (e, i, arr) {
-    if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
-  });
+    return props.sort().filter(function (e, i, arr) {
+        if (e != arr[i + 1] && typeof toCheck[e] == 'function') return true;
+    });
 }
 export default getMethods;

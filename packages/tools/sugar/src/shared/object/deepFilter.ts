@@ -6,7 +6,6 @@ import __isPlainObject from '../is/plainObject';
  * @namespace            js.object
  * @type                        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -70,7 +69,11 @@ function processObj(object: any, filter: IDeepFilterFilter, settings): any {
         // true mean: we keep this totally
         if (res === true) {
             if (__isPlainObject(value)) {
-                (newObj[key] = settings.cloneFirst ? Object.assign({}, value) : value), filter, settings;
+                (newObj[key] = settings.cloneFirst
+                    ? Object.assign({}, value)
+                    : value),
+                    filter,
+                    settings;
             } else {
                 newObj[key] = value;
             }
@@ -92,11 +95,19 @@ function processObj(object: any, filter: IDeepFilterFilter, settings): any {
     return newObj;
 }
 
-function deepFilter(object: any, filter: IDeepFilterFilter, settings?: Partial<IDeepFilterSettings>) {
+function deepFilter(
+    object: any,
+    filter: IDeepFilterFilter,
+    settings?: Partial<IDeepFilterSettings>,
+) {
     settings = {
         cloneFirst: true,
         ...(settings ?? {}),
     };
-    return processObj(settings.cloneFirst ? Object.assign({}, object) : object, filter, settings);
+    return processObj(
+        settings.cloneFirst ? Object.assign({}, object) : object,
+        filter,
+        settings,
+    );
 }
 export default deepFilter;

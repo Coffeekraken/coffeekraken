@@ -7,7 +7,6 @@ import __findPkgJson from 'find-package-json';
  * @name                    packageRoot
  * @namespace            node.path
  * @type                    Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -28,28 +27,28 @@ import __findPkgJson from 'find-package-json';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function packageRoot(from = process.cwd(), highest = false) {
-  if (__isFile(from)) from = from.split('/').slice(0, -1).join('/');
+    if (__isFile(from)) from = from.split('/').slice(0, -1).join('/');
 
-  const f = __findPkgJson(from);
-  let file = f.next();
+    const f = __findPkgJson(from);
+    let file = f.next();
 
-  if (!file || !file.filename) return false;
+    if (!file || !file.filename) return false;
 
-  if (!highest) {
-    const filename = file.filename || false;
-    if (!filename) return filename;
-    return filename.split('/').slice(0, -1).join('/');
-  }
+    if (!highest) {
+        const filename = file.filename || false;
+        if (!filename) return filename;
+        return filename.split('/').slice(0, -1).join('/');
+    }
 
-  let finalFile;
-  while (!file.done) {
-    if (file.done) break;
-    finalFile = file;
-    file = f.next();
-  }
-  if (finalFile.filename) {
-    return finalFile.filename.split('/').slice(0, -1).join('/');
-  }
-  return false;
+    let finalFile;
+    while (!file.done) {
+        if (file.done) break;
+        finalFile = file;
+        file = f.next();
+    }
+    if (finalFile.filename) {
+        return finalFile.filename.split('/').slice(0, -1).join('/');
+    }
+    return false;
 }
 export default packageRoot;

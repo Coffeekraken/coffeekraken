@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type        Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Empty a node by removing each childs one after the other
@@ -25,9 +24,9 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function emptyNode(node: HTMLElement): HTMLElement {
-  while (node.firstChild) {
-    node.removeChild(node.firstChild);
-  }
-  return node;
+    while (node.firstChild) {
+        node.removeChild(node.firstChild);
+    }
+    return node;
 }
 export default emptyNode;

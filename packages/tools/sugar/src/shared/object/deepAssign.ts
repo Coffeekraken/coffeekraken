@@ -6,7 +6,6 @@ import __clone from './clone';
  * @namespace            js.object
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -32,75 +31,75 @@ import __clone from './clone';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function deepAssign(referenceObj, ...objects) {
-  // objects.forEach((obj) => {
-  //   __deepAssign(referenceObj, obj);
-  // });
-  // return referenceObj;
+    // objects.forEach((obj) => {
+    //   __deepAssign(referenceObj, obj);
+    // });
+    // return referenceObj;
 
-  const settings = {
-    array: false,
-    object: true,
-    cloneChilds: true
-  };
+    const settings = {
+        array: false,
+        object: true,
+        cloneChilds: true,
+    };
 
-  function merge(refObj, mixWithObj) {
-    // const newObj = {};
-    // if (!refObj && mixWithObj) return mixWithObj;
-    // if (!mixWithObj && refObj) return refObj;
-    // if (!refObj && !mixWithObj) return {};
-    // __copyTo(refObj).override(newObj);
-    for (const key of Object.keys(mixWithObj)) {
-      // merging arrays
-      if (
-        settings.array === true &&
-        Array.isArray(refObj[key]) &&
-        Array.isArray(mixWithObj[key])
-      ) {
-        const newArray = __unique([...refObj[key], ...mixWithObj[key]]);
-        refObj[key] = newArray;
-        continue;
-      }
+    function merge(refObj, mixWithObj) {
+        // const newObj = {};
+        // if (!refObj && mixWithObj) return mixWithObj;
+        // if (!mixWithObj && refObj) return refObj;
+        // if (!refObj && !mixWithObj) return {};
+        // __copyTo(refObj).override(newObj);
+        for (const key of Object.keys(mixWithObj)) {
+            // merging arrays
+            if (
+                settings.array === true &&
+                Array.isArray(refObj[key]) &&
+                Array.isArray(mixWithObj[key])
+            ) {
+                const newArray = __unique([...refObj[key], ...mixWithObj[key]]);
+                refObj[key] = newArray;
+                continue;
+            }
 
-      // merging objects
-      if (
-        settings.object === true &&
-        __isPlainObject(refObj[key]) &&
-        __isPlainObject(mixWithObj[key])
-      ) {
-        refObj[key] = merge(refObj[key], mixWithObj[key]);
-        continue;
-      }
+            // merging objects
+            if (
+                settings.object === true &&
+                __isPlainObject(refObj[key]) &&
+                __isPlainObject(mixWithObj[key])
+            ) {
+                refObj[key] = merge(refObj[key], mixWithObj[key]);
+                continue;
+            }
 
-      if (__isPlainObject(mixWithObj[key]) && settings.cloneChilds) {
-        refObj[key] = __clone(mixWithObj[key], {
-          deep: true
-        });
-      } else {
-        // default values
-        refObj[key] = mixWithObj[key];
-      }
+            if (__isPlainObject(mixWithObj[key]) && settings.cloneChilds) {
+                refObj[key] = __clone(mixWithObj[key], {
+                    deep: true,
+                });
+            } else {
+                // default values
+                refObj[key] = mixWithObj[key];
+            }
+        }
+        return refObj;
     }
-    return refObj;
-  }
 
-  const potentialSettingsObj = objects[objects.length - 1] || {};
-  if (
-    (potentialSettingsObj.array &&
-      typeof potentialSettingsObj.array === 'boolean') ||
-    (potentialSettingsObj.object &&
-      typeof potentialSettingsObj.object === 'boolean')
-  ) {
-    if (potentialSettingsObj.array !== undefined)
-      settings.array = potentialSettingsObj.array;
-    if (potentialSettingsObj.object !== undefined)
-      settings.object = potentialSettingsObj.object;
-    objects.pop();
-  }
+    const potentialSettingsObj = objects[objects.length - 1] || {};
+    if (
+        (potentialSettingsObj.array &&
+            typeof potentialSettingsObj.array === 'boolean') ||
+        (potentialSettingsObj.object &&
+            typeof potentialSettingsObj.object === 'boolean')
+    ) {
+        if (potentialSettingsObj.array !== undefined)
+            settings.array = potentialSettingsObj.array;
+        if (potentialSettingsObj.object !== undefined)
+            settings.object = potentialSettingsObj.object;
+        objects.pop();
+    }
 
-  for (let i = 0; i < objects.length; i++) {
-    const toMergeObj = objects[i] || {};
-    merge(referenceObj, toMergeObj);
-  }
+    for (let i = 0; i < objects.length; i++) {
+        const toMergeObj = objects[i] || {};
+        merge(referenceObj, toMergeObj);
+    }
 
-  return referenceObj;
+    return referenceObj;
 }

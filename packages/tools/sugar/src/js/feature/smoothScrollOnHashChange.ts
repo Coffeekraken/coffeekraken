@@ -8,13 +8,12 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @namespace            js.feature
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This feature simply allow a snooth scroll on hash changes
  *
  * @setting    {IScrollToSettings}            [scroll={}]       Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function
- * 
+ *
  * @param     {ISmoothScrollOnHashChangeSettings}    [settings={}]     Some settings to tweak the smooth scroll behavior
  *
  * @todo            interface
@@ -30,20 +29,21 @@ import __deepMerge from '../../shared/object/deepMerge';
  */
 
 export interface ISmoothScrollOnHashChangeSettings {
-  scroll: Partial<IScrollToSettings>;
+    scroll: Partial<IScrollToSettings>;
 }
 
 function smoothScrollOnHashChange(
-  settings: Partial<ISmoothScrollOnHashChangeSettings> = {}
+    settings: Partial<ISmoothScrollOnHashChangeSettings> = {},
 ): void {
+    settings = __deepMerge(
+        {
+            scroll: {},
+        },
+        settings,
+    );
 
-  settings = __deepMerge({
-    scroll: {}
-  }, settings);
-
-  window.addEventListener('hashchange', (e) => {
-    __scrollToLocationHash(settings);
-  });
-
+    window.addEventListener('hashchange', (e) => {
+        __scrollToLocationHash(settings);
+    });
 }
 export default smoothScrollOnHashChange;

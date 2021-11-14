@@ -5,7 +5,6 @@
  * @namespace            js.unit
  * @type                    Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,6 +26,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function px2em(px, $elm = document.documentElement) {
-  return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
+    return px / parseFloat(getComputedStyle($elm).fontSize || '16px');
 }
 export default px2em;

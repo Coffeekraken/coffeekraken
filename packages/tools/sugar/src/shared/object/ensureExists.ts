@@ -8,7 +8,6 @@ import __set from './set';
  * @namespace            js.object
  * @type                        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -32,8 +31,8 @@ import __set from './set';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (obj, path, value = {}) => {
-  const v = __get(obj, path);
-  if (v === undefined) {
-    __set(obj, path, value);
-  }
+    const v = __get(obj, path);
+    if (v === undefined) {
+        __set(obj, path, value);
+    }
 };

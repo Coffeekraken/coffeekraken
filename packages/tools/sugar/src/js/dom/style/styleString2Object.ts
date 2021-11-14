@@ -8,7 +8,6 @@ import __autoCast from '../../shared/string/autoCast';
  * @namespace            js.dom.style
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Transform a style string to an object representation
@@ -32,18 +31,18 @@ import __autoCast from '../../shared/string/autoCast';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function styleString2Object(style: string): any {
-  if (!style || style === '') return {};
-  const obj = {};
-  const split = style.replace(/\s/g, '').split(';');
-  split.forEach((statement) => {
-    // split statement by key value pairs
-    const spl = statement.split(':'),
-      key = __camelize(spl[0]),
-      value = spl[1];
-    // add element into object
-    obj[key] = __autoCast(value);
-  });
-  // return the style object
-  return obj;
+    if (!style || style === '') return {};
+    const obj = {};
+    const split = style.replace(/\s/g, '').split(';');
+    split.forEach((statement) => {
+        // split statement by key value pairs
+        const spl = statement.split(':'),
+            key = __camelize(spl[0]),
+            value = spl[1];
+        // add element into object
+        obj[key] = __autoCast(value);
+    });
+    // return the style object
+    return obj;
 }
 export default styleString2Object;

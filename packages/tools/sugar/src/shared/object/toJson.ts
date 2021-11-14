@@ -6,7 +6,6 @@ import __set from './set';
  * @namespace            shared.object
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,17 +26,17 @@ import __set from './set';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function toJson(object: any): any {
-  const newObj = {};
-  __deepMap(
-    object,
-    ({ value, path }) => {
-      __set(newObj, path, value);
-      return value;
-    },
-    {
-      privateProps: false,
-      classInstances: true
-    }
-  );
-  return newObj;
+    const newObj = {};
+    __deepMap(
+        object,
+        ({ value, path }) => {
+            __set(newObj, path, value);
+            return value;
+        },
+        {
+            privateProps: false,
+            classInstances: true,
+        },
+    );
+    return newObj;
 }

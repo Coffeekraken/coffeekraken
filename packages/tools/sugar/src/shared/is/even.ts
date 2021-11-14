@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,6 +26,6 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isEven(value) {
-  return value % 2 === 0;
+    return value % 2 === 0;
 }
 export default isEven;

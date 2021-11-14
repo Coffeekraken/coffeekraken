@@ -4,7 +4,6 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @name                            excludeGlobs
  * @namespace            node.path
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -29,4 +28,4 @@ export default function () {
     }
     return [];
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhjbHVkZUdsb2JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZXhjbHVkZUdsb2JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQU0sQ0FBQyxPQUFPO0lBQ1YsSUFBSSxhQUFhLENBQUMsUUFBUSxFQUFFLEVBQUU7UUFDMUIsT0FBTyxhQUFhLENBQUMsR0FBRyxDQUFDLGlCQUFpQixDQUFDLENBQUM7S0FDL0M7SUFDRCxPQUFPLEVBQUUsQ0FBQztBQUNkLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhjbHVkZUdsb2JzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZXhjbHVkZUdsb2JzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSw4QkFBOEIsQ0FBQztBQUV6RDs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBcUJHO0FBRUgsTUFBTSxDQUFDLE9BQU87SUFDVixJQUFJLGFBQWEsQ0FBQyxRQUFRLEVBQUUsRUFBRTtRQUMxQixPQUFPLGFBQWEsQ0FBQyxHQUFHLENBQUMsaUJBQWlCLENBQUMsQ0FBQztLQUMvQztJQUNELE9BQU8sRUFBRSxDQUFDO0FBQ2QsQ0FBQyJ9

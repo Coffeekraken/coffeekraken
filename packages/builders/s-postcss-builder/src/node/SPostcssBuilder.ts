@@ -20,7 +20,6 @@ import { PurgeCSS } from 'purgecss';
  * @type                Class
  * @extends             SBuilder
  * @platform            node
- * @platform            ts
  * @status              beta
  *
  * This class represent the postcss builder that you can use to build your postcss files

@@ -80,13 +80,13 @@
 
     {{-- <div class="__grains" layer amount="0.03"></div> --}}
 
-    <div class="__footer">
+    {{-- <div class="__footer">
         <span class="__bracket __bracket-start">{</span>
         <span class="__first">'Take what <span class="s-tc:accent">you need</span>':</span>
         <br>
         <span class="__second">'<span class="s-tc:accent">leave the rest</span> aside'</span>
         <span class="__bracket __bracket-end">}</span>
-    </div>
+    </div> --}}
 
     {{--
     <svg class="__blobs" width="100%" height="100%" viewbox="0 0 100 100" preserveaspectratio="none">

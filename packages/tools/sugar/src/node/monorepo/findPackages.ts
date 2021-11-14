@@ -8,7 +8,6 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @namespace            node.monorepo
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -31,21 +30,21 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default async function findPackages(
-  rootDir = process.cwd()
+    rootDir = process.cwd(),
 ): Promise<object> {
-  interface IPackagesObj {
-    [key: string]: string;
-  }
-  const packagesObj: IPackagesObj = {};
-  const packagesPaths = _glob
-    .sync('**/package.json', {
-      cwd: rootDir,
-      ignore: '**/node_modules/**'
-    })
-    .filter((path) => path !== 'package.json');
-  packagesPaths.forEach((path) => {
-    const folder = path.split('/').slice(0, -1).join('/');
-    packagesObj[folder] = __readJsonSync(`${rootDir}/${path}`);
-  });
-  return packagesObj;
+    interface IPackagesObj {
+        [key: string]: string;
+    }
+    const packagesObj: IPackagesObj = {};
+    const packagesPaths = _glob
+        .sync('**/package.json', {
+            cwd: rootDir,
+            ignore: '**/node_modules/**',
+        })
+        .filter((path) => path !== 'package.json');
+    packagesPaths.forEach((path) => {
+        const folder = path.split('/').slice(0, -1).join('/');
+        packagesObj[folder] = __readJsonSync(`${rootDir}/${path}`);
+    });
+    return packagesObj;
 }

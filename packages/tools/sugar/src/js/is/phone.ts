@@ -6,7 +6,6 @@ import MobileDetect from 'mobile-detect';
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Detect if is a phone device
@@ -29,7 +28,7 @@ import MobileDetect from 'mobile-detect';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isPhone(ua: string = navigator.userAgent): boolean {
-  const md = new MobileDetect(ua);
-  return md.phone() !== null;
+    const md = new MobileDetect(ua);
+    return md.phone() !== null;
 }
 export default isPhone;

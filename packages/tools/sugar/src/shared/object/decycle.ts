@@ -5,7 +5,6 @@ import { decycle as __decycle } from 'json-cyclic';
  * @namespace            js.object
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,6 +26,6 @@ import { decycle as __decycle } from 'json-cyclic';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function decycle(obj) {
-  return __decycle(obj);
+    return __decycle(obj);
 }
 export default decycle;

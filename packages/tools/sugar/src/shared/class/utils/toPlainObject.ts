@@ -5,7 +5,6 @@
  * @namespace          shared.class.utils
  * @type                          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *
@@ -31,11 +30,11 @@
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function toPlainObject(theClass) {
-  const originalClass = theClass || {};
-  const keys = Object.getOwnPropertyNames(originalClass);
-  return keys.reduce((classAsObj, key) => {
-    classAsObj[key] = originalClass[key];
-    return classAsObj;
-  }, {});
+    const originalClass = theClass || {};
+    const keys = Object.getOwnPropertyNames(originalClass);
+    return keys.reduce((classAsObj, key) => {
+        classAsObj[key] = originalClass[key];
+        return classAsObj;
+    }, {});
 }
 export default toPlainObject;

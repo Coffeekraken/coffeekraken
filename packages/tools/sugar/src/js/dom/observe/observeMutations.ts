@@ -7,7 +7,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.observe
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Observe mutations on an HTMLElement and get them through the observable subscription.
@@ -35,33 +34,36 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function observeMutations($target: HTMLElement, settings: MutationObserverInit = {}): __SPromise<any> {
-  settings = {
-    attributes: true,
-    childList: false,
-    subtree: false,
-    ...settings
-  };
+function observeMutations(
+    $target: HTMLElement,
+    settings: MutationObserverInit = {},
+): __SPromise<any> {
+    settings = {
+        attributes: true,
+        childList: false,
+        subtree: false,
+        ...settings,
+    };
 
-  let mutationObserver;
+    let mutationObserver;
 
-  return new __SPromise(
-    ({ emit }) => {
-      // create a new observer
-      mutationObserver = new MutationObserver((mutations) => {
-        // loop on mutations
-        mutations.forEach((mutation) => {
-          // emit the then stack
-          emit('then', mutation);
-        });
-      });
-      mutationObserver.observe($target, settings);
-    },
-    {
-      id: 'observeMutations'
-    }
-  ).on('finally', () => {
-    mutationObserver && mutationObserver.disconnect();
-  });
+    return new __SPromise(
+        ({ emit }) => {
+            // create a new observer
+            mutationObserver = new MutationObserver((mutations) => {
+                // loop on mutations
+                mutations.forEach((mutation) => {
+                    // emit the then stack
+                    emit('then', mutation);
+                });
+            });
+            mutationObserver.observe($target, settings);
+        },
+        {
+            id: 'observeMutations',
+        },
+    ).on('finally', () => {
+        mutationObserver && mutationObserver.disconnect();
+    });
 }
 export default observeMutations;

@@ -5,7 +5,6 @@
  * @namespace            js.dom.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Check if the passed HTMLElement is visible or not.
@@ -28,15 +27,15 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function visible(elm: HTMLElement): boolean {
-  // assume that the script tag is always visible
-  if (elm.nodeName.toLowerCase() === 'script') return true;
+    // assume that the script tag is always visible
+    if (elm.nodeName.toLowerCase() === 'script') return true;
 
-  // get style
-  const style = window.getComputedStyle(elm, null),
-    opacity = style['opacity'],
-    visibility = style['visibility'],
-    display = style['display'];
-  return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
+    // get style
+    const style = window.getComputedStyle(elm, null),
+        opacity = style['opacity'],
+        visibility = style['visibility'],
+        display = style['display'];
+    return '0' !== opacity && 'none' !== display && 'hidden' !== visibility;
 }
 window.__visible = visible;
 export default visible;

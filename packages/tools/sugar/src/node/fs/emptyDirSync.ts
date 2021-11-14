@@ -6,7 +6,6 @@ import __fs from 'fs-extra';
  * @name        emptyDirSync
  * @namespace            node.fs
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

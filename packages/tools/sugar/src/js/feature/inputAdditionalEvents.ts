@@ -8,7 +8,6 @@ import __dispatchEvent from '../dom/event/dispatchEvent';
  * @namespace            js.feature
  * @type      Feature
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Add some events on some DOM Elements. Here's the list:
@@ -34,46 +33,54 @@ import __dispatchEvent from '../dom/event/dispatchEvent';
  */
 
 export interface IInputAdditionalEventsSettings {
-  enter: boolean;
-  escape: boolean;
+    enter: boolean;
+    escape: boolean;
 }
 
-function inputAdditionalEvents(settings: Partial<IInputAdditionalEventsSettings> = {}): void {
-  settings = {
-    enter: true,
-    escape: true,
-    ...settings
-  };
+function inputAdditionalEvents(
+    settings: Partial<IInputAdditionalEventsSettings> = {},
+): void {
+    settings = {
+        enter: true,
+        escape: true,
+        ...settings,
+    };
 
-  function handleInputAttributes(e) {
-    const field = e.target ? e.target : e;
-    if (!field || !field.tagName) return;
-    switch (field.tagName) {
-      case 'INPUT':
-      case 'TEXTAREA':
-        fastdom.mutate(() => {
-          if (e.keyCode) {
-            switch (e.keyCode) {
-              case 13: // enter
-                if (settings.enter && field.hasAttribute('onenter')) {
-                  eval(field.getAttribute('onenter'));
-                  __dispatchEvent(field, 'enter');
-                }
+    function handleInputAttributes(e) {
+        const field = e.target ? e.target : e;
+        if (!field || !field.tagName) return;
+        switch (field.tagName) {
+            case 'INPUT':
+            case 'TEXTAREA':
+                fastdom.mutate(() => {
+                    if (e.keyCode) {
+                        switch (e.keyCode) {
+                            case 13: // enter
+                                if (
+                                    settings.enter &&
+                                    field.hasAttribute('onenter')
+                                ) {
+                                    eval(field.getAttribute('onenter'));
+                                    __dispatchEvent(field, 'enter');
+                                }
+                                break;
+                            case 27: // escape
+                                if (
+                                    settings.escape &&
+                                    field.hasAttribute('onescape')
+                                ) {
+                                    eval(field.getAttribute('onescape'));
+                                    __dispatchEvent(field, 'escape');
+                                }
+                                break;
+                        }
+                    }
+                });
                 break;
-              case 27: // escape
-                if (settings.escape && field.hasAttribute('onescape')) {
-                  eval(field.getAttribute('onescape'));
-                  __dispatchEvent(field, 'escape');
-                }
-                break;
-            }
-          }
-        });
-        break;
+        }
     }
-  }
 
-  document.addEventListener('change', handleInputAttributes);
-  document.addEventListener('keyup', handleInputAttributes);
+    document.addEventListener('change', handleInputAttributes);
+    document.addEventListener('keyup', handleInputAttributes);
 }
 export default inputAdditionalEvents;

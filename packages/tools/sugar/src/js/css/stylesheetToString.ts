@@ -3,14 +3,13 @@
  * @namespace       js.css
  * @type             Function
  * @platform          js
- * @platform          ts
  * @status           stable
  *
  * This function take a StyleSheet instance and convert it to a simple string
  *
  * @todo        check online doc
  * @todo        tests
- * 
+ *
  * @param       {StyleSheet|StyleSheet[]}        stalesheet      The StyleSheet instance to convert
  * @return      {String}                            The css string
  *
@@ -22,25 +21,25 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function stylesheetToString(
-  // @ts-ignore
-  stylesheet: StyleSheet | StyleSheetList
+    // @ts-ignore
+    stylesheet: StyleSheet | StyleSheetList,
 ): string {
-  let stack: any[] = [];
+    let stack: any[] = [];
 
-  if (!(stylesheet instanceof StyleSheetList)) {
-    if (!Array.isArray(stylesheet)) stack.push(stylesheet);
-  } else {
-    Object.keys(stylesheet).forEach((k) => {
-      stack.push(stylesheet[k]);
+    if (!(stylesheet instanceof StyleSheetList)) {
+        if (!Array.isArray(stylesheet)) stack.push(stylesheet);
+    } else {
+        Object.keys(stylesheet).forEach((k) => {
+            stack.push(stylesheet[k]);
+        });
+    }
+    let str = ``;
+    stack.forEach((style) => {
+        str += style.cssRules
+            ? Array.from(style.cssRules)
+                  .map((rule: any) => rule.cssText ?? '')
+                  .join('\n')
+            : '';
     });
-  }
-  let str = ``;
-  stack.forEach((style) => {
-    str += style.cssRules
-      ? Array.from(style.cssRules)
-          .map((rule: any) => rule.cssText ?? '')
-          .join('\n')
-      : '';
-  });
-  return str;
+    return str;
 }

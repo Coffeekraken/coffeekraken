@@ -10,7 +10,6 @@ import __pad from '@coffeekraken/sugar/shared/number/pad';
  * @name            SSitemapDocmapSource
  * @namespace       node
  * @type            Class
- * @platform        ts
  * @platform        js
  * @platform        node
  * @status          beta

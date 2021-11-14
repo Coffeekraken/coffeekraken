@@ -4,7 +4,6 @@ import __fs from 'fs';
  * @name        existsSync
  * @namespace            node.fs
  * @type        Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -27,34 +26,34 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IExistsSettings {
-  directory: boolean;
-  file: boolean;
-  symlink: boolean;
+    directory: boolean;
+    file: boolean;
+    symlink: boolean;
 }
 export default function existsSync(
-  path: string,
-  settings?: Partial<IExistsSettings>
+    path: string,
+    settings?: Partial<IExistsSettings>,
 ): boolean {
-  const set: IExistsSettings = {
-    directory: true,
-    file: true,
-    symlink: true,
-    ...(settings || {})
-  };
+    const set: IExistsSettings = {
+        directory: true,
+        file: true,
+        symlink: true,
+        ...(settings || {}),
+    };
 
-  let isSymlink = false,
-    stats: any;
+    let isSymlink = false,
+        stats: any;
 
-  try {
-    stats = __fs.statSync(path);
-    if (!stats) return false;
-    isSymlink = stats.isSymbolicLink();
-  } catch (e) {
-    return false;
-  }
+    try {
+        stats = __fs.statSync(path);
+        if (!stats) return false;
+        isSymlink = stats.isSymbolicLink();
+    } catch (e) {
+        return false;
+    }
 
-  if (isSymlink && !set.symlink) return false;
-  if (stats.isDirectory() && !set.directory) return false;
-  if (stats.isFile() && !set.file) return false;
-  return true;
+    if (isSymlink && !set.symlink) return false;
+    if (stats.isDirectory() && !set.directory) return false;
+    if (stats.isFile() && !set.file) return false;
+    return true;
 }

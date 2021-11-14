@@ -8,7 +8,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @stable
  *
  * Wait that an interaction is made with the passed element like "focus", "focusIn", "mouseover", etc...
@@ -49,7 +48,10 @@ export interface IWhenInteractSettings {
     mouse: booleam | Partial<IWhenInteractMouseSettings>;
 }
 
-export default function whenInteract(elm: HTMLElement, settings?: Partial<IWhenInteractSettings>): Promise<any> {
+export default function whenInteract(
+    elm: HTMLElement,
+    settings?: Partial<IWhenInteractSettings>,
+): Promise<any> {
     return new Promise((resolve, reject) => {
         settings = <IWhenInteractSettings>__deepMerge(
             {

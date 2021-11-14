@@ -39,6 +39,10 @@ body {
         ); */
     }
 
+    #nav {
+        user-select: none;
+    }
+
     &:not(#homepage &),
     body.scrolled & {
         top: 0;
@@ -124,7 +128,8 @@ body {
         top: 50px;
         left: 50%;
         height: calc(var(--max-height) + 96px);
-        min-width: 1000px;
+        width: 1240px;
+        max-width: 100vw;
         transform: translateX(-50%);
         z-index: 10;
         /* width: 100vw; */
@@ -181,9 +186,9 @@ body {
     .__subnav-chapters {
         overflow-y: auto;
         height: var(--max-height);
-        @sugar.scrollbar;
         padding: sugar.padding(50);
         position: relative;
+        @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
 
         background: linear-gradient(
             -90deg,
@@ -233,19 +238,26 @@ body {
         position: relative;
         overflow-y: auto;
         height: var(--max-height);
-        @sugar.scrollbar;
         padding: sugar.padding(50);
+        background-color: sugar.color(main, background);
+        background-image: radial-gradient(
+            circle at bottom,
+            sugar.color(complementary, --alpha 0.02),
+            transparent
+        ) !important;
 
-        &:before {
+        @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
+
+        /* &:before {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: sugar.color(main, surface);
+            
             opacity: 0.98;
-        }
+        } */
     }
 
     .__subnav-story {
@@ -271,9 +283,9 @@ body {
             }
         }
     }
-    .__subnav-doc .__subnav-story li {
+    /* .__subnav-doc .__subnav-story li {
         width: 50%;
-    }
+    } */
 
     .__subnav-story {
         display: none;
@@ -282,6 +294,10 @@ body {
         &[active] {
             display: block;
         }
+    }
+
+    .ck-discover p {
+        @sugar.truncate (3);
     }
 }
 

@@ -14,7 +14,6 @@ import __SLog from '@coffeekraken/s-log';
  * @namespace            node.process
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          wip
  *

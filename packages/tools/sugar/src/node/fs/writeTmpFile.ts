@@ -11,7 +11,6 @@ import __packageTmpDir from '../path/packageTmpDir';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          stable
  *

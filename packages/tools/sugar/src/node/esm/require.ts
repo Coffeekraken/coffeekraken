@@ -7,7 +7,6 @@ import { createRequire } from 'module';
  * @namespace           node.esm
  * @type                Function
  * @platform            node
- * @platform            ts
  * @status              beta
  *
  * This function allows you to get back an fully functional "require" function in

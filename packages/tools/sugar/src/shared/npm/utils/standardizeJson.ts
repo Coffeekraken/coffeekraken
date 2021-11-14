@@ -7,7 +7,6 @@ import __parseAuthorString from './parseAuthorString';
  * @namespace            js.npm
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -41,30 +40,30 @@ import __parseAuthorString from './parseAuthorString';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function standardizeJson(json) {
-  // author
-  if (json.author && typeof json.author === 'string') {
-    json.author = __parseAuthorString(json.author);
-  } else if (json.author && Array.isArray(json.author)) {
-    json.author = json.author.map((string) => {
-      if (typeof string === 'string') {
-        return __parseAuthorString(string);
-      }
-      return string;
-    });
-  }
+    // author
+    if (json.author && typeof json.author === 'string') {
+        json.author = __parseAuthorString(json.author);
+    } else if (json.author && Array.isArray(json.author)) {
+        json.author = json.author.map((string) => {
+            if (typeof string === 'string') {
+                return __parseAuthorString(string);
+            }
+            return string;
+        });
+    }
 
-  // contributors
-  if (json.contributors && typeof json.contributors === 'string') {
-    json.contributors = __parseAuthorString(json.contributors);
-  } else if (json.contributors && Array.isArray(json.contributors)) {
-    json.contributors = json.contributors.map((string) => {
-      if (typeof string === 'string') {
-        return __parseAuthorString(string);
-      }
-      return string;
-    });
-  }
+    // contributors
+    if (json.contributors && typeof json.contributors === 'string') {
+        json.contributors = __parseAuthorString(json.contributors);
+    } else if (json.contributors && Array.isArray(json.contributors)) {
+        json.contributors = json.contributors.map((string) => {
+            if (typeof string === 'string') {
+                return __parseAuthorString(string);
+            }
+            return string;
+        });
+    }
 
-  return json;
+    return json;
 }
 export default standardizeJson;

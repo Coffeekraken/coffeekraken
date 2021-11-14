@@ -6,8 +6,8 @@ import _isClass from '../is/class';
 import _upperFirst from '../string/upperFirst';
 
 interface ITypeofSettings {
-  of?: boolean;
-  customClass?: boolean;
+    of?: boolean;
+    customClass?: boolean;
 }
 
 /**
@@ -15,7 +15,6 @@ interface ITypeofSettings {
  * @namespace            js.value
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -61,72 +60,72 @@ interface ITypeofSettings {
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function typeOf(value: any, settings: ITypeofSettings = {}): string {
-  settings = _deepMerge(
-    {
-      of: false,
-      customClass: true
-    },
-    settings
-  );
+    settings = _deepMerge(
+        {
+            of: false,
+            customClass: true,
+        },
+        settings,
+    );
 
-  // get the real type
-  let type: string;
-  if (Array.isArray(value)) type = 'Array';
-  else if (value instanceof Map) type = 'Map';
-  else if (value === null) type = 'Null';
-  else if (value === undefined) type = 'Undefined';
-  else if (typeof value === 'string') type = 'String';
-  else if (_isInt(value)) type = 'Integer';
-  else if (typeof value === 'number') type = 'Number';
-  else if (typeof value === 'boolean') type = 'Boolean';
-  else if (value instanceof RegExp) type = 'RegExp';
-  else if (
-    settings.customClass === true &&
-    _isClass(value) &&
-    value.name !== undefined
-  ) {
-    type = _upperFirst(value.name);
-  } else if (
-    settings.customClass === true &&
-    value.constructor !== undefined &&
-    value.constructor.name !== undefined
-  ) {
-    type = _upperFirst(value.constructor.name);
-  } else if (settings.customClass === false && _isClass(value)) {
-    type = 'Class';
-  } else if (typeof value === 'function') type = 'Function';
-  else if (typeof value === 'object') type = 'Object';
-  else type = 'Unknown';
+    // get the real type
+    let type: string;
+    if (Array.isArray(value)) type = 'Array';
+    else if (value instanceof Map) type = 'Map';
+    else if (value === null) type = 'Null';
+    else if (value === undefined) type = 'Undefined';
+    else if (typeof value === 'string') type = 'String';
+    else if (_isInt(value)) type = 'Integer';
+    else if (typeof value === 'number') type = 'Number';
+    else if (typeof value === 'boolean') type = 'Boolean';
+    else if (value instanceof RegExp) type = 'RegExp';
+    else if (
+        settings.customClass === true &&
+        _isClass(value) &&
+        value.name !== undefined
+    ) {
+        type = _upperFirst(value.name);
+    } else if (
+        settings.customClass === true &&
+        value.constructor !== undefined &&
+        value.constructor.name !== undefined
+    ) {
+        type = _upperFirst(value.constructor.name);
+    } else if (settings.customClass === false && _isClass(value)) {
+        type = 'Class';
+    } else if (typeof value === 'function') type = 'Function';
+    else if (typeof value === 'object') type = 'Object';
+    else type = 'Unknown';
 
-  // check if need to get the "child" types
-  const avoidTypes = [
-    'Null',
-    'Undefined',
-    'String',
-    'Integer',
-    'Number',
-    'Boolean',
-    'Unknown'
-  ];
-  if (settings.of === true && !avoidTypes.includes(type)) {
-    const loopOn = Array.isArray(value)
-      ? [...value.keys()]
-      : Object.keys(value);
-    const receivedTypes: string[] = [];
-    loopOn.forEach((valueIndex: any) => {
-      const valueToCheck = value[valueIndex];
-      const childType: string = typeOf(valueToCheck, {
-        of: false,
-        customClass: settings.customClass
-      });
-      if (!receivedTypes.includes(childType)) {
-        receivedTypes.push(childType);
-      }
-    });
-    // save the "of" types in the result obj
-    type += `<${receivedTypes.join('|')}>`;
-  }
+    // check if need to get the "child" types
+    const avoidTypes = [
+        'Null',
+        'Undefined',
+        'String',
+        'Integer',
+        'Number',
+        'Boolean',
+        'Unknown',
+    ];
+    if (settings.of === true && !avoidTypes.includes(type)) {
+        const loopOn = Array.isArray(value)
+            ? [...value.keys()]
+            : Object.keys(value);
+        const receivedTypes: string[] = [];
+        loopOn.forEach((valueIndex: any) => {
+            const valueToCheck = value[valueIndex];
+            const childType: string = typeOf(valueToCheck, {
+                of: false,
+                customClass: settings.customClass,
+            });
+            if (!receivedTypes.includes(childType)) {
+                receivedTypes.push(childType);
+            }
+        });
+        // save the "of" types in the result obj
+        type += `<${receivedTypes.join('|')}>`;
+    }
 
-  return type;
+    return type;
 }
 export default typeOf;

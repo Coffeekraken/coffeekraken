@@ -8,7 +8,6 @@ import querySelectorLive from '../dom/query/querySelectorLive';
  * @namespace            js.feature
  * @type      Feature
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This feature simply add some special attributes on links like "actual" when the link correspond to the actual visited page url,
@@ -25,7 +24,7 @@ import querySelectorLive from '../dom/query/querySelectorLive';
  * linksStateAttributes();
  *
  * @example    html
- * <!-- page url: /something --> 
+ * <!-- page url: /something -->
  * <a href="/something" actual>Hello</a>
  * <a href="/something/cool" actual-child>World</a>
  *
@@ -33,19 +32,19 @@ import querySelectorLive from '../dom/query/querySelectorLive';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface IlinksStateAttributesSettings {
-}
+export interface IlinksStateAttributesSettings {}
 
-function linksStateAttributes(settings: Partial<IlinksStateAttributesSettings> = {}): void {
-  settings = deepMerge(
-    {},
-    settings
-  );
+function linksStateAttributes(
+    settings: Partial<IlinksStateAttributesSettings> = {},
+): void {
+    settings = deepMerge({}, settings);
 
     function handleLink($linkElm) {
         if ($linkElm.getAttribute('href') === document.location.pathname) {
             $linkElm.setAttribute('actual', true);
-        } else if ($linkElm.getAttribute('href').startsWith(document.location.pathname)) {
+        } else if (
+            $linkElm.getAttribute('href').startsWith(document.location.pathname)
+        ) {
             $linkElm.removeAttribute('actual');
             $linkElm.setAttribute('actual-child', true);
         } else {
@@ -54,13 +53,13 @@ function linksStateAttributes(settings: Partial<IlinksStateAttributesSettings> =
         }
     }
 
-  querySelectorLive(`[href]`, ($linkElm) => {
-    handleLink($linkElm);
-  });
-  window.addEventListener('locationchange', () => {
-    Array.from(document.querySelectorAll('[href]')).forEach($linkElm => {
+    querySelectorLive(`[href]`, ($linkElm) => {
         handleLink($linkElm);
     });
-  });
+    window.addEventListener('locationchange', () => {
+        Array.from(document.querySelectorAll('[href]')).forEach(($linkElm) => {
+            handleLink($linkElm);
+        });
+    });
 }
 export default linksStateAttributes;

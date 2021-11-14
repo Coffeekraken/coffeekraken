@@ -5,7 +5,6 @@ import __fs from 'fs';
  * @name            checkPathWithMultipleExtensions
  * @namespace            node.fs
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -27,21 +26,21 @@ import __fs from 'fs';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function checkPathWithMultipleExtensions(
-  path: string,
-  exts: string[]
+    path: string,
+    exts: string[],
 ): string | undefined {
-  const extension = __extension(path) || '';
+    const extension = __extension(path) || '';
 
-  if (__fs.existsSync(path)) {
-    return path;
-  }
-
-  const pathWithoutExt = path.replace(`.${extension}`, '');
-  for (let i = 0; i < exts.length; i++) {
-    const ext = exts[i];
-    if (__fs.existsSync(`${pathWithoutExt}.${ext}`)) {
-      return `${pathWithoutExt}.${ext}`;
+    if (__fs.existsSync(path)) {
+        return path;
     }
-  }
-  return undefined;
+
+    const pathWithoutExt = path.replace(`.${extension}`, '');
+    for (let i = 0; i < exts.length; i++) {
+        const ext = exts[i];
+        if (__fs.existsSync(`${pathWithoutExt}.${ext}`)) {
+            return `${pathWithoutExt}.${ext}`;
+        }
+    }
+    return undefined;
 }

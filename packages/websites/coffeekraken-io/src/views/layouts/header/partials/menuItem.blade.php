@@ -14,20 +14,24 @@
                 @endforeach
             </ul>
             <div class="__subnav-stories">
-                    @foreach($menuItem as $item)
+                @foreach($menuItem as $item)
                     @if (is_object($item))
                         <div class="__subnav-story" id="subnav-{{ \Sugar\string\idCompliant($item->name) }}">
-                            <ul>
-                                @foreach($item as $subItem)
-                                    @if ($subItem->slug)
-                                        <li>
-                                            <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
-                                                {{ $subItem->name }}
-                                            </a>
-                                        </li>
-                                    @endif
-                                @endforeach        
-                            </ul>
+                            @if ($item->content)
+                                {!! $item->content !!}
+                            @else
+                                <ul>
+                                    @foreach($item as $subItem)
+                                        @if ($subItem->slug)
+                                            <li>
+                                                <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
+                                                    {{ $subItem->name }}
+                                                </a>
+                                            </li>
+                                        @endif
+                                    @endforeach        
+                                </ul>
+                            @endif
                         </div>
                     @endif
                 @endforeach

@@ -5,7 +5,6 @@ import __aggregation from 'aggregation/es5';
  * @namespace           shared.class.utils
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          alpha
  *
@@ -29,4 +28,4 @@ import __aggregation from 'aggregation/es5';
 export default (...classes) => {
     return __aggregation(...classes);
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibXVsdGlwbGVFeHRlbmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibXVsdGlwbGVFeHRlbmRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXlCRztBQUNILGVBQWUsQ0FBQyxHQUFHLE9BQU8sRUFBRSxFQUFFO0lBQzVCLE9BQU8sYUFBYSxDQUFDLEdBQUcsT0FBTyxDQUFDLENBQUM7QUFDbkMsQ0FBQyxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibXVsdGlwbGVFeHRlbmRzLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibXVsdGlwbGVFeHRlbmRzLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZCxPQUFPLGFBQWEsTUFBTSxpQkFBaUIsQ0FBQztBQUU1Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBd0JHO0FBQ0gsZUFBZSxDQUFDLEdBQUcsT0FBTyxFQUFFLEVBQUU7SUFDMUIsT0FBTyxhQUFhLENBQUMsR0FBRyxPQUFPLENBQUMsQ0FBQztBQUNyQyxDQUFDLENBQUMifQ==

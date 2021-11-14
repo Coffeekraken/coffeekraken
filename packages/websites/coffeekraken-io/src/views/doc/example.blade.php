@@ -4,7 +4,7 @@
         <i class="s-icon:example s-tc:accent"></i>&nbsp;&nbsp;Example
     </h4>
 
-    <s-code-example class="s-mbe:50" @if ($lines)
+    <s-code-example class="s-mbe:100" @if ($lines)
         lines="{{ $lines }}"
     @endif>
         @foreach ($block->example as $example)

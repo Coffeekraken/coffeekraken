@@ -5,7 +5,6 @@
  * @namespace            js.function
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -30,8 +29,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function sleep(time) {
-  return new Promise((resolve) => {
-    setTimeout(resolve, time);
-  });
+    return new Promise((resolve) => {
+        setTimeout(resolve, time);
+    });
 }
 export default sleep;

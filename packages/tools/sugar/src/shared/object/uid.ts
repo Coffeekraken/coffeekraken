@@ -9,7 +9,6 @@ import __crypto from 'crypto';
  * @namespace           node.object
  * @type                            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -36,32 +35,32 @@ import __crypto from 'crypto';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uid(obj, settings = {}) {
-  settings = {
-    format: 'sha256',
-    key: 'sugar.js.object.uid',
-    ...settings
-  };
+    settings = {
+        format: 'sha256',
+        key: 'sugar.js.object.uid',
+        ...settings,
+    };
 
-  // init the uid
-  let uid = '';
+    // init the uid
+    let uid = '';
 
-  // loop on each arguments
-  uid = __encryptObject.encrypt(obj, settings.key);
+    // loop on each arguments
+    uid = __encryptObject.encrypt(obj, settings.key);
 
-  switch (settings.format.toLowerCase()) {
-    case 'full':
-      // return the uid
-      return uid;
-      break;
-    case 'sha256':
-    default:
-      const hash = __crypto
-        .createHash('sha256')
-        .update(uid)
-        .digest('hex')
-        .toString();
-      return hash;
-      break;
-  }
+    switch (settings.format.toLowerCase()) {
+        case 'full':
+            // return the uid
+            return uid;
+            break;
+        case 'sha256':
+        default:
+            const hash = __crypto
+                .createHash('sha256')
+                .update(uid)
+                .digest('hex')
+                .toString();
+            return hash;
+            break;
+    }
 }
 export default uid;

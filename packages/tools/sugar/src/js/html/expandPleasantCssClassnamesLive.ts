@@ -6,7 +6,6 @@ import __expandPleasantCssClassname from '../../shared/html/expandPleasantCssCla
  * @namespace       js.html
  * @type            Function
  * @platform        js
- * @platform        ts
  * @status          beta
  *
  * This function allows you to convert "colon" classnames like "s-something:cool @desktop something"

@@ -3,7 +3,6 @@
  * @namespace            node.sugar
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -24,13 +23,13 @@
  * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function sanitizeSugarJson(sugarJson: any): any {
-  // break reference
-  sugarJson = Object.assign({}, sugarJson);
+    // break reference
+    sugarJson = Object.assign({}, sugarJson);
 
-  // extends
-  if (!sugarJson.extends) sugarJson.extends = [];
-  else if (!Array.isArray(sugarJson.extends))
-    sugarJson.extends = [sugarJson.extends];
+    // extends
+    if (!sugarJson.extends) sugarJson.extends = [];
+    else if (!Array.isArray(sugarJson.extends))
+        sugarJson.extends = [sugarJson.extends];
 
-  return sugarJson;
+    return sugarJson;
 }

@@ -64,9 +64,9 @@ export default async function ({ root, sharedData }) {
         if (cachedFolderHash === folderHash) {
             // same icons, nothing to generate again
             console.log(
-                `<yellow>[fonticons]</yellow> All icon(s) are up to date`,
+                `<green>[fonticons]</green> All icon(s) are up to date`,
             );
-            return;
+            // return;
         }
     }
 
@@ -115,6 +115,7 @@ export default async function ({ root, sharedData }) {
         'line-height: 1;',
         'width: 1em;',
         'height:1em;',
+        'vertical-align: middle;',
         '}',
     ].join('\n');
 

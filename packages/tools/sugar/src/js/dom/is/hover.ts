@@ -5,7 +5,6 @@
  * @namespace            js.dom.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Check if the mouse is hover the passed HTMLElement
@@ -27,6 +26,6 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function hover($elm: HTMLElement): boolean {
-  return $elm.parentElement.querySelector(':hover') === $elm;
+    return $elm.parentElement.querySelector(':hover') === $elm;
 }
 export default hover;

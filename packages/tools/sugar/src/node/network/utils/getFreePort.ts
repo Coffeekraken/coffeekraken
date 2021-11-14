@@ -7,7 +7,6 @@ import __isPortFree from './isPortFree';
  * @namespace            node.http
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -29,14 +28,14 @@ import __isPortFree from './isPortFree';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function getFreePort(port = null) {
-  return new Promise(async (resolve) => {
-    if (!port) port = Math.round(Math.random() * 65535);
-    let isFree = await __isPortFree(port);
-    do {
-      port = Math.round(Math.random() * 65535);
-      isFree = await __isPortFree(port);
-    } while (!isFree);
-    resolve(port);
-  });
+    return new Promise(async (resolve) => {
+        if (!port) port = Math.round(Math.random() * 65535);
+        let isFree = await __isPortFree(port);
+        do {
+            port = Math.round(Math.random() * 65535);
+            isFree = await __isPortFree(port);
+        } while (!isFree);
+        resolve(port);
+    });
 }
 export default getFreePort;

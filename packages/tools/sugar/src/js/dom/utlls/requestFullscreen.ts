@@ -5,7 +5,6 @@
  * @namespace            js.dom.utils
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Request fullscreen on the passed DOM element
@@ -25,14 +24,14 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function requestFullscreen(elm: HTMLElement): Promise<any> {
-  if (elm.requestFullscreen) {
-    return elm.requestFullscreen();
-  } else if (elm.mozRequestFullScreen) {
-    return elm.mozRequestFullScreen();
-  } else if (elm.webkitRequestFullscreen) {
-    return elm.webkitRequestFullscreen();
-  } else if (elm.msRequestFullscreen) {
-    return elm.msRequestFullscreen();
-  }
+    if (elm.requestFullscreen) {
+        return elm.requestFullscreen();
+    } else if (elm.mozRequestFullScreen) {
+        return elm.mozRequestFullScreen();
+    } else if (elm.webkitRequestFullscreen) {
+        return elm.webkitRequestFullscreen();
+    } else if (elm.msRequestFullscreen) {
+        return elm.msRequestFullscreen();
+    }
 }
 export default requestFullscreen;

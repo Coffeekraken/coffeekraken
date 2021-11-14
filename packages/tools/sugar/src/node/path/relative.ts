@@ -7,7 +7,6 @@ import __packageRootDir from './packageRootDir';
  * @name            relative
  * @namespace            node.path
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

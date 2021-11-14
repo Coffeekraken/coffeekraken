@@ -19,7 +19,6 @@ import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuil
  * @interface       ./interface/SImagesBuilderBuildParamsInterface
  * @extends         SBuilder
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * This class allows you to compress the more popular images formats like

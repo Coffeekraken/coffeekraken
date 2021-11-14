@@ -4,7 +4,6 @@
  * @type            Function
  * @platform        node
  * @platform        js
- * @platform        ts
  * @status          stable
  *
  * This function simple take a json string and ensure that it will be valid

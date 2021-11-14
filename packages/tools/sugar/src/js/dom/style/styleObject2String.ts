@@ -7,7 +7,6 @@ import __uncamelize from '../../shared/string/uncamelize';
  * @namespace            js.dom.style
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Transform a style object to inline string separated by ;
@@ -31,19 +30,19 @@ import __uncamelize from '../../shared/string/uncamelize';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function styleObject2String(styleObj: any): string {
-  // process the style object
-  const propertiesArray = [];
-  for (const key in styleObj) {
-    const value = styleObj[key];
-    // if the value is ''
-    // mean that we need to get rid of
-    if (value === undefined || value === '') {
-      delete styleObj[key];
-    } else {
-      propertiesArray.push(`${__uncamelize(key)}:${value};`);
+    // process the style object
+    const propertiesArray = [];
+    for (const key in styleObj) {
+        const value = styleObj[key];
+        // if the value is ''
+        // mean that we need to get rid of
+        if (value === undefined || value === '') {
+            delete styleObj[key];
+        } else {
+            propertiesArray.push(`${__uncamelize(key)}:${value};`);
+        }
     }
-  }
-  // return the css text
-  return propertiesArray.join(' ');
+    // return the css text
+    return propertiesArray.join(' ');
 }
 export default styleObject2String;

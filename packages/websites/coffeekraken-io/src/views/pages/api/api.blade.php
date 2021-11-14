@@ -30,7 +30,7 @@
 
                 <div class="__content s-pb:50">
 
-                    @include('pages.styleguide.partials.block', ['block' => $firstBlock, 'isFirst' => true])
+                    @include('generic.docblock.block', ['block' => $firstBlock, 'isFirst' => true])
 
                 </div>
 

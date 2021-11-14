@@ -9,7 +9,6 @@ import __readJson from '../fs/readJson';
  * @namespace            node.package
  * @async
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -31,24 +30,22 @@ import __readJson from '../fs/readJson';
  */
 const __packageJson = {};
 function json(from = process.cwd(), highest = false) {
+    const prop = highest ? 'highest' : 'default';
 
-  const prop = highest ? 'highest' : 'default';
+    if (__packageJson[from]?.[prop]) {
+        return __packageJson[from][prop];
+    }
 
-  if (__packageJson[from]?.[prop]) {
-    return __packageJson[from][prop];
-  }
+    const path = `${__packageRoot(from, highest)}/package.json`;
+    if (!__fs.existsSync(path)) return false;
 
-  const path = `${__packageRoot(from, highest)}/package.json`;
-  if (!__fs.existsSync(path)) return false;
+    return new Promise(async (resolve) => {
+        const json = await __readJson(path);
 
-  return new Promise(async (resolve) => {
+        if (!__packageJson[from]) __packageJson[from] = {};
+        __packageJson[from][prop] = json;
 
-    const json = await __readJson(path);
-
-    if (!__packageJson[from]) __packageJson[from] = {};
-    __packageJson[from][prop] = json;
-
-    resolve(json);
-  });
+        resolve(json);
+    });
 }
 export default json;

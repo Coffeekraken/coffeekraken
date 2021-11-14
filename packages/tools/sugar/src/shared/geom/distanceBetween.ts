@@ -5,7 +5,6 @@
  * @namespace            js.geom.2d
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -31,15 +30,15 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function distanceBetween(point1, point2) {
-  let xs = 0;
-  let ys = 0;
+    let xs = 0;
+    let ys = 0;
 
-  xs = point2.x - point1.x;
-  xs = xs * xs;
+    xs = point2.x - point1.x;
+    xs = xs * xs;
 
-  ys = point2.y - point1.y;
-  ys = ys * ys;
+    ys = point2.y - point1.y;
+    ys = ys * ys;
 
-  return Math.sqrt(xs + ys);
+    return Math.sqrt(xs + ys);
 }
 export default distanceBetween;

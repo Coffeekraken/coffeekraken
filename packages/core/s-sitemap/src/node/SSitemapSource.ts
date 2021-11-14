@@ -8,7 +8,6 @@ import { ISSitemapDocmapSourceCtorSettings } from './sources/SSitemapDocmapSourc
  * @name            SSitemapSource
  * @namespace       node
  * @type            Class
- * @platform        ts
  * @platform        js
  * @platform        node
  * @status          beta

@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Wrap an HTMLElement inside another `$wrapper` one
@@ -13,7 +12,7 @@
  * @param    {HTMLElement}    $toWrap    The element to wrap
  * @param    {HTMLElement}    $wrapper    The wrapper element
  * @return    {HTMLElement}           The toWrap element
- * 
+ *
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -37,16 +36,16 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function wrap($elm: HTMLElement, $wrapper: HTMLElement): HTMLElement {
-  if (typeof $wrapper === 'string') {
-    $wrapper = document.createElement($wrapper);
-  }
-  const $parent = $elm.parentNode;
-  const $sibling = $elm.nextSibling;
-  if ($sibling) {
-    $parent.insertBefore($wrapper, $sibling);
-  } else {
-    $parent.appendChild($wrapper);
-  }
-  return $wrapper.appendChild($elm);
+    if (typeof $wrapper === 'string') {
+        $wrapper = document.createElement($wrapper);
+    }
+    const $parent = $elm.parentNode;
+    const $sibling = $elm.nextSibling;
+    if ($sibling) {
+        $parent.insertBefore($wrapper, $sibling);
+    } else {
+        $parent.appendChild($wrapper);
+    }
+    return $wrapper.appendChild($elm);
 }
 export default wrap;

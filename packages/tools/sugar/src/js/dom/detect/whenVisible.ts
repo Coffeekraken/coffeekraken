@@ -9,7 +9,6 @@ import __closestNotVisible from '../query/closestNotVisible';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @status          beta
  *
  * Monitor an HTMLElement to be notified when it is visible
@@ -54,9 +53,18 @@ function whenVisible(elm: HTMLElement, cb = null) {
                 elm.removeEventListener('animationend', _eventCb);
                 // remove the event listeners
                 if (closestNotVisible) {
-                    closestNotVisible.removeEventListener('transitionend', _eventCb);
-                    closestNotVisible.removeEventListener('animationstart', _eventCb);
-                    closestNotVisible.removeEventListener('animationend', _eventCb);
+                    closestNotVisible.removeEventListener(
+                        'transitionend',
+                        _eventCb,
+                    );
+                    closestNotVisible.removeEventListener(
+                        'animationstart',
+                        _eventCb,
+                    );
+                    closestNotVisible.removeEventListener(
+                        'animationend',
+                        _eventCb,
+                    );
                 }
             }
         };
@@ -83,9 +91,18 @@ function whenVisible(elm: HTMLElement, cb = null) {
                             parentObserver.disconnect();
                         }
                         // remove the event listeners
-                        closestNotVisible.removeEventListener('transitionend', _eventCb);
-                        closestNotVisible.removeEventListener('animationstart', _eventCb);
-                        closestNotVisible.removeEventListener('animationend', _eventCb);
+                        closestNotVisible.removeEventListener(
+                            'transitionend',
+                            _eventCb,
+                        );
+                        closestNotVisible.removeEventListener(
+                            'animationstart',
+                            _eventCb,
+                        );
+                        closestNotVisible.removeEventListener(
+                            'animationend',
+                            _eventCb,
+                        );
                     }
                 }
                 // callback
@@ -98,7 +115,10 @@ function whenVisible(elm: HTMLElement, cb = null) {
             selfObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     // check that is the style whos changed
-                    if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
+                    if (
+                        mutation.attributeName === 'style' ||
+                        mutation.attributeName === 'class'
+                    ) {
                         // check if is visible
                         if (__isVisible(mutation.target)) {
                             // update
@@ -128,7 +148,10 @@ function whenVisible(elm: HTMLElement, cb = null) {
             parentObserver = new MutationObserver((mutations) => {
                 mutations.forEach((mutation) => {
                     // check that is the style whos changed
-                    if (mutation.attributeName === 'style' || mutation.attributeName === 'class') {
+                    if (
+                        mutation.attributeName === 'style' ||
+                        mutation.attributeName === 'class'
+                    ) {
                         // check if is visible
                         if (__isVisible(mutation.target)) {
                             // update

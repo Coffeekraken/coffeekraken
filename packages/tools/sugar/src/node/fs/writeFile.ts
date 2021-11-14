@@ -9,7 +9,6 @@ import __fs from 'fs-extra';
  * @namespace            node.fs
  * @type          Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          stable
  *

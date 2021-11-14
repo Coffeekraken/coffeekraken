@@ -4,16 +4,21 @@
     position: relative;
     z-index: 10;
     margin-top: -80px;
-    margin-bottom: 150px;
+    margin-bottom: 50px;
 
-    background: radial-gradient(
+    /* background: radial-gradient(
         ellipse at top,
         sugar.color(main, --lighten 43),
         transparent
-    );
+    ); */
 
     @sugar.theme.when (dark) {
         background: sugar.color(main, background) !important;
+        background: radial-gradient(
+            circle at bottom,
+            sugar.color(complementary, --alpha 0.02),
+            transparent
+        ) !important;
     }
 
     /* .s-remap-complementary-accent {
@@ -192,7 +197,7 @@
             filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.07));
 
             @sugar.theme.when dark {
-                filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.4));
+                filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.2));
             }
         }
         .__coffee-cup {
@@ -283,6 +288,7 @@
     }
 
     .__template {
+        display: none;
         text-align: right;
         position: absolute;
         top: calc(50% - 100px);
@@ -408,15 +414,18 @@
     .__code {
         mask-image: radial-gradient(ellipse at bottom, black, transparent);
         font-family: sugar.font.family(code);
-        font-size: 35px;
+        font-size: 40px;
+        line-height: 1.7;
+        letter-spacing: 0.4em;
         text-align: center;
         width: calc(
             sugar.theme(layout.container.default.max-width) / 2 + 400px
         );
+        width: 100%;
         position: absolute;
         bottom: 200px;
-        left: 50%;
-        opacity: 0.1;
+        left: 0;
+        opacity: 0.05;
         user-select: none;
 
         @sugar.theme.when dark {

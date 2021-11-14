@@ -5,7 +5,6 @@ import __isClass from '../../is/class';
  * @namespace       shared.class.utils
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -32,41 +31,41 @@ import __isClass from '../../is/class';
  */
 
 export interface IGetExtendsStackSettings {
-  includeBaseClass?: boolean;
+    includeBaseClass?: boolean;
 }
 export interface IGetExtendsStackResult {
-  [key: string]: any;
+    [key: string]: any;
 }
 export interface IGetExtendsStack {
-  (cls: any, settings?: IGetExtendsStackSettings): IGetExtendsStackResult;
+    (cls: any, settings?: IGetExtendsStackSettings): IGetExtendsStackResult;
 }
 
 const fn: IGetExtendsStack = function (
-  cls: any,
-  settings: IGetExtendsStackSettings = {}
+    cls: any,
+    settings: IGetExtendsStackSettings = {},
 ) {
-  const stack = {};
+    const stack = {};
 
-  if (!__isClass(cls)) {
-    cls = cls.constructor;
-  }
-
-  if (settings.includeBaseClass === true) {
-    stack[cls.name] = cls;
-  }
-
-  let baseClass = cls;
-
-  while (baseClass) {
-    const newBaseClass = Object.getPrototypeOf(baseClass);
-    if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
-      stack[newBaseClass.name] = newBaseClass;
-      baseClass = newBaseClass;
-    } else {
-      break;
+    if (!__isClass(cls)) {
+        cls = cls.constructor;
     }
-  }
 
-  return stack;
+    if (settings.includeBaseClass === true) {
+        stack[cls.name] = cls;
+    }
+
+    let baseClass = cls;
+
+    while (baseClass) {
+        const newBaseClass = Object.getPrototypeOf(baseClass);
+        if (newBaseClass && newBaseClass !== Object && newBaseClass.name) {
+            stack[newBaseClass.name] = newBaseClass;
+            baseClass = newBaseClass;
+        } else {
+            break;
+        }
+    }
+
+    return stack;
 };
 export default fn;

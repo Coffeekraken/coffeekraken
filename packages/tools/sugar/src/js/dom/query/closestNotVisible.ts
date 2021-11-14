@@ -7,7 +7,6 @@ import __isVisible from '../is/visible';
  * @namespace            js.dom.query
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Go up the dom three to find the first element that is not visible.

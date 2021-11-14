@@ -3,8 +3,6 @@
  * @namespace           js.clipboard
  * @type                Function
  * @platform          js
- * @platform          ts
- * @platform            ts
  * @async
  * @status              stable
  *

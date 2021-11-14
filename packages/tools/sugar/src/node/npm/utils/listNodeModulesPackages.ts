@@ -7,7 +7,6 @@ import __unique from '../../../shared/array/unique';
  * @name        listNodeModulesPackages
  * @namespace     node.npm.utils
  * @type        Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -26,50 +25,50 @@ import __unique from '../../../shared/array/unique';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IListNodeModulesPackagesSettings {
-  pathes: string[];
-  monorepo: boolean;
+    pathes: string[];
+    monorepo: boolean;
 }
 
 export default function listNodeModulesPackages(
-  settings?: Partial<IListNodeModulesPackagesSettings>
+    settings?: Partial<IListNodeModulesPackagesSettings>,
 ): Record<string, any> {
-  const finalSettings = <IListNodeModulesPackagesSettings>{
-    pathes: [`${__packageRootDir()}/node_modules`],
-    monorepo: false,
-    ...(settings ?? {})
-  };
+    const finalSettings = <IListNodeModulesPackagesSettings>{
+        pathes: [`${__packageRootDir()}/node_modules`],
+        monorepo: false,
+        ...(settings ?? {}),
+    };
 
-  if (finalSettings.monorepo) {
-    finalSettings.pathes.push(
-      `${__packageRootDir(process.cwd(), true)}/node_modules`
-    );
-  }
-
-  const finalPaths: string[] = [];
-
-  finalSettings.pathes.forEach((path) => {
-    finalPaths.push(`${path}/*/package.json`);
-    finalPaths.push(`${path}/*/*/package.json`);
-  });
-
-  finalSettings.pathes = __unique(finalSettings.pathes);
-
-  const finalPackagesList = {};
-
-  __glob.sync(finalPaths).forEach((path) => {
-    let packageJson;
-    try {
-      packageJson = JSON.parse(__fs.readFileSync(path, 'utf8'));
-    } catch (e) {
-      console.log(path.toUpperCase());
-      console.log(e);
+    if (finalSettings.monorepo) {
+        finalSettings.pathes.push(
+            `${__packageRootDir(process.cwd(), true)}/node_modules`,
+        );
     }
-    if (packageJson) {
-      if (!finalPackagesList[packageJson.name]) {
-        finalPackagesList[packageJson.name] = packageJson;
-      }
-    }
-  });
 
-  return finalPackagesList;
+    const finalPaths: string[] = [];
+
+    finalSettings.pathes.forEach((path) => {
+        finalPaths.push(`${path}/*/package.json`);
+        finalPaths.push(`${path}/*/*/package.json`);
+    });
+
+    finalSettings.pathes = __unique(finalSettings.pathes);
+
+    const finalPackagesList = {};
+
+    __glob.sync(finalPaths).forEach((path) => {
+        let packageJson;
+        try {
+            packageJson = JSON.parse(__fs.readFileSync(path, 'utf8'));
+        } catch (e) {
+            console.log(path.toUpperCase());
+            console.log(e);
+        }
+        if (packageJson) {
+            if (!finalPackagesList[packageJson.name]) {
+                finalPackagesList[packageJson.name] = packageJson;
+            }
+        }
+    });
+
+    return finalPackagesList;
 }

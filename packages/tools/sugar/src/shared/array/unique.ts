@@ -5,7 +5,6 @@
  * @namespace            js.array
  * @type                  Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              stable
  *
@@ -23,12 +22,12 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function unique(array) {
-  const a = array.concat();
-  for (let i = 0; i < a.length; ++i) {
-    for (let j = i + 1; j < a.length; ++j) {
-      if (a[i] === a[j]) a.splice(j--, 1);
+    const a = array.concat();
+    for (let i = 0; i < a.length; ++i) {
+        for (let j = i + 1; j < a.length; ++j) {
+            if (a[i] === a[j]) a.splice(j--, 1);
+        }
     }
-  }
-  return a;
+    return a;
 }
 export default unique;

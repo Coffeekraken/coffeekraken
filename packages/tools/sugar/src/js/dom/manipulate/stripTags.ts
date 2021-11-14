@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Strip the tags of the passed text
@@ -25,8 +24,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function stripTags(html: string): string {
-  const tmp = document.createElement('div');
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || '';
+    const tmp = document.createElement('div');
+    tmp.innerHTML = html;
+    return tmp.textContent || tmp.innerText || '';
 }
 export default stripTags;

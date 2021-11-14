@@ -5,7 +5,6 @@
  * @namespace            js.dom.manipulate
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Insert an HTMLElement after another HTMLElement
@@ -26,13 +25,13 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function insertAfter(elm: HTMLElement, refElm: HTMLElement): HTMLElement {
-  // next sibling of ref elm
-  const nextSibling = refElm.nextSibling;
-  if (!nextSibling) {
-    refElm.parentNode.appendChild(elm);
-  } else {
-    refElm.parentNode.insertBefore(elm, nextSibling);
-  }
-  return elm;
+    // next sibling of ref elm
+    const nextSibling = refElm.nextSibling;
+    if (!nextSibling) {
+        refElm.parentNode.appendChild(elm);
+    } else {
+        refElm.parentNode.insertBefore(elm, nextSibling);
+    }
+    return elm;
 }
 export default insertAfter;

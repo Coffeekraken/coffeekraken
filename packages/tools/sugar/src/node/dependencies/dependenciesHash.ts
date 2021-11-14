@@ -9,7 +9,6 @@ import __callsites from 'callsites';
  * @namespace       node.dependencies
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  * @async

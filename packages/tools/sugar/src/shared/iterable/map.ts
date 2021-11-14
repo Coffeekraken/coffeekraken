@@ -5,7 +5,6 @@ import __typeOf from '../value/typeof';
  * @namespace            js.iterable
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,124 +28,124 @@ import __typeOf from '../value/typeof';
  */
 
 export interface IMapFnSettings {
-  newStack?: boolean;
+    newStack?: boolean;
 }
 
 export interface IMapCallbackObj {
-  key: any;
-  prop: any;
-  value: any;
-  i: number;
-  idx: number;
+    key: any;
+    prop: any;
+    value: any;
+    i: number;
+    idx: number;
 }
 
 export interface IMapCallbackFn {
-  (metas: IMapCallbackObj): any;
+    (metas: IMapCallbackObj): any;
 }
 
 export interface IMapFn {
-  (
-    stack: Iterable<any>,
-    callback: IMapCallbackFn,
-    settings?: IMapFnSettings
-  ): Promise<Iterable<any>>;
+    (
+        stack: Iterable<any>,
+        callback: IMapCallbackFn,
+        settings?: IMapFnSettings,
+    ): Promise<Iterable<any>>;
 }
 
 const fn: IMapFn = function (stack, callback, settings = {}) {
-  settings = {
-    newStack: false,
-    ...settings
-  };
+    settings = {
+        newStack: false,
+        ...settings,
+    };
 
-  const stackType = __typeOf(stack).toLowerCase();
-  let loopOnKeys: (string | number)[];
-  if (stackType === 'object') loopOnKeys = Object.keys(stack);
-  // @ts-ignore
-  else if (stackType === 'array')
+    const stackType = __typeOf(stack).toLowerCase();
+    let loopOnKeys: (string | number)[];
+    if (stackType === 'object') loopOnKeys = Object.keys(stack);
     // @ts-ignore
-    loopOnKeys = Array.from(Array(stack.length).keys());
-  else if (stackType === 'number' || stackType === 'integer')
+    else if (stackType === 'array')
+        // @ts-ignore
+        loopOnKeys = Array.from(Array(stack.length).keys());
+    else if (stackType === 'number' || stackType === 'integer')
+        // @ts-ignore
+        loopOnKeys = Array.from(Array(Math.round(stack)).keys());
+    else if (stackType === 'string') loopOnKeys = Array.from(stack);
+    else if (stackType === 'set') loopOnKeys = Array.from(stack);
     // @ts-ignore
-    loopOnKeys = Array.from(Array(Math.round(stack)).keys());
-  else if (stackType === 'string') loopOnKeys = Array.from(stack);
-  else if (stackType === 'set') loopOnKeys = Array.from(stack);
-  // @ts-ignore
-  else loopOnKeys = Array.from(stack.keys());
+    else loopOnKeys = Array.from(stack.keys());
 
-  // handle the forcing of "newStack" setting
-  if (
-    stackType === 'string' ||
-    stackType === 'number' ||
-    stackType === 'integer' ||
-    stackType === 'set'
-  )
-    settings.newStack = true;
+    // handle the forcing of "newStack" setting
+    if (
+        stackType === 'string' ||
+        stackType === 'number' ||
+        stackType === 'integer' ||
+        stackType === 'set'
+    )
+        settings.newStack = true;
 
-  // create a newStack by stack types
-  let newStack: any = [];
-  if (stackType === 'object') newStack = {};
-  else if (stackType === 'map') newStack = new Map();
-  else if (stackType === 'set') newStack = new Set();
+    // create a newStack by stack types
+    let newStack: any = [];
+    if (stackType === 'object') newStack = {};
+    else if (stackType === 'map') newStack = new Map();
+    else if (stackType === 'set') newStack = new Set();
 
-  let value: any;
-  let newValue: any;
+    let value: any;
+    let newValue: any;
 
-  const _get: Function = (s, k) => {
-    switch (__typeOf(s).toLowerCase()) {
-      case 'array':
-      case 'object':
-        return s[k];
-        break;
-      case 'string':
-        return k;
-        break;
-      case 'number':
-      case 'integer':
-        return k;
-        break;
-      case 'map':
-        return s.get(k);
-        break;
-      case 'set':
-        return k;
-        break;
+    const _get: Function = (s, k) => {
+        switch (__typeOf(s).toLowerCase()) {
+            case 'array':
+            case 'object':
+                return s[k];
+                break;
+            case 'string':
+                return k;
+                break;
+            case 'number':
+            case 'integer':
+                return k;
+                break;
+            case 'map':
+                return s.get(k);
+                break;
+            case 'set':
+                return k;
+                break;
+        }
+    };
+    const _set: Function = (s, k, v) => {
+        switch (__typeOf(s).toLowerCase()) {
+            case 'array':
+                if (settings.newStack === true) s.push(v);
+                else s[k] = v;
+                break;
+            case 'object':
+                s[k] = v;
+                break;
+            case 'number':
+            case 'integer':
+            case 'string':
+                s.push(v);
+                break;
+            case 'map':
+                s.set(k, v);
+                break;
+            case 'set':
+                s.add(v);
+                break;
+        }
+    };
+
+    for (let i = 0; i < loopOnKeys.length; i++) {
+        const key = loopOnKeys[i];
+        value = _get(stack, key);
+        newValue = callback({ key, prop: key, value, i, idx: i });
+        if (newValue === -1) break;
+        // @ts-ignore
+        _set(settings.newStack ? newStack : stack, key, newValue);
     }
-  };
-  const _set: Function = (s, k, v) => {
-    switch (__typeOf(s).toLowerCase()) {
-      case 'array':
-        if (settings.newStack === true) s.push(v);
-        else s[k] = v;
-        break;
-      case 'object':
-        s[k] = v;
-        break;
-      case 'number':
-      case 'integer':
-      case 'string':
-        s.push(v);
-        break;
-      case 'map':
-        s.set(k, v);
-        break;
-      case 'set':
-        s.add(v);
-        break;
+
+    if (stackType === 'string') {
+        return newStack.join('');
     }
-  };
-
-  for (let i = 0; i < loopOnKeys.length; i++) {
-    const key = loopOnKeys[i];
-    value = _get(stack, key);
-    newValue = callback({ key, prop: key, value, i, idx: i });
-    if (newValue === -1) break;
-    // @ts-ignore
-    _set(settings.newStack ? newStack : stack, key, newValue);
-  }
-
-  if (stackType === 'string') {
-    return newStack.join('');
-  }
-  return settings.newStack ? newStack : stack;
+    return settings.newStack ? newStack : stack;
 };
 export default fn;

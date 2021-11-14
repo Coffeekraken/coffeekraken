@@ -5,7 +5,6 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @name                            childProcess
  * @namespace            node.is
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -25,9 +24,9 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isChildProcess() {
-  if (__isTestEnv()) return false;
-  return (
-    process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
-  );
+    if (__isTestEnv()) return false;
+    return (
+        process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
+    );
 }
 export default isChildProcess;

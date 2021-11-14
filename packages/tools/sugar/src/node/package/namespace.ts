@@ -9,7 +9,6 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @name          namespace
  * @namespace            node.package
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          wip
  *
@@ -32,35 +31,36 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function namespace(path, settings = {}) {
-  settings = __deepMerge(__SugarConfig.get('core.namespace') || {}, settings);
-  // get the package json content
-  const json = __json(settings.context || process.cwd());
-  let packageName = '',
-    packageVersion = '';
-  if (json && json.name)
-    packageName = json.name.replace('@', '').split('/').join('.').trim();
-  if (json && json.version) packageVersion = json.version.split('.').join('-');
+    settings = __deepMerge(__SugarConfig.get('core.namespace') || {}, settings);
+    // get the package json content
+    const json = __json(settings.context || process.cwd());
+    let packageName = '',
+        packageVersion = '';
+    if (json && json.name)
+        packageName = json.name.replace('@', '').split('/').join('.').trim();
+    if (json && json.version)
+        packageVersion = json.version.split('.').join('-');
 
-  // sanitize the passed path
-  let sanitizedPath = path;
-  const filename = __getFilename(path);
-  if (filename && sanitizedPath.split('/').length > 1) {
-    sanitizedPath = sanitizedPath
-      .replace('/' + filename, '')
-      .replace(filename, '');
-  }
-  sanitizedPath = sanitizedPath.split(' ').join('').split('/').join('.');
+    // sanitize the passed path
+    let sanitizedPath = path;
+    const filename = __getFilename(path);
+    if (filename && sanitizedPath.split('/').length > 1) {
+        sanitizedPath = sanitizedPath
+            .replace('/' + filename, '')
+            .replace(filename, '');
+    }
+    sanitizedPath = sanitizedPath.split(' ').join('').split('/').join('.');
 
-  let resultNamespace = settings.pattern
-    .replace('{package.name}', packageName)
-    .replace('{package.version}', packageVersion)
-    .replace('{path}', sanitizedPath)
-    .trim();
-  resultNamespace = resultNamespace
-    .split('...')
-    .join('.')
-    .split('..')
-    .join('.');
-  return resultNamespace;
+    let resultNamespace = settings.pattern
+        .replace('{package.name}', packageName)
+        .replace('{package.version}', packageVersion)
+        .replace('{path}', sanitizedPath)
+        .trim();
+    resultNamespace = resultNamespace
+        .split('...')
+        .join('.')
+        .split('..')
+        .join('.');
+    return resultNamespace;
 }
 export default namespace;

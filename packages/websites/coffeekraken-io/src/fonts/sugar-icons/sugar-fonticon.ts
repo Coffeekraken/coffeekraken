@@ -21,6 +21,7 @@ export type SugarFonticonId =
   | "lang-php"
   | "lang-ts"
   | "range"
+  | "refresh"
   | "support-chromium"
   | "support-edge"
   | "support-firefox"
@@ -51,6 +52,7 @@ export type SugarFonticonKey =
   | "LangPhp"
   | "LangTs"
   | "Range"
+  | "Refresh"
   | "SupportChromium"
   | "SupportEdge"
   | "SupportFirefox"
@@ -81,6 +83,7 @@ export enum SugarFonticon {
   LangPhp = "lang-php",
   LangTs = "lang-ts",
   Range = "range",
+  Refresh = "refresh",
   SupportChromium = "support-chromium",
   SupportEdge = "support-edge",
   SupportFirefox = "support-firefox",
@@ -112,10 +115,11 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.LangPhp]: "61716",
   [SugarFonticon.LangTs]: "61717",
   [SugarFonticon.Range]: "61718",
-  [SugarFonticon.SupportChromium]: "61719",
-  [SugarFonticon.SupportEdge]: "61720",
-  [SugarFonticon.SupportFirefox]: "61721",
-  [SugarFonticon.SupportRtl]: "61722",
-  [SugarFonticon.SupportSafari]: "61723",
-  [SugarFonticon.Vue]: "61724",
+  [SugarFonticon.Refresh]: "61719",
+  [SugarFonticon.SupportChromium]: "61720",
+  [SugarFonticon.SupportEdge]: "61721",
+  [SugarFonticon.SupportFirefox]: "61722",
+  [SugarFonticon.SupportRtl]: "61723",
+  [SugarFonticon.SupportSafari]: "61724",
+  [SugarFonticon.Vue]: "61725",
 };

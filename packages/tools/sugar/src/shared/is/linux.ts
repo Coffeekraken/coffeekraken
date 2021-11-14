@@ -7,7 +7,6 @@
  * @namespace            js.is
  * @type                            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,9 +26,9 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function linux() {
-  if (process && process.platform) {
-    return process.platform === 'linux';
-  }
-  return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
+    if (process && process.platform) {
+        return process.platform === 'linux';
+    }
+    return navigator.platform.toUpperCase().indexOf('LINUX') >= 0;
 }
 export default linux;

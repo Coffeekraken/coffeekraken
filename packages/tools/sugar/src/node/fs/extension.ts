@@ -4,7 +4,6 @@
  * @name                    extension
  * @namespace            node.fs
  * @type                    Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

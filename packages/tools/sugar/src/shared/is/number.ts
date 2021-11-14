@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,6 +27,6 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isNumber(source) {
-  return !isNaN(parseFloat(source)) && isFinite(source);
+    return !isNaN(parseFloat(source)) && isFinite(source);
 }
 export default isNumber;

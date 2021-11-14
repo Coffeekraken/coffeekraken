@@ -10,12 +10,11 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @namespace            js.feature
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This feature enable some underhood features like the automatic scroll on anchor links as well as
  * the smooth scroll on page load.
- * 
+ *
  * @feature         Smooth scroll on page load when an anchor is present in the url
  * @feature         Smooth scroll when clicking on an anchor link in the page
  *
@@ -36,21 +35,19 @@ import __deepMerge from '../../shared/object/deepMerge';
  */
 
 export interface IsmoothScrollSettings {
-  scroll: Partial<IScrollToSettings>;
+    scroll: Partial<IScrollToSettings>;
 }
 
-function smoothScroll(
-  settings: Partial<IsmoothScrollSettings> = {}
-): void {
+function smoothScroll(settings: Partial<IsmoothScrollSettings> = {}): void {
+    settings = __deepMerge(
+        {
+            scroll: {},
+        },
+        settings,
+    );
 
-  settings = __deepMerge({
-    scroll: {}
-  }, settings);
-
-  __smoothScrollOnPageLoad(settings);
-  __smoothScrollOnAnchorLinks(settings);
-  __smoothScrollOnHashChange(settings);
-
-  
+    __smoothScrollOnPageLoad(settings);
+    __smoothScrollOnAnchorLinks(settings);
+    __smoothScrollOnHashChange(settings);
 }
 export default smoothScroll;

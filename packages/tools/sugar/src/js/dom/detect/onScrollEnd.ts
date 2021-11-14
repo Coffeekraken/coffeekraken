@@ -6,7 +6,6 @@
  * @type            Function
  * @async
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * This function simply listen for scroll on the passed element and call the passed callback

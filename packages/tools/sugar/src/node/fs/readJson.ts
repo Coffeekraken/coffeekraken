@@ -5,7 +5,6 @@ import __fs from 'fs';
  * @namespace       node.fs
  * @type            Function
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * This function allows you to read a json file

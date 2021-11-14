@@ -7,7 +7,6 @@ import ltrim from '../string/ltrim';
  * @namespace            js.url
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -32,17 +31,17 @@ import ltrim from '../string/ltrim';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function queryStringToObject(str) {
-  str = ltrim(str, '?');
-  str = decodeURIComponent(str);
-  let chunks = str.split('&');
-  const obj = {};
-  chunks = chunks.filter((ch) => {
-    return ch !== '';
-  });
-  for (let c = 0; c < chunks.length; c++) {
-    const split = chunks[c].split('=', 2);
-    obj[split[0]] = split[1];
-  }
-  return obj;
+    str = ltrim(str, '?');
+    str = decodeURIComponent(str);
+    let chunks = str.split('&');
+    const obj = {};
+    chunks = chunks.filter((ch) => {
+        return ch !== '';
+    });
+    for (let c = 0; c < chunks.length; c++) {
+        const split = chunks[c].split('=', 2);
+        obj[split[0]] = split[1];
+    }
+    return obj;
 }
 export default queryStringToObject;

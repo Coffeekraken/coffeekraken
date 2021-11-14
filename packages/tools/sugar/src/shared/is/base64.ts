@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -28,9 +27,10 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isBase64(value) {
-  if (typeof value !== 'string') return false;
-  if (value === '' || value.trim() === '') return false;
-  const reg = /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
-  return reg.test(value);
+    if (typeof value !== 'string') return false;
+    if (value === '' || value.trim() === '') return false;
+    const reg =
+        /^([0-9a-zA-Z+/]{4})*(([0-9a-zA-Z+/]{2}==)|([0-9a-zA-Z+/]{3}=))?$/;
+    return reg.test(value);
 }
 export default isBase64;

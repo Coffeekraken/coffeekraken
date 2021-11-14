@@ -6,7 +6,6 @@
  * @type            Function
  * @async
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *

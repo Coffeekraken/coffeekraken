@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type                                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -25,5 +24,5 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default () => {
-  return typeof window !== 'undefined';
+    return typeof window !== 'undefined';
 };

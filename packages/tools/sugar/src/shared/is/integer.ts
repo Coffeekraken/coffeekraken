@@ -5,7 +5,6 @@
  * @namespace            js.is
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,12 +26,12 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isInteger(data) {
-  return (
-    typeof data === 'number' &&
-    !isNaN(data) &&
-    (function (x) {
-      return (x | 0) === x;
-    })(parseFloat(data))
-  );
+    return (
+        typeof data === 'number' &&
+        !isNaN(data) &&
+        (function (x) {
+            return (x | 0) === x;
+        })(parseFloat(data))
+    );
 }
 export default isInteger;

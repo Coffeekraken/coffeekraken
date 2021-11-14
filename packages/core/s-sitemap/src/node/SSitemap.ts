@@ -18,7 +18,6 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
  * @name            SSitemap
  * @namespace       node
  * @type            Class
- * @platform        ts
  * @platform        js
  * @platform        node
  * @status          beta

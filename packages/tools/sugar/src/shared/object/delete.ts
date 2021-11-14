@@ -7,7 +7,6 @@ import __set from './set';
  * @namespace            js.object
  * @type                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -32,29 +31,29 @@ import __set from './set';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function del(object, dotPath) {
-  const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
+    const parentDotPath = dotPath.split('.').slice(0, -1).join('.');
 
-  if (!dotPath || dotPath === '' || dotPath === '.') return object;
-  dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
-  dotPath = dotPath.replace(/^\./, '');
-  const a = dotPath.split('.');
-  let o = object;
-  while (a.length) {
-    const n = a.shift();
-    if (a.length < 1) {
-      if (Array.isArray(o)) {
-        const valueToDelete = o[n];
-        o = o.filter((v) => {
-          return v !== valueToDelete;
-        });
-      } else {
-        delete o[n];
-      }
-      __set(object, parentDotPath, o);
-    } else {
-      o = o[n];
+    if (!dotPath || dotPath === '' || dotPath === '.') return object;
+    dotPath = dotPath.replace(/\[(\w+)\]/g, '.$1');
+    dotPath = dotPath.replace(/^\./, '');
+    const a = dotPath.split('.');
+    let o = object;
+    while (a.length) {
+        const n = a.shift();
+        if (a.length < 1) {
+            if (Array.isArray(o)) {
+                const valueToDelete = o[n];
+                o = o.filter((v) => {
+                    return v !== valueToDelete;
+                });
+            } else {
+                delete o[n];
+            }
+            __set(object, parentDotPath, o);
+        } else {
+            o = o[n];
+        }
     }
-  }
-  return object;
+    return object;
 }
 export default del;

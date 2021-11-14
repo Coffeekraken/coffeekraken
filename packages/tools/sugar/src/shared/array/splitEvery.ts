@@ -5,7 +5,6 @@
  * @namespace            js.array
  * @type                                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              beta
  *
@@ -23,11 +22,11 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function splitEvery(array: any[], every: number): any[] {
-  let i: number, j: number;
-  const finalArray: any[] = [];
-  for (i = 0, j = array.length; i < j; i += every) {
-    finalArray.push(array.slice(i, i + every));
-  }
-  return finalArray;
+    let i: number, j: number;
+    const finalArray: any[] = [];
+    for (i = 0, j = array.length; i < j; i += every) {
+        finalArray.push(array.slice(i, i + every));
+    }
+    return finalArray;
 }
 export default splitEvery;

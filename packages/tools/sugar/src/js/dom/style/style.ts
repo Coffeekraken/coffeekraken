@@ -9,7 +9,6 @@ import __styleObject2String from '../styleObject2String';
  * @namespace            js.dom.style
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Set or remove a css style property on an HTMLElement
@@ -33,21 +32,21 @@ import __styleObject2String from '../styleObject2String';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function style(elm: HTMLElement, styleObj: any): any {
-  // convert style string to object
-  const styleAttr = elm.getAttribute('style');
+    // convert style string to object
+    const styleAttr = elm.getAttribute('style');
 
-  if (styleAttr) {
-    styleObj = {
-      ...__styleString2Object(styleAttr),
-      ...styleObj
-    };
-  }
+    if (styleAttr) {
+        styleObj = {
+            ...__styleString2Object(styleAttr),
+            ...styleObj,
+        };
+    }
 
-  // apply the style to the element
-  // elm.setAttribute('style', __styleObject2String(current.styleObj));
-  elm.style.cssText = __styleObject2String(styleObj);
+    // apply the style to the element
+    // elm.setAttribute('style', __styleObject2String(current.styleObj));
+    elm.style.cssText = __styleObject2String(styleObj);
 
-  // return the style
-  return elm.style;
+    // return the style
+    return elm.style;
 }
 export default style;

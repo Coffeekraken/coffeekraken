@@ -8,7 +8,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.class
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Remove some class on animation end
@@ -29,22 +28,22 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function removeClassOnAnimationEnd($elm, cls) {
-  return new __SPromise(
-    ({ resolve }) => {
-      // listen for animation end on the element just once
-      __addEventListenerOnce($elm, 'animationend', (e) => {
-        if (!Array.isArray(cls)) cls = [cls];
-        // remove the cls
-        cls.forEach((_cls) => {
-          $elm.classList.remove(_cls);
-        });
-        // resolve the process
-        resolve(e);
-      });
-    },
-    {
-      id: 'removeClassOnAnimationEnd'
-    }
-  );
+    return new __SPromise(
+        ({ resolve }) => {
+            // listen for animation end on the element just once
+            __addEventListenerOnce($elm, 'animationend', (e) => {
+                if (!Array.isArray(cls)) cls = [cls];
+                // remove the cls
+                cls.forEach((_cls) => {
+                    $elm.classList.remove(_cls);
+                });
+                // resolve the process
+                resolve(e);
+            });
+        },
+        {
+            id: 'removeClassOnAnimationEnd',
+        },
+    );
 }
 export default removeClassOnAnimationEnd;

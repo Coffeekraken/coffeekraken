@@ -8,7 +8,6 @@ import __SPromise from '@coffeekraken/s-promise';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Observe attributes on an HTMLElement and get mutations through the SPromise instance
@@ -33,34 +32,37 @@ import __SPromise from '@coffeekraken/s-promise';
  * @since       1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function observeAttributes(target: HTMLElement, settings: any = {}): __SPromise<any> {
-  return new __SPromise(
-    ({ emit }) => {
-      // create a new observer
-      const mutationObserver = new MutationObserver((mutations) => {
-        let mutedAttrs = {};
-        // loop on mutations
-        mutations.forEach((mutation) => {
-          // push mutation
-          if (!mutedAttrs[mutation.attributeName]) {
-            emit('then', mutation);
-            mutedAttrs[mutation.attributeName] = true;
-          }
-        });
-        mutedAttrs = {};
-      });
-      mutationObserver.observe(target, {
-        attributes: true,
-        // characterData : true,
-        ...settings
-      });
-    },
-    {
-      id: 'observeAttributes'
-    }
-  ).on('finally', () => {
-    mutationObserver.disconnect();
-  });
+function observeAttributes(
+    target: HTMLElement,
+    settings: any = {},
+): __SPromise<any> {
+    return new __SPromise(
+        ({ emit }) => {
+            // create a new observer
+            const mutationObserver = new MutationObserver((mutations) => {
+                let mutedAttrs = {};
+                // loop on mutations
+                mutations.forEach((mutation) => {
+                    // push mutation
+                    if (!mutedAttrs[mutation.attributeName]) {
+                        emit('then', mutation);
+                        mutedAttrs[mutation.attributeName] = true;
+                    }
+                });
+                mutedAttrs = {};
+            });
+            mutationObserver.observe(target, {
+                attributes: true,
+                // characterData : true,
+                ...settings,
+            });
+        },
+        {
+            id: 'observeAttributes',
+        },
+    ).on('finally', () => {
+        mutationObserver.disconnect();
+    });
 }
 
 /**

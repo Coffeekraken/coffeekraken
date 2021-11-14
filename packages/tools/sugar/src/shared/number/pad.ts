@@ -5,7 +5,6 @@
  * @namespace            js.number
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,9 +26,9 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function pad(number, width, character = '0') {
-  number = number + '';
-  return number.length >= width
-    ? number
-    : new Array(width - number.length + 1).join(character) + number;
+    number = number + '';
+    return number.length >= width
+        ? number
+        : new Array(width - number.length + 1).join(character) + number;
 }
 export default pad;

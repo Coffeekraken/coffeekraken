@@ -20,27 +20,18 @@
     
     <p class="s-typo:lead s-mbe:50">{!! $block->description !!}</p>
 
-    <div class="s-bg:main-surface s-p:30 s-mbe:50 s-radius s-depth:100 s-flex:align-center">
+    <div class="s-bg:main-surface s-p:30 s-mbe:100 s-radius s-depth:100 s-flex:align-center">
         <div class="s-flex-item:grow">
             @if ($block->platform)
                 Platform
                 &nbsp;
-                @foreach ($block->platform as $platform)
-                    <span class="s-tooltip-container">
-                        <i class="s-platform:{{ $platform->name }}"></i>
-                        <div class="s-tooltip s-color:complementary s-white-space:nowrap">
-                            {{ $platform->name }}
-                        </div>
-                    </span>
-                @endforeach
+                @include('generic.platforms.icons', ['platforms' => $block->platform])
             @endif
             @if ($block->support)
                 &nbsp;&nbsp;&nbsp;<span class="s-tc:main-background">│</span>&nbsp;&nbsp;&nbsp;
                 Support 
                 &nbsp;
-                <span class="">
                 @include('generic.support.icons', ['supports' => $block->support])
-                </span>
             @endif
         </div>
 

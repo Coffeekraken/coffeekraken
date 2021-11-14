@@ -9,7 +9,6 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @name            extractImport
  * @namespace            node.module
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

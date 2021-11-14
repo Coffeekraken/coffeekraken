@@ -7,7 +7,6 @@ import __SEvent from '../../event/SEvent';
  * @namespace            js.dom.event
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status          stable
  *
  * Helper to quickly display an event with some optional data attached to it
@@ -29,13 +28,17 @@ import __SEvent from '../../event/SEvent';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function dispatchEvent($target: HTMLElement, name: string, data: any = null): void {
-  // create new event
-  const e = new __SEvent(name, {
-    detail: data,
-    bubbles: true,
-    cancelable: true
-  });
-  $target.dispatchEvent(e);
+function dispatchEvent(
+    $target: HTMLElement,
+    name: string,
+    data: any = null,
+): void {
+    // create new event
+    const e = new __SEvent(name, {
+        detail: data,
+        bubbles: true,
+        cancelable: true,
+    });
+    $target.dispatchEvent(e);
 }
 export default dispatchEvent;

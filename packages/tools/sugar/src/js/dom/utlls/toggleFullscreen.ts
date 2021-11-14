@@ -8,7 +8,6 @@ import exitFullscreen from './exitFullscreen';
  * @namespace            js.dom.utils
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * Toggle the fullscreen mode
@@ -28,14 +27,14 @@ import exitFullscreen from './exitFullscreen';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function toggleFullscreen(elm: HTMLElement): Promise<any> {
-  const fullscreenElm =
-    document.fullscreenElement ||
-    document.mozFullScreenElement ||
-    document.webkitFullscreenElement;
-  if (!fullscreenElm || fullscreenElm !== elm) {
-    return requestFullscreen(elm);
-  } else {
-    return exitFullscreen();
-  }
+    const fullscreenElm =
+        document.fullscreenElement ||
+        document.mozFullScreenElement ||
+        document.webkitFullscreenElement;
+    if (!fullscreenElm || fullscreenElm !== elm) {
+        return requestFullscreen(elm);
+    } else {
+        return exitFullscreen();
+    }
 }
 export default toggleFullscreen;

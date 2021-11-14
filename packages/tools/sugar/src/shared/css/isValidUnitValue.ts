@@ -3,7 +3,6 @@
  * @namespace       shared.css
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -21,34 +20,34 @@
  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function isValidUnitValue(value: string | number): boolean {
-  if (typeof value === 'number') return true;
-  if (typeof value !== 'string') return false;
+    if (typeof value === 'number') return true;
+    if (typeof value !== 'string') return false;
 
-  const unit = value
-    .replace(/[0-9,.]+/, '')
-    .trim()
-    .toLowerCase();
+    const unit = value
+        .replace(/[0-9,.]+/, '')
+        .trim()
+        .toLowerCase();
 
-  if (
-    [
-      'cm',
-      'mm',
-      'in',
-      'px',
-      'pt',
-      'pc',
-      'em',
-      'ex',
-      'ch',
-      'rem',
-      'vw',
-      'vh',
-      'vmin',
-      'vmax',
-      '%'
-    ].indexOf(unit) === -1
-  )
-    return false;
+    if (
+        [
+            'cm',
+            'mm',
+            'in',
+            'px',
+            'pt',
+            'pc',
+            'em',
+            'ex',
+            'ch',
+            'rem',
+            'vw',
+            'vh',
+            'vmin',
+            'vmax',
+            '%',
+        ].indexOf(unit) === -1
+    )
+        return false;
 
-  return true;
+    return true;
 }

@@ -8,13 +8,12 @@ import __deepMerge from '../../shared/object/deepMerge';
  * @namespace            js.feature
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status      beta
  *
  * This feature simply allow a snooth scroll on page load if an hash exists in the url
  *
  * @setting    {IScrollToSettings}            [scroll={}]       Some scroll settings that you can check on the sugar.dom.scroll.scrollTo function
- * 
+ *
  * @param     {ISmoothScrollOnPageLoadSettings}    [settings={}]     Some settings to tweak the smooth scroll behavior
  *
  * @todo            interface
@@ -30,18 +29,19 @@ import __deepMerge from '../../shared/object/deepMerge';
  */
 
 export interface ISmoothScrollOnPageLoadSettings {
-  scroll: Partial<IScrollToSettings>;
+    scroll: Partial<IScrollToSettings>;
 }
 
 function smoothScrollOnPageLoad(
-  settings: Partial<ISmoothScrollOnPageLoadSettings> = {}
+    settings: Partial<ISmoothScrollOnPageLoadSettings> = {},
 ): void {
+    settings = __deepMerge(
+        {
+            scroll: {},
+        },
+        settings,
+    );
 
-  settings = __deepMerge({
-    scroll: {}
-  }, settings);
-
-  __scrollToLocationHash(settings);
-
+    __scrollToLocationHash(settings);
 }
 export default smoothScrollOnPageLoad;

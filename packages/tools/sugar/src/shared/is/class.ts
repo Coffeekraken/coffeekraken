@@ -7,7 +7,6 @@ import __isClass from 'is-class';
  * @namespace            js.is
  * @type                      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -31,10 +30,10 @@ import __isClass from 'is-class';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function cls(cls) {
-  if (!Array.isArray(cls)) cls = [cls];
-  for (let i = 0; i < cls.length; i++) {
-    if (!__isClass(cls[i])) return false;
-  }
-  return true;
+    if (!Array.isArray(cls)) cls = [cls];
+    for (let i = 0; i < cls.length; i++) {
+        if (!__isClass(cls[i])) return false;
+    }
+    return true;
 }
 export default cls;

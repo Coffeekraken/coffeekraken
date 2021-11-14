@@ -5,7 +5,6 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @namespace       node.helpers
  * @type            Function
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * @since       2.0.0

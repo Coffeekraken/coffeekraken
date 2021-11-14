@@ -6,7 +6,6 @@ import __extension from './extension';
  * @name                       filename
  * @namespace            node.fs
  * @type                        Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

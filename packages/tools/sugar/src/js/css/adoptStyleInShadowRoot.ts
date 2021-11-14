@@ -5,7 +5,6 @@ import __uniqid from '../../shared/string/uniqid';
  * @namespace       js.css
  * @type            Function
  * @platform        js
- * @platform        ts
  * @status          beta
  *
  * This function allows you to make a shadowRoot element adopt his host context styles

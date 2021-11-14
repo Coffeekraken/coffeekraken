@@ -10,7 +10,6 @@ import __closest from '../query/closest';
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @status        stable
  *
  * Monitor an HTMLElement to be notified when it exit the viewport

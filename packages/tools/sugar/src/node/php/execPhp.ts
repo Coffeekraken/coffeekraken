@@ -11,7 +11,6 @@ import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
  * @namespace       node.php
  * @type            Function
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * This function allows you to execute quickly and efficiently some php
@@ -28,7 +27,11 @@ export interface IExecPhpSettings {
     paramsThroughFile: boolean;
 }
 
-export default function execPhp(scriptPath: string, params: any, settings?: Partial<IExecPhpSettings>) {
+export default function execPhp(
+    scriptPath: string,
+    params: any,
+    settings?: Partial<IExecPhpSettings>,
+) {
     return new Promise((resolve, reject) => {
         settings = {
             encryptParams: false,
@@ -44,9 +47,13 @@ export default function execPhp(scriptPath: string, params: any, settings?: Part
             __writeJsonSync(paramsFilePath, params);
         }
 
-        const result = __childProcess.spawnSync(`php ${scriptPath} '${paramsFilePath ?? paramsStr}'`, [], {
-            shell: true,
-        });
+        const result = __childProcess.spawnSync(
+            `php ${scriptPath} '${paramsFilePath ?? paramsStr}'`,
+            [],
+            {
+                shell: true,
+            },
+        );
 
         if (result.stderr.toString()) {
             return reject(result.stderr.toString());

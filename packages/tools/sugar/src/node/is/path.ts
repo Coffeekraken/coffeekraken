@@ -6,7 +6,6 @@ import __isPath from '../fs/isPath';
  * @name                            path
  * @namespace            node.is
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -28,6 +27,6 @@ import __isPath from '../fs/isPath';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function path(path, checkExistence = false) {
-  return __isPath(path, checkExistence);
+    return __isPath(path, checkExistence);
 }
 export default path;

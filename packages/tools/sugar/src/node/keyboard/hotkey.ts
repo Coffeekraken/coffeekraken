@@ -9,7 +9,6 @@ import __isChildProcess from '../is/childProcess';
  * @name                hotkey
  * @namespace            node.keyboard
  * @type                Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

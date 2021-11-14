@@ -8,7 +8,6 @@ import __ncp from 'copy-paste';
  * @name            copy
  * @namespace            node.clipboard
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -30,11 +29,11 @@ import __ncp from 'copy-paste';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function copy(text) {
-  text = __toString(text);
-  try {
-    __clipboardy.writeSync(text);
-  } catch (e) {
-    __ncp.copy(text);
-  }
+    text = __toString(text);
+    try {
+        __clipboardy.writeSync(text);
+    } catch (e) {
+        __ncp.copy(text);
+    }
 }
 export default copy;

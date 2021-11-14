@@ -9,7 +9,6 @@ import __stringify from 'fast-safe-stringify';
  * @namespace            js.json
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -36,6 +35,6 @@ import __stringify from 'fast-safe-stringify';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function stringify(obj, replacer = null, space = null) {
-  return __stringify(obj, replacer, space);
+    return __stringify(obj, replacer, space);
 }
 export default stringify;

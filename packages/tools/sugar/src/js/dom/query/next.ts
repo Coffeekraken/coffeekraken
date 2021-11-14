@@ -7,7 +7,6 @@ import __matches from './matches';
  * @namespace            js.dom.query
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Browse the passed element next siblings to find the first element that matches the passed selector
@@ -31,13 +30,13 @@ import __matches from './matches';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function next(elm: HTMLElement, selector: string): HTMLElement {
-  elm = elm.nextSibling;
-  while (elm) {
-    if (__matches(elm, selector)) {
-      return elm;
-    }
     elm = elm.nextSibling;
-  }
-  return false;
+    while (elm) {
+        if (__matches(elm, selector)) {
+            return elm;
+        }
+        elm = elm.nextSibling;
+    }
+    return false;
 }
 export default next;

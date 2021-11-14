@@ -13,7 +13,6 @@ import __excludeGlobs from '../path/excludeGlobs';
  * @name            resolveGlob
  * @namespace            node.glob
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

@@ -11,7 +11,6 @@ import __unquote from '../string/unquote';
  * @namespace            js.object
  * @type                          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -38,27 +37,27 @@ import __unquote from '../string/unquote';
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function getGlob(obj, glob, settings = {}) {
-  settings = {
-    deepize: true,
-    ...settings
-  };
+    settings = {
+        deepize: true,
+        ...settings,
+    };
 
-  const flat = __flatten(obj);
+    const flat = __flatten(obj);
 
-  const resultObj = {};
+    const resultObj = {};
 
-  Object.keys(flat).forEach((path) => {
-    if (__minimatch(path, glob)) {
-      resultObj[path] = flat[path];
-    }
-  });
+    Object.keys(flat).forEach((path) => {
+        if (__minimatch(path, glob)) {
+            resultObj[path] = flat[path];
+        }
+    });
 
-  // if (glob === 'watch') {
-  //   console.log('GLOB', resultObj);
-  // }
+    // if (glob === 'watch') {
+    //   console.log('GLOB', resultObj);
+    // }
 
-  if (settings.deepize === true) return __deepize(resultObj);
-  return resultObj;
+    if (settings.deepize === true) return __deepize(resultObj);
+    return resultObj;
 }
 
 // console.log(

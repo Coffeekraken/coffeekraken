@@ -25,13 +25,13 @@ import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginScrollbarInterface extends __SInterface {
     static get _definition() {
         return {
-            size: {
-                type: 'String',
-                default: __STheme.config('ui.scrollbar.size'),
-            },
             color: {
                 type: 'String',
                 default: __STheme.config('ui.scrollbar.defaultColor'),
+            },
+            size: {
+                type: 'String',
+                default: __STheme.config('ui.scrollbar.size'),
             },
         };
     }

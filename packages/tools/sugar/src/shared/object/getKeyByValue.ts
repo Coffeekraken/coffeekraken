@@ -5,7 +5,6 @@
  * @namespace            js.object
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,6 +26,6 @@
  * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function getKeyByValue(object, value) {
-  return Object.keys(object).find((key) => object[key] === value);
+    return Object.keys(object).find((key) => object[key] === value);
 }
 export default getKeyByValue;

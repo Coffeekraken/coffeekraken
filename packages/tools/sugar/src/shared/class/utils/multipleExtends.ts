@@ -7,7 +7,6 @@ import __aggregation from 'aggregation/es5';
  * @namespace           shared.class.utils
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          alpha
  *
@@ -29,5 +28,5 @@ import __aggregation from 'aggregation/es5';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default (...classes) => {
-  return __aggregation(...classes);
+    return __aggregation(...classes);
 };

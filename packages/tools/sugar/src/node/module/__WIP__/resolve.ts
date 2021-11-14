@@ -15,7 +15,6 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * @name            resolve
  * @namespace            node.module
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          wip
  *

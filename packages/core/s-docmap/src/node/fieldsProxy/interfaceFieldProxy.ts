@@ -3,7 +3,6 @@
  * @namespace       node.fieldsProxy
  * @type                Function
  * @platform        node
- * @platform        ts
  * @status          beta
  *
  * This field proxy take the "interface" field and transform it to full
@@ -18,7 +17,9 @@
 
 export interface ISDocMapInterfaceField {}
 
-export default async function interfaceFieldProxy(data: any): Promise<ISDocMapInterfaceField> {
+export default async function interfaceFieldProxy(
+    data: any,
+): Promise<ISDocMapInterfaceField> {
     const int = (await import(data.path)).default;
     return int.toObject();
 }

@@ -11,7 +11,6 @@ import __parse from '../string/parse';
  * @namespace            js.env
  * @type                    Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              wip
  *
@@ -33,20 +32,20 @@ import __parse from '../string/parse';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function env(dotPath, value?) {
-  if (!__isNode()) {
-    if (!window.process) window.process = {};
-    if (!window.process.env) window.process.env = {};
-  }
-  const targetObj = __isNode() ? global.process.env : window.process.env;
+    if (!__isNode()) {
+        if (!window.process) window.process = {};
+        if (!window.process.env) window.process.env = {};
+    }
+    const targetObj = __isNode() ? global.process.env : window.process.env;
 
-  if (value === -1) {
-    // delete the variable
-    __delete(targetObj, dotPath.toUpperCase());
-  } else if (value !== undefined) {
-    __set(targetObj, dotPath.toUpperCase(), __parse(value));
-  }
-  // return the variable value
-  return __parse(__get(targetObj, dotPath.toUpperCase()));
+    if (value === -1) {
+        // delete the variable
+        __delete(targetObj, dotPath.toUpperCase());
+    } else if (value !== undefined) {
+        __set(targetObj, dotPath.toUpperCase(), __parse(value));
+    }
+    // return the variable value
+    return __parse(__get(targetObj, dotPath.toUpperCase()));
 }
 
 export default env;

@@ -23,7 +23,6 @@ import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilder
  * @type                Class
  * @extends             SBuilder
  * @platform            node
- * @platform            ts
  * @status              beta
  *
  * This class represent the markdown builder that helps you create and maintain multiple README for example

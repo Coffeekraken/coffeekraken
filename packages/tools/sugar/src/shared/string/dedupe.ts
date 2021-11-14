@@ -7,7 +7,6 @@ import __toRegex from 'to-regex';
  * @namespace            js.string
  * @type        Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -29,17 +28,17 @@ import __toRegex from 'to-regex';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function dedupe(str, statement) {
-  const reg = __toRegex(`(${statement})`, {
-    contains: true,
-    flags: 'g'
-  });
-  return str
-    .split(reg)
-    .reverse()
-    .filter(function (e, i, arr) {
-      return arr.indexOf(e, i + 1) === -1;
-    })
-    .reverse()
-    .join('');
+    const reg = __toRegex(`(${statement})`, {
+        contains: true,
+        flags: 'g',
+    });
+    return str
+        .split(reg)
+        .reverse()
+        .filter(function (e, i, arr) {
+            return arr.indexOf(e, i + 1) === -1;
+        })
+        .reverse()
+        .join('');
 }
 export default dedupe;

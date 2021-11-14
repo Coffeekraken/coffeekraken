@@ -6,7 +6,6 @@ import __ip from 'ip';
  * @name              ipAddress
  * @namespace            node.network
  * @type              Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -27,6 +26,6 @@ import __ip from 'ip';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function ipAddress() {
-  return __ip.address();
+    return __ip.address();
 }
 export default ipAddress;

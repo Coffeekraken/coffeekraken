@@ -5,7 +5,6 @@
  * @namespace            js.class.utils
  * @type                                    Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -31,12 +30,12 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function methodExists(instance, ...methods) {
-  const missingMethodsArray = [];
-  if (!Array.isArray(methods)) methods = [methods];
-  methods.forEach((method) => {
-    if (typeof instance[method] !== 'function')
-      missingMethodsArray.push(method);
-  });
-  return !missingMethodsArray.length ? true : missingMethodsArray;
+    const missingMethodsArray = [];
+    if (!Array.isArray(methods)) methods = [methods];
+    methods.forEach((method) => {
+        if (typeof instance[method] !== 'function')
+            missingMethodsArray.push(method);
+    });
+    return !missingMethodsArray.length ? true : missingMethodsArray;
 }
 export default methodExists;

@@ -7,7 +7,6 @@ import __deepMerge from '../object/deepMerge';
  * @namespace            js.string
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -36,31 +35,31 @@ import __deepMerge from '../object/deepMerge';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function trimLines(string, settings = {}) {
-  settings = __deepMerge(
-    {
-      leftPadding: 0,
-      rightPadding: 0,
-      keepEmptyLines: true
-    },
-    settings
-  );
+    settings = __deepMerge(
+        {
+            leftPadding: 0,
+            rightPadding: 0,
+            keepEmptyLines: true,
+        },
+        settings,
+    );
 
-  string = string
-    .split('\n')
-    .map((line) => {
-      line = line.trim();
-      if (!settings.keepEmptyLines) {
-        if (line === '') return -1;
-      }
-      if (settings.leftPadding)
-        line = `${' '.repeat(settings.leftPadding)}${line}`;
-      if (settings.rightPadding)
-        line = `${line}${' '.repeat(settings.rightPadding)}`;
-      return line;
-    })
-    .filter((line) => line !== -1)
-    .join('\n');
+    string = string
+        .split('\n')
+        .map((line) => {
+            line = line.trim();
+            if (!settings.keepEmptyLines) {
+                if (line === '') return -1;
+            }
+            if (settings.leftPadding)
+                line = `${' '.repeat(settings.leftPadding)}${line}`;
+            if (settings.rightPadding)
+                line = `${line}${' '.repeat(settings.rightPadding)}`;
+            return line;
+        })
+        .filter((line) => line !== -1)
+        .join('\n');
 
-  return string;
+    return string;
 }
 export default trimLines;

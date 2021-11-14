@@ -6,7 +6,6 @@ import __clipboardy from 'clipboardy';
  * @name            read
  * @namespace            node.clipboard
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

@@ -10,7 +10,6 @@ import __minimatch from 'minimatch';
  * @namespace       node.fs
  * @type            Function
  * @async
- * @platform        ts
  * @platform        node
  * @status          beta
  *

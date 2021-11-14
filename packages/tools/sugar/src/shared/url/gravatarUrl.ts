@@ -7,7 +7,6 @@ import __md5 from '../crypt/md5';
  * @namespace            js.url
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -30,6 +29,6 @@ import __md5 from '../crypt/md5';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function gravatarUrl(email, size = 200) {
-  return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
+    return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;
 }
 export default gravatarUrl;

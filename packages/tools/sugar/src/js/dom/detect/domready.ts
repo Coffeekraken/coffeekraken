@@ -6,7 +6,6 @@
  * @type      Function
  * @async
  * @platform          js
- * @platform          ts
  * @stable
  *
  * Wait that the dom is ready before resolving the promise
@@ -34,11 +33,11 @@
  */
 import __domReady from 'domready';
 function domReady(cb = null) {
-  return new Promise((resolve, reject) => {
-    __domReady(() => {
-      cb && cb();
-      resolve();
+    return new Promise((resolve, reject) => {
+        __domReady(() => {
+            cb && cb();
+            resolve();
+        });
     });
-  });
 }
 export default domReady;

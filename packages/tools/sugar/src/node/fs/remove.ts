@@ -6,7 +6,6 @@ import __fs from 'fs-extra';
  * @name        remove
  * @namespace            node.fs
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          stable
  *

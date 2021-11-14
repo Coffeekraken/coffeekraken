@@ -18,7 +18,6 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @type            Feature
  * @menu            Styleguide / Forms               /styleguide/forms/s-form-validate
  * @platform        js
- * @platform        ts
  * @status          beta
  *
  * This feature allows you to validate your forms by using under the hood the **AMAZING joi library**.

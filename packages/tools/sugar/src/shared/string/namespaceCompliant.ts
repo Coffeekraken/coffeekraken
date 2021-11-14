@@ -5,7 +5,6 @@ import __simplifySpecialChars from './simplifySpecialChars';
  * @namespace            shared.string
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

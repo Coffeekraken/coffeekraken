@@ -7,7 +7,6 @@ import __fs from 'fs';
  * @name                            isPath
  * @namespace            node.fs
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

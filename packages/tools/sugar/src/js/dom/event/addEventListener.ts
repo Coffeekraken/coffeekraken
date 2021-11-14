@@ -7,14 +7,13 @@ import __SPromise from '@coffeekraken/s-promise';
  * @namespace            js.dom.event
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status          beta
  *
  * Add an event listener on an element and return the function to remove the event listener
  *
  * @feature       Returns an SPromise that you can use to remove the event listener using the `cancel` method
  * @feature       Can listen to multiple events at once
- * 
+ *
  * @param    {HTMLElement}    $elm    The HTMLElement on which to add the event listener
  * @param    {String}    eventNames    The event names to listen to. Can be a simple string like "click", multiple events like "click,focus", or an array of events like ['click','hover']
  * @param    {Function}    callback    The callback function to call on event. The passed event
@@ -44,42 +43,46 @@ import __SPromise from '@coffeekraken/s-promise';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function addEventListener(
-  $elm,
-  eventNames,
-  callback = null,
-  useCapture = false
+    $elm,
+    eventNames,
+    callback = null,
+    useCapture = false,
 ) {
-  if (!Array.isArray(eventNames))
-    eventNames = eventNames.split(',').map((e) => e.trim());
+    if (!Array.isArray(eventNames))
+        eventNames = eventNames.split(',').map((e) => e.trim());
 
-  if (callback && typeof callback === 'function') callback = callback;
-  else if (callback && typeof callback === 'boolean') useCapture = callback;
+    if (callback && typeof callback === 'function') callback = callback;
+    else if (callback && typeof callback === 'boolean') useCapture = callback;
 
-  const eventsStack = {};
+    const eventsStack = {};
 
-  const promise = new __SPromise({
-    id: 'addEventListener'
-  }).on('finally', () => {
-    eventNames.forEach((eventName) => {
-      const stack = eventsStack[eventName];
-      $elm.removeEventListener(eventName, stack.callback, stack.useCapture);
+    const promise = new __SPromise({
+        id: 'addEventListener',
+    }).on('finally', () => {
+        eventNames.forEach((eventName) => {
+            const stack = eventsStack[eventName];
+            $elm.removeEventListener(
+                eventName,
+                stack.callback,
+                stack.useCapture,
+            );
+        });
     });
-  });
 
-  eventNames.forEach((eventName) => {
-    const internalCallback = (event) => {
-      if (callback) callback.apply(this, [event]);
-      promise.emit(eventName, event);
-    };
+    eventNames.forEach((eventName) => {
+        const internalCallback = (event) => {
+            if (callback) callback.apply(this, [event]);
+            promise.emit(eventName, event);
+        };
 
-    eventsStack[eventName] = {
-      callback: internalCallback,
-      useCapture
-    };
+        eventsStack[eventName] = {
+            callback: internalCallback,
+            useCapture,
+        };
 
-    $elm.addEventListener(eventName, internalCallback, useCapture);
-  });
+        $elm.addEventListener(eventName, internalCallback, useCapture);
+    });
 
-  return promise;
+    return promise;
 }
 export default addEventListener;

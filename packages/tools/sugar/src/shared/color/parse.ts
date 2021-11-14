@@ -14,7 +14,6 @@ import __rgba2hsv from './rgba2hsv';
  * @namespace            js.color
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  * @private

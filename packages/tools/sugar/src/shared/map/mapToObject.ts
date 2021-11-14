@@ -3,7 +3,6 @@
  * @namespace            js.map
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -25,8 +24,8 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function mapToObject(map: any): object {
-  const obj = {};
-  for (const [k, v] of map) obj[k] = v;
-  return obj;
+    const obj = {};
+    for (const [k, v] of map) obj[k] = v;
+    return obj;
 }
 export default mapToObject;

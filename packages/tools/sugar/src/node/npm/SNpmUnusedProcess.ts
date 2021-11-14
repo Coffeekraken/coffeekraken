@@ -13,7 +13,6 @@ import __packageJson from './utils/packageJson';
  * @namespace            node.npm
  * @type            Class
  * @extends         SProcess
- * @platform        ts
  * @platform        node
  * @status          beta
  *

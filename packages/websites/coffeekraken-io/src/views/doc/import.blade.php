@@ -4,7 +4,7 @@
         <i class="s-icon:import s-tc:accent"></i>&nbsp;&nbsp;Import
     </h4>
 
-    <s-code-example class="s-mbe:50">
+    <s-code-example class="s-mbe:100">
         <template lang="js">
             {{ $block->import }}
         </template>       

@@ -5,7 +5,6 @@
  * @namespace            js.easing
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -22,6 +21,6 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function ease(t) {
-  return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
+    return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;
 }
 export default ease;

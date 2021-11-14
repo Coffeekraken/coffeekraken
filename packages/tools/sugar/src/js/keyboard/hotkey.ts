@@ -3,7 +3,7 @@
 import hotkeys from 'hotkeys-js/dist/hotkeys.common';
 import __SPromise from '@coffeekraken/s-promise';
 hotkeys.filter = function () {
-  return true;
+    return true;
 };
 
 /**
@@ -11,7 +11,6 @@ hotkeys.filter = function () {
  * @namespace            js.keyboard
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status              beta
  *
  * Simple function to add a hotkey like "ctrl+a" and an handler function that will be called when the hotkey has been pressed
@@ -28,7 +27,7 @@ hotkeys.filter = function () {
  * @setting      {Boolean}          [keydown=true]          Detect on keydown
  * @setting      {Boolean}          [once=false]            Specify if you want to detect the keyboard event just once
  * @setting      {String}           [splitKey='+']           Specify the split key to use in the sequences like "ctrl+a"
- * 
+ *
  * @param        {String}       hotkey          The hotkey to detect
  * @param         {Object}      [settings={}]    An option object to configure your hotkey. Here's the list of available settings:
  * @return      {SPromise}                       An SPromise instance on which you can register for "key" stack event
@@ -51,39 +50,42 @@ hotkeys.filter = function () {
  */
 
 export interface IHotkeySettings {
-  element: HTMLElement;
-  keyup: boolean;
-  keydown: boolean;
-  once: boolean;
-  splitKey: string
+    element: HTMLElement;
+    keyup: boolean;
+    keydown: boolean;
+    once: boolean;
+    splitKey: string;
 }
 
-function hotkey(hotkey: string, settings: Partial<IHotkeySettings> = {}): __SPromise<any> {
-  return new __SPromise(
-    ({ resolve, reject, emit, cancel }) => {
-      // merge default settings with passed ones:
-      settings = {
-        element: null,
-        keyup: false,
-        keydown: true,
-        once: false,
-        splitKey: '+',
-        ...settings
-      };
+function hotkey(
+    hotkey: string,
+    settings: Partial<IHotkeySettings> = {},
+): __SPromise<any> {
+    return new __SPromise(
+        ({ resolve, reject, emit, cancel }) => {
+            // merge default settings with passed ones:
+            settings = {
+                element: null,
+                keyup: false,
+                keydown: true,
+                once: false,
+                splitKey: '+',
+                ...settings,
+            };
 
-      // init the hotkey
-      hotkeys(hotkey, settings, (e, h) => {
-        // call the handler function
-        emit('press', e);
-        // unsubscribe if once is truc
-        if (settings.once) cancel();
-      });
-    },
-    {
-      id: 'hotkey'
-    }
-  ).on('finally', () => {
-    hotkeys.unbind(hotkey);
-  });
+            // init the hotkey
+            hotkeys(hotkey, settings, (e, h) => {
+                // call the handler function
+                emit('press', e);
+                // unsubscribe if once is truc
+                if (settings.once) cancel();
+            });
+        },
+        {
+            id: 'hotkey',
+        },
+    ).on('finally', () => {
+        hotkeys.unbind(hotkey);
+    });
 }
 export default hotkey;

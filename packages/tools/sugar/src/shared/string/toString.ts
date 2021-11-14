@@ -23,7 +23,6 @@ import { decycle } from 'json-cyclic';
  * @namespace            js.string
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -50,124 +49,128 @@ import { decycle } from 'json-cyclic';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function fn(value, settings = {}) {
-  settings = __deepMerge(
-    {
-      beautify: true,
-      highlight: true,
-      verbose: true,
-      theme: {
-        number: __chalk.yellow,
-        default: __chalk.white,
-        keyword: __chalk.blue,
-        regexp: __chalk.red,
-        string: __chalk.whiteBright,
-        class: __chalk.yellow,
-        function: __chalk.yellow,
-        comment: __chalk.gray,
-        variable: __chalk.red,
-        attr: __chalk.green
-      }
-    },
-    settings
-  );
+    settings = __deepMerge(
+        {
+            beautify: true,
+            highlight: true,
+            verbose: true,
+            theme: {
+                number: __chalk.yellow,
+                default: __chalk.white,
+                keyword: __chalk.blue,
+                regexp: __chalk.red,
+                string: __chalk.whiteBright,
+                class: __chalk.yellow,
+                function: __chalk.yellow,
+                comment: __chalk.gray,
+                variable: __chalk.red,
+                attr: __chalk.green,
+            },
+        },
+        settings,
+    );
 
-  // string
-  if (typeof value === 'string') return value;
-  // null
-  if (value === null) return null;
-  // undefined
-  if (value === undefined) return undefined;
-  // error
-  if (value instanceof Error) {
-    const errorStr = value.toString();
-    const stackStr = value.stack;
-    const messageStr = value.message;
+    // string
+    if (typeof value === 'string') return value;
+    // null
+    if (value === null) return null;
+    // undefined
+    if (value === undefined) return undefined;
+    // error
+    if (value instanceof Error) {
+        const errorStr = value.toString();
+        const stackStr = value.stack;
+        const messageStr = value.message;
 
-    // if (settings.beautify) {
-    //   if (__isNode()) {
-    //     const __packageRoot = require('../path/packageRootDir').default; // eslint-disable-line
-    //     stackStr = stackStr.replace(errorStr, '').trim();
-    //     stackStr = stackStr
-    //       .split(`${__packageRoot(process.cwd(), true)}/`)
-    //       .join('');
-    //     stackStr = `${stackStr
-    //       .split('\n')
-    //       .map((l) => {
-    //         l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
-    //           if (str.match(/\//) && str.match(/\.ts$/))
-    //             l = l.replace(str, `<blue>${str}</blue>`);
-    //           else if (str.match(/\//))
-    //             l = l.replace(str, `<cyan>${str}</cyan>`);
-    //         });
-    //         l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
-    //         l = l.replace('->', '<yellow>└-></yellow>');
-    //         l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
-    //         return `<yellow>│</yellow> ${l.trim()}`;
-    //       })
-    //       .join('\n')}`;
-    //   }
-    // }
-    if (settings.verbose) {
-      return [
-        `<red>${value.constructor.name || 'Error'}</red>`,
-        '',
-        messageStr,
-        '',
-        stackStr
-      ].join('\n');
+        // if (settings.beautify) {
+        //   if (__isNode()) {
+        //     const __packageRoot = require('../path/packageRootDir').default; // eslint-disable-line
+        //     stackStr = stackStr.replace(errorStr, '').trim();
+        //     stackStr = stackStr
+        //       .split(`${__packageRoot(process.cwd(), true)}/`)
+        //       .join('');
+        //     stackStr = `${stackStr
+        //       .split('\n')
+        //       .map((l) => {
+        //         l.match(/[a-zA-Z-0-9\-_\./]+/gm).forEach((str) => {
+        //           if (str.match(/\//) && str.match(/\.ts$/))
+        //             l = l.replace(str, `<blue>${str}</blue>`);
+        //           else if (str.match(/\//))
+        //             l = l.replace(str, `<cyan>${str}</cyan>`);
+        //         });
+        //         l = l.trim().replace(/^at\s/, '<yellow>at</yellow> ');
+        //         l = l.replace('->', '<yellow>└-></yellow>');
+        //         l = l.replace(/:([0-9]{1,29}:[0-9]{1,29})/, `:<yellow>$1</yellow>`);
+        //         return `<yellow>│</yellow> ${l.trim()}`;
+        //       })
+        //       .join('\n')}`;
+        //   }
+        // }
+        if (settings.verbose) {
+            return [
+                `<red>${value.constructor.name || 'Error'}</red>`,
+                '',
+                messageStr,
+                '',
+                stackStr,
+            ].join('\n');
+        }
+        return errorStr;
     }
-    return errorStr;
-  }
 
-  // Map
-  if (__isMap(value)) {
-    value = __mapToObj(value);
-  }
-
-  // JSON
-  if (__isObject(value) || __isArray(value) || __isJson(value)) {
-    try {
-      value = decycle(value);
-    } catch (e) {}
-
-    value = __deepMap(value, ({ value }) => {
-      if (value instanceof Map) return __mapToObj(value);
-      return value;
-    });
-
-    let prettyString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
-    prettyString = prettyString
-      .replace(/"([^"]+)":/g, '$1:')
-      .replace(/\uFFFF/g, '\\"');
-    if (settings.highlight) {
-      // prettyString = __cliHighlight(prettyString, {
-      //   language: 'js',
-      //   theme: settings.theme
-      // });
+    // Map
+    if (__isMap(value)) {
+        value = __mapToObj(value);
     }
-    return prettyString;
-  }
-  // boolean
-  if (__isBoolean(value)) {
-    if (value) return 'true';
-    else return 'false';
-  }
-  // function
-  if (__isFunction(value)) {
-    return '' + value;
-  }
-  // stringify
-  let returnString = '';
-  try {
-    value = decycle(value);
-    returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
-  } catch (e) {
+
+    // JSON
+    if (__isObject(value) || __isArray(value) || __isJson(value)) {
+        try {
+            value = decycle(value);
+        } catch (e) {}
+
+        value = __deepMap(value, ({ value }) => {
+            if (value instanceof Map) return __mapToObj(value);
+            return value;
+        });
+
+        let prettyString = JSON.stringify(
+            value,
+            null,
+            settings.beautify ? 4 : 0,
+        );
+        prettyString = prettyString
+            .replace(/"([^"]+)":/g, '$1:')
+            .replace(/\uFFFF/g, '\\"');
+        if (settings.highlight) {
+            // prettyString = __cliHighlight(prettyString, {
+            //   language: 'js',
+            //   theme: settings.theme
+            // });
+        }
+        return prettyString;
+    }
+    // boolean
+    if (__isBoolean(value)) {
+        if (value) return 'true';
+        else return 'false';
+    }
+    // function
+    if (__isFunction(value)) {
+        return '' + value;
+    }
+    // stringify
+    let returnString = '';
     try {
-      returnString = value.toString();
+        value = decycle(value);
+        returnString = JSON.stringify(value, null, settings.beautify ? 4 : 0);
     } catch (e) {
-      returnString = value;
+        try {
+            returnString = value.toString();
+        } catch (e) {
+            returnString = value;
+        }
     }
-  }
-  return returnString;
+    return returnString;
 }
 export default fn;

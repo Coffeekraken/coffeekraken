@@ -6,7 +6,6 @@ import __fs from 'fs';
  * @name            symlink
  * @namespace            node.is
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -29,6 +28,6 @@ import __fs from 'fs';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function isSymlink(path) {
-  return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
+    return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();
 }
 export default isSymlink;

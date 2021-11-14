@@ -19,7 +19,6 @@ import __formatEstimation from '@coffeekraken/sugar/shared/time/formatEstimation
  * @type                Class
  * @extends             SBuilder
  * @platform            node
- * @platform            ts
  * @status              beta
  *
  * This class represent the postcss builder that you can use to build your postcss files

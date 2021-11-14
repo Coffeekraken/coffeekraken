@@ -6,7 +6,6 @@ import __isPath from './isPath';
  * @name                folderPath
  * @namespace            node.fs
  * @type                Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

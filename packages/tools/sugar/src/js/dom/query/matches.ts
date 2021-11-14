@@ -5,7 +5,6 @@
  * @namespace            js.dom.query
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Polyfill for the Element.matches function
@@ -29,18 +28,18 @@
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function matches(el: HTMLElement, selector: string): boolean {
-  if (el.nodeName == '#comment' || el.nodeName == '#text') {
-    return false;
-  }
-  const p = Element.prototype;
-  const f =
-    p.matches ||
-    p.webkitMatchesSelector ||
-    p.mozMatchesSelector ||
-    p.msMatchesSelector ||
-    function (s) {
-      return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
-    };
-  return f.call(el, selector);
+    if (el.nodeName == '#comment' || el.nodeName == '#text') {
+        return false;
+    }
+    const p = Element.prototype;
+    const f =
+        p.matches ||
+        p.webkitMatchesSelector ||
+        p.mozMatchesSelector ||
+        p.msMatchesSelector ||
+        function (s) {
+            return [].indexOf.call(document.querySelectorAll(s), this) !== -1;
+        };
+    return f.call(el, selector);
 }
 export default matches;

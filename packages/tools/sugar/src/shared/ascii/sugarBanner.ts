@@ -8,7 +8,6 @@ import __parseHtml from '../console/parseHtml';
  * @namespace            shared.ascii
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *
@@ -30,67 +29,67 @@ import __parseHtml from '../console/parseHtml';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 interface ISugarBannerSettings {
-  version?: string;
-  borders?: boolean;
-  marginLeft: number;
-  paddingTop: number;
-  paddingBottom: number;
+    version?: string;
+    borders?: boolean;
+    marginLeft: number;
+    paddingTop: number;
+    paddingBottom: number;
 }
 function sugarBanner(settings: Partial<ISugarBannerSettings> = {}): string {
-  settings = __deepMerge(
-    {
-      version: '',
-      borders: true,
-      marginLeft: 2,
-      paddingTop: 0,
-      paddingBottom: 0
-    },
-    settings
-  );
-  let version = '';
-  if (settings.version) version = `<white>${settings.version}</white>`;
-  const value = [
-    `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-      settings.marginLeft
-    )}  ____                           </yellow>`,
-    `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-      settings.marginLeft
-    )}/ ____|</yellow><white>Coffee<magenta>kraken</magenta></white><yellow> __ _ _ __   </yellow>`,
-    `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-      settings.marginLeft
-    )}\\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,
-    `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-      settings.marginLeft
-    )} ___) | |_| | (_| | (_| | |       </yellow>`,
-    `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-      settings.marginLeft
-    )}|____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
-    `<yellow>${settings.borders ? '█' : ''}</yellow><white>${' '.repeat(
-      settings.marginLeft
-    )}             </white><yellow>|___/</yellow>`
-  ].map((line) => {
-    return line;
-  });
-  if (settings.paddingTop) {
-    for (let i = 0; i < settings.paddingTop; i++) {
-      value.unshift(
+    settings = __deepMerge(
+        {
+            version: '',
+            borders: true,
+            marginLeft: 2,
+            paddingTop: 0,
+            paddingBottom: 0,
+        },
+        settings,
+    );
+    let version = '';
+    if (settings.version) version = `<white>${settings.version}</white>`;
+    const value = [
         `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-          settings.marginLeft
-        )}</yellow>`
-      );
-    }
-  }
-  if (settings.paddingBottom) {
-    for (let i = 0; i < settings.paddingBottom; i++) {
-      value.push(
+            settings.marginLeft,
+        )}  ____                           </yellow>`,
         `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
-          settings.marginLeft
-        )}</yellow>`
-      );
+            settings.marginLeft,
+        )}/ ____|</yellow><white>Coffee<magenta>kraken</magenta></white><yellow> __ _ _ __   </yellow>`,
+        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+            settings.marginLeft,
+        )}\\___ \\| | | |/ _\` |/ _\` | \`__|  </yellow>`,
+        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+            settings.marginLeft,
+        )} ___) | |_| | (_| | (_| | |       </yellow>`,
+        `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+            settings.marginLeft,
+        )}|____/ \\__,_|\\__, |\\__,_|_|</yellow> ${version}    `,
+        `<yellow>${settings.borders ? '█' : ''}</yellow><white>${' '.repeat(
+            settings.marginLeft,
+        )}             </white><yellow>|___/</yellow>`,
+    ].map((line) => {
+        return line;
+    });
+    if (settings.paddingTop) {
+        for (let i = 0; i < settings.paddingTop; i++) {
+            value.unshift(
+                `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+                    settings.marginLeft,
+                )}</yellow>`,
+            );
+        }
     }
-  }
+    if (settings.paddingBottom) {
+        for (let i = 0; i < settings.paddingBottom; i++) {
+            value.push(
+                `<yellow>${settings.borders ? '█' : ''}${' '.repeat(
+                    settings.marginLeft,
+                )}</yellow>`,
+            );
+        }
+    }
 
-  return value.join('\n');
+    return value.join('\n');
 }
 
 export default sugarBanner;

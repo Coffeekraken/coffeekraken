@@ -8,7 +8,6 @@ import __readJsonSync from '../fs/readJsonSync';
  * @name          jsonSync
  * @namespace            node.package
  * @type          Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -30,21 +29,20 @@ import __readJsonSync from '../fs/readJsonSync';
  */
 let __packageJson = {};
 function jsonSync(from = process.cwd(), highest = false) {
+    const prop = highest ? 'highest' : 'default';
 
-  const prop = highest ? 'highest' : 'default';
+    if (__packageJson[from]?.[prop]) {
+        return __packageJson[from][prop];
+    }
 
-  if (__packageJson[from]?.[prop]) {
-    return __packageJson[from][prop];
-  }
+    const path = `${__packageRoot(from, highest)}/package.json`;
+    if (!__fs.existsSync(path)) return false;
 
-  const path = `${__packageRoot(from, highest)}/package.json`;
-  if (!__fs.existsSync(path)) return false;
+    const json = __readJsonSync(path);
 
-  const json = __readJsonSync(path);
+    if (!__packageJson[from]) __packageJson[from] = {};
+    __packageJson[from][prop] = json;
 
-  if (!__packageJson[from]) __packageJson[from] = {};
-  __packageJson[from][prop] = json;
-
-  return json;
+    return json;
 }
 export default jsonSync;

@@ -6,7 +6,6 @@ import __packageRoot from './packageRoot';
  * @name                            packageRootDir
  * @namespace            node.path
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

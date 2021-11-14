@@ -6,7 +6,6 @@ import __fs from 'fs-extra';
  * @name                            packageCacheDir
  * @namespace            node.path
  * @type                            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *

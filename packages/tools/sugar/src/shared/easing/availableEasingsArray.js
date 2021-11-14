@@ -4,7 +4,6 @@
  * @namespace            js.easing
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -32,8 +31,8 @@ function availableEasingsArray() {
         'easeOutCubic',
         'easeOutQuad',
         'easeOutQuart',
-        'easeOutQuint'
+        'easeOutQuint',
     ];
 }
 export default availableEasingsArray;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlRWFzaW5nc0FycmF5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlRWFzaW5nc0FycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQW1CRztBQUNILFNBQVMscUJBQXFCO0lBQzVCLE9BQU87UUFDTCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLGdCQUFnQjtRQUNoQixnQkFBZ0I7UUFDaEIsYUFBYTtRQUNiLFlBQVk7UUFDWixhQUFhO1FBQ2IsYUFBYTtRQUNiLGNBQWM7UUFDZCxhQUFhO1FBQ2IsY0FBYztRQUNkLGNBQWM7S0FDZixDQUFDO0FBQ0osQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiYXZhaWxhYmxlRWFzaW5nc0FycmF5LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiYXZhaWxhYmxlRWFzaW5nc0FycmF5LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLGNBQWM7QUFFZDs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBa0JHO0FBQ0gsU0FBUyxxQkFBcUI7SUFDMUIsT0FBTztRQUNILGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsZ0JBQWdCO1FBQ2hCLGdCQUFnQjtRQUNoQixhQUFhO1FBQ2IsWUFBWTtRQUNaLGFBQWE7UUFDYixhQUFhO1FBQ2IsY0FBYztRQUNkLGFBQWE7UUFDYixjQUFjO1FBQ2QsY0FBYztLQUNqQixDQUFDO0FBQ04sQ0FBQztBQUNELGVBQWUscUJBQXFCLENBQUMifQ==

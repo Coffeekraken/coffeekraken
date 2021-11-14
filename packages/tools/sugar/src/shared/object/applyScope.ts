@@ -7,7 +7,6 @@ import __isPlainObject from '../is/plainObject';
  * @type            Function
  * @platform            js
  * @platform            node
- * @platform            ts
  * @status              beta
  *
  * This function allows you to apply a certain scope on the passed object.

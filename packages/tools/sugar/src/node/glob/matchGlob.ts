@@ -11,7 +11,6 @@ import __path from 'path';
  * @name            matchGlob
  * @namespace       node.glob
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -33,65 +32,65 @@ import __path from 'path';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IMatchGlobSettings {
-  cwd: string;
-  symlinks: boolean;
-  nodir: boolean;
+    cwd: string;
+    symlinks: boolean;
+    nodir: boolean;
 }
 
 export default function matchGlob(
-  input,
-  glob,
-  settings?: Partial<IMatchGlobSettings>
+    input,
+    glob,
+    settings?: Partial<IMatchGlobSettings>,
 ): boolean {
-  settings = __deepMerge(
-    {
-      cwd: settings?.cwd ?? process.cwd(),
-      symlinks: true,
-      nodir: true
-    },
-    settings ?? {}
-  );
+    settings = __deepMerge(
+        {
+            cwd: settings?.cwd ?? process.cwd(),
+            symlinks: true,
+            nodir: true,
+        },
+        settings ?? {},
+    );
 
-  if (Array.isArray(glob)) {
-    for (let i = 0; i < glob.length; i++) {
-      if (matchGlob(input, glob[i], settings)) return true;
+    if (Array.isArray(glob)) {
+        for (let i = 0; i < glob.length; i++) {
+            if (matchGlob(input, glob[i], settings)) return true;
+        }
+        return false;
     }
-    return false;
-  }
 
-  const splits = glob.split(':');
-  const pattern = splits[0]
-    .replace(`${settings.cwd}/`, '')
-    .replace(settings.cwd, '');
-  const regex = splits[1];
+    const splits = glob.split(':');
+    const pattern = splits[0]
+        .replace(`${settings.cwd}/`, '')
+        .replace(settings.cwd, '');
+    const regex = splits[1];
 
-  const fullFilePath = __path.resolve(settings.cwd ?? '', input);
+    const fullFilePath = __path.resolve(settings.cwd ?? '', input);
 
-  const expandedGlobs = __expandGlob(pattern);
+    const expandedGlobs = __expandGlob(pattern);
 
-  let hasMatch = false;
-  for (let i = 0; i < expandedGlobs.length; i++) {
-    const g = expandedGlobs[i];
-    if (__minimatch(input, g)) {
-      hasMatch = true;
-      break;
+    let hasMatch = false;
+    for (let i = 0; i < expandedGlobs.length; i++) {
+        const g = expandedGlobs[i];
+        if (__minimatch(input, g)) {
+            hasMatch = true;
+            break;
+        }
     }
-  }
-  if (!hasMatch) return false;
+    if (!hasMatch) return false;
 
-  if (!__fs.existsSync(fullFilePath)) return false;
-  if (settings.nodir && __isDirectory(fullFilePath)) return false;
+    if (!__fs.existsSync(fullFilePath)) return false;
+    if (settings.nodir && __isDirectory(fullFilePath)) return false;
 
-  if (regex) {
-    const fileContent = __fs.readFileSync(fullFilePath, 'utf8').toString();
-    const regSplits = regex.split('/').splice(1);
-    const regString = regSplits[0];
-    const flags = regSplits[regSplits.length - 1];
-    const searchReg = __toRegex(regString, {
-      flags
-    });
-    if (!fileContent.match(searchReg)) return false;
-  }
+    if (regex) {
+        const fileContent = __fs.readFileSync(fullFilePath, 'utf8').toString();
+        const regSplits = regex.split('/').splice(1);
+        const regString = regSplits[0];
+        const flags = regSplits[regSplits.length - 1];
+        const searchReg = __toRegex(regString, {
+            flags,
+        });
+        if (!fileContent.match(searchReg)) return false;
+    }
 
-  return true;
+    return true;
 }

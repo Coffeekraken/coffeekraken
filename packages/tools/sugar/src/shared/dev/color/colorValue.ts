@@ -5,7 +5,6 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @namespace            shared.dev.colors
  * @type            Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -20,12 +19,12 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function colorValue(color) {
-  if (!__SugarConfig.get('dev.colors')[color]) {
-    throw new Error(
-      `[sugar.shared.dev.colors.colorValue] Sorry but the color "<yellow>${color}</yellow>" you want to get the value from does not exists... Here's the list of available colors at this time: ${Object.keys(
-        __SugarConfig.get('dev.colors')
-      ).join(',')}`
-    );
-  }
-  return __SugarConfig.get('dev.colors')[color];
+    if (!__SugarConfig.get('dev.colors')[color]) {
+        throw new Error(
+            `[sugar.shared.dev.colors.colorValue] Sorry but the color "<yellow>${color}</yellow>" you want to get the value from does not exists... Here's the list of available colors at this time: ${Object.keys(
+                __SugarConfig.get('dev.colors'),
+            ).join(',')}`,
+        );
+    }
+    return __SugarConfig.get('dev.colors')[color];
 }

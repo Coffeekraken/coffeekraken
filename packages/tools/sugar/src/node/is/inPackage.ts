@@ -6,7 +6,6 @@ import __isInPackage from '../path/isInPackage';
  * @name            inPackage
  * @namespace            node.is
  * @type            Function
- * @platform        ts
  * @platform        node
  * @status          beta
  *
@@ -29,6 +28,6 @@ import __isInPackage from '../path/isInPackage';
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
 function inPackage(name, from = process.cwd(), highest = false) {
-  return __isInPackage(name, from, highest);
+    return __isInPackage(name, from, highest);
 }
 export default inPackage;

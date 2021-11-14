@@ -6,7 +6,6 @@ import * as __convertColors from 'colors-convert';
  * @namespace            js.color
  * @type                  Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status            beta
  *

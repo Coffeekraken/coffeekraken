@@ -4,7 +4,6 @@
  * @namespace           shared.dev.types
  * @type                    Array
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              wip
  *
@@ -28,6 +27,6 @@ export default [
     'Object',
     'Array',
     'JSON',
-    'Function'
+    'Function',
 ];
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YVR5cGVzQXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXRhVHlwZXNBcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQWtCRztBQUNILGVBQWU7SUFDYixRQUFRO0lBQ1IsUUFBUTtJQUNSLFFBQVE7SUFDUixTQUFTO0lBQ1QsTUFBTTtJQUNOLFdBQVc7SUFDWCxRQUFRO0lBQ1IsT0FBTztJQUNQLE1BQU07SUFDTixVQUFVO0NBQ1gsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZGF0YVR5cGVzQXJyYXkuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJkYXRhVHlwZXNBcnJheS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQ7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUJHO0FBQ0gsZUFBZTtJQUNYLFFBQVE7SUFDUixRQUFRO0lBQ1IsUUFBUTtJQUNSLFNBQVM7SUFDVCxNQUFNO0lBQ04sV0FBVztJQUNYLFFBQVE7SUFDUixPQUFPO0lBQ1AsTUFBTTtJQUNOLFVBQVU7Q0FDYixDQUFDIn0=

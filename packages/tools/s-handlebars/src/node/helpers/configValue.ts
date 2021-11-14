@@ -5,7 +5,6 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * @namespace       node.helpers
  * @type            Function
  * @platform        js
- * @platform        ts
  * @platform        node
  * @status          beta
  *

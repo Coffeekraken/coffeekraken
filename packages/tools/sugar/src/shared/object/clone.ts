@@ -8,7 +8,6 @@ import __deepClone from 'lodash.clonedeep';
  * @namespace            js.object
  * @type                Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -35,13 +34,13 @@ import __deepClone from 'lodash.clonedeep';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function clone(object, settings = {}) {
-  settings = {
-    deep: false,
-    ...settings
-  };
-  if (settings.deep) {
-    return __deepClone(object);
-  }
-  return __clone(object);
+    settings = {
+        deep: false,
+        ...settings,
+    };
+    if (settings.deep) {
+        return __deepClone(object);
+    }
+    return __clone(object);
 }
 export default clone;

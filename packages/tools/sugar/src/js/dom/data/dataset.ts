@@ -9,7 +9,6 @@ import __toString from '../../../shared/string/toString';
  * @namespace            js.dom.data
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status              wip
  *
  * Get or set a value on the passed element with the passed name
@@ -31,23 +30,23 @@ import __toString from '../../../shared/string/toString';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function dataset($elm, key, value = null) {
-  if (!$elm.getAttribute) return;
-  if (!value) {
-    const v =
-      $elm.dataset[key] || $elm.getAttribute('data-' + __uncamelize(key));
-    return __autoCast(v);
-  } else {
-    // try to set the value
-    const dataset = $elm.dataset;
-    if (dataset) {
-      $elm.dataset[key] = __toString(value);
+    if (!$elm.getAttribute) return;
+    if (!value) {
+        const v =
+            $elm.dataset[key] || $elm.getAttribute('data-' + __uncamelize(key));
+        return __autoCast(v);
     } else {
-      // set the data through setAttribute
-      // cause no support for dataset
-      $elm.setAttribute('data-' + __uncamelize(key), __toString(value));
+        // try to set the value
+        const dataset = $elm.dataset;
+        if (dataset) {
+            $elm.dataset[key] = __toString(value);
+        } else {
+            // set the data through setAttribute
+            // cause no support for dataset
+            $elm.setAttribute('data-' + __uncamelize(key), __toString(value));
+        }
+        // return the element
+        return $elm;
     }
-    // return the element
-    return $elm;
-  }
 }
 export default dataset;

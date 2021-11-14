@@ -7,7 +7,6 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @namespace            js.dom.utils
  * @type      Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * Force the element to be painted again in case of visual issues
@@ -27,10 +26,10 @@ import __getStyleProperty from '../style/getStyleProperty';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function forceRedraw($elm: HTMLElement): HTMLElement {
-  const display = __getStyleProperty($elm, 'display');
-  $elm.style.display = 'none';
-  $elm.offsetHeight;
-  $elm.style.display = display;
-  return $elm;
+    const display = __getStyleProperty($elm, 'display');
+    $elm.style.display = 'none';
+    $elm.offsetHeight;
+    $elm.style.display = display;
+    return $elm;
 }
 export default forceRedraw;

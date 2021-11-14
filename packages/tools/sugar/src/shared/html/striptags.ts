@@ -7,7 +7,6 @@ import __striptags from 'striptags';
  * @namespace            js.html
  * @type      Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status          beta
  *
@@ -32,6 +31,6 @@ import __striptags from 'striptags';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function striptags(html, allowedTags = '', tagReplacement = '') {
-  return __striptags(html, allowedTags, tagReplacement);
+    return __striptags(html, allowedTags, tagReplacement);
 }
 export default striptags;

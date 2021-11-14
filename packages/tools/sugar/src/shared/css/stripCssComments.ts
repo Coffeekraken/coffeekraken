@@ -8,7 +8,6 @@ import __stripCssComments from 'strip-css-comments';
  * @namespace            js.css
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status              beta
  *
@@ -40,22 +39,22 @@ import __stripCssComments from 'strip-css-comments';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function stripCssComments(css, settings = {}) {
-  settings = __deepMerge(
-    {
-      block: true,
-      line: true
-    },
-    settings
-  );
-  if (settings.block) {
-    // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
-    css = __stripCssComments(css, {
-      preserve: false
-    });
-  }
-  if (settings.line) {
-    css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, '');
-  }
-  return css;
+    settings = __deepMerge(
+        {
+            block: true,
+            line: true,
+        },
+        settings,
+    );
+    if (settings.block) {
+        // css = css.replace(/\/\*{2}([\s\S]+?)\*\//g, '');
+        css = __stripCssComments(css, {
+            preserve: false,
+        });
+    }
+    if (settings.line) {
+        css = css.replace(/^[\s]{0,99999999}\/\/.*$/gm, '');
+    }
+    return css;
 }
 export default stripCssComments;

@@ -8,7 +8,6 @@ import __htmlTagToHtmlClassMap from './htmlTagToHtmlClassMap';
  * @namespace            js.html
  * @type            Function
  * @platform          js
- * @platform          ts
  * @status        beta
  *
  * This function simply return the HTML{name}Element class depending on the passed

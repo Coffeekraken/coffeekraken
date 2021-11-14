@@ -6,7 +6,6 @@ import { v4 as __uuidv4 } from 'uuid';
  * @namespace            js.string
  * @type          Function
  * @platform          js
- * @platform          ts
  * @platform          node
  * @status        beta
  *
@@ -27,6 +26,6 @@ import { v4 as __uuidv4 } from 'uuid';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function uniqid() {
-  return __uuidv4();
+    return __uuidv4();
 }
 export default uniqid;

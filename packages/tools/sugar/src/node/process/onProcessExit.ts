@@ -37,6 +37,7 @@ const __onProcessExitCallbacks = [];
 
 function onProcessExit(callback) {
     if (!__onProcessExitCallbacks.length) {
+        process.stdin.resume();
         process.env.HAS_ON_PROCESS_EXIT_HANDLERS = true;
         let isExiting = false;
         async function exitHandler(state) {

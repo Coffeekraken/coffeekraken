@@ -29,7 +29,7 @@ import __isChildProcess from '../is/childProcess';
  *
  * @example         js
  * import hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
- * const promise = hotkey('ctrl+a').on('key', (e) => {
+ * const promise = hotkey('ctrl+a').on('press', (e) => {
  *    // do something...
  * });
  * promise.cancel();

@@ -8,6 +8,7 @@ import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 import __SProcessManagerProcessWrapper, {
     ISProcessManagerProcessWrapperSettings,
 } from './SProcessManagerProcessWrapper';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 /**
  * @name            SProcessManager
@@ -89,16 +90,24 @@ class SProcessManager extends __SEventEmitter {
             ),
         );
 
-        if (this.processManagerSettings.stdio) {
-            (async () => {
-                this._stdio = __SStdio.existingOrNew(
-                    'default',
-                    this,
-                    this.processManagerSettings.stdio,
-                    this.processManagerSettings.stdioSettings,
-                );
-            })();
-        }
+        // __onProcessExit(() => {
+        //     return new Promise((resolve) => {
+        //         setTimeout(() => {
+        //             resolve();
+        //         }, 2000);
+        //     });
+        // });
+
+        // if (this.processManagerSettings.stdio) {
+        //     (async () => {
+        //         this._stdio = __SStdio.existingOrNew(
+        //             'default',
+        //             this,
+        //             this.processManagerSettings.stdio,
+        //             this.processManagerSettings.stdioSettings,
+        //         );
+        //     })();
+        // }
     }
 
     /**
@@ -144,15 +153,15 @@ class SProcessManager extends __SEventEmitter {
         );
 
         // register process for stdio
-        this.pipe(processManagerProcess, {
-            // prefixEvent: id,
-            exclude: [],
-            processor(data, metas) {
-                if (metas.event !== 'log') return data;
-                data.decorators = true;
-                return data;
-            },
-        });
+        // this.pipe(processManagerProcess, {
+        //     // prefixEvent: id,
+        //     exclude: [],
+        //     processor(data, metas) {
+        //         if (metas.event !== 'log') return data;
+        //         data.decorators = true;
+        //         return data;
+        //     },
+        // });
 
         this._processesStack[id] = processManagerProcess;
     }
@@ -200,16 +209,15 @@ class SProcessManager extends __SEventEmitter {
             throw new Error(
                 `<red>[${this.constructor.name}.run]</red> Sorry but no process exists with the id "<magenta>${processId}</magenta>"`,
             );
-        // emit a run event
-        this.emit(`${processId}.run`, {
-            time: Date.now(),
-        });
 
         // run the process
         const promise = this._processesStack[processId].run(
             paramsOrStringArgs,
             settings,
         );
+        this.pipe(promise, {
+            overrideEmitter: true,
+        });
 
         // console.log(processId, this._processesStack[processId]);
 

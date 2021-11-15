@@ -1,4 +1,4 @@
-ƒmd5<section id="features-sugar" class="s-pb:100">
+<section id="features-sugar" class="s-pb:100">
 
     <div class="s-container">
 

@@ -143,6 +143,14 @@ export default class SVite extends __SClass {
                         `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
                     ].join('\n'),
                 });
+                emit('log', {
+                    type: 'summary',
+                    value: {
+                        status: 'success',
+                        value: `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
+                        collapse: true,
+                    },
+                });
             },
             {
                 metas: {

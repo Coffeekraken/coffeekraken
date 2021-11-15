@@ -4,6 +4,8 @@ import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -230,7 +232,6 @@ export default class SStdio extends __SClass implements ISStdio {
      * - inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio
      * - terminal: STerminalStdio (node only)
      * - console: SConsoleStdio (browser only)
-     * - blessed: SBlessedStdio (node only)
      *
      * @param     {String}          id          A unique id for your stdio instance
      * @param         {SProcess}          proc        The process to display Stdio for
@@ -340,6 +341,39 @@ export default class SStdio extends __SClass implements ISStdio {
             // subscribe to the process
             this.registerSource(s);
         });
+
+        const packageJson = __packageJson(__dirname());
+
+        this.log({
+            metas: {
+                id: 'Coffeekraken',
+            },
+            active: true,
+            value: ``,
+        });
+
+        setTimeout(() => {
+            this.log({
+                metas: {
+                    id: 'Coffeekraken',
+                },
+                active: true,
+                value: `You are running the <yellow>Coffeekraken</yellow> stack version <cyan>${packageJson.version}</cyan>`,
+            });
+
+            this.log({
+                metas: {
+                    id: 'Coffeekraken',
+                },
+                active: true,
+                type: 'summary',
+                value: {
+                    status: 'success',
+                    value: `v<yellow>${packageJson.version}</yellow>`,
+                    collapse: true,
+                },
+            });
+        }, 50);
     }
 
     /**

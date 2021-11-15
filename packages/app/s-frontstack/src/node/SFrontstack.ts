@@ -302,13 +302,30 @@ export default class SFrontstack extends __SClass {
 
                 // instanciate the process manager
                 const processManager = new __SProcessManager();
-                pipe(processManager);
+                pipe(processManager, {
+                    overrideEmitter: true,
+                    // processor(data, metas) {
+                    //     metas.emitter.metas.name = metas.emitter.metas.id;
+                    //     return [data, metas];
+                    // },
+                });
 
                 // loop on each actions for this recipe
                 if (recipeObj.stacks[finalParams.stack].actions) {
-                    Object.keys(
-                        recipeObj.stacks[finalParams.stack].actions,
-                    ).forEach(async (actionName) => {
+                    for (
+                        let i = 0;
+                        i <
+                        Object.keys(recipeObj.stacks[finalParams.stack].actions)
+                            .length;
+                        i++
+                    ) {
+                        const actionName = Object.keys(
+                            recipeObj.stacks[finalParams.stack].actions,
+                        )[i];
+
+                        // Object.keys(
+                        //     recipeObj.stacks[finalParams.stack].actions,
+                        // ).forEach(async (actionName) => {
                         if (
                             finalParams.exclude &&
                             finalParams.exclude.indexOf(actionName) !== -1
@@ -379,8 +396,23 @@ export default class SFrontstack extends __SClass {
                             finalProcessManagerParams,
                             actionObj.settings?.process ?? {},
                         );
-                    });
+                    }
                 }
+
+                setTimeout(() => {
+                    emit('log', {
+                        type: 'summary',
+                        value: {
+                            status: 'success',
+                            value: `All <cyan>${
+                                Object.keys(
+                                    recipeObj.stacks[finalParams.stack].actions,
+                                ).length
+                            }</cyan> process(es) <green>ready</green>`,
+                            collapse: true,
+                        },
+                    });
+                }, 5000);
             },
             {
                 eventEmitter: {

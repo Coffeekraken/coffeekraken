@@ -34,8 +34,8 @@ export default function availableColors(
         'cyan',
         'green',
         'magenta',
-        'red',
         'blue',
+        'red',
         'grey',
         'gray',
     ];

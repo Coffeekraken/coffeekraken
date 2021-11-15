@@ -15,6 +15,7 @@ import __SFrontendServerInterface from './interface/SFrontendServerInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __SBench from '@coffeekraken/s-bench';
 import __SDuration from '@coffeekraken/s-duration';
+import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 
 /**
  * @name            SFrontendServer
@@ -263,7 +264,7 @@ export default class SFrontendServer extends __SClass {
                     await __kill(`:${frontendServerConfig.port}`);
                 }
 
-                express.listen(frontendServerConfig.port, () => {
+                const server = express.listen(frontendServerConfig.port, () => {
                     // server started successfully
                     emit('log', {
                         group: `s-frontend-server-${this.metas.id}`,
@@ -282,6 +283,29 @@ export default class SFrontendServer extends __SClass {
                         type: __SLog.VERBOSE,
                         // group: `s-frontend-server-${this.metas.id}`,
                         value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
+                    });
+
+                    setTimeout(() => {
+                        emit('log', {
+                            type: 'summary',
+                            value: {
+                                status: 'success',
+                                value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
+                                collapse: true,
+                            },
+                        });
+                    }, 2000);
+                });
+
+                __onProcessExit(() => {
+                    emit('log', {
+                        value: `<red>[kill]</red> Gracefully killing the frontend server...`,
+                    });
+                    return new Promise((resolve) => {
+                        server.close(() => {
+                            // @ts-ignore
+                            resolve();
+                        });
                     });
                 });
             },

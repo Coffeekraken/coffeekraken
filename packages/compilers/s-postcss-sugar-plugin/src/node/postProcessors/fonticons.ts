@@ -66,7 +66,7 @@ export default async function ({ root, sharedData }) {
             console.log(
                 `<green>[fonticons]</green> All icon(s) are up to date`,
             );
-            // return;
+            return;
         }
     }
 

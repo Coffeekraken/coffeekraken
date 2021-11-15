@@ -228,7 +228,9 @@ class SPromise
         this._eventEmitter = new __SEventEmitter(
             __deepMerge(
                 {
-                    metas: this.metas,
+                    metas: {
+                        ...this.metas,
+                    },
                     eventEmitter: {},
                 },
                 this._settings,

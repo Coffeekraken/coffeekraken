@@ -3,7 +3,7 @@
         <div class="s-layout:122:gutter-x:gutter-between">
 
             <div class="s-pb:100">
-                <h3 class="s-typo:h3 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
+                <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
                 <p class="s-typo:lead s-mbe:30">
                     Coffeekraken has a <span class="s-tc:accent">built-in development stack environment</span> that you can use
                     to:

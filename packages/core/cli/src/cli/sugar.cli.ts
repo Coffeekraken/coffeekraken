@@ -5,7 +5,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SEnv from '@coffeekraken/s-env';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SInterface from '@coffeekraken/s-interface';
-import { STerminalStdio } from '@coffeekraken/s-stdio';
+import __SStdio, { STerminalStdio } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import '@coffeekraken/sugar/node/index';
@@ -22,6 +22,7 @@ import __packageJson from '@coffeekraken/sugar/node/package/json';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import { Server as __nodeIpcStoreServer } from 'node-ipc-store';
 import __SLog from '@coffeekraken/s-log';
+import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -91,6 +92,12 @@ class SSugarCli {
 
     constructor() {
         __SBench.start('sugar.cli');
+
+        // hook ctrl+c
+        __hotkey('ctrl+c').on('press', (e) => {
+            // @ts-ignore
+            process.emit('SIGINT');
+        });
 
         this._command =
             process.argv && process.argv[2]
@@ -178,7 +185,13 @@ class SSugarCli {
                     id: 'Sugar',
                 },
             });
-            this._stdio = new STerminalStdio('default', this._eventEmitter);
+
+            if (!__isChildProcess()) {
+                this._stdio = __SStdio.existingOrNew(
+                    'default',
+                    this._eventEmitter,
+                );
+            }
 
             if (__isChildProcess()) {
                 this._eventEmitter.pipeTo(process);

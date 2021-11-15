@@ -19,6 +19,8 @@
     "enquirer": "^2.3.6",
     "inquirer": "^8.0.0",
     "minimatch": "^3.0.4",
+    "neo-blessed": "^0.2.0",
+    "ora": "^6.0.1",
     "stack-trace": "0.0.10",
     "terminal-kit": "^2.0.7"
   }

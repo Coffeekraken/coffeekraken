@@ -3,7 +3,7 @@
 
         <div class="section-top-background"></div>
 
-        <h3 class="s-typo:h3 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
+        <h3 class="s-typo:h2 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
         <p class="s-typo:p s-mbe:50">
             The goal of Coffeekraken is to help having a better development experience with
             a production ready quality grade. Here's some areas where we can help you:

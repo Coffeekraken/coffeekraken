@@ -10,6 +10,12 @@ import __countLine from '@coffeekraken/sugar/shared/string/countLine';
 import __splitEvery from '@coffeekraken/sugar/shared/string/splitEvery';
 import __SPromise from '@coffeekraken/s-promise';
 import * as __Enquirer from 'enquirer';
+import * as __readline from 'readline';
+import __blessed from 'blessed';
+import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
+import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
+import __ora from 'ora';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 
 /**
  * @name            STerminalStdio
@@ -54,6 +60,10 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         return (<any>this)._settings.terminalStdio;
     }
 
+    _currentLine = 0;
+
+    _screen;
+
     /**
      * @name            constructor
      * @type            Function
@@ -82,6 +92,24 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
             ),
         );
 
+        const packageJson = __packageJson();
+
+        this._screen = __blessed.screen({
+            smartCSR: true,
+            autoPadding: true,
+            title: `Coffeekraken | ${packageJson.name}`
+        });
+        this._screen.enableInput();
+
+        this._screen.render();
+
+        this._log({
+            metas: {
+                id: 'Global'
+            },
+            value: 'Init...'
+        })
+
         this.display();
     }
 
@@ -91,7 +119,56 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     }
 
     clear() {
+        this._currentLine = 0;
         process.stdout.write('\x1Bc');
+    }
+
+    _render() {
+        let currentTop = 0, collapsedCount = 0, boxesCount = Object.keys(this._logsStack).length, availableHeight = this._screen.height;
+         this._logsStack.forEach((logsStack, i) => {
+            if (logsStack.collapsed) {
+                collapsedCount++;
+                availableHeight--;
+            }
+        });
+
+        const newHeight = Math.floor(availableHeight / (boxesCount - collapsedCount));
+
+        this._logsStack.forEach((logsStack, i) => {
+            logsStack.box.height = logsStack.collapsed ? 1 : newHeight;
+            logsStack.box.top = currentTop;
+            logsStack.borderLeft.height = logsStack.box.height;
+            logsStack.borderLeft.top = currentTop;
+            logsStack.borderTop.top = currentTop;
+            currentTop += logsStack.box.height;
+        });
+
+        this._screen.render();
+    }
+
+    _renderTop(box, title, content) {
+
+        let ora = box._ora ?? __ora('');
+        box._ora = ora;
+
+        let statusChar = '';
+        if (box._status === 'success') {
+            statusChar = '{green-fg}✓{/green-fg}';
+        } else if (box._status === 'error') {
+            statusChar = '<red>✖</red>';
+        } else {
+            statusChar = ora.frame().slice(0,-1);
+        }
+        box.setContent(__parseHtml(` {black-bg} ${statusChar} ${title} {/black-bg}{|}${content ? `{black-bg} ${content} {/black-bg}` : ''}`));
+        this._render();
+
+        if (box._status === 'running') {
+            box._renderTopTimeout = setTimeout(() => {
+                this._renderTop(box, title, content);
+            }, 1000 / 10);
+        } else {
+            clearTimeout(box._renderTopTimeout);
+        }
     }
 
     /**
@@ -108,97 +185,122 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _currentLogId = '';
+    _logsStack = [];
     _log(logObj, component) {
         // handle empty logs
         if (!logObj) return;
 
-        if (!logObj.decorators) {
-            console.log(__parseHtml(logObj.value));
-            return;
+        if (logObj.metas.id === 'SPromise') {
+            logObj.metas.id = 'Global';
         }
 
-        let needId = false;
-        if (
-            logObj.metas?.emitter?.metas?.id &&
-            this._currentLogId !== logObj.metas?.emitter?.metas?.id
-        ) {
-            needId = true;
-            this._currentLogId = logObj.metas.emitter.metas.id;
+        let logStack = this._logsStack.filter(logStack => logStack.id === logObj.metas.id)[0];
+        if (!logStack) {
+
+            logStack = {
+                id: logObj.metas.id,
+                collapse: false,
+                box: undefined,
+                borderTop: undefined,
+                borderLeft: undefined
+            };
+
+            const color =
+                __availableColors()[this._logsStack.length];
+            logStack.box = __blessed.box({
+                // top: 0,
+                content: '',
+                left: 1,
+                width: '100%',
+                height: 1,
+                padding: {
+                    top: 1,
+                    left: 2,
+                    right: 2,
+                    bottom: 1
+                },
+                scrollable: true,
+                alwaysScroll: true,
+                scrollbar: {
+                    ch: '',
+                    // inverse: true,
+                },
+                style: {
+                    scrollbar: {
+                        bg: color ?? 'yellow',
+                    },
+                },
+            });
+            logStack.borderLeft = __blessed.box({
+                left: 0,
+                width: 1,
+                height: 1,
+                style: {
+                    bg: color ?? 'yellow',
+                },
+            });
+            logStack.borderTop = __blessed.box({
+                // content: ` ${__ora('').frame()}  {black-bg} ${logObj.metas.id} {/black-bg}`,
+                left: 0,
+                width: '100%',
+                height: 1,
+                tags: true,
+                style: {
+                    bg: color ?? 'yellow',
+                },
+            });
+
+            logStack.borderTop._status = 'running';
+            this._renderTop(logStack.borderTop, logObj.metas.id, null);
+
+            this._logsStack.push(logStack);
+
+            // this._logsStack[logObj.metas.id] = {
+            //     box,
+            //     borderLeft,
+            //     borderTop,
+            //     collapsed: false,
+            // };
+
+            logStack.borderTop.on('click', () => {
+                logStack.collapsed =
+                    !logStack.collapsed;
+                this._render();
+            });
+
+            this._screen.append(logStack.box);
+            this._screen.append(logStack.borderLeft);
+            this._screen.append(logStack.borderTop);
         }
 
-        let lineStart = '',
-            idStr = '',
-            idSeparator = '';
+        // if (this._logsStack[logObj.metas.id]) {
+        //     box = this._logsStack[logObj.metas.id].box;
+        //     borderLeft = this._logsStack[logObj.metas.id].borderLeft;
+        //     borderTop = this._logsStack[logObj.metas.id].borderTop;
+        // } else {
+            
+        // }
 
-        // render the component
+        if (logObj.type === 'summary') {
+            logStack.borderTop._status = logObj.value.status ?? 'success';
+            if (logObj.value.collapse) {
+                logStack.collapsed = true;
+            }
+            this._renderTop(logStack.borderTop, logObj.metas.id, logObj.value.value);
+            return this._render();
+        }
+        
+
         let renderedStr = component.render(logObj, this._settings);
-        // handle metas if needed
-        if (!logObj.nude) {
-            if (logObj.metas?.emitter) {
-                lineStart = `<bg${__upperFirst(
-                    logObj.metas.emitter.metas.color || 'yellow',
-                )}> </bg${__upperFirst(
-                    logObj.metas.emitter.metas.color || 'yellow',
-                )}>`;
-                idStr = `<${logObj.metas.emitter.metas.color || 'yellow'}> ${
-                    logObj.metas.emitter.metas.id
-                }</${logObj.metas.emitter.metas.color || 'yellow'}>`;
-                idSeparator = `<${
-                    logObj.metas.emitter.metas.color || 'yellow'
-                }> │ </${logObj.metas.emitter.metas.color || 'yellow'}>`;
-            }
-        }
-        if (logObj.marginTop && typeof logObj.marginTop === 'number') {
-            renderedStr = '\n'.repeat(logObj.marginTop) + renderedStr;
-        }
-        if (logObj.marginBottom && typeof logObj.marginBottom === 'number') {
-            renderedStr = renderedStr + '\n'.repeat(logObj.marginBottom);
-        }
-
-        if (needId) {
-            console.log(__parseHtml(lineStart));
-        }
-
-        let lines = renderedStr.split('\n');
-        const idLength = __countLine(__parseHtml(idStr)),
-            idSeparatorLength = __countLine(__parseHtml(idSeparator)),
-            lineStartLength = __countLine(__parseHtml(lineStart));
-        const maxLineLenght =
-            process.stdout.columns -
-            idLength -
-            idSeparatorLength -
-            lineStartLength;
-
-        let finalLines: string[] = [];
-
-        lines.forEach((line, i) => {
-            if (line.includes('-%-')) {
-                finalLines.push(line.replace('-%-', '-'.repeat(maxLineLenght)));
-            } else if (__countLine(line) > maxLineLenght) {
-                __splitEvery(line, maxLineLenght).forEach((l, j) => {
-                    finalLines.push(l.trim());
-                });
-            } else {
-                finalLines.push(line.trim());
-            }
-        });
-
-        finalLines = finalLines.map((line) => {
-            if (needId) {
-                needId = false;
-                return `${lineStart}${idStr}${idSeparator}${line.trim()}`;
-            } else {
-                return `${lineStart}${' '.repeat(
-                    idLength,
-                )}${idSeparator}${line.trim()}`;
-            }
-        });
 
         // log the string
-        try {
-            console.log(__parseHtml(finalLines.join('\n')));
-        } catch (e) {}
+        logStack.box.insertBottom(__parseHtml(renderedStr));
+        logStack.box.setScrollPerc(100);
+
+¨       this._render();
     }
+
+    _draw() {}
 
     /**
      * @name          _ask
@@ -308,6 +410,7 @@ import __headingTerminalStdioComponent from './components/headingTerminalStdioCo
 import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
 import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
 import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
+import staticBuilderConfig from '../../../../../builders/s-static-builder/src/config/staticBuilder.config';
 
 STerminalStdio.registerComponent(__defaultTerminalStdioComponent);
 STerminalStdio.registerComponent(__separatorTerminalStdioComponent);

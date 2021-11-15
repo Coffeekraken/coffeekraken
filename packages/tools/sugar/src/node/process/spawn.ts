@@ -98,8 +98,16 @@ export default function spawn(
             },
         });
 
+        let childProcessExitPromiseResolve;
+
         __onProcessExit(() => {
-            childProcess.kill();
+            new Promise((resolve) => {
+                childProcessExitPromiseResolve = resolve;
+                emit('log', {
+                    value: `<red>[kill]</red> Gracefully killing child process "<yellow>${command}</yellow>"`,
+                });
+                childProcess.kill('SIGINT');
+            });
         });
 
         // handle the process.send pattern
@@ -159,6 +167,9 @@ export default function spawn(
                 spawn: true,
                 ...duration.end(),
             };
+
+            // closed by this process
+            childProcessExitPromiseResolve?.();
 
             // generic close event
             emit('close', resultObj);

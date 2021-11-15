@@ -36,13 +36,6 @@
 
                     $apiMenu = (Object)[
                         'name' => 'API',
-                        'config' => (Object)[
-                            'name' => 'Config',
-                            'explorer' => (Object)[
-                                'name' => 'Config Explorer',
-                                'slug' => '/config/explorer'
-                            ],
-                        ],
                         'jsFeatured' => (Object)[
                             'name' => 'Featured (js)',
                             'spromise' => (Object)[
@@ -108,6 +101,13 @@
                         ],
                         'nodeFeatured' => (Object)[
                             'name' => 'Featured (node)'
+                        ],
+                        'config' => (Object)[
+                            'name' => 'Config',
+                            'explorer' => (Object)[
+                                'name' => 'Config Explorer',
+                                'slug' => '/config/explorer'
+                            ],
                         ],
                         'components' => (Object)[
                             'name' => 'Components'

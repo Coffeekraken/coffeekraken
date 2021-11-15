@@ -301,9 +301,9 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
         //     console.log('A___A', res);
         // });
 
-        this.pipe(promise, {
-            overrideEmitter: true,
-        });
+        // this.pipe(promise, {
+        //     overrideEmitter: true,
+        // });
         return promise;
     }
 
@@ -328,21 +328,31 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
                 `Sorry but you cannot run this "<yellow>${this.metas.id}</yellow>" process cause it has been detached from the process manager`,
             );
         }
-        return new __SPromise(async ({ resolve }) => {
-            this._restartingProcessResolve = resolve;
+        return new __SPromise(
+            async ({ resolve, pipe }) => {
+                this._restartingProcessResolve = resolve;
 
-            // run the process
-            const res = await this._run(paramsOrStringArgs, settings);
+                // run the process
+                const resPromise = this._run(paramsOrStringArgs, settings);
+                pipe(resPromise);
+                const res = await resPromise;
 
-            // if restart is setted, do not resolve the promis
-            if (
-                !this.processManagerProcessSettings.restart &&
-                !this._isDetached
-            ) {
-                // console.log('AAAAAAAAAAAA', res);
-                resolve(res);
-            }
-        });
+                // if restart is setted, do not resolve the promis
+                if (
+                    !this.processManagerProcessSettings.restart &&
+                    !this._isDetached
+                ) {
+                    // console.log('AAAAAAAAAAAA', res);
+                    resolve(res);
+                }
+            },
+            {
+                id: 'plop',
+                metas: {
+                    id: 'coco',
+                },
+            },
+        );
     }
 }
 export default SProcessManagerProcessWrapper;

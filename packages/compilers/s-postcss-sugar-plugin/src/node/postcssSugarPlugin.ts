@@ -345,7 +345,9 @@ const plugin = (settings: any = {}) => {
                             .join('\n');
 
                         console.log(
-                            `[cache] Caching "${cacheId ?? cacheHash}"...`,
+                            `<yellow>[cache]</yellow> Caching "<cyan>${
+                                cacheId ?? cacheHash
+                            }</cyan>"...`,
                         );
 
                         await __cacache.put(cacheDir, cacheHash, cacheStr);
@@ -361,9 +363,9 @@ const plugin = (settings: any = {}) => {
                         const cached = await __cacache.get(cacheDir, cacheHash);
                         if (cached) {
                             console.log(
-                                `[cache] Getting "${
+                                `<yellow>[cache]</yellow> Getting "<cyan>${
                                     cacheId ?? cacheHash
-                                }" from cache...`,
+                                }</cyan>" from cache...`,
                             );
                             // console.log(cached.data.toString());
                             comment.replaceWith(cached.data.toString());

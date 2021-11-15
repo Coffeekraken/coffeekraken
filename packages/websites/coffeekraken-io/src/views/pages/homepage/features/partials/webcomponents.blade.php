@@ -7,7 +7,7 @@
         <div class="s-layout:122:gutter-x:gutter-between">
 
             <div>
-                <h3 class="s-typo:h3 s-mbe:30">
+                <h3 class="s-typo:h2 s-mbe:30">
                     Fully customizable
                     <br /><span class="s-tc:accent">webcomponents</span>
                 </h3>

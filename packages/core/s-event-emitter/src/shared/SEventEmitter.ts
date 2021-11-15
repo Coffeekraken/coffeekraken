@@ -9,6 +9,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __SLog from '@coffeekraken/s-log';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 
 /**
  * @name                  SEventEmitter
@@ -67,7 +68,9 @@ export interface ISEventEmitterCallbackSettings {
 
 export interface ISEventEmitterMetas {
     event: string;
+    id?: string;
     name?: string;
+    color?: string;
     emitter?: any;
     originalEmitter?: any;
     time?: number;
@@ -216,6 +219,17 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 return;
             }
 
+            // specify the id
+            // @ts-ignore
+            metas.id = metas.id ?? metas.emitter.metas?.id ?? __uniqid();
+
+            // specify color
+            // @ts-ignore
+            metas.color =
+                metas.color ??
+                metas.emitter.metas?.color ??
+                __getColorFor(metas.id);
+
             // check excluded stacks
             if (set.exclude && set.exclude.indexOf(metas.event) !== -1) return;
             // check if we have a filter setted
@@ -313,7 +327,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                     }
 
                     // @todo            check why need this and from where comes from the "metas" property in the value...
-                    if (value.metas?.event) delete value.metas;
+                    // if (value.metas?.event) delete value.metas;
 
                     process.send({
                         value: value,
@@ -558,7 +572,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 originalEmitter: metas?.originalEmitter ?? this,
                 time: Date.now(),
                 level: 0,
-                id: __uniqid(),
             },
             metas ?? {},
         );

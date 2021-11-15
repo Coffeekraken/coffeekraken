@@ -1,6 +1,6 @@
 import __SClass, { ISClass } from '@coffeekraken/s-class';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -345,28 +345,28 @@ export default class SStdio extends __SClass implements ISStdio {
         const packageJson = __packageJson(__dirname());
 
         this.log({
-            metas: {
-                id: 'Coffeekraken',
-            },
+            group: 'Global',
+            active: true,
+            value: ``,
+        });
+
+        this.log({
+            group: 'Coffeekraken',
             active: true,
             value: ``,
         });
 
         setTimeout(() => {
             this.log({
-                metas: {
-                    id: 'Coffeekraken',
-                },
+                group: 'Coffeekraken',
                 active: true,
                 value: `You are running the <yellow>Coffeekraken</yellow> stack version <cyan>${packageJson.version}</cyan>`,
             });
 
             this.log({
-                metas: {
-                    id: 'Coffeekraken',
-                },
+                group: 'Coffeekraken',
                 active: true,
-                type: 'summary',
+                type: __SLog.SUMMARY,
                 value: {
                     status: 'success',
                     value: `v<yellow>${packageJson.version}</yellow>`,

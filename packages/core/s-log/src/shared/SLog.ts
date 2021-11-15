@@ -1,6 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-import ISLog from './ISLog';
+import ISLog, { ISLogType } from './ISLog';
 
 /**
  * @name            SLog
@@ -52,7 +52,7 @@ export interface ISLogFilterObj {
 export default class SLog {
     /**
      * @name            LOG
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "LOG"
@@ -60,11 +60,11 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static LOG = 0;
+    static LOG: ISLogType = 'log';
 
     /**
      * @name            INFO
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "INFO"
@@ -72,11 +72,11 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static INFO = 1;
+    static INFO: ISLogType = 'info';
 
     /**
      * @name            WARN
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "WARN"
@@ -84,11 +84,11 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static WARN = 2;
+    static WARN: ISLogType = 'warn';
 
     /**
      * @name            ERROR
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "ERROR"
@@ -96,11 +96,11 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static ERROR = 3;
+    static ERROR: ISLogType = 'error';
 
     /**
      * @name            VERBOSE
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "VERBOSE"
@@ -108,11 +108,23 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static VERBOSE = 4;
+    static VERBOSE: ISLogType = 'verbose';
+
+    /**
+     * @name            SUMMARY
+     * @type            String
+     * @static
+     *
+     * This static constant tells a log that it is of type "SUMMARY"
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static SUMMARY: ISLogType = 'summary';
 
     /**
      * @name            CHILD_PROCESS
-     * @type            Number
+     * @type            String
      * @static
      *
      * This static constant tells a log that it is of type "CHILD_PROCESS"
@@ -120,7 +132,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static CHILD_PROCESS = 5;
+    static CHILD_PROCESS: ISLogType = 'child_process';
 
     /**
      * @name            filter

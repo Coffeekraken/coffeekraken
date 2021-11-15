@@ -41,6 +41,14 @@ export interface ISTerminalStdioCtorSettings {
     terminalStdio?: Partial<ISTerminalStdioSettings>;
 }
 
+export interface ISTerminalStdioLogsContainer {
+    id: string;
+    collapsed: boolean;
+    box: any;
+    left: any;
+    top: any;
+}
+
 export interface ISTerminalStdioSettings {}
 
 export interface ISTerminalStdio {}
@@ -103,13 +111,6 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
 
         this._screen.render();
 
-        this._log({
-            metas: {
-                id: 'Global'
-            },
-            value: 'Init...'
-        })
-
         this.display();
     }
 
@@ -137,9 +138,9 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         this._logsStack.forEach((logsStack, i) => {
             logsStack.box.height = logsStack.collapsed ? 1 : newHeight;
             logsStack.box.top = currentTop;
-            logsStack.borderLeft.height = logsStack.box.height;
-            logsStack.borderLeft.top = currentTop;
-            logsStack.borderTop.top = currentTop;
+            logsStack.left.height = logsStack.box.height;
+            logsStack.left.top = currentTop;
+            logsStack.top.top = currentTop;
             currentTop += logsStack.box.height;
         });
 
@@ -185,30 +186,33 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _currentLogId = '';
-    _logsStack = [];
+    _logsStack: ISTerminalStdioLogsContainer[] = [];
     _log(logObj, component) {
         // handle empty logs
         if (!logObj) return;
 
-        if (logObj.metas.id === 'SPromise') {
-            logObj.metas.id = 'Global';
+        if (!logObj.group) {
+            if (logObj.metas.id === 'SPromise') {
+                logObj.group = 'Global';
+            } else {
+                logObj.group = logObj.metas.id;
+            }
         }
 
-        let logStack = this._logsStack.filter(logStack => logStack.id === logObj.metas.id)[0];
+        let logStack = this._logsStack.filter(logStack => logStack.group === logObj.group)[0];
         if (!logStack) {
 
             logStack = {
-                id: logObj.metas.id,
-                collapse: false,
+                group: logObj.group,
+                collapsed: false,
                 box: undefined,
-                borderTop: undefined,
-                borderLeft: undefined
+                top: undefined,
+                left: undefined
             };
 
             const color =
                 __availableColors()[this._logsStack.length];
             logStack.box = __blessed.box({
-                // top: 0,
                 content: '',
                 left: 1,
                 width: '100%',
@@ -227,11 +231,11 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
                 },
                 style: {
                     scrollbar: {
-                        bg: color ?? 'yellow',
+                        // bg: color ?? 'yellow',
                     },
                 },
             });
-            logStack.borderLeft = __blessed.box({
+            logStack.left = __blessed.box({
                 left: 0,
                 width: 1,
                 height: 1,
@@ -239,8 +243,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
                     bg: color ?? 'yellow',
                 },
             });
-            logStack.borderTop = __blessed.box({
-                // content: ` ${__ora('').frame()}  {black-bg} ${logObj.metas.id} {/black-bg}`,
+            logStack.top = __blessed.box({
                 left: 0,
                 width: '100%',
                 height: 1,
@@ -250,43 +253,28 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
                 },
             });
 
-            logStack.borderTop._status = 'running';
-            this._renderTop(logStack.borderTop, logObj.metas.id, null);
+            logStack.top._status = 'running';
+            this._renderTop(logStack.top, logObj.group, null);
 
-            this._logsStack.push(logStack);
+            this._logsStack.splice(this._logsStack.length-1, 0, logStack);
 
-            // this._logsStack[logObj.metas.id] = {
-            //     box,
-            //     borderLeft,
-            //     borderTop,
-            //     collapsed: false,
-            // };
-
-            logStack.borderTop.on('click', () => {
+            logStack.top.on('click', () => {
                 logStack.collapsed =
                     !logStack.collapsed;
                 this._render();
             });
 
             this._screen.append(logStack.box);
-            this._screen.append(logStack.borderLeft);
-            this._screen.append(logStack.borderTop);
+            this._screen.append(logStack.left);
+            this._screen.append(logStack.top);
         }
 
-        // if (this._logsStack[logObj.metas.id]) {
-        //     box = this._logsStack[logObj.metas.id].box;
-        //     borderLeft = this._logsStack[logObj.metas.id].borderLeft;
-        //     borderTop = this._logsStack[logObj.metas.id].borderTop;
-        // } else {
-            
-        // }
-
         if (logObj.type === 'summary') {
-            logStack.borderTop._status = logObj.value.status ?? 'success';
+            logStack.top._status = logObj.value.status ?? 'success';
             if (logObj.value.collapse) {
                 logStack.collapsed = true;
             }
-            this._renderTop(logStack.borderTop, logObj.metas.id, logObj.value.value);
+            this._renderTop(logStack.top, logObj.group, logObj.value.value);
             return this._render();
         }
         
@@ -410,7 +398,6 @@ import __headingTerminalStdioComponent from './components/headingTerminalStdioCo
 import __separatorTerminalStdioComponent from './components/separatorTerminalStdioComponent';
 import __timeTerminalStdioComponent from './components/timeTerminalStdioComponent';
 import __warningTerminalStdioComponent from './components/warningTerminalStdioComponent';
-import staticBuilderConfig from '../../../../../builders/s-static-builder/src/config/staticBuilder.config';
 
 STerminalStdio.registerComponent(__defaultTerminalStdioComponent);
 STerminalStdio.registerComponent(__separatorTerminalStdioComponent);

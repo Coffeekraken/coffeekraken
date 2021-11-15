@@ -1,3 +1,5 @@
+import __SLog from './SLog';
+
 // @ts-nocheck
 /**
  * @name                    ISLog
@@ -25,14 +27,25 @@
  * @since         2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
+
+export type ISLogType =
+    | 'log'
+    | 'info'
+    | 'warn'
+    | 'error'
+    | 'verbose'
+    | 'summary'
+    | 'child_process';
+
 export default interface ISLog {
-    decorators: boolean;
-    time: boolean;
-    clear: boolean;
-    temp: boolean;
-    timestamp: number;
-    type: 'log' | 'info' | 'warn' | 'error' | 'verbose' | 'child_process';
-    as: string;
+    decorators?: boolean;
+    time?: boolean;
+    clear?: boolean;
+    temp?: boolean;
+    timestamp?: number;
+    group?: string;
+    type?: ISLogType;
+    as?: string;
     value: any;
-    active: boolean;
+    active?: boolean;
 }

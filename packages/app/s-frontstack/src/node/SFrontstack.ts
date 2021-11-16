@@ -247,6 +247,7 @@ export default class SFrontstack extends __SClass {
                 emit('log', {
                     value: `Starting frontstack process`,
                 });
+                console.log('START');
 
                 emit('log', {
                     value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,

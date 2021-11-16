@@ -14,6 +14,7 @@ import { define as __VersionSelector } from './components/VersionSelector';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKSettingsComponent } from './components/CkSettings';
+import { define as __CKBlobComponent } from './components/CkBlob';
 
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
@@ -46,6 +47,7 @@ import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
     // __DocNavComponent();
     __VersionSelector();
     __CKSearchComponent();
+    __CKBlobComponent();
 
     __smoothScroll({
         scroll: {

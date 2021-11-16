@@ -187,7 +187,8 @@
 
     .__illustration {
         position: absolute;
-        width: 50%;
+        width: 500px;
+        aspect-ratio: 1;
         top: 230px;
         left: calc(50% + 100px);
         transform: scale(0.9);

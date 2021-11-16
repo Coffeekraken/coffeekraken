@@ -45,7 +45,15 @@ export interface ISLogFilterObj {
     time: boolean;
     clear: boolean;
     temp: boolean;
-    type: ('log' | 'info' | 'warn' | 'error' | 'verbose' | 'child_process')[];
+    type: (
+        | 'log'
+        | 'info'
+        | 'warn'
+        | 'error'
+        | 'verbose'
+        | 'summary'
+        | 'child_process'
+    )[];
     as: string | string[];
 }
 

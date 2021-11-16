@@ -12,10 +12,16 @@ export default function kill(params) {
                 value: `<green>[process.kill]</green> The process with id <yellow>${params.id}</yellow> has been <green>successfully</green> killed`,
             });
         } else if (params.port) {
-            await __fkill(`:${params.port}`);
-            emit('log', {
-                value: `<green>[process.kill]</green> The process running on the port <yellow>${params.port}</yellow> has been <green>successfully</green> killed`,
-            });
+            try {
+                await __fkill(`:${params.port}`);
+                emit('log', {
+                    value: `<green>[process.kill]</green> The process running on the port <yellow>${params.port}</yellow> has been <green>successfully</green> killed`,
+                });
+            } catch (e) {
+                emit('log', {
+                    value: `<yellow>[process.kill]</yellow> It seems that no process are running on port <yellow>${params.port}</yellow>`,
+                });
+            }
         }
         resolve();
     });

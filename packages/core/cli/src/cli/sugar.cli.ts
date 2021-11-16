@@ -10,19 +10,14 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import '@coffeekraken/sugar/node/index';
 import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
+import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
-import __SDuration from '@coffeekraken/s-duration';
 import __path from 'path';
-import __STheme from '@coffeekraken/s-theme';
-import __packageJson from '@coffeekraken/sugar/node/package/json';
-import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
-import { Server as __nodeIpcStoreServer } from 'node-ipc-store';
-import __SLog from '@coffeekraken/s-log';
-import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -186,13 +181,6 @@ class SSugarCli {
                 },
             });
 
-            if (!__isChildProcess()) {
-                this._stdio = __SStdio.existingOrNew(
-                    'default',
-                    this._eventEmitter,
-                );
-            }
-
             if (__isChildProcess()) {
                 this._eventEmitter.pipeTo(process);
             }
@@ -201,11 +189,6 @@ class SSugarCli {
             this._eventEmitter.on('writeLog', (logObj) => {
                 this.writeLog(logObj.value);
             });
-
-            // print header
-            if (!__isChildProcess()) {
-                this._newStep(true);
-            }
 
             __SBench.step('sugar.cli', 'beforeLoadSugarJson');
 
@@ -263,7 +246,19 @@ class SSugarCli {
 
         // @ts-ignore
         if (cliObj.processPath) {
-            const { default: processFn } = await import(cliObj.processPath);
+            const { default: processFn, sugarCliSettings } = await import(
+                cliObj.processPath
+            );
+
+            if (!__isChildProcess()) {
+                this._stdio = __SStdio.existingOrNew(
+                    'default',
+                    this._eventEmitter,
+                    sugarCliSettings.stdio,
+                );
+            }
+
+            await __wait(100);
 
             let args = this._args;
 
@@ -276,6 +271,7 @@ class SSugarCli {
             const proPromise = processFn(args);
             this._eventEmitter.pipe(proPromise, {});
             await proPromise;
+            await __wait(1000);
             process.exit();
         }
     }

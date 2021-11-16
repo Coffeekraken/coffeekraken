@@ -6,6 +6,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
+import __SEnv from '@coffeekraken/s-env';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -20,6 +21,7 @@ export interface ISStdioSettings {
     filter: typeof Function;
     processor: typeof Function;
     metas: ISStdioSettingsMetas;
+    ui: ISStdioUi;
     defaultLogObj: Partial<ISLog>;
     defaultAskObj: Partial<ISLogAsk>;
 }
@@ -36,6 +38,8 @@ export interface ISStdioComponent {
     render(logObj: ISLog, settings: any);
 }
 
+export type ISStdioUi = -1 | 'terminal' | 'console';
+
 export interface ISStdioLogFn {
     (...logObj: ISLog[]): void;
 }
@@ -43,14 +47,6 @@ export interface ISStdioLogFn {
 export interface ISStdio extends ISClass {
     sources: ISEventEmitter[];
     log: ISStdioLogFn;
-}
-
-export interface ISStdioTypes {
-    LOG: number;
-    INFO: number;
-    WARN: number;
-    ERROR: number;
-    VERBOSE: number;
 }
 
 /**
@@ -128,6 +124,42 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _lastLogObj?: ISLog;
+
+    /**
+     * @name      NO_UI
+     * @type      ISStdioUi
+     * @static
+     *
+     * Represent the "no" ui
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static NO_UI: ISStdioUi = -1;
+
+    /**
+     * @name      UI_TERMINAL
+     * @type      ISStdioUi
+     * @static
+     *
+     * Represent the "terminal" ui
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static UI_TERMINAL: ISStdioUi = 'terminal';
+
+    /**
+     * @name      UI_CONSOLE
+     * @type      ISStdioUi
+     * @static
+     *
+     * Represent the "console" ui
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static UI_CONSOLE: ISStdioUi = 'console';
 
     /**
      * @name      _logsBuffer
@@ -213,7 +245,7 @@ export default class SStdio extends __SClass implements ISStdio {
     static existingOrNew(
         id: string,
         sources,
-        stdio: any = 'inherit',
+        stdio: ISStdioUi = SStdio.NO_UI,
         settings = {},
     ) {
         // @ts-ignore
@@ -230,6 +262,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * and either a path to a SStdio class, an SStdio class directly or a pre-registered
      * stdio id like:
      * - inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio
+     * -
      * - terminal: STerminalStdio (node only)
      * - console: SConsoleStdio (browser only)
      *
@@ -251,7 +284,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static new(id: string, sources, stdio: any = 'inherit', settings = {}) {
+    static new(id: string, sources, stdio: ISStdioUi, settings = {}) {
         return new Promise(async (resolve) => {
             const __new = (await import('./new')).default;
             // @ts-ignore
@@ -312,6 +345,7 @@ export default class SStdio extends __SClass implements ISStdio {
                         metas: {
                             time: false,
                         },
+                        ui: SStdio.NO_UI,
                         defaultLogObj: {
                             decorators: true,
                         },
@@ -344,36 +378,29 @@ export default class SStdio extends __SClass implements ISStdio {
 
         const packageJson = __packageJson(__dirname());
 
-        this.log({
-            group: 'Global',
-            active: true,
-            value: ``,
-        });
+        // this.log({
+        //     group: 'Global',
+        //     active: true,
+        //     value: ``,
+        // });
 
-        this.log({
-            group: 'Coffeekraken',
-            active: true,
-            value: ``,
-        });
+        // this.log({
+        //     group: 'Coffeekraken',
+        //     active: true,
+        //     value: ``,
+        // });
 
-        setTimeout(() => {
-            this.log({
-                group: 'Coffeekraken',
-                active: true,
-                value: `You are running the <yellow>Coffeekraken</yellow> stack version <cyan>${packageJson.version}</cyan>`,
-            });
-
-            this.log({
-                group: 'Coffeekraken',
-                active: true,
-                type: __SLog.SUMMARY,
-                value: {
-                    status: 'success',
-                    value: `v<yellow>${packageJson.version}</yellow>`,
-                    collapse: true,
-                },
-            });
-        }, 50);
+        // setTimeout(() => {
+        //     this.log({
+        //         group: 'Coffeekraken',
+        //         active: true,
+        //         value: `<cyan>[Coffeekraken]</cyan> You are running the stack version <cyan>${
+        //             packageJson.version
+        //         }</cyan> in <magenta>${__SEnv.get(
+        //             'environment',
+        //         )}</magenta> environment`,
+        //     });
+        // });
     }
 
     /**
@@ -531,17 +558,26 @@ export default class SStdio extends __SClass implements ISStdio {
             }
 
             // get the correct component to pass to the _log method
-            const componentObj = (<any>this).constructor.registeredComponents[
+            let logType =
+                log.type === 'log' ? 'default' : log.type ?? 'default';
+
+            let componentObj = (<any>this).constructor.registeredComponents[
                 this.constructor.name
-            ][log.as || 'default'];
-            if (!componentObj)
-                throw new Error(
-                    `Sorry but the requested "<yellow>${
-                        log.as || 'default'
-                    }</yellow>" in the "<cyan>${
-                        this.constructor.name
-                    }</cyan>" stdio class does not exists...`,
-                );
+            ][logType];
+            // if (!componentObj)
+            //     throw new Error(
+            //         `Sorry but the requested "<yellow>${
+            //             log.type || 'default'
+            //         }</yellow>" in the "<cyan>${
+            //             this.constructor.name
+            //         }</cyan>" stdio class does not exists...`,
+            //     );
+
+            if (!componentObj) {
+                componentObj = (<any>this).constructor.registeredComponents[
+                    this.constructor.name
+                ].default;
+            }
 
             if (typeof componentObj.component.render !== 'function') {
                 throw new Error(

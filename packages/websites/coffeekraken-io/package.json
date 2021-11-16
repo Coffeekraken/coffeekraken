@@ -75,6 +75,9 @@
         "http-server": "^14.0.0",
         "lit-element": "^2.5.1",
         "minisearch": "^3.0.4",
+        "noise-canvas": "^1.1.1",
+        "three": "^0.134.0",
+        "tumult": "^3.0.14",
         "vue": "^3.1.5",
         "vue3-webcomponent-wrapper": "^0.1.4"
     },

@@ -105,13 +105,20 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         this._screen = __blessed.screen({
             smartCSR: true,
             autoPadding: true,
-            title: `Coffeekraken | ${packageJson.name}`
+            title: `Coffeekraken | ${packageJson.name}`,
         });
         this._screen.enableInput();
 
-        this._screen.render();
+        // this._screen.render();
 
         this.display();
+
+        setTimeout(() => {
+            this._log({
+                group: 'Global',
+                value: '',
+            });
+        }, 100);
     }
 
     clearLast() {
@@ -125,15 +132,20 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
     }
 
     _render() {
-        let currentTop = 0, collapsedCount = 0, boxesCount = Object.keys(this._logsStack).length, availableHeight = this._screen.height;
-         this._logsStack.forEach((logsStack, i) => {
+        let currentTop = 0,
+            collapsedCount = 0,
+            boxesCount = Object.keys(this._logsStack).length,
+            availableHeight = this._screen.height;
+        this._logsStack.forEach((logsStack, i) => {
             if (logsStack.collapsed) {
                 collapsedCount++;
                 availableHeight--;
             }
         });
 
-        const newHeight = Math.floor(availableHeight / (boxesCount - collapsedCount));
+        const newHeight = Math.floor(
+            availableHeight / (boxesCount - collapsedCount),
+        );
 
         this._logsStack.forEach((logsStack, i) => {
             logsStack.box.height = logsStack.collapsed ? 1 : newHeight;
@@ -144,11 +156,12 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
             currentTop += logsStack.box.height;
         });
 
+        // setTimeout(() => {
         this._screen.render();
+        // });
     }
 
     _renderTop(box, title, content) {
-
         let ora = box._ora ?? __ora('');
         box._ora = ora;
 
@@ -158,9 +171,15 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
         } else if (box._status === 'error') {
             statusChar = '<red>✖</red>';
         } else {
-            statusChar = ora.frame().slice(0,-1);
+            statusChar = ora.frame().slice(0, -1);
         }
-        box.setContent(__parseHtml(` {black-bg} ${statusChar} ${title} {/black-bg}{|}${content ? `{black-bg} ${content} {/black-bg}` : ''}`));
+        box.setContent(
+            __parseHtml(
+                ` {black-bg} ${statusChar} ${title} {/black-bg}{|}${
+                    content ? `{black-bg} ${content} {/black-bg}` : ''
+                }`,
+            ),
+        );
         this._render();
 
         if (box._status === 'running') {
@@ -187,7 +206,14 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
      */
     _currentLogId = '';
     _logsStack: ISTerminalStdioLogsContainer[] = [];
-    _log(logObj, component) {
+    // @ts-ignore
+    _log(logObj, component?) {
+        if (!component) {
+            component =
+                this.constructor.registeredComponents[this.constructor.name]
+                    .default.component;
+        }
+
         // handle empty logs
         if (!logObj) return;
 
@@ -199,19 +225,19 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
             }
         }
 
-        let logStack = this._logsStack.filter(logStack => logStack.group === logObj.group)[0];
+        let logStack = this._logsStack.filter(
+            (logStack) => logStack.group === logObj.group,
+        )[0];
         if (!logStack) {
-
             logStack = {
                 group: logObj.group,
                 collapsed: false,
                 box: undefined,
                 top: undefined,
-                left: undefined
+                left: undefined,
             };
 
-            const color =
-                __availableColors()[this._logsStack.length];
+            const color = __availableColors()[this._logsStack.length];
             logStack.box = __blessed.box({
                 content: '',
                 left: 1,
@@ -221,7 +247,7 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
                     top: 1,
                     left: 2,
                     right: 2,
-                    bottom: 1
+                    bottom: 1,
                 },
                 scrollable: true,
                 alwaysScroll: true,
@@ -256,11 +282,10 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
             logStack.top._status = 'running';
             this._renderTop(logStack.top, logObj.group, null);
 
-            this._logsStack.splice(this._logsStack.length-1, 0, logStack);
+            this._logsStack.splice(this._logsStack.length - 1, 0, logStack);
 
             logStack.top.on('click', () => {
-                logStack.collapsed =
-                    !logStack.collapsed;
+                logStack.collapsed = !logStack.collapsed;
                 this._render();
             });
 
@@ -277,15 +302,14 @@ class STerminalStdio extends __SStdio implements ISTerminalStdio {
             this._renderTop(logStack.top, logObj.group, logObj.value.value);
             return this._render();
         }
-        
 
         let renderedStr = component.render(logObj, this._settings);
 
         // log the string
         logStack.box.insertBottom(__parseHtml(renderedStr));
-        logStack.box.setScrollPerc(100);
+        // logStack.box.setScrollPerc(100);
 
-¨       this._render();
+        this._render();
     }
 
     _draw() {}

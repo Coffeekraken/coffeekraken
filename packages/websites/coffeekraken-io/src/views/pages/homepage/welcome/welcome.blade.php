@@ -46,7 +46,10 @@
     <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     
     <div class="__illustration">
-        <div class="__coffee-cup">
+
+        <ck-blob></ck-blob>
+
+        {{-- <div class="__coffee-cup">
             <img src="{{ $config->serve->img->url }}/welcome/coffee-cup.png" />
         </div>
         <div class="__blob-js" s-parallax amount="0.5" amount-y="0.5" amount-rotate-x="0.1">
@@ -75,7 +78,7 @@
         </div>
         <div class="__blob-03" s-parallax amount="0.5" amount-y="0.2" amount-rotate-x="0.1">
             <img src="{{ $config->serve->img->url }}/welcome/blob-03.png" />
-        </div>
+        </div> --}}
     </div>
 
     {{-- <div class="__grains" layer amount="0.03"></div> --}}

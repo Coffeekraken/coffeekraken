@@ -100,6 +100,10 @@ export default function spawn(
 
         let childProcessExitPromiseResolve;
 
+        process.on('exit', function () {
+            childProcess.kill();
+        });
+
         __onProcessExit(() => {
             new Promise((resolve) => {
                 childProcessExitPromiseResolve = resolve;

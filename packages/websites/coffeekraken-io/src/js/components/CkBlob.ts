@@ -1,44 +1,28 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { html } from 'lit';
-import __filterObject from '@coffeekraken/sugar/shared/object/filter';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __noisify from './lib/noisify';
-import { Simplex2 } from 'tumult';
-
-import * as THREE from 'three';
-import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 // import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
 // import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
 // import { BokehPass } from './lib/three/examples/jsm/postprocessing/BokehPass.js';
 // import { ShaderPass } from './lib/three/examples/jsm/postprocessing/ShaderPass';
 // import { FXAAShader } from './lib/three/examples/jsm/shaders/FXAAShader';
-import { MTLLoader } from './lib/three/examples/jsm/loaders/MTLLoader.js';
-import { TextureLoader } from './lib/three/examples/jsm/loaders/TextureLoader.js';
-
+// import { MTLLoader } from './lib/three/examples/jsm/loaders/MTLLoader.js';
+// import { TextureLoader } from './lib/three/examples/jsm/loaders/TextureLoader.js';
 import {
     BloomEffect,
     EffectComposer,
     EffectPass,
+    DepthOfFieldEffect,
+    PixelationEffect,
     RenderPass,
 } from 'postprocessing';
-
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-
-import { RGBELoader } from './lib/RGBELoader';
+import { html } from 'lit';
+import * as THREE from 'three';
 import __perlin from './lib/perlinNoise';
-
-class NoiseSphereGeometry extends THREE.SphereGeometry {
-    constructor(
-        radius,
-        widthSegments,
-        heightSegments,
-        { seed, noiseWidth, noiseHeight },
-    ) {
-        super(radius, widthSegments, heightSegments);
-    }
-}
+import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
+// import { RGBELoader } from './lib/RGBELoader';
+import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 
 export default class CKBlob extends __SLitComponent {
     constructor() {
@@ -86,11 +70,6 @@ export default class CKBlob extends __SLitComponent {
         this._renderer.shadowMap.enabled = true;
         this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
         this.querySelector('.ck-blob').appendChild(this._renderer.domElement);
-
-        // const color = 0xffffff; // white
-        // const near = 10;
-        // const far = 100;
-        // this._scene.fog = new THREE.Fog(color, near, far);
 
         // load env map
         this._envMap = await this.loadEnvMap();
@@ -144,57 +123,6 @@ export default class CKBlob extends __SLitComponent {
         this.addControls();
 
         this.animate();
-
-        return;
-
-        // const light = new THREE.DirectionalLight(0xff0000, 1, 20);
-        // light.position.set(0, 0, 0); //default; light shining from top
-        // light.rotation.x = 90;
-        // // light.target.position.set(0, 0, 0);
-        // light.castShadow = true; // default false
-        // // light.shadow.radius = 1;
-        // // light.shadow.bias = -0.005;
-        // var side = 100;
-        // light.shadow.camera.top = side;
-        // light.shadow.camera.bottom = -side;
-        // light.shadow.camera.left = side;
-        // light.shadow.camera.right = -side;
-        // light.shadow.camera.near = 0.01; // same as the camera
-        // light.shadow.camera.far = 1000; // same as the camera
-        // light.shadow.camera.fov = 50; // same as the camera
-        // light.shadow.mapSize.width = 2048;
-        // light.shadow.mapSize.height = 2048;
-        // // light.shadow.mapSize.width = 512; // default
-        // // light.shadow.mapSize.height = 512; // default
-        // // light.shadow.camera.near = 10; // default
-        // light.shadow.camera.far = 100; // default
-        // // light.shadowCameraVisible = true;
-        // // this._scene.add(light.target);
-        // this._directionalLight = light;
-
-        // const helper = new THREE.CameraHelper(light.shadow.camera);
-
-        // var ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
-        // // ambientLight.castShadow = true;
-
-        // //Create a plane that receives shadows (but does not cast them)
-        // const planeGeometry = new THREE.PlaneGeometry(50, 50, 32, 32);
-        // const planeMaterial = new THREE.MeshStandardMaterial({
-        //     color: 0xffffff,
-        // });
-        // const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        // // plane.receiveShadow = true;
-        // plane.position.set(0, -10, 0);
-        // plane.rotation.set(-90, 0, 0);
-
-        // this._scene.add(plane);
-        // // this._scene.add(this._sphere);
-        // // this._scene.add(this._grainsGroup);
-        // this._scene.add(light);
-        // this._scene.add(ambientLight);
-        // // this._scene.add(helper);
-
-        // this.animate();
     }
 
     initPostprocessing() {
@@ -219,9 +147,20 @@ export default class CKBlob extends __SLitComponent {
         const composer = new EffectComposer(this._renderer);
 
         composer.addPass(renderPass);
-        composer.addPass(new EffectPass(this._camera, new BloomEffect()));
+        composer.addPass(
+            new EffectPass(
+                this._camera,
+                new DepthOfFieldEffect(this._camera, {
+                    focusDistance: 1.3,
+                    focalLength: 0.75,
+                    bokehScale: 2,
+                }),
+            ),
+        );
         // composer.addPass(bokehPass);
         // composer.addPass(fxaaPass);
+
+        this._composer = composer;
 
         // zBlurPass.renderToScreen = true;
 
@@ -312,7 +251,7 @@ export default class CKBlob extends __SLitComponent {
     loadCoffeeGrain() {
         return new Promise((resolve) => {
             new THREE.TextureLoader().load(
-                '/src/3d/coffeeGrain/coffeeGrain-bw.jpg',
+                '/src/3d/coffeeGrain/coffeeGrain-bw-1.jpg',
                 (texture) => {
                     new THREE.TextureLoader().load(
                         '/src/3d/coffeeGrain/coffeeGrainBumpMap.jpg',
@@ -409,6 +348,7 @@ export default class CKBlob extends __SLitComponent {
         this._controls.update();
         // this._postprocessing.composer.render(0.1);
         // this._renderer.render(this._scene, this._camera);
+        this._composer.render();
     }
 
     render() {

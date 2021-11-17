@@ -187,11 +187,13 @@
 
     .__illustration {
         position: absolute;
-        width: 500px;
-        aspect-ratio: 1;
-        top: 230px;
-        left: calc(50% + 100px);
-        transform: scale(0.9);
+        width: 1280px;
+        height: 720px;
+        background: rgba(255, 0, 0, 0.01);
+        z-index: 10;
+        top: 130px;
+        left: calc(50% - 300px);
+        transform: scale(1);
 
         > * {
             position: absolute;
@@ -485,6 +487,7 @@
     }
 
     .__footer {
+        display: none;
         position: absolute;
         text-align: center;
         bottom: 0;

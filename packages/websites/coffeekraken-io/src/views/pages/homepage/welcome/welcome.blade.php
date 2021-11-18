@@ -1,6 +1,8 @@
 <section id="homepage-welcome">
 
 
+    <div class="__stars"></div>
+
     {{-- <div class="__background"></div>
     <canvas class="__canvas" id="welcome-canvas"></canvas>
     <canvas class="__canvas" id="welcome-canvas-2"></canvas> --}}
@@ -20,7 +22,7 @@
             </div>
         </div>
     </div> --}}
-    <div class="__code">
+    {{-- <div class="__code">
         @php
 
 
@@ -34,18 +36,22 @@
             }
         @endphp
         <span>{!! implode('',$ar) !!}</span>
-    </div>
+    </div> --}}
 
-    <div layer amount="0" class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    {{-- <div layer amount="0" class="__template __template-01">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-02">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-03">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     {{-- <div layer amount="0" class="__template __template-04">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     {{-- <div layer amount="0" class="__template __template-05">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
     <div layer amount="0" class="__template __template-06">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     {{-- <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
-    <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div>
+    {{-- <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     
     <div class="__illustration">
+
+        <div class="__loader">
+            <i class="s-loader:spinner s-color:accent"></i>
+        </div>
 
         <ck-blob></ck-blob>
 

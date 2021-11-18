@@ -3,14 +3,7 @@
     text-align: left;
     position: relative;
     z-index: 10;
-    margin-top: -80px;
     margin-bottom: 50px;
-
-    /* background: radial-gradient(
-        ellipse at top,
-        sugar.color(main, --lighten 43),
-        transparent
-    ); */
 
     @sugar.theme.when (dark) {
         background: sugar.color(main, background) !important;
@@ -21,167 +14,22 @@
         ) !important;
     }
 
-    /* .s-remap-complementary-accent {
-        @sugar.color.remap (complementary, accent);
-    }
-    .s-remap-accent-complementary {
-        @sugar.color.remap (accent, complementary);
-    } */
-
-    &:before {
-        content: '';
+    .__stars {
         position: absolute;
-        bottom: 0;
-        left: 0;
-        width: 100%;
-        height: 200px;
-        background: linear-gradient(
-            180deg,
-            sugar.color(main, background, --darken 1.2),
-            sugar.color(main, --alpha 0)
-        );
-        mask-image: radial-gradient(ellipse at top, black, transparent);
-    }
-
-    @sugar.theme.when (dark) {
-        &:before {
-            background: linear-gradient(
-                180deg,
-                sugar.color(main, background, --darken 2),
-                sugar.color(main, background)
-            );
-        }
-    }
-
-    @keyframes grains-in {
-        0 {
-            transform: scale(1);
-        }
-        50% {
-            transform: scale(1.5);
-        }
-        100% {
-            transform: scale(1);
-        }
-    }
-    .__grains {
-        position: absolute;
-        top: 0;
+        top: 0px;
         left: 0;
         width: 100%;
         height: 100%;
-        background-image: url('/src/img/coffee-grains-light.png');
-        background-size: contain;
-        background-position: 50% 50%;
-        pointer-events: none;
-        transform: scale(1);
-        animation: grains-in 120s ease-out 1s infinite;
-        opacity: 0.3;
+        background-image: url('/src/img/welcome/welcome-bg-light-01.jpg');
+        background-repeat: repeat-x;
+        background-size: cover;
+        background-position: 50% 0;
+        filter: saturate(0);
+        opacity: 0.2;
+        mask-image: linear-gradient(black, transparent);
 
-        @sugar.theme.when (dark) {
-            filter: drop-shadow(100px 100px 50px rgba(0, 0, 0, 0.3));
-            background-image: url('/src/img/coffee-grains-dark.png');
-        }
-    }
-
-    @keyframes coffee-cup {
-        from {
-            opacity: 0;
-            transform: translateX(25px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-js {
-        from {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-css {
-        from {
-            opacity: 0;
-            transform: translateX(120px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-ui {
-        from {
-            opacity: 0;
-            transform: translateX(80px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-node {
-        from {
-            opacity: 0;
-            transform: translateX(-50px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-cli {
-        from {
-            opacity: 0;
-            transform: translateX(40px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-php {
-        from {
-            opacity: 0;
-            transform: translateX(20px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-01 {
-        from {
-            opacity: 0;
-            transform: translateX(80px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-02 {
-        from {
-            opacity: 0;
-            transform: translateX(100px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
-        }
-    }
-    @keyframes blob-03 {
-        from {
-            opacity: 0;
-            transform: translateX(80px);
-        }
-        to {
-            opacity: 1;
-            transform: translateX(0);
+        @sugar.theme.when dark {
+            background-image: url('/src/img/welcome/welcome-bg-01.jpg');
         }
     }
 
@@ -189,203 +37,26 @@
         position: absolute;
         width: 1280px;
         height: 720px;
-        background: rgba(255, 0, 0, 0.01);
         z-index: 10;
-        top: 130px;
-        left: calc(50% - 300px);
+        top: 90px;
+        left: calc(50% - 250px);
         transform: scale(1);
+
+        .__loader {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
 
         > * {
             position: absolute;
-            filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.07));
+            filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.07));
 
             @sugar.theme.when dark {
-                filter: drop-shadow(100px 20px 30px rgba(0, 0, 0, 0.2));
+                filter: drop-shadow(20px 20px 30px rgba(0, 0, 0, 0.1));
             }
         }
-        .__coffee-cup {
-            opacity: 0;
-            animation: coffee-cup 0.6s ease-out 2s forwards;
-        }
-        .__blob-js {
-            top: 51px;
-            left: 9px;
-
-            img {
-                opacity: 0;
-                animation: blob-js 0.6s ease-out 2.3s forwards;
-            }
-        }
-        .__blob-css {
-            top: 36px;
-            left: 329px;
-
-            img {
-                opacity: 0;
-                animation: blob-css 0.7s ease-out 2.2s forwards;
-            }
-        }
-        .__blob-ui {
-            top: 0;
-            left: 270px;
-
-            img {
-                opacity: 0;
-                animation: blob-ui 0.6s ease-out 2.3s forwards;
-            }
-        }
-        .__blob-node {
-            top: 166px;
-            left: -44px;
-
-            img {
-                opacity: 0;
-                animation: blob-node 0.4s ease-out 2.2s forwards;
-            }
-        }
-        .__blob-cli {
-            top: 316px;
-            left: 309px;
-
-            img {
-                opacity: 0;
-                animation: blob-cli 0.6s ease-out 2.1s forwards;
-            }
-        }
-        .__blob-php {
-            top: 383px;
-            left: 283px;
-
-            img {
-                opacity: 0;
-                animation: blob-php 0.5s ease-out 2s forwards;
-            }
-        }
-        .__blob-01 {
-            top: 0;
-            left: 227px;
-
-            img {
-                opacity: 0;
-                animation: blob-01 0.6s ease-out 2.1s forwards;
-            }
-        }
-        .__blob-02 {
-            top: 260px;
-            left: -30px;
-
-            img {
-                opacity: 0;
-                animation: blob-02 0.7s ease-out 2.3s forwards;
-            }
-        }
-        .__blob-03 {
-            top: 320px;
-            left: 550px;
-
-            img {
-                opacity: 0;
-                animation: blob-03 0.6s ease-out 2.3s forwards;
-            }
-        }
-    }
-
-    .__template {
-        display: none;
-        text-align: right;
-        position: absolute;
-        top: calc(50% - 100px);
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background: rgba(0, 0, 0, 0.02);
-        border-radius: 20px;
-        overflow: hidden;
-        user-select: none;
-        opacity: 0.5;
-        box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.05);
-        font-size: 40px;
-        color: rgba(0, 0, 0, 0);
-
-        @sugar.theme.when (dark) {
-            color: rgba(255, 255, 255, 0);
-            background: rgba(255, 255, 255, 0.01);
-            background: linear-gradient(
-                rgba(255, 255, 255, 0.05),
-                rgba(255, 255, 255, 0),
-                25deg
-            );
-            box-shadow: 30px 30px 40px rgba(0, 0, 0, 0.1);
-        }
-    }
-    .__template-01 {
-        width: 600px;
-        height: 130px;
-        transform: translate(calc(-50% - 500px), calc(-50% - 220px))
-            rotateY(20deg) perspective(200px) rotateX(10deg) rotateZ(-3deg);
-    }
-    .__template-02 {
-        width: 200px;
-        height: 250px;
-        transform: translate(calc(-50% - 550px), calc(-50% + 30px))
-            rotateY(20deg) perspective(200px) rotateX(20deg) rotateZ(20deg);
-        font-size: 20px;
-    }
-    .__template-03 {
-        width: 150px;
-        height: 150px;
-        transform: translate(calc(-50% - 320px), calc(-50% + 210px))
-            rotateY(20deg) perspective(200px) rotateX(20deg);
-        font-size: 40px;
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
-
-        @sugar.theme.when (dark) {
-            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
-        }
-    }
-    .__template-04 {
-        width: 350px;
-        height: 150px;
-        transform: translate(calc(-50% + 400px), calc(-50% - 250px))
-            rotateY(20deg) perspective(200px) rotateX(20deg) rotateZ(5deg);
-        font-size: 25px;
-    }
-    .__template-05 {
-        width: 150px;
-        height: 250px;
-        transform: translate(calc(-50% + 520px), calc(-50% + 40px))
-            rotateY(20deg) perspective(200px) rotateX(20deg) rotateZ(-7deg);
-        font-size: 50px;
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
-
-        @sugar.theme.when (dark) {
-            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
-        }
-    }
-    .__template-06 {
-        width: 150px;
-        height: 150px;
-        transform: translate(calc(-50% + 285px), calc(-50% + 230px))
-            rotateY(20deg) perspective(200px) rotateX(-20deg) rotateZ(4deg);
-        font-size: 10px;
-    }
-    .__template-07 {
-        width: 650px;
-        height: 100px;
-        transform: translate(calc(-50% + 980px), calc(-50% + 40px))
-            rotateY(30deg) perspective(200px) rotateX(-35deg) rotateZ(15deg);
-        font-size: 40px;
-        box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.05);
-
-        @sugar.theme.when (dark) {
-            box-shadow: 50px 50px 40px rgba(0, 0, 0, 0.1);
-        }
-    }
-    .__template-08 {
-        width: 600px;
-        height: 130px;
-        transform: translate(calc(-50% - 1000px), calc(-50% + 30px))
-            rotateY(20deg) perspective(200px) rotateX(-10deg) rotateZ(-6deg);
-        font-size: 20px;
     }
 
     .__content {
@@ -395,167 +66,5 @@
         left: 50%;
         width: 1280px;
         transform: translate(-50%, -50%);
-    }
-
-    .__logo {
-        display: none;
-        height: 70px;
-        margin: 0 auto sugar.margin(50) auto;
-
-        svg {
-            width: 100%;
-            height: 80px;
-        }
-        svg .main {
-            fill: sugar.color(main, text);
-        }
-        svg .accent {
-            fill: sugar.color(accent);
-        }
-    }
-
-    .__code {
-        mask-image: radial-gradient(ellipse at bottom, black, transparent);
-        font-family: sugar.font.family(code);
-        font-size: 40px;
-        line-height: 1.7;
-        letter-spacing: 0.4em;
-        text-align: center;
-        width: calc(
-            sugar.theme(layout.container.default.max-width) / 2 + 400px
-        );
-        width: 100%;
-        position: absolute;
-        bottom: 200px;
-        left: 0;
-        opacity: 0.05;
-        user-select: none;
-
-        @sugar.theme.when dark {
-            opacity: 0.1;
-        }
-    }
-
-    .__code-0 {
-        animation: code 2s ease-in-out infinite;
-    }
-    .__code-1 {
-        animation: code 3s ease-in-out infinite 0.3s;
-    }
-    .__code-2 {
-        animation: code 2s ease-in-out infinite 0.6s;
-        color: sugar.color(accent);
-    }
-    .__code-3 {
-        animation: code 2.3s ease-in-out infinite;
-    }
-    .__code-4 {
-        animation: code 3.1s ease-in-out infinite;
-        color: sugar.color(complementary);
-    }
-    .__code-5 {
-        animation: code 2.8s ease-in-out infinite;
-    }
-    .__code-6 {
-        animation: code 3.5s ease-in-out infinite 0.3s;
-        color: sugar.color(accent);
-    }
-    .__code-7 {
-        animation: code 2s ease-in-out infinite 0.6s;
-    }
-    .__code-8 {
-        animation: code 5.3s ease-in-out infinite;
-    }
-    .__code-9 {
-        animation: code 3.1s ease-in-out infinite;
-        color: sugar.color(complementary);
-    }
-    .__code-10 {
-        animation: code 3.1s ease-in-out infinite;
-    }
-
-    @keyframes code {
-        0% {
-            opacity: 0;
-        }
-        50% {
-            opacity: 1;
-        }
-        100% {
-            opacity: 0;
-        }
-    }
-
-    .__footer {
-        display: none;
-        position: absolute;
-        text-align: center;
-        bottom: 0;
-        left: 50%;
-        width: 100%;
-        transform: translate(-50%, 50%);
-        background: sugar.color(main, surface);
-        border-radius: sugar.border.radius();
-        /* background: linear-gradient(
-            90deg,
-            sugar.color(main, --lighten 27 --alpha 0),
-            sugar.color(main, --lighten 23),
-            sugar.color(main, --lighten 27 --alpha 0)
-        ); */
-        background: linear-gradient(
-            90deg,
-            sugar.color(main, --lighten 48),
-            sugar.color(main, --lighten 49),
-            sugar.color(main, --lighten 48)
-        );
-        /* background: sugar.color(main, --lighten 49); */
-        /* box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05); */
-        padding: sugar.padding(50);
-        font-family: sugar.font.family(code);
-        font-size: sugar.font.size(60);
-        user-select: none;
-        /* mask-image: radial-gradient(ellipse at top, black, transparent),
-            radial-gradient(ellipse at bottom, black, transparent); */
-
-        @sugar.theme.when (dark) {
-            text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.2);
-            background: linear-gradient(
-                90deg,
-                sugar.color(main, --darken 27 --alpha 0),
-                sugar.color(main, --darken 33),
-                sugar.color(main, --darken 27 --alpha 0)
-            );
-            box-shadow: none;
-        }
-
-        .__bracket {
-            font-size: sugar.font.size(100);
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            opacity: 0.1;
-
-            @sugar.theme.when (dark) {
-                text-shadow: 5px 5px 20px rgba(0, 0, 0, 0.6);
-            }
-        }
-        .__first {
-            display: inline-block;
-            transform: translateX(-10%) rotateY(30deg) perspective(10px)
-                rotateX(-1deg) rotateZ(2deg);
-            transform: translateX(-10%);
-        }
-        .__second {
-            display: inline-block;
-            transform: translateX(10%) rotateY(30deg) perspective(10px)
-                rotateX(1deg) rotateZ(2deg);
-            transform: translateX(10%);
-        }
-        .__bracket-start {
-            transform: translate(calc(-300px - 100%), -50%);
-        }
-        .__bracket-end {
-            transform: translate(300px, -50%);
-        }
     }
 }

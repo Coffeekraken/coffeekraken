@@ -17,6 +17,7 @@ import {
     BlendFunction,
     ShockWaveEffect,
     NoiseEffect,
+    OutlineEffect,
     GlitchEffect,
     DepthOfFieldEffect,
     PixelationEffect,
@@ -55,7 +56,7 @@ export default class CKBlob extends __SLitComponent {
 
     _perlin = __perlin();
 
-    _isDark = false;
+    _isDark = document.body.getAttribute('class')?.toString().includes('-dark');
 
     _postprocessing = {};
 
@@ -73,7 +74,7 @@ export default class CKBlob extends __SLitComponent {
             minFilter: THREE.LinearFilter,
             magFilter: THREE.LinearFilter,
             format: THREE.RGBAFormat,
-            stencilBuffer: false,
+            // stencilBuffer: false,
             alpha: true,
             antialias: true,
         });
@@ -89,11 +90,12 @@ export default class CKBlob extends __SLitComponent {
 
         let backLight;
         if (this._isDark) {
-            backLight = new THREE.PointLight(0x4d1af9, 2, 100);
+            backLight = new THREE.PointLight(0xffffff, 0.5);
+            backLight.position.set(8, 8, -10);
         } else {
-            backLight = new THREE.PointLight(0x4d1af9, 2, 100);
+            backLight = new THREE.PointLight(0xffffff, 2);
+            backLight.position.set(8, 8, -10);
         }
-        backLight.position.set(8, 8, -10);
 
         //Create a DirectionalLight and turn on shadows for the light
         const light = new THREE.DirectionalLight(0xffcc17, 0.1, 100);
@@ -131,86 +133,92 @@ export default class CKBlob extends __SLitComponent {
         if (this._isDark) {
             ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
         } else {
-            ambientLight = new THREE.AmbientLight(0x9e83f6, 0.3);
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
         }
 
         //Create a helper for the shadow camera (optional)
         const helper = new THREE.CameraHelper(light.shadow.camera);
 
-        const pointsSphere1 = this.createPointsSphere(0xffcd43, 0, 0.3);
-        pointsSphere1.scale.set(6, 6, 6);
-        const pointsSphere2 = this.createPointsSphere(0x7043ff, 0, 0.3);
-        pointsSphere2.scale.set(7.5, 7.5, 7.5);
-        const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
-        pointsSphere3.scale.set(9, 9, 9);
+        const pointsSphere1 = this.createPointsSphere(
+            this._isDark ? 0xffffff : 0x000000,
+            0,
+            0.1,
+        );
+        pointsSphere1.scale.set(9, 9, 9);
+        // const pointsSphere2 = this.createPointsSphere(0x7043ff, 0, 0.3);
+        // pointsSphere2.scale.set(7.5, 7.5, 7.5);
+        // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
+        // pointsSphere3.scale.set(9, 9, 9);
 
-        const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
-        html5.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const css3 = await this.createIconSphere('/src/3d/logo-css3.jpg');
-        css3.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const js = await this.createIconSphere('/src/3d/logo-js.jpg');
-        js.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const vitejs = await this.createIconSphere('/src/3d/logo-vitejs.jpg');
-        vitejs.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const postcss = await this.createIconSphere('/src/3d/logo-postcss.jpg');
-        postcss.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const npm = await this.createIconSphere('/src/3d/logo-npm.jpg');
-        npm.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const yarn = await this.createIconSphere('/src/3d/logo-yarn.jpg');
-        yarn.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const typescript = await this.createIconSphere(
-            '/src/3d/logo-typescript.jpg',
-        );
-        typescript.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const php = await this.createIconSphere('/src/3d/logo-php.jpg');
-        php.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
-        const node = await this.createIconSphere('/src/3d/logo-node.jpg');
-        node.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
+        // const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
+        // html5.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const css3 = await this.createIconSphere('/src/3d/logo-css3.jpg');
+        // css3.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const js = await this.createIconSphere('/src/3d/logo-js.jpg');
+        // js.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const vitejs = await this.createIconSphere('/src/3d/logo-vitejs.jpg');
+        // vitejs.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const postcss = await this.createIconSphere('/src/3d/logo-postcss.jpg');
+        // postcss.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const npm = await this.createIconSphere('/src/3d/logo-npm.jpg');
+        // npm.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const yarn = await this.createIconSphere('/src/3d/logo-yarn.jpg');
+        // yarn.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const typescript = await this.createIconSphere(
+        //     '/src/3d/logo-typescript.jpg',
+        // );
+        // typescript.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const php = await this.createIconSphere('/src/3d/logo-php.jpg');
+        // php.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
+        // const node = await this.createIconSphere('/src/3d/logo-node.jpg');
+        // node.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
 
-        this._pointSpheres = [pointsSphere3];
+        this._pointSpheres = [pointsSphere1];
 
+        if (this._isDark) {
+            this._scene.add(backLight);
+        }
         this._scene.add(light);
-        this._scene.add(backLight);
         this._scene.add(ambientLight);
         this._scene.add(sphere);
         // this._scene.add(html5);
@@ -223,10 +231,10 @@ export default class CKBlob extends __SLitComponent {
         // this._scene.add(typescript);
         // this._scene.add(php);
         // this._scene.add(node);
-        this._scene.add(grains);
+        // this._scene.add(grains);
         this._pointSpheres.forEach((s) => this._scene.add(s));
 
-        this._scene.add(plane);
+        // this._scene.add(plane);
         // this._scene.add(helper);
 
         this.initPostprocessing();
@@ -271,11 +279,17 @@ export default class CKBlob extends __SLitComponent {
         composer.addPass(
             new EffectPass(
                 this._camera,
-                new BloomEffect({
-                    intensity: 1,
-                }),
+                new OutlineEffect(this._scene, this._camera),
             ),
         );
+        // composer.addPass(
+        //     new EffectPass(
+        //         this._camera,
+        //         new BloomEffect({
+        //             intensity: 2,
+        //         }),
+        //     ),
+        // );
         composer.addPass(
             new EffectPass(
                 this._camera,
@@ -327,7 +341,7 @@ export default class CKBlob extends __SLitComponent {
 
         const materials = [yellowMaterial, purpleMaterial];
 
-        const count = 7;
+        const count = 12;
 
         for (let i = 0; i < count; i++) {
             const newGrain = grain.clone();
@@ -339,18 +353,18 @@ export default class CKBlob extends __SLitComponent {
                 }
             });
 
-            const ballMat = new THREE.ShadowMaterial({
-                opacity: 0.5,
-            });
-            const geom = new THREE.SphereGeometry(1, 32, 32);
+            // const ballMat = new THREE.ShadowMaterial({
+            //     opacity: 0.5,
+            // });
+            // const geom = new THREE.SphereGeometry(1, 32, 32);
 
-            const sphere = new THREE.Mesh(geom, ballMat);
-            sphere.scale.set(0.5, 0.5, 0.25);
+            // const sphere = new THREE.Mesh(geom, ballMat);
+            // sphere.scale.set(0.5, 0.5, 0.25);
             // sphere.receiveShadow = true;
-            sphere.castShadow = true;
+            // sphere.castShadow = true;
 
             const group = new THREE.Group();
-            group.add(sphere);
+            // group.add(sphere);
             group.add(newGrain);
 
             group.rotation.set(
@@ -360,13 +374,13 @@ export default class CKBlob extends __SLitComponent {
             );
             newGrain.position.x = 7 + Math.random() * 4;
             // newGrain.position.x = 9;
-            sphere.position.x = newGrain.position.x;
-            // group.position.set(0, 5, 0);
+            // sphere.position.x = newGrain.position.x;
+            // group.position.set(0, 5, 0);πwelcome
             // let scaleAddition = -1 + Math.random() * 2;
             // newGrain.scale.x = scaleAddition;
             // newGrain.scale.y = scaleAddition;
             // newGrain.scale.z = scaleAddition;
-            const scale = 0.005 + (Math.random() / 100) * 1.5;
+            const scale = 0.005 + (Math.random() / 100) * 2;
             newGrain.scale.set(scale, scale, scale);
             newGrain.castShadow = true;
             // group.receiveShadow = true;
@@ -395,6 +409,9 @@ export default class CKBlob extends __SLitComponent {
         } else {
             texture = await this.loadTexture('/src/3d/ck-texture-light.jpg');
             matSettings = {
+                // refractionRatio: 0.2,
+                // flatShading: true,
+                // emissiveIntensity: 1,
                 clearcoat: 0,
                 clearcoatRoughness: 0,
                 metalness: 0,
@@ -410,7 +427,7 @@ export default class CKBlob extends __SLitComponent {
             envMap: this._envMap.texture,
         };
 
-        const ballMat = new THREE.MeshPhysicalMaterial(ballMaterial);
+        const ballMat = new THREE.MeshStandardMaterial(ballMaterial);
         const geom = new THREE.SphereGeometry(1, 64, 64);
 
         this._sphere = new THREE.Mesh(geom, ballMat);
@@ -466,7 +483,9 @@ export default class CKBlob extends __SLitComponent {
 
         for (var i = 0; i < numVertices; i++) {
             // set alpha randomly
-            alphas[i] = Math.random() < 0.3 ? maxAlpha : minAlpha;
+            alphas[i] =
+                minAlpha / (this._isDark ? 2 : 5) +
+                (Math.random() * maxAlpha) / (this._isDark ? 2 : 5);
         }
 
         const vertexShader = `attribute float alpha;
@@ -486,7 +505,7 @@ export default class CKBlob extends __SLitComponent {
     }`;
 
         const ballMat = new THREE.MeshBasicMaterial({
-            color: 0xffffff,
+            color: this._isDark ? 0xffffff : 0x000000,
         });
         const geom = new THREE.SphereGeometry(1, 32, 32);
 
@@ -528,15 +547,15 @@ export default class CKBlob extends __SLitComponent {
                 '/src/3d/coffeeGrain/coffeeGrainBumpMap.jpg',
             );
 
-            let grainMat = new THREE.MeshPhysicalMaterial({
+            let grainMat = new THREE.MeshStandardMaterial({
                 clearcoat: 1,
                 clearcoatRoughness: 1,
                 metalness: 0,
-                roughness: 0.8,
+                roughness: 1,
                 color: 0xffffff,
                 // displacementMap: bumpMap,
                 // normalMap: bumpMap,
-                bumpMap: bumpMap,
+                // bumpMap: bumpMap,
                 // bumpScale: 3,
                 // normalScale: new THREE.Vector2(0.15, 2),
                 map: texture,
@@ -606,8 +625,6 @@ export default class CKBlob extends __SLitComponent {
             return;
         }
 
-        console.log('An');
-
         this.updateGeometryOf(this._sphere, 1.4);
         this._pointSpheres.forEach((p) => {
             this.updateGeometryOf(p, 8, 0.0001);
@@ -635,21 +652,21 @@ export default class CKBlob extends __SLitComponent {
             group.rotation.z += group._speed;
         });
 
-        this._icons.forEach((icon) => {
-            this.updateGeometryOf(icon, 1, 0.001);
-            icon.geometry.attributes.position.needsUpdate = true;
-            if (!icon._speed) icon._speed = 0.003 + Math.random() / 100;
-            icon.rotation.x += icon._speed;
-            icon.rotation.y += icon._speed;
-            icon.rotation.z += icon._speed;
-        });
+        // this._icons.forEach((icon) => {
+        //     this.updateGeometryOf(icon, 1, 0.001);
+        //     icon.geometry.attributes.position.needsUpdate = true;
+        //     if (!icon._speed) icon._speed = 0.003 + Math.random() / 100;
+        //     icon.rotation.x += icon._speed;
+        //     icon.rotation.y += icon._speed;
+        //     icon.rotation.z += icon._speed;
+        // });
 
-        this._iconsGroups.forEach((group) => {
-            if (!group._speed) group._speed = 0.001 + Math.random() / 100 / 2;
-            group.rotation.x += group._speed;
-            group.rotation.y += group._speed;
-            group.rotation.z += group._speed;
-        });
+        // this._iconsGroups.forEach((group) => {
+        //     if (!group._speed) group._speed = 0.001 + Math.random() / 100 / 2;
+        //     group.rotation.x += group._speed;
+        //     group.rotation.y += group._speed;
+        //     group.rotation.z += group._speed;
+        // });
 
         // this._grainsGroup.rotation.x += 0.005;
         // this._grainsGroup.rotation.y += 0.005;

@@ -17,6 +17,7 @@ import __SViteStartInterface from './start/interface/SViteStartInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import __SViteBuildInterface from './build/interface/SViteBuildInterface';
+import __SLog from '@coffeekraken/s-log';
 
 export interface ISViteSettings {}
 export interface ISViteCtorSettings {
@@ -124,6 +125,7 @@ export default class SVite extends __SClass {
 
                 if (!(await __isPortFree(config.server.port))) {
                     emit('log', {
+                        type: __SLog.TYPE_WARN,
                         value: `Port <yellow>${config.server.port}</yellow> already in use. Try to kill it before continue...`,
                     });
                     await __kill(`:${config.server.port}`);
@@ -134,17 +136,19 @@ export default class SVite extends __SClass {
                 const listen = await server.listen();
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: [
                         `<yellow>Vite</yellow> server started <green>successfully</green>`,
                     ].join('\n'),
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: [
                         `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
                     ].join('\n'),
                 });
                 emit('log', {
-                    type: 'summary',
+                    type: __SLog.TYPE_SUMMARY,
                     value: {
                         status: 'success',
                         value: `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
@@ -328,39 +332,43 @@ export default class SVite extends __SClass {
                         });
                     }
 
-                    if (finalParams.verbose) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Environment : ${
+                            finalParams.prod
+                                ? '<green>production</green>'
+                                : '<yellow>development</yellow>'
+                        }`,
+                    });
+                    outputsFilenames.forEach((filename) => {
                         emit('log', {
-                            value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`,
+                            type: __SLog.TYPE_INFO,
+                            value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
+                                process.cwd(),
+                                `${__path.resolve(
+                                    viteConfig.build.outDir,
+                                )}/${filename}`,
+                            )}</cyan>`,
                         });
-                        emit('log', {
-                            value: `<yellow>○</yellow> Environment : ${
-                                finalParams.prod
-                                    ? '<green>production</green>'
-                                    : '<yellow>development</yellow>'
-                            }`,
-                        });
-                        outputsFilenames.forEach((filename) => {
-                            emit('log', {
-                                value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
-                                    process.cwd(),
-                                    `${__path.resolve(
-                                        viteConfig.build.outDir,
-                                    )}/${filename}`,
-                                )}</cyan>`,
-                            });
-                        });
-                        emit('log', {
-                            value: `<yellow>○</yellow> Type        : ${buildType.toLowerCase()}`,
-                        });
-                        emit('log', {
-                            value: `<yellow>○</yellow> Target      : ${config.build.target}`,
-                        });
-                        emit('log', {
-                            value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(
-                                ',',
-                            )}`,
-                        });
-                    }
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Type        : ${buildType.toLowerCase()}`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Target      : ${config.build.target}`,
+                    });
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>○</yellow> Format(s)   : ${finalFormats.join(
+                            ',',
+                        )}`,
+                    });
 
                     // set the outputs
                     config.build.rollupOptions.output = outputs;
@@ -372,6 +380,7 @@ export default class SVite extends __SClass {
                         // @ts-ignore
                         res.on('change', async () => {
                             emit('log', {
+                                type: __SLog.TYPE_INFO,
                                 value: `<yellow>[watch]</yellow> Update detected. Re-building...`,
                             });
                             await pipe(
@@ -382,6 +391,7 @@ export default class SVite extends __SClass {
                                 }),
                             );
                             emit('log', {
+                                type: __SLog.TYPE_INFO,
                                 value: `<cyan>[watch]</cyan> Watching for changes...`,
                             });
                         });
@@ -393,6 +403,7 @@ export default class SVite extends __SClass {
                             }),
                         );
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<cyan>[watch]</cyan> Watching for changes...`,
                         });
                         return;
@@ -444,6 +455,7 @@ export default class SVite extends __SClass {
                             );
 
                             emit('log', {
+                                type: __SLog.TYPE_INFO,
                                 value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
                             });
                         });
@@ -451,6 +463,7 @@ export default class SVite extends __SClass {
                 }
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<green>[success]</green> Build completed <green>successfully</green> in <yellow>${
                         duration.end().formatedDuration
                     }</yellow>`,

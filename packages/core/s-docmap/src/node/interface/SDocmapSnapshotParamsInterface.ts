@@ -19,6 +19,8 @@ class SDocMapSnapshotParamsInterface extends __SInterface {
     static get _definition() {
         return {
             outDir: {
+                description:
+                    'Specify the directory path where to store your snapshots',
                 type: 'String',
                 path: {
                     absolute: true,

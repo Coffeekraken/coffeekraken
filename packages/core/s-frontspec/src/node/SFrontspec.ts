@@ -73,8 +73,7 @@ export default class SFrontspec extends __SPromise {
      * @type          Function
      *
      * This static method allows you to search for frontspec.json files and read them to get
-     * back the content of them in one call. It can take advantage of the cache if
-     * the setting.cache property is setted to true
+     * back the content of them in one call.
      *
      * @todo      update documentation
      *

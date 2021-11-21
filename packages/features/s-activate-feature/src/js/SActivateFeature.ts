@@ -91,6 +91,7 @@ export default class SActivateFeature extends __SFeature {
                         }
                     });
                     break;
+                case 'mousenter':
                 case 'mouseover':
                     this.node.addEventListener('mouseover', (e) => {
                         this.activate();

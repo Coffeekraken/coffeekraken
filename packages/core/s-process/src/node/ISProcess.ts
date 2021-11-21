@@ -35,7 +35,6 @@ export interface ISProcessProcessObj extends ISDurationObject {
 export interface ISProcessResultObject extends ISProcessProcessObj {}
 
 export interface ISProcessSettings {
-    asyncStart: boolean;
     killOnError: boolean;
     emitErrorAsEvent: boolean;
     stdio: ISStdio;
@@ -57,10 +56,16 @@ export interface ISProcessParams {
 }
 
 export interface ISProcessCtor {
-    new (params: Record<string, unknown>, settings: ISProcessSettings): ISProcess;
+    new (
+        params: Record<string, unknown>,
+        settings: ISProcessSettings,
+    ): ISProcess;
 }
 export interface ISProcessInternal extends ISClass {
-    run(paramsOrStringArgs: Record<string, unknown> | string, settings: ISProcessSettings): any;
+    run(
+        paramsOrStringArgs: Record<string, unknown> | string,
+        settings: ISProcessSettings,
+    ): any;
     kill(data: any): void;
     log(...logs: ISLog[]): void;
     error(...errors: ISLog[]): void;

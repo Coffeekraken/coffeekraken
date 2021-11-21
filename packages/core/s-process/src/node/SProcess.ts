@@ -373,13 +373,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                 `An SProcess instance MUST have a "<yellow>processPath</yellow>" property either populated automatically if possible, or specified in the "<cyan>settings.processPath</cyan>" property...`,
             );
         }
-
-        // ready if not an asyncStart process
-        // if (this.processSettings.asyncStart === false) {
-        //   setTimeout(() => {
-        //     this.ready();
-        //   });
-        // }
     }
 
     /**

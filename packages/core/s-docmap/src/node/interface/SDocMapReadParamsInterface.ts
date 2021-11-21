@@ -19,30 +19,24 @@ class SDocMapReadParamsInterface extends __SInterface {
     static get _definition() {
         return {
             input: {
+                description:
+                    'Specify the input path to the docmap.json file to read',
                 type: 'String',
                 default: __SSugarConfig.get('docmap.read.input'),
                 alias: 'i',
             },
-            snapshot: {
-                type: 'String',
-                alias: 's',
-            },
-            snapshotDir: {
-                type: 'String',
-                path: {
-                    absolute: true,
-                    tokens: true,
-                },
-                default: __SSugarConfig.get('docmap.snapshot.outDir'),
-            },
-            // cache: {
-            //   type: 'Boolean',
-            //   default: __SSugarConfig.get('docmap.cache')
+            // snapshot: {
+            //     type: 'String',
+            //     alias: 's',
             // },
-            // clearCache: {
-            //   type: 'Boolean',
-            //   default: false
-            // }
+            // snapshotDir: {
+            //     type: 'String',
+            //     path: {
+            //         absolute: true,
+            //         tokens: true,
+            //     },
+            //     default: __SSugarConfig.get('docmap.snapshot.outDir'),
+            // },
         };
     }
 }

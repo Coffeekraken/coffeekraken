@@ -19,17 +19,11 @@ import __SEnv from '@coffeekraken/s-env';
 class SFrontspecParamsInterface extends __SInterface {
     static get _definition() {
         return {
-            cache: {
-                type: 'Boolean',
-                default: __SugarConfig.get('frontspec.cache'),
-            },
             env: {
+                description:
+                    'Specify the environment for which to read the frontspec for',
                 type: 'String',
                 default: undefined,
-            },
-            clearCache: {
-                type: 'Boolean',
-                default: false,
             },
         };
     }

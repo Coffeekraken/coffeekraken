@@ -67,7 +67,7 @@ if (cliParams.bench) {
 }
 
 // __SLog.filter({
-//     type: [__SLog.LOG, __SLog.INFO, __SLog.WARN, __SLog.ERROR],
+//     type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],
 // });
 
 class SSugarCli {

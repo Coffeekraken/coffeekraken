@@ -138,7 +138,7 @@ export default function spawn(
                 if (!data) return;
                 stdout.push(data.toString());
                 emit('log', {
-                    type: __SLog.CHILD_PROCESS,
+                    type: __SLog.TYPE_CHILD_PROCESS,
                     value: data.toString(),
                 });
             });
@@ -148,7 +148,7 @@ export default function spawn(
                 if (!data) return;
                 stderr.push(data.toString());
                 emit('log', {
-                    type: __SLog.CHILD_PROCESS,
+                    type: __SLog.TYPE_CHILD_PROCESS,
                     value: data.toString(),
                 });
             });

@@ -283,7 +283,7 @@ class SPromise
                 } catch (e) {
                     if (this.promiseSettings.emitErrorEventOnThrow) {
                         this.emit('log', {
-                            type: __SLog.ERROR,
+                            type: __SLog.TYPE_ERROR,
                             value: e,
                         });
                     }

@@ -73,7 +73,7 @@ export interface ISFrontstackRecipeParams {
 }
 
 export interface ISFrontstackListParams {
-    recipeStack: string;
+    recipe: string;
 }
 
 export default class SFrontstack extends __SClass {
@@ -466,9 +466,9 @@ export default class SFrontstack extends __SClass {
                     __SFrontstackListParamsInterface.apply(params);
 
                 let recipe, stack;
-                if (finalParams.recipeStack) {
-                    recipe = finalParams.recipeStack.split('.')[0];
-                    stack = finalParams.recipeStack.split('.')[1];
+                if (finalParams.recipe) {
+                    recipe = finalParams.recipe.split('.')[0];
+                    stack = finalParams.recipe.split('.')[1];
                 }
 
                 if (!recipe) {

@@ -15,10 +15,11 @@ import __SInterface from '@coffeekraken/s-interface';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SProcessInterface extends __SInterface {
-    // static extendsArray = ['SProcess', 'SPromise'];
     static get _definition() {
         return {
             help: {
+                description:
+                    'Specify if you want to see the help of the process',
                 type: 'Boolean',
                 alias: 'h',
                 default: false,

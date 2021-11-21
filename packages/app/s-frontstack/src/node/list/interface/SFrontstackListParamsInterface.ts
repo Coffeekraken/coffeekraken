@@ -20,7 +20,7 @@ import __SInterface from '@coffeekraken/s-interface';
 class SFrontstackListParamsInterface extends __SInterface {
     static get _definition() {
         return {
-            recipeStack: {
+            recipe: {
                 type: 'String',
             },
         };

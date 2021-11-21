@@ -27,10 +27,14 @@ export default class SSitemapBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
             source: {
+                description:
+                    'Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the "config.sitemap.sources" config',
                 type: 'Array<String>',
                 default: [],
             },
             sourcesSettings: {
+                description:
+                    'Specigy sources settings by passing an object under each source "id" property',
                 type: 'Object',
                 default: {},
             },

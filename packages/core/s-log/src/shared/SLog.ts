@@ -24,7 +24,7 @@ import ISLog, { ISLogType } from './ISLog';
  * import __SLog from '@coffeekraken/s-log';
  * const myLog = new __SLog({
  *    value: 'Hello world',
- *    type: __SLog.WARN
+ *    type: __SLog.TYPE_WARN
  * });
  *
  * // Or thgouth an SPromise emit
@@ -32,7 +32,7 @@ import ISLog, { ISLogType } from './ISLog';
  * new __SPromise(({resolve, reject, emit}) => {
  *      emit('log', {
  *          value: 'Hello world',
- *          type: __SLog.ERROR
+ *          type: __SLog.TYPE_ERROR
  *      });
  * });
  *
@@ -59,7 +59,7 @@ export interface ISLogFilterObj {
 
 export default class SLog {
     /**
-     * @name            LOG
+     * @name            TYPE_LOG
      * @type            String
      * @static
      *
@@ -68,10 +68,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static LOG: ISLogType = 'log';
+    static TYPE_LOG: ISLogType = 'log';
 
     /**
-     * @name            INFO
+     * @name            TYPE_INFO
      * @type            String
      * @static
      *
@@ -80,10 +80,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static INFO: ISLogType = 'info';
+    static TYPE_INFO: ISLogType = 'info';
 
     /**
-     * @name            WARN
+     * @name            TYPE_WARN
      * @type            String
      * @static
      *
@@ -92,10 +92,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static WARN: ISLogType = 'warn';
+    static TYPE_WARN: ISLogType = 'warn';
 
     /**
-     * @name            ERROR
+     * @name           TYPE_ERROR
      * @type            String
      * @static
      *
@@ -104,10 +104,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static ERROR: ISLogType = 'error';
+    static TYPE_ERROR: ISLogType = 'error';
 
     /**
-     * @name            VERBOSE
+     * @name            TYPE_VERBOSE
      * @type            String
      * @static
      *
@@ -116,10 +116,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static VERBOSE: ISLogType = 'verbose';
+    static TYPE_VERBOSE: ISLogType = 'verbose';
 
     /**
-     * @name            SUMMARY
+     * @name            TYPE_SUMMARY
      * @type            String
      * @static
      *
@@ -128,10 +128,10 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static SUMMARY: ISLogType = 'summary';
+    static TYPE_SUMMARY: ISLogType = 'summary';
 
     /**
-     * @name            CHILD_PROCESS
+     * @name            TYPE_CHILD_PROCESS
      * @type            String
      * @static
      *
@@ -140,7 +140,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static CHILD_PROCESS: ISLogType = 'child_process';
+    static TYPE_CHILD_PROCESS: ISLogType = 'child_process';
 
     /**
      * @name            filter

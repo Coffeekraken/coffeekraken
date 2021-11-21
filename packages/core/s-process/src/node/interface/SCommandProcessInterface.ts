@@ -21,6 +21,7 @@ export default class SCommandProcessInterface extends __SInterface {
         return {
             ...__SProcessInterface.definition,
             command: {
+                description: 'Specify the command to execute',
                 type: 'String',
                 alias: 'c',
                 required: true,

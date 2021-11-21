@@ -44,7 +44,7 @@ class SColorApplyParamsInterface extends __SInterface {
             transparentize: {
                 type: 'Number',
                 default: 0,
-                description: 'The amount of transparence to apply between 0-100|0-1',
+                description: 'The amount of transparency to apply between 0-100|0-1',
             },
             alpha: {
                 type: 'Number',

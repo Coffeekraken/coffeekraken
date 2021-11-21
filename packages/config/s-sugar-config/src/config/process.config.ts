@@ -3,19 +3,6 @@ export default function (env) {
 
     return {
         /**
-         * @name            asyncStart
-         * @namespace       config.process
-         * @type            Boolean
-         * @default         false
-         *
-         * Specify if the process has to start asyncronously or not
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        asyncStart: false,
-
-        /**
          * @name            killOnError
          * @namespace       config.process
          * @type            Boolean
@@ -27,20 +14,6 @@ export default function (env) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         killOnError: true,
-
-        /**
-         * @name            emitErrorAsEvent
-         * @namespace       config.process
-         * @type            Boolean
-         * @default         false
-         *
-         * Specify if the you want the thrown errors inside the promise to be emitted as "error" event
-         * or if you want the default behavior and that you catch errors with a .catch or "try catch".
-         *
-         * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        emitErrorAsEvent: false,
 
         /**
          * @name              stdio
@@ -56,19 +29,6 @@ export default function (env) {
          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         stdio: 'inherit',
-
-        /**
-         * @name              decorators
-         * @namespace         config.process
-         * @type              Boolean
-         * @default           false
-         *
-         * Specify if you want to log decorators (start message, end message, etc...)
-         *
-         * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-         */
-        decorators: false,
 
         /**
          * @name          throw

@@ -4,45 +4,64 @@ export default class SFormValidateFeatureInterface extends __SInterface {
     static get _definition() {
         return {
             type: {
+                description:
+                    'Specify the validation type. Usually automatically detected depending on the field type',
                 type: 'String',
                 default: 'text',
             },
             on: {
+                description:
+                    'Specify when to trigger a validation. Can be "change","submit","enter" and/or "reset"',
                 type: 'Array<String>',
                 values: ['change', 'submit', 'enter', 'reset'],
                 default: ['change', 'submit', 'enter', 'reset'],
             },
             wrap: {
+                description:
+                    'Specify if you want to wrap your s-form-validate element when theres an error',
                 type: 'Boolean',
                 default: true,
             },
             errorClass: {
+                description: 'Specify the class to apply when theres an error',
                 type: 'String',
                 default:
                     's-form-validate s-form-validate--error s-color--error',
             },
             errorMessageClass: {
+                description:
+                    'Specify the class to apply on the injected error message container',
                 type: 'String',
                 default: 's-form-validate__error-message',
             },
             validClass: {
+                description:
+                    'Specify the class to apply on your s-form-validate element when validation is passed successfully',
                 type: 'String',
                 default:
                     's-form-validate s-form-validate--valid s-color--success',
             },
             customValidations: {
+                description:
+                    'Specify some custom validations [key]: function(value, helpers). For mor info check out the [Joi](https://joi.dev/api/?v=17.4.2#anycustommethod-description) custom validation doc',
                 type: 'Object',
                 default: {},
             },
             joiOptions: {
+                description:
+                    'Specify some [Joi](https://joi.dev/) options to use for your validation',
                 type: 'Object',
                 default: {},
             },
             language: {
+                description:
+                    'Specify the language you want to use for messages',
                 type: 'String',
                 default: 'fr',
             },
             displayError: {
+                description:
+                    'Specify if you want to display the error messages or not',
                 type: 'Boolean',
                 default: true,
             },

@@ -24,7 +24,7 @@ import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __fs from 'fs';
 import __path from 'path';
-import __SDocMapBuildParamsInterface from './interface/SDocMapBuildParamsInterface';
+import __SDocmapBuildParamsInterface from './interface/SDocmapBuildParamsInterface';
 import __SDocmapInstallSnapshotParamsInterface from './interface/SDocmapInstallSnapshotParamsInterface';
 import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface';
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
@@ -284,7 +284,6 @@ class SDocMap extends __SClass implements ISDocMap {
      *
      * This static method allows you to search for docMap.json files and read them to get
      * back the content of them in one call. It can take advantage of the cache if
-     * the setting.cache property is setted to true
      *
      * @todo      update documentation
      * @todo      integrate the "cache" feature
@@ -374,7 +373,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         currentPathDocmapJsonPath = potentialRootPackagePath;
                     } else {
                         emit('log', {
-                            type: __SLog.WARN,
+                            type: __SLog.TYPE_WARN,
                             value: `<red>[read]</red> Sorry but the references docmap path/package "<yellow>${packageNameOrPath}</yellow>" does not exists`,
                         });
                     }
@@ -389,7 +388,7 @@ class SDocMap extends __SClass implements ISDocMap {
                     const packageJsonPath = `${extendsRootPath}/package.json`;
                     if (!__fs.existsSync(packageJsonPath)) {
                         emit('log', {
-                            type: __SLog.WARN,
+                            type: __SLog.TYPE_WARN,
                             value: `<red>[${this.constructor.name}]</red> Sorry but the package "<yellow>${extendsRootPath}</yellow>" does not have any valid "<cyan>package.json</cyan>" file at his root`,
                         });
                     }
@@ -657,7 +656,7 @@ class SDocMap extends __SClass implements ISDocMap {
      */
     build(params: Partial<ISDocMapBuildParams>): Promise<any> {
         const finalParams = <ISDocMapBuildParams>(
-            __deepMerge(__SDocMapBuildParamsInterface.defaults(), params)
+            __deepMerge(__SDocmapBuildParamsInterface.defaults(), params)
         );
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {

@@ -275,12 +275,12 @@ export default class SFrontendServer extends __SClass {
                         value: `<yellow>http://${finalParams.hostname}</yellow>:<cyan>${finalParams.port}</cyan>`,
                     });
                     emit('log', {
-                        type: __SLog.VERBOSE,
+                        type: __SLog.TYPE_VERBOSE,
                         // group: `s-frontend-server-${this.metas.id}`,
                         value: `Root directory: <cyan>${finalParams.rootDir}</cyan>`,
                     });
                     emit('log', {
-                        type: __SLog.VERBOSE,
+                        type: __SLog.TYPE_VERBOSE,
                         // group: `s-frontend-server-${this.metas.id}`,
                         value: `Log level: <yellow>${finalParams.logLevel}</yellow>`,
                     });

@@ -152,17 +152,6 @@ class SProcessManager extends __SEventEmitter {
             },
         );
 
-        // register process for stdio
-        // this.pipe(processManagerProcess, {
-        //     // prefixEvent: id,
-        //     exclude: [],
-        //     processor(data, metas) {
-        //         if (metas.event !== 'log') return data;
-        //         data.decorators = true;
-        //         return data;
-        //     },
-        // });
-
         this._processesStack[id] = processManagerProcess;
     }
 

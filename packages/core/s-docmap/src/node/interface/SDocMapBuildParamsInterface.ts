@@ -4,7 +4,7 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
 import __SInterface from '@coffeekraken/s-interface';
 
 /**
- * @name                SDocMapBuildParamsInterface
+ * @name                SDocmapBuildParamsInterface
  * @namespace           node.interface
  * @type                Class
  * @extends             SInterface
@@ -15,7 +15,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-class SDocMapBuildParamsInterface extends __SInterface {
+class SDocmapBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
             globs: {
@@ -70,4 +70,4 @@ class SDocMapBuildParamsInterface extends __SInterface {
         };
     }
 }
-export default SDocMapBuildParamsInterface;
+export default SDocmapBuildParamsInterface;

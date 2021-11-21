@@ -24,39 +24,39 @@ export default class SFrontendServerInterface extends __SInterface {
     static get _definition() {
         return {
             hostname: {
+                description: 'Server hostname',
                 type: 'String',
                 alias: 'o',
-                description: 'Server hostname',
                 required: true,
                 default:
                     __SSugarConfig.get('frontendServer.hostname') ||
                     '127.0.0.1',
             },
             port: {
+                description: 'Server port',
                 type: 'Number',
                 alias: 'p',
-                description: 'Server port',
                 default: __SSugarConfig.get('frontendServer.port') || 3000,
                 level: 1,
             },
             rootDir: {
-                type: 'String',
                 description: 'Server root directory',
+                type: 'String',
                 default:
                     __SSugarConfig.get('frontendServer.rootDir') ||
                     __packageRoot(process.cwd()),
                 level: 1,
             },
             viewsDir: {
-                type: 'String',
                 description: 'Server views directory',
+                type: 'String',
                 default:
                     __SSugarConfig.get('frontendServer.viewsDir') ||
                     __packageRoot(process.cwd()) + '/views',
             },
             logLevel: {
-                type: 'String',
                 description: 'Specify the log level you want for your server',
+                type: 'String',
                 values: [
                     'silent',
                     'error',
@@ -70,9 +70,9 @@ export default class SFrontendServerInterface extends __SInterface {
                     __SSugarConfig.get('frontendServer.logLevel') ?? 'info',
             },
             prod: {
-                type: 'Boolean',
                 description:
                     'Specify that we want the server to act "like" a production one with compression etc...',
+                type: 'Boolean',
                 default: false,
             },
         };

@@ -4,6 +4,7 @@ import __SRequest from '@coffeekraken/s-request';
 import { html } from 'lit';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
+import __STheme from '@coffeekraken/s-theme';
 
 import { loadDocmap, setState, getState } from '../state/state';
 
@@ -25,6 +26,8 @@ export default class CkSettings extends __SLitComponent {
         // (async () => {
         //     this._currentVersion = await getCurrentVersion();
         // })();
+
+        console.log('theme', __STheme.getTheme());
 
         this._restoreState();
     }
@@ -80,9 +83,9 @@ export default class CkSettings extends __SLitComponent {
     }
     render() {
         return html`
-            <div class="">
-                <div class="s-p:30 s-mbe:40">
-                    <h1 class="s-typo:h3">Settings</h1>
+            <div class="ck-settings">
+                <div class="s-p:40 s-mbe:40">
+                    <h1 class="s-typo:h3 s-mbe:40">Settings</h1>
                     <p class="s-typo:p">
                         These settings allows you to customize your Coffeekraken
                         experience as well as feature some of the capabilities
@@ -93,7 +96,7 @@ export default class CkSettings extends __SLitComponent {
                 <ul class="__settings s-bg:odd">
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-pi:30 s-pb:20"
+                            class="s-label s-pi:40 s-pb:30"
                             for="theme-switcher"
                         >
                             Dark mode
@@ -110,7 +113,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-pi:30 s-pb:20"
+                            class="s-label s-pi:40 s-pb:30"
                             for="setting-main-color"
                         >
                             Main color
@@ -122,7 +125,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-pi:30 s-pb:20"
+                            class="s-label s-pi:40 s-pb:30"
                             for="setting-accent-color"
                         >
                             Accent color
@@ -134,99 +137,13 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-pi:30 s-pb:20"
+                            class="s-label s-pi:40 s-pb:30"
                             for="setting-accent-color"
                         >
                             Complementary color
                             <s-color-picker
                                 id="setting-complementary-color"
                                 value="#ff0000"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <s-range
-                                name="hello"
-                                class="s-range s-cs"
-                                id="setting-spread"
-                                tooltip
-                                min="0"
-                                max="100"
-                                step="10"
-                            ></s-range>
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <s-range
-                                name="coco"
-                                class="s-color:accent"
-                                id="setting-spread"
-                                tooltip
-                                min="0"
-                                max="100"
-                                step="10"
-                            ></s-range>
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <input
-                                type="text"
-                                class="s-input"
-                                id="setting-spread"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <input
-                                type="text"
-                                class="s-input s-color:accent"
-                                id="setting-spread"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <input
-                                type="text"
-                                class="s-input"
-                                id="setting-spread"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label
-                            class="s-label s-pi:30 s-pb:20"
-                            for="setting-accent-color"
-                        >
-                            Spread
-                            <input
-                                type="text"
-                                class="s-input"
-                                id="setting-spread"
                             />
                         </label>
                     </li>

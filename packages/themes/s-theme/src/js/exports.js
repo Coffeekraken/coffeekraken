@@ -1,0 +1,4 @@
+import STheme from './STheme';
+export * from './STheme';
+export default STheme;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxNQUFNLE1BQU0sVUFBVSxDQUFDO0FBRTlCLGNBQWMsVUFBVSxDQUFDO0FBRXpCLGVBQWUsTUFBTSxDQUFDIn0=

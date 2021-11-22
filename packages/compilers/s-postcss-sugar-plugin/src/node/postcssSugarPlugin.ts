@@ -38,6 +38,14 @@ const plugin = (settings: any = {}) => {
     //   stylesCss.push(__fs.readFileSync(path, 'utf8').toString());
     // });
 
+    function pluginIntegrityHash() {
+        return __folderHash(`${__dirname()}`, {
+            include: {
+                ctime: true,
+            },
+        });
+    }
+
     function findUp(node, checker) {
         const res = checker(node);
         if (!res && node.parent) return findUp(node.parent, checker);
@@ -49,15 +57,11 @@ const plugin = (settings: any = {}) => {
         let cached;
         if (!settings.cache) return;
 
-        const pluginHash = __folderHash(`${__dirname()}`, {
-            include: {
-                ctime: true,
-            },
-        });
-        console.log('plugin', pluginHash);
-
         try {
-            cached = await __cacache.get(cacheDir, hash);
+            cached = await __cacache.get(
+                cacheDir,
+                `${hash}-${pluginIntegrityHash()}`,
+            );
         } catch (e) {}
         if (cached) {
             if (id) {
@@ -297,6 +301,8 @@ const plugin = (settings: any = {}) => {
             //     comment.remove();
             // });
 
+            const pluginHash = pluginIntegrityHash();
+
             // caching system
             if (settings.cache) {
                 const $comments: any[] = [];
@@ -359,7 +365,11 @@ const plugin = (settings: any = {}) => {
                             }</cyan>"...`,
                         );
 
-                        await __cacache.put(cacheDir, cacheHash, cacheStr);
+                        await __cacache.put(
+                            cacheDir,
+                            `${cacheHash}-${pluginHash}`,
+                            cacheStr,
+                        );
                     }
 
                     // handle code coming from cache
@@ -369,7 +379,10 @@ const plugin = (settings: any = {}) => {
                     if (fromCacheMatches) {
                         const cacheHash = fromCacheMatches[1];
                         const cacheId = fromCacheMatches[2] ?? 'unkown';
-                        const cached = await __cacache.get(cacheDir, cacheHash);
+                        let cached;
+                        try {
+                            cached = await __cacache.get(cacheDir, cacheHash);
+                        } catch (e) {}
                         if (cached) {
                             console.log(
                                 `<yellow>[cache]</yellow> Getting "<cyan>${

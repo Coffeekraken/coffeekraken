@@ -1,7 +1,7 @@
 import __STheme from '../shared/STheme';
 /**
  * @name            STheme
- * @namespace       node
+ * @namespace       js
  * @type            Class
  * @extends         STheme
  *

@@ -68,16 +68,9 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
         '@sugar.whiteSpace.classes;',
     ];
 
-    const codeHash = __folderHash(__dirname(), {
-        include: {
-            ctime: true,
-        },
-    });
-
     const hash = `classes-${__objectHash({
         css: cssArray,
         theme: __STheme.hash(),
-        code: codeHash,
     })}`;
 
     // from cache

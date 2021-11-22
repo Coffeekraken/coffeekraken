@@ -13,6 +13,7 @@ import __SProcess, {
     ISProcessSettings,
     ISProcessManagerProcessSettings,
 } from '@coffeekraken/s-process';
+import __SLog from '@coffeekraken/s-log';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import param from '@coffeekraken/s-docblock/src/shared/tags/param';
@@ -150,6 +151,7 @@ export default class SFrontstack extends __SClass {
                 }
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `Starting frontstack process using "<yellow>${finalParams.action}</yellow>" action`,
                 });
 
@@ -245,14 +247,16 @@ export default class SFrontstack extends __SClass {
                 }
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `Starting frontstack process`,
                 });
-                console.log('START');
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
                 });
 
@@ -305,10 +309,6 @@ export default class SFrontstack extends __SClass {
                 const processManager = new __SProcessManager();
                 pipe(processManager, {
                     overrideEmitter: true,
-                    // processor(data, metas) {
-                    //     metas.emitter.metas.name = metas.emitter.metas.id;
-                    //     return [data, metas];
-                    // },
                 });
 
                 // loop on each actions for this recipe
@@ -332,7 +332,7 @@ export default class SFrontstack extends __SClass {
                             finalParams.exclude.indexOf(actionName) !== -1
                         ) {
                             emit('log', {
-                                type: 'verbose',
+                                type: __SLog.TYPE_VERBOSE,
                                 value: `Excluding the action "<yellow>${actionName}</yellow>"`,
                             });
                             return;
@@ -379,6 +379,7 @@ export default class SFrontstack extends __SClass {
                             paramsStr;
 
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
                         });
 
@@ -402,7 +403,7 @@ export default class SFrontstack extends __SClass {
 
                 setTimeout(() => {
                     emit('log', {
-                        type: 'summary',
+                        type: __SLog.TYPE_SUMMARY,
                         value: {
                             status: 'success',
                             value: `All <cyan>${
@@ -473,6 +474,7 @@ export default class SFrontstack extends __SClass {
 
                 if (!recipe) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `Available recipe(s) list:`,
                     });
 
@@ -482,6 +484,7 @@ export default class SFrontstack extends __SClass {
                     }
                     for (const [name, obj] of Object.entries(recipes)) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `- <cyan>${name}</cyan>${' '.repeat(
                                 largerName.length - name.length,
                             )} : ${obj.description}`,
@@ -501,6 +504,7 @@ export default class SFrontstack extends __SClass {
 
                 if (recipe && !stack) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `Stacks list for the recipe "<yellow>${recipe}</yellow>":`,
                     });
                     let largerName = '';
@@ -511,6 +515,7 @@ export default class SFrontstack extends __SClass {
                         recipes[recipe].stacks,
                     )) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `- <cyan>${name}</cyan>${' '.repeat(
                                 largerName.length - name.length,
                             )} : ${obj.description}`,
@@ -530,6 +535,7 @@ export default class SFrontstack extends __SClass {
 
                 if (recipe && stack) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `Actions list for the recipe "<yellow>${recipe}</yellow> and the stack "<cyan>${stack}</cyan>":`,
                     });
                     let largerName = '';
@@ -540,6 +546,7 @@ export default class SFrontstack extends __SClass {
                         recipes[recipe].stacks[stack].actions,
                     )) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `- <cyan>${name}</cyan>${' '.repeat(
                                 largerName.length - name.length,
                             )} : ${obj.description}`,

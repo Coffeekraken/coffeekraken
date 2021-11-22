@@ -5,12 +5,14 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
             input: {
+                description: 'Specify the path to the input sitemap.xml file',
                 type: 'String',
                 required: true,
                 alias: 'i',
                 default: __SSugarConfig.get('staticBuilder.input'),
             },
             outDir: {
+                description: 'Specify the path to the output folder',
                 type: 'String',
                 alias: 'o',
                 default: __SSugarConfig.get('staticBuilder.outDir'),
@@ -50,6 +52,7 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('staticBuilder.assets'),
             },
             minify: {
+                description: 'Specify if you want to minify the output or not',
                 type: 'Boolean',
                 alias: 'm',
                 default: false,

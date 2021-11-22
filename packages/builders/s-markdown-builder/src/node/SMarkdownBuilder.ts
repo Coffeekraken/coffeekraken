@@ -16,6 +16,7 @@ import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __marked from 'marked';
 import __path from 'path';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name                SMarkdownBuilder
@@ -312,6 +313,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const preset = params.preset[i];
 
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<cyan>[preset]</cyan> Start "<yellow>${preset}</yellow>" preset markdown build`,
                     });
 
@@ -537,15 +539,18 @@ export default class SMarkdownBuilder extends __SBuilder {
                     }
 
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Starting markdown Build`,
                     });
 
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Input       : <cyan>${sourceObj.inputStr}</cyan>`,
                     });
 
                     if (sourceObj.outputStr) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Output      : <cyan>${sourceObj.outputStr}</cyan>`,
                         });
                     }

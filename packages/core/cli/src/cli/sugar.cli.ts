@@ -13,11 +13,14 @@ import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
+import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
+import __SLog from '@coffeekraken/s-log';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -88,18 +91,19 @@ class SSugarCli {
     constructor() {
         __SBench.start('sugar.cli');
 
-        // hook ctrl+c
-        __hotkey('ctrl+c').on('press', (e) => {
-            // @ts-ignore
-            process.emit('SIGINT');
-        });
-
         this._command =
             process.argv && process.argv[2]
                 ? process.argv[2].split(' ')[0]
                 : '';
         this._stack = this._command.split('.')[0];
+        if (!this._stack?.match(/^[a-zA-Z0-9]+$/)) this._stack = undefined;
         this._action = this._command.split('.')[1] || null;
+        if (!this._action?.match(/^[a-zA-Z0-9]+$/)) this._action = undefined;
+
+        this._isHelp = false;
+        const lastArg = process.argv.pop();
+        if (lastArg.match(/\s?(-h$|--help$)/)) this._isHelp = true;
+
         this._args =
             process.argv
                 .slice(3)
@@ -142,16 +146,6 @@ class SSugarCli {
         } else {
             process.env.NODE_ENV = 'development';
         }
-
-        // if (!__isChildProcess()) {
-        //   new __nodeIpcStoreServer({
-        //     ipc: { // node-ipc config
-        //       id: "sugar-ipc-store",
-        //       // silent: true
-        //       startupTimeout: -1
-        //     },
-        //   });
-        // }
 
         (async () => {
             __SBench.step('sugar.cli', 'beforeLoadConfig');
@@ -205,16 +199,16 @@ class SSugarCli {
 
             __SBench.step('sugar.cli', 'afterLoadAvailableCli');
 
+            // help
+            if (this._isHelp) {
+                this._displayHelp(this._stack, this._action);
+                return;
+            }
+
             // interactive
             if (!this._stack && !this._action && !this._args) {
                 this._interactivePrompt();
                 return;
-            }
-
-            // help
-            if (this._args.match(/--help/)) {
-                this._displayHelp(this._stack, this._action);
-                process.exit();
             }
 
             __SBench.step('sugar.cli', 'beforeProcess');
@@ -243,6 +237,12 @@ class SSugarCli {
             this._availableCli.endpoints[
                 `${this._stack}.${this._action ?? defaultStackAction}`
             ];
+
+        // hook ctrl+c
+        __hotkey('ctrl+c').on('press', (e) => {
+            // @ts-ignore
+            process.emit('SIGINT');
+        });
 
         // @ts-ignore
         if (cliObj.processPath) {
@@ -281,9 +281,11 @@ class SSugarCli {
         for (let i = 0; i < Object.keys(this._sugarJsons).length; i++) {
             const packageName = Object.keys(this._sugarJsons)[i];
             const sugarJson = this._sugarJsons[packageName];
-            const packageJson = await import(
-                sugarJson.metas.path.replace('/sugar.json', '/package.json')
-            );
+            const packageJson = (
+                await import(
+                    sugarJson.metas.path.replace('/sugar.json', '/package.json')
+                )
+            ).default;
             if (!sugarJson.cli) continue;
             sugarJson.cli.forEach((cliObj) => {
                 if (!cliObj.actions) {
@@ -352,7 +354,7 @@ class SSugarCli {
                     let interfacePath;
                     if (actionObj.interface) {
                         interfacePath = __path.resolve(
-                            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+                            sugarJson.metas.folderPath,
                             actionObj.interface,
                         );
                     }
@@ -391,12 +393,14 @@ class SSugarCli {
     log(log) {
         if (typeof log === 'string') {
             this._eventEmitter.emit('log', {
+                // type: __SLog.TYPE_INFO,
                 value: log,
             });
             return;
         }
 
         this._eventEmitter.emit('log', {
+            // type: __SLog.TYPE_INFO,
             ...log,
         });
     }
@@ -414,10 +418,13 @@ class SSugarCli {
     }
 
     _newStep() {
+        const packageJson = __packageJson(__dirname());
+
         const logStr = [
             __sugarBanner({
                 paddingTop: 1,
                 paddingBottom: 1,
+                version: `CLI <cyan>v${packageJson.version}</cyan>`,
             }),
             `<yellow>█</yellow> This process is running in the ${
                 process.env.NODE_ENV === 'production'
@@ -438,13 +445,18 @@ class SSugarCli {
             .join('\n');
 
         this.log({
-            clear: true,
+            clear: false,
             decorators: false,
             value: logStr,
         });
     }
 
     async _interactivePrompt() {
+        if (!__isChildProcess()) {
+            this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
+        }
+
+        await __wait(100);
         this._newStep();
 
         const choices: string[] = [];
@@ -472,7 +484,7 @@ class SSugarCli {
                     args = int.apply({});
                 }
 
-                this._newStep(true);
+                // this._newStep(true);
                 const proPromise = pro(args);
                 this._eventEmitter.pipe(proPromise, {
                     processor(value, metas) {
@@ -515,9 +527,67 @@ class SSugarCli {
         return promise;
     }
 
-    _displayHelp() {
-        let currentPackage;
-        const logArray: string[] = [];
+    async _displayHelp() {
+        if (!__isChildProcess()) {
+            this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
+        }
+
+        await __wait(100);
+
+        this._newStep();
+
+        if (this._stack && this._action) {
+            const commandObj =
+                this._availableCli.endpoints[`${this._stack}.${this._action}`];
+
+            this.log(
+                `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+            );
+            this.log(
+                `<yellow>█</yellow> Action <cyan>${this._stack}.${this._action}</cyan>`,
+            );
+            this.log(
+                `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+            );
+
+            this.log(`<yellow>█</yellow>`);
+            this.log(`<yellow>█</yellow> ${commandObj.description}`);
+            this.log(
+                `<yellow>█</yellow> Package: <yellow>${commandObj.packageJson.name}</yellow> (<cyan>v${commandObj.packageJson.version}</cyan>)`,
+            );
+
+            this.log(`<yellow>█</yellow>`);
+
+            this.log(
+                `<yellow>████</yellow>   <yellow>sugar</yellow> <cyan>${this._stack}.${this._action}</cyan> <magenta>[arguments]</magenta>`,
+            );
+
+            this.log(`<yellow>█</yellow>`);
+
+            if (commandObj.interfacePath) {
+                const { default: int } = await import(commandObj.interfacePath);
+                Object.entries(int.definition).forEach(([arg, argObj]) => {
+                    this.log(
+                        `<yellow>█</yellow>   <cyan>${arg}</cyan> ${
+                            argObj.alias
+                                ? `(<magenta>-${argObj.alias}</magenta>)`
+                                : ''
+                        }`,
+                    );
+                    this.log(`<yellow>█</yellow>   ${argObj.description}`);
+                    if (argObj.default !== undefined) {
+                        this.log(
+                            `<yellow>█</yellow>   Default: <magenta>${argObj.default}</magenta>`,
+                        );
+                    }
+                    this.log(`<yellow>█</yellow>`);
+                });
+            }
+
+            await __wait(1000);
+
+            process.exit();
+        }
 
         const sortedByStack = {};
 
@@ -533,12 +603,18 @@ class SSugarCli {
                 this._availableCli.endpoints[stackAction];
         });
 
+        this.log(
+            `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+        );
+        this.log(`<yellow>█</yellow> Stacks and actions list:`);
+        this.log(
+            `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+        );
+
         Object.keys(sortedByStack).forEach((stack) => {
             const stackObj = sortedByStack[stack];
 
-            this.log('<cyan>-%-</cyan>');
-            this.log(`Stack       : <cyan>${stack}</cyan>`);
-            this.log('<cyan>-%-</cyan>');
+            this.log(`<yellow>█</yellow> <cyan>${stack}</cyan>`);
 
             Object.keys(stackObj).forEach((action) => {
                 const actionObj = stackObj[action];
@@ -547,21 +623,16 @@ class SSugarCli {
                 }
 
                 this.log(
-                    `Action      : <yellow>${action}</yellow> ${
-                        this._availableCli.defaultByStack[stack] === action
-                            ? '(default)'
-                            : ''
-                    }`,
+                    `<yellow>█</yellow>   <magenta>${action}</magenta>${' '.repeat(
+                        20 - action.length,
+                    )}: ${actionObj.description}`,
                 );
-                this.log(`Description : ${actionObj.description}`);
-                this.log(
-                    `Example     : <magenta>sugar</magenta> <cyan>${stack}</cyan>.<yellow>${action}</yellow> ...`,
-                );
-                this.log(' ');
             });
-
-            this.log(' ');
         });
+
+        await __wait(1000);
+
+        process.exit();
     }
 
     _displayHelpAfterError() {

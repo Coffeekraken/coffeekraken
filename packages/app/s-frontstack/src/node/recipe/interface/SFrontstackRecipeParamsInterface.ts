@@ -21,14 +21,20 @@ class SFrontstackRecipeParamsInterface extends __SInterface {
     static get _definition() {
         return {
             stack: {
+                description:
+                    'Specify the stack you want to execute like "dev", "build", etc...',
                 type: 'String',
                 alias: 's',
             },
             recipe: {
+                description:
+                    'Specify the recipe you want to execute the stack from',
                 type: 'String',
                 alias: 'r',
             },
             env: {
+                description:
+                    'Specify the environment in which to execute your recipe',
                 type: 'String',
             },
         };

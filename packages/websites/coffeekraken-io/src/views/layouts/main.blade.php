@@ -18,7 +18,9 @@
 
     @include('layouts.header.header')
     
-    @yield('content')
+    <div class="content">
+        @yield('content')
+    </div>
 
     @include('generic.tools.tools')
 

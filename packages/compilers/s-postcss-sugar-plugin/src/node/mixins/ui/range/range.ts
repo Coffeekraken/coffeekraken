@@ -166,7 +166,6 @@ export default function ({
     // bare
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            margin: calc(var(--thumb-height) / 2) 0;
             -webkit-appearance: none;
             background: transparent;
 

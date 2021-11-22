@@ -4,10 +4,14 @@ export default class SHighlightJsComponentInterface extends __SInterface {
     static get _definition() {
         return {
             successTimeout: {
+                description:
+                    'Specify the duration for displaying the "success" icon',
                 type: 'Number',
                 default: 1500,
             },
             errorTimeout: {
+                description:
+                    'Specify the duration for displaying the "error" icon',
                 type: 'Number',
                 default: 3000,
             },

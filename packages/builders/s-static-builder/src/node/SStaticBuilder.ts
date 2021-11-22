@@ -8,6 +8,7 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
+import __SLog from '@coffeekraken/s-log';
 import __path from 'path';
 import { parseStringPromise } from 'xml2js';
 import __copy from '@coffeekraken/sugar/node/fs/copy';
@@ -137,6 +138,7 @@ export default class SStaticBuilder extends __SBuilder {
         return new __SPromise(
             async ({ resolve, reject, emit }) => {
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>[build]</yellow> Start building your static website`,
                 });
 
@@ -150,6 +152,7 @@ export default class SStaticBuilder extends __SBuilder {
                 // clear if needed
                 if (params.clear) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>[clear]</yellow> Clearing the outDir "<cyan>${__path.relative(
                             __packageRoot(),
                             params.outDir,
@@ -185,6 +188,7 @@ export default class SStaticBuilder extends __SBuilder {
                     const url = xml.urlset.url[i];
 
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Reaching the url "<cyan>${url.loc}</cyan>"...`,
                     });
 
@@ -196,6 +200,7 @@ export default class SStaticBuilder extends __SBuilder {
                     });
                     const res = await request.send().catch((e) => {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<red>[error]</red> The url "<cyan>${url.loc}</cyan>" cannot be reached...`,
                         });
                         failsCount++;
@@ -228,6 +233,7 @@ export default class SStaticBuilder extends __SBuilder {
                     if (res?.data) {
                         // saving file
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<green>[build]</green> Saving the page from url "<cyan>${url.loc}</cyan>"...`,
                         });
                         // @ts-ignore
@@ -235,6 +241,7 @@ export default class SStaticBuilder extends __SBuilder {
                     }
 
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> <magenta>${
                             xml.urlset.url.length - i
                         }</magenta> url(s), <cyan>~${__formatEstimation(
@@ -255,6 +262,7 @@ export default class SStaticBuilder extends __SBuilder {
                         const assetObj =
                             params.assets[Object.keys(params.assets)[i]];
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>[assets]</yellow> Copying assets "<yellow>${__path.relative(
                                 __packageRoot(),
                                 assetObj.from,

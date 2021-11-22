@@ -375,32 +375,6 @@ export default class SStdio extends __SClass implements ISStdio {
             // subscribe to the process
             this.registerSource(s);
         });
-
-        const packageJson = __packageJson(__dirname());
-
-        // this.log({
-        //     group: 'Global',
-        //     active: true,
-        //     value: ``,
-        // });
-
-        // this.log({
-        //     group: 'Coffeekraken',
-        //     active: true,
-        //     value: ``,
-        // });
-
-        // setTimeout(() => {
-        //     this.log({
-        //         group: 'Coffeekraken',
-        //         active: true,
-        //         value: `<cyan>[Coffeekraken]</cyan> You are running the stack version <cyan>${
-        //             packageJson.version
-        //         }</cyan> in <magenta>${__SEnv.get(
-        //             'environment',
-        //         )}</magenta> environment`,
-        //     });
-        // });
     }
 
     /**
@@ -469,12 +443,9 @@ export default class SStdio extends __SClass implements ISStdio {
         // subscribe to data
 
         // "ask" event
-        this.sources.forEach((source) => {
-            source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
-                // console.log(askObj);
-                const res = await this.ask(askObj);
-                answer?.(res);
-            });
+        source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+            const res = await this.ask(askObj);
+            answer?.(res);
         });
 
         source.on(

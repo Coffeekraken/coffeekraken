@@ -11,6 +11,7 @@ import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
 import __postcss from 'postcss';
+import __folderHash from '@coffeekraken/sugar/node/fs/folderHash';
 import __getRoot from './utils/getRoot';
 import __dependenciesHash from '@coffeekraken/sugar/node/dependencies/dependenciesHash';
 import __cacache from 'cacache';
@@ -47,6 +48,14 @@ const plugin = (settings: any = {}) => {
     async function fromCache(hash, id = 'unknown') {
         let cached;
         if (!settings.cache) return;
+
+        const pluginHash = __folderHash(`${__dirname()}`, {
+            include: {
+                ctime: true,
+            },
+        });
+        console.log('plugin', pluginHash);
+
         try {
             cached = await __cacache.get(cacheDir, hash);
         } catch (e) {}

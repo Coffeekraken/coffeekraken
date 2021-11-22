@@ -10,6 +10,7 @@ import __imageSize from 'image-size';
 import __minimatch from 'minimatch';
 import __path from 'path';
 import __sharp from 'sharp';
+import __SLog from '@coffeekraken/s-log';
 import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
 
 /**
@@ -180,17 +181,20 @@ export default class SImagesBuilder extends __SBuilder {
                 };
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>[build]</yellow> Starting images Build`,
                 });
 
                 function printParams(paramsObj) {
                     if (paramsObj.glob) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Glob        : <yellow>${paramsObj.glob}</yellow>`,
                         });
                     }
                     if (paramsObj.inDir) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Input       : <cyan>${__path.relative(
                                 process.cwd(),
                                 paramsObj.inDir,
@@ -199,6 +203,7 @@ export default class SImagesBuilder extends __SBuilder {
                     }
                     if (paramsObj.outDir) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
                                 process.cwd(),
                                 paramsObj.outDir,
@@ -207,11 +212,13 @@ export default class SImagesBuilder extends __SBuilder {
                     }
                     if (paramsObj.quality) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Quality     : <green>${paramsObj.quality}</green>`,
                         });
                     }
                     if (paramsObj.webp !== undefined) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Webp        : ${
                                 paramsObj.webp
                                     ? '<green>true</green>'
@@ -221,6 +228,7 @@ export default class SImagesBuilder extends __SBuilder {
                     }
                     if (paramsObj.width || paramsObj.height) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Size        : <yellow>${
                                 paramsObj.width ? paramsObj.width : '...'
                             }/${
@@ -230,6 +238,7 @@ export default class SImagesBuilder extends __SBuilder {
                     }
                     if (paramsObj.resolution) {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> Resolution${
                                 paramsObj.resolution.length > 1 ? 's' : ' '
                             } : ${paramsObj.resolution
@@ -247,6 +256,7 @@ export default class SImagesBuilder extends __SBuilder {
                     Object.keys(params.specificParams).forEach((glob) => {
                         const customParamsObj = params.specificParams[glob];
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<cyan>[${glob}]</cyan> Specific params`,
                         });
                         printParams(customParamsObj);
@@ -478,34 +488,42 @@ export default class SImagesBuilder extends __SBuilder {
                 };
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<green>[success]</green> Images build success!`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>[source]</yellow>  Sources files : <yellow>${result.source.mbytes}mb</yellow>`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     // @ts-ignore
                     value: `<yellow>[builded]</yellow> Builded files : <yellow>${result.builded.mbytes}mb</yellow>`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     // @ts-ignore
                     value: `<white>                       </white> : <cyan>-${result.builded.fromSourceGain.percentage}%</cyan> from source`,
                 });
                 if (params.webp) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         // @ts-ignore
                         value: `<yellow>[webp]</yellow>    Webp files    : <yellow>${result.webp.mbytes}mb</yellow>`,
                     });
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         // @ts-ignore
                         value: `<white>                       </white> : <cyan>-${result.webp.fromSourceGain.percentage}%</cyan> from source`,
                     });
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         // @ts-ignore
                         value: `<white>                       </white> : <cyan>-${result.webp.fromBuildedGain.percentage}%</cyan> from builded`,
                     });
                 }
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     // @ts-ignore
                     value: `<cyan>[info]</cyan> Note that only images at resolution <magenta>1x</magenta> are used for stats...`,
                 });

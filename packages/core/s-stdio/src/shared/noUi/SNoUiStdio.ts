@@ -88,8 +88,6 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
             ),
         );
 
-        const packageJson = __packageJson();
-
         this.display();
     }
 
@@ -99,8 +97,8 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
     }
 
     clear() {
-        this._currentLine = 0;
-        process.stdout.write('\x1Bc');
+        // this._currentLine = 0;
+        // process.stdout.write('\x1Bc');
     }
 
     /**

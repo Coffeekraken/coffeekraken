@@ -227,9 +227,6 @@ export default function ({
         @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(
             ',',
         )}');
-        ${__STheme.jsObjectToCssProperties(
-            __STheme.config('ui.switch.rhythmVertical'),
-        )}
       }
     `);
     });

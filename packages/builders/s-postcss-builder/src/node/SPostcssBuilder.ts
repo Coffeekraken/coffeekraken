@@ -161,9 +161,11 @@ export default class SPostcssBuilder extends __SBuilder {
                 } catch (e) {}
 
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>[build]</yellow> Starting Postcss Build`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Environment : ${
                         params.prod
                             ? '<green>production</green>'
@@ -172,6 +174,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 });
                 if (params.output) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Output      : <cyan>${__path.relative(
                             process.cwd(),
                             params.output,
@@ -179,6 +182,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     });
                 }
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Minify      : ${
                         params.minify
                             ? '<green>true</green>'
@@ -186,6 +190,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     }`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Purge       : ${
                         params.purge
                             ? '<green>true</green>'
@@ -193,11 +198,13 @@ export default class SPostcssBuilder extends __SBuilder {
                     }`,
                 });
                 emit('log', {
+                    type: __SLog.TYPE_INFO,
                     value: `<yellow>○</yellow> Plugins     :`,
                 });
                 this.postcssBuilderSettings.postcss.plugins.forEach(
                     (pluginName) => {
                         emit('log', {
+                            type: __SLog.TYPE_INFO,
                             value: `<yellow>|------------</yellow> : ${pluginName}`,
                         });
                     },
@@ -240,6 +247,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 // purge if needed
                 if (params.purge) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<green>[build]</green> Purging unused css`,
                     });
 
@@ -285,6 +293,7 @@ export default class SPostcssBuilder extends __SBuilder {
                 // minify
                 if (params.minify) {
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<green>[build]</green> Minifying css`,
                     });
                     finalCss = __csso.minify(finalCss, {
@@ -296,6 +305,7 @@ export default class SPostcssBuilder extends __SBuilder {
                     __writeFileSync(params.output, finalCss);
                     const file = new __SFile(params.output);
                     emit('log', {
+                        type: __SLog.TYPE_INFO,
                         value: `<green>[save]</green> File "<yellow>${file.relPath}</yellow>" <yellow>${file.stats.kbytes}kb</yellow> saved <green>successfully</green>`,
                     });
                 }

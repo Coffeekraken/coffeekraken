@@ -3,6 +3,7 @@ import __SClass from '@coffeekraken/s-class';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';
 import __SInterface from '@coffeekraken/s-interface';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name                SBuilder
@@ -112,11 +113,13 @@ class SBuilder extends __SClass implements ISBuilder {
         const promise = this._build(finalParams, settings);
 
         promise.emit('log', {
+            type: __SLog.TYPE_INFO,
             value: `<yellow>[build]</yellow> Start ${this.constructor.name} build`,
         });
 
         promise.then(() => {
             promise.emit('log', {
+                type: __SLog.TYPE_INFO,
                 value: `<green>[success]</green> Build ${
                     this.constructor.name
                 } finished <green>successfully</green> in <yellow>${

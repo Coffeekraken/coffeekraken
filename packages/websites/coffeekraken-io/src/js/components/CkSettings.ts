@@ -80,10 +80,22 @@ export default class CkSettings extends __SLitComponent {
     }
     render() {
         return html`
-            <div class="s-p:10">
+            <div class="">
+                <div class="s-p:30 s-mbe:40">
+                    <h1 class="s-typo:h3">Settings</h1>
+                    <p class="s-typo:p">
+                        These settings allows you to customize your Coffeekraken
+                        experience as well as feature some of the capabilities
+                        that our toolkit has to offer.
+                    </p>
+                </div>
+
                 <ul class="__settings s-bg:odd">
                     <li class="s-bg:main-surface">
-                        <label class="s-label s-p:20" for="theme-switcher">
+                        <label
+                            class="s-label s-pi:30 s-pb:20"
+                            for="theme-switcher"
+                        >
                             Dark mode
                             <input
                                 class="s-switch"
@@ -97,21 +109,10 @@ export default class CkSettings extends __SLitComponent {
                         </label>
                     </li>
                     <li class="s-bg:main-surface">
-                        <label class="s-label s-p:20" for="theme-switcher">
-                            Dark mode
-                            <input
-                                class="s-switch s-color:accent"
-                                type="checkbox"
-                                id="theme-switcher"
-                                ?checked="${this._settings.darkMode}"
-                                @change="${(e) => {
-                                    this.setDarkMode(e.target.checked);
-                                }}"
-                            />
-                        </label>
-                    </li>
-                    <li class="s-bg:main-surface">
-                        <label class="s-label s-p:20" for="setting-main-color">
+                        <label
+                            class="s-label s-pi:30 s-pb:20"
+                            for="setting-main-color"
+                        >
                             Main color
                             <s-color-picker
                                 id="setting-main-color"
@@ -121,7 +122,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Accent color
@@ -133,7 +134,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Complementary color
@@ -145,7 +146,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread
@@ -162,7 +163,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread
@@ -179,7 +180,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread
@@ -192,7 +193,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread
@@ -205,7 +206,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread
@@ -218,7 +219,7 @@ export default class CkSettings extends __SLitComponent {
                     </li>
                     <li class="s-bg:main-surface">
                         <label
-                            class="s-label s-p:20"
+                            class="s-label s-pi:30 s-pb:20"
                             for="setting-accent-color"
                         >
                             Spread

@@ -87,7 +87,7 @@ export default class SFiltrableInput extends __SLitComponent {
                         <div class="${this.componentUtils.className('__item')}">
                             ${unsafeHTML(
                                 typeof this.props.label === 'function'
-                                    ? this.props.label(item)
+                                    ? this.props.label({ item })
                                     : item[this.props.label],
                             )}
                         </div>

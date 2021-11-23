@@ -164,7 +164,6 @@ var __css = "s-color-picker:not([mounted]) > * {\n        display: none;\n    }\
             value: {
                 description: 'Specify the initial value for your picker',
                 type: 'String',
-                default: '#ff0000',
             },
             theme: {
                 description: 'Specify the theme you want to use for this picker',
@@ -330,9 +329,6 @@ class SColorPicker extends __SLitComponent {
                         // save: true
                     },
                 },
-            });
-            setTimeout(() => {
-                pickr.setColor(value);
             });
             function getPickrState() {
                 const color = pickr.getColor();

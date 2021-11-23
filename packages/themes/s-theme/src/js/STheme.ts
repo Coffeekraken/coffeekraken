@@ -63,6 +63,36 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            setColor
+     * @type            Function
+     *
+     * THis method allows you to set a color for the theme that represent this instance
+     *
+     * @param           {String}            color                   The color you want to set
+     * @param           {String}            value                   The color value you want to set
+     * @param           {HTMLElement}       [$context=document.body]        The context in which to set the color
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    setColor(color: string, value: string, $context = document.body): void {
+        const colorInstance = new __SColor(value);
+
+        $context.style.setProperty(
+            `--s-theme-color-${color}-h`,
+            colorInstance.h,
+        );
+        $context.style.setProperty(
+            `--s-theme-color-${color}-s`,
+            colorInstance.s,
+        );
+        $context.style.setProperty(
+            `--s-theme-color-${color}-l`,
+            colorInstance.l,
+        );
+    }
+
+    /**
      * @name            color
      * @type            Function
      *
@@ -76,12 +106,16 @@ export default class STheme extends __SThemeBase {
      */
     color(name: string, variant?: string, $context = document.body): __SColor {
         const $elm = document.createElement('p');
-        $elm.classList.add(`s-tc--${name}${variant ? `-${variant}` : ''}`);
-        $elm.setAttribute('theme', this.name);
-        $elm.setAttribute('variant', this.variant);
-        $context.appendChild($elm);
+        $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
+        const $wrapper = document.createElement('div');
+        $wrapper.setAttribute('hidden', 'true');
+        $wrapper.setAttribute('theme', this.name);
+        $wrapper.setAttribute('variant', this.variant);
+        $wrapper.appendChild($elm);
+        $context.appendChild($wrapper);
         const style = getComputedStyle($elm);
-        const color = new __SColor(style.color);
+        const color = new __SColor(style.backgroundColor);
+        $wrapper.remove();
         return color;
     }
 }

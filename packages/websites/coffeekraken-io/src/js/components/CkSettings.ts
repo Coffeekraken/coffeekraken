@@ -28,43 +28,33 @@ export default class CkSettings extends __SLitComponent {
         // })();
 
         this._theme = __STheme.getCurrentTheme();
-
         this._restoreState();
     }
 
     async firstUpdated() {
-        const $root = document.querySelector(':root'),
-            $darkRoot = document.querySelector('.s-theme--coffeekrakenDark'),
-            $theme = <HTMLElement>($darkRoot ?? $root);
-
         const $mainColorPicker = this.querySelector('#setting-main-color');
         const $accentColorPicker = this.querySelector('#setting-accent-color');
+        const $complementaryColorPicker = this.querySelector(
+            '#setting-complementary-color',
+        );
 
         $mainColorPicker.addEventListener('change', (e) => {
-            $theme.style.setProperty('--s-theme-color-main-h', e.detail.hsla.h);
-            $theme.style.setProperty('--s-theme-color-main-s', e.detail.hsla.s);
-            $theme.style.setProperty('--s-theme-color-main-l', e.detail.hsla.l);
+            this._theme.setColor('main', e.detail.hex);
         });
-
         $accentColorPicker.addEventListener('change', (e) => {
-            $theme.style.setProperty(
-                '--s-theme-color-accent-h',
-                e.detail.hsla.h,
-            );
-            $theme.style.setProperty(
-                '--s-theme-color-accent-s',
-                e.detail.hsla.s,
-            );
-            $theme.style.setProperty(
-                '--s-theme-color-accent-l',
-                e.detail.hsla.l,
-            );
+            this._theme.setColor('accent', e.detail.hex);
+        });
+        $complementaryColorPicker.addEventListener('change', (e) => {
+            console.log('com', e.detail.hex);
+            this._theme.setColor('complementary', e.detail.hex);
         });
     }
 
     _restoreState() {
         const state = getState();
     }
+
+    toggleMode(dark) {}
     _saveState() {
         setState({
             ...this._settings,
@@ -95,7 +85,7 @@ export default class CkSettings extends __SLitComponent {
                                 id="theme-switcher"
                                 ?checked="${this._settings.darkMode}"
                                 @change="${(e) => {
-                                    this.setDarkMode(e.target.checked);
+                                    this.toggleMode(e.target.checked);
                                 }}"
                             />
                         </label>
@@ -106,10 +96,7 @@ export default class CkSettings extends __SLitComponent {
                             for="setting-main-color"
                         >
                             Main color
-                            <s-color-picker
-                                id="setting-main-color"
-                                value="${this._theme.color('main').toHex()}"
-                            >
+                            <s-color-picker id="setting-main-color">
                                 <input
                                     type="text"
                                     class="s-input"
@@ -138,7 +125,7 @@ export default class CkSettings extends __SLitComponent {
                     <li class="s-bg:main-surface">
                         <label
                             class="s-label s-pi:40 s-pb:30"
-                            for="setting-accent-color"
+                            for="setting-complementary-color"
                         >
                             Complementary color
                             <s-color-picker id="setting-complementary-color">

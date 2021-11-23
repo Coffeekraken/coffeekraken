@@ -121,10 +121,6 @@ export default class SColorPicker extends __SLitComponent {
             },
         });
 
-        setTimeout(() => {
-            pickr.setColor(value);
-        });
-
         function getPickrState() {
             const color = pickr.getColor();
             const hsla = color.toHSLA(),

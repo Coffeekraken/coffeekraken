@@ -6,7 +6,6 @@ export default class SColorPickerComponentInterface extends __SInterface {
             value: {
                 description: 'Specify the initial value for your picker',
                 type: 'String',
-                default: '#ff0000',
             },
             theme: {
                 description:

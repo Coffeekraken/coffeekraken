@@ -1,2 +1,5 @@
 .ck-settings {
 }
+#settings .s-side-panel__container {
+    @sugar.depth (100);
+}

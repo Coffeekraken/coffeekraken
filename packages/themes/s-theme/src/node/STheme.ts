@@ -1,10 +1,10 @@
-import __STheme from '../shared/STheme';
+import __SThemeBase from '../shared/SThemeBase';
 
 /**
  * @name            STheme
  * @namespace       node
  * @type            Class
- * @extends         STheme
+ * @extends         SThemeBase
  *
  * This class represent the sugar theme you've passed the name in the constructor.
  * Once you have an instance of this theme you will have access to a lot of utilities
@@ -22,7 +22,7 @@ import __STheme from '../shared/STheme';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class STheme extends __STheme {
+export default class STheme extends __SThemeBase {
     /**
      * @name        constructor
      * @type        Function

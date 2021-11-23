@@ -75,7 +75,7 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
 
     // from cache
     const cached = await fromCache(hash, '@sugar.classes;');
-    if (cached) return cached;
+    // if (cached) return cached;
 
     console.log(
         '<yellow>[postcss]</yellow> Compiling the "<yellow>@sugar.classes;</yellow>" statement. This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....',

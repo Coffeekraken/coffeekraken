@@ -7,6 +7,7 @@ import __baseCss from '@simonwep/pickr/dist/themes/nano.min.css';
 import { css, html, unsafeCSS } from 'lit';
 import __css from '../css/s-color-picker.css';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 export interface ISColorPickerComponentProps {
     name: string;
@@ -70,21 +71,36 @@ export default class SColorPicker extends __SLitComponent {
     constructor() {
         super(
             __deepMerge({
-                litComponent: {},
+                litComponent: {
+                    shadowDom: false,
+                },
                 componentUtils: {
                     interface: __SColorPickerComponentInterface,
                 },
             }),
         );
     }
-    firstUpdated() {
+    async firstUpdated() {
+        await __wait(100);
+
+        const $input = this.querySelector('input');
+        const value = this.props.value ?? $input?.value ?? '#ff0000';
+
+        const $container = this.querySelector(
+            `.${this.componentUtils.className('')}`,
+        );
+
+        if ($input) {
+            $container.prepend($input);
+            $input.classList.add(this.componentUtils.className('__input'));
+        }
+
         const pickr = __Pickr.create({
-            el: this.shadowRoot?.querySelector('.s-color-picker__preview'),
+            el: this.querySelector('.s-color-picker__preview'),
             theme: 'nano', // or 'monolith', or 'nano'
-            container: this.shadowRoot?.querySelector(
-                '.s-color-picker__picker-wrapper',
-            ),
-            default: this.props.value,
+            container: this.querySelector('.s-color-picker__picker-wrapper'),
+            default: value,
+            inline: true,
             // autoReposition: false,
             comparison: false,
             swatches: [],
@@ -103,6 +119,10 @@ export default class SColorPicker extends __SLitComponent {
                     // save: true
                 },
             },
+        });
+
+        setTimeout(() => {
+            pickr.setColor(value);
         });
 
         function getPickrState() {
@@ -153,6 +173,9 @@ export default class SColorPicker extends __SLitComponent {
             const change = new CustomEvent('change', {
                 detail,
             });
+            if ($input) {
+                $input.value = detail.hex;
+            }
             this.dispatchEvent(change);
         });
         pickr.on('show', () => {
@@ -177,15 +200,28 @@ export default class SColorPicker extends __SLitComponent {
             this.dispatchEvent(change);
         });
 
-        const $app = this.shadowRoot?.querySelector('.pcr-app');
+        if ($input) {
+            $input.addEventListener('focus', () => {
+                pickr.show();
+            });
+            $input.addEventListener('change', () => {
+                pickr.setColor($input.value);
+            });
+        }
+
+        const $app = this.querySelector('.pcr-app');
         $app?.classList.add(this.componentUtils.className('__picker'));
 
-        const $preview = this.shadowRoot?.querySelector('.pickr');
+        const $preview = this.querySelector('.pickr');
         $preview?.classList.add(this.componentUtils.className('__preview'));
     }
     render() {
         return html`
-            <div class="${this.componentUtils.className('')}">
+            <div
+                class="${this.componentUtils.className(
+                    '',
+                )} ${this.componentUtils.className('')}--${this.props.position}"
+            >
                 <div
                     class="${this.componentUtils.className('__picker-wrapper')}"
                 ></div>

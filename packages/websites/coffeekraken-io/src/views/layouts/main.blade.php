@@ -12,7 +12,8 @@
     <script>
         const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
         if (state.darkMode) {
-            document.body.classList.add('s-theme--default-dark');
+            document.body.setAttribute('theme', 'default');
+            document.body.setAttribute('variant', 'dark');
         }
     </script>
 

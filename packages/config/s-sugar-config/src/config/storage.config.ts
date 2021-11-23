@@ -4,7 +4,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
 
 export default function (env) {
-    if (env.platform !== 'node') return;
+    // if (env.platform !== 'node') return;
 
     return {
         system: {

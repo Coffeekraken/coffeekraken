@@ -70,7 +70,9 @@ export default function ({
     const vars = __STheme.toCssVars(finalParams.theme, finalParams.variant);
 
     if (finalParams.scope) {
-        vars.unshift(`.s-theme--${finalParams.theme} {`);
+        vars.unshift(
+            `[theme="${finalParams.theme}"][variant="${finalParams.variant}"] {`,
+        );
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

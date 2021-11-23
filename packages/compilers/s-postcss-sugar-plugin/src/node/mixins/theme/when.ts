@@ -69,8 +69,8 @@ export default function ({
 
     const container = new postcssApi.Rule({
         selectors: [
-            `.s-theme--${finalParams.theme}-${finalParams.variant} &`,
-            `&.s-theme--${finalParams.theme}-${finalParams.variant}`,
+            `[theme="${finalParams.theme}"][variant="${finalParams.variant}"] &`,
+            `&[theme="${finalParams.theme}"][variant="${finalParams.variant}"]`,
         ],
     });
     atRule.nodes.forEach((n) => {

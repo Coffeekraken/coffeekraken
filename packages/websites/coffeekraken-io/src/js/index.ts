@@ -37,6 +37,8 @@ import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
         mountWhen: 'direct',
     });
 
+    console.log('coco');
+
     // layout related
     __expandPleasantCssClassnamesLive();
 

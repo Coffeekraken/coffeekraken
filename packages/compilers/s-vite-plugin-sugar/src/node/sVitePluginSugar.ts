@@ -23,8 +23,8 @@ export default function sVitePluginSugar(settings: any = {}) {
     const packageRoot = __packageRootDir();
 
     async function _injectEnvVars(src, id) {
-        if (areEnvVarsInjected) return src;
-        areEnvVarsInjected = true;
+        // if (areEnvVarsInjected) return src;
+        // areEnvVarsInjected = true;
 
         await __SSugarConfig.load(
             {
@@ -34,7 +34,7 @@ export default function sVitePluginSugar(settings: any = {}) {
             'browser',
         );
 
-        const browserConfig = __SSugarConfig.get('.', 'browser');
+        const browserConfig = __SSugarConfig.toObject('browser');
 
         let envJsonStr = JSON.stringify({
             // @ts-ignore
@@ -66,9 +66,16 @@ export default function sVitePluginSugar(settings: any = {}) {
             if (jsReg.test(id)) {
                 if (
                     id.includes(packageRoot) &&
-                    id === config.build.rollupOptions?.input
+                    (id === config.build.rollupOptions?.input ||
+                        id === config.build.lib?.entry)
                 ) {
-                    if (!config.build.lib) {
+                    // build
+                    if (config.build.rollupOptions?.input) {
+                        if (!config.build.lib) {
+                            src = await _injectEnvVars(src, id);
+                        }
+                    } else {
+                        // live dev environment
                         src = await _injectEnvVars(src, id);
                     }
                 }

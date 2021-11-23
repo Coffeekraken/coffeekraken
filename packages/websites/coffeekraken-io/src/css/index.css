@@ -89,9 +89,7 @@ body {
 
 @sugar.platform.classes;
 
-.s-theme--default-dark {
-    @sugar.theme (dark);
-}
+@sugar.theme (dark, default, true);
 
 [class*='s-btn']:not(s-date-picker [class*='s-btn']):not(.preview
         [class*='s-btn']) {

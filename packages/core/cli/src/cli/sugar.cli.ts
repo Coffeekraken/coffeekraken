@@ -101,7 +101,7 @@ class SSugarCli {
         if (!this._action?.match(/^[a-zA-Z0-9]+$/)) this._action = undefined;
 
         this._isHelp = false;
-        const lastArg = process.argv.pop();
+        const lastArg = process.argv.slice(-1)[0];
         if (lastArg.match(/\s?(-h$|--help$)/)) this._isHelp = true;
 
         this._args =
@@ -254,7 +254,7 @@ class SSugarCli {
                 this._stdio = __SStdio.existingOrNew(
                     'default',
                     this._eventEmitter,
-                    sugarCliSettings.stdio,
+                    sugarCliSettings?.stdio ?? null,
                 );
             }
 

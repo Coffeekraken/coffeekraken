@@ -27,7 +27,7 @@ export default class CkSettings extends __SLitComponent {
         //     this._currentVersion = await getCurrentVersion();
         // })();
 
-        console.log('theme', __STheme.getTheme());
+        this._theme = __STheme.getCurrentTheme();
 
         this._restoreState();
     }
@@ -64,22 +64,11 @@ export default class CkSettings extends __SLitComponent {
 
     _restoreState() {
         const state = getState();
-        this.setDarkMode(state.darkMode);
     }
     _saveState() {
         setState({
             ...this._settings,
         });
-    }
-
-    setDarkMode(mode) {
-        this._settings.darkMode = mode;
-        if (mode) {
-            document.body.classList.add('s-theme--coffeekraken-dark');
-        } else {
-            document.body.classList.remove('s-theme--coffeekraken-dark');
-        }
-        this._saveState();
     }
     render() {
         return html`
@@ -119,8 +108,14 @@ export default class CkSettings extends __SLitComponent {
                             Main color
                             <s-color-picker
                                 id="setting-main-color"
-                                value="#ff0000"
-                            />
+                                value="${this._theme.color('main').toHex()}"
+                            >
+                                <input
+                                    type="text"
+                                    class="s-input"
+                                    value="${this._theme.color('main').toHex()}"
+                                />
+                            </s-color-picker>
                         </label>
                     </li>
                     <li class="s-bg:main-surface">
@@ -129,10 +124,15 @@ export default class CkSettings extends __SLitComponent {
                             for="setting-accent-color"
                         >
                             Accent color
-                            <s-color-picker
-                                id="setting-accent-color"
-                                value="#ff0000"
-                            />
+                            <s-color-picker id="setting-accent-color">
+                                <input
+                                    type="text"
+                                    class="s-input"
+                                    value="${this._theme
+                                        .color('accent')
+                                        .toHex()}"
+                                />
+                            </s-color-picker>
                         </label>
                     </li>
                     <li class="s-bg:main-surface">
@@ -141,10 +141,15 @@ export default class CkSettings extends __SLitComponent {
                             for="setting-accent-color"
                         >
                             Complementary color
-                            <s-color-picker
-                                id="setting-complementary-color"
-                                value="#ff0000"
-                            />
+                            <s-color-picker id="setting-complementary-color">
+                                <input
+                                    type="text"
+                                    class="s-input"
+                                    value="${this._theme
+                                        .color('complementary')
+                                        .toHex()}"
+                                />
+                            </s-color-picker>
                         </label>
                     </li>
                 </ul>

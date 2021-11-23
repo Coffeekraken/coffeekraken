@@ -299,6 +299,52 @@ export default class SSugarConfig extends __SClass {
     }
 
     /**
+     * @name            toObject
+     * @type            function
+     * @static
+     *
+     * This static method allows you to get back the config in a simple object format.
+     * Some configurations can be excluded using the config.config.browser.exclude configuration
+     *
+     * @param       {String}            [target="node"]         Specify the target of the config. Can be "node" or "browser"
+     * @returns     {Any}                                       The configuration object filtered and ready for the asked target
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static toObject(target = 'node'): any {
+        // get the configuration
+        const config = this.get('');
+        const newConfig = {};
+        // include some config
+        const include = this.get(`config.${target}.include`);
+        if (!include || !include.length) return config;
+        include.forEach((configId) => {
+            newConfig[configId] = config[configId];
+        });
+        // return the filtered config
+        return newConfig;
+    }
+
+    /**
+     * @name            toJson
+     * @type            function
+     * @static
+     *
+     * This static method allows you to get back the config in a JSON format.
+     * Some configurations can be included using the config.config.browser.include configuration
+     *
+     * @param       {String}            [target="node"]         Specify the target of the config. Can be "node" or "browser"
+     * @return      {String}                                    The json string
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static toJson(target = 'node'): string {
+        return JSON.stringify(this.toObject(target));
+    }
+
+    /**
      * @name            get
      * @type            Function
      *

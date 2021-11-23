@@ -15,6 +15,19 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 values: ['nano', 'monolith'],
                 default: 'nano',
             },
+            noPreview: {
+                description: 'Specify if you want to hide the preview',
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+            position: {
+                description:
+                    'Specify the position of the picker. Can be "top" or "bottom"',
+                type: 'String',
+                values: ['top', 'bottom'],
+                default: 'bottom',
+            },
             swatches: {
                 description: 'Specify some colors you want in your swatches',
                 type: 'Array<String>',

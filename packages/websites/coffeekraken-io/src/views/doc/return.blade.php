@@ -14,7 +14,7 @@
     @if ($block->return->default != null)
         <div class="s-pi:30 s-mbs:40 s-mbe:20">
             <div class="s-typo:code">
-                {{ $block->return->default }}
+                {{ \Sugar\string\toString($block->return->default) }}
             </div>
         </div>
     @endif

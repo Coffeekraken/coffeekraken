@@ -9,6 +9,7 @@ import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';
 import __langHtml from 'highlight.js/lib/languages/xml';
 import { css, html, unsafeCSS } from 'lit';
+import { unsafeHTML } from 'lit/directives/unsafe-html.js';
 import { property, query, queryAssignedNodes } from 'lit/decorators.js';
 import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities';
 // @ts-ignore
@@ -151,7 +152,6 @@ export default class SCodeExample extends __SLitComponent {
     async firstUpdated() {
         this.$templates.forEach(($template: HTMLElement) => {
             if (!$template.getAttribute) return;
-
             let parser = 'babel';
             switch (
                 $template.getAttribute('id') ??
@@ -167,7 +167,6 @@ export default class SCodeExample extends __SLitComponent {
                     parser = 'postcss';
                     break;
             }
-
             let rawCode = __decodeHtmlEntities(
                 $template.tagName.toLowerCase() === 'textarea' &&
                     // @ts-ignore
@@ -197,6 +196,7 @@ export default class SCodeExample extends __SLitComponent {
                         'html',
                     // @ts-ignore
                     code: formatedCode,
+                    lines: formatedCode.trim().split('\n').length,
                 },
             ];
             $template.remove();
@@ -211,18 +211,20 @@ export default class SCodeExample extends __SLitComponent {
             }
         }
 
-        await __wait(500);
-
-        this._$content = this.shadowRoot?.querySelector(
-            '.s-code-example__content',
-        );
+        // await __wait(500);
+        // this._$content = this.shadowRoot?.querySelector(
+        //     '.s-code-example__content',
+        // );
         this._$pre = this.shadowRoot?.querySelector('.s-code-example__code');
         this._$root = this.shadowRoot?.querySelector('.s-code-example');
-
         return true;
     }
     setActiveTabByTab(e) {
         this.setActiveTab(e.target.id);
+    }
+    get currentItem() {
+        if (!this._activeTabId) return {};
+        return this._items.find((i) => i.id === this._activeTabId);
     }
     async setActiveTab(id) {
         await __wait();
@@ -230,12 +232,12 @@ export default class SCodeExample extends __SLitComponent {
         this.initPrismOnTab(id);
     }
     async setMoreClass() {
-        await __wait(500);
         if (this._more) {
             this._$root.classList.add('s-code-example--more');
         } else {
             this._$root.classList.remove('s-code-example--more');
         }
+        this.requestUpdate();
     }
     toggleMore() {
         this._more = !this._more;
@@ -245,12 +247,21 @@ export default class SCodeExample extends __SLitComponent {
         const $content = <HTMLElement>(
             this.shadowRoot?.querySelector(`pre#${id} code`)
         );
+
+        const item = this._items.find((i) => i.id === id);
+
         if ($content.hasAttribute('inited')) {
             this.setMoreClass();
             return;
         }
         $content.setAttribute('inited', 'true');
-        __hljs.highlightElement($content);
+        const code = __hljs.highlight(
+            $content.innerHTML.replace(/<!--\?lit.*-->/, ''),
+            {
+                language: <string>$content.getAttribute('lang'),
+            },
+        );
+        item.highlightedCode = __decodeHtmlEntities(code.value);
         this.setMoreClass();
     }
     copy() {
@@ -260,11 +271,12 @@ export default class SCodeExample extends __SLitComponent {
         this.$copy.copy(item.code);
     }
     render() {
+        const currentItem = this.currentItem;
         return html`
             <div
-                class="${this.componentUtils.className()} ${
-            this.props.more ? this.componentUtils.className('more') : ''
-        }"
+                class="${this.componentUtils.className()} ${this.props.more
+                    ? this.componentUtils.className('more')
+                    : ''}"
                 ?lines="${
                     // @ts-ignore
                     this.lines
@@ -287,10 +299,12 @@ export default class SCodeExample extends __SLitComponent {
                 </div>
 
                 <header class="${this.componentUtils.className('__nav')}">
-                    <ol class="${this.componentUtils.className(
-                        '__tabs',
-                        's-tabs',
-                    )}">
+                    <ol
+                        class="${this.componentUtils.className(
+                            '__tabs',
+                            's-tabs',
+                        )}"
+                    >
                         ${(this._items ?? []).map(
                             (item) => html`
                                 <li
@@ -360,69 +374,78 @@ export default class SCodeExample extends __SLitComponent {
                                 ? ''
                                 : 'hljs'}">${
                                 // @ts-ignore
-                                item.code.trim()
+                                item.highlightedCode
+                                    ? unsafeHTML(item.highlightedCode)
+                                    : item.code.trim()
                             }</code>
                         </pre>
                         `,
                     )}
-                    <div class="${this.componentUtils.className('__more-bar')}">
-                        ${
-                            // @ts-ignore
-                            this._moreAction === 'toggle'
-                                ? html`
-                                      <a
-                                          class="${this.componentUtils.className(
-                                              '__more-button',
-                                              's-btn',
-                                          )}"
-                                          @click="${this.toggleMore}"
-                                      >
-                                          ${
-                                              // @ts-ignore
-                                              this._more
-                                                  ? html`
-                                                        ${this.props
-                                                            .lessLabel ??
-                                                        'Show less'}
-                                                    `
-                                                  : html`
-                                                        ${this.props
-                                                            .moreLabel ??
-                                                        'Show more'}
-                                                    `
-                                          }
-                                      </a>
-                                  `
-                                : html`
-                                      <a
-                                          class="${this.componentUtils.className(
-                                              '__more-button',
-                                              's-btn s-color--accent',
-                                          )}"
-                                          href="${
-                                              // @ts-ignore
-                                              this._moreAction
-                                          }"
-                                      >
-                                          ${
-                                              // @ts-ignore
-                                              this._more
-                                                  ? html`
-                                                        ${this.props
-                                                            .lessLabel ??
-                                                        'Show less'}
-                                                    `
-                                                  : html`
-                                                        ${this.props
-                                                            .moreLabel ??
-                                                        'Show more'}
-                                                    `
-                                          }
-                                      </a>
-                                  `
-                        }                        
-                        </a>
-                    </div>
+                    ${this.props.lines && currentItem.lines > this.lines
+                        ? html`
+                        <div class="${this.componentUtils.className(
+                            '__more-bar',
+                        )}">
+                            ${
+                                // @ts-ignore
+                                this.moreAction === 'toggle'
+                                    ? html`
+                                          <a
+                                              class="${this.componentUtils.className(
+                                                  '__more-button',
+                                                  's-btn',
+                                              )}"
+                                              @click="${() =>
+                                                  this.toggleMore()}"
+                                          >
+                                              ${
+                                                  // @ts-ignore
+                                                  this._more
+                                                      ? html`
+                                                            ${this.props
+                                                                .lessLabel ??
+                                                            'Show less'}
+                                                        `
+                                                      : html`
+                                                            ${this.props
+                                                                .moreLabel ??
+                                                            'Show more'}
+                                                        `
+                                              }
+                                          </a>
+                                      `
+                                    : html`
+                                          <a
+                                              class="${this.componentUtils.className(
+                                                  '__more-button',
+                                                  's-btn s-color--accent',
+                                              )}"
+                                              href="${
+                                                  // @ts-ignore
+                                                  this.moreAction
+                                              }"
+                                          >
+                                              ${
+                                                  // @ts-ignore
+                                                  this._more
+                                                      ? html`
+                                                            ${this.props
+                                                                .lessLabel ??
+                                                            'Show less'}
+                                                        `
+                                                      : html`
+                                                            ${this.props
+                                                                .moreLabel ??
+                                                            'Show more'}
+                                                        `
+                                              }
+                                          </a>
+                                      `
+                            }                        
+                            </a>
+                        </div>
+                    `
+                        : ''}
                 </div>
             </div>
         `;

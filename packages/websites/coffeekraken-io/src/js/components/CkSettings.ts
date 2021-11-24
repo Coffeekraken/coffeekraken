@@ -6,7 +6,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __STheme from '@coffeekraken/s-theme';
 
-import { loadDocmap, setState, getState } from '../state/state';
+import { setState, getState } from '../state/state';
 
 export default class CkSettings extends __SLitComponent {
     _settings = {
@@ -23,12 +23,8 @@ export default class CkSettings extends __SLitComponent {
                 shadowDom: false,
             },
         });
-        // (async () => {
-        //     this._currentVersion = await getCurrentVersion();
-        // })();
-
+        this._state = getState();
         this._theme = __STheme.getCurrentTheme();
-        this._restoreState();
     }
 
     async firstUpdated() {
@@ -50,16 +46,24 @@ export default class CkSettings extends __SLitComponent {
         });
     }
 
-    _restoreState() {
-        const state = getState();
-    }
+    // _restoreState() {
+    //     const state = getState();
+    // }
 
-    toggleMode(dark) {}
-    _saveState() {
-        setState({
-            ...this._settings,
-        });
+    toggleMode(dark) {
+        this._state.darkMode = dark;
+        if (dark) {
+            this._theme = __STheme.setTheme('default', 'dark');
+        } else {
+            this._theme = __STheme.setTheme('default', 'light');
+        }
+        setState(this._state);
     }
+    // _saveState() {
+    //     setState({
+    //         ...this._settings,
+    //     });
+    // }
     render() {
         return html`
             <div class="ck-settings">
@@ -83,7 +87,7 @@ export default class CkSettings extends __SLitComponent {
                                 class="s-switch"
                                 type="checkbox"
                                 id="theme-switcher"
-                                ?checked="${this._settings.darkMode}"
+                                ?checked="${this._state.darkMode}"
                                 @change="${(e) => {
                                     this.toggleMode(e.target.checked);
                                 }}"

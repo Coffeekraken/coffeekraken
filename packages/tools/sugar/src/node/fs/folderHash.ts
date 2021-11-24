@@ -62,10 +62,11 @@ export default function folderHash(
     const paths: string[] = [];
 
     function readDir(dir) {
-        const files = __fs.readdirSync(folderPath);
+        const files = __fs.readdirSync(dir);
         files.forEach((filePath) => {
-            if (settings.recursive && __isDirectory(filePath))
-                return readDir(filePath);
+            if (settings.recursive && __isDirectory(`${dir}/${filePath}`)) {
+                return readDir(`${dir}/${filePath}`);
+            }
             paths.push(`${dir}/${filePath}`);
         });
     }

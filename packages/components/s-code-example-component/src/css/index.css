@@ -1,2 +1,2 @@
-@sugar.init;
+@sugar.init ($variant: dark);
 @sugar.classes;

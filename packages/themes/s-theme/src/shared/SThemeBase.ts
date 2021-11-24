@@ -533,9 +533,9 @@ export default class SThemeBase extends __SClass {
                         !colorObj.variant &&
                         colorObj.value.color
                     ) {
-                        vars.push(`${fromVariable}-h: ${colorObj.value.h};`);
-                        vars.push(`${fromVariable}-s: ${colorObj.value.s};`);
-                        vars.push(`${fromVariable}-l: ${colorObj.value.l};`);
+                        vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
+                        vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
+                        vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
                     } else if (!colorObj.value.color) {
                         vars.push(
                             `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,

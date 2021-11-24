@@ -10,21 +10,6 @@ export function getState(): any {
     return state;
 }
 
-// export async function getCurrentVersion(): string {
-//     const docmapJson = await loadDocmap();
-
-//     let version;
-//     if (document.location.hostname.split('.').length >= 4) {
-//         version = document.location.hostname
-//             .split('.')
-//             .slice(0, 3)
-//             .join('.')
-//             .replace(/^v/, '');
-//     }
-
-//     return version ?? docmapJson.snapshots.slice(-1)[0];
-// }
-
 export function setState(stateObj) {
     const state = getState();
     const newState = __deepMerge(state, stateObj);
@@ -33,7 +18,6 @@ export function setState(stateObj) {
 
 let _docmap, _docmapPromise;
 export async function loadDocmap(): Promise<any> {
-    const state = getState();
     if (_docmap) return _docmap;
     if (_docmapPromise) return (await _docmapPromise).data;
 

@@ -39,11 +39,12 @@ const plugin = (settings: any = {}) => {
     // });
 
     function pluginIntegrityHash() {
-        return __folderHash(`${__dirname()}`, {
+        const hash = __folderHash(`${__dirname()}`, {
             include: {
                 ctime: true,
             },
         });
+        return hash;
     }
 
     function findUp(node, checker) {
@@ -360,7 +361,7 @@ const plugin = (settings: any = {}) => {
                             .join('\n');
 
                         console.log(
-                            `<yellow>[cache]</yellow> Caching "<cyan>${
+                            `<yellow>[postcss]</yellow> Caching "<cyan>${
                                 cacheId ?? cacheHash
                             }</cyan>"...`,
                         );
@@ -381,7 +382,10 @@ const plugin = (settings: any = {}) => {
                         const cacheId = fromCacheMatches[2] ?? 'unkown';
                         let cached;
                         try {
-                            cached = await __cacache.get(cacheDir, cacheHash);
+                            cached = await __cacache.get(
+                                cacheDir,
+                                `${cacheHash}-${pluginHash}`,
+                            );
                         } catch (e) {}
                         if (cached) {
                             console.log(

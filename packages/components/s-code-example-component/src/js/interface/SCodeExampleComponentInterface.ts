@@ -48,7 +48,7 @@ export default class SCodeExampleInterface extends __SInterface {
             },
             more: {
                 description:
-                    'Specify if you want to use the "more button" feature',
+                    'Specify if you want to expand the more feature at start or not',
                 type: 'Boolean',
                 default: false,
             },

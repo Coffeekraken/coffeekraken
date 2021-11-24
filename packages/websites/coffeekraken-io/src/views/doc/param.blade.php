@@ -12,7 +12,7 @@
                 </div>
                 <div>
                     <div class="s-typo:code">
-                        {{ $param->default == 1 ? 'true' : $param->default }}
+                        {{ \Sugar\string\toString($param->default) }}
                     </div>
                 </div>
                 <div class="s-typo:bold s-p:30 s-tc:info">

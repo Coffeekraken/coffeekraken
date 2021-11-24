@@ -26,17 +26,28 @@ import __SColor from '@coffeekraken/s-color';
  */
 export default class STheme extends __SThemeBase {
     /**
-     * @name        constructor
-     * @type        Function
-     * @constructor
+     * @name            setTheme
+     * @type            Function
+     * @static
      *
-     * Constructor
+     * This method allows you to set the current applied theme and get back an STheme instance
      *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @param               {String}            theme           The theme name to apply
+     * @param               {String}            variant         The theme variant to apply
+     * @param               {HTMLElement}       [$context=document.body]            The context element on which to apply the theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(theme?: string, variant?: string) {
-        super(theme, variant);
+    static setTheme(
+        theme: string,
+        variant: string,
+        $context = document.body,
+    ): STheme {
+        $context.setAttribute('theme', theme);
+        $context.setAttribute('variant', variant);
+        return this.getCurrentTheme($context);
     }
 
     /**
@@ -51,7 +62,7 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static getCurrentTheme($context = document.body): __SThemeBase {
+    static getCurrentTheme($context = document.body): STheme {
         const theme =
                 $context.getAttribute('theme') ??
                 __SSugarConfig.get('theme.theme'),
@@ -59,7 +70,21 @@ export default class STheme extends __SThemeBase {
                 $context.getAttribute('variant') ??
                 __SSugarConfig.get('theme.variant');
 
-        return this.getTheme(theme, variant);
+        return <STheme>this.getTheme(theme, variant);
+    }
+
+    /**
+     * @name        constructor
+     * @type        Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    constructor(theme?: string, variant?: string) {
+        super(theme, variant);
     }
 
     /**

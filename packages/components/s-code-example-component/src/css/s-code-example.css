@@ -84,8 +84,15 @@
         left: 0;
         width: 100%;
         height: 100%;
+        transition: sugar.transition();
 
         @sugar.gradient ($type: linear, $start: sugar.color(current, surface), $end: sugar.color(current, --alpha 0), $angle: 0);
+    }
+}
+
+.s-code-example--more .s-code-example__more-bar {
+    &:before {
+        height: 0;
     }
 }
 

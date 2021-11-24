@@ -1,0 +1,39 @@
+<?php
+
+namespace Sugar\string;
+
+/**
+ * @name            toString
+ * @namespace            php.string
+ * @type            Function
+ * @platform        php
+ * @status          beta
+ * 
+ * This function allows you to transform pretty much any types like Array, Object, etc... into a string version that you can display
+ * in documentation, etc...
+ * 
+ * @param       {Any}               $value                  The value to convert into a string
+ * @return      {String}                        The generated string
+ * 
+ * @example         php
+ * Sugar\string\toString(['hello','world']); // => "['hello','world']"
+ * 
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+function toString($value) {
+    if (is_array($value) || is_object($value)) {
+        return json_encode($value);
+        // $str = [];
+        // foreach($value as $v) {
+        //     array_push(toString($v));
+        // }
+        // return '[' . implode(',',$str) . ']';
+    } else if (is_bool($value)) {
+        return $value ? 'true' : 'false';
+    } else if (is_string($value)) {
+        return $value;
+    } else {
+        return (string)$value;
+    }
+}

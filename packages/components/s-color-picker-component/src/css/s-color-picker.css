@@ -3,10 +3,14 @@ s-color-picker {
         display: none;
     }
 
-    .s-color-picker {
+    &:not([no-input]) .s-color-picker {
         display: flex;
         position: relative;
         align-items: center;
+    }
+    &[no-input] .s-color-picker {
+        position: relative;
+        display: inline-block;
     }
 
     .s-color-picker--top .s-color-picker__picker {
@@ -48,6 +52,13 @@ s-color-picker {
                 content: initial;
             }
         }
+    }
+
+    :not([bare]) input:not([type='hidden']) ~ .s-color-picker__preview {
+        position: absolute;
+        top: 50%;
+        right: 0;
+        transform: translate(-50%, -50%);
     }
 }
 
@@ -94,6 +105,8 @@ s-color-picker {
 .pickr.s-color-picker__preview {
     display: inline-block;
     outline: none;
+    width: 1em;
+    height: 1em;
 
     :not([bare]) & {
         transition: sugar.transition(fast);
@@ -104,8 +117,11 @@ s-color-picker {
     } */
 
     button {
+        position: absolute;
         width: 1em;
         height: 1em;
+        top: 0;
+        left: 0;
         border-radius: sugar.border.radius();
 
         &:before,

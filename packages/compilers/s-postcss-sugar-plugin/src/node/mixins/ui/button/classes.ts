@@ -10,10 +10,6 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
                 values: ['solid', 'gradient', 'outline', 'text'],
                 default: ['solid', 'gradient', 'outline', 'text'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.button.defaultColor'),
-            },
             defaultStyle: {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text'],
@@ -34,7 +30,6 @@ class postcssSugarPluginUiButtonClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiButtonClassesParams {
     styles: ('solid' | 'gradient' | 'outline' | 'text')[];
     defaultStyle: 'solid' | 'gradient' | 'outline' | 'text';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -59,7 +54,6 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
         styles: ['solid', 'gradient', 'outline', 'text'],
         defaultStyle: 'solid',
-        defaultColor: 'ui',
         scope: ['bare', 'lnf', 'tf', 'vr'],
         ...params,
     };
@@ -169,7 +163,6 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
      .${cls} {
-        @sugar.color(${finalParams.defaultColor});
         @sugar.ui.button($style: ${style});
      }`);
     });
@@ -262,7 +255,6 @@ export default function ({
         */
             @sugar.format.text {
                 button {
-                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
                 } 
             }

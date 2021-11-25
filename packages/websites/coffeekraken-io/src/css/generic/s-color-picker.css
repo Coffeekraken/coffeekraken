@@ -1,5 +1,5 @@
 .s-color-picker {
-    input ~ .s-color-picker__preview {
+    /* input ~ .s-color-picker__preview {
         position: absolute;
         right: sugar.padding(20);
     }
@@ -7,5 +7,5 @@
         .s-color-picker__preview {
             filter: drop-shadow(0 0 2px rgba(0, 0, 0, 0.5));
         }
-    }
+    } */
 }

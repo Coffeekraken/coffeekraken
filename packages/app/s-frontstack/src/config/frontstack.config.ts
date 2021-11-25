@@ -33,6 +33,18 @@ export default function (env, config) {
              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             litElement: '[config.frontstackRecipeLitElement]',
+            /**
+             * @name            feature
+             * @namespace       config.frontstack.recipes
+             * @type            String
+             * @default         [config.frontstackRecipeFeature]
+             *
+             * Specify the feature recipe
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            feature: '[config.frontstackRecipeFeature]',
         },
 
         actions: {

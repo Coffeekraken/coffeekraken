@@ -511,6 +511,21 @@ const plugin = (settings: any = {}) => {
             }
         },
         async Declaration(decl) {
+            // replace vh units
+            const vhMatches = decl.value.match(
+                /(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm,
+            );
+            if (vhMatches) {
+                vhMatches.forEach((match) => {
+                    if (match.match(/^var\(--vh,/)) return;
+                    const val = match.replace('vh', '');
+                    decl.value = decl.value.replace(
+                        match,
+                        `calc(${val} * var(--vh,1vh))`,
+                    );
+                });
+            }
+
             if (!decl.prop || !decl.value) return;
             if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
             const calls = decl.value.match(

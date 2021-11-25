@@ -17,6 +17,7 @@ export default class SDatePickerComponentInterface extends __SInterface {
             placeholder: {
                 description: 'Specify a placeholder for your input',
                 type: 'String',
+                default: 'Select a date',
             },
             format: {
                 description: 'Specify the format to use for your datepicker',
@@ -119,11 +120,19 @@ export default class SDatePickerComponentInterface extends __SInterface {
                 description: `array of dates that you would like to differentiate from regular days (e.g. ['Sat Jun 28 2017', 'Sun Jun 29 2017', 'Tue Jul 01 2017',])`,
                 default: [],
             },
-            button: {
+            noInput: {
+                description:
+                    "Specify if you want a visible input injected if you don't have specified yours.",
+                type: 'Boolean',
+                default: false,
+                physical: true,
+            },
+            noButton: {
                 description:
                     'Specify if you want a button attached to your input or not',
                 type: 'Boolean',
-                default: true,
+                default: false,
+                physical: true,
             },
             arrowIcon: {
                 description:

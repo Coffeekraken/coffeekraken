@@ -47,14 +47,6 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     });
     __linksStateAttributes();
 
-    document.addEventListener('scroll', (e) => {
-        if (window.scrollY >= 10) {
-            document.body.classList.add('scrolled');
-        } else {
-            document.body.classList.remove('scrolled');
-        }
-    });
-
     await __wait(1500);
 
     // components

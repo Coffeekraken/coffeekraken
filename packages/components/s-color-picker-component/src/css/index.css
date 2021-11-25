@@ -1,5 +1,5 @@
-/* @sugar.init ($variant: dark); */
-/* @sugar.classes; */
+@sugar.init ($variant: dark);
+@sugar.classes;
 
 .s-side-panel__container {
     max-width: 400px;

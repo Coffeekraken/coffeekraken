@@ -2,7 +2,7 @@
 
 import { html, css, unsafeCSS } from 'lit';
 import { html as staticHTML } from 'lit/static-html.js';
-import { queryAsync } from 'lit/decorators.js';
+import { queryAsync, queryAssignedNodes } from 'lit/decorators.js';
 import __SDatePickerComponentInterface from './interface/SDatePickerComponentInterface';
 import __SComponentUtils, {
     SLitElement,
@@ -57,7 +57,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *      Min and max date
  *      <s-date-picker
  *          placeholder="Select a date"
- *          class="s-color:accent\:deep s-width--50"
+ *          class="s-color:accent s-width--50"
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
@@ -68,7 +68,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Disable weekends
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-color:complementary\:deep s-width--50"
+ *         class="s-color:complementary s-width--50"
  *         name="myDatePicker3"
  *         disable-weekends
  *     ></s-date-picker>
@@ -78,7 +78,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     RTL support
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-color:accent\:deep s-width--50"
+ *         class="s-color:accent s-width--50"
  *         min-date="2021-08-10"
  *         name="myDatePicker1"
  *         rtl
@@ -89,7 +89,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Display more than 1 month
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-color:success\:deep s-width--50"
+ *         class="s-color:success s-width--50"
  *         name="myDatePicker4"
  *         number-of-months="2"
  *     ></s-date-picker>
@@ -99,7 +99,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     Custom calendar icon
  *     <s-date-picker
  *         placeholder="Select a date"
- *         class="s-color:error\:deep s-width--50"
+ *         class="s-color:error s-width--50"
  *         name="myDatePicker5"
  *         calendar-icon="<?xml version='1.0' encoding='iso-8859-1'?>
  * <*svg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' x='0px' y='0px' viewBox='0 0 488.901 488.901' style='enable-background:new 0 0 488.901 488.901;' xml:space='preserve'><g><g><g><path fill='currentColor' d='M468.9,56.1h-76.2v-36c0-10.6-9.5-20.1-20.1-20.1s-20.1,8.5-20.1,20.1v36H136.6v-36c0-10.6-9.5-20.1-20.1-20.1
@@ -109,6 +109,24 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *		c-13,11.6-21.2,28.4-21.2,47.1c0,34.7,28.3,63,63,63s63-28.3,63-63C307.5,284.5,299.3,267.7,286.3,256.1z M244.5,198.6
  *		c11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3
  *		c-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>"
+ *     ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     Without input
+ *     <s-date-picker
+ *          name="something"
+ *         class="s-color:accent"
+ *          no-input
+ *     ></s-date-picker>
+ * </label>
+ *
+ * <label class="s-label s-mb--30">
+ *     Without button
+ *     <s-date-picker
+ *          name="something"
+ *         class="s-color:accent s-width--50"
+ *          no-button
  *     ></s-date-picker>
  * </label>
  *
@@ -137,6 +155,7 @@ export interface ISDatePickerComponentProps {
     i18n: string;
     numberOfMonths: number;
     events: string[];
+    input: boolean;
     button: boolean;
     arrowIcon: string;
     calendarIcon: string;
@@ -157,8 +176,8 @@ export default class SDatePicker extends __SLitComponent {
         `;
     }
 
-    @queryAsync('input')
     _$input;
+    _$root;
 
     @queryAsync('button')
     _$button;
@@ -174,15 +193,47 @@ export default class SDatePicker extends __SLitComponent {
         });
     }
     async firstUpdated() {
-        const $input = await this._$input;
+        this._$root = this.querySelector(
+            `.${this.componentUtils.className('')}`,
+        );
+        this._$input = this.querySelector('input');
+        if (!this._$input) {
+            this._$input = document.createElement('input');
+            this._$input.setAttribute(
+                'type',
+                this.props.noInput ? 'hidden' : 'text',
+            );
+            if (!this.props.noInput) {
+                this._$input.setAttribute(
+                    'class',
+                    this.componentUtils.className('__input', 's-input'),
+                );
+            }
+        } else {
+            this._$input.classList.add(
+                this.componentUtils.className('__input'),
+            );
+        }
+        if (!this._$input.hasAttribute('name')) {
+            this._$input.setAttribute('name', this.props.name);
+        }
+        if (!this._$input.hasAttribute('placeholder')) {
+            this._$input.setAttribute('placeholder', this.props.placeholder);
+        }
+        if (!this._$input.hasAttribute('autocomplete')) {
+            this._$input.setAttribute('autocomplete', 'off');
+        }
+        if (this.props.rtl) this._$input.setAttribute('rtl', 'true');
+        this._$root.prepend(this._$input);
+
         let $button;
-        if (this.props.button) $button = await this._$button;
+        if (!this.props.noButton) $button = await this._$button;
 
         await __whenInteract(this);
 
         const _this = this;
         this._picker = new __pikaday({
-            field: $input,
+            field: this._$input,
             format: this.props.format,
             trigger: $button,
             firstDay: this.props.firstDay,
@@ -190,13 +241,16 @@ export default class SDatePicker extends __SLitComponent {
             maxDate: this.parseDate(this.props.maxDate),
             disableWeekends: this.props.disableWeekends,
             yearRange: this.props.yearRange,
+            container: this,
+            position: this.props.rtl ? 'bottom right' : 'bottom left',
+            reposition: true,
             // showWeekNumber: this.props.showWeekNumber,
             isRTL: this.props.rtl,
             i18n: this.props.i18n,
             numberOfMonths: this.props.numberOfMonths,
             events: this.props.events,
             defaultDate: this.props.value,
-            theme: this.props.defaultStyle ? 's-pikaday' : '',
+            theme: !this.props.bare ? 's-pikaday' : '',
             toString(date, format) {
                 return _this.dateToString(date, format);
             },
@@ -266,18 +320,8 @@ export default class SDatePicker extends __SLitComponent {
     render() {
         return html`
             <div class="${this.componentUtils.className('')}">
-                <input
-                    class="${this.componentUtils.className(
-                        '__input',
-                        's-input',
-                    )}"
-                    type="text"
-                    name="${this.name}"
-                    ?rtl="${this.rtl}"
-                    placeholder="${this.placeholder}"
-                    autocomplete="off"
-                />
-                ${this.button
+                <slot></slot>
+                ${!this.props.noButton
                     ? html`
                           <button
                               onclick="return false"

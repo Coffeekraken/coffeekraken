@@ -41,9 +41,25 @@ export interface ISColorPickerComponentProps {
  * @event           hide                Emitted when the color picker is hided
  *
  * @example         html
- * <label class="s-label s-mb--30">
- *      Simply color picker
+ * <label class="s-label s-mbe:30">
+ *      Simple color picker
  *      <s-color-picker></s-color-picker>
+ * </label>
+ * <label class="s-label s-mbe:30">
+ *      Color picker with an input and no preview
+ *      <s-color-picker no-preview>
+ *           <input class="s-input" type="text" value="#ff000f" />
+ *       </s-color-picker>
+ * </label>
+ * <label class="s-label s-mbe:30">
+ *      Color picker with an input and a preview
+ *      <s-color-picker>
+ *           <input class="s-input" type="text" value="#ff000f" />
+ *       </s-color-picker>
+ * </label>
+ * <label class="s-label s-mbe:30">
+ *      Color picker with only a preview
+ *      <s-color-picker no-input></s-color-picker>
  * </label>
  *
  * @example         js
@@ -83,8 +99,30 @@ export default class SColorPicker extends __SLitComponent {
     async firstUpdated() {
         await __wait(100);
 
-        const $input = this.querySelector('input');
+        let $input = this.querySelector('input');
         const value = this.props.value ?? $input?.value ?? '#ff0000';
+
+        if (!$input) {
+            $input = document.createElement('input');
+            $input.setAttribute('type', this.props.noInput ? 'hidden' : 'text');
+            if (!this.props.noInput) {
+                $input.setAttribute(
+                    'class',
+                    this.componentUtils.className('__input', 's-input'),
+                );
+            }
+        } else {
+            $input.classList.add(this.componentUtils.className('__input'));
+        }
+        if (!$input.hasAttribute('name')) {
+            $input.setAttribute('name', this.props.name);
+        }
+        if (!$input.hasAttribute('placeholder')) {
+            $input.setAttribute('placeholder', this.props.placeholder);
+        }
+        if (!$input.hasAttribute('autocomplete')) {
+            $input.setAttribute('autocomplete', 'off');
+        }
 
         const $container = this.querySelector(
             `.${this.componentUtils.className('')}`,
@@ -96,7 +134,7 @@ export default class SColorPicker extends __SLitComponent {
         }
 
         const pickr = __Pickr.create({
-            el: this.querySelector('.s-color-picker__preview'),
+            el: this.querySelector('.s-color-picker__preview') ?? this,
             theme: 'nano', // or 'monolith', or 'nano'
             container: this.querySelector('.s-color-picker__picker-wrapper'),
             default: value,

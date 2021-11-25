@@ -16,7 +16,7 @@
                     </div>
                 </div>
                 <div class="s-typo:bold s-p:30 s-tc:info">
-                    {{ $param->type }}
+                    {{ \Sugar\string\toString($param->type->type ? $param->type->type : $param->type) }}
                 </div>
             </header>
             <p class="s-typo:p s-p:30">{!! $param->description !!}</p> 

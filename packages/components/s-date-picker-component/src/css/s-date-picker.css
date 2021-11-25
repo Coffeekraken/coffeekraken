@@ -1,5 +1,6 @@
 s-date-picker {
     display: inline-block;
+    position: relative;
 }
 .s-date-picker {
     display: flex;
@@ -17,8 +18,22 @@ s-date-picker {
     cursor: pointer;
 }
 
+.s-pikaday {
+    top: 100%;
+    left: auto;
+    right: 0;
+    bottom: auto;
+    display: flex;
+}
+s-date-picker[rtl] .s-pikaday {
+    top: 100%;
+    left: 0;
+    right: auto;
+    bottom: auto;
+}
+
 s-date-picker:not([bare]) {
-    &:not([rtl]) {
+    &:not([rtl]):not([no-button]):not([no-input]) {
         .s-date-picker__input {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -28,7 +43,7 @@ s-date-picker:not([bare]) {
             border-bottom-left-radius: 0;
         }
     }
-    &[rtl] {
+    &[rtl]:not([no-button]):not([no-input]) {
         .s-date-picker__button {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;

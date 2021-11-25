@@ -412,18 +412,6 @@ export default (env, config) => {
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.button
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for button ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.button
              * @type          Object

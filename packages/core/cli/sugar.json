@@ -1,45 +1,58 @@
 {
-  "config": {
-    "folders": [
-      {
-        "scope": "default",
-        "path": "./src/config"
-      }
-    ]
-  },
-  "cli": [
-    {
-      "stack": "new",
-      "description": "Create project, etc...",
-      "actions": {
-        "project1": {
-          "scope": "global",
-          "description": "Create a new project",
-          "process": "./src/cli/process/kill.cli.js"
-        }
-      }
+    "config": {
+        "folders": [
+            {
+                "scope": "default",
+                "path": "./src/config"
+            }
+        ]
     },
-    {
-      "stack": "process",
-      "description": "Process related actions",
-      "interactive": {
-        "project": {
-          "scope": "global",
-          "title": "Kill a process",
-          "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
-          "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
-          "process": "./src/cli/process/interactiveKill.cli.js"
+    "cli": [
+        {
+            "stack": "dev",
+            "description": "Sugar development stack actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "global",
+                    "description": "Start the development stack",
+                    "command": "sugar frontstack.recipe dev"
+                }
+            }
+        },
+        {
+            "stack": "build",
+            "description": "Sugar build action",
+            "defaultAction": "prod",
+            "actions": {
+                "prod ": {
+                    "scope": "global",
+                    "description": "Build for production",
+                    "command": "sugar frontstack.recipe build"
+                }
+            }
+        },
+        {
+            "stack": "process",
+            "description": "Process related actions",
+            "interactive": {
+                "project": {
+                    "scope": "global",
+                    "title": "Kill a process",
+                    "description": "Allows you to kill particular process through parameters like the port on which it runs, etc...",
+                    "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./src/cli/process/interactiveKill.cli.js"
+                }
+            },
+            "defaultAction": "kill",
+            "actions": {
+                "kill": {
+                    "scope": "global",
+                    "description": "Kill a process by it's pid, port and more",
+                    "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                    "process": "./src/cli/process/kill.cli.js"
+                }
+            }
         }
-      },
-      "defaultAction": "kill",
-      "actions": {
-        "kill": {
-          "scope": "global",
-          "description": "Kill a process by it's pid, port and more",
-          "interface": "./src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
-          "process": "./src/cli/process/kill.cli.js"
-        }
-      }
-    }
-  ]
+    ]
 }

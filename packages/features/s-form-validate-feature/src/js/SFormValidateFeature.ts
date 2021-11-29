@@ -13,10 +13,11 @@ import __css from '../css/s-form-validate.css';
 import __SComponentUtils from '@coffeekraken/s-component-utils';
 
 /**
- * @name            SFormValidate
+ * @name            SFormValidateFeature
  * @namespace       js
  * @type            Feature
- * @menu            Styleguide / Forms               /styleguide/forms/s-form-validate
+ * @interface       ./interface/SFormValidateFeatureInterface.js
+ * @menu            Styleguide / Forms               /styleguide/forms/s-form-validate-feature
  * @platform        js
  * @status          beta
  *

@@ -14,6 +14,8 @@
 
 {{#> layout-doc }}
 
-{{#> config-explorer}}{{/config-explorer}}
+# Configuration explorer
+
+To fully understand how the configuration system works, the easier way is to take a look at current available configuration by going [to our configuration explorer](/config/explorer).
 
 {{/layout-doc }}

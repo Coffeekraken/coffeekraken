@@ -1,54 +1,54 @@
 {
-  "config": {
-    "folders": [
-      {
-        "scope": "default",
-        "path": "./src/config"
-      }
-    ]
-  },
-  "cli": [
-    {
-      "stack": "new",
-      "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
-      "defaultAction": "project",
-      "actions": {
-        "project": {
-          "scope": "global",
-          "description": "Create a new project using the step by step guide",
-          "process": "./src/node/action/action.cli.js"
-        }
-      }
+    "config": {
+        "folders": [
+            {
+                "scope": "default",
+                "path": "./src/config"
+            }
+        ]
     },
-    {
-      "stack": "frontstack",
-      "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
-      "interactive": {
-        "project": {
-          "scope": "global",
-          "title": "Create a new project",
-          "description": "Create a new project from a recipe (template) like the default one or for example the litElement one, etc...",
-          "process": "./src/cli/createProject.cli.js"
-        }
-      },
-      "defaultAction": "recipe",
-      "actions": {
-        "action": {
-          "scope": "package",
-          "description": "Exec an action of the frontstack application into the current working directory",
-          "process": "./src/node/action/action.cli.js"
+    "cli": [
+        {
+            "stack": "new",
+            "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+            "defaultAction": "project",
+            "actions": {
+                "project": {
+                    "scope": "global",
+                    "description": "Create a new project using the step by step guide",
+                    "process": "./src/cli/createProject.cli.js"
+                }
+            }
         },
-        "recipe": {
-          "scope": "package",
-          "description": "Exec a recipe of the frontstack application into the current working directory",
-          "process": "./src/node/recipe/recipe.cli.js"
-        },
-        "list": {
-          "scope": "package",
-          "description": "List either all the recipes available or particular recipe actions stack",
-          "process": "./src/node/list/list.cli.js"
+        {
+            "stack": "frontstack",
+            "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
+            "interactive": {
+                "project": {
+                    "scope": "global",
+                    "title": "Create a new project",
+                    "description": "Create a new project from a recipe (template) like the default one or for example the litElement one, etc...",
+                    "process": "./src/cli/createProject.cli.js"
+                }
+            },
+            "defaultAction": "recipe",
+            "actions": {
+                "action": {
+                    "scope": "package",
+                    "description": "Exec an action of the frontstack application into the current working directory",
+                    "process": "./src/node/action/action.cli.js"
+                },
+                "recipe": {
+                    "scope": "package",
+                    "description": "Exec a recipe of the frontstack application into the current working directory",
+                    "process": "./src/node/recipe/recipe.cli.js"
+                },
+                "list": {
+                    "scope": "package",
+                    "description": "List either all the recipes available or particular recipe actions stack",
+                    "process": "./src/node/list/list.cli.js"
+                }
+            }
         }
-      }
-    }
-  ]
+    ]
 }

@@ -9,6 +9,34 @@ export interface ISParallaxFeatureProps {
     amount: number;
 }
 
+/**
+ * @name            SParallaxFeature
+ * @namespace       js
+ * @type            Feature
+ * @interface       ./interface/SParallaxFeatureInterface.js
+ * @menu            Styleguide / Forms               /styleguide/forms/s-parallax-feature
+ * @platform        js
+ * @status          beta
+ *
+ * This feature allows you to easily apply some parallax effect to any HTMLElement items you want.
+ *
+ * @feature         Specify the amount of parallax you want
+ * @feature         Specify amount for X and Y separately
+ * @feature         Keep your original transforms
+ *
+ * @support          chromium
+ * @support          firefox
+ * @support          safari
+ * @support          edge
+ *
+ * @example         html
+ * <div s-parallax amount="0.1">I will move on mousemove</div>
+ * <div s-parallax amount="0.3">I will move on mousemove</div>
+ * <div s-parallax amount="0.5">I will move on mousemove</div>
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SParallaxFeature extends __SFeature implements ISFeature {
     _matrix;
     _originalTransform;
@@ -36,7 +64,7 @@ export default class SParallaxFeature extends __SFeature implements ISFeature {
         const transformFn = __throttle((e) => {}, 0);
 
         document.addEventListener('mousemove', (e) => {
-            if (!this.componentUtils.isInViewport) return;
+            if (!this.componentUtils.isInViewport()) return;
 
             const percentage = this._getPositionPercentages(e);
             this._setLayerTransform(percentage);

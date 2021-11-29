@@ -7,6 +7,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __SEnv from '@coffeekraken/s-env';
+import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
@@ -479,12 +480,23 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _isClearing = false;
+    _hashBuffer: string[] = [];
     // _isCleared = true;
     log(...logObj: ISLog[]) {
         for (let i = 0; i < logObj.length; i++) {
             let log = <ISLog>logObj[i];
 
             if (!log.active) continue;
+
+            if (!log.hash) {
+                const hash = __objectHash({ value: log.value, type: log.type });
+                log.hash = hash;
+            }
+            if (this._hashBuffer.includes(log.hash)) return;
+            this._hashBuffer.push(log.hash);
+            setTimeout(() => {
+                this._hashBuffer.shift();
+            }, 1000);
 
             // put in buffer if not displayed
             if (!this.isDisplayed() || this._isClearing) {

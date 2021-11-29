@@ -16,4 +16,6 @@
 
 # Images configurations
 
+{{> config path='@coffeekraken.s-images-builder.config.imagesBuilder'}}
+
 {{/layout-doc }}

@@ -138,6 +138,9 @@ export default class SFrontstack extends __SClass {
 
                 const availableActions = Object.keys(actionsObj);
 
+                console.log(finalParams, availableActions);
+                return;
+
                 if (availableActions.indexOf(finalParams.action) === -1) {
                     throw new Error(
                         `<red>[${

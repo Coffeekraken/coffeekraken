@@ -13,6 +13,46 @@ export interface ISActivateFeatureProps {
     trigger: string[];
 }
 
+/**
+ * @name            SActivateFeature
+ * @namespace       js
+ * @type            Feature
+ * @interface       ./interface/SActivateFeatureInterface.js
+ * @menu            Styleguide / Features               /styleguide/features/s-activate-feature
+ * @platform        js
+ * @status          beta
+ *
+ * This feature allows you to activate some elements depending on triggers like "click", "mouseover", "mouseout", "anchor", etc...
+ * To be explicit, you can apply this feature on a link tag with the href attribute "#something", and on click,
+ * the DOM element that has the id "something" will get the "active" class applied.
+ *
+ * @feature          Take the `href` attribute as target
+ * @feature          Allows to "group" some element for tabs behavior, etc...
+ * @feature         Support the `toggle` mode
+ * @feature          Support the `history` mode
+ * @feature         Allows you to save state to restore them on page load
+ * @feature         Available trigger: `click`, `mouseover`, `mouseout`, `anchor` and more to come
+ *
+ * @support          chromium
+ * @support          firefox
+ * @support          safari
+ * @support          edge
+ *
+ * @example         html
+ * <a href="#my-element">Click me!</a>
+ * <div id="my-element">I will be activated on click</a>
+ *
+ * <a href="#tab1" group="my-tabs">Tab 1</a>
+ * <a href="#tab2" group="my-tabs">Tab 1</a>
+ * <a href="#tab3" group="my-tabs">Tab 1</a>
+ *
+ * <div id="tab1">Tab 1 content</div>
+ * <div id="tab2">Tab 1 content</div>
+ * <div id="tab3">Tab 1 content</div>
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SActivateFeature extends __SFeature {
     _hrefSelector?: string;
     _$targets?: HTMLElement[];

@@ -14,6 +14,8 @@
 
 {{#> layout-doc }}
 
-# Servers handlers
+# SFrontendServer modules
+
+The SFrontendServer is based on the AMAZING [ExpressJs](https://expressjs.com/) server. This mean that you can extend it as you want by following these steps described bellow:
 
 {{/layout-doc }}

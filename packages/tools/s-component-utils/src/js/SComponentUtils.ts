@@ -179,21 +179,7 @@ export default class SComponent extends __SClass {
 
     _whenMountPromise;
     _whenMountedPromise;
-
-    /**
-     * @name            isInViewport
-     * @type            Boolean
-     * @get
-     *
-     * true if the component is in the viewport, false if not
-     *
-     * @since   2.0.0
-     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
-     */
     _isInViewport = false;
-    get isInViewport(): boolean {
-        return this._isInViewport;
-    }
 
     /**
      * @name            constructor
@@ -265,8 +251,8 @@ export default class SComponent extends __SClass {
     }
 
     /**
-     * @name           ()
-     * @type            Function
+     * @name           inViewportStatusChange
+     * @type            SPromise
      * @get
      * @async
      *
@@ -524,42 +510,15 @@ export default class SComponent extends __SClass {
     }
 
     /**
-     * @name        dispatchSyncEvent
-     * @type        Function
+     * @name            isInViewport
+     * @type            Function
      *
-     * This method allows you to dispatch a sync event that will wait for an answer
-     * before passing to the next statements.
-     * This mechanism work by sending a "ping" event to check if someone (another component) listen to us.
-     * If their's no answer, we pass to the next statements whichout doing anything but
-     * if we have an answer, we send the actual event and wait for an answer.
+     * true if the component is in the viewport, false if not
      *
-     * @param     {String}     name       The event name you want to send
-     * @param     {Any}       details     Some details you want to attach to the event
-     * @return    {SPromise}              An SPromise instance that will be resolved if we get an answer and rejected if not
-     *
-     * @since       2.0.0
+     * @since   2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    // dispatchSyncEvent(name: string, details: any): Promise<any> {
-    //     return new Promise((resolve, reject) => {
-    //         let hasListeners = false;
-
-    //         this.dispatchEvent(
-    //             new CustomEvent(name, {
-    //                 detail: {
-    //                     ...details,
-    //                     onPing() {
-    //                         hasListeners = true;
-    //                     },
-    //                     onResolve(data) {
-    //                         resolve(data);
-    //                     },
-    //                 },
-    //             }),
-    //         );
-    //         setTimeout(() => {
-    //             if (!hasListeners) reject();
-    //         });
-    //     });
-    // }
+    isInViewport(): boolean {
+        return this._isInViewport;
+    }
 }

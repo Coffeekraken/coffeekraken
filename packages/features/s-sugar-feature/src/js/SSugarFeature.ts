@@ -8,6 +8,34 @@ export interface ISSugarFeatureProps {
     vhvar: boolean;
 }
 
+/**
+ * @name            SSugarFeature
+ * @namespace       js
+ * @type            Feature
+ * @interface       ./interface/SSugarFeatureInterface.js
+ * @menu            Styleguide / Forms               /styleguide/features/s-sugar-feature
+ * @platform        js
+ * @status          beta
+ *
+ * This feature allows you to apply some "nice to have" features like having a "scrolled" class applied on the body
+ * when the user has scroll in the page or having access to a `--vh` css variable that represent the exact
+ * viewport innerHeight and avoid having issues with mobile different viewport height values. Note that if you use
+ * the `sPostcssSugarPlugin` postcss plugin, you can use the `vh` unit as normal and if will automatically take the
+ * value of the `--vh` variable if it exists.
+ * More feature can be added in the future depending on the needs.
+ *
+ * @support          chromium
+ * @support          firefox
+ * @support          safari
+ * @support          edge
+ *
+ * @example         html
+ * <body s-sugar>
+ * </body>
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SSugarFeature extends __SFeature implements ISFeature {
     _matrix;
     _originalTransform;

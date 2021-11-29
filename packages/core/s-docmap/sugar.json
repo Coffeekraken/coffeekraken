@@ -11,6 +11,7 @@
         {
             "stack": "docmap",
             "description": "SDocMap CLI",
+            "defaultAction": "build",
             "actions": {
                 "build": {
                     "description": "Build the docmap.json file by searching for source files with a @namespace defined",

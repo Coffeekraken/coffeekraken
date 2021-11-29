@@ -38,6 +38,7 @@ export type ISLogType =
     | 'child_process';
 
 export default interface ISLog {
+    hash?: string;
     decorators?: boolean;
     time?: boolean;
     clear?: boolean;

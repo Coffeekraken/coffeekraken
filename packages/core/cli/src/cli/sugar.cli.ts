@@ -21,6 +21,7 @@ import __fsExtra from 'fs-extra';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 import __SLog from '@coffeekraken/s-log';
+import __childProcess from 'child_process';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -81,6 +82,8 @@ class SSugarCli {
     _stdio: STerminalStdio;
     _eventEmitter: __SEventEmitter;
 
+    _treatAsMain: boolean;
+
     _sugarJsons: any;
     _availableCli: ISSugarCliAvailableCli = {
         defaultByStack: {},
@@ -90,6 +93,11 @@ class SSugarCli {
 
     constructor() {
         __SBench.start('sugar.cli');
+
+        if (process.env.TREAT_AS_MAIN) {
+            this._treatAsMain = true;
+            process.env.TREAT_AS_MAIN = false;
+        }
 
         this._command =
             process.argv && process.argv[2]
@@ -221,6 +229,10 @@ class SSugarCli {
         })();
     }
 
+    _isStdioNeeded() {
+        return !__isChildProcess() || this._treatAsMain;
+    }
+
     async _process() {
         const defaultStackAction =
             this._availableCli.defaultByStack[this._stack];
@@ -250,7 +262,7 @@ class SSugarCli {
                 cliObj.processPath
             );
 
-            if (!__isChildProcess()) {
+            if (this._isStdioNeeded()) {
                 this._stdio = __SStdio.existingOrNew(
                     'default',
                     this._eventEmitter,
@@ -273,6 +285,27 @@ class SSugarCli {
             await proPromise;
             await __wait(1000);
             process.exit();
+        } else if (cliObj.command) {
+            if (this._isStdioNeeded()) {
+                this._stdio = __SStdio.existingOrNew(
+                    'default',
+                    this._eventEmitter,
+                    'terminal',
+                );
+            }
+
+            const promise = __spawn(cliObj.command, [], {});
+            this._eventEmitter.pipe(promise);
+            await promise;
+            process.exit();
+            // __childProcess.spawnSync(cliObj.command, [], {
+            //     shell: true,
+            //     stdio: 'inherit',
+            //     env: {
+            //         ...process.env,
+            //         TREAT_AS_MAIN: true,
+            //     },
+            // });
         }
     }
 
@@ -346,10 +379,21 @@ class SSugarCli {
                 Object.keys(cliObj.actions).forEach((action) => {
                     const actionObj = cliObj.actions[action];
 
-                    const cliPath = __path.resolve(
-                        sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
-                        actionObj.process,
-                    );
+                    let processPath, command;
+
+                    if (actionObj.command && !actionObj.process) {
+                        command = actionObj.command;
+                    } else {
+                        processPath = __path.resolve(
+                            sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
+                            actionObj.process,
+                        );
+                        if (!__fs.existsSync(processPath)) {
+                            throw new Error(
+                                `[sugar.cli] Sorry but the references cli file "${processPath}" does not exists...`,
+                            );
+                        }
+                    }
 
                     let interfacePath;
                     if (actionObj.interface) {
@@ -359,10 +403,6 @@ class SSugarCli {
                         );
                     }
 
-                    if (!__fs.existsSync(cliPath))
-                        throw new Error(
-                            `[sugar.cli] Sorry but the references cli file "${cliPath}" does not exists...`,
-                        );
                     if (
                         !this._action &&
                         cliObj.defaultAction &&
@@ -376,7 +416,8 @@ class SSugarCli {
                         {
                             packageJson,
                             ...actionObj,
-                            processPath: cliPath,
+                            processPath,
+                            command,
                             interfacePath,
                         };
                 });
@@ -452,7 +493,7 @@ class SSugarCli {
     }
 
     async _interactivePrompt() {
-        if (!__isChildProcess()) {
+        if (this._isStdioNeeded()) {
             this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
         }
 
@@ -528,7 +569,7 @@ class SSugarCli {
     }
 
     async _displayHelp() {
-        if (!__isChildProcess()) {
+        if (this._isStdioNeeded()) {
             this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
         }
 

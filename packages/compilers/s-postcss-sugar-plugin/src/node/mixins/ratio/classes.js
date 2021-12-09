@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           classes
  * @namespace      node.mixins.ratio
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.

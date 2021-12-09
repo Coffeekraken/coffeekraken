@@ -5,7 +5,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.padding
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the padding helper classes like s-p:10, s-pie:40, etc...

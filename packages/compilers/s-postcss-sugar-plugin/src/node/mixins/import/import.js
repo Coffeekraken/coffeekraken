@@ -8,7 +8,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  * @name           import
  * @namespace      node.mixins.import
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to import other files just like the @import statement does.

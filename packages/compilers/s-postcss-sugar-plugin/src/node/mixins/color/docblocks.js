@@ -10,7 +10,7 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
  * @name           docblocks
  * @namespace      mixins.color
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin print the documentation docblocks for the colors

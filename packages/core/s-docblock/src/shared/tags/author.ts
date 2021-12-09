@@ -4,7 +4,8 @@
  * @name              author
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the author tag
  *

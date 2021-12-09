@@ -4,7 +4,8 @@
  * @name              description
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the description tag
  *

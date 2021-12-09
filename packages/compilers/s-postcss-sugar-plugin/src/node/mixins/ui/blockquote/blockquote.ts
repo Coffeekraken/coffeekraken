@@ -1,6 +1,28 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          blockquote
+ * @namespace     node.mixins.ui.blockquote
+ * @type          PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "blockquote" UI component css.
+ *
+ * @param       {'solid'}                           [style='solid']         The style you want your blockquote to have
+ * @param       {('bare'|'lnf'|'shape'|'interactive')[]}        [scope=['bare','lnf','shape']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      \@sugar.ui.badge();
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
     static get _definition() {
         return {
@@ -14,8 +36,8 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
@@ -41,7 +63,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
         style: 'solid',
-        scope: ['bare', 'lnf', 'vr'],
+        scope: ['bare', 'lnf'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);

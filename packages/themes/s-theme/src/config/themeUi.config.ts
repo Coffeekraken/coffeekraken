@@ -87,6 +87,18 @@ export default (env, config) => {
              */
             defaultStyle: 'solid',
             /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.default
+             * @type          String
+             * @default      default
+             *
+             * Specify the default style for ui's.
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: 'default',
+            /**
              * @name          depth
              * @namespace     config.themeUi.default
              * @type          String
@@ -411,6 +423,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.button
+             * @type          Number
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default style for your button ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.button
@@ -1084,6 +1108,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.checkbox
+             * @type          Number
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default style for your checkbox ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          outline
              * @namespace     config.themeUi.checkbox

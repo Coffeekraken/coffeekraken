@@ -6,8 +6,8 @@
         <div class="s-container s-layout:1222">
             <ul class="__subnav-chapters">
                 @foreach($menuItem as $item)
-                    @if (!$item->slug && $item->name)
-                        <li s-activate href="#subnav-{{ \Sugar\string\idCompliant($item->name) }}" {{ ($loop->index == 1) ? 'active="true"' : ''}} id="subnav-item-{{ \Sugar\string\idCompliant($item->name) }}" save-state trigger="click" group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
+                    @if ($item->name)
+                        <li s-activate href="#subnav-{{ \Sugar\string\idCompliant($item->name) }}" {!! ($loop->index == 1) ? 'active="true"' : '' !!} id="subnav-item-{{ \Sugar\string\idCompliant($item->name) }}" save-state trigger="click" group="subnav-{{ \Sugar\string\idCompliant($menuItem->name) }}">
                             {{ $item->name }}
                         </li>
                     @endif

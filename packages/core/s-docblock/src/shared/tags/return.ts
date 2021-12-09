@@ -6,7 +6,8 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @name              return
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the return tag
  *

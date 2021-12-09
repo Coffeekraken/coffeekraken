@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          space
+ * @namespace     node.function.space
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a space value depending on your theme config
+ *
+ * @param       {String}        space      The space to get
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *    padding: sugar.space(20);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginSpaceFunctionInterface extends __SInterface {
     static get _definition() {
         return {

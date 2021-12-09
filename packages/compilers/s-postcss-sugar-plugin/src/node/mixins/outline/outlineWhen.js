@@ -15,7 +15,7 @@ export { postcssSugarPluginStateOutlineWhenMixinInterface as interface };
  * @name           outline
  * @namespace      mixins.outline
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a nice outline on any HTMLElement.

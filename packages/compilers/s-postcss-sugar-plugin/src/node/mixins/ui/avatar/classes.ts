@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          classes
+ * @namespace     node.mixins.ui.avatar
+ * @type          PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "avatar" UI component classes.
+ *
+ * @param       {('solid')[]}                           [styles=['solid']]         The style(s) you want to generate
+ * @param       {'solid''}                [defaultStyle='theme.ui.avatar.defaultStyle']           The default style you want
+ * @param       {('bare', 'lnf')[]}        [scope=['bare', 'lnf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * \@sugar.ui.avatar.classes();
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
     static get _definition() {
         return {
@@ -8,10 +29,6 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
                 type: 'String[]',
                 values: ['solid'],
                 default: ['solid'],
-            },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.avatar.defaultColor'),
             },
             defaultStyle: {
                 type: 'String',
@@ -23,8 +40,8 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf'],
+                default: ['bare', 'lnf'],
             },
         };
     }
@@ -33,7 +50,6 @@ class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
 export interface IPostcssSugarPluginUiAvatarClassesParams {
     styles: 'solid'[];
     defaultStyle: 'solid';
-    defaultColor: string;
     scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
 }
 
@@ -58,7 +74,6 @@ export default function ({
     const finalParams: IPostcssSugarPluginUiAvatarClassesParams = {
         styles: [],
         defaultStyle: 'solid',
-        defaultColor: 'ui',
         scope: [],
         ...params,
     };
@@ -168,7 +183,6 @@ export default function ({
         */`);
         vars.push(`
           .s-avatar${style === finalParams.defaultStyle ? '' : `--${style}`} {
-            @sugar.color(${finalParams.defaultColor});
             @sugar.ui.avatar($shape: default, $style: ${style});
           }
       `);

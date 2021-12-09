@@ -6,7 +6,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.margin
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...

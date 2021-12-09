@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           container
  * @namespace      node.mixins.layout
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed for a container depending

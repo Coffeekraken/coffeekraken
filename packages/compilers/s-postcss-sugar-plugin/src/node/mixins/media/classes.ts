@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           classes
  * @namespace      node.mixins.media
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to automatically generate the requested media query as well

@@ -50,12 +50,9 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @todo      tests
  *
  * @example             js
- * import SDocMap from 'coffeekraken/sugar/node/doc/SDocMap';
- * const docMap = new SDocMap({
- *  outputDir: '/my/cool/directory'
- * });
- * await docMap.scan('/my/cool/directory/*.js');
- * await docMap.save();
+ * import SDocmap from '@coffeekraken/s-docmap';
+ * const docmap = new SDocMap();
+ * await docmap.read();
  *
  * @since           2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -67,7 +64,7 @@ export interface ISDocMapBuildParams {
     exclude: string[];
     noExtends: boolean;
     filters: Record<string, RegExp>;
-    fields: string[];
+    tags: string[];
     save: boolean;
     outPath: string;
 }
@@ -86,7 +83,7 @@ export interface ISDocMapReadParams {
     snapshotDir: string;
 }
 
-export interface ISDocMapFieldProxyFn {
+export interface ISDocMapTagProxyFn {
     (data: any): any;
 }
 
@@ -96,7 +93,7 @@ export interface ISDocMapCustomMenuSettingFn {
 
 export interface ISDocMapSettings {
     customMenu: Record<string, ISDocMapCustomMenuSettingFn>;
-    fieldsProxy: Record<string, ISDocMapFieldProxyFn>;
+    tagsProxy: Record<string, ISDocMapTagProxyFn>;
 }
 
 export interface ISDocMapCtorSettings {
@@ -159,25 +156,22 @@ class SDocMap extends __SClass implements ISDocMap {
 
     static _cachedDocmapJson = {};
 
-    static _registeredFieldsProxy = {};
+    static _registeredTagsProxy = {};
     /**
-     * @name           registerFieldProxy
+     * @name           registerTagProxy
      * @type            Function
      * @static
      *
-     * This static method allows you to register a field proxy for all the SDocMap instances
+     * This static method allows you to register a tag proxy for all the SDocMap instances
      *
-     * @param               {String}            field           The field you want to proxy
-     * @param               {ISDocMapFieldProxyFn}      processor       The processor function
+     * @param               {String}            tag           The tag you want to proxy
+     * @param               {ISDocMapTagProxyFn}      processor       The processor function
      *
      * @since           2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static registerFieldProxy(
-        field: string,
-        processor: ISDocMapFieldProxyFn,
-    ): any {
-        this._registeredFieldsProxy[field] = processor;
+    static registerTagProxy(tag: string, processor: ISDocMapTagProxyFn): any {
+        this._registeredTagsProxy[tag] = processor;
     }
 
     /**
@@ -236,7 +230,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         id: 'SDocMap',
                     },
                     docmap: {
-                        fieldsProxy: {},
+                        tagsProxy: {},
                         customMenu: {
                             styleguide({ key, value, isObject }) {
                                 if (
@@ -256,10 +250,10 @@ class SDocMap extends __SClass implements ISDocMap {
             ),
         );
         // @ts-ignore
-        this.docmapSettings.fieldsProxy = {
+        this.docmapSettings.tagsProxy = {
             // @ts-ignore
-            ...this.constructor._registeredFieldsProxy,
-            ...this.docmapSettings.fieldsProxy,
+            ...this.constructor._registeredTagsProxy,
+            ...this.docmapSettings.tagsProxy,
         };
 
         // watch file
@@ -735,10 +729,15 @@ class SDocMap extends __SClass implements ISDocMap {
                 });
 
                 // searching inside the current package for docblocks to use
-                const filesInPackage = __SGlob.resolve(finalParams.globs, {
-                    cwd: packageRoot,
-                    exclude: finalParams.exclude ?? [],
-                });
+                const filesInPackage = __SGlob.resolve(
+                    finalParams.globs.map((glob) => {
+                        return `${glob}:\\*\\s@namespace`;
+                    }),
+                    {
+                        cwd: packageRoot,
+                        exclude: finalParams.exclude ?? [],
+                    },
+                );
 
                 emit('log', {
                     value: `<yellow>[build]</yellow> Found <cyan>${filesInPackage.length}</cyan> file(s) to parse in package`,
@@ -799,22 +798,22 @@ class SDocMap extends __SClass implements ISDocMap {
 
                         const docblockEntryObj: ISDocMapEntry = {};
 
-                        for (let l = 0; l < finalParams.fields.length; l++) {
-                            const field = finalParams.fields[l];
-                            if (docblock[field] === undefined) continue;
-                            if (field === 'namespace')
-                                docblock[field] = `${packageJson.name.replace(
+                        for (let l = 0; l < finalParams.tags.length; l++) {
+                            const tag = finalParams.tags[l];
+                            if (docblock[tag] === undefined) continue;
+                            if (tag === 'namespace')
+                                docblock[tag] = `${packageJson.name.replace(
                                     '/',
                                     '.',
-                                )}.${docblock[field]}`;
+                                )}.${docblock[tag]}`;
                             // props proxy
-                            if (this.docmapSettings.fieldsProxy[field]) {
-                                docblockEntryObj[field] =
-                                    await this.docmapSettings.fieldsProxy[
-                                        field
-                                    ](docblock[field]);
+                            if (this.docmapSettings.tagsProxy[tag]) {
+                                docblockEntryObj[tag] =
+                                    await this.docmapSettings.tagsProxy[tag](
+                                        docblock[tag],
+                                    );
                             } else {
-                                docblockEntryObj[field] = docblock[field];
+                                docblockEntryObj[tag] = docblock[tag];
                             }
                         }
 
@@ -1172,8 +1171,5 @@ class SDocMap extends __SClass implements ISDocMap {
         );
     }
 }
-
-// register global field proxy
-// SDocMap.registerFieldProxy('interface', __interfaceFieldProxy);
 
 export default SDocMap;

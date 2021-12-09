@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          transition
+ * @namespace     node.function.border
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a transition value depending on your theme config
+ *
+ * @param       {String}        transition      The transition to get
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      transition: sugar.transition(fast);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginTransitionFunctionInterface extends __SInterface {
     static get _definition() {
         return {

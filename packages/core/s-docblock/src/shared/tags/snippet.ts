@@ -4,7 +4,8 @@
  * @name              snippet
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the snippet tag
  *
@@ -19,13 +20,17 @@
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function snippet(data, blockSettings) {
-  if (data.content && data.content[data.content.length - 1] === '') {
-    data.content = data.content.slice(0, -1);
-  }
-  return {
-    language:
-      typeof data.value === 'string' ? data.value.toLowerCase() : data.value,
-    code: Array.isArray(data.content) ? data.content.join('\n') : data.content
-  };
+    if (data.content && data.content[data.content.length - 1] === '') {
+        data.content = data.content.slice(0, -1);
+    }
+    return {
+        language:
+            typeof data.value === 'string'
+                ? data.value.toLowerCase()
+                : data.value,
+        code: Array.isArray(data.content)
+            ? data.content.join('\n')
+            : data.content,
+    };
 }
 export default snippet;

@@ -9,7 +9,7 @@ export { postcssSugarPluginRhythmVerticalMixinInterface as interface };
  * @name           vertical
  * @namespace      mixins.rhythm
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to scope some css that you want to apply only in vertical rhythm context.

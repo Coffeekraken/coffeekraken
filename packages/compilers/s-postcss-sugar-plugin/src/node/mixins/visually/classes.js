@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           classes
  * @namespace      node.mixins.visually
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...

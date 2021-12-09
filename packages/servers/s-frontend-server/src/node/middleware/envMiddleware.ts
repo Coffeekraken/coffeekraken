@@ -2,6 +2,7 @@
 
 import __env from '@coffeekraken/sugar/shared/env/env';
 import __SBench from '@coffeekraken/s-bench';
+import __SEnv from '@coffeekraken/s-env';
 
 /**
  * @name            envMiddleware
@@ -30,16 +31,15 @@ import __SBench from '@coffeekraken/s-bench';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function envMiddleware(settings = {}) {
-  return function (req, res, next) {
+    return function (req, res, next) {
+        res.templateData = {
+            ...(res.templateData || {}),
+            env: __SEnv.env,
+        };
 
-    res.templateData = {
-      ...(res.templateData || {}),
-      env: __env('NODE_ENV') || 'development'
+        __SBench.step('request', 'envMiddleware');
+
+        return next();
     };
-
-    __SBench.step('request', 'envMiddleware');
-
-    return next();
-  };
 }
 export default envMiddleware;

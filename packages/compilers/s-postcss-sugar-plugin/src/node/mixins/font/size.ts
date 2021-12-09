@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           size
  * @namespace      node.mixins.font
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the css needed to apply a font-size depending on the font sizes

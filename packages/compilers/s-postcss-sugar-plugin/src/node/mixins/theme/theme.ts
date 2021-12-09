@@ -6,7 +6,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           theme
  * @namespace      node.mixins.theme
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin simply generate all the css needed for a theme to be applied

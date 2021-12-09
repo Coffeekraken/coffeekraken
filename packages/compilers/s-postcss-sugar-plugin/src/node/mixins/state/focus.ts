@@ -12,9 +12,9 @@ export interface postcssSugarPluginStateFocusMixinParams {}
 
 /**
  * @name           focus
- * @namespace      mixins.state
- * @type           Mixin
- * @platform      css
+ * @namespace      node.mixins.state
+ * @type           PostcssMixin
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to target some focus items to apply some styling.

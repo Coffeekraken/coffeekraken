@@ -15,7 +15,6 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
@@ -37,6 +36,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,6 +45,7 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -61,12 +62,42 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-docblock.shared.dockblock": {
-                "name": "Dockblock",
+            "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder": {
+                "name": "firstDocblockWithNamespaceInFolder",
+                "type": "Function",
+                "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
+                "namespace": "@coffeekraken.s-docblock.sugar.node.docblock",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';\nfirstDocblockWithNamespaceInFolder('my/cool/folder');"
+                    }
+                ],
+                "async": "true",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "firstDocblocksWithNamespaceInFolder.ts",
+                "extension": "ts",
+                "relPath": "src/node/utils/firstDocblocksWithNamespaceInFolder.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-docblock.shared.sDockblock": {
+                "name": "SDockblock",
                 "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This is the main class that expose the methods like \"parse\", etc...\nYou have to instanciate it by passing a settings object. Here's the available options:",
                 "namespace": "@coffeekraken.s-docblock.shared",
-                "status": "wip",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -124,6 +155,7 @@
                         "name": "parse",
                         "type": "Function",
                         "description": "This method is the principal one. Use it to parse a string\nand get back the object version of it",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -158,8 +190,15 @@
             "@coffeekraken.s-docblock.shared.sDocblockBlock": {
                 "name": "SDocblockBlock",
                 "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a docblock object that contains all the \"tags\" values and some features like:\n- Converting the block to markdown\n- More to come...",
                 "namespace": "@coffeekraken.s-docblock.shared",
+                "status": "beta",
                 "example": [
                     {
                         "language": "js",
@@ -236,35 +275,18 @@
                     }
                 }
             },
-            "@coffeekraken.s-docblock.sugar.node.docblock.firstDocblockWithNamespaceInFolder": {
-                "name": "firstDocblockWithNamespaceInFolder",
-                "type": "Function",
-                "description": "This function search in the passed folder for files containing a \"@namespace\" tag (and an \"@name\" optional one)\nand generate a SNav instance with all these founded files as sources...",
-                "namespace": "@coffeekraken.s-docblock.sugar.node.docblock",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import firstDocblockWithNamespaceInFolder from '@coffeekraken/sugar/node/nav/firstDocblockWithNamespaceInFolder';\nfirstDocblockWithNamespaceInFolder('my/cool/folder');"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "firstDocblocksWithNamespaceInFolder.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/firstDocblocksWithNamespaceInFolder.ts",
-                "children": {}
-            },
             "@coffeekraken.s-docblock.shared.tags.author": {
                 "name": "author",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the author tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -275,24 +297,18 @@
                 "relPath": "src/shared/tags/author.ts",
                 "children": {}
             },
-            "@coffeekraken.s-docblock.shared.tags.caniuse": {
-                "name": "caniuse",
-                "type": "Function",
-                "description": "Parse the caniuse tag",
-                "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
-                "since": "2.0.0",
-                "filename": "caniuse.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/caniuse.ts",
-                "children": {}
-            },
             "@coffeekraken.s-docblock.shared.tags.contributor": {
                 "name": "contributor",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the contributor tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "filename": "contributor.ts",
                 "extension": "ts",
@@ -302,9 +318,15 @@
             "@coffeekraken.s-docblock.shared.tags.cssClass": {
                 "name": "cssClass",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the cssClass tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -318,9 +340,15 @@
             "@coffeekraken.s-docblock.shared.tags.description": {
                 "name": "description",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the description tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -334,9 +362,15 @@
             "@coffeekraken.s-docblock.shared.tags.example": {
                 "name": "example",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the example tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "example": [],
                 "since": "2.0.0",
                 "author": {
@@ -355,15 +389,12 @@
                     {
                         "name": "node",
                         "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
                     }
                 ],
                 "description": "Parse the interface tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
+                "async": "true",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -377,9 +408,15 @@
             "@coffeekraken.s-docblock.shared.tags.menuTag": {
                 "name": "menuTag",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the menu tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -393,9 +430,15 @@
             "@coffeekraken.s-docblock.shared.tags.param": {
                 "name": "param",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the param tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -409,9 +452,15 @@
             "@coffeekraken.s-docblock.shared.tags.return": {
                 "name": "return",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the return tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -425,9 +474,15 @@
             "@coffeekraken.s-docblock.shared.tags.see": {
                 "name": "see",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the see tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -441,9 +496,15 @@
             "@coffeekraken.s-docblock.shared.tags.simpleRepeatableValue": {
                 "name": "simpleRepeatableValue",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the simpleRepeatableValue tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -457,9 +518,15 @@
             "@coffeekraken.s-docblock.shared.tags.simpleValue": {
                 "name": "simpleValue",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the simpleValue tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -473,9 +540,15 @@
             "@coffeekraken.s-docblock.shared.tags.snippet": {
                 "name": "snippet",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the snippet tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -489,9 +562,15 @@
             "@coffeekraken.s-docblock.shared.tags.support": {
                 "name": "support",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the support tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -505,9 +584,15 @@
             "@coffeekraken.s-docblock.shared.tags.todo": {
                 "name": "todo",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parse the todo tag",
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
-                "status": "wip",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",

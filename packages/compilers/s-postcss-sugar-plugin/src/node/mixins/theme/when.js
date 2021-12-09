@@ -19,7 +19,7 @@ export { postcssSugarPluginThemeWhenMixinInterface as interface };
  * @name           when
  * @namespace      mixins.rhythm
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to scope some css for a particular theme.

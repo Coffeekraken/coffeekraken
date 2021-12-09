@@ -5,7 +5,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @name           reset
  * @namespace      node.mixins.reset
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the reset css needed to standardize display

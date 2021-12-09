@@ -2,9 +2,9 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           theme
- * @namespace      node.mixins.prism
+ * @namespace      node.mixins.highlightjs
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed to skin "Prism js"
@@ -13,32 +13,32 @@ import __SInterface from '@coffeekraken/s-interface';
  * @return        {Css}         The generated css
  *
  * @example         postcss
- * \@sugar.prism.theme;
+ * \@sugar.highlightjs.theme;
  *
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-class postcssSugarPluginPrismThemeInterface extends __SInterface {
+class postcssSugarPluginHighlightjsThemeInterface extends __SInterface {
     static get _definition() {
         return {};
     }
 }
 
-export interface IPostcssSugarPluginPrismThemeParams {}
+export interface IPostcssSugarPluginHighlightjsThemeParams {}
 
-export { postcssSugarPluginPrismThemeInterface as interface };
+export { postcssSugarPluginHighlightjsThemeInterface as interface };
 
 export default function ({
     params,
     atRule,
     replaceWith,
 }: {
-    params: Partial<IPostcssSugarPluginPrismThemeParams>;
+    params: Partial<IPostcssSugarPluginHighlightjsThemeParams>;
     atRule: any;
     replaceWith: Function;
 }) {
-    const finalParams: IPostcssSugarPluginPrismThemeParams = {
+    const finalParams: IPostcssSugarPluginHighlightjsThemeParams = {
         ...params,
     };
 

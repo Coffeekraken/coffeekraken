@@ -7,7 +7,8 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * @name              param
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the param tag
  *
@@ -23,26 +24,25 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  */
 
 export interface IPlatform {
-  name: string;
-  description: string;
+    name: string;
+    description: string;
 }
 
 function param(data, blockSettings): IPlatform[] {
-  if (!Array.isArray(data)) data = [data];
+    if (!Array.isArray(data)) data = [data];
 
-  const res = [];
+    const res = [];
 
-  data.forEach((param) => {
-    
-    if (!param.value) return;
+    data.forEach((param) => {
+        if (!param.value) return;
 
-    const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
+        const parts = param.value.split(/\s{2,20000}/).map((l) => l.trim());
 
-    res.push({
-      name: parts[0],
-      description: parts[1] ?? ''
+        res.push({
+            name: parts[0],
+            description: parts[1] ?? '',
+        });
     });
-  });
-  return res;
+    return res;
 }
 export default param;

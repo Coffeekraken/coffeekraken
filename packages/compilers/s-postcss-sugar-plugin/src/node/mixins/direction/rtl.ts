@@ -12,9 +12,9 @@ export interface postcssSugarPluginDirectionRtlMixinParams {}
 
 /**
  * @name           rtl
- * @namespace      mixins.direction
- * @type           Mixin
- * @platform      css
+ * @namespace      node.mixins.direction
+ * @type           PostcssMixin
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to style an element when it is in an rtl scope

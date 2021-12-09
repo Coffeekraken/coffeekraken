@@ -17,7 +17,7 @@ import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/check
  * @type              Function
  * @async
  * @platform            node
- * @status              wip
+ * @status              beta
  *
  * Parse the interface tag
  *

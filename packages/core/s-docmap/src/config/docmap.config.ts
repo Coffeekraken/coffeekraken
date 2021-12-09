@@ -67,21 +67,11 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             globs: [
-                '*:/.*@namespace.*/gm',
-                '*.md:/.*@namespace.*/gm',
-                `src/**{5}/*:/.*@namespace.*/gm`,
-                `dist/css/*:/.*@namespace.*/gm`,
-                // `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
+                '*',
+                `src/+(cli|doc|js|node|views|shared)/**/*`,
+                `dist/+(css)/*`,
+                // `src/**/+(README|LICENSE|*.md)`,
             ],
-            '@dev': {
-                globs: [
-                    '*:/.*@namespace.*/gm',
-                    '*.md:/.*@namespace.*/gm',
-                    `src/**{5}/*:/.*@namespace.*/gm`,
-                    `dist/css/*:/.*@namespace.*/gm`,
-                    // `src/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
-                ],
-            },
 
             /**
              * @name        exclude
@@ -136,17 +126,17 @@ export default function (env, config) {
             },
 
             /**
-             * @name        fields
+             * @name        tags
              * @namespace     config.docmap.build
              * @type        Array<String>
              * @default     ['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
              *
-             * Specify which docblock fields you want to integrate to your docmap.json items
+             * Specify which docblock tags you want to integrate to your docmap.json items
              *
              * @since     2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            fields: [
+            tags: [
                 'name',
                 'type',
                 'menu',
@@ -157,7 +147,6 @@ export default function (env, config) {
                 'status',
                 'example',
                 'interface',
-                'styleguide',
                 'async',
                 'static',
                 'since',

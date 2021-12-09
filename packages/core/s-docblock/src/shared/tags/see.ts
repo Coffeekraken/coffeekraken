@@ -8,7 +8,8 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @name              see
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the see tag
  *

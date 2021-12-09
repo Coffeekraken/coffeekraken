@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           sugar
  * @namespace      node.mixins.reset
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin print the sugar css reset that makes:

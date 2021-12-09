@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          width
  * @namespace     node.mixins.border
  * @type          PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a border width with a value coming

@@ -6,7 +6,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.format
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the documentation for the usage of the .s-format:... classes

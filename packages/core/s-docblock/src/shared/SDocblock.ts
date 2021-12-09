@@ -3,16 +3,17 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDocblockBlock, { ISDocblockBlock } from './SDocblockBlock';
 // import __markdown from './markdown/index';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __isPath from '@coffeekraken/sugar/shared/is/path';
+import __isPath from '@coffeekraken/sugar/node/fs/isPath';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __require from '@coffeekraken/sugar/node/esm/require';
 
 /**
- * @name                  Dockblock
+ * @name                  SDockblock
  * @namespace           shared
  * @type                  Class
  * @extends             SClass
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * This is the main class that expose the methods like "parse", etc...
  * You have to instanciate it by passing a settings object. Here's the available options:

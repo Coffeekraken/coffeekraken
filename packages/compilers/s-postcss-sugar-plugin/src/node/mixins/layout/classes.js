@@ -5,7 +5,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @name           classes
  * @namespace      node.mixins.layout
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the layout helper classes like s-layout:12, s-container, etc...
@@ -59,7 +59,7 @@ export default function ({ params, atRule, replaceWith, }) {
          * @name       s-grid:${id}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      css
+         * @platform      postcss
          * @status      beta
          * 
          * This class represent a grid of "<yellow>${id}</yellow> columns"
@@ -91,7 +91,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name       s-layout:${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      css
+       * @platform      postcss
        * @status      beta
        * 
        * This class represent a layout of "<yellow>${layout}</yellow>"
@@ -123,7 +123,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name       ${clsX}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      css
+       * @platform      postcss
        * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-layout items
@@ -150,7 +150,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name       ${clsY}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      css
+       * @platform      postcss
        * @status        beta
        * 
        * This class allows you to apply some left and right gutters on your s-layout items
@@ -177,7 +177,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name       ${cls}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      css
+       * @platform      postcss
        * @status      beta
        * 
        * This class allows you to apply some left and right gutters on your s-layout items
@@ -204,7 +204,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name       s-layout:gutter-between
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      css
+       * @platform      postcss
        * @status      beta
        * 
        * This class allows you to specify that you want only gutters between layout items
@@ -237,7 +237,7 @@ export default function ({ params, atRule, replaceWith, }) {
          * @name       s-layout:align-${align}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This allows you to align all the items to "${align}"
@@ -266,7 +266,7 @@ export default function ({ params, atRule, replaceWith, }) {
          * @name       s-layout:justify-${justify}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This allows you to justify all the items to "${justify}"

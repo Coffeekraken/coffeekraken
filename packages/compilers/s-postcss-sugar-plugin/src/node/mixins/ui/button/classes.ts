@@ -113,6 +113,14 @@ export default function ({
             })
             .join('\n')}
         *
+        * <!-- shapes -->
+        * <div class="s-mbe:50">
+        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Shapes</h3>
+        *   <a tabindex="0" class="s-btn s-mie:20"><span>Default</span></a>
+        *   <a tabindex="0" class="s-btn:square s-mie:20"><span>Square</span></a>
+        *   <a tabindex="0" class="s-btn:pill s-mie:20"><span>Pill</span></a>
+        * </div>
+        * 
         * <!-- scales -->
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
@@ -166,6 +174,40 @@ export default function ({
         @sugar.ui.button($style: ${style});
      }`);
     });
+
+    vars.push(`/**
+        * @name           s-btn:square
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">square</s-color>" button
+        * 
+        * @example        html
+        * <a class="s-btn:square">I'm a cool button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+     .s-btn--square {
+        @sugar.ui.button($shape: square, $scope: shape});
+     }`);
+
+    vars.push(`/**
+        * @name           s-btn:pill
+        * @namespace      sugar.css.ui.button
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<s-color="accent">pill</s-color>" button
+        * 
+        * @example        html
+        * <a class="s-btn:pill">I'm a cool button</a>
+        * 
+        * @since    2.0.0
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+     .s-btn--pill {
+        @sugar.ui.button($shape: pill, $scope: shape});
+     }`);
 
     vars.push(`/**
         * @name           s-btn--block

@@ -6,7 +6,7 @@ import __fs from 'fs';
  * @name           classes
  * @namespace      node.mixins.platform
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the "platforms" css classes like s-platform:css, etc...

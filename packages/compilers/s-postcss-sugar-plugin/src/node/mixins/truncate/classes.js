@@ -5,7 +5,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.truncate
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...

@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           truncate
  * @namespace      node.mixins.truncate
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to truncate some text to a number of lines

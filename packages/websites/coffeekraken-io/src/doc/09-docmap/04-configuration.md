@@ -16,4 +16,12 @@
 
 # Docmap configuration
 
+All the available docmap configurations can be found in the `docmap.config.js` configuration file.
+
+## Configurations
+
+## `docmap.config.js`
+
+{{> config path='@coffeekraken.s-docmap.config.docmap'}}
+
 {{/layout-doc }}

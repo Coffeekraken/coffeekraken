@@ -10,7 +10,7 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
  * @name          classes
  * @namespace     node.mixins.border
  * @type          PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the borders helpers like s-radius:20, etc...

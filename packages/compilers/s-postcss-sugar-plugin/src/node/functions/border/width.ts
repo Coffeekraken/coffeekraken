@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          width
+ * @namespace     node.function.border
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a border width value depending on your theme config
+ *
+ * @param       {String}        width      The width to get
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *    border-width: sugar.border.width(50);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginBorderWidthFunctionInterface extends __SInterface {
     static get _definition() {
         return {

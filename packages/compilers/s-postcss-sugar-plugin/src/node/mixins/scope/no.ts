@@ -22,8 +22,8 @@ export interface postcssSugarPluginScopeNoMixinParams {
 
 /**
  * @name           no
- * @namespace      mixins.scope
- * @type           Mixin
+ * @namespace      node.mixins.scope
+ * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *

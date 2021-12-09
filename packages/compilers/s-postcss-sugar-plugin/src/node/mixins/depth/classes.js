@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           classes
  * @namespace      node.mixins.depth
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate all the depth helper classes like s-depth:20, etc...

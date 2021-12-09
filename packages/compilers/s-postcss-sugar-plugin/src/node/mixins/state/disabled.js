@@ -10,7 +10,7 @@ export { postcssSugarPluginStateDisabledMixinInterface as interface };
  * @name           disabled
  * @namespace      mixins.state
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to target some disabled items to apply some styling.

@@ -23,13 +23,14 @@ import __menuTag from './tags/menu';
 import __cssClass from './tags/cssClass';
 import __interfaceTag from './tags/interface';
 import __supportTag from './tags/support';
-import __caniuseTag from './tags/caniuse';
 
 /**
  * @name          SDocblockBlock
  * @namespace           shared
  * @type          Class
  * @extends     SClass
+ * @platform            node
+ * @status          beta
  *
  * This class represent a docblock object that contains all the "tags" values and some features like:
  * - Converting the block to markdown
@@ -444,7 +445,6 @@ SDocblockBlock.registerTag('install', __simpleValueTag);
 SDocblockBlock.registerTag('feature', __simpleRepeatableValue);
 SDocblockBlock.registerTag('description', __descriptionTag);
 SDocblockBlock.registerTag('desc', __descriptionTag);
-SDocblockBlock.registerTag('caniuse', __caniuseTag);
 // SDocblockBlock.registerTag('yields', __yieldsTag);
 // SDocblockBlock.registerTag('typedef', __typedefTag);
 // SDocblockBlock.registerTag('throws', __throwsTag);

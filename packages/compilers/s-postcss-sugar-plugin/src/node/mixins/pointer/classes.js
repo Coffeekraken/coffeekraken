@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           classes
  * @namespace      node.mixins.pointer
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the pointer helper classes like ```.s-pointer-events:none```, ```.s-pointer-events:all```, etc...

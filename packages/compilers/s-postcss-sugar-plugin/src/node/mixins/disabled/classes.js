@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           classes
  * @namespace      node.mixins.disabled
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate all the disabled helper classes like s-disabled

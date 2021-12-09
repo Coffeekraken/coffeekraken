@@ -7,7 +7,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.text
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the text helper classes like s-text:center, s-text:left, etc...
@@ -135,7 +135,7 @@ export default function ({
          * @name            s-text:left
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to align text to the left side
@@ -154,7 +154,7 @@ export default function ({
          * @name            s-text:right
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to align text to the right side
@@ -173,7 +173,7 @@ export default function ({
          * @name            s-text:center
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to align text to the center
@@ -192,7 +192,7 @@ export default function ({
          * @name            s-text:start
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to align text to the start (left) side, (right) when rtl
@@ -211,7 +211,7 @@ export default function ({
          * @name            s-text:end
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to align text to the end (right) side, (left) when rtl
@@ -230,7 +230,7 @@ export default function ({
          * @name            s-text:justify
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to justify the text
@@ -249,7 +249,7 @@ export default function ({
          * @name            s-text:overline
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to overline the text
@@ -268,7 +268,7 @@ export default function ({
          * @name            s-text:underline
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to underline the text
@@ -287,7 +287,7 @@ export default function ({
          * @name            s-text:line-through
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to line-through the text
@@ -306,7 +306,7 @@ export default function ({
          * @name            s-text:lowercase
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to lowercase the text
@@ -325,7 +325,7 @@ export default function ({
          * @name            s-text:uppercase
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to uppercase the text
@@ -344,7 +344,7 @@ export default function ({
          * @name            s-text:capitalize
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      css
+         * @platform      postcss
          * @status        beta
          * 
          * This class allows you to capitalize the text

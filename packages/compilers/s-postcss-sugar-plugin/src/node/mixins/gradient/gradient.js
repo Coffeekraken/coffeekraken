@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           gradient
  * @namespace      node.mixins.gradient
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed to apply a gradient on your elements

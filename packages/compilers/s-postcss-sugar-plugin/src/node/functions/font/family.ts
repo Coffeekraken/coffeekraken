@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue';
 
+/**
+ * @name          family
+ * @namespace     node.function.font
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a font family value depending on your theme config
+ *
+ * @param       {String}        name      The font name to get
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      font-family: sugar.font.family(code);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginFontFamilyInterface extends __SInterface {
     static get _definition() {
         return {

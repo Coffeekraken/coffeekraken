@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           transition
  * @namespace      node.mixins.transition
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the needed css to apply a transition setted in

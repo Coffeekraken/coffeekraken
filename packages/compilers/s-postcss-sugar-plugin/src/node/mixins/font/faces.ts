@@ -5,7 +5,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           faces
  * @namespace      node.mixins.font
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the @font-face needed depending on the declared

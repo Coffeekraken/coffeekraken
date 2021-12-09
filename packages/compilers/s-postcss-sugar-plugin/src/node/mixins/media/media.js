@@ -33,7 +33,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @name           media
  * @namespace      mixins
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply any media queries that are defined

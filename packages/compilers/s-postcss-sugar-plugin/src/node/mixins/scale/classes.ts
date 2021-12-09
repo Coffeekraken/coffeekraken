@@ -6,7 +6,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.scale
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.

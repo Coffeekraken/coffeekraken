@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           theme
  * @namespace      node.mixins.prism
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed to skin "Prism js"

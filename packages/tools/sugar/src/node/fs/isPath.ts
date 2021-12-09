@@ -27,6 +27,12 @@ import __fs from 'fs';
 function isPath(path, checkExistence = false) {
     if (typeof path !== 'string') return false;
 
+    // empty string
+    if (path.trim() === '') return false;
+
+    // multiple lines content
+    if (path.split('\n').length > 1) return false;
+
     // check if we have some /
     if (!path.includes('/')) {
         if (!path.includes('.')) return false;

@@ -29,7 +29,7 @@ export { postcssSugarPluginUiButtonInterface as interface };
  * @namespace     ui.button
  * @type          CssMixin
  * @interface     ./button          interface
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * Apply the button style to any element

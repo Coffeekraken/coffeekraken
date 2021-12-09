@@ -7,7 +7,7 @@ import __fs from 'fs';
  * @name           platform
  * @namespace      node.mixins.platform
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed to display correctly a "platform" icon like

@@ -20,7 +20,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @name           classes
  * @namespace      node.mixins.classes
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...

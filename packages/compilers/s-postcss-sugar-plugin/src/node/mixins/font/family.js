@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           family
  * @namespace      node.mixins.font
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the css needed to apply a particular font in your css.

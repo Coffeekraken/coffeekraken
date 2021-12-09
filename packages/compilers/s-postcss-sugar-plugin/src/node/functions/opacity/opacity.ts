@@ -1,6 +1,27 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          opacity
+ * @namespace     node.function.opacity
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get an opacity value depending on your theme config
+ *
+ * @param       {String}        opacity      The opacity to get
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      opacity: sugar.opacity(20);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginOpacityFunctionInterface extends __SInterface {
     static get _definition() {
         return {

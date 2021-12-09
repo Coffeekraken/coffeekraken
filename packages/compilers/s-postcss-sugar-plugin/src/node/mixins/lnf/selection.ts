@@ -14,7 +14,7 @@ export { postcssSugarPluginLiikAndFeelSelectionInterface as interface };
  * @name          selection
  * @namespace     node.mixin.lnf
  * @type          PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin apply some base look and feel depending on the current theme like:

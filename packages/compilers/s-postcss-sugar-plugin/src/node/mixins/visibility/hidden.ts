@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           hidden
  * @namespace      node.mixins.visually
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a css that make the element visually hidden but not really

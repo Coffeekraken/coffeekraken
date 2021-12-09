@@ -1,6 +1,6 @@
 /**
- * @name            interfaceFieldProxy
- * @namespace       node.fieldsProxy
+ * @name            interfaceTagProxy
+ * @namespace       node.tagsProxy
  * @type                Function
  * @platform        node
  * @status          beta
@@ -17,7 +17,7 @@
 
 export interface ISDocMapInterfaceField {}
 
-export default async function interfaceFieldProxy(
+export default async function interfaceTagProxy(
     data: any,
 ): Promise<ISDocMapInterfaceField> {
     const int = (await import(data.path)).default;

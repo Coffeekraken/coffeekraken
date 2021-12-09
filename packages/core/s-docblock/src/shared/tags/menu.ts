@@ -5,7 +5,8 @@ import __urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
  * @name              menuTag
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the menu tag
  *
@@ -20,29 +21,24 @@ import __urlFromString from '@coffeekraken/sugar/shared/url/urlFromString';
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function menuTag(data, blockSettings) {
-  if (
-    data &&
-    data.value &&
-    typeof data.value === 'string'
-) {
+    if (data && data.value && typeof data.value === 'string') {
+        const parts = data.value.split(/\s{2,20000}/).map((l) => l.trim());
 
-  const parts = data.value.split(/\s{2,20000}/).map((l) => l.trim());
+        let slug;
 
-  let slug;
+        if (parts.length > 1) {
+            slug = parts[1];
+        } else {
+            slug = parts[0].split('/').map((l) => {
+                return __urlFromString(l);
+            });
+        }
 
-  if (parts.length > 1) {
-    slug = parts[1];
-  } else {
-    slug = parts[0].split('/').map(l => {
-      return __urlFromString(l);
-    });
-  }
-
-  return {
-    tree: parts[0].split('/').map(l => l.trim()),
-    slug
-  };
-  }
-  return data.value;
+        return {
+            tree: parts[0].split('/').map((l) => l.trim()),
+            slug,
+        };
+    }
+    return data.value;
 }
 export default menuTag;

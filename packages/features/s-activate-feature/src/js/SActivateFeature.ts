@@ -85,23 +85,8 @@ export default class SActivateFeature extends __SFeature {
         );
     }
     mount() {
-        // save state
-        if (this.props.saveState) {
-            // @ts-ignore
-            if (!this.props.id)
-                throw new Error(
-                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                );
-            // @ts-ignore
-            if (
-                localStorage.getItem(`s-activate-state-${this.saveStateId}`) ===
-                this.props.id
-            ) {
-                this.props.active = true;
-            } else {
-                this.props.active = false;
-            }
-        }
+        // restore the state
+        this._restoreState();
 
         if (this.props.href) {
             this._hrefSelector = this.props.href;
@@ -158,9 +143,9 @@ export default class SActivateFeature extends __SFeature {
         });
 
         // activate if has the "active" attribute
-        if (this.props.active) {
-            this.activate(true);
-        }
+        // if (this.props.active) {
+        //     this.activate(true);
+        // }
     }
     get saveStateId(): string {
         // @ts-ignore
@@ -178,6 +163,64 @@ export default class SActivateFeature extends __SFeature {
      */
     isActive() {
         return this.node.hasAttribute('active');
+    }
+
+    _restoreState() {
+        // save state
+        if (this.props.saveState) {
+            // @ts-ignore
+            if (!this.props.id)
+                throw new Error(
+                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                );
+            // @ts-ignore
+
+            if (this.props.group) {
+                const groupState = JSON.parse(
+                    localStorage.getItem(
+                        `s-activate-group-state-${this.props.group}`,
+                    ) ?? '{}',
+                );
+
+                if (groupState.activeId === this.props.id) {
+                    this.activate(true);
+                } else if (!groupState.activeId && this.props.active) {
+                    this.activate(true);
+                }
+            } else if (
+                localStorage.getItem(`s-activate-state-${this.saveStateId}`) ===
+                this.props.id
+            ) {
+                this.activate(true);
+            } else {
+                // this.props.active = false;
+            }
+        }
+    }
+
+    _saveState() {
+        // save state
+        if (this.props.saveState) {
+            // @ts-ignore
+            if (!this.props.id)
+                throw new Error(
+                    `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
+                );
+            // @ts-ignore
+            if (this.props.group) {
+                localStorage.setItem(
+                    `s-activate-group-state-${this.props.group}`,
+                    JSON.stringify({
+                        activeId: this.props.id,
+                    }),
+                );
+            } else {
+                localStorage.setItem(
+                    `s-activate-state-${this.saveStateId}`,
+                    this.props.id,
+                );
+            }
+        }
     }
 
     /**
@@ -199,18 +242,7 @@ export default class SActivateFeature extends __SFeature {
 
         setTimeout(() => {
             // save state
-            if (this.props.saveState) {
-                // @ts-ignore
-                if (!this.props.id)
-                    throw new Error(
-                        `<red>[s-activate]</red> In order to use the "<yellow>saveState</yellow>" property, you MUST specify an "<cyan>id</cyan>" on your s-activate component`,
-                    );
-                // @ts-ignore
-                localStorage.setItem(
-                    `s-activate-state-${this.saveStateId}`,
-                    this.props.id,
-                );
-            }
+            this._saveState();
 
             // history
             if (this.props.history && this._hrefSelector) {

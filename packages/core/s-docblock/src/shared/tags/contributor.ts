@@ -4,7 +4,8 @@
  * @name              contributor
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the contributor tag
  *
@@ -19,27 +20,24 @@
  * @contributor 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 function contributor(data, blockSettings) {
+    data = Array.from(data);
 
-  data = Array.from(data);
+    const contributors: any[] = [];
 
-  const contributors: any[] = [];
-
-  data.forEach(d => {
-
-    const contributorNfo = /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
-        d.value
-    );
-    if (!contributorNfo) return null;
+    data.forEach((d) => {
+        const contributorNfo =
+            /^([^<(]+?)?[ \t]*(?:<([^>(]+?)>)?[ \t]*(?:\(([^)]+?)\)|$)/gm.exec(
+                d.value,
+            );
+        if (!contributorNfo) return null;
 
         contributors.push({
             name: contributorNfo[1],
             email: contributorNfo[2],
-            url: contributorNfo[3]
+            url: contributorNfo[3],
         });
+    });
 
-  });
-
-  return contributors;
-
+    return contributors;
 }
 export default contributor;

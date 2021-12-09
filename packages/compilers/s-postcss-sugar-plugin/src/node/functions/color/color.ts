@@ -4,6 +4,29 @@ import __SColor from '@coffeekraken/s-color';
 import __SInterface from '@coffeekraken/s-interface';
 import __isColor from '@coffeekraken/sugar/shared/is/color';
 
+/**
+ * @name          color
+ * @namespace     node.function.color
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a color value depending on your theme config.
+ *
+ * @param       {String}        color      The color to get
+ * @param       {String}        [variant=null]      The color variant to get
+ * @param       {String}        [modifier=null]     A color modifier like "--alpha 0.3 --saturate 20", etc...
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *    color: sugar.color(accent);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class colorVariantNameInterface extends __SInterface {
     static get _definition() {
         return {

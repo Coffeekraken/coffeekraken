@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name          radius
  * @namespace     node.mixins.border
  * @type          PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a border radius with a value coming

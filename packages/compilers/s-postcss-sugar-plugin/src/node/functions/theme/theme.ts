@@ -3,6 +3,31 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          theme
+ * @namespace     node.function.theme
+ * @type          PostcssFunction
+ * @platform      postcss
+ * @status        beta
+ *
+ * This function allows you to get a theme value using dot path like "font.family.default.font-family", etc...
+ * Usually the best way to access theme config is to use dedicated functions/mixins like "sugar.margin", "sugar.font.family", etc...
+ *
+ * @param       {String}        dotPath      The dot path to the theme config value you want back
+ * @param       {Boolean}       [scalable=false]        Specify if you want to value back to be scalable. Work only for number config as well
+ * @param       {'var'|'value'}     [return='var']      Specify if you want to get back a variable or the value directly. Note that you need to make sure a variable is outputed in your css to use the 'var'.
+ * @param       {Any}           [fallback=null]         Specify a fallback in case the variable does not resolve to any value
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *    font-family: sugar.theme(font.family.default.font-family);
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginThemeInterface extends __SInterface {
     static get _definition() {
         return {

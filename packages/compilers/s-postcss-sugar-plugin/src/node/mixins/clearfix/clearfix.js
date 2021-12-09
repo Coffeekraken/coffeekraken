@@ -4,7 +4,7 @@ import __STheme from '@coffeekraken/s-theme';
  * @name           clearfix
  * @namespace      node.mixins.clearfix
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:

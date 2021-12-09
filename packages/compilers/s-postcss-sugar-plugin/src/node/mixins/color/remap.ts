@@ -21,7 +21,7 @@ export { postcssSugarPluginColorRemapMixinInterface as interface };
  * @name           remap
  * @namespace      node.mixins.colors
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to (re)map a color to another one like saying you want the "warning" color as the "primary" one

@@ -2,9 +2,9 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           classes
- * @namespace      node.mixins.clearfix
+ * @namespace      node.mixins.fit
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...

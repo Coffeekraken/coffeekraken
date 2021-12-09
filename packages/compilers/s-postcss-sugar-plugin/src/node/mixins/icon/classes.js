@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           classes
  * @namespace      node.mixins.icon
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the classes needed to display the icons you've

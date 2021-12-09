@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name          classes
  * @namespace     node.mixins.align
  * @type          PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the align helper classes

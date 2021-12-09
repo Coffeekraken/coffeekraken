@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           mounted
  * @namespace      node.mixins.until
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to set some css applied only UNTIL a specific "state" has been

@@ -175,8 +175,6 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
         env: ISConfigEnvObj,
         configObj,
     ) {
-        const configObj = {};
-
         folderPaths = __unique(folderPaths);
 
         for (let i = 0; i < folderPaths.length; i++) {
@@ -206,15 +204,14 @@ export default class SConfigFolderAdapter extends __SConfigAdapter {
                 const importedConfig = await import(configFilePath);
 
                 let configData = importedConfig.default;
-                if (typeof configData === 'function')
-                    configData = configData(env, configObj);
+                if (typeof configData === 'function') {
+                    configData = configData(env, configObj ?? {});
+                }
 
                 const configKey = file.replace('.config.js', '');
 
-                if (!configData) continue;
-
                 configObj[configKey] = __deepMerge(
-                    configObj[configKey],
+                    configObj[configKey] ?? {},
                     configData,
                 );
 

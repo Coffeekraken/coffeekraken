@@ -5,7 +5,8 @@ import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCom
  * @name              namespace
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the namespace tag
  *

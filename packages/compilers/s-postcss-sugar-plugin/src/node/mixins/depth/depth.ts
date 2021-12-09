@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           depth
  * @namespace      node.mixins.depth
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to apply a certain depth that are defined

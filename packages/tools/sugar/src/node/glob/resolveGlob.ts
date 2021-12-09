@@ -55,7 +55,7 @@ export default function resolveGlob(
         {
             cwd: settings.cwd || process.cwd(),
             symlinks: true,
-            nodir: false,
+            nodir: true,
             contentRegExp: undefined,
             SFile: true,
             exclude: [],
@@ -103,7 +103,7 @@ export default function resolveGlob(
             if (flags) {
                 flags = flags[0].replace('/', '');
             }
-            searchReg = new RegExp(innerReg, flags);
+            searchReg = new RegExp(innerReg, flags ?? '');
         }
         globPattern = splits[0];
 
@@ -130,14 +130,10 @@ export default function resolveGlob(
         // check if need to search for inline content
         if (searchReg) {
             pathes = pathes.filter((path) => {
-                if (__isDirectory(path)) return false;
                 try {
                     const content = __fs.readFileSync(path, 'utf8').toString();
-                    const matches = content.match(searchReg);
 
-                    // if (path.includes('/doc/getStarted')) {
-                    //   console.log(path, searchReg, searchReg.test(content), matches);
-                    // }
+                    const matches = content.match(searchReg);
 
                     if (matches && matches.length) {
                         return true;
@@ -150,10 +146,6 @@ export default function resolveGlob(
         }
 
         pathes.forEach((path) => {
-            if (__isDirectory(path)) {
-                filesArray.push(path);
-                return;
-            }
             if (settings.SFile) {
                 const sFile = __SFile.new(path, {
                     file: {

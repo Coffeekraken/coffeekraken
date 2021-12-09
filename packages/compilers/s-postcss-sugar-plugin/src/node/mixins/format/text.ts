@@ -11,9 +11,9 @@ export interface postcssSugarPluginFormatTextMixinParams {}
 
 /**
  * @name           text
- * @namespace      mixins.format
- * @type           Mixin
- * @platform      css
+ * @namespace      node.mixins.format
+ * @type           PostcssMixin
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to scope some css that you want to apply only in text format context.

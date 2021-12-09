@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           ratio
  * @namespace      node.mixins.ratio
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the css needed to apply a ratio on any HTMLElement.

@@ -3,7 +3,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           classes
  * @namespace      node.mixins.position
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the position helper classes like s-position:absolute, etc...
@@ -89,7 +89,7 @@ export default function ({ params, atRule, replaceWith, }) {
        * @name            s-position:absolute
        * @namespace       sugar.css.position
        * @type            CssClass
-       * @platform      css
+       * @platform      postcss
        * @status        stable
        * 
        * This class allows you to apply the value "<yellow>absolute</yellow>" to the position property on any HTMLElement

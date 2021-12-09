@@ -16,7 +16,7 @@ export { postcssSugarPluginColorPrimaryMixinInterface as interface };
  * @name           primary
  * @namespace      node.mixins.colors
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to (re)map the "primary" virtual color to another like "complementary", "accent", etc...

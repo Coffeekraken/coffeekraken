@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           layout
  * @namespace      node.mixins.layout
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate all the css needed for complex grids with multiple

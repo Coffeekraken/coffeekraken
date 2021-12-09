@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           styleguide
  * @namespace      node.mixins.reset
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate the styleguide documentation for the reset helpers

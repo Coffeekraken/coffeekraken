@@ -31,12 +31,12 @@ class SDocmapBuildParamsInterface extends __SInterface {
                 default: __SugarConfig.get('docmap.build.exclude'),
                 level: 1,
             },
-            fields: {
+            tags: {
                 type: 'Array<String>',
                 description:
-                    'Specify which docblock fields you want in your final docmap.json file',
+                    'Specify which docblock tags you want in your final docmap.json file',
                 alias: 'f',
-                default: __SugarConfig.get('docmap.build.fields'),
+                default: __SugarConfig.get('docmap.build.tags'),
             },
             filters: {
                 type: 'Object<RegExp>',

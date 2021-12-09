@@ -12,9 +12,9 @@ export interface postcssSugarPluginStateHoverMixinParams {}
 
 /**
  * @name           hover
- * @namespace      mixins.state
- * @type           Mixin
- * @platform      css
+ * @namespace      node.mixins.state
+ * @type           PostcssMixin
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to target some hover item to apply some styling on it.

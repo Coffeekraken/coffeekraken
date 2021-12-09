@@ -5,7 +5,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * @name           classes
  * @namespace      node.mixins.transition
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the transition helper classes like s-transition:slow, etc.

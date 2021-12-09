@@ -22,7 +22,7 @@ export { postcssSugarPluginColorMixinInterface as interface };
  * @name           color
  * @namespace      node.mixins.colors
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to (re)map the "current", "primary" and "secondary" color to any other colors you want like "accent", "success, "etc...""

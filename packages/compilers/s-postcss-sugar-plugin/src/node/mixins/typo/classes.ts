@@ -6,7 +6,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.typo
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the typo helper classes like s-typo:h1, s-typo:p, and all the typo

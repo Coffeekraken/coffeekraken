@@ -8,7 +8,8 @@ import __idCompliant from '@coffeekraken/sugar/shared/string/idCompliant';
  * @name              cssClass
  * @namespace           shared.tags
  * @type              Function
- * @status              wip
+ * @platform            node
+ * @status              beta
  *
  * Parse the cssClass tag
  *

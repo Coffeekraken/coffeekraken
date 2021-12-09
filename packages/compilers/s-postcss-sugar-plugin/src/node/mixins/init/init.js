@@ -19,7 +19,7 @@ export { postcssSugarPluginMediaMixinInterface as interface };
  * @name           init
  * @namespace      mixins.init
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin is the one you usually call first in your css.

@@ -66,6 +66,15 @@ export default function ({
 
                 li {
                     margin-inline-start: cale(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                    white-space: nowrap;
+                    overflow: hidden;
+                    text-overflow: ellipsis;
+
+                    > a {
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    }
 
                     &:before {
                         content: '';

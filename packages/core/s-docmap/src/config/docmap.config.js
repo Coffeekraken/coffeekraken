@@ -62,21 +62,11 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             globs: [
-                '*:/.*@namespace.*/gm',
-                '*.md:/.*@namespace.*/gm',
-                `src/**{5}/*:/.*@namespace.*/gm`,
-                `dist/css/*:/.*@namespace.*/gm`,
-                // `dist/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
+                '*',
+                `src/+(cli|doc|js|node|views|shared)/**/*`,
+                `dist/+(css)/*`,
+                // `src/**/+(README|LICENSE|*.md)`,
             ],
-            '@dev': {
-                globs: [
-                    '*:/.*@namespace.*/gm',
-                    '*.md:/.*@namespace.*/gm',
-                    `src/**{5}/*:/.*@namespace.*/gm`,
-                    `dist/css/*:/.*@namespace.*/gm`,
-                    // `src/**/+(README|LICENSE|*.md):/.*@namespace.*/gm`,
-                ],
-            },
             /**
              * @name        exclude
              * @namespace   config.docmap.build
@@ -127,17 +117,17 @@ export default function (env, config) {
                 namespace: /#\{.*\}/gm,
             },
             /**
-             * @name        fields
+             * @name        tags
              * @namespace     config.docmap.build
              * @type        Array<String>
              * @default     ['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']
              *
-             * Specify which docblock fields you want to integrate to your docmap.json items
+             * Specify which docblock tags you want to integrate to your docmap.json items
              *
              * @since     2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            fields: [
+            tags: [
                 'name',
                 'type',
                 'menu',
@@ -148,7 +138,6 @@ export default function (env, config) {
                 'status',
                 'example',
                 'interface',
-                'styleguide',
                 'async',
                 'static',
                 'since',
@@ -181,4 +170,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxhQUFhLEVBQUUsY0FBYztTQUMxQztRQUVELFFBQVEsRUFBRTtZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUUsMENBQTBDO1NBQ3JEO1FBRUQsZUFBZSxFQUFFO1lBQ2I7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsNENBQTRDO1NBQ3JEO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7Ozs7ZUFhRztZQUNILEtBQUssRUFBRTtnQkFDSCxzQkFBc0I7Z0JBQ3RCLHlCQUF5QjtnQkFDekIsZ0NBQWdDO2dCQUNoQywrQkFBK0I7Z0JBQy9CLHVEQUF1RDthQUMxRDtZQUNELE1BQU0sRUFBRTtnQkFDSixLQUFLLEVBQUU7b0JBQ0gsc0JBQXNCO29CQUN0Qix5QkFBeUI7b0JBQ3pCLGdDQUFnQztvQkFDaEMsK0JBQStCO29CQUMvQixzREFBc0Q7aUJBQ3pEO2FBQ0o7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFNBQVMsRUFBRSxLQUFLO1lBRWhCLE9BQU8sRUFBRTtnQkFDTDs7Ozs7Ozs7Ozs7Ozs7OzttQkFnQkc7Z0JBQ0gsU0FBUyxFQUFFLFdBQVc7YUFDekI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLE1BQU07Z0JBQ04sTUFBTTtnQkFDTixNQUFNO2dCQUNOLFNBQVM7Z0JBQ1QsVUFBVTtnQkFDVixhQUFhO2dCQUNiLFdBQVc7Z0JBQ1gsUUFBUTtnQkFDUixTQUFTO2dCQUNULFdBQVc7Z0JBQ1gsWUFBWTtnQkFDWixPQUFPO2dCQUNQLFFBQVE7Z0JBQ1IsT0FBTztnQkFDUCxRQUFRO2FBQ1g7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLElBQUk7WUFFVjs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLDhDQUE4QztTQUMxRDtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZG9jbWFwLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImRvY21hcC5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFHdEUsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILElBQUksRUFBRTtZQUNGOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsR0FBRyxhQUFhLEVBQUUsY0FBYztTQUMxQztRQUVELFFBQVEsRUFBRTtZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxNQUFNLEVBQUUsMENBQTBDO1NBQ3JEO1FBRUQsZUFBZSxFQUFFO1lBQ2I7Ozs7Ozs7Ozs7O2VBV0c7WUFDSCxJQUFJLEVBQUUsNENBQTRDO1NBQ3JEO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7Ozs7ZUFhRztZQUNILEtBQUssRUFBRTtnQkFDSCxHQUFHO2dCQUNILDBDQUEwQztnQkFDMUMsZUFBZTtnQkFDZixtQ0FBbUM7YUFDdEM7WUFFRDs7Ozs7Ozs7Ozs7ZUFXRztZQUNILE9BQU8sRUFBRTtnQkFDTCxtQkFBbUI7Z0JBQ25CLHVCQUF1QjtnQkFDdkIsaUJBQWlCO2FBQ3BCO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILFNBQVMsRUFBRSxLQUFLO1lBRWhCLE9BQU8sRUFBRTtnQkFDTDs7Ozs7Ozs7Ozs7Ozs7OzttQkFnQkc7Z0JBQ0gsU0FBUyxFQUFFLFdBQVc7YUFDekI7WUFFRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFO2dCQUNGLE1BQU07Z0JBQ04sTUFBTTtnQkFDTixNQUFNO2dCQUNOLFNBQVM7Z0JBQ1QsVUFBVTtnQkFDVixhQUFhO2dCQUNiLFdBQVc7Z0JBQ1gsUUFBUTtnQkFDUixTQUFTO2dCQUNULFdBQVc7Z0JBQ1gsT0FBTztnQkFDUCxRQUFRO2dCQUNSLE9BQU87Z0JBQ1AsUUFBUTthQUNYO1lBRUQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1lBRVY7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSw4Q0FBOEM7U0FDMUQ7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @name           destyle
  * @namespace      node.mixins.reset
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin print the destyle css reset

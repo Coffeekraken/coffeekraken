@@ -5,7 +5,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.display
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the display helper classes like s-display:block, etc...

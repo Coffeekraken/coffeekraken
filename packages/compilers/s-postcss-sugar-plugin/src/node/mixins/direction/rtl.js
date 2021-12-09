@@ -9,7 +9,7 @@ export { postcssSugarPluginDirectionRtlMixinInterface as interface };
  * @name           rtl
  * @namespace      mixins.direction
  * @type           Mixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to style an element when it is in an rtl scope

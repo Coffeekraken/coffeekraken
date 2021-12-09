@@ -5,11 +5,11 @@ import matches from './matches';
 import __SPromise from '@coffeekraken/s-promise';
 
 /**
- * @name      querySelectorLive
- * @namespace            js.dom.query
- * @type      Function
- * @platform          js
- * @status        beta
+ * @name            querySelectorLive
+ * @namespace       js.dom.query
+ * @type            Function
+ * @platform        js
+ * @status          beta
  *
  * Observe the dom to get all the elements that matches a passed css selector at any point in time.
  * Be warned that this use the mutation observer API and will monitor all the document for new nodes. Make sure to use it
@@ -20,20 +20,17 @@ import __SPromise from '@coffeekraken/s-promise';
  * @feature         Callback support
  * @feature         Monitor added nodes and existing nodes that have class and id attributes updated
  *
- * @param	{String} 		selector 		The css selector that we are interested in
- * @param 	{Function} 		cb 				The function to call with the newly added node
- * @param 	{Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
+ * @param	    {String} 		selector 		The css selector that we are interested in
+ * @param 	    {Function} 		cb 				The function to call with the newly added node
+ * @param 	    {Object} 		[settings={}] 	An optional settings object to specify things like the rootNode to monitor, etc...
+ * @return      {SPromise<HTMLElement>}         An SPromise instance on which to listen for nodes using the "node" event
  *
  * @example 	js
  * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node, clearFn) => {
- * 	// do something here with the detected node
- *  // call clearFn if you want to stop listening for this selector
- *  clearFn();
+ * 	    // do something here with the detected node
+ *      // call clearFn if you want to stop listening for this selector
+ *      clearFn();
  * });
  *
  * @since       1.0.0

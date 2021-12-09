@@ -70,8 +70,6 @@ export default class ApiNav extends __SLitComponent {
             return true;
         });
 
-        console.log(types);
-
         this._menuStack = {};
         Object.keys(res.data.map).forEach((namespace) => {
             __set(this._menuStack, namespace, res.data.map[namespace]);

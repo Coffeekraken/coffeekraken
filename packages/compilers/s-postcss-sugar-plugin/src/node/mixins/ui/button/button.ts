@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          avatar
+ * @namespace     node.mixins.ui.avatar
+ * @type          PostcssMixin
+ * @platform      postcss
+ * @status        beta
+ *
+ * This mixin allows you to generate the "avatar" UI component css.
+ *
+ * @param       {'solid'|'gradient'|'outline'|'text'}                           [style=theme.ui.button.defaultStyle]         The style you want your avatar to have
+ * @param       {'default'|'square'|'puill'}                     [shape='default']       The shape you want your badge to have
+ * @param       {Boolean}                                         [outline=theme.ui.button.outline]
+ * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
+ * @return      {Css}                   The corresponding css
+ *
+ * @example       css
+ * .my-element {
+ *      \@sugar.ui.button();
+ * }
+ *
+ * @since     2.0.0
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiButtonInterface extends __SInterface {
     static get _definition() {
         return {
@@ -8,6 +32,11 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
                 type: 'String',
                 values: ['solid', 'gradient', 'outline', 'text'],
                 default: __STheme.config('ui.button.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.button.defaultShape'),
             },
             outline: {
                 type: 'Boolean',
@@ -18,8 +47,8 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -27,8 +56,9 @@ class postcssSugarPluginUiButtonInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'solid' | 'gradient' | 'outline' | 'text';
+    shape: 'default' | 'square' | 'pill';
     outline: boolean;
-    scope: ('bare' | 'lnf')[];
+    scope: ('bare' | 'lnf' | 'shape')[];
 }
 
 export { postcssSugarPluginUiButtonInterface as interface };
@@ -38,7 +68,7 @@ export { postcssSugarPluginUiButtonInterface as interface };
  * @namespace     ui.button
  * @type          CssMixin
  * @interface     ./button          interface
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * Apply the button style to any element
@@ -67,8 +97,9 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: __STheme.config('ui.button.defaultStyle'),
+        shape: __STheme.config('ui.button.defaultShape'),
         outline: true,
-        scope: ['bare', 'lnf'],
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -106,7 +137,6 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           font-size: sugar.scalable(1rem);
-          border-radius: sugar.theme(ui.button.borderRadius);
         `);
 
         switch (finalParams.style) {
@@ -131,7 +161,6 @@ export default function ({
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      border-radius: sugar.theme(ui.button.borderRadius);
                       @sugar.gradient(sugar.color(current, gradientStart), sugar.color(current, gradientEnd), $angle: 90);
                       transition: sugar.theme(ui.button.transition);
                     }
@@ -143,7 +172,6 @@ export default function ({
                       left: 0;
                       width: 100%;
                       height: 100%;
-                      border-radius: sugar.theme(ui.button.borderRadius);
                       @sugar.gradient(sugar.color(current,gradientEnd), sugar.color(current, gradientStart), $angle: 90);
                       opacity: 0;
                       transition: sugar.theme(ui.button.transition);
@@ -197,6 +225,42 @@ export default function ({
                   }
         `);
                 break;
+        }
+
+        if (finalParams.scope.includes('shape')) {
+            switch (finalParams.shape) {
+                case 'square':
+                    vars.push(`
+                    border-radius: 0;
+
+                    &:before,
+                    &:after {
+                      border-radius: 0;
+                    }
+                  `);
+                    break;
+                case 'pull
+    ill':
+                    vars.push(`
+                    border-radius: 9999px;
+
+                    &:before,
+                    &:after {
+                      border-radius: 9999px;
+                    }
+                  `);
+                    break;
+                default:
+                    vars.push(`
+                    border-radius: sugar.theme(ui.button.borderRadius);
+
+                    &:before,
+                    &:after {
+                      border-radius: sugar.theme(ui.button.borderRadius);
+                    }
+                  `);
+                    break;
+            }
         }
 
         if (finalParams.outline) {

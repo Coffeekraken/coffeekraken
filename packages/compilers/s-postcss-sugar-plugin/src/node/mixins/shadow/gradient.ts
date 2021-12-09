@@ -2,8 +2,8 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name           shadow
- * @namespace      mixins.shadow
- * @type           Mixin
+ * @namespace      node.mixins.shadow
+ * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *

@@ -4,7 +4,7 @@ import __faker from 'faker';
  * @name           classes
  * @namespace      node.mixins.flex
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...

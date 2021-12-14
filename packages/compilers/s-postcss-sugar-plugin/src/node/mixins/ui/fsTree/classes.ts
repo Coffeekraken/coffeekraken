@@ -10,9 +10,10 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.fsTree.defaultColor'),
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
             },
             defaultStyle: {
                 type: 'String',
@@ -24,8 +25,8 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
+                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
             },
         };
     }
@@ -33,9 +34,10 @@ class postcssSugarPluginUiFsTreeClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFsTreelassesParams {
     styles: 'solid'[];
-    defaultColor: string;
+    shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
+    defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'tf' | 'vr')[];
 }
 
 export { postcssSugarPluginUiFsTreeClassesInterface as interface };
@@ -60,8 +62,9 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreelassesParams = {
         styles: [],
-        defaultColor: 'main',
+        shapes: [],
         defaultStyle: 'solid',
+        defaultShape: 'default',
         scope: [],
         ...params,
     };
@@ -95,6 +98,13 @@ export default function ({
                 }           Apply the ${style} filesystem tree style`;
             })
             .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-fs-tree${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} filesystem tree shape`;
+            })
+            .join('\n')}
         * 
         * @example        html
         ${finalParams.styles
@@ -104,6 +114,61 @@ export default function ({
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <ul class="s-fs-tree${
                 style === finalParams.defaultStyle ? '' : `:${style}`
+            }">
+            *       <li class="active">
+            *           <i class="s-icon:folder-open"></i>
+            *           <span tabindex="0">${__faker.name.findName()}</span>
+            *           <ul>
+            *               <li>
+            *                   <i class="s-icon:file"></i>
+            *                   <a tabindex="0">${__faker.name.findName()}</a>
+            *               </li>
+            *               <li class="active">
+            *                   <i class="s-icon:folder-open"></i>
+            *                   <span tabindex="0">${__faker.name.findName()}</span>
+                                <ul>
+                    *               <li>
+                    *                   <i class="s-icon:file-pdf"></i>
+                    *                   <a tabindex="0">${__faker.name.findName()}</a>
+                    *               </li>
+                    *               <li>
+                    *                   <i class="s-icon:file-code"></i>
+                    *                   <a tabindex="0">${__faker.name.findName()}</a>
+                    *               </li>
+                    *              <li>
+                    *                   <i class="s-icon:file-image"></i>
+                    *                   <a tabindex="0">${__faker.name.findName()}</a>
+                    *               </li>
+                    *           </ul>
+            *               </li>
+            *              <li>
+            *                   <i class="s-icon:file-archive"></i>
+            *                   <a tabindex="0">${__faker.name.findName()}</a>
+            *               </li>
+            *           </ul>
+            *           <li class="s-disabled">
+        *                   <i class="s-icon:file"></i>
+        *                   <a tabindex="0">${__faker.name.findName()}</a>
+        *               </li>
+            *           <li>
+        *                   <i class="s-icon:file-code"></i>
+        *                   <a tabindex="0">${__faker.name.findName()}</a>
+        *               </li>
+            *       </li>
+            *   </ul>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * <!-- ${shape} shape -->
+            * <div class="s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+            *   <ul class="s-fs-tree${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
             }">
             *       <li class="active">
             *           <i class="s-icon:folder-open"></i>
@@ -265,10 +330,48 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
       .s-fs-tree {
-        @sugar.color(${finalParams.defaultColor});
         @sugar.ui.fsTree();
       }
   `);
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            vars.push(`/**
+                * @name           s-fs-tree${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }
+                * @namespace      sugar.css.ui.list
+                * @type           CssClass
+                * 
+                * This class represent an "<yellow>${shape}</yellow>" filesystem tree
+                * 
+                * @example        html
+                * <ul class="s-fs-tree${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }">
+                *       <li>
+                *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
+                *          <ul>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           </ul>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *       </li>
+                *   </ul>
+                * 
+                * @since       2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-fs-tree${
+                shape === finalParams.defaultShape ? '' : `--${shape}`
+            } {
+                @sugar.ui.fsTree($shape: ${shape}, $scope: shape);
+            }
+        `);
+        });
+    }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
         vars.push(`/**

@@ -10,10 +10,20 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
                 values: ['inline', 'float'],
                 default: ['inline', 'float'],
             },
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
+            },
             defaultStyle: {
                 type: 'String',
                 values: ['inline', 'float'],
                 default: __STheme.config('ui.label.defaultStyle'),
+            },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.label.defaultShape'),
             },
         };
     }
@@ -21,7 +31,9 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiLabelClassesParams {
     styles: ('inline' | 'float')[];
-    defaultStyle: 'inline';
+    shapes: ('default' | 'square' | 'pill')[];
+    defaultStyle: 'inline' | 'float';
+    defaultShape: 'default' | 'square' | 'pill';
 }
 
 export { postcssSugarPluginUiLabelClassesInterface as interface };
@@ -43,8 +55,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelClassesParams = {
-        styles: ['inline', 'float'],
+        styles: [],
+        shapes: [],
         defaultStyle: 'inline',
+        defaultShape: 'default',
         ...params,
     };
 
@@ -66,6 +80,13 @@ export default function ({
                 return ` * @cssClass     s-label${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} label style`;
+            })
+            .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-label${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} label shape`;
             })
             .join('\n')}
         * 
@@ -121,6 +142,35 @@ export default function ({
             * `;
             })
             .join('\n')}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * <!-- ${shape} shape -->
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+            *   <label class="s-mbe:30 s-color:accent s-label${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            }">
+            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *   </label>
+            *   <label class="s-mbe:30 s-color:info s-label${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            }">
+            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *   </label>
+            *   <label class="s-mbe:30 s-color:error s-label${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            }">
+            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *   </label>
+            * </div>
+            * `;
+            })
+            .join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -152,6 +202,34 @@ export default function ({
       .${cls.replace(':', '--')} {
           @sugar.ui.label(${style});
       } 
+    `);
+    });
+
+    finalParams.shapes.forEach((shape) => {
+        let cls = `s-label`;
+        if (shape !== finalParams.defaultShape) {
+            cls += `:${shape}`;
+        }
+
+        vars.push(`/**
+            * @name           ${cls}
+            * @namespace      sugar.css.ui.label
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">${shape}</s-color>" label
+            * 
+            * @example        html
+            * <label class="${cls.replace(':', ':')}">
+            *   Hello world
+            *   <input type="text" class="s-input" placeholder="Type something!" />
+            * </label>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .${cls.replace(':', '--')} {
+            @sugar.ui.label($shape: ${shape}, $scope: shape);
+        } 
     `);
     });
 

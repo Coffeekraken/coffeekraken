@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          spinner
+ * @namespace     ui.loader
+ * @type          CssMixin
+ * @interface     ./spinner          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the spinner style to any element
+ *
+ * @param        {String}           [name='s-loader-spinner']               A name for your spinner
+ * @param       {String}            [duration='theme.ui.loaderSpinner.duration']        The duration of your spinner animation
+ * @param        {String}           [easing='theme.ui.loaderSpinner.easing']            The easing you want for your spinner animation
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-spinner {
+ *    @sugar.ui.loader.spinner;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiLoaderSpinnerMixinInterface extends __SInterface {
     static get _definition() {
         return {

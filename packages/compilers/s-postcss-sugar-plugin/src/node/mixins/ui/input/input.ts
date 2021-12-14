@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          input
+ * @namespace     ui.input
+ * @type          CssMixin
+ * @interface     ./text          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the input style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.input.defaultStyle']        The style you want for your input
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.input.defaultShape]      The shape you want for your input
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-input {
+ *    @sugar.ui.input;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiFormInputInterface extends __SInterface {
     static get _definition() {
         return {
@@ -8,6 +32,11 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.config('ui.input.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.input.defaultShape'),
             },
             outline: {
                 type: 'Boolean',
@@ -18,8 +47,8 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -27,6 +56,7 @@ class postcssSugarPluginUiFormInputInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFormInputParams {
     style: 'solid';
+    shape: 'default' | 'square' | 'pill';
     outline: boolean;
     scope: string[];
 }
@@ -44,6 +74,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFormInputParams = {
         style: 'solid',
+        shape: 'default',
         outline: true,
         scope: [],
         ...params,
@@ -90,6 +121,26 @@ export default function ({
         case 'solid':
         default:
             break;
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.input.borderRadius);
+                `);
+                break;
+        }
     }
 
     return vars;

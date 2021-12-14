@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          fsTree
+ * @namespace     ui.fsTree
+ * @type          CssMixin
+ * @interface     ./fsTree          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the fsTree style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.fsTree.defaultStyle']        The style you want for your fsTree
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.fsTree.defaultShape]      The shape you want for your fsTree
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-fsTree {
+ *    @sugar.ui.fsTree;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiFsTreeInterface extends __SInterface {
     static get _definition() {
         return {
@@ -9,13 +33,18 @@ class postcssSugarPluginUiFsTreeInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.config('ui.fsTree.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.fsTree.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -23,6 +52,7 @@ class postcssSugarPluginUiFsTreeInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFsTreeParams {
     style: 'solid';
+    shape: 'default' | 'square' | 'pill';
     scope: string[];
 }
 
@@ -43,7 +73,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreeParams = {
         style: 'solid',
-        scope: ['bare', 'lnf'],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -189,6 +220,38 @@ export default function ({
                         }
                     }
 
+                `);
+                break;
+        }
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    li {
+                        & > *:not(ul):not(ol):not(i) {
+                            border-radius: 0;
+                        }
+                    }
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    li {
+                        & > *:not(ul):not(ol):not(i) {
+                            border-radius: 9999px;
+                        }
+                    }
+                `);
+                break;
+            default:
+                vars.push(`
+                    li {
+                        & > *:not(ul):not(ol):not(i) {
+                            border-radius: sugar.theme(ui.fsTree.borderRadius);
+                        }
+                    }
                 `);
                 break;
         }

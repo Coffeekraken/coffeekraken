@@ -35,7 +35,7 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
             },
             shape: {
                 type: 'String',
-                values: ['default', 'square', 'pill'],
+                values: ['default', 'square', 'pill', 'circle'],
                 default: __STheme.config('ui.checkbox.defaultShape'),
             },
             scope: {
@@ -43,8 +43,8 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf','shape'],
-                default: ['bare', 'lnf','shape'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -52,7 +52,8 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiCheckboxParams {
     style: 'solid';
-    scope: ('bare' | 'lnf')[];
+    shape: 'default' | 'square' | 'pill' | 'circle';
+    scope: ('bare' | 'lnf' | 'shape')[];
 }
 
 export { postcssSugarPluginUiCheckboxInterface as interface };
@@ -69,16 +70,13 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiCheckboxParams = {
         style: 'solid',
-        scope: ['bare', 'lnf'],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [
-        `
-        
-`,
-    ];
+    const vars: string[] = [``];
 
     switch (finalParams.style) {
         case 'solid':
@@ -133,11 +131,28 @@ export default function ({
                     }
  
         `);
-
             }
+    }
 
-            border-radius: sugar.theme(ui.checkbox.borderRadius);
-
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'circle':
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.checkbox.borderRadius);
+                `);
+                break;
+        }
     }
 
     return vars;

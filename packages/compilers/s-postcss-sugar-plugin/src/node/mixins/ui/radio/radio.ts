@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          radio
+ * @namespace     ui.radio
+ * @type          CssMixin
+ * @interface     ./radio          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the radio style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.radio.defaultStyle']        The style you want for your radio
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.radio.defaultShape]      The shape you want for your radio
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-radio {
+ *    @sugar.ui.radio;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiRadioInterface extends __SInterface {
     static get _definition() {
         return {
@@ -9,13 +33,18 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.config('ui.range.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill', 'circle'],
+                default: __STheme.config('ui.radio.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr'],
-                default: ['bare', 'lnf', 'vr'],
+                values: ['bare', 'lnf', 'shape', 'vr'],
+                default: ['bare', 'lnf', 'shape', 'vr'],
             },
         };
     }
@@ -23,7 +52,8 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiRadioParams {
     style: 'solid';
-    scope: ('bare' | 'lnf' | 'vr')[];
+    shape: 'default' | 'square' | 'pill' | 'circle';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr')[];
 }
 
 export { postcssSugarPluginUiRadioInterface as interface };
@@ -40,7 +70,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiRadioParams = {
         style: 'solid',
-        scope: ['bare', 'lnf', 'vr'],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape', 'vr'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -77,7 +108,6 @@ export default function ({
                 
                     transition: sugar.theme(ui.radio.transition);
                     border: sugar.theme(ui.radio.borderWidth) solid sugar.color(current);
-                    border-radius: sugar.theme(ui.radio.borderRadius);
                     background-color: transparent;
                     transition: sugar.theme(ui.radio.transition);
                     box-shadow: 0 0 0 0 sugar.color(current, --alpha 0.2);
@@ -87,7 +117,6 @@ export default function ({
                         position: absolute;
                         top: 50%; left: 50%;
                         width: 0.4em; height: 0.4em;
-                        border-radius: sugar.theme(ui.radio.borderRadius);
                         transform: translate(-50%, -50%);
                         background: sugar.color(current);
                         opacity: 0;
@@ -107,6 +136,36 @@ export default function ({
  
         `);
             }
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                    &:after {
+                        border-radius: 0;
+                    }
+                `);
+                break;
+            case 'pill':
+            case 'circle':
+                vars.push(`
+                    border-radius: 9999px;
+                    &:after {
+                        border-radius: 9999px;
+                    }
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.radio.borderRadius);
+                    &:after {
+                        border-radius: sugar.theme(ui.radio.borderRadius);
+                    }
+                `);
+                break;
+        }
     }
 
     return vars;

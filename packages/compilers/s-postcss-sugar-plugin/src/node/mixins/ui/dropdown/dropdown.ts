@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          dropdown
+ * @namespace     ui.dropdown
+ * @type          CssMixin
+ * @interface     ./dropdown          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the dropdown style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.dropdown.defaultStyle']        The style you want for your dropdown
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.dropdown.defaultShape]      The shape you want for your dropdown
+ * @param       {('bare'|'lnf'|'shape'|'position')[]}      [scope=['bare','lnf','shape','position']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-dropdown {
+ *    @sugar.ui.dropdown;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
     static get _definition() {
         return {
@@ -8,6 +32,11 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.config('ui.dropdown.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.dropdown.defaultShape'),
             },
             position: {
                 type: 'String',
@@ -26,8 +55,8 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'position'],
-                default: ['bare', 'lnf', 'position'],
+                values: ['bare', 'lnf', 'shape', 'position'],
+                default: ['bare', 'lnf', 'shape', 'position'],
             },
         };
     }
@@ -35,6 +64,7 @@ class postcssSugarPluginUiDropdownInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiDropdownParams {
     style: 'solid';
+    shape: 'default' | 'square' | 'pill';
     position:
         | 'top'
         | 'top-start'
@@ -42,7 +72,7 @@ export interface IPostcssSugarPluginUiDropdownParams {
         | 'bottom'
         | 'bottom-start'
         | 'bottom-end';
-    scope: string[];
+    scope: ('bare' | 'lnf' | 'shape' | 'position')[];
 }
 
 export { postcssSugarPluginUiDropdownInterface as interface };
@@ -60,6 +90,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownParams = {
         style: 'solid',
+        shape: 'default',
         position: 'bottom',
         scope: [],
         ...params,
@@ -115,11 +146,30 @@ export default function ({
                     padding-inline: sugar.theme(ui.dropdown.paddingInline);
                     padding-block: sugar.theme(ui.dropdown.paddingBlock);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
-                    border-radius: sugar.theme(ui.dropdown.borderRadius);
                     @sugar.depth(sugar.theme(ui.dropdown.depth));
                     @sugar.transition(fast);
                 `);
 
+                break;
+        }
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.dropdown.borderRadius);
+                `);
                 break;
         }
     }

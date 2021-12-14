@@ -10,10 +10,6 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
                 values: ['ul', 'ol', 'icon'],
                 default: ['ul', 'ol', 'icon'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.list.defaultColor'),
-            },
             defaultStyle: {
                 type: 'String',
                 values: ['ul'],
@@ -33,7 +29,6 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiListClassesParams {
     styles: ('ul' | 'ol' | 'icon')[];
-    defaultColor: string;
     defaultStyle: 'ul' | 'ol' | 'icon';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
@@ -60,7 +55,6 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
         styles: [],
-        defaultColor: 'ui',
         defaultStyle: 'ul',
         scope: [],
         ...params,
@@ -296,7 +290,6 @@ export default function ({
         */
             @sugar.format.text {
                 ul {
-                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(
                         ',',
                     )}');
@@ -324,7 +317,6 @@ export default function ({
         */
             @sugar.format.text {
                 ol {
-                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(
                         ',',
                     )}');

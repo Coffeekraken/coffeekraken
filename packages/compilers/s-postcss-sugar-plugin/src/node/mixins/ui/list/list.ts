@@ -1,6 +1,29 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          list
+ * @namespace     ui.list
+ * @type          CssMixin
+ * @interface     ./list          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the list style to any element
+ *
+ * @param       {'ul'|'ol'|'icon'}           [style='theme.ui.list.defaultStyle']        The style you want for your list
+ * @param       {('bare'|'lnf')[]}      [scope=['bare','lnf']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-list {
+ *    @sugar.ui.list;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiListInterface extends __SInterface {
     static get _definition() {
         return {

@@ -11,7 +11,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @name           classes
  * @namespace      node.mixins.colors
  * @type           PostcssMixin
- * @platform      css
+ * @platform      postcss
  * @status        beta
  *
  * This mixin allows you to generate all the colors helpers classes like s-tc:accent, etc...

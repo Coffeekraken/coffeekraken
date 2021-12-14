@@ -1,7 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name           depth
- * @namespace      node.mixins.depth
+ * @namespace      node.mixins.fit
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta

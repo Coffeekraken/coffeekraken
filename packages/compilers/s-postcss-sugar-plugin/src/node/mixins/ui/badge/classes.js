@@ -9,10 +9,28 @@ class postcssSugarPluginUiBadgeClassesInterface extends __SInterface {
                 values: ['solid', 'outline'],
                 default: ['solid', 'outline'],
             },
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
+            },
             defaultStyle: {
                 type: 'String',
                 values: ['solid', 'outline'],
                 default: (_a = __STheme.config('ui.badge.defaultStyle')) !== null && _a !== void 0 ? _a : 'solid',
+            },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.badge.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
             },
         };
     }
@@ -25,7 +43,7 @@ export function dependencies() {
     };
 }
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({ styles: ['solid', 'outline'], defaultStyle: 'solid' }, params);
+    const finalParams = Object.assign({ styles: [], shapes: [], defaultStyle: 'solid', defaultShape: 'default', scope: [] }, params);
     const vars = [];
     vars.push(`
       /**
@@ -43,6 +61,11 @@ export default function ({ params, atRule, replaceWith, }) {
         return ` * @cssClass     s-badge${style === finalParams.defaultStyle ? '' : `:${style}`}           Apply the ${style} badge style`;
     })
         .join('\n')}
+        ${finalParams.shapes
+        .map((shape) => {
+        return ` * @cssClass     s-badge${shape === finalParams.defaultShape ? '' : `:${shape}`}           Apply the ${shape} badge shape`;
+    })
+        .join('\n')}
         * 
         * @cssClass         s-badge:square       Display your badge with squared corners
         * @cssClass         s-badge:pill         Display your badge with rounded corners
@@ -53,23 +76,29 @@ export default function ({ params, atRule, replaceWith, }) {
         return ` * <!-- ${style} style -->
             * <div class="s-font:40 s-mbe:50">
             *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${style} style</h3>
-            *   <a class="s-badge:${style} s-mie:20">Say hello!</a>
-            *   <a class="s-badge:${style} s-mie:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge:${style} s-mie:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge:${style} s-color:error">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-color:accent">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultStyle === style ? '' : `:${style}`} s-mie:20 s-color:complementary">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultStyle === style ? '' : `:${style}`} s-color:error">Say hello!</a>
             * </div>
             * `;
     })
         .join('\n')}
         *
         * <!-- shapes -->
-        * <div class="s-font:40 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Shapes</h3>
-        *   <a class="s-badge:square s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge:pill s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge:outline:square s-mie:20 s-mbe:20">Say hello!</a>
-        *   <a class="s-badge:outline:pill s-mie:20 s-mbe:20">Say hello!</a>
-        * </div>
+        ${finalParams.shapes
+        .map((shape) => {
+        return ` * <!-- ${shape} shape -->
+            * <div class="s-font:40 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${shape} shape</h3>
+            *   <a class="s-badge:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-color:accent">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-mie:20 s-color:complementary">Say hello!</a>
+            *   <a class="s-badge:${finalParams.defaultShape === shape ? '' : `:${shape}`} s-color:error">Say hello!</a>
+            * </div>
+            * `;
+    })
+        .join('\n')}
         * 
         * <!-- scales -->
         * <div class="s-mbe:50">
@@ -85,82 +114,70 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`/**
-        * @name           s-badge
-        * @namespace      sugar.css.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">default</s-color>" badge
-        * 
-        * @example        html
-        * <a class="s-badge">I'm a cool badge</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
-      .s-badge {
-            @sugar.ui.badge($scope: bare);
-        }
-    `);
-    finalParams.styles.forEach((style) => {
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
-        * @name           s-badge:${style}
+            * @name           s-badge
+            * @namespace      sugar.css.ui.badge
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">bare</s-color>" badge
+            * 
+            * @example        html
+            * <a class="s-badge">I'm a cool badge</a>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+        vars.push(`
+            .s-badge {
+                @sugar.ui.badge($scope: bare);
+            }
+        `);
+    }
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.push(`/**
+            * @name           s-badge${finalParams.defaultStyle === style ? '' : `:${style}`}
+            * @namespace      sugar.css.ui.badge
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">outline</s-color>" badge
+            * 
+            * @example        html
+            * <a class="s-badge${finalParams.defaultStyle === style ? '' : `:${style}`}">I'm a cool ${style} badge</a>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+            vars.push(`
+            .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
+                @sugar.ui.badge($style: ${style}, $scope: lnf);
+            }
+        `);
+        });
+    }
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            vars.push(`/**
+        * @name           s-badge${finalParams.defaultShape === shape ? '' : `:${shape}`}
         * @namespace      sugar.css.ui.badge
         * @type           CssClass
         * 
         * This class represent a(n) "<s-color="accent">outline</s-color>" badge
         * 
         * @example        html
-        * <a class="s-badge:${style}">I'm a cool ${style} badge</a>
+        * <a class="s-badge${finalParams.defaultShape === shape ? '' : `:${shape}`}">I'm a cool ${shape} badge</a>
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */`);
-        vars.push(`
-        .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
-            @sugar.ui.badge($style: ${style}, $scope: 'lnf,shape');
+            vars.push(`
+        .s-badge${shape === finalParams.defaultShape ? '' : `--${shape}`} {
+            @sugar.ui.badge($shape: ${shape}, $scope: shape);
         }
     `);
-    });
-    vars.push(`/**
-        * @name           s-badge:square
-        * @namespace      sugar.css.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">squared</s-color>" badge
-        * 
-        * 
-        * 
-        * @example        html
-        * <a class="s-badge:square">I'm a cool badge</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
-        .s-badge--square {
-            @sugar.ui.badge($shape: square, $scope: shape);
-        }
-    `);
-    vars.push(`/**
-        * @name           s-badge:pill
-        * @namespace      sugar.css.ui.button
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">pill</s-color>" badge
-        * 
-        * @example        html
-        * <a class="s-badge:pill">I'm a cool badge</a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
-        .s-badge--pill {
-            @sugar.ui.badge($shape: pill, $scope: shape);
-        }
-    `);
+        });
+    }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXOztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO2dCQUM1QixPQUFPLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO2FBQ2hDO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sRUFBRSxTQUFTLENBQUM7Z0JBQzVCLE9BQU8sRUFBRSxNQUFBLFFBQVEsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUMsbUNBQUksT0FBTzthQUMvRDtTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFPRCxPQUFPLEVBQUUseUNBQXlDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbEUsT0FBTyxTQUFTLE1BQU0scUNBQXFDLENBQUM7QUFDNUQsTUFBTSxVQUFVLFlBQVk7SUFDeEIsT0FBTztRQUNILEtBQUssRUFBRSxDQUFDLEdBQUcsU0FBUyxFQUFFLFdBQVcsQ0FBQztLQUNyQyxDQUFDO0FBQ04sQ0FBQztBQUVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcsbUJBQ2IsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQyxFQUM1QixZQUFZLEVBQUUsT0FBTyxJQUNsQixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7OztVQVdKLFdBQVcsQ0FBQyxNQUFNO1NBQ2YsR0FBRyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDWCxPQUFPLDJCQUNILEtBQUssS0FBSyxXQUFXLENBQUMsWUFBWSxDQUFDLENBQUMsQ0FBQyxFQUFFLENBQUMsQ0FBQyxDQUFDLElBQUksS0FBSyxFQUN2RCx3QkFBd0IsS0FBSyxjQUFjLENBQUM7SUFDaEQsQ0FBQyxDQUFDO1NBQ0QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O1VBTWIsV0FBVyxDQUFDLE1BQU07U0FDZixHQUFHLENBQUMsQ0FBQyxLQUFLLEVBQUUsRUFBRTtRQUNYLE9BQU8sV0FBVyxLQUFLOzs2REFFc0IsS0FBSztvQ0FDOUIsS0FBSztvQ0FDTCxLQUFLO29DQUNMLEtBQUs7b0NBQ0wsS0FBSzs7ZUFFMUIsQ0FBQztJQUNKLENBQUMsQ0FBQztTQUNELElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXdCbEIsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILFdBQVcsQ0FBQyxNQUFNLENBQUMsT0FBTyxDQUFDLENBQUMsS0FBSyxFQUFFLEVBQUU7UUFDakMsSUFBSSxDQUFDLElBQUksQ0FBQztvQ0FDa0IsS0FBSzs7Ozs7Ozs4QkFPWCxLQUFLLGdCQUFnQixLQUFLOzs7O1NBSS9DLENBQUMsQ0FBQztRQUNILElBQUksQ0FBQyxJQUFJLENBQUM7a0JBQ0EsS0FBSyxLQUFLLFdBQVcsQ0FBQyxZQUFZLENBQUMsQ0FBQyxDQUFDLEVBQUUsQ0FBQyxDQUFDLENBQUMsS0FBSyxLQUFLLEVBQUU7c0NBQ2xDLEtBQUs7O0tBRXRDLENBQUMsQ0FBQztJQUNILENBQUMsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7U0FjTCxDQUFDLENBQUM7SUFDUCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7O0tBSVQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7O1NBWUwsQ0FBQyxDQUFDO0lBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7OztLQUlULENBQUMsQ0FBQztJQUVILE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXOztRQUNsQixPQUFPO1lBQ0gsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO2dCQUM1QixPQUFPLEVBQUUsQ0FBQyxPQUFPLEVBQUUsU0FBUyxDQUFDO2FBQ2hDO1lBQ0QsTUFBTSxFQUFFO2dCQUNKLElBQUksRUFBRSxVQUFVO2dCQUNoQixNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsRUFBRSxNQUFNLENBQUM7YUFDekM7WUFDRCxZQUFZLEVBQUU7Z0JBQ1YsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxFQUFFLFNBQVMsQ0FBQztnQkFDNUIsT0FBTyxFQUFFLE1BQUEsUUFBUSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQyxtQ0FBSSxPQUFPO2FBQy9EO1lBQ0QsWUFBWSxFQUFFO2dCQUNWLElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBRSxRQUFRLEVBQUUsTUFBTSxDQUFDO2dCQUNyQyxPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx1QkFBdUIsQ0FBQzthQUNwRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUU7b0JBQ0YsSUFBSSxFQUFFLGVBQWU7b0JBQ3JCLFVBQVUsRUFBRSxDQUFDLEdBQUcsRUFBRSxHQUFHLENBQUM7aUJBQ3pCO2dCQUNELE1BQU0sRUFB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

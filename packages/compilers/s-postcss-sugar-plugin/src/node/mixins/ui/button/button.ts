@@ -96,8 +96,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
-        style: __STheme.config('ui.button.defaultStyle'),
-        shape: __STheme.config('ui.button.defaultShape'),
+        style: 'solid',
+        shape: 'default',
         outline: true,
         scope: ['bare', 'lnf', 'shape'],
         ...params,
@@ -226,11 +226,19 @@ export default function ({
         `);
                 break;
         }
+        if (finalParams.outline) {
+            vars.push(`
+              &:focus:not(:hover) {
+                @sugar.outline;
+              }
+          `);
+        }
+    }
 
-        if (finalParams.scope.includes('shape')) {
-            switch (finalParams.shape) {
-                case 'square':
-                    vars.push(`
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
                     border-radius: 0;
 
                     &:before,
@@ -238,10 +246,9 @@ export default function ({
                       border-radius: 0;
                     }
                   `);
-                    break;
-                case 'pull
-    ill':
-                    vars.push(`
+                break;
+            case 'pill':
+                vars.push(`
                     border-radius: 9999px;
 
                     &:before,
@@ -249,9 +256,9 @@ export default function ({
                       border-radius: 9999px;
                     }
                   `);
-                    break;
-                default:
-                    vars.push(`
+                break;
+            default:
+                vars.push(`
                     border-radius: sugar.theme(ui.button.borderRadius);
 
                     &:before,
@@ -259,16 +266,7 @@ export default function ({
                       border-radius: sugar.theme(ui.button.borderRadius);
                     }
                   `);
-                    break;
-            }
-        }
-
-        if (finalParams.outline) {
-            vars.push(`
-              &:focus:not(:hover) {
-                @sugar.outline;
-              }
-          `);
+                break;
         }
     }
 

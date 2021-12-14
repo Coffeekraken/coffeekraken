@@ -316,37 +316,65 @@ export default function ({
         */
     `);
 
-    finalParams.styles.forEach((style) => {
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
-        * @name           s-dropdown${
-            finalParams.defaultStyle === style ? '' : `:${style}`
-        }
-        * @namespace      sugar.css.ui.dropdown
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<yellow>${style}</yellow>" dropdown
-        * 
-        * @example        html
-        * <span class="s-dropdown-container">
-        *     <button class="s-btn">Click me!</button>
-        *     <div class="s-dropdown${
-            finalParams.defaultStyle === style ? '' : `:${style}`
-        }">
-        *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *         <a class="s-btn s-color:accent">You find me!</a>
-        *     </div>
-        * </span>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-        .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
-            @sugar.ui.dropdown($style: ${style}, $scope: '${finalParams.scope.join(
-            ',',
-        )}');
-        }
-        `);
-    });
+            * @name           s-dropdown
+            * @namespace      sugar.css.ui.dropdown
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>bare</yellow>" dropdown
+            * 
+            * @example        html
+            * <span class="s-dropdown-container">
+            *     <button class="s-btn">Click me!</button>
+            *     <div class="s-dropdown">
+            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *         <a class="s-btn s-color:accent">You find me!</a>
+            *     </div>
+            * </span>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            .s-dropdown {
+                @sugar.ui.dropdown($scope: bare);
+            }
+            `);
+    }
+
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.push(`/**
+            * @name           s-dropdown${
+                finalParams.defaultStyle === style ? '' : `:${style}`
+            }
+            * @namespace      sugar.css.ui.dropdown
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>${style}</yellow>" dropdown
+            * 
+            * @example        html
+            * <span class="s-dropdown-container">
+            *     <button class="s-btn">Click me!</button>
+            *     <div class="s-dropdown${
+                finalParams.defaultStyle === style ? '' : `:${style}`
+            }">
+            *         <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *         <a class="s-btn s-color:accent">You find me!</a>
+            *     </div>
+            * </span>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            .s-dropdown${
+                finalParams.defaultStyle === style ? '' : `--${style}`
+            } {
+                @sugar.ui.dropdown($style: ${style}, $scope: lnf);
+            }
+            `);
+        });
+    }
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {

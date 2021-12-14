@@ -120,7 +120,9 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
         // handle empty logs
         if (!logObj) return;
 
-        console.log(component.render(logObj, this.noUiStdioSettings));
+        console.log(
+            __parseHtml(component.render(logObj, this.noUiStdioSettings)),
+        );
     }
 
     /**

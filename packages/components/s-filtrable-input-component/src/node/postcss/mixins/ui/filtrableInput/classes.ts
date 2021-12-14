@@ -161,7 +161,6 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
      .${cls} {
-        @sugar.color(${finalParams.defaultColor});
         @sugar.ui.filtrableInput($style: ${style});
      }`);
     });

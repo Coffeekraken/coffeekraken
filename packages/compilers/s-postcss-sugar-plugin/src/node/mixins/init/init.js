@@ -17,8 +17,8 @@ class postcssSugarPluginMediaMixinInterface extends __SInterface {
 export { postcssSugarPluginMediaMixinInterface as interface };
 /**
  * @name           init
- * @namespace      mixins.init
- * @type           Mixin
+ * @namespace      node.mixins.init
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

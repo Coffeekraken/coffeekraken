@@ -48,7 +48,6 @@ export default function ({
         '@sugar.ui.select.classes;',
         '@sugar.ui.switch.classes;',
         '@sugar.ui.table.classes;',
-        '@sugar.ui.terminal.classes;',
         '@sugar.ui.tooltip.classes;',
     ];
 

@@ -7,8 +7,8 @@ class postcssSugarPluginFormatTextlMixinInterface extends __SInterface {
 export { postcssSugarPluginFormatTextlMixinInterface as interface };
 /**
  * @name           text
- * @namespace      mixins.format
- * @type           Mixin
+ * @namespace      node.mixins.format
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

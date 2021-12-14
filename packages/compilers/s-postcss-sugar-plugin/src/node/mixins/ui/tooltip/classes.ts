@@ -1,13 +1,49 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __faker from 'faker';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginUiTooltipClassesInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            styles: {
+                type: 'String[]',
+                values: ['solid'],
+                default: ['solid'],
+            },
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
+            },
+            defaultStyle: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.tooltip.defaultStyle'),
+            },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.tooltip.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+            },
+        };
     }
 }
 
-export interface IPostcssSugarPluginUiTooltipClassesParams {}
+export interface IPostcssSugarPluginUiTooltipClassesParams {
+    styles: 'solid'[];
+    shapes: ('default' | 'square' | 'pill')[];
+    defaultStyle: 'solid';
+    defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
+}
 
 export { postcssSugarPluginUiTooltipClassesInterface as interface };
 
@@ -28,6 +64,11 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipClassesParams = {
+        styles: [],
+        shapes: [],
+        defaultStyle: 'solid',
+        defaultShape: 'default',
+        scope: [],
         ...params,
     };
 
@@ -47,6 +88,20 @@ export default function ({
         * @cssClass             s-tooltip-container             Allows to hide and show your tooltip on hover (focus)
         * @cssClass             s-tooltip-container:active     Allow to display a tooltip without having the need of the user interaction
         * @cssClass             s-tooltip                       Apply on the element you want as a tooltip
+        ${finalParams.styles
+            .map((style) => {
+                return ` * @cssClass     s-tooltip${
+                    style === finalParams.defaultStyle ? '' : `:${style}`
+                }           Apply the ${style} tooltip style`;
+            })
+            .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-tooltip${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} tooltip shape`;
+            })
+            .join('\n')}
         * @cssClass             s-tooltip:block-start                 Align your tooltip at "top". This is the default         
         * @cssClass             s-tooltip:inline-end               Align your tooltip at "right"
         * @cssClass             s-tooltip:inline-start               Align your tooltip at "left"
@@ -54,14 +109,70 @@ export default function ({
         * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip
         * 
         * @example        html
-        * <div class="s-font:30 s-mbe:50">
-        *   <span class="s-tooltip-container:active">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-        *       <div class="s-tooltip:inline-end s-color:accent">
-        *           ${__faker.name.title()} ${__faker.name.findName()}
-        *       </div>
-        *   </span>
-        * </div>
+        ${finalParams.styles.map((style) => {
+            return ` * <!-- ${style} style -->
+                * <div class="s-font:30 s-mbe:50">
+                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                } s-color:accent">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                } s-color:complementary">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                } s-color:info">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                * </div>
+            `;
+        })}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes.map((shape) => {
+            return ` * <!-- ${shape} shape -->
+                * <div class="s-font:30 s-mbe:50">
+                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                } s-color:accent">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                } s-color:complementary">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                *   <span class="s-tooltip-container:active">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
+                *       <div class="s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                } s-color:info">
+                *           ${__faker.name.title()} ${__faker.name.findName()}
+                *       </div>
+                *   </span>
+                * </div>
+            `;
+        })}
         * 
         * <div class="s-font:30 s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Positions</h3>
@@ -140,80 +251,147 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
-        * @name           s-toolip-container
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent the tooltip container in which you have to put your actual .s-tooltip element
-        * and anything you want as a tooltip activator. Can be a button, an image, really anything
-        * 
-        * @example        html
-        * <div class="s-tooltip-container">
-        *   <img src="..." />
-        *   <div class="s-tooltip">Something cool</div>
-        * </div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip-container {
-            position: relative;
-            display: inline-block;
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+            * @name           s-toolip-container
+            * @namespace      sugar.css.ui.tooltip
+            * @type           CssClass
+            * 
+            * This class represent the tooltip container in which you have to put your actual .s-tooltip element
+            * and anything you want as a tooltip activator. Can be a button, an image, really anything
+            * 
+            * @example        html
+            * <div class="s-tooltip-container">
+            *   <img src="..." />
+            *   <div class="s-tooltip">Something cool</div>
+            * </div>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */`);
+        vars.push(`
+            .s-tooltip-container {
+                position: relative;
+                display: inline-block;
 
-            & > .s-tooltip {
-                opacity: 0;
+                & > .s-tooltip {
+                    opacity: 0;
+                }
+
+                &:focus > .s-tooltip,
+                &:focus-within > .s-tooltip,
+                .s-tooltip:focus,
+                &:hover > .s-tooltip {
+                    opacity: 1;
+                }
             }
+        `);
+        vars.push(`/**
+            * @name           s-toolip-container:active
+            * @namespace      sugar.css.ui.tooltip
+            * @type           CssClass
+            * 
+            * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
+            * 
+            * @example        html
+            * <div class="s-tooltip-container:active">
+            *   <img src="..." />
+            *   <div class="s-tooltip">Something cool</div>
+            * </div>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */`);
+        // no need to write a class here cause this is handled in the tooltip.ts file directly...
+    }
 
-            &:focus > .s-tooltip,
-            &:focus-within > .s-tooltip,
-            .s-tooltip:focus,
-            &:hover > .s-tooltip {
-                opacity: 1;
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+            * @name           s-tooltip
+            * @namespace      sugar.css.ui.tooltip
+            * @type           CssClass
+            * 
+            * This class represent a simple tooltip
+            * 
+            * @example        html
+            * <a class="s-tooltip-container s-btn">
+            *   I'm a cool button
+            *   <div class="s-tooltip">Something cool</div>
+            * </a>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */`);
+        vars.push(`
+            .s-tooltip {
+                @sugar.ui.tooltip($scope: bare);
             }
-        }
-    `);
+        `);
+    }
 
-    vars.push(`/**
-        * @name           s-toolip-container:active
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class allows you to display a tooltip inside a tooltip container without needing hover by the user
-        * 
-        * @example        html
-        * <div class="s-tooltip-container:active">
-        *   <img src="..." />
-        *   <div class="s-tooltip">Something cool</div>
-        * </div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    // no need to write a class here cause this is handled in the tooltip.ts file directly...
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.push(`/**
+                * @name           s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                }
+                * @namespace      sugar.css.ui.tooltip
+                * @type           CssClass
+                * 
+                * This class represent a ${style} tooltip
+                * 
+                * @example        html
+                * <a class="s-tooltip-container s-btn">
+                *   I'm a cool button
+                *   <div class="s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                }">Something cool</div>
+                * </a>
+                * 
+                * @since    2.0.0
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */`);
+            vars.push(`
+                .s-tooltip${
+                    finalParams.defaultStyle === style ? '' : `--${style}`
+                } {
+                    @sugar.ui.tooltip($style: ${style}, $scope: lnf);
+                }
+            `);
+        });
+    }
 
-    vars.push(`/**
-        * @name           s-tooltip
-        * @namespace      sugar.css.ui.tooltip
-        * @type           CssClass
-        * 
-        * This class represent a simple tooltip
-        * 
-        * @example        html
-        * <a class="s-tooltip-container s-btn">
-        *   I'm a cool button
-        *   <div class="s-tooltip">Something cool</div>
-        * </a>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
-        .s-tooltip {
-            @sugar.ui.tooltip();
-        }
-    `);
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            vars.push(`/**
+                * @name           s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                }
+                * @namespace      sugar.css.ui.tooltip
+                * @type           CssClass
+                * 
+                * This class represent a ${shape} tooltip
+                * 
+                * @example        html
+                * <a class="s-tooltip-container s-btn">
+                *   I'm a cool button
+                *   <div class="s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `:${shape}`
+                }">Something cool</div>
+                * </a>
+                * 
+                * @since    2.0.0
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */`);
+            vars.push(`
+                .s-tooltip${
+                    finalParams.defaultShape === shape ? '' : `--${shape}`
+                } {
+                    @sugar.ui.tooltip($shape: ${shape}, $scope: shape);
+                }
+            `);
+        });
+    }
 
     // Interactive
     vars.push(`/**

@@ -499,21 +499,9 @@ export default (env, config) => {
              */
             depth: '[theme.ui.default.depth]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.avatar
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for avatar ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.avatar
-             * @type          Number
+             * @type          String
              * @default      [theme.ui.default.defaultStyle]
              *
              * Specify the default style for your avatar ui
@@ -522,6 +510,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.avatar
+             * @type          String
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default shape for your avatar ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.avatar
@@ -1207,18 +1207,6 @@ export default (env, config) => {
              */
             transition: '[theme.ui.form.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.range
-             * @type          String
-             * @default      [theme.ui.form.defaultColor]
-             *
-             * Specify the default color for range ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.form.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.range
              * @type          Number
@@ -1229,7 +1217,19 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            defaultStyle: '[theme.ui.default.defaultStyle]',
+            defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.range
+             * @type          Number
+             * @default      [theme.ui.form.defaultShape]
+             *
+             * Specify the default style for your range ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.form.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.range
@@ -1451,21 +1451,9 @@ export default (env, config) => {
              */
             depth: '[theme.ui.form.depth]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.select
-             * @type          String
-             * @default      [theme.ui.form.defaultColor]
-             *
-             * Specify the default color for select ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.form.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.select
-             * @type          Number
+             * @type          String
              * @default      [theme.ui.form.defaultStyle]
              *
              * Specify the default style for your select ui
@@ -1474,6 +1462,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.select
+             * @type          String
+             * @default      [theme.ui.form.defaultShape]
+             *
+             * Specify the default style for your select ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.form.defaultShape]',
             /**
              * @name          outline
              * @namespace     config.themeUi.select
@@ -1549,18 +1549,6 @@ export default (env, config) => {
              */
             depth: '[theme.ui.form.depth]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.switch
-             * @type          String
-             * @default      [theme.ui.form.defaultColor]
-             *
-             * Specify the default color for switch ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.form.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.switch
              * @type          Number
@@ -1572,6 +1560,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.switch
+             * @type          Number
+             * @default      [theme.ui.form.defaultShape]
+             *
+             * Specify the default shape for your switch ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.form.defaultShape]',
             /**
              * @name          outline
              * @namespace     config.themeUi.switch
@@ -2001,18 +2001,6 @@ export default (env, config) => {
              */
             transition: '[theme.ui.default.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.tabs
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for tabs ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.tabs
              * @type          Number
@@ -2024,6 +2012,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.tabs
+             * @type          Number
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default style for your tabs ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.tabs
@@ -2233,21 +2233,9 @@ export default (env, config) => {
              */
             transition: '[theme.ui.default.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.tooltip
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for tooltip ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.tooltip
-             * @type          Number
+             * @type          String
              * @default      [theme.ui.default.defaultStyle]
              *
              * Specify the default style for your tooltip ui
@@ -2256,6 +2244,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.tooltip
+             * @type          String
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default shape for your tooltip ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.tooltip
@@ -2453,21 +2453,9 @@ export default (env, config) => {
              */
             transition: '[theme.ui.default.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.blockquote
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for blockquote ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.blockquote
-             * @type          Number
+             * @type          String
              * @default      [theme.ui.default.defaultStyle]
              *
              * Specify the default style for your blockquote ui
@@ -2476,6 +2464,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default shape for your blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.blockquote
@@ -2563,18 +2563,6 @@ export default (env, config) => {
              */
             transition: '[theme.ui.default.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.table
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for table ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.table
              * @type          Number
@@ -2586,6 +2574,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.table
+             * @type          Number
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default shape for your table ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.table
@@ -2673,18 +2673,6 @@ export default (env, config) => {
              */
             transition: '[theme.ui.default.transition]',
             /**
-             * @name          defaultColor
-             * @namespace     config.themeUi.badge
-             * @type          String
-             * @default      [theme.ui.default.defaultColor]
-             *
-             * Specify the default color for badge ui
-             *
-             * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            defaultColor: '[theme.ui.default.defaultColor]',
-            /**
              * @name          defaultStyle
              * @namespace     config.themeUi.badge
              * @type          Number
@@ -2696,6 +2684,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
+            /**
+             * @name          defaultShape
+             * @namespace     config.themeUi.badge
+             * @type          Number
+             * @default      [theme.ui.default.defaultShape]
+             *
+             * Specify the default shape for your badge ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultShape: '[theme.ui.default.defaultShape]',
             /**
              * @name          depth
              * @namespace     config.themeUi.badge

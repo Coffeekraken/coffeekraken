@@ -8,8 +8,8 @@ class postcssSugarPluginStateFocusMixinInterface extends __SInterface {
 export { postcssSugarPluginStateFocusMixinInterface as interface };
 /**
  * @name           focus
- * @namespace      mixins.state
- * @type           Mixin
+ * @namespace      node.mixins.state
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

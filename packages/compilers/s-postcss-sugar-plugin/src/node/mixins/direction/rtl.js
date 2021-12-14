@@ -7,8 +7,8 @@ class postcssSugarPluginDirectionRtlMixinInterface extends __SInterface {
 export { postcssSugarPluginDirectionRtlMixinInterface as interface };
 /**
  * @name           rtl
- * @namespace      mixins.direction
- * @type           Mixin
+ * @namespace      node.mixins.direction
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

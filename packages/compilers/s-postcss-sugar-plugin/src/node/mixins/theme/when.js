@@ -17,8 +17,8 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
 export { postcssSugarPluginThemeWhenMixinInterface as interface };
 /**
  * @name           when
- * @namespace      mixins.rhythm
- * @type           Mixin
+ * @namespace      node.mixins.rhythm
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

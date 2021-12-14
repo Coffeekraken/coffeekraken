@@ -1,5 +1,29 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name          tooltip
+ * @namespace     ui.tooltip
+ * @type          CssMixin
+ * @interface     ./tooltip          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the tooltip style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.tooltip.defaultStyle']        The style you want for your tooltip
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.tooltip.defaultShape]      The shape you want for your tooltip
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-tooltip {
+ *    @sugar.ui.tooltip;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiTooltipInterface extends __SInterface {
     static get _definition() {
         return {
@@ -22,14 +46,17 @@ class postcssSugarPluginUiTooltipInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'position', 'interactive'],
-                default: ['bare', 'lnf', 'position', 'interactive'],
+                values: ['bare', 'lnf', 'shape', 'position', 'interactive'],
+                default: ['bare', 'lnf', 'shape', 'position', 'interactive'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTooltipParams {
+    style: 'solid';
+    shape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'position' | 'interactive' | 'vr')[];
     position:
         | 'block-start'
         // | 'top-left'
@@ -52,7 +79,6 @@ export interface IPostcssSugarPluginUiTooltipParams {
     // | 'right-center-top'
     // | 'right-top-top';
     interactive: Boolean;
-    scope: string[];
 }
 
 export { postcssSugarPluginUiTooltipInterface as interface };
@@ -68,9 +94,11 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipParams = {
+        style: 'solid',
+        shape: 'default',
         position: 'block-start',
         interactive: false,
-        scope: ['bare', 'lnf', 'position', 'interactive'],
+        scope: ['bare', 'lnf', 'shape', 'position', 'interactive'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -79,7 +107,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-        font-size: sugar.scalable(1rem);
+            font-size: sugar.scalable(1rem);
           position: absolute;
           z-index: 500;
           display: block;
@@ -112,7 +140,6 @@ export default function ({
         vars.push(`
           background-color: sugar.color(current);
           color: sugar.color(current, foreground);
-          border-radius: sugar.theme(ui.tooltip.borderRadius);
           transition: sugar.theme(ui.tooltip.transition);
           padding-inline: sugar.theme(ui.tooltip.paddingInline);
           padding-block: sugar.theme(ui.tooltip.paddingBlock);
@@ -824,6 +851,26 @@ export default function ({
                 left: 50%;
                 transform: translateX(-50%);
             `);
+                break;
+        }
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.tooltip.borderRadius);
+                `);
                 break;
         }
     }

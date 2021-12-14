@@ -1,25 +1,64 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          tabs
+ * @namespace     ui.tabs
+ * @type          CssMixin
+ * @interface     ./tabs          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the tabs style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.tabs.defaultStyle']        The style you want for your tabs
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.tabs.defaultShape]      The shape you want for your tabs
+ * @param       {Boolean}           [grow=false]                  Specify if you want your tabs to grow and take all the available place or not
+ * @param       {'vertical'|'horizontal'}       [direction='horizontal']                Specify if you want your tabs to be vertical or horizontal
+ * @param       {Boolean}           [outline=true]                      Specify if you want your tabs to have an outline on focus or not
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-tabs {
+ *    @sugar.ui.tabs;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiTabInterface extends __SInterface {
     static get _definition() {
         return {
             style: {
                 type: 'String',
+                description: 'Specify the style you want for your tabs',
                 values: ['solid'],
                 default: __STheme.config('ui.tabs.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                description: 'Specify the shape you want for your tabs',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.tabs.defaultShape'),
+            },
             grow: {
                 type: 'Boolean',
+                description:
+                    'Specify if you want your tabs to take all the available place of not',
                 default: false,
             },
             direction: {
                 type: 'String',
+                description: 'Specigy the direction of your tabs',
                 values: ['vertical', 'horizontal'],
                 default: 'horizontal',
             },
             outline: {
                 type: 'Boolean',
+                description:
+                    'Specify if you want your tabs to have an outline on focus',
                 default: __STheme.config('ui.tabs.outline'),
             },
             scope: {
@@ -27,19 +66,21 @@ class postcssSugarPluginUiTabInterface extends __SInterface {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'grow', 'direction'],
-                default: ['bare', 'lnf', 'grow', 'direction'],
+                description: 'Specify the scope(s) you want to generate',
+                values: ['bare', 'lnf', 'shape', 'grow', 'direction'],
+                default: ['bare', 'lnf', 'shape', 'grow', 'direction'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiTabParams {
-    grow: boolean;
     style: 'solid';
+    shape: 'default' | 'square' | 'pill';
+    grow: boolean;
     direction: 'horizontal' | 'vertical';
     outline: boolean;
-    scope: string[];
+    scope: ('bare' | 'lnf' | 'shape' | 'grow' | 'direction' | 'vr')[];
 }
 
 export { postcssSugarPluginUiTabInterface as interface };
@@ -56,7 +97,8 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTabParams = {
-        style: __STheme.config('ui.tabs.defaultStyle'),
+        style: 'solid',
+        shape: 'default',
         grow: false,
         direction: 'horizontal',
         outline: true,
@@ -101,7 +143,6 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
           /** background-color: sugar.color(current, surface); */
-          border-radius: sugar.theme(ui.tabs.borderRadius);
           user-select: none;
 
           & > * > * {
@@ -116,42 +157,6 @@ export default function ({
             cursor: pointer;
             display: block;      
           }
-
-          & > *:first-child {
-            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-          }
-          & > *:last-child {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
-          }
-
-          [dir="rtl"] & > *:first-child,
-          &[dir="rtl"] > *:first-child {
-            border-top-left-radius: 0;
-            border-bottom-left-radius: 0;
-            border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
-          }
-          [dir="rtl"] & > *:last-child,
-          &[dir="rtl"] > *:last-child {
-            border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
-            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
-            border-top-right-radius: 0;
-            border-bottom-right-radius: 0;
-          }
-
-          & > *:first-child:last-child {
-            border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-            border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-            border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-            border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-          }
-
       `);
     }
 
@@ -195,16 +200,132 @@ export default function ({
         finalParams.scope.indexOf('direction') !== -1
     ) {
         vars.push(`
-      display: block;
+          display: block;
 
-      & > * {
-        display: block;
-        text-align: inherit;
-      }
-    `);
-        if (finalParams.direction === 'vertical') {
-            vars.push(`
-          & > *:first-child {
+          & > * {
+            display: block;
+            text-align: inherit;
+          }
+        `);
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                border-radius: 0;
+                & > * {
+                  border-radius: 0;
+                }
+              `);
+
+                break;
+            case 'pill':
+                vars.push(`
+
+                border-radius: 9999px;
+
+                & > *:first-child {
+                  border-top-left-radius: 9999px;
+                  border-bottom-left-radius: 9999px;
+                  border-top-right-radius: 0;
+                  border-bottom-right-radius: 0;
+                }
+                & > *:last-child {
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                  border-top-right-radius: 9999px;
+                  border-bottom-right-radius: 9999px;
+                }
+
+                [dir="rtl"] & > *:first-child,
+                &[dir="rtl"] > *:first-child {
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                  border-top-right-radius: 9999px;
+                  border-bottom-right-radius: 9999px;
+                }
+                [dir="rtl"] & > *:last-child,
+                &[dir="rtl"] > *:last-child {
+                  border-top-left-radius: 9999px;
+                  border-bottom-left-radius: 9999px;
+                  border-top-right-radius: 0;
+                  border-bottom-right-radius: 0;
+                }
+
+                & > *:first-child:last-child {
+                  border-top-left-radius: 9999px !important;
+                  border-bottom-left-radius: 9999px !important;
+                  border-top-right-radius: 9999px !important;
+                  border-bottom-right-radius: 9999px !important;
+                }
+
+                ${
+                    finalParams.direction === 'vertical'
+                        ? `
+                  & > *:first-child {
+              border-top-left-radius: 9999px !important;
+              border-bottom-left-radius: 0 !important;
+              border-top-right-radius: 9999px !important;
+              border-bottom-right-radius: 0 !important;
+            }
+            & > *:last-child {
+              border-top-left-radius: 0 !important;
+              border-bottom-left-radius: 9999px !important;
+              border-top-right-radius: 0 !important;
+              border-bottom-right-radius: 9999px !important;
+            }
+                `
+                        : ''
+                }
+
+              `);
+
+                break;
+            default:
+                vars.push(`
+
+                border-radius: sugar.theme(ui.tabs.borderRadius);
+
+                & > *:first-child {
+                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-right-radius: 0;
+                  border-bottom-right-radius: 0;
+                }
+                & > *:last-child {
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+                }
+
+                [dir="rtl"] & > *:first-child,
+                &[dir="rtl"] > *:first-child {
+                  border-top-left-radius: 0;
+                  border-bottom-left-radius: 0;
+                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius);
+                }
+                [dir="rtl"] & > *:last-child,
+                &[dir="rtl"] > *:last-child {
+                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius);
+                  border-top-right-radius: 0;
+                  border-bottom-right-radius: 0;
+                }
+
+                & > *:first-child:last-child {
+                  border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                  border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                  border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                  border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                }
+
+                ${
+                    finalParams.direction === 'vertical'
+                        ? `
+                  & > *:first-child {
               border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
               border-bottom-left-radius: 0 !important;
               border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
@@ -216,7 +337,13 @@ export default function ({
               border-top-right-radius: 0 !important;
               border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
             }
-        `);
+                `
+                        : ''
+                }
+
+              `);
+
+                break;
         }
     }
 

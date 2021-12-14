@@ -8,8 +8,8 @@ class postcssSugarPluginStateDisabledMixinInterface extends __SInterface {
 export { postcssSugarPluginStateDisabledMixinInterface as interface };
 /**
  * @name           disabled
- * @namespace      mixins.state
- * @type           Mixin
+ * @namespace      node.mixins.state
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

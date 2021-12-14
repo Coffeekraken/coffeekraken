@@ -7,8 +7,8 @@ class postcssSugarPluginRhythmVerticalMixinInterface extends __SInterface {
 export { postcssSugarPluginRhythmVerticalMixinInterface as interface };
 /**
  * @name           vertical
- * @namespace      mixins.rhythm
- * @type           Mixin
+ * @namespace      node.mixins.rhythm
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

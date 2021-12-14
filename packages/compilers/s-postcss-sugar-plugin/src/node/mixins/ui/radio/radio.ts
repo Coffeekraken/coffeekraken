@@ -31,7 +31,7 @@ class postcssSugarPluginUiRadioInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: __STheme.config('ui.range.defaultStyle'),
+                default: __STheme.config('ui.radio.defaultStyle'),
             },
             shape: {
                 type: 'String',

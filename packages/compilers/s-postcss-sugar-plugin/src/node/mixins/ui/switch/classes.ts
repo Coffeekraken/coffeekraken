@@ -10,22 +10,28 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.switch.defaultColor'),
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
             },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.config('ui.switch.defaultStyle') ?? 'solid',
             },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.switch.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'tf'],
-                default: ['bare', 'lnf', 'tf'],
+                values: ['bare', 'lnf', 'shape', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'tf'],
             },
         };
     }
@@ -33,9 +39,10 @@ class postcssSugarPluginUiSwitchClassesMixinInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiSwitchClassesMixinParams {
     styles: 'solid'[];
-    defaultColor: string;
+    shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf')[];
+    defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiSwitchClassesMixinInterface as interface };
@@ -59,9 +66,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchClassesMixinParams = {
-        styles: ['solid'],
-        defaultColor: 'ui',
+        styles: [],
+        shapes: [],
         defaultStyle: 'solid',
+        defaultShape: 'default',
         scope: [],
         ...params,
     };
@@ -93,6 +101,13 @@ export default function ({
                 return ` * @cssClass     s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }           Apply the ${style} switch style`;
+            })
+            .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} switch shape`;
             })
             .join('\n')}
         * 
@@ -140,6 +155,57 @@ export default function ({
                 Math.random() > 0.5 ? 'checked' : ''
             } class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
+                } s-color:accent" />
+            *   </label>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * <!-- ${shape} shape -->
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+            *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }" />
+            *   </label>
+            *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                } s-color:accent" />
+            *   </label>
+            *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                } s-color:complementary" />
+            *   </label>
+            *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <input type="checkbox" ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                } s-color:error" />
+            *   </label>
+                <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     <input type="checkbox" disabled ${
+                Math.random() > 0.5 ? 'checked' : ''
+            } class="s-switch${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
                 } s-color:accent" />
             *   </label>
             * </div>
@@ -198,20 +264,78 @@ export default function ({
         */
     `);
 
-    finalParams.styles.forEach((style) => {
-        let cls = `s-switch`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `\n${style}`;
-        }
-
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
+            * @name           s-switch
+            * @namespace      sugar.css.ui.switch
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">bare</s-color>" switch
+            * 
+            * @feature      Vertical rhythm
+            * 
+            * @example        html
+            * <label class="s-label">
+            *   <input type="checkbox" class="s-switch" />
+            *   ${__faker.name.findName()}
+            * </label>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-switch {
+            @sugar.ui.switch($scope: bare);
+        }
+        `);
+    }
+
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            let cls = `s-switch`;
+            if (style !== finalParams.defaultStyle) {
+                cls += `\n${style}`;
+            }
+
+            vars.push(`/**
+                * @name           ${cls}
+                * @namespace      sugar.css.ui.switch
+                * @type           CssClass
+                * 
+                * This class represent a(n) "<s-color="accent">${style}</s-color>" switch
+                * 
+                * @feature      Vertical rhythm
+                * 
+                * @example        html
+                * <label class="s-label">
+                *   <input type="checkbox" class="${cls
+                    .replace(/\./gm, ' ')
+                    .trim()}" />
+                *   ${__faker.name.findName()}
+                * </label>
+                * 
+                * @since    2.0.0
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .${cls.replace('\n', '--')} {
+                @sugar.ui.switch($style: ${style}, $scope: lnf);
+            }
+        `);
+        });
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            let cls = `s-switch`;
+            if (shape !== finalParams.defaultShape) {
+                cls += `\n${shape}`;
+            }
+
+            vars.push(`/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.switch
         * @type           CssClass
         * 
-        * This class represent a(n) "<s-color="accent">${style}</s-color>" switch
-        * 
-        * @feature      Vertical rhythm
+        * This class represent a(n) "<s-color="accent">${shape}</s-color>" switch
         * 
         * @example        html
         * <label class="s-label">
@@ -223,13 +347,11 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
       .${cls.replace('\n', '--')} {
-        @sugar.color(${finalParams.defaultColor});
-        @sugar.ui.switch($style: ${style}, $scope: '${finalParams.scope.join(
-            ',',
-        )}');
+        @sugar.ui.switch($shape: ${shape}, $scope: shape);
       }
     `);
-    });
+        });
+    }
 
     return vars;
 }

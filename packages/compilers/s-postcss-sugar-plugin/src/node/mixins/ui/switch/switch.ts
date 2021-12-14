@@ -1,4 +1,29 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+
+/**
+ * @name          switch
+ * @namespace     ui.switch
+ * @type          CssMixin
+ * @interface     ./switch          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the switch style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.switch.defaultStyle']        The style you want for your switch
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.switch.defaultShape]      The shape you want for your switch
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-switch {
+ *    @sugar.ui.switch;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 
 class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
     static get _definition() {
@@ -6,23 +31,29 @@ class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
             style: {
                 type: 'String',
                 values: ['solid'],
-                default: 'solid',
+                default: __STheme.config('ui.switch.defaultShape'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.switch.defaultShape'),
             },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
 }
 
 export interface IPostcssSugarPluginUiSwitchMixinParams {
-    style: string;
-    scope: string[];
+    style: 'solid';
+    shape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape')[];
 }
 
 export { postcssSugarPluginUiSwitchMixinInterface as interface };
@@ -40,7 +71,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchMixinParams = {
         style: 'solid',
-        scope: [],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -146,7 +178,6 @@ export default function ({
         
                     font-size: sugar.scalable(0.8rem);        
                     background: var(--track-color-inactive);
-                    border-radius: var(--track-size);
 
                     border: sugar.color(current, border) solid sugar.theme(ui.switch.borderWidth);
                     outline-offset: 5px;
@@ -167,7 +198,6 @@ export default function ({
 
                         background: var(--thumb-color-inactive);
                         box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
-                        border-radius: 50%;
                         transform: translateX(var(--thumb-position));
                         box-shadow: 0;
                         transition: sugar.theme(ui.switch.transition);
@@ -175,7 +205,6 @@ export default function ({
 
                     &::after {
                         background: rgba(255,255,25,0);
-                        border-radius: 50%;
                         box-shadow: 0;
                         transition: sugar.theme(ui.switch.transition);
                     }
@@ -195,6 +224,38 @@ export default function ({
             }
 
             break;
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                    &:after,
+                    &:before {
+                        border-radius: 0;
+                    }
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                    &:after,
+                    &:before {
+                        border-radius: 9999px;
+                    }
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.radio.borderRadius);
+                    &:after,
+                    &:before {
+                        border-radius: sugar.theme(ui.radio.borderRadius);
+                    }
+                `);
+                break;
+        }
     }
 
     return vars;

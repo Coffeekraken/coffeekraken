@@ -22,6 +22,14 @@ class postcssSugarPluginUiFormClassesInterface extends __SInterface {
                 type: 'String',
                 default: __STheme.config('ui.input.defaultShape'),
             },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+            },
         };
     }
 }
@@ -31,6 +39,7 @@ export interface IPostcssSugarPluginUiFormClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiFormClassesInterface as interface };
@@ -56,14 +65,12 @@ export default function ({
         shapes: [],
         defaultStyle: 'solid',
         defaultShape: 'default',
+        scope: [],
         ...params,
     };
 
     const vars: string[] = [
         `
-      .s-input {
-        @sugar.ui.input;
-      }
   `,
     ];
 
@@ -156,51 +163,76 @@ export default function ({
         */
     `);
 
-    finalParams.styles.forEach((style) => {
-        const isDefaultStyle = finalParams.defaultStyle === style;
-
-        const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
-        const cls = `.s-input${styleCls}`;
-
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
-        * @name           ${cls}
+        * @name           s-input
         * @namespace      sugar.css.ui.input
         * @type           CssClass
         * 
-        * This class represent a(n) "<yellow>${style}</yellow>" input
+        * This class represent a(n) "<yellow>bare</yellow>" input
         * 
         * @example        html
-        * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
-      */`);
-        vars.push(
-            [`${cls} {`, ` @sugar.ui.input($style: ${style});`, `}`].join('\n'),
-        );
-    });
+        * <input type="text" class="s-input" placeholder="Hello world" />
+      */
+        .s-input {
+            @sugar.ui.input($scope: bare);
+        }
+        `);
+    }
 
-    finalParams.shapes.forEach((shape) => {
-        const isDefaultShape = finalParams.defaultShape === shape;
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            const isDefaultStyle = finalParams.defaultStyle === style;
 
-        const shapeCls = isDefaultShape ? '' : `.s-input--${shape}`;
-        const cls = `.s-input${shapeCls}`;
+            const styleCls = isDefaultStyle ? '' : `.s-input--${style}`;
+            const cls = `.s-input${styleCls}`;
 
-        vars.push(`/**
-        * @name           ${cls}
-        * @namespace      sugar.css.ui.input
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<yellow>${shape}</yellow>" input
-        * 
-        * @example        html
-        * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
-      */`);
-        vars.push(
-            [
-                `${cls} {`,
-                ` @sugar.ui.input($shape: ${shape}, $scope: shape);`,
-                `}`,
-            ].join('\n'),
-        );
-    });
+            vars.push(`/**
+            * @name           ${cls}
+            * @namespace      sugar.css.ui.input
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>${style}</yellow>" input
+            * 
+            * @example        html
+            * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
+        */`);
+            vars.push(
+                [
+                    `${cls} {`,
+                    ` @sugar.ui.input($style: ${style}, $scope: lnf);`,
+                    `}`,
+                ].join('\n'),
+            );
+        });
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            const isDefaultShape = finalParams.defaultShape === shape;
+
+            const shapeCls = isDefaultShape ? '' : `.s-input--${shape}`;
+            const cls = `.s-input${shapeCls}`;
+
+            vars.push(`/**
+            * @name           ${cls}
+            * @namespace      sugar.css.ui.input
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>${shape}</yellow>" input
+            * 
+            * @example        html
+            * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
+        */`);
+            vars.push(
+                [
+                    `${cls} {`,
+                    ` @sugar.ui.input($shape: ${shape}, $scope: shape);`,
+                    `}`,
+                ].join('\n'),
+            );
+        });
+    }
 
     return vars;
 }

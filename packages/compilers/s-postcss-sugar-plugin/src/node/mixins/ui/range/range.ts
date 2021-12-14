@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          range
+ * @namespace     ui.range
+ * @type          CssMixin
+ * @interface     ./range          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the range style to any HTMLInputElement
+ *
+ * @param       {'solid'}           [style='theme.ui.range.defaultStyle']        The style you want for your range
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.range.defaultShape]      The shape you want for your range
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-range {
+ *    @sugar.ui.range;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiRangeInterface extends __SInterface {
     static get _definition() {
         return {
@@ -9,13 +33,18 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.config('ui.range.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pull', 'circle'],
+                default: __STheme.config('ui.range.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -23,7 +52,8 @@ class postcssSugarPluginUiRangeInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiButtonParams {
     style: 'solid';
-    scope: ('bare' | 'lnf')[];
+    shape: 'default' | 'square' | 'pill' | 'circle';
+    scope: ('bare' | 'lnf' | 'shape')[];
 }
 
 export { postcssSugarPluginUiRangeInterface as interface };
@@ -40,7 +70,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiButtonParams = {
         style: 'solid',
-        scope: ['bare', 'lnf'],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -230,6 +261,31 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
+                `);
+                break;
+        }
+    }
+
+    // shapes
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    --thumb-radius: 0;
+                    --track-radius: 0;
+                `);
+                break;
+            case 'pill':
+            case 'circle':
+                vars.push(`
+                    --thumb-radius: 9999px;
+                    --track-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    --thumb-radius: sugar.theme(ui.range.borderRadius);
+                    --track-radius: sugar.theme(ui.range.borderRadius);
                 `);
                 break;
         }

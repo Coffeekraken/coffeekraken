@@ -10,22 +10,28 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.blockquote.defaultColor'),
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill'],
+                default: ['default', 'square', 'pill'],
             },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.config('ui.blockquote.defaultStyle'),
             },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.blockquote.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'vr', 'tf'],
-                default: ['bare', 'lnf', 'vr', 'tf'],
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
             },
         };
     }
@@ -33,9 +39,10 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiBlockquoteClassesParams {
     styles: 'solid'[];
+    shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
-    defaultColor: string;
-    scope: ('bare' | 'lnf' | 'vr' | 'tf')[];
+    defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiBlockquoteClassesInterface as interface };
@@ -60,8 +67,9 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
         styles: [],
+        shapes: [],
         defaultStyle: 'solid',
-        defaultColor: 'ui',
+        defaultShape: 'default',
         scope: [],
         ...params,
     };
@@ -98,6 +106,13 @@ export default function ({
                 }           Apply the ${style} blockquote style`;
             })
             .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-blockquote${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} blockquote shape`;
+            })
+            .join('\n')}
         * @cssClass         s-format:text blockquote            Apply the s-blockquote styling on plain blockquotes
         * @cssClass         s-rhythm:vertical &                 Apply the vertical rhythm on the blockquote
         * 
@@ -109,6 +124,22 @@ export default function ({
             *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
             *   <p class="s-blockquote${
                 style === finalParams.defaultStyle ? '' : `:${style}`
+            }">
+            *       ${__faker.lorem.paragraph()}
+            *   </p>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * <!-- ${shape} shape -->
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+            *   <p class="s-blockquote${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
             }">
             *       ${__faker.lorem.paragraph()}
             *   </p>
@@ -168,14 +199,68 @@ export default function ({
         */
     `);
 
-    const cls = `s-blockquote`;
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+        * @name           s-blockquote
+        * @namespace      sugar.css.ui.blockquote
+        * @type           CssClass
+        * 
+        * This class represent a <span class="s-tc:accent">bare</span> blockquote
+        * 
+        * @example        html
+        * <blockquote class="s-blockquote">
+        *   <p>Hello world</p>
+        * </blockquote>
+        * 
+        * @since      2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+        .s-blockquote {
+            @sugar.ui.blockquote($scope: bare);
+        } `);
+    }
 
-    vars.push(`/**
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            let cls = `s-blockquote`;
+            if (style !== finalParams.defaultStyle) {
+                cls += `--${style}`;
+            }
+
+            vars.push(`/**
+            * @name           ${cls}
+            * @namespace      sugar.css.ui.blockquote
+            * @type           CssClass
+            * 
+            * This class represent a <span class="s-tc:accent">${style}</span> blockquote
+            * 
+            * @example        html
+            * <blockquote class="${cls.trim()}">
+            *   <p>Hello world</p>
+            * </blockquote>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            .${cls} {
+                @sugar.ui.blockquote($style: ${style}, $scope: lnf);
+            } `);
+        });
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            let cls = `s-blockquote`;
+            if (shape !== finalParams.defaultShape) {
+                cls += `--${shape}`;
+            }
+
+            vars.push(`/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.blockquote
         * @type           CssClass
         * 
-        * This class represent a simple blockquote
+        * This class represent a <span class="s-tc:accent">${shape}</span> blockquote
         * 
         * @example        html
         * <blockquote class="${cls.trim()}">
@@ -186,10 +271,10 @@ export default function ({
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .${cls} {
-            @sugar.color(${finalParams.defaultColor});
-            @sugar.ui.blockquote($scope: '${finalParams.scope.join(',')}');
-        } 
-    `);
+            @sugar.ui.blockquote($shape: ${shape}, $scope: shape);
+        } `);
+        });
+    }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
         vars.push(`/**
@@ -211,7 +296,6 @@ export default function ({
         */
             @sugar.format.text {
                 blockquote {
-                    @sugar.color(${finalParams.defaultColor});
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
                         ',',
                     )}');

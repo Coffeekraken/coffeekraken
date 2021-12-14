@@ -25,6 +25,14 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: __STheme.config('ui.label.defaultShape'),
             },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+                default: ['bare', 'lnf', 'shape', 'vr', 'tf'],
+            },
         };
     }
 }
@@ -34,6 +42,7 @@ export interface IPostcssSugarPluginUiLabelClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'inline' | 'float';
     defaultShape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiLabelClassesInterface as interface };
@@ -59,6 +68,7 @@ export default function ({
         shapes: [],
         defaultStyle: 'inline',
         defaultShape: 'default',
+        scope: [],
         ...params,
     };
 
@@ -177,41 +187,67 @@ export default function ({
         */
     `);
 
-    finalParams.styles.forEach((style) => {
-        let cls = `s-label`;
-        if (style !== finalParams.defaultStyle) {
-            cls += `:${style}`;
-        }
-
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
-        * @name           ${cls}
-        * @namespace      sugar.css.ui.label
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">${style}</s-color>" label
-        * 
-        * @example        html
-        * <label class="${cls.replace(':', ':')}">
-        *   Hello world
-        *   <input type="text" class="s-input" placeholder="Type something!" />
-        * </label>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-      .${cls.replace(':', '--')} {
-          @sugar.ui.label(${style});
-      } 
-    `);
-    });
+            * @name           s-label
+            * @namespace      sugar.css.ui.label
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">bare</s-color>" label
+            * 
+            * @example        html
+            * <label class="s-label">
+            *   Hello world
+            *   <input type="text" class="s-input" placeholder="Type something!" />
+            * </label>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-label {
+            @sugar.ui.label($scope: bare);
+        } 
+        `);
+    }
 
-    finalParams.shapes.forEach((shape) => {
-        let cls = `s-label`;
-        if (shape !== finalParams.defaultShape) {
-            cls += `:${shape}`;
-        }
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            let cls = `s-label`;
+            if (style !== finalParams.defaultStyle) {
+                cls += `:${style}`;
+            }
 
-        vars.push(`/**
+            vars.push(`/**
+            * @name           ${cls}
+            * @namespace      sugar.css.ui.label
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">${style}</s-color>" label
+            * 
+            * @example        html
+            * <label class="${cls.replace(':', ':')}">
+            *   Hello world
+            *   <input type="text" class="s-input" placeholder="Type something!" />
+            * </label>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .${cls.replace(':', '--')} {
+            @sugar.ui.label($style: ${style}, $scope: lnf);
+        } 
+        `);
+        });
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            let cls = `s-label`;
+            if (shape !== finalParams.defaultShape) {
+                cls += `:${shape}`;
+            }
+
+            vars.push(`/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.label
             * @type           CssClass
@@ -231,7 +267,8 @@ export default function ({
             @sugar.ui.label($shape: ${shape}, $scope: shape);
         } 
     `);
-    });
+        });
+    }
 
     return vars;
 }

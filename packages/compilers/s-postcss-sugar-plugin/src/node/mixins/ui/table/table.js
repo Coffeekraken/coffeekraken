@@ -1,29 +1,68 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
+/**
+ * @name          table
+ * @namespace     ui.table
+ * @type          CssMixin
+ * @interface     ./table          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the table style to any element
+ *
+ * @param       {'solid'}           [style='theme.ui.table.defaultStyle']        The style you want for your table
+ * @param       {'default'|'square'}     [shape=theme.ui.table.defaultShape]      The shape you want for your table
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-table {
+ *    @sugar.ui.table;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 class postcssSugarPluginUiTableInterface extends __SInterface {
     static get _definition() {
-        return {};
+        return {
+            style: {
+                type: 'String',
+                values: ['solid'],
+                default: __STheme.config('ui.table.defaultStyle'),
+            },
+            shape: {
+                type: 'String',
+                values: ['default', 'square'],
+                default: __STheme.config('ui.table.defaultShape'),
+            },
+            scope: {
+                type: {
+                    type: 'Array<String>',
+                    splitChars: [',', ' '],
+                },
+                values: ['bare', 'lnf', 'shape', 'vr'],
+                default: ['bare', 'lnf', 'shape', 'vr'],
+            },
+        };
     }
 }
 export { postcssSugarPluginUiTableInterface as interface };
 export default function ({ params, atRule, replaceWith, }) {
-    const finalParams = Object.assign({}, params);
+    const finalParams = Object.assign({ style: 'solid', shape: 'default', scope: ['bare', 'lnf', 'shape', 'vr'] }, params);
     const vars = [];
-    vars.push(`
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`
     width: 100%;
     font-size: sugar.scalable(1rem);
     table-layout: fixed;
     overflow-wrap: break-word;
-    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border);
-    border-radius: sugar.theme(ui.table.borderRadius);
     border-collapse: collapse;
-    @sugar.depth(sugar.theme(ui.table.depth));
-
+    
     &, th, td {
-        border: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border)
+    
     }
     th {
-        background-color: sugar.color(current, surface);
-        font-weight: bold;
         vertical-align: middle;
     }
     td, th {
@@ -37,6 +76,45 @@ export default function ({ params, atRule, replaceWith, }) {
     }
 
   `);
+    }
+    if (finalParams.scope.includes('lnf')) {
+        switch (finalParams.style) {
+            case 'solid':
+            default:
+                vars.push(`
+    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border);
+    border-radius: sugar.theme(ui.table.borderRadius);
+    @sugar.depth(sugar.theme(ui.table.depth));
+
+    &, th, td {
+        border: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border)
+    }
+    th {
+        background-color: sugar.color(current, surface);
+        font-weight: bold;
+    }
+    td, th {
+    
+    }
+
+  `);
+                break;
+        }
+    }
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+    border-radius: 0;
+        `);
+                break;
+            default:
+                vars.push(`
+    border-radius: sugar.theme(ui.table.borderRadius);
+        `);
+                break;
+        }
+    }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFibGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0YWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUVyRCxNQUFNLGtDQUFtQyxTQUFRLFlBQVk7SUFDekQsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsa0NBQWtDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFM0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNEJYLENBQUMsQ0FBQztJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGFibGUuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0YWJsZS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLFlBQVksTUFBTSwyQkFBMkIsQ0FBQztBQUNyRCxPQUFPLFFBQVEsTUFBTSx1QkFBdUIsQ0FBQztBQUU3Qzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQXNCRztBQUVILE1BQU0sa0NBQW1DLFNBQVEsWUFBWTtJQUN6RCxNQUFNLEtBQUssV0FBVztRQUNsQixPQUFPO1lBQ0gsS0FBSyxFQUFFO2dCQUNILElBQUksRUFBRSxRQUFRO2dCQUNkLE1BQU0sRUFBRSxDQUFDLE9BQU8sQ0FBQztnQkFDakIsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUM7YUFDcEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsU0FBUyxFQUFFLFFBQVEsQ0FBQztnQkFDN0IsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsdUJBQXVCLENBQUM7YUFDcEQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sRUFBRSxJQUFJLENBQUM7Z0JBQ3RDLE9BQU8sRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFLElBQUksQ0FBQzthQUMxQztTQUNKLENBQUM7SUFDTixDQUFDO0NBQ0o7QUFRRCxPQUFPLEVBQUUsa0NBQWtDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFM0QsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsT0FBTyxFQUNkLEtBQUssRUFBRSxTQUFTLEVBQ2hCLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxFQUFFLElBQUksQ0FBQyxJQUNsQyxNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE1BQU0sQ0FBQyxFQUFFO1FBQ3BDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJmLENBQUMsQ0FBQztLQUNBO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLFFBQVEsQ0FBQyxLQUFLLENBQUMsRUFBRTtRQUNuQyxRQUFRLFdBQVcsQ0FBQyxLQUFLLEVBQUU7WUFDdkIsS0FBSyxPQUFPLENBQUM7WUFDYjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0J2QixDQUFDLENBQUM7Z0JBQ1csTUFBTTtTQUNiO0tBQ0o7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3JDLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFFBQVE7Z0JBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7U0FFakIsQ0FBQyxDQUFDO2dCQUNLLE1BQU07WUFDVjtnQkFDSSxJQUFJLENBQUMsSUFBSSxDQUFDOztTQUVqQixDQUFDLENBQUM7Z0JBQ0ssTUFBTTtTQUNiO0tBQ0o7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

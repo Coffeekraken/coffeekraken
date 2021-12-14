@@ -8,8 +8,8 @@ class postcssSugarPluginStateHoverMixinInterface extends __SInterface {
 export { postcssSugarPluginStateHoverMixinInterface as interface };
 /**
  * @name           hover
- * @namespace      mixins.state
- * @type           Mixin
+ * @namespace      node.mixins.state
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

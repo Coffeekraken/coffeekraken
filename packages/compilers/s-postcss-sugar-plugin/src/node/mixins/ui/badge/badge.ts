@@ -68,7 +68,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeParams = {
-        style: __STheme.config('ui.button.defaultStyle') ?? 'solid',
+        style: 'solid',
         shape: 'default',
         scope: ['bare', 'lnf', 'shape'],
         ...params,

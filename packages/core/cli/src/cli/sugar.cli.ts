@@ -22,6 +22,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 import __SLog from '@coffeekraken/s-log';
 import __childProcess from 'child_process';
+import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -69,6 +70,21 @@ if (cliParams.bench) {
         cliParams.bench === true ? '*' : cliParams.bench,
     );
 }
+
+// hooking the consoles methods to parse html at output
+const originalConsole = {};
+['log', 'warn', 'error', 'trace'].forEach((method) => {
+    originalConsole[method] = console[method];
+    console[method] = (...args) => {
+        args.forEach((value, i) => {
+            if (typeof value === 'string') {
+                args[i] = __parseHtml(args[i]);
+            }
+        });
+
+        originalConsole[method](...args);
+    };
+});
 
 // __SLog.filter({
 //     type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],

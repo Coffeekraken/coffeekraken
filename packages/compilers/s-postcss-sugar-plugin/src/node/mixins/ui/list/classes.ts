@@ -171,30 +171,61 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
-        * @name           s-list
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>${__STheme.config(
-            'ui.list.defaultStyle',
-        )}</yellow>" list
-        * 
-        * @feature       Support vertical rhythm
-        * 
-        * @example        html
-        * <ul class="s-list">
-        *   <li>Hello</li>
-        *   <li>World</li>
-        * </ul>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-      .s-list {
-        @sugar.ui.list();
-      }
-  `);
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+            * @name           s-list
+            * @namespace      sugar.css.ui.list
+            * @type           CssClass
+            * 
+            * This class represent an "<yellow>bare</yellow>" list
+            * 
+            * @feature       Support vertical rhythm
+            * 
+            * @example        html
+            * <ul class="s-list">
+            *   <li>Hello</li>
+            *   <li>World</li>
+            * </ul>
+            * 
+            * @since       2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-list {
+            @sugar.ui.list($scope: bare);
+        }
+    `);
+    }
+
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.push(`/**
+                * @name           s-list${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                }
+                * @namespace      sugar.css.ui.list
+                * @type           CssClass
+                * 
+                * This class represent an "<yellow>${style}</yellow>" list
+                * 
+                * @feature       Support vertical rhythm
+                * 
+                * @example        html
+                * <ul class="s-list${
+                    finalParams.defaultStyle === style ? '' : `:${style}`
+                }">
+                *   <li>Hello</li>
+                *   <li>World</li>
+                * </ul>
+                * 
+                * @since       2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-list${finalParams.defaultStyle === style ? '' : `--${style}`} {
+                @sugar.ui.list($scope: lnf);
+            }
+        `);
+        });
+    }
 
     // ul
     vars.push(`/**
@@ -216,7 +247,7 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
       .s-list--ul {
-        @sugar.ui.list($style: ul, $scope: lnf);
+        @sugar.ui.list($style: ul, $scope: '${finalParams.scope.join(',')}');
       }
   `);
 
@@ -241,7 +272,9 @@ export default function ({
       */`);
     vars.push(`
       .s-list--icon {
-          @sugar.ui.list($style: icon, $scope: lnf);
+          @sugar.ui.list($style: icon, $scope: '${finalParams.scope.join(
+              ',',
+          )}');
       }`);
 
     // ol
@@ -264,7 +297,7 @@ export default function ({
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
       .s-list--ol {
-        @sugar.ui.list($style: ol, $scope: lnf);
+        @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
       }   
   `);
 

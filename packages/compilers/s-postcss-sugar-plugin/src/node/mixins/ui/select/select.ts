@@ -1,6 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
+/**
+ * @name          select
+ * @namespace     ui.select
+ * @type          CssMixin
+ * @interface     ./select          interface
+ * @platform      postcss
+ * @status        beta
+ *
+ * Apply the select style to any HTMLSelectElement
+ *
+ * @param       {'solid'}           [style='theme.ui.select.defaultStyle']        The style you want for your select
+ * @param       {'default'|'square'|'pill'}     [shape=theme.ui.select.defaultShape]      The shape you want for your select
+ * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
+ * @return      {String}            The generated css
+ *
+ * @example     css
+ * .my-select {
+ *    @sugar.ui.select;
+ * }
+ *
+ * @since      2.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 class postcssSugarPluginUiFormSelectInterface extends __SInterface {
     static get _definition() {
         return {
@@ -9,13 +33,18 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.config('ui.select.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                values: ['default', 'square', 'pill'],
+                default: __STheme.config('ui.select.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -23,7 +52,8 @@ class postcssSugarPluginUiFormSelectInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiFormSelectParams {
     style: 'solid';
-    scope: string[];
+    shape: 'default' | 'square' | 'pill';
+    scope: ('bare' | 'lnf' | 'shape')[];
 }
 
 export { postcssSugarPluginUiFormSelectInterface as interface };
@@ -41,7 +71,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectParams = {
         style: 'solid',
-        scope: [],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -104,6 +135,26 @@ export default function ({
 
                 break;
             }
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            case 'pill':
+                vars.push(`
+                    border-radius: 9999px;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.select.borderRadius);
+                `);
+                break;
+        }
     }
 
     return vars;

@@ -31,13 +31,18 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
                 values: ['solid'],
                 default: __STheme.config('ui.blockquote.defaultStyle'),
             },
+            shape: {
+                type: 'String',
+                values: ['default', 'square'],
+                default: __STheme.config('ui.blockquote.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf'],
-                default: ['bare', 'lnf'],
+                values: ['bare', 'lnf', 'shape'],
+                default: ['bare', 'lnf', 'shape'],
             },
         };
     }
@@ -45,7 +50,8 @@ class postcssSugarPluginUiBlockquoteInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiBlockquoteParams {
     style: 'solid';
-    scope: ('bare' | 'lnf' | 'vr')[];
+    shape: 'default' | 'square';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr')[];
 }
 
 export { postcssSugarPluginUiBlockquoteInterface as interface };
@@ -63,7 +69,8 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteParams = {
         style: 'solid',
-        scope: ['bare', 'lnf'],
+        shape: 'default',
+        scope: ['bare', 'lnf', 'shape'],
         ...params,
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
@@ -76,29 +83,41 @@ export default function ({
         `);
     }
 
-    if (finalParams.scope.indexOf('lnf') !== -1) {
-        switch (finalParams.style) {
-            case 'solid':
-            default:
-                if (finalParams.scope.indexOf('bare') !== -1) {
-                    vars.push(`
+    switch (finalParams.style) {
+        case 'solid':
+        default:
+            if (finalParams.scope.indexOf('bare') !== -1) {
+                vars.push(`
                             display: block;
                             padding-inline: sugar.theme(ui.blockquote.paddingInline);
                             padding-block: sugar.theme(ui.blockquote.paddingBlock);
                     `);
-                }
-                if (finalParams.scope.indexOf('lnf') !== -1) {
-                    vars.push(`
+            }
+            if (finalParams.scope.indexOf('lnf') !== -1) {
+                vars.push(`
                             border-inline-start: sugar.theme(ui.blockquote.borderWidth) solid sugar.color(current);
                             color: sugar.color(current, surfaceForeground);
                             background-color: sugar.color(current, surface);
-                            border-radius: sugar.theme(ui.blockquote.borderRadius);
                             @sugar.depth(sugar.theme(ui.blockquote.depth));
                             font-size: sugar.scalable(1rem);
 
                             @sugar.font.family(quote);
                     `);
-                }
+            }
+            break;
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        switch (finalParams.shape) {
+            case 'square':
+                vars.push(`
+                    border-radius: 0;
+                `);
+                break;
+            default:
+                vars.push(`
+                    border-radius: sugar.theme(ui.blockquote.borderRadius);
+                `);
                 break;
         }
     }

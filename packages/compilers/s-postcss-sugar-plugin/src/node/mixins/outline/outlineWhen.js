@@ -13,8 +13,8 @@ class postcssSugarPluginStateOutlineWhenMixinInterface extends __SInterface {
 export { postcssSugarPluginStateOutlineWhenMixinInterface as interface };
 /**
  * @name           outline
- * @namespace      mixins.outline
- * @type           Mixin
+ * @namespace      node.mixins.outline
+ * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *

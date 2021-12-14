@@ -14,7 +14,6 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
@@ -24,6 +23,7 @@
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -36,6 +36,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -44,6 +45,7 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -93,15 +95,12 @@
                     "name": "SCodeExampleInterface",
                     "description": "",
                     "definition": {
-                        "theme": {
-                            "description": "Specify the theme you want to use for your code example",
-                            "type": "String",
-                            "default": "https://gitcdn.link/repo/PrismJS/prism-themes/master/themes/prism-nord.css"
-                        },
                         "active": {
+                            "description": "Specify which \"tab\" is active in case of multiple languages examples",
                             "type": "String"
                         },
                         "toolbar": {
+                            "description": "Specify what you want in the toolbar. Currently available item is \"copy\"",
                             "type": "Array<String>",
                             "values": [
                                 "copy"
@@ -111,6 +110,7 @@
                             ]
                         },
                         "toolbarPosition": {
+                            "description": "Specify the toolbar position. Can be \"content\" or \"nav\"",
                             "type": "String",
                             "values": [
                                 "content",
@@ -119,17 +119,21 @@
                             "default": "nav"
                         },
                         "languages": {
+                            "description": "Specify some languages that you want to support. Must be \"[key]: language\" object syntax. See [highlight.js doc](https://github.com/highlightjs/highlight.js/blob/main/SUPPORTED_LANGUAGES.md) for supported languages",
                             "type": "Object",
                             "default": {}
                         },
                         "lines": {
+                            "description": "Specify how many lines to display at max",
                             "type": "Number"
                         },
                         "moreLabel": {
+                            "description": "Specify the \"show more\" button label",
                             "type": "String",
                             "default": "Show more"
                         },
                         "lessLabel": {
+                            "description": "Specigy the \"show less\" button label",
                             "type": "String",
                             "default": "Show less"
                         },
@@ -138,6 +142,7 @@
                             "default": "toggle"
                         },
                         "more": {
+                            "description": "Specify if you want to expand the more feature at start or not",
                             "type": "Boolean",
                             "default": false
                         }

@@ -15,8 +15,8 @@ class postcssSugarPluginScopeNoMixinInterface extends __SInterface {
 export { postcssSugarPluginScopeNoMixinInterface as interface };
 /**
  * @name           no
- * @namespace      mixins.scope
- * @type           Mixin
+ * @namespace      node.mixins.scope
+ * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *

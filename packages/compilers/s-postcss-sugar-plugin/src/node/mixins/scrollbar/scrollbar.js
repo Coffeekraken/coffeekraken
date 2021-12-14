@@ -2,8 +2,8 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 /**
  * @name           scrollbar
- * @namespace      mixins.scrollbar
- * @type           Mixin
+ * @namespace      node.mixins.scrollbar
+ * @type           PostcssMixin
  * @platform        css
  * @status        beta
  *

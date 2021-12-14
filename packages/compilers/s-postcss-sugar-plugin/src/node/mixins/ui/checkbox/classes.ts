@@ -10,6 +10,11 @@ class postcssSugarPluginUiCheckboxClassesInterface extends __SInterface {
                 values: ['solid'],
                 default: ['solid'],
             },
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square', 'pill', 'circle'],
+                default: ['default', 'square', 'pill', 'circle'],
+            },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
@@ -223,6 +228,28 @@ export default function ({
         */
     `);
 
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+            * @name           s-checkbox
+            * @namespace      sugar.css.ui.checkbox
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">bare</s-color>" checkbox
+            * 
+            * @example        html
+            * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem1" />
+            * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem2" />
+            * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem3" />
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+            .s-checkbox {
+                @sugar.ui.checkbox($scope: bare);
+            }
+            `);
+    }
+
     finalParams.styles.forEach((style) => {
         let cls = `s-checkbox`;
         if (style !== finalParams.defaultStyle) {
@@ -251,9 +278,7 @@ export default function ({
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
         .${cls} {
-            @sugar.ui.checkbox($style: ${style}, $scope: '${finalParams.scope.join(
-            ',',
-        )}');
+            @sugar.ui.checkbox($style: ${style}, $scope: lnf);
         }
         `);
     });

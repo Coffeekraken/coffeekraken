@@ -301,38 +301,79 @@ export default function ({
         */
     `);
 
-    vars.push(`/**
-        * @name           s-fs-tree
-        * @namespace      sugar.css.ui.list
-        * @type           CssClass
-        * 
-        * This class represent an "<yellow>${__STheme.config(
-            'ui.fsTree.defaultStyle',
-        )}</yellow>" filesystem tree
-        * 
-        * @feature       Support RTL
-        * 
-        * @example        html
-        * <ul class="s-fs-tree">
-        *       <li>
-        *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
-        *          <ul>
-        *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-        *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-        *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-        *           </ul>
-        *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-        *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
-        *       </li>
-        *   </ul>
-        * 
-        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */
-      .s-fs-tree {
-        @sugar.ui.fsTree();
-      }
-  `);
+    if (finalParams.scope.includes('bare')) {
+        vars.push(`/**
+            * @name           s-fs-tree
+            * @namespace      sugar.css.ui.list
+            * @type           CssClass
+            * 
+            * This class represent an "<yellow>${__STheme.config(
+                'ui.fsTree.defaultStyle',
+            )}</yellow>" filesystem tree
+            * 
+            * @feature       Support RTL
+            * 
+            * @example        html
+            * <ul class="s-fs-tree">
+            *       <li>
+            *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
+            *          <ul>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *           </ul>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+            *       </li>
+            *   </ul>
+            * 
+            * @since       2.0.0
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        .s-fs-tree {
+            @sugar.ui.fsTree($scope: bare);
+        }
+    `);
+    }
+
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            vars.push(`/**
+                * @name           s-fs-tree${
+                    style === finalParams.defaultStyle ? '' : `:${style}`
+                }
+                * @namespace      sugar.css.ui.list
+                * @type           CssClass
+                * 
+                * This class represent an "<yellow>${style}</yellow>" filesystem tree
+                * 
+                * @example        html
+                * <ul class="s-fs-tree${
+                    style === finalParams.defaultStyle ? '' : `:${style}`
+                }">
+                *       <li>
+                *          <i class="s-icon:folder"></i> ${__faker.name.findName()}
+                *          <ul>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *               <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *              <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           </ul>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *           <li><i class="s-icon:file"></i> ${__faker.name.findName()}</li>
+                *       </li>
+                *   </ul>
+                * 
+                * @since       2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+            .s-fs-tree${
+                style === finalParams.defaultStyle ? '' : `--${style}`
+            } {
+                @sugar.ui.fsTree($style: ${style}, $scope: lnf);
+            }
+        `);
+        });
+    }
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {

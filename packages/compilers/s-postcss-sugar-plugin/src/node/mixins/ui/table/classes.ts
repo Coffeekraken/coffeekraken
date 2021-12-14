@@ -9,22 +9,28 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
                 type: 'String[]',
                 default: ['solid'],
             },
-            defaultColor: {
-                type: 'String',
-                default: __STheme.config('ui.table.defaultColor'),
+            shapes: {
+                type: 'String[]',
+                values: ['default', 'square'],
+                default: ['default', 'square'],
             },
             defaultStyle: {
                 type: 'String',
                 values: ['solid'],
                 default: __STheme.config('ui.table.defaultStyle'),
             },
+            defaultShape: {
+                type: 'String',
+                values: ['default', 'square'],
+                default: __STheme.config('ui.table.defaultShape'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
                     splitChars: [',', ' '],
                 },
-                values: ['bare', 'lnf', 'tf', 'vr'],
-                default: ['bare', 'lnf', 'tf', 'vr'],
+                values: ['bare', 'lnf', 'shape', 'tf', 'vr'],
+                default: ['bare', 'lnf', 'shape', 'tf', 'vr'],
             },
         };
     }
@@ -32,9 +38,10 @@ class postcssSugarPluginUiTableClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiTableClassesParams {
     styles: 'solid'[];
-    defaultColor: string;
+    shapes: ('default' | 'square')[];
     defaultStyle: 'solid';
-    scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
+    defaultShape: 'default' | 'square';
+    scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
 export { postcssSugarPluginUiTableClassesInterface as interface };
@@ -56,9 +63,10 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
-        styles: ['solid'],
-        defaultColor: 'ui',
+        styles: [],
+        shapes: [],
         defaultStyle: 'solid',
+        defaultShape: 'default',
         scope: [],
         ...params,
     };
@@ -91,6 +99,13 @@ export default function ({
                 }           Apply the ${style} table style`;
             })
             .join('\n')}
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * @cssClass     s-table${
+                    shape === finalParams.defaultShape ? '' : `:${shape}`
+                }           Apply the ${shape} table shape`;
+            })
+            .join('\n')}
         * 
         * @example        html
         ${finalParams.styles
@@ -120,6 +135,36 @@ export default function ({
             *   <table class="s-table${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-color:accent s-mbe:30">
+            *       <tr>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *           <th>${__faker.name.findName()}</th>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *       <tr>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *           <td>${__faker.name.findName()}</td>
+            *       </tr>
+            *   </table>
+            * </div>
+            * `;
+            })
+            .join('\n')}
+        *
+        * <!-- Shapes -->
+        ${finalParams.shapes
+            .map((shape) => {
+                return ` * <!-- ${shape} shape -->
+            * <div class="s-font:30 s-mbe:50">
+            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+            *   <table class="s-table${
+                shape === finalParams.defaultShape ? '' : `:${shape}`
+            } s-mbe:30">
             *       <tr>
             *           <th>${__faker.name.findName()}</th>
             *           <th>${__faker.name.findName()}</th>
@@ -217,47 +262,118 @@ export default function ({
         */
     `);
 
-    finalParams.styles.forEach((style) => {
-        const isDefaultStyle =
-            __STheme.config('ui.table.defaultStyle') === style;
-
-        const styleCls = isDefaultStyle ? '' : `.s-table--${style}`;
-        const cls = `.s-table${styleCls}`;
-
+    if (finalParams.scope.includes('bare')) {
         vars.push(`/**
-        * @name           s-table${isDefaultStyle ? '' : `:${style}`}
-        * @namespace      sugar.css.ui.table
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<yellow>${style}</yellow>" table
-        * 
-        * @example        html
-        * <table class="s-table${isDefaultStyle ? '' : `:${style}`}">
-        *   <tr>
-        *       <th>Hello</th>
-        *       <th>World</th>
-        *   </tr>
-        *   <tr>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *   </tr>
-        *   <tr>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
-        *   </tr>
-        * </table>
-        * 
-        * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
+            * @name           s-table
+            * @namespace      sugar.css.ui.table
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>bare</yellow>" table
+            * 
+            * @example        html
+            * <table class="s-table">
+            *   <tr>
+            *       <th>Hello</th>
+            *       <th>World</th>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            * </table>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
         vars.push(`
-            ${cls} {
-                @sugar.color(${finalParams.defaultColor});
-                @sugar.ui.table($style: ${style}, $scope: '${finalParams.scope.join(
-            ',',
-        )}');
-            }`);
-    });
+                .s-table {
+                    @sugar.ui.table($scope: bare);
+                }`);
+    }
+
+    if (finalParams.scope.includes('lnf')) {
+        finalParams.styles.forEach((style) => {
+            const isDefaultStyle = finalParams.defaultStyle === style;
+
+            const styleCls = isDefaultStyle ? '' : `.s-table--${style}`;
+            const cls = `.s-table${styleCls}`;
+
+            vars.push(`/**
+            * @name           s-table${isDefaultStyle ? '' : `:${style}`}
+            * @namespace      sugar.css.ui.table
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>${style}</yellow>" table
+            * 
+            * @example        html
+            * <table class="s-table${isDefaultStyle ? '' : `:${style}`}">
+            *   <tr>
+            *       <th>Hello</th>
+            *       <th>World</th>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            * </table>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+            vars.push(`
+                ${cls} {
+                    @sugar.ui.table($style: ${style}, $scope: lnf);
+                }`);
+        });
+    }
+
+    if (finalParams.scope.includes('shape')) {
+        finalParams.shapes.forEach((shape) => {
+            const isDefaultShape = finalParams.defaultShape === shape;
+
+            const shapeCls = isDefaultShape ? '' : `.s-table--${shape}`;
+            const cls = `.s-table${shapeCls}`;
+
+            vars.push(`/**
+            * @name           s-table${isDefaultShape ? '' : `:${shape}`}
+            * @namespace      sugar.css.ui.table
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<yellow>${shape}</yellow>" table
+            * 
+            * @example        html
+            * <table class="s-table${isDefaultShape ? '' : `:${shape}`}">
+            *   <tr>
+            *       <th>Hello</th>
+            *       <th>World</th>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            *   <tr>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *       <td>Lorem ipsum dolor sit amet, consectetur adipiscing elit</td>
+            *   </tr>
+            * </table>
+            * 
+            * @since      2.0.0
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`);
+            vars.push(`
+                ${cls} {
+                    @sugar.ui.table($shape: ${shape}, $scope: shape);
+                }`);
+        });
+    }
 
     vars.push(`/**
         * @name           s-format:text
@@ -289,7 +405,6 @@ export default function ({
       */
         @sugar.format.text {
           table {
-              @sugar.color(${__STheme.config('ui.table.defaultColor')});
               @sugar.ui.table;
           }
         } 

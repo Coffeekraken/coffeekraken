@@ -113,25 +113,25 @@ export default function ({
             return ` * <!-- ${style} style -->
                 * <div class="s-font:30 s-mbe:50">
                 *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:accent">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:complementary">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:info">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
@@ -146,25 +146,25 @@ export default function ({
             return ` * <!-- ${shape} shape -->
                 * <div class="s-font:30 s-mbe:50">
                 *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:accent">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:complementary">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                *   <span class="s-tooltip-container:active">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hello</a>
-                *       <div class="s-tooltip${
+                *   <span class="s-tooltip-container">
+                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:info">
                 *           ${__faker.name.title()} ${__faker.name.findName()}
@@ -178,25 +178,25 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Positions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Block start (default)</a>
-        *       <div class="s-tooltip s-color:accent">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Inline end</a>
-        *       <div class="s-tooltip:inline-end s-color:accent">
+        *       <div class="s-tooltip:inline-end s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Block end</a>
-        *       <div class="s-tooltip:block-end s-color:accent">
+        *       <div class="s-tooltip:block-end s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Inline start</a>
-        *       <div class="s-tooltip:inline-start s-color:accent">
+        *       <div class="s-tooltip:inline-start s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -206,25 +206,25 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (sample)</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Accent</a>
-        *       <div class="s-tooltip s-color:accent">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Complementary</a>
-        *       <div class="s-tooltip s-color:complementary">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:complementary">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Error</a>
-        *       <div class="s-tooltip s-color:error">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:error">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Info</a>
-        *       <div class="s-tooltip s-color:info">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:info">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -234,13 +234,13 @@ export default function ({
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Interactions</h3>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">I'm not interactive</a>
-        *       <div class="s-tooltip">
+        *       <div class="s-tooltip s-white-space:nowrap">
         *           <a class="s-btn s-color:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">I'm interactive</a>
-        *       <div class="s-tooltip:interactive">
+        *       <div class="s-tooltip:interactive s-white-space:nowrap">
         *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>

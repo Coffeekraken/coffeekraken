@@ -1,6 +1,6 @@
 // @ts-nocheck
 
-import linkLoaded from './linkLoaded';
+import linkLoaded from '../load/linkLoaded';
 /**
  * @name      stylesheetsReady
  * @namespace            js.dom.detect

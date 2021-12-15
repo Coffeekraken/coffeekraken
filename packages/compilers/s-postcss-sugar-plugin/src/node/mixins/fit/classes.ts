@@ -38,10 +38,12 @@ export { postcssSugarPluginFixClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFitClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFitClassesParams = {
@@ -49,10 +51,11 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
     const fitSizes = ['fill', 'cover', 'contain', 'none'];
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Fit Sizes
         * @namespace          sugar.css.helpers
@@ -93,10 +96,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     fitSizes.forEach((fitSizeName) => {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name          s-fit:${fitSizeName}
                 * @namespace          sugar.css.fit
                 * @type               CssClass
@@ -113,6 +118,8 @@ export default function ({
                 * @since        2.0.0
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
+            `,
+        ).code(`
                 .s-fit--${fitSizeName} {
                     @sugar.fit(${fitSizeName});
                 }`);

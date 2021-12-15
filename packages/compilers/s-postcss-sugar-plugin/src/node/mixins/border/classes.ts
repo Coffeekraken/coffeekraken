@@ -31,10 +31,12 @@ export { postcssSugarPluginBorderRadiusClassesMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginBorderRadiusClassesMixinParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginBorderRadiusClassesMixinParams = {
@@ -43,9 +45,10 @@ export default function ({
     const radiusesObj = __STheme.config('border.radius');
     const widthsObj = __STheme.config('border.width');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Radius
         * @namespace          sugar.css.helpers
@@ -86,9 +89,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Border width
         * @namespace          sugar.css.helpers
@@ -129,52 +134,57 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(radiusesObj).forEach((radiusName) => {
         const cls = `s-radius--${radiusName}`.replace('--default', '');
         const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
-  * @name               ${clsName}
-  * @namespace          sugar.css.border
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to apply a "<yellow>${radiusName}</yellow>" border radius style to any HTMLElement
-  * 
-  * @example        html
-  * <div class="${clsName.replace(':', ':')} s-color--complementary">
-  *     Hello world
-  * </div>
-  */
-.${cls} {
-    @sugar.border.radius(${radiusName});
-}`;
-        vars.push(radiusCss);
+            * @name               ${clsName}
+            * @namespace          sugar.css.border
+            * @type               CssClass
+            * @platform         css
+            * @status           beta
+            * 
+            * This class allows you to apply a "<yellow>${radiusName}</yellow>" border radius style to any HTMLElement
+            * 
+            * @example        html
+            * <div class="${clsName.replace(':', ':')} s-color--complementary">
+            *     Hello world
+            * </div>
+            */
+ `;
+        vars.comment(() => radiusCss).code(`
+            .${cls} {
+                @sugar.border.radius(${radiusName});
+            }
+        `);
     });
 
     Object.keys(widthsObj).forEach((widthName) => {
         const cls = `s-bwidth:${widthName}`.replace(':default', '');
         const clsName = `s-bwidth--${widthName}`.replace('--default', '');
-        const radiusCss = `/**
-  * @name               ${cls}
-  * @namespace          sugar.css.border
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to apply a "<yellow>${widthName}</yellow>" border width style to any HTMLElement
-  * 
-  * @example        html
-  * <div class="${cls}">
-  *     Hello world
-  * </div>
-  */
-.${clsName} {
-    @sugar.border.width(${widthName});
-}`;
-        vars.push(radiusCss);
+        vars.comment(
+            () => `/**
+                * @name               ${cls}
+                * @namespace          sugar.css.border
+                * @type               CssClass
+                * @platform         css
+                * @status           beta
+                * 
+                * This class allows you to apply a "<yellow>${widthName}</yellow>" border width style to any HTMLElement
+                * 
+                * @example        html
+                * <div class="${cls}">
+                *     Hello world
+                * </div>
+                */
+        `,
+        ).code(`
+        .${clsName} {
+            @sugar.border.width(${widthName});
+        }`);
     });
 
     return vars;

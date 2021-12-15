@@ -282,7 +282,8 @@ class SSugarCli {
                 this._stdio = __SStdio.existingOrNew(
                     'default',
                     this._eventEmitter,
-                    sugarCliSettings?.stdio ?? null,
+                    __SStdio.NO_UI,
+                    // sugarCliSettings?.stdio ?? null,
                 );
             }
 
@@ -306,7 +307,7 @@ class SSugarCli {
                 this._stdio = __SStdio.existingOrNew(
                     'default',
                     this._eventEmitter,
-                    'terminal',
+                    // 'terminal',
                 );
             }
 

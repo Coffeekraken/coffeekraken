@@ -31,19 +31,22 @@ export { postcssSugarPluginFixClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFitClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFitClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Disabled
         * @namespace          sugar.css.helpers
@@ -68,9 +71,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-disabled
             * @namespace          sugar.css.disabled
             * @type               CssClass
@@ -88,6 +93,8 @@ export default function ({
             * @since        2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+        `,
+    ).code(`
             .s-disabled {
                 @sugar.disabled;
             }`);

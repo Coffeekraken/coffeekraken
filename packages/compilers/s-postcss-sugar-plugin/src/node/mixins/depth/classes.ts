@@ -32,10 +32,12 @@ export { postcssSugarPluginDepthClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginDepthClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginDepthClassesParams = {
@@ -44,9 +46,10 @@ export default function ({
 
     const depthsObj = __STheme.config('depth');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Depth
         * @namespace          sugar.css.helpers
@@ -82,25 +85,28 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(depthsObj).forEach((depthName) => {
-        const depthCss = `/**
-  * @name          s-depth:${depthName}
-  * @namespace          sugar.css.depth
-  * @type               CssClass
-  * @platform         css
-  * @status           beta
-  * 
-  * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
-  * 
-  * @example        html
-  * <a class="s-btn s-btn--primary s-depth\:${depthName}">I'm a cool depth button</a>
-  */
+        vars.comment(
+            () => `/**
+                * @name          s-depth:${depthName}
+                * @namespace          sugar.css.depth
+                * @type               CssClass
+                * @platform         css
+                * @status           beta
+                * 
+                * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
+                * 
+                * @example        html
+                * <a class="s-btn s-btn--primary s-depth\:${depthName}">I'm a cool depth button</a>
+                */
+                `,
+        ).code(`
 .s-depth--${depthName} {
     @sugar.depth(${depthName});
-}`;
-        vars.push(depthCss);
+}`);
     });
 
     return vars;

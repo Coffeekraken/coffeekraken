@@ -33,17 +33,19 @@ export { postcssSugarPluginFontClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFontClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFontClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const fontsFamiliesObj = __STheme.config('font.family'),
         fontSizesObj = __STheme.config('font.size'),
@@ -72,7 +74,8 @@ export default function ({
             'weight-900',
         ];
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Families
         * @namespace          sugar.css.font
@@ -107,9 +110,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Sizes
         * @namespace          sugar.css.font
@@ -145,9 +150,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Styles
         * @namespace          sugar.css.font
@@ -180,9 +187,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Weights
         * @namespace          sugar.css.font
@@ -225,9 +234,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Stretches
         * @namespace          sugar.css.font
@@ -265,9 +276,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Resets
         * @namespace          sugar.css.font
@@ -295,10 +308,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
-        vars.push(`
+        vars.comment(
+            () => `
         /**
         * @name          s-font:${fontName}
         * @namespace          sugar.css.font
@@ -314,6 +329,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
 .s-font--${fontName} {
     @sugar.font.family(${fontName});
 }`);
@@ -321,7 +338,8 @@ export default function ({
 
     Object.keys(fontSizesObj).forEach((sizeName) => {
         if (sizeName === 'default') return;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
   * @name          s-font:${sizeName}
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -333,13 +351,16 @@ export default function ({
   * @example        html
   * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
+ `,
+        ).code(`
 .s-font--${sizeName} {
     @sugar.font.size(${sizeName});
 }`);
     });
 
     // reset
-    vars.push(`/**
+    vars.comment(
+        () => `/**
   * @name          s-font:reset-size
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -354,10 +375,14 @@ export default function ({
   * @since      2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+ `,
+    ).code(`
 .s-font--reset-size {
   font-size: sugar.scalable(1rem);
 }`);
-    vars.push(`/**
+
+    vars.comment(
+        () => `/**
   * @name          s-font:reset-family
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -372,12 +397,15 @@ export default function ({
   * @since      2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+ `,
+    ).code(`
 .s-font--reset-family {
   @sugar.font.family(default);
 }`);
 
     fontStretchProps.forEach((value) => {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -392,12 +420,15 @@ export default function ({
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+        ).code(`
             .s-font--${value} {
                 font-stretch: ${value};
             }`);
     });
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-font:italic
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -412,11 +443,14 @@ export default function ({
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+    ).code(`
             .s-font--italic {
                 font-style: italic;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-font:oblique
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -431,12 +465,15 @@ export default function ({
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+    ).code(`
             .s-font--oblique {
                 font-style: oblique;
             }`);
 
     fontWeightProps.forEach((value) => {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -457,6 +494,8 @@ export default function ({
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+        `,
+        ).code(`
             .s-font--${value} {
                 font-weight: ${value.replace('weight-', '')};
             }`);

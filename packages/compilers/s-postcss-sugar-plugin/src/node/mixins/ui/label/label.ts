@@ -88,12 +88,9 @@ export default function ({
             cursor: pointer;
           }
     `);
-    }
 
-    // style
-    switch (finalParams.style) {
-        case 'float':
-            if (finalParams.scope.indexOf('bare') !== -1) {
+        switch (finalParams.style) {
+            case 'float':
                 vars.push(`
                   display: block;
                   line-height: 1;
@@ -126,7 +123,7 @@ export default function ({
                       transform: scale(0.7);
                     }
                   }
-                  & > input:not(:placeholder-shown) + *,
+                  & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
                   & > textarea:not(:placeholder-shown) + * {
                     top: calc(var(--top) + 0.3em);
                     left: 0.3em;
@@ -147,14 +144,14 @@ export default function ({
                         right: 0.3em;
                       }
                     }
-                    & > input:not(:placeholder-shown) + *,
+                    & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
                     & > textarea:not(:placeholder-shown) + * {
                       left: auto;
                       right: 0.3em;
                     }
                   }
 
-                  & > input,
+                  & > input:not([type="checkbox"]):not([type="radio"]),
                   & > textarea,
                   & > select {
                     width: 100%;
@@ -166,61 +163,22 @@ export default function ({
 
                   &:focus,
                   &:focus-within {
-                    & > input,
+                    & > input:not([type="checkbox"]):not([type="radio"]),
                     & > textarea,
                     & > select {
                       padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
                       padding-block-end: sugar.theme(ui.form.paddingBlock, true);
                     }
                   }
-                  & > input:not(:placeholder-shown),
+                  & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]),
                   & > textarea:not(:placeholder-shown) {
                     padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
                     padding-block-end: sugar.theme(ui.form.paddingBlock, true);
                   }
                 `);
-            }
-
-            if (finalParams.scope.indexOf('lnf') !== -1) {
-                vars.push(`
-                  
-                  & > *:not(input):not(textarea):not(select) {
-                    transition: sugar.theme(ui.label.transition);
-                  }
-
-                  & > input,
-                  & > textarea,
-                  & > select {
-                    transition: sugar.theme(ui.label.transition);
-
-                    &::placeholder {
-                      color: sugar.color(current, --alpha 0);
-                    }
-                  }
-
-                  &:focus,
-                  &:focus-within {
-                    & > input,
-                    & > textarea,
-                    & > select {
-                      &::placeholder {
-                        color: sugar.color(current, placeholder);
-                      }
-                    }
-                  }
-                  & > input:not(:placeholder-shown),
-                  & > textarea:not(:placeholder-shown) {
-                    &::placeholder {
-                      color: sugar.color(current, placeholder);
-                    }
-                  }
-
-                `);
-            }
-            break;
-        case 'inline':
-        default:
-            if (finalParams.scope.indexOf('bare') !== -1) {
+                break;
+            case 'inline':
+            default:
                 vars.push(`
                   display: flex;
                   align-items: center;
@@ -232,13 +190,53 @@ export default function ({
                   }
 
                 `);
-            }
-            if (finalParams.scope.indexOf('lnf') !== -1) {
+                break;
+        }
+    }
+
+    // style
+    if (finalParams.scope.indexOf('lnf') !== -1) {
+        switch (finalParams.style) {
+            case 'float':
                 vars.push(`
-                
+                  
+                  & > *:not(input):not(textarea):not(select) {
+                    transition: sugar.theme(ui.label.transition);
+                  }
+
+                  & > input:not([type="checkbox"]):not([type="radio"]),
+                  & > textarea,
+                  & > select {
+                    transition: sugar.theme(ui.label.transition);
+
+                    &::placeholder {
+                      color: sugar.color(current, --alpha 0);
+                    }
+                  }
+
+                  &:focus,
+                  &:focus-within {
+                    & > input:not([type="checkbox"]):not([type="radio"]),
+                    & > textarea,
+                    & > select {
+                      &::placeholder {
+                        color: sugar.color(current, placeholder);
+                      }
+                    }
+                  }
+                  & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]),
+                  & > textarea:not(:placeholder-shown) {
+                    &::placeholder {
+                      color: sugar.color(current, placeholder);
+                    }
+                  }
+
                 `);
-            }
-            break;
+                break;
+            case 'inline':
+            default:
+                break;
+        }
     }
 
     return vars;

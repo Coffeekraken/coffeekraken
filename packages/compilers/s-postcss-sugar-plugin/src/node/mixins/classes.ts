@@ -74,13 +74,13 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
     })}`;
 
     // from cache
-    // const cached = await fromCache(hash, '@sugar.classes;');
-    // if (cached) {
-    //     console.log(
-    //         `<green>[postcss]</green> Statement "<cyan>@sugar.classes;</cyan>" getted from cache`,
-    //     );
-    //     return cached;
-    // }
+    const cached = await fromCache(hash, '@sugar.classes;');
+    if (cached) {
+        console.log(
+            `<green>[postcss]</green> Statement "<cyan>@sugar.classes;</cyan>" getted from cache`,
+        );
+        return cached;
+    }
 
     console.log(
         '<yellow>[postcss]</yellow> Compiling the "<cyan>@sugar.classes;</cyan>" statement. ',

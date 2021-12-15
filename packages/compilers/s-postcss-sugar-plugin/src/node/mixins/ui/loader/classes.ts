@@ -62,7 +62,7 @@ export default function ({
         *           <div class="s-loader:spinner s-color:accent"></div>
         *       </div>
         *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner s-color:accent"></div>
+        *           <div class="s-loader:spinner s-color:complementary"></div>
         *       </div>
         *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
         *           <div class="s-loader:spinner s-color:info"></div>

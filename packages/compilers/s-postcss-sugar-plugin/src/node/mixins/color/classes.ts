@@ -26,10 +26,11 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, replaceWith }) {
-    const cssArray: string[] = [];
+export default function ({ params, atRule, CssVars, replaceWith }) {
+    const cssArray = new CssVars();
 
-    cssArray.push(`
+    cssArray.comment(
+        () => `
       /**
         * @name          Colors
         * @namespace          sugar.css.helpers
@@ -83,10 +84,12 @@ export default function ({ params, atRule, replaceWith }) {
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
-        cssArray.push(`
+        cssArray.comment(
+            () => `
       /**
        * @name        s-color:${colorName}
        * @namespace     sugar.css.ui.label
@@ -104,6 +107,8 @@ export default function ({ params, atRule, replaceWith }) {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+        ).code(`
       .s-color--${colorName} {
         @sugar.color(${colorName});
       }
@@ -115,7 +120,7 @@ export default function ({ params, atRule, replaceWith }) {
         let modifierStr = '';
         if (colorObj.variant) modifierStr = `-${colorObj.variant}`;
 
-        cssArray.push(
+        cssArray.comment(() =>
             [
                 `/**`,
                 ` * @name           s-tc:${colorName}${
@@ -135,15 +140,16 @@ export default function ({ params, atRule, replaceWith }) {
                 ` *     Something cool`,
                 ` * </h1>`,
                 ` */`,
-                `.s-tc--${colorName}${
-                    colorObj.variant === 'text' ? '' : modifierStr
-                } {`,
-                `   color: sugar.color(${colorName}, ${colorObj.variant});`,
-                `}`,
             ].join('\n'),
-        );
+        ).code(`
+            .s-tc--${colorName}${
+            colorObj.variant === 'text' ? '' : modifierStr
+        } {
+            color: sugar.color(${colorName}, ${colorObj.variant});
+        }
+        `);
 
-        cssArray.push(
+        cssArray.comment(() =>
             [
                 `/**`,
                 ` * @name           s-bg:${colorName}${modifierStr}`,
@@ -159,14 +165,15 @@ export default function ({ params, atRule, replaceWith }) {
                 ` *     Something cool`,
                 ` * </h1>`,
                 ` */`,
-                `.s-bg--${colorName}${modifierStr} {`,
-                `   background-color: sugar.color(${colorName}, ${colorObj.variant})`,
-                `}`,
             ].join('\n'),
-        );
+        ).code(`
+            .s-bg--${colorName}${modifierStr} {
+                   background-color: sugar.color(${colorName}, ${colorObj.variant});
+                }
+        `);
     });
 
-    cssArray.push(
+    cssArray.comment(() =>
         [
             `/**`,
             ` * @name           s-bg:odd`,
@@ -184,12 +191,13 @@ export default function ({ params, atRule, replaceWith }) {
             ` *     <li class="s-bg--accent">Something cool</li>`,
             ` * </li>`,
             ` */`,
-            `.s-bg--odd > *:nth-child(even) {`,
-            '   background-color: transparent !important;',
-            `}`,
         ].join('\n'),
-    );
-    cssArray.push(
+    ).code(`
+        .s-bg--odd > *:nth-child(even) {
+              background-color: transparent !important;
+            }
+    `);
+    cssArray.comment(() =>
         [
             `/**`,
             ` * @name           s-bg:even`,
@@ -207,11 +215,12 @@ export default function ({ params, atRule, replaceWith }) {
             ` *     <li class="s-bg--accent">Something cool</li>`,
             ` * </li>`,
             ` */`,
-            `.s-bg--even > *:nth-child(even) {`,
-            '   background-color: transparent !important;',
-            `}`,
         ].join('\n'),
-    );
+    ).code(`
+        .s-bg--even > *:nth-child(even) {
+            background-color: transparent !important;
+        }
+    `);
 
     replaceWith(cssArray);
 }

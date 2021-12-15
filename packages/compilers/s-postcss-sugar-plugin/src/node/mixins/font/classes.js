@@ -24,9 +24,9 @@ class postcssSugarPluginFontClassesInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginFontClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
+export default function ({ params, atRule, CssVars, replaceWith, }) {
     const finalParams = Object.assign({}, params);
-    const vars = [];
+    const vars = new CssVars();
     const fontsFamiliesObj = __STheme.config('font.family'), fontSizesObj = __STheme.config('font.size'), fontStretchProps = [
         'ultra-condensed',
         'extra-condensed',
@@ -50,7 +50,7 @@ export default function ({ params, atRule, replaceWith, }) {
         'weight-800',
         'weight-900',
     ];
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Families
         * @namespace          sugar.css.font
@@ -86,7 +86,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Sizes
         * @namespace          sugar.css.font
@@ -123,7 +123,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Styles
         * @namespace          sugar.css.font
@@ -157,7 +157,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Weights
         * @namespace          sugar.css.font
@@ -201,7 +201,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Stretches
         * @namespace          sugar.css.font
@@ -240,7 +240,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
       /**
         * @name          Resets
         * @namespace          sugar.css.font
@@ -270,7 +270,7 @@ export default function ({ params, atRule, replaceWith, }) {
         */
     `);
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
-        vars.push(`
+        vars.comment(() => `
         /**
         * @name          s-font:${fontName}
         * @namespace          sugar.css.font
@@ -286,6 +286,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `).code(`
 .s-font--${fontName} {
     @sugar.font.family(${fontName});
 }`);
@@ -293,7 +294,7 @@ export default function ({ params, atRule, replaceWith, }) {
     Object.keys(fontSizesObj).forEach((sizeName) => {
         if (sizeName === 'default')
             return;
-        vars.push(`/**
+        vars.comment(() => `/**
   * @name          s-font:${sizeName}
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -305,12 +306,13 @@ export default function ({ params, atRule, replaceWith, }) {
   * @example        html
   * <h1 class="s-font:${sizeName}">Hello world</h1>
   */
+ `).code(`
 .s-font--${sizeName} {
     @sugar.font.size(${sizeName});
 }`);
     });
     // reset
-    vars.push(`/**
+    vars.comment(() => `/**
   * @name          s-font:reset-size
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -325,10 +327,11 @@ export default function ({ params, atRule, replaceWith, }) {
   * @since      2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+ `).code(`
 .s-font--reset-size {
   font-size: sugar.scalable(1rem);
 }`);
-    vars.push(`/**
+    vars.comment(() => `/**
   * @name          s-font:reset-family
   * @namespace          sugar.css.mixins.font
   * @type               CssClass
@@ -343,11 +346,12 @@ export default function ({ params, atRule, replaceWith, }) {
   * @since      2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+ `).code(`
 .s-font--reset-family {
   @sugar.font.family(default);
 }`);
     fontStretchProps.forEach((value) => {
-        vars.push(`/**
+        vars.comment(() => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -362,11 +366,12 @@ export default function ({ params, atRule, replaceWith, }) {
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `).code(`
             .s-font--${value} {
                 font-stretch: ${value};
             }`);
     });
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-font:italic
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -381,10 +386,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `).code(`
             .s-font--italic {
                 font-style: italic;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-font:oblique
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -399,11 +405,12 @@ export default function ({ params, atRule, replaceWith, }) {
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `).code(`
             .s-font--oblique {
                 font-style: oblique;
             }`);
     fontWeightProps.forEach((value) => {
-        vars.push(`/**
+        vars.comment(() => `/**
             * @name          s-font:${value}
             * @namespace          sugar.css.mixins.font
             * @type               CssClass
@@ -418,10 +425,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @since      2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+        `).code(`
             .s-font--${value} {
                 font-weight: ${value.replace('weight-', '')};
             }`);
     });
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsTUFBTSxnQkFBZ0IsR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLGFBQWEsQ0FBQyxFQUNuRCxZQUFZLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUMsRUFDM0MsZ0JBQWdCLEdBQUc7UUFDZixpQkFBaUI7UUFDakIsaUJBQWlCO1FBQ2pCLFdBQVc7UUFDWCxnQkFBZ0I7UUFDaEIsZUFBZTtRQUNmLFVBQVU7UUFDVixnQkFBZ0I7UUFDaEIsZ0JBQWdCO0tBQ25CLEVBQ0QsZUFBZSxHQUFHO1FBQ2QsTUFBTTtRQUNOLFFBQVE7UUFDUixTQUFTO1FBQ1QsWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO0tBQ2YsQ0FBQztJQUVOLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7VUFnQkosTUFBTSxDQUFDLElBQUksQ0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixNQUFNLGdCQUFnQixHQUFHLFFBQVEsQ0FBQyxNQUFNLENBQUMsYUFBYSxDQUFDLEVBQ25ELFlBQVksR0FBRyxRQUFRLENBQUMsTUFBTSxDQUFDLFdBQVcsQ0FBQyxFQUMzQyxnQkFBZ0IsR0FBRztRQUNmLGlCQUFpQjtRQUNqQixpQkFBaUI7UUFDakIsV0FBVztRQUNYLGdCQUFnQjtRQUNoQixlQUFlO1FBQ2YsVUFBVTtRQUNWLGdCQUFnQjtRQUNoQixnQkFBZ0I7S0FDbkIsRUFDRCxlQUFlLEdBQUc7UUFDZCxNQUFNO1FBQ04sUUFBUTtRQUNSLFNBQVM7UUFDVCxZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7UUFDWixZQUFZO1FBQ1osWUFBWTtRQUNaLFlBQVk7S0FDZixDQUFDO0lBRU4sSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7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

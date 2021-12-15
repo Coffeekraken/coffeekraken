@@ -26,8 +26,8 @@ export { postcssSugarPluginDocblockColorsMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, replaceWith }) {
-    const cssArray: string[] = [];
+export default function ({ params, atRule, CssVars, replaceWith }) {
+    const vars = new CssVars();
 
     const colorsObj = __STheme.config('color');
 
@@ -36,7 +36,7 @@ export default function ({ params, atRule, replaceWith }) {
         const colorObj = colorsObj[colorName];
         Object.keys(colorObj).forEach((modifier) => {
             const colorValue = colorObj[modifier];
-            cssArray.push(
+            vars.comment(() =>
                 [
                     `/**`,
                     ` * @name 		    ${colorName}`,
@@ -57,5 +57,5 @@ export default function ({ params, atRule, replaceWith }) {
         });
     });
 
-    replaceWith(cssArray);
+    return vars;
 }

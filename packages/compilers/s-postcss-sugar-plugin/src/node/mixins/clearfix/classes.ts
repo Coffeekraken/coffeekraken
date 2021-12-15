@@ -39,10 +39,12 @@ export { postcssSugarPluginClearfixClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginClearfixClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginClearfixClassesParams = {
@@ -50,14 +52,16 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
+
     const clearfixes = ['overflow', 'facebook', 'micro', 'after'];
     const notStr = clearfixes
         .filter((c) => c !== finalParams.defaultClearfix)
         .map((c) => `:not(.s-clearfix--${c})`)
         .join('');
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Clearfix
         * @namespace          sugar.css.helpers
@@ -104,10 +108,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     clearfixes.forEach((clearfixName) => {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name          s-clearfix${
                     clearfixName === finalParams.defaultClearfix
                         ? ''
@@ -130,6 +136,8 @@ export default function ({
                 * @since        2.0.0
                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                 */
+            `,
+        ).code(`
                 .s-clearfix${
                     clearfixName === finalParams.defaultClearfix
                         ? `${notStr}`

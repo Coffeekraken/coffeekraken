@@ -13,7 +13,7 @@ import __SStdio from '@coffeekraken/s-stdio';
 export const sugarCliSettings = {
     stdio: __SStdio.UI_TERMINAL,
 };
-export default function action(stringArgs = '') {
+export default function recipe(stringArgs = '') {
     return new __SPromise(({ resolve, pipe }) => __awaiter(this, void 0, void 0, function* () {
         const frontstack = new __SFrontstack();
         const promise = frontstack.recipe(stringArgs);

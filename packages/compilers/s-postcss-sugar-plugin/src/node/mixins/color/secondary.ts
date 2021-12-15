@@ -51,11 +51,11 @@ export default function ({
         ...params,
     };
 
-    const cssArray: string[] = [
+    const vars: string[] = [
         `
         @sugar.color.remap(secondary, ${finalParams.color});
     `,
     ];
 
-    replaceWith(cssArray);
+    return vars;
 }

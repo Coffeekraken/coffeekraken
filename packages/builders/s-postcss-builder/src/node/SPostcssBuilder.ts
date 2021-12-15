@@ -225,7 +225,12 @@ export default class SPostcssBuilder extends __SBuilder {
                             this.postcssBuilderSettings.postcss.pluginsOptions[
                                 p
                             ] ?? {};
-                        plugins.push(fn(options));
+                        plugins.push(
+                            fn({
+                                target: 'dev',
+                                ...options,
+                            }),
+                        );
                     } else {
                         plugins.push(p);
                     }

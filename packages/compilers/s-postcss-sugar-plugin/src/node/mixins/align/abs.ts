@@ -50,51 +50,53 @@ export { postcssSugarPluginAlignInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: IPostcssSugarPluginAlignParams;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginAlignParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
-    position: absolute;
-  `);
+    vars.code(`
+        position: absolute;
+    `);
 
     let transform = '';
     const alignSplits = finalParams.align.split(' ').map((l) => l.trim());
 
     if (alignSplits.indexOf('top') !== -1) {
-        vars.push('top: 0;');
+        vars.code('top: 0;');
     } else if (alignSplits.indexOf('bottom') !== -1) {
-        vars.push('bottom: 0;');
+        vars.code('bottom: 0;');
     } else if (
         alignSplits.indexOf('center') !== -1 ||
         alignSplits.indexOf('center-y') !== -1
     ) {
-        vars.push('top: 50%;');
+        vars.code('top: 50%;');
         transform += 'translateY(-50%) ';
     }
 
     if (alignSplits.indexOf('left') !== -1) {
-        vars.push('left: 0;');
+        vars.code('left: 0;');
     } else if (alignSplits.indexOf('right') !== -1) {
-        vars.push('right: 0;');
+        vars.code('right: 0;');
     } else if (
         alignSplits.indexOf('center') !== -1 ||
         alignSplits.indexOf('center-x') !== -1
     ) {
-        vars.push('left: 50%;');
+        vars.code('left: 50%;');
         transform += 'translateX(-50%)';
     }
 
     if (transform) {
-        vars.push(`transform: ${transform.trim()};`);
+        vars.code(`transform: ${transform.trim()};`);
     }
 
     return vars;

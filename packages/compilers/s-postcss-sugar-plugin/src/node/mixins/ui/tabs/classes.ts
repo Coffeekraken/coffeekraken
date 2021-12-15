@@ -117,8 +117,8 @@ export default function ({
             *   <ul class="s-tabs${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-color:accent">
-            *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
+            *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
             * </div>
@@ -135,8 +135,8 @@ export default function ({
             *   <ul class="s-tabs${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-color:accent">
-            *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0" active>${__faker.name.findName()}</li>
+            *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
             * </div>
@@ -257,6 +257,10 @@ export default function ({
           */
         .s-tabs${finalParams.defaultShape === shape ? '' : `--${shape}`} {
           @sugar.ui.tabs($shape: ${shape}, $scope: shape);
+
+          &.s-tabs--vertical {
+                @sugar.ui.tabs($direction: vertical, $shape: ${shape}, $scope: 'shape');
+            }
         }
       `);
         });
@@ -294,7 +298,7 @@ export default function ({
         * </div>
       */
     .s-tabs--vertical {
-      @sugar.ui.tabs($direction: vertical, $scope: direction);
+      @sugar.ui.tabs($direction: vertical, $scope: 'direction');
     }
   `);
 

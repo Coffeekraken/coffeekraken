@@ -108,20 +108,21 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-    border-left: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border);
-    border-radius: sugar.theme(ui.table.borderRadius);
-    @sugar.depth(sugar.theme(ui.table.depth));
+                    @sugar.depth(sugar.theme(ui.table.depth));
+                    position: relative;
+                    box-shadow: 0 0 0 sugar.theme(ui.table.borderWidth) sugar.color(current, border);
+                    overflow: hidden;
 
-    &, th, td {
-        border: sugar.theme(ui.table.borderWidth) solid sugar.color(current, border)
-    }
-    th {
-        background-color: sugar.color(current, surface);
-        font-weight: bold;
-    }
-    td, th {
-    
-    }
+                    &, th, td {
+
+                    }
+                    th {
+                        background-color: sugar.color(current, surface);
+                        font-weight: bold;
+                    }
+                    td, th {
+                    
+                    }
 
   `);
                 break;

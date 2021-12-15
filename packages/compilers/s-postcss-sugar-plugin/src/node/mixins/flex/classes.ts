@@ -32,19 +32,22 @@ export { postcssSugarPluginFlexClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFlexClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFlexClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Flex
         * @namespace          sugar.css.helpers
@@ -140,9 +143,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -154,11 +159,14 @@ export default function ({
             * @example        html
             * <div class="s-flex"></div>
             */
+        `,
+    ).code(`
             .s-flex {
                 display: flex;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:row
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -170,11 +178,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:row"></div>
             */
+        `,
+    ).code(`
             .s-flex--row {
                 flex-direction: row;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:row-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -186,11 +197,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:row-reverse"></div>
             */
+        `,
+    ).code(`
             .s-flex--row-reverse {
                 flex-direction: row-reverse;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:column
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -202,11 +216,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:column"></div>
             */
+        `,
+    ).code(`
             .s-flex--column {
                 flex-direction: column;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:column-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -218,11 +235,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:column-reverse"></div>
             */
+           `,
+    ).code(`
             .s-flex--column-reverse {
                 flex-direction: column-reverse;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:nowrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -234,11 +254,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:nowrap"></div>
             */
+           `,
+    ).code(`
             .s-flex--nowrap {
                 flex-wrap: nowrap;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:wrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -250,11 +273,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:wrap"></div>
             */
+           `,
+    ).code(`
             .s-flex--wrap {
                 flex-wrap: wrap;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:wrap-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -266,11 +292,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:wrap-reverse"></div>
             */
+           `,
+    ).code(`
             .s-flex--wrap-reverse {
                 flex-wrap: wrap-reverse;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -282,11 +311,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-start"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-start {
                 justify-content: start;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -298,11 +330,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-flex-start"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-flex-start {
                 justify-content: flex-start;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -314,11 +349,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-end"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-end {
                 justify-content: end;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -330,11 +368,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-flex-end"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-flex-end {
                 justify-content: flex-end;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -346,11 +387,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-center"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-center {
                 justify-content: center;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-space-between
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -362,11 +406,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-space-between"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-space-between {
                 justify-content: space-between;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-space-around
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -378,11 +425,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-space-around"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-space-around {
                 justify-content: space-around;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-space-evenly
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -394,11 +444,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-space-evenly"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-space-evenly {
                 justify-content: space-evenly;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:justify-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -410,11 +463,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:justify-stretch"></div>
             */
+           `,
+    ).code(`
             .s-flex--justify-stretch {
                 justify-content: stretch;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -426,11 +482,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-start"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-start {
                 align-items: start;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -442,11 +501,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-flex-start"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-flex-start {
                 align-items: flex-start;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -458,11 +520,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-end"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-end {
                 align-items: end;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -474,11 +539,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-flex-end"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-flex-end {
                 align-items: flex-end;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -490,11 +558,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-center"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-center {
                 align-items: center;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -506,11 +577,14 @@ export default function ({
             * @example        html
             * <div class="s-flex\:align-baseline"></div>
             */
+           `,
+    ).code(`
             .s-flex--align-baseline {
                 align-items: baseline;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name          s-flex-item:grow
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -524,11 +598,14 @@ export default function ({
         *   <div class="s-flex-item\:grow"></div>
         * </div>
         */
+       `,
+    ).code(`
         .s-flex-item--grow {
             flex-grow: 1;
         }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name          s-flex-item:shrink
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -542,12 +619,15 @@ export default function ({
         *   <div class="s-flex-item\:shrink"></div>
         * </div>
         */
+       `,
+    ).code(`
         .s-flex-item--shrink {
             flex-shrink: 1;
         }`);
 
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name          s-flex-item:order-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -561,13 +641,16 @@ export default function ({
                 *   <div class="s-flex-item\:order-${i}"></div>
                 * </div>
                 */
+               `,
+        ).code(`
                 .s-flex-item--order-${i} {
                     order: ${i};
                 }`);
     }
 
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name          s-flex-item:grow-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -581,13 +664,16 @@ export default function ({
                 *   <div class="s-flex-item\:grow-${i}"></div>
                 * </div>
                 */
+               `,
+        ).code(`
                 .s-flex-item--grow-${i} {
                     flex-grow: ${i};
                 }`);
     }
 
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name          s-flex-item:shrink-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -601,12 +687,15 @@ export default function ({
                 *   <div class="s-flex-item\:shrink-${i}"></div>
                 * </div>
                 */
+               `,
+        ).code(`
                 .s-flex-item--shrink-${i} {
                     flex-shrink: ${i};
                 }`);
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex-item:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -620,11 +709,14 @@ export default function ({
             *   <div class="s-flex-item\:align-flex-start"></div>
             * </div>
             */
+           `,
+    ).code(`
             .s-flex-item--align-flex-start {
                 align-self: flex-start;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex-item:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -638,11 +730,14 @@ export default function ({
             *   <div class="s-flex-item\:align-flex-end"></div>
             * </div>
             */
+           `,
+    ).code(`
             .s-flex-item--align-flex-end {
                 align-self: flex-end;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex-item:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -656,11 +751,14 @@ export default function ({
             *   <div class="s-flex-item\:align-center"></div>
             * </div>
             */
+           `,
+    ).code(`
             .s-flex-item--align-center {
                 align-self: center;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex-item:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -674,11 +772,14 @@ export default function ({
             *   <div class="s-flex-item\:align-baseline"></div>
             * </div>
             */
+           `,
+    ).code(`
             .s-flex-item--align-baseline {
                 align-self: baseline;
             }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-flex-item:align-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -692,6 +793,8 @@ export default function ({
             *   <div class="s-flex-item\:align-stretch"></div>
             * </div>
             */
+           `,
+    ).code(`
             .s-flex-item--align-stretch {
                 align-self: stretch;
             }`);

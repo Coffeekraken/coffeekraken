@@ -213,9 +213,9 @@ export default function ({
         switch (finalParams.shape) {
             case 'square':
                 vars.push(`
-                border-radius: 0;
+                border-radius: 0 !important;
                 & > * {
-                  border-radius: 0;
+                  border-radius: 0 !important;
                 }
               `);
 
@@ -260,26 +260,24 @@ export default function ({
                   border-bottom-right-radius: 9999px !important;
                 }
 
-                ${
-                    finalParams.direction === 'vertical'
-                        ? `
-                  & > *:first-child {
-              border-top-left-radius: 9999px !important;
-              border-bottom-left-radius: 0 !important;
-              border-top-right-radius: 9999px !important;
-              border-bottom-right-radius: 0 !important;
-            }
-            & > *:last-child {
-              border-top-left-radius: 0 !important;
-              border-bottom-left-radius: 9999px !important;
-              border-top-right-radius: 0 !important;
-              border-bottom-right-radius: 9999px !important;
-            }
-                `
-                        : ''
-                }
-
               `);
+
+                if (finalParams.direction === 'vertical') {
+                    vars.push(`
+                    & > *:first-child {
+                      border-top-left-radius: 9999px !important;
+                      border-bottom-left-radius: 0 !important;
+                      border-top-right-radius: 9999px !important;
+                      border-bottom-right-radius: 0 !important;
+                    }
+                    & > *:last-child {
+                      border-top-left-radius: 0 !important;
+                      border-bottom-left-radius: 9999px !important;
+                      border-top-right-radius: 0 !important;
+                      border-bottom-right-radius: 9999px !important;
+                    }
+                  `);
+                }
 
                 break;
             default:
@@ -321,27 +319,24 @@ export default function ({
                   border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
                   border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
                 }
-
-                ${
-                    finalParams.direction === 'vertical'
-                        ? `
-                  & > *:first-child {
-              border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-bottom-left-radius: 0 !important;
-              border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-bottom-right-radius: 0 !important;
-            }
-            & > *:last-child {
-              border-top-left-radius: 0 !important;
-              border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
-              border-top-right-radius: 0 !important;
-              border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
-            }
-                `
-                        : ''
-                }
-
               `);
+
+                if (finalParams.direction === 'vertical') {
+                    vars.push(`
+                    & > *:first-child {
+                      border-top-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-bottom-left-radius: 0 !important;
+                      border-top-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-bottom-right-radius: 0 !important;
+                    }
+                    & > *:last-child {
+                      border-top-left-radius: 0 !important;
+                      border-bottom-left-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                      border-top-right-radius: 0 !important;
+                      border-bottom-right-radius: sugar.theme(ui.tabs.borderRadius) !important;
+                    }
+                  `);
+                }
 
                 break;
         }

@@ -6,7 +6,7 @@ export const sugarCliSettings = {
     stdio: __SStdio.UI_TERMINAL,
 };
 
-export default function action(stringArgs = '') {
+export default function recipe(stringArgs = '') {
     return new __SPromise(async ({ resolve, pipe }) => {
         const frontstack = new __SFrontstack();
         const promise = frontstack.recipe(stringArgs);

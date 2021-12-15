@@ -47,10 +47,12 @@ export { postcssSugarPluginClearfixInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginClearfixParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginClearfixParams = {
@@ -58,18 +60,18 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     switch (finalParams.clearfix) {
         case 'facebook':
-            vars.push(`
+            vars.code(`
                 display: table-cell;
                 vertical-align: top;
                 width: 10000px !important;
             `);
             break;
         case 'micro':
-            vars.push(`
+            vars.code(`
                 zoom: 1;
                 &:before,
                 &:after {
@@ -82,7 +84,7 @@ export default function ({
             `);
             break;
         case 'after':
-            vars.push(`
+            vars.code(`
                 &:after {
                     content: "";
                     clear: both;
@@ -91,7 +93,7 @@ export default function ({
             `);
             break;
         case 'overflow':
-            vars.push(`
+            vars.code(`
                 overflow: hidden;
             `);
             break;

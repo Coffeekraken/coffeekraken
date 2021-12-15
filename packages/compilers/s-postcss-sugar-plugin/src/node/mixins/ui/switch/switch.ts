@@ -189,7 +189,6 @@ export default function ({
                             background: var(--thumb-color-active) !important;
                         }
                         &::after {
-                            box-shadow: 0 0 3px sugar.color(current, --darken 20);
                         }
                     }
 
@@ -199,7 +198,6 @@ export default function ({
                         background: var(--thumb-color-inactive);
                         box-shadow: 0 0 0 var(--highlight-size) var(--thumb-color-highlight);
                         transform: translateX(var(--thumb-position));
-                        box-shadow: 0;
                         transition: sugar.theme(ui.switch.transition);
                     }
 
@@ -231,6 +229,7 @@ export default function ({
             case 'square':
                 vars.push(`
                     border-radius: 0;
+
                     &:after,
                     &:before {
                         border-radius: 0;
@@ -240,6 +239,7 @@ export default function ({
             case 'pill':
                 vars.push(`
                     border-radius: 9999px;
+
                     &:after,
                     &:before {
                         border-radius: 9999px;
@@ -248,10 +248,11 @@ export default function ({
                 break;
             default:
                 vars.push(`
-                    border-radius: sugar.theme(ui.radio.borderRadius);
+                    border-radius: sugar.theme(ui.switch.borderRadius);
+
                     &:after,
                     &:before {
-                        border-radius: sugar.theme(ui.radio.borderRadius);
+                        border-radius: sugar.theme(ui.switch.borderRadius);
                     }
                 `);
                 break;

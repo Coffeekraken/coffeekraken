@@ -46,10 +46,12 @@ export { postcssSugarPluginBorderRadiusMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginBorderRadiusMixinParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginBorderRadiusMixinParams = {
@@ -57,8 +59,8 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [
-        `border-radius: sugar.border.radius(${finalParams.radius});`,
-    ];
+    const vars = new CssVars(`
+        border-radius: sugar.border.radius(${finalParams.radius});
+    `);
     return vars;
 }

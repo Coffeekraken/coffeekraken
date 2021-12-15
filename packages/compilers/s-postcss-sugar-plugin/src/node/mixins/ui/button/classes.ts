@@ -271,8 +271,6 @@ export default function ({
                 cls += `--${shape}`;
             }
 
-            console.log('SSS', shape);
-
             vars.push(`/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.button

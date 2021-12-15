@@ -23,6 +23,7 @@ let _mixinsPaths;
 const plugin = (settings: any = {}) => {
     settings = __deepMerge(
         {
+            target: 'prod',
             inlineImport: true,
             cache: __SSugarConfig.get('postcssSugarPlugin.cache'),
         },
@@ -94,8 +95,20 @@ const plugin = (settings: any = {}) => {
         return scopes;
     }
 
+    function commentsNeeded() {
+        return settings.target === 'dev';
+    }
+
     function replaceWith(atRule, nodes) {
+        if (nodes instanceof CssVars) {
+            nodes = nodes._stack;
+        }
+
         nodes = !Array.isArray(nodes) ? [nodes] : nodes;
+
+        atRule.walkComments((comment) => {
+            comment.remove();
+        });
 
         let isAllText = true;
         nodes.forEach((n) => {
@@ -250,6 +263,29 @@ const plugin = (settings: any = {}) => {
         return true;
     }
 
+    class CssVars {
+        _stack: string[] = [];
+        constructor(str) {
+            if (str) this._stack.push(str);
+        }
+        comment(str) {
+            // if (!commentsNeeded()) return this;
+            // if (typeof str === 'function') str = str();
+            // if (Array.isArray(str)) str = str.join('\n');
+            // this._stack.push(str);
+            return this;
+        }
+        code(str) {
+            if (typeof str === 'function') str = str();
+            if (Array.isArray(str)) str = str.join('\n');
+            this._stack.push(str);
+            return this;
+        }
+        toString() {
+            return this._stack.join('\n');
+        }
+    }
+
     return {
         postcssPlugin: 'sugar',
         async Once() {
@@ -297,10 +333,6 @@ const plugin = (settings: any = {}) => {
             if (__SBench.isBenchActive('postcssSugarPlugin')) {
                 __SBench.end('postcssSugarPlugin', true);
             }
-
-            // root.walkComments((comment) => {
-            //     comment.remove();
-            // });
 
             const pluginHash = pluginIntegrityHash();
 
@@ -446,6 +478,8 @@ const plugin = (settings: any = {}) => {
                     atRule,
                     findUp,
                     fromCache,
+                    CssVars,
+                    commentsNeeded,
                     applyNoScopes(scopes = []) {
                         return applyNoScopes(scopes, atRule);
                     },
@@ -471,6 +505,9 @@ const plugin = (settings: any = {}) => {
                 });
 
                 if (result) {
+                    if (result instanceof CssVars) {
+                        result = result._stack;
+                    }
                     if (!Array.isArray(result)) result = [result];
                     replaceWith(atRule, result);
                 }

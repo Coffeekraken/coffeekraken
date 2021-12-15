@@ -46,13 +46,13 @@ export default function ({
         ...params,
     };
 
-    const cssArray: string[] = [];
+    const vars: string[] = [];
 
     const componentsObj = __STheme.config('components');
 
     Object.keys(componentsObj).forEach((selector) => {
         if (finalParams.scope.indexOf('bare') !== -1) {
-            cssArray.push(`
+            vars.push(`
           ${selector} {
             ${__STheme.jsObjectToCssProperties(componentsObj[selector], {
                 exclude: ['rhythmVertical'],
@@ -62,7 +62,7 @@ export default function ({
         }
 
         if (finalParams.scope.indexOf('vr') !== -1) {
-            cssArray.push(`
+            vars.push(`
           @sugar.rhythm.vertical {
             ${selector} {
               ${__STheme.jsObjectToCssProperties(
@@ -74,5 +74,5 @@ export default function ({
         }
     });
 
-    replaceWith(cssArray);
+    replaceWith(vars);
 }

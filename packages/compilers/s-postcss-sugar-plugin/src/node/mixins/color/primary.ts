@@ -40,10 +40,12 @@ export interface IPostcssSugarPluginColorPrimaryParams {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginColorPrimaryParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginColorPrimaryParams = {
@@ -51,11 +53,11 @@ export default function ({
         ...params,
     };
 
-    const cssArray: string[] = [
+    const vars: string[] = [
         `
         @sugar.color.remap(primary, ${finalParams.color});
     `,
     ];
 
-    replaceWith(cssArray);
+    return vars;
 }

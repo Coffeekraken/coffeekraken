@@ -59,14 +59,14 @@ export default function ({
         ...params,
     };
 
-    const cssArray: string[] = [
+    const vars: string[] = [
         ...__STheme.remapCssColorVars(finalParams.color, finalParams.toColor),
     ];
 
     if (atRule.parent.type === 'root') {
-        cssArray.unshift(':root {');
-        cssArray.push('}');
+        vars.unshift(':root {');
+        vars.push('}');
     }
 
-    replaceWith(cssArray);
+    return vars;
 }

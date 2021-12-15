@@ -46,10 +46,12 @@ export { postcssSugarPluginBorderwidthMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginBorderwidthMixinParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginBorderwidthMixinParams = {
@@ -57,8 +59,8 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [
+    const vars = new CssVars(
         `border-width: sugar.border.width(${finalParams.width});`,
-    ];
+    );
     return vars;
 }

@@ -23,10 +23,10 @@ class postcssSugarPluginDisplayClassesInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginDisplayClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
+export default function ({ params, atRule, CssVars, replaceWith, }) {
     const finalParams = Object.assign({}, params);
-    const vars = [];
-    vars.push(`
+    const vars = new CssVars();
+    vars.comment(() => `
       /**
         * @name          Display
         * @namespace          sugar.css.helpers
@@ -130,7 +130,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
         
       /**
        * @name            s-display:block
@@ -149,10 +149,12 @@ export default function ({ params, atRule, replaceWith, }) {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `).code(`
       .s-display--block{
           display: block !important;
       }
-
+    `);
+    vars.comment(() => `
       /**
        * @name            s-display:inline-block
        * @namespace       sugar.css.display
@@ -170,52 +172,58 @@ export default function ({ params, atRule, replaceWith, }) {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `).code(`
       .s-display--inline-block{
           display: inline-block !important;
       }
-
-      /**
-       * @name            s-display:contents
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:contents">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-display:contents
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:contents">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `).code(`
       .s-display--contents{
           display: contents !important;
       }
-
-      /**
-       * @name            s-display:flex
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:flex">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-display:flex
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:flex">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `).code(`
       .s-display--flex{
           display: flex !important;
       }
-
+    `);
+    vars.comment(() => `
       /**
        * @name            s-display:grid
        * @namespace       sugar.css.display
@@ -233,74 +241,80 @@ export default function ({ params, atRule, replaceWith, }) {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `).code(`
       .s-display--grid{
           display: grid !important;
       }
-
-      /**
-       * @name            s-display:inline-flex
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:inline-flex">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-display:inline-flex
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:inline-flex">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `).code(`
       .s-display--inline-flex{
           display: inline-flex !important;
       }
-
-      /**
-       * @name            s-display:inline-grid
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:inline-grid">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-display:inline-grid
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:inline-grid">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `).code(`
       .s-display--inline-grid{
           display: inline-grid !important;
       }
-
-      /**
-       * @name            s-display:none
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:none">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-display:none
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:none">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        `).code(`
       .s-display--none{
           display: none !important;
       }
-
-  `);
+      `);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztvQ0ErQnNCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7b0NBT3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtvQ0FDdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7S0FPdEQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwS1gsQ0FBQyxDQUFDO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSx5Q0FBMEMsU0FBUSxZQUFZO0lBQ2hFLE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHlDQUF5QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWxFLE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O29DQStCc0IsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztvQ0FPdkIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7b0NBQ3ZCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO29DQUN2QixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztLQU90RCxDQUNBLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbUJULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7S0FJTixDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7S0FrQlQsQ0FDQSxDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWtCVCxDQUNBLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBa0JULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7S0FJTixDQUFDLENBQUM7SUFFSCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQlAsQ0FDRixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQWtCVCxDQUNBLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBa0JULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FrQkwsQ0FDSixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==

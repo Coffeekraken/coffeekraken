@@ -32,19 +32,22 @@ export { postcssSugarPluginDisplayClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginDisplayClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginDisplayClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Display
         * @namespace          sugar.css.helpers
@@ -147,9 +150,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
         
       /**
        * @name            s-display:block
@@ -168,10 +173,15 @@ export default function ({
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `,
+    ).code(`
       .s-display--block{
           display: block !important;
       }
+    `);
 
+    vars.comment(
+        () => `
       /**
        * @name            s-display:inline-block
        * @namespace       sugar.css.display
@@ -189,52 +199,67 @@ export default function ({
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `,
+    ).code(`
       .s-display--inline-block{
           display: inline-block !important;
       }
+      `);
 
-      /**
-       * @name            s-display:contents
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:contents">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-display:contents
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>contents</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:contents">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `,
+    ).code(`
       .s-display--contents{
           display: contents !important;
       }
+      `);
 
-      /**
-       * @name            s-display:flex
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:flex">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-display:flex
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>flex</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:flex">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `,
+    ).code(`
       .s-display--flex{
           display: flex !important;
       }
+    `);
 
+    vars.comment(
+        () => `
       /**
        * @name            s-display:grid
        * @namespace       sugar.css.display
@@ -252,74 +277,90 @@ export default function ({
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+    ).code(`
       .s-display--grid{
           display: grid !important;
       }
+      `);
 
-      /**
-       * @name            s-display:inline-flex
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:inline-flex">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-display:inline-flex
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>inline-flex</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:inline-flex">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `,
+    ).code(`
       .s-display--inline-flex{
           display: inline-flex !important;
       }
+      `);
 
-      /**
-       * @name            s-display:inline-grid
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:inline-grid">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-display:inline-grid
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>inline-grid</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:inline-grid">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+    `,
+    ).code(`
       .s-display--inline-grid{
           display: inline-grid !important;
       }
+      `);
 
-      /**
-       * @name            s-display:none
-       * @namespace       sugar.css.display
-       * @type            CssClass
-       * @platform           css
-       * @status               beta
-       * 
-       * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-display\:none">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-display:none
+         * @namespace       sugar.css.display
+         * @type            CssClass
+         * @platform           css
+         * @status               beta
+         * 
+         * This class allows you to apply the value "<yellow>none</yellow>" to the display property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-display\:none">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        `,
+    ).code(`
       .s-display--none{
           display: none !important;
       }
-
-  `);
+      `);
 
     return vars;
 }

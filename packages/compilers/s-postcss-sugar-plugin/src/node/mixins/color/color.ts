@@ -51,10 +51,12 @@ export interface IPostcssSugarPluginColorParams {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginColorParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginColorParams = {
@@ -77,22 +79,19 @@ export default function ({
     //         `You cannot remap the "<yellow>secondary</yellow>" color to "<cyan>secondary</cyan>"...`,
     //     );
 
-    const cssArray: string[] = [
-        `@sugar.color.remap(current, ${finalParams.current});`,
-    ];
+    const vars = new CssVars(`
+        @sugar.color.remap(current, ${finalParams.current});`);
 
     if (finalParams.primary) {
-        cssArray.push(`@sugar.color.remap(primary, ${finalParams.primary});`);
+        vars.code(`@sugar.color.remap(primary, ${finalParams.primary});`);
     } else {
-        cssArray.push(`@sugar.color.remap(primary, ${finalParams.current});`);
+        vars.code(`@sugar.color.remap(primary, ${finalParams.current});`);
     }
     if (finalParams.secondary) {
-        cssArray.push(
-            `@sugar.color.remap(secondary, ${finalParams.secondary});`,
-        );
+        vars.code(`@sugar.color.remap(secondary, ${finalParams.secondary});`);
     } else {
-        cssArray.push(`@sugar.color.remap(secondary, ${finalParams.current});`);
+        vars.code(`@sugar.color.remap(secondary, ${finalParams.current});`);
     }
 
-    replaceWith(cssArray);
+    return vars;
 }

@@ -23,10 +23,10 @@ class postcssSugarPluginFlexClassesInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginFlexClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
+export default function ({ params, atRule, CssVars, replaceWith, }) {
     const finalParams = Object.assign({}, params);
-    const vars = [];
-    vars.push(`
+    const vars = new CssVars();
+    vars.comment(() => `
       /**
         * @name          Flex
         * @namespace          sugar.css.helpers
@@ -123,7 +123,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -135,10 +135,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex"></div>
             */
+        `).code(`
             .s-flex {
                 display: flex;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:row
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -150,10 +151,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:row"></div>
             */
+        `).code(`
             .s-flex--row {
                 flex-direction: row;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:row-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -165,10 +167,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:row-reverse"></div>
             */
+        `).code(`
             .s-flex--row-reverse {
                 flex-direction: row-reverse;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:column
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -180,10 +183,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:column"></div>
             */
+        `).code(`
             .s-flex--column {
                 flex-direction: column;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:column-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -195,10 +199,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:column-reverse"></div>
             */
+           `).code(`
             .s-flex--column-reverse {
                 flex-direction: column-reverse;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:nowrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -210,10 +215,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:nowrap"></div>
             */
+           `).code(`
             .s-flex--nowrap {
                 flex-wrap: nowrap;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:wrap
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -225,10 +231,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:wrap"></div>
             */
+           `).code(`
             .s-flex--wrap {
                 flex-wrap: wrap;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:wrap-reverse
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -240,10 +247,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:wrap-reverse"></div>
             */
+           `).code(`
             .s-flex--wrap-reverse {
                 flex-wrap: wrap-reverse;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -255,10 +263,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-start"></div>
             */
+           `).code(`
             .s-flex--justify-start {
                 justify-content: start;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -270,10 +279,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-flex-start"></div>
             */
+           `).code(`
             .s-flex--justify-flex-start {
                 justify-content: flex-start;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -285,10 +295,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-end"></div>
             */
+           `).code(`
             .s-flex--justify-end {
                 justify-content: end;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -300,10 +311,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-flex-end"></div>
             */
+           `).code(`
             .s-flex--justify-flex-end {
                 justify-content: flex-end;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -315,10 +327,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-center"></div>
             */
+           `).code(`
             .s-flex--justify-center {
                 justify-content: center;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-space-between
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -330,10 +343,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-space-between"></div>
             */
+           `).code(`
             .s-flex--justify-space-between {
                 justify-content: space-between;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-space-around
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -345,10 +359,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-space-around"></div>
             */
+           `).code(`
             .s-flex--justify-space-around {
                 justify-content: space-around;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-space-evenly
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -360,10 +375,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-space-evenly"></div>
             */
+           `).code(`
             .s-flex--justify-space-evenly {
                 justify-content: space-evenly;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:justify-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -375,10 +391,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:justify-stretch"></div>
             */
+           `).code(`
             .s-flex--justify-stretch {
                 justify-content: stretch;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -390,10 +407,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-start"></div>
             */
+           `).code(`
             .s-flex--align-start {
                 align-items: start;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -405,10 +423,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-flex-start"></div>
             */
+           `).code(`
             .s-flex--align-flex-start {
                 align-items: flex-start;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -420,10 +439,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-end"></div>
             */
+           `).code(`
             .s-flex--align-end {
                 align-items: end;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -435,10 +455,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-flex-end"></div>
             */
+           `).code(`
             .s-flex--align-flex-end {
                 align-items: flex-end;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -450,10 +471,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-center"></div>
             */
+           `).code(`
             .s-flex--align-center {
                 align-items: center;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -465,10 +487,11 @@ export default function ({ params, atRule, replaceWith, }) {
             * @example        html
             * <div class="s-flex\:align-baseline"></div>
             */
+           `).code(`
             .s-flex--align-baseline {
                 align-items: baseline;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
         * @name          s-flex-item:grow
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -482,10 +505,11 @@ export default function ({ params, atRule, replaceWith, }) {
         *   <div class="s-flex-item\:grow"></div>
         * </div>
         */
+       `).code(`
         .s-flex-item--grow {
             flex-grow: 1;
         }`);
-    vars.push(`/**
+    vars.comment(() => `/**
         * @name          s-flex-item:shrink
         * @namespace          sugar.css.flex
         * @type               CssClass
@@ -499,11 +523,12 @@ export default function ({ params, atRule, replaceWith, }) {
         *   <div class="s-flex-item\:shrink"></div>
         * </div>
         */
+       `).code(`
         .s-flex-item--shrink {
             flex-shrink: 1;
         }`);
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(() => `/**
                 * @name          s-flex-item:order-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -517,12 +542,13 @@ export default function ({ params, atRule, replaceWith, }) {
                 *   <div class="s-flex-item\:order-${i}"></div>
                 * </div>
                 */
+               `).code(`
                 .s-flex-item--order-${i} {
                     order: ${i};
                 }`);
     }
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(() => `/**
                 * @name          s-flex-item:grow-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -536,12 +562,13 @@ export default function ({ params, atRule, replaceWith, }) {
                 *   <div class="s-flex-item\:grow-${i}"></div>
                 * </div>
                 */
+               `).code(`
                 .s-flex-item--grow-${i} {
                     flex-grow: ${i};
                 }`);
     }
     for (let i = 1; i < 20; i++) {
-        vars.push(`/**
+        vars.comment(() => `/**
                 * @name          s-flex-item:shrink-${i}
                 * @namespace          sugar.css.flex
                 * @type               CssClass
@@ -555,11 +582,12 @@ export default function ({ params, atRule, replaceWith, }) {
                 *   <div class="s-flex-item\:shrink-${i}"></div>
                 * </div>
                 */
+               `).code(`
                 .s-flex-item--shrink-${i} {
                     flex-shrink: ${i};
                 }`);
     }
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex-item:align-flex-start
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -573,10 +601,11 @@ export default function ({ params, atRule, replaceWith, }) {
             *   <div class="s-flex-item\:align-flex-start"></div>
             * </div>
             */
+           `).code(`
             .s-flex-item--align-flex-start {
                 align-self: flex-start;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex-item:align-flex-end
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -590,10 +619,11 @@ export default function ({ params, atRule, replaceWith, }) {
             *   <div class="s-flex-item\:align-flex-end"></div>
             * </div>
             */
+           `).code(`
             .s-flex-item--align-flex-end {
                 align-self: flex-end;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex-item:align-center
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -607,10 +637,11 @@ export default function ({ params, atRule, replaceWith, }) {
             *   <div class="s-flex-item\:align-center"></div>
             * </div>
             */
+           `).code(`
             .s-flex-item--align-center {
                 align-self: center;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex-item:align-baseline
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -624,10 +655,11 @@ export default function ({ params, atRule, replaceWith, }) {
             *   <div class="s-flex-item\:align-baseline"></div>
             * </div>
             */
+           `).code(`
             .s-flex-item--align-baseline {
                 align-self: baseline;
             }`);
-    vars.push(`/**
+    vars.comment(() => `/**
             * @name          s-flex-item:align-stretch
             * @namespace          sugar.css.flex
             * @type               CssClass
@@ -641,9 +673,10 @@ export default function ({ params, atRule, replaceWith, }) {
             *   <div class="s-flex-item\:align-stretch"></div>
             * </div>
             */
+           `).code(`
             .s-flex-item--align-stretch {
                 align-self: stretch;
             }`);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEdBS2Q7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBYSxFQUFFLENBQUM7SUFFMUIsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7eURBd0QyQyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTsyREFDckIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7a0VBQ2hCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3lEQUNoQyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7K0RBUWpCLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO2dEQUN0QyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTt1REFDaEIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Ozs7Ozs7O2tFQVFaLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO2dEQUN6QyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTt1REFDaEIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFR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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFDckQsT0FBTyxPQUFPLE1BQU0sT0FBTyxDQUFDO0FBRTVCOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBRUgsTUFBTSxzQ0FBdUMsU0FBUSxZQUFZO0lBQzdELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBSUQsT0FBTyxFQUFFLHNDQUFzQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRS9ELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixPQUFPLEVBQ1AsV0FBVyxHQU1kO0lBQ0csTUFBTSxXQUFXLHFCQUNWLE1BQU0sQ0FDWixDQUFDO0lBRUYsTUFBTSxJQUFJLEdBQUcsSUFBSSxPQUFPLEVBQUUsQ0FBQztJQUUzQixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozt5REF3RDJDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzJEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTtrRUFDaEIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7eURBQ2hDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFOzs7Ozs7OzsrREFRakIsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3RDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7a0VBUVosT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUU7Z0RBQ3pDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7Ozs7OENBUWhDLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO2dEQUNyQixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFLFNBQVMsT0FBTyxDQUFDLElBQUksQ0FBQyxRQUFRLEVBQUUsU0FBUyxPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRSxTQUFTLE9BQU8sQ0FBQyxJQUFJLENBQUMsUUFBUSxFQUFFO3VEQUNoSixPQUFPLENBQUMsSUFBSSxDQUFDLFFBQVEsRUFBRTs7Ozs7OztLQU96RSxDQUNBLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7U0FZTCxDQUNKLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7U0FZTCxDQUNKLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7U0FZTCxDQUNKLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7U0FZTCxDQUNKLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7WUFZRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7OztRQWNOLENBQ0gsQ0FBQyxJQUFJLENBQUM7OztVQUdELENBQUMsQ0FBQztJQUVSLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7O1FBY04sQ0FDSCxDQUFDLElBQUksQ0FBQzs7O1VBR0QsQ0FBQyxDQUFDO0lBRVIsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUN6QixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO3FEQUNtQyxDQUFDOzs7Ozs7bUZBTTZCLENBQUM7Ozs7cURBSS9CLENBQUM7OztnQkFHdEMsQ0FDUCxDQUFDLElBQUksQ0FBQztzQ0FDdUIsQ0FBQzs2QkFDVixDQUFDO2tCQUNaLENBQUMsQ0FBQztLQUNmO0lBRUQsS0FBSyxJQUFJLENBQUMsR0FBRyxDQUFDLEVBQUUsQ0FBQyxHQUFHLEVBQUUsRUFBRSxDQUFDLEVBQUUsRUFBRTtRQUN6QixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDO29EQUNrQyxDQUFDOzs7Ozs7dUZBTWtDLENBQUM7Ozs7b0RBSXBDLENBQUM7OztnQkFHckMsQ0FDUCxDQUFDLElBQUksQ0FBQztxQ0FDc0IsQ0FBQztpQ0FDTCxDQUFDO2tCQUNoQixDQUFDLENBQUM7S0FDZjtJQUVELEtBQUssSUFBSSxDQUFDLEdBQUcsQ0FBQyxFQUFFLENBQUMsR0FBRyxFQUFFLEVBQUUsQ0FBQyxFQUFFLEVBQUU7UUFDekIsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQztzREFDb0MsQ0FBQzs7Ozs7O3lGQU1rQyxDQUFDOzs7O3NEQUlwQyxDQUFDOzs7Z0JBR3ZDLENBQ1AsQ0FBQyxJQUFJLENBQUM7dUNBQ3dCLENBQUM7bUNBQ0wsQ0FBQztrQkFDbEIsQ0FBQyxDQUFDO0tBQ2Y7SUFFRCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7OztZQWNGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7O1lBY0YsQ0FDUCxDQUFDLElBQUksQ0FBQzs7O2NBR0csQ0FBQyxDQUFDO0lBRVosSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7WUFjRixDQUNQLENBQUMsSUFBSSxDQUFDOzs7Y0FHRyxDQUFDLENBQUM7SUFFWixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7OztZQWNGLENBQ1AsQ0FBQyxJQUFJLENBQUM7OztjQUdHLENBQUMsQ0FBQztJQUVaLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7O1lBY0YsQ0FDUCxDQUFDLElBQUksQ0FBQzs7O2NBR0csQ0FBQyxDQUFDO0lBRVosT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9

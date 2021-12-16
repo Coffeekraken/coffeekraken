@@ -34,19 +34,23 @@ export { postcssSugarPluginTextClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginTextClassesParams>;
     atRule: any;
+    CssVars;
+    aby;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginTextClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Text
         * @namespace          sugar.css.helpers
@@ -127,10 +131,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     // align
-    vars.push(`
+    vars.comment(
+        () => `
         /**
          * @name            s-text:left
          * @namespace       sugar.css.mixins.text
@@ -146,10 +152,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+    `,
+    ).code(`
         .s-text--left {
             text-align: left;
         }
+        `);
 
+    vars.comment(
+        () => `
        /**
          * @name            s-text:right
          * @namespace       sugar.css.mixins.text
@@ -165,10 +176,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--right {
             text-align: right;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:center
          * @namespace       sugar.css.mixins.text
@@ -184,10 +200,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+         `,
+    ).code(`
         .s-text--center {
             text-align: center;
         }
+        `);
 
+    vars.comment(
+        () => `
            /**
          * @name            s-text:start
          * @namespace       sugar.css.mixins.text
@@ -203,10 +224,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--start {
             text-align: start;
         }
+        `);
 
+    vars.comment(
+        () => `
           /**
          * @name            s-text:end
          * @namespace       sugar.css.mixins.text
@@ -222,10 +248,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--end {
             text-align: end;
         }
+        `);
 
+    vars.comment(
+        () => `
          /**
          * @name            s-text:justify
          * @namespace       sugar.css.mixins.text
@@ -241,10 +272,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--justify {
             text-align: justify;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:overline
          * @namespace       sugar.css.mixins.text
@@ -260,10 +296,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--overline {
             text-decoration: overline;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:underline
          * @namespace       sugar.css.mixins.text
@@ -279,10 +320,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--underline {
             text-decoration: underline;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:line-through
          * @namespace       sugar.css.mixins.text
@@ -298,10 +344,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--line-through {
             text-decoration: line-through;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:lowercase
          * @namespace       sugar.css.mixins.text
@@ -317,10 +368,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--lowercase {
             text-transform: lowercase;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:uppercase
          * @namespace       sugar.css.mixins.text
@@ -336,10 +392,15 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--uppercase {
             text-transform: uppercase;
         }
+        `);
 
+    vars.comment(
+        () => `
         /**
          * @name            s-text:capitalize
          * @namespace       sugar.css.mixins.text
@@ -355,11 +416,12 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+    ).code(`
         .s-text--capitalize {
             text-transform: capitalize;
         }
-
-  `);
+        `);
 
     return vars;
 }

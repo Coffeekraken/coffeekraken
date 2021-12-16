@@ -35,10 +35,12 @@ export { postcssSugarPluginRatioClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginRatioClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginRatioClassesParams = {
@@ -48,9 +50,10 @@ export default function ({
 
     const ratioObj = __STheme.config('ratio');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Ratio
         * @namespace          sugar.css.helpers
@@ -91,11 +94,13 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(ratioObj).forEach((ratioName) => {
         const ratioValue = ratioObj[ratioName];
-        const ratioCss = `/**
+        vars.comment(
+            () => `/**
   * @name          s-ratio:${ratioName.replace('/', '-')}
   * @namespace          sugar.css.ratio
   * @type               CssClass
@@ -109,10 +114,11 @@ export default function ({
   *     <div class="s-center-abs">I'm a cool ratio container</div>
   * </div>
   */
+ `,
+        ).code(`
 .s-ratio--${ratioName.replace('/', '-')} {
     @sugar.ratio(${ratioValue});
-}`;
-        vars.push(ratioCss);
+}`);
     });
 
     return vars;

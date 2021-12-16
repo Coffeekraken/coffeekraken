@@ -40,10 +40,12 @@ export { postcssSugarPluginPlatformClassesMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginPlatformClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginPlatformClassesParams = {
@@ -54,7 +56,7 @@ export default function ({
     // list all the available platforms in the folder
     const files = __fs.readdirSync(`${__dirname()}/platforms`);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     files.forEach((filename) => {
         const name = filename.split('.')[0];
@@ -65,7 +67,8 @@ export default function ({
         )
             return;
 
-        vars.push(`
+        vars.comment(
+            () => `
         
         /**
          * @name            s-platform:${name}
@@ -82,6 +85,8 @@ export default function ({
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `,
+        ).code(`
         .s-platform--${name} {
           @sugar.platform(${name});
         }

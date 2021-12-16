@@ -33,17 +33,19 @@ export { postcssSugarPluginLayoutClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginLayoutClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginLayoutClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const layoutConfig = __STheme.config('layout');
 
@@ -54,7 +56,8 @@ export default function ({
                 ? `s-container`
                 : `s-container:${containerName}`;
 
-        vars.push(`/**
+        vars.comment(
+            () => `/**
       * @name          ${cls}
       * @namespace          sugar.css.layout
       * @type               CssClass
@@ -68,15 +71,18 @@ export default function ({
       *     <h1 class="s-h1">Hello world</h1>
       * </div>
       */
-    .${cls.replace(':', '--')} {
-        @sugar.layout.container(${containerName});
-    }`);
+    `,
+        ).code(`
+      .${cls.replace(':', '--')} {
+          @sugar.layout.container(${containerName});
+      }`);
     });
 
     const grids = layoutConfig.grid;
     Object.keys(grids).forEach((id) => {
         const grid = grids[id];
-        vars.push(`
+        vars.comment(
+            () => `
         /**
          * @name       s-grid:${id}
          * @namespace     sugar.css.layout
@@ -98,6 +104,8 @@ export default function ({
         * @since     2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+      `,
+        ).code(`
         .s-grid--${id} {
           display: grid;
           grid-template-columns: repeat(${grid}, minmax(0, 1fr));
@@ -109,7 +117,8 @@ export default function ({
     Object.keys(layouts).forEach((id) => {
         const layout = layouts[id];
         const colsCount = __unique(layout.split(/\n\s/)).length;
-        vars.push(`
+        vars.comment(
+            () => `
       /**
        * @name       s-layout:${id}
        * @namespace     sugar.css.layout
@@ -131,6 +140,8 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+        ).code(`
       .s-layout--${id} {
         @sugar.layout(${layout}, $scope: bare);
       }
@@ -144,7 +155,8 @@ export default function ({
         const clsY = `s-layout:gutter-y-${spaceName}`.replace('-default', '');
         const cls = `s-layout:gutter-${spaceName}`.replace('-default', '');
 
-        vars.push(`
+        vars.comment(
+            () => `
       /**
        * @name       ${clsX}
        * @namespace     sugar.css.layout
@@ -166,13 +178,16 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+        ).code(`
       .${clsX.replace(':', '--')} > * {
         padding-left: sugar.space(${spaceName});
         padding-right: sugar.space(${spaceName});
       }
     `);
 
-        vars.push(`
+        vars.comment(
+            () => `
       /**
        * @name       ${clsY}
        * @namespace     sugar.css.layout
@@ -194,13 +209,16 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+        ).code(`
         .${clsY.replace(':', '--')} > * {
         padding-top: sugar.space(${spaceName});
         padding-bottom: sugar.space(${spaceName});
       }
     `);
 
-        vars.push(`
+        vars.comment(
+            () => `
       /**
        * @name       ${cls}
        * @namespace     sugar.css.layout
@@ -222,13 +240,16 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+        ).code(`
       .${cls.replace(':', '--')} > * {
         padding: sugar.space(${spaceName});
       }
     `);
     });
 
-    vars.push(`
+    vars.comment(
+        () => `
      /**
        * @name       s-layout:gutter-between
        * @namespace     sugar.css.layout
@@ -250,6 +271,8 @@ export default function ({
        * @since     2.0.0
        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+      `,
+    ).code(`
       .s-layout--gutter-between > * {
         &:first-child {
           padding-left: 0 !important;
@@ -262,7 +285,8 @@ export default function ({
 
     // align items
     ['start', 'end', 'center', 'stretch'].forEach((align) => {
-        vars.push(`
+        vars.comment(
+            () => `
       /**
          * @name       s-layout:align-${align}
          * @namespace     sugar.css.layout
@@ -284,6 +308,8 @@ export default function ({
         * @since     2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
         .s-layout--align-${align} {
           align-items: ${align};
         }
@@ -292,7 +318,8 @@ export default function ({
 
     // justify items
     ['start', 'end', 'center', 'stretch'].forEach((justify) => {
-        vars.push(`
+        vars.comment(
+            () => `
       /**
          * @name       s-layout:justify-${justify}
          * @namespace     sugar.css.layout
@@ -314,6 +341,8 @@ export default function ({
         * @since     2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
         .s-layout--justify-${justify} {
           justify-items: ${justify};
         }

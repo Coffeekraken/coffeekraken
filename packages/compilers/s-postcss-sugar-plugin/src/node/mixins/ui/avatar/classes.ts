@@ -77,10 +77,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiAvatarClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiAvatarClassesParams = {
@@ -92,9 +94,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Avatar
         * @namespace          sugar.css.ui
@@ -192,10 +195,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
           * @name           s-avatar
           * @namespace      sugar.css.ui.avatar
           * @type           CssClass
@@ -210,6 +215,8 @@ export default function ({
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
           .s-avatar {
             @sugar.ui.avatar($scope: bare);
           }
@@ -218,7 +225,8 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-avatar${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }
@@ -234,8 +242,8 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            */`);
-            vars.push(`
+            */`,
+            ).code(`
             .s-avatar${style === finalParams.defaultStyle ? '' : `--${style}`} {
                 @sugar.ui.avatar($style: ${style}, $scope: lnf);
             }
@@ -245,7 +253,8 @@ export default function ({
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
           * @name           s-avatar${
               shape === finalParams.defaultShape ? '' : `:${shape}`
           }
@@ -261,8 +270,8 @@ export default function ({
           * 
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-            vars.push(`
+        */`,
+            ).code(`
           .s-avatar${shape === finalParams.defaultShape ? '' : `--${shape}`} {
             @sugar.ui.avatar($shape: ${shape}, $scope: shape);
           }
@@ -270,7 +279,8 @@ export default function ({
         });
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
           * @name           s-avatar:interactive
           * @namespace      sugar.css.ui.avatar
           * @type           CssClass
@@ -284,8 +294,8 @@ export default function ({
           * 
           * @since    2.0.0
           * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    ).code(`
           .s-avatar--interactive {
               @sugar.ui.avatar($scope: 'interactive');
           }

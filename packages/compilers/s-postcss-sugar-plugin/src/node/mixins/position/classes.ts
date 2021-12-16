@@ -33,19 +33,22 @@ export { postcssSugarPluginPositionClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginPositionClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginPositionClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Positions
         * @namespace          sugar.css.helpers
@@ -102,9 +105,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
         
       /**
        * @name            s-position:absolute
@@ -123,158 +128,195 @@ export default function ({
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `,
+    ).code(`
       .s-position--absolute{
           position: absolute !important;
       }
+      `);
 
-      /**
-       * @name            s-position:relative
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>relative</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:relative">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+
+          /**
+           * @name            s-position:relative
+           * @namespace       sugar.css.position
+           * @type            CssClass
+           * @platform        css
+           * @status          stable
+           * 
+           * This class allows you to apply the value "<yellow>relative</yellow>" to the position property on any HTMLElement
+           * 
+           * @example     html
+           * <div class="s-position\:relative">
+           *  Hello world
+           * </div>
+           * 
+           * @since       2.0.0
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+        `,
+    ).code(`
       .s-position--relative{
           position: relative !important;
       }
+      `);
 
-      /**
-       * @name            s-position:fixed
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>fixed</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:fixed">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+          /**
+           * @name            s-position:fixed
+           * @namespace       sugar.css.position
+           * @type            CssClass
+           * @platform        css
+           * @status          stable
+           * 
+           * This class allows you to apply the value "<yellow>fixed</yellow>" to the position property on any HTMLElement
+           * 
+           * @example     html
+           * <div class="s-position\:fixed">
+           *  Hello world
+           * </div>
+           * 
+           * @since       2.0.0
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+        `,
+    ).code(`
       .s-position--fixed{
           position: fixed !important;
       }
+      `);
 
-      /**
-       * @name            s-position::sticky
-       * @namespace       sugar.css.mixins.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>sticky</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:sticky">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-position::sticky
+         * @namespace       sugar.css.mixins.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the value "<yellow>sticky</yellow>" to the position property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-position\:sticky">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `,
+    ).code(`
       .s-position--sticky{
           position: sticky !important;
       }
+      `);
 
-      /**
-       * @name            s-position:top
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the top property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:top">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-position:top
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the top property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:top">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `,
+    ).code(`
       .s-position--top{
         top: 0;
       }
+      `);
 
-      /**
-       * @name            s-position:left
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the left property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:left">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-position:left
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the left property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:left">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `,
+    ).code(`
       .s-position--left{
         left: 0;
       }
+      `);
 
-      /**
-       * @name            s-position:bottom
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the bottom property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:bottom">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+    vars.comment(
+        () => `
+        /**
+         * @name            s-position:bottom
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the bottom property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:bottom">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `,
+    ).code(`
       .s-position--bottom{
         bottom: 0;
       }
+      `);
 
+    vars.comment(
+        () => `
       /**
-       * @name            s-position:right
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the right property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:right">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+         * @name            s-position:right
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the right property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:right">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `,
+    ).code(`
       .s-position--right{
         right: 0;
       }
-
-  `);
+      `);
 
     return vars;
 }

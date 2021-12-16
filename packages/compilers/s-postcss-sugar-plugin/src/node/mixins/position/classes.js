@@ -22,10 +22,10 @@ class postcssSugarPluginPositionClassesInterface extends __SInterface {
     }
 }
 export { postcssSugarPluginPositionClassesInterface as interface };
-export default function ({ params, atRule, replaceWith, }) {
+export default function ({ params, atRule, CssVars, replaceWith, }) {
     const finalParams = Object.assign({}, params);
-    const vars = [];
-    vars.push(`
+    const vars = new CssVars();
+    vars.comment(() => `
       /**
         * @name          Positions
         * @namespace          sugar.css.helpers
@@ -83,7 +83,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `);
-    vars.push(`
+    vars.comment(() => `
         
       /**
        * @name            s-position:absolute
@@ -102,158 +102,173 @@ export default function ({ params, atRule, replaceWith, }) {
        * @since       2.0.0
        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
        */
+    `).code(`
       .s-position--absolute{
           position: absolute !important;
       }
+      `);
+    vars.comment(() => `
 
-      /**
-       * @name            s-position:relative
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>relative</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:relative">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+          /**
+           * @name            s-position:relative
+           * @namespace       sugar.css.position
+           * @type            CssClass
+           * @platform        css
+           * @status          stable
+           * 
+           * This class allows you to apply the value "<yellow>relative</yellow>" to the position property on any HTMLElement
+           * 
+           * @example     html
+           * <div class="s-position\:relative">
+           *  Hello world
+           * </div>
+           * 
+           * @since       2.0.0
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+        `).code(`
       .s-position--relative{
           position: relative !important;
       }
-
-      /**
-       * @name            s-position:fixed
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>fixed</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:fixed">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+          /**
+           * @name            s-position:fixed
+           * @namespace       sugar.css.position
+           * @type            CssClass
+           * @platform        css
+           * @status          stable
+           * 
+           * This class allows you to apply the value "<yellow>fixed</yellow>" to the position property on any HTMLElement
+           * 
+           * @example     html
+           * <div class="s-position\:fixed">
+           *  Hello world
+           * </div>
+           * 
+           * @since       2.0.0
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           */
+        `).code(`
       .s-position--fixed{
           position: fixed !important;
       }
-
-      /**
-       * @name            s-position::sticky
-       * @namespace       sugar.css.mixins.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the value "<yellow>sticky</yellow>" to the position property on any HTMLElement
-       * 
-       * @example     html
-       * <div class="s-position\:sticky">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-position::sticky
+         * @namespace       sugar.css.mixins.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the value "<yellow>sticky</yellow>" to the position property on any HTMLElement
+         * 
+         * @example     html
+         * <div class="s-position\:sticky">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `).code(`
       .s-position--sticky{
           position: sticky !important;
       }
-
-      /**
-       * @name            s-position:top
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the top property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:top">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-position:top
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the top property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:top">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `).code(`
       .s-position--top{
         top: 0;
       }
-
-      /**
-       * @name            s-position:left
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the left property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:left">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-position:left
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the left property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:left">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `).code(`
       .s-position--left{
         left: 0;
       }
-
-      /**
-       * @name            s-position:bottom
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the bottom property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:bottom">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+      `);
+    vars.comment(() => `
+        /**
+         * @name            s-position:bottom
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the bottom property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:bottom">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `).code(`
       .s-position--bottom{
         bottom: 0;
       }
-
+      `);
+    vars.comment(() => `
       /**
-       * @name            s-position:right
-       * @namespace       sugar.css.position
-       * @type            CssClass
-       * @platform        css
-       * @status          stable
-       * 
-       * This class allows you to apply the right property to 0
-       * 
-       * @example     html
-       * <div class="s-position\:fixed\:right">
-       *  Hello world
-       * </div>
-       * 
-       * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
+         * @name            s-position:right
+         * @namespace       sugar.css.position
+         * @type            CssClass
+         * @platform        css
+         * @status          stable
+         * 
+         * This class allows you to apply the right property to 0
+         * 
+         * @example     html
+         * <div class="s-position\:fixed\:right">
+         *  Hello world
+         * </div>
+         * 
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+      `).code(`
       .s-position--right{
         right: 0;
       }
-
-  `);
+      `);
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7SUFDakUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLFdBQVcsR0FLZDtJQUNHLE1BQU0sV0FBVyxxQkFDVixNQUFNLENBQ1osQ0FBQztJQUVGLE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7S0F5RFQsQ0FBQyxDQUFDO0lBRUgsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0EwS1gsQ0FBQyxDQUFDO0lBRUQsT0FBTyxJQUFJLENBQUM7QUFDaEIsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFJckQ7Ozs7Ozs7Ozs7Ozs7Ozs7R0FnQkc7QUFFSCxNQUFNLDBDQUEyQyxTQUFRLFlBQVk7SUFDakUsTUFBTSxLQUFLLFdBQVc7UUFDbEIsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDO0NBQ0o7QUFJRCxPQUFPLEVBQUUsMENBQTBDLElBQUksU0FBUyxFQUFFLENBQUM7QUFFbkUsTUFBTSxDQUFDLE9BQU8sV0FBVyxFQUNyQixNQUFNLEVBQ04sTUFBTSxFQUNOLE9BQU8sRUFDUCxXQUFXLEdBTWQ7SUFDRyxNQUFNLFdBQVcscUJBQ1YsTUFBTSxDQUNaLENBQUM7SUFFRixNQUFNLElBQUksR0FBRyxJQUFJLE9BQU8sRUFBRSxDQUFDO0lBRTNCLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztLQXlEVCxDQUNBLENBQUM7SUFFRixJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O0tBbUJULENBQ0EsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBbUJMLENBQ0osQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FrQkwsQ0FDSixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWtCUCxDQUNGLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Ba0JQLENBQ0YsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxJQUFJLENBQUMsT0FBTyxDQUNSLEdBQUcsRUFBRSxDQUFDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7T0FrQlAsQ0FDRixDQUFDLElBQUksQ0FBQzs7OztPQUlKLENBQUMsQ0FBQztJQUVMLElBQUksQ0FBQyxPQUFPLENBQ1IsR0FBRyxFQUFFLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7OztPQWtCUCxDQUNGLENBQUMsSUFBSSxDQUFDOzs7O09BSUosQ0FBQyxDQUFDO0lBRUwsSUFBSSxDQUFDLE9BQU8sQ0FDUixHQUFHLEVBQUUsQ0FBQzs7Ozs7Ozs7Ozs7Ozs7Ozs7O09Ba0JQLENBQ0YsQ0FBQyxJQUFJLENBQUM7Ozs7T0FJSixDQUFDLENBQUM7SUFFTCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

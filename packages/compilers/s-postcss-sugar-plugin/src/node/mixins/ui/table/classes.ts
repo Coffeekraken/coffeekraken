@@ -56,10 +56,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTableClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTableClassesParams = {
@@ -71,9 +73,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Table
         * @namespace          sugar.css.ui
@@ -260,10 +263,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-table
             * @namespace      sugar.css.ui.table
             * @type           CssClass
@@ -288,11 +293,14 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-        vars.push(`
+        */`,
+        );
+        vars.code(
+            () => `
                 .s-table {
                     @sugar.ui.table($scope: bare);
-                }`);
+                }`,
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -302,7 +310,8 @@ export default function ({
             const styleCls = isDefaultStyle ? '' : `.s-table--${style}`;
             const cls = `.s-table${styleCls}`;
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-table${isDefaultStyle ? '' : `:${style}`}
             * @namespace      sugar.css.ui.table
             * @type           CssClass
@@ -327,11 +336,14 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-            vars.push(`
+        */`,
+            );
+            vars.code(
+                () => `
                 ${cls} {
                     @sugar.ui.table($style: ${style}, $scope: lnf);
-                }`);
+                }`,
+            );
         });
     }
 
@@ -342,7 +354,8 @@ export default function ({
             const shapeCls = isDefaultShape ? '' : `.s-table--${shape}`;
             const cls = `.s-table${shapeCls}`;
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-table${isDefaultShape ? '' : `:${shape}`}
             * @namespace      sugar.css.ui.table
             * @type           CssClass
@@ -367,15 +380,19 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-            vars.push(`
+        */`,
+            );
+            vars.code(
+                () => `
                 ${cls} {
                     @sugar.ui.table($shape: ${shape}, $scope: shape);
-                }`);
+                }`,
+            );
         });
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-format:text
         * @namespace      sugar.css.ui.table
         * @type           CssClass
@@ -403,6 +420,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         @sugar.format.text {
           table {
               @sugar.ui.table;
@@ -410,7 +429,8 @@ export default function ({
         } 
     `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-rhythm:vertical
         * @namespace      sugar.css.ui.table
         * @type           CssClass
@@ -454,6 +474,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         @sugar.rhythm.vertical {
           table, .s-table {
               ${__STheme.jsObjectToCssProperties(

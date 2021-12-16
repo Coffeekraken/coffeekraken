@@ -33,17 +33,19 @@ export { postcssSugarPluginFormatClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFormatClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFormatClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const typoFormatElements = Object.keys(__STheme.config('typo')).map(
         (typo) => {
@@ -60,7 +62,8 @@ export default function ({
             return `${ui}`;
         });
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Format text
         * @namespace          sugar.css.font
@@ -136,7 +139,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     const typoRhythmElements = Object.keys(__STheme.config('typo'))
         .filter((typo) => {
@@ -156,7 +160,8 @@ export default function ({
             return `${ui}`;
         });
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Rhythm vertical
         * @namespace          sugar.css.font
@@ -225,7 +230,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     return vars;
 }

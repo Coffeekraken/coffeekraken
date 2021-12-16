@@ -34,10 +34,12 @@ export { postcssSugarPluginTransitionClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginTransitionClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginTransitionClassesParams = {
@@ -46,9 +48,10 @@ export default function ({
 
     const transitionObj = __STheme.config('transition');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Transitions
         * @namespace          sugar.css.helpers
@@ -95,10 +98,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(transitionObj).forEach((transitionName) => {
-        const transitionCss = `/**
+        vars.comment(
+            () => `/**
   * @name          s-ratio:${transitionName.replace('/', '-')}
   * @namespace          sugar.css.transition
   * @type               CssClass
@@ -112,10 +117,11 @@ export default function ({
   *     <div class="s-center-abs">I'm a cool container</div>
   * </div>
   */
+ `,
+        ).code(`
 .s-transition${transitionName === 'default' ? '' : `--${transitionName}`} {
     @sugar.transition(${transitionName});
-}`;
-        vars.push(transitionCss);
+}`);
     });
 
     return vars;

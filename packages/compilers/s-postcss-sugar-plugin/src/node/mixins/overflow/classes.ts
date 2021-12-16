@@ -31,19 +31,22 @@ export { postcssSugarPluginOverflowClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginOverflowClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginOverflowClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:auto
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -57,11 +60,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--auto {
         overflow: auto;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:hidden
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -75,11 +81,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow hidden container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--hidden {
         overflow: hidden;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:inherit
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -93,11 +102,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow inherit container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--inherit {
         overflow: inherit;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:initial
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -111,11 +123,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow initial container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--initial {
         overflow: initial;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:overlay
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -129,11 +144,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow overlay container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--overlay {
         overflow: overlay;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:revert
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -147,11 +165,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow revert container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--revert {
         overflow: revert;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:scroll
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -165,11 +186,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow scroll container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--scroll {
         overflow: scroll;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:visible
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -183,11 +207,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow visible container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--visible {
         overflow: visible;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-overflow:unset
     * @namespace          sugar.css.overflow
     * @type               CssClass
@@ -201,6 +228,8 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow unset container</div>
     * </div>
     */
+    `,
+    ).code(`
     .s-overflow--unset {
         overflow: unset;
     }`);

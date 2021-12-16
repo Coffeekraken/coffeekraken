@@ -58,11 +58,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBlockquoteClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBlockquoteClassesParams = {
@@ -75,9 +77,10 @@ export default function ({
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Blockquote
         * @namespace          sugar.css.ui
@@ -197,10 +200,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
         * @name           s-blockquote
         * @namespace      sugar.css.ui.blockquote
         * @type           CssClass
@@ -215,6 +220,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+        ).code(`
         .s-blockquote {
             @sugar.ui.blockquote($scope: bare);
         } `);
@@ -227,7 +234,8 @@ export default function ({
                 cls += `--${style}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.blockquote
             * @type           CssClass
@@ -242,6 +250,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .${cls} {
                 @sugar.ui.blockquote($style: ${style}, $scope: lnf);
             } `);
@@ -255,7 +265,8 @@ export default function ({
                 cls += `--${shape}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.blockquote
         * @type           CssClass
@@ -270,6 +281,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+            ).code(`
         .${cls} {
             @sugar.ui.blockquote($shape: ${shape}, $scope: shape);
         } `);
@@ -277,7 +290,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-format:text bloquote
             * @namespace      sugar.css.ui.blockquote
             * @type           CssClass
@@ -294,6 +308,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.format.text {
                 blockquote {
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
@@ -305,7 +321,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.blockquote
             * @type           CssClass
@@ -330,6 +347,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.rhythm.vertical {
                 blockquote, .s-blockquote {
                     ${__STheme.jsObjectToCssProperties(

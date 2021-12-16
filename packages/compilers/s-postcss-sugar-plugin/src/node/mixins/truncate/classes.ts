@@ -41,10 +41,12 @@ export { postcssSugarPluginRatioClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginRatioClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginRatioClassesParams = {
@@ -52,9 +54,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Truncate
         * @namespace          sugar.css.helpers
@@ -96,10 +99,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     [...Array(finalParams.count).keys()].forEach((i) => {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
   * @name          s-truncate:${i}
   * @namespace          sugar.css.truncate
   * @type               CssClass
@@ -112,10 +117,12 @@ export default function ({
   * 
   * @example        html
   * <p class="s-typo:p s-truncate:${i}">${__faker.lorem
-            .lines(finalParams.count + 5)
-            .split('\n')
-            .join('<br />')}</p>
+                .lines(finalParams.count + 5)
+                .split('\n')
+                .join('<br />')}</p>
   */
+ `,
+        ).code(`
 .s-truncate--${i + 1} {
     @sugar.truncate(${i + 1});
 }`);

@@ -51,10 +51,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLabelClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLabelClassesParams = {
@@ -65,9 +67,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Labels
         * @namespace          sugar.css.ui
@@ -142,7 +145,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     finalParams.styles.forEach((style) => {
         let cls = `s-label`;
@@ -150,7 +154,8 @@ export default function ({
             cls += `:${style}`;
         }
 
-        vars.push(`/**
+        vars.comment(
+            () => `/**
                 * @name           ${cls}
                 * @namespace      sugar.css.ui.label
                 * @type           CssClass
@@ -166,10 +171,11 @@ export default function ({
                 * @since    2.0.0
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
-        `);
+        `,
+        );
 
         if (finalParams.scope.includes('bare')) {
-            vars.push(`.s-label${
+            vars.code(`.s-label${
                 finalParams.defaultStyle === style ? '' : `--${style}`
             } {
                 @sugar.ui.label($style: ${style}, $scope: bare);
@@ -178,11 +184,13 @@ export default function ({
         }
 
         if (finalParams.scope.includes('lnf')) {
-            vars.push(`
+            vars.code(
+                () => `
                 .${cls.replace(':', '--')} {
                     @sugar.ui.label($style: ${style}, $scope: lnf);
                 } 
-            `);
+            `,
+            );
         }
     });
 

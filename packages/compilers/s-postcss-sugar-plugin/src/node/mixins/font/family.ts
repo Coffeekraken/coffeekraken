@@ -44,10 +44,12 @@ export { postcssSugarPluginFontFamilyInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFontFamilyParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFontFamilyParams = {
@@ -55,7 +57,7 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const fontFamilyObj = __STheme.config(`font.family.${finalParams.font}`);
 
@@ -64,7 +66,7 @@ export default function ({
             case 'font-family':
             case 'font-weight':
             case 'font-style':
-                vars.push(
+                vars.code(
                     `${prop}: var(${`--s-theme-font-family-${finalParams.font}-${prop}`}, ${
                         fontFamilyObj[prop]
                     });`,

@@ -20,19 +20,22 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiLoaderClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiLoaderClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Loaders
         * @namespace          sugar.css.ui
@@ -76,9 +79,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-loader:spinner
         * @namespace      sugar.css.ui.range
         * @type           CssClass
@@ -91,6 +96,8 @@ export default function ({
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-loader--spinner {
             @sugar.ui.loader.spinner();
         }

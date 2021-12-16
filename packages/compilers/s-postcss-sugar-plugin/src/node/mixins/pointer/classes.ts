@@ -33,19 +33,22 @@ export { postcssSugarPluginPointerClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginPointerClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginPointerClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-pointer-events:none
     * @namespace          sugar.css.pointer
     * @type               CssClass
@@ -59,11 +62,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
+   `,
+    ).code(`
     .s-pointer-events--none {
         pointer-events: none;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-pointer-events:all
     * @namespace          sugar.css.pointer
     * @type               CssClass
@@ -77,11 +83,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
+   `,
+    ).code(`
     .s-pointer-events--all {
         pointer-events: all;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-pointer-events:auto
     * @namespace          sugar.css.pointer
     * @type               CssClass
@@ -95,11 +104,14 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
+   `,
+    ).code(`
     .s-pointer-events--auto {
         pointer-events: auto;
     }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name          s-pointer-events:fill
     * @namespace          sugar.css.pointer
     * @type               CssClass
@@ -113,6 +125,8 @@ export default function ({
     *     <div class="s-center-abs">I'm a cool overflow auto container</div>
     * </div>
     */
+   `,
+    ).code(`
     .s-pointer-events--fill {
         pointer-events: fill;
     }`);

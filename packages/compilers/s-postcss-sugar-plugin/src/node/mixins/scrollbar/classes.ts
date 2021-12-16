@@ -34,10 +34,12 @@ export { postcssSugarPluginScaleClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginScaleClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginScaleClassesParams = {
@@ -46,9 +48,10 @@ export default function ({
 
     const scaleObj = __STheme.config('ui.scrollbar');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Scrollbar
         * @namespace          sugar.css.tools
@@ -87,9 +90,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
             * @name          s-scrollbar
             * @namespace          sugar.css.scrollbar
             * @type               CssClass
@@ -107,6 +112,8 @@ export default function ({
             * since           2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+        `,
+    ).code(`
             .s-scrollbar {
                 @sugar.scrollbar();
             }`);

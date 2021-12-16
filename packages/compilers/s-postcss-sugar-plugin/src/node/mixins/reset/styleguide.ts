@@ -32,17 +32,20 @@ export { postcssSugarPluginResetStyleguideInterface as interface };
 
 export default function ({
     params,
+    CssVars,
 }: {
     params: Partial<IPostcssSugarPluginResetStyleguideClassesParams>;
+    CssVars: any;
 }) {
     const finalParams: IPostcssSugarPluginResetStyleguideClassesParams = {
         ratio: 1,
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Global reset
         * @namespace          sugar.css.resets
@@ -69,9 +72,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Destyle reset
         * @namespace          sugar.css.resets
@@ -104,9 +109,11 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Sugar reset
         * @namespace          sugar.css.resets
@@ -136,7 +143,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     return vars;
 }

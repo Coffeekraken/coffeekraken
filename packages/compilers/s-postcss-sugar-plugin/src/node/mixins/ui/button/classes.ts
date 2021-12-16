@@ -57,10 +57,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiButtonClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiButtonClassesParams = {
@@ -72,9 +74,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Buttons
         * @namespace          sugar.css.ui
@@ -215,10 +218,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-btn
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -231,6 +236,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
         .s-btn {
             @sugar.ui.button($scope: bare);
         }`);
@@ -243,7 +250,8 @@ export default function ({
                 cls += `--${style}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -258,6 +266,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
         .${cls} {
             @sugar.ui.button($style: ${style}, $scope: lnf);
         }`);
@@ -271,7 +281,8 @@ export default function ({
                 cls += `--${shape}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -286,13 +297,16 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
         .${cls} {
             @sugar.ui.button($shape: ${shape}, $scope: shape);
         }`);
         });
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-btn--block
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -304,14 +318,15 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
+      */`,
+    ).code(`
       .s-btn--block {
         display: block !important;
       }
     `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-btn-group
         * @namespace      sugar.css.ui.button
         * @type           CssClass
@@ -326,8 +341,9 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-    vars.push(`
+      */`,
+    );
+    vars.code(`
       .s-btn-group {
           display: inline-flex !important;   
           flex-wrap: nowrap;
@@ -361,7 +377,8 @@ export default function ({
     `);
 
     if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-format:text button
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -378,6 +395,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.format.text {
                 button {
                     @sugar.ui.button($scope: '${finalParams.scope.join(',')}');
@@ -387,7 +406,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.button
             * @type           CssClass
@@ -412,6 +432,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.rhythm.vertical {
                 button, .s-btn {
                     ${__STheme.jsObjectToCssProperties(

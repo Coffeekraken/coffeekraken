@@ -57,10 +57,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiListClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
@@ -72,9 +74,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Tabs
         * @namespace          sugar.css.ui
@@ -187,10 +190,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`
+        vars.comment(
+            () => `
             /**
               * @name           s-tabs
               * @namespace      sugar.css.ui.tabs
@@ -204,6 +209,8 @@ export default function ({
               *    <div>A tab</div>
               * </div>
             */
+           `,
+        ).code(`
           .s-tabs {
             @sugar.ui.tabs($scope: bare);
           }
@@ -212,7 +219,8 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
               * @name           s-tabs${
                   finalParams.defaultStyle === style ? '' : `:${style}`
               }
@@ -229,6 +237,8 @@ export default function ({
               *    <div>A tab</div>
               * </div>
             */
+           `,
+            ).code(`
           .s-tabs${finalParams.defaultStyle === style ? '' : `--${style}`} {
             @sugar.ui.tabs($style: ${style}, $scope: lnf);
           }
@@ -238,7 +248,8 @@ export default function ({
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-tabs${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }
@@ -255,6 +266,8 @@ export default function ({
             *    <div>A tab</div>
             * </div>
           */
+         `,
+            ).code(`
         .s-tabs${finalParams.defaultShape === shape ? '' : `--${shape}`} {
           @sugar.ui.tabs($shape: ${shape}, $scope: shape);
 
@@ -266,7 +279,8 @@ export default function ({
         });
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tabs--grow
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
@@ -279,12 +293,15 @@ export default function ({
         *    <div>A tab</div>
         * </div>
       */
+     `,
+    ).code(`
     .s-tabs--grow {
       @sugar.ui.tabs($grow: true, $scope: grow);
     }
   `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tabs--vertical
         * @namespace      sugar.css.ui.tabs
         * @type           CssClass
@@ -297,6 +314,8 @@ export default function ({
         *    <div>A tab</div>
         * </div>
       */
+     `,
+    ).code(`
     .s-tabs--vertical {
       @sugar.ui.tabs($direction: vertical, $scope: 'direction');
     }

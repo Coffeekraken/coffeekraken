@@ -34,10 +34,12 @@ export { postcssSugarPluginScaleClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginScaleClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginScaleClassesParams = {
@@ -46,9 +48,10 @@ export default function ({
 
     const scaleObj = __STheme.config('scale');
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Scale
         * @namespace          sugar.css.tools
@@ -92,11 +95,13 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(scaleObj).forEach((scaleName) => {
         const scaleValue = scaleObj[scaleName];
-        const scaleCss = `/**
+        vars.comment(
+            () => `/**
   * @name          s-scale:${scaleName}
   * @namespace          sugar.css.scale
   * @type               CssClass
@@ -114,10 +119,11 @@ export default function ({
   * since           2.0.0
   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
   */
+ `,
+        ).code(`
 .s-scale--${scaleName} {
     --s-scale: ${scaleValue};
-}`;
-        vars.push(scaleCss);
+}`);
     });
 
     return vars;

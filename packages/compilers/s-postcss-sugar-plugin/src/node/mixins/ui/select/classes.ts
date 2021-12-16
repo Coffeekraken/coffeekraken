@@ -57,11 +57,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFormSelectClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFormSelectClassesParams = {
@@ -74,9 +76,10 @@ export default function ({
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Select
         * @namespace          sugar.css.ui
@@ -318,10 +321,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-select
             * @namespace      sugar.css.ui.select
             * @type           CssClass
@@ -336,11 +341,14 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-        vars.push(`
+        */`,
+        );
+        vars.code(
+            () => `
                 .s-select {
                     @sugar.ui.select($scope: bare);
-                }`);
+                }`,
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
@@ -350,7 +358,8 @@ export default function ({
             const styleCls = isDefaultStyle ? '' : `.s-select--${style}`;
             const cls = `.s-select${styleCls}`;
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-select${isDefaultStyle ? '' : `:${style}`}
             * @namespace      sugar.css.ui.select
             * @type           CssClass
@@ -365,11 +374,14 @@ export default function ({
             * 
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-            vars.push(`
+        */`,
+            );
+            vars.code(
+                () => `
                 ${cls} {
                     @sugar.ui.select($style: ${style}, $scope: lnf);
-                }`);
+                }`,
+            );
         });
     }
 
@@ -380,7 +392,8 @@ export default function ({
             const styleCls = isDefaultShape ? '' : `.s-select--${shape}`;
             const cls = `.s-select${styleCls}`;
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name           s-select${isDefaultShape ? '' : `:${shape}`}
         * @namespace      sugar.css.ui.select
         * @type           CssClass
@@ -395,16 +408,20 @@ export default function ({
         * 
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-            vars.push(`
+      */`,
+            );
+            vars.code(
+                () => `
             ${cls} {
                 @sugar.ui.select($shape: ${shape}, $scope: shape);
-            }`);
+            }`,
+            );
         });
     }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-format:text select
             * @namespace      sugar.css.ui.select
             * @type           CssClass
@@ -423,6 +440,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.format.text {
                 select {
                     @sugar.ui.select($scope: '${finalParams.scope.join(',')}');
@@ -432,7 +451,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.select
             * @type           CssClass
@@ -463,6 +483,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.rhythm.vertical {
                 select, .s-select {
                     ${__STheme.jsObjectToCssProperties(

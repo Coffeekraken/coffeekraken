@@ -57,10 +57,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRangeClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
@@ -72,9 +74,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Range
         * @namespace          sugar.css.ui
@@ -231,10 +234,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
         * @name           s-range
         * @namespace      sugar.css.ui.range
         * @type           CssClass
@@ -247,6 +252,8 @@ export default function ({
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+        ).code(`
         .s-range {
             @sugar.ui.range($scope: bare);
         }
@@ -260,7 +267,8 @@ export default function ({
                 cls += `--${style}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.range
             * @type           CssClass
@@ -275,6 +283,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .${cls} {
                 @sugar.ui.range($style: ${style}, $scope: lnf);
             }
@@ -289,7 +299,8 @@ export default function ({
                 cls += `--${shape}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.range
             * @type           CssClass
@@ -304,6 +315,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .${cls} {
                 @sugar.ui.range($shape: ${shape}, $scope: shape);
             }

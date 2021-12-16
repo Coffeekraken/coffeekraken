@@ -53,11 +53,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiFsTreelassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiFsTreelassesParams = {
@@ -70,9 +72,10 @@ export default function ({
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Fs Tree
         * @namespace          sugar.css.ui
@@ -299,10 +302,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-fs-tree
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -330,6 +335,8 @@ export default function ({
             * @since       2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
         .s-fs-tree {
             @sugar.ui.fsTree($scope: bare);
         }
@@ -338,7 +345,8 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
                 * @name           s-fs-tree${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }
@@ -366,6 +374,8 @@ export default function ({
                 * @since       2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+            ).code(`
             .s-fs-tree${
                 style === finalParams.defaultStyle ? '' : `--${style}`
             } {
@@ -377,7 +387,8 @@ export default function ({
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
                 * @name           s-fs-tree${
                     shape === finalParams.defaultShape ? '' : `:${shape}`
                 }
@@ -405,6 +416,8 @@ export default function ({
                 * @since       2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+            ).code(`
             .s-fs-tree${
                 shape === finalParams.defaultShape ? '' : `--${shape}`
             } {
@@ -415,7 +428,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.list
             * @type           CssClass
@@ -443,6 +457,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.rhythm.vertical {
                 .s-fs-tree {
                     ${__STheme.jsObjectToCssProperties(

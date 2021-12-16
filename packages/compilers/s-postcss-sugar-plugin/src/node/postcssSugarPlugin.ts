@@ -269,10 +269,11 @@ const plugin = (settings: any = {}) => {
             if (str) this._stack.push(str);
         }
         comment(str) {
-            // if (!commentsNeeded()) return this;
-            // if (typeof str === 'function') str = str();
-            // if (Array.isArray(str)) str = str.join('\n');
-            // this._stack.push(str);
+            return this;
+            if (!commentsNeeded()) return this;
+            if (typeof str === 'function') str = str();
+            if (Array.isArray(str)) str = str.join('\n');
+            this._stack.push(str);
             return this;
         }
         code(str) {

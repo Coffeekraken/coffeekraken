@@ -32,23 +32,26 @@ export { postcssSugarPluginOpacityClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginOpacityClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginOpacityClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const opacityObj = __STheme.config('opacity');
 
     Object.keys(opacityObj).forEach((opacity) => {
         const opacityCls = `s-opacity:${opacity}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${opacityCls}
     * @namespace        sugar.css.opacity
     * @type             CssClass
@@ -63,6 +66,8 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${opacityCls.replace(':', '--')} {
         opacity: sugar.opacity(${opacity});
    }`);

@@ -33,21 +33,24 @@ export { postcssSugarPluginPaddingClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginPaddingClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginPaddingClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const marginsObj = __STheme.config('padding');
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Padding
         * @namespace          sugar.css.helpers
@@ -115,12 +118,14 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(marginsObj).forEach((spaceName) => {
         // margins
         const clsMargin = `s-p:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -135,11 +140,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMargin.replace(':', '--')} {
         padding: sugar.padding(${spaceName});
    }`);
         const clsMarginTop = `s-pbs:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginTop}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -154,11 +162,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginTop.replace(':', '--')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
    }`);
         const clsMarginBottom = `s-pbe:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginBottom}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -173,11 +184,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginBottom.replace(':', '--')} {
         padding-block-end: sugar.padding(${spaceName}) !important;
    }`);
         const clsMarginLeft = `s-pis:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginLeft}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -192,11 +206,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginLeft.replace(':', '--')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
    }`);
         const clsMarginRight = `s-pie:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -211,11 +228,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginRight.replace(':', '--')} {
         padding-inline-end: sugar.padding(${spaceName}) !important;
    }`);
         const clsMarginX = `s-pi:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginX}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -230,12 +250,15 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
      .${clsMarginX.replace(':', '--')} {
         padding-inline-start: sugar.padding(${spaceName}) !important;
         padding-inline-end: sugar.padding(${spaceName}) !important;
    }`);
         const clsMarginY = `s-pb:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginY}
     * @namespace        sugar.css.padding
     * @type             CssClass
@@ -250,6 +273,8 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginY.replace(':', '--')} {
         padding-block-start: sugar.padding(${spaceName}) !important;
         padding-block-end: sugar.padding(${spaceName}) !important;

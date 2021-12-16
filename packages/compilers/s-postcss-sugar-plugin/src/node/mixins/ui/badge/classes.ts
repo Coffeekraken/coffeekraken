@@ -56,10 +56,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiBadgeClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiBadgeClassesParams = {
@@ -71,9 +73,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Badges
         * @namespace          sugar.css.ui
@@ -161,10 +164,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-badge
             * @namespace      sugar.css.ui.badge
             * @type           CssClass
@@ -176,8 +181,8 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-        vars.push(`
+        */`,
+        ).code(`
             .s-badge {
                 @sugar.ui.badge($scope: bare);
             }
@@ -186,7 +191,8 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             }
@@ -202,8 +208,8 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-            vars.push(`
+        */`,
+            ).code(`
             .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
                 @sugar.ui.badge($style: ${style}, $scope: lnf);
             }
@@ -213,7 +219,8 @@ export default function ({
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name           s-badge${
             finalParams.defaultShape === shape ? '' : `:${shape}`
         }
@@ -229,8 +236,8 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-      */`);
-            vars.push(`
+      */`,
+            ).code(`
         .s-badge${shape === finalParams.defaultShape ? '' : `--${shape}`} {
             @sugar.ui.badge($shape: ${shape}, $scope: shape);
         }

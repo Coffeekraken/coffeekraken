@@ -58,11 +58,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiRangeClassesParams>;
     atRule: any;
     applyNoScopes: Function;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiRangeClassesParams = {
@@ -75,9 +77,10 @@ export default function ({
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Radio
         * @namespace          sugar.css.ui
@@ -231,10 +234,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-radio
             * @namespace      sugar.css.ui.radio
             * @type           CssClass
@@ -249,6 +254,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             .s-radio {
                 @sugar.ui.radio($scope: bare);
             }
@@ -262,7 +269,8 @@ export default function ({
                 cls += `--${style}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.radio
             * @type           CssClass
@@ -283,6 +291,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .${cls} {
                 @sugar.ui.radio($style: ${style}, $scope: lnf);
             }
@@ -297,7 +307,8 @@ export default function ({
                 cls += `--${shape}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           ${cls}
             * @namespace      sugar.css.ui.radio
             * @type           CssClass
@@ -318,6 +329,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .${cls} {
                 @sugar.ui.radio($shape: ${shape}, $scope: shape);
             }
@@ -326,7 +339,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('tf') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-format:text input[type="radio"]
             * @namespace      sugar.css.ui.radio
             * @type           CssClass
@@ -343,6 +357,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.format.text {
                 input[type="radio"] {
                     @sugar.ui.radio($scope: '${finalParams.scope.join(',')}');
@@ -352,7 +368,8 @@ export default function ({
     }
 
     if (finalParams.scope.indexOf('vr') !== -1) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-rhythm:vertical
             * @namespace      sugar.css.ui.radio
             * @type           CssClass
@@ -371,6 +388,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             @sugar.rhythm.vertical {
                 input[type="radio"], .s-radio {
                     ${__STheme.jsObjectToCssProperties(

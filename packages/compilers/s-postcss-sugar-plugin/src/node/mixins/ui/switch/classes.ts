@@ -58,11 +58,13 @@ export default function ({
     params,
     atRule,
     applyNoScopes,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiSwitchClassesMixinParams>;
     atRule: any;
     applyNoScopes: Function;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiSwitchClassesMixinParams = {
@@ -75,9 +77,10 @@ export default function ({
     };
     finalParams.scope = applyNoScopes(finalParams.scope);
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Switch
         * @namespace          sugar.css.ui
@@ -262,10 +265,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-switch
             * @namespace      sugar.css.ui.switch
             * @type           CssClass
@@ -283,6 +288,8 @@ export default function ({
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
         .s-switch {
             @sugar.ui.switch($scope: bare);
         }
@@ -296,7 +303,8 @@ export default function ({
                 cls += `\n${style}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
                 * @name           ${cls}
                 * @namespace      sugar.css.ui.switch
                 * @type           CssClass
@@ -316,6 +324,8 @@ export default function ({
                 * @since    2.0.0
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+            ).code(`
             .${cls.replace('\n', '--')} {
                 @sugar.ui.switch($style: ${style}, $scope: lnf);
             }
@@ -330,7 +340,8 @@ export default function ({
                 cls += `\n${shape}`;
             }
 
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name           ${cls}
         * @namespace      sugar.css.ui.switch
         * @type           CssClass
@@ -346,6 +357,8 @@ export default function ({
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+            ).code(`
       .${cls.replace('\n', '--')} {
         @sugar.ui.switch($shape: ${shape}, $scope: shape);
       }

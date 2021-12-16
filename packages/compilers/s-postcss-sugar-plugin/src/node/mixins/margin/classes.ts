@@ -33,21 +33,24 @@ export { postcssSugarPluginMarginClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginMarginClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginMarginClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const marginsObj = __STheme.config('margin');
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Margin
         * @namespace          sugar.css.helpers
@@ -122,12 +125,14 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(marginsObj).forEach((spaceName) => {
         // margins
         const clsMargin = `s-m:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -142,11 +147,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMargin.replace(':', '--')} {
         margin: sugar.margin(${spaceName});
    }`);
         const clsMarginTop = `s-mbs:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginTop}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -161,11 +169,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginTop.replace(':', '--')} {
         margin-block-start: sugar.margin(${spaceName}) !important;
    }`);
         const clsMarginBottom = `s-mbe:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginBottom}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -180,11 +191,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginBottom.replace(':', '--')} {
         margin-block-end: sugar.margin(${spaceName}) !important;
    }`);
         const clsMarginLeft = `s-mis:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginLeft}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -199,11 +213,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginLeft.replace(':', '--')} {
         margin-inline-start: sugar.margin(${spaceName}) !important;
    }`);
         const clsMarginRight = `s-mie:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            .${clsMarginRight}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -218,11 +235,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginRight.replace(':', '--')} {
         margin-inline-end: sugar.margin(${spaceName}) !important;
    }`);
         const clsMarginX = `s-mi:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginX}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -237,12 +257,15 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
      .${clsMarginX.replace(':', '--')} {
         margin-inline-start: sugar.margin(${spaceName}) !important;
         margin-inline-end: sugar.margin(${spaceName}) !important;
    }`);
         const clsMarginY = `s-mb:${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginY}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -257,6 +280,8 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginY.replace(':', '--')} {
         margin-block-start: sugar.margin(${spaceName}) !important;
         margin-block-end: sugar.margin(${spaceName}) !important;
@@ -267,7 +292,8 @@ export default function ({
     Object.keys(marginsObj).forEach((spaceName) => {
         // margins
         const clsMargin = `s-m:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMargin}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -282,11 +308,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMargin.replace(':', '--')} {
         margin: calc(sugar.margin(${spaceName}) * -1);
    }`);
         const clsMarginTop = `s-mbs:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginTop}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -301,11 +330,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginTop.replace(':', '--')} {
         margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
         const clsMarginBottom = `s-mbe:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            .${clsMarginBottom}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -320,11 +352,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginBottom.replace(':', '--')} {
         margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
         const clsMarginLeft = `s-mis:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginLeft}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -339,11 +374,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginLeft.replace(':', '--')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
         const clsMarginRight = `s-mie:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginRight}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -358,11 +396,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginRight.replace(':', '--')} {
         margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
         const clsMarginX = `s-mi:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginX}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -377,12 +418,15 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
      .${clsMarginX.replace(':', '--')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
         margin-inline-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
         const clsMarginY = `s-mb:-${spaceName}`;
-        vars.push(`/**
+        vars.comment(
+            () => `/**
     * @name            ${clsMarginY}
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -397,13 +441,16 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+        ).code(`
    .${clsMarginY.replace(':', '--')} {
         margin-block-start: calc(sugar.margin(${spaceName}) * -1) !important;
         margin-block-end: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
     });
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-m:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -418,11 +465,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-m--auto {
         margin: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mbs:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -437,11 +487,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mbs--auto {
         margin-block-start: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mie:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -456,11 +509,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mie--auto {
         margin-inline-end: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mbe:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -475,11 +531,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mbe--auto {
         margin-block-end: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mis:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -494,11 +553,14 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mis--auto {
         margin-inline-start: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mi:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -513,12 +575,15 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mi--auto {
         margin-inline-start: auto;
         margin-inline-end: auto;
    }`);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
     * @name            s-mb:auto
     * @namespace        sugar.css.margin
     * @type             CssClass
@@ -533,6 +598,8 @@ export default function ({
     * @since        2.0.0
     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     */
+   `,
+    ).code(`
    .s-mb--auto {
         margin-block-start: auto;
         margin-block-end: auto;

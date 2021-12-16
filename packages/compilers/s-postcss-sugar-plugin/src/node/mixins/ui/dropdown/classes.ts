@@ -56,10 +56,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiDropdownClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiDropdownClassesParams = {
@@ -71,9 +73,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Dropdown
         * @namespace          sugar.css.ui
@@ -314,10 +317,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-dropdown
             * @namespace      sugar.css.ui.dropdown
             * @type           CssClass
@@ -336,6 +341,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+        ).code(`
             .s-dropdown {
                 @sugar.ui.dropdown($scope: bare);
             }
@@ -344,7 +351,8 @@ export default function ({
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
             * @name           s-dropdown${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             }
@@ -367,6 +375,8 @@ export default function ({
             * @since      2.0.0
             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
             .s-dropdown${
                 finalParams.defaultStyle === style ? '' : `--${style}`
             } {
@@ -378,7 +388,8 @@ export default function ({
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name           s-dropdown${
             finalParams.defaultShape === shape ? '' : `:${shape}`
         }
@@ -401,6 +412,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+            ).code(`
         .s-dropdown${finalParams.defaultShape === shape ? '' : `--${shape}`} {
             @sugar.ui.dropdown($shape: ${shape}, $scope: shape);
         }
@@ -408,7 +421,8 @@ export default function ({
         });
     }
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -428,12 +442,15 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown {
             @sugar.ui.dropdown($position: bottom, $scope: position);
         }
         `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown:bottom-start
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -453,12 +470,15 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown--bottom-start {
             @sugar.ui.dropdown($position: bottom-start, $scope: position);
         }
         `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown:bottom-end
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -478,12 +498,15 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown--bottom-end {
             @sugar.ui.dropdown($position: bottom-end, $scope: position);
         }
         `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown:top
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -503,12 +526,15 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown--top {
             @sugar.ui.dropdown($position: top, $scope: position);
         }
         `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown:top-start
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -528,12 +554,15 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown--top-start {
             @sugar.ui.dropdown($position: top-start, $scope: position);
         }
         `);
 
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-dropdown:top-end
         * @namespace      sugar.css.ui.dropdown
         * @type           CssClass
@@ -553,6 +582,8 @@ export default function ({
         * @since      2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `,
+    ).code(`
         .s-dropdown--top-end {
             @sugar.ui.dropdown($position: top-end, $scope: position);
         }

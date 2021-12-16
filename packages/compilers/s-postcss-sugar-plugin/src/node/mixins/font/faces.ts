@@ -33,24 +33,27 @@ export { postcssSugarPluginFontFacesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginFontFacesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginFontFacesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const fontsFamiliesObj = __STheme.config('font.family');
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
         const fontObj = fontsFamiliesObj[fontName];
 
         if (fontObj.import) {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
         * @name               ${fontName}
         * @namespace          sugar.css.font
         * @type               CssFontFace
@@ -62,6 +65,8 @@ export default function ({
         * @since          2.0.0
         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `,
+            ).code(`
         @import url("${fontObj.import}");
       `);
         }

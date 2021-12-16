@@ -49,10 +49,12 @@ export { postcssSugarPluginGradientClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginGradientClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginGradientClassesParams = {
@@ -61,10 +63,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     if (finalParams.types.indexOf('linear') !== -1) {
-        vars.push(`/**
+        vars.comment(`/**
         * @name             s-gradient:linear
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -82,13 +84,14 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `).code(`
     .s-gradient--linear {
         --s-gradient-type-inline: linear;
     }`);
     }
 
     if (finalParams.types.indexOf('radial') !== -1) {
-        vars.push(`/**
+        vars.comment(`/**
         * @name             s-gradient:radial
         * @namespace          sugar.css.gradient
         * @type                 CssClass
@@ -106,6 +109,7 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `).code(`
     .s-gradient--radial {
         --s-gradient-type-inline: radial;
     }`);
@@ -113,7 +117,7 @@ export default function ({
 
     if (finalParams.angles) {
         finalParams.angles.forEach((angle) => {
-            vars.push(`
+            vars.comment(`
         /**
          * @name        .s-gradient:${angle}deg
          * @namespace       sugar.css.gradient
@@ -132,6 +136,7 @@ export default function ({
          * @since            2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
+        `).code(`
         .s-gradient--${angle}deg {
             --s-gradient-angle-inline: ${angle}deg;
         }
@@ -143,7 +148,7 @@ export default function ({
     __STheme.getTheme().loopOnColors(({ name, variant, value }) => {
         if (currentName !== name) {
             // default gradients
-            vars.push(`
+            vars.comment(`
           /**
            * @name        .s-gradient:${name}
            * @namespace   sugar.css.gradient
@@ -164,6 +169,7 @@ export default function ({
            * @since       2.0.0
            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
            */
+          `).code(`
           .s-gradient--${name} {
               @sugar.gradient(
                   $start: ${name},
@@ -179,7 +185,7 @@ export default function ({
         const startColorClassName = `s-gradient:start-${name}${
             variant === 'default' ? '' : `-${variant}`
         }`;
-        vars.push(`/**
+        vars.comment(`/**
         * @name          ${startColorClassName}
         * @namespace          sugar.css.gradient
         * @type               CssClass
@@ -199,6 +205,7 @@ export default function ({
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
+       `).code(`
       .${startColorClassName.replace(':', '--')} {
           --s-gradient-start-color-inline: sugar.color(${name}, ${variant});
       }`);
@@ -206,7 +213,7 @@ export default function ({
         const endColorClassName = `s-gradient:end-${name}${
             variant === 'default' ? '' : `-${variant}`
         }`;
-        vars.push(`/**
+        vars.comment(`/**
       * @name          ${endColorClassName}
       * @namespace          sugar.css.gradient
       * @type               CssClass
@@ -230,6 +237,7 @@ export default function ({
       * @since            2.0.0
       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
+     `).code(`
     .${endColorClassName.replace(':', '--')} {
         --s-gradient-end-color-inline: sugar.color(${name}, ${variant});
     }`);

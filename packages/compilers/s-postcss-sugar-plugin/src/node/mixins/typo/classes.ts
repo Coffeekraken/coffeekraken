@@ -34,21 +34,24 @@ export { postcssSugarPluginTypoClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginTypoClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginTypoClassesParams = {
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
     const typosObj = __STheme.config('typo');
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Typography
         * @namespace          sugar.css.helpers
@@ -90,7 +93,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     Object.keys(typosObj).forEach((typoName) => {
         const typoObj = typosObj[typoName];
@@ -100,7 +104,8 @@ export default function ({
             exclude: ['rhythmVertical'],
         });
 
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name            ${cls}
             * @namespace        sugar.css.typo
             * @type             CssClass
@@ -115,11 +120,14 @@ export default function ({
             * @since        2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+        `,
+        ).code(`
         .${cls.replace(':', '--')} {
                 ${css}
         }`);
 
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name            s-format:text ${typoName}
             * @namespace        sugar.css.typo
             * @type             CssClass
@@ -135,13 +143,16 @@ export default function ({
             * @since        2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+        ).code(`
         @sugar.format.text {
             ${typoName} {
                 ${css}
             }
         }`);
 
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name            s-rhythm:vertical .${typoName}, s-rhythm:vertical ${typoName}
             * @namespace        sugar.css.typo
             * @type             CssClass
@@ -159,6 +170,8 @@ export default function ({
             * @since        2.0.0
             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
             */
+           `,
+        ).code(`
         @sugar.rhythm.vertical {
             ${typoName}, .${typoName} {
                 ${__STheme.jsObjectToCssProperties(

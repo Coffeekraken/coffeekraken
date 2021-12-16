@@ -57,10 +57,12 @@ export function dependencies() {
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginUiTooltipClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiTooltipClassesParams = {
@@ -72,9 +74,10 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Tooltips
         * @namespace          sugar.css.ui
@@ -249,10 +252,12 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-toolip-container
             * @namespace      sugar.css.ui.tooltip
             * @type           CssClass
@@ -268,8 +273,10 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            */`);
-        vars.push(`
+            */`,
+        );
+        vars.code(
+            () => `
             .s-tooltip-container {
                 position: relative;
                 display: inline-block;
@@ -285,8 +292,10 @@ export default function ({
                     opacity: 1;
                 }
             }
-        `);
-        vars.push(`/**
+        `,
+        );
+        vars.comment(
+            () => `/**
             * @name           s-toolip-container:active
             * @namespace      sugar.css.ui.tooltip
             * @type           CssClass
@@ -301,12 +310,14 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            */`);
+            */`,
+        );
         // no need to write a class here cause this is handled in the tooltip.ts file directly...
     }
 
     if (finalParams.scope.includes('bare')) {
-        vars.push(`/**
+        vars.comment(
+            () => `/**
             * @name           s-tooltip
             * @namespace      sugar.css.ui.tooltip
             * @type           CssClass
@@ -321,17 +332,21 @@ export default function ({
             * 
             * @since    2.0.0
             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            */`);
-        vars.push(`
+            */`,
+        );
+        vars.code(
+            () => `
             .s-tooltip {
                 @sugar.ui.tooltip($scope: bare);
             }
-        `);
+        `,
+        );
     }
 
     if (finalParams.scope.includes('lnf')) {
         finalParams.styles.forEach((style) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
                 * @name           s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 }
@@ -350,20 +365,24 @@ export default function ({
                 * 
                 * @since    2.0.0
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                */`);
-            vars.push(`
+                */`,
+            );
+            vars.code(
+                () => `
                 .s-tooltip${
                     finalParams.defaultStyle === style ? '' : `--${style}`
                 } {
                     @sugar.ui.tooltip($style: ${style}, $scope: lnf);
                 }
-            `);
+            `,
+            );
         });
     }
 
     if (finalParams.scope.includes('shape')) {
         finalParams.shapes.forEach((shape) => {
-            vars.push(`/**
+            vars.comment(
+                () => `/**
                 * @name           s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 }
@@ -382,19 +401,23 @@ export default function ({
                 * 
                 * @since    2.0.0
                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                */`);
-            vars.push(`
+                */`,
+            );
+            vars.code(
+                () => `
                 .s-tooltip${
                     finalParams.defaultShape === shape ? '' : `--${shape}`
                 } {
                     @sugar.ui.tooltip($shape: ${shape}, $scope: shape);
                 }
-            `);
+            `,
+            );
         });
     }
 
     // Interactive
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tooltip--interactive
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -410,15 +433,19 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    );
+    vars.code(
+        () => `
         .s-tooltip--interactive {
             @sugar.ui.tooltip($interactive: true, $scope: 'interactive');
         }
-    `);
+    `,
+    );
 
     // TOP
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tooltip
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -433,13 +460,16 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    );
+    vars.code(
+        () => `
         .s-tooltip {
             @sugar.ui.tooltip($position: block-start, $scope: 'position');
         }
-    `);
-    // vars.push(`/**
+    `,
+    );
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--top-left
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -453,12 +483,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--top-left {
     //         @sugar.ui.tooltip($position: top-left, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--top-right
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -472,14 +502,15 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--top-right {
     //         @sugar.ui.tooltip($position: top-right, $scope: 'position');
     //     }
     // `);
 
     // RIGHT
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tooltip:inline-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -494,13 +525,16 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    );
+    vars.code(
+        () => `
         .s-tooltip--inline-end {
             @sugar.ui.tooltip($position: inline-end, $scope: 'position');
         }
-    `);
-    // vars.push(`/**
+    `,
+    );
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-center-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -514,12 +548,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-center-top {
     //         @sugar.ui.tooltip($position: right-center-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -533,12 +567,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-top {
     //         @sugar.ui.tooltip($position: right-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-top-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -552,12 +586,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-top-top {
     //         @sugar.ui.tooltip($position: right-top-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-bottom-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -571,12 +605,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-bottom-top {
     //         @sugar.ui.tooltip($position: right-bottom-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-bottom
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -590,12 +624,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-bottom {
     //         @sugar.ui.tooltip($position: right-bottom, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--right-bottom-bottom
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -609,14 +643,15 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--right-bottom-bottom {
     //         @sugar.ui.tooltip($position: right-bottom-bottom, $scope: 'position');
     //     }
     // `);
 
     // left
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tooltip:inline-start
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -631,13 +666,16 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    );
+    vars.code(
+        () => `
         .s-tooltip--inline-start {
             @sugar.ui.tooltip($position: inline-start, $scope: 'position');
         }
-    `);
-    // vars.push(`/**
+    `,
+    );
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-center-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -651,12 +689,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-center-top {
     //         @sugar.ui.tooltip($position: left-center-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -670,12 +708,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-top {
     //         @sugar.ui.tooltip($position: left-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-top-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -689,12 +727,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-top-top {
     //         @sugar.ui.tooltip($position: left-top-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-bottom-top
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -708,12 +746,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-bottom-top {
     //         @sugar.ui.tooltip($position: left-bottom-top, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-bottom-bottom
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -727,12 +765,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-bottom-bottom {
     //         @sugar.ui.tooltip($position: left-bottom-bottom, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--left-bottom
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -746,14 +784,15 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--left-bottom {
     //         @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
     //     }
     // `);
 
     // BOTTOM
-    vars.push(`/**
+    vars.comment(
+        () => `/**
         * @name           s-tooltip:block-end
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
@@ -768,13 +807,16 @@ export default function ({
         * 
         * @since    2.0.0
         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        */`);
-    vars.push(`
+        */`,
+    );
+    vars.code(
+        () => `
         .s-tooltip--block-end {
             @sugar.ui.tooltip($position: block-end, $scope: 'position');
         }
-    `);
-    // vars.push(`/**
+    `,
+    );
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--bottom-left
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -788,12 +830,12 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--bottom-left {
     //         @sugar.ui.tooltip($position: bottom-left, $scope: 'position');
     //     }
     // `);
-    // vars.push(`/**
+    // vars.comment(() => `/**
     //     * @name           s-tooltip--bottom-right
     //     * @namespace      sugar.css.ui.tooltip
     //     * @type           CssClass
@@ -807,7 +849,7 @@ export default function ({
     //     * @since    2.0.0
     //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
     //     */`);
-    // vars.push(`
+    // vars.code(() => `
     //     .s-tooltip--bottom-right {
     //         @sugar.ui.tooltip($position: bottom-right, $scope: 'position');
     //     }

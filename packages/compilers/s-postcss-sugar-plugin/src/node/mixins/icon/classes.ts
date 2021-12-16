@@ -74,10 +74,12 @@ export { postcssSugarPluginIconClassesInterface as interface };
 export default function ({
     params,
     atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginIconClassesParams>;
     atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginIconClassesParams = {
@@ -119,9 +121,10 @@ export default function ({
         }
     });
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(
+        () => `
       /**
         * @name          Icons
         * @namespace          sugar.css.ui
@@ -181,7 +184,8 @@ export default function ({
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-    `);
+    `,
+    );
 
     icons.forEach((iconObj) => {
         switch (iconObj?.protocol) {
@@ -190,7 +194,8 @@ export default function ({
             case 'far':
             case 'fal':
             case 'fad':
-                vars.push(`
+                vars.comment(
+                    () => `
                 /**
                  * @name        s-icon:${iconObj.as}
                   * @namespace      sugar.css.icon
@@ -210,13 +215,16 @@ export default function ({
                   * @since      2.0.0
                   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                   */
+                `,
+                ).code(`
                   .s-icon--${iconObj.as} {
                     @sugar.icon.fa(${iconObj.name}, ${iconObj.protocol});
                   }
               `);
                 break;
             case 'fs':
-                vars.push(`
+                vars.comment(
+                    () => `
                     /**
                      * @name        s-icon:${iconObj.as}
                       * @namespace      sugar.css.icon
@@ -236,6 +244,8 @@ export default function ({
                       * @since      2.0.0
                       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                       */
+                    `,
+                ).code(`
                       .s-icon--${iconObj.as} {
                         @sugar.icon.fs(${iconObj.path}, ${iconObj.as});
                       }

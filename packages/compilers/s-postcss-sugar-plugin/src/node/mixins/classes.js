@@ -8,8 +8,6 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SInterface from '@coffeekraken/s-interface';
-import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
-import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static get _definition() {
         return {};
@@ -33,7 +31,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, fromCache, replaceWith }) {
+export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const cssArray = [
             '@sugar.reset.styleguide;',
@@ -71,22 +69,21 @@ export default function ({ params, atRule, fromCache, replaceWith }) {
             '@sugar.components.classes;',
             '@sugar.whiteSpace.classes;',
         ];
-        const hash = `classes-${__objectHash({
-            css: cssArray,
-            theme: __STheme.hash(),
-        })}`;
-        // from cache
-        const cached = yield fromCache(hash, '@sugar.classes;');
-        if (cached) {
-            console.log(`<green>[postcss]</green> Statement "<cyan>@sugar.classes;</cyan>" getted from cache`);
-            return cached;
-        }
-        console.log('<yellow>[postcss]</yellow> Compiling the "<cyan>@sugar.classes;</cyan>" statement. ');
-        console.log(`<yellow>[postcss]</yellow> This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....`);
-        // add caching statements
-        cssArray.unshift(`/* CACHE:${hash}:@sugar.classes; */`);
-        cssArray.push(`/* ENDCACHE:${hash}:@sugar.classes; */`);
         return cssArray;
+        // const hash = `classes-${__objectHash({
+        //     css: cssArray,
+        //     theme: __STheme.hash(),
+        // })}`;
+        // // from cache
+        // const cached = await fromCache(hash, '@sugar.classes;');
+        // if (cached) {
+        //     return cached;
+        // } else {
+        //     console.log(
+        //         `<yellow>[postcss]</yellow> This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....`,
+        //     );
+        //     return toCache(hash, cssArray, '@sugar.classes;');
+        // }
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxZQUFZLE1BQU0sOENBQThDLENBQUM7QUFDeEUsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFLN0MsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBaUIsRUFBRSxNQUFNLEVBQUUsTUFBTSxFQUFFLFNBQVMsRUFBRSxXQUFXLEVBQUU7O1FBQ3JFLE1BQU0sUUFBUSxHQUFhO1lBQ3ZCLDBCQUEwQjtZQUMxQixvQkFBb0I7WUFDcEIsdUJBQXVCO1lBQ3ZCLHNCQUFzQjtZQUN0Qix3QkFBd0I7WUFDeEIsMEJBQTBCO1lBQzFCLHVCQUF1QjtZQUN2QixxQkFBcUI7WUFDckIsd0JBQXdCO1lBQ3hCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2QiwwQkFBMEI7WUFDMUIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2Qix3QkFBd0I7WUFDeEIseUJBQXlCO1lBQ3pCLDBCQUEwQjtZQUMxQiwwQkFBMEI7WUFDMUIseUJBQXlCO1lBQ3pCLDRCQUE0QjtZQUM1Qix3QkFBd0I7WUFDeEIseUJBQXlCO1lBQ3pCLHVCQUF1QjtZQUN2Qix5QkFBeUI7WUFDekIsNEJBQTRCO1lBQzVCLDBCQUEwQjtZQUMxQiwwQkFBMEI7WUFDMUIsdUJBQXVCO1lBQ3ZCLDJCQUEyQjtZQUMzQix1QkFBdUI7WUFDdkIsNEJBQTRCO1lBQzVCLDRCQUE0QjtTQUMvQixDQUFDO1FBRUYsTUFBTSxJQUFJLEdBQUcsV0FBVyxZQUFZLENBQUM7WUFDakMsR0FBRyxFQUFFLFFBQVE7WUFDYixLQUFLLEVBQUUsUUFBUSxDQUFDLElBQUksRUFBRTtTQUN6QixDQUFDLEVBQUUsQ0FBQztRQUVMLGFBQWE7UUFDYixNQUFNLE1BQU0sR0FBRyxNQUFNLFNBQVMsQ0FBQyxJQUFJLEVBQUUsaUJBQWlCLENBQUMsQ0FBQztRQUN4RCxJQUFJLE1BQU0sRUFBRTtZQUNSLE9BQU8sQ0FBQyxHQUFHLENBQ1AscUZBQXFGLENBQ3hGLENBQUM7WUFDRixPQUFPLE1BQU0sQ0FBQztTQUNqQjtRQUVELE9BQU8sQ0FBQyxHQUFHLENBQ1AscUZBQXFGLENBQ3hGLENBQUM7UUFDRixPQUFPLENBQUMsR0FBRyxDQUNQLGtJQUFrSSxDQUNySSxDQUFDO1FBRUYseUJBQXlCO1FBQ3pCLFFBQVEsQ0FBQyxPQUFPLENBQUMsWUFBWSxJQUFJLHFCQUFxQixDQUFDLENBQUM7UUFDeEQsUUFBUSxDQUFDLElBQUksQ0FBQyxlQUFlLElBQUkscUJBQXFCLENBQUMsQ0FBQztRQUV4RCxPQUFPLFFBQVEsQ0FBQztJQUNwQixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFRckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBaUIsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixTQUFTLEVBQ1QsT0FBTyxFQUNQLFdBQVcsR0FDZDs7UUFDRyxNQUFNLFFBQVEsR0FBYTtZQUN2QiwwQkFBMEI7WUFDMUIsb0JBQW9CO1lBQ3BCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsd0JBQXdCO1lBQ3hCLDBCQUEwQjtZQUMxQix1QkFBdUI7WUFDdkIscUJBQXFCO1lBQ3JCLHdCQUF3QjtZQUN4Qix1QkFBdUI7WUFDdkIsc0JBQXNCO1lBQ3RCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsMEJBQTBCO1lBQzFCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6QiwwQkFBMEI7WUFDMUIsMEJBQTBCO1lBQzFCLHlCQUF5QjtZQUN6Qiw0QkFBNEI7WUFDNUIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6Qix1QkFBdUI7WUFDdkIseUJBQXlCO1lBQ3pCLDRCQUE0QjtZQUM1QiwwQkFBMEI7WUFDMUIsMEJBQTBCO1lBQzFCLHVCQUF1QjtZQUN2QiwyQkFBMkI7WUFDM0IsdUJBQXVCO1lBQ3ZCLDRCQUE0QjtZQUM1Qiw0QkFBNEI7U0FDL0IsQ0FBQztRQUVGLE9BQU8sUUFBUSxDQUFDO1FBRWhCLHlDQUF5QztRQUN6QyxxQkFBcUI7UUFDckIsOEJBQThCO1FBQzlCLFFBQVE7UUFFUixnQkFBZ0I7UUFDaEIsMkRBQTJEO1FBQzNELGdCQUFnQjtRQUNoQixxQkFBcUI7UUFDckIsV0FBVztRQUNYLG1CQUFtQjtRQUNuQiw4SUFBOEk7UUFDOUksU0FBUztRQUNULHlEQUF5RDtRQUN6RCxJQUFJO0lBQ1IsQ0FBQztDQUFBIn0=

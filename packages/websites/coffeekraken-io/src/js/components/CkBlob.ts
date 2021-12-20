@@ -150,12 +150,12 @@ export default class CKBlob extends __SLitComponent {
         // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
         // pointsSphere3.scale.set(9, 9, 9);
 
-        // const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
-        // html5.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
+        const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
+        html5.rotation.set(
+            Math.random() * 360,
+            Math.random() * 360,
+            Math.random() * 360,
+        );
         // const css3 = await this.createIconSphere('/src/3d/logo-css3.jpg');
         // css3.rotation.set(
         //     Math.random() * 360,
@@ -221,7 +221,7 @@ export default class CKBlob extends __SLitComponent {
         this._scene.add(light);
         this._scene.add(ambientLight);
         this._scene.add(sphere);
-        // this._scene.add(html5);
+        this._scene.add(html5);
         // this._scene.add(css3);
         // this._scene.add(js);
         // this._scene.add(vitejs);
@@ -240,6 +240,44 @@ export default class CKBlob extends __SLitComponent {
         this.initPostprocessing();
 
         // this.addControls();
+
+        const trailLength = 40;
+
+        setInterval(() => {
+            this._scene.updateMatrixWorld();
+
+            this._grains.forEach((grain) => {
+                if (!grain._trail) grain._trail = [];
+
+                if (grain._trail.length >= trailLength) {
+                    const last = grain._trail.shift();
+                    last.geometry.dispose();
+                    last.material.dispose();
+                    this._scene.remove(last);
+                    // grain._trail = grain._trail.slice(1);
+                }
+
+                grain._trail.forEach((s, i) => {
+                    const scale = (0.2 / trailLength) * i;
+                    s.scale.set(scale, scale, scale);
+                });
+
+                const ballMat = new THREE.MeshBasicMaterial({
+                    color: 0xffffff,
+                });
+                const geom = new THREE.SphereGeometry(1, 4, 4);
+
+                const sphere = new THREE.Mesh(geom, ballMat);
+
+                sphere.scale.set(0.2, 0.2, 0.2);
+
+                grain._trail.push(sphere);
+
+                this._scene.add(sphere);
+
+                sphere.position.copy(grain.matrixWorld.getPosition());
+            });
+        }, 200);
 
         this.animate();
     }
@@ -639,12 +677,6 @@ export default class CKBlob extends __SLitComponent {
         this._sphere.rotation.y += 0.003;
         // this._sphere.rotation.z += 0.005;
 
-        this._grains.forEach((grain) => {
-            if (!grain._speed) grain._speed = 0.003 + Math.random() / 100;
-            grain.rotation.x += grain._speed;
-            grain.rotation.y += grain._speed;
-            grain.rotation.z += grain._speed;
-        });
         this._grainsGroups.forEach((group) => {
             if (!group._speed) group._speed = 0.001 + Math.random() / 100 / 2;
             group.rotation.x += group._speed;

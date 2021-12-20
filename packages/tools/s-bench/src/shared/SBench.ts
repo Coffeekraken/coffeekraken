@@ -40,7 +40,10 @@ export interface ISBenchCtorSettings {
     promise: Partial<ISPromiseSettings>;
 }
 
-export interface ISBenchSettings {}
+export interface ISBenchSettings {
+    title: string;
+    body: string;
+}
 
 export interface ISBenchStep {
     id: string;
@@ -173,9 +176,9 @@ export default class SBench extends __SPromise {
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static end(id: string, log: boolean = false): SBench {
+    static end(id: string, settings?: Partial<ISBenchSettings>): SBench {
         const instance = this.getBenchInstanceById(id);
-        instance.end(log);
+        instance.end(settings);
         return instance;
     }
 
@@ -198,6 +201,20 @@ export default class SBench extends __SPromise {
     }
 
     /**
+     * @name        benchSettings
+     * @type        ISBenchSettings
+     * @get
+     *
+     * Access the bench settings
+     *
+     * @since           2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get benchSettings(): ISBenchSettings {
+        return (<any>this._settings).bench;
+    }
+
+    /**
      * @name        constructor
      * @type        Function
      * @constructor
@@ -214,7 +231,10 @@ export default class SBench extends __SPromise {
                     metas: {
                         id,
                     },
-                    bench: {},
+                    bench: {
+                        title: undefined,
+                        body: undefined,
+                    },
                     promise: {},
                 },
                 settings ?? {},
@@ -247,8 +267,10 @@ export default class SBench extends __SPromise {
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    start(): void {
+    start(settings?: Partial<ISBenchSettings>): void {
         if (!this.isActive()) return;
+
+        const finalSettings = __deepMerge(this.benchSettings, settings ?? {});
 
         // reset potential old bench
         this._steps.push({
@@ -316,8 +338,12 @@ export default class SBench extends __SPromise {
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    end(log: boolean = false): void {
+    end(settings?: Partial<ISBenchSettings>): void {
         if (!this.isActive()) return;
+
+        const finalSettings = <ISBenchSettings>(
+            __deepMerge(this.benchSettings, settings ?? {})
+        );
 
         const startTime = this._steps[0].time;
 
@@ -338,28 +364,13 @@ export default class SBench extends __SPromise {
             ],
         });
 
-        let logsAr: string[] = [];
-        Object.keys(this._steps).forEach((stepId) => {
-            const stepObj = this._steps[stepId];
-            logsAr = [...logsAr, ...stepObj.logs];
-        });
-
-        __SEventEmitter.global.emit('log', {
-            value: '-------------------- SBench --------------------',
-        });
-        logsAr.forEach((log) => {
-            __SEventEmitter.global.emit('log', {
-                id: this.metas.id,
-                value: log,
+        this.toString(finalSettings)
+            .split('\n')
+            .forEach((line) => {
+                __SEventEmitter.global.emit('log', {
+                    value: line,
+                });
             });
-        });
-        __SEventEmitter.global.emit('log', {
-            value: '------------------------------------------------',
-        });
-
-        if (log) {
-            console.log(__parseHtml(this.toString()));
-        }
 
         this.resolve(this);
     }
@@ -375,10 +386,26 @@ export default class SBench extends __SPromise {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    toString() {
-        let logsAr: string[] = [
+    toString(settings?: Partial<ISBenchSettings>) {
+        const finalSettings = <ISBenchSettings>(
+            __deepMerge(this.benchSettings, settings ?? {})
+        );
+
+        let logsAr = [
             '<magenta>-------------------- SBench --------------------</magenta>',
         ];
+
+        if (finalSettings?.title) {
+            logsAr.push(
+                `<yellow>[bench.${this.metas.id}]</yellow> ${finalSettings.title}`,
+            );
+        }
+        if (finalSettings?.body) {
+            logsAr.push(
+                `<yellow>[bench.${this.metas.id}]</yellow> ${finalSettings.body}`,
+            );
+        }
+
         Object.keys(this._steps).forEach((stepId) => {
             const stepObj = this._steps[stepId];
             logsAr = [...logsAr, ...stepObj.logs];

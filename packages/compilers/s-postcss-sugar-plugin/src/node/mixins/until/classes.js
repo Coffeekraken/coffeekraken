@@ -82,7 +82,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * @since            2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
-        .s-until.s-until--mounted.s-until--show:not(.s-until--sibling):not(.s-until--hide)[mounted]) {
+        .s-until.s-until--mounted.s-until--show:not(.s-until--sibling):not(.s-until--hide)[mounted] {
             display: none;
         }`);
     vars.push(`/**

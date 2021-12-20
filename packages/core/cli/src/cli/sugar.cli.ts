@@ -236,7 +236,9 @@ class SSugarCli {
             }
 
             __SBench.step('sugar.cli', 'beforeProcess');
-            __SBench.end('sugar.cli', true);
+            __SBench.end('sugar.cli', {
+                log: true,
+            });
 
             // normal process
             await this._process();

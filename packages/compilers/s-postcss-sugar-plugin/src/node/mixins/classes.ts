@@ -30,7 +30,13 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function ({ params, atRule, fromCache, replaceWith }) {
+export default async function ({
+    params,
+    atRule,
+    fromCache,
+    toCache,
+    replaceWith,
+}) {
     const cssArray: string[] = [
         '@sugar.reset.styleguide;',
         '@sugar.ui.classes;',
@@ -68,30 +74,21 @@ export default async function ({ params, atRule, fromCache, replaceWith }) {
         '@sugar.whiteSpace.classes;',
     ];
 
-    const hash = `classes-${__objectHash({
-        css: cssArray,
-        theme: __STheme.hash(),
-    })}`;
-
-    // from cache
-    const cached = await fromCache(hash, '@sugar.classes;');
-    if (cached) {
-        console.log(
-            `<green>[postcss]</green> Statement "<cyan>@sugar.classes;</cyan>" getted from cache`,
-        );
-        return cached;
-    }
-
-    console.log(
-        '<yellow>[postcss]</yellow> Compiling the "<cyan>@sugar.classes;</cyan>" statement. ',
-    );
-    console.log(
-        `<yellow>[postcss]</yellow> This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....`,
-    );
-
-    // add caching statements
-    cssArray.unshift(`/* CACHE:${hash}:@sugar.classes; */`);
-    cssArray.push(`/* ENDCACHE:${hash}:@sugar.classes; */`);
-
     return cssArray;
+
+    // const hash = `classes-${__objectHash({
+    //     css: cssArray,
+    //     theme: __STheme.hash(),
+    // })}`;
+
+    // // from cache
+    // const cached = await fromCache(hash, '@sugar.classes;');
+    // if (cached) {
+    //     return cached;
+    // } else {
+    //     console.log(
+    //         `<yellow>[postcss]</yellow> This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....`,
+    //     );
+    //     return toCache(hash, cssArray, '@sugar.classes;');
+    // }
 }

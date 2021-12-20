@@ -1,0 +1,69 @@
+@sugar.init;
+@sugar.theme (dark, default, true);
+@sugar.classes;
+
+@sugar.ui.filtrableinput.classes;
+@sugar.platform.classes;
+
+@sugar.icon.classes (
+  fa:user:user
+  fa:heart:heart
+  fa:fire:fire
+  fa:eye:preview
+  fab:css3-alt:css
+  fa:box-open:box
+  fa:info:info
+  fa:chalkboard-teacher:example
+  fa:list-ul:list-ul
+  fa:cogs:setting
+  fa:th:return
+  fa:search:search
+  fa:radiation:nothing
+  fa:download:import
+  fab:discord:discord
+  fab:github:github
+  fab:facebook:facebook
+  fab:twitter:twitter
+  fab:instagram:instagram
+  fa:cloud-download-alt:install
+  fa:cogs:settings
+  fab:vuejs:vuejs
+  fa:tasks:tasks
+  fa:hammer:todo
+  fa:file-pdf
+  fa:file-image
+  fa:file-code
+  fa:file-archive
+  fa:file
+  fs:src/icons/coffeekraken/lang/lang-js.svg
+  fs:src/icons/coffeekraken/lang/lang-ts.svg
+  fs:src/icons/coffeekraken/lang/lang-css.svg
+  fs:src/icons/coffeekraken/lang/lang-html.svg
+  fs:src/icons/coffeekraken/lang/lang-php.svg
+  fs:src/icons/coffeekraken/lang/lang-html.svg
+  fs:src/icons/coffeekraken/lang/lang-md.svg
+  fs:src/icons/coffeekraken/file/file-js.svg
+  fs:src/icons/coffeekraken/file/file-ts.svg
+  fs:src/icons/coffeekraken/file/file-css.svg
+  fs:src/icons/coffeekraken/file/file-html.svg
+  fs:src/icons/coffeekraken/file/file-php.svg
+  fs:src/icons/coffeekraken/file/file-html.svg
+  fs:src/icons/coffeekraken/file/file-md.svg
+  fs:src/icons/coffeekraken/brand/brand-lit.svg
+  fs:src/icons/coffeekraken/brand/brand-coffeekraken.svg
+  fs:src/icons/coffeekraken/fs/folder.svg
+  fs:src/icons/coffeekraken/html/autocomplete.svg
+  fs:src/icons/coffeekraken/html/range.svg
+  fs:src/icons/coffeekraken/html/code.svg
+  fs:src/icons/coffeekraken/html/datepicker.svg
+  fs:src/icons/coffeekraken/action/copy.svg
+  fs:src/icons/coffeekraken/action/refresh.svg
+  fs:src/icons/coffeekraken/fs/folder-opened.svg
+  fs:src/icons/coffeekraken/display/display-preview.svg
+  fs:src/icons/read-direction.svg:support-rtl
+  fs:src/icons/edge.svg:support-edge
+  fs:src/icons/chrome.svg:support-chromium
+  fs:src/icons/firefox.svg:support-firefox
+  fs:src/icons/safari.svg:support-safari
+  fs:src/icons/vuejs.svg:vue
+);

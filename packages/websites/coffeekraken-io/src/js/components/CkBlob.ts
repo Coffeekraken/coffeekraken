@@ -460,7 +460,8 @@ export default class CKBlob extends __SLitComponent {
         );
 
         this._controls.autoRotate = true;
-        this._controls.autoRotateSpeed = 0.5;
+        this._controls.autoRotateSpeed = 4;
+        this._controls.enableZoom = false;
         // this._controls.enableDamping = true;
         this._controls.update();
     }
@@ -518,7 +519,7 @@ export default class CKBlob extends __SLitComponent {
                 scale,
                 speed,
                 color,
-                trailLength: 5 + Math.round(Math.random() * 30),
+                trailLength: 15 + Math.round(Math.random() * 20),
                 localGroup,
                 trail: [],
             };

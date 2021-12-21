@@ -19,6 +19,9 @@
 
     @include('layouts.header.header')
     
+    <div class="__bgGradient"></div>
+    <div class="__bgGradient1"></div>
+
     <div class="content">
         @yield('content')
     </div>

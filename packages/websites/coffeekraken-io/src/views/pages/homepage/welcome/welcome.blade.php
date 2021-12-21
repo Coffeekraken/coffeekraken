@@ -47,8 +47,7 @@
     {{-- <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     {{-- <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
 
-    <div class="__bgGradient"></div>
-    <div class="__bgGradient1"></div>
+    
 
     <div class="__illustration">
 

@@ -1,28 +1,33 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-// import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
-// import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
+import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
 // import { BokehPass } from './lib/three/examples/jsm/postprocessing/BokehPass.js';
-// import { ShaderPass } from './lib/three/examples/jsm/postprocessing/ShaderPass';
+import { ShaderPass } from './lib/three/examples/jsm/postprocessing/ShaderPass';
+import { RGBShiftShader } from './lib/three/examples/jsm/shaders/RGBShiftShader';
+import { CopyShader } from './lib/three/examples/jsm/shaders/CopyShader';
+import { BlendShader } from './lib/three/examples/jsm/shaders/BlendShader';
 // import { FXAAShader } from './lib/three/examples/jsm/shaders/FXAAShader';
 // import { MTLLoader } from './lib/three/examples/jsm/loaders/MTLLoader.js';
+import { UnrealBloomPass } from './lib/FixesUnrealBloomPass';
+import { SavePass } from './lib/three/examples/jsm/postprocessing/SavePass';
 // import { TextureLoader } from './lib/three/examples/jsm/loaders/TextureLoader.js';
-import {
-    BloomEffect,
-    EffectComposer,
-    EffectPass,
-    DotScreenEffect,
-    GodRaysEffect,
-    BlendFunction,
-    ShockWaveEffect,
-    NoiseEffect,
-    OutlineEffect,
-    GlitchEffect,
-    DepthOfFieldEffect,
-    PixelationEffect,
-    RenderPass,
-} from 'postprocessing';
+// import {
+//     BloomEffect,
+//     EffectComposer,
+//     EffectPass,
+//     DotScreenEffect,
+//     GodRaysEffect,
+//     BlendFunction,
+//     ShockWaveEffect,
+//     NoiseEffect,
+//     OutlineEffect,
+//     GlitchEffect,
+//     DepthOfFieldEffect,
+//     PixelationEffect,
+//     RenderPass,
+// } from 'postprocessing';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
 import { html } from 'lit';
 import * as THREE from 'three';
@@ -31,6 +36,12 @@ import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
 // import { RGBELoader } from './lib/RGBELoader';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 import { Triangle } from 'three/build/three.module';
+
+interface IFlyingCoffee {
+    grain: any;
+    trail: any[];
+    group: any;
+}
 
 export default class CKBlob extends __SLitComponent {
     constructor() {
@@ -47,7 +58,6 @@ export default class CKBlob extends __SLitComponent {
     _sphere;
 
     _grains = [];
-    _grainsGroups = [];
 
     _icons = [];
     _iconsGroups = [];
@@ -70,19 +80,40 @@ export default class CKBlob extends __SLitComponent {
         );
         this._camera.position.z = 50;
 
-        this._renderer = new THREE.WebGLRenderer({
+        this.ENTIRE_SCENE = 0;
+        this.BLOOM_SCENE = 1;
+
+        this._materialsByObj = {};
+
+        this._darkMaterial = new THREE.MeshBasicMaterial({ color: 'black' });
+
+        var width = this.offsetWidth || 1;
+        var height = this.offsetHeight || 1;
+        var parameters = {
             minFilter: THREE.LinearFilter,
             magFilter: THREE.LinearFilter,
             format: THREE.RGBAFormat,
-            // stencilBuffer: false,
             alpha: true,
             antialias: true,
+            // stencilBuffer: false,
+        };
+
+        this._renderTarget = new THREE.WebGLRenderTarget(
+            width,
+            height,
+            parameters,
+        );
+
+        this._renderer = new THREE.WebGLRenderer({
+            ...parameters,
         });
-        this._renderer.autoClear = false;
         this._renderer.setSize(this.offsetWidth, this.offsetHeight);
         this._renderer.setPixelRatio(window.devicePixelRatio);
-        this._renderer.shadowMap.enabled = true;
-        this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        // this._renderer.setClearColor(0x000000, 0);
+        this._renderer.setRenderTarget(this._renderTarget);
+        // this._renderer.shadowMap.enabled = true;
+        // this._renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+        // this._renderer.toneMapping = THREE.ReinhardToneMapping;
         this.querySelector('.ck-blob').appendChild(this._renderer.domElement);
 
         // load env map
@@ -100,24 +131,24 @@ export default class CKBlob extends __SLitComponent {
         //Create a DirectionalLight and turn on shadows for the light
         const light = new THREE.DirectionalLight(0xffcc17, 0.1, 100);
         light.position.set(0, 40, 0); //default; light shining from top
-        light.castShadow = false; // default false
+        // light.castShadow = false; // default false
 
-        //Set up shadow properties for the light
-        light.shadow.mapSize.width = 1024; // default
-        light.shadow.mapSize.height = 1024; // default
-        light.shadow.camera.near = 0.5; // default
-        light.shadow.camera.far = 500; // default
+        // //Set up shadow properties for the light
+        // light.shadow.mapSize.width = 1024; // default
+        // light.shadow.mapSize.height = 1024; // default
+        // light.shadow.camera.near = 0.5; // default
+        // light.shadow.camera.far = 500; // default
 
-        light.shadow.camera.left = -50;
-        light.shadow.camera.right = 50;
-        light.shadow.camera.top = 50;
-        light.shadow.camera.bottom = -50;
+        // light.shadow.camera.left = -50;
+        // light.shadow.camera.right = 50;
+        // light.shadow.camera.top = 50;
+        // light.shadow.camera.bottom = -50;
 
         // sphere
         const sphere = await this.createSphere();
 
         // grains
-        const grains = await this.addGrains();
+        await this.addGrains();
 
         //Create a plane that receives shadows (but does not cast them)
         const planeGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
@@ -125,7 +156,7 @@ export default class CKBlob extends __SLitComponent {
             opacity: 0.1,
         });
         const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.receiveShadow = true;
+        // plane.receiveShadow = true;
         plane.position.set(0, -12, 0);
         plane.rotation.x = (Math.PI / 2) * -1;
 
@@ -150,12 +181,12 @@ export default class CKBlob extends __SLitComponent {
         // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
         // pointsSphere3.scale.set(9, 9, 9);
 
-        const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
-        html5.rotation.set(
-            Math.random() * 360,
-            Math.random() * 360,
-            Math.random() * 360,
-        );
+        // const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
+        // html5.rotation.set(
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        //     Math.random() * 360,
+        // );
         // const css3 = await this.createIconSphere('/src/3d/logo-css3.jpg');
         // css3.rotation.set(
         //     Math.random() * 360,
@@ -221,7 +252,7 @@ export default class CKBlob extends __SLitComponent {
         this._scene.add(light);
         this._scene.add(ambientLight);
         this._scene.add(sphere);
-        this._scene.add(html5);
+        // this._scene.add(html5);
         // this._scene.add(css3);
         // this._scene.add(js);
         // this._scene.add(vitejs);
@@ -232,58 +263,57 @@ export default class CKBlob extends __SLitComponent {
         // this._scene.add(php);
         // this._scene.add(node);
         // this._scene.add(grains);
-        this._pointSpheres.forEach((s) => this._scene.add(s));
+        // this._pointSpheres.forEach((s) => this._scene.add(s));
 
         // this._scene.add(plane);
         // this._scene.add(helper);
 
         this.initPostprocessing();
 
-        // this.addControls();
-
-        const trailLength = 40;
+        this.addControls();
 
         setInterval(() => {
             this._scene.updateMatrixWorld();
 
-            this._grains.forEach((grain) => {
-                if (!grain._trail) grain._trail = [];
+            this._grains.forEach((grainObj) => {
+                if (!grainObj.trail) grainObj.trail = [];
 
-                if (grain._trail.length >= trailLength) {
-                    const last = grain._trail.shift();
+                if (grainObj.trail.length >= grainObj.trailLength) {
+                    const last = grainObj.trail.shift();
                     last.geometry.dispose();
                     last.material.dispose();
+                    this._scene.remove(last._light);
                     this._scene.remove(last);
-                    // grain._trail = grain._trail.slice(1);
+                    // grainObj.trail = grainObj.trail.slice(1);
                 }
 
-                grain._trail.forEach((s, i) => {
-                    const scale = (0.2 / trailLength) * i;
+                grainObj.trail.forEach((s, i) => {
+                    const scale = (0.15 / grainObj.trailLength) * i;
                     s.scale.set(scale, scale, scale);
                 });
 
-                const ballMat = new THREE.MeshBasicMaterial({
-                    color: 0xffffff,
+                const ballMat = new THREE.MeshStandardMaterial({
+                    color: 0x3d403e,
+                    emissive: 0x252726,
+                    emissiveIntensity: 1,
                 });
                 const geom = new THREE.SphereGeometry(1, 4, 4);
-
                 const sphere = new THREE.Mesh(geom, ballMat);
-
                 sphere.scale.set(0.2, 0.2, 0.2);
-
-                grain._trail.push(sphere);
-
+                grainObj.trail.push(sphere);
+                sphere.layers.toggle(this.BLOOM_SCENE);
                 this._scene.add(sphere);
-
-                sphere.position.copy(grain.matrixWorld.getPosition());
+                sphere.position.copy(
+                    grainObj.localGroup.matrixWorld.getPosition(),
+                );
             });
-        }, 200);
+        }, 50);
 
         this.animate();
     }
 
     initPostprocessing() {
-        const renderPass = new RenderPass(this._scene, this._camera);
+        // const renderPass = new RenderPass(this._scene, this._camera);
 
         // const bokehPass = new BokehPass(this._scene, this._camera, {
         //     // focus: 1.0,
@@ -301,53 +331,126 @@ export default class CKBlob extends __SLitComponent {
         // renderPass.clearColor = new THREE.Color(0, 0, 0);
         // renderPass.clearAlpha = 0;
 
-        const composer = new EffectComposer(this._renderer);
+        // const composer = new EffectComposer(this._renderer);
 
-        composer.addPass(renderPass);
+        // composer.addPass(renderPass);
+        // // composer.addPass(
+        // //     new EffectPass(
+        // //         this._camera,
+        // //         new DepthOfFieldEffect(this._camera, {
+        // //             focusDistance: 0.4,
+        // //             focalLength: 0.1,
+        // //             bokehScale: 1,
+        // //         }),
+        // //     ),
+        // // );
         // composer.addPass(
         //     new EffectPass(
         //         this._camera,
-        //         new DepthOfFieldEffect(this._camera, {
-        //             focusDistance: 0.4,
-        //             focalLength: 0.1,
-        //             bokehScale: 1,
-        //         }),
+        //         new OutlineEffect(this._scene, this._camera),
         //     ),
         // );
-        composer.addPass(
-            new EffectPass(
-                this._camera,
-                new OutlineEffect(this._scene, this._camera),
-            ),
-        );
+        // // composer.addPass(
+        // //     new EffectPass(
+        // //         this._camera,
+        // //         new BloomEffect({
+        // //             intensity: 2,
+        // //         }),
+        // //     ),
+        // // );
         // composer.addPass(
         //     new EffectPass(
         //         this._camera,
-        //         new BloomEffect({
-        //             intensity: 2,
+        //         new GlitchEffect({
+        //             delay: new THREE.Vector2(5, 15),
+        //             duration: new THREE.Vector2(0.05, 0.2),
+        //             ratio: 0.1,
+        //             strengh: new THREE.Vector2(0.01, 0.02),
         //         }),
         //     ),
         // );
-        composer.addPass(
-            new EffectPass(
-                this._camera,
-                new GlitchEffect({
-                    delay: new THREE.Vector2(5, 15),
-                    duration: new THREE.Vector2(0.05, 0.2),
-                    ratio: 0.1,
-                    strengh: new THREE.Vector2(0.01, 0.02),
-                }),
-            ),
+        // // composer.addPass(bokehPass);
+        // // composer.addPass(fxaaPass);
+
+        this._bloomLayer = new THREE.Layers();
+        this._bloomLayer.set(this.BLOOM_SCENE);
+
+        const params = {
+            exposure: 1,
+            bloomStrength: 1.5,
+            bloomThreshold: 0,
+            bloomRadius: 0,
+        };
+
+        const bloomPass = new UnrealBloomPass(
+            new THREE.Vector2(this.offsetWidth, this.offsetHeight),
+            1.5,
+            0.4,
+            0.85,
         );
-        // composer.addPass(bokehPass);
-        // composer.addPass(fxaaPass);
+        bloomPass.threshold = params.bloomThreshold;
+        bloomPass.strength = params.bloomStrength;
+        bloomPass.radius = params.bloomRadius;
 
-        this._composer = composer;
+        const renderPass = new RenderPass(this._scene, this._camera);
 
-        // zBlurPass.renderToScreen = true;
+        // renderPass.clearColor = new THREE.Color(0, 0, 0);
+        // renderPass.clearAlpha = true;
 
-        // this._postprocessing.composer = composer;
-        // this._postprocessing.bokeh = bokehPass;
+        const bloomComposer = new EffectComposer(
+            this._renderer,
+            // this._renderTarget,
+        );
+        bloomComposer.renderToScreen = false;
+        bloomComposer.addPass(renderPass);
+        bloomComposer.addPass(bloomPass);
+
+        const finalPass = new ShaderPass(
+            new THREE.ShaderMaterial({
+                uniforms: {
+                    baseTexture: { value: null },
+                    bloomTexture: {
+                        value: bloomComposer.renderTarget2.texture,
+                    },
+                },
+                vertexShader: `
+                    varying vec2 vUv;
+
+			void main() {
+
+				vUv = uv;
+
+				gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
+
+			}
+                `,
+                fragmentShader: `
+                uniform sampler2D baseTexture;
+			uniform sampler2D bloomTexture;
+
+			varying vec2 vUv;
+
+			void main() {
+
+				gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
+
+			}
+            `,
+                defines: {},
+            }),
+            'baseTexture',
+        );
+        finalPass.needsSwap = true;
+
+        const finalComposer = new EffectComposer(
+            this._renderer,
+            // this._renderTarget,
+        );
+        finalComposer.addPass(renderPass);
+        finalComposer.addPass(finalPass);
+
+        this._bloomComposer = bloomComposer;
+        this._finalComposer = finalComposer;
     }
 
     addControls() {
@@ -356,18 +459,14 @@ export default class CKBlob extends __SLitComponent {
             this._renderer.domElement,
         );
 
-        // this._controls.autoRotate = true;
-        // this._controls.autoRotateSpeed = 0.5;
+        this._controls.autoRotate = true;
+        this._controls.autoRotateSpeed = 0.5;
         // this._controls.enableDamping = true;
         this._controls.update();
     }
     async addGrains() {
         const grain = await this.loadCoffeeGrain();
-        grain.castShadow = true;
-        grain.receiveShadow = true;
         this._grains = [];
-        this._grainsGroups = [];
-        this._grainsGroup = new THREE.Group();
 
         const yellowMaterial = await this.createGrainMaterial(
             '/src/3d/coffeeGrain/grain-yellow.jpg',
@@ -378,59 +477,62 @@ export default class CKBlob extends __SLitComponent {
         );
 
         const materials = [yellowMaterial, purpleMaterial];
+        const colors = [0xfabb03, 0xfabb03, 0x5101ff];
 
         const count = 12;
 
         for (let i = 0; i < count; i++) {
+            let material = materials[0];
+            let color = colors[0];
+            if (Math.random() > 0.5) {
+                material = materials[1];
+                color = colors[1];
+            }
+
             const newGrain = grain.clone();
-            newGrain.position.set(0, 0, -0.3);
+            newGrain.position.set(0, -0.6, -0.5);
+            newGrain.rotation.x = Math.PI / 2;
+            newGrain.rotation.y = Math.PI;
+            newGrain.scale.set(0.02, 0.02, 0.02);
+
+            let scale = 0.2 + Math.random() - 0.2;
+            // scale = 1;
 
             newGrain.traverse(function (child) {
                 if (child instanceof THREE.Mesh) {
-                    child.material = materials[i <= count / 2 ? 0 : 1];
+                    child.material = material;
                 }
             });
 
-            // const ballMat = new THREE.ShadowMaterial({
-            //     opacity: 0.5,
-            // });
-            // const geom = new THREE.SphereGeometry(1, 32, 32);
-
-            // const sphere = new THREE.Mesh(geom, ballMat);
-            // sphere.scale.set(0.5, 0.5, 0.25);
-            // sphere.receiveShadow = true;
-            // sphere.castShadow = true;
+            const localGroup = new THREE.Group();
+            localGroup.scale.set(scale, scale, scale);
+            localGroup.add(newGrain);
 
             const group = new THREE.Group();
-            // group.add(sphere);
-            group.add(newGrain);
+            group.add(localGroup);
+
+            const speed = 0.003 + Math.random() / 100 / 2;
+            const grainObj: IFlyingCoffee = {
+                grain: newGrain,
+                group,
+                scale,
+                speed,
+                color,
+                trailLength: 5 + Math.round(Math.random() * 30),
+                localGroup,
+                trail: [],
+            };
 
             group.rotation.set(
                 Math.random() * 360,
                 Math.random() * 360,
                 Math.random() * 360,
             );
-            newGrain.position.x = 7 + Math.random() * 4;
-            // newGrain.position.x = 9;
-            // sphere.position.x = newGrain.position.x;
-            // group.position.set(0, 5, 0);πwelcome
-            // let scaleAddition = -1 + Math.random() * 2;
-            // newGrain.scale.x = scaleAddition;
-            // newGrain.scale.y = scaleAddition;
-            // newGrain.scale.z = scaleAddition;
-            const scale = 0.005 + (Math.random() / 100) * 2;
-            newGrain.scale.set(scale, scale, scale);
-            newGrain.castShadow = true;
-            // group.receiveShadow = true;
+            localGroup.position.x = 7 + Math.random() * 4;
 
-            this._grains.push(newGrain);
-            this._grainsGroups.push(group);
-
+            this._grains.push(grainObj);
             this._scene.add(group);
-
-            // this._grainsGroup.add(group);
         }
-        return this._grainsGroup;
     }
     async createSphere() {
         let texture;
@@ -470,8 +572,8 @@ export default class CKBlob extends __SLitComponent {
 
         this._sphere = new THREE.Mesh(geom, ballMat);
         this._sphere.scale.set(4, 4, 4);
-        this._sphere.receiveShadow = true;
-        this._sphere.castShadow = true;
+        // this._sphere.receiveShadow = true;
+        // this._sphere.castShadow = true;
 
         return this._sphere;
     }
@@ -503,8 +605,8 @@ export default class CKBlob extends __SLitComponent {
         // sphere.position.x = 5 + 4;
         sphere.position.x = 6;
 
-        sphere.receiveShadow = true;
-        sphere.castShadow = true;
+        // sphere.receiveShadow = true;
+        // sphere.castShadow = true;
 
         const group = new THREE.Group();
         group.add(sphere);
@@ -578,6 +680,33 @@ export default class CKBlob extends __SLitComponent {
             });
         });
     }
+
+    renderBloom(mask) {
+        if (mask === true) {
+            this._scene.traverse(this.darkenNonBloomed.bind(this));
+            this._bloomComposer.render();
+            this._scene.traverse(this.restoreMaterial.bind(this));
+        } else {
+            this._camera.layers.set(this.BLOOM_SCENE);
+            this._bloomComposer.render();
+            this._camera.layers.set(this.ENTIRE_SCENE);
+        }
+    }
+
+    darkenNonBloomed(obj) {
+        if (obj.isMesh && this._bloomLayer.test(obj.layers) === false) {
+            this._materialsByObj[obj.uuid] = obj.material;
+            obj.material = this._darkMaterial;
+        }
+    }
+
+    restoreMaterial(obj) {
+        if (this._materialsByObj[obj.uuid]) {
+            obj.material = this._materialsByObj[obj.uuid];
+            delete this._materialsByObj[obj.uuid];
+        }
+    }
+
     createGrainMaterial(texturePath) {
         return new Promise(async (resolve) => {
             const texture = await this.loadTexture(texturePath);
@@ -608,7 +737,7 @@ export default class CKBlob extends __SLitComponent {
             new OBJLoader().load(
                 '/src/3d/coffeeGrain/coffeeGrain.obj',
                 (object) => {
-                    object.castShadow = true;
+                    // object.castShadow = true;
                     object.scale.set(0.01, 0.01, 0.01);
                     object.position.set(0, 0, 0);
 
@@ -664,24 +793,44 @@ export default class CKBlob extends __SLitComponent {
         }
 
         this.updateGeometryOf(this._sphere, 1.4);
-        this._pointSpheres.forEach((p) => {
-            this.updateGeometryOf(p, 8, 0.0001);
-            p.geometry.attributes.alpha.needsUpdate = true;
-            p.geometry.attributes.position.needsUpdate = true;
-            if (!p._speed) p._speed = Math.random() / 1000 / 8;
-            p.rotation.x -= p._speed;
-            p.rotation.y -= p._speed;
-            p.rotation.z -= p._speed;
-        });
+        // this._pointSpheres.forEach((p) => {
+        //     this.updateGeometryOf(p, 8, 0.0001);
+        //     p.geometry.attributes.alpha.needsUpdate = true;
+        //     p.geometry.attributes.position.needsUpdate = true;
+        //     if (!p._speed) p._speed = Math.random() / 1000 / 8;
+        //     p.rotation.x -= p._speed;
+        //     p.rotation.y -= p._speed;
+        //     p.rotation.z -= p._speed;
+        // });
         // this._sphere.rotation.x += 0.001;
         this._sphere.rotation.y += 0.003;
         // this._sphere.rotation.z += 0.005;
 
-        this._grainsGroups.forEach((group) => {
-            if (!group._speed) group._speed = 0.001 + Math.random() / 100 / 2;
-            group.rotation.x += group._speed;
-            group.rotation.y += group._speed;
-            group.rotation.z += group._speed;
+        this._grains.forEach((grainObj) => {
+            grainObj.group.rotation.x += grainObj.speed;
+            grainObj.group.rotation.y += grainObj.speed;
+            grainObj.group.rotation.z += grainObj.speed;
+
+            if (!grainObj.localGroup.lastPositions)
+                grainObj.localGroup.lastPositions = [];
+
+            const originalPosition = new THREE.Vector3();
+            const newPosition = new THREE.Vector3();
+            if (grainObj.localGroup.lastPositions.length > 10) {
+                grainObj.localGroup.getWorldPosition(newPosition);
+                const lastPosition = grainObj.localGroup.lastPositions.shift();
+                grainObj.localGroup.lookAt(
+                    lastPosition.x,
+                    lastPosition.y,
+                    lastPosition.z,
+                );
+            }
+            grainObj.localGroup.getWorldPosition(originalPosition);
+            grainObj.localGroup.lastPositions.push(originalPosition);
+
+            // grainObj.grain.rotation.x = group.rotation.x;
+            // grainObj.grain.rotation.y = group.rotation.y;
+            // grainObj.grain.rotation.z = group.rotation.z;
         });
 
         // this._icons.forEach((icon) => {
@@ -732,7 +881,8 @@ export default class CKBlob extends __SLitComponent {
         this._controls?.update?.();
         // this._postprocessing.composer.render(0.1);
         // this._renderer.render(this._scene, this._camera);
-        this._composer.render();
+        this.renderBloom(true);
+        this._finalComposer.render();
     }
 
     render() {

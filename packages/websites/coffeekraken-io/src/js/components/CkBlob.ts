@@ -284,7 +284,6 @@ export default class CKBlob extends __SLitComponent {
                     last.material.dispose();
                     this._scene.remove(last._light);
                     this._scene.remove(last);
-                    // grainObj.trail = grainObj.trail.slice(1);
                 }
 
                 grainObj.trail.forEach((s, i) => {
@@ -304,7 +303,9 @@ export default class CKBlob extends __SLitComponent {
                 sphere.layers.toggle(this.BLOOM_SCENE);
                 this._scene.add(sphere);
                 sphere.position.copy(
-                    grainObj.localGroup.matrixWorld.getPosition(),
+                    new THREE.Vector3().setFromMatrixPosition(
+                        grainObj.localGroup.matrixWorld,
+                    ),
                 );
             });
         }, 50);
@@ -541,8 +542,6 @@ export default class CKBlob extends __SLitComponent {
         if (this._isDark) {
             texture = await this.loadTexture('/src/3d/ck-texture.jpg');
             matSettings = {
-                clearcoat: 0,
-                clearcoatRoughness: 0,
                 metalness: 0,
                 roughness: 0.6,
                 color: 0xffffff,
@@ -553,15 +552,11 @@ export default class CKBlob extends __SLitComponent {
                 // refractionRatio: 0.2,
                 // flatShading: true,
                 // emissiveIntensity: 1,
-                clearcoat: 0,
-                clearcoatRoughness: 0,
                 metalness: 0,
                 roughness: 0.6,
                 color: 0xffffff,
             };
         }
-        const roughnessMap = await this.loadTexture('/src/3d/ck-roughness.jpg');
-
         const ballMaterial = {
             ...matSettings,
             map: texture,
@@ -573,8 +568,6 @@ export default class CKBlob extends __SLitComponent {
 
         this._sphere = new THREE.Mesh(geom, ballMat);
         this._sphere.scale.set(4, 4, 4);
-        // this._sphere.receiveShadow = true;
-        // this._sphere.castShadow = true;
 
         return this._sphere;
     }
@@ -603,11 +596,7 @@ export default class CKBlob extends __SLitComponent {
 
         const scale = 0.3 + Math.random() * 0.5;
         sphere.scale.set(scale, scale, scale);
-        // sphere.position.x = 5 + 4;
         sphere.position.x = 6;
-
-        // sphere.receiveShadow = true;
-        // sphere.castShadow = true;
 
         const group = new THREE.Group();
         group.add(sphere);
@@ -716,8 +705,6 @@ export default class CKBlob extends __SLitComponent {
             );
 
             let grainMat = new THREE.MeshStandardMaterial({
-                clearcoat: 1,
-                clearcoatRoughness: 1,
                 metalness: 0,
                 roughness: 1,
                 color: 0xffffff,

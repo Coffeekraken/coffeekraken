@@ -3,7 +3,7 @@
 
 @section('body')
 
-    <div id="{{ $request->path != '/' ? \Sugar\string\idCompliant($request->path) : 'homepage' }}">
+    <div s-sugar id="{{ $request->path != '/' ? \Sugar\string\idCompliant($request->path) : 'homepage' }}">
 
     <script>
         window.packageJson = {!! json_encode($packageJson) !!};
@@ -19,8 +19,10 @@
 
     @include('layouts.header.header')
     
-    <div class="__bgGradient"></div>
-    <div class="__bgGradient1"></div>
+    <div class="bg">
+        <div class="__gradient1"></div>
+        <div class="__gradient2"></div>
+    </div>
 
     <div class="content">
         @yield('content')

@@ -68,6 +68,7 @@ export default async function ({
         '@sugar.visually.classes;',
         '@sugar.truncate.classes;',
         '@sugar.until.classes;',
+        '@sugar.when.classes;',
         '@sugar.scrollbar.classes;',
         '@sugar.width.classes;',
         '@sugar.components.classes;',

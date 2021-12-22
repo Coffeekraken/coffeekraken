@@ -113,6 +113,29 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
         @sugar.color(${colorName});
       }
     `);
+
+        cssArray.comment(() =>
+            [
+                `/**`,
+                ` * @name           s-bg:${colorName}`,
+                ` * @namespace      sugar.css.color.bg.${colorName}`,
+                ` * @type           CssClass`,
+                ` * @platform       css`,
+                ` * @status         beta`,
+                ` *`,
+                ` * This class allows you to apply the "${colorName}" color to the background of an HTMLElement`,
+                ` *`,
+                ` * @example        html`,
+                ` * <h1 class="s-bg\:${colorName}${modifierStr}">`,
+                ` *     Something cool`,
+                ` * </h1>`,
+                ` */`,
+            ].join('\n'),
+        ).code(`
+            .s-bg--${colorName} {
+                   background-color: sugar.color(${colorName});
+                }
+        `);
     });
 
     __STheme.getTheme().loopOnColors((colorObj) => {

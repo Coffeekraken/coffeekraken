@@ -25,11 +25,17 @@ export default function sVitePluginPostcss() {
                 const plugins: any[] = [];
                 for (let i = 0; i < postcssConfig.plugins.length; i++) {
                     const p = postcssConfig.plugins[i];
+
                     if (typeof p === 'string') {
                         const { default: plugin } = await import(p);
                         const fn = plugin.default ?? plugin;
                         const options = postcssConfig.pluginsOptions[p] ?? {};
-                        plugins.push(fn(options));
+                        plugins.push(
+                            fn({
+                                target: 'dev',
+                                ...options,
+                            }),
+                        );
                     } else {
                         plugins.push(p);
                     }

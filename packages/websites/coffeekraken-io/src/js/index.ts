@@ -3,6 +3,7 @@ import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-examp
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
@@ -47,7 +48,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     });
     __linksStateAttributes();
 
-    await __wait(1500);
+    // await __wait(1500);
 
     // components
     __CKDiscoverComponent();
@@ -58,9 +59,10 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
 
-    await __wait(1000);
+    // await __wait(1000);
 
     // features
+    __sSugarFeature();
     __sParallaxFeature();
     __sFormValidateFeature({
         customValidations: {

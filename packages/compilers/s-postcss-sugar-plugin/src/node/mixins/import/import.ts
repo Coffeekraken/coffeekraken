@@ -64,10 +64,12 @@ export default function ({
     params,
     atRule,
     postcss,
+    settings,
 }: {
     params: IPostcssSugarPluginImportParams;
     atRule: any;
     postcss: any;
+    settings: any;
 }) {
     const finalParams: IPostcssSugarPluginImportParams = {
         ...params,
@@ -109,7 +111,10 @@ export default function ({
     }
 
     files.forEach((file) => {
-        const newRule = postcss.parse(`@import url("${file.relPath}");`);
+        let newRule = postcss.parse(`@import "${file.relPath}";`);
+        if (settings.target !== 'prod') {
+            newRule = postcss.parse(`@import url("${file.relPath}");`);
+        }
         newRule.source.input.file = atRule.source.input.file;
         atRule.parent.insertAfter(atRule, newRule);
     });

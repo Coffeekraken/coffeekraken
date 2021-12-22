@@ -1,31 +1,3 @@
-.__bgGradient {
-    position: fixed;
-    width: 720px;
-    height: 720px;
-    z-index: 1;
-    top: 100px;
-    background: sugar.color(accent);
-    filter: blur(200px);
-    border-radius: 9999px;
-    left: calc(50% - 250px);
-    mix-blend-mode: overlay;
-    opacity: 0.2;
-}
-
-.__bgGradient1 {
-    position: fixed;
-    width: 720px;
-    height: 720px;
-    z-index: 1;
-    top: 100px;
-    background: sugar.color(complementary);
-    filter: blur(200px);
-    border-radius: 9999px;
-    left: calc(50% + 250px);
-    mix-blend-mode: overlay;
-    opacity: 0.1;
-}
-
 #homepage-welcome {
     height: 100vh;
     text-align: left;
@@ -57,6 +29,7 @@
         mask-image: linear-gradient(black, transparent);
 
         @sugar.theme.when dark {
+            opacity: 0.5;
             background-image: url('/src/img/welcome/welcome-bg-01.jpg');
         }
     }

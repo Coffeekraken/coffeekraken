@@ -1772,14 +1772,14 @@ export default (env, config) => {
              * @name          defaultStyle
              * @namespace     config.themeUi.list
              * @type          Number
-             * @default      ul
+             * @default      dl
              *
              * Specify the default style for your list ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            defaultStyle: 'ul',
+            defaultStyle: 'dl',
             /**
              * @name          depth
              * @namespace     config.themeUi.list

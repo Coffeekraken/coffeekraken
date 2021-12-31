@@ -99,5 +99,8 @@
     },
     "[xml]": {
         "editor.defaultFormatter": "redhat.vscode-xml"
+    },
+    "[blade]": {
+        "editor.defaultFormatter": "shufo.vscode-blade-formatter"
     }
 }

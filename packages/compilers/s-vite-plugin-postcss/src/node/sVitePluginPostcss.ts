@@ -32,7 +32,7 @@ export default function sVitePluginPostcss() {
                         const options = postcssConfig.pluginsOptions[p] ?? {};
                         plugins.push(
                             fn({
-                                target: 'dev',
+                                target: 'vite',
                                 ...options,
                             }),
                         );

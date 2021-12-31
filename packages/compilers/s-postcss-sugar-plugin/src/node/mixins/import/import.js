@@ -84,7 +84,7 @@ export default function ({ params, atRule, postcss, settings, }) {
     }
     files.forEach((file) => {
         let newRule = postcss.parse(`@import "${file.relPath}";`);
-        if (settings.target !== 'prod') {
+        if (settings.target === 'vite') {
             newRule = postcss.parse(`@import url("${file.relPath}");`);
         }
         newRule.source.input.file = atRule.source.input.file;

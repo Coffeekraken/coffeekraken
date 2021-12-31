@@ -6852,6 +6852,7 @@ class SCodeExample extends __SLitComponent {
     firstUpdated() {
         var _a, _b;
         return __awaiter(this, void 0, void 0, function* () {
+            console.log('DFIR', this);
             this.$templates.forEach(($template) => {
                 var _a, _b, _c, _d, _e, _f, _g;
                 if (!$template.getAttribute)
@@ -6902,6 +6903,7 @@ class SCodeExample extends __SLitComponent {
                     this.setActiveTab(this._items[0].id);
                 }
             }
+            console.log('DDDDDD', this);
             // await __wait(500);
             // this._$content = this.shadowRoot?.querySelector(
             //     '.s-code-example__content',

@@ -7,13 +7,13 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
         return {
             styles: {
                 type: 'String[]',
-                values: ['ul', 'ol', 'icon'],
-                default: ['ul', 'ol', 'icon'],
+                values: ['dl', 'ul', 'ol', 'icon'],
+                default: ['dl', 'ul', 'ol', 'icon'],
             },
             defaultStyle: {
                 type: 'String',
-                values: ['ul'],
-                default: __STheme.config('ui.list.defaultStyle') ?? 'ul',
+                values: ['dl', 'ul', 'ol', 'icon'],
+                default: __STheme.config('ui.list.defaultStyle') ?? 'dl',
             },
             scope: {
                 type: {
@@ -28,8 +28,8 @@ class postcssSugarPluginUiListClassesInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiListClassesParams {
-    styles: ('ul' | 'ol' | 'icon')[];
-    defaultStyle: 'ul' | 'ol' | 'icon';
+    styles: ('dl' | 'ul' | 'ol' | 'icon')[];
+    defaultStyle: 'dl' | 'ul' | 'ol' | 'icon';
     scope: ('bare' | 'lnf' | 'tf' | 'vr')[];
 }
 
@@ -57,7 +57,7 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginUiListClassesParams = {
         styles: [],
-        defaultStyle: 'ul',
+        defaultStyle: 'dl',
         scope: [],
         ...params,
     };
@@ -267,7 +267,7 @@ export default function ({
     // ul:icon
     vars.comment(
         () => `/**
-        * @name           s-list--ul.s-list--icon
+        * @name           s-list--icon
         * @namespace      sugar.css.ui.list
         * @type           CssClass
         * 
@@ -318,6 +318,33 @@ export default function ({
     ).code(`
       .s-list--ol {
         @sugar.ui.list($style: ol, $scope: '${finalParams.scope.join(',')}');
+      }   
+  `);
+
+    // dl
+    vars.comment(
+        () => `/**
+        * @name           s-list--dl
+        * @namespace      sugar.css.ui.list
+        * @type           CssClass
+        * 
+        * This class represent an "<yellow>dl</yellow>" list
+        * 
+        * @feature       Support vertical rhythm
+        * 
+        * @example        html
+        * <ul class="s-list--dl">
+        *   <li>Hello</li>
+        *   <li>World</li>
+        * </ul>
+        * 
+        * @since       2.0.0
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+     `,
+    ).code(`
+      .s-list--dl {
+        @sugar.ui.list($style: dl, $scope: '${finalParams.scope.join(',')}');
       }   
   `);
 

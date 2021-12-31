@@ -14,6 +14,7 @@ import __SProcess, {
     ISProcessManagerProcessSettings,
 } from '@coffeekraken/s-process';
 import __SLog from '@coffeekraken/s-log';
+import __SSugarCli from '@coffeekraken/cli';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 import param from '@coffeekraken/s-docblock/src/shared/tags/param';
@@ -138,9 +139,6 @@ export default class SFrontstack extends __SClass {
 
                 const availableActions = Object.keys(actionsObj);
 
-                console.log(finalParams, availableActions);
-                return;
-
                 if (availableActions.indexOf(finalParams.action) === -1) {
                     throw new Error(
                         `<red>[${
@@ -168,12 +166,14 @@ export default class SFrontstack extends __SClass {
                 pipe(processManager);
                 // loop on each actions for this recipe
 
-                const actionId = actionObj.id ?? finalParams.action;
-                // create a process from the recipe object
-                const pro = await __SProcess.from(
+                const finalCommand = __SSugarCli.replaceTokens(
                     // @ts-ignore
                     actionObj.command ?? actionObj.process,
                 );
+
+                const actionId = actionObj.id ?? finalParams.action;
+                // create a process from the recipe object
+                const pro = await __SProcess.from(finalCommand);
                 // add the process to the process manager
                 // @TODO    integrate log filter feature
                 processManager.attachProcess(actionId, pro, {
@@ -374,12 +374,13 @@ export default class SFrontstack extends __SClass {
 
                         const actionId = actionObj.id ?? actionName;
                         // create a process from the recipe object
-                        const finalCommand =
+                        let finalCommand =
                             (actionObj.command ?? actionObj.process).trim() +
                             ' ' +
                             sharedParamsStr +
                             ' ' +
                             paramsStr;
+                        finalCommand = __SSugarCli.replaceTokens(finalCommand);
 
                         emit('log', {
                             type: __SLog.TYPE_INFO,

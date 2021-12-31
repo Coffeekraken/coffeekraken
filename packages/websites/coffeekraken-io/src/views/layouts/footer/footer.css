@@ -1,0 +1,20 @@
+.footer {
+    background-color: sugar.color(main, surface);
+    padding-block: sugar.padding(50);
+
+    svg {
+        width: 100px;
+    }
+
+    svg .main {
+        fill: sugar.color(main, text);
+    }
+    svg .accent {
+        fill: sugar.color(accent);
+    }
+
+    .__columns {
+        display: flex;
+        justify-content: space-between;
+    }
+}

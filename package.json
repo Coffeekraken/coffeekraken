@@ -3,6 +3,7 @@
     "version": "1.0.0",
     "description": "We are a young collectve of front-end creative developers with one goal in mind. Build tools to make every team working day life better",
     "scripts": {
+        "install": "./install.sh",
         "dev": "concurrently \"yarn ts.watch\"",
         "ts": "tsc",
         "ts.watch": "tsc --watch",

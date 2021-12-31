@@ -1,0 +1,4 @@
+import SSugarCli from './sugar.cli.js';
+export * from './sugar.cli';
+export default SSugarCli;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxTQUFTLE1BQU0sZ0JBQWdCLENBQUM7QUFDdkMsY0FBYyxhQUFhLENBQUM7QUFDNUIsZUFBZSxTQUFTLENBQUMifQ==

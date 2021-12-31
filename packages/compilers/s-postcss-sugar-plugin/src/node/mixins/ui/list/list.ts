@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the list style to any element
  *
- * @param       {'ul'|'ol'|'icon'}           [style='theme.ui.list.defaultStyle']        The style you want for your list
+ * @param       {'dl'|'ul'|'ol'|'icon'}           [style='theme.ui.list.defaultStyle']        The style you want for your list
  * @param       {('bare'|'lnf')[]}      [scope=['bare','lnf']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
  *
@@ -29,7 +29,7 @@ class postcssSugarPluginUiListInterface extends __SInterface {
         return {
             style: {
                 type: 'String',
-                values: ['ul', 'ol', 'icon'],
+                values: ['dl', 'ul', 'ol', 'icon'],
                 default: __STheme.config('ui.list.defaultStyle'),
             },
             scope: {
@@ -45,7 +45,7 @@ class postcssSugarPluginUiListInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiListParams {
-    style: 'ul' | 'ol' | 'icon';
+    style: 'dl' | 'ul' | 'ol' | 'icon';
     scope: string[];
 }
 
@@ -63,7 +63,7 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginUiListParams = {
-        style: 'ul',
+        style: 'dl',
         scope: ['bare', 'lnf'],
         ...params,
     };
@@ -150,7 +150,6 @@ export default function ({
                 `);
                 break;
             case 'ul':
-            default:
                 vars.push(`
                     & > * {
                         ${bulletSelector} {
@@ -160,6 +159,14 @@ export default function ({
                         }
                     }
                 `);
+                break;
+            case 'dl':
+            default:
+                vars.push(`
+                    & > * {
+                        padding-inline-start: 0;
+                    }
+                    `);
                 break;
         }
     }

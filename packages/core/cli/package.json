@@ -3,7 +3,7 @@
     "version": "2.0.0",
     "description": "",
     "type": "module",
-    "main": "./src/node/exports.js",
+    "main": "./src/cli/sugar.cli.js",
     "bin": {
         "sugar": "./src/cli/sugar.cli.js"
     },

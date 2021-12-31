@@ -20,6 +20,7 @@ import __fs from 'fs';
 import __fsExtra from 'fs-extra';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
+import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __SLog from '@coffeekraken/s-log';
 import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
@@ -71,26 +72,11 @@ if (cliParams.bench) {
     );
 }
 
-// hooking the consoles methods to parse html at output
-const originalConsole = {};
-['log', 'warn', 'error', 'trace'].forEach((method) => {
-    originalConsole[method] = console[method];
-    console[method] = (...args) => {
-        args.forEach((value, i) => {
-            if (typeof value === 'string') {
-                args[i] = __parseHtml(args[i]);
-            }
-        });
-
-        originalConsole[method](...args);
-    };
-});
-
 // __SLog.filter({
 //     type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],
 // });
 
-class SSugarCli {
+export default class SSugarCli {
     _command: string;
     _stack: string;
     _action: string;
@@ -107,6 +93,72 @@ class SSugarCli {
     };
     _availableInteractiveCli: Record<string, any> = {};
 
+    /**
+     * @name           command
+     * @type            String
+     * @static
+     * @get
+     *
+     * Get the correct sugar or sugard commant depending on the environment in which the cli is running
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static get command(): string {
+        const command = process.argv[1];
+        return command.split('/').pop();
+    }
+
+    /**
+     * @name           replaceTokens
+     * @type            Function
+     * @static
+     *
+     * Replace tokens in a passed command like:
+     * - %sugar: Replaced by either "sugar" or "sugard" depending on the environment
+     * - Support all the tokens supported by the "replaceTokens" function of the sugar package
+     *
+     * @param        {String} command The command to replace tokens in
+     * @return       {String} The command with the replaced tokens
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static replaceTokens(command: string): string {
+        command = __replaceTokens(command);
+        command = command.replace(/%sugar/gm, SSugarCli.command);
+        command = this.replaceSugarCommandForDev(command);
+        return command;
+    }
+
+    /**
+     * @name           replaceSugarCommandForDev
+     * @type            Function
+     * @static
+     *
+     * Replace the starting "sugar" by "sugard" in the command line when needed
+     *
+     * @param        {String} command The command to replace "sugar" in
+     * @return       {String} The command with the replaced "sugar"
+     *
+     * @since           2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static replaceSugarCommandForDev(command: string): string {
+        if (!command.match(/^sugar\s/)) return command;
+        return command.replace(/^sugar/, this.command);
+    }
+
+    /**
+     * @name           constructor
+     * @type            Function
+     * @constructor
+     *
+     * Constructor
+     *
+     * @since       2.0.0
+     * @author      Olivier Bossel <olivier.bossel@gmail.com>
+     */
     constructor() {
         __SBench.start('sugar.cli');
 
@@ -181,7 +233,9 @@ class SSugarCli {
             //         'theme.themes.coffeekraken-dark.color.complementary.default',
             //     ),
             // );
-            // return;
+
+            // hook base console functions
+            this._proxyConsole();
 
             __SBench.step('sugar.cli', 'afterLoadConfig');
 
@@ -245,6 +299,23 @@ class SSugarCli {
 
             __SBench.step('sugar.cli', 'afterProcess');
         })();
+    }
+
+    _proxyConsole() {
+        // hooking the consoles methods to parse html at output
+        const originalConsole = {};
+        ['log', 'warn', 'error', 'trace'].forEach((method) => {
+            originalConsole[method] = console[method];
+            console[method] = (...args) => {
+                args.forEach((value, i) => {
+                    if (typeof value === 'string') {
+                        args[i] = __parseHtml(args[i]);
+                    }
+                });
+
+                originalConsole[method](...args);
+            };
+        });
     }
 
     _isStdioNeeded() {
@@ -313,18 +384,14 @@ class SSugarCli {
                 );
             }
 
-            const promise = __spawn(cliObj.command, [], {});
+            const promise = __spawn(
+                SSugarCli.replaceTokens(cliObj.command),
+                [],
+                {},
+            );
             this._eventEmitter.pipe(promise);
             await promise;
             process.exit();
-            // __childProcess.spawnSync(cliObj.command, [], {
-            //     shell: true,
-            //     stdio: 'inherit',
-            //     env: {
-            //         ...process.env,
-            //         TREAT_AS_MAIN: true,
-            //     },
-            // });
         }
     }
 
@@ -401,7 +468,7 @@ class SSugarCli {
                     let processPath, command;
 
                     if (actionObj.command && !actionObj.process) {
-                        command = actionObj.command;
+                        command = SSugarCli.replaceTokens(actionObj.command);
                     } else {
                         processPath = __path.resolve(
                             sugarJson.metas.path.replace(/\/sugar\.json$/, ''),
@@ -711,4 +778,6 @@ class SSugarCli {
     }
 }
 
-new SSugarCli();
+if (!global._sugarCli) {
+    global._sugarCli = new SSugarCli();
+}

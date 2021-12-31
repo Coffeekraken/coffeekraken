@@ -227,7 +227,7 @@ export default class SPostcssBuilder extends __SBuilder {
                             ] ?? {};
                         plugins.push(
                             fn({
-                                target: 'prod',
+                                target: params.prod ? 'prod' : 'dev',
                                 ...options,
                             }),
                         );

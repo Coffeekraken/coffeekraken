@@ -325,7 +325,6 @@ const plugin = (settings: any = {}) => {
             if (str) this._stack.push(str);
         }
         comment(str) {
-            return this;
             if (!commentsNeeded()) return this;
             if (typeof str === 'function') str = str();
             if (Array.isArray(str)) str = str.join('\n');

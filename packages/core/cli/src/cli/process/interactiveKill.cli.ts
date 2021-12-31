@@ -1,5 +1,6 @@
 import __SPromise from '@coffeekraken/s-promise';
 import __spawn from '@coffeekraken/sugar/node/process/spawn';
+import __SSugarCli from '@coffeekraken/cli';
 
 export default function interactiveKill(params) {
     return new __SPromise(
@@ -26,7 +27,9 @@ export default function interactiveKill(params) {
                         },
                     });
 
-                    command = `sugar process.kill --id ${res}`;
+                    command = __SSugarCli.replaceTokens(
+                        `%sugar process.kill --id ${res}`,
+                    );
                     emit('log', {
                         value: `> Running command: <yellow>${command}</yellow>`,
                     });
@@ -43,7 +46,10 @@ export default function interactiveKill(params) {
                             return true;
                         },
                     });
-                    command = `sugar process.kill --port ${res}`;
+
+                    command = __SSugarCli.replaceTokens(
+                        `%sugar process.kill --port ${res}`,
+                    );
                     emit('log', {
                         value: `> Running command: <yellow>${command}</yellow>`,
                     });

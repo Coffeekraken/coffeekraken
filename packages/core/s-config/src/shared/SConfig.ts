@@ -355,13 +355,6 @@ export default class SConfig {
                 };
             }
         });
-
-        // load the config from the default adapter if the setting "autoLoad" is true
-        // if (this._settings.autoLoad) {
-        //     throw 'COCO';
-        //     console.log('LOAD');
-        //     this.load();
-        // }
     }
 
     /**

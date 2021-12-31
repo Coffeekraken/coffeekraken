@@ -96,6 +96,10 @@ export default class SSugarConfig extends __SClass {
             scope: scope ?? 'default',
             packageName,
         });
+
+        // protect against readding none existing folders
+        if (!__fs.existsSync(path)) return;
+        // adding folders
         this._registeredConfigFilesPaths = [
             ...this._registeredConfigFilesPaths,
             ...__fs
@@ -119,9 +123,11 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get filesRealPaths(): string[] {
-        return this._registeredConfigFilesPaths.map((f) =>
-            __fs.realpathSync(f),
-        );
+        return this._registeredConfigFilesPaths
+            .filter((f) => {
+                return __fs.existsSync(f);
+            })
+            .map((f) => __fs.realpathSync(f));
     }
 
     /**
@@ -151,9 +157,11 @@ export default class SSugarConfig extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static get foldersRealPaths(): string[] {
-        return this._registeredConfigFolderPaths.map((f) =>
-            __fs.realpathSync(f.path),
-        );
+        return this._registeredConfigFolderPaths
+            .filter((f) => {
+                return __fs.existsSync(f.path);
+            })
+            .map((f) => __fs.realpathSync(f.path));
     }
 
     /**
@@ -188,43 +196,53 @@ export default class SSugarConfig extends __SClass {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static async load(
+    _loadPromise;
+    static load(
         envOrId?: ISConfigEnvObj | string,
         id?: string,
     ): ISSugarConfigLoadedObj {
-        id = id ?? (typeof envOrId === 'string' ? envOrId : undefined);
-        if (!id) {
-            if (__isPlainObject(envOrId)) {
-                id = __md5.encrypt(envOrId);
-            } else {
-                id = 'default';
+        // singleton promise
+        if (this._loadPromise) {
+            return this._loadPromise;
+        }
+
+        this._loadPromise = new Promise(async (resolve, reject) => {
+            id = id ?? (typeof envOrId === 'string' ? envOrId : undefined);
+            if (!id) {
+                if (__isPlainObject(envOrId)) {
+                    id = __md5.encrypt(envOrId);
+                } else {
+                    id = 'default';
+                }
             }
-        }
-        let env;
-        if (__isPlainObject(envOrId)) env = envOrId;
+            let env;
+            if (__isPlainObject(envOrId)) env = envOrId;
 
-        if (this._sSugarConfigInstances[id]) {
-            return {
+            if (this._sSugarConfigInstances[id]) {
+                return resolve({
+                    id,
+                    config: this._sSugarConfigInstances[id].get('.'),
+                    instance: this._sSugarConfigInstances[id],
+                });
+            }
+
+            this._sSugarConfigInstances[id] = new this({
+                metas: {
+                    id,
+                },
+                sugarConfig: {
+                    env,
+                },
+            });
+            const config = await this._sSugarConfigInstances[id]._load();
+            resolve({
                 id,
-                config: this._sSugarConfigInstances[id].get('.'),
+                config,
                 instance: this._sSugarConfigInstances[id],
-            };
-        }
-
-        this._sSugarConfigInstances[id] = new this({
-            metas: {
-                id,
-            },
-            sugarConfig: {
-                env,
-            },
+            });
         });
-        const config = await this._sSugarConfigInstances[id]._load();
-        return {
-            id,
-            config,
-            instance: this._sSugarConfigInstances[id],
-        };
+
+        return this._loadPromise;
     }
 
     /**
@@ -608,6 +626,7 @@ export default class SSugarConfig extends __SClass {
         });
 
         const res = await this._configInstance.load();
+
         return res;
     }
 }

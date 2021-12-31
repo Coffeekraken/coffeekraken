@@ -8,6 +8,7 @@ import __onProcessExit from './onProcessExit';
 import __SDuration from '@coffeekraken/s-duration';
 import __isTestEnv from '../../shared/is/testEnv';
 import __SLog from '@coffeekraken/s-log';
+import __SSugarCli from '@coffeekraken/cli';
 
 /**
  * @name            spawn
@@ -81,6 +82,9 @@ export default function spawn(
 
         const stderr = [],
             stdout = [];
+
+        // replace tokens using the SSugarCli replaceTokens function
+        command = __SSugarCli.replaceTokens(command);
 
         childProcess = __spawn(command, [], {
             shell: true,

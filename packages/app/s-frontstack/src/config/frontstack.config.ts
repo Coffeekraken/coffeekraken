@@ -85,7 +85,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                process: 'sugar frontendServer.start',
+                process: '%sugar frontendServer.start',
                 params: {},
                 settings: {
                     processManager: {
@@ -140,7 +140,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar postcss.build',
+                command: '%sugar postcss.build',
                 params: {},
                 settings: {
                     processManager: {
@@ -196,7 +196,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar images.build',
+                command: '%sugar images.build',
                 params: {},
                 settings: {
                     processManager: {
@@ -251,7 +251,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar vite',
+                command: '%sugar vite',
                 params: {},
                 settings: {
                     processManager: {
@@ -307,7 +307,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar vite.build',
+                command: '%sugar vite.build',
                 params: {},
                 settings: {
                     processManager: {
@@ -363,7 +363,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar markdown.build -p readme -p doc',
+                command: '%sugar markdown.build -p readme -p doc',
                 params: {},
                 settings: {
                     processManager: {
@@ -419,7 +419,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: 'sugar docmap.build --noExtends',
+                command: '%sugar docmap.build --noExtends',
                 params: {},
                 settings: {
                     processManager: {

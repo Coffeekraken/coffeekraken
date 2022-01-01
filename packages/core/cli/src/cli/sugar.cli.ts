@@ -24,6 +24,7 @@ import __replaceTokens from '@coffeekraken/sugar/node/token/replaceTokens';
 import __SLog from '@coffeekraken/s-log';
 import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import { Console } from 'console';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -463,6 +464,12 @@ export default class SSugarCli {
                 }
 
                 Object.keys(cliObj.actions).forEach((action) => {
+                    if (action.match(/\s/)) {
+                        throw new Error(
+                            `The action "<yellow>${action}</yellow>" seems to have some spaces in his id... Please correct that.`,
+                        );
+                    }
+
                     const actionObj = cliObj.actions[action];
 
                     let processPath, command;

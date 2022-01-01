@@ -25,6 +25,11 @@ body {
     @sugar.depth (50);
 }
 
+.sticky {
+    position: sticky;
+    top: 100px;
+}
+
 #bkg {
     position: absolute;
     top: 0;

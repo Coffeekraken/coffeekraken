@@ -531,7 +531,7 @@ const plugin = (settings: any = {}) => {
                     const val = match.replace('vh', '');
                     decl.value = decl.value.replace(
                         match,
-                        `calc(${val} * var(--vh,1vh))`,
+                        `calc(${val} * var(--vh,1vh)) `,
                     );
                 });
             }

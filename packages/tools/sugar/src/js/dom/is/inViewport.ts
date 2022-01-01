@@ -68,9 +68,6 @@ function inViewport(
             (entries, observer) => {
                 if (!entries.length) return;
                 const entry = entries[0];
-                if (elm.tagName.toLowerCase() === 's-code-example') {
-                    console.log('INTER', entry.intersectionRatio, elm);
-                }
                 if (entry.intersectionRatio > 0) {
                     resolve(true);
                 } else {

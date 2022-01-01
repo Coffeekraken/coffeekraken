@@ -25,7 +25,7 @@
             "description": "Sugar build action",
             "defaultAction": "prod",
             "actions": {
-                "prod ": {
+                "prod": {
                     "scope": "global",
                     "description": "Build for production",
                     "command": "sugar frontstack.recipe build"

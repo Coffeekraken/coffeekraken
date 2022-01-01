@@ -2,6 +2,7 @@ export type SugarFonticonId =
   | "autocomplete"
   | "brand-coffeekraken"
   | "brand-lit"
+  | "button"
   | "code"
   | "copy"
   | "datepicker"
@@ -33,6 +34,7 @@ export type SugarFonticonKey =
   | "Autocomplete"
   | "BrandCoffeekraken"
   | "BrandLit"
+  | "Button"
   | "Code"
   | "Copy"
   | "Datepicker"
@@ -64,6 +66,7 @@ export enum SugarFonticon {
   Autocomplete = "autocomplete",
   BrandCoffeekraken = "brand-coffeekraken",
   BrandLit = "brand-lit",
+  Button = "button",
   Code = "code",
   Copy = "copy",
   Datepicker = "datepicker",
@@ -96,30 +99,31 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.Autocomplete]: "61697",
   [SugarFonticon.BrandCoffeekraken]: "61698",
   [SugarFonticon.BrandLit]: "61699",
-  [SugarFonticon.Code]: "61700",
-  [SugarFonticon.Copy]: "61701",
-  [SugarFonticon.Datepicker]: "61702",
-  [SugarFonticon.DisplayPreview]: "61703",
-  [SugarFonticon.FileCss]: "61704",
-  [SugarFonticon.FileHtml]: "61705",
-  [SugarFonticon.FileJs]: "61706",
-  [SugarFonticon.FileMd]: "61707",
-  [SugarFonticon.FilePhp]: "61708",
-  [SugarFonticon.FileTs]: "61709",
-  [SugarFonticon.FolderOpened]: "61710",
-  [SugarFonticon.Folder]: "61711",
-  [SugarFonticon.LangCss]: "61712",
-  [SugarFonticon.LangHtml]: "61713",
-  [SugarFonticon.LangJs]: "61714",
-  [SugarFonticon.LangMd]: "61715",
-  [SugarFonticon.LangPhp]: "61716",
-  [SugarFonticon.LangTs]: "61717",
-  [SugarFonticon.Range]: "61718",
-  [SugarFonticon.Refresh]: "61719",
-  [SugarFonticon.SupportChromium]: "61720",
-  [SugarFonticon.SupportEdge]: "61721",
-  [SugarFonticon.SupportFirefox]: "61722",
-  [SugarFonticon.SupportRtl]: "61723",
-  [SugarFonticon.SupportSafari]: "61724",
-  [SugarFonticon.Vue]: "61725",
+  [SugarFonticon.Button]: "61700",
+  [SugarFonticon.Code]: "61701",
+  [SugarFonticon.Copy]: "61702",
+  [SugarFonticon.Datepicker]: "61703",
+  [SugarFonticon.DisplayPreview]: "61704",
+  [SugarFonticon.FileCss]: "61705",
+  [SugarFonticon.FileHtml]: "61706",
+  [SugarFonticon.FileJs]: "61707",
+  [SugarFonticon.FileMd]: "61708",
+  [SugarFonticon.FilePhp]: "61709",
+  [SugarFonticon.FileTs]: "61710",
+  [SugarFonticon.FolderOpened]: "61711",
+  [SugarFonticon.Folder]: "61712",
+  [SugarFonticon.LangCss]: "61713",
+  [SugarFonticon.LangHtml]: "61714",
+  [SugarFonticon.LangJs]: "61715",
+  [SugarFonticon.LangMd]: "61716",
+  [SugarFonticon.LangPhp]: "61717",
+  [SugarFonticon.LangTs]: "61718",
+  [SugarFonticon.Range]: "61719",
+  [SugarFonticon.Refresh]: "61720",
+  [SugarFonticon.SupportChromium]: "61721",
+  [SugarFonticon.SupportEdge]: "61722",
+  [SugarFonticon.SupportFirefox]: "61723",
+  [SugarFonticon.SupportRtl]: "61724",
+  [SugarFonticon.SupportSafari]: "61725",
+  [SugarFonticon.Vue]: "61726",
 };

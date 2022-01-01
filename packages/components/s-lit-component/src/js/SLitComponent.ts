@@ -166,9 +166,6 @@ export default class SLitComponent extends LitElement {
 
         (async () => {
             await this.componentUtils.waitOnMountState();
-            if (this.tagName.toLowerCase() === 's-code-example') {
-                console.log('S', this);
-            }
             await this.mount();
         })();
     }

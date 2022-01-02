@@ -16,14 +16,14 @@ import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities
 import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
 
-// @ts-ignore
-import __prettier from 'prettier/esm/standalone.mjs';
-// @ts-ignore
-import __prettierJs from 'prettier/esm/parser-babel.mjs';
-// @ts-ignore
-import __prettierHtml from 'prettier/esm/parser-html.mjs';
-// @ts-ignore
-import __prettierCss from 'prettier/esm/parser-postcss.mjs';
+// // @ts-ignore
+// import __prettier from 'prettier/esm/standalone.mjs';
+// // @ts-ignore
+// import __prettierJs from 'prettier/esm/parser-babel.mjs';
+// // @ts-ignore
+// import __prettierHtml from 'prettier/esm/parser-html.mjs';
+// // @ts-ignore
+// import __prettierCss from 'prettier/esm/parser-postcss.mjs';
 
 __SClipboardCopy();
 
@@ -164,7 +164,7 @@ export default class SCodeExample extends __SLitComponent {
                     break;
                 case 'css':
                 case 'postcss':
-                    parser = 'postcss';
+                    parser = 'css';
                     break;
             }
             let rawCode = __decodeHtmlEntities(
@@ -177,10 +177,10 @@ export default class SCodeExample extends __SLitComponent {
             );
             let formatedCode = rawCode;
             try {
-                formatedCode = __prettier.format(rawCode, {
-                    parser,
-                    plugins: [__prettierCss, __prettierHtml, __prettierJs],
-                });
+                // formatedCode = __prettier.format(rawCode, {
+                //     parser,
+                //     plugins: [__prettierCss, __prettierHtml, __prettierJs],
+                // });
             } catch (e) {}
             this._items = [
                 ...this._items,
@@ -255,12 +255,15 @@ export default class SCodeExample extends __SLitComponent {
             return;
         }
         $content.setAttribute('inited', 'true');
-        const code = __hljs.highlight(
-            $content.innerHTML.replace(/<!--\?lit.*-->/, ''),
-            {
-                language: <string>$content.getAttribute('lang'),
-            },
-        );
+        let code;
+        try {
+            const code = __hljs.highlight(
+                $content.innerHTML.replace(/<!--\?lit.*-->/, ''),
+                {
+                    language: <string>$content.getAttribute('lang'),
+                },
+            );
+        } catch (e) {}
         item.highlightedCode = __decodeHtmlEntities(code.value);
         this.setMoreClass();
     }

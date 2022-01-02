@@ -12,7 +12,7 @@ import __SLog from '@coffeekraken/s-log';
 import __path from 'path';
 import { parseStringPromise } from 'xml2js';
 import __copy from '@coffeekraken/sugar/node/fs/copy';
-import __formatEstimation from '@coffeekraken/sugar/shared/time/formatEstimation';
+import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 /**
  * @name                SStaticBuilder
@@ -244,7 +244,7 @@ export default class SStaticBuilder extends __SBuilder {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> <magenta>${
                             xml.urlset.url.length - i
-                        }</magenta> url(s), <cyan>~${__formatEstimation(
+                        }</magenta> url(s), <cyan>~${__formatDuration(
                             average * (xml.urlset.url.length - i),
                         )}</cyan> remaining`,
                     });

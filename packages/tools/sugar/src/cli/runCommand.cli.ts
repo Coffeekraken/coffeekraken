@@ -5,7 +5,7 @@ import __spawn from '../node/process/spawn';
 import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __SDuration from '@coffeekraken/s-duration';
-import __formatEstimation from '@coffeekraken/sugar/shared/time/formatEstimation';
+import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 export class SRunCommandInterface extends __SInterface {
     static get _definition() {
@@ -104,7 +104,7 @@ export default function runCommand(stringArgs = '') {
                 emit('log', {
                     value: `<green>[command]</green> <magenta>${
                         paths.length - (i + 1)
-                    }</magenta> folder(s), <cyan>~${__formatEstimation(
+                    }</magenta> folder(s), <cyan>~${__formatDuration(
                         remaining,
                     )}</cyan> remaining...`,
                 });

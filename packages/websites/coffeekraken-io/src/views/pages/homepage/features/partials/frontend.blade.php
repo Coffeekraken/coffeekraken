@@ -112,7 +112,7 @@
             <div>
                 <div class="s-mbe:30">
                     @include('generic.code.example', ['examples' => [
-                    'postcss' => '/* defining some layouts */
+                    'css' => '/* defining some layouts */
                     .my-layout-1 {
                     @sugar.layout("1 2 _ 3 3");
                     }

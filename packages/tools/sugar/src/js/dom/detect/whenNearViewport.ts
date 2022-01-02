@@ -3,22 +3,20 @@
 import __whenVisible from './whenVisible';
 
 /**
- * @name      whenInViewport
+ * @name      whenNearViewport
  * @namespace            js.dom.detect
  * @type      Function
  * @async
  * @platform          js
  * @status        beta
  *
- * Monitor an HTMLElement to be notified when it is in the viewport
+ * Monitor an HTMLElement to be notified when it is near (100vh before or after) the viewport, or in the viewport
  *
  * @feature       Promise based API
  * @feature       Some settings available to tweak the behavior
  *
- * @setting     {String}      [offset='10px']         An offset to detect sooner or later the element entering in the viewport
- *
  * @param 		{HTMLElement} 				elm 					The element to monitor
- * @param 		{IWhenInViewportSettings} 					[settings={}] 		Some settings to tweak the detection behavior
+ * @param 		{IWhenNearViewportSettings} 					[settings={}] 		Some settings to tweak the detection behavior
  * @return 		(Promise) 											The promise that will be resolved when the element is in the viewport
  *
  * @todo      interface
@@ -26,8 +24,8 @@ import __whenVisible from './whenVisible';
  * @todo      tests
  *
  * @example 	js
- * import whenInViewport from '@coffeekraken/sugar/js/dom/whenInViewport'
- * whenInViewport(myCoolHTMLElement).then((elm) => {
+ * import whenNearViewport from '@coffeekraken/sugar/js/dom/whenNearViewport'
+ * whenNearViewport(myCoolHTMLElement).then((elm) => {
  * 		// do something with your element that has entered the viewport...
  * });
  *
@@ -35,18 +33,18 @@ import __whenVisible from './whenVisible';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface IWhenInViewportSettings {
-    offset: string;
-}
+export interface IWhenNearViewportSettings {}
 
-function whenInViewport(
+function whenNearViewport(
     elm: HTMLElement,
-    settings: Partials<IWhenInViewportSettings> = {},
+    settings: Partials<IWhenNearViewportSettings> = {},
 ) {
     settings = {
-        offset: '10px',
+        offset: `${window.innerHeight}px ${window.innerWidth}px`,
         ...settings,
     };
+
+    let observer: IntersectionObserver, resizeTimeout: number;
 
     return new Promise(async (resolve) => {
         const options = {
@@ -65,9 +63,18 @@ function whenInViewport(
             });
         }
 
-        const observer = new IntersectionObserver(onChange, options);
-
+        observer = new IntersectionObserver(onChange, options);
         observer.observe(elm);
+
+        window.addEventListener('resize', (e) => {
+            clearTimeout(resizeTimeout);
+            resizeTimeout = setTimeout(() => {
+                observer.disconnect?.();
+                options.rootMargin = `${window.innerHeight}px ${window.innerWidth}px`;
+                observer = new IntersectionObserver(onChange, options);
+                observer.observe(elm);
+            }, 500);
+        });
     });
 }
-export default whenInViewport;
+export default whenNearViewport;

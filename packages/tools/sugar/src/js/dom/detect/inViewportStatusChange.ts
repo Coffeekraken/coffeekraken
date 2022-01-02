@@ -37,7 +37,7 @@ import __whenOutOfViewport from './whenOutOfViewport';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export interface IInViewportStatusChangeSettings {
-    offset: number;
+    offset: string;
 }
 
 function inViewportStatusChange(
@@ -47,7 +47,7 @@ function inViewportStatusChange(
     let isFinished = false;
 
     settings = {
-        offset: 10,
+        offset: '10px',
         ...(settings ?? {}),
     };
 

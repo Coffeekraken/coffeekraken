@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 /**
- * @name            formatEstimation
+ * @name            formatDuration
  * @namespace            shared.time
  * @type            Function
  * @async
@@ -19,13 +19,13 @@
  * @todo      tests
  *
  * @example       js
- * import formatEstimation from '@coffeekraken/sugar/js/time/formatEstimation';
- * formatEstimation(2000); // => 2s
+ * import formatDuration from '@coffeekraken/sugar/js/time/formatDuration';
+ * formatDuration(2000); // => 2s
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function formatEstimation(estimation: number): string {
+function formatDuration(estimation: number): string {
     if (estimation === Infinity) {
         return '...';
     }
@@ -51,4 +51,4 @@ function formatEstimation(estimation: number): string {
     return `${h}h${m > 0 ? ` ${m}m` : ''}`;
     // }
 }
-export default formatEstimation;
+export default formatDuration;

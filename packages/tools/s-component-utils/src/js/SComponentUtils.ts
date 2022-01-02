@@ -14,6 +14,7 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SClass from '@coffeekraken/s-class';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
 import __SPromise from '@coffeekraken/s-promise';
+import __SConductor from '@coffeekraken/s-conductor';
 
 export class SComponentDefaultInterface extends __SInterface {
     static get _definition() {
@@ -234,20 +235,20 @@ export default class SComponent extends __SClass {
         const styleStr = this.componentUtilsSettings.style;
         this.injectStyle(styleStr ?? '');
 
-        // waiting for mount state
-        this._whenMountPromise = new Promise((resolve) => {
-            switch (this.props.mountWhen) {
-                case 'inViewport':
-                    this.inViewportStatusChange.on('enter', () => {
-                        resolve();
-                    });
-                    break;
-                case 'directly':
-                default:
-                    resolve();
-                    break;
-            }
-        });
+        // // waiting for mount state
+        // this._whenMountPromise = new Promise((resolve) => {
+        //     switch (this.props.mountWhen) {
+        //         case 'inViewport':
+        //             this.inViewportStatusChange.on('enter', () => {
+        //                 resolve();
+        //             });
+        //             break;
+        //         case 'directly':
+        //         default:
+        //             resolve();
+        //             break;
+        //     }
+        // });
     }
 
     /**
@@ -288,6 +289,10 @@ export default class SComponent extends __SClass {
      */
     waitOnMountState(): Promise<any> {
         return this._whenMountPromise;
+    }
+
+    waitAndExecute(callback: Function): Promise<any> {
+        return __SConductor.when(this.node, this.props.mountWhen, callback);
     }
 
     /**

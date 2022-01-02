@@ -24,7 +24,7 @@ const viewsRelated = import.meta.globEager('../views/**/*.ts');
 
 (async () => {
     __SLitComponent.setDefaultProps('*', {
-        mountWhen: 'inViewport',
+        mountWhen: 'nearViewport',
     });
     __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
         mountWhen: 'direct',

@@ -165,8 +165,7 @@ export default class SLitComponent extends LitElement {
         };
 
         (async () => {
-            await this.componentUtils.waitOnMountState();
-            await this.mount();
+            await this.componentUtils.waitAndExecute(this.mount.bind(this));
         })();
     }
 
@@ -221,7 +220,7 @@ export default class SLitComponent extends LitElement {
         // set the not as updatable
         this._shouldUpdate = true;
         // @ts-ignore
-        this.requestUpdate();
+        await this.requestUpdate();
         this.componentUtils.injectStyle(
             this.constructor.styles?.cssText ?? '',
             this.tagName,

@@ -220,7 +220,8 @@ export default class SLitComponent extends LitElement {
         // set the not as updatable
         this._shouldUpdate = true;
         // @ts-ignore
-        await this.requestUpdate();
+        this.requestUpdate();
+        await this.updateComplete;
         this.componentUtils.injectStyle(
             this.constructor.styles?.cssText ?? '',
             this.tagName,

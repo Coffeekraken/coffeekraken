@@ -38,7 +38,7 @@ function inViewport(
 ): boolean {
     return new Promise((resolve) => {
         settings = {
-            offset: 10,
+            offset: '10px',
             ...settings,
         };
 
@@ -77,7 +77,7 @@ function inViewport(
             },
             {
                 root: null, // viewport
-                rootMargin: `${settings.offset}px`,
+                rootMargin: settings.offset,
                 threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
             },
         );

@@ -44,7 +44,9 @@ function inViewportStatusChange(
     $elm,
     settings?: Partial<IInViewportStatusChangeSettings>,
 ) {
-    let isFinished = false;
+    let status = 'out',
+        observer,
+        isInViewport = false;
 
     settings = {
         offset: '10px',
@@ -52,35 +54,44 @@ function inViewportStatusChange(
     };
 
     return new __SPromise(
-        async ({ emit }) => {
-            function _whenIn() {
-                if (isFinished) return;
-                __whenInViewport($elm, settings).then(() => {
-                    emit('enter', $elm);
-                    _whenOut();
-                });
-            }
-            function _whenOut() {
-                if (isFinished) return;
-                __whenOutOfViewport($elm, settings).then(() => {
+        ({ emit }) => {
+            const _cb = () => {
+                if (!isInViewport && status === 'in') {
+                    status = 'out';
                     emit('leave', $elm);
-                    _whenIn();
-                });
-            }
+                } else if (isInViewport && status === 'out') {
+                    status = 'in';
+                    emit('enter', $elm);
+                }
+            };
 
-            if (await __isInViewport($elm, settings)) {
-                emit('enter', $elm);
-                _whenOut();
-            } else {
-                emit('leave', $elm);
-                _whenIn();
-            }
+            observer = new IntersectionObserver(
+                (entries, observer) => {
+                    if (!entries.length) return;
+                    const entry = entries[0];
+                    if (entry.intersectionRatio > 0) {
+                        isInViewport = true;
+                    } else {
+                        isInViewport = false;
+                    }
+                    _cb();
+                },
+                {
+                    root: null, // viewport
+                    rootMargin: settings.offset,
+                    threshold: [
+                        0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1,
+                    ],
+                },
+            );
+
+            observer.observe($elm);
         },
         {
             id: 'inViewportStatisChange',
         },
-    ).on('finally', () => {
-        isFinished = true;
+    ).on('cancel', () => {
+        observer.disconnect?.();
     });
 }
 export default inViewportStatusChange;

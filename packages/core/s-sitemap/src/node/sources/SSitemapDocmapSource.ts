@@ -5,6 +5,7 @@ import { ISSitemapBuildParams } from '../interface/SSitemapBuildInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __pad from '@coffeekraken/sugar/shared/number/pad';
+import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
 
 /**
  * @name            SSitemapDocmapSource
@@ -106,12 +107,15 @@ export default class SSitemapDocmapSource extends __SSitemapSource {
             )}-${__pad(date.getDate(), 2)}`;
 
             // @ts-ignore
-            Object.keys(docmap.menu?.slug).forEach((slug) => {
+            for (let [slug, docmapObj] of Object.entries(docmap.menu.slug)) {
+                // @ts-ignore
+                const hash = __fileHash(docmapObj.docmap.path);
                 items.push({
                     loc: slug,
                     lastmod,
+                    integrity: hash,
                 });
-            });
+            }
 
             resolve(items);
         });

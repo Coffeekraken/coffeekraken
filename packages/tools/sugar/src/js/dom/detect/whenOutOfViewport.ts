@@ -17,7 +17,7 @@ import __closest from '../query/closest';
  * @feature       Promise based API
  * @feature       Some settings to tweak the detection behavior
  *
- * @setting       {Number}      [offset=50]     An offset to detect sooner or later the element exits the viewport
+ * @setting       {String}      [offset=10px]     An offset to detect sooner or later the element exits the viewport
  *
  * @param 		{HTMLElement} 				elm 				The element to monitor
  * @param 		{IWhenOutOfViewportSettings} 					[settings={}]       Some settings to tweak the detection behavior
@@ -47,7 +47,7 @@ function whenOutOfViewport(
 ) {
     return new Promise((resolve, reject) => {
         settings = {
-            offset: 10,
+            offset: '10px',
             ...settings,
         };
 
@@ -72,7 +72,7 @@ function whenOutOfViewport(
             },
             {
                 root: null, // viewport
-                rootMargin: `${settings.offset}px`,
+                rootMargin: settings.offset,
                 threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1],
             },
         );

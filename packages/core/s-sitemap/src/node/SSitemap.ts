@@ -42,6 +42,7 @@ export interface ISSitemapCtopSettings {
 export interface ISSitemapResultItem {
     loc: string;
     lastmod: string;
+    integrity?: string;
     changefreq?:
         | 'always'
         | 'hourly'
@@ -237,20 +238,32 @@ export default class SSitemap extends __SClass {
                 let xmlStr: string[] = [
                     '<?xml version="1.0" encoding="UTF-8"?>',
                     '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">',
+                    '   <url>',
+                    '       <loc>/</loc>',
+                    '   </url>',
                 ];
                 items.forEach((item) => {
                     const itemStr: string[] = [];
-                    itemStr.push('<url>');
-                    if (item.loc) itemStr.push(`<loc>${item.loc}</loc>`);
+                    itemStr.push(`  <url>`);
+                    if (item.loc)
+                        itemStr.push(`        <loc>${item.loc}</loc>`);
                     if (item.lastmod)
-                        itemStr.push(`<lastmod>${item.lastmod}</lastmod>`);
+                        itemStr.push(
+                            `      <lastmod>${item.lastmod}</lastmod>`,
+                        );
                     if (item.changefreq)
                         itemStr.push(
-                            `<changefreq>${item.changefreq}</changefreq>`,
+                            `       <changefreq>${item.changefreq}</changefreq>`,
                         );
                     if (item.priority)
-                        itemStr.push(`<priority>${item.priority}</priority>`);
-                    itemStr.push('</url>');
+                        itemStr.push(
+                            `      <priority>${item.priority}</priority>`,
+                        );
+                    if (item.integrity)
+                        itemStr.push(
+                            `       <integrity>${item.integrity}</integrity>`,
+                        );
+                    itemStr.push('  </url>');
                     xmlStr.push(itemStr.join('\n'));
                 });
 

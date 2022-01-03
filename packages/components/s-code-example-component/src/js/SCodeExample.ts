@@ -264,7 +264,7 @@ export default class SCodeExample extends __SLitComponent {
                 },
             );
         } catch (e) {}
-        item.highlightedCode = __decodeHtmlEntities(code.value);
+        item.highlightedCode = __decodeHtmlEntities(code?.value ?? '');
         this.setMoreClass();
     }
     copy() {

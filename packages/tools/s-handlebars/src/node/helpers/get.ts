@@ -30,7 +30,7 @@ export default function get(
     } else {
         if (path === '@coffeekraken.s-images-builder.node.sImagesBuilder') {
             res = object[path];
-            console.log('re', res);
+            // console.log('re', res);
         }
     }
     if (insidePath) {

@@ -64,17 +64,30 @@ export default function (env, config) {
         requestTimeout: 5000,
 
         /**
-         * @name            clear
+         * @name            clean
          * @namespace       config.staticBuilder
          * @type            Boolean
-         * @default         true
+         * @default         false
          *
-         * Specify if you want to clear the "outDir" before rebuilding
+         * Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the "incremental" option to false
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        clear: true,
+        clean: false,
+
+        /**
+         * @name            incremental
+         * @namespace       config.staticBuilder
+         * @type            Boolean
+         * @default         true
+         *
+         * Specify if you want to use incremental build
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        incremental: true,
 
         assets: {
             docmap: {
@@ -102,6 +115,84 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 to: '[config.staticBuilder.outDir]/docmap.json',
+            },
+            manifest: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.manifest
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/manifest.json
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/manifest.json',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.manifest
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/manifest.json
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/manifest.json',
+            },
+            sitemap: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.sitemap
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/sitemap.xml
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/sitemap.xml',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.sitemap
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/sitemap.xml
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/sitemap.xml',
+            },
+            favicon: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.favicon
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/favicon.ico
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/favicon.ico',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.favicon
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/favicon.ico
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/favicon.ico',
             },
             dist: {
                 /**

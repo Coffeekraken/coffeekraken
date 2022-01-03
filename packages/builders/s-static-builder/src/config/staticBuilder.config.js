@@ -63,17 +63,29 @@ export default function (env, config) {
          */
         requestTimeout: 5000,
         /**
-         * @name            clear
+         * @name            clean
          * @namespace       config.staticBuilder
          * @type            Boolean
-         * @default         true
+         * @default         false
          *
-         * Specify if you want to clear the "outDir" before rebuilding
+         * Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the "incremental" option to false
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        clear: true,
+        clean: false,
+        /**
+         * @name            incremental
+         * @namespace       config.staticBuilder
+         * @type            Boolean
+         * @default         true
+         *
+         * Specify if you want to use incremental build
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        incremental: true,
         assets: {
             docmap: {
                 /**
@@ -100,6 +112,84 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 to: '[config.staticBuilder.outDir]/docmap.json',
+            },
+            manifest: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.manifest
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/manifest.json
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/manifest.json',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.manifest
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/manifest.json
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/manifest.json',
+            },
+            sitemap: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.sitemap
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/sitemap.xml
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/sitemap.xml',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.sitemap
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/sitemap.xml
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/sitemap.xml',
+            },
+            favicon: {
+                /**
+                 * @name            from
+                 * @namespace       config.staticBuilder.assets.favicon
+                 * @type            String
+                 * @default         [config.storage.package.rootDir]/favicon.ico
+                 *
+                 * Specify the directory/file to copy
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                from: '[config.storage.package.rootDir]/favicon.ico',
+                /**
+                 * @name            to
+                 * @namespace       config.staticBuilder.assets.favicon
+                 * @type            String
+                 * @default         [config.staticBuilder.outDir]/favicon.ico
+                 *
+                 * Specify the directory where you want to paste the asset(s)
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                to: '[config.staticBuilder.outDir]/favicon.ico',
             },
             dist: {
                 /**
@@ -130,4 +220,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RhdGljQnVpbGRlci5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdGF0aWNCdWlsZGVyLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUNwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw4Q0FBOEM7UUFDckQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSx5Q0FBeUM7UUFDakQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxzRUFBc0U7UUFDNUU7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRSxDQUFDLENBQUM7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsY0FBYyxFQUFFLElBQUk7UUFFcEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxJQUFJO1FBRVgsTUFBTSxFQUFFO1lBQ0osTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSx5Q0FBeUM7Z0JBQy9DOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEVBQUUsRUFBRSwyQ0FBMkM7YUFDbEQ7WUFDRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLCtCQUErQjtnQkFDckM7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLCtCQUErQjthQUN0QztTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic3RhdGljQnVpbGRlci5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzdGF0aWNCdWlsZGVyLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUNwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSw4Q0FBOEM7UUFDckQ7Ozs7Ozs7Ozs7V0FVRztRQUNILE1BQU0sRUFBRSx5Q0FBeUM7UUFDakQ7Ozs7Ozs7Ozs7V0FVRztRQUNILElBQUksRUFBRSxzRUFBc0U7UUFDNUU7Ozs7Ozs7Ozs7V0FVRztRQUNILFNBQVMsRUFBRSxDQUFDLENBQUM7UUFFYjs7Ozs7Ozs7OztXQVVHO1FBQ0gsY0FBYyxFQUFFLElBQUk7UUFFcEI7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxLQUFLO1FBRVo7Ozs7Ozs7Ozs7V0FVRztRQUNILFdBQVcsRUFBRSxJQUFJO1FBRWpCLE1BQU0sRUFBRTtZQUNKLE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUseUNBQXlDO2dCQUMvQzs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsMkNBQTJDO2FBQ2xEO1lBQ0QsUUFBUSxFQUFFO2dCQUNOOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxnREFBZ0Q7Z0JBQ3REOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEVBQUUsRUFBRSw2Q0FBNkM7YUFDcEQ7WUFDRCxPQUFPLEVBQUU7Z0JBQ0w7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLDhDQUE4QztnQkFDcEQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLDJDQUEyQzthQUNsRDtZQUNELE9BQU8sRUFBRTtnQkFDTDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsOENBQThDO2dCQUNwRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsMkNBQTJDO2FBQ2xEO1lBQ0QsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSwrQkFBK0I7Z0JBQ3JDOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEVBQUUsRUFBRSwrQkFBK0I7YUFDdEM7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=

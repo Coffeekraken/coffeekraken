@@ -14,26 +14,6 @@
         ) !important;
     }
 
-    .__stars {
-        position: absolute;
-        top: 0px;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-image: url('/src/img/welcome/welcome-bg-light-01.jpg');
-        background-repeat: repeat-x;
-        background-size: cover;
-        background-position: 50% 0;
-        filter: saturate(0);
-        opacity: 0.2;
-        mask-image: linear-gradient(black, transparent);
-
-        @sugar.theme.when dark {
-            opacity: 0.5;
-            background-image: url('/src/img/welcome/welcome-bg-01.jpg');
-        }
-    }
-
     .__illustration {
         position: absolute;
         width: 1280px;

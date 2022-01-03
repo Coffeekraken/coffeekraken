@@ -49,6 +49,10 @@ export interface ISConductorSettings {
     log: boolean;
 }
 
+export interface ISConductorCtorSettings {
+    conductor: Partial<ISConductorSettings>;
+}
+
 export type TSConductorTimes =
     | 'direct'
     | 'directly'
@@ -81,6 +85,19 @@ export default class SConductor extends __SClass {
     static _defaultInstance: SConductor;
 
     /**
+     * @name            _defaultInstanceSettings
+     * @type            Partial<ISConductorSettings>
+     * @private
+     * @static
+     *
+     * Store the default instance settings
+     *
+     * @since       2.0.0
+     * @author      Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static _defaultInstanceSettings: Partial<ISConductorSettings> = {};
+
+    /**
      * @name            defaultInstance
      * @type            SConductor
      * @static
@@ -93,7 +110,9 @@ export default class SConductor extends __SClass {
      */
     static get defaultInstance(): SConductor {
         if (this._defaultInstance) return this._defaultInstance;
-        this._defaultInstance = new SConductor();
+        this._defaultInstance = new SConductor({
+            conductor: this._defaultInstanceSettings,
+        });
         return this._defaultInstance;
     }
 
@@ -118,6 +137,27 @@ export default class SConductor extends __SClass {
         task: Function = null,
     ): Promise<ISConductorTaskObj> {
         return this.defaultInstance.when($elm, time, task);
+    }
+
+    /**
+     * @name            setup
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to setup the "default" SConductor instance created when you use the static methods like "when", etc...
+     *
+     * @param      {Partial<ISConductorSettings>}       settings    The settings to use
+     *
+     * @since      2.0.0
+     * @author      Olivier Bossel <olivier.bossel@gmail.com>
+     */
+    static setup(settings: Partial<ISConductorSettings>): void {
+        if (this._defaultInstance) {
+            throw new Error(
+                `Sorry but you need to call the "SConductor.setup" method before all other static methods like "when"`,
+            );
+        }
+        this._defaultInstanceSettings = settings;
     }
 
     /**
@@ -205,17 +245,17 @@ export default class SConductor extends __SClass {
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    constructor(settings = {}) {
+    constructor(settings?: Partial<ISConductorCtorSettings>) {
         super(
             __deepMerge(
                 {
                     conductor: {
                         idleInterval: 500,
                         logTimeout: 2000,
-                        log: true,
+                        log: false,
                     },
                 },
-                settings,
+                settings ?? {},
             ),
         );
 
@@ -249,10 +289,8 @@ export default class SConductor extends __SClass {
 
         if (taskToExecute) {
             this._executeTask(taskToExecute);
-        } else if (!this._logTimeout) {
+        } else if (!this._logTimeout && this.conductorSettings.log) {
             this._logTimeout = setTimeout(() => {
-                console.log('LOG');
-
                 console.log(
                     `[SConductor] The conductor "${
                         this.metas.id

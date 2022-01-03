@@ -56,8 +56,7 @@ function whenNearViewport(
         function onChange(changes, observer) {
             changes.forEach((change) => {
                 if (change.intersectionRatio > 0) {
-                    // your observer logic
-                    observer.disconnect();
+                    observer.disconnect?.();
                     resolve(elm);
                 }
             });

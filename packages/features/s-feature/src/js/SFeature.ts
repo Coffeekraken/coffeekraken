@@ -199,9 +199,7 @@ export default class SFeature extends __SClass implements ISFeature {
 
         (async () => {
             // @ts-ignore
-            await this.componentUtils.waitOnMountState();
-            // @ts-ignore
-            await this.mount?.();
+            this.componentUtils.waitAndExecute(this.mount?.bind(this));
         })();
     }
 

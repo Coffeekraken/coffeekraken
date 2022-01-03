@@ -23,12 +23,18 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 'h',
                 default: __SSugarConfig.get('staticBuilder.host'),
             },
-            clear: {
+            clean: {
                 description:
-                    'Specify if you want to clear the outDir before rebuilding',
+                    'Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the "incremental" option to false',
                 type: 'Boolean',
                 alias: 'c',
-                default: __SSugarConfig.get('staticBuilder.clear'),
+                default: __SSugarConfig.get('staticBuilder.clean'),
+            },
+            incremental: {
+                description: 'Specify if you want to use incremental build',
+                type: 'Boolean',
+                alias: 'i',
+                default: __SSugarConfig.get('staticBuilder.incremental'),
             },
             failAfter: {
                 description:

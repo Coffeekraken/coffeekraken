@@ -48,6 +48,7 @@ function writeTmpFileSync(
 
     let path = __path.resolve(
         __packageTmpDir(),
+        'files',
         settings.path ?? __uniqid() + '.tmp',
     );
     __writeFileSync(path, data);

@@ -48,7 +48,7 @@ function whenInViewport(
         ...settings,
     };
 
-    return new Promise(async (resolve) => {
+    return new Promise((resolve) => {
         const options = {
             root: null, // relative to document viewport
             rootMargin: settings.offset, // margin around root. Values are similar to css property. Unitless values not allowed
@@ -59,7 +59,7 @@ function whenInViewport(
             changes.forEach((change) => {
                 if (change.intersectionRatio > 0) {
                     // your observer logic
-                    observer.disconnect();
+                    observer.disconnect?.();
                     resolve(elm);
                 }
             });

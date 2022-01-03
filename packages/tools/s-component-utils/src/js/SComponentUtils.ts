@@ -212,6 +212,9 @@ export default class SComponent extends __SClass {
         // listen viewport status update
         this.inViewportStatusChange
             .on('enter', () => {
+                if (this.node.tagName.toLowerCase() === 'ck-blob') {
+                    console.log('IN');
+                }
                 this._isInViewport = true;
             })
             .on('leave', () => {
@@ -234,21 +237,6 @@ export default class SComponent extends __SClass {
         // @ts-ignore
         const styleStr = this.componentUtilsSettings.style;
         this.injectStyle(styleStr ?? '');
-
-        // // waiting for mount state
-        // this._whenMountPromise = new Promise((resolve) => {
-        //     switch (this.props.mountWhen) {
-        //         case 'inViewport':
-        //             this.inViewportStatusChange.on('enter', () => {
-        //                 resolve();
-        //             });
-        //             break;
-        //         case 'directly':
-        //         default:
-        //             resolve();
-        //             break;
-        //     }
-        // });
     }
 
     /**
@@ -275,22 +263,19 @@ export default class SComponent extends __SClass {
     }
 
     /**
-     * @name           waitOnMountState
+     * @name           waitAndExecute
      * @type            Function
      * @async
      *
-     * This asynv method allows you to wait for the component (node) has reached
-     * his "mount" state. This state depends fully on the "mountWhen" property
+     * This async method allows you to wait for the component (node) has reached
+     * his "mount" state. This state depends fully on the "mountWhen" property.
+     * When the state has been reached, the passed callback will be executed.
      *
      * @return          {Promise}           A promise fullfilled when the component (node) has reached his "mount" state
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    waitOnMountState(): Promise<any> {
-        return this._whenMountPromise;
-    }
-
     waitAndExecute(callback: Function): Promise<any> {
         return __SConductor.when(this.node, this.props.mountWhen, callback);
     }

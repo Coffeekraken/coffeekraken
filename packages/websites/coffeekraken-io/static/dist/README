@@ -1,0 +1,207 @@
+<!-- 
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation               /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+-->
+
+<!-- image -->
+![](/dist/img/doc/readmeHeader.jpg)
+
+<!-- header -->
+# 
+
+[![size](https://shields.io/bundlephobia/min/[packageJson.name]?style&#x3D;for-the-badge)](hhttps://www.npmjs.com/package/[packageJson.name])
+[![downloads](https://shields.io/npm/dm/[packageJson.name]?style&#x3D;for-the-badge)](hhttps://www.npmjs.com/package/[packageJson.name])
+[![license](https://shields.io/npm/l/[packageJson.name]?style&#x3D;for-the-badge)](./LICENSE)
+[![discord](https://shields.io/discord/Coffeekraken?style&#x3D;for-the-badge)](https://discord.gg/ERsX54UE)
+
+
+<!-- description -->
+
+
+<!-- install -->
+### Install
+
+###### Using npm
+
+```shell
+npm i 
+```
+
+
+###### Using yarn
+
+```shell
+yarn add 
+```
+
+
+  PLop
+
+
+<!-- doc-menu -->
+## Documentation
+
+
+
+- Styleguide
+    - Resets
+        - [Global reset](/styleguide/resets/global)
+        - [Destyle reset](/styleguide/resets/destyle)
+        - [Sugar reset](/styleguide/resets/sugar)
+    - UI
+        - [Avatar](/styleguide/ui/avatar)
+        - [Buttons](/styleguide/ui/buttons)
+        - [Dropdown](/styleguide/ui/dropdown)
+        - [Fs Tree](/styleguide/ui/fs-tree)
+        - [Blockquote](/styleguide/ui/blockquote)
+        - [Lists](/styleguide/ui/lists)
+        - [Tabs](/styleguide/ui/tabs)
+        - [Badges](/styleguide/ui/badges)
+        - [Table](/styleguide/ui/table)
+        - [Tooltips](/styleguide/ui/tooltips)
+        - [Scrollbar](/styleguide/ui/scrollbar)
+        - [Icons](/styleguide/ui/icons)
+    - Forms
+        - [Checkbox](/styleguide/forms/checkbox)
+        - [Text Input](/styleguide/forms/text-input)
+        - [Labels](/styleguide/forms/labels)
+        - [Radio](/styleguide/forms/radio)
+        - [Select](/styleguide/forms/select)
+        - [Switch](/styleguide/form/switch)
+    - Helpers
+        - [Align](/styleguide/helpers/align)
+        - [Typography](/styleguide/helpers/typography)
+        - [Clearfix](/styleguide/helpers/clearfix)
+        - [Colors](/styleguide/helpers/colors)
+        - [Fit Sizes](/styleguide/helpers/fit-sizes)
+        - [Text](/styleguide/helpers/scale)
+        - [Depth](/styleguide/helpers/depth)
+        - [Disabled](/styleguide/helpers/disabled)
+        - [Flex](/styleguide/helpers/flex)
+        - [Ratio](/styleguide/helpers/ratio)
+        - [Radius](/styleguide/helpers/radius)
+        - [Border width](/styleguide/helpers/border-width)
+        - [Display](/styleguide/helpers/display)
+        - [Positions](/styleguide/helpers/positions)
+        - [Transitions](/styleguide/helpers/transitions)
+        - [Margin](/styleguide/helpers/margin)
+        - [Padding](/styleguide/helpers/padding)
+        - [Visibility](/styleguide/helpers/visibility)
+        - [Visually](/styleguide/helpers/visually)
+        - [Truncate](/styleguide/helpers/truncate)
+        - [Widths](/styleguide/helpers/widths)
+    - Tools
+        - [Format text](/styleguide/tools/format-text)
+        - [Rhythm vertical](/styleguide/tools/rhythm-vertical)
+        - [Scale](/styleguide/tools/scale)
+    - Fonts
+        - [Families](/styleguide/fonts/families)
+        - [Sizes](/styleguide/fonts/sizes)
+        - [Styles](/styleguide/fonts/styles)
+        - [Weights](/styleguide/fonts/weights)
+        - [Stretches](/styleguide/fonts/stretches)
+        - [Resets](/styleguide/fonts/resets)
+- Documentation
+    - Get Started
+        - [First project](/doc/get-started/first-project)
+    - Configuration
+        - [Overview](/doc/config/overview)
+        - [Built-in configs](/doc/config/built-in)
+        - [Override configs](/doc/config/override)
+        - [References](/doc/config/references)
+        - [Register new config files](/doc/config/register)
+        - [Configuration explorer](/doc/config/explorer)
+        - [More...](/doc/config/more)
+    - Recipes
+        - [What are recipes?](/doc/recipes/what-are-recipes)
+        - [Create your recipe](/doc/recipes/create-your-recipe)
+        - [More...](/doc/recipes/more)
+        - Built-in
+            - [Default](/doc/recipes/built-in/default)
+            - [Lit Element](/doc/recipes/built-in/litElement)
+    - CSS
+        - [Languages](/doc/css/languages)
+        - [Pleasant syntax](/doc/css/pleasant-syntax)
+        - [Classes](/doc/css/classes)
+        - [Mixins](/doc/css/mixins)
+        - [Theming](/doc/css/theming)
+        - [Colors](/doc/css/colors)
+        - [Typography](/doc/css/typography)
+        - [UI](/doc/css/ui)
+        - [Icons](/doc/css/icons)
+        - [Layout](/doc/css/layout)
+        - [Responsive](/doc/css/responsive)
+        - [Scopes](/doc/css/scopes)
+        - [Build](/doc/css/build)
+        - [More...](/doc/css/more)
+    - JS - Node
+        - [Supported languages](/doc/js/supported-languages)
+        - [Sugar toolkit](/doc/js/sugar)
+        - [Packages](/doc/js/packages)
+        - [Build](/doc/js/build)
+        - [More...](/doc/js/more)
+    - Components
+        - [Overview](/doc/components/overview)
+        - [Fully customizable](/doc/components/customizable)
+        - [Official components](/doc/components/official)
+        - [Create your own](/doc/components/create-your-own)
+        - [More...](/doc/components/more)
+    - Images
+        - [Overview](/doc/images/overview)
+        - [Supported formats](/doc/images/formats)
+        - [Build](/doc/images/build)
+        - [More...](/doc/images/more)
+    - Views
+        - [Configuration](/doc/views/configuration)
+        - [Overview](/doc/views/overview)
+        - [Supported languages](/doc/views/languages)
+        - [More...](/doc/views/more)
+    - Servers
+        - [Overview](/doc/servers/overview)
+        - [Handlers](/doc/servers/handlers)
+        - [Middlewares](/doc/servers/middlewares)
+        - [Routes](/doc/servers/routes)
+        - [Modules](/doc/servers/modules)
+        - [Configuration](/doc/servers/configuration)
+        - [More...](/doc/servers/more)
+    - Docmap
+        - [Overview](/doc/docmap/overview)
+        - [Writing documentation](/doc/docmap/writing-documentation)
+        - [Build](/doc/docmap/build)
+        - [Configuration](/doc/docmap/configuration)
+        - [More...](/doc/docmap/more)
+    - Markdown
+        - [Overview](/doc/markdown/overview)
+        - [Layouts](/doc/markdown/layouts)
+        - [Sections](/doc/markdown/sections)
+        - [Partials](/doc/markdown/partials)
+        - [Extends views](/doc/markdown/extends)
+        - [Build](/doc/markdown/build)
+        - [Configuration](/doc/markdown/configuration)
+        - [More...](/doc/markdown/more)
+    - CLI
+        - [Overview](/doc/cli/overview)
+        - [Built-in commands](/doc/cli/built-in-commands)
+        - [Extend the CLI](/doc/cli/extends)
+        - [Configuration](/doc/cli/configuration)
+        - [More...](/doc/cli/more)
+
+
+### License
+
+Distributed under the **** License. See **[LICENSE](./license)** for more information.
+
+### Contact
+
+Here's all the ways you can contact us listed:
+
+[![discord](https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style&#x3D;for-the-badge&amp;logo&#x3D;discord)](https://discord.gg/ERsX54UE)
+[![email](https://img.shields.io/badge/Email%20us-Go-green?style&#x3D;for-the-badge&amp;logo&#x3D;Mail.Ru)]()
+

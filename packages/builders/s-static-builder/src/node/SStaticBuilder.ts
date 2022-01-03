@@ -6,13 +6,20 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __remove from '@coffeekraken/sugar/node/fs/remove';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
+import __packageTmpDir from '@coffeekraken/sugar/node/path/packageTmpDir';
+import __systemTmpDir from '@coffeekraken/sugar/node/path/systemTmpDir';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __SLog from '@coffeekraken/s-log';
 import __path from 'path';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import { parseStringPromise } from 'xml2js';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
 import __copy from '@coffeekraken/sugar/node/fs/copy';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
+import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
  * @name                SStaticBuilder
@@ -75,7 +82,8 @@ export interface ISStaticBuilderBuildParams {
     input: string;
     outDir: string;
     host: string;
-    clear: boolean;
+    clean: boolean;
+    incremental: boolean;
     assets: ISStaticBuilderAssets;
     failAfter: number;
     requestTimeout: number;
@@ -142,23 +150,43 @@ export default class SStaticBuilder extends __SBuilder {
                     value: `<yellow>[build]</yellow> Start building your static website`,
                 });
 
+                // create the temp build directory
+                const cacheBuildDir = `${__packageCacheDir()}/s-static-builder/build`;
+
+                // init incremental cache
+                let incrementalCache = {};
+                const incrementalCachePath = __path.resolve(
+                    __packageCacheDir(),
+                    's-static-builder/incremental-cache.json',
+                );
+
+                // handle params
+                if (params.clean) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...))`,
+                    });
+
+                    // remove the cache build dir
+                    __removeSync(cacheBuildDir);
+
+                    // delete the integrity cache
+                    __removeSync(incrementalCache);
+                }
+
+                // read the "incremental" cache
+                if (
+                    params.incremental &&
+                    __fs.existsSync(incrementalCachePath)
+                ) {
+                    incrementalCache = __readJsonSync(incrementalCachePath);
+                }
+
                 // ensure input file exists
                 if (!__fs.existsSync(params.input)) {
                     throw new Error(
                         `Sorry but the specified input file "<cyan>${params.input}</cyan>" does not exists...`,
                     );
-                }
-
-                // clear if needed
-                if (params.clear) {
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[clear]</yellow> Clearing the outDir "<cyan>${__path.relative(
-                            __packageRoot(),
-                            params.outDir,
-                        )}</cyan>"...`,
-                    });
-                    await __remove(params.outDir);
                 }
 
                 // reading the file
@@ -173,38 +201,58 @@ export default class SStaticBuilder extends __SBuilder {
                     failedUrls: string[] = [],
                     currentDuration = 0;
 
-                // xml = {
-                //     urlset: {
-                //         url: [
-                //             {
-                //                 loc: '/api/@coffeekraken.s-theme.config.themeBase.ui.default.paddingInline',
-                //             },
-                //         ],
-                //     },
-                // };
-
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
-                    const url = xml.urlset.url[i];
+                    const url = xml.urlset.url[i],
+                        urlIntegrity = url.integrity?.[0],
+                        urlLoc = url.loc?.[0],
+                        urlLastMod = url.lastmod?.[0];
+
+                    // generating the output path for the current file
+                    const outPath = `${params.outDir}/${
+                            urlLoc === '/' ? 'index' : urlLoc
+                        }.html`.replace(/\/{2,20}/gm, '/'),
+                        cacheOutPath = `${cacheBuildDir}/${
+                            urlLoc === '/' ? 'index' : urlLoc
+                        }.html`.replace(/\/{2,20}/gm, '/');
+
+                    // incremental build
+                    if (params.incremental) {
+                        if (
+                            urlIntegrity &&
+                            incrementalCache[urlLoc] == urlIntegrity
+                        ) {
+                            if (__fs.existsSync(cacheOutPath)) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>[build]</yellow> Incremental build for url <cyan>${urlLoc}</cyan>`,
+                                });
+
+                                __copySync(cacheOutPath, outPath);
+                                // continue with next url
+                                continue;
+                            }
+                        }
+                    }
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Reaching the url "<cyan>${url.loc}</cyan>"...`,
+                        value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
                     });
 
                     const start = Date.now();
 
                     const request = new __SRequest({
-                        url: `${params.host}${url.loc}`,
+                        url: `${params.host}${urlLoc}`,
                         timeout: params.requestTimeout,
                     });
                     const res = await request.send().catch((e) => {
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<red>[error]</red> The url "<cyan>${url.loc}</cyan>" cannot be reached...`,
+                            value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
                         });
                         failsCount++;
-                        failedUrls.push(url.loc);
+                        failedUrls.push(urlLoc);
 
                         __writeFileSync(
                             `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
@@ -226,18 +274,25 @@ export default class SStaticBuilder extends __SBuilder {
                     currentDuration += end - start;
                     const average = currentDuration / i;
 
-                    // generating the output path for the current file
-                    const outPath = `${params.outDir}${url.loc}`;
-
                     // @ts-ignore
                     if (res?.data) {
                         // saving file
                         emit('log', {
                             type: __SLog.TYPE_INFO,
-                            value: `<green>[build]</green> Saving the page from url "<cyan>${url.loc}</cyan>"...`,
+                            value: `<green>[build]</green> Saving the page from url "<cyan>${urlLoc}</cyan>"...`,
                         });
                         // @ts-ignore
-                        __writeFileSync(`${outPath}.html`, res.data);
+                        __writeFileSync(cacheOutPath, res.data);
+                        __writeFileSync(outPath, res.data);
+
+                        // saving the integrity
+                        if (urlIntegrity) {
+                            incrementalCache[urlLoc] = urlIntegrity;
+                            __writeJsonSync(
+                                incrementalCachePath,
+                                incrementalCache,
+                            );
+                        }
                     }
 
                     emit('log', {
@@ -249,8 +304,13 @@ export default class SStaticBuilder extends __SBuilder {
                         )}</cyan> remaining`,
                     });
 
-                    // if (i >= 5) break;
+                    // if (i >= 1) break;
                 }
+
+                // remove output directory
+                // __removeSync(params.outDir);
+                // copy the tmp build directory to the output directory
+                // __copySync(tmpBuildDir, params.outDir);
 
                 // assets
                 if (params.assets) {
@@ -261,27 +321,47 @@ export default class SStaticBuilder extends __SBuilder {
                     ) {
                         const assetObj =
                             params.assets[Object.keys(params.assets)[i]];
-                        emit('log', {
-                            type: __SLog.TYPE_INFO,
-                            value: `<yellow>[assets]</yellow> Copying assets "<yellow>${__path.relative(
-                                __packageRoot(),
-                                assetObj.from,
-                            )}</yellow>" to "<cyan>${__path.relative(
-                                __packageRoot(),
-                                assetObj.to,
-                            )}</cyan>"`,
-                        });
 
                         // filesystem
                         if (assetObj.from.match(/^\//)) {
                             const to = `${assetObj.to}/${
                                 assetObj.from.split('/').slice(-1)[0]
                             }`;
-                            await __copy(assetObj.from, to);
+                            if (!__fs.existsSync(assetObj.from)) {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>[assets]</yellow> No "<yellow>${__path.relative(
+                                        __packageRoot(),
+                                        assetObj.from,
+                                    )}</yellow>" file to copy...`,
+                                });
+                            } else {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<yellow>[assets]</yellow> Copying asset "<yellow>${__path.relative(
+                                        __packageRoot(),
+                                        assetObj.from,
+                                    )}</yellow>" to "<cyan>${__path.relative(
+                                        __packageRoot(),
+                                        assetObj.to,
+                                    )}</cyan>"`,
+                                });
+                                await __copy(assetObj.from, to);
+                            }
                             // url
                         } else if (assetObj.from.match(/^https?:\/\//)) {
                             const req = new __SRequest({
                                 url: assetObj.from,
+                            });
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>[assets]</yellow> Getting asset "<yellow>${__path.relative(
+                                    __packageRoot(),
+                                    assetObj.from,
+                                )}</yellow>" to "<cyan>${__path.relative(
+                                    __packageRoot(),
+                                    assetObj.to,
+                                )}</cyan>"`,
                             });
                             const res = await req.send().catch((error) => {
                                 throw new Error(

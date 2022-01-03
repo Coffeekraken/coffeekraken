@@ -6685,7 +6685,7 @@ class SCodeExample extends __SLitComponent {
         this.setMoreClass();
     }
     initPrismOnTab(id) {
-        var _a;
+        var _a, _b;
         const $content = ((_a = this.shadowRoot) === null || _a === void 0 ? void 0 : _a.querySelector(`pre#${id} code`));
         const item = this._items.find((i) => i.id === id);
         if ($content.hasAttribute('inited')) {
@@ -6693,14 +6693,13 @@ class SCodeExample extends __SLitComponent {
             return;
         }
         $content.setAttribute('inited', 'true');
-        let code;
         try {
             const code = core.highlight($content.innerHTML.replace(/<!--\?lit.*-->/, ''), {
                 language: $content.getAttribute('lang'),
             });
         }
         catch (e) { }
-        item.highlightedCode = decodeHtmlEntities(code.value);
+        item.highlightedCode = decodeHtmlEntities((_b = void 0 ) !== null && _b !== void 0 ? _b : '');
         this.setMoreClass();
     }
     copy() {

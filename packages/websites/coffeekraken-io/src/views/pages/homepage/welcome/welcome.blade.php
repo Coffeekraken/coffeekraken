@@ -1,8 +1,5 @@
 <section id="homepage-welcome">
 
-
-    <div class="__stars"></div>
-
     {{-- <div class="__background"></div>
     <canvas class="__canvas" id="welcome-canvas"></canvas>
     <canvas class="__canvas" id="welcome-canvas-2"></canvas> --}}
@@ -47,7 +44,7 @@
     {{-- <div layer amount="0" class="__template __template-07">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
     {{-- <div layer amount="0" class="__template __template-08">{{ \Sugar\string\generateRandomString(500, '01 ') }}</div> --}}
 
-    
+
 
     <div class="__illustration">
 
@@ -99,8 +96,7 @@
         <span class="__bracket __bracket-end">}</span>
     </div> --}}
 
-    {{--
-    <svg class="__blobs" width="100%" height="100%" viewbox="0 0 100 100" preserveaspectratio="none">
+    {{-- <svg class="__blobs" width="100%" height="100%" viewbox="0 0 100 100" preserveaspectratio="none">
         <defs>
             <clipPath id="welcome-clip-path-01" x="0" y="0">
                 <polygon></polygon>

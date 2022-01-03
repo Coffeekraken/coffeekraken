@@ -5,38 +5,40 @@
 
     <div s-sugar id="{{ $request->path != '/' ? \Sugar\string\idCompliant($request->path) : 'homepage' }}">
 
-    <script>
-        window.packageJson = {!! json_encode($packageJson) !!};
-    </script>
+        <script>
+            window.packageJson = {!! json_encode($packageJson) !!};
+        </script>
 
-    <script>
-        const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
-        if (state.darkMode) {
-            document.body.setAttribute('theme', 'default');
-            document.body.setAttribute('variant', 'dark');
-        }
-    </script>
+        <script>
+            const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
+            if (state.darkMode) {
+                document.body.setAttribute('theme', 'default');
+                document.body.setAttribute('variant', 'dark');
+            }
+        </script>
 
-    @include('layouts.header.header')
-    
-    <div class="bg">
-        <div class="__gradient1"></div>
-        <div class="__gradient2"></div>
-    </div>
+        @include('layouts.header.header')
 
-    <div class="content">
-        @yield('content')
-    </div>
+        <div class="__stars"></div>
 
-    @include('generic.tools.tools')
+        <div class="bg">
+            <div class="__gradient1"></div>
+            <div class="__gradient2"></div>
+        </div>
 
-    <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
-        <ck-settings mount-when="inViewport"></ck-settings> 
-    </s-side-panel>
+        <div class="content">
+            @yield('content')
+        </div>
 
-    {{-- <ck-search></ck-search> --}}
+        @include('generic.tools.tools')
 
-    @include('layouts.footer.footer')
+        <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
+            <ck-settings mount-when="inViewport"></ck-settings>
+        </s-side-panel>
+
+        {{-- <ck-search></ck-search> --}}
+
+        @include('layouts.footer.footer')
 
     </div>
 

@@ -21,6 +21,18 @@
             }
         },
         {
+            "stack": "prod",
+            "description": "Sugar production testing stack actions",
+            "defaultAction": "start",
+            "actions": {
+                "start": {
+                    "scope": "global",
+                    "description": "Start the production testing stack",
+                    "command": "sugar frontstack.recipe prod"
+                }
+            }
+        },
+        {
             "stack": "build",
             "description": "Sugar build action",
             "defaultAction": "prod",

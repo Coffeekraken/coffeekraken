@@ -167,11 +167,12 @@ export default class SStaticBuilder extends __SBuilder {
                         value: `<yellow>[build]</yellow> Cleaning the static builder internal cache (incremental, etc...))`,
                     });
 
-                    // remove the cache build dir
-                    __removeSync(cacheBuildDir);
-
-                    // delete the integrity cache
-                    __removeSync(incrementalCache);
+                    try {
+                        // remove the cache build dir
+                        __removeSync(cacheBuildDir);
+                        // delete the integrity cache
+                        __removeSync(incrementalCache);
+                    } catch (e) {}
                 }
 
                 // read the "incremental" cache
@@ -306,11 +307,6 @@ export default class SStaticBuilder extends __SBuilder {
 
                     // if (i >= 1) break;
                 }
-
-                // remove output directory
-                // __removeSync(params.outDir);
-                // copy the tmp build directory to the output directory
-                // __copySync(tmpBuildDir, params.outDir);
 
                 // assets
                 if (params.assets) {

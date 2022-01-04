@@ -25,9 +25,10 @@
  <meta property="og:image" content="/cool-image.jpg">
  
  <!-- stylesheets -->
-     <link rel="stylesheet" id="dev" href="http://localhost:3000/src/css/index.css" />
+     <link rel="stylesheet" id="main" href="/dist/css/index.css" />
      <!-- scripts -->
-     <script type="module" id="dev"  src="http://localhost:3000/src/js/index.ts"></script>
+     <script type="module" id="module"  src="/dist/js/module.es.js"></script>
+      <script type="text/javascript" id="main" nomodule src="/dist/js/index.iife.js"></script>
      <!-- @TODO -->
  <!-- head -->
   </head>
@@ -2167,6 +2168,12 @@ These providers are the one that we support for now but others can be added if n
   </div>
 
   <div class="s-p s-p--30 s-text s-text--center s-ratio s-ratio--1" style="padding-block-start: 30%">
+    <i class="s-icon s-icon--undefined s-font s-font--50"></i><br/>
+    <p class="s-typo s-typo--p s-mbs s-mbs--20">undefined</p>
+    <p class="s-typo s-typo--p s-typo--bold">Source: fs</p>
+  </div>
+
+  <div class="s-p s-p--30 s-text s-text--center s-ratio s-ratio--1" style="padding-block-start: 30%">
     <i class="s-icon s-icon--support-rtl s-font s-font--50"></i><br/>
     <p class="s-typo s-typo--p s-mbs s-mbs--20">support-rtl</p>
     <p class="s-typo s-typo--p s-typo--bold">Source: fs</p>
@@ -2404,6 +2411,12 @@ These providers are the one that we support for now but others can be added if n
     <i class="s-icon:file s-font:50"></i><br/>
     <p class="s-typo:p s-mbs:20">file</p>
     <p class="s-typo:p:bold">Source: fa</p>
+  </div>
+
+  <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+    <i class="s-icon:undefined s-font:50"></i><br/>
+    <p class="s-typo:p s-mbs:20">undefined</p>
+    <p class="s-typo:p:bold">Source: fs</p>
   </div>
 
   <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
@@ -3177,5 +3190,5 @@ These providers are the one that we support for now but others can be added if n
 
  <!-- body stylesheets -->
       <!-- body scripts -->
-     </body>
+       </body>
 </html>

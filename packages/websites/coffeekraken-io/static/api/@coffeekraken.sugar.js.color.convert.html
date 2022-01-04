@@ -25,9 +25,10 @@
  <meta property="og:image" content="/cool-image.jpg">
  
  <!-- stylesheets -->
-     <link rel="stylesheet" id="dev" href="http://localhost:3000/src/css/index.css" />
+     <link rel="stylesheet" id="main" href="/dist/css/index.css" />
      <!-- scripts -->
-     <script type="module" id="dev"  src="http://localhost:3000/src/js/index.ts"></script>
+     <script type="module" id="module"  src="/dist/js/module.es.js"></script>
+      <script type="text/javascript" id="main" nomodule src="/dist/js/index.iife.js"></script>
      <!-- @TODO -->
  <!-- head -->
   </head>
@@ -1559,5 +1560,5 @@ convert('rgba(10,20,30,100)', 'rgba'); // => { r: 10, g: 20, b: 30, a: 100 }
 
  <!-- body stylesheets -->
       <!-- body scripts -->
-     </body>
+       </body>
 </html>

@@ -325,12 +325,12 @@ export default class SVite extends __SClass {
                         );
                     });
 
-                    // prod filename
-                    if (finalParams.prod) {
-                        outputsFilenames = outputsFilenames.map((filename) => {
-                            return filename.replace(/\.js$/, '.prod.js');
-                        });
-                    }
+                    // // prod filename
+                    // if (finalParams.prod) {
+                    //     outputsFilenames = outputsFilenames.map((filename) => {
+                    //         return filename.replace(/\.js$/, '.prod.js');
+                    //     });
+                    // }
 
                     emit('log', {
                         type: __SLog.TYPE_INFO,

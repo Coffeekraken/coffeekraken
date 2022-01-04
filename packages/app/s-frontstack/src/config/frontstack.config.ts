@@ -143,20 +143,7 @@ export default function (env, config) {
                 command: '%sugar postcss.build',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.postcssBuild.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the postcss build action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
             imagesBuild: {
@@ -199,20 +186,7 @@ export default function (env, config) {
                 command: '%sugar images.build',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.imagesBuild.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the images build action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
             vite: {
@@ -254,20 +228,7 @@ export default function (env, config) {
                 command: '%sugar vite',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.vite.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the vite action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
             viteBuild: {
@@ -310,20 +271,7 @@ export default function (env, config) {
                 command: '%sugar vite.build',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.viteBuild.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the vite build action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
             docBuild: {
@@ -366,20 +314,7 @@ export default function (env, config) {
                 command: '%sugar markdown.build -p readme -p doc',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.docBuild.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the doc build action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
             docmapBuild: {
@@ -422,20 +357,7 @@ export default function (env, config) {
                 command: '%sugar docmap.build --noExtends',
                 params: {},
                 settings: {
-                    processManager: {
-                        /**
-                         * @name            restart
-                         * @namespace       config.frontstack.actions.docmapBuild.settings.processManager
-                         * @type            String
-                         * @default        true
-                         *
-                         * Specify the docmap build action restart behavior
-                         *
-                         * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                         */
-                        restart: true,
-                    },
+                    processManager: {},
                 },
             },
         },

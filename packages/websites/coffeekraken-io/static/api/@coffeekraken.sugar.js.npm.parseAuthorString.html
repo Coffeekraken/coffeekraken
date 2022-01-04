@@ -25,9 +25,10 @@
  <meta property="og:image" content="/cool-image.jpg">
  
  <!-- stylesheets -->
-     <link rel="stylesheet" id="dev" href="http://localhost:3000/src/css/index.css" />
+     <link rel="stylesheet" id="main" href="/dist/css/index.css" />
      <!-- scripts -->
-     <script type="module" id="dev"  src="http://localhost:3000/src/js/index.ts"></script>
+     <script type="module" id="module"  src="/dist/js/module.es.js"></script>
+      <script type="text/javascript" id="main" nomodule src="/dist/js/index.iife.js"></script>
      <!-- @TODO -->
  <!-- head -->
   </head>
@@ -1150,7 +1151,7 @@
  parseAuthorString
  </h1>
  
- <p class="s-typo s-typo--lead s-mbe s-mbe--50">This function simply take an author string like &quot;Olivier Bossel <a href="mailto:&#111;&#108;&#x69;&#x76;&#105;&#x65;&#x72;&#x2e;&#x62;&#x6f;&#x73;&#x73;&#101;&#x6c;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;">&#111;&#108;&#x69;&#x76;&#105;&#x65;&#x72;&#x2e;&#x62;&#x6f;&#x73;&#x73;&#101;&#x6c;&#x40;&#103;&#109;&#x61;&#105;&#x6c;&#46;&#99;&#x6f;&#x6d;</a> (<a href="https://olivierbossel.com)&quot;">https://olivierbossel.com)&quot;</a> and
+ <p class="s-typo s-typo--lead s-mbe s-mbe--50">This function simply take an author string like &quot;Olivier Bossel <a href="mailto:&#111;&#x6c;&#105;&#118;&#x69;&#101;&#x72;&#46;&#98;&#x6f;&#115;&#x73;&#x65;&#108;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;">&#111;&#x6c;&#105;&#118;&#x69;&#101;&#x72;&#46;&#98;&#x6f;&#115;&#x73;&#x65;&#108;&#x40;&#103;&#109;&#97;&#x69;&#108;&#46;&#x63;&#x6f;&#109;</a> (<a href="https://olivierbossel.com)&quot;">https://olivierbossel.com)&quot;</a> and
 transform it into a plain object with these properties: name, email and url</p>
 
  <div class="s-bg s-bg--main-surface s-p s-p--30 s-mbe s-mbe--100 s-radius s-depth s-depth--100 s-flex s-flex--align-center">
@@ -1548,5 +1549,5 @@ parseAuthorString("Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbos
 
  <!-- body stylesheets -->
       <!-- body scripts -->
-     </body>
+       </body>
 </html>

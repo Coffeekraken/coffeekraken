@@ -152,6 +152,20 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 description: 'Build your final production ready dist package',
+                sharedParams: {
+                    /**
+                     * @name            prod
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.sharedParams
+                     * @type            String
+                     * @default         true
+                     *
+                     * Specify that the build is made for production
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    // prod: true,
+                },
                 actions: {
                     /**
                      * @name            postcssBuild
@@ -189,30 +203,6 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     // imagesBuild: '[config.frontstack.actions.imagesBuild]',
-                    /**
-                     * @name            docBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.frontstack.actions.docBuild]
-                     *
-                     * Specify the recipe build stack docBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    // docBuild: '[config.frontstack.actions.docBuild]',
-                    /**
-                     * @name            docmapBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.frontstack.actions.docmapBuild]
-                     *
-                     * Specify the recipe build stack docmapBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    // docmapBuild: '[config.frontstack.actions.docmapBuild]',
                 },
             },
         },

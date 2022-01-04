@@ -36,19 +36,19 @@ function formatDuration(estimation: number): string {
         const s = (estimation / 1000).toFixed(0);
         const ms = (estimation - s * 1000).toFixed(0);
 
-        return `${s}s${ms > 0 ? ` ${ms}ms` : ''}`;
+        return `${s}s${ms > 0 ? `${ms}ms` : ''}`;
     }
     if (estimation < 1000 * 60 * 60) {
         const m = Math.floor(estimation / 1000 / 60);
         const s = ((estimation - m * 1000 * 60) / 1000).toFixed(0);
 
-        return `${m}m${s > 0 ? ` ${s}s` : ''}`;
+        return `${m}m${s > 0 ? `${s}s` : ''}`;
     }
     // if (estimation < 1000 * 60 * 60 * 60) {
     const h = Math.floor(estimation / 1000 / 60 / 60);
     const m = ((estimation - h * 1000 * 60 * 60) / 1000 / 60).toFixed(0);
 
-    return `${h}h${m > 0 ? ` ${m}m` : ''}`;
+    return `${h}h${m > 0 ? `${m}m` : ''}`;
     // }
 }
 export default formatDuration;

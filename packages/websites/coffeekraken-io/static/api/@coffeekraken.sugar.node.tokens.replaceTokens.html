@@ -25,9 +25,10 @@
  <meta property="og:image" content="/cool-image.jpg">
  
  <!-- stylesheets -->
-     <link rel="stylesheet" id="dev" href="http://localhost:3000/src/css/index.css" />
+     <link rel="stylesheet" id="main" href="/dist/css/index.css" />
      <!-- scripts -->
-     <script type="module" id="dev"  src="http://localhost:3000/src/js/index.ts"></script>
+     <script type="module" id="module"  src="/dist/js/module.es.js"></script>
+      <script type="text/javascript" id="main" nomodule src="/dist/js/index.iife.js"></script>
      <!-- @TODO -->
  <!-- head -->
   </head>
@@ -1508,5 +1509,5 @@ replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir
 
  <!-- body stylesheets -->
       <!-- body scripts -->
-     </body>
+       </body>
 </html>

@@ -25,9 +25,10 @@
  <meta property="og:image" content="/cool-image.jpg">
  
  <!-- stylesheets -->
-     <link rel="stylesheet" id="dev" href="http://localhost:3000/src/css/index.css" />
+     <link rel="stylesheet" id="main" href="/dist/css/index.css" />
      <!-- scripts -->
-     <script type="module" id="dev"  src="http://localhost:3000/src/js/index.ts"></script>
+     <script type="module" id="module"  src="/dist/js/module.es.js"></script>
+      <script type="text/javascript" id="main" nomodule src="/dist/js/index.iife.js"></script>
      <!-- @TODO -->
  <!-- head -->
   </head>
@@ -1840,10 +1841,10 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe s-mbe--50">
   <h3 class="s-tc s-tc--accent s-font s-font--30 s-mbe s-mbe--30">Simple grid</h3>
   <div class="s-flex s-flex--row s-flex--wrap">
-    <div class="s-bg s-bg--main s-width s-width--50 s-p s-p--20">Darryl Effertz</div>
-    <div class="s-bg s-bg--accent s-width s-width--50 s-p s-p--20">Angela Grady</div>
-    <div class="s-bg s-bg--complementary s-width s-width--50 s-p s-p--20">Celia Klein</div>
-    <div class="s-bg s-bg--info s-width s-width--50 s-p s-p--20">Beverly Weimann</div>
+    <div class="s-bg s-bg--main s-width s-width--50 s-p s-p--20">Nicolas Kreiger</div>
+    <div class="s-bg s-bg--accent s-width s-width--50 s-p s-p--20">Gilbert Hammes</div>
+    <div class="s-bg s-bg--complementary s-width s-width--50 s-p s-p--20">Faith Walsh</div>
+    <div class="s-bg s-bg--info s-width s-width--50 s-p s-p--20">Laverne Lynch</div>
   </div>
 </div>
 
@@ -1851,9 +1852,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe s-mbe--50">
   <h3 class="s-tc s-tc--accent s-font s-font--30 s-mbe s-mbe--30">Grow</h3>
   <div class="s-flex s-flex--row s-flex--nowrap">
-    <div class="s-bg s-bg--main s-p s-p--20 s-flex-item s-flex-item--grow">Taylor Ortiz</div>
-    <div class="s-bg s-bg--accent s-p s-p--20">Dr. Julia Morar</div>
-    <div class="s-bg s-bg--complementary s-p s-p--20">Nina Schuppe III</div>
+    <div class="s-bg s-bg--main s-p s-p--20 s-flex-item s-flex-item--grow">Mrs. Jake Medhurst</div>
+    <div class="s-bg s-bg--accent s-p s-p--20">Elsie Harvey</div>
+    <div class="s-bg s-bg--complementary s-p s-p--20">Caleb Paucek</div>
   </div>
 </div>
 
@@ -1861,9 +1862,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe s-mbe--50">
   <h3 class="s-tc s-tc--accent s-font s-font--30 s-mbe s-mbe--30">Order</h3>
   <div class="s-flex s-flex--row s-flex--nowrap">
-    <div class="s-bg s-bg--main s-p s-p--20 s-flex-item s-flex-item--order-3">Alyssa Borer</div>
-    <div class="s-bg s-bg--accent s-p s-p--20">Phillip Predovic</div>
-    <div class="s-bg s-bg--complementary s-p s-p--20">Brittany Kuvalis I</div>
+    <div class="s-bg s-bg--main s-p s-p--20 s-flex-item s-flex-item--order-3">Don Krajcik</div>
+    <div class="s-bg s-bg--accent s-p s-p--20">Minnie Erdman</div>
+    <div class="s-bg s-bg--complementary s-p s-p--20">Mrs. Conrad Koelpin</div>
   </div>
 </div>
 
@@ -1871,9 +1872,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe s-mbe--50">
   <h3 class="s-tc s-tc--accent s-font s-font--30 s-mbe s-mbe--30">Align</h3>
   <div class="s-flex s-flex--row s-flex--nowrap s-flex--align-end">
-    <div class="s-bg s-bg--main s-p s-p--20">Miss Felipe Feest</div>
-    <div class="s-bg s-bg--accent s-p s-p--20">Ms. Yvonne Jaskolski<br />Richard Wiza DVM<br />Tommie Wintheiser<br />Wade Sanford<br />Hugo Strosin</div>
-    <div class="s-bg s-bg--complementary s-p s-p--20">Ms. Diana Harvey</div>
+    <div class="s-bg s-bg--main s-p s-p--20">Holly Wyman</div>
+    <div class="s-bg s-bg--accent s-p s-p--20">Garry Schroeder<br />Mrs. Terrence Konopelski<br />Dr. Angelica Reichert<br />Jessica Moen<br />Nellie Crona IV</div>
+    <div class="s-bg s-bg--complementary s-p s-p--20">Geneva Nolan</div>
   </div>
 </div>                     
    </div>
@@ -1890,10 +1891,10 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple grid</h3>
   <div class="s-flex:row:wrap">
-    <div class="s-bg:main s-width:50 s-p:20">Darryl Effertz</div>
-    <div class="s-bg:accent s-width:50 s-p:20">Angela Grady</div>
-    <div class="s-bg:complementary s-width:50 s-p:20">Celia Klein</div>
-    <div class="s-bg:info s-width:50 s-p:20">Beverly Weimann</div>
+    <div class="s-bg:main s-width:50 s-p:20">Nicolas Kreiger</div>
+    <div class="s-bg:accent s-width:50 s-p:20">Gilbert Hammes</div>
+    <div class="s-bg:complementary s-width:50 s-p:20">Faith Walsh</div>
+    <div class="s-bg:info s-width:50 s-p:20">Laverne Lynch</div>
   </div>
 </div>
 
@@ -1901,9 +1902,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grow</h3>
   <div class="s-flex:row:nowrap">
-    <div class="s-bg:main s-p:20 s-flex-item:grow">Taylor Ortiz</div>
-    <div class="s-bg:accent s-p:20">Dr. Julia Morar</div>
-    <div class="s-bg:complementary s-p:20">Nina Schuppe III</div>
+    <div class="s-bg:main s-p:20 s-flex-item:grow">Mrs. Jake Medhurst</div>
+    <div class="s-bg:accent s-p:20">Elsie Harvey</div>
+    <div class="s-bg:complementary s-p:20">Caleb Paucek</div>
   </div>
 </div>
 
@@ -1911,9 +1912,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">Order</h3>
   <div class="s-flex:row:nowrap">
-    <div class="s-bg:main s-p:20 s-flex-item:order-3">Alyssa Borer</div>
-    <div class="s-bg:accent s-p:20">Phillip Predovic</div>
-    <div class="s-bg:complementary s-p:20">Brittany Kuvalis I</div>
+    <div class="s-bg:main s-p:20 s-flex-item:order-3">Don Krajcik</div>
+    <div class="s-bg:accent s-p:20">Minnie Erdman</div>
+    <div class="s-bg:complementary s-p:20">Mrs. Conrad Koelpin</div>
   </div>
 </div>
 
@@ -1921,9 +1922,9 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align</h3>
   <div class="s-flex:row:nowrap:align-end">
-    <div class="s-bg:main s-p:20">Miss Felipe Feest</div>
-    <div class="s-bg:accent s-p:20">Ms. Yvonne Jaskolski<br />Richard Wiza DVM<br />Tommie Wintheiser<br />Wade Sanford<br />Hugo Strosin</div>
-    <div class="s-bg:complementary s-p:20">Ms. Diana Harvey</div>
+    <div class="s-bg:main s-p:20">Holly Wyman</div>
+    <div class="s-bg:accent s-p:20">Garry Schroeder<br />Mrs. Terrence Konopelski<br />Dr. Angelica Reichert<br />Jessica Moen<br />Nellie Crona IV</div>
+    <div class="s-bg:complementary s-p:20">Geneva Nolan</div>
   </div>
 </div>                     
  </code>       
@@ -2486,5 +2487,5 @@ that you can <em>create some layouts directly in your HTML</em>*.</p>
 
  <!-- body stylesheets -->
       <!-- body scripts -->
-     </body>
+       </body>
 </html>

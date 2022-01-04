@@ -142,15 +142,15 @@ export default class SPostcssBuilder extends __SBuilder {
                     params.purge = true;
                 }
 
-                // handle default output
-                if (params.output && params.output === defaultParams.output) {
-                    if (params.prod) {
-                        params.output = params.output.replace(
-                            /\.css/,
-                            '.prod.css',
-                        );
-                    }
-                }
+                // // handle default output
+                // if (params.output && params.output === defaultParams.output) {
+                //     if (params.prod) {
+                //         params.output = params.output.replace(
+                //             /\.css/,
+                //             '.prod.css',
+                //         );
+                //     }
+                // }
 
                 // handle input
                 let src = params.input,

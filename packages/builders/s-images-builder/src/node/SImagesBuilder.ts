@@ -47,6 +47,7 @@ export interface ISImagesBuilderSettings {
 
 export interface ISImagesBuilderBuildParams {
     glob: string;
+    compressExts: string[];
     inDir: string;
     outDir: string;
     quality: number;
@@ -284,6 +285,10 @@ export default class SImagesBuilder extends __SBuilder {
                     let imgParams = params;
 
                     const file = filesStack[path].source;
+
+
+                    console.log(file.extension);
+                    continue;
 
                     if (params.specificParams) {
                         for (

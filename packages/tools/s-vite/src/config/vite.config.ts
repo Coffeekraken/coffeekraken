@@ -40,14 +40,14 @@ export default function (env, config) {
          * @name          logLevel
          * @namespace     config.vite
          * @type          String
-         * @default      error
+         * @default      warn
          *
          * Specify the log level
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        logLevel: 'error',
+        logLevel: 'warn',
 
         /**
          * @name          mode
@@ -228,9 +228,13 @@ export default function (env, config) {
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
             // watch: {
-            //     ignored: [`${__dirname()}/static`],
+            //     ignored: [/\/static\//],
             // },
+            // watch: false,
         },
+        // optimizeDeps: {
+        //     exclude: ['static'],
+        // },
         css: {},
         rewrites: [
             __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),

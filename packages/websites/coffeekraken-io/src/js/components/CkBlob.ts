@@ -36,6 +36,7 @@ import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
 // import { RGBELoader } from './lib/RGBELoader';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
 import { Triangle } from 'three/build/three.module';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 interface IFlyingCoffee {
     grain: any;

@@ -7318,16 +7318,16 @@ ${settingsArray.join("\n")}
     if (estimation < 1e3 * 60) {
       const s = (estimation / 1e3).toFixed(0);
       const ms = (estimation - s * 1e3).toFixed(0);
-      return `${s}s${ms > 0 ? ` ${ms}ms` : ""}`;
+      return `${s}s${ms > 0 ? `${ms}ms` : ""}`;
     }
     if (estimation < 1e3 * 60 * 60) {
       const m2 = Math.floor(estimation / 1e3 / 60);
       const s = ((estimation - m2 * 1e3 * 60) / 1e3).toFixed(0);
-      return `${m2}m${s > 0 ? ` ${s}s` : ""}`;
+      return `${m2}m${s > 0 ? `${s}s` : ""}`;
     }
     const h = Math.floor(estimation / 1e3 / 60 / 60);
     const m = ((estimation - h * 1e3 * 60 * 60) / 1e3 / 60).toFixed(0);
-    return `${h}h${m > 0 ? ` ${m}m` : ""}`;
+    return `${h}h${m > 0 ? `${m}m` : ""}`;
   }
   function whenInViewport(elm, settings = {}) {
     settings = Object.assign({ offset: "10px" }, settings);

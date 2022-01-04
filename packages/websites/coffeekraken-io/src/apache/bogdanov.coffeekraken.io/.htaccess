@@ -1,0 +1,4 @@
+AuthType Basic
+AuthName "Coffeekraken Restricted Area"
+AuthUserFile "/home/clients/3362547c3abfd25cde1ed3b23a8d2b93/sites/bogdanov.coffeekraken.io/static/.htpasswd"
+Require valid-user

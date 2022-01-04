@@ -355,6 +355,8 @@ export default function (env) {
              */
             rootDir: `/dist`,
 
+            imgDir: '[config.storage.serve.rootDir]/img',
+
             '@dev': {
                 /**
                  * @name            rootDir

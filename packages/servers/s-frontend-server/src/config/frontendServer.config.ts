@@ -95,14 +95,14 @@ export default function (env, config) {
                  * @name            route
                  * @namespace       config.frontendServer.proxy.assets
                  * @type            String
-                 * @default         [config.storage.serve.rootDir]
+                 * @default         [config.storage.package.rootDir]
                  *
                  * Specify which route to proxy for the assets
                  *
                  * @since           2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                route: '[config.storage.serve.rootDir]',
+                route: '[config.storage.package.rootDir]',
                 settings: {
                     /**
                      * @name        target

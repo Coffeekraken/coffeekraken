@@ -472,11 +472,11 @@ export default class CKBlob extends __SLitComponent {
         this._grains = [];
 
         const yellowMaterial = await this.createGrainMaterial(
-            '/src/3d/coffeeGrain/grain-yellow.jpg',
+            `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-yellow.jpg`
         );
 
         const purpleMaterial = await this.createGrainMaterial(
-            '/src/3d/coffeeGrain/grain-purple.jpg',
+            `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/grain-purple.jpg`
         );
 
         const materials = [yellowMaterial, purpleMaterial];
@@ -541,14 +541,14 @@ export default class CKBlob extends __SLitComponent {
         let texture;
         let matSettings;
         if (this._isDark) {
-            texture = await this.loadTexture('/src/3d/ck-texture.jpg');
+            texture = await this.loadTexture(`${__SSugarConfig.get('serve.img.url')}/3d/ck-texture.jpg`);
             matSettings = {
                 metalness: 0,
                 roughness: 0.6,
                 color: 0xffffff,
             };
         } else {
-            texture = await this.loadTexture('/src/3d/ck-texture-light.jpg');
+            texture = await this.loadTexture(`${__SSugarConfig.get('serve.img.url')}/3d/ck-texture-light.jpg`);
             matSettings = {
                 // refractionRatio: 0.2,
                 // flatShading: true,
@@ -701,9 +701,9 @@ export default class CKBlob extends __SLitComponent {
     createGrainMaterial(texturePath) {
         return new Promise(async (resolve) => {
             const texture = await this.loadTexture(texturePath);
-            const bumpMap = await this.loadTexture(
-                '/src/3d/coffeeGrain/coffeeGrainBumpMap.jpg',
-            );
+            // const bumpMap = await this.loadTexture(
+            //     '/src/3d/coffeeGrain/coffeeGrainBumpMap.jpg',
+            // );
 
             let grainMat = new THREE.MeshStandardMaterial({
                 metalness: 0,
@@ -724,7 +724,7 @@ export default class CKBlob extends __SLitComponent {
     loadCoffeeGrain() {
         return new Promise((resolve) => {
             new OBJLoader().load(
-                '/src/3d/coffeeGrain/coffeeGrain.obj',
+                `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/coffeeGrain.obj`,
                 (object) => {
                     // object.castShadow = true;
                     object.scale.set(0.01, 0.01, 0.01);
@@ -766,7 +766,7 @@ export default class CKBlob extends __SLitComponent {
         return new Promise((resolve) => {
             let envmaploader = new THREE.PMREMGenerator(this._renderer);
             new RGBELoader()
-                .setPath('/src/3d/')
+                .setPath(`${__SSugarConfig.get('serve.img.url')}/3d/`)
                 .load('HDRI_STUDIO_vol2_030.hdr', function (hdrmap) {
                     let envmap = envmaploader.fromCubemap(hdrmap);
                     resolve(envmap);

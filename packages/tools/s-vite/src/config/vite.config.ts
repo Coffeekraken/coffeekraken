@@ -40,14 +40,14 @@ export default function (env, config) {
          * @name          logLevel
          * @namespace     config.vite
          * @type          String
-         * @default      warn
+         * @default      error
          *
          * Specify the log level
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        logLevel: 'warn',
+        logLevel: 'error',
 
         /**
          * @name          mode

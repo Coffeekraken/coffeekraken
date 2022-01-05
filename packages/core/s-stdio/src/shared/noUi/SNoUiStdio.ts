@@ -120,9 +120,27 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
         // handle empty logs
         if (!logObj) return;
 
+        if (logObj.clear) {
+            process.stdout.moveCursor(0, -1) // up one line
+            process.stdout.clearLine(1) // from cursor to end
+        }
+
+        if (logObj.margin?.top) {
+            for(let i=0; i<logObj.margin.top; i++) {
+                console.log(' ');
+            }
+        }
+
         console.log(
             __parseHtml(component.render(logObj, this.noUiStdioSettings)),
         );
+
+        if (logObj.margin?.bottom) {
+            for(let i=0; i<logObj.margin.bottom; i++) {
+                console.log(' ');
+            }
+        }
+
     }
 
     /**

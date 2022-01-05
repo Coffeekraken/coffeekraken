@@ -9,6 +9,8 @@ import __SProcessManagerProcessWrapper, {
     ISProcessManagerProcessWrapperSettings,
 } from './SProcessManagerProcessWrapper';
 import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
+import __SPromise from '@coffeekraken/s-promise';
+import __SLog from '@coffeekraken/s-log';
 
 /**
  * @name            SProcessManager
@@ -39,6 +41,7 @@ export interface ISProcessManagerCtorSettings {
 export interface ISProcessManagerSettings {
     stdio: __SStdio | string;
     stdioSettings: ISStdioSettings;
+    runInParallel: boolean;
 }
 
 class SProcessManager extends __SEventEmitter {
@@ -53,6 +56,31 @@ class SProcessManager extends __SEventEmitter {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _processesStack: Record<string, __SProcess> = {};
+
+    /**
+     * @name        _processesQueue
+     * @type        SProcess[]
+     * @private
+     *
+     * Store all the processed ONLY when runInParallel is false to manage the processed queue
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _processesQueue: Record<string, __SProcess> = {};
+
+    /**
+     * @name        _isQueueRunning
+     * @type        Boolean
+     * @private
+     *
+     * Store a flag to know if the queue is running
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    _isQueueRunning: boolean = false;
+    _queuePromise: Promise;
 
     /**
      * @name          processManageSettings
@@ -84,6 +112,7 @@ class SProcessManager extends __SEventEmitter {
                     processManager: {
                         stdio: 'terminal',
                         stdioSettings: {},
+                        runInParallel: true
                     },
                 },
                 settings ?? {},
@@ -174,6 +203,33 @@ class SProcessManager extends __SEventEmitter {
         this._processesStack[id].detach();
     }
 
+    runQueue(): Promise<Promise[]> {
+        if (this._queuePromise) {
+            return this._queuePromise;
+        }
+
+        this._queuePromise = new Promise((resolve) => {
+            clearTimeout(this._parallelRunTimeout);
+            this._parallelRunTimeout = setTimeout(() => {
+                __SPromise.queue(this._processesQueue, (processId, promise) => {
+                    this.emit('log', {
+                        margin: {
+                            top: 1,
+                            bottom: 1
+                        },
+                        type: __SLog.TYPE_INFO,
+                        value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(process.stdout.columns - 19 - processId.length)}</yellow>`
+                    });
+                }).then((results) => {
+                    resolve(results);
+                    this._queuePromise = undefined;
+                });
+            });
+
+        });
+        return this._queuePromise;
+    }
+
     /**
      * @name      run
      * @type      Function
@@ -189,6 +245,7 @@ class SProcessManager extends __SEventEmitter {
      * @since     2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
+    _parallelRunTimeout;
     run(
         processId,
         paramsOrStringArgs = {},
@@ -199,20 +256,31 @@ class SProcessManager extends __SEventEmitter {
                 `<red>[${this.constructor.name}.run]</red> Sorry but no process exists with the id "<magenta>${processId}</magenta>"`,
             );
 
-        // run the process
-        const promise = this._processesStack[processId].run(
-            paramsOrStringArgs,
-            settings,
-        );
-        this.pipe(promise, {
-            overrideEmitter: true,
-        });
+        let promise;
 
-        // console.log(processId, this._processesStack[processId]);
+        // if don't run in parallel, add this process to the queue
+        if (!this.processManagerSettings.runInParallel) {
+            this._processesQueue[processId] = () => {
+                return this.pipe(this._processesStack[processId].run(paramsOrStringArgs, settings));
+            };
 
-        // promise.then((res) => {
-        //     console.log('___SS', res);
-        // });
+            promise = this.runQueue();
+        } else {
+            // run the process
+            promise = this._processesStack[processId].run(
+                paramsOrStringArgs,
+                settings,
+            );
+
+            this.emit('log', {
+                type: __SLog.TYPE_INFO,
+                value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(process.stdout.columns - 19 - processId.length)}</yellow>`
+            });
+
+            this.pipe(promise, {
+                overrideEmitter: true,
+            });
+        }
 
         return promise;
     }

@@ -123,7 +123,7 @@ export default class SVite extends __SClass {
                 }
                 config.plugins = plugins;
 
-                if (!(await __isPortFree(config.server.port))) {y
+                if (!(await __isPortFree(config.server.port))) {
                     emit('log', {
                         type: __SLog.TYPE_WARN,
                         value: `Port <yellow>${config.server.port}</yellow> already in use. Try to kill it before continue...`,

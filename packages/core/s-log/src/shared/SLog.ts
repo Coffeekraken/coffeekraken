@@ -1,6 +1,6 @@
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
-import ISLog, { ISLogType } from './ISLog';
+import ISLog, { ISLogMargin, ISLogType } from './ISLog';
 
 /**
  * @name            SLog
@@ -51,6 +51,8 @@ export interface ISLogFilterObj {
         | 'warn'
         | 'error'
         | 'verbose'
+        | 'verboser'
+        | 'decorator'
         | 'summary'
         | 'child_process'
     )[];
@@ -58,9 +60,10 @@ export interface ISLogFilterObj {
 }
 
 export default class SLog {
+
     /**
      * @name            TYPE_LOG
-     * @type            String
+     * @type            ISLogType[]
      * @static
      *
      * This static constant tells a log that it is of type "LOG"
@@ -72,7 +75,7 @@ export default class SLog {
 
     /**
      * @name            TYPE_INFO
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "INFO"
@@ -84,7 +87,7 @@ export default class SLog {
 
     /**
      * @name            TYPE_WARN
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "WARN"
@@ -96,7 +99,7 @@ export default class SLog {
 
     /**
      * @name           TYPE_ERROR
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "ERROR"
@@ -108,7 +111,7 @@ export default class SLog {
 
     /**
      * @name            TYPE_VERBOSE
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "VERBOSE"
@@ -119,8 +122,32 @@ export default class SLog {
     static TYPE_VERBOSE: ISLogType = 'verbose';
 
     /**
+     * @name            TYPE_VERBOSER
+     * @type            ISLogType
+     * @static
+     *
+     * This static constant tells a log that it is of type "VERBOSER"
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static TYPE_VERBOSER: ISLogType = 'verboser';
+
+    /**
+     * @name            TYPE_DECORATOR
+     * @type            ISLogType
+     * @static
+     *
+     * This static constant tells a log that it is of type "DECORATOR"
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static TYPE_DECORATOR: ISLogType = 'decorator';
+
+    /**
      * @name            TYPE_SUMMARY
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "SUMMARY"
@@ -132,7 +159,7 @@ export default class SLog {
 
     /**
      * @name            TYPE_CHILD_PROCESS
-     * @type            String
+     * @type            ISLogType
      * @static
      *
      * This static constant tells a log that it is of type "CHILD_PROCESS"
@@ -141,6 +168,126 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static TYPE_CHILD_PROCESS: ISLogType = 'child_process';
+
+    /**
+     * @name            TYPES
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant store all the log types available
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static TYPES: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
+
+    /**
+     * @name            PRESET_SILENT
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "silent" that display nothing
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_SILENT: ISLogType[] = [];
+
+    /**
+     * @name            PRESET_DEFAULT
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "default" that display:
+     * - LOG
+     * - INFO
+     * - WARN
+     * - ERROR
+     * - DECORATOR
+     * - SUMMARY
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_DEFAULT: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR];
+
+    /**
+     * @name            PRESET_WARN
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "warn" that display:
+     * - WARN
+     * - ERROR
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR];
+
+    /**
+     * @name            PRESET_ERROR
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "error" that display:
+     * - ERROR
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR];
+
+    /**
+     * @name            PRESET_VERBOSE
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "verbose" that display:
+     * - LOG
+     * - INFO
+     * - WARN
+     * - ERROR
+     * - VERBOSE
+     * - DECORATOR
+     * - SUMMARY
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_VERBOSE: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY];
+
+    /**
+     * @name            PRESET_VERBOSER
+     * @type            ISLogType[]
+     * @static
+     *
+     * This static constant define a log preset called "verboser" that display:
+     * - LOG
+     * - INFO
+     * - WARN
+     * - ERROR
+     * - VERBOSE
+     * - VERBOSER
+     * - DECORATOR
+     * - SUMMARY
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESET_VERBOSER: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY];
+
+    /**
+     * @name            PRESETS
+     * @type            String[]
+     * @static
+     *
+     * This static constant store all the log presets available
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static PRESETS: String[] = ['silent', 'default', 'warn', 'error', 'verbose', 'verboser'];
 
     /**
      * @name            filter
@@ -393,6 +540,23 @@ export default class SLog {
      */
     get clear(): boolean {
         return this._logObj.clear;
+    }
+
+    /**
+     * @name        margin
+     * @type        ISLogMargin
+     * @get
+     *
+     * Access the "margin" property of the SLog object.
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    get margin(): ISLogMargin {
+        // @ts-ignore
+        return this._logObj.margin ?? {
+            top: 0, bottom: 0
+        };
     }
 
     /**

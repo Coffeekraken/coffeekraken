@@ -68,6 +68,7 @@ export default function (env, config) {
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 description: 'Start the development stack',
+                runInParallel: true,
                 actions: {
                     /**
                      * @name            frontendServer
@@ -164,7 +165,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    // prod: true,
+                    prod: true,
                 },
                 actions: {
                     /**
@@ -202,7 +203,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    // imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    imagesBuild: '[config.frontstack.actions.imagesBuild]',
                 },
             },
         },

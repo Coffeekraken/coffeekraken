@@ -117,6 +117,54 @@ class SPromise
     extends __SClass.extends(Promise)
     implements ISPromise, ISEventEmitter
 {
+
+    /**
+     * @name        queue
+     * @type        Function
+     * @static
+     * 
+     * This static method allows you to pass an array of promises that will be executed one after the other.
+     * It will call the "callback" function if specified with the resolved promise as argument.
+     * 
+     * @param       {Promise[]}        promises        The array of promises to execute one after the other
+     * @param       {Function}      [before=null]        A callback to call before each promises executions
+     * @param       {Function}      [after=null]        A callback to call after each promises executions
+     * @return      {SPromise}                            The promise that will be resolved once all promises are resolved      
+     * 
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    static queue(promises: Record<string, Promise | Function>, before?: function, after?: function): Promise<Promise[]> {
+        return new SPromise(async ({resolve, reject}) => {
+            const results = {};
+            let i=0;
+            async function next() {
+                const firstKey = Object.keys(promises)[0];
+                let promise = promises[firstKey];
+                if (typeof promise === 'function') promise = promise();
+                try {
+                    delete promises[firstKey];
+                    if (before) await before(firstKey, promise);
+                    let res = await promise;
+                    results[firstKey] = res;
+                    if (after) {
+                        let afterRes = await after(firstKey, result);
+                        if (afterRes !== undefined) result[firstKey] = afterRes;
+                    }
+                    if (Object.keys(promises).length) {
+                        next();
+                    } else {
+                        resolve(results);
+                    }
+                } catch(e) {
+                    reject(promise);
+                }
+                i++;
+            }
+            next();
+        });
+    }
+
     /**
      * @name        treatAsValue
      * @type        Function

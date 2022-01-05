@@ -7,3 +7,4 @@ views/tmp
 .DS_Store
 yarn-error.log
 vendor
+dist

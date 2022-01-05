@@ -32,6 +32,11 @@ class SFrontstackRecipeParamsInterface extends __SInterface {
                 type: 'String',
                 alias: 'r',
             },
+            runInParallel: {
+                description: 'Specify if you want the recipe actions to run in parallel of not',
+                type: 'Boolean',
+                alias: 'p'
+            },
             env: {
                 description:
                     'Specify the environment in which to execute your recipe',

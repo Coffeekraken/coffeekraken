@@ -1,4 +1,5 @@
 import __SClass from '@coffeekraken/s-class';
+import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SFrontstackActionInterface from './action/interface/SFrontstackActionInterface';
@@ -17,7 +18,6 @@ import __SLog from '@coffeekraken/s-log';
 import __SSugarCli from '@coffeekraken/cli';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
-import param from '@coffeekraken/s-docblock/src/shared/tags/param';
 
 export interface ISFrontstackSettings {}
 export interface ISFrontstackCtorSettings {
@@ -46,9 +46,10 @@ export interface ISFrontstackActionWrapper {
     [key: string]: any;
 }
 
-export interface ISFrontstackRecipestack {
+export interface ISFrontstackRecipeStack {
     description: string;
     sharedParams: any;
+    runInParallel: boolean;
     actions:
         | Record<string, ISFrontstackAction>
         | Record<string, ISFrontstackActionWrapper>;
@@ -60,7 +61,7 @@ export interface ISFrontstackRecipe {
     description: string;
     templateDir: string;
     defaultStack: string;
-    stacks: Record<string, ISFrontstackRecipestack>;
+    stacks: Record<string, ISFrontstackRecipeStack>;
 }
 
 export interface ISFrontstackActionParams {
@@ -162,7 +163,11 @@ export default class SFrontstack extends __SClass {
                     actionsObj[finalParams.action];
 
                 // instanciate the process manager
-                const processManager = new __SProcessManager();
+                const processManager = new __SProcessManager({
+                    // processManager: {
+                    //     runInParallel: false
+                    // }
+                });
                 pipe(processManager);
                 // loop on each actions for this recipe
 
@@ -207,6 +212,11 @@ export default class SFrontstack extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     recipe(params: ISFrontstackRecipeParams | string) {
+
+        const processesPromises: any[] = [];
+
+        const duration = new __SDuration();
+
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
@@ -249,20 +259,6 @@ export default class SFrontstack extends __SClass {
                         recipesObj[finalParams.recipe].defaultStack;
                 }
 
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `Starting frontstack process`,
-                });
-
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
-                });
-                emit('log', {
-                    type: __SLog.TYPE_INFO,
-                    value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
-                });
-
                 // get the recipe object and treat it
                 const recipeObj: Partial<ISFrontstackRecipe> =
                     // @ts-ignore
@@ -294,6 +290,31 @@ export default class SFrontstack extends __SClass {
                     );
                 }
 
+                const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
+
+                
+                if (!finalParams.runInParallel) {
+                    finalParams.runInParallel = stackObj.runInParallel ?? false;
+                }
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `Starting frontstack process`,
+                });
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Recipe : <yellow>${finalParams.recipe}</yellow>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Stack  : <cyan>${finalParams.stack}</cyan>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Run in parallel : ${finalParams.runInParallel ? '<green>true</green>' : '<red>false</red>'}`,
+                });
+
                 // build shared params to pass to every sub-processes
                 let sharedParams = Object.assign({}, finalParams);
                 delete sharedParams.recipe;
@@ -301,34 +322,39 @@ export default class SFrontstack extends __SClass {
                 delete sharedParams.help;
 
                 // extend with "sharedParams" if exists on the recipe stack
-                if (recipeObj.stacks[finalParams.stack].sharedParams) {
+                if (stackObj.sharedParams) {
                     sharedParams = {
-                        ...recipeObj.stacks[finalParams.stack].sharedParams,
+                        ...stackObj.sharedParams,
                         ...sharedParams,
                     };
                 }
 
                 // instanciate the process manager
-                const processManager = new __SProcessManager();
+                const processManager = new __SProcessManager({
+                    processManager: {
+                        // @ts-ignore
+                        runInParallel: finalParams.runInParallel
+                    }
+                });
                 pipe(processManager, {
                     overrideEmitter: true,
                 });
 
                 // loop on each actions for this recipe
-                if (recipeObj.stacks[finalParams.stack].actions) {
+                if (stackObj.actions) {
                     for (
                         let i = 0;
                         i <
-                        Object.keys(recipeObj.stacks[finalParams.stack].actions)
+                        Object.keys(stackObj.actions)
                             .length;
                         i++
                     ) {
                         const actionName = Object.keys(
-                            recipeObj.stacks[finalParams.stack].actions,
+                            stackObj.actions,
                         )[i];
 
                         // Object.keys(
-                        //     recipeObj.stacks[finalParams.stack].actions,
+                        //     stackObj.actions,
                         // ).forEach(async (actionName) => {
                         if (
                             finalParams.exclude &&
@@ -344,7 +370,7 @@ export default class SFrontstack extends __SClass {
                         // @ts-ignore
                         let actionObj =
                             // @ts-ignore
-                            recipeObj.stacks[finalParams.stack].actions[
+                            stackObj.actions[
                                 actionName
                             ];
                         let actionSpecificParams = {},
@@ -397,28 +423,34 @@ export default class SFrontstack extends __SClass {
                         // add the process to the process manager
                         // @TODO    integrate log filter feature
                         processManager.attachProcess(actionId, pro, {});
-                        processManager.run(
+
+
+                        const processPro = processManager.run(
                             actionId,
                             finalProcessManagerParams,
                             actionObj.settings?.process ?? {},
                         );
+                        if (!processesPromises.includes(processPro)) {
+                            processesPromises.push(processPro);
+                        }
+
                     }
                 }
 
-                setTimeout(() => {
-                    emit('log', {
-                        type: __SLog.TYPE_SUMMARY,
-                        value: {
-                            status: 'success',
-                            value: `All <cyan>${
-                                Object.keys(
-                                    recipeObj.stacks[finalParams.stack].actions,
-                                ).length
-                            }</cyan> process(es) <green>ready</green>`,
-                            collapse: true,
-                        },
-                    });
-                }, 5000);
+                await Promise.all(processesPromises);
+
+
+                emit('log', {
+                    type: __SLog.TYPE_DECORATOR,
+                    value: `<green>${'-'.repeat(process.stdout.columns)}</green>`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`,
+                })
+
+                resolve(processesPromises);
+
             },
             {
                 eventEmitter: {
@@ -460,7 +492,7 @@ export default class SFrontstack extends __SClass {
         params: ISFrontstackListParams | string,
     ): Promise<
         | Record<string, ISFrontstackRecipe>
-        | Record<string, ISFrontstackRecipestack>
+        | Record<string, ISFrontstackRecipeStack>
         | Record<string, ISFrontstackAction>
     > {
         return new __SPromise(

@@ -10,5 +10,6 @@ export default function build(stringArgs = '') {
             },
         });
         await pipe(builder.build(stringArgs));
+        process.exit();
     });
 }

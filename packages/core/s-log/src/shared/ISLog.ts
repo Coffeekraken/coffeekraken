@@ -34,8 +34,15 @@ export type ISLogType =
     | 'warn'
     | 'error'
     | 'verbose'
+    | 'verboser'
+    | 'decorator'
     | 'summary'
     | 'child_process';
+
+export interface ISLogMargin {
+    top: number;
+    bottom: number;
+}
 
 export default interface ISLog {
     hash?: string;
@@ -45,6 +52,7 @@ export default interface ISLog {
     temp?: boolean;
     timestamp?: number;
     group?: string;
+    margin: Partial<ISLogMargin>;
     type?: ISLogType;
     as?: string;
     value: any;

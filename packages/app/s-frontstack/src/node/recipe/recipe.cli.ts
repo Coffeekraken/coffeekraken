@@ -11,6 +11,7 @@ export default function recipe(stringArgs = '') {
         const frontstack = new __SFrontstack();
         const promise = frontstack.recipe(stringArgs);
         pipe(promise);
-        resolve(await promise);
+        await promise;
+        resolve(promise);
     });
 }

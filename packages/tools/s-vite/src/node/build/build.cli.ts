@@ -7,5 +7,6 @@ export default function build(stringArgs = '') {
         const buildPromise = vite.build(stringArgs);
         pipe(buildPromise);
         resolve(await buildPromise);
+        process.exit();
     });
 }

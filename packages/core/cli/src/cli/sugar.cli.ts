@@ -49,6 +49,12 @@ class SSugarCliParamsInterface extends __SInterface {
                 default: false,
                 explicit: true,
             },
+            logPreset: {
+                type: 'String',
+                values: __SLog.PRESETS,
+                default: 'default',
+                explicit: true,
+            },
         };
     }
 }
@@ -73,21 +79,35 @@ if (cliParams.bench) {
     );
 }
 
-// __SLog.filter({
-//     type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],
-// });
+if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
+    console.log(`The log preset "${cliParams.logPreset}" does not exists... Here's the list of available presets:\n${__SLog.PRESETS.map(preset => {
+        return `- ${preset}\n`;
+    }).join('')}`);
+    cliParams.logPreset = 'default';
+}
+
+__SLog.filter({
+    // type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],
+    type: __SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`],
+});
+
+export interface ISSugarCliArgs {
+    command: string;
+    stack: string;
+    action: string;
+    isHelp: boolean;
+    params: Record<string, any>
+}
 
 export default class SSugarCli {
-    _command: string;
-    _stack: string;
-    _action: string;
-    _args: string;
     _stdio: STerminalStdio;
     _eventEmitter: __SEventEmitter;
-
     _treatAsMain: boolean;
-
     _sugarJsons: any;
+
+    args: ISSugarCliArgs;
+
+
     _availableCli: ISSugarCliAvailableCli = {
         defaultByStack: {},
         endpoints: {},
@@ -168,61 +188,9 @@ export default class SSugarCli {
             process.env.TREAT_AS_MAIN = false;
         }
 
-        this._command =
-            process.argv && process.argv[2]
-                ? process.argv[2].split(' ')[0]
-                : '';
-        this._stack = this._command.split('.')[0];
-        if (!this._stack?.match(/^[a-zA-Z0-9]+$/)) this._stack = undefined;
-        this._action = this._command.split('.')[1] || null;
-        if (!this._action?.match(/^[a-zA-Z0-9]+$/)) this._action = undefined;
+        this.args = this._parseArgs(process.argv);
 
-        this._isHelp = false;
-        const lastArg = process.argv.slice(-1)[0];
-        if (lastArg.match(/\s?(-h$|--help$)/)) this._isHelp = true;
-
-        this._args =
-            process.argv
-                .slice(3)
-                .map((arg) => {
-                    // @todo      support for command with 1 sub param like: --something "--else"
-                    if (arg.includes(' ')) {
-                        return `"${arg}"`;
-                    } else if (
-                        arg.slice(0, 2) !== '--' &&
-                        arg.slice(0, 1) !== '-'
-                    ) {
-                        return `"${arg}"`;
-                    }
-                    return arg;
-                })
-                .join(' ') || '';
-
-        // checking and set "NODE_ENV"
-        const params = __parseArgs(this._args);
-
-        if (params.env) {
-            switch (params.env) {
-                case 'dev':
-                case 'development':
-                    process.env.NODE_ENV = 'development';
-                    break;
-                case 'prod':
-                case 'production':
-                    process.env.NODE_ENV = 'production';
-                    break;
-                case 'test':
-                    process.env.NODE_ENV = 'test';
-                    break;
-                default:
-                    throw new Error(
-                        `<red>[sugar]</red> Sorry but the passed env "<yellow>${params.env}</yellow>" is not supported. Valid values are "<green>dev,development,prod,production,test</green>"`,
-                    );
-                    break;
-            }
-        } else {
-            process.env.NODE_ENV = 'development';
-        }
+        this._setNodeEnv();
 
         (async () => {
             __SBench.step('sugar.cli', 'beforeLoadConfig');
@@ -279,13 +247,13 @@ export default class SSugarCli {
             __SBench.step('sugar.cli', 'afterLoadAvailableCli');
 
             // help
-            if (this._isHelp) {
-                this._displayHelp(this._stack, this._action);
+            if (this.args.isHelp) {
+                this._displayHelp(this.args.stack, this.args.action);
                 return;
             }
 
             // interactive
-            if (!this._stack && !this._action && !this._args) {
+            if (!this.args.stack && !this.args.action && !this.args.params) {
                 this._interactivePrompt();
                 return;
             }
@@ -300,6 +268,70 @@ export default class SSugarCli {
 
             __SBench.step('sugar.cli', 'afterProcess');
         })();
+    }
+
+    _setNodeEnv() {
+        if (this.args.params.env) {
+            switch (this.args.params.env) {
+                case 'dev':
+                case 'development':
+                    process.env.NODE_ENV = 'development';
+                    break;
+                case 'prod':
+                case 'production':
+                    process.env.NODE_ENV = 'production';
+                    break;
+                case 'test':
+                    process.env.NODE_ENV = 'test';
+                    break;
+                default:
+                    throw new Error(
+                        `<red>[sugar]</red> Sorry but the passed env "<yellow>${this.args.params.env}</yellow>" is not supported. Valid values are "<green>dev,development,prod,production,test</green>"`,
+                    );
+                    break;
+            }
+        } else {
+            process.env.NODE_ENV = 'development';
+        }
+    }
+
+    _parseArgs(argv = process.argv): ISSugarCliArgs {
+        const args: ISSugarCliArgs = {};
+
+        args.command =
+            argv && argv[2]
+                ? argv[2].split(' ')[0]
+                : '';
+
+        args.stack = args.command.split('.')[0];
+        if (!args.stack?.match(/^[a-zA-Z0-9]+$/)) args.stack = undefined;
+        args.action = args.command.split('.')[1] || null;
+        if (!args.action?.match(/^[a-zA-Z0-9]+$/)) args.action = undefined;
+
+        const a = argv
+                .slice(3)
+                .map((arg) => {
+                    // @todo      support for command with 1 sub param like: --something "--else"
+                    if (arg.includes(' ')) {
+                        return `"${arg}"`;
+                    } else if (
+                        arg.slice(0, 2) !== '--' &&
+                        arg.slice(0, 1) !== '-' &&
+                        arg.split(' ').length > 1  
+                    ) {
+                        return `"${arg}"`;
+                    }
+                    return arg;
+                })
+                .join(' ') || '';
+        args.args = a;
+        args.params = __parseArgs(a);
+
+        args.isHelp = false;
+        const lastArg = argv.slice(-1)[0];
+        if (lastArg.match(/\s?(-h$|--help$)/)) args.isHelp = true;
+
+        return args;
     }
 
     _proxyConsole() {
@@ -323,22 +355,54 @@ export default class SSugarCli {
         return !__isChildProcess() || this._treatAsMain;
     }
 
-    async _process() {
+    _getCliObj() {
+
         const defaultStackAction =
-            this._availableCli.defaultByStack[this._stack];
+            this._availableCli.defaultByStack[this.args.stack];
 
         if (
             !this._availableCli.endpoints[
-                `${this._stack}.${this._action ?? defaultStackAction}`
+                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
             ]
         ) {
             this._displayHelpAfterError();
             process.exit();
         }
-        const cliObj =
+        let cliObj =
             this._availableCli.endpoints[
-                `${this._stack}.${this._action ?? defaultStackAction}`
+                `${this.args.stack}.${this.args.action ?? defaultStackAction}`
             ];
+
+        return cliObj;
+    }
+
+    async _process() {
+
+        // get cli object for current args
+        let cliObj = this._getCliObj();
+
+        let argv = [
+            process.argv[0],
+            process.argv[1],
+            process.argv[2],
+        ];
+
+        // handle sugar inception
+        if (cliObj.command && cliObj.command.match(/^sugard?\s/)) {
+
+            const p = __parseArgs(cliObj.command);
+            argv[2] = p['1'];
+
+            argv = [
+                ...argv.slice(0,3),
+                ...process.argv.slice(2)
+            ]
+
+            this.args = this._parseArgs(argv);
+            cliObj = this._getCliObj();
+
+        }
+
 
         // hook ctrl+c
         __hotkey('ctrl+c').on('press', (e) => {
@@ -363,11 +427,11 @@ export default class SSugarCli {
 
             await __wait(100);
 
-            let args = this._args;
+            let args = this.args.args;
 
             if (cliObj.interfacePath) {
-                const { default: int } = await import(cliObj.interfacePath);
-                args = int.apply(this._args);
+                const { default: int } = await import(cliObj.interfacePath);)
+                args = int.apply(this.args.args);
             }
 
             // @ts-ignore
@@ -375,7 +439,9 @@ export default class SSugarCli {
             this._eventEmitter.pipe(proPromise, {});
             await proPromise;
             await __wait(1000);
-            process.exit();
+            if (!__isChildProcess()) {
+                process.exit();
+            }
         } else if (cliObj.command) {
             if (this._isStdioNeeded()) {
                 this._stdio = __SStdio.existingOrNew(
@@ -391,8 +457,10 @@ export default class SSugarCli {
                 {},
             );
             this._eventEmitter.pipe(promise);
-            await promise;
-            process.exit();
+            const res = await promise;
+            if (!__isChildProcess()) {
+                process.exit();
+            }
         }
     }
 
@@ -497,7 +565,7 @@ export default class SSugarCli {
                     }
 
                     if (
-                        !this._action &&
+                        !this.args.action &&
                         cliObj.defaultAction &&
                         action === cliObj.defaultAction
                     ) {
@@ -670,15 +738,15 @@ export default class SSugarCli {
 
         this._newStep();
 
-        if (this._stack && this._action) {
+        if (this.args.stack && this.args.action) {
             const commandObj =
-                this._availableCli.endpoints[`${this._stack}.${this._action}`];
+                this._availableCli.endpoints[`${this.args.stack}.${this.args.action}`];
 
             this.log(
                 `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
             );
             this.log(
-                `<yellow>█</yellow> Action <cyan>${this._stack}.${this._action}</cyan>`,
+                `<yellow>█</yellow> Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
             );
             this.log(
                 `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
@@ -693,7 +761,7 @@ export default class SSugarCli {
             this.log(`<yellow>█</yellow>`);
 
             this.log(
-                `<yellow>████</yellow>   <yellow>sugar</yellow> <cyan>${this._stack}.${this._action}</cyan> <magenta>[arguments]</magenta>`,
+                `<yellow>████</yellow>   <yellow>sugar</yellow> <cyan>${this.args.stack}.${this.args.action}</cyan> <magenta>[arguments]</magenta>`,
             );
 
             this.log(`<yellow>█</yellow>`);
@@ -720,7 +788,9 @@ export default class SSugarCli {
 
             await __wait(1000);
 
-            process.exit();
+            if (!__isChildProcess()) {
+                process.exit();
+            }
         }
 
         const sortedByStack = {};
@@ -729,7 +799,7 @@ export default class SSugarCli {
             const _stack = stackAction.split('.')[0];
             const _action = stackAction.split('.')[1];
 
-            if (this._stack && _stack !== this._stack) return;
+            if (this.args.stack && _stack !== this.args.stack) return;
 
             if (!sortedByStack[_stack]) sortedByStack[_stack] = {};
 
@@ -766,14 +836,16 @@ export default class SSugarCli {
 
         await __wait(1000);
 
-        process.exit();
+        if (!__isChildProcess()) {
+            process.exit();
+        }
     }
 
     _displayHelpAfterError() {
         const logArray: string[] = [];
         logArray.push(
-            `<red>Sorry</red> but the requested "<cyan>${this._stack}.${
-                this._action ?? 'default'
+            `<red>Sorry</red> but the requested "<cyan>${this.args.stack}.${
+                this.args.action ?? 'default'
             }</cyan>" command does not exists...`,
         );
         logArray.push(

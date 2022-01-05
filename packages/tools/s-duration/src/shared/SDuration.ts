@@ -2,6 +2,7 @@
 
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __convert from '@coffeekraken/sugar/shared/time/convert';
+import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 /**
  * @name                SDuration
@@ -133,10 +134,7 @@ export default class SDuration {
     const durationMs = this.endTime - this.startTime;
     this.duration = durationMs;
     const convertedDuration = __convert(durationMs, settings.format);
-    const formatedDuration = settings.suffix
-      ? convertedDuration +
-        (settings.suffix === true ? settings.format : settings.suffix)
-      : parseFloat(convertedDuration);
+    const formatedDuration = __formatDuration(durationMs);
 
     return <ISDurationObject>{
       startTime: this.startTime || -1,

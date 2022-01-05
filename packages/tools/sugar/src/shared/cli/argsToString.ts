@@ -53,6 +53,11 @@ function argsToString(args, settings = {}) {
         const argValue = args[key];
         let str = '';
 
+        let finalKey = key;
+        if (!isNaN(key)) finalKey = '';
+        else if (finalKey.length <= 1) finalKey = `-${key}`;
+        else finalKey = `--${finalKey}`;
+
         if (Array.isArray(argValue)) {
             argValue.forEach((value) => {
                 let valueStr;
@@ -67,23 +72,31 @@ function argsToString(args, settings = {}) {
                     if (typeof __parse(valueStr) === 'string')
                         valueStr = `"${valueStr}"`;
                 }
+
+                if (valueStr.split(' ').length < 1) {
+                    if (settings.valueQuote === '"')
+                        valueStr = valueStr.replace(/"/g, '\\"');
+                    if (settings.valueQuote === "'")
+                        valueStr = valueStr.replace(/'/g, "\\'");
+                    if (settings.valueQuote === '`') {
+                        valueStr = valueStr.replace(/`/g, '\\`');
+                    }
+                }
+                
+                    string += ` ${finalKey} ${valueStr}`;
+            });
+        } else if (__isPlainObject(argValue)) {
+            let valueStr = JSON.stringify(argValue);
+
+            if (valueStr.split(' ').length < 1) {
                 if (settings.valueQuote === '"')
                     valueStr = valueStr.replace(/"/g, '\\"');
                 if (settings.valueQuote === "'")
                     valueStr = valueStr.replace(/'/g, "\\'");
                 if (settings.valueQuote === '`')
                     valueStr = valueStr.replace(/`/g, '\\`');
-                string += ` --${key} ${valueStr}`;
-            });
-        } else if (__isPlainObject(argValue)) {
-            let valueStr = JSON.stringify(argValue);
-            if (settings.valueQuote === '"')
-                valueStr = valueStr.replace(/"/g, '\\"');
-            if (settings.valueQuote === "'")
-                valueStr = valueStr.replace(/'/g, "\\'");
-            if (settings.valueQuote === '`')
-                valueStr = valueStr.replace(/`/g, '\\`');
-            string += ` --${key} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
+            }
+            string += ` ${finalKey} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
         } else {
             if (argValue === false) {
                 if (!settings.keepFalsy) return;
@@ -97,15 +110,19 @@ function argsToString(args, settings = {}) {
                     typeof argValue.toString === 'function'
                         ? argValue.toString()
                         : __toString(argValue);
-                if (typeof __parse(str) === 'string')
+
+                if (typeof __parse(str) === 'string' && str.split(' ').length > 1) {
                     if (settings.valueQuote === '"')
                         str = str.replace(/"/g, '\\"');
-                if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
-                if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
+                    if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
+                    if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
+                }
 
-                str = `${settings.valueQuote}${str}${settings.valueQuote}`;
+                if (str.split(' ').length < 1) {
+                    str = `${settings.valueQuote}${str}${settings.valueQuote}`;
+                } 
             }
-            string += ` --${key} ${str}`;
+            string += ` ${finalKey} ${str}`;
         }
     });
     return string.replace(/(\s){2,999999}/gm, ' ');

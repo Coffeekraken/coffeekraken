@@ -89,6 +89,7 @@ export default function spawn(
         childProcess = __spawn(command, [], {
             shell: true,
             stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
+            detached: true,
             cwd: settings.cwd || process.cwd(),
             ...settings,
             env: {
@@ -179,9 +180,10 @@ export default function spawn(
             // closed by this process
             childProcessExitPromiseResolve?.();
 
+            
             // generic close event
             emit('close', resultObj);
-
+            
             // handle resolve and reject
             if (resolveValue) {
                 emit('close.success', resultObj);
@@ -192,7 +194,7 @@ export default function spawn(
                 if (settings.returnValueOnly) return reject(resultObj.value);
                 return reject(resultObj);
             }
-
+            
             // handle other cases
             if (stderr.length) {
                 emit('close.error', resultObj);

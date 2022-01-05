@@ -14,5 +14,6 @@ export default function build(stringArgs = '') {
         const promise = builder.build(stringArgs);
         pipe(promise);
         resolve(await promise);
+        process.exit();
     });
 }

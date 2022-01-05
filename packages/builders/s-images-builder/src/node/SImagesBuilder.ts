@@ -8,10 +8,14 @@ import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __imageSize from 'image-size';
 import __minimatch from 'minimatch';
+import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __path from 'path';
+import __SDuration from '@coffeekraken/s-duration';
+import __fs from 'fs';
 import __sharp from 'sharp';
 import __SLog from '@coffeekraken/s-log';
 import __SImagesBuilderBuildParamsInterface from './interface/SImagesBuilderBuildParamsInterface';
+import __copySync from '@coffeekraken/sugar/node/fs/copySync';
 
 /**
  * @name            SImagesBuilder
@@ -47,6 +51,7 @@ export interface ISImagesBuilderSettings {
 
 export interface ISImagesBuilderBuildParams {
     glob: string;
+    compressExts: string[];
     inDir: string;
     outDir: string;
     quality: number;
@@ -281,129 +286,191 @@ export default class SImagesBuilder extends __SBuilder {
                 for (let i = 0; i < Object.keys(filesStack).length; i++) {
                     const path = Object.keys(filesStack)[i];
 
-                    let imgParams = params;
+                    let imgParams = Object.assign({}, params);
 
                     const file = filesStack[path].source;
 
-                    if (params.specificParams) {
-                        for (
-                            let l = 0;
-                            l < Object.keys(params.specificParams).length;
-                            l++
-                        ) {
-                            const glob = Object.keys(params.specificParams)[l];
-                            const specificParams = params.specificParams[glob];
-                            if (__minimatch(file.relPath, glob)) {
-                                imgParams = <ISImagesBuilderBuildParams>(
-                                    __deepMerge(params, specificParams)
-                                );
-                            }
-                        }
-                    }
-
                     const outPath = `${imgParams.outDir}/${file.relPath}`;
 
-                    // remove file
-                    __removeSync(outPath);
+                    // check if is a file to compress
+                    if (!params.compressExts.includes(file.extension)) {
 
-                    // ensure directory
-                    __ensureDirSync(__folderPath(outPath));
-
-                    // shared manipulations
-                    const imageSize = __imageSize(file.path);
-
-                    const idealSize = <
-                        {
-                            width: number;
-                            height: number;
-                        }
-                    >imageSize;
-
-                    if (imgParams.width && idealSize.width > imgParams.width) {
-                        const percent =
-                            (100 / idealSize.width) * imgParams.width;
-                        idealSize.width = imgParams.width;
-                        idealSize.height = Math.round(
-                            (idealSize.height / 100) * percent,
-                        );
-                    }
-                    if (
-                        imgParams.height &&
-                        idealSize.height > imgParams.height
-                    ) {
-                        const percent =
-                            (100 / idealSize.height) * imgParams.height;
-                        idealSize.height = imgParams.height;
-                        idealSize.width = Math.round(
-                            (idealSize.width / 100) * percent,
-                        );
-                    }
-
-                    const imgsArray = [
-                        {
-                            size: idealSize,
-                            resolution: 1,
-                            outPath,
-                        },
-                    ];
-
-                    for (let k = 0; k < imgParams.resolution.length; k++) {
-                        const resolution = imgParams.resolution[k];
-                        if (resolution === 1) continue;
-                        if (file.extension === 'svg') continue;
-
-                        imgsArray.push({
-                            size: {
-                                width: idealSize.width * resolution,
-                                height: idealSize.height * resolution,
-                            },
-                            resolution,
-                            outPath: outPath.replace(
-                                /\.([a-zA-Z]+)$/,
-                                `@${resolution}x.$1`,
-                            ),
+                        emit('log', {
+                            clear: true,
+                            type: __SLog.TYPE_VERBOSE,
+                            value: `<cyan>[copy]</cyan> Copying file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>"`,
                         });
-                    }
 
-                    for (let j = 0; j < imgsArray.length; j++) {
-                        const imgObj = imgsArray[j];
+                        const duration = new __SDuration();
 
-                        const outputFn =
-                            file.extension === 'jpg' ? 'jpeg' : file.extension;
+                        // track the builded stats
+                        buildedStats.bytes += __fs.statSync(file.path).size;
+                        webpStats.bytes += __fs.statSync(file.path).size;
 
-                        const img = __sharp(path);
+                        // copy file
+                        __copySync(file.path, outPath);
 
-                        if (!img[outputFn]) {
+                        emit('log', {
+                            clear: true,
+                            type: __SLog.TYPE_VERBOSE,
+                            value: `<green>[copy]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" copied <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
+                        });
+
+                        // pass to next file
+                        continue;
+
+                    } else {
+
+                        if (params.specificParams) {
+                            for (
+                                let l = 0;
+                                l < Object.keys(params.specificParams).length;
+                                l++
+                            ) {
+                                const glob = Object.keys(params.specificParams)[l];
+                                const specificParams = params.specificParams[glob];
+                                if (__minimatch(file.relPath, glob)) {
+                                    imgParams = <ISImagesBuilderBuildParams>(
+                                        __deepMerge(params, specificParams)
+                                    );
+                                    // @ts-ignore
+                                    imgParams.specific = true;
+                                }
+                            }
+                        }
+
+                        // remove file
+                        __removeSync(outPath);
+
+                        // ensure directory
+                        __ensureDirSync(__folderPath(outPath));
+
+                        // shared manipulations
+                        const imageSize = __imageSize(file.path);
+
+                        const idealSize = <
+                            {
+                                width: number;
+                                height: number;
+                            }
+                        >imageSize;
+
+                        if (imgParams.width && idealSize.width > imgParams.width) {
+                            const percent =
+                                (100 / idealSize.width) * imgParams.width;
+                            idealSize.width = imgParams.width;
+                            idealSize.height = Math.round(
+                                (idealSize.height / 100) * percent,
+                            );
+                        }
+                        if (
+                            imgParams.height &&
+                            idealSize.height > imgParams.height
+                        ) {
+                            const percent =
+                                (100 / idealSize.height) * imgParams.height;
+                            idealSize.height = imgParams.height;
+                            idealSize.width = Math.round(
+                                (idealSize.width / 100) * percent,
+                            );
+                        }
+
+                        const imgsArray = [
+                            {
+                                size: idealSize,
+                                resolution: 1,
+                                outPath,
+                            },
+                        ];
+
+                        for (let k = 0; k < imgParams.resolution.length; k++) {
+                            const resolution = imgParams.resolution[k];
+                            if (resolution === 1) continue;
+                            if (file.extension === 'svg') continue;
+
+                            imgsArray.push({
+                                size: {
+                                    width: idealSize.width * resolution,
+                                    height: idealSize.height * resolution,
+                                },
+                                resolution,
+                                outPath: outPath.replace(
+                                    /\.([a-zA-Z]+)$/,
+                                    `@${resolution}x.$1`,
+                                ),
+                            });
+                        }
+
+                        for (let j = 0; j < imgsArray.length; j++) {
+                            const imgObj = imgsArray[j];
+
+                            const outputFn =
+                                file.extension === 'jpg' ? 'jpeg' : file.extension;
+
+                            emit('log', {
+                                clear: true,
+                                type: __SLog.TYPE_VERBOSE,
+                                // @ts-ignore
+                                value: `<yellow>[compress]</yellow> Compressing file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" ${imgParams.specific ? ` with <red>specific parameters</red>` : ''}`,
+                            });
+
+                            const duration = new __SDuration();
+
+                            const img = __sharp(path);
+
+                            if (!img[outputFn]) {
+                                await img
+                                    .resize(imgObj.size)
+                                    .toFile(imgObj.outPath);
+                                continue;
+                            }
+
                             await img
                                 .resize(imgObj.size)
-                                .toFile(imgObj.outPath);
-                            continue;
-                        }
-
-                        await img
-                            .resize(imgObj.size)
-                            [outputFn]({
-                                quality: params.quality,
-                            })
-                            .toFile(imgObj.outPath);
-                        const buildedFile = __SFile.new(outPath);
-                        buildedStats.bytes += buildedFile.stats.bytes;
-                        filesStack[path].builded.push(buildedFile);
-
-                        if (params.webp) {
-                            const webpOutPath = imgObj.outPath.replace(
-                                /\.[a-zA-Z0-9]+/,
-                                '.webp',
-                            );
-                            await __sharp(path)
-                                .resize(imgObj.size)
-                                .webp({
+                                [outputFn]({
                                     quality: params.quality,
                                 })
-                                .toFile(webpOutPath);
-                            const webpFile = __SFile.new(webpOutPath);
-                            webpStats.bytes += webpFile.stats.bytes;
-                            filesStack[path].builded.push(webpFile);
+                                .toFile(imgObj.outPath);
+                            const buildedFile = __SFile.new(outPath);
+                            buildedStats.bytes += buildedFile.stats.bytes;
+                            filesStack[path].builded.push(buildedFile);
+
+                            emit('log', {
+                                clear: true,
+                                type: __SLog.TYPE_VERBOSE,
+                                value: `<green>[compress]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" compressed <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
+                            });
+
+                            if (params.webp) {
+
+                                const webpDuration = new __SDuration();
+
+                                const webpOutPath = imgObj.outPath.replace(
+                                    /\.[a-zA-Z0-9]+/,
+                                    '.webp',
+                                );
+
+                                emit('log', {
+                                    type: __SLog.TYPE_VERBOSER,
+                                    value: `<yellow>[webp]</yellow> Generatating webp version of file "<cyan>${__path.relative(__packageRoot(), imgObj.outPath)}</cyan>"`,
+                                });
+
+                                await __sharp(path)
+                                    .resize(imgObj.size)
+                                    .webp({
+                                        quality: params.quality,
+                                    })
+                                    .toFile(webpOutPath);
+                                const webpFile = __SFile.new(webpOutPath);
+                                webpStats.bytes += webpFile.stats.bytes;
+                                filesStack[path].builded.push(webpFile);
+
+                                emit('log', {
+                                    type: __SLog.TYPE_VERBOSER,
+                                    value: `<green>[webp]</green> Webp generation of file "<cyan>${__path.relative(__packageRoot(), imgObj.outPath)}</cyan>" finished <green>successfully</green> in <yellow>${webpDuration.end().formatedDuration}</yellow>`,
+                                });
+
+                            }
                         }
                     }
                 }

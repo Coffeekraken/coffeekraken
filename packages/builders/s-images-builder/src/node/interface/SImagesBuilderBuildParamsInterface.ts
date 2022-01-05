@@ -12,6 +12,13 @@ export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
                 default: __SSugarConfig.get('imagesBuilder.glob'),
                 alias: 'g',
             },
+            compressExts: {
+                description:
+                    'Specify the file extensions you want to compress',
+                type: 'String[]',
+                required: true,
+                default: __SSugarConfig.get('imagesBuilder.compressExts')
+            },
             inDir: {
                 description:
                     'Specify the absolute path to the folder where your images stands',

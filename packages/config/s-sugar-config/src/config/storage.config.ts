@@ -341,36 +341,6 @@ export default function (env) {
             viewsDir: `[config.storage.dist.rootDir]/views`,
         },
 
-        serve: {
-            /**
-             * @name            rootDir
-             * @namespace       config.storage.serve
-             * @type            String
-             * @default         /dist
-             *
-             * Configure where is located the "serve" folder in which are stored usually the "distribution" files like production css, js, images, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            rootDir: `/dist`,
-
-            '@dev': {
-                /**
-                 * @name            rootDir
-                 * @namespace       config.storage.serve.env:dev
-                 * @type            String
-                 * @default         /src
-                 *
-                 * Configure where is located the "serve" folder in which are stored usually the "distribution" files like production css, js, images, etc...
-                 *
-                 * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                rootDir: `/src`,
-            },
-        },
-
         /**
          * @name            exclude
          * @namespace       config.storage

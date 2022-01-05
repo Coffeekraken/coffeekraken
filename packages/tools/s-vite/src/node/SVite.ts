@@ -131,9 +131,14 @@ export default class SVite extends __SClass {
                     await __kill(`:${config.server.port}`);
                 }
 
-                const server = await __viteServer(config);
 
-                const listen = await server.listen();
+                const server = await __viteServer(config);
+                let listen;
+                try {
+                    listen = await server.listen();
+                } catch(e) {
+                    console.log('ERRROR', e);
+                }
 
                 emit('log', {
                     type: __SLog.TYPE_INFO,
@@ -147,14 +152,14 @@ export default class SVite extends __SClass {
                         `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
                     ].join('\n'),
                 });
-                emit('log', {
-                    type: __SLog.TYPE_SUMMARY,
-                    value: {
-                        status: 'success',
-                        value: `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
-                        collapse: true,
-                    },
-                });
+                // emit('log', {
+                //     type: __SLog.TYPE_SUMMARY,
+                //     value: {
+                //         status: 'success',
+                //         value: `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
+                //         collapse: true,
+                //     },
+                // });
             },
             {
                 metas: {

@@ -6,14 +6,27 @@ export default function (env, config) {
          * @name            glob
          * @namespace       config.imagesBuilder
          * @type            String
-         * @default         [config.imagesBuilder.inDir]/** /*.{jpg,jpeg,png,gif,svg,webp}
+         * @default         [config.imagesBuilder.inDir]/** /*
          *
          * Specify a glob pattern relative to the "inDir" to specify files you want to compress
          *
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        glob: '**/*.{jpg,jpeg,png,gif,svg,webp}',
+        glob: '**/*',
+
+        /**
+         * @name            compressExts
+         * @namespace       config.imagesBuilder
+         * @type            String
+         * @default         ['jpg', 'jpeg', 'png', 'svg', 'webp']
+         *
+         * Specify a which file extensions you want to compress
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        compressExts: ['jpg', 'jpeg', 'png', 'svg', 'webp'],
 
         /**
          * @name            inDir

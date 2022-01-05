@@ -228,9 +228,13 @@ export default function (env, config) {
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
             // watch: {
-            //     ignored: [`${__dirname()}/static`],
+            //     ignored: [/\/static\//],
             // },
+            // watch: false,
         },
+        // optimizeDeps: {
+        //     exclude: ['static'],
+        // },
         css: {},
         rewrites: [
             __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),

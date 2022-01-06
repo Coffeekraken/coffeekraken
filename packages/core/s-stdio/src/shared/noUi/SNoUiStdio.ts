@@ -16,6 +16,9 @@ import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableCol
 import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 import __ora from 'ora';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
+import __countLines from '@coffeekraken/sugar/node/terminal/countLines';
+import __SLog, { ISLog } from '@coffeekraken/s-log';
+import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 
 /**
  * @name            SNoUiStdio
@@ -115,32 +118,72 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _currentLogId = '';
+    _lastLogLinesCount = 0;
+    _lastLogObj;
+    _loggedGroups: any = {};
     _logsStack: ISNoUiStdioLogsContainer[] = [];
-    _log(logObj, component) {
+    _log(logObj: ISLog, component) {
         // handle empty logs
         if (!logObj) return;
 
-        if (logObj.clear) {
-            process.stdout.moveCursor(0, -1) // up one line
+        if (!logObj.group) {
+            // @ts-ignore
+            if (logObj.metas.id === 'SPromise') {
+                logObj.group = 'Global';
+            } else {
+                // @ts-ignore
+                logObj.group = logObj.metas.id;
+            }
+        }
+
+        // @ts-ignore
+        let groupObj = this._loggedGroups[logObj.group];
+        if (!groupObj || this._lastLogObj?.group !== logObj.group) {
+            // @ts-ignore
+            groupObj = {
+                color: __getColorFor(logObj.group),
+            };
+
+            // if (this._lastLogObj) {
+            //     console.log(`<${this._loggedGroups[this._lastLogObj.group].color}> </${this._loggedGroups[this._lastLogObj.group].color}>`);
+            // }
+            console.log(`<${groupObj.color}>█</${groupObj.color}>`);
+            // @ts-ignore
+            console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${'-'.repeat(process.stdout.columns - 2 - logObj.group.length)}</${groupObj.color}>`);
+            console.log(`<${groupObj.color}>█</${groupObj.color}>`);
+            // @ts-ignore
+            this._loggedGroups[logObj.group] = groupObj;
+        }
+
+        if (logObj.clear && this._lastLogObj?.type !== __SLog.TYPE_WARN && this._lastLogObj?.type !== __SLog.TYPE_ERROR) {
+            process.stdout.moveCursor(0, this._lastLogLinesCount * -1) // up one line
             process.stdout.clearLine(1) // from cursor to end
         }
 
+        let logLinesCount = 0;
+
         if (logObj.margin?.top) {
             for(let i=0; i<logObj.margin.top; i++) {
-                console.log(' ');
+                console.log(`<${groupObj.color}>█</${groupObj.color}>`);
             }
+            logLinesCount += logObj.margin.top;
         }
 
-        console.log(
-            __parseHtml(component.render(logObj, this.noUiStdioSettings)),
-        );
+        const log = `<${groupObj.color}>█</${groupObj.color}> ${__parseHtml(component.render(logObj, this.noUiStdioSettings))}`;
+        logLinesCount += __countLines(log);
+        console.log(log);
 
         if (logObj.margin?.bottom) {
             for(let i=0; i<logObj.margin.bottom; i++) {
-                console.log(' ');
+                console.log(`<${groupObj.color}>█</${groupObj.color}>`);
             }
+            // @ts-ignore
+            logLinesCount += logObj.margin.top;
         }
 
+        // @ts-ignore)
+        this._lastLogLinesCount = logLinesCount;
+        this._lastLogObj = logObj;
     }
 
     /**
@@ -247,6 +290,7 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
 import __defaultNoUiStdioComponent from './components/defaultNoUiStdioComponent';
 import __summaryNoUiStdioComponent from './components/summaryNoUiStdioComponent';
 import __errorNoUiStdioComponent from './components/errorNoUiStdioComponent';
+import logConfig from '@coffeekraken/s-sugar-config/src/config/log.config';
 
 SNoUiStdio.registerComponent(__defaultNoUiStdioComponent);
 SNoUiStdio.registerComponent(__summaryNoUiStdioComponent);

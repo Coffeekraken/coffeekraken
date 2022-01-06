@@ -440,10 +440,10 @@ export default class SFrontstack extends __SClass {
                 await Promise.all(processesPromises);
 
 
-                emit('log', {
-                    type: __SLog.TYPE_DECORATOR,
-                    value: `<green>${'-'.repeat(process.stdout.columns)}</green>`,
-                });
+                // emit('log', {
+                //     type: __SLog.TYPE_DECORATOR,
+                //     value: `<green>${'-'.repeat(process.stdout.columns)}</green>`,
+                // });
                 emit('log', {
                     type: __SLog.TYPE_INFO,
                     value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`,

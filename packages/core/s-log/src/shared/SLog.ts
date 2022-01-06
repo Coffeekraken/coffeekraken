@@ -313,9 +313,9 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static _appliedFilters = {};
-    static filter(filterObj: Partial<ISLogFilterObj>, name = 'default'): void {
-        this._appliedFilters[name] = filterObj;
+    static _filteredTypes: ISLogType[] = [];
+    static filter(types: ISLogType[]): void {
+        this._filteredTypes = types;
     }
 
     /**
@@ -329,21 +329,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static clearFilters(): void {
-        this._appliedFilters = {};
-    }
-
-    /**
-     * @name            removeFilter
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to remove a particular filter by its name
-     *
-     * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static removeFilter(name: string): void {
-        delete this._appliedFilters[name];
+        this._filteredTypes = [];
     }
 
     /**
@@ -362,6 +348,28 @@ export default class SLog {
     static _defaultLogObj: Partial<ISLog> = {};
     static setDefaultLogObj(logObj: Partial<ISLog>): void {
         this._defaultLogObj = logObj;
+    }
+
+    /**
+     * @name            isTypeEnabled
+     * @type            Function
+     * @static
+     *
+     * This static method allows you Check if a particular log type is enabled or not.
+     * You can pass as well multiple log types as an array.
+     *
+     * @param       {ISLogType|ISLogType[]}             types      The log type(s) you want to check
+     * @return      {Boolean}                              True if the log type is enabled, false otherwise                 
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static isTypeEnabled(types: ISLogType | ISLogType[]): boolean {
+        if (!Array.isArray(types)) types = [types];
+        for (const type of types) {
+            if (!this._filteredTypes.includes(type)) return false;
+        }
+        return true;
     }
 
     /**
@@ -398,7 +406,7 @@ export default class SLog {
         // @ts-ignore
         this._logObj = __deepMerge(
             {
-                type: SLog.LOG,
+                type: SLog.TYPE_LOG,
                 timestamp: Date.now(),
                 decorators: true,
                 time: false,
@@ -440,6 +448,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get type(): string {
+        // @ts-ignore
         return this._logObj.type;
     }
 
@@ -456,26 +465,14 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get active(): boolean {
+        // logs that does not have types are always active
+        if (!this._logObj.type) return true;
+
+        // check type
         // @ts-ignore
-        const keys = Object.keys(this.constructor._appliedFilters);
+        if (!this.constructor._filteredTypes.includes(this._logObj.type)) return false;
 
-        for (let i = 0; i < keys.length; i++) {
-            // @ts-ignore
-            const filterObj = this.constructor._appliedFilters[keys[i]];
-            for (let j = 0; j < Object.keys(filterObj).length; j++) {
-                const filterId = Object.keys(filterObj)[j];
-                const filterItem = filterObj[filterId];
-                if (this[filterId] === undefined) {
-                    continue;
-                }
-                if (Array.isArray(filterItem)) {
-                    if (filterItem.indexOf(this[filterId]) === -1) return false;
-                } else if (filterItem !== this[filterId]) {
-                    return false;
-                }
-            }
-        }
-
+        // active by default
         return true;
     }
 
@@ -492,6 +489,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get decorators(): boolean {
+        // @ts-ignore
         return this._logObj.decorators;
     }
     set decorators(value: boolean) {
@@ -510,6 +508,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get time(): boolean {
+        // @ts-ignore
         return this._logObj.time;
     }
 
@@ -524,6 +523,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get timestamp(): number {
+        // @ts-ignore
         return this._logObj.timestamp;
     }
 
@@ -539,6 +539,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get clear(): boolean {
+        // @ts-ignore
         return this._logObj.clear;
     }
 
@@ -572,6 +573,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get temp(): boolean {
+        // @ts-ignore
         return this._logObj.temp;
     }
 
@@ -588,6 +590,7 @@ export default class SLog {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get as(): string {
+        // @ts-ignore
         return this._logObj.as;
     }
 }

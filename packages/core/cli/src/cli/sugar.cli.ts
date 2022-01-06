@@ -86,10 +86,7 @@ if (!__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]) {
     cliParams.logPreset = 'default';
 }
 
-__SLog.filter({
-    // type: [__SLog.TYPE_LOG, __SLog.TYPE_INFO, __SLog.TYPE_WARN, __SLog.TYPE_ERROR],
-    type: __SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`],
-});
+__SLog.filter(__SLog[`PRESET_${cliParams.logPreset.toUpperCase()}`]);
 
 export interface ISSugarCliArgs {
     command: string;
@@ -430,7 +427,7 @@ export default class SSugarCli {
             let args = this.args.args;
 
             if (cliObj.interfacePath) {
-                const { default: int } = await import(cliObj.interfacePath);)
+                const { default: int } = await import(cliObj.interfacePath);
                 args = int.apply(this.args.args);
             }
 

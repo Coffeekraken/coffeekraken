@@ -1,3 +1,5 @@
+/
+/config/explorer
 /api/@coffeekraken.sugar.node.path.absolute
 /api/@coffeekraken.sugar.node.path.relative
 /api/@coffeekraken.s-docblock.shared.sDocblockBlock

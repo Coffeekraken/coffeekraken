@@ -1,16 +1,21 @@
-
 @extends('layouts.main')
 @section('title', $title)
 
 @section('content')
-    
+
     @php $firstBlock = $docblocks[0]; @endphp
 
     @php
-        $statusColor = 'info';
-        if ($firstBlock->status == 'alpha') $statusColor = 'error';
-        if ($firstBlock->status == 'stable') $statusColor = 'success';
-        if ($firstBlock->status == 'wip') $statusColor = 'error';
+    $statusColor = 'info';
+    if ($firstBlock->status == 'alpha') {
+        $statusColor = 'error';
+    }
+    if ($firstBlock->status == 'stable') {
+        $statusColor = 'success';
+    }
+    if ($firstBlock->status == 'wip') {
+        $statusColor = 'error';
+    }
     @endphp
 
     <div id="styleguide">
@@ -27,7 +32,7 @@
 
                     @php $menu = get_object_vars($docmap->menu->custom->styleguide->tree->styleguide); @endphp
                     @include('pages.markdown.menu', ['menu' => $menu, 'id' => 'main', 'icon' => 'display-preview'])
-                    
+
                 </nav>
 
                 <div class="__content s-pb:50">

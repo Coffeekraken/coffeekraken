@@ -65,7 +65,9 @@
                 "name": "README",
                 "type": "Markdown",
                 "menu": {
-                    "tree": ["Documentation"],
+                    "tree": [
+                        "Documentation"
+                    ],
                     "slug": "/doc/readme"
                 },
                 "platform": [
@@ -82,8 +84,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "README",
-                "relPath": "README",
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "README.md",
                 "children": {}
             },
             "@coffeekraken.sugar.js.clipboard.copy": {
@@ -4603,6 +4606,35 @@
                 "relPath": "src/node/esm/require.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.esm.resolvePackagePath": {
+                "name": "resolvePackagePath",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to resolve a passed package name or a folder directory to it's package.json file",
+                "namespace": "@coffeekraken.sugar.node.esm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import resolvePackagePath from '@coffeekraken/sugar/node/esm/resolvePackagePath';\nresolvePackagePath('something');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "resolvePackagePath.ts",
+                "extension": "ts",
+                "relPath": "src/node/esm/resolvePackagePath.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.fs.checkPathWithMultipleExtensions": {
                 "name": "checkPathWithMultipleExtensions",
                 "type": "Function",
@@ -7565,6 +7597,35 @@
                 "relPath": "src/node/process/spawn.ts",
                 "children": {}
             },
+            "@coffeekraken.sugar.node.terminal.countLine": {
+                "name": "countLine",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Count how many lines the passed string will take in the current terminal",
+                "namespace": "@coffeekraken.sugar.node.terminal",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import countLines from '@coffeekraken/sugar/node//countLine';\ncountLines('Hello <red>World</red>'); // 11"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "countLines.ts",
+                "extension": "ts",
+                "relPath": "src/node/terminal/countLines.ts",
+                "children": {}
+            },
             "@coffeekraken.sugar.node.tokens.replaceTokens": {
                 "name": "replaceTokens",
                 "type": "Function",
@@ -10126,6 +10187,39 @@
                 "filename": "expandPleasantCssClassnames.ts",
                 "extension": "ts",
                 "relPath": "src/shared/html/expandPleasantCssClassnames.ts",
+                "children": {}
+            },
+            "@coffeekraken.sugar.shared.html.extractCssClassesNames": {
+                "name": "extractCssClassesNames",
+                "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to extract all the classes names from a passed html string.\nYou can use it with other things than html but depending on the complexity of your string, it may not\nwork as expected...",
+                "namespace": "@coffeekraken.sugar.shared.html",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import extractCssClassesNames from '@coffeekraken/sugar/shared/html/extractCssClassesNames';\nextractCssClassesNames('...');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "extractCssClassesNames.ts",
+                "extension": "ts",
+                "relPath": "src/shared/html/extractCssClassesNames.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.html.replaceTags": {

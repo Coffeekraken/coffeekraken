@@ -23,7 +23,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        root: '[config.storage.package.rootDir]',
+        root: '[config.storage.package.rootDir]/src',
         /**
          * @name          base
          * @namespace     config.vite
@@ -64,6 +64,9 @@ export default function (env, config) {
         mode: 'development',
         resolve: {
             alias: {
+
+                static: '',
+
                 /**
                  * @name          vue
                  * @namespace     config.vite.resolve.alias
@@ -107,7 +110,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        publicDir: '[config.storage.src.rootDir]',
+        // publicDir: '[config.storage.src.rootDir]',
         /**
          * @name          cacheDir
          * @namespace     config.vite

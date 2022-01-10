@@ -131,7 +131,6 @@ export default class SVite extends __SClass {
                     await __kill(`:${config.server.port}`);
                 }
 
-
                 const server = await __viteServer(config);
                 let listen;
                 try {

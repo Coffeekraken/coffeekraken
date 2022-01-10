@@ -22,7 +22,7 @@
                 "id": "dev",
                 "type": "module",
                 "defer": true,
-                "src": "http://localhost:3000/src/js/index.ts",
+                "src": "http://localhost:3000/js/index.ts",
                 "env": "development"
             },
             "module": {
@@ -44,7 +44,7 @@
             "dev": {
                 "id": "dev",
                 "defer": true,
-                "src": "http://localhost:3000/src/css/index.css",
+                "src": "http://localhost:3000/css/index.css",
                 "env": "development"
             },
             "main": {

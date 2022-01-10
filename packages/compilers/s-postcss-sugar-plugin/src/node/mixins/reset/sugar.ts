@@ -60,6 +60,10 @@ export default function ({
 
     const vars: string[] = [
         `
+
+        /* purgecss start ignore */
+
+
         /**
          * Body height
          */
@@ -102,6 +106,9 @@ export default function ({
         img {
             max-width: 100%;
         }
+
+        /* purgecss end ignore */
+
 
   `,
     ];

@@ -15,6 +15,7 @@ import __handlebars from 'handlebars';
 import { registerHelpers } from '@coffeekraken/s-handlebars';
 import __marked from 'marked';
 import __path from 'path';
+import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __SMarkdownBuilderBuildParamsInterface from './interface/SMarkdownBuilderBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
 
@@ -561,6 +562,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                     const viewData = {
                         config: __SSugarConfig.get('.'),
                         flatConfig: __flatten(__SSugarConfig.get('.')),
+                        settings: this.markdownBuilderSettings,
+                        params,
+                        packageJson: __packageJson(),
                         docMenu: docmap.menu,
                         docmap,
                         time: {

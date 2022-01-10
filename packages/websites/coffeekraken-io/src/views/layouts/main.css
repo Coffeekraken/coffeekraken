@@ -13,7 +13,7 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background-image: url('/src/img/welcome/welcome-bg-light-01.jpg');
+    background-image: url('/img/welcome/welcome-bg-light-01.jpg');
     background-repeat: repeat-x;
     background-size: cover;
     background-position: 50% 0;
@@ -24,7 +24,7 @@
 
     @sugar.theme.when dark {
         opacity: 0.15;
-        background-image: url('/src/img/welcome/welcome-bg-01.jpg');
+        background-image: url('/img/welcome/welcome-bg-01.jpg');
     }
 
     [s-sugar]:not(#homepage) &,

@@ -5,6 +5,6 @@ export async function prepare() {
 }
 
 export default function (env, config) {
-    if (env.plarform !== 'node') return;
+    if (env.platform !== 'node') return;
     return {};
 }

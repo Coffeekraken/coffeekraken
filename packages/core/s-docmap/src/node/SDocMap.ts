@@ -765,6 +765,10 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const docblocks = docblocksInstance.toObject();
 
+                    if (file.path.includes('.dev.css')) {
+                        console.log(docblocks.length);
+                    }
+
                     if (!docblocks || !docblocks.length) continue;
 
                     let docblockObj: any = {};

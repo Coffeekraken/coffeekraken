@@ -43,6 +43,7 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterDocmapRead');
 
+        
         const styleguideObj = styleguideMenu.slug[req.path];
 
         if (!styleguideObj || !__fs.existsSync(styleguideObj.docmap.path)) {
@@ -91,7 +92,9 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterViewRendering');
 
-        console.log(__SBench.end('handlers.styleguide', {}).toString());
+        if (__SBench.isBenchActive('handlers.styleguide')) {
+            console.log(__SBench.end('handlers.styleguide', {}).toString());
+        }
 
         res.status(200);
         res.type('text/html');

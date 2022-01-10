@@ -10,14 +10,14 @@ export default function (env, config) {
          * @name              port
          * @namespace         config.frontendServer
          * @type              Number
-         * @default           8888
+         * @default           env.env === 'production' ? 8889 : 8888
          *
          * Specify the port to use for the frontend server
          *
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        port: 8888,
+        port: env.env === 'production' ? 8889 : 8888,
 
         /**
          * @name              hostname

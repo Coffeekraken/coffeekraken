@@ -36,9 +36,11 @@ class postcssSugarPluginmountedMixinInterface extends __SInterface {
                 values: ['mounted', 'active'],
                 required: true,
             },
-            sibling: {
-                type: 'Boolean',
-                default: false,
+            context: {
+                type: 'String',
+                values: ['self' ,'sibling' ,'parent' , 'ancestor'],
+                default: 'self',
+                required: true
             },
         };
     }
@@ -47,7 +49,7 @@ export { postcssSugarPluginmountedMixinInterface as interface };
 
 export interface postcssSugarPluginmountedMixinParams {
     state: 'mounted' | 'active';
-    sibling: boolean;
+    context: 'self' | 'sibling' | 'parent' | 'ancestor';
 }
 export default function ({
     params,
@@ -60,7 +62,7 @@ export default function ({
 }) {
     const finalParams = <postcssSugarPluginmountedMixinParams>{
         state: 'mounted',
-        sibling: false,
+        context: 'self',
         ...(params ?? {}),
     };
 
@@ -68,15 +70,23 @@ export default function ({
 
     switch (finalParams.state) {
         case 'mounted':
-            if (finalParams.sibling) {
+            if (finalParams.context === 'parent') {
+                selector = '*[mounted] > &, *.mounted > &';
+            } else if (finalParams.context === 'ancestor') {
                 selector = '*[mounted] &, *.mounted &';
+            } else if (finalParams.context === 'sibling') {
+                selector = '*[mounted] + &, *.mounted + &';
             } else {
                 selector = '&[mounted], &.mounted';
             }
             break;
         case 'active':
-            if (finalParams.sibling) {
+            if (finalParams.context === 'parent') {
+                selector = '*[active] > &. *.active > &';
+            } else if (finalParams.context === 'ancestor') {
                 selector = '*[active] &. *.active &';
+            } else if (finalParams.context === 'sibling') {
+                selector = '*[active] + &. *.active + &';
             } else {
                 selector = '&[active], &.active';
             }

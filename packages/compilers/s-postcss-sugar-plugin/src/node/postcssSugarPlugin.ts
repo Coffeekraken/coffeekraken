@@ -154,7 +154,7 @@ const plugin = (settings: any = {}) => {
     }
 
     function commentsNeeded() {
-        return settings.target === 'dev';
+        return settings.target !== 'vite';
     }
 
     function replaceWith(atRule, nodes) {

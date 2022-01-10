@@ -12,6 +12,6 @@
 
 # Get started
 
-[Git repository](https://github.com/Coffeekraken/coffeekraken.git)
+[Git repository]()
 
 A little sugar in your codebase

@@ -1,6 +1,6 @@
 <!-- image -->
-{{#if config.markdownBuilder.layouts.doc.data.headerImageUrl }}
-![{{ config.packageJson.name }}]({{ config.markdownBuilder.layouts.doc.data.headerImageUrl }})
+{{#if settings.layouts.doc.data.headerImageUrl }}
+![{{ packageJson.name }}]({{ settings.layouts.doc.data.headerImageUrl }})
 {{/if}}
 
 <!-- header -->

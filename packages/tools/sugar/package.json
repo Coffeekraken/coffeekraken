@@ -17,6 +17,7 @@
         "test": "jest --silent"
     },
     "dependencies": {
+        "@coffeekraken/cli": "^2.0.0",
         "@coffeekraken/s-cache": "^2.0.0",
         "@coffeekraken/s-class": "^2.0.0",
         "@coffeekraken/s-color": "^2.0.0",
@@ -29,7 +30,6 @@
         "@coffeekraken/s-log": "^2.0.0",
         "@coffeekraken/s-process": "^2.0.0",
         "@coffeekraken/s-promise": "^2.0.0",
-        "@coffeekraken/cli": "^2.0.0",
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
@@ -112,6 +112,7 @@
         "ps-list": "^7.2.0",
         "rematrix": "^0.7.2",
         "resolve": "^1.20.0",
+        "resolve-package-path": "^4.0.3",
         "sprintf-js": "^1.1.2",
         "strip-ansi": "^6.0.0",
         "strip-css-comments": "^4.1.0",

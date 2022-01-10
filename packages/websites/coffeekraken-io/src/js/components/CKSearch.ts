@@ -6,9 +6,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 
-import { loadDocmap } from '../state/state';
-
-let searchItems;
 __sFiltrableInputDefine(
     {
         value: 'name',
@@ -19,10 +16,10 @@ __sFiltrableInputDefine(
         templates: ({ type, item, html, unsafeHTML }) => {
             if (type === 'item') {
                 return html`
-                    <div class="__item">
+                    <div class="ck-search__list-item">
                         <div class="s-flex s-mbe:10">
                             <h4
-                                class="__title s-typo:bold s-tc:accent s-flex-item:grow"
+                                class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
                             >
                                 ${unsafeHTML(item.name)}
                             </h4>
@@ -111,8 +108,8 @@ export default class CKSearch extends __SLitComponent {
     render() {
         return html`
             <div class="ck-search">
-                <div class="__background"></div>
-                <div class="__content s-color:accent">
+                <div class="ck-search__background"></div>
+                <div class="ck-search__content s-color:accent">
                     <ck-search-input>
                         <input
                             placeholder="API search..."

@@ -1,6 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-export default class SHighlightJsComponentInterface extends __SInterface {
+/**
+ * @name                SFiltrableInputComponentInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This class represent the interface that describe parameters of the SFiltrableInputComponent
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+export default class SFiltrableInputComponentInterface extends __SInterface {
     static get _definition() {
         return {
             items: {
@@ -26,11 +45,19 @@ export default class SHighlightJsComponentInterface extends __SInterface {
                 type: 'String',
                 default: 'No item to display',
             },
+            searchValuePreprocess: {
+                description: 'Specify a function used to preprocess the value just before actually searching through the items',
+                type: 'Function',
+            },
             loadingText: {
                 description:
                     'Specify the text to use for the default "loading" state',
                 type: 'String',
                 default: 'Loading please wait...',
+            },
+            filterItems: {
+                description: 'Specify a function to use to filter the items. Must return the filtered list of items',
+                type: 'Function'
             },
             filtrable: {
                 description:

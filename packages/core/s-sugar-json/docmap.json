@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -50,6 +52,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
             "@coffeekraken/s-type",
@@ -62,38 +65,60 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-sugar-json.sugar.cli.sSugarJsonListParamsInterface": {
+            "@coffeekraken.s-sugar-json.node.list.interface.sSugarJsonListParamsInterface": {
                 "name": "SSugarJsonListParamsInterface",
-                "type": "Class",
-                "description": "Parameters representation for the SSugarJson updateCache process",
-                "namespace": "@coffeekraken.s-sugar-json.sugar.cli",
-                "status": "wip",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "Parameters representation for the 5SSugarJson list command.",
+                "namespace": "@coffeekraken.s-sugar-json.node.list.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarJsonListParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSugarJsonListParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.ts",
+                "filename": "SSugarJsonListParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/list/interface/SSugarJsonListParamsInterface.js",
                 "children": {}
             },
-            "@coffeekraken.s-sugar-json.sugar.cli.sSugarJsonUpdateCacheParamsInterface": {
+            "@coffeekraken.s-sugar-json.node.updateCache.interface.sSugarJsonUpdateCacheParamsInterface": {
                 "name": "SSugarJsonUpdateCacheParamsInterface",
-                "type": "Class",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "Parameters representation for the SSugarJson updateCache process",
-                "namespace": "@coffeekraken.s-sugar-json.sugar.cli",
-                "status": "wip",
+                "namespace": "@coffeekraken.s-sugar-json.node.updateCache.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarJsonUpdateCacheParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSugarJsonUpdateCacheParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/updateCache/interface/SSugarJsonUpdateCacheParamsInterface.ts",
+                "filename": "SSugarJsonUpdateCacheParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/updateCache/interface/SSugarJsonUpdateCacheParamsInterface.js",
                 "children": {}
             }
         }

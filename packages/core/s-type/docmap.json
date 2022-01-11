@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -50,6 +52,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -189,6 +192,358 @@
                     }
                 }
             },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.arrayTypeDescriptor": {
+                "name": "arrayTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"array\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "arrayTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/arrayTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.bigintTypeDescriptor": {
+                "name": "bigintTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"bigint\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "bigintTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/bigintTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.booleanTypeDescriptor": {
+                "name": "booleanTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"boolean\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "booleanTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/booleanTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.classTypeDescriptor": {
+                "name": "classTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"class\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "classTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/classTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.dateTypeDescriptor": {
+                "name": "dateTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"date\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "dateTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/dateTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.functionTypeDescriptor": {
+                "name": "functionTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"function\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "functionTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/functionTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.integerTypeDescriptor": {
+                "name": "integerTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"integer\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "integerTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/integerTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.mapTypeDescriptor": {
+                "name": "mapTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"map\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "mapTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/mapTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.nullTypeDescriptor": {
+                "name": "nullTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"null\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "nullTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/nullTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.numberTypeDescriptor": {
+                "name": "numberTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"number\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "numberTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/numberTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.objectTypeDescriptor": {
+                "name": "objectTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"object\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "objectTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/objectTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.stringTypeDescriptor": {
+                "name": "stringTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"string\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "stringTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/stringTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.symbolTypeDescriptor": {
+                "name": "symbolTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"symbol\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "symbolTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/symbolTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.undefinedTypeDescriptor": {
+                "name": "undefinedTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"undefined\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "undefinedTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/undefinedTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.weakmapTypeDescriptor": {
+                "name": "weakmapTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"map\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "weakmapTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/weakmapTypeDescriptor.js",
+                "children": {}
+            },
+            "@coffeekraken.s-type.sugar.js.type.descriptor.weaksetTypeDescriptor": {
+                "name": "weaksetTypeDescriptor",
+                "type": "ISTypeDescriptor",
+                "description": "Describe the type \"WeakSet\" with some utilities methods like \"is\", \"cast\", etc...",
+                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "weaksetTypeDescriptor.js",
+                "extension": "js",
+                "relPath": "src/shared/descriptors/weaksetTypeDescriptor.js",
+                "children": {}
+            },
             "@coffeekraken.s-type.sugar.js.type.sTypeResult": {
                 "name": "STypeResult",
                 "type": "Class",
@@ -315,358 +670,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.arrayTypeDescriptor": {
-                "name": "arrayTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"array\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "arrayTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/arrayTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.bigintTypeDescriptor": {
-                "name": "bigintTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"bigint\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "bigintTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/bigintTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.booleanTypeDescriptor": {
-                "name": "booleanTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"boolean\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "booleanTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/booleanTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.classTypeDescriptor": {
-                "name": "classTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"class\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "classTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/classTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.dateTypeDescriptor": {
-                "name": "dateTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"date\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "dateTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/dateTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.functionTypeDescriptor": {
-                "name": "functionTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"function\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "functionTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/functionTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.integerTypeDescriptor": {
-                "name": "integerTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"integer\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "integerTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/integerTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.mapTypeDescriptor": {
-                "name": "mapTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"set\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "setTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/setTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.nullTypeDescriptor": {
-                "name": "nullTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"null\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "nullTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/nullTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.numberTypeDescriptor": {
-                "name": "numberTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"number\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "numberTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/numberTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.objectTypeDescriptor": {
-                "name": "objectTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"object\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "objectTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/objectTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.stringTypeDescriptor": {
-                "name": "stringTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"string\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "stringTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/stringTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.symbolTypeDescriptor": {
-                "name": "symbolTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"symbol\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "symbolTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/symbolTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.undefinedTypeDescriptor": {
-                "name": "undefinedTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"undefined\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "undefinedTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/undefinedTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.weakmapTypeDescriptor": {
-                "name": "weakmapTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"map\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "weakmapTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/weakmapTypeDescriptor.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-type.sugar.js.type.descriptor.weaksetTypeDescriptor": {
-                "name": "weaksetTypeDescriptor",
-                "type": "ISTypeDescriptor",
-                "description": "Describe the type \"WeakSet\" with some utilities methods like \"is\", \"cast\", etc...",
-                "namespace": "@coffeekraken.s-type.sugar.js.type.descriptor",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "export default {\n   name: 'String',\n   id: 'string',\n   is: (value) => typeof value === 'string',\n   cast: (value) => '' + value,\n   // etc...\n};"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "weaksetTypeDescriptor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/descriptors/weaksetTypeDescriptor.ts",
-                "children": {}
             },
             "@coffeekraken.s-type.shared.utils.parseTypeString": {
                 "name": "parseTypeString",

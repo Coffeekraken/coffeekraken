@@ -3,7 +3,7 @@
  * @name      requestAnimationFrame
  * @namespace            js.dom.utils
  * @type      Function
- * @plaform       js
+ * @platform       js
  * @status      beta
  *
  * Proxy for the window.requestAnimationFrame function

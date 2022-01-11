@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -62,103 +65,68 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-postcss-builder.config.postcss.plugins": {
-                "name": "plugins",
-                "type": "String",
-                "default": "['@coffeekraken/s-postcss-sugar-plugin','postcss-nested','postcss-atroot','postcss-extend-rule','postcss-property-lookup','autoprefixer']",
-                "description": "Specify the plugins to use with the postcss process",
-                "namespace": "@coffeekraken.s-postcss-builder.config.postcss",
+            "@coffeekraken.s-postcss-builder.node.interface.sPostcssBuilderBuildParamsInterface": {
+                "name": "SPostcssBuilderBuildParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SPostcssBuilder.build method",
+                "namespace": "@coffeekraken.s-postcss-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPostcssBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input css file for your build",
+                            "type": "String",
+                            "required": true,
+                            "alias": "i",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/src/css/index.css"
+                        },
+                        "output": {
+                            "description": "Specify the output file path you want to save your build",
+                            "type": "String",
+                            "alias": "o",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-postcss-builder/dist/css/index.css"
+                        },
+                        "prod": {
+                            "description": "Shorthand to set a production ready build",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "p"
+                        },
+                        "minify": {
+                            "description": "Specify if you want to minify your output css",
+                            "type": "Boolean",
+                            "alias": "m",
+                            "default": false
+                        },
+                        "purge": {
+                            "description": "Specify if you want to purge your output css. See the config.purgecss configuration file for more control",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "saveDev": {
+                            "description": "Specify if you want to save a .dev.css file that will not be purged or minified",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "postcss.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcss.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-builder.config.postcssBuilder.input": {
-                "name": "input",
-                "type": "String",
-                "default": "[config.storage.src.cssDir]/index.css",
-                "description": "Specify the input file to use for building your postcss",
-                "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "postcssBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.ts"
-            },
-            "@coffeekraken.s-postcss-builder.config.postcssBuilder.output": {
-                "name": "output",
-                "type": "String",
-                "default": "[config.storage.dist.cssDir]/index.css",
-                "description": "Specify the output file to save your builded postcss",
-                "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "postcssBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.ts"
-            },
-            "@coffeekraken.s-postcss-builder.config.postcssBuilder.postcss": {
-                "name": "postcss",
-                "type": "Object",
-                "default": "[config.postcss]",
-                "description": "Specify the postcss compiler configuration",
-                "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "postcssBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.ts"
-            },
-            "@coffeekraken.s-postcss-builder.config.postcssBuilder.purgecss": {
-                "name": "purgecss",
-                "type": "Object",
-                "default": "[config.purgecss]",
-                "description": "Specify the purgecss compiler configuration",
-                "namespace": "@coffeekraken.s-postcss-builder.config.postcssBuilder",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Oli vier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "postcssBuilder.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcssBuilder.config.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-postcss-builder.config.purgecss.content": {
-                "name": "content",
-                "type": "String[]",
-                "default": "['index.html','[config.storage.src.rootDir]/ ** / *.js','[config.storage.src.rootDir]/ ** / *.jsx','[config.storage.src.rootDir]/ ** / *.html','[config.storage.src.rootDir]/ ** / *.vue','[config.storage.src.rootDir]/ ** / *.riot','[config.storage.src.rootDir]/ ** / *.svelte','[config.storage.src.rootDir]/ ** / *.blade.php','[config.storage.src.rootDir]/ ** / *.twig']",
-                "description": "Specify the content files to take in consideration to purge your css",
-                "namespace": "@coffeekraken.s-postcss-builder.config.purgecss",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "purgecss.config.ts",
-                "extension": "config",
-                "relPath": "src/config/purgecss.config.ts",
+                "filename": "SPostcssBuilderBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SPostcssBuilderBuildParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-postcss-builder.node.sPostcssBuilder": {
@@ -167,10 +135,6 @@
                 "platform": [
                     {
                         "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
                         "description": ""
                     }
                 ],

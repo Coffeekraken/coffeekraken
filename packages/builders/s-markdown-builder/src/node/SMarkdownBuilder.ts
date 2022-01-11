@@ -564,7 +564,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         flatConfig: __flatten(__SSugarConfig.get('.')),
                         settings: this.markdownBuilderSettings,
                         params,
-                        packageJson: __packageJson(),
+                        packageJson: __packageJson(params.inDir),
                         docMenu: docmap.menu,
                         docmap,
                         time: {

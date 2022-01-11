@@ -236,6 +236,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             let currentContent: string[] = [];
             let currentObj: any = {};
             let docblockObj: any = {};
+            let finalDocblockObj: any = {};
             let previousWasEmptyLine = false;
 
             function add() {
@@ -319,14 +320,23 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                 const prop = Object.keys(docblockObj)[i];
                 const value = docblockObj[prop];
 
+                // do not process two times the same property
+                if (finalDocblockObj[prop]) continue;
+                
+                // private props
                 if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_')
                     continue;
+
+                // process with tags
                 if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-                    docblockObj[prop] = await this.docblockBlockSettings.tags[
+                    const res = await this.docblockBlockSettings.tags[
                         prop
                     ](value, this.docblockBlockSettings);
+                    if (res !== undefined) {
+                        finalDocblockObj[prop] = res;
+                    }
                 } else {
-                    docblockObj[prop] = __simpleValueTag(
+                    finalDocblockObj[prop] = __simpleValueTag(
                         value,
                         this.docblockBlockSettings,
                     );
@@ -334,15 +344,14 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
                 if (this.docblockBlockSettings.renderMarkdown) {
                     if (
-                        docblockObj[prop] instanceof String &&
-                        (<any>docblockObj[prop]).render === true
+                        finalDocblockObj[prop] instanceof String &&
+                        (<any>finalDocblockObj[prop]).render === true
                     ) {
-                        // console.log('AAAAAAA', docblockObj[prop].toString());
-                        docblockObj[prop] = __marked.parseInline(
-                            docblockObj[prop].toString(),
+                        finalDocblockObj[prop] = __marked.parseInline(
+                            finalDocblockObj[prop].toString(),
                         );
-                    } else if (Array.isArray(docblockObj[prop])) {
-                        docblockObj[prop] = docblockObj[prop].map((item) => {
+                    } else if (Array.isArray(finalDocblockObj[prop])) {
+                        finalDocblockObj[prop] = finalDocblockObj[prop].map((item) => {
                             if (
                                 item instanceof String &&
                                 (<any>item).render === true
@@ -352,7 +361,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                             } else return item;
                         });
                     } else if (__isPlainObject(value)) {
-                        __deepMap(docblockObj[prop], ({ prop, value: v }) => {
+                        __deepMap(finalDocblockObj[prop], ({ prop, value: v }) => {
                             if (
                                 v instanceof String &&
                                 (<any>v).render === true
@@ -367,13 +376,13 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             }
 
             // save the raw string
-            docblockObj.raw = this._source.toString();
+            finalDocblockObj.raw = this._source.toString();
 
             // save into internal property
-            this._blockObj = docblockObj;
+            this._blockObj = finalDocblockObj;
 
             // return the parsed docblock object
-            return resolve(docblockObj);
+            return resolve(finalDocblockObj);
         });
     }
 }

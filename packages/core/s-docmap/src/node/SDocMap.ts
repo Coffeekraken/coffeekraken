@@ -765,10 +765,6 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const docblocks = docblocksInstance.toObject();
 
-                    if (file.path.includes('.dev.css')) {
-                        console.log(docblocks.length);
-                    }
-
                     if (!docblocks || !docblocks.length) continue;
 
                     let docblockObj: any = {};
@@ -821,7 +817,13 @@ class SDocMap extends __SClass implements ISDocMap {
                             }
                         }
 
-                        if (docblock.namespace) {
+                        const namespaceIdCompliant = __namespaceCompliant(
+                                    `${docblock.namespace}.${__camelCase(
+                                        docblock.name,
+                                    )}`,
+                                )
+
+                        if (docblock.namespace && !this._entries[namespaceIdCompliant]) {
                             docblockObj = {
                                 ...docblockEntryObj,
                                 filename,
@@ -832,11 +834,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                 ),
                             };
                             this._entries[
-                                __namespaceCompliant(
-                                    `${docblock.namespace}.${__camelCase(
-                                        docblock.name,
-                                    )}`,
-                                )
+                                namespaceIdCompliant
                             ] = docblockObj;
                         } else if (docblock.name) {
                             children[__camelCase(docblock.name)] =

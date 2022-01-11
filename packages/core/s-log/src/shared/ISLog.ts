@@ -4,10 +4,10 @@ import __SLog from './SLog';
 /**
  * @name                    ISLog
  * @namespace           shared
- * @type                    Interface
+ * @type.                      Class
  * @platform            js
  * @platform            node
- * @plaform             ts
+ * @platform             ts
  * @status              beta
  *
  * This interface define the shape a an log object that can be used

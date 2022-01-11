@@ -1,6 +1,7 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
 
 export interface ISActivateFeatureProps {
     href: string;
@@ -56,6 +57,7 @@ export interface ISActivateFeatureProps {
 export default class SActivateFeature extends __SFeature {
     _hrefSelector?: string;
     _$targets?: HTMLElement[];
+    _$triggerers: HTMLElement[];
     _$groupElements?: HTMLElement[];
     _unactivateTimeout;
 
@@ -73,6 +75,12 @@ export default class SActivateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+
+        if (this.props.triggerer) {
+            this._$triggerers = Array.from(document.querySelectorAll(this.props.triggerer));
+        } else {
+            this._$triggerers = [this.node];
+        }
 
         // expose the api on node
         this.componentUtils.exposeApi(
@@ -105,41 +113,56 @@ export default class SActivateFeature extends __SFeature {
             );
         }
 
-        this.props.trigger.forEach((trigger) => {
-            switch (trigger) {
-                case 'click':
-                    this.node.addEventListener('click', (e) => {
-                        if (this.isActive() && this.props.toggle) {
-                            this.unactivate();
-                        } else {
-                            this.activate();
-                        }
-                    });
-                    break;
-                case 'mousenter':
-                case 'mouseover':
-                    this.node.addEventListener('mouseover', (e) => {
-                        this.activate();
-                    });
-                    break;
-                case 'mouseout':
-                case 'mouseleave':
-                    this.node.addEventListener('mouseleave', (e) => {
-                        this.unactivate();
-                    });
-                    break;
-                case 'anchor':
-                    if (document.location.hash === this._hrefSelector) {
-                        this.activate();
-                    }
-                    window.addEventListener('hashchange', (e) => {
-                        if (document.location.hash === this._hrefSelector) {
-                            this.activate();
-                        }
-                    });
+        this._$triggerers.forEach($triggerer => {
 
-                    break;
-            }
+            // @ts-ignore
+            const triggererTriggers = $triggerer.hasAttribute('trigger') ? $triggerer.getAttribute('trigger').split(',').map(l => l.trim()) : [];
+            const triggers = __unique([...this.props.trigger, ...triggererTriggers]);
+
+            triggers.forEach((trigger) => {
+
+                if (trigger.match(/^event:/)) {
+                    this.node.addEventListener(trigger.replace('event:',''), (e) => {
+                        this.activate();
+                    });
+                } else {
+
+                    switch (trigger) {
+                        case 'click':
+                            $triggerer.addEventListener('click', (e) => {
+                                if (this.isActive() && this.props.toggle) {
+                                    this.unactivate();
+                                } else {
+                                    this.activate();
+                                }
+                            });
+                            break;
+                        case 'mousenter':
+                        case 'mouseover':
+                            $triggerer.addEventListener('mouseover', (e) => {
+                                this.activate();
+                            });
+                            break;
+                        case 'mouseout':
+                        case 'mouseleave':
+                            $triggerer.addEventListener('mouseleave', (e) => {
+                                this.unactivate();
+                            });
+                            break;
+                        case 'anchor':
+                            if (document.location.hash === this._hrefSelector) {
+                                this.activate();
+                            }
+                            window.addEventListener('hashchange', (e) => {
+                                if (document.location.hash === this._hrefSelector) {
+                                    this.activate();
+                                }
+                            });
+
+                            break;
+                    }
+                }
+            });
         });
 
         // activate if has the "active" attribute

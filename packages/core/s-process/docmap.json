@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-promise",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +65,145 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-process.node.interface.sCommandProcessInterface": {
+                "name": "SCommandProcessInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SCommandProcessInterface",
+                    "description": "",
+                    "definition": {
+                        "help": {
+                            "description": "Specify if you want to see the help of the process",
+                            "type": "Boolean",
+                            "alias": "h",
+                            "default": false
+                        },
+                        "command": {
+                            "description": "Specify the command to execute",
+                            "type": "String",
+                            "alias": "c",
+                            "required": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SCommandProcessInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SCommandProcessInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-process.node.interface.sProcessInterface": {
+                "name": "SProcessInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SProcessInterface",
+                    "description": "",
+                    "definition": {
+                        "help": {
+                            "description": "Specify if you want to see the help of the process",
+                            "type": "Boolean",
+                            "alias": "h",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SProcessInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-process.node.interface.sProcessSettingsInterface": {
+                "name": "SProcessSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
+                "namespace": "@coffeekraken.s-process.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SProcessSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "killOnError": {
+                            "description": "Specify if you want to kill the process when an error occurs",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "stdio": {
+                            "description": "Specify the stdio to use for your process",
+                            "type": "String|SStdio|Boolean",
+                            "alias": "s",
+                            "default": "inherit"
+                        },
+                        "throw": {
+                            "description": "Specify if you want to throw error when an error occurs",
+                            "type": "Boolean",
+                            "alias": "t",
+                            "default": true
+                        },
+                        "exitAtEnd": {
+                            "description": "Specify if you want to kill the process at his end",
+                            "type": "Boolean",
+                            "alias": "e",
+                            "default": false
+                        },
+                        "runAsChild": {
+                            "description": "Specify if you want to run your process as a child one",
+                            "type": "Boolean",
+                            "alias": "c",
+                            "default": false
+                        },
+                        "processPath": {
+                            "description": "Specify a path to a process file that exports a process supported type like an SProcess based class, a function, etc...",
+                            "type": "String",
+                            "default": null
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SProcessSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SProcessSettingsInterface.js",
+                "children": {}
+            },
             "@coffeekraken.s-process.s-process.sCommandProcess": {
                 "name": "SCommandProcess",
                 "type": "Class",
@@ -79,21 +222,10 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SCommandProcess.ts",
-                "extension": "ts",
-                "relPath": "src/node/SCommandProcess.ts",
+                "filename": "SCommandProcess.js",
+                "extension": "js",
+                "relPath": "src/node/SCommandProcess.js",
                 "children": {
-                    "commandProcessSettings": {
-                        "name": "commandProcessSettings",
-                        "type": "ISCommandProcessSettings",
-                        "description": "Access the command process settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "constructor": {
                         "name": "constructor",
                         "type": "Function",
@@ -105,10 +237,22 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
+                    "commandProcessSettings": {
+                        "name": "commandProcessSettings",
+                        "type": "ISCommandProcessSettings",
+                        "description": "Access the command process settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
                     "process": {
                         "name": "process",
                         "type": "Function",
                         "description": "Run the actual command through a ```spawn``` call.\nThe spawn function used here is the sugar one stored in \"sugar.node.process.spawn\"",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -130,14 +274,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SProcess.ts",
-                "extension": "ts",
-                "relPath": "src/node/SProcess.ts",
+                "filename": "SProcess.js",
+                "extension": "js",
+                "relPath": "src/node/SProcess.js",
                 "children": {
-                    "params": {
-                        "name": "params",
-                        "type": "String",
-                        "description": "Access the process params",
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -178,32 +322,11 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "currentExecutionObj": {
-                        "name": "currentExecutionObj",
-                        "type": "ISProcessProcessObj",
-                        "description": "Store the current execution object info like startTime, endTime, duration, state, etc...",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "paramsInterface": {
-                        "name": "paramsInterface",
-                        "type": "Object",
-                        "description": "Store the parameters interface to apply on the params object and on the initialParams object.\nCan come from the static ```interfaces.params``` property or the ```settings.interface``` one.",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "from": {
                         "name": "from",
                         "type": "Function",
                         "description": "This static method allows you to pass arguments like:\n- file path: Will require it, check what's returned from and instanciate an SProcess depending on that\n- command string: Will instanciate a new SCommandProcess instance and returns it for you to run it\n- function: Will execute the function and instanciate the proper SPromise instance type depending on the returned value\n- SPromise instance: Will simply wrap the SPromise  instance inside an SProcess one and returns you this new SProcess instance\n- SProcess based class: This make not so much sens but at least you can rely on this method to instanciate event an SProcess based class\nOnce you get the proper instance back, you can use it the same as an SProcess based class instance and use the ```run``` method to\nexecute your process",
+                        "async": "true",
                         "static": "true",
                         "since": "true",
                         "author": {
@@ -216,6 +339,7 @@
                         "name": "fromCommand",
                         "type": "Function",
                         "description": "Initialize an SCommandProcess instance on which you can call the standard \"run\" method\nand execute a command by passing inside the params object the ```command``` prop.",
+                        "async": "true",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -227,18 +351,9 @@
                     "run": {
                         "name": "run",
                         "type": "Function",
-                        "description": "Run the process by calling the ```process``` method implemented on your\nSProcess class (if exists).\nTake care of starting timers for duration tracking, etc...",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
+                        "description": "Static \"run\" function to use as a shortcut of the new, and run call",
+                        "async": "true",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -447,6 +562,7 @@
                         "name": "run",
                         "type": "Function",
                         "description": "Proxy to the ```run``` method on the passed processInstance for the specified process id",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -530,6 +646,7 @@
                         "name": "run",
                         "type": "Function",
                         "description": "Proxy to the ```run``` method on the passed processInstance",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -593,6 +710,7 @@
                         "name": "run",
                         "type": "Function",
                         "description": "Execute the processes pipe",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -601,54 +719,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-process.sugar.node.process.interface.sCommandProcessInterface": {
-                "name": "SCommandProcessInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SCommandProcessInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SCommandProcessInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-process.sugar.node.process.interface.sProcessInterface": {
-                "name": "SProcessInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SProcessInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SProcessInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-process.sugar.node.process.interface.sProcessSettingsInterface": {
-                "name": "SProcessSettingsInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-process.sugar.node.process.interface",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SProcessSettingsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SProcessSettingsInterface.ts",
-                "children": {}
             }
         }
     }

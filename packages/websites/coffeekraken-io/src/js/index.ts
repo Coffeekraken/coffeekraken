@@ -56,6 +56,12 @@ __SConductor.setup({
 
     // await __wait(1500);
 
+    // views related
+    for (let [key, value] of Object.entries(viewsRelated)) {
+        // @ts-ignore
+        if (typeof value.default === 'function') value.default();
+    }
+
     // components
     __CKDiscoverComponent();
     __CKSettingsComponent();

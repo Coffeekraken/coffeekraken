@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,10 +16,11 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +65,22 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.pathRule": {
+                "name": "pathRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "status": "wip",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "pathRule.ts",
+                "extension": "ts",
+                "relPath": "src/js/rules/pathRule.ts",
+                "children": {}
+            },
             "@coffeekraken.s-descriptor.s-descriptor.shared.sDescriptor": {
                 "name": "SDescriptor",
                 "type": "Class",
@@ -152,6 +172,66 @@
                     }
                 }
             },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.maxRule": {
+                "name": "maxRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "maxRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/maxRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.minRule": {
+                "name": "minRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value is not under a certain value",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "minRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/minRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.requiredRule": {
+                "name": "requiredRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure that your value is not ```undefined```\nor a nullish value like ```null``` or ```''```.",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "requiredRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/requiredRule.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.typeRule": {
+                "name": "typeRule",
+                "type": "ISDescriptorRule",
+                "description": "This rule allows you to make sure a value does match the passed type like:\n- String | Array<String>\n- Boolean\n- Number\n- etc...",
+                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "typeRule.ts",
+                "extension": "ts",
+                "relPath": "src/shared/rules/typeRule.ts",
+                "children": {}
+            },
             "@coffeekraken.s-descriptor.sugar.js.descriptor.sDescriptorResult": {
                 "name": "SDescriptorResult",
                 "type": "Class",
@@ -229,82 +309,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.pathRule": {
-                "name": "pathRule",
-                "type": "ISDescriptorRule",
-                "description": "This rule allows you to make sure a value is not under a certain value",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "pathRule.ts",
-                "extension": "ts",
-                "relPath": "src/node/rules/pathRule.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.maxRule": {
-                "name": "maxRule",
-                "type": "ISDescriptorRule",
-                "description": "This rule allows you to make sure a value is not under a certain value",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "maxRule.ts",
-                "extension": "ts",
-                "relPath": "src/shared/rules/maxRule.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.minRule": {
-                "name": "minRule",
-                "type": "ISDescriptorRule",
-                "description": "This rule allows you to make sure a value is not under a certain value",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "minRule.ts",
-                "extension": "ts",
-                "relPath": "src/shared/rules/minRule.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.requiredRule": {
-                "name": "requiredRule",
-                "type": "ISDescriptorRule",
-                "description": "This rule allows you to make sure that your value is not ```undefined```\nor a nullish value like ```null``` or ```''```.",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "requiredRule.ts",
-                "extension": "ts",
-                "relPath": "src/shared/rules/requiredRule.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-descriptor.sugar.js.descriptor.rules.typeRule": {
-                "name": "typeRule",
-                "type": "ISDescriptorRule",
-                "description": "This rule allows you to make sure a value does match the passed type like:\n- String | Array<String>\n- Boolean\n- Number\n- etc...",
-                "namespace": "@coffeekraken.s-descriptor.sugar.js.descriptor.rules",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com"
-                },
-                "filename": "typeRule.ts",
-                "extension": "ts",
-                "relPath": "src/shared/rules/typeRule.ts",
-                "children": {}
             }
         }
     }

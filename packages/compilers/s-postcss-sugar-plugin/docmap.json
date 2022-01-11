@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -62,23 +65,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
-                "name": "cache",
-                "type": "Boolean",
-                "default": "true",
-                "description": "Specify if you want to use the internal cache to speed up your compilations or not",
-                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "postcssSugarPlugin.config.ts",
-                "extension": "config",
-                "relPath": "src/config/postcssSugarPlugin.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
                 "name": "astNodesToString",
                 "type": "Function",
@@ -91,9 +77,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "astNodesToString.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/astNodesToString.ts",
+                "filename": "astNodesToString.js",
+                "extension": "js",
+                "relPath": "src/node/utils/astNodesToString.js",
                 "children": {}
             }
         }

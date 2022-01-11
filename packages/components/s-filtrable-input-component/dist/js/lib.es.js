@@ -1206,7 +1206,25 @@ UnsafeHTMLDirective.resultType = HTML_RESULT;
  * sanitized or escaped, as it may lead to cross-site-scripting
  * vulnerabilities.
  */
-const unsafeHTML = directive(UnsafeHTMLDirective);class SHighlightJsComponentInterface extends __SInterface {
+const unsafeHTML = directive(UnsafeHTMLDirective);/**
+ * @name                SFiltrableInputComponentInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This class represent the interface that describe parameters of the SFiltrableInputComponent
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+class SFiltrableInputComponentInterface extends __SInterface {
     static get _definition() {
         return {
             items: {
@@ -1228,10 +1246,18 @@ const unsafeHTML = directive(UnsafeHTMLDirective);class SHighlightJsComponentInt
                 type: 'String',
                 default: 'No item to display',
             },
+            searchValuePreprocess: {
+                description: 'Specify a function used to preprocess the value just before actually searching through the items',
+                type: 'Function',
+            },
             loadingText: {
                 description: 'Specify the text to use for the default "loading" state',
                 type: 'String',
                 default: 'Loading please wait...',
+            },
+            filterItems: {
+                description: 'Specify a function to use to filter the items. Must return the filtered list of items',
+                type: 'Function'
             },
             filtrable: {
                 description: 'Specify all the properties of your "item" to use as source for the filtrable process',
@@ -1572,6 +1598,8 @@ function fromElementTopToViewportBottom(elm) {
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 function camelize(text) {
+    if (!text)
+        text = '';
     let res = '';
     const reg = /(?:^|[_-\s])(\w)/g;
     res = text.replace(reg, function (_, c) {
@@ -2394,7 +2422,7 @@ class SFiltrableInput extends __SLitComponent {
                 shadowDom: false,
             },
             componentUtils: {
-                interface: SHighlightJsComponentInterface,
+                interface: SFiltrableInputComponentInterface,
             },
         }));
         this.state = {
@@ -2616,41 +2644,51 @@ class SFiltrableInput extends __SLitComponent {
             if (needUpdate)
                 yield this.refreshItems();
             let items = this.state.items;
-            let matchedItemsCount = 0;
-            const filteredItems = items
-                .map((item) => clone(item))
-                .filter((item) => {
-                if (matchedItemsCount >= this.state.displayedMaxItems)
-                    return false;
-                if (!this.props.filtrable.length)
-                    return true;
-                let matchFilter = false;
-                for (let i = 0; i < Object.keys(item).length; i++) {
-                    const propName = Object.keys(item)[i], propValue = item[propName];
-                    // prevent not string value
-                    if (typeof propValue !== 'string')
-                        continue;
-                    // check if the current propName is specified in the filtrable list
-                    if (this.props.filtrable.indexOf(propName) !== -1) {
-                        const reg = new RegExp(this.state.value.split(' ').join('|'), 'gi');
-                        if (propValue.match(reg)) {
-                            matchFilter = true;
-                            if (this.state.value && this.state.value !== '') {
-                                const reg = new RegExp(this.state.value.split(' ').join('|'), 'gi');
-                                const finalString = propValue.replace(reg, (str) => {
-                                    return `<span class="${this.componentUtils.className('__list-item-highlight')} s-highlight"
-                                                >${str}</span>`;
-                                });
-                                item[propName] = finalString;
+            let searchValue = this.state.value;
+            if (this.props.searchValuePreprocess) {
+                searchValue = this.props.searchValuePreprocess(searchValue);
+            }
+            let filteredItems = items.map(item => clone(item));
+            // custom function
+            if (this.props.filterItems) {
+                filteredItems = yield this.props.filterItems(filteredItems, searchValue, this.state);
+            }
+            else {
+                let matchedItemsCount = 0;
+                filteredItems = filteredItems
+                    .filter((item) => {
+                    if (matchedItemsCount >= this.state.displayedMaxItems)
+                        return false;
+                    if (!this.props.filtrable.length)
+                        return true;
+                    let matchFilter = false;
+                    for (let i = 0; i < Object.keys(item).length; i++) {
+                        const propName = Object.keys(item)[i], propValue = item[propName];
+                        // prevent not string value
+                        if (typeof propValue !== 'string')
+                            continue;
+                        // check if the current propName is specified in the filtrable list
+                        if (this.props.filtrable.indexOf(propName) !== -1) {
+                            const reg = new RegExp(searchValue.split(' ').join('|'), 'gi');
+                            if (propValue.match(reg)) {
+                                matchFilter = true;
+                                if (searchValue && searchValue !== '') {
+                                    const reg = new RegExp(searchValue.split(' ').join('|'), 'gi');
+                                    const finalString = propValue.replace(reg, (str) => {
+                                        return `<span class="${this.componentUtils.className('__list-item-highlight')} s-highlight"
+                                                    >${str}</span>`;
+                                    });
+                                    item[propName] = finalString;
+                                }
                             }
                         }
                     }
-                }
-                if (matchFilter) {
-                    matchedItemsCount++;
-                }
-                return matchFilter;
-            });
+                    if (matchFilter) {
+                        matchedItemsCount++;
+                    }
+                    return matchFilter;
+                });
+            }
             // @ts-ignore
             this.state.filteredItems = filteredItems;
             this.state.isLoading = false;

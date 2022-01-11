@@ -36,7 +36,12 @@ function formatDuration(estimation: number): string {
         const s = (estimation / 1000).toFixed(0);
         const ms = (estimation - s * 1000).toFixed(0);
 
-        return `${s}s${ms > 0 ? `${ms}ms` : ''}`;
+        if (s > 10) {
+            return `${s}s`;
+        } else {
+            return `${s}s${ms > 0 ? `${ms}ms` : ''}`;
+        }
+
     }
     if (estimation < 1000 * 60 * 60) {
         const m = Math.floor(estimation / 1000 / 60);

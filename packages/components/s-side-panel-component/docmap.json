@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-range-component",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -60,6 +64,78 @@
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-side-panel-component.js.interface.sSidePanelComponentInterface": {
+                "name": "SSidePanelComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSidePanelComponent",
+                "namespace": "@coffeekraken.s-side-panel-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSidePanelComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "side": {
+                            "description": "Specify the side where to display the panel. Can be \"top\",\"left\",\"bottom\" or \"right\"",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "left",
+                                "bottom",
+                                "right"
+                            ],
+                            "default": "left"
+                        },
+                        "active": {
+                            "description": "Specify the panel initial state",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "overlay": {
+                            "description": "Specify if you want an \"overlay\" between the panel and your content",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "triggerer": {
+                            "description": "Specify a css selector that targets the elements in your UI you want to open the panel on click",
+                            "type": "String"
+                        },
+                        "closeOn": {
+                            "description": "Specify which \"action(s)\" close the panel. Valid values are \"click\" or/and \"escape\"",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "click",
+                                "escape"
+                            ],
+                            "default": [
+                                "click",
+                                "escape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSidePanelComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SSidePanelComponentInterface.js",
+                "children": {}
+            }
+        }
     }
 }

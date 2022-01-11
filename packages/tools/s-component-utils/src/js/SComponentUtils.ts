@@ -15,37 +15,7 @@ import __SClass from '@coffeekraken/s-class';
 import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
 import __SPromise from '@coffeekraken/s-promise';
 import __SConductor from '@coffeekraken/s-conductor';
-
-export class SComponentDefaultInterface extends __SInterface {
-    static get _definition() {
-        return {
-            id: {
-                type: 'String',
-                physical: true,
-            },
-            mounted: {
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
-            mountWhen: {
-                type: 'String',
-                values: ['directly', 'inViewport'],
-                default: 'directly',
-            },
-            adoptStyle: {
-                type: 'Boolean',
-                default: true,
-                physical: true,
-            },
-            bare: {
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
-        };
-    }
-}
+import __SComponentDefaultInterface from './interface/SComponentDefaultInterface';
 
 export interface ISComponentUtilsSettings {
     interface?: typeof __SInterface;
@@ -227,7 +197,7 @@ export default class SComponent extends __SClass {
         };
         // @ts-ignore
         InterfaceToApply.definition = {
-            ...Object.assign({}, SComponentDefaultInterface.definition),
+            ...Object.assign({}, __SComponentDefaultInterface.definition),
             // @ts-ignore
             ...(this.componentUtilsSettings.interface?.definition ?? {}),
         };
@@ -410,11 +380,11 @@ export default class SComponent extends __SClass {
 
     static getFinalInterface(int?: typeof __SInterface): __SInterface {
         class InlineSComponentUtilsInterface extends __SInterface {
-            static definition = SComponentDefaultInterface.definition;
+            static definition = __SComponentDefaultInterface.definition;
         }
         if (int) {
             InlineSComponentUtilsInterface.definition = {
-                ...SComponentDefaultInterface.definition,
+                ...__SComponentDefaultInterface.definition,
                 // @ts-ignore
                 ...int.definition,
             };

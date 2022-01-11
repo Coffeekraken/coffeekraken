@@ -5,7 +5,7 @@ import __urlSlug from 'url';
  * @type            Function
  * @platform        js
  * @platform        node
- * @plaform         ts
+ * @platform         ts
  * @status          stable
  *
  * Simple function that take a string as parameter and returns you a valid

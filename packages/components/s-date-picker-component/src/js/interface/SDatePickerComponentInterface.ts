@@ -2,6 +2,25 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 
+/**
+ * @name                SDatePickerComponentInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This class represent the interface that describe parameters of the SDatePickerComponent
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 export default class SDatePickerComponentInterface extends __SInterface {
     static get _definition() {
         return {

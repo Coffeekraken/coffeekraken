@@ -1,6 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
+/**
+ * @name                SPostcssBuilderBuildParamsInterface
+ * @namespace           node.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             node
+ *
+ * This class represent the interface that describe parameters of the SImagesBuilder.build method
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
 export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {

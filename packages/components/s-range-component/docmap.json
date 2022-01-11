@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +65,66 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-range-component.js.interface.sRangeComponentInterface": {
+                "name": "SRangeComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SRangeComponent",
+                "namespace": "@coffeekraken.s-range-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": "String",
+                            "description": "Specify the initial range value"
+                        },
+                        "min": {
+                            "type": "Number",
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": "Number",
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": "Number",
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": "String",
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": "Boolean",
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRangeComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SRangeComponentInterface.js",
+                "children": {}
+            },
             "@coffeekraken.s-range-component.js.range": {
                 "name": "Range",
                 "type": "CustomElement",

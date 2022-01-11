@@ -7,14 +7,15 @@
         @endphp
 
         @if (is_object($item))
-            <li id="{{ $subId }}">
+            <li id="{{ $subId }}" s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle
+                save-state trigger="click,event:actual">
                 @if ($item->slug)
                     <i class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent"></i>
                     <a href="{{ $item->slug }}">
                     @else
                         <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
                         <i class="s-icon:folder"></i>
-                        <span s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
+                        <span>
                 @endif
                 @if ($item->name)
                     {{ $item->name }}

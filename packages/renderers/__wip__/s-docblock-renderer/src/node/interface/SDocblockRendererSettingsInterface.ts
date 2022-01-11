@@ -4,10 +4,12 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name            SDocblockRendererSettingsInterface
- * @namespace       sugar.node.docblock.renderers.interface
- * @type            Class
+ * @namespace       node.interface
+ * @type.                      Class
  * @extends         SInterface
- * @status          beta
+ * @interface
+ * @status              beta
+ * @platform             node
  *
  * Represent the SDocblockRenderer settings
  *

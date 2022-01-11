@@ -4,6 +4,7 @@ import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 import __fs from 'fs';
 import __path from 'path';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
+import __fileName from '@coffeekraken/sugar/node/fs/filename';
 
 /**
  * @name              interface
@@ -26,19 +27,28 @@ import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/check
  * @author 	Olivier Bossel <olivier.bossel@gmail.com>
  */
 export default async function interfaceTag(data, blockSettings) {
-    const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
 
-    let name = stringArray[0],
-        importName = stringArray[1] ? stringArray[1].trim() : 'default',
-        path,
-        relPath;
+    let stringArray: string[] = [];
+
+    if (data.value === true) {
+        stringArray = [__fileName(blockSettings.filepath),'default'];
+        if (blockSettings.filepath.match(/\.ts$/)) {
+            console.log('RE');
+            return;
+        }
+    } else {
+       stringArray = data.value.trim().split(/(?<=^\S+)\s/);
+    }
+
+    let path = stringArray[0],
+        importName = stringArray[1] ? stringArray[1].trim() : 'default';
 
     const potentialPath = __checkPathWithMultipleExtensions(
-        __path.resolve(__folderPath(blockSettings.filepath), name),
+        __path.resolve(__folderPath(blockSettings.filepath), path),
         ['js'],
     );
 
-    if (!potentialPath) return {};
+    if (!potentialPath) return;
 
     const int = await import(potentialPath);
     return int[importName].toObject();

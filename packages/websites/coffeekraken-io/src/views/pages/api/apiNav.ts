@@ -10,7 +10,7 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 export interface IApiNavComponentProps {}
 
-export default class ApiNav extends __SLitComponent {
+export class ApiNav extends __SLitComponent {
     constructor() {
         super({
             litComponent: {
@@ -33,6 +33,14 @@ export default class ApiNav extends __SLitComponent {
         const request = new __SRequest({
             url: '/docmap.json',
             method: 'get',
+        });
+
+        this.addEventListener('actual', (e) => {
+            for (let [key, value] of Object.entries(this._menuStates)) {
+                if (e.target.getAttribute('namespace').startsWith(key + '.')) {
+                    value.opened = true;
+                }
+            }
         });
 
         // restore state
@@ -112,6 +120,12 @@ export default class ApiNav extends __SLitComponent {
                 currentNamespace ? `${currentNamespace}.` : ''
             }${itemName}`;
 
+            if (!this._menuStates[itemNamespace]) {
+                  this._menuStates[itemNamespace] = {
+                    opened: false,
+                };
+            }
+
             if (itemObj.name && itemObj.namespace) {
                 let icon = itemObj.platform[0].name;
 
@@ -120,15 +134,13 @@ export default class ApiNav extends __SLitComponent {
                         <i
                             class="s-icon:file-${icon} s-tc:extension-${icon}"
                         ></i>
-                        <a href="/api/${itemNamespace}">${itemObj.name}</a>
+                        <a href="/api/${itemNamespace}" namespace="${itemNamespace}">${itemObj.name}</a>
                     </li>
                 `;
             } else {
                 return html`
                     <li class="${this._isAcive(itemNamespace) ? 'active' : ''}">
-                        <i
-                            class="s-icon:folder-opened s-tc:info s-when:active"
-                        ></i>
+                        <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
                         <i class="s-icon:folder"></i>
                         <span
                             @click=${() => {
@@ -137,14 +149,10 @@ export default class ApiNav extends __SLitComponent {
                         >
                             ${itemName}
                         </span>
-                        ${this._menuStates[itemNamespace]?.opened
-                            ? html`
-                                  ${this._renderList(
-                                      __get(this._menuStack, itemNamespace),
-                                      itemNamespace,
-                                  )}
-                              `
-                            : ''}
+                        ${this._renderList(
+                            __get(this._menuStack, itemNamespace),
+                            itemNamespace,
+                        )}
                     </li>
                 `;
             }
@@ -160,7 +168,7 @@ export default class ApiNav extends __SLitComponent {
     render() {
         if (!this._loaded) {
             return html`
-                <div class="s-until:sibling:mounted">
+                <div>
                     <i class="s-loader:spinner s-color:accent"></i>
                     &nbsp;
                     <p class="s-typo:p s-display:inline-block">
@@ -178,6 +186,8 @@ export default class ApiNav extends __SLitComponent {
     }
 }
 
-if (!customElements.get('api-nav')) {
-    customElements.define('api-nav', ApiNav);
+export default () => {
+    if (!customElements.get('api-nav')) {
+        customElements.define('api-nav', ApiNav);
+    }
 }

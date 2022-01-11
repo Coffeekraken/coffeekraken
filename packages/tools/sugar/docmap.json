@@ -4,6 +4,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,10 +15,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -49,6 +52,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -87,6 +91,29 @@
                 "filename": "README.md",
                 "extension": "md",
                 "relPath": "README.md",
+                "children": {}
+            },
+            "@coffeekraken.sugar.cli.interface.sRunCommandParamsInterface": {
+                "name": "SRunCommandParamsInterface",
+                "type": "Interface",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the `sugar command.run` command",
+                "namespace": "@coffeekraken.sugar.cli.interface",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRunCommandParamsInterface.ts",
+                "extension": "ts",
+                "relPath": "src/cli/interface/SRunCommandParamsInterface.ts",
                 "children": {}
             },
             "@coffeekraken.sugar.js.clipboard.copy": {
@@ -2370,6 +2397,12 @@
             "@coffeekraken.sugar.js.dom.utils.requestAnimationFrame": {
                 "name": "requestAnimationFrame",
                 "type": "Function",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
                 "description": "Proxy for the window.requestAnimationFrame function",
                 "namespace": "@coffeekraken.sugar.js.dom.utils",
                 "status": "beta",
@@ -14105,6 +14138,10 @@
                     },
                     {
                         "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
                         "description": ""
                     }
                 ],

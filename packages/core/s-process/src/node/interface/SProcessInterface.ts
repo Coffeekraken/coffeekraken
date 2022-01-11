@@ -4,9 +4,12 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SProcessInterface
- * @namespace           sugar.node.process.interface
- * @type                Class
+ * @namespace           node.interface
+ * @type.                      Class
  * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             node
  *
  * This class represent the interface that describe the minimum requirement
  * needed for a process instance usable across the toolkit like in an SCli instance, etc...

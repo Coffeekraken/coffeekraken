@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,23 +65,6 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-file.config.sFile.classesMap": {
-                "name": "classesMap",
-                "type": "Record<string, string>",
-                "default": "{}",
-                "description": "Map some SFile classes path using minimatch patterns like so:\n{\n'.scss,*.sass': `${__packageRoot(__dirname)}/src/node/scss/SScssFile`\n}",
-                "namespace": "@coffeekraken.s-file.config.sFile",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "sFile.config.ts",
-                "extension": "config",
-                "relPath": "src/config/sFile.config.ts",
-                "children": {}
-            },
             "@coffeekraken.s-file.sugar.node.fs.sFile": {
                 "name": "SFile",
                 "type": "Class",
@@ -348,6 +335,7 @@
                         "name": "duplicate",
                         "type": "Function",
                         "description": "This method allows you to make a copy of this file.\nIf you don't specify a \"to\" path, the file will be diplicated\ninto the temp directory",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -370,6 +358,7 @@
                         "name": "save",
                         "type": "Function",
                         "description": "This method allows you to save the file with the content\nthat you can set by setting the ```content``` property",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -392,6 +381,7 @@
                         "name": "unlink",
                         "type": "Function",
                         "description": "This method allows you to unlink the file asyncronously",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -403,6 +393,7 @@
                         "name": "unlinkSync",
                         "type": "Function",
                         "description": "This method allows you to unlinkSync the file syncronously",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -414,6 +405,7 @@
                         "name": "read",
                         "type": "Function",
                         "description": "This method allows you to read the file asycronously",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -436,6 +428,7 @@
                         "name": "write",
                         "type": "Function",
                         "description": "This method allows you to write the file asycronously",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

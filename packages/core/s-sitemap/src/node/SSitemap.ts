@@ -3,7 +3,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSitemapSource from './SSitemapSource';
 import __SSitemapBuildParamsInterface, {
     ISSitemapBuildParams,
-} from './interface/SSitemapBuildInterface';
+} from './interface/SSitemapBuildIParamsInterface';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';

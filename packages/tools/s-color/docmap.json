@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,11 +15,12 @@
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -62,6 +65,101 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-color.shared.interface.sColorApplyParamsInterface": {
+                "name": "SColorApplyParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSvelteCompiler",
+                "namespace": "@coffeekraken.s-color.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SColorApplyParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "desaturate": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "d",
+                            "description": "Allows you to desaturate the color using a percentage"
+                        },
+                        "saturate": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "s",
+                            "description": "Allows you to saturate the color using a percentage"
+                        },
+                        "greyscale": {
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "g",
+                            "description": "Allows you to get back the grayscale version of your color"
+                        },
+                        "spin": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "Spin the hue on the passed value (max 360)"
+                        },
+                        "transparentize": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of transparency to apply between 0-100|0-1"
+                        },
+                        "alpha": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "a",
+                            "description": "The new alpha value to apply between 0-100|0-1"
+                        },
+                        "opacity": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "o",
+                            "description": "The new alpha value to apply between 0-100|0-1"
+                        },
+                        "opacify": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of transparence to remove between 0-100|0-1"
+                        },
+                        "darken": {
+                            "type": "Number",
+                            "default": 0,
+                            "description": "The amount of darkness (of the nightmare of the shadow) to apply between 0-100"
+                        },
+                        "lighten": {
+                            "type": "Number",
+                            "default": 0,
+                            "alias": "l",
+                            "description": "The amount of lightness (of the sky of the angels) to apply between 0-100"
+                        },
+                        "invert": {
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "i",
+                            "description": "Specify if you want to invert the color to keep a good contrast ratio with a background for example"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColorApplyParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SColorApplyParamsInterface.js",
+                "children": {}
+            },
             "@coffeekraken.s-color.shared.sColor": {
                 "name": "SColor",
                 "type": "Class",
@@ -544,23 +642,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-color.sugar.node.svelte.compile.interface.sColorApplyParamsInterface": {
-                "name": "SColorApplyParamsInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe parameters of the SSvelteCompiler",
-                "namespace": "@coffeekraken.s-color.sugar.node.svelte.compile.interface",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SColorApplyParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/shared/interface/SColorApplyParamsInterface.ts",
-                "children": {}
             }
         }
     }

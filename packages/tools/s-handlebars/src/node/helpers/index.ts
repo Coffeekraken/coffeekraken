@@ -3,6 +3,7 @@ import configFiles from './configFiles';
 import configFromDocmap from './configFromDocmap';
 import configValue from './configValue';
 import get from './get';
+import __import from './import';
 import ifEqual from './ifEqual';
 import ifMatch from './ifMatch';
 import isLicense from './isLicense';
@@ -19,6 +20,7 @@ export {
     configFromDocmap,
     configValue,
     get,
+    __import as import,
     ifEqual,
     ifMatch,
     isLicense,

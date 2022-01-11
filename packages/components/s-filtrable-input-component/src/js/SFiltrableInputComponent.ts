@@ -276,59 +276,71 @@ export default class SFiltrableInput extends __SLitComponent {
         }
     }
     async filterItems(needUpdate = true) {
+
         if (needUpdate) await this.refreshItems();
 
         let items = this.state.items;
 
-        let matchedItemsCount = 0;
-        const filteredItems = items
-            .map((item) => __clone(item))
-            .filter((item) => {
-                if (matchedItemsCount >= this.state.displayedMaxItems)
-                    return false;
+        let searchValue = this.state.value;
+        if (this.props.searchValuePreprocess) {
+            searchValue = this.props.searchValuePreprocess(searchValue);
+        }
 
-                if (!this.props.filtrable.length) return true;
+        let filteredItems = items.map(item => __clone(item));
 
-                let matchFilter = false;
-                for (let i = 0; i < Object.keys(item).length; i++) {
-                    const propName = Object.keys(item)[i],
-                        propValue = item[propName];
+        // custom function
+        if (this.props.filterItems) {
+            filteredItems = await this.props.filterItems(filteredItems, searchValue, this.state);
+        } else {
+            let matchedItemsCount = 0;
+            filteredItems = filteredItems
+                .filter((item) => {
+                    if (matchedItemsCount >= this.state.displayedMaxItems)
+                        return false;
 
-                    // prevent not string value
-                    if (typeof propValue !== 'string') continue;
+                    if (!this.props.filtrable.length) return true;
 
-                    // check if the current propName is specified in the filtrable list
-                    if (this.props.filtrable.indexOf(propName) !== -1) {
-                        const reg = new RegExp(
-                            this.state.value.split(' ').join('|'),
-                            'gi',
-                        );
-                        if (propValue.match(reg)) {
-                            matchFilter = true;
-                            if (this.state.value && this.state.value !== '') {
-                                const reg = new RegExp(
-                                    this.state.value.split(' ').join('|'),
-                                    'gi',
-                                );
-                                const finalString = propValue.replace(
-                                    reg,
-                                    (str) => {
-                                        return `<span class="${this.componentUtils.className(
-                                            '__list-item-highlight',
-                                        )} s-highlight"
-                                                >${str}</span>`;
-                                    },
-                                );
-                                item[propName] = finalString;
+                    let matchFilter = false;
+                    for (let i = 0; i < Object.keys(item).length; i++) {
+                        const propName = Object.keys(item)[i],
+                            propValue = item[propName];
+
+                        // prevent not string value
+                        if (typeof propValue !== 'string') continue;
+
+                        // check if the current propName is specified in the filtrable list
+                        if (this.props.filtrable.indexOf(propName) !== -1) {
+                            const reg = new RegExp(
+                                searchValue.split(' ').join('|'),
+                                'gi',
+                            );
+                            if (propValue.match(reg)) {
+                                matchFilter = true;
+                                if (searchValue && searchValue !== '') {
+                                    const reg = new RegExp(
+                                        searchValue.split(' ').join('|'),
+                                        'gi',
+                                    );
+                                    const finalString = propValue.replace(
+                                        reg,
+                                        (str) => {
+                                            return `<span class="${this.componentUtils.className(
+                                                '__list-item-highlight',
+                                            )} s-highlight"
+                                                    >${str}</span>`;
+                                        },
+                                    );
+                                    item[propName] = finalString;
+                                }
                             }
                         }
                     }
-                }
-                if (matchFilter) {
-                    matchedItemsCount++;
-                }
-                return matchFilter;
-            });
+                    if (matchFilter) {
+                        matchedItemsCount++;
+                    }
+                    return matchFilter;
+                });
+        }
 
         // @ts-ignore
         this.state.filteredItems = filteredItems;

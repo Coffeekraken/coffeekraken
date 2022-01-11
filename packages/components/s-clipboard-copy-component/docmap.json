@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,10 +15,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -35,7 +38,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +64,46 @@
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-clipboard-copy-component.js.interface.sClipboardCopyComponentInterface": {
+                "name": "SClipboardCopyComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SClipboardCopyComponent",
+                "namespace": "@coffeekraken.s-clipboard-copy-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SClipboardCopyComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "successTimeout": {
+                            "description": "Specify the duration for displaying the \"success\" icon",
+                            "type": "Number",
+                            "default": 1500
+                        },
+                        "errorTimeout": {
+                            "description": "Specify the duration for displaying the \"error\" icon",
+                            "type": "Number",
+                            "default": 3000
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SClipboardCopyComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SClipboardCopyComponentInterface.js",
+                "children": {}
+            }
+        }
     }
 }

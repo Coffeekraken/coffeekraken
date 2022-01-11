@@ -9,11 +9,11 @@
     },
     "cli": [
         {
-            "stack": "run",
+            "stack": "command",
             "description": "Allows you to run commands easily even in multiple packages at once",
             "defaultAction": "command",
             "actions": {
-                "command": {
+                "run": {
                     "scope": "global",
                     "description": "Run a line command either in current directory or in a(some) specific packages",
                     "process": "./src/cli/runCommand.cli.js"

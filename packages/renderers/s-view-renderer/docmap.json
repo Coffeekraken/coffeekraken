@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -37,7 +39,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -50,6 +52,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -62,100 +65,60 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-view-renderer.config.views.rootDirs": {
-                "name": "rootDirs",
-                "type": "string[]",
-                "default": "['[config.storage.src.rootDir]/views']",
-                "description": "Specify the roots views directories",
-                "namespace": "@coffeekraken.s-view-renderer.config.views",
+            "@coffeekraken.s-view-renderer.s-view.dataHandlers.js": {
+                "name": "js",
+                "type": "Function",
+                "description": "This function simply take the .data.js file path and return\nthe resulting object",
+                "namespace": "@coffeekraken.s-view-renderer.s-view.dataHandlers",
+                "status": "beta",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts"
+                "filename": "js.js",
+                "extension": "js",
+                "relPath": "src/node/dataHandlers/js.js",
+                "children": {}
             },
-            "@coffeekraken.s-view-renderer.config.views.cacheDir": {
-                "name": "cacheDir",
-                "type": "String",
-                "default": "[config.storage.package.cacheDir]",
-                "description": "Specify the views template rendering cache directory",
-                "namespace": "@coffeekraken.s-view-renderer.config.views",
+            "@coffeekraken.s-view-renderer.s-render.engines.bladeViewEngine": {
+                "name": "bladeViewEngine",
+                "type": "ISViewEngine",
+                "description": "This is the blade.php view engine that allows you\nto render .blade.php views.",
+                "namespace": "@coffeekraken.s-view-renderer.s-render.engines",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts"
+                "filename": "bladeViewEngine.js",
+                "extension": "js",
+                "relPath": "src/node/engines/blade/bladeViewEngine.js",
+                "children": {}
             },
-            "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.extensions": {
-                "name": "extensions",
-                "type": "String",
-                "default": "['blade.php']",
-                "description": "Store which extensions match this engine",
-                "namespace": "@coffeekraken.s-view-renderer.config.views.engines.bladePhp",
+            "@coffeekraken.s-view-renderer.s-view.pages.404": {
+                "name": "404",
+                "type": "Function",
+                "description": "This function simply take a data object and render a clean 404 page",
+                "namespace": "@coffeekraken.s-view-renderer.s-view.pages",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import page404 from '@coffeekraken/sugar/node/engines/pages/404';\nconst html = await page404({\n     title: 'Not found',\n     body: 'The page you want does not exists...'\n});"
+                    }
+                ],
+                "async": "true",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.views.engines.bladePhp.path": {
-                "name": "path",
-                "type": "String",
-                "description": "Store the path where to find the blade.php template engine",
-                "namespace": "@coffeekraken.s-view-renderer.config.views.engines.bladePhp",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.extensions": {
-                "name": "extensions",
-                "type": "String",
-                "default": "['js','json']",
-                "description": "Store which extensions match this handler",
-                "namespace": "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts"
-            },
-            "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson.path": {
-                "name": "path",
-                "type": "String",
-                "default": "__path.resolve(__dirname(), '../node/dataHandlers/js.js')",
-                "description": "Store the path to the jsJson handler",
-                "namespace": "@coffeekraken.s-view-renderer.config.views.dataHandlers.jsJson",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "views.config.ts",
-                "extension": "config",
-                "relPath": "src/config/views.config.ts",
+                "filename": "404.ts",
+                "extension": "ts",
+                "relPath": "src/node/pages/404.ts",
                 "children": {}
             },
             "@coffeekraken.s-view-renderer.sugar.node.template.sViews": {
@@ -232,6 +195,7 @@
                         "name": "render",
                         "type": "Function",
                         "description": "Main method to render your view by passing it an object of data to use as well as an object of settings to override the default passed onces",
+                        "async": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -298,61 +262,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-view-renderer.s-view.dataHandlers.js": {
-                "name": "js",
-                "type": "Function",
-                "description": "This function simply take the .data.js file path and return\nthe resulting object",
-                "namespace": "@coffeekraken.s-view-renderer.s-view.dataHandlers",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "js.ts",
-                "extension": "ts",
-                "relPath": "src/node/dataHandlers/js.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.s-view.pages.404": {
-                "name": "404",
-                "type": "Function",
-                "description": "This function simply take a data object and render a clean 404 page",
-                "namespace": "@coffeekraken.s-view-renderer.s-view.pages",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import page404 from '@coffeekraken/sugar/node/engines/pages/404';\nconst html = await page404({\n     title: 'Not found',\n     body: 'The page you want does not exists...'\n});"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "404.ts",
-                "extension": "ts",
-                "relPath": "src/node/pages/404.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-view-renderer.s-render.engines.bladeViewEngine": {
-                "name": "bladeViewEngine",
-                "type": "ISViewEngine",
-                "description": "This is the blade.php view engine that allows you\nto render .blade.php views.",
-                "namespace": "@coffeekraken.s-view-renderer.s-render.engines",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "bladeViewEngine.ts",
-                "extension": "ts",
-                "relPath": "src/node/engines/blade/bladeViewEngine.ts",
-                "children": {}
             }
         }
     }

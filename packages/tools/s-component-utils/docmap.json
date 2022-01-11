@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,11 +15,12 @@
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +64,63 @@
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-component-utils.js.interface.sComponentDefaultInterface": {
+                "name": "SComponentDefaultInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of a basic SComponent",
+                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SComponentDefaultInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "type": "String",
+                            "physical": true
+                        },
+                        "mounted": {
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "mountWhen": {
+                            "type": "String",
+                            "values": [
+                                "directly",
+                                "inViewport"
+                            ],
+                            "default": "directly"
+                        },
+                        "adoptStyle": {
+                            "type": "Boolean",
+                            "default": true,
+                            "physical": true
+                        },
+                        "bare": {
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SComponentDefaultInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SComponentDefaultInterface.js",
+                "children": {}
+            }
+        }
     }
 }

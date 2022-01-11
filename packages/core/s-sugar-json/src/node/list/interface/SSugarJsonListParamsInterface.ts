@@ -2,12 +2,14 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SSugarJsonListParamsInterface
- * @namespace           sugar.cli
- * @type                Class
+ * @namespace           node.list.interface
+ * @type.                      Class
  * @extends             SInterface
- * @status              wip
+ * @interface
+ * @status              beta
+ * @platform             node
  *
- * Parameters representation for the SSugarJson updateCache process
+ * Parameters representation for the 5SSugarJson list command.
  *
  * @todo      interface
  * @todo      doc

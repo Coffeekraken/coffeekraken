@@ -13,10 +13,10 @@ import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-import __SViteStartInterface from './start/interface/SViteStartInterface';
+import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
-import __SViteBuildInterface from './build/interface/SViteBuildInterface';
+import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
 
 export interface ISViteSettings {}
@@ -43,7 +43,7 @@ export interface ISViteBuildParams {
 
 export default class SVite extends __SClass {
     static interfaces = {
-        startParams: __SViteStartInterface,
+        startParams: __SViteStartParamsInterface,
     };
 
     /**
@@ -186,7 +186,7 @@ export default class SVite extends __SClass {
                 const duration = new __SDuration();
 
                 const finalParams: ISViteBuildParams =
-                    __SViteBuildInterface.apply(params);
+                    __SViteBuildParamsInterface.apply(params);
 
                 // if (params.watch) {
                 //   throw new Error('The watch feature is not implemented yet...');

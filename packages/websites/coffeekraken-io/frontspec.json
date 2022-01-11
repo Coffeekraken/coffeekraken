@@ -29,14 +29,14 @@
                 "id": "module",
                 "type": "module",
                 "defer": true,
-                "src": "/dist/js/module.es.js",
+                "src": "/js/module.es.js",
                 "env": "production"
             },
             "main": {
                 "id": "main",
                 "nomodule": true,
                 "defer": true,
-                "src": "/dist/js/index.iife.js",
+                "src": "/js/index.iife.js",
                 "env": "production"
             }
         },
@@ -50,7 +50,7 @@
             "main": {
                 "id": "main",
                 "defer": true,
-                "src": "/dist/css/index.css",
+                "src": "/css/index.css",
                 "env": "production"
             }
         }

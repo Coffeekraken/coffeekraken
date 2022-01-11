@@ -115,6 +115,7 @@ class SDocblock extends __SClass implements ISDocblock {
      * @author 	Olivier Bossel <olivier.bossel@gmail.com>
      */
     constructor(source: string, settings?: ISDocblockCtorSettings) {
+           
         super(
             __deepMerge(
                 {
@@ -149,7 +150,6 @@ class SDocblock extends __SClass implements ISDocblock {
                 settings || {},
             ),
         );
-
         // check if the source is path
         if (__isPath(source)) {
             if (!__isNode())
@@ -167,6 +167,8 @@ class SDocblock extends __SClass implements ISDocblock {
         } else {
             this._source = source;
         }
+
+
     }
 
     /**
@@ -329,6 +331,8 @@ class SDocblock extends __SClass implements ISDocblock {
                     markedOptions: this.docblockSettings.markedOptions,
                 },
             });
+
+
             await docblockBlock.parse();
             blocks[i] = docblockBlock;
         }

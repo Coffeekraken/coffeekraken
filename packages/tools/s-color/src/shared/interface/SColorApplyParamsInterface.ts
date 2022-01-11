@@ -2,10 +2,13 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SColorApplyParamsInterface
- * @namespace           sugar.node.svelte.compile.interface
- * @type                Class
+ * @namespace           shared.interface
+ * @type.                      Class
  * @extends             SInterface
- * @status              wip
+ * @interface
+ * @status              beta
+ * @platform             node
+ * @platform        js
  *
  * This class represent the interface that describe parameters of the SSvelteCompiler
  *

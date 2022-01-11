@@ -25,6 +25,7 @@ import __SLog from '@coffeekraken/s-log';
 import __childProcess from 'child_process';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import { Console } from 'console';
+import __SSugarCliParamsInterface from './interface/SSugarCliParamsInterface';
 
 export interface ISSugarCliAvailableCliObj {
     packageJson: any;
@@ -38,27 +39,6 @@ export interface ISSugarCliAvailableCli {
     endpoints: Record<string, ISSugarCliAvailableCliObj>;
 }
 
-class SSugarCliParamsInterface extends __SInterface {
-    static get _definition() {
-        return {
-            bench: {
-                type: {
-                    type: 'Array<String> | Boolean',
-                    splitChars: [','],
-                },
-                default: false,
-                explicit: true,
-            },
-            logPreset: {
-                type: 'String',
-                values: __SLog.PRESETS,
-                default: 'default',
-                explicit: true,
-            },
-        };
-    }
-}
-
 /**
  * @name            sugar.cli
  * @namespace           cli
@@ -70,7 +50,7 @@ class SSugarCliParamsInterface extends __SInterface {
  * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-const cliParams = SSugarCliParamsInterface.apply(
+const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),
 );
 if (cliParams.bench) {
@@ -436,9 +416,9 @@ export default class SSugarCli {
             this._eventEmitter.pipe(proPromise, {});
             await proPromise;
             await __wait(1000);
-            if (!__isChildProcess()) {
+            // if (!__isChildProcess()) {
                 process.exit();
-            }
+            // }
         } else if (cliObj.command) {
             if (this._isStdioNeeded()) {
                 this._stdio = __SStdio.existingOrNew(
@@ -455,9 +435,9 @@ export default class SSugarCli {
             );
             this._eventEmitter.pipe(promise);
             const res = await promise;
-            if (!__isChildProcess()) {
+            // if (!__isChildProcess()) {
                 process.exit();
-            }
+            // }
         }
     }
 
@@ -785,9 +765,9 @@ export default class SSugarCli {
 
             await __wait(1000);
 
-            if (!__isChildProcess()) {
+            // if (!__isChildProcess()) {
                 process.exit();
-            }
+            // }
         }
 
         const sortedByStack = {};
@@ -833,9 +813,9 @@ export default class SSugarCli {
 
         await __wait(1000);
 
-        if (!__isChildProcess()) {
+        // if (!__isChildProcess()) {
             process.exit();
-        }
+        // }
     }
 
     _displayHelpAfterError() {

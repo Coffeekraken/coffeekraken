@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,10 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +39,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -73,9 +76,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "defaultTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/defaultTerminalStdioComponent.ts",
+                "filename": "defaultTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/defaultTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.errorTerminalStdioComponent": {
@@ -89,9 +92,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "errorTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/errorTerminalStdioComponent.ts",
+                "filename": "errorTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/errorTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.fileTerminalStdioComponent": {
@@ -105,9 +108,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "fileTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/fileTerminalStdioComponent.ts",
+                "filename": "fileTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/fileTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.headingTerminalStdioComponent": {
@@ -121,9 +124,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "headingTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/headingTerminalStdioComponent.ts",
+                "filename": "headingTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/headingTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.separatorTerminalStdioComponent": {
@@ -137,9 +140,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "separatorTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/separatorTerminalStdioComponent.ts",
+                "filename": "separatorTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/separatorTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.timeTerminalStdioComponent": {
@@ -153,9 +156,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "timeTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/timeTerminalStdioComponent.ts",
+                "filename": "timeTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/timeTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.sugar.node.stdio.terminal.components.warningTerminalStdioComponent": {
@@ -169,9 +172,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "warningTerminalStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/node/terminal/components/warningTerminalStdioComponent.ts",
+                "filename": "warningTerminalStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/node/terminal/components/warningTerminalStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.s-stdio.terminal.sTerminalStdio": {
@@ -230,9 +233,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "defaultNoUiStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/shared/noUi/components/defaultNoUiStdioComponent.ts",
+                "filename": "defaultNoUiStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/shared/noUi/components/defaultNoUiStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.shared.noUi.components.errorNoUiStdioComponent": {
@@ -246,9 +249,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "errorNoUiStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/shared/noUi/components/errorNoUiStdioComponent.ts",
+                "filename": "errorNoUiStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/shared/noUi/components/errorNoUiStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.shared.noUi.components.summaryNoUiStdioComponent": {
@@ -262,9 +265,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "summaryNoUiStdioComponent.ts",
-                "extension": "ts",
-                "relPath": "src/shared/noUi/components/summaryNoUiStdioComponent.ts",
+                "filename": "summaryNoUiStdioComponent.js",
+                "extension": "js",
+                "relPath": "src/shared/noUi/components/summaryNoUiStdioComponent.js",
                 "children": {}
             },
             "@coffeekraken.s-stdio.s-stdio.terminal.sNoUiStdio": {
@@ -330,15 +333,14 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SStdio.ts",
-                "extension": "ts",
-                "relPath": "src/shared/SStdio.ts",
+                "filename": "SStdio.js",
+                "extension": "js",
+                "relPath": "src/shared/SStdio.js",
                 "children": {
-                    "registeredComponents": {
-                        "name": "registeredComponents",
-                        "type": "ISStdioRegisteredComponents",
-                        "description": "Store the registered stdio components",
-                        "static": "true",
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -346,11 +348,10 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "nOUI": {
-                        "name": "NO_UI",
-                        "type": "ISStdioUi",
-                        "description": "Represent the \"no\" ui",
-                        "static": "true",
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Access the stdio id",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -358,23 +359,10 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "uITERMINAL": {
-                        "name": "UI_TERMINAL",
-                        "type": "ISStdioUi",
-                        "description": "Represent the \"terminal\" ui",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "uICONSOLE": {
-                        "name": "UI_CONSOLE",
-                        "type": "ISStdioUi",
-                        "description": "Represent the \"console\" ui",
-                        "static": "true",
+                    "log": {
+                        "name": "log",
+                        "type": "Function",
+                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -435,28 +423,6 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "id": {
-                        "name": "id",
-                        "type": "String",
-                        "description": "Access the stdio id",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "display": {
                         "name": "display",
                         "type": "Function",
@@ -489,17 +455,6 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "log": {
-                        "name": "log",
-                        "type": "Function",
-                        "description": "This method is the one called to log something.\nIt will call the ```_log``` method that each implementation of the\nSStdio class MUST have",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "ask": {
                         "name": "ask",
                         "type": "Function",
@@ -516,6 +471,54 @@
                         "name": "isDisplayed",
                         "type": "Boolean",
                         "description": "true if the stdio if actually displayed, false if not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registeredComponents": {
+                        "name": "registeredComponents",
+                        "type": "ISStdioRegisteredComponents",
+                        "description": "Store the registered stdio components",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "nOUI": {
+                        "name": "NO_UI",
+                        "type": "ISStdioUi",
+                        "description": "Represent the \"no\" ui",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "uITERMINAL": {
+                        "name": "UI_TERMINAL",
+                        "type": "ISStdioUi",
+                        "description": "Represent the \"terminal\" ui",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "uICONSOLE": {
+                        "name": "UI_CONSOLE",
+                        "type": "ISStdioUi",
+                        "description": "Represent the \"console\" ui",
+                        "static": "true",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

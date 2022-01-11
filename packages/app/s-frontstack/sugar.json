@@ -36,17 +36,17 @@
                 "action": {
                     "scope": "package",
                     "description": "Exec an action of the frontstack application into the current working directory",
-                    "process": "./src/node/action/action.cli.js"
+                    "process": "./src/cli/action.cli.js"
                 },
                 "recipe": {
                     "scope": "package",
                     "description": "Exec a recipe of the frontstack application into the current working directory",
-                    "process": "./src/node/recipe/recipe.cli.js"
+                    "process": "./src/cli/recipe.cli.js"
                 },
                 "list": {
                     "scope": "package",
                     "description": "List either all the recipes available or particular recipe actions stack",
-                    "process": "./src/node/list/list.cli.js"
+                    "process": "./src/cli/list.cli.js"
                 }
             }
         }

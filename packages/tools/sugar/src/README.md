@@ -97,5 +97,16 @@ Each of these languages comes with multiple tools in areas likes:
     - And more...
 9. And a lot more to discover on [our website](https://coffeekraken.io)
 
+## Usage
+
+Sugar toolkit came with a lot of utilities, functions and classes. To use them, simply load them directly like so:
+
+```js
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
+import __isInViewport from '@coffeekraken/sugar/js/dom/is/inViewport';
+// etc...
+```
+
+> The best way to discover the available utilities is to check out the API documentation on [our website](https://coffeekraken.io//api/@coffeekraken.coffeekraken-io.js.dom.query.querySelectorLive).
 
 {{/ layout-readme }}

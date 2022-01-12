@@ -6,35 +6,46 @@
     .s-filtrable-input__input {
     }
 
-    .s-filtrable-input__list {
+    .s-filtrable-input__before,
+    .s-filtrable-input__after {
+        flex-grow: 0;
+        width: 100%;
+    }
+
+    .s-filtrable-input__dropdown {
         position: absolute;
         top: 100%;
         left: 0;
-        overflow-x: hidden;
-        overflow-y: auto;
         opacity: 0;
         max-width: calc(100vw - 100px);
         pointer-events: none;
         margin: 20px 0;
+        display: flex;
+        flex-direction: column;
     }
 
-    &:focus-within .s-filtrable-input__list {
+    &:focus-within .s-filtrable-input__dropdown {
         pointer-events: all;
         opacity: 1;
     }
 
     &.s-filtrable-input--top {
-        .s-filtrable-input__list {
+        .s-filtrable-input__dropdown {
             top: auto;
             bottom: 100%;
         }
     }
 
-    .s-filtrable-input__input:focus + .s-filtrable-input__list,
-    .s-filtrable-input__list:focus,
-    .s-filtrable-input__list:focus-within {
+    .s-filtrable-input__input:focus + .s-filtrable-input__dropdown,
+    .s-filtrable-input__dropdown:focus,
+    .s-filtrable-input__dropdown:focus-within {
         opacity: 1;
         pointer-events: all !important;
+    }
+
+    .s-filtrable-input__list {
+        overflow-x: hidden;
+        overflow-y: auto;
     }
 
     .s-filtrable-input__list-item {
@@ -48,14 +59,4 @@
             pointer-events: none;
         }
     }
-
-    /* @sugar.scope.lnf {
-        .s-filtrable-input__list {
-            transition: max-height 0.1s ease-in-out;
-        }
-
-        .s-filtrable-input__list-item-highlight {
-            background-color: sugar.color(current);
-        }
-    } */
 }

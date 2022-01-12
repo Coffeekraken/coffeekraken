@@ -5,19 +5,29 @@
         border-radius: sugar.border.radius(10);
     }
 
-    .ck-search-input {
+    #search-tips {
+        max-height: 250px;
+        transition: sugar.transition();
+        overflow: hidden;
+    }
+    #search-tips.active {
+        max-height: 0;
+        padding-block: 0;
+    }
+
+    .s-filtrable-input {
         width: 100%;
         @sugar.color (accent, accent, main);
     }
 
-    .ck-search-input__list {
+    .s-filtrable-input__dropdown {
         background: sugar.color(main, surface);
         width: 300% !important;
         left: auto !important;
         right: 0 !important;
     }
 
-    .ck-search-input__list-item {
+    .s-filtrable-input__list-item {
         padding-inline: sugar.padding(30) !important;
         padding-block: sugar.padding(30) !important;
     }

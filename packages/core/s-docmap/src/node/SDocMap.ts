@@ -394,15 +394,23 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     Object.keys(docmapJson.map).forEach((namespace) => {
                         if (docmapJson.map[namespace]) {
-                            docmapJson.map[namespace].package =
-                                currentPackageJson.name;
+                            docmapJson.map[namespace].package = {
+                                name: currentPackageJson.name,
+                                description: currentPackageJson.description,
+                                version: currentPackageJson.version,
+                                license: currentPackageJson.license
+                            };
                         }
                     });
                     Object.keys(docmapJson.generated?.map ?? []).forEach(
                         (namespace) => {
                             if (docmapJson.generated.map[namespace]) {
-                                docmapJson.generated.map[namespace].package =
-                                    currentPackageJson.name;
+                                docmapJson.generated.map[namespace].package = {
+                                    name: currentPackageJson.name,
+                                    description: currentPackageJson.description,
+                                    version: currentPackageJson.version,
+                                    license: currentPackageJson.license
+                                }
                             }
                         },
                     );

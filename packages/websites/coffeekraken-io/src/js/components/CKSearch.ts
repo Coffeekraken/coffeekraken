@@ -5,6 +5,9 @@ import { html } from 'lit';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
 __sFiltrableInputDefine(
     {
@@ -14,9 +17,24 @@ __sFiltrableInputDefine(
         },
         filtrable: ['namespace', 'name', 'type'],
         searchValuePreprocess: (value) => {
-            if (value.match(/^\/[a-z]+/)) {
-                return value.replace(/^\/[a-z]+\s?/, '').trim();
+
+            // "@" searches
+            if (value.match(/^@[a-z_-]+\s.*/)) {
+                return value.replace(/^@[a-z_-]+\s/, '').trim();
             }
+            if (value.match(/^@[a-z_-]+/)) {
+                return value.replace(/^@/, '').trim();
+            }
+
+            // "/" searches
+            if (value.match(/^\/[a-z]+\s.*/)) {
+                return value.replace(/^\/[a-z]+\s/, '').trim();
+            }
+            if (value.match(/^\/[a-z]+/)) {
+                return value.replace(/^\//, '').trim();
+            }
+
+            // default
             return value;
         },
         templates: ({ type, item, html, unsafeHTML }) => {
@@ -25,13 +43,14 @@ __sFiltrableInputDefine(
 
                 switch(item.type) {
                     case 'category':
+                    case 'package':
                         return html`
                             <div class="ck-search__list-item">
                                 <div class="s-flex s-mbe:10">
                                     <h4
                                         class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
                                     >
-                                        ${unsafeHTML(item.title)}
+                                        ${unsafeHTML(item.name)}
                                     </h4>
                                 </div>
                                 <p class="__description s-typo:p s-truncate:2">
@@ -108,26 +127,68 @@ __sFiltrableInputDefine(
                 items = JSON.parse(cached);
             }
 
+            if (value.match(/^@([a-z_-]+)?$/)) {
+
+                let packageName = value.replace(/^@/, '');
+
+                let packages = {};
+                items.forEach((item) => {
+                    if (item.package.name.includes(`@coffeekraken/${packageName}`)) {
+                        if (!packages[item.package.name]) {
+                            packages[item.package.name] = {
+                                value: `@${item.package.name.replace('@coffeekraken/', '')}`,
+                                namespace: item.package.name,
+                                type: 'package',
+                                name: item.package.name,
+                                description: item.package.description,
+                                props: {
+                                    value: 'value'
+                                }
+                            };
+                        }
+                    }
+                });
+                return Object.values(packages);
+            }
+
             if (value.match(/^\/([a-z]+)?$/)) {
                 return [{
                     value: '/doc',
                     namespace: '/doc',
                     type: 'category',
-                    title: 'Documentation',
+                    name: 'Documentation',
                     description: 'Search through the documentation',
+                    props: {
+                        value: 'value'
+                    }
                 }, {
                     value: '/styleguide',
                     namespace: '/styleguide',
                     type: 'category',
-                    title: 'Styleguide',
+                    name: 'Styleguide',
                     description: 'Search through the styleguide',
+                    props: {
+                        value: 'value'
+                    }
                 }, {
                     value: '/api',
                     namespace: '/api',
                     type: 'category',
-                    title: 'API',
+                    name: 'API',
                     description: 'Search through the API',
+                    props: {
+                        value: 'value'
+                    }
                 }];
+            }
+
+            if (value.match(/^@[a-z_-]+\s.*?/)) {
+                console.log(`"${value}"`);
+                const packageName = `@coffeekraken/${value.replace(/^@/, '').split(' ')[0].trim()}`;
+                console.log(packageName);
+                return items.filter(item => {
+                    return item.package.name.startsWith(packageName);
+                });
             }
 
             if (value.match(/^\/[a-z]+.*?/)) {
@@ -162,25 +223,32 @@ export default class CKSearch extends __SLitComponent {
                 shadowDom: false,
             },
         });
+        const queryObj = __queryStringToObject(document.location.search ?? '');
+        this._search = queryObj.search ?? '';
     }
     _$input;
+    _search;
     firstUpdated() {
 
         this._$input = this.querySelector('input');
 
-        this.addEventListener('select', (e) => {
+        __hotkey('ctrl+p').on('press', () => {
+            __cursorToEnd(this._$input);
+        });
+
+        this.addEventListener('selectItem', (e) => {
             const item = e.detail;
 
-            if (item.type === 'category') {
+            if (item.type === 'category' || item.type === 'package') {
 
                 this._$input.value = item.value + ' ';
-                this._$input.focus();
+                __cursorToEnd(this._$input);
 
             } else {
 
                 if (item.menu?.slug) {
-                    if (item.package !== window.packageJson.name) {
-                        document.location.href = `/${item.package}${item.menu.slug}`;
+                    if (item.package.name !== window.packageJson.name) {
+                        document.location.href = `/${item.package.name}${item.menu.slug}`;
                     } else {
                         document.location.href = item.menu.slug;
                     }
@@ -200,8 +268,20 @@ export default class CKSearch extends __SLitComponent {
                             placeholder="Search..."
                             type="text"
                             name="search"
+                            value="${this._search}"
                             class="s-input s-color:accent s-scale:11"
                         />
+                        <template type="before">
+                            <div class="s-p:30" id="search-tips">
+                                <p class="s-mbe:20">
+                                    <span class="s-typo:p s-tc:current">Search tips</span>
+                                    <i class="s-icon:close s-float:right" s-activate href="#search-tips"></i>
+                                </p>
+                                <p class="s-typo:p">
+                                    <span class="s-badge:outline s-mie:10">/...</span> Categories&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge:outline s-mie:10">@...</span> Packages&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge s-color:complementary s-mie:10">CMD+P</span> Search shortcut
+                                </p>
+                            </div>
+                        </template>
                     </ck-search-input>
                 </div>
             </div>

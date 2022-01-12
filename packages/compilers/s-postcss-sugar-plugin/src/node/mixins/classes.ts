@@ -53,6 +53,7 @@ export default async function ({
         '@sugar.depth.classes;',
         '@sugar.disabled.classes;',
         '@sugar.flex.classes;',
+        '@sugar.float.classes;',
         '@sugar.ratio.classes;',
         '@sugar.border.classes;',
         '@sugar.display.classes;',

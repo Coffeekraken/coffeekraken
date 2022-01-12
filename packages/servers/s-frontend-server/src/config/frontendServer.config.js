@@ -14,7 +14,7 @@ export default function (env, config) {
          * @since             2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        port: env.env === 'production' ? 8889 : 8888,
+        port: env.env === 'production' ? 9090 : 8080,
         /**
          * @name              hostname
          * @namespace         config.frontendServer

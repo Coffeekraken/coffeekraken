@@ -1452,7 +1452,40 @@ function __deepMerge (...args) {
     return currentObj;
 }
 // export default deepMerge;
-// @ts-nocheck
+/**
+ * @name      cursorToEnd
+ * @namespace            js.dom.input
+ * @type      Function
+ * @platform          js
+ * @status        beta
+ *
+ * Place the cursor to the end of the input
+ *
+ * @param 		{HTMLFormElement} 		$input 		The input to process
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @example 	js
+ * import cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
+ * cursorToEnd($input);
+ *
+ * @see             https://stackoverflow.com/a/56416714
+ * @since         1.0.0
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierboss$input.com)
+ */
+function cursorToEnd($input) {
+    $input.focus();
+    if (typeof $input.selectionStart == "number") {
+        $input.selectionStart = $input.selectionEnd = $input.value.length;
+    }
+    else if (typeof $input.createTextRange != "undefined") {
+        var range = $input.createTextRange();
+        range.collapse(false);
+        range.select();
+    }
+}// @ts-nocheck
 /**
  * @name                clone
  * @namespace            js.object
@@ -2382,9 +2415,6 @@ function onScrollEnd($elm, callback, settings) {
             scrollTop = $scrollHeightElm.scrollTop;
             fullHeight = $scrollHeightElm.scrollHeight;
         }
-        console.log('is', active);
-        console.log($elm, scrollTop, viewportHeight, fullHeight, finalSettings.offset);
-        console.log(scrollTop + viewportHeight, fullHeight - finalSettings.offset);
         if (active &&
             scrollTop + viewportHeight >= fullHeight - finalSettings.offset) {
             callback();
@@ -2404,9 +2434,8 @@ function onScrollEnd($elm, callback, settings) {
             active = true;
         }
     };
-    console.log($scrollListenedElm);
     $scrollListenedElm.addEventListener('scroll', internalCallback);
-}var __css = ".s-filtrable-input {\n    font-size: calc(1rem * var(--s-scale, 1));\n    display: inline-block;\n    position: relative;\n\n    /* @sugar.scope.lnf {\n        .s-filtrable-input__list {\n            transition: max-height 0.1s ease-in-out;\n        }\n\n        .s-filtrable-input__list-item-highlight {\n            background-color: sugar.color(current);\n        }\n    } */\n}\n\n    .s-filtrable-input .s-filtrable-input__input {\n    }\n\n    .s-filtrable-input .s-filtrable-input__list {\n        position: absolute;\n        top: 100%;\n        left: 0;\n        overflow-x: hidden;\n        overflow-y: auto;\n        opacity: 0;\n        max-width: calc(100vw - 100px);\n        pointer-events: none;\n        margin: 20px 0;\n    }\n\n    .s-filtrable-input:focus-within .s-filtrable-input__list {\n        pointer-events: all;\n        opacity: 1;\n    }\n\n    .s-filtrable-input.s-filtrable-input--top .s-filtrable-input__list {\n            top: auto;\n            bottom: 100%;\n        }\n\n    .s-filtrable-input .s-filtrable-input__input:focus + .s-filtrable-input__list,\n    .s-filtrable-input .s-filtrable-input__list:focus,\n    .s-filtrable-input .s-filtrable-input__list:focus-within {\n        opacity: 1;\n        pointer-events: all !important;\n    }\n\n    .s-filtrable-input .s-filtrable-input__list-item {\n        position: relative;\n        -webkit-user-select: none;\n           -moz-user-select: none;\n            -ms-user-select: none;\n                user-select: none;\n    }\n\n    .s-filtrable-input:not([interactive]) .s-filtrable-input__list-item {\n        cursor: pointer;\n    }\n\n    .s-filtrable-input:not([interactive]) .s-filtrable-input__list-item * {\n            pointer-events: none;\n        }\n";var __awaiter = (globalThis && globalThis.__awaiter) || function (thisArg, _arguments, P, generator) {
+}var __css = ".s-filtrable-input {\n    font-size: calc(1rem * var(--s-scale, 1));\n    display: inline-block;\n    position: relative;\n}\n\n    .s-filtrable-input .s-filtrable-input__input {\n    }\n\n    .s-filtrable-input .s-filtrable-input__before,\n    .s-filtrable-input .s-filtrable-input__after {\n        flex-grow: 0;\n        width: 100%;\n    }\n\n    .s-filtrable-input .s-filtrable-input__dropdown {\n        position: absolute;\n        top: 100%;\n        left: 0;\n        opacity: 0;\n        max-width: calc(100vw - 100px);\n        pointer-events: none;\n        margin: 20px 0;\n        display: flex;\n        flex-direction: column;\n    }\n\n    .s-filtrable-input:focus-within .s-filtrable-input__dropdown {\n        pointer-events: all;\n        opacity: 1;\n    }\n\n    .s-filtrable-input.s-filtrable-input--top .s-filtrable-input__dropdown {\n            top: auto;\n            bottom: 100%;\n        }\n\n    .s-filtrable-input .s-filtrable-input__input:focus + .s-filtrable-input__dropdown,\n    .s-filtrable-input .s-filtrable-input__dropdown:focus,\n    .s-filtrable-input .s-filtrable-input__dropdown:focus-within {\n        opacity: 1;\n        pointer-events: all !important;\n    }\n\n    .s-filtrable-input .s-filtrable-input__list {\n        overflow-x: hidden;\n        overflow-y: auto;\n    }\n\n    .s-filtrable-input .s-filtrable-input__list-item {\n        position: relative;\n        -webkit-user-select: none;\n           -moz-user-select: none;\n            -ms-user-select: none;\n                user-select: none;\n    }\n\n    .s-filtrable-input:not([interactive]) .s-filtrable-input__list-item {\n        cursor: pointer;\n    }\n\n    .s-filtrable-input:not([interactive]) .s-filtrable-input__list-item * {\n            pointer-events: none;\n        }\n";var __awaiter = (globalThis && globalThis.__awaiter) || function (thisArg, _arguments, P, generator) {
     function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
     return new (P || (P = Promise))(function (resolve, reject) {
         function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
@@ -2425,11 +2454,13 @@ class SFiltrableInput extends __SLitComponent {
                 interface: SFiltrableInputComponentInterface,
             },
         }));
+        this._templatesFromHtml = {};
         this.state = {
-            baseTemplates: undefined,
-            preselectedItem: undefined,
+            baseTemplates: {},
+            preselectedItem: {},
             preselectedItemIdx: -1,
             selectedItemIdx: -1,
+            selectedItem: {},
             displayedMaxItems: 0,
             value: '',
             isActive: false,
@@ -2483,19 +2514,36 @@ class SFiltrableInput extends __SLitComponent {
     firstUpdated() {
         var _a;
         return __awaiter(this, void 0, void 0, function* () {
+            // input
             this.$input = this.querySelector('input');
             this.$input.setAttribute('autocomplete', 'off');
+            // @ts-ignore
+            this.$form = this.$input.form;
+            // prevent from sending form if search is opened
+            this.$form.addEventListener('submit', e => {
+                if (this.state.isActive) {
+                    e.preventDefault();
+                }
+            });
+            // grab templates
+            this._grabTemplates();
             if (!this.props.bare) {
                 // @ts-ignore
                 (_a = this.$input.classList) === null || _a === void 0 ? void 0 : _a.add('s-input');
             }
             // @ts-ignore
             this.$input.addEventListener('keyup', (e) => {
+                this.state.isActive = true;
                 // @ts-ignore
                 const value = e.target.value;
                 this.state.value = value;
                 this.state.displayedMaxItems = this.props.maxItems;
                 this.filterItems();
+            });
+            this.$input.addEventListener('focus', (e) => {
+                this.state.isActive = true;
+                this.filterItems();
+                this._updateListSizeAndPosition();
             });
             // @ts-ignore
             this.$input.classList.add(this.componentUtils.className('__input'));
@@ -2504,14 +2552,11 @@ class SFiltrableInput extends __SLitComponent {
             this.$container.classList.add(this.componentUtils.className());
             // @ts-ignore
             this.$list = this.querySelector('ul');
+            // @ts-ignore
+            this.$dropdown = this.querySelector(`.s-filtrable-input__dropdown`);
             this.prepend(this.$input);
             this.filterItems();
             document.addEventListener('scroll', () => {
-                this._updateListSizeAndPosition();
-            });
-            this.$input.addEventListener('focus', (e) => {
-                this.state.isActive = true;
-                this.filterItems();
                 this._updateListSizeAndPosition();
             });
             this._updateListSizeAndPosition();
@@ -2560,6 +2605,41 @@ class SFiltrableInput extends __SLitComponent {
                     return;
                 this.validateAndClose();
             });
+            // open if a value exists
+            if (this.$input.value) {
+                this.state.value = this.$input.value;
+                cursorToEnd(this.$input);
+                this.filterItems(true);
+            }
+        });
+    }
+    _grabTemplates() {
+        this.querySelectorAll('template').forEach($template => {
+            if (!$template.hasAttribute('type'))
+                return;
+            // @ts-ignore
+            this._templatesFromHtml[$template.getAttribute('type')] = $template.innerHTML;
+        });
+    }
+    _getTemplate(type) {
+        if (this.props.templates) {
+            const res = this.props.templates({
+                type,
+                html
+            });
+            if (res)
+                return res;
+        }
+        // from template tags
+        if (this._templatesFromHtml[type]) {
+            return html `
+                ${unsafeHTML(this._templatesFromHtml[type])}
+            `;
+        }
+        // @ts-ignore
+        return this.state.baseTemplates({
+            type,
+            html
         });
     }
     get selectedItem() {
@@ -2573,20 +2653,22 @@ class SFiltrableInput extends __SLitComponent {
         return this.state.filteredItems[this.state.preselectedItemIdx];
     }
     validate() {
-        var _a;
+        var _a, _b;
         // protect against not selected item
-        if (!this.state.preselectedItem)
+        if (this.state.preselectedItemIdx === -1)
             return;
         // set the value in the input
-        if (this.state.preselectedItem) {
-            if (typeof this.props.value === 'string' &&
-                ((_a = this.state.preselectedItem) === null || _a === void 0 ? void 0 : _a[this.props.value])) {
+        if (this.preselectedItem) {
+            const itemProps = __deepMerge(Object.assign({}, this.props), (_a = this.state.preselectedItem.props) !== null && _a !== void 0 ? _a : {});
+            if (typeof itemProps.value === 'string' &&
+                ((_b = this.preselectedItem) === null || _b === void 0 ? void 0 : _b[itemProps.value])) {
                 this.$input.value = stripTags(
                 // @ts-ignore
-                this.state.preselectedItem[this.props.value]);
+                this.preselectedItem[itemProps.value]);
             }
-            else if (typeof this.props.value === 'function') {
-                const v = this.props.value({
+            else if (typeof itemProps.value === 'function') {
+                // @ts-ignore
+                const v = itemProps.value({
                     item: this.state.filteredItems[this.state.preselectedItemIdx],
                 });
                 if (typeof v !== 'string') {
@@ -2600,7 +2682,7 @@ class SFiltrableInput extends __SLitComponent {
         this.state.value = this.$input.value;
         this.requestUpdate();
         // dispatch an event
-        const event = new CustomEvent('select', {
+        const event = new CustomEvent('selectItem', {
             bubbles: true,
             detail: this.selectedItem,
         });
@@ -2613,9 +2695,19 @@ class SFiltrableInput extends __SLitComponent {
             this.close();
         }, this.props.closeTimeout);
     }
+    resetSelected() {
+        this.state.preselectedItemIdx = -1;
+        this.state.preselectedItem = {};
+        this.state.selectedItemIdx = -1;
+        this.state.selectedItem = {};
+    }
+    reset() {
+        this.resetSelected();
+        this.$input.value = '';
+    }
     close() {
-        this.$input.focus();
-        this.$input.blur();
+        cursorToEnd(this.$input);
+        // this.$input.blur();
         this.state.isActive = false;
     }
     refreshItems() {
@@ -2643,6 +2735,8 @@ class SFiltrableInput extends __SLitComponent {
         return __awaiter(this, void 0, void 0, function* () {
             if (needUpdate)
                 yield this.refreshItems();
+            // reset selected
+            this.resetSelected();
             let items = this.state.items;
             let searchValue = this.state.value;
             if (this.props.searchValuePreprocess) {
@@ -2699,61 +2793,71 @@ class SFiltrableInput extends __SLitComponent {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
     }
-    selectAndValidate(idx) {
+    preselectAndValidate(idx) {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
         // validate
         this.validate();
     }
-    selectValidateAndClose(idx) {
+    preselectValidateAndClose(idx) {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
         // validate
         this.validateAndClose();
+    }
+    _setSelectedItemByIdx(idx) {
+        // check if the component is in not selectable mode
+        if (this.props.notSelectable)
+            return;
+        this.state.selectedItemIdx = idx;
+        this.state.selectedItem = this.selectedItem;
+        this.requestUpdate();
     }
     _setPreselectedItemByIdx(idx) {
         // check if the component is in not selectable mode
         if (this.props.notSelectable)
             return;
         this.state.preselectedItemIdx = idx;
-        this.state.preselectedItem = this.state.items[idx];
+        this.state.preselectedItem = this.preselectedItem;
         this.requestUpdate();
     }
     _updateListSizeAndPosition() {
         //   if (!__isFocus(this.$input)) return;
         if (!this.state.isActive)
             return;
-        const marginTop = getStyleProperty(this.$list, 'marginTop'); getStyleProperty(this.$list, 'marginLeft'); getStyleProperty(this.$list, 'marginRight'); const marginBottom = getStyleProperty(this.$list, 'marginBottom');
+        const marginTop = getStyleProperty(this.$dropdown, 'marginTop'); getStyleProperty(this.$dropdown, 'marginLeft'); getStyleProperty(this.$dropdown, 'marginRight'); const marginBottom = getStyleProperty(this.$dropdown, 'marginBottom');
         const distanceTop = fromElementTopToViewportTop(this.$input);
         const distanceBottom = fromElementTopToViewportBottom(this.$input) -
             this.$input.clientHeight;
         let maxHeight;
         if (distanceTop > distanceBottom) {
             this.$container.classList.add('s-filtrable-input--top');
-            this.$list.style.top = `auto`;
-            this.$list.style.bottom = `calc(100% - ${marginBottom})`;
+            this.$dropdown.style.top = `auto`;
+            this.$dropdown.style.bottom = `calc(100% - ${marginBottom})`;
             maxHeight = distanceTop - parseInt(marginTop);
         }
         else {
             this.$container.classList.remove('s-filtrable-input--top');
-            this.$list.style.bottom = `auto`;
-            this.$list.style.top = `calc(100% - ${marginTop})`;
+            this.$dropdown.style.bottom = `auto`;
+            this.$dropdown.style.top = `calc(100% - ${marginTop})`;
             maxHeight = distanceBottom - parseInt(marginBottom);
         }
-        this.$list.style.maxHeight = `${maxHeight}px`;
+        this.$dropdown.style.maxHeight = `${maxHeight}px`;
     }
     render() {
-        var _a, _b, _c, _d, _e, _f;
+        var _a, _b, _c, _d, _e, _f, _g, _h;
         return html `
-            <ul
-                class="s-filtrable-input__list ${this.componentUtils.className('__list')}"
-            >
-                ${this.state.isLoading
+            <div class="s-filtrable-input__dropdown">
+                <div class="s-filtrable-input__before" tabindex="0">
+                    ${this._getTemplate('before')}
+                </div>
+                <ul class="s-filtrable-input__list">
+                    ${this.state.isLoading
             ? html `
-                          <li
-                              class="s-filtrable-input__list-item s-filtrable-input__list-loading ${this.componentUtils.className('__list-item __list-loading')}"
-                          >
-                              ${(_c = (_b = (_a = this.props).templates) === null || _b === void 0 ? void 0 : _b.call(_a, {
+                            <li
+                                class="s-filtrable-input__list-item s-filtrable-input__list-loading"
+                            >
+                                ${(_c = (_b = (_a = this.props).templates) === null || _b === void 0 ? void 0 : _b.call(_a, {
                 type: 'loading',
                 html,
             })) !== null && _c !== void 0 ? _c : 
@@ -2762,15 +2866,15 @@ class SFiltrableInput extends __SLitComponent {
                 type: 'loading',
                 html,
             })}
-                          </li>
-                      `
+                            </li>
+                        `
             : !this.state.isLoading &&
                 this.state.filteredItems.length <= 0
                 ? html `
-                          <li
-                              class="s-filtrable-input__list-item s-filtrable-input__list-no-item  ${this.componentUtils.className('__list-item __list-no-item')}"
-                          >
-                              ${(_f = (_e = (_d = this.props).templates) === null || _e === void 0 ? void 0 : _e.call(_d, {
+                            <li
+                                class="s-filtrable-input__list-item s-filtrable-input__list-no-item"
+                            >
+                                ${(_f = (_e = (_d = this.props).templates) === null || _e === void 0 ? void 0 : _e.call(_d, {
                     type: 'empty',
                     html,
                 })) !== null && _f !== void 0 ? _f : 
@@ -2779,27 +2883,25 @@ class SFiltrableInput extends __SLitComponent {
                     type: 'empty',
                     html,
                 })}
-                          </li>
-                      `
+                            </li>
+                        `
                 : !this.state.isLoading && this.state.filteredItems.length
                     ? this.state.filteredItems.map((item, idx) => {
                         var _a, _b, _c;
                         return idx < this.state.displayedMaxItems
                             ? html `
-                                    <li
-                                        @click=${() => this.selectAndValidate(idx)}
-                                        @dblclick=${() => this.selectValidateAndClose(idx)}
-                                        @focus=${() => this._setPreselectedItemByIdx(idx)}
-                                        style="z-index: ${999999999 - idx}"
-                                        tabindex="0"
-                                        class="s-filtrable-input__list-item ${this.componentUtils.className('__list-item') +
-                                ' ' +
-                                (this.state.selectedItemIdx === idx
-                                    ? 'active'
-                                    : '')}"
-                                        hoverable
-                                    >
-                                        ${(_c = (_b = (_a = this.props).templates) === null || _b === void 0 ? void 0 : _b.call(_a, {
+                                        <li
+                                            @click=${() => this.preselectAndValidate(idx)}
+                                            @dblclick=${() => this.preselectValidateAndClose(idx)}
+                                            @focus=${() => this._setPreselectedItemByIdx(idx)}
+                                            style="z-index: ${999999999 - idx}"
+                                            tabindex="0"
+                                            class="s-filtrable-input__list-item ${(this.state.selectedItemIdx === idx
+                                ? 'active'
+                                : '')}"
+                                            hoverable
+                                        >
+                                            ${(_c = (_b = (_a = this.props).templates) === null || _b === void 0 ? void 0 : _b.call(_a, {
                                 type: 'item',
                                 html,
                                 unsafeHTML,
@@ -2814,12 +2916,19 @@ class SFiltrableInput extends __SLitComponent {
                                 item,
                                 idx,
                             })}
-                                    </li>
-                                `
+                                        </li>
+                                    `
                             : '';
                     })
                     : ''}
-            </ul>
+                </ul>
+                <div class="s-filtrable-input__after" tabindex="0">
+                    ${(_h = (_g = this.props).templates) === null || _h === void 0 ? void 0 : _h.call(_g, {
+            type: 'after',
+            html,
+        })}
+                </div>
+            </div>
         `;
     }
 }

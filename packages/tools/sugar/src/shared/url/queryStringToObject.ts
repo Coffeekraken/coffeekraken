@@ -32,6 +32,7 @@ import ltrim from '../string/ltrim';
  */
 function queryStringToObject(str) {
     str = ltrim(str, '?');
+    str = str.replace(/%20/gm, ' ');
     str = decodeURIComponent(str);
     let chunks = str.split('&');
     const obj = {};

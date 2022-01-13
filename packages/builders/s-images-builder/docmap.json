@@ -65,6 +65,189 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-images-builder.config.imagesBuilder.glob": {
+                "name": "glob",
+                "type": "String",
+                "default": "[config.imagesBuilder.inDir]/** /*",
+                "description": "Specify a glob pattern relative to the \"inDir\" to specify files you want to compress",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.compressExts": {
+                "name": "compressExts",
+                "type": "String",
+                "default": "['jpg', 'jpeg', 'png', 'svg', 'webp']",
+                "description": "Specify a which file extensions you want to compress",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.inDir": {
+                "name": "inDir",
+                "type": "String",
+                "default": "[config.storage.src.imgDir]",
+                "description": "Specify a directory from where you want to  compress files",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.dist.imgDir]",
+                "description": "Specify a directory where you want to put the compressed files",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.quality": {
+                "name": "quality",
+                "type": "Number",
+                "default": "80",
+                "description": "Specify an overall quality percentage that you want to target",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.webp": {
+                "name": "webp",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to generate a webp version of each images",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.width": {
+                "name": "width",
+                "type": "Number",
+                "default": "null",
+                "description": "Specify a max width you want your resolution 1 images to target",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.height": {
+                "name": "height",
+                "type": "Number",
+                "default": "null",
+                "description": "Specify a max height you want your resolution 1 images to target",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.resolution": {
+                "name": "resolution",
+                "type": "Array<Integer>",
+                "default": "[1,2]",
+                "description": "Specify some resolutions you want your images to be generated",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.clear": {
+                "name": "clear",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to clear the outDir before the generation",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js"
+            },
+            "@coffeekraken.s-images-builder.config.imagesBuilder.specificParams": {
+                "name": "specificParams",
+                "type": "Record<string, ISimagesBuilderCompressParams>",
+                "default": "{}",
+                "description": "Specify some custom params for some files by using a glob (relative to the params.inDir) as object key, and\nan object of custom params as value like so:",
+                "namespace": "@coffeekraken.s-images-builder.config.imagesBuilder",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "export default {\n     specificParams: {\n         'myCoolFolder/': {\n             quality: 20\n         }\n     }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "imagesBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/imagesBuilder.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-images-builder.node.interface.sPostcssBuilderBuildParamsInterface": {
                 "name": "SPostcssBuilderBuildParamsInterface",
                 "type": ".                      Class",

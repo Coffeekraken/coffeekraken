@@ -65,6 +65,938 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-frontstack.config.frontstack.recipes.default": {
+                "name": "default",
+                "type": "String",
+                "default": "[config.frontstackRecipeDefault]",
+                "description": "Specify the default recipe",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.recipes.litElement": {
+                "name": "litElement",
+                "type": "String",
+                "default": "[config.frontstackRecipeLitElement]",
+                "description": "Specify the litElement recipe",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.recipes.feature": {
+                "name": "feature",
+                "type": "String",
+                "default": "[config.frontstackRecipeFeature]",
+                "description": "Specify the feature recipe",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.recipes",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Frontend server",
+                "description": "Specify the frontend server action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the frontend server action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar frontendServer.start",
+                "description": "Specify the frontend server action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager.restart": {
+                "name": "restart",
+                "type": "String",
+                "default": "true",
+                "description": "Specify the frontend server action restart behavior",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.frontendServer.settings.processManager",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Frontend server",
+                "description": "Specify the postcss build action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the postcss build action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild.command": {
+                "name": "command",
+                "type": "String",
+                "default": "Frontend server",
+                "description": "Specify the postcss build action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.postcssBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Frontend server",
+                "description": "Specify the images build action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the images build action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar images.build",
+                "description": "Specify the images build action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.imagesBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.vite.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Vite development stack",
+                "description": "Specify the vite action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.vite.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the vite action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.vite.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar vite",
+                "description": "Specify the vite action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.vite",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Vite build stasck",
+                "description": "Specify the vite build action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the vite build action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar vite.build",
+                "description": "Specify the vite build action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.viteBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild.title": {
+                "name": "title",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the doc build action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the doc build action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar markdown.build -p readme -p doc",
+                "description": "Specify the doc build action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.title": {
+                "name": "title",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the doc build action title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the doc build action description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild.command": {
+                "name": "command",
+                "type": "String",
+                "default": "sugar docmap.build --noExtends",
+                "description": "Specify the doc build action command",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstack.actions.docmapBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstack.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstack.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.title": {
+                "name": "title",
+                "type": "String",
+                "default": "Default",
+                "description": "Specify the recipe name",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.description": {
+                "name": "description",
+                "type": "String",
+                "default": "Default s-frontstack recipe",
+                "description": "Specify the recipe description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.templateDir": {
+                "name": "templateDir",
+                "type": "String",
+                "default": "__path.resolve(`${__dirname()}/../templates/default`)e",
+                "description": "Specify the recipe template directory",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.defaultStack": {
+                "name": "defaultStack",
+                "type": "String",
+                "default": "dev",
+                "description": "Specify the recipe default stack",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.description": {
+                "name": "description",
+                "type": "String",
+                "default": "Start the development stack",
+                "description": "Specify the recipe dev stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.frontendServer": {
+                "name": "frontendServer",
+                "type": "String",
+                "default": "[config.frontstack.actions.frontendServer]",
+                "description": "Specify the recipe dev stack frontendServer action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions.vite": {
+                "name": "vite",
+                "type": "String",
+                "default": "[config.frontstack.actions.vite]",
+                "description": "Specify the recipe dev stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.dev.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe prod stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.sharedParams.env": {
+                "name": "env",
+                "type": "String",
+                "default": "production",
+                "description": "Specify the recipe prod stack env shared param",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.sharedParams",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions.frontendServer": {
+                "name": "frontendServer",
+                "type": "String",
+                "default": "[config.frontstack.actions.frontendServer]",
+                "description": "Specify the recipe prod stack frontendServer action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.prod.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe build stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.sharedParams.prod": {
+                "name": "prod",
+                "type": "String",
+                "default": "true",
+                "description": "Specify that the build is made for production",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.sharedParams",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.postcssBuild": {
+                "name": "postcssBuild",
+                "type": "String",
+                "default": "[config.frontstack.actions.postcssBuild]",
+                "description": "Specify the recipe build stack postcssBuild action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.viteBuild": {
+                "name": "viteBuild",
+                "type": "String",
+                "default": "[config.frontstack.actions.viteBuild]",
+                "description": "Specify the recipe build stack viteBuild action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions.imagesBuild": {
+                "name": "imagesBuild",
+                "type": "String",
+                "default": "[config.frontstack.actions.imagesBuild]",
+                "description": "Specify the recipe build stack imagesBuild action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeDefault.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeDefault.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeDefault.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.title": {
+                "name": "title",
+                "type": "String",
+                "default": "LitElement component",
+                "description": "Specify the recipe title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.templateDir": {
+                "name": "templateDir",
+                "type": "String",
+                "default": "__path.resolve(`${__dirname()}/../templates/feature`)",
+                "description": "Specify the recipe template directory",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.defaultStack": {
+                "name": "defaultStack",
+                "type": "String",
+                "default": "dev",
+                "description": "Specify the recipe default stack",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe dev stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.actions.vite": {
+                "name": "vite",
+                "type": "String",
+                "default": "[config.frontstack.actions.vite]",
+                "description": "Specify the recipe dev stack vite action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.dev.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe build stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.action": {
+                "name": "action",
+                "type": "String",
+                "default": "[config.frontstack.actions.viteBuild]",
+                "description": "Specify the recipe build stack viteBuild action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params.lib": {
+                "name": "lib",
+                "type": "String",
+                "default": "true",
+                "description": "Specify the recipe build stack viteBuild action lib param",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeFeature.stacks.build.actions.viteBuild.params",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeFeature.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeFeature.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.title": {
+                "name": "title",
+                "type": "String",
+                "default": "LitElement component",
+                "description": "Specify the recipe title",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.templateDir": {
+                "name": "templateDir",
+                "type": "String",
+                "default": "__path.resolve(`${__dirname()}/../templates/litElement`)",
+                "description": "Specify the recipe template directory",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.defaultStack": {
+                "name": "defaultStack",
+                "type": "String",
+                "default": "dev",
+                "description": "Specify the recipe default stack",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe dev stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.actions.vite": {
+                "name": "vite",
+                "type": "String",
+                "default": "[config.frontstack.actions.vite]",
+                "description": "Specify the recipe dev stack vite action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.dev.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.description": {
+                "name": "description",
+                "type": "String",
+                "default": "...",
+                "description": "Specify the recipe build stack description",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.action": {
+                "name": "action",
+                "type": "String",
+                "default": "[config.frontstack.actions.viteBuild]",
+                "description": "Specify the recipe build stack viteBuild action",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js"
+            },
+            "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.params.lib": {
+                "name": "lib",
+                "type": "String",
+                "default": "true",
+                "description": "Specify the recipe build stack viteBuild action lib param",
+                "namespace": "@coffeekraken.s-frontstack.config.frontstackRecipeLitElement.stacks.build.actions.viteBuild.params",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontstackRecipeLitElement.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontstackRecipeLitElement.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-frontstack.node.interface.sFrontstackActionInterface": {
                 "name": "SFrontstackActionInterface",
                 "type": ".                      Class",

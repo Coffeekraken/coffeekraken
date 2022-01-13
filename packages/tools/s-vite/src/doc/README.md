@@ -37,8 +37,34 @@ await sVite.build({
 });
 ```
 
-## Build parameters interface
+## Build
+
+```js
+import __SVite from '@coffeekraken/s-vite';
+const sVite = new __SVite();
+await sVite.build({
+    // ...parameters
+});
+```
+
+#### Parameters
 
 {{> interface namespace='@coffeekraken.s-vite.node.interface.sViteBuildParamsInterface' }}
+
+## Start server
+
+```js
+import __SVite from '@coffeekraken/s-vite';
+const sVite = new __SVite();
+await sVite.start({
+    // ...parameters
+});
+```
+
+#### Parameters
+
+This method accept [all of the ViteJS configurations](https://vitejs.dev/config/). It's pretty much a proxy that set some configurations that you can check defaults values just bellow:
+
+{{> config namespace='@coffeekraken.s-vite.config.vite'}}
 
 {{/ layout-readme }}

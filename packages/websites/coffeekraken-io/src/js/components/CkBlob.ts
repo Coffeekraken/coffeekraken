@@ -155,7 +155,7 @@ export default class CKBlob extends __SLitComponent {
         //Create a plane that receives shadows (but does not cast them)
         const planeGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
         const planeMaterial = new THREE.ShadowMaterial({
-            opacity: .2,
+            opacity: this._isDark ? .2 : .05,
         });
         const plane = new THREE.Mesh(planeGeometry, planeMaterial);
         plane.receiveShadow = true;

@@ -22,6 +22,6 @@ All the available server configurations can be found in the `frontendServer.conf
 
 ## `frontendServer.config.js`
 
-{{> config path='@coffeekraken.s-frontend-server.config.frontendServer'}}
+{{> config namespace='@coffeekraken.s-frontend-server.config.frontendServer'}}
 
 {{/layout-doc }}

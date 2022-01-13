@@ -21,6 +21,11 @@ import __stripSourcemap from '@coffeekraken/sugar/shared/string/stripSourcemap';
 export default function configFromDocmap(docmap: any, path: string): any {
     const newObj = {};
     Object.keys(docmap.map).forEach((namespace) => {
+
+        if (namespace.startsWith('@coffeekraken.s-vite')) {
+            console.log(namespace);
+        }
+
         if (!namespace.includes(path + '.')) return;
         newObj[namespace.replace(path + '.', '')] = docmap.map[namespace];
     });

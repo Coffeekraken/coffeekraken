@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,6 +16,7 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
@@ -37,7 +39,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -66,7 +67,7 @@
         "map": {
             "@coffeekraken.s-sugar-feature.js.interface.sSugarFeatureInterface": {
                 "name": "SSugarFeatureInterface",
-                "type": "Interface",
+                "type": ".                      Class",
                 "platform": [
                     {
                         "name": "js",
@@ -76,15 +77,36 @@
                 "description": "This interface represent the attributes of the SSugarFeature",
                 "namespace": "@coffeekraken.s-sugar-feature.js.interface",
                 "status": "beta",
+                "interface": {
+                    "name": "SSugarFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "scrolled": {
+                            "description": "Specify if you want the \"scrolled\" class to be applied on the \"body\" element when the page has been scrolled",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scrolledDelta": {
+                            "description": "Specify after how many scroll the scrolled class will be applied",
+                            "type": "Number",
+                            "default": 10
+                        },
+                        "vhvar": {
+                            "description": "Specify if you want the \"--vh\" css variable to be computed and available",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSugarFeatureInterface.ts",
-                "extension": "ts",
-                "relPath": "src/js/interface/SSugarFeatureInterface.ts",
+                "filename": "SSugarFeatureInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SSugarFeatureInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-sugar-feature.js.sSugarFeature": {
@@ -139,9 +161,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSugarFeature.ts",
-                "extension": "ts",
-                "relPath": "src/js/SSugarFeature.ts",
+                "filename": "SSugarFeature.js",
+                "extension": "js",
+                "relPath": "src/js/SSugarFeature.js",
                 "children": {}
             },
             "@coffeekraken.s-sugar-feature.sugar.css.font.default": {

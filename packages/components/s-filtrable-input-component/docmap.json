@@ -65,6 +65,167 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingInline": {
+                "name": "paddingInline",
+                "type": "String",
+                "default": "[theme.ui.default.paddingInline]",
+                "description": "Specify the default padding inline for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.paddingBlock": {
+                "name": "paddingBlock",
+                "type": "String",
+                "default": "[theme.ui.default.paddingBlock]",
+                "description": "Specify the default padding block for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderRadius": {
+                "name": "borderRadius",
+                "type": "String",
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.borderWidth": {
+                "name": "borderWidth",
+                "type": "String",
+                "default": "[theme.ui.default.borderWidth]",
+                "description": "Specify the default border width for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.transition": {
+                "name": "transition",
+                "type": "String",
+                "default": "[theme.ui.default.transition]",
+                "description": "Specify the default transition for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultColor": {
+                "name": "defaultColor",
+                "type": "String",
+                "default": "[theme.ui.default.defaultColor]",
+                "description": "Specify the default color for filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.defaultStyle": {
+                "name": "defaultStyle",
+                "type": "Number",
+                "default": "[theme.ui.default.defaultStyle]",
+                "description": "Specify the default style for your filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.depth": {
+                "name": "depth",
+                "type": "String",
+                "default": "[theme.depth.100]",
+                "description": "Specify the default depth for input items",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.outline": {
+                "name": "outline",
+                "type": "Object",
+                "default": "[theme.ui.outline.active]",
+                "description": "Specify if the focus outline is activated for this ui element",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput.rhythmVertical": {
+                "name": "rhythmVertical",
+                "type": "Object",
+                "default": "[theme.ui.default.rhythmVertical]",
+                "description": "Specify the default vertical rhythm for your filtrable input ui",
+                "namespace": "@coffeekraken.s-filtrable-input-component.config.themeUi.filtrableInput",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-filtrable-input-component.js.interface.sFiltrableInputComponentInterface": {
                 "name": "SFiltrableInputComponentInterface",
                 "type": ".                      Class",
@@ -100,10 +261,18 @@
                             "type": "String",
                             "default": "No item to display"
                         },
+                        "searchValuePreprocess": {
+                            "description": "Specify a function used to preprocess the value just before actually searching through the items",
+                            "type": "Function"
+                        },
                         "loadingText": {
                             "description": "Specify the text to use for the default \"loading\" state",
                             "type": "String",
                             "default": "Loading please wait..."
+                        },
+                        "filterItems": {
+                            "description": "Specify a function to use to filter the items. Must return the filtered list of items",
+                            "type": "Function"
                         },
                         "filtrable": {
                             "description": "Specify all the properties of your \"item\" to use as source for the filtrable process",

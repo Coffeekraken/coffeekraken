@@ -94,9 +94,10 @@
                             "type": "String",
                             "values": [
                                 "directly",
+                                "direct",
                                 "inViewport"
                             ],
-                            "default": "directly"
+                            "default": "direct"
                         },
                         "adoptStyle": {
                             "type": "Boolean",

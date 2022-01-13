@@ -29,10 +29,13 @@
             </div>
             <div>
                 <div class="sticky">
-                    <h4 class="s-typo:h4 s-mbe:30">
-                        CSS made<br>
-                        <span class="s-tc:accent">pleasant</span> again
-                    </h4>
+                    <div class="s-flex:align-center">
+                        <i class="s-icon:file-css s-tc:main s-opacity:20 s-font:90"></i>
+                        <h4 class="s-typo:h4 s-mbe:30 s-pbs:30 s-pis:20">
+                            CSS made<br>
+                            <span class="s-tc:accent">pleasant</span> again
+                        </h4>
+                    </div>
                     <ol class="s-list:ol s-color:accent s-mbe:30">
                         <li class="s-typo:p">
                             Powerfull and pleasant classnames syntax
@@ -64,10 +67,13 @@
         <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
             <div>
                 <div class="sticky">
-                    <h4 class="s-typo:h4 s-mbe:30">
-                        <span class="s-tc:accent">Theming</span> made<br>
-                        As tasty as a donut
-                    </h4>
+                    <div class="s-flex:align-center">
+                        <i class="s-icon:theme s-tc:main s-opacity:20 s-font:90"></i>
+                        <h4 class="s-typo:h4 s-mbe:30 s-pbs:30 s-pis:30">
+                            <span class="s-tc:accent">Theming</span> made<br>
+                            As tasty as a donut
+                        </h4>
+                    </div>
                     <ol class="s-list:ol s-color:accent s-mbe:30">
                         <li class="s-typo:p">
                             Easy and Powerfull <span class="s-tc:complementary">color management</span>
@@ -142,10 +148,13 @@
                 </div>
                 <div>
                     <div class="sticky">
-                        <h4 class="s-typo:h4 s-mbe:30">
-                            <span class="s-tc:accent">Layout</span> finally<br>
-                            Nice to work with
-                        </h4>
+                        <div class="s-flex:align-center">
+                            <i class="s-icon:layout s-tc:main s-opacity:20 s-font:90"></i>
+                            <h4 class="s-typo:h4 s-mbe:30 s-pbs:30 s-pis:30">
+                                <span class="s-tc:accent">Layout</span> finally<br>
+                                Nice to work with
+                            </h4>
+                        </div>
                         <ol class="s-list:ol s-color:accent s-mbe:30">
                             <li class="s-typo:p">
                                 No more pre-defined columns
@@ -168,10 +177,13 @@
             <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
                 <div>
                     <div class="sticky">
-                        <h4 class="s-typo:h4 s-mbe:30">
-                            <span class="s-tc:accent">Helpers</span> as<br>
-                            Many as you need
-                        </h4>
+                        <div class="s-flex:align-center">
+                            <i class="s-icon:helpers s-tc:main s-opacity:20 s-font:90"></i>
+                            <h4 class="s-typo:h4 s-mbe:30 s-pbs:30 s-pis:30">
+                                <span class="s-tc:accent">Helpers</span> as<br>
+                                Many as you need
+                            </h4>
+                        </div>
                         <ol class="s-list:ol s-color:accent s-mbe:30">
                             <li class="s-typo:p">
                                 Helpers for things like <code class="s-typo:code">margin</code>, <code

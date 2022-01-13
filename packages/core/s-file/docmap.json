@@ -65,6 +65,23 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-file.config.sFile.classesMap": {
+                "name": "classesMap",
+                "type": "Record<string, string>",
+                "default": "{}",
+                "description": "Map some SFile classes path using minimatch patterns like so:\n{\n'.scss,*.sass': `${__packageRoot(__dirname)}/src/node/scss/SScssFile`\n}",
+                "namespace": "@coffeekraken.s-file.config.sFile",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "sFile.config.js",
+                "extension": "config",
+                "relPath": "src/config/sFile.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-file.sugar.node.fs.sFile": {
                 "name": "SFile",
                 "type": "Class",

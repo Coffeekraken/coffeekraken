@@ -65,6 +65,23 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-env.config.env.env": {
+                "name": "env",
+                "type": "String",
+                "default": "process.env.NODE_ENV ?? window.env.ENV ?? 'dev`",
+                "description": "Specify the environment env. This is usually \"production\" or \"dev\" as value.",
+                "namespace": "@coffeekraken.s-env.config.env",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "env.config.js",
+                "extension": "config",
+                "relPath": "src/config/env.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-env.s-env.shared.sEnv": {
                 "name": "SEnv",
                 "type": "Class",

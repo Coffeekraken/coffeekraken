@@ -1,5 +1,6 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __commonTextFileExtensions from '@coffeekraken/sugar/shared/extension/commonTextFileExtensions';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
@@ -56,7 +57,7 @@ export default function (env, config) {
              * @name            globs
              * @namespace       config.docmap.build
              * @type                Array<String>
-             * @default             ['*:\/.*@namespace.*\/gm','*.md:\/.*@namespace.*\/gm',`src/**{5}/!(*.md|*.ts):\/.*@namespace.*\/gm`,`dist/css/*:/.*@namespace.*\/gm`]
+             * @default             ['*',`src/!(css)/** /*.+(${__commonTextFileExtensions(false).join('|')})`,`dist/+(css)/*`]
              *
              * Specify the input globs to use in order to find files that will
              * be used for docmap generation.
@@ -68,9 +69,8 @@ export default function (env, config) {
              */
             globs: [
                 '*',
-                `src/+(cli|doc|js|node|views|shared)/**/*`,
-                `dist/+(css)/*`,
-                // `src/**/+(README|LICENSE|*.md)`,
+                `src/!(css)/**/*.+(${__commonTextFileExtensions(false).join('|')})`,
+                `dist/+(css)/*`
             ],
 
             /**

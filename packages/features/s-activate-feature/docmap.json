@@ -140,6 +140,10 @@
                             "type": "Number",
                             "default": 0
                         },
+                        "triggerer": {
+                            "description": "Specify an element selector that will be used as the triggerer instead of this current element",
+                            "type": "String"
+                        },
                         "trigger": {
                             "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
                             "type": {
@@ -260,6 +264,10 @@
                             "description": "Specify a timeout before unactivate the target(s)",
                             "type": "Number",
                             "default": 0
+                        },
+                        "triggerer": {
+                            "description": "Specify an element selector that will be used as the triggerer instead of this current element",
+                            "type": "String"
                         },
                         "trigger": {
                             "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",

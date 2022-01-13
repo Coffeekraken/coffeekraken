@@ -65,6 +65,173 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-docmap.config.docmap.read.input": {
+                "name": "input",
+                "type": "String",
+                "default": "${__packageRoot()}/docmap.json",
+                "description": "Specify the path of the docmap.json source file to read",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.read",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.snapshot.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/.docmap",
+                "description": "Specify where to save the generated snapshot",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.snapshot",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.installSnapshot.glob": {
+                "name": "glob",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/.docmap/*",
+                "description": "Specify where to find the snapshot(s) to install. It must refer\nto folder(s) where a docmap.json and a package.json exists...",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.installSnapshot",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.globs": {
+                "name": "globs",
+                "type": "Array<String>",
+                "default": "['*',`src/!(css)/** /*.+(${__commonTextFileExtensions(false).join('|')})`,`dist/+(css)/*`]",
+                "description": "Specify the input globs to use in order to find files that will\nbe used for docmap generation.\nThe syntax is standard glob with an additional feature which is:\n- [glob]:[regex] -> This will search for files using the [glob] part, and search inside them using the [regex] part",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.exclude": {
+                "name": "exclude",
+                "type": "Array<String>",
+                "default": "['**\\/__tests__/**\\/*','**\\/__tests__.wip/**\\/*','**\\/__wip__/**\\/*']",
+                "description": "Specify some regex to apply on different docblock and path properties\nto exclude some files from the buildd docMap json",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.noExtends": {
+                "name": "noExtends",
+                "type": "Boolean",
+                "default": "false",
+                "description": "Specify if you want to disable the extends search process that will result in the \"extends\" array in the docmap.json file",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.filters.namespace": {
+                "name": "namespace",
+                "type": "Object<String>",
+                "default": "/#\\{.*\\}/gm",
+                "description": "Specify some regex to apply on different docblock properties\nto exclude some files from the buildd docmap json",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build.filters",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "{\n   namespace: /#\\{.\\}/gm\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.tags": {
+                "name": "tags",
+                "type": "Array<String>",
+                "default": "['name','type','menu','default','platform','description','namespace','status','example','interface','styleguide','static','since','author']",
+                "description": "Specify which docblock tags you want to integrate to your docmap.json items",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.save": {
+                "name": "save",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to save the buildd docmap.json file under the ```outPath``` path",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js"
+            },
+            "@coffeekraken.s-docmap.config.docmap.build.outPath": {
+                "name": "outPath",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/docmap.json",
+                "description": "Specify where you want to outPath the file",
+                "namespace": "@coffeekraken.s-docmap.config.docmap.build",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.config.js",
+                "extension": "config",
+                "relPath": "src/config/docmap.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-docmap.node.interface.sDocmapBuildParamsInterface": {
                 "name": "SDocmapBuildParamsInterface",
                 "type": ".                      Class",
@@ -86,7 +253,7 @@
                             "description": "Specify some globs to use to search docblocks to use in docmap generation",
                             "default": [
                                 "*",
-                                "src/+(cli|doc|js|node|views|shared)/**/*",
+                                "src/!(css)/**/*.+(txt|htm|html|md|json|csv|rss|xhtml|asp|c|cgi|cfm|pl|class|cpp|cs|h|java|php|py|sh|swift|vb|js|jsp|jsx|css|ts|tsx|rs|dart)",
                                 "dist/+(css)/*"
                             ]
                         },

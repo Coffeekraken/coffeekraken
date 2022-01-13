@@ -65,6 +65,1010 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.glob": {
+                "name": "glob",
+                "type": "String",
+                "default": "** /+(README|LICENSE|*.md)",
+                "description": "Specify a glob pattern relative to your \"inDir\" config",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir": {
+                "name": "inDir",
+                "type": "String",
+                "default": "[config.storage.src.rootDir]",
+                "description": "Specify the input directory where to search for files to build using the \"glob\" config",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath": {
+                "name": "inPath",
+                "type": "String",
+                "default": "null",
+                "description": "Specify a file path to process.",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw": {
+                "name": "inRaw",
+                "type": "String",
+                "default": "null",
+                "description": "Specify some markdown to build in string format.",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.dist.rootDir]",
+                "description": "Specify the output directory where to save the processed files.",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath": {
+                "name": "outPath",
+                "type": "String",
+                "default": "null",
+                "description": "Specify an output file path when using the \"inPath\" config",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save": {
+                "name": "save",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to save the processed files out or not",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target": {
+                "name": "target",
+                "type": "String",
+                "default": "markdown",
+                "description": "Specify the output target you want. Can be \"markdown\" or \"html\"",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.default",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.match": {
+                "name": "match",
+                "type": "String",
+                "default": "/^```([a-zA-Z0-9]+)\\n([\\s\\S]*?)```$/gm",
+                "description": "Specify the regex to match \"code\" string",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../transformers/code/code.md')",
+                "description": "Specify the \"markdown\" template to transform this match",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/license/license.md')",
+                "description": "Specify the \"markdown\" template for this \"license\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseMit/licenseMit.md')",
+                "description": "Specify the \"markdown\" template for this \"license-mit\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseMit/licenseMit.md')",
+                "description": "Specify the \"html\" template for this \"license-mit\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseGpl/licenseGpl.md')",
+                "description": "Specify the \"markdown\" template for this \"license-gpl\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseGpl/licenseGpl.md')",
+                "description": "Specify the \"html\" template for this \"license-gpl\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseLgpl/licenseLgpl.md')",
+                "description": "Specify the \"markdown\" template for this \"license-lgpl\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseLgpl/licenseLgpl.md')",
+                "description": "Specify the \"html\" template for this \"license-lgpl\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseEpl20/licenseEpl20.md')",
+                "description": "Specify the \"markdown\" template for this \"license-epl-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseEpl20/licenseEpl20.md')",
+                "description": "Specify the \"html\" template for this \"license-epl-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseMpl20/licenseMpl20.md')",
+                "description": "Specify the \"markdown\" template for this \"license-mpl-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseMpl20/licenseMpl20.md')",
+                "description": "Specify the \"html\" template for this \"license-mpl-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseCddl10/licenseCddl10.md')",
+                "description": "Specify the \"markdown\" template for this \"license-cddl-10\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseCddl10/licenseCddl10.md')",
+                "description": "Specify the \"html\" template for this \"license-cddl-10\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseApache20/licenseApache20.md')",
+                "description": "Specify the \"markdown\" template for this \"license-apache-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseApache20/licenseApache20.md')",
+                "description": "Specify the \"html\" template for this \"license-apache-20\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseBsd2Clause/licenseBsd2Clause.md')",
+                "description": "Specify the \"markdown\" template for this \"license-bsd-2-clause\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseBsd2Clause/licenseBsd2Clause.md')",
+                "description": "Specify the \"html\" template for this \"license-bsd-2-clause\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseBsd3Clause/licenseBsd3Clause.md')",
+                "description": "Specify the \"markdown\" template for this \"license-bsd-3-clause\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/licenseBsd3Clause/licenseBsd3Clause.md')",
+                "description": "Specify the \"html\" template for this \"license-bsd-3-clause\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/shields/shields.md')",
+                "description": "Specify the \"markdown\" template for this \"shields\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/shields/shields.md')",
+                "description": "Specify the \"html\" template for this \"shields\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.data": {
+                "name": "data",
+                "type": "Object",
+                "default": "[config.shieldsio]",
+                "description": "Specify specify the datas to use to display the correct shields",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/interface/interface.md')",
+                "description": "Specify the \"markdown\" template for the \"interface\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/interface/interface.html')",
+                "description": "Specify the \"html\" template for the \"interface\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/configFiles/configFiles.md')",
+                "description": "Specify the \"markdown\" template for the \"configFiles\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/configFiles/configFiles.md')",
+                "description": "Specify the \"html\" template for the \"configFiles\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/config/config.md')",
+                "description": "Specify the \"markdown\" template for the \"config\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/config/config.md')",
+                "description": "Specify the \"html\" template for the \"config\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/docMenu/docMenu.md')",
+                "description": "Specify the \"markdown\" template for the \"docMenu\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../partials/docMenu/docMenu.md')",
+                "description": "Specify the \"html\" template for the \"docMenu\" partial",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/doc/docLayout.md')",
+                "description": "Specify the \"markdown\" template for the \"doc\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/doc/docLayout.md')",
+                "description": "Specify the \"html\" template for the \"doc\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.data": {
+                "name": "data",
+                "type": "String",
+                "default": "[config.doc.layout]",
+                "description": "Specify the data to use for the \"doc\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/readme/readmeLayout.md')",
+                "description": "Specify the \"markdown\" template for the \"readme\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/readme/readmeLayout.md')",
+                "description": "Specify the \"html\" template for the \"readme\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/license/licenseLayout.md')",
+                "description": "Specify the \"markdown\" template for the \"license\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../layouts/license/licenseLayout.md')",
+                "description": "Specify the \"html\" template for the \"license\" layout",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/readmeHeader/readmeHeaderSection.md')",
+                "description": "Specify the \"markdown\" template for the \"readme-header\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/readmeHeader/readmeHeaderSection.md')",
+                "description": "Specify the \"html\" template for the \"readme-header\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/docHeader/docHeaderSection.md')",
+                "description": "Specify the \"markdown\" template for the \"doc-header\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/docHeader/docHeaderSection.md')",
+                "description": "Specify the \"html\" template for the \"doc-header\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/docMenu/docMenuSection.md')",
+                "description": "Specify the \"markdown\" template for the \"doc-menu\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/docMenu/docMenuSection.md')",
+                "description": "Specify the \"html\" template for the \"doc-menu\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/description/descriptionSection.md')",
+                "description": "Specify the \"markdown\" template for the \"description\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/description/descriptionSection.md')",
+                "description": "Specify the \"html\" template for the \"description\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/install/installSection.md')",
+                "description": "Specify the \"markdown\" template for the \"install\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/install/installSection.md')",
+                "description": "Specify the \"html\" template for the \"install\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/license/licenseSection.md')",
+                "description": "Specify the \"markdown\" template for the \"license\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/license/licenseSection.md')",
+                "description": "Specify the \"html\" template for the \"license\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.markdown": {
+                "name": "markdown",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/contact/contactSection.md')",
+                "description": "Specify the \"markdown\" template for the \"contact\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js"
+            },
+            "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.html": {
+                "name": "html",
+                "type": "String",
+                "default": "__path.resolve(__dirname(),'../sections/contact/contactSection.md')",
+                "description": "Specify the \"html\" template for the \"contact\" section",
+                "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdownBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/markdownBuilder.config.js",
+                "children": {
+                    "markdown": {
+                        "name": "markdown",
+                        "type": "String",
+                        "default": "[config.license.layout]",
+                        "description": "Specify the data to use for the \"license\" layout",
+                        "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "data": {
+                        "name": "data",
+                        "type": "String",
+                        "default": "[config.readme.layout]",
+                        "description": "Specify the data to use for the \"readme\" layout",
+                        "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-markdown-builder.node.interface.sMarkdownBuilderBuildParamsInterface": {
                 "name": "SMarkdownBuilderBuildParamsInterface",
                 "type": ".                      Class",

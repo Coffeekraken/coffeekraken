@@ -65,6 +65,279 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-static-builder.config.staticBuilder.input": {
+                "name": "input",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/sitemap.xml",
+                "description": "Specify the input sitemap file to use for building your static website",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/static",
+                "description": "Specify the outDir folder path to save your builded website",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.host": {
+                "name": "host",
+                "type": "String",
+                "default": "http://[config.frontendServer.hostname]:[config.frontendServer.port]",
+                "description": "Specify the host on which to make requests to",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.failAfter": {
+                "name": "failAfter",
+                "type": "Number",
+                "default": "-1",
+                "description": "Specify the number of failures after which the build is considered as rejected. -1 to disable this feature",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.requestTimeout": {
+                "name": "requestTimeout",
+                "type": "Number",
+                "default": "5000",
+                "description": "Specify after how many ms a request has to be considered as failed",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.clean": {
+                "name": "clean",
+                "type": "Boolean",
+                "default": "false",
+                "description": "Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the \"incremental\" option to false",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.incremental": {
+                "name": "incremental",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to use incremental build",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.staticBuilder.host]/docmap.json",
+                "description": "Specify the directory/file/url from which to get the asset to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]/docmap.json",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.docmap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.manifest.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/manifest.json",
+                "description": "Specify the directory/file to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.manifest",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.manifest.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]/manifest.json",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.manifest",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.sitemap.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/sitemap.xml",
+                "description": "Specify the directory/file to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.sitemap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.sitemap.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]/sitemap.xml",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.sitemap",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.favicon.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.storage.package.rootDir]/favicon.ico",
+                "description": "Specify the directory/file to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.favicon",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.favicon.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]/favicon.ico",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.favicon",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.from": {
+                "name": "from",
+                "type": "String",
+                "default": "[config.storage.dist.rootDir]",
+                "description": "Specify the directory/file to copy",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js"
+            },
+            "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist.to": {
+                "name": "to",
+                "type": "String",
+                "default": "[config.staticBuilder.outDir]",
+                "description": "Specify the directory where you want to paste the asset(s)",
+                "namespace": "@coffeekraken.s-static-builder.config.staticBuilder.assets.dist",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "staticBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/staticBuilder.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-static-builder.node.interface.sStaticBuilderBuildParamsInterface": {
                 "name": "SStaticBuilderBuildParamsInterface",
                 "type": ".                      Class",
@@ -98,7 +371,7 @@
                             "description": "Specify the host on which to make the requests",
                             "type": "String",
                             "alias": "h",
-                            "default": "http://127.0.0.1:8888"
+                            "default": "http://127.0.0.1:8080"
                         },
                         "clean": {
                             "description": "Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the \"incremental\" option to false",
@@ -130,7 +403,7 @@
                             "alias": "a",
                             "default": {
                                 "docmap": {
-                                    "from": "http://127.0.0.1:8888/docmap.json",
+                                    "from": "http://127.0.0.1:8080/docmap.json",
                                     "to": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-static-builder/static/docmap.json"
                                 },
                                 "manifest": {

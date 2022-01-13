@@ -81,6 +81,7 @@ export default function ({
         vars.push(`   
         display: inline-block;
         white-space: nowrap;
+        user-select: none;
     `);
     }
 

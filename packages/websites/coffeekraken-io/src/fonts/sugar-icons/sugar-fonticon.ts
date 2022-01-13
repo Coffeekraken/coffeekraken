@@ -15,12 +15,14 @@ export type SugarFonticonId =
   | "file-ts"
   | "folder-opened"
   | "folder"
+  | "helpers"
   | "lang-css"
   | "lang-html"
   | "lang-js"
   | "lang-md"
   | "lang-php"
   | "lang-ts"
+  | "layout"
   | "range"
   | "refresh"
   | "support-chromium"
@@ -28,6 +30,7 @@ export type SugarFonticonId =
   | "support-firefox"
   | "support-rtl"
   | "support-safari"
+  | "theme"
   | "vue";
 
 export type SugarFonticonKey =
@@ -47,12 +50,14 @@ export type SugarFonticonKey =
   | "FileTs"
   | "FolderOpened"
   | "Folder"
+  | "Helpers"
   | "LangCss"
   | "LangHtml"
   | "LangJs"
   | "LangMd"
   | "LangPhp"
   | "LangTs"
+  | "Layout"
   | "Range"
   | "Refresh"
   | "SupportChromium"
@@ -60,6 +65,7 @@ export type SugarFonticonKey =
   | "SupportFirefox"
   | "SupportRtl"
   | "SupportSafari"
+  | "Theme"
   | "Vue";
 
 export enum SugarFonticon {
@@ -79,12 +85,14 @@ export enum SugarFonticon {
   FileTs = "file-ts",
   FolderOpened = "folder-opened",
   Folder = "folder",
+  Helpers = "helpers",
   LangCss = "lang-css",
   LangHtml = "lang-html",
   LangJs = "lang-js",
   LangMd = "lang-md",
   LangPhp = "lang-php",
   LangTs = "lang-ts",
+  Layout = "layout",
   Range = "range",
   Refresh = "refresh",
   SupportChromium = "support-chromium",
@@ -92,6 +100,7 @@ export enum SugarFonticon {
   SupportFirefox = "support-firefox",
   SupportRtl = "support-rtl",
   SupportSafari = "support-safari",
+  Theme = "theme",
   Vue = "vue",
 }
 
@@ -112,18 +121,21 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.FileTs]: "61710",
   [SugarFonticon.FolderOpened]: "61711",
   [SugarFonticon.Folder]: "61712",
-  [SugarFonticon.LangCss]: "61713",
-  [SugarFonticon.LangHtml]: "61714",
-  [SugarFonticon.LangJs]: "61715",
-  [SugarFonticon.LangMd]: "61716",
-  [SugarFonticon.LangPhp]: "61717",
-  [SugarFonticon.LangTs]: "61718",
-  [SugarFonticon.Range]: "61719",
-  [SugarFonticon.Refresh]: "61720",
-  [SugarFonticon.SupportChromium]: "61721",
-  [SugarFonticon.SupportEdge]: "61722",
-  [SugarFonticon.SupportFirefox]: "61723",
-  [SugarFonticon.SupportRtl]: "61724",
-  [SugarFonticon.SupportSafari]: "61725",
-  [SugarFonticon.Vue]: "61726",
+  [SugarFonticon.Helpers]: "61713",
+  [SugarFonticon.LangCss]: "61714",
+  [SugarFonticon.LangHtml]: "61715",
+  [SugarFonticon.LangJs]: "61716",
+  [SugarFonticon.LangMd]: "61717",
+  [SugarFonticon.LangPhp]: "61718",
+  [SugarFonticon.LangTs]: "61719",
+  [SugarFonticon.Layout]: "61720",
+  [SugarFonticon.Range]: "61721",
+  [SugarFonticon.Refresh]: "61722",
+  [SugarFonticon.SupportChromium]: "61723",
+  [SugarFonticon.SupportEdge]: "61724",
+  [SugarFonticon.SupportFirefox]: "61725",
+  [SugarFonticon.SupportRtl]: "61726",
+  [SugarFonticon.SupportSafari]: "61727",
+  [SugarFonticon.Theme]: "61728",
+  [SugarFonticon.Vue]: "61729",
 };

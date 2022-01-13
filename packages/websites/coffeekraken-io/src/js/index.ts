@@ -8,8 +8,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
-import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
-import __SConductor from '@coffeekraken/s-conductor';
+
 // features
 import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
@@ -19,6 +18,10 @@ import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __VersionSelector } from './components/VersionSelector';
+
+// others
+import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+import __SConductor from '@coffeekraken/s-conductor';
 
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');

@@ -33,8 +33,8 @@ export default class SComponentDefaultInterface extends __SInterface {
             },
             mountWhen: {
                 type: 'String',
-                values: ['directly', 'inViewport'],
-                default: 'directly',
+                values: ['directly', 'direct', 'inViewport'],
+                default: 'direct',
             },
             adoptStyle: {
                 type: 'Boolean',

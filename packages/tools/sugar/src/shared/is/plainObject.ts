@@ -24,7 +24,7 @@
  * @since       1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function plainObject(object) {
+export default function plainObject(object) {
     if (!object) return false;
     if (typeof object !== 'object') return false;
     if (object.constructor && object.constructor.name !== 'Object')
@@ -35,4 +35,3 @@ function plainObject(object) {
     // if (object.constructor !== Object) return false;
     return true;
 }
-export default plainObject;

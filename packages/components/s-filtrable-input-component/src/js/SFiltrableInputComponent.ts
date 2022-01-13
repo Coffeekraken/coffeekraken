@@ -1,6 +1,5 @@
 import { html, css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { property } from 'lit/decorators.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';

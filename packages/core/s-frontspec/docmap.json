@@ -65,6 +65,23 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-frontspec.config.frontspec.head.@dev.viteClient": {
+                "name": "viteClient",
+                "type": "Object",
+                "default": "vite client script",
+                "description": "Specify some items you want to integrate to the head tag. It can be everything you want",
+                "namespace": "@coffeekraken.s-frontspec.config.frontspec.head.@dev",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontspec.config.js",
+                "extension": "config",
+                "relPath": "src/config/frontspec.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-frontspec.node.interface.sFrontspecParamsInterface": {
                 "name": "SFrontspecParamsInterface",
                 "type": ".                      Class",

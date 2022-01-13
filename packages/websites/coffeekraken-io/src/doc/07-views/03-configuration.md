@@ -22,10 +22,10 @@ This mean that the configurations stands into two configuration files that you c
 
 ## `views.config.js`
 
-{{> config path='@coffeekraken.s-view-renderer.config.views'}}
+{{> config namespace='@coffeekraken.s-view-renderer.config.views'}}
 
 ## `frontendServer.config.js`
 
-{{> config path='@coffeekraken.s-frontend-server.config.frontendServer'}}
+{{> config namespace='@coffeekraken.s-frontend-server.config.frontendServer'}}
 
 {{/layout-doc }}

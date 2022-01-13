@@ -65,6 +65,23 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin.cache": {
+                "name": "cache",
+                "type": "Boolean",
+                "default": "true",
+                "description": "Specify if you want to use the internal cache to speed up your compilations or not",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.config.postcssSugarPlugin",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "postcssSugarPlugin.config.js",
+                "extension": "config",
+                "relPath": "src/config/postcssSugarPlugin.config.js",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
                 "name": "astNodesToString",
                 "type": "Function",

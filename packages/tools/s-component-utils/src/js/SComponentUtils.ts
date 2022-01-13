@@ -29,7 +29,7 @@ export interface ISComponentUtilsCtorSettings {
 
 export interface ISComponentDefaultProps {
     id: string;
-    mountWhen: 'directly' | 'inViewport';
+    mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     bare: boolean;
 }

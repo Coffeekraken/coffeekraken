@@ -506,10 +506,10 @@ class SDocMap extends __SClass implements ISDocMap {
             // @ts-ignore
             const docmapObj = docmapJson.map[namespace];
             if (!docmapObj.menu) return;
-            if (!docmapJsonMenuByPackage[docmapObj.package]) {
-                docmapJsonMenuByPackage[docmapObj.package] = [];
+            if (!docmapJsonMenuByPackage[docmapObj.package.name]) {
+                docmapJsonMenuByPackage[docmapObj.package.name] = [];
             }
-            docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
+            docmapJsonMenuByPackage[docmapObj.package.name].push(docmapObj);
         });
 
         let finalMenu: ISDocmapMenuObj = {

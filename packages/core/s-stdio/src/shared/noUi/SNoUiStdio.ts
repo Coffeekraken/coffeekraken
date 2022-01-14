@@ -104,6 +104,22 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
         // process.stdout.write('\x1Bc');
     }
 
+    _getGroupObj(group, log = true) {
+        // @ts-ignore
+        let groupObj = this._loggedGroups[group];
+        if (!groupObj || this._lastLogObj?.group !== group) {
+            // @ts-ignore
+            groupObj = {
+                color: __getColorFor(group)
+            };
+            groupObj.prefix = __parseHtml(`<${groupObj.color}>█</${groupObj.color}>`);
+            // @ts-ignore
+            this._loggedGroups[group] = groupObj;
+        }
+        return groupObj;
+
+    }
+
     /**
      * @name          _log
      * @type          Function
@@ -136,23 +152,13 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
             }
         }
 
-        // @ts-ignore
-        let groupObj = this._loggedGroups[logObj.group];
-        if (!groupObj || this._lastLogObj?.group !== logObj.group) {
-            // @ts-ignore
-            groupObj = {
-                color: __getColorFor(logObj.group),
-            };
+        const groupObj = this._getGroupObj(logObj.group);
 
-            // if (this._lastLogObj) {
-            //     console.log(`<${this._loggedGroups[this._lastLogObj.group].color}> </${this._loggedGroups[this._lastLogObj.group].color}>`);
-            // }
-            console.log(`<${groupObj.color}>█</${groupObj.color}>`);
+        if (logObj.group !== this._lastLogObj?.group) {
+            console.log(groupObj.prefix);
             // @ts-ignore
             console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${'-'.repeat(process.stdout.columns - 2 - logObj.group.length)}</${groupObj.color}>`);
-            console.log(`<${groupObj.color}>█</${groupObj.color}>`);
-            // @ts-ignore
-            this._loggedGroups[logObj.group] = groupObj;
+            console.log(groupObj.prefix);
         }
 
         if (logObj.clear && this._lastLogObj?.type !== __SLog.TYPE_WARN && this._lastLogObj?.type !== __SLog.TYPE_ERROR) {
@@ -203,6 +209,18 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
         return new __SPromise(async ({ resolve, reject, emit }) => {
             let prompt, res;
 
+            if (!askObj.group) {
+                // @ts-ignore
+                if (askObj.metas.id === 'SPromise') {
+                    askObj.group = 'Global';
+                } else {
+                    // @ts-ignore
+                    askObj.group = askObj.metas.id;
+                }
+            }
+
+            const groupObj = this._getGroupObj(askObj.group);
+
             switch (askObj.type) {
                 case 'select':
                     // @ts-ignore
@@ -215,6 +233,10 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
                     // @ts-ignore
                     prompt = new __Enquirer.default.AutoComplete({
                         ...askObj,
+                        prefix: groupObj.prefix,
+                        choices: askObj.choices.map(choice => {
+                            return `${groupObj.prefix} ${choice}`;
+                        })
                     });
                     res = await prompt.run();
                     break;
@@ -282,6 +304,8 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
                     res = await prompt.run();
                     break;
             }
+            console.log('RE', res, typeof res);
+            res = res.replace(groupObj.prefix, '').trim();
             resolve(res);
         });
     }

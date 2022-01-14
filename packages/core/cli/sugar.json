@@ -9,6 +9,18 @@
     },
     "cli": [
         {
+            "stack": "new",
+            "description": "Sugar new action",
+            "defaultAction": "project",
+            "actions": {
+                "project": {
+                    "scope": "global",
+                    "description": "Init a new project",
+                    "command": "sugar frontstack.new"
+                }
+            }
+        },
+        {
             "stack": "dev",
             "description": "Sugar development stack actions",
             "defaultAction": "start",
@@ -41,6 +53,19 @@
                     "scope": "global",
                     "description": "Build for production",
                     "command": "sugar frontstack.recipe build"
+                }
+            }
+        },
+        {
+            "stack": "package",
+            "description": "Package related actions",
+            "defaultAction": "rename",
+            "actions": {
+                "rename": {
+                    "scope": "global",
+                    "description": "Rename a package (folder, package.json, etc...",
+                    "interface": "./src/node/package/interface/SCliPackageRenameParamsInterface.js",
+                    "process": "./src/cli/package/rename.cli.js"
                 }
             }
         },

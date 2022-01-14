@@ -15,6 +15,7 @@ import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities
 // @ts-ignore
 import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
+import __scrollTo, { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 // // @ts-ignore
 // import __prettier from 'prettier/esm/standalone.mjs';
@@ -37,6 +38,8 @@ export interface ISCodeExampleComponentProps {
     lessLabel: string;
     moreAction: 'toggle' | string;
     more: boolean;
+    scrollOnMore: boolean;
+    scrollToSettings: Partial<IScrollToSettings>
 }
 
 /**
@@ -242,6 +245,9 @@ export default class SCodeExample extends __SLitComponent {
     toggleMore() {
         this._more = !this._more;
         this.setMoreClass();
+        __scrollTo(this, {
+            ...this.props.scrollToSettings ?? {}
+        });
     }
     initPrismOnTab(id) {
         const $content = <HTMLElement>(

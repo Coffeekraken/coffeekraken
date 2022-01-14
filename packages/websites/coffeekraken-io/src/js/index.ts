@@ -38,6 +38,11 @@ __SConductor.setup({
     __SLitComponent.setDefaultProps(['s-side-panel', 'ck-settings'], {
         mountWhen: 'direct',
     });
+    __SLitComponent.setDefaultProps(['s-code-example'], {
+        scrollToSettings: {
+            offset: 100,
+        }
+    });
 
     // layout related
     __expandPleasantCssClassnamesLive();

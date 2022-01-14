@@ -86,6 +86,7 @@ function argsToString(args, settings = {}) {
                     string += ` ${finalKey} ${valueStr}`;
             });
         } else if (__isPlainObject(argValue)) {
+
             let valueStr = JSON.stringify(argValue);
 
             if (valueStr.split(' ').length < 1) {
@@ -125,6 +126,6 @@ function argsToString(args, settings = {}) {
             string += ` ${finalKey} ${str}`;
         }
     });
-    return string.replace(/(\s){2,999999}/gm, ' ');
+    return string.replace(/(\s){2,999999}/gm, ' ').trim();
 }
 export default argsToString;

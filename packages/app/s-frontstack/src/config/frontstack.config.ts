@@ -48,6 +48,88 @@ export default function (env, config) {
         },
 
         actions: {
+            copy: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the frontend server action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Copy file/directory',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontend server action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Copy a file or a directory from the source to the destination passed in params',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontend server action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `cp -a [arguments]`,
+                params: {},
+                settings: {},
+            },
+            rename: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Rename a project (folder, package.json, etc...)
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Rename project',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack rename action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Rename a project (folder, package.json, etc...)',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontend server action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar project.rename [arguments]`,
+                params: {},
+                settings: {},
+            },
             frontendServer: {
                 /**
                  * @name            title
@@ -85,7 +167,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                process: '%sugar frontendServer.start',
+                command: '%sugar frontendServer.start',
                 params: {},
                 settings: {
                     processManager: {

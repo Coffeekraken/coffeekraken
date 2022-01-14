@@ -1,10 +1,10 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
-
-const recipe = 'default';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
+
     return {
         /**
          * @name            title
@@ -55,6 +55,54 @@ export default function (env, config) {
          */
         defaultStack: 'dev',
         stacks: {
+            new: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontstackRecipeDefault.stacks.init
+                 * @type            String
+                 * @default         Init a new project with this recipe
+                 *
+                 * Specify the recipe init stack description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'Init a new project with this recipe',
+                actions: {
+                    /**
+                     * @name            copy
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.frontendServer]
+                     *
+                     * Specify the recipe init stack copy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    copy: __deepMerge(config.frontstack.actions.copy, {
+                        params: {
+                            0: __path.resolve(__dirname(), `../templates/default/.`),
+                            1: `${process.cwd()}/default`
+                        }
+                    }),
+                    /**
+                     * @name            rename
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.frontendServer]
+                     *
+                     * Specify the recipe init stack rename action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    rename: __deepMerge(config.frontstack.actions.rename, {
+                        params: {
+                        }
+                    })
+                },
+            },
             dev: {
                 /**
                  * @name            description

@@ -71,6 +71,16 @@ export default class SCodeExampleComponentInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
+            scrollOnMore: {
+                description: 'Specify if you want to scroll to the code when clicking on the "show more/less" button',
+                type: 'Boolean',
+                default: true
+            },
+            scrollToSettings: {
+                description: 'Specify some scrollTo settings',
+                type: 'IScrollToSettings',
+                default: {}
+            }
         };
     }
 }

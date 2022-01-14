@@ -15,6 +15,7 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __sugarBanner from '@coffeekraken/sugar/shared/ascii/sugarBanner';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __parseArgs from '@coffeekraken/sugar/shared/cli/parseArgs';
+import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __fs from 'fs';
 import __fsExtra from 'fs-extra';
@@ -122,7 +123,8 @@ export default class SSugarCli {
      * @since           2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com>
      */
-    static replaceTokens(command: string): string {
+    static replaceTokens(command: string, params?: any): string {
+        command = command.replace('[arguments]', params ? __argsToString(params) :'');
         command = __replaceTokens(command);
         command = command.replace(/%sugar/gm, SSugarCli.command);
         command = this.replaceSugarCommandForDev(command);

@@ -445,6 +445,8 @@ export default class SStdio extends __SClass implements ISStdio {
 
         // "ask" event
         source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+            // @ts-ignore
+            askObj.metas = metas;
             const res = await this.ask(askObj);
             answer?.(res);
         });

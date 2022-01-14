@@ -440,7 +440,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         defaultCallTime: {},
                         bufferTimeout: 1000,
                         bufferedEvents: [],
-                        forceObject: ['log'],
+                        forceObject: ['log','ask'],
                         defaults: {},
                         castByEvent: {
                             log: __SLog,
@@ -654,7 +654,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                     logObj.resolve(answer);
                 },
             );
-            this._emitEvents(logObj.event, logObj.value, logObj.metas);
+            this._emitEvents(logObj.event, logObj.value, Object.assign({}, logObj.metas));
         } else {
             const res = await this._emitEvents(
                 logObj.event,

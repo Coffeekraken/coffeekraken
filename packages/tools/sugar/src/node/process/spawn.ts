@@ -9,6 +9,7 @@ import __SDuration from '@coffeekraken/s-duration';
 import __isTestEnv from '../../shared/is/testEnv';
 import __SLog from '@coffeekraken/s-log';
 import __SSugarCli from '@coffeekraken/cli';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 /**
  * @name            spawn
@@ -68,7 +69,7 @@ export default function spawn(
 ): __SPromise {
     let childProcess;
 
-    const promise = new __SPromise(async ({ resolve, reject, emit }) => {
+    const promise = new __SPromise(async ({ resolve, reject, emit, pipe }) => {
         settings = __deepMerge(
             {
                 pipeEvents: true,
@@ -85,6 +86,9 @@ export default function spawn(
 
         // replace tokens using the SSugarCli replaceTokens function
         command = __SSugarCli.replaceTokens(command);
+
+        const eventEmitter = await __SEventEmitter.ipcServer();
+        pipe(eventEmitter);
 
         childProcess = __spawn(command, [], {
             shell: true,
@@ -119,27 +123,10 @@ export default function spawn(
             });
         });
 
-        // handle the process.send pattern
-        if (settings.pipeEvents) {
-            childProcess.on('message', (dataObj) => {
-                if (!dataObj.value || !dataObj.metas) return;
-                if (dataObj.metas.event === 'resolve') {
-                    resolveValue = dataObj.value;
-                    childProcess.kill('SIGINT');
-                    resolve(dataObj.value);
-                } else if (dataObj.metas.event === 'reject') {
-                    rejectValue = dataObj.value;
-                    childProcess.kill('SIGINT');
-                    reject(dataObj.value);
-                } else {
-                    emit(dataObj.metas.event, dataObj.value, dataObj.metas);
-                }
-            });
-        }
-
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
+                console.log(data.toString?.());
                 if (!data) return;
                 stdout.push(data.toString());
                 emit('log', {

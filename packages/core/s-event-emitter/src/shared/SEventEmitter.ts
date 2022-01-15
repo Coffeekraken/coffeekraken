@@ -10,6 +10,30 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __SLog from '@coffeekraken/s-log';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
+import __nodeIpc from 'node-ipc';
+
+const _ipcInstance = new __nodeIpc.IPC();
+_ipcInstance.config.id = `ipc-${process.pid}`;
+_ipcInstance.config.retry = 1500;
+_ipcInstance.config.silent = true;
+
+if (__isChildProcess()) {
+    _ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
+        _ipcInstance.of[`ipc-${process.ppid}`].on('connect', () => {
+        });
+        _ipcInstance.of[`ipc-${process.ppid}`].on('answer', (data) => {
+            _ipcInstance.log(data);
+            SEventEmitter.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
+        });
+        // _ipcInstance.of[`ipc-${process.ppid}`].on(
+        //     'message',  //any event or message type your server listens for
+        //     function(data){
+        //         _ipcInstance.log('got a message from world : ', data);
+        //     }
+        // );
+    });
+}
+
 
 /**
  * @name                  SEventEmitter
@@ -166,6 +190,46 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         return this._globalInstance;
     }
 
+    static ipcServer(ipcSettings?: any, eventEmitterSettings?: Partial<ISEventEmitterSettings>) {
+
+        return new Promise((resolve, reject) => {
+
+            const eventEmitter = new this({
+                eventEmitter: eventEmitterSettings ?? {}
+            });
+
+            const ipcInstance = new __nodeIpc.IPC();
+
+            ipcInstance.config = __deepMerge(ipcInstance.config ?? {}, {
+                id: `ipc-${process.pid}`,
+                retry: 1500,
+                silent: true
+            }, ipcSettings ?? {});
+
+            ipcInstance.serve(() => {
+                ipcInstance.server.on('message', async (data, socket) =>{
+
+                    if (data.metas.event === 'ask', data.metas) {
+                        const res = await eventEmitter.emit(data.metas.event, data.value, data.metas);
+                        ipcInstance.server.emit(
+                            socket,
+                            `answer`,
+                            {
+                                value: res,
+                                metas: data.metas
+                            }
+                        );
+                    } else {
+                        eventEmitter.emit(data.metas.event, data.value, data.metas);
+                    }
+                });
+                resolve(eventEmitter);
+                
+            });
+            ipcInstance.server.start();
+        });
+    }
+
     /**
      * @name                  pipe
      * @type                  Function
@@ -319,20 +383,25 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
                 if (
                     destSEventEmitter === process &&
-                    __isChildProcess() &&
-                    process.send
+                    __isChildProcess()
+                    // process.send
                 ) {
                     if (value.value && value.value instanceof Error) {
                         value.value = __toString(value.value);
                     }
 
-                    // @todo            check why need this and from where comes from the "metas" property in the value...
-                    // if (value.metas?.event) delete value.metas;
+                    _ipcInstance.of[`ipc-${process.ppid}`].emit(
+                        'message',
+                        {
+                         value,
+                         metas: emitMetas   
+                        }
+                    );
 
-                    process.send({
-                        value: value,
-                        metas: emitMetas,
-                    });
+                    // process.send({
+                    //     value: value,
+                    //     metas: emitMetas,
+                    // });
                 } else {
                     (<SEventEmitter>destSEventEmitter).emit(
                         metas.event,

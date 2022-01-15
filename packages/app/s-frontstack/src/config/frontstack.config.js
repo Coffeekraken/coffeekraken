@@ -119,7 +119,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: `sugar project.rename [arguments]`,
+                command: `sugar package.rename [arguments]`,
                 params: {},
                 settings: {},
             },

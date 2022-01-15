@@ -10,17 +10,15 @@ export default (stringArgs = '') => {
             finalParams.name = await emit('ask', {
                 type: 'input',
                 message: 'Please enter the new name for your package',
-                validate: (value) => {
-                    return true;
-                    return value.match(/^[a-zA-Z0-9_@-]+$/);
-                }
+                pattern: '^[a-zA-Z0-9_@-]+$'
             });
         }
 
         finalParams.folder = await emit('ask', {
-            type: 'boolean',
-            message: 'Do you want to rename the folder as well ?'
-        });
+            type: 'confirm',
+            message: 'Do you want to rename the folder as well ?',
+            default: true
+        });        
 
         console.log(finalParams);
 

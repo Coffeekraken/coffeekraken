@@ -19,6 +19,7 @@ import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
 import __countLines from '@coffeekraken/sugar/node/terminal/countLines';
 import __SLog, { ISLog } from '@coffeekraken/s-log';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
+import __isChildProcess from '@coffeekraken/sugar/node/is/childProcess';
 
 /**
  * @name            SNoUiStdio
@@ -258,6 +259,12 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
                     // @ts-ignore
                     prompt = new __Enquirer.default.Input({
                         ...askObj,
+                        validate(value) {
+                            if (!askObj.pattern) return true;
+                            const pattern = Array.isArray(askObj.pattern) ? askObj.pattern : [askObj.pattern];
+                            const reg = new RegExp(pattern[0], pattern[1]);
+                            return reg.test(value);
+                        }
                     });
                     res = await prompt.run();
                     break;
@@ -303,9 +310,13 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
                     });
                     res = await prompt.run();
                     break;
+                default:
+                    throw new Error(`Unknown ask type ${askObj.type}`);
+                    break;
             }
-            console.log('RE', res, typeof res);
-            res = res.replace(groupObj.prefix, '').trim();
+            if (typeof res === 'string') {
+                res = res.replace(groupObj.prefix, '').trim();
+            }
             resolve(res);
         });
     }

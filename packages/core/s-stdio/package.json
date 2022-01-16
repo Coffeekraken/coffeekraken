@@ -17,7 +17,7 @@
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",
     "enquirer": "^2.3.6",
-    "inquirer": "^8.0.0",
+    "inquirer": "^8.2.0",
     "minimatch": "^3.0.4",
     "neo-blessed": "^0.2.0",
     "ora": "^6.0.1",

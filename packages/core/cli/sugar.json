@@ -57,6 +57,19 @@
             }
         },
         {
+            "stack": "fs",
+            "description": "Filesystem related actions",
+            "defaultAction": "copy",
+            "actions": {
+                "copy": {
+                    "scope": "global",
+                    "description": "Copy a file/directory to a specified destination",
+                    "interface": "./src/node/fs/interface/SCliFsCopyParamsInterface.js",
+                    "process": "./src/cli/fs/copy.cli.js"
+                }
+            }
+        },
+        {
             "stack": "package",
             "description": "Package related actions",
             "defaultAction": "rename",

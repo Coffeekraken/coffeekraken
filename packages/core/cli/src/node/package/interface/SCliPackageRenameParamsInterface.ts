@@ -4,7 +4,7 @@ import __SInterface from '@coffeekraken/s-interface';
 
 /**
  * @name                SCliPackageRenameParamsInterface
- * @namespace           node.interface
+ * @namespace           node.package.interface
  * @type.                      Class
  * @extends             SInterface
  * @interface

@@ -1,5 +1,5 @@
 import __SPromise from '@coffeekraken/s-promise';
-import __keypress from 'keypress';
+// import __keypress from 'keypress';
 import __uniqid from '../../shared/string/uniqid';
 import __SInterface from '@coffeekraken/s-interface';
 // import __SIpc from '../ipc/SIpc';
@@ -81,8 +81,6 @@ function _handleKeypress(ch, keyObj) {
             .map((m) => m.trim())
             .forEach((key) => {
                 if (ch && ch.toString() === key) {
-                    console.log('RE', key, keyObj);
-
                     obj.promise.emit('press', {
                         key,
                         ctrl: keyObj ? keyObj.ctrl : false,
@@ -126,7 +124,7 @@ function hotkey(key, settings?: Partial<IHotkeySettings>) {
 
         if (!isListenerAlreadyAdded) {
             isListenerAlreadyAdded = true;
-            __keypress(process.stdin);
+            // __keypress(process.stdin);
             process.stdin.on('keypress', _handleKeypress);
             process.stdin.setRawMode(true);
             process.stdin.resume();

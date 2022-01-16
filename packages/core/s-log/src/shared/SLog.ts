@@ -209,7 +209,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static PRESET_DEFAULT: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR];
+    static PRESET_DEFAULT: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
 
     /**
      * @name            PRESET_WARN
@@ -223,7 +223,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR];
+    static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
 
     /**
      * @name            PRESET_ERROR
@@ -236,7 +236,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR];
+    static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
 
     /**
      * @name            PRESET_VERBOSE
@@ -255,7 +255,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static PRESET_VERBOSE: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY];
+    static PRESET_VERBOSE: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
 
     /**
      * @name            PRESET_VERBOSER
@@ -275,7 +275,7 @@ export default class SLog {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static PRESET_VERBOSER: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY];
+    static PRESET_VERBOSER: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
 
     /**
      * @name            PRESETS

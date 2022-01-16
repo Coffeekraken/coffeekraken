@@ -82,8 +82,9 @@ export default function (env, config) {
                      */
                     copy: __deepMerge(config.frontstack.actions.copy, {
                         params: {
-                            0: __path.resolve(__dirname(), `../templates/default/.`),
-                            1: `${process.cwd()}/default`
+                            'src': __path.resolve(__dirname(), `../templates/default/.`),
+                            'dest': `${process.cwd()}/default`,
+                            'chdir': true
                         }
                     }),
                     /**

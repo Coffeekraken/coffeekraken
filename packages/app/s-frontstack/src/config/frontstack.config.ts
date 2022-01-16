@@ -85,7 +85,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: `cp -a [arguments]`,
+                command: `sugar fs.copy [arguments]`,
                 params: {},
                 settings: {},
             },

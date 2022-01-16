@@ -10,30 +10,29 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
 import __SLog from '@coffeekraken/s-log';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
-import __nodeIpc from 'node-ipc';
 
-const _ipcInstance = new __nodeIpc.IPC();
-_ipcInstance.config.id = `ipc-${process.pid}`;
-_ipcInstance.config.retry = 1500;
-_ipcInstance.config.silent = true;
 
-if (__isChildProcess()) {
-    _ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
-        _ipcInstance.of[`ipc-${process.ppid}`].on('connect', () => {
-        });
-        _ipcInstance.of[`ipc-${process.ppid}`].on('answer', (data) => {
-            _ipcInstance.log(data);
-            SEventEmitter.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
-        });
-        // _ipcInstance.of[`ipc-${process.ppid}`].on(
-        //     'message',  //any event or message type your server listens for
-        //     function(data){
-        //         _ipcInstance.log('got a message from world : ', data);
-        //     }
-        // );
-    });
+let _ipcInstance;
+if (__isNode()) {
+    (async () => {
+        const { default: __nodeIpc } = await import('node-ipc');
+        _ipcInstance = new __nodeIpc.IPC();
+        _ipcInstance.config.id = `ipc-${process.pid}`;
+        _ipcInstance.config.retry = 1500;
+        _ipcInstance.config.silent = true;
+
+        if (__isChildProcess()) {
+            _ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
+                _ipcInstance.of[`ipc-${process.ppid}`].on('connect', () => {
+                });
+                _ipcInstance.of[`ipc-${process.ppid}`].on('answer', (data) => {
+                    _ipcInstance.log(data);
+                    SEventEmitter.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
+                });
+            });
+        }
+    })();
 }
-
 
 /**
  * @name                  SEventEmitter
@@ -190,13 +189,18 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         return this._globalInstance;
     }
 
+    static _ipcPromise;
     static ipcServer(ipcSettings?: any, eventEmitterSettings?: Partial<ISEventEmitterSettings>) {
 
-        return new Promise((resolve, reject) => {
+        if (this._ipcPromise) return this._ipcPromise;
+
+        this._ipcPromise = new Promise(async (resolve, reject) => {
 
             const eventEmitter = new this({
                 eventEmitter: eventEmitterSettings ?? {}
             });
+
+            const { default: __nodeIpc } = await import('node-ipc');
 
             const ipcInstance = new __nodeIpc.IPC();
 
@@ -228,6 +232,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             });
             ipcInstance.server.start();
         });
+
+        return this._ipcPromise;
     }
 
     /**

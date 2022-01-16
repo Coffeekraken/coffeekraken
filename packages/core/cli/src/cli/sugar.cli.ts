@@ -416,6 +416,15 @@ export default class SSugarCli {
             // @ts-ignore
             const proPromise = processFn(args);
             this._eventEmitter.pipe(proPromise, {});
+
+            proPromise.on('chdir', (directory) => {
+                if (!__fs.existsSync(directory)) return;
+                proPromise.emit('log', {
+                    value: `<yellow>[process]</yellow> Changing directory to <cyan>${directory}</cyan>`,
+                });
+                process.chdir(directory);
+            });
+
             await proPromise;
             await __wait(1000);
             // if (!__isChildProcess()) {

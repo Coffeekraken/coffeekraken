@@ -92,8 +92,8 @@ export default function spawn(
 
         childProcess = __spawn(command, [], {
             shell: true,
-            stdio: ['pipe', 'pipe', 'pipe', 'ipc'],
-            detached: true,
+            stdio: ['pipe', 'pipe', 'pipe'],
+            // detached: true,
             cwd: settings.cwd || process.cwd(),
             ...settings,
             env: {
@@ -126,7 +126,6 @@ export default function spawn(
         // listen for errors etc...
         if (childProcess.stdout) {
             childProcess.stdout.on('data', (data) => {
-                console.log(data.toString?.());
                 if (!data) return;
                 stdout.push(data.toString());
                 emit('log', {

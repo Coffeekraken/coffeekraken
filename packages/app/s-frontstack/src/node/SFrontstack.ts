@@ -349,7 +349,6 @@ export default class SFrontstack extends __SClass {
                 }
 
                 const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
-
                 
                 if (!finalParams.runInParallel) {
                     finalParams.runInParallel = stackObj.runInParallel ?? false;

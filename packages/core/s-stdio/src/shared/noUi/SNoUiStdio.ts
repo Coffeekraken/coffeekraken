@@ -1,4 +1,4 @@
-import __inquirer from 'inquirer';
+// import __inquirer from 'inquirer';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 // import __SNotification from '../../notification/SNotification';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
@@ -12,6 +12,8 @@ import __SPromise from '@coffeekraken/s-promise';
 import * as __Enquirer from 'enquirer';
 import * as __readline from 'readline';
 import __blessed from 'blessed';
+import __clone from '@coffeekraken/sugar/shared/object/clone';
+import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __availableColors from '@coffeekraken/sugar/shared/dev/color/availableColors';
 import __hotkey from '@coffeekraken/sugar/node/keyboard/hotkey';
 import __ora from 'ora';
@@ -193,6 +195,56 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
         this._lastLogObj = logObj;
     }
 
+    _addPrefix(string: string): string {
+
+    }
+    _removePrefix(string: string): string {
+
+    }
+
+    _getPromptClass(BasePromptClass: any): any {
+        return class MyPrompt extends BasePromptClass {
+            constructor(options) {
+                super({
+                    ...options,
+                    format(str) {
+                        if (typeof str !== 'string') return str;
+                        return str.replace(`${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)}`, '');
+                    }
+                });
+
+                if (this.options.choices) {
+                    this.options.choices = this.options.choices?.map(choice => {
+                        return `${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)} ${choice}`;
+                    });
+                }
+
+
+                this.symbols = this.symb(__clone(this.symbols, {
+                    deep: true
+                }));
+            }
+            symb(obj) {
+                for (let [key, value] of Object.entries(obj)) {
+                    if (['ellipsis','ellipsisLarge','ellipsisSmall','question','questionFull','questionSmall','pointerSmall'].includes(key)) continue;
+                    if (value === '›') continue;
+                    if (value === '%') continue;
+                    if (typeof value !== 'string') {
+                        obj[key] = this.symb(value);
+                        continue;
+                    }
+                    if (obj[key].includes('█')) {
+                        obj[key] = __stripAnsi(obj[key]);
+                        obj[key] = obj[key].replace(/█\s?/, '');
+                    }
+                    obj[key] = `${__parseHtml(`<${this.options.color ?? 'yellow'}>█</${this.options.color ?? 'yellow'}>`)} ${value}`;
+                }
+                return obj;
+            }
+        }
+    }
+
+
     /**
      * @name          _ask
      * @type          Function
@@ -225,40 +277,42 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
             switch (askObj.type) {
                 case 'select':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Select({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Select))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'autocomplete':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.AutoComplete({
+                    prompt = new (this._getPromptClass(__Enquirer.default.AutoComplete))({
                         ...askObj,
-                        prefix: groupObj.prefix,
-                        choices: askObj.choices.map(choice => {
-                            return `${groupObj.prefix} ${choice}`;
-                        })
+                        color: groupObj.color,
+                        choices: askObj.choices,
                     });
                     res = await prompt.run();
                     break;
                 case 'confirm':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Confirm({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Confirm))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'form':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Form({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Form))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'input':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Input({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Input))({
                         ...askObj,
+                        color: groupObj.color,
                         validate(value) {
                             if (!askObj.pattern) return true;
                             const pattern = Array.isArray(askObj.pattern) ? askObj.pattern : [askObj.pattern];
@@ -270,43 +324,49 @@ class SNoUiStdio extends __SStdio implements ISNoUiStdio {
                     break;
                 case 'secret':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Secret({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Secret))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'list':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.List({
+                    prompt = new (this._getPromptClass(__Enquirer.default.List))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'multiselect':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.MultiSelect({
+                    prompt = new (this._getPromptClass(__Enquirer.default.MultiSelect))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'number':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.NumberPrompt({
+                    prompt = new (this._getPromptClass(__Enquirer.default.NumberPrompt))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'password':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Password({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Password))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;
                 case 'toggle':
                     // @ts-ignore
-                    prompt = new __Enquirer.default.Toggle({
+                    prompt = new (this._getPromptClass(__Enquirer.default.Toggle))({
                         ...askObj,
+                        color: groupObj.color,
                     });
                     res = await prompt.run();
                     break;

@@ -1,6 +1,7 @@
 import __SThemeBase from '../shared/SThemeBase';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
+import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 
 /**
  * @name            STheme
@@ -45,6 +46,11 @@ export default class STheme extends __SThemeBase {
         variant: string,
         $context = document.body,
     ): STheme {
+
+        __clearTransmations(document.body, {
+            timeout: 100
+        });
+
         $context.setAttribute('theme', theme);
         $context.setAttribute('variant', variant);
         return this.getCurrentTheme($context);

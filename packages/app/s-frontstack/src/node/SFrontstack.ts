@@ -15,9 +15,11 @@ import __SProcess, {
     ISProcessSettings,
     ISProcessManagerProcessSettings,
 } from '@coffeekraken/s-process';
+import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __SLog from '@coffeekraken/s-log';
 import __SSugarCli from '@coffeekraken/cli';
 import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
@@ -52,19 +54,24 @@ export interface ISFrontstackActionWrapper {
     [key: string]: any;
 }
 
+export interface ISFrontstackRecipeRequirements {
+    commands: string[];
+}
+
 export interface ISFrontstackRecipeStack {
     description: string;
     sharedParams: any;
     runInParallel: boolean;
     actions:
-        | Record<string, ISFrontstackAction>
-        | Record<string, ISFrontstackActionWrapper>;
+    | Record<string, ISFrontstackAction>
+    | Record<string, ISFrontstackActionWrapper>;
 }
 
 export interface ISFrontstackRecipe {
     id: string;
     title: string;
     description: string;
+    requirements?: ISFrontstackRecipeRequirements;
     defaultStack: string;
     stacks: Record<string, ISFrontstackRecipeStack>;
 }
@@ -348,6 +355,29 @@ export default class SFrontstack extends __SClass {
                     );
                 }
 
+                // requirements
+                if (recipeObj.requirements) {
+                    if (recipeObj.requirements.commands) {
+                        for (let i=0; i<recipeObj.requirements.commands.length; i++) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`
+                            });
+                            const version = await __commandExists(recipeObj.requirements.commands[i])
+                            if (!version) {
+                                throw new Error(
+                                    `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
+                                );
+                            } else {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<green>[requirements]</green> Command "<magenta>${recipeObj.requirements.commands[i]}</magenta>" available in version <cyan>${__stripAnsi(String(version).replace('\n',''))}</cyan>.`
+                                });
+                            }
+                        }
+                    }
+                }
+
                 const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
                 
                 if (!finalParams.runInParallel) {
@@ -466,7 +496,12 @@ export default class SFrontstack extends __SClass {
                             value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
                         });
 
-                        const pro = await __SProcess.from(finalCommand);
+                        const pro = await __SProcess.from(finalCommand, {
+                            process: {
+                                before: actionObj.before,
+                                after: actionObj.after,
+                            }
+                        });
 
                         const finalProcessManagerParams = {
                             ...sharedParams,

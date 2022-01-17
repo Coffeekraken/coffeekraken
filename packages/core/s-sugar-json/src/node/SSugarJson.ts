@@ -27,8 +27,6 @@ export interface ISSugarJsonIncludeSettings {
 export interface ISSugarJsonSettings {
     modules: string | boolean;
     include: ISSugarJsonIncludeSettings;
-    cache: boolean;
-    cacheId: string;
 }
 
 export interface ISSugarJsonFileCliAction {
@@ -102,24 +100,12 @@ export default class SSugarJson extends __SClass {
                             modules: true,
                             top: true,
                             global: true,
-                        },
-                        cache: true,
+                        }
                     },
                 },
                 settings ?? {},
             ),
         );
-
-        this.sugarJsonSettings.cacheId = __md5.encrypt({
-            context: __packageRoot(),
-            ...this._settings,
-        });
-
-        __onProcessExit(() => {
-            try {
-                __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-            } catch (e) {}
-        });
     }
 
     /**
@@ -326,40 +312,5 @@ export default class SSugarJson extends __SClass {
                     return true;
                 }),
         );
-    }
-
-    /**
-     * @name          updateCache
-     * @type          Function
-     *
-     * This method search for files and update the cache once finished
-     *
-     * @param         {String[]}        [filesPaths=[]]         An array of files paths to save in cache. If not passed, the system will search for files and update the cache with this result
-     * @return        {String[]}          An array of found files just like the ```search``` method
-     *
-     * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    updateCache(filesPaths?: string[]): string[] {
-        if (__fs.existsSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`)) return [];
-
-        __fs.writeFileSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`, '');
-
-        // console.log(
-        //   'WRITE',
-        //   `${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`
-        // );
-
-        if (!filesPaths) {
-            filesPaths = this.search();
-        }
-        __fs.writeFileSync(
-            `${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.json`,
-            JSON.stringify(filesPaths, null, 4),
-        );
-
-        __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-
-        return filesPaths;
     }
 }

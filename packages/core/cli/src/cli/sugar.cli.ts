@@ -167,6 +167,7 @@ export default class SSugarCli {
             process.env.TREAT_AS_MAIN = false;
         }
 
+        this.packageJson = __packageJson();
         this.args = this._parseArgs(process.argv);
 
         this._setNodeEnv();
@@ -181,6 +182,16 @@ export default class SSugarCli {
             //         'theme.themes.coffeekraken-dark.color.complementary.default',
             //     ),
             // );
+
+            // if (!this.args.params['no-scripts'] && !this.args.action && this.packageJson.scripts?.[this.args.stack]) {
+            //     const scriptCommand = SSugarCli.replaceTokens(this.packageJson.scripts[this.args.stack]);
+            //     console.log('SSS', scriptCommand);
+            //     __childProcess.spawnSync(scriptCommand, [], {
+            //         stdio: 'inherit',
+            //         shell: true
+            //     });
+            //     return;
+            // }
 
             // hook base console functions
             this._proxyConsole();
@@ -305,8 +316,9 @@ export default class SSugarCli {
                 .join(' ') || '';
         args.args = a;
         args.params = __parseArgs(a);
-
+        
         args.isHelp = false;
+        if (!args.stack && !args.action) args.isHelp = true;
         const lastArg = argv.slice(-1)[0];
         if (lastArg.match(/\s?(-h$|--help$)/)) args.isHelp = true;
 
@@ -381,13 +393,6 @@ export default class SSugarCli {
             cliObj = this._getCliObj();
 
         }
-
-
-        // hook ctrl+c
-        __hotkey('ctrl+c').on('press', (e) => {
-            // @ts-ignore
-            process.emit('SIGINT');
-        });
 
         // @ts-ignore
         if (cliObj.processPath) {
@@ -608,15 +613,17 @@ export default class SSugarCli {
     }
 
     _newStep() {
-        const packageJson = __packageJson(__dirname());
+
+        const packageJson = this.packageJson;
 
         const logStr = [
-            __sugarBanner({
-                paddingTop: 1,
+            ...__sugarBanner({
+                borders: false,
+                marginLeft: 1,
                 paddingBottom: 1,
                 version: `CLI <cyan>v${packageJson.version}</cyan>`,
-            }),
-            `<yellow>█</yellow> This process is running in the ${
+            }).split('\n'),
+            `This process is running in the ${
                 process.env.NODE_ENV === 'production'
                     ? '<green>production</green>'
                     : process.env.NODE_ENV === 'test'
@@ -624,68 +631,21 @@ export default class SSugarCli {
                     : '<yellow>development</yellow>'
             } environment`,
             !__SEnv.packageJson
-                ? `<yellow>█</yellow> This process is running <yellow>outside of an existing package</yellow>.`
+                ? `This process is running <yellow>outside of an existing package</yellow>.`
                 : '',
             !__SEnv.packageJson
-                ? `<yellow>█</yellow> Not all the features will be available...`
+                ? `Not all the features will be available...`
                 : '',
-            '<yellow>█</yellow>',
+            '',
         ]
             .filter((l) => l !== '')
-            .join('\n');
-
-        this.log({
-            clear: false,
-            decorators: false,
-            value: logStr,
-        });
-    }
-
-    async _interactivePrompt() {
-        if (this._isStdioNeeded()) {
-            this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
-        }
-
-        await __wait(100);
-        this._newStep();
-
-        const choices: string[] = [];
-        for (const [name, obj] of Object.entries(
-            this._availableInteractiveCli,
-        )) {
-            choices.push(`> ${obj.title}`);
-        }
-
-        const res = await this.ask({
-            type: 'autocomplete',
-            message: 'What can Sugar do for you?',
-            choices,
-        });
-
-        for (const [name, obj] of Object.entries(
-            this._availableInteractiveCli,
-        )) {
-            if (res === `> ${obj.title}`) {
-                const pro = (await import(obj.processPath)).default;
-
-                let args = {};
-                if (obj.interfacePath) {
-                    const { default: int } = await import(obj.interfacePath);
-                    args = int.apply({});
-                }
-
-                // this._newStep(true);
-                const proPromise = pro(args);
-                this._eventEmitter.pipe(proPromise, {
-                    processor(value, metas) {
-                        if (metas.event !== 'log') return value;
-                        value.decorators = false;
-                        return value;
-                    },
+            .forEach(l => {
+                this.log({
+                    clear: false,
+                    decorators: false,
+                    value: l,
                 });
-                break;
-            }
-        }
+            });
     }
 
     writeLog(log: string) {
@@ -731,46 +691,43 @@ export default class SSugarCli {
                 this._availableCli.endpoints[`${this.args.stack}.${this.args.action}`];
 
             this.log(
-                `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+                ` Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
             );
             this.log(
-                `<yellow>█</yellow> Action <cyan>${this.args.stack}.${this.args.action}</cyan>`,
-            );
-            this.log(
-                `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+                `<yellow>${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
             );
 
-            this.log(`<yellow>█</yellow>`);
-            this.log(`<yellow>█</yellow> ${commandObj.description}`);
+            this.log(``);
+            this.log(`${commandObj.description}`);
             this.log(
-                `<yellow>█</yellow> Package: <yellow>${commandObj.packageJson.name}</yellow> (<cyan>v${commandObj.packageJson.version}</cyan>)`,
+                `Package: <yellow>${commandObj.packageJson.name}</yellow> (<cyan>v${commandObj.packageJson.version}</cyan>)`,
             );
 
-            this.log(`<yellow>█</yellow>`);
+            this.log(``);
 
             this.log(
-                `<yellow>████</yellow>   <yellow>sugar</yellow> <cyan>${this.args.stack}.${this.args.action}</cyan> <magenta>[arguments]</magenta>`,
+                `<yellow>██</yellow>   <yellow>sugar</yellow> <cyan>${this.args.stack}.${this.args.action}</cyan> <magenta>[arguments]</magenta>`,
             );
 
-            this.log(`<yellow>█</yellow>`);
+            this.log(``);
 
             if (commandObj.interfacePath) {
                 const { default: int } = await import(commandObj.interfacePath);
                 Object.entries(int.definition).forEach(([arg, argObj]) => {
                     this.log(
-                        `<yellow>█</yellow>   <cyan>${arg}</cyan> ${
+                        `   <cyan>${arg}</cyan> ${
                             argObj.alias
                                 ? `(<magenta>-${argObj.alias}</magenta>)`
                                 : ''
                         }`,
                     );
-                    this.log(`<yellow>█</yellow>   ${argObj.description}`);
+                    this.log(`   ${argObj.description}`);
                     if (argObj.default !== undefined) {
                         this.log(
-                            `<yellow>█</yellow>   Default: <magenta>${argObj.default}</magenta>`,
+                            `   Default: <magenta>${argObj.default}</magenta>`,
                         );
                     }
-                    this.log(`<yellow>█</yellow>`);
+                    this.log(``);
                 });
             }
 
@@ -795,18 +752,18 @@ export default class SSugarCli {
                 this._availableCli.endpoints[stackAction];
         });
 
-        this.log(
-            `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
-        );
-        this.log(`<yellow>█</yellow> Stacks and actions list:`);
-        this.log(
-            `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
-        );
+        // this.log(
+        //     `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+        // );
+        this.log(`Stacks and actions list:`);
+        // this.log(
+        //     `<yellow>█ ${'-'.repeat(process.stdout.columns - 2)}</yellow>`,
+        // );
 
         Object.keys(sortedByStack).forEach((stack) => {
             const stackObj = sortedByStack[stack];
 
-            this.log(`<yellow>█</yellow> <cyan>${stack}</cyan>`);
+            this.log(`<cyan>${stack}</cyan>`);
 
             Object.keys(stackObj).forEach((action) => {
                 const actionObj = stackObj[action];
@@ -815,7 +772,7 @@ export default class SSugarCli {
                 }
 
                 this.log(
-                    `<yellow>█</yellow>   <magenta>${action}</magenta>${' '.repeat(
+                    `  <magenta>${action}</magenta>${' '.repeat(
                         20 - action.length,
                     )}: ${actionObj.description}`,
                 );

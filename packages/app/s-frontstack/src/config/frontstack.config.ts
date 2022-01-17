@@ -22,6 +22,18 @@ export default function (env, config) {
              */
             default: '[config.frontstackRecipeDefault]',
             /**
+             * @name            nextJs
+             * @namespace       config.frontstack.recipes
+             * @type            String
+             * @default         [config.frontstackRecipeNextJs]
+             *
+             * Specify the next.js recipe
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            nextJs: '[config.frontstackRecipeNextJs]',
+            /**
              * @name            litElement
              * @namespace       config.frontstack.recipes
              * @type            String
@@ -121,12 +133,135 @@ export default function (env, config) {
                  * @type            String
                  * @default        sugar 
                  *
-                 * Specify the frontend server action command
+                 * Specify the frontstack rename action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 command: `sugar package.rename [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addSugarJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        Adding sugar.json file
+                 *
+                 * Add the sugar.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Adding sugar.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addSugarJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Adding the sugar.json file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addSugarJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar add.sugarJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addManifestJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the manifest.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Adding manifest.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addManifestJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Adding the manifest.json file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addManifestJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar add.manifestJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            installDependencies: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        Install dependencies
+                 *
+                 * Install dependencies like node_modules and composer if exists
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Install dependencies',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addManifestJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Install dependencies like node_modules and composer if exists',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addManifestJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar package.install [arguments]`,
                 params: {},
                 settings: {},
             },

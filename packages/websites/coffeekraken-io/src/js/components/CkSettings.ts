@@ -52,6 +52,7 @@ export default class CkSettings extends __SLitComponent {
 
     toggleMode(dark) {
         this._state.darkMode = dark;
+
         if (dark) {
             this._theme = __STheme.setTheme('default', 'dark');
         } else {

@@ -7,9 +7,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __STerminalStdio from '../node/terminal/STerminalStdio';
-import __SNoUiStdio from './noUi/SNoUiStdio';
+import __SBasicStdio from './basic/SBasicStdio';
 import __SStdio from './SStdio';
 /**
  * @name            new
@@ -47,27 +45,12 @@ export default function _new(id, sources, stdio, settings) {
             sources = [sources];
         let stdioInstance;
         switch (stdio) {
-            case __SStdio.UI_TERMINAL:
-                if (__isNode()) {
-                    stdioInstance = new __STerminalStdio(id, sources, settings);
-                }
-                else {
-                    throw new Error(`<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`);
-                }
-                break;
-            case __SStdio.UI_CONSOLE:
-                // if (!__isNode())
-                //     throw new Error(
-                //         `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`,
-                //     );
-                // stdioInstance = new __STerminalStdio(id, sources, settings);
-                break;
-            case __SStdio.NO_UI:
+            case __SStdio.BASIC:
             default:
-                stdioInstance = new __SNoUiStdio(id, sources, settings);
+                stdioInstance = new __SBasicStdio(id, sources, settings);
                 break;
         }
         return stdioInstance;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUVBLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sZ0JBQWdCLE1BQU0saUNBQWlDLENBQUM7QUFDL0QsT0FBTyxZQUFZLE1BQU0sbUJBQW1CLENBQUM7QUFDN0MsT0FBTyxRQUF1QixNQUFNLFVBQVUsQ0FBQztBQUUvQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7R0E2Qkc7QUFDSCxNQUFNLENBQUMsT0FBTyxVQUFnQixJQUFJLENBQzlCLEVBQVUsRUFDVixPQUFPLEVBQ1AsS0FBaUIsRUFDakIsUUFBYzs7UUFFZCxJQUFJLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxPQUFPLENBQUM7WUFBRSxPQUFPLEdBQUcsQ0FBQyxPQUFPLENBQUMsQ0FBQztRQUVqRCxJQUFJLGFBQWtCLENBQUM7UUFFdkIsUUFBUSxLQUFLLEVBQUU7WUFDWCxLQUFLLFFBQVEsQ0FBQyxXQUFXO2dCQUNyQixJQUFJLFFBQVEsRUFBRSxFQUFFO29CQUNaLGFBQWEsR0FBRyxJQUFJLGdCQUFnQixDQUFDLEVBQUUsRUFBRSxPQUFPLEVBQUUsUUFBUSxDQUFDLENBQUM7aUJBQy9EO3FCQUFNO29CQUNILE1BQU0sSUFBSSxLQUFLLENBQ1gsd0dBQXdHLENBQzNHLENBQUM7aUJBQ0w7Z0JBQ0QsTUFBTTtZQUNWLEtBQUssUUFBUSxDQUFDLFVBQVU7Z0JBQ3BCLG1CQUFtQjtnQkFDbkIsdUJBQXVCO2dCQUN2Qix5SkFBeUo7Z0JBQ3pKLFNBQVM7Z0JBQ1QsK0RBQStEO2dCQUMvRCxNQUFNO1lBQ1YsS0FBSyxRQUFRLENBQUMsS0FBSyxDQUFDO1lBQ3BCO2dCQUNJLGFBQWEsR0FBRyxJQUFJLFlBQVksQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO2dCQUN4RCxNQUFNO1NBQ2I7UUFFRCxPQUFPLGFBQWEsQ0FBQztJQUN6QixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUdBLE9BQU8sYUFBYSxNQUFNLHFCQUFxQixDQUFDO0FBQ2hELE9BQU8sUUFBdUIsTUFBTSxVQUFVLENBQUM7QUFFL0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBZ0IsSUFBSSxDQUM5QixFQUFVLEVBQ1YsT0FBTyxFQUNQLEtBQWlCLEVBQ2pCLFFBQWM7O1FBRWQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLFFBQVEsS0FBSyxFQUFFO1lBRVgsS0FBSyxRQUFRLENBQUMsS0FBSyxDQUFDO1lBQ3BCO2dCQUNJLGFBQWEsR0FBRyxJQUFJLGFBQWEsQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO2dCQUN6RCxNQUFNO1NBQ2I7UUFFRCxPQUFPLGFBQWEsQ0FBQztJQUN6QixDQUFDO0NBQUEifQ==

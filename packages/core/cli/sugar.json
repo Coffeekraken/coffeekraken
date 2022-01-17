@@ -57,6 +57,25 @@
             }
         },
         {
+            "stack": "add",
+            "description": "Add related actions",
+            "defaultAction": "sugarJson",
+            "actions": {
+                "sugarJson": {
+                    "scope": "global",
+                    "description": "Add the sugar.json file",
+                    "interface": "./src/node/add/interface/SCliAddSugarJsonParamsInterface.js",
+                    "process": "./src/cli/add/sugarJson.cli.js"
+                },
+                "manifestJson": {
+                    "scope": "global",
+                    "description": "Add the manifest.json file",
+                    "interface": "./src/node/add/interface/SCliAddManifestJsonParamsInterface.js",
+                    "process": "./src/cli/add/manifestJson.cli.js"
+                }
+            }
+        },
+        {
             "stack": "fs",
             "description": "Filesystem related actions",
             "defaultAction": "copy",
@@ -79,6 +98,12 @@
                     "description": "Rename a package (folder, package.json, etc...",
                     "interface": "./src/node/package/interface/SCliPackageRenameParamsInterface.js",
                     "process": "./src/cli/package/rename.cli.js"
+                },
+                "install": {
+                    "scope": "global",
+                    "description": "Install package dependencies like npm and composer",
+                    "interface": "./src/node/package/interface/SCliPackageInstallParamsInterface.js",
+                    "process": "./src/cli/package/install.cli.js"
                 }
             }
         },

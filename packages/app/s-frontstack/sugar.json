@@ -11,14 +11,6 @@
         {
             "stack": "frontstack",
             "description": "Sugar Frontstack application that allows you to develop quickly and efficiently",
-            "interactive": {
-                "project": {
-                    "scope": "global",
-                    "title": "Create a new project",
-                    "description": "Create a new project from a recipe (template) like the default one or for example the litElement one, etc...",
-                    "process": "./src/cli/createProject.cli.js"
-                }
-            },
             "defaultAction": "recipe",
             "actions": {
                 "new": {

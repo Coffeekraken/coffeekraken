@@ -21,14 +21,6 @@
                 "read": {
                     "description": "Get a special docmap entry",
                     "process": "./src/cli/read.cli.js"
-                },
-                "snapshot": {
-                    "description": "Build a snapshot",
-                    "process": "./src/cli/snapshot.cli.js"
-                },
-                "installSnapshot": {
-                    "description": "Install snapshot(s) to make them workable",
-                    "process": "./src/cli/installSnapshot.cli.js"
                 }
             }
         }

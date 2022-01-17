@@ -5,7 +5,7 @@
     "main": "./src/shared/exports.js",
     "type": "module",
     "scripts": {
-        "dev": "sugar frontstack",
+        "dev": "sugar frontstack dev",
         "prod": "sugar frontstack prod",
         "build": "sugar frontstack build"
     },

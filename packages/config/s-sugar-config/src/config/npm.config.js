@@ -4,7 +4,7 @@ export default function (env) {
     return {
         /**
          * @name            rootDir
-         * @namespace       sugar.config.npm
+         * @namespace       config.npm
          * @type            String
          * @default         [config.storage.package.rootDir]/node_modules
          *

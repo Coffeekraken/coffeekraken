@@ -1,8 +1,7 @@
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __STerminalStdio from '../node/terminal/STerminalStdio';
-import __SNoUiStdio from './noUi/SNoUiStdio';
+import __SBasicStdio from './basic/SBasicStdio';
 import __SStdio, { ISStdioUi } from './SStdio';
 
 /**
@@ -46,25 +45,10 @@ export default async function _new(
     let stdioInstance: any;
 
     switch (stdio) {
-        case __SStdio.UI_TERMINAL:
-            if (__isNode()) {
-                stdioInstance = new __STerminalStdio(id, sources, settings);
-            } else {
-                throw new Error(
-                    `<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`,
-                );
-            }
-            break;
-        case __SStdio.UI_CONSOLE:
-            // if (!__isNode())
-            //     throw new Error(
-            //         `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`,
-            //     );
-            // stdioInstance = new __STerminalStdio(id, sources, settings);
-            break;
-        case __SStdio.NO_UI:
+    
+        case __SStdio.BASIC:
         default:
-            stdioInstance = new __SNoUiStdio(id, sources, settings);
+            stdioInstance = new __SBasicStdio(id, sources, settings);
             break;
     }
 

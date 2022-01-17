@@ -127,40 +127,16 @@ export default class SStdio extends __SClass implements ISStdio {
     _lastLogObj?: ISLog;
 
     /**
-     * @name      NO_UI
+     * @name      UI_BASIC
      * @type      ISStdioUi
      * @static
      *
-     * Represent the "no" ui
+     * Represent the "basic" stdio
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static NO_UI: ISStdioUi = -1;
-
-    /**
-     * @name      UI_TERMINAL
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "terminal" ui
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static UI_TERMINAL: ISStdioUi = 'terminal';
-
-    /**
-     * @name      UI_CONSOLE
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "console" ui
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static UI_CONSOLE: ISStdioUi = 'console';
+    static UI_BASIC: ISStdioUi = -1;
 
     /**
      * @name      _logsBuffer
@@ -246,7 +222,7 @@ export default class SStdio extends __SClass implements ISStdio {
     static existingOrNew(
         id: string,
         sources,
-        stdio: ISStdioUi = SStdio.NO_UI,
+        stdio: ISStdioUi = SStdio.UI_BASIC,
         settings = {},
     ) {
         // @ts-ignore
@@ -346,7 +322,6 @@ export default class SStdio extends __SClass implements ISStdio {
                         metas: {
                             time: false,
                         },
-                        ui: SStdio.NO_UI,
                         defaultLogObj: {
                             decorators: true,
                         },

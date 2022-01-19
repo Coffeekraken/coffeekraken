@@ -123,7 +123,7 @@ export default class SActivateFeature extends __SFeature {
             triggers.forEach((trigger) => {
 
                 if (trigger.match(/^event:/)) {
-                    this.node.addEventListener(trigger.replace('event:',''), (e) => {
+                    this.node.addEventListener('actual', (e) => {
                         this.activate();
                     });
                 } else {
@@ -131,6 +131,8 @@ export default class SActivateFeature extends __SFeature {
                     switch (trigger) {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
+                                if (e.currentTarget !== $triggerer) return;
+                                e.stopPropagation();
                                 if (this.isActive() && this.props.toggle) {
                                     this.unactivate();
                                 } else {

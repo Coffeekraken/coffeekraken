@@ -3,10 +3,11 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SRefocusFeatureInterface from './interface/SRefocusFeatureInterface';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
-import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __scrollTo, { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 export interface ISRefocusFeatureProps {
-    on: string[];
+    trigger: string[];
+    scrollToSettings: Partial<IScrollToSettings>;
     timeout: number;
 }
 
@@ -27,7 +28,7 @@ export interface ISRefocusFeatureProps {
  * @support          edge
  *
  * @example         html
- * <div class="scrollable" s-refocus on="actual">
+ * <div class="scrollable" s-refocus trigger="event:actual">
  *    <ul>
  *       <li>
  *          <a href="#hello">Hello</a>
@@ -60,15 +61,43 @@ export default class SRefocusFeature extends __SFeature {
         );
     }
     mount() {
-        this.props.on.forEach((eventName) => {
-            this.node.addEventListener(eventName, (e) => {
-                console.log('even', eventName);
-                __scrollTo(e.target, {
-                    $elm: this.node
-                }, this.props.timeout);
-
-            });
+        this.props.trigger.forEach((trigger) => {
+            switch(trigger) {
+                case 'anchor':
+                    if (document.location.hash) {
+                        const $targetElm = this.node.querySelector(document.location.hash);
+                        if ($targetElm) {
+                            this._scrollTo($targetElm);
+                        }
+                    }
+                break;
+                case 'history':
+                    window.addEventListener('hashchange', (e) => {
+                        if (document.location.hash) {
+                            const $targetElm = this.node.querySelector(document.location.hash);
+                            if ($targetElm) {
+                                this._scrollTo($targetElm);
+                            }
+                        }
+                    });
+                break;
+                default:
+                    if (trigger.match(/^event:/)) {
+                        const event = trigger.replace('event:', '').trim();
+                        this.node.addEventListener(event, (e) => {
+                            this._scrollTo(e.target);
+                        });
+                    }
+                break;
+            }
         });
+    }
+    _scrollTo($elm) {
+        __scrollTo($elm, {
+            $elm: this.node,
+            ...this.props.scrollToSettings ?? {},
+        // @ts-ignore
+        }, this.props.timeout);
     }
     
 }

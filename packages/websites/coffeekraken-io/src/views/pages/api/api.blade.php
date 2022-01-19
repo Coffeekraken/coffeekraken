@@ -24,7 +24,7 @@
 
             <div class="s-layout:1222:gutter-between:gutter-50">
 
-                <nav class="sidemenu s-pb:50" s-refocus on="actual">
+                <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:30">
                         API

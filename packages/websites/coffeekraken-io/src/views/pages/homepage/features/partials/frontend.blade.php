@@ -174,7 +174,7 @@
 
             </div>
 
-            <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
+            {{-- <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
                 <div>
                     <div class="sticky">
                         <div class="s-flex:align-center">
@@ -254,6 +254,6 @@
                     </a>
                 </div>
 
-            </div>
+            </div> --}}
 
 </section>

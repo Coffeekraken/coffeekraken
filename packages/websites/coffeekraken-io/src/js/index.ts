@@ -11,7 +11,6 @@ import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component'
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
 
 // features
-import __smoothScroll from '@coffeekraken/sugar/js/feature/smoothScroll';
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { define as __CKBlobComponent } from './components/CkBlob';
@@ -56,12 +55,6 @@ __SConductor.setup({
     __CKSearchComponent();
     __CKBlobComponent();
 
-    __smoothScroll({
-        scroll: {
-            offset: 188,
-        },
-    });
-
     // await __wait(1500);
 
     // views related
@@ -98,6 +91,8 @@ __SConductor.setup({
         },
     });
 
+    setTimeout(() => {
     __linksStateAttributes();
+    }, 1000);
 
 })();

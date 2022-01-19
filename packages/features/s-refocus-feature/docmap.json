@@ -6,6 +6,7 @@
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
             "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
@@ -38,6 +39,69 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar",
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-coffeekraken-theme",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -65,120 +129,36 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-activate-feature.js.interface.sActivateFeatureInterface": {
-                "name": "SActivateFeatureInterface",
-                "type": ".                      Class",
+            "@coffeekraken.s-refocus-feature.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
                 "platform": [
                     {
-                        "name": "js",
+                        "name": "md",
                         "description": ""
                     }
                 ],
-                "description": "This interface represent the attributes of the SActivateFeature",
-                "namespace": "@coffeekraken.s-activate-feature.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SActivateFeatureInterface",
-                    "description": "",
-                    "definition": {
-                        "href": {
-                            "description": "Specify the target element(s) to activate/unactivate",
-                            "type": "String",
-                            "default": ""
-                        },
-                        "group": {
-                            "description": "Specify a group id for your element. This is used for things like tabs, etc...",
-                            "type": "String"
-                        },
-                        "toggle": {
-                            "description": "Specify if you want to be able to click on the same element to activate/unactivate it.",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false
-                        },
-                        "history": {
-                            "description": "Specify if you want to store and react to history hash changes",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false
-                        },
-                        "active": {
-                            "description": "Specify the initial state of your element",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false,
-                            "physical": true
-                        },
-                        "activeClass": {
-                            "description": "Specify the class applied on target(s) when active. Default is \"active\"",
-                            "type": "String",
-                            "default": "active"
-                        },
-                        "activeAttribute": {
-                            "description": "Specify the attribute name applied on target(s) when active.",
-                            "type": "String",
-                            "default": "active"
-                        },
-                        "saveState": {
-                            "description": "Specify if you want to save state in localStorage to restore it on page reload, etc...",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "activateTimeout": {
-                            "description": "Specify a timeout before actiavting the target(s)",
-                            "type": "Number",
-                            "default": 0
-                        },
-                        "unactivateTimeout": {
-                            "description": "Specify a timeout before unactivate the target(s)",
-                            "type": "Number",
-                            "default": 0
-                        },
-                        "triggerer": {
-                            "description": "Specify an element selector that will be used as the triggerer instead of this current element",
-                            "type": "String"
-                        },
-                        "trigger": {
-                            "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
-                            "type": {
-                                "type": "Array<String>",
-                                "splitChars": [
-                                    ","
-                                ]
-                            },
-                            "values": [
-                                "click",
-                                "mouseover",
-                                "mouseenter",
-                                "mouseout",
-                                "mouseleave",
-                                "anchor"
-                            ],
-                            "default": [
-                                "click"
-                            ]
-                        }
-                    }
-                },
+                "namespace": "@coffeekraken.s-refocus-feature.doc",
+                "status": "stable",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SActivateFeatureInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SActivateFeatureInterface.js",
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-activate-feature.js.sActivateFeature": {
-                "name": "SActivateFeature",
+            "@coffeekraken.s-refocus-feature.js.SRefocusFeature": {
+                "name": "SRefocusFeature",
                 "type": "Feature",
                 "menu": {
                     "tree": [
@@ -193,84 +173,21 @@
                         "description": ""
                     }
                 ],
-                "description": "This feature allows you to activate some elements depending on triggers like \"click\", \"mouseover\", \"mouseout\", \"anchor\", etc...\nTo be explicit, you can apply this feature on a link tag with the href attribute \"#something\", and on click,\nthe DOM element that has the id \"something\" will get the \"active\" class applied.",
-                "namespace": "@coffeekraken.s-activate-feature.js",
+                "description": "This feature allows you to automatically visually refocus an element that is inside a scrollable one on different trigger(s) like events, etc...",
+                "namespace": "@coffeekraken.s-refocus-feature.js",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
-                        "code": "<a href=\"#my-element\">Click me!</a>\n<div id=\"my-element\">I will be activated on click</a>\n\n<a href=\"#tab1\" group=\"my-tabs\">Tab 1</a>\n<a href=\"#tab2\" group=\"my-tabs\">Tab 1</a>\n<a href=\"#tab3\" group=\"my-tabs\">Tab 1</a>\n\n<div id=\"tab1\">Tab 1 content</div>\n<div id=\"tab2\">Tab 1 content</div>\n<div id=\"tab3\">Tab 1 content</div>"
+                        "code": "<div class=\"scrollable\" s-refocus trigger=\"event:actual\">\n   <ul>\n      <li>\n         <a href=\"#hello\">Hello</a>\n         <!-- when this element dispatch an \"actual\" event,\n              it will be refocused -->\n      </li>\n      <li>\n         <a href=\"#world\">World</a>\n      </li>\n   </ul>\n</div>"
                     }
                 ],
                 "interface": {
-                    "name": "SActivateFeatureInterface",
+                    "name": "SRefocusFeatureInterface",
                     "description": "",
                     "definition": {
-                        "href": {
-                            "description": "Specify the target element(s) to activate/unactivate",
-                            "type": "String",
-                            "default": ""
-                        },
-                        "group": {
-                            "description": "Specify a group id for your element. This is used for things like tabs, etc...",
-                            "type": "String"
-                        },
-                        "toggle": {
-                            "description": "Specify if you want to be able to click on the same element to activate/unactivate it.",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false
-                        },
-                        "history": {
-                            "description": "Specify if you want to store and react to history hash changes",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false
-                        },
-                        "active": {
-                            "description": "Specify the initial state of your element",
-                            "type": {
-                                "type": "Boolean",
-                                "nullishAsTrue": true
-                            },
-                            "default": false,
-                            "physical": true
-                        },
-                        "activeClass": {
-                            "description": "Specify the class applied on target(s) when active. Default is \"active\"",
-                            "type": "String",
-                            "default": "active"
-                        },
-                        "activeAttribute": {
-                            "description": "Specify the attribute name applied on target(s) when active.",
-                            "type": "String",
-                            "default": "active"
-                        },
-                        "saveState": {
-                            "description": "Specify if you want to save state in localStorage to restore it on page reload, etc...",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "activateTimeout": {
-                            "description": "Specify a timeout before actiavting the target(s)",
-                            "type": "Number",
-                            "default": 0
-                        },
-                        "unactivateTimeout": {
-                            "description": "Specify a timeout before unactivate the target(s)",
-                            "type": "Number",
-                            "default": 0
-                        },
-                        "triggerer": {
-                            "description": "Specify an element selector that will be used as the triggerer instead of this current element",
-                            "type": "String"
-                        },
                         "trigger": {
-                            "description": "Specify what trigger an activate/unactivate action. Can be \"click\", \"mouseover\", \"mouseout\" and/or \"anchor\"",
+                            "description": "Specify some trigger(s) on which to refocus a particular element like \"event:actual\", \"anchor\", \"history\", etc...",
                             "type": {
                                 "type": "Array<String>",
                                 "splitChars": [
@@ -278,16 +195,21 @@
                                 ]
                             },
                             "values": [
-                                "click",
-                                "mouseover",
-                                "mouseenter",
-                                "mouseout",
-                                "mouseleave",
-                                "anchor"
+                                "event:eventName",
+                                "anchor",
+                                "history"
                             ],
-                            "default": [
-                                "click"
-                            ]
+                            "default": []
+                        },
+                        "scrollToSettings": {
+                            "description": "Specify some `scrollTo` settings to override the default ones",
+                            "type": "IScrollToSettings",
+                            "default": {}
+                        },
+                        "timeout": {
+                            "description": "Specify a timeout to wait before refocus the element",
+                            "type": "Number",
+                            "default": 500
                         }
                     }
                 },
@@ -297,43 +219,64 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SActivateFeature.js",
+                "filename": "SRefocusFeature.js",
                 "extension": "js",
-                "relPath": "src/js/SActivateFeature.js",
-                "children": {
-                    "isActive": {
-                        "name": "isActive",
-                        "type": "Function",
-                        "description": "This method allows you to know if this particular s-activate node is active or not",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "activate": {
-                        "name": "activate",
-                        "type": "Function",
-                        "description": "This async method allows you to activate this particular s-activate node",
-                        "async": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
-                        }
-                    },
-                    "unactivate": {
-                        "name": "unactivate",
-                        "type": "Function",
-                        "description": "This async method allows you to unactivate this particular s-activate node",
-                        "async": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com"
+                "relPath": "src/js/SRefocusFeature.js",
+                "children": {}
+            },
+            "@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface": {
+                "name": "SRefocusFeatureInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SRefocusFeature",
+                "namespace": "@coffeekraken.s-refocus-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SRefocusFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "trigger": {
+                            "description": "Specify some trigger(s) on which to refocus a particular element like \"event:actual\", \"anchor\", \"history\", etc...",
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "values": [
+                                "event:eventName",
+                                "anchor",
+                                "history"
+                            ],
+                            "default": []
+                        },
+                        "scrollToSettings": {
+                            "description": "Specify some `scrollTo` settings to override the default ones",
+                            "type": "IScrollToSettings",
+                            "default": {}
+                        },
+                        "timeout": {
+                            "description": "Specify a timeout to wait before refocus the element",
+                            "type": "Number",
+                            "default": 500
                         }
                     }
-                }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRefocusFeatureInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SRefocusFeatureInterface.js",
+                "children": {}
             }
         }
     }

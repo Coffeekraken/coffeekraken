@@ -69,7 +69,7 @@ export default function (env, config) {
              */
             globs: [
                 '*',
-                `src/!(css)/**/*.+(${__commonTextFileExtensions(false).join('|')})`,
+                `src/!(css)/*{0,4}/*.+(${__commonTextFileExtensions(false).join('|')})`,
                 `dist/+(css)/*`
             ],
 

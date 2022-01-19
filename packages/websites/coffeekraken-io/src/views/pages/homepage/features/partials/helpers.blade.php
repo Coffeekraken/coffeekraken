@@ -3,7 +3,7 @@
 
         <div class="section-top-background"></div>
 
-        <h3 class="s-typo:h2 s-mbe:30">Full premium <span class="s-tc:accent">UI<br>Components</span> library</h3>
+        <h3 class="s-typo:h2 s-mbe:30">All the <span class="s-tc:accent">helpers<br></span> you ever need</h3>
         <p class="s-typo:lead s-mbe:50">
             As part of our ecosystem, you will have access to a nice list of fully customizable, themeing ready UI
             library. This gives you access to components like:
@@ -13,8 +13,8 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:button"></i>
-                        <p class="s-p">Buttons</p>
+                        <i class="s-icon:align"></i>
+                        <p class="s-p">Aligns</p>
                     </div>
                 </a>
             </li>
@@ -22,16 +22,16 @@
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:dropdown"></i>
-                        <p class="s-p">Dropdowns</p>
+                        <i class="s-icon:typography"></i>
+                        <p class="s-p">Typography</p>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:tooltip"></i>
-                        <p class="s-p">Tooltips</p>
+                        <i class="s-icon:colors"></i>
+                        <p class="s-p">Colors</p>
                     </div>
                 </a>
             </li>
@@ -98,7 +98,7 @@
         </ul>
 
 
-        <div class="s-text:center s-pt:50">
+        <div class="s-text:center s-pt:50 s-mis:-50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
                 Keep in mind that <span class="s-tc:accent">all of these features are
                     optional</span>.

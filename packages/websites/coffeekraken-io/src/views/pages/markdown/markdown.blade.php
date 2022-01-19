@@ -9,7 +9,7 @@
 
             <div class="s-layout:1222:gutter-between:gutter-50">
 
-                <nav class="sidemenu s-pb:50" s-refocus on="actual">
+                <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:20">
                         Coffeekraken
@@ -30,8 +30,8 @@
                                 @if (!$package->tree->documentation) @continue @endif
 
                                 <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
-                                    href="#{{ \Sugar\string\idCompliant($package->name) }}" toggle save-state
-                                    trigger="click,event:actual">
+                                    trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
+                                    toggle save-state mount-when="direct" trigger="click,event:actual">
                                     <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
                                     <i class="s-icon:folder"></i>
                                     <span>

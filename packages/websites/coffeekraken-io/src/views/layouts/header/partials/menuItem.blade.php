@@ -29,7 +29,7 @@
                                         @if ($subItem->slug)
                                             <li>
                                                 <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
-                                                    {{ $subItem->name }}
+                                                    {!! str_replace('@coffeekraken/', '', $subItem->name) !!}
                                                 </a>
                                             </li>
                                         @endif

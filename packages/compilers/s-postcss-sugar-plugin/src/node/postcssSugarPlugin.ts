@@ -345,9 +345,7 @@ const plugin = (settings: any = {}) => {
     return {
         postcssPlugin: 'sugar',
         async Once(root) {
-            if (__SBench.isBenchActive('postcssSugarPlugin')) {
-                __SBench.start('postcssSugarPlugin');
-            }
+            __SBench.start('postcssSugarPlugin');
 
             await _load();
 
@@ -419,16 +417,12 @@ const plugin = (settings: any = {}) => {
             //     await toCache(hash, root.toString(), root.source.input.from);
             // }
 
-            if (__SBench.isBenchActive('postcssSugarPlugin')) {
-                console.log(
-                    __SBench.end('postcssSugarPlugin').toString({
-                        body: `File: <cyan>${__path.relative(
-                            __packageRoot(),
-                            root.source?.input?.from,
-                        )}</cyan>`,
-                    }),
-                );
-            }
+            __SBench.end('postcssSugarPlugin').log({
+                body: `File: <cyan>${__path.relative(
+                    __packageRoot(),
+                    root.source?.input?.from,
+                )}</cyan>`,
+            });
         },
         async AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {

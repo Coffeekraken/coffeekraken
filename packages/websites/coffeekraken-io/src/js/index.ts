@@ -3,6 +3,7 @@ import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-examp
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
+import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
@@ -60,7 +61,6 @@ __SConductor.setup({
             offset: 188,
         },
     });
-    __linksStateAttributes();
 
     // await __wait(1500);
 
@@ -83,6 +83,7 @@ __SConductor.setup({
 
     // features
     __sSugarFeature();
+    __sRefocusFeature();
     __sParallaxFeature();
     __sFormValidateFeature({
         customValidations: {
@@ -96,4 +97,7 @@ __SConductor.setup({
             },
         },
     });
+
+    __linksStateAttributes();
+
 })();

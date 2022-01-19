@@ -2,73 +2,84 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [
-            "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-color",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-date-picker-component",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-docmap",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-frontstack",
-            "@coffeekraken/s-glob",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-parallax-feature",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-feature",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
-            "@coffeekraken/s-vite-plugin-riotjs",
-            "@coffeekraken/s-vite-plugin-sugar",
-            "@coffeekraken/s-vite",
-            "@coffeekraken/sugar"
-        ],
+        "extends": [],
         "map": {
-            "@coffeekraken.s-conductor.s-duration.sConductor": {
+            "@coffeekraken.s-conductor.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-conductor.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface": {
+                "name": "SConductorSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the SConductor settings.",
+                "namespace": "@coffeekraken.s-conductor.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SConductorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "idleTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to be considered as idle ",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "logTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to log the small analysis",
+                            "type": "Number",
+                            "default": 2000
+                        },
+                        "log": {
+                            "description": "Specify if you want to log the small analysis when the SConductor is idle",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConductorSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SConductorSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-conductor.s-duration.SConductor": {
                 "name": "SConductor",
                 "type": "Class",
-                "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- idle: Execute when no other task is running",
+                "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
                 "namespace": "@coffeekraken.s-conductor.s-duration",
                 "status": "beta",
                 "example": [
@@ -86,7 +97,7 @@
                 "extension": "ts",
                 "relPath": "src/js/SConductor.ts",
                 "children": {
-                    "defaultInstance": {
+                    "defaultinstance": {
                         "name": "defaultInstance",
                         "type": "SConductor",
                         "description": "Access the default instance of the SConductor class",
@@ -118,7 +129,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "conductorSettings": {
+                    "conductorsettings": {
                         "name": "conductorSettings",
                         "type": "ISConductorSettings",
                         "description": "Access the settings of the conductor",

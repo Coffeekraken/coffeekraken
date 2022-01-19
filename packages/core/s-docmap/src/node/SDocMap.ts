@@ -20,7 +20,6 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __fs from 'fs';
 import __path from 'path';
@@ -30,6 +29,10 @@ import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
 import __chokidar from 'chokidar';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+
+function __toLowerCase(l = '') {
+    return l.toLowerCase();
+}
 
 /**
  * @name                SDocMap
@@ -605,7 +608,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
             const dotPath = docmapObj.menu.tree
                 .map((l) => {
-                    return __camelCase(l);
+                    return __toLowerCase(l);
                 })
                 .join('.');
 
@@ -619,7 +622,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 }
 
                 if (i >= dotPath.split('.').length - 1) {
-                    currentObj[part][__camelCase(docmapObj.name)] = {
+                    currentObj[part][docmapObj.name] = {
                         name: docmapObj.name,
                         slug: docmapObj.menu.slug,
                         tree: docmapObj.menu.tree,
@@ -826,9 +829,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         }
 
                         const namespaceIdCompliant = __namespaceCompliant(
-                                    `${docblock.namespace}.${__camelCase(
-                                        docblock.name,
-                                    )}`,
+                                    `${docblock.namespace}.${docblock.name}`,
                                 )
 
                         if (docblock.namespace && !this._entries[namespaceIdCompliant]) {
@@ -845,7 +846,7 @@ class SDocMap extends __SClass implements ISDocMap {
                                 namespaceIdCompliant
                             ] = docblockObj;
                         } else if (docblock.name) {
-                            children[__camelCase(docblock.name)] =
+                            children[__toLowerCase(docblock.name)] =
                                 docblockEntryObj;
                         }
                     }

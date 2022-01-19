@@ -2,9 +2,11 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SPromise, { ISPromiseSettings } from '@coffeekraken/s-promise';
 import __utcTime from '@coffeekraken/sugar/shared/date/utcTime';
-import __SBenchEnv from './SBenchEnv';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
+import __env from '@coffeekraken/sugar/shared/env/env';
+import __minimatch from 'minimatch';
+import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
 
 /**
  * @name            SBench
@@ -55,19 +57,6 @@ export interface ISBenchStep {
 
 export default class SBench extends __SPromise {
     /**
-     * @name        env
-     * @type        SBenchEnv
-     * @static
-     * @get
-     *
-     * Access the SBenchEnv object to check activated bench, etc...
-     *
-     * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static env = __SBenchEnv;
-
-    /**
      * @name        _stepsTime
      * @type        ISBenchStep[]
      * @private
@@ -99,6 +88,62 @@ export default class SBench extends __SPromise {
      * This static method allows you to get the current bench environment
      * the process is running in. The bench environment
      */
+
+    /**
+     * @name        filter
+     * @type        Function
+     * @static
+     *
+     * This method allows you to activate a list of bench id(s).
+     * You can specify "*" for wildcard
+     *
+     * @param           {String|String[]}           benchId         One or more bench id(s) to activate
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static filter(benchId: string | string[]): void {
+        let currentBenchs = __env('s-bench-filtered-ids') ?? [];
+        currentBenchs = [...currentBenchs, ...Array.from(benchId)];
+        __env('s-bench-filtered-ids', currentBenchs);
+    }
+
+    /**
+     * @name        filtered
+     * @type        Function
+     * @static
+     *
+     * This method allows you to get back the list of activated bench(s)
+     *
+     * @return      {String[]}          The list of activated bench id(s)
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static filtered(): string[] {
+        return __env('s-bench-filtered-ids') ?? [];
+    }
+
+    /**
+     * @name        isBenchActive
+     * @type        Function
+     * @static
+     *
+     * This method allows you to check if a particular bench id is active
+     *
+     * @param        {String}               benchId             The bench id to check
+     * @return      {Boolean}           true if is active, false if not
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static isBenchActive(benchId: string): boolean {
+        if (this.filtered().indexOf('*') !== -1) return true;
+        for (let i = 0; i < this.filtered().length; i++) {
+            const filteredId = this.filtered()[i];
+            if (__minimatch(benchId, filteredId)) return true;
+        }
+    }
 
     /**
      * @name            getBenchInstanceById
@@ -140,8 +185,7 @@ export default class SBench extends __SPromise {
         this._benchInstancesById[id] = new SBench(id);
 
         const instance = this._benchInstancesById[id];
-        instance.start();
-        return instance;
+        return instance.start();
     }
 
     /**
@@ -159,8 +203,7 @@ export default class SBench extends __SPromise {
      */
     static step(id: string, stepId: string, description = ''): SBench {
         const instance = this.getBenchInstanceById(id);
-        instance.step(stepId, description);
-        return instance;
+        return instance.step(stepId, description);
     }
 
     /**
@@ -178,26 +221,25 @@ export default class SBench extends __SPromise {
      */
     static end(id: string, settings?: Partial<ISBenchSettings>): SBench {
         const instance = this.getBenchInstanceById(id);
-        instance.end(settings);
-        return instance;
+        return instance.end(settings);
     }
 
     /**
-     * @name        isBenchActive
-     * @type        Function
+     * @name            log
+     * @type            Function
      * @static
      *
-     * This method allows you to check if a particular bench id is active
+     * This method allows you to log a new bench "session" if this one is active
      *
-     * @param        {String}               benchId             The bench id to check
-     * @return      {Boolean}           true if is active, false if not
+     * @param       {String}        id          The "bench" id to use during the whole benchmark
+     * @return      {SBench}                    The SBench instance for this bench
      *
-     * @since       2.0.0
+     * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static isBenchActive(benchId: string): boolean {
-        if (this.env.activeBench().indexOf('*') !== -1) return true;
-        return this.env.activeBench().indexOf(benchId) !== -1;
+    static log(id: string, settings?: Partial<ISBenchSettings>): SBench {
+        const instance = this.getBenchInstanceById(id);
+        return instance.log();
     }
 
     /**
@@ -231,10 +273,7 @@ export default class SBench extends __SPromise {
                     metas: {
                         id,
                     },
-                    bench: {
-                        title: undefined,
-                        body: undefined,
-                    },
+                    bench: __SBenchSettingsInterface.defaults(),
                     promise: {},
                 },
                 settings ?? {},
@@ -255,7 +294,7 @@ export default class SBench extends __SPromise {
      */
     isActive(): boolean {
         // @ts-ignore
-        return this.constructor.env.isBenchActive(this.metas.id);
+        return this.constructor.isBenchActive(this.metas.id);
     }
 
     /**
@@ -264,11 +303,13 @@ export default class SBench extends __SPromise {
      *
      * This method allows you to start a new bench "session"
      *
+     * @return  {SBench}                                The instance to maintain chainability
+     *
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    start(settings?: Partial<ISBenchSettings>): void {
-        if (!this.isActive()) return;
+    start(settings?: Partial<ISBenchSettings>): SBench {
+        if (!this.isActive()) return this;
 
         const finalSettings = __deepMerge(this.benchSettings, settings ?? {});
 
@@ -284,6 +325,8 @@ export default class SBench extends __SPromise {
                 }]</yellow> Starting bench session at <magenta>${__utcTime()}</magenta>`,
             ],
         });
+
+        return this;
     }
 
     /**
@@ -295,11 +338,15 @@ export default class SBench extends __SPromise {
      * It will keep track of each steps and display the time it has taken
      * from the last step.
      *
+     * @param       {String}        id              The step id
+     * @param       {String}        [description='']   The step description
+     * @return  {SBench}                                The instance to maintain chainability
+     * 
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    step(id: string, description = ''): void {
-        if (!this.isActive()) return;
+    step(id: string, description = ''): SBench {
+        if (!this.isActive()) return this;
 
         const keys = Object.keys(this._steps);
 
@@ -325,6 +372,8 @@ export default class SBench extends __SPromise {
                 }`,
             ],
         });
+
+        return this;
     }
 
     /**
@@ -334,12 +383,13 @@ export default class SBench extends __SPromise {
      * This method allows you to end a bencvh "session"
      *
      * @param   {Boolean}           [log=false]         Specify if you want to log the result directly or not
-     *
+     * @return  {SBench}                                The instance to maintain chainability
+     * 
      * @since           2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    end(settings?: Partial<ISBenchSettings>): void {
-        if (!this.isActive()) return;
+    end(settings?: Partial<ISBenchSettings>): SBench {
+        if (!this.isActive()) return this;
 
         const finalSettings = <ISBenchSettings>(
             __deepMerge(this.benchSettings, settings ?? {})
@@ -364,15 +414,29 @@ export default class SBench extends __SPromise {
             ],
         });
 
-        this.toString(finalSettings)
-            .split('\n')
-            .forEach((line) => {
-                __SEventEmitter.global.emit('log', {
-                    value: line,
-                });
-            });
-
         this.resolve(this);
+
+        return this;
+    }
+
+    /**
+     * @name            log
+     * @type            Function
+     *
+     * This method allows you to log the summary if this bench is active
+     *
+     * @return  {SBench}                                The instance to maintain chainability
+     *
+     * @since       2.0.0
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    log(settings?: Partial<ISBenchSettings>): SBench {
+        if (!this.isActive()) return this;
+        const finalSettings = <ISBenchSettings>(
+            __deepMerge(this.benchSettings, settings ?? {})
+        );
+        console.log(this.toString(finalSettings));
+        return this;
     }
 
     /**
@@ -386,7 +450,7 @@ export default class SBench extends __SPromise {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    toString(settings?: Partial<ISBenchSettings>) {
+    toString(settings?: Partial<ISBenchSettings>): string {
         const finalSettings = <ISBenchSettings>(
             __deepMerge(this.benchSettings, settings ?? {})
         );

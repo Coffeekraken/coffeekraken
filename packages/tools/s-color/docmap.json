@@ -2,70 +2,37 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [
-            "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/prettier-plugin-coffeekraken",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-conductor",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-date-picker-component",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-docmap",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-frontstack",
-            "@coffeekraken/s-glob",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-parallax-feature",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-feature",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
-            "@coffeekraken/s-vite-plugin-riotjs",
-            "@coffeekraken/s-vite-plugin-sugar",
-            "@coffeekraken/s-vite",
-            "@coffeekraken/sugar"
-        ],
+        "extends": [],
         "map": {
-            "@coffeekraken.s-color.shared.interface.sColorApplyParamsInterface": {
+            "@coffeekraken.s-color.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-color.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-color.shared.interface.SColorApplyParamsInterface": {
                 "name": "SColorApplyParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -160,10 +127,60 @@
                 "relPath": "src/shared/interface/SColorApplyParamsInterface.js",
                 "children": {}
             },
-            "@coffeekraken.s-color.shared.sColor": {
+            "@coffeekraken.s-color.shared.interface.SColorSettingsInterface": {
+                "name": "SColorSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the settings of an SColor instance.",
+                "namespace": "@coffeekraken.s-color.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SColorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "returnNewInstance": {
+                            "description": "Specify if the methods returns by default a new SColor instance or the same",
+                            "type": "boolean",
+                            "default": false
+                        },
+                        "defaultFormat": {
+                            "description": "Specify the default format of the color",
+                            "type": "String",
+                            "values": [
+                                "hex",
+                                "rgb",
+                                "rgba",
+                                "hsl",
+                                "hsla"
+                            ],
+                            "default": "hex"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColorSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SColorSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-color.shared.SColor": {
                 "name": "SColor",
                 "type": "Class",
-                "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- opacity\n- darken\n- lighten\n- desaturate\n- saturate\n- spin (change hue)\n- transparentize\n- alpha\n- grayscale\n- Conversions\n- rgba\n- hsla\n- hex\n- Print out formats\n- toRgbaString\n- toHslString\n- toHexString\n- toString(format = null)",
+                "description": "Class that provide complete and simple to use color manupilation capabilities like:\n- Modifiers\n- lighten\n- darken\n- saturate\n- desaturate\n- spin (change hue)\n- alpha\n- opacity\n- grayscale\n- Conversions\n- rgb\n- rgba\n- hsl\n- hsla\n- hex\n- Print out formats\n- toRgbString\n- toRgbaString\n- toHslString\n- toHslaString\n- toHexString\n- toString(format = null)",
                 "namespace": "@coffeekraken.s-color.shared",
                 "status": "beta",
                 "example": [
@@ -193,7 +210,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "colorSettings": {
+                    "colorsettings": {
                         "name": "colorSettings",
                         "type": "ISColorSettings",
                         "description": "Access the color settings",
@@ -214,12 +231,12 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "getColor": {
+                    "getcolor": {
                         "name": "getColor",
                         "type": "Function",
                         "description": "This method take as parameter the passed color to the constructor and has to return the\nactual real color like color from the static colors listed in the SColor class or maybe\nfrom the Sugar configured colors"
                     },
-                    "toHex": {
+                    "tohex": {
                         "name": "toHex",
                         "type": "Function",
                         "description": "To hex",
@@ -235,7 +252,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toHsl": {
+                    "tohsl": {
                         "name": "toHsl",
                         "type": "Function",
                         "description": "To hsl",
@@ -251,7 +268,39 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toRgba": {
+                    "tohsla": {
+                        "name": "toHsla",
+                        "type": "Function",
+                        "description": "To hsla",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHsla();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "torgb": {
+                        "name": "toRgb",
+                        "type": "Function",
+                        "description": "To rgb",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toRgb();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "torgba": {
                         "name": "toRgba",
                         "type": "Function",
                         "description": "To rgba",
@@ -470,22 +519,6 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "transparentize": {
-                        "name": "transparentize",
-                        "type": "Function",
-                        "description": "Transparentize",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.transparenize(30);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
                     "alpha": {
                         "name": "alpha",
                         "type": "Function",
@@ -494,38 +527,6 @@
                             {
                                 "language": "js",
                                 "code": "myColor.alpha(10);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "opacity": {
-                        "name": "opacity",
-                        "type": "Function",
-                        "description": "Set the opacity (alias for alpha)",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.opacity(20);"
-                            }
-                        ],
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "opacify": {
-                        "name": "opacify",
-                        "type": "Function",
-                        "description": "Opacify",
-                        "example": [
-                            {
-                                "language": "js",
-                                "code": "myColor.opacify(18);"
                             }
                         ],
                         "author": {
@@ -577,7 +578,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toHexString": {
+                    "tohexstring": {
                         "name": "toHexString",
                         "type": "Function",
                         "description": "To hex string",
@@ -593,7 +594,23 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toRgbaString": {
+                    "torgbstring": {
+                        "name": "toRgbString",
+                        "type": "Function",
+                        "description": "To rgb string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toRgbString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "torgbastring": {
                         "name": "toRgbaString",
                         "type": "Function",
                         "description": "To rgba string",
@@ -609,7 +626,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toHslString": {
+                    "tohslstring": {
                         "name": "toHslString",
                         "type": "Function",
                         "description": "To hsl string",
@@ -625,7 +642,23 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toString": {
+                    "tohslastring": {
+                        "name": "toHslaString",
+                        "type": "Function",
+                        "description": "To hsla string",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "myColor.toHslaString();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "tostring": {
                         "name": "toString",
                         "type": "Function",
                         "description": "To string",

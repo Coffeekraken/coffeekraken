@@ -26,7 +26,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * @return      {SPromise<HTMLElement>}         An SPromise instance on which to listen for nodes using the "node" event
  *
  * @example 	js
- * import querySelectorLive from '@coffeekraken/sugar/js/dom/querySelectorLive'
+ * import querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive'
  * querySelectorLive('.my-cool-item', (node, clearFn) => {
  * 	    // do something here with the detected node
  *      // call clearFn if you want to stop listening for this selector

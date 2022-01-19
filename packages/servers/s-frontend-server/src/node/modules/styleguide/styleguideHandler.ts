@@ -92,9 +92,7 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterViewRendering');
 
-        if (__SBench.isBenchActive('handlers.styleguide')) {
-            console.log(__SBench.end('handlers.styleguide', {}).toString());
-        }
+        __SBench.end('handlers.styleguide', {}).log();
 
         res.status(200);
         res.type('text/html');

@@ -35,12 +35,19 @@ export class ApiNav extends __SLitComponent {
             method: 'get',
         });
 
+        let _dispatchTimeout;
         this.addEventListener('actual', (e) => {
             for (let [key, value] of Object.entries(this._menuStates)) {
                 if (e.target.getAttribute('namespace').startsWith(key + '.')) {
                     value.opened = true;
                 }
             }
+            if (_dispatchTimeout) return;
+            _dispatchTimeout = setTimeout(() => {
+                e.target.dispatchEvent(new CustomEvent('actual', {
+                    bubbles: true
+                }));
+            }, 1000);
         });
 
         // restore state

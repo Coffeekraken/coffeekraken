@@ -9,7 +9,7 @@
 
             <div class="s-layout:1222:gutter-between:gutter-50">
 
-                <nav class="sidemenu s-pb:50">
+                <nav class="sidemenu s-pb:50" s-refocus on="actual">
 
                     <h5 class="s-typo:h5 s-mbe:20">
                         Coffeekraken

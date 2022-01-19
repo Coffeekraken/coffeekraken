@@ -247,7 +247,7 @@ export default class SComponent extends __SClass {
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
     waitAndExecute(callback: Function): Promise<any> {
-        return __SConductor.when(this.node, this.props.mountWhen, callback);
+        return __SConductor.when(this.props.mountWhen, this.node, callback);
     }
 
     /**

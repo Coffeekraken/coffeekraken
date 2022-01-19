@@ -49,7 +49,7 @@ await sVite.build({
 
 #### Parameters
 
-{{> interface namespace='@coffeekraken.s-vite.node.interface.sViteBuildParamsInterface' }}
+{{> interface namespace='@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface' }}
 
 ## Start server
 

@@ -13,6 +13,7 @@ import __isGlob from '@coffeekraken/sugar/shared/is/glob';
  * @namespace            node
  * @type                Class
  * @status              beta
+ * @platform            node
  *
  * This class represent a glob pattern and can be used to resolve some globs and get back
  * an array of SFile instances or to extract some part of the pattern, etc...

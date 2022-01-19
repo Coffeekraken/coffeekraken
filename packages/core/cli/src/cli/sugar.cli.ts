@@ -55,7 +55,7 @@ const cliParams = __SSugarCliParamsInterface.apply(
     process.argv.slice(2).join(' '),
 );
 if (cliParams.bench) {
-    __SBench.env.activateBench(
+    __SBench.filter(
         cliParams.bench === true ? '*' : cliParams.bench,
     );
 }

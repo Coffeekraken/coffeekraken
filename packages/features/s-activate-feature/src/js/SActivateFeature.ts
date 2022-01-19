@@ -2,6 +2,7 @@ import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
 
 export interface ISActivateFeatureProps {
     href: string;

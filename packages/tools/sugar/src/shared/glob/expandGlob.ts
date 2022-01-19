@@ -15,7 +15,7 @@
  *
  * @example         js
  * import expandGlob from '@coffeekraken/sugar/js/glob/expandGlob';
- * expandGlob('/something/**{2,4}/*.ts');
+ * expandGlob('/something/*{2,4}/*.ts');
  * // ['/something/* /* /*.ts','/something/* /* /* /*.ts', '/something/* /* /* /* /*.ts']
  *
  * @since       2.0.0
@@ -29,11 +29,11 @@ function expandGlob(globs) {
     globs.forEach((globPattern) => {
         // handle "maxDepth"
         const maxDepthMatch = globPattern.match(
-            /\/?\*\*\{(([0-9]+,[0-9]+|[0-9]+))\}\/?/gm,
+            /\/?\*\{(([0-9]+,[0-9]+|[0-9]+))\}\/?/gm,
         );
         if (maxDepthMatch) {
             const minMaxStr = maxDepthMatch[0]
-                .replace('**{', '')
+                .replace('*{', '')
                 .replace('}', '')
                 .replace(/[\{\}\/]/g, '');
 

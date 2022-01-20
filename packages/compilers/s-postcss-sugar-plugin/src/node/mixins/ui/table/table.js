@@ -82,7 +82,7 @@ export default function ({ params, atRule, replaceWith, }) {
             case 'solid':
             default:
                 vars.push(`
-                    @sugar.depth(sugar.theme(ui.table.depth));
+                    @sugar.depth(sugar.theme.value(ui.table.depth));
                     position: relative;
                     box-shadow: 0 0 0 sugar.theme(ui.table.borderWidth) sugar.color(current, border);
                     overflow: hidden;

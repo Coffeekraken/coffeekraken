@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name           classes
@@ -47,7 +48,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    const marginsObj = __STheme.config('padding');
+    const paddingsObj = __STheme.config('padding');
+    const paddingsKeys = __keysFirst(Object.keys(paddingsObj), ['default']);
 
     vars.comment(
         () => `
@@ -68,7 +70,7 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${Object.keys(marginsObj)
+        ${paddingsKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';
                 return [
@@ -121,7 +123,7 @@ export default function ({
     `,
     );
 
-    Object.keys(marginsObj).forEach((spaceName) => {
+    paddingsKeys.forEach((spaceName) => {
         // margins
         const clsMargin = `s-p:${spaceName}`;
         vars.comment(

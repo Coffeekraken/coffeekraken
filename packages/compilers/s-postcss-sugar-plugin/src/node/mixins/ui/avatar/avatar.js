@@ -67,7 +67,7 @@ export default function ({ params, atRule, replaceWith, }) {
                     border-width: sugar.theme(ui.avatar.borderWidth);
                     border-color: sugar.color(current);
                     border-style: solid;
-                    @sugar.depth(sugar.theme(ui.avatar.depth));
+                    @sugar.depth(sugar.theme.value(ui.avatar.depth));
                 `);
                 break;
         }

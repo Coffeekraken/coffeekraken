@@ -62,6 +62,8 @@
             </div>
         </div> --}}
 
+
+        @include('pages.homepage.features.partials.openSource')
         @include('pages.homepage.features.partials.ui')
         @include('pages.homepage.features.partials.helpers')
         @include('pages.homepage.features.partials.frontend')

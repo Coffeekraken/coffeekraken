@@ -275,5 +275,60 @@ export default function ({
             display: block;
         }`);
 
+    vars.comment(
+        () => `/**
+        * @name          s-when:dark
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when the prefered color scheme is not dark.
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:dark">
+        *       Display something when the color scheme is dark
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        .s-when--dark {
+            display: none;
+        }
+        [theme][variant="dark"] .s-when--dark {
+            display: inherit;
+        }
+        `);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:light
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when the prefered color scheme is not light.
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:light">
+        *       Display something when the color scheme is light
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        [theme][variant="dark"] .s-when--light {
+            display: none;
+        }
+        `);
+
     return vars;
 }

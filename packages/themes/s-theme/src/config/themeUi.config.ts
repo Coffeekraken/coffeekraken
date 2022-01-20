@@ -102,14 +102,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      [theme.depth.default]
+             * @default      50
              *
              * Specify the default depth for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: '[theme.depth.default]',
+            depth: 50,
 
             rhythmVertical: {
                 /**
@@ -239,14 +239,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      [theme.depth.default]
+             * @default      50
              *
              * Specify the default depth for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: '[theme.depth.default]',
+            depth: 50,
             rhythmVertical: {
                 /**
                  * @name          margin-bottom

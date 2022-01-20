@@ -264,6 +264,85 @@ const plugin = (settings: any = {}) => {
         }
     }
 
+    async function _processDeclaration(value: string) {
+        // replace vh units
+        const vhMatches = value.match(
+            /(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm,
+        );
+        if (vhMatches) {
+            vhMatches.forEach((match) => {
+                if (match.match(/^var\(--vh,/)) return;
+                const val = match.replace('vh', '');
+                value = value.replace(
+                    match,
+                    `calc(${val} * var(--vh,1vh)) `,
+                );
+            });
+        }
+
+        if (!value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return value;
+        const calls = value.match(
+            /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
+        );
+
+        if (!calls || !calls.length) return value;
+
+        for (let i = 0; i < calls.length; i++) {
+            let sugarStatement: string = calls[i] ?? '';
+
+            // FIX. sugarStatement comes with none corresponding count of "(" and ")"
+            const openingParenthesisCount = (
+                sugarStatement.match(/\(/g) || []
+            ).length;
+            const closingParenthesisCount = (
+                sugarStatement.match(/\)/g) || []
+            ).length;
+
+            if (openingParenthesisCount > closingParenthesisCount) {
+                sugarStatement += ')'.repeat(
+                    openingParenthesisCount - closingParenthesisCount,
+                );
+            }
+
+            // @ts-ignore
+            const functionName = sugarStatement.match(
+                /sugar\.([a-zA-Z0-9\.]+)/,
+            )[1];
+            const paramsStatement = sugarStatement.replace(
+                /sugar\.[a-zA-Z0-9\.]+/,
+                '',
+            );
+
+            let fnId = functionName;
+            if (!functionsStack[fnId]) {
+                fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
+            }
+
+            const fnObject = functionsStack[fnId];
+
+            if (!fnObject) {
+                throw new Error(
+                    `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
+                );
+            }
+
+            const functionInterface = functionsStack[fnId].interface;
+            const params = functionInterface.apply(paramsStatement, {});
+            delete params.help;
+
+            try {
+                const result = await fnObject.fn({
+                    params,
+                    settings,
+                });
+                value = value.replace(sugarStatement, result);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+        return value;
+    }
+
     function _load() {
         if (loadedPromise) return loadedPromise;
         loadedPromise = new Promise(async (resolve, reject) => {
@@ -447,9 +526,8 @@ const plugin = (settings: any = {}) => {
                 const mixinFn = mixinsStack[mixinId].mixin;
                 const mixinInterface = mixinsStack[mixinId].interface;
 
-                const sanitizedParams = atRule.params;
-
-                const params = mixinInterface.apply(sanitizedParams, {});
+                const processedParams = await _processDeclaration(atRule.params);
+                const params = mixinInterface.apply(processedParams, {});
 
                 delete params.help;
                 let result = await mixinFn({
@@ -515,81 +593,8 @@ const plugin = (settings: any = {}) => {
             }
         },
         async Declaration(decl) {
-            // replace vh units
-            const vhMatches = decl.value.match(
-                /(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm,
-            );
-            if (vhMatches) {
-                vhMatches.forEach((match) => {
-                    if (match.match(/^var\(--vh,/)) return;
-                    const val = match.replace('vh', '');
-                    decl.value = decl.value.replace(
-                        match,
-                        `calc(${val} * var(--vh,1vh)) `,
-                    );
-                });
-            }
-
-            if (!decl.prop || !decl.value) return;
-            if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
-            const calls = decl.value.match(
-                /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
-            );
-
-            if (!calls || !calls.length) return;
-
-            for (let i = 0; i < calls.length; i++) {
-                let sugarStatement = calls[i];
-
-                // FIX. sugarStatement comes with none corresponding count of "(" and ")"
-                const openingParenthesisCount = (
-                    sugarStatement.match(/\(/g) || []
-                ).length;
-                const closingParenthesisCount = (
-                    sugarStatement.match(/\)/g) || []
-                ).length;
-
-                if (openingParenthesisCount > closingParenthesisCount) {
-                    sugarStatement += ')'.repeat(
-                        openingParenthesisCount - closingParenthesisCount,
-                    );
-                }
-
-                const functionName = sugarStatement.match(
-                    /sugar\.([a-zA-Z0-9\.]+)/,
-                )[1];
-                const paramsStatement = sugarStatement.replace(
-                    /sugar\.[a-zA-Z0-9\.]+/,
-                    '',
-                );
-
-                let fnId = functionName;
-                if (!functionsStack[fnId]) {
-                    fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
-                }
-
-                const fnObject = functionsStack[fnId];
-
-                if (!fnObject) {
-                    throw new Error(
-                        `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
-                    );
-                }
-
-                const functionInterface = functionsStack[fnId].interface;
-                const params = functionInterface.apply(paramsStatement, {});
-                delete params.help;
-
-                try {
-                    const result = await fnObject.fn({
-                        params,
-                        settings,
-                    });
-                    decl.value = decl.value.replace(sugarStatement, result);
-                } catch (e) {
-                    console.error(e.message);
-                }
-            }
+            if (!decl.prop) return;
+            decl.value = await _processDeclaration(decl.value);
         },
     };
 };

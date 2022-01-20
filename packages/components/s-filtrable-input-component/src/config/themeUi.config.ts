@@ -89,14 +89,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.filtrableInput
              * @type          String
-             * @default      [theme.depth.100]
+             * @default      100
              *
              * Specify the default depth for input items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: '[theme.depth.100]',
+            depth: 100,
             /**
              * @name          outline
              * @namespace     config.themeUi.filtrableInput

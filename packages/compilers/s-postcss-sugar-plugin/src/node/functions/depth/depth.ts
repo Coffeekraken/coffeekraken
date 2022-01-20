@@ -49,10 +49,10 @@ export default function depth({
         ...params,
     };
 
-    let intDepth = parseInt(finalParams.depth);
-    if (typeof finalParams.depth !== 'number') {
-        return finalParams.depth;
-    } else {
-        return __STheme.cssVar(`depth.${intDepth}`, false);
-    }
+    // let intDepth = parseInt(finalParams.depth);
+    // if (typeof finalParams.depth !== 'number' && finalParams.depth !== 'default') {
+    //     return finalParams.depth;
+    // } else {
+        return __STheme.cssVar(`depth.${finalParams.depth}`, false);
+    // }
 }

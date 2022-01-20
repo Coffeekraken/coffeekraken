@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 class postcssSugarPluginBorderRadiusClassesMixinInterface extends __SInterface {
     static get _definition() {
@@ -43,7 +44,9 @@ export default function ({
         ...params,
     };
     const radiusesObj = __STheme.config('border.radius');
+    const radiusesKeys = __keysFirst(Object.keys(radiusesObj), ['default']);
     const widthsObj = __STheme.config('border.width');
+    const widthsKeys = __keysFirst(Object.keys(widthsObj), ['default']);
 
     const vars = new CssVars();
 
@@ -64,7 +67,7 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(radiusesObj)
+        ${radiusesKeys
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return ` * @cssClass      s-radius:${radiusName}      Apply the border radius ${radiusName} to any HTMLElement`;
@@ -74,7 +77,7 @@ export default function ({
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Radius</h3>
-        ${Object.keys(radiusesObj)
+        ${radiusesKeys
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return `
@@ -109,7 +112,7 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(widthsObj)
+        ${widthsKeys
             .map((widthName) => {
                 if (widthName === 'default') return '';
                 return ` * @cssClass      s-bwidth:${widthName}      Apply the border width ${widthName} to any HTMLElement`;
@@ -119,7 +122,7 @@ export default function ({
         * @example        html
         * <div class="s-mbe:50">
         *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Width</h3>
-        ${Object.keys(widthsObj)
+        ${widthsKeys
             .map((widthName) => {
                 if (widthName === 'default') return '';
                 return `
@@ -137,7 +140,7 @@ export default function ({
     `,
     );
 
-    Object.keys(radiusesObj).forEach((radiusName) => {
+    radiusesKeys.forEach((radiusName) => {
         const cls = `s-radius--${radiusName}`.replace('--default', '');
         const clsName = `s-radius:${radiusName}`.replace(':default', '');
         const radiusCss = `/**
@@ -162,7 +165,7 @@ export default function ({
         `);
     });
 
-    Object.keys(widthsObj).forEach((widthName) => {
+    widthsKeys.forEach((widthName) => {
         const cls = `s-bwidth:${widthName}`.replace(':default', '');
         const clsName = `s-bwidth--${widthName}`.replace('--default', '');
         vars.comment(

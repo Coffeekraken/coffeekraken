@@ -57,7 +57,7 @@ export default function ({ params, atRule, applyNoScopes, sharedData, replaceWit
         
             .s-filtrable-input__dropdown {
                 overflow: hidden;
-                @sugar.depth(sugar.theme(ui.filtrableInput.depth));
+                @sugar.depth(sugar.theme.value(ui.filtrableInput.depth));
                 transition: sugar.theme(ui.filtrableInput.transition);
             }
             .s-filtrable-input__list {

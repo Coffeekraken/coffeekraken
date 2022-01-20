@@ -42,7 +42,6 @@ function linksStateAttributes(
     function handleLink($linkElm) {
         if ($linkElm.getAttribute('href') === document.location.pathname) {
             $linkElm.setAttribute('actual', true);
-            console.log('dispatch^', $linkElm);
             $linkElm.dispatchEvent(new CustomEvent('actual', {
                 bubbles: true,
             }));

@@ -5,7 +5,8 @@
 
         <h3 class="s-typo:h2 s-mbe:30">Full premium <span class="s-tc:accent">UI<br>Components</span> library</h3>
         <p class="s-typo:lead s-mbe:50">
-            As part of our ecosystem, you will have access to a nice list of fully customizable, themeing ready UI
+            As part of our ecosystem, you will have access to a nice list of <span class="s-tc:complementary">fully
+                customizable</span>, themeing ready UI
             library. This gives you access to components like:
         </p>
 
@@ -101,11 +102,7 @@
         <div class="s-text:center s-pt:50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
                 Keep in mind that <span class="s-tc:accent">all of these features are
-                    optional</span>.
-                This
-                mean
-                that
-                you can work with the things you like and let the rest aside...
+                    optional</span>. This mean that you can work with the things you like and let the rest aside...
             </p>
             <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
                 Get started!

@@ -14,6 +14,7 @@ import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-c
 import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import { define as __CKBlobComponent } from './components/CkBlob';
+import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
 import { define as __CKSearchComponent } from './components/CKSearch';
 import { define as __CKSettingsComponent } from './components/CkSettings';
@@ -54,6 +55,7 @@ __SConductor.setup({
     __VersionSelector();
     __CKSearchComponent();
     __CKBlobComponent();
+    __CkFallingStarsComponent();
 
     // await __wait(1500);
 

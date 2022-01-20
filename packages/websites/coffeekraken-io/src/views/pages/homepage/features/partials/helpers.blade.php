@@ -39,16 +39,16 @@
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:switch"></i>
-                        <p class="s-p">Switches</p>
+                        <i class="s-icon:flex"></i>
+                        <p class="s-p">Flexbox</p>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:datepicker"></i>
-                        <p class="s-p">Date Picker</p>
+                        <i class="s-icon:ratio"></i>
+                        <p class="s-p">Ratios</p>
                     </div>
                 </a>
             </li>
@@ -56,16 +56,16 @@
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:autocomplete"></i>
-                        <p class="s-p">Filtrable Input</p>
+                        <i class="s-icon:radius"></i>
+                        <p class="s-p">Radius</p>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:copy"></i>
-                        <p class="s-p">Clipbord copy</p>
+                        <i class="s-icon:easing"></i>
+                        <p class="s-p">Transitions</p>
                     </div>
                 </a>
             </li>
@@ -73,16 +73,16 @@
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:range"></i>
-                        <p class="s-p">Range Input</p>
+                        <i class="s-icon:space"></i>
+                        <p class="s-p">Spaces</p>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:code"></i>
-                        <p class="s-p">Code Example</p>
+                        <i class="s-icon:visibility"></i>
+                        <p class="s-p">Visibility</p>
                     </div>
                 </a>
             </li>
@@ -90,8 +90,8 @@
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
                         style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:avatar"></i>
-                        <p class="s-p">Avatar</p>
+                        <i class="s-icon:scale"></i>
+                        <p class="s-p">Scales</p>
                     </div>
                 </a>
             </li>

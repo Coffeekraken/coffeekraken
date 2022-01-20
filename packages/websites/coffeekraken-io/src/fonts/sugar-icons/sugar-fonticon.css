@@ -1,11 +1,11 @@
 @font-face {
     font-family: "sugar-fonticon";
-    src: url("./sugar-fonticon.eot?db45b00369dbef22229ebfd1c1c1eaac#iefix") format("embedded-opentype"),
-url("./sugar-fonticon.woff2?db45b00369dbef22229ebfd1c1c1eaac") format("woff2"),
-url("./sugar-fonticon.woff?db45b00369dbef22229ebfd1c1c1eaac") format("woff");
+    src: url("./sugar-fonticon.eot?c3155ff7fd8cf14ad186df4fe6b064d7#iefix") format("embedded-opentype"),
+url("./sugar-fonticon.woff2?c3155ff7fd8cf14ad186df4fe6b064d7") format("woff2"),
+url("./sugar-fonticon.woff?c3155ff7fd8cf14ad186df4fe6b064d7") format("woff");
 }
 
-.s-icon--align:before,.s-icon--autocomplete:before,.s-icon--avatar:before,.s-icon--brand-coffeekraken:before,.s-icon--brand-lit:before,.s-icon--button:before,.s-icon--code:before,.s-icon--colors:before,.s-icon--copy:before,.s-icon--datepicker:before,.s-icon--display-preview:before,.s-icon--dropdown:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--helpers:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--layout:before,.s-icon--range:before,.s-icon--refresh:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--switch:before,.s-icon--theme:before,.s-icon--tooltip:before,.s-icon--typography:before,.s-icon--vue:before {
+.s-icon--align:before,.s-icon--autocomplete:before,.s-icon--avatar:before,.s-icon--brand-coffeekraken:before,.s-icon--brand-lit:before,.s-icon--button:before,.s-icon--code:before,.s-icon--colors:before,.s-icon--copy:before,.s-icon--datepicker:before,.s-icon--display-preview:before,.s-icon--dropdown:before,.s-icon--easing:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--flex:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--helpers:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--layout:before,.s-icon--opensource:before,.s-icon--radius:before,.s-icon--range:before,.s-icon--ratio:before,.s-icon--refresh:before,.s-icon--scale:before,.s-icon--space:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--switch:before,.s-icon--theme:before,.s-icon--tooltip:before,.s-icon--typography:before,.s-icon--visibility:before,.s-icon--vue:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -54,91 +54,115 @@ position: relative;
 .s-icon--dropdown:before {
     content: "\f10c";
 }
-.s-icon--file-css:before {
+.s-icon--easing:before {
     content: "\f10d";
 }
-.s-icon--file-html:before {
+.s-icon--file-css:before {
     content: "\f10e";
 }
-.s-icon--file-js:before {
+.s-icon--file-html:before {
     content: "\f10f";
 }
-.s-icon--file-md:before {
+.s-icon--file-js:before {
     content: "\f110";
 }
-.s-icon--file-php:before {
+.s-icon--file-md:before {
     content: "\f111";
 }
-.s-icon--file-ts:before {
+.s-icon--file-php:before {
     content: "\f112";
 }
-.s-icon--folder-opened:before {
+.s-icon--file-ts:before {
     content: "\f113";
 }
-.s-icon--folder:before {
+.s-icon--flex:before {
     content: "\f114";
 }
-.s-icon--helpers:before {
+.s-icon--folder-opened:before {
     content: "\f115";
 }
-.s-icon--lang-css:before {
+.s-icon--folder:before {
     content: "\f116";
 }
-.s-icon--lang-html:before {
+.s-icon--helpers:before {
     content: "\f117";
 }
-.s-icon--lang-js:before {
+.s-icon--lang-css:before {
     content: "\f118";
 }
-.s-icon--lang-md:before {
+.s-icon--lang-html:before {
     content: "\f119";
 }
-.s-icon--lang-php:before {
+.s-icon--lang-js:before {
     content: "\f11a";
 }
-.s-icon--lang-ts:before {
+.s-icon--lang-md:before {
     content: "\f11b";
 }
-.s-icon--layout:before {
+.s-icon--lang-php:before {
     content: "\f11c";
 }
-.s-icon--range:before {
+.s-icon--lang-ts:before {
     content: "\f11d";
 }
-.s-icon--refresh:before {
+.s-icon--layout:before {
     content: "\f11e";
 }
-.s-icon--support-chromium:before {
+.s-icon--opensource:before {
     content: "\f11f";
 }
-.s-icon--support-edge:before {
+.s-icon--radius:before {
     content: "\f120";
 }
-.s-icon--support-firefox:before {
+.s-icon--range:before {
     content: "\f121";
 }
-.s-icon--support-rtl:before {
+.s-icon--ratio:before {
     content: "\f122";
 }
-.s-icon--support-safari:before {
+.s-icon--refresh:before {
     content: "\f123";
 }
-.s-icon--switch:before {
+.s-icon--scale:before {
     content: "\f124";
 }
-.s-icon--theme:before {
+.s-icon--space:before {
     content: "\f125";
 }
-.s-icon--tooltip:before {
+.s-icon--support-chromium:before {
     content: "\f126";
 }
-.s-icon--typography:before {
+.s-icon--support-edge:before {
     content: "\f127";
 }
-.s-icon--vue:before {
+.s-icon--support-firefox:before {
     content: "\f128";
 }
-.s-icon--align,.s-icon--autocomplete,.s-icon--avatar,.s-icon--brand-coffeekraken,.s-icon--brand-lit,.s-icon--button,.s-icon--code,.s-icon--colors,.s-icon--copy,.s-icon--datepicker,.s-icon--display-preview,.s-icon--dropdown,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--folder-opened,.s-icon--folder,.s-icon--helpers,.s-icon--lang-css,.s-icon--lang-html,.s-icon--lang-js,.s-icon--lang-md,.s-icon--lang-php,.s-icon--lang-ts,.s-icon--layout,.s-icon--range,.s-icon--refresh,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--switch,.s-icon--theme,.s-icon--tooltip,.s-icon--typography,.s-icon--vue {
+.s-icon--support-rtl:before {
+    content: "\f129";
+}
+.s-icon--support-safari:before {
+    content: "\f12a";
+}
+.s-icon--switch:before {
+    content: "\f12b";
+}
+.s-icon--theme:before {
+    content: "\f12c";
+}
+.s-icon--tooltip:before {
+    content: "\f12d";
+}
+.s-icon--typography:before {
+    content: "\f12e";
+}
+.s-icon--visibility:before {
+    content: "\f12f";
+}
+.s-icon--vue:before {
+    content: "\f130";
+}
+.s-icon--align,.s-icon--autocomplete,.s-icon--avatar,.s-icon--brand-coffeekraken,.s-icon--brand-lit,.s-icon--button,.s-icon--code,.s-icon--colors,.s-icon--copy,.s-icon--datepicker,.s-icon--display-preview,.s-icon--dropdown,.s-icon--easing,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--flex,.s-icon--folder-opened,.s-icon--folder,.s-icon--helpers,.s-icon--lang-css,.s-icon--lang-html,.s-icon--lang-js,.s-icon--lang-md,.s-icon--lang-php,.s-icon--lang-ts,.s-icon--layout,.s-icon--opensource,.s-icon--radius,.s-icon--range,.s-icon--ratio,.s-icon--refresh,.s-icon--scale,.s-icon--space,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--switch,.s-icon--theme,.s-icon--tooltip,.s-icon--typography,.s-icon--visibility,.s-icon--vue {
 display: inline-block;
 line-height: 1;
 width: 1em;

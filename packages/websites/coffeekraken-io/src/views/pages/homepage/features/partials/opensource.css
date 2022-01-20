@@ -1,0 +1,25 @@
+#features-opensource {
+
+    .__box {
+        position: relative;
+        overflow: hidden;
+
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background-image: url('/img/welcome/welcome-bg-light-01.jpg');
+            background-repeat: repeat-x;
+            background-size: cover;
+            background-position: 50% 0;
+            opacity: 0.1;
+        }
+        @sugar.theme.when dark {
+            &:before {
+                opacity: 0.05;
+                background-image: url('/img/welcome/welcome-bg-01.jpg');
+            }
+        }
+    }
+}

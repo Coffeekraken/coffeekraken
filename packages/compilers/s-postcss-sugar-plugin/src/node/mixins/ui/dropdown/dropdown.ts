@@ -146,7 +146,7 @@ export default function ({
                     padding-inline: sugar.theme(ui.dropdown.paddingInline);
                     padding-block: sugar.theme(ui.dropdown.paddingBlock);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);
-                    @sugar.depth(sugar.theme(ui.dropdown.depth));
+                    @sugar.depth(sugar.theme.value(ui.dropdown.depth));
                     @sugar.transition(fast);
                 `);
 

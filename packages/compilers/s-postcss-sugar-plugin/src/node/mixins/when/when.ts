@@ -33,12 +33,12 @@ class postcssSugarPluginmountedMixinInterface extends __SInterface {
         return {
             state: {
                 type: 'String',
-                values: ['mounted', 'active'],
+                values: ['mounted', 'active', 'dark', 'light'],
                 required: true,
             },
             context: {
                 type: 'String',
-                values: ['self' ,'sibling' ,'parent' , 'ancestor'],
+                values: ['self' ,'sibling' ,'parent' , 'ancestor', 'theme'],
                 default: 'self',
                 required: true
             },
@@ -48,8 +48,8 @@ class postcssSugarPluginmountedMixinInterface extends __SInterface {
 export { postcssSugarPluginmountedMixinInterface as interface };
 
 export interface postcssSugarPluginmountedMixinParams {
-    state: 'mounted' | 'active';
-    context: 'self' | 'sibling' | 'parent' | 'ancestor';
+    state: 'mounted' | 'active' | 'dark' | 'light';
+    context: 'self' | 'sibling' | 'parent' | 'ancestor' | 'theme';
 }
 export default function ({
     params,
@@ -91,6 +91,12 @@ export default function ({
                 selector = '&[active], &.active';
             }
             break;
+        case 'dark':
+            selector = `@media (prefers-color-scheme: dark)`;
+        break;
+        case 'light':
+            selector = `@media (prefers-color-scheme: light)`;
+        break;
     }
 
     const wrapperRule = new postcssApi.Rule({

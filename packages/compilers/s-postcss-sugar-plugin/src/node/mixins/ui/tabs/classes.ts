@@ -108,15 +108,12 @@ export default function ({
                 }           Apply the ${shape} tabs shape`;
             })
             .join('\n')}
-        * @cssClass       s-tabs\:grow        Make the tabs items grow and take the available space
-        * @cssClass       s-tabs\:vertical    Display the tabs horizontally
+        * @cssClass       s-tabs:grow        Make the tabs items grow and take the available space
+        * @cssClass       s-tabs:vertical    Display the tabs horizontally
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <ul class="s-tabs${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-color:accent">
@@ -124,17 +121,13 @@ export default function ({
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <ul class="s-tabs${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-color:accent">
@@ -142,24 +135,19 @@ export default function ({
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *     <li tabindex="0">${__faker.name.findName()}</li>
             *   </ul>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- grow -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Grow</h3>
-        *   <ul class="s-tabs\:grow">
+        * @example        html       Grow
+        *   <ul class="s-tabs:grow">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *   </ul>
-        * </div>
         * 
-        * <!-- rtl -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL</h3>
+        * @example      html        RTL
+        * <div dir="rtl">
         *   <ul class="s-tabs">
         *     <li class="s-color:accent" tabindex="0" active>${__faker.name.findName()}</li>
         *     <li class="s-color:complementary" tabindex="0">${__faker.name.findName()}</li>
@@ -167,25 +155,19 @@ export default function ({
         *   </ul>
         * </div>
         * 
-        * <!-- vertical -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Vertical</h3>
-        *   <ul class="s-tabs\:vertical s-color:complementary">
+        * @example      html        Vertical
+        *   <ul class="s-tabs:vertical s-color:complementary">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *   </ul>
-        * </div>
         * 
-        * <!-- scaled -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scaled</h3>
-        *   <ul class="s-tabs\:grow s-scale\:13 s-color:accebt">
+        * @example      html        Scales
+        *   <ul class="s-tabs:grow s-scale:13 s-color:accent">
         *     <li tabindex="0" active>${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *     <li tabindex="0">${__faker.name.findName()}</li>
         *   </ul>
-        * </div>
         *
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -53,10 +53,7 @@ export default function ({
         * 
         * @cssClass         s-loader:spinner            Display a spinner loader
         * 
-        * @example        html
-        * <!-- Spinner -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Spinner</h3>
+        * @example        html      Spinner
         *   <div class="s-grid:5">
         *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
         *           <div class="s-loader:spinner"></div>
@@ -74,7 +71,6 @@ export default function ({
         *           <div class="s-loader:spinner s-color:error"></div>
         *       </div>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

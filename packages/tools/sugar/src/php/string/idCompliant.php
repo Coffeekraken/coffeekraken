@@ -47,7 +47,7 @@ function idCompliant($string) {
     $string = preg_replace('/-{1,999}$/', '', $string);
     $string = preg_replace('/-{2,999}/', '-', $string);
     // lowercase
-    $string = strtolower($string);
+    // $string = strtolower($string);
 
     return $string;
 }

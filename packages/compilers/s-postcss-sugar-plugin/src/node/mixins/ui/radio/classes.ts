@@ -114,12 +114,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" checked class="s-radio" name="radio-style-${style}" value="hello 1" checked />
             *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -132,16 +129,13 @@ export default function ({
             *     <input type="radio" class="s-radio s-color:accent" name="radio-style-${style}" value="hello 3" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" checked class="s-radio${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -160,14 +154,11 @@ export default function ({
             } s-color:accent" name="radio-shape-${shape}" value="hello 3" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- Colors -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        * @example        html          Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" checked class="s-radio" name="radio-style-color" value="hello 1" checked />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -184,11 +175,9 @@ export default function ({
         *     <input type="radio" disabled class="s-radio s-color:error" name="radio-style-color" value="hello 4" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
-        * <!-- LTR -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
+        * @example        html          RTL
+        * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -201,11 +190,8 @@ export default function ({
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-ltr" value="hello 3" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
-        * <!-- Scale -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
+        * @example        html          Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-scale" value="hello 1" checked />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -218,18 +204,11 @@ export default function ({
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
-        * <!-- Text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`input[type="radio"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example      html         Text format
         *   <div class="s-format:text">
         *     <input type="radio" />
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

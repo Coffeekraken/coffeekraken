@@ -1,6 +1,6 @@
 @if ($block->see)
 
-    <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mbs:80 s-mbe:50">
+    <h4 id="related-{{ $block->name }}" class="s-typo:h4 s-mb:50">
         <i class="s-icon:box s-tc:accent"></i>&nbsp;&nbsp;Related resource(s)
     </h4>
 
@@ -16,7 +16,8 @@
                         <p class="s-typo:p s-mbe:30">
                             {!! $see->og->ogDescription !!}
                         </p>
-                        <a class="s-btn s-color:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}" target="_blank">
+                        <a class="s-btn s-color:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}"
+                            target="_blank">
                             Check that out!
                         </a>
                     </div>

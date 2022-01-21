@@ -27,11 +27,14 @@ function example(data, blockSettings) {
                 item.content = item.content.slice(0, -1);
             }
             if (!item.content) return null;
+
+            const parts = item.value.split(/\s{2,20000}/).map((l) => l.trim());
+
             return {
                 language:
-                    typeof item.value === 'string'
-                        ? item.value.toLowerCase()
-                        : item.value,
+                    parts[0],
+                title: parts[1],
+                description: parts[2],
                 code: Array.isArray(item.content)
                     ? item.content.join('\n').trim().replace(/\\@/, '@')
                     : item.content.replace(/\\@/, '@'),

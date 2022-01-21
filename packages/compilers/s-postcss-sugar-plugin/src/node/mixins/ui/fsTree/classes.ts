@@ -109,12 +109,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <ul class="s-fs-tree${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
@@ -159,17 +156,13 @@ export default function ({
         *               </li>
             *       </li>
             *   </ul>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <ul class="s-fs-tree${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             }">
@@ -214,14 +207,12 @@ export default function ({
         *               </li>
             *       </li>
             *   </ul>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- RTL -->
-        * <div class="s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
+        * @example        html       RTL
+        * <div dir="rtl">
         *   <ul class="s-fs-tree">
         *       <li class="active">
         *           <i class="s-icon:folder-open"></i>
@@ -266,9 +257,7 @@ export default function ({
         *   </ul>
         * </div>
         * 
-        * <!-- Scale -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
+        * @example        html       Scales
         *   <ul class="s-fs-tree s-scale:08">
         *       <li class="active">
         *           <i class="s-icon:folder-open"></i>
@@ -297,7 +286,6 @@ export default function ({
     *               </li>
         *       </li>
         *   </ul>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

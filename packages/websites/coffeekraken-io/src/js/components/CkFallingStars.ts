@@ -82,9 +82,6 @@ export default class CKFallingStars extends __SLitComponent {
 
     render() {
         return html`
-            <div class="ck-falling-stars">
-            hello
-            </div>
         `;
     }
 }

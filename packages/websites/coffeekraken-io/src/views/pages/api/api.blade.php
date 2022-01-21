@@ -36,7 +36,11 @@
 
                 <div class="__content s-pb:50">
 
-                    @include('generic.docblock.block', ['block' => $firstBlock, 'isFirst' => true])
+                    @foreach ($docblocks as $docblock)
+                        @if (!$docblock->private)
+                            @include('generic.docblock.block', ['block' => $docblock, 'isFirst' => $loop->first])
+                        @endif
+                    @endforeach
 
                 </div>
 

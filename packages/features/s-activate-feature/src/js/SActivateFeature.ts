@@ -105,6 +105,7 @@ export default class SActivateFeature extends __SFeature {
         if (this._hrefSelector)
             targets = Array.from(document.querySelectorAll(this._hrefSelector));
         if (targets?.length) this._$targets = targets;
+        else this._$targets = [this.node];
 
         if (this.props.group) {
             this._$groupElements = Array.from(
@@ -132,6 +133,7 @@ export default class SActivateFeature extends __SFeature {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
                                 if (e.currentTarget !== $triggerer) return;
+                                e.preventDefault();
                                 e.stopPropagation();
                                 if (this.isActive() && this.props.toggle) {
                                     this.unactivate();

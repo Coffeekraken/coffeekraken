@@ -100,12 +100,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
@@ -130,17 +127,13 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-scale\:15 s-color:accent" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />
@@ -153,7 +146,6 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40 s-color:complementary" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}

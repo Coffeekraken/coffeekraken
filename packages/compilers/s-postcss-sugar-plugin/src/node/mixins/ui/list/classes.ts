@@ -95,12 +95,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <ul class="s-list\:${style} ${
                     style === 'ol' ? 's-color:accent s-scale:15' : ''
                 }">
@@ -118,14 +115,12 @@ export default function ({
                     : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- RTL -->
-        * <div class="s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL</h3>
+        * @example        html          RTL
+        * <div dir="rtl">
         *   <ul class="s-list\:ul s-color:accent s-mbe:30">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
@@ -140,21 +135,14 @@ export default function ({
         *   </ul>
         * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors</h3>
+        * @example          html         Colors (none-exhaustive)
         *   <ul class="s-list s-scale\:12 s-color:accent">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li class="s-color:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li class="s-color:error">${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        * </div>
         * 
-        * <!-- Text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`ul\` or \`ol\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example          html            Vertical Rhythm / Text format
         *   <div class="s-format:text s-rhythm:vertical">
         *       <ul>
         *           <li>${__faker.name.findName()}</li>
@@ -167,7 +155,6 @@ export default function ({
         *           <li>${__faker.name.findName()}</li>
         *       </ol>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

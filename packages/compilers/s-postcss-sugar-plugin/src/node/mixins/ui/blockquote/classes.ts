@@ -119,41 +119,31 @@ export default function ({
         * @cssClass         s-format:text blockquote            Apply the s-blockquote styling on plain blockquotes
         * @cssClass         s-rhythm:vertical &                 Apply the vertical rhythm on the blockquote
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <p class="s-blockquote${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
             *       ${__faker.lorem.paragraph()}
             *   </p>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <p class="s-blockquote${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             }">
             *       ${__faker.lorem.paragraph()}
             *   </p>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Colors -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        * @example        html       Colors (none-exhaustive)
         *   <p class="s-blockquote s-mbe:30 s-color:accent">
         *       ${__faker.lorem.paragraph()}
         *   </p>
@@ -163,30 +153,18 @@ export default function ({
         *   <p class="s-blockquote s-mbe:30 s-color:info">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         *
-        * <!-- LTR -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
-        *   <p class="s-blockquote s-mbe:30">
+        * @example    html       RTL
+        *   <p class="s-blockquote s-mbe:30" dir="rtl">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <!-- Scale -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
+        * @example          html        Scales
         *   <p class="s-blockquote s-scale:15 s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <!-- Rhythm and text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`blockquote\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example          html        Vertical Rhythm / Text format
         *   <div class="s-format:text s-rhythm:vertical">
         *       <blockquote>
         *          ${__faker.lorem.paragraph()}
@@ -195,7 +173,6 @@ export default function ({
         *           ${__faker.lorem.paragraph()}
         *       </blockquote>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

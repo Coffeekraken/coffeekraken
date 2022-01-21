@@ -111,11 +111,8 @@ export default function ({
         * @cssClass             s-tooltip:block-end               Align your tooltip at "bottom"
         * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip
         * 
-        * @example        html
         ${finalParams.styles.map((style) => {
-            return ` * <!-- ${style} style -->
-                * <div class="s-font:30 s-mbe:50">
-                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+            return ` * @example        html       ${style}
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
@@ -140,15 +137,11 @@ export default function ({
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                * </div>
             `;
         })}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes.map((shape) => {
-            return ` * <!-- ${shape} shape -->
-                * <div class="s-font:30 s-mbe:50">
-                *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+            return ` * @example        html       ${shape}
                 *   <span class="s-tooltip-container">
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
@@ -173,12 +166,10 @@ export default function ({
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
-                * </div>
             `;
         })}
         * 
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Positions</h3>
+        * @example      html        Positions
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Block start (default)</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
@@ -203,10 +194,8 @@ export default function ({
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
-        * </div>
         * 
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (sample)</h3>
+        * @example      html        Colors (none-exhaustive)
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Accent</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
@@ -231,10 +220,8 @@ export default function ({
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
-        * </div>
         * 
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Interactions</h3>
+        * @example      html        Interactive
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">I'm not interactive</a>
         *       <div class="s-tooltip s-white-space:nowrap">
@@ -247,7 +234,6 @@ export default function ({
         *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -89,12 +89,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-color:accent s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
@@ -137,7 +134,6 @@ export default function ({
             *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}

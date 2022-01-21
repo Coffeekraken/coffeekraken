@@ -89,7 +89,7 @@ export default class SGlob extends __SClass {
      * @type                Function
      * @static
      *
-     * his function simply return you the none glob part of the passed string
+     * This function simply return you the none glob part of the passed string
      *
      * @param       {String}            string          The string from which to extract the none glob part
      * @return      {String}                            The none glob part of the passed string

@@ -111,12 +111,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-label">
             *     <input type="range" class="s-range${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -135,16 +132,13 @@ export default function ({
             } s-color:complementary" min="0" max="100" step="10" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
             *     <input type="range" class="s-range${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -163,14 +157,30 @@ export default function ({
             } s-color:complementary" min="0" max="100" step="10" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- Colors -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        * @example        html          Colors (none-exclusive)
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="range" class="s-range" min="0" max="100" step="10" />
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *   </label>
+        * 
+        * @example      html        RTL
+        * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -188,31 +198,8 @@ export default function ({
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * </div>
-        * 
-        * <!-- LTR -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
-        *   <label class="s-mbe:30 s-label">
-        *     <input type="range" class="s-range" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     <input type="range" class="s-range s-color:accent" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     <input type="range" class="s-range s-color:complementary" min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     <input type="range" class="s-range s-color:error" disabled min="0" max="100" step="10" />
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *   </label>
-        * </div>
-        * 
-        * <!-- Scale -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        *
+        * @example        html          Scales
         *   <label class="s-mbe:30 s-label">
         *     <input type="range" class="s-range s-scale:08" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -229,7 +216,6 @@ export default function ({
         *     <input type="range" class="s-range s-scale:14" min="0" max="100" step="10" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

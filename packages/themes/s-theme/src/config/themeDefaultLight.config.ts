@@ -56,6 +56,9 @@ export default function (env, config) {
                     text: {
                         darken: 10,
                     },
+                    surface: {
+                        lighten: 48
+                    }
                 },
             },
 
@@ -224,6 +227,11 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        darken: 10,
+                    }
+                }
             },
         },
     };

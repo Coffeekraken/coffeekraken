@@ -87,6 +87,7 @@ export interface ISMarkdownBuilderBuildParams {
     save: boolean;
     target: 'html' | 'markdown';
     preset: string[];
+    protectedTags: string[];
 }
 
 export default class SMarkdownBuilder extends __SBuilder {
@@ -342,22 +343,24 @@ export default class SMarkdownBuilder extends __SBuilder {
                     // helpers
                     registerHelpers(handlebars);
 
+                    const finalParams: ISMarkdownBuilderBuildParams = __deepMerge(__SMarkdownBuilderBuildParamsInterface.defaults(), params ?? {});
+
                     const buildedFiles: ISMarkdownBuilderResult[] = [];
 
-                    if (params.inRaw) {
-                        params.inPath = __writeTmpFileSync(params.inRaw);
+                    if (finalParams.inRaw) {
+                        finalParams.inPath = __writeTmpFileSync(finalParams.inRaw);
                         // @ts-ignore
-                        delete params.inRaw;
+                        delete finalParams.inRaw;
                     }
 
-                    if (params.inPath) {
-                        params.inDir = __folderPath(params.inPath);
-                        params.glob = __path.relative(
-                            params.inDir,
-                            params.inPath,
+                    if (finalParams.inPath) {
+                        finalParams.inDir = __folderPath(finalParams.inPath);
+                        finalParams.glob = __path.relative(
+                            finalParams.inDir,
+                            finalParams.inPath,
                         );
                         // @ts-ignore
-                        delete params.inPath;
+                        delete finalParams.inPath;
                     }
 
                     // register helpers and layouts in handlebars
@@ -370,11 +373,11 @@ export default class SMarkdownBuilder extends __SBuilder {
                         if (
                             // @ts-ignore
                             !this.constructor._registeredLayouts[layoutName]?.[
-                                params.target
+                                finalParams.target
                             ]
                         ) {
                             throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
+                                `<red>[${this.constructor.name}]</red> Sorry but the requested layout "<yellow>${layoutName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
                             );
                         }
                         // @ts-ignore
@@ -383,7 +386,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                             .readFileSync(
                                 // @ts-ignore
                                 this.constructor._registeredLayouts[layoutName][
-                                    params.target
+                                    finalParams.target
                                 ],
                                 'utf8',
                             )
@@ -403,10 +406,10 @@ export default class SMarkdownBuilder extends __SBuilder {
                             // @ts-ignore
                             !this.constructor._registeredSections[
                                 sectionName
-                            ]?.[params.target]
+                            ]?.[finalParams.target]
                         ) {
                             throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
+                                `<red>[${this.constructor.name}]</red> Sorry but the requested section "<yellow>${sectionName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
                             );
                         }
                         // @ts-ignore
@@ -416,7 +419,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 // @ts-ignore
                                 this.constructor._registeredSections[
                                     sectionName
-                                ][params.target],
+                                ][finalParams.target],
                                 'utf8',
                             )
                             .toString();
@@ -435,10 +438,10 @@ export default class SMarkdownBuilder extends __SBuilder {
                             // @ts-ignore
                             !this.constructor._registeredPartials[
                                 partialName
-                            ]?.[params.target]
+                            ]?.[finalParams.target]
                         ) {
                             throw new Error(
-                                `<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${params.target}</cyan>" target option...`,
+                                `<red>[${this.constructor.name}]</red> Sorry but the requested partial "<yellow>${partialName}</yellow>" does not have a "<cyan>${finalParams.target}</cyan>" target option...`,
                             );
                         }
                         // @ts-ignore
@@ -448,7 +451,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 // @ts-ignore
                                 this.constructor._registeredPartials[
                                     partialName
-                                ][params.target],
+                                ][finalParams.target],
                                 'utf8',
                             )
                             .toString();
@@ -479,14 +482,14 @@ export default class SMarkdownBuilder extends __SBuilder {
                     }
 
                     // save with no output
-                    if (params.save && !params.outPath && !params.outDir) {
+                    if (finalParams.save && !finalParams.outPath && !finalParams.outDir) {
                         throw new Error(
                             `<red>[${this.constructor.name}]</red> The param "<yellow>save</yellow>" MUST be used alongside the params "<yellow>outPath</yellow>" or "<yellow>outDir</yellow>"`,
                         );
                     }
 
                     // inDir with no glob
-                    if (params.inDir && !params.glob) {
+                    if (finalParams.inDir && !finalParams.glob) {
                         throw new Error(
                             `<red>[${this.constructor.name}]</red> The param "<yellow>inDir</yellow>" MUST be used alongside the param "<yellow>glob</yellow>"`,
                         );
@@ -494,23 +497,23 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                     // either no outDir with inDir or inverse...
                     if (
-                        params.save &&
-                        ((params.outDir && !params.inDir) ||
-                            (!params.outDir && params.inDir))
+                        finalParams.save &&
+                        ((finalParams.outDir && !finalParams.inDir) ||
+                            (!finalParams.outDir && finalParams.inDir))
                     ) {
                         throw new Error(
                             `<red>[${this.constructor.name}]</red> The param "<yellow>outDir</yellow>" MUST be used alongside the params "<yellow>inDir</yellow>" and "<yellow>glob</yellow>"`,
                         );
                     }
 
-                    let path = `${params.inDir}/${params.glob}`;
+                    let path = `${finalParams.inDir}/${finalParams.glob}`;
                     const sourceObj = {
                         inputStr: '',
                         outputStr: '',
                         files: [],
-                        inDir: params.inDir,
-                        outDir: params.outDir,
-                        outPath: params.outPath,
+                        inDir: finalParams.inDir,
+                        outDir: finalParams.outDir,
+                        outPath: finalParams.outPath,
                     };
                     if (__fs.existsSync(path)) {
                         sourceObj.inputStr = __path.relative(
@@ -564,7 +567,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                         flatConfig: __flatten(__SSugarConfig.get('.')),
                         settings: this.markdownBuilderSettings,
                         params,
-                        packageJson: __packageJson(params.inDir),
+                        packageJson: __packageJson(finalParams.inDir),
                         docMenu: docmap.menu,
                         docmap,
                         time: {
@@ -621,7 +624,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                                     transformerId
                                 ];
 
-                            if (!transformerObj[params.target]) return;
+                            if (!transformerObj[finalParams.target]) return;
 
                             const matches = [
                                 ...currentTransformedString.matchAll(
@@ -633,7 +636,7 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                             const transformerStr = __fs
                                 .readFileSync(
-                                    transformerObj[params.target],
+                                    transformerObj[finalParams.target],
                                     'utf8',
                                 )
                                 .toString();
@@ -651,15 +654,37 @@ export default class SMarkdownBuilder extends __SBuilder {
                             });
                         });
 
+                        // protected tags like "template"
+                        let protectedTagsMatches: string[] = [];
+                        finalParams.protectedTags.forEach((tag) => {
+                            const tagReg = new RegExp(`<${tag}[^>]*>[\\w\\W\\n]+?(?=<\\/${tag}>)<\\/${tag}>`, 'gm');
+                            const tagMatches = currentTransformedString.match(tagReg);
+                            if (tagMatches) {
+                                protectedTagsMatches = [
+                                    ...protectedTagsMatches,
+                                    ...tagMatches
+                                ]
+                            }
+                        });
+
+                        protectedTagsMatches?.forEach((match, i) => {
+                            currentTransformedString = currentTransformedString.replace(match, `{match:${i}}`)
+                        });
+
                         // marked if html is the target
-                        if (params.target === 'html') {
+                        if (finalParams.target === 'html') {
                             currentTransformedString = __marked(
                                 currentTransformedString,
                                 {},
                             );
                         }
 
-                        if (params.save) {
+                        // puth protected tags back
+                        protectedTagsMatches?.forEach((match, i) => {
+                            currentTransformedString = currentTransformedString.replace(`{match:${i}}`, match);
+                        });
+
+                        if (finalParams.save) {
                             __writeFileSync(
                                 buildObj.output,
                                 currentTransformedString,
@@ -672,7 +697,7 @@ export default class SMarkdownBuilder extends __SBuilder {
 
                         const res: ISMarkdownBuilderResult = {
                             inputFile: __SFile.new(filePath),
-                            outputFile: params.save
+                            outputFile: finalParams.save
                                 ? __SFile.new(buildObj.output)
                                 : undefined,
                             code: currentTransformedString,

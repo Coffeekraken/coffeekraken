@@ -5,9 +5,10 @@
 
         <h3 class="s-typo:h2 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
         <p class="s-typo:lead s-mbe:50">
-            The goal of Coffeekraken is to help having a better development experience with
-            a production ready quality grade. Here's some areas where we can help you:
-        </p>
+            The goal of Coffeekraken is to help having a <span class="s-tc:complementary">better development
+                experience</span>
+            with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
+            help you: </p>
 
         <div class="s-layout:112:gutter-x:gutter-between s-pb:50">
             <div>
@@ -38,7 +39,7 @@
                     </div>
                     <ol class="s-list:ol s-color:accent s-mbe:30">
                         <li class="s-typo:p">
-                            Powerfull and pleasant classnames syntax
+                            Powerfull and <span class="s-typo:code">pleasant</span> classnames syntax
                         </li>
                         <li class="s-typo:p">
                             Color management simplified
@@ -48,9 +49,10 @@
                                 title="ViteJs" target="_blank">ViteJs</a>
                         </li>
                         <li class="s-typo:p">
-                            Automatic icons integration from <a class="s-typo:a" href="https://fontawesome.com/"
+                            Automatic icons integration from <a class="s-typo:code" href="https://fontawesome.com/"
                                 title="Fontawesome" target="_blank">Fontawesome</a>, <span
-                                class="s-tc:complementary">filesystem</span> and more...
+                                class="s-typo:code">filesystem</span>
+                            and more...
                         </li>
                         {{-- <li class="s-typo:p">
                             Easy grid layout generation through the <a class="s-typo:a" href="/" title="grid">@sugar.grid</a> PostCSS mixin.
@@ -76,7 +78,7 @@
                     </div>
                     <ol class="s-list:ol s-color:accent s-mbe:30">
                         <li class="s-typo:p">
-                            Easy and Powerfull <span class="s-tc:complementary">color management</span>
+                            Easy and Powerfull <span class="s-typo:code">color management</span>
                         </li>
                         <li class="s-typo:p">
                             Based on powerfull configuration system
@@ -85,7 +87,7 @@
                             Colors function to apply and tweak colors
                         </li>
                         <li class="s-typo:p">
-                            Easy <span class="s-tc:accent">dark mode</span> support
+                            Easy <span class="s-typo:code">dark mode</span> support
                         </li>
                         <li class="s-typo:p">
                             And more...
@@ -157,13 +159,15 @@
                         </div>
                         <ol class="s-list:ol s-color:accent s-mbe:30">
                             <li class="s-typo:p">
-                                No more pre-defined columns
+                                <span class="s-typo:code">No more</span> pre-defined columns
                             </li>
                             <li class="s-typo:p">
                                 Auto-generated classes for your templates
                             </li>
                             <li class="s-typo:p">
-                                Powerfull layout system to handle simple and complex layouts
+                                Powerfull layout system to handle <span class="s-typo:code">simple</span> and
+                                <span class="s-typo:code">complex</span>
+                                layouts
                             </li>
                             <li class="s-typo:p">
                                 Pre defined layouts as well as full custom capabilities

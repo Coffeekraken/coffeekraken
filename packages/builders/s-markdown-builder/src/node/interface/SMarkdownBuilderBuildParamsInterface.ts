@@ -88,6 +88,11 @@ export default class SMarkdownBuilderBuildParamsInterface extends __SInterface {
                 ),
                 alias: 'p',
             },
+            protectedTags: {
+                description: 'Specify some tags that should be protected from the markdown transformations like "template" or "code"...',
+                type: 'Array<String>',
+                default: __SSugarConfig.get('markdownBuilder.default.protectedTags')
+            }
         };
     }
 }

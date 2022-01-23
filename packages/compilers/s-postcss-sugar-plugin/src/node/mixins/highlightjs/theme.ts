@@ -54,30 +54,41 @@ export default function ({
     color: sugar.color(current, surfaceForeground);
     line-height: 1.5 !important;
 
+    .hljs-sugar-function {
+        color: sugar.color(accent, --lighten 20);
+        border-bottom: 1px solid sugar.color(accent, --lighten 20);
+        display: inline-block;
+    }
+    .hljs-sugar-mixin {
+        color: sugar.color(error, --lighten 20);
+        border-bottom: 1px solid sugar.color(error, --lighten 20);
+        display: inline-block;
+    }
+
     &,
     &.hljs-subst {
         color: sugar.color(current, surfaceForeground);
     }
 
     .hljs-selector-tag {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(error, --lighten 20);
     }
 
     .hljs-selector-id {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
         font-weight: bold;
     }
 
     .hljs-selector-class {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-selector-attr {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-selector-pseudo {
-        color: #88C0D0;
+        color: sugar.color(info, --lighten 20 --alpha .6);
     }
 
     .hljs-addition {
@@ -90,41 +101,41 @@ export default function ({
 
     .hljs-built_in,
     .hljs-type {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-class {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-function {
-        color: #88C0D0;
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-function > .hljs-title {
-        color: #88C0D0;
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-keyword,
     .hljs-literal,
     .hljs-symbol {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(error, --lighten 20);
     }
 
     .hljs-number {
-        color: #B48EAD;
+        color: sugar.color(accent, --lighten 20);
     }
 
     .hljs-regexp {
-        color: sugar.color(accent);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-string {
-        color: sugar.color(accent);
+        color: sugar.color(accent, --lighten 20);
     }
 
     .hljs-title {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-params {
@@ -132,11 +143,11 @@ export default function ({
     }
 
     .hljs-bullet {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(accent, --lighten 20);
     }
 
     .hljs-code {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-emphasis {
@@ -144,7 +155,7 @@ export default function ({
     }
 
     .hljs-formula {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-strong {
@@ -164,12 +175,12 @@ export default function ({
     }
 
     .hljs-doctag {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-meta,
     .hljs-meta-keyword {
-        color: #5E81AC;
+        color: sugar.color(error, --lighten 10 --desaturate 40);
     }
 
     .hljs-meta-string {
@@ -177,172 +188,51 @@ export default function ({
     }
 
     .hljs-attr {
-        color: sugar.color(info);
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-attribute {
-        color: sugar.color(text, 30);
+        color: sugar.color(complementary, --lighten 30);
     }
 
     .hljs-builtin-name {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(error, --lighten 20);
     }
 
     .hljs-name {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(error, --lighten 20);
     }
 
     .hljs-section {
-        color: #88C0D0;
+        color: sugar.color(info, --lighten 20);
     }
 
     .hljs-tag {
-        color: sugar.color(accent, --spin 340);
+        color: sugar.color(error, --lighten 20);
     }
 
     .hljs-variable {
-        color: sugar.color(text);
+        color: sugar.color(complementary, --lighten 20);
     }
 
     .hljs-template-variable {
-        color: sugar.color(text);
+        color: sugar.color(complementary, --lighten 20);
     }
 
     .hljs-template-tag {
-        color: #5E81AC;
-    }
-
-    &.abnf .hljs-attribute {
-        color: #88C0D0;
-    }
-
-    &.abnf .hljs-symbol {
-        color: sugar.color(accent);
-    }
-
-    &.apache .hljs-attribute {
-        color: #88C0D0;
-    }
-
-    &.apache .hljs-section {
-        color: sugar.color(accent, --spin 340);
-    }
-
-    &.arduino .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.aspectj .hljs-meta {
-        color: #D08770;
-    }
-
-    &.aspectj > .hljs-title {
-        color: #88C0D0;
-    }
-
-    &.bnf .hljs-attribute {
-        color: sugar.color(info);
-    }
-
-    &.clojure .hljs-name {
-        color: #88C0D0;
-    }
-
-    &.clojure .hljs-symbol {
-        color: sugar.color(accent);
-    }
-
-    &.coq .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.cpp .hljs-meta-string {
-        color: sugar.color(info);
+        color: sugar.color(error, --darken 10 --desaturate 20);
     }
 
     &.css .hljs-built_in {
-        color: #88C0D0;
+        color: sugar.color(info, --lighten 20);
     }
 
     &.css .hljs-keyword {
-        color: #D08770;
-    }
-
-    &.diff .hljs-meta {
-        color: sugar.color(info);
-    }
-
-    &.ebnf .hljs-attribute {
-        color: sugar.color(info);
-    }
-
-    &.glsl .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.groovy .hljs-meta:not(:first-child) {
-        color: #D08770;
-    }
-
-    &.haxe .hljs-meta {
-        color: #D08770;
-    }
-
-    &.java .hljs-meta {
-        color: #D08770;
-    }
-
-    &.ldif .hljs-attribute {
-        color: sugar.color(info);
-    }
-
-    &.lisp .hljs-name {
-        color: #88C0D0;
-    }
-
-    &.lua .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.moonscript .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.nginx .hljs-attribute {
-        color: #88C0D0;
-    }
-
-    &.nginx .hljs-section {
-        color: #5E81AC;
-    }
-
-    &.pf .hljs-built_in {
-        color: #88C0D0;
-    }
-
-    &.processing .hljs-built_in {
-        color: #88C0D0;
+        color: sugar.color(error, --lighten 20);
     }
 
     &.scss .hljs-keyword {
-        color: sugar.color(accent, --spin 340);
-    }
-
-    &.stylus .hljs-keyword {
-        color: sugar.color(accent, --spin 340);
-    }
-
-    &.swift .hljs-meta {
-        color: #D08770;
-    }
-
-    &.vim .hljs-built_in {
-        color: #88C0D0;
-        font-style: italic;
-    }
-
-    &.yaml .hljs-meta {
-        color: #D08770;
+        color: sugar.color(error, --lighten 20);
     }
 }
   `,

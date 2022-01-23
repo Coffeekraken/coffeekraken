@@ -58,6 +58,8 @@ s-date-picker:not([bare]) {
 }
 
 .s-date-picker__button {
+    @sugar.depth(sugar.theme.value(ui.form.depth));
+
     svg {
         height: 1em;
 

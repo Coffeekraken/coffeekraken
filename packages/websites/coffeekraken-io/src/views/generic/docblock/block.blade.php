@@ -17,7 +17,9 @@
     @include('doc.description', ['block' => $block])
     @if ($isFirst)
         @include('doc.status', ['block' => $block])
-        @include('doc.preview', ['block' => $block])
+        @if ($isStyleguide)
+            @include('doc.preview', ['block' => $block])
+        @endif
         @include('doc.feature', ['block' => $block])
         @include('doc.import', ['block' => $block])
         @include('doc.install', ['block' => $block])

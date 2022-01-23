@@ -183,6 +183,9 @@ export default class SSugarCli {
             //     ),
             // );
 
+            // console.log(__SSugarConfig.get('theme.themes.default-light.color.info.default.text'));
+            // return;
+
             // if (!this.args.params['no-scripts'] && !this.args.action && this.packageJson.scripts?.[this.args.stack]) {
             //     const scriptCommand = SSugarCli.replaceTokens(this.packageJson.scripts[this.args.stack]);
             //     console.log('SSS', scriptCommand);

@@ -300,7 +300,7 @@ export default function (env, config) {
                 },
                 text: {
                     /**
-                     * @name          lighten
+                     * @name          darken
                      * @namespace     config.themeLightBase.colorSchemas.default.text
                      * @type          Number
                      * @default      0
@@ -310,33 +310,33 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    lighten: 0,
+                    darken: 0
                 },
                 placeholder: {
                     /**
                      * @name          darken
                      * @namespace     config.themeLightBase.colorSchemas.default.placeholder
                      * @type          Number
-                     * @default      45
+                     * @default      0
                      *
                      * Specify the darken value for the "placeholder" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    darken: 45,
+                    darken: 0,
                     /**
                      * @name          alpha
                      * @namespace     config.themeLightBase.colorSchemas.default.placeholder
                      * @type          Number
-                     * @default      0.4
+                     * @default      0.2
                      *
                      * Specify the alpha value for the "placeholder" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    alpha: 0.4,
+                    alpha: 0.2,
                 },
                 foreground: {
                     /**
@@ -385,14 +385,14 @@ export default function (env, config) {
                      * @name          lighten
                      * @namespace     config.themeLightBase.colorSchemas.default.surface
                      * @type          Number
-                     * @default      48
+                     * @default      35
                      *
                      * Specify the lighten value for the "surface" color variant
                      *
                      * @since       2.0.0
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    lighten: 48,
+                    lighten: 35,
                 },
                 surfaceForeground: {
                     /**

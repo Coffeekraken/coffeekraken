@@ -41,20 +41,15 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @support         safari
  * @support         edge
  *
- * @example         html
- * <label class="s-label s-mb--30">
- *      Min and max date
+ * @example         html            Min and max dates
  *      <s-date-picker
  *          placeholder="Select a date"
- *          class="s-width--50"
+ *          class="s-width:50 s-mbe:30"
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
  *      ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *      Min and max date
  *      <s-date-picker
  *          placeholder="Select a date"
  *          class="s-color:accent s-width--50"
@@ -62,20 +57,16 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
  *      ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     Disable weekends
+ * @example         html            Disable weekends
  *     <s-date-picker
  *         placeholder="Select a date"
  *         class="s-color:complementary s-width--50"
  *         name="myDatePicker3"
  *         disable-weekends
  *     ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     RTL support
+ * @example         html            RTL
  *     <s-date-picker
  *         placeholder="Select a date"
  *         class="s-color:accent s-width--50"
@@ -83,20 +74,16 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         name="myDatePicker1"
  *         rtl
  *     ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     Display more than 1 month
+ * @example         html            Display more than 1 month
  *     <s-date-picker
  *         placeholder="Select a date"
  *         class="s-color:success s-width--50"
  *         name="myDatePicker4"
  *         number-of-months="2"
  *     ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     Custom calendar icon
+ * @example         html            Custom calendar icon
  *     <s-date-picker
  *         placeholder="Select a date"
  *         class="s-color:error s-width--50"
@@ -110,25 +97,20 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *		c11.4,0,20.7,9.3,20.7,20.7s-9.3,20.7-20.7,20.7s-20.7-9.3-20.7-20.7S233.1,198.6,244.5,198.6z M244.5,331.3
  *		c-15.4,0-28-12.6-28-28s12.6-28,28-28s28,12.6,28,28S259.9,331.3,244.5,331.3z'/></g></g><g></svg>"
  *     ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     Without input
+ * @example         html            Without input
  *     <s-date-picker
  *          name="something"
  *         class="s-color:accent"
  *          no-input
  *     ></s-date-picker>
- * </label>
  *
- * <label class="s-label s-mb--30">
- *     Without button
+ * @example         html            Without button
  *     <s-date-picker
  *          name="something"
  *         class="s-color:accent s-width--50"
  *          no-button
  *     ></s-date-picker>
- * </label>
  *
  * @example         js
  * import { define } from '@coffeekraken/s-date-picker-component';

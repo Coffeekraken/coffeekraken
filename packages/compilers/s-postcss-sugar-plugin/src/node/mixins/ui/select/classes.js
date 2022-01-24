@@ -77,7 +77,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * 
         ${finalParams.styles
         .map((style) => {
-        return ` * @example        html       ${style}
+        return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select${finalParams.defaultStyle === style ? '' : `:${style}`} s-width:40" name="select-style-${style}">
             *       <option value="value1">${__faker.name.findName()}</option>
@@ -108,7 +108,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         *
         ${finalParams.shapes
         .map((shape) => {
-        return ` * @example        html       ${shape}
+        return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select${finalParams.defaultShape === shape ? '' : `:${shape}`} s-width:40" name="select-shape-${shape}">
             *       <option value="value1">${__faker.name.findName()}</option>

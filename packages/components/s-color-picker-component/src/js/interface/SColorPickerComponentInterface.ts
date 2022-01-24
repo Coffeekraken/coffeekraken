@@ -45,13 +45,13 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 values: ['nano', 'monolith'],
                 default: 'nano',
             },
-            noInput: {
+            input: {
                 description:
                     'Specify if you dont want an automatically injected text input when you dont provide yours',
                 type: 'Boolean',
                 default: false,
             },
-            noPreview: {
+            preview: {
                 description:
                     'Specify if you want to display the preview or not',
                 type: 'Boolean',

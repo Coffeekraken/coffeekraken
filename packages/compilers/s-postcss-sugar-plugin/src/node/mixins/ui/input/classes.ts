@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
     static get _definition() {
@@ -100,9 +101,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        ${finalParams.styles
+        ${__keysFirst(finalParams.styles, ['default'])
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
@@ -131,9 +132,9 @@ export default function ({
             })
             .join('\n')}
         *
-        ${finalParams.shapes
+        ${__keysFirst(finalParams.shapes, ['default'])
             .map((shape) => {
-                return ` * @example        html       ${shape}
+                return ` * @example        html       ${shape} shape
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />

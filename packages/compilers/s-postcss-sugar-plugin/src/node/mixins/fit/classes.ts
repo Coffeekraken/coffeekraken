@@ -79,16 +79,12 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${fitSizes
             .map((fitSizeName) => {
-                return ` * <!-- ${fitSizeName} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${fitSizeName} fit size</h3>
+                return ` * @example         html        ${fitSizeName}
             *   <div class="s-ratio\:16-9 s-bg:ui">
-            *       <img class="s-fit\:${fitSizeName}" src="https://picsum.photos/1000/1000" />
+            *       <img class="s-fit\:${fitSizeName} s-radius" src="https://picsum.photos/1000/1000" />
             *   </div>
-            * </div>
             * `;
             })
             .join('\n')}

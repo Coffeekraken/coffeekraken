@@ -62,24 +62,21 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             })
             .join('\n')}
         *
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text color</h3>
+        * @example        html          Text color
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
-                return ` * <div class="s-tc:${colorName} s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
+                return ` * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
+                    * <div class="s-tc:${colorName} s-mb:30">${__faker.name.findName()}</div>`;
             })
             .join('\n')}
-        * </div>
         *
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Background color</h3>
+        * @example        html          Background color
         ${Object.keys(__STheme.getTheme().baseColors())
             .map((colorName) => {
-                return ` * <div class="s-bg:${colorName} s-p:10 s-mb:20">${colorName}: ${__faker.name.findName()}</div>`;
+                return `  * <h4 class="s-typo:h4 s-mbe:20">${colorName}</h4>
+                    * <div class="s-bg:${colorName} s-p:10 s-mb:30 s-radius">${__faker.name.findName()}</div>`;
             })
             .join('\n')}
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

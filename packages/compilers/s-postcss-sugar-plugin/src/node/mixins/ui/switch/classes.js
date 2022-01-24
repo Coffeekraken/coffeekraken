@@ -79,7 +79,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * 
         ${finalParams.styles
         .map((style) => {
-        return ` * @example        html       ${style}
+        return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${style === finalParams.defaultStyle ? '' : `:${style}`}" />
@@ -106,7 +106,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         *
         ${finalParams.shapes
         .map((shape) => {
-        return ` * @example        html       ${shape}
+        return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${Math.random() > 0.5 ? 'checked' : ''} class="s-switch${shape === finalParams.defaultShape ? '' : `:${shape}`}" />

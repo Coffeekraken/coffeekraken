@@ -74,20 +74,17 @@ export default function ({
             })
             .join('\n')}
         *
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Radius</h3>
+        * @example        html          Border radius
         ${radiusesKeys
             .map((radiusName) => {
                 if (radiusName === 'default') return '';
                 return `
-              *   <div class="s-display:inline-block s-width:20 s-bg:accent s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-radius:${radiusName}">
+              *   <div class="s-radius:${radiusName} s-display:inline-block s-width:20 s-bg:main s-pbs:30 s-mie:30 s-mbe:30 s-text:center s-ratio:1">
               *     ${radiusName}
               *   </div> 
             `;
             })
             .join('\n')}
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -119,20 +116,56 @@ export default function ({
             })
             .join('\n')}
         *
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Width</h3>
+        * @example             html         Border width
         ${widthsKeys
             .map((widthName) => {
                 if (widthName === 'default') return '';
-                return `
-              *   <div style="border-color: var(--s-theme-color-accent);" class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bwidth:${widthName}">
+                return `   <div class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bcolor:accent s-bwidth:${widthName}">
               *     ${widthName}
               *   </div> 
             `;
             })
             .join('\n')}
-        * </div>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    );
+
+    vars.comment(
+        () => `
+      /**
+        * @name          Border color
+        * @namespace          sugar.css.helpers
+        * @type               Styleguide
+        * @menu           Styleguide / Helpers        /styleguide/helpers/border-color
+        * @platform       css
+        * @status       beta
+        * 
+        * These classes allows you to apply some border color to any HTMLElement
+        * 
+        * @support      chromium        
+        * @support      firefox         
+        * @support      safari          
+        * @support      edge           
+        * 
+        ${Object.keys(__STheme.getTheme().baseColors())
+             .map((colorName) => {
+                if (colorName === 'default') return '';
+                return ` * @cssClass      s-bcolor:${colorName}      Apply the border color ${colorName} to any HTMLElement`;
+            })
+            .join('\n')}
+        *
+        * @example             html         Border color
+        ${Object.keys(__STheme.getTheme().baseColors())
+             .map((colorName) => {
+                return ` * <div class="s-display:inline-block s-width:20 s-pbs:20 s-mie:20 s-mbe:20 s-text:center s-ratio:1 s-bcolor:${colorName} s-bwidth:20">
+              *     ${colorName}
+              *   </div> 
+            `;
+            })
+            .join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -187,6 +220,32 @@ export default function ({
         ).code(`
         .${clsName} {
             @sugar.border.width(${widthName});
+        }`);
+    });
+
+     Object.keys(__STheme.getTheme().baseColors())
+             .forEach((colorName) => {
+        const cls = `s-bcolor:${colorName}`.replace(':default', '');
+        const clsName = `s-bcolor--${colorName}`.replace('--default', '');
+        vars.comment(
+            () => `/**
+                * @name               ${cls}
+                * @namespace          sugar.css.border
+                * @type               CssClass
+                * @platform         css
+                * @status           beta
+                * 
+                * This class allows you to apply a "<yellow>${colorName}</yellow>" border color style to any HTMLElement
+                * 
+                * @example        html
+                * <div class="${cls}">
+                *     Hello world
+                * </div>
+                */
+        `,
+        ).code(`
+        .${clsName} {
+            border-color: sugar.color(${colorName});
         }`);
     });
 

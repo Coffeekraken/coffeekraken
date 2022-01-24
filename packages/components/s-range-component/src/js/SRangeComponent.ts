@@ -32,23 +32,28 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @support         safari
  * @support         edge
  *
- * @example         html
- * <s-range name="myCoolRange" value="90" class="s-color:accent:deep s-mbe:30"></s-range>
+ * @example         html        Simple range
+ * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
  *
+ * @example         html        With tooltop
  * <s-range name="myOtherRanfe" class="s-mbe:30" tooltip></s-range>
  *
- * <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent:deep" tooltip></s-range>
+ * @example         html        With tooltop and colored
+ * <s-range name="myOtherRanfe" class="s-mbe:30 s-color:accent" tooltip></s-range>
  *
- * <s-range name="myRangeWithSteps" value="70" class="s-color:complementary:deep s-mbe:30" step="5"></s-range>
+ * @example         html        With steps
+ * <s-range name="myRangeWithSteps" value="70" class="s-color:complementary s-mbe:30" step="5"></s-range>
  *
+ * @example         html        External target input
  * <div class="s-flex:align-center s-mbe:30">
  *  <s-range name="myRangeWithTarget" value="30" target="#my-range-with-target-target"></s-range>
  *  <span class="s-pis:20" id="my-range-with-target-target"></span>
  * </div>
  *
- * <s-range name="myRangeColoredSuccess" value="30" class="s-color:success:deep s-mbe:30"></s-range>
- * <s-range name="myRangeColoredWarning" value="0" class="s-color:warning:deep s-mbe:30"></s-range>
- * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-color:error:deep s-mbe:30"></s-range>
+ * @example         html        Some colors
+ * <s-range name="myRangeColoredSuccess" value="30" class="s-color:success s-mbe:30"></s-range>
+ * <s-range name="myRangeColoredWarning" value="0" class="s-color:warning s-mbe:30"></s-range>
+ * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-color:error s-mbe:30"></s-range>
  *
  * @example         js
  * import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';

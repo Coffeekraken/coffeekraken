@@ -67,7 +67,7 @@ export default class CKFallingStars extends __SLitComponent {
             $star.remove();
         }, 5000);
         this.appendChild($star);
-        setTimeout(this.new.bind(this), Math.random() * 5000);
+        setTimeout(this.new.bind(this), Math.random() * 3500);
     }
     render() {
         return html `

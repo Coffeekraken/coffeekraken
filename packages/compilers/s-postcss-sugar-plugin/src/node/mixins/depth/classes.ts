@@ -78,17 +78,14 @@ export default function ({
             })
             .join('\n')}
         *
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Depths</h3>
         ${depthsArray
             .map((depthName) => {
-                return ` * <div class="s-depth:${depthName} s-bg:main-surface s-mbe:100 s-text:center s-radius:30 s-p:30">
+                return ` * @example          html        Depth ${depthName}
+                <div class="s-depth:${depthName} s-bg:main-surface s-text:center s-radius s-p:30">
                     <span class="s-depth:text:${depthName}">s-depth:${depthName}    
                 </div>`;
             })
             .join('\n')}
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

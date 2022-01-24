@@ -78,7 +78,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * 
         ${finalParams.styles
         .map((style) => {
-        return ` * @example        html       ${style}
+        return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" checked class="s-radio" name="radio-style-${style}" value="hello 1" checked />
             *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -97,7 +97,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         *
         ${finalParams.shapes
         .map((shape) => {
-        return ` * @example        html       ${shape}
+        return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     <input type="radio" checked class="s-radio${finalParams.defaultShape === shape ? '' : `:${shape}`}" name="radio-shape-${shape}" value="hello 1" checked />
             *     ${__faker.name.title()} ${__faker.name.findName()}

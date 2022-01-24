@@ -54,9 +54,9 @@ export default function ({
         () => `
       /**
         * @name          Typography
-        * @namespace          sugar.css.helpers
+        * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/typography
+        * @menu           Styleguide / UI        /styleguide/ui/typography
         * @platform       css
         * @status       beta
         * 
@@ -76,16 +76,12 @@ export default function ({
         * @cssClass             s-format:text           Format automatically child tags like \`strong\` to the \`s-typo:string\` style
         * @cssClass             s-rhythm:vertical           Apply the vertical rhythm to all direct child tags
         *
-        * @example        html
          ${Object.keys(typosObj)
              .map((typoName) => {
-                 return ` * <!-- ${typoName} -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${typoName}</h3>
+                 return ` * @example        html        ${typoName}
             *   <${typoName} class="s-typo:${typoName}">
             *       ${__faker.name.findName()}
             *   </${typoName}>
-            * </div>
             * `;
              })
              .join('\n')}

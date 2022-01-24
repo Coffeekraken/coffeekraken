@@ -2699,14 +2699,14 @@ export default function (env, config) {
              * @name            80
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         5.25
+             * @default         5.25rem
              *
              * Specify the "80" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '5.25',
+            80: '5.25rem',
 
             /**
              * @name            90

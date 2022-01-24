@@ -202,6 +202,7 @@ export default function ({
                   background: none !important;
                   border: rgba(0,0,0,0) solid sugar.theme(ui.button.borderWidth);
                   color: sugar.color(current);
+                  box-shadow: none !important;
 
                   &:hover, &:focus {
                     transform: scale(1.1);

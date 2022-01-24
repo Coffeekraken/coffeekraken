@@ -115,7 +115,7 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -152,7 +152,7 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
+                return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`

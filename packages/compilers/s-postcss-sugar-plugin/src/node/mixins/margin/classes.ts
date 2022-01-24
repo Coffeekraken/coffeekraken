@@ -99,29 +99,24 @@ export default function ({
         * @cssClass                s-mie:auto          Apply the \`auto\` inline end space
         *
         * 
-        * @example        html
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin inline</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">${__faker.name.findName()}</p>
-        * </div>
+        * @example        html               Inline
+        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${__faker.name.findName()}</p>
+        *   <p class="s-bg:main s-mie:100 s-radius s-mbe:20 s-p:30">${__faker.name.findName()}</p>
+        *   <p class="s-bg:error s-mie:30 s-radius s-p:30">${__faker.name.findName()}</p>
         * 
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-p:20 s-mbe:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-mi:50 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:ui s-mie:100 s-mbe:20 s-p:20">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-mie:30 s-p:20">${__faker.name.findName()}</p>
-        * </div>
+        * @example            html                Block
+        *   <div class="s-bg:accent s-radius s-mbe:40 s-p:30 s-text:center">${__faker.name.findName()}</div>
+        *   <div class="s-bg:complementary s-radius s-mbe:20 s-p:30 s-text:center">${__faker.name.findName()}</div>
+        *   <div class="s-bg:main s-radius s-mbe:50 s-p:30 s-text:center">${__faker.name.findName()}</div>
+        *   <div class="s-bg:error s-radius s-p:30 s-text:center">${__faker.name.findName()}</div>
         * 
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Margin Block</h3>
-        *   <div class="s-bg:accent s-mbe:40 s-p:20 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:complementary s-mbe:20 s-p:20 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:ui s-mbe:50 s-p:20 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:error s-p:20 s-text:center">${__faker.name.findName()}</div>
+        * @example            html                RTL
+        * <div dir="rtl">
+        *   <p class="s-bg:accent s-radius s-p:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:complementary s-radius s-mi:50 s-mbe:20 s-p:30">${__faker.name.findName()}</p>
+        *   <p class="s-bg:main s-radius s-mie:100 s-mbe:20 s-p:30">${__faker.name.findName()}</p>
+        *   <p class="s-bg:error s-radius s-mie:30 s-p:30">${__faker.name.findName()}</p>
         * </div>
         * 
         * @since      2.0.0

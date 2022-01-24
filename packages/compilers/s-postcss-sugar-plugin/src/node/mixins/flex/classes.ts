@@ -98,47 +98,34 @@ export default function ({
         * @cssClass                 s-flex-item:grow-{0...20}             Apply the grow {0...20} to any flex item
         * @cssClass                 s-flex-item:shrink-{0...20}             Apply the shrink {0...20} to any flex item
         * 
-        * @example        html
-        * <!-- Simple grid -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple grid</h3>
-        *   <div class="s-flex:row:wrap">
-        *     <div class="s-bg:main s-width:50 s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-width:50 s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-width:50 s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:info s-width:50 s-p:20">${__faker.name.findName()}</div>
+        * @example        html          Simple grid
+        *   <div class="s-flex:row:wrap s-radius">
+        *     <div class="s-bg:main s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-width:50 s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:info s-width:50 s-p:30">${__faker.name.findName()}</div>
         *   </div>
-        * </div>
         * 
-        * <!-- Grow -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grow</h3>
-        *   <div class="s-flex:row:nowrap">
-        *     <div class="s-bg:main s-p:20 s-flex-item:grow">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        * @example        html          Grow
+        *   <div class="s-flex:row:nowrap s-radius">
+        *     <div class="s-flex-item:grow s-bg:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
-        * </div>
         * 
-        * <!-- Order -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Order</h3>
-        *   <div class="s-flex:row:nowrap">
-        *     <div class="s-bg:main s-p:20 s-flex-item:order-3">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        * @example      html          Orders
+        *   <div class="s-flex:row:nowrap s-radius">
+        *     <div class="s-flex-item:order-3 s-bg:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
-        * </div>
         * 
-        * <!-- Align -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Align</h3>
-        *   <div class="s-flex:row:nowrap:align-end">
-        *     <div class="s-bg:main s-p:20">${__faker.name.findName()}</div>
-        *     <div class="s-bg:accent s-p:20">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
-        *     <div class="s-bg:complementary s-p:20">${__faker.name.findName()}</div>
+        * @example          html            Aligns
+        *   <div class="s-flex:row:nowrap:align-end s-radius">
+        *     <div class="s-bg:main s-p:30">${__faker.name.findName()}</div>
+        *     <div class="s-bg:accent s-p:30">${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}<br />${__faker.name.findName()}</div>
+        *     <div class="s-bg:complementary s-p:30">${__faker.name.findName()}</div>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

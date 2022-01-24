@@ -87,12 +87,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${clearfixes
             .map((clearfixName) => {
-                return ` * <!-- ${clearfixName} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${clearfixName}clearfix</h3>
+                return ` * @example        html         ${clearfixName}
             *   <div class="s-clearfix${
                 clearfixName === finalParams.defaultClearfix
                     ? ``
@@ -100,7 +97,6 @@ export default function ({
             } s-bg:ui">
             *       <img src="https://picsum.photos/200/200" style="float: right" />
             *   </div>
-            * </div>
             * `;
             })
             .join('\n')}

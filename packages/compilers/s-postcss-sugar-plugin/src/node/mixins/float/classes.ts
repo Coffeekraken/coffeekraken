@@ -66,14 +66,18 @@ export default function ({
         * @cssClass     s-float:right         Apply the right float style
         * @cssClass     s-float:none         Apply the none float style
         * 
-        * @example        html
-        * <div class="s-bg:accent">
+        * @example        html              Left
+        * <div class="s-bg:accent s-clearfix  s-p:30 s-radius">
         *     <div class="s-float:left">I'm a cool float left element</div>
         * </div>
-        * <div class="s-bg:complementary">
+        * 
+        * @example      html                Right
+        * <div class="s-bg:complementary s-clearfix s-p:30 s-radius">
         *     <div class="s-float:right">I'm a cool float right element</div>
         * </div>
-        * <div class="s-bg:error">
+        * 
+        * @example      html                None
+        * <div class="s-bg:error s-p:30 s-radius">
         *     <div class="s-float:none">I'm a cool float none element</div>
         * </div>
         * 

@@ -44,7 +44,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * @cssClass                 s-disabled              Apply the disabled styling on any HTMLElement
         * 
-        * @example        html
+        * @example        html      Disabled
         * <input type="text" class="s-input s-disabled" placeholder="I'm disabled" />
         * 
         * @since      2.0.0

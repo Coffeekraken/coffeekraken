@@ -132,7 +132,12 @@ export default class SActivateFeature extends __SFeature {
                     switch (trigger) {
                         case 'click':
                             $triggerer.addEventListener('click', (e) => {
-                                if (e.currentTarget !== $triggerer) return;
+                                // only direct child(s) of the triggerer can trigger the activation
+                                if (e.target !== $triggerer) {
+                                    // @ts-ignore
+                                    if (e.target.parentElement !== $triggerer) return;
+                                    if (e.currentTarget !== $triggerer) return;
+                                }
                                 e.preventDefault();
                                 e.stopPropagation();
                                 if (this.isActive() && this.props.toggle) {

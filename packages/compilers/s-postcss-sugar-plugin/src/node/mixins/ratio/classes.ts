@@ -77,16 +77,12 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${Object.keys(ratioObj)
             .map((ratioName) => {
-                return ` * <!-- ${ratioName} ratio -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${ratioName} ratio</h3>
+                return ` * @example             html        ${ratioName}
             *   <div class="s-ratio\:${ratioName.replace('/', '-')} s-width:40">
-            *       <img class="s-fit\:cover" src="https://picsum.photos/500/500" />
+            *       <img class="s-fit\:cover s-radius" src="https://picsum.photos/500/500" />
             *   </div>
-            * </div>
             * `;
             })
             .join('\n')}

@@ -91,7 +91,7 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-color:accent s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">

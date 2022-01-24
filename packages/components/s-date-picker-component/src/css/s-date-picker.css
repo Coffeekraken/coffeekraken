@@ -33,7 +33,7 @@ s-date-picker[rtl] .s-pikaday {
 }
 
 s-date-picker:not([bare]) {
-    &:not([rtl]):not([no-button]):not([no-input]) {
+    &:not([rtl])[button][input] {
         .s-date-picker__input {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -43,7 +43,7 @@ s-date-picker:not([bare]) {
             border-bottom-left-radius: 0;
         }
     }
-    &[rtl]:not([no-button]):not([no-input]) {
+    &[rtl][button][input] {
         .s-date-picker__button {
             border-top-right-radius: 0;
             border-bottom-right-radius: 0;
@@ -59,6 +59,10 @@ s-date-picker:not([bare]) {
 
 .s-date-picker__button {
     @sugar.depth(sugar.theme.value(ui.form.depth));
+
+    i {
+        text-shadow: 0px 0px 3px sugar.color(current, --darken 10);
+    }
 
     svg {
         height: 1em;

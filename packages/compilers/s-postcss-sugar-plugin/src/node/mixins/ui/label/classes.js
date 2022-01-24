@@ -61,7 +61,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         ${finalParams.styles
         .map((style) => {
-        return ` * @example        html       ${style}
+        return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-color:accent s-label${style === finalParams.defaultStyle ? '' : `:${style}`}">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>

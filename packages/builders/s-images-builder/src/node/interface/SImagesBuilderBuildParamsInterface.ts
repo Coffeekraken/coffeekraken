@@ -2,7 +2,7 @@ import __SInterface from '@coffeekraken/s-interface';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 /**
- * @name                SPostcssBuilderBuildParamsInterface
+ * @name                SImagesBuilderBuildParamsInterface
  * @namespace           node.interface
  * @type.                      Class
  * @extends             SInterface
@@ -19,7 +19,7 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default class SPostcssBuilderBuildParamsInterface extends __SInterface {
+export default class SImagesBuilderBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {
             glob: {

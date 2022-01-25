@@ -290,8 +290,9 @@ export default class SFrontstack extends __SClass {
                 const finalParams =
                     __SFrontstackRecipeParamsInterface.apply(params);
 
+                const sugarJson = new __SSugarJson().current();
+                
                 if (!finalParams.recipe) {
-                    const sugarJson = new __SSugarJson().current();
                     if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
                 }
                 if (!finalParams.recipe) {
@@ -325,9 +326,21 @@ export default class SFrontstack extends __SClass {
                 }
 
                 // get the recipe object and treat it
-                const recipeObj: Partial<ISFrontstackRecipe> =
+                const recipeObj: ISFrontstackRecipe =
                     // @ts-ignore
                     recipesObj[finalParams.recipe];
+
+                // defined actions in the sugar.jcon file
+                if (sugarJson.frontstack?.[finalParams.stack]) {
+                    for (let [key, value] of Object.entries(sugarJson.frontstack?.[finalParams.stack])) {
+                        if (!frontstackConfig.actions[value.action]) {
+                            throw new Error(`The requested action "<yellow>${value.action}</yellow>" does not exists in the config.frontstack.actions stack... Here's the available ones: <green>${Object.keys(frontstackConfig.actions).join(',')}</green>`)
+                        }
+                        // @ts-ignore
+                        recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`] = __deepMerge(Object.assign({}, frontstackConfig.actions[value.action], value));
+                        delete recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`].action;
+                    }
+                }
 
                 // check the recipe stacks
                 if (

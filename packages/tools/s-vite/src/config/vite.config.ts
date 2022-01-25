@@ -23,7 +23,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        root: '[config.storage.package.rootDir]/src',
+        root: '[config.storage.package.rootDir]',
         /**
          * @name          base
          * @namespace     config.vite
@@ -110,7 +110,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        // publicDir: '[config.storage.src.rootDir]',
+        publicDir: '[config.storage.src.rootDir]/src',
         /**
          * @name          cacheDir
          * @namespace     config.vite
@@ -135,20 +135,20 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         clearScreen: false,
-        // optimizeDeps: {
-        //     /**
-        //      * @name          exclude
-        //      * @namespace     config.vite.optimizeDeps
-        //      * @type          String[]
-        //      * @default      false
-        //      *
-        //      * Specify some packages to exclude from build
-        //      *
-        //      * @since       2.0.0
-        //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //      */
-        //     exclude: ['vue'],
-        // },
+        optimizeDeps: {
+            /**
+             * @name          exclude
+             * @namespace     config.vite.optimizeDeps
+             * @type          String[]
+             * @default      false
+             *
+             * Specify some packages to exclude from build
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            // exclude: ['static'],
+        },
         build: {
             lib: {
                 /**

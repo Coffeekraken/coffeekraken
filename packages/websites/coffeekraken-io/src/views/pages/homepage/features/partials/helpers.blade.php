@@ -12,7 +12,7 @@
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:align"></i>
                         <p class="s-p">Aligns</p>
                     </div>
@@ -21,7 +21,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:typography"></i>
                         <p class="s-p">Typography</p>
                     </div>
@@ -29,7 +29,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:colors"></i>
                         <p class="s-p">Colors</p>
                     </div>
@@ -38,7 +38,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:flex"></i>
                         <p class="s-p">Flexbox</p>
                     </div>
@@ -46,7 +46,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:ratio"></i>
                         <p class="s-p">Ratios</p>
                     </div>
@@ -55,7 +55,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:radius"></i>
                         <p class="s-p">Radius</p>
                     </div>
@@ -63,7 +63,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:easing"></i>
                         <p class="s-p">Transitions</p>
                     </div>
@@ -72,7 +72,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:space"></i>
                         <p class="s-p">Spaces</p>
                     </div>
@@ -80,7 +80,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:visibility"></i>
                         <p class="s-p">Visibility</p>
                     </div>
@@ -89,7 +89,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:scale"></i>
                         <p class="s-p">Scales</p>
                     </div>

@@ -3,6 +3,8 @@
 import __packageRoot from './rootPath';
 import __fs from 'fs';
 import __readJsonSync from '../fs/readJsonSync';
+import __standardizeJson from '../../shared/npm/utils/standardizeJson';
+import __objectHash from '../../shared/object/objectHash';
 
 /**
  * @name          jsonSync
@@ -27,21 +29,40 @@ import __readJsonSync from '../fs/readJsonSync';
  * @since       2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
  */
+
+export interface IPackageJsonSyncSettings {
+    highest: boolean;
+    standardize: boolean;
+}
+
 let __packageJson = {};
-function jsonSync(from = process.cwd(), highest = false) {
-    const prop = highest ? 'highest' : 'default';
+function jsonSync(from = process.cwd(), settings?: Partial<IPackageJsonSyncSettings>): any {
+    const finalSettings = {
+        highest: false,
+        standardize: false,
+        ...settings ?? {}
+    };
 
-    if (__packageJson[from]?.[prop]) {
-        return __packageJson[from][prop];
+    const hash = __objectHash({
+        from,
+        ...finalSettings
+    });
+
+    
+    if (__packageJson[hash]) {
+        return __packageJson[hash];
     }
-
-    const path = `${__packageRoot(from, highest)}/package.json`;
+    
+    const path = `${__packageRoot(from, finalSettings.highest)}/package.json`;
     if (!__fs.existsSync(path)) return false;
 
-    const json = __readJsonSync(path);
+    let json = __readJsonSync(path);
+    if (finalSettings.standardize) {
+        json = __standardizeJson(json);
+    }
 
-    if (!__packageJson[from]) __packageJson[from] = {};
-    __packageJson[from][prop] = json;
+    // cache
+    if (!__packageJson[hash]) __packageJson[hash] = json;
 
     return json;
 }

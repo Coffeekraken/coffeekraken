@@ -18,7 +18,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/img' : '/img',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/img' : '/dist/img',
         },
         js: {
             /**
@@ -32,7 +32,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/js' : '/js',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/js' : '/dist/js',
         },
         css: {
             /**
@@ -46,7 +46,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/css' : '/css',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/css' : '/dist/css',
         },
         icons: {
             /**
@@ -60,7 +60,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/icons' : '/icons',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/icons' : '/dist/icons',
         },
         fonts: {
             /**
@@ -74,7 +74,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/fonts' : '/fonts',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/fonts' : '/dist/fonts',
         },
     };
 };

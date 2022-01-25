@@ -13,6 +13,7 @@
     "@coffeekraken/s-event-emitter": "^2.0.0",
     "@coffeekraken/s-interface": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
+    "@coffeekraken/s-frontstack": "^2.0.0",
     "@coffeekraken/s-glob": "^2.0.0",
     "@coffeekraken/s-log": "^2.0.0",
     "@coffeekraken/s-stdio": "^2.0.0",

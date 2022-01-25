@@ -21,7 +21,7 @@
                     <h4 class="s-typo:h3 s-mb:50">{{ ucfirst($example->title) }}</h4>
                 @endif
                 @if ($example->description)
-                    <p class="s-typo:p">{{ $example->description }}</p>
+                    <p class="s-typo:p s-format:text">{!! \Sugar\markdown\toHtml($example->description) !!}</p>
                 @endif
                 @if ($example->language == 'html')
                     <div class="preview-html">

@@ -19,7 +19,7 @@
                         {{ implode($setting->type, '|') }}
                     </div>
                 </header>
-                <p class="s-typo:p s-pi:30 s-pb:20">{!! $setting->description !!}</p>
+                <p class="s-typo:p s-format:text s-pi:30 s-pb:20">{!! \Sugar\markdown\toHtml($setting->description) !!}</p>
             </li>
         @endforeach
     </ol>

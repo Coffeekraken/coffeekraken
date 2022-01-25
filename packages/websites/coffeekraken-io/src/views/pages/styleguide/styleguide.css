@@ -24,7 +24,7 @@
         animation-iteration-count: infinite;
 
         @sugar.theme.when (dark) {
-            background-image: url('/src/img/discord-illustration-05-bkg.png');
+            background-image: url('/dist/img/discord-illustration-05-bkg.png');
         }
     }
 

@@ -11,6 +11,6 @@ export default {
          * @since           2.0.0
          * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        headerImageUrl: '[config.serve.img.url]/img/doc/licenseHeader.jpg',
+        headerImageUrl: '[config.serve.img.url]/doc/licenseHeader.jpg',
     },
 };

@@ -577,6 +577,49 @@ export default function (env, config) {
                     processManager: {},
                 },
             },
+            faviconBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Docmap build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the favicon build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to build and maintain up to date your favicon files and the manifest.json',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        sugar favicon.build
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: '%sugar favicon.build',
+                params: {},
+                settings: {
+                    processManager: {},
+                },
+            }
         },
     };
 }

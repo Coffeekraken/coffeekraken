@@ -48,82 +48,40 @@ function argsToString(args, settings = {}) {
         settings,
     );
 
+    function processParam(param, value) {
+        const finalKey = param.length > 1 ? `--${param}` : `-${param}`;
+        if (value === true) return `${finalKey}`;
+        if (value === false && settings.keepFalsy) return `${finalKey} false`;
+        if (!value) return '';
+        let valueStr = value.toString !== undefined &&
+                        typeof value.toString === 'function'
+                            ? value.toString()
+                            : __toString(value);
+
+        if (settings.valueQuote === '"')
+            valueStr = valueStr.replace(/"/g, '\\"');
+        if (settings.valueQuote === "'")
+            valueStr = valueStr.replace(/'/g, "\\'");
+        if (settings.valueQuote === '`')
+            valueStr = valueStr.replace(/`/g, '\\`');
+
+        return `${finalKey} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
+    }
+
     let string = '';
     Object.keys(args).forEach((key) => {
         const argValue = args[key];
         let str = '';
 
-        let finalKey = key;
-        if (!isNaN(key)) finalKey = '';
-        else if (finalKey.length <= 1) finalKey = `-${key}`;
-        else finalKey = `--${finalKey}`;
-
         if (Array.isArray(argValue)) {
-            argValue.forEach((value) => {
-                let valueStr;
-                if (value === true) {
-                    valueStr = '';
-                } else {
-                    valueStr =
-                        value.toString !== undefined &&
-                        typeof value.toString === 'function'
-                            ? value.toString()
-                            : __toString(value);
-                    if (typeof __parse(valueStr) === 'string')
-                        valueStr = `"${valueStr}"`;
-                }
-
-                if (valueStr.split(' ').length < 1) {
-                    if (settings.valueQuote === '"')
-                        valueStr = valueStr.replace(/"/g, '\\"');
-                    if (settings.valueQuote === "'")
-                        valueStr = valueStr.replace(/'/g, "\\'");
-                    if (settings.valueQuote === '`') {
-                        valueStr = valueStr.replace(/`/g, '\\`');
-                    }
-                }
-                
-                    string += ` ${finalKey} ${valueStr}`;
+            argValue.forEach((value) => {  
+                string += ` ${processParam(key, value)}`;
             });
         } else if (__isPlainObject(argValue)) {
-
             let valueStr = JSON.stringify(argValue);
-
-            if (valueStr.split(' ').length < 1) {
-                if (settings.valueQuote === '"')
-                    valueStr = valueStr.replace(/"/g, '\\"');
-                if (settings.valueQuote === "'")
-                    valueStr = valueStr.replace(/'/g, "\\'");
-                if (settings.valueQuote === '`')
-                    valueStr = valueStr.replace(/`/g, '\\`');
-            }
-            string += ` ${finalKey} ${settings.valueQuote}${valueStr}${settings.valueQuote}`;
+            string += ` ${processParam(key, valueStr)}`;
         } else {
-            if (argValue === false) {
-                if (!settings.keepFalsy) return;
-                str = 'false';
-            }
-            if (argValue === true) {
-                str = '';
-            } else {
-                str =
-                    argValue.toString !== undefined &&
-                    typeof argValue.toString === 'function'
-                        ? argValue.toString()
-                        : __toString(argValue);
-
-                if (typeof __parse(str) === 'string' && str.split(' ').length > 1) {
-                    if (settings.valueQuote === '"')
-                        str = str.replace(/"/g, '\\"');
-                    if (settings.valueQuote === "'") str = str.replace(/'/g, "\\'");
-                    if (settings.valueQuote === '`') str = str.replace(/`/g, '\\`');
-                }
-
-                if (str.split(' ').length < 1) {
-                    str = `${settings.valueQuote}${str}${settings.valueQuote}`;
-                } 
-            }
-            string += ` ${finalKey} ${str}`;
+            string += ` ${processParam(key, argValue)}`;
         }
     });
     return string.replace(/(\s){2,999999}/gm, ' ').trim();

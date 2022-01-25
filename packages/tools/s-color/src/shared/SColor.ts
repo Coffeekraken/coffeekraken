@@ -298,14 +298,14 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(color: string, settings: Partial<ISColorCtorSettings>) {
+    constructor(color: string, settings?: Partial<ISColorCtorSettings>) {
         // save the instance settings
         super(
             __deepMerge(
                 {
                     color: __SColorSettingsInterface.defaults(),
                 },
-                settings,
+                settings ?? {},
             ),
         );
 

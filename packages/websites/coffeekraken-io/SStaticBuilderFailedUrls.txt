@@ -1,6 +1,0 @@
-/
-/config/explorer
-/api/@coffeekraken.sugar.node.path.absolute
-/api/@coffeekraken.sugar.node.path.relative
-/api/@coffeekraken.s-docblock.shared.sDocblockBlock
-/api/@coffeekraken.coffeekraken-io.sugar.css.typo.sRhythm-vertical-.code-not-pre -Code-SRhythm-verticalCode-not-pre -Code

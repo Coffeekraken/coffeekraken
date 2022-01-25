@@ -1,5 +1,5 @@
 @if ($block->description)
 
-    <p class="s-typo:lead s-mbs:50">{!! $block->description !!}</p>
+    <p class="s-typo:lead s-format:text s-mbs:50">{!! \Sugar\markdown\toHtml($block->description) !!}</p>
 
 @endif

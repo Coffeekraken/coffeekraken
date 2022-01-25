@@ -32,33 +32,27 @@ export default class SFormValidateFeatureInterface extends __SInterface {
                 description:
                     'Specify when to trigger a validation. Can be "change","submit","enter" and/or "reset"',
                 type: 'Array<String>',
-                values: ['change', 'submit', 'enter', 'reset'],
-                default: ['change', 'submit', 'enter', 'reset'],
+                values: ['keyup', 'change', 'submit', 'enter', 'reset'],
+                default: ['keyup', 'change', 'submit', 'enter', 'reset'],
             },
             wrap: {
                 description:
                     'Specify if you want to wrap your s-form-validate element when theres an error',
                 type: 'Boolean',
-                default: true,
+                default: false,
             },
             errorClass: {
                 description: 'Specify the class to apply when theres an error',
                 type: 'String',
                 default:
-                    's-form-validate s-form-validate--error s-color--error',
-            },
-            errorMessageClass: {
-                description:
-                    'Specify the class to apply on the injected error message container',
-                type: 'String',
-                default: 's-form-validate__error-message',
+                    's-form-validate--error s-color--error',
             },
             validClass: {
                 description:
                     'Specify the class to apply on your s-form-validate element when validation is passed successfully',
                 type: 'String',
                 default:
-                    's-form-validate s-form-validate--valid s-color--success',
+                    's-form-validate--valid s-color--success',
             },
             customValidations: {
                 description:

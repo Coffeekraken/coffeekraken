@@ -38,45 +38,44 @@ $metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas
     <!-- stylesheets -->
     @if ($frontspec->assets && $frontspec->assets->css)
         @foreach ($frontspec->assets->css as $name => $css)
-            @if (!$css->body)
-                @if ($css->raw)
-                    {!! $css->raw !!}
-                @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src))
-                    <link rel="stylesheet" id="{{ $name }}"
-                        href="{{ Sugar\string\replaceTokens($css->src) }}" />
-                @else
-                    <link rel="stylesheet" id="{{ $name }}"
-                        href="/{{ Sugar\string\replaceTokens($css->src) }}" />
-                @endif
+            @if ($css->raw)
+                {!! $css->raw !!}
+            @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src))
+                <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replaceTokens($css->src) }}" />
+            @else
+                <link rel="stylesheet" id="{{ $name }}"
+                    href="/{{ Sugar\string\replaceTokens($css->src) }}" />
             @endif
         @endforeach
     @endif
     <!-- scripts -->
     @if ($frontspec->assets && $frontspec->assets->js)
         @foreach ($frontspec->assets->js as $name => $js)
-            @if (!$js->body)
-                @if ($js->raw)
-                    {!! $js->raw !!}
-                @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
-                    <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
-                                        {{ $js->nomodule ? 'nomodule' : '' }} src="{{ Sugar\string\replaceTokens($js->src) }}">
-                    </script>
-                @else
-                    <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
-                                        {{ $js->nomodule ? 'nomodule' : '' }} src="/{{ Sugar\string\replaceTokens($js->src) }}">
-                    </script>
-                @endif
+            @if ($js->raw)
+                {!! $js->raw !!}
+            @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
+                <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
+                                {{ $js->nomodule ? 'nomodule' : '' }} src="{{ Sugar\string\replaceTokens($js->src) }}">
+                </script>
+            @else
+                <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
+                                {{ $js->nomodule ? 'nomodule' : '' }} src="/{{ Sugar\string\replaceTokens($js->src) }}">
+                </script>
             @endif
         @endforeach
     @endif
-    <!-- @TODO -->
-    <!-- head -->
-    {{-- @if ($frontspec && $frontspec->head)
-    @foreach ($frontspec->head as $id => $raw)
-      <!-- {{ $id }} -->
-      {!! $raw !!}
-    @endforeach
-  @endif --}}
+    <!-- html -->
+    @if ($frontspec->assets && $frontspec->assets->html)
+        @foreach ($frontspec->assets->html as $name => $html)
+            @if ($html->raw)
+                {!! $html->raw !!}
+            @elseif (file_exists(realpath($frontspec->metas->folderPath . '/' . $html->src)))
+                {!! file_get_contents(realpath($frontspec->metas->folderPath . '/' . $html->src)) !!}
+            @else
+                <!-- trying to use the file "{{ $html->src }}" from the frontspec.json but something goes wrong... -->
+            @endif
+        @endforeach
+    @endif
     @yield('head')
 </head>
 
@@ -84,38 +83,6 @@ $metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas
 
     @yield('body')
 
-    <!-- body stylesheets -->
-    @if ($frontspec->assets && $frontspec->assets->css)
-        @foreach ($frontspec->assets->css as $name => $css)
-            @if ($css->body)
-                @if ($css->raw)
-                    {!! $css->raw !!}
-                @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src)) {
-                    <link rel="stylesheet" id="{{ $name }}"
-                        href="{{ Sugar\string\replaceTokens($css->src) }}" />
-                @else
-                    <link rel="stylesheet" id="{{ $name }}"
-                        href="/{{ Sugar\string\replaceTokens($css->src) }}" />
-                @endif
-            @endif
-        @endforeach
-    @endif
-    <!-- body scripts -->
-    @if ($frontspec->assets && $frontspec->assets->js)
-        @foreach ($frontspec->assets->js as $name => $js)
-            @if ($js->body)
-                @if ($js->raw)
-                    {!! $js->raw !!}
-                @elseif (Sugar\is\absolutePath($js->src) || Sugar\is\url($js->src))
-                    <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
-                                        src="{{ Sugar\string\replaceTokens($js->src) }}"></script>
-                @else
-                    <script type="{{ $js->type ? $js->type : 'text/javascript' }}" id="{{ $name }}"
-                                        src="/{{ Sugar\string\replaceTokens($js->src) }}"></script>
-                @endif
-            @endif
-        @endforeach
-    @endif
 </body>
 
 </html>

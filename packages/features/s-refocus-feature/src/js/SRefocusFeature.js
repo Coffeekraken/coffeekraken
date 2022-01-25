@@ -18,7 +18,7 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
  * @support          safari
  * @support          edge
  *
- * @example         html
+ * @example         html            Simple usage
  * <div class="scrollable" s-refocus trigger="event:actual">
  *    <ul>
  *       <li>

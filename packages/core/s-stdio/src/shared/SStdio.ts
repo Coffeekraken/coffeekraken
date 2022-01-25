@@ -1,12 +1,8 @@
 import __SClass, { ISClass } from '@coffeekraken/s-class';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __SEnv from '@coffeekraken/s-env';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 export interface ISStdioCtorSettings {

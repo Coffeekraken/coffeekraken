@@ -24,6 +24,10 @@ export default class SCliFsCopyParamsInterface extends __SInterface {
                 type: 'String',
                 required: true
             },
+            glob: {
+                description: 'Specify a glob pattern to search for files inside the specified src"',
+                type: 'String',
+            },
             dest: {
                 description: 'Specify the destination file/folder',
                 type: 'String',

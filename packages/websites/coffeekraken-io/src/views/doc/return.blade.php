@@ -4,8 +4,8 @@
     </h4>
 
     <header class="s-flex s-bg:main-surface s-radius s-depth:100 s-mbe:20">
-        <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
-            {!! $block->return->description !!}
+        <div class="s-flex-item:grow s-format:text s-tc:accent s-p:30 s-color:complementary">
+            {!! \Sugar\markdown\toHtml($block->return->description) !!}
         </div>
         <div class="s-typo:bold s-p:30 s-tc:info">
             {{ implode($block->return->type, '|') }}

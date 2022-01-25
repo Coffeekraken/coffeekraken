@@ -26,7 +26,7 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 description:
                     "Specify the name that will be assigned to the injected input if you don't provide one yourself",
                 type: 'String',
-                default: 'date',
+                default: 'color',
             },
             value: {
                 description: 'Specify the initial value for your picker',
@@ -51,9 +51,9 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
-            preview: {
+            button: {
                 description:
-                    'Specify if you want to display the preview or not',
+                    'Specify if you want to display the button or not',
                 type: 'Boolean',
                 default: false,
                 physical: true,

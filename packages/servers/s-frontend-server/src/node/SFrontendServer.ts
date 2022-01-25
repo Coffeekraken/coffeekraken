@@ -138,20 +138,20 @@ export default class SFrontendServer extends __SClass {
                     }
                 }
 
-                // if (frontendServerConfig.staticDirs) {
-                //     Object.keys(frontendServerConfig.staticDirs).forEach(
-                //         (dir) => {
-                //             const fsPath = frontendServerConfig.staticDirs[dir];
-                //             emit('log', {
-                //                 value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
-                //                     process.cwd(),
-                //                     fsPath,
-                //                 )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
-                //             });
-                //             express.use(dir, __express.static(fsPath));
-                //         },
-                //     );
-                // }
+                if (frontendServerConfig.staticDirs) {
+                    Object.keys(frontendServerConfig.staticDirs).forEach(
+                        (dir) => {
+                            const fsPath = frontendServerConfig.staticDirs[dir];
+                            emit('log', {
+                                value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
+                                    process.cwd(),
+                                    fsPath,
+                                )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
+                            });
+                            express.use(dir, __express.static(fsPath));
+                        },
+                    );
+                }
 
                 if (frontendServerConfig.proxy) {
                     Object.keys(frontendServerConfig.proxy).forEach(

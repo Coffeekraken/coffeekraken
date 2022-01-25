@@ -16,6 +16,7 @@ import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs
 import __SBench from '@coffeekraken/s-bench';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __SFrontstack, { ISFrontstackAction } from '@coffeekraken/s-frontstack';
 
 export interface ISSugarJsonIncludeSettings {
     package: boolean;
@@ -62,6 +63,7 @@ export interface ISSugarJsonFile {
     recipe?: string;
     cli?: ISSugarJsonFileCli;
     config?: ISSugarJsonFileConfig;
+    frontstack?: Record<string, ISFrontstackAction>
 }
 
 export default class SSugarJson extends __SClass {

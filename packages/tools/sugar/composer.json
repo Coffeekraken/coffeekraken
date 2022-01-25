@@ -4,5 +4,6 @@
       "src/php/autoload.php"
     ]
   },
-  "require": {}
+  "require": {
+  }
 }

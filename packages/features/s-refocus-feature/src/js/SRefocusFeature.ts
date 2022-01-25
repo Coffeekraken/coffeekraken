@@ -27,7 +27,7 @@ export interface ISRefocusFeatureProps {
  * @support          safari
  * @support          edge
  *
- * @example         html
+ * @example         html            Simple usage
  * <div class="scrollable" s-refocus trigger="event:actual">
  *    <ul>
  *       <li>

@@ -6,8 +6,8 @@
 
     <ul class="s-list:ul:accent">
         @foreach ($block->feature as $feature)
-            <li>
-                {!! $feature !!}
+            <li class="s-format:text">
+                {!! \Sugar\markdown\toHtml($feature) !!}
             </li>
         @endforeach
     </ul>

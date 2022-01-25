@@ -9,6 +9,7 @@ import __css from '../css/s-color-picker.css';
 import __SColorPickerComponentInterface from './interface/SColorPickerComponentInterface';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
+import __STheme from '@coffeekraken/s-theme';
 
 export interface ISColorPickerComponentProps {
     name: string;
@@ -41,20 +42,23 @@ export interface ISColorPickerComponentProps {
  * @event           show                Emitted when the color picker is shown
  * @event           hide                Emitted when the color picker is hided
  *
- * @example         html            Simple color
+ * @example         html            Simple input
  * <s-color-picker value="#FABB03" input></s-color-picker>
  * 
- * @example         html            With an input and a preview
- * <s-color-picker value="#5101FF" input preview></s-color-picker>
+ * @example         html            With an input and a button
+ * <s-color-picker value="#5101FF" input button></s-color-picker>
  * 
- * @example         html            Just a preview
- * <s-color-picker value="#55FFFF" preview></s-color-picker>
+ * @example         html            Just a button
+ * <s-color-picker value="#55FFFF" button></s-color-picker>
  * 
  * @example         html            With a custom input
  * <s-color-picker>
- *      <input type="text" placeholder="Enter a color..." />
+ *      <input type="text" placeholder="Enter a color..." value="#FABB03" />
  * </s-color-picker>
  *
+ * @example         html            RTL
+ * <s-color-picker value="#FABB03" input button dir="rtl"></s-color-picker>
+ * 
  * @example         js
  * import { define } from '@coffeekraken/s-color-picker-component';
  * define();
@@ -78,9 +82,9 @@ export default class SColorPicker extends __SLitComponent {
     }
 
     _hasInput = false;
-    _hasPreview = false;
+    _hasButton = false;
     _$input;
-    _$preview;
+    _$button;
     _$root;
 
     constructor() {
@@ -97,18 +101,19 @@ export default class SColorPicker extends __SLitComponent {
 
         this._$input = this.querySelector('input');
         this._hasInput = this._$input !== null;
-        this._$preview = this.querySelector('button');
-        this._hasPreview = this._$preview !== null;
+        this._$button = this.querySelector('button');
+        this._hasButton = this._$button !== null;
 
     }
     async firstUpdated() {
-        await __wait(100);
+        
+        this._$root = this.querySelector(`.${this.componentUtils.className('')}`);
 
         // input
         if (!this._$input) {
             this._$input = this.querySelector('input');
         } else {
-            this.append(this._$input);
+            this._$root.append(this._$input);
         }
         if (!this._$input?.hasAttribute('name')) {
             this._$input?.setAttribute('name', this.props.name);
@@ -120,20 +125,19 @@ export default class SColorPicker extends __SLitComponent {
             this._$input?.setAttribute('autocomplete', 'off');
         }
         
-        // preview
-        if (!this._$preview) {
-            this._$preview = this.querySelector('button');
+        // button
+        if (!this._$button) {
+            this._$button = this.querySelector('button');
         } else {
-            this.append(this._$preview);
+            this._$root.append(this._$button);
+        }
+        if (this._$button) {
+            this._$button.classList.add(
+                this.componentUtils.className('__button'),
+            );
         }
 
-        this._$root = this.querySelector(`.${this.componentUtils.className('')}`);
-
-        // await __whenInteract(this);
-
         const value = this.props.value ?? this._$input?.value ?? '#ff0000';
-
-
         const pickr = __Pickr.create({
             el: this.querySelector(`.${this.componentUtils.className('__picker')}`),
             theme: 'nano', // or 'monolith', or 'nano'
@@ -211,12 +215,20 @@ export default class SColorPicker extends __SLitComponent {
             };
         }
 
+        __STheme.applyColor(value, this._$root);
+
+
         pickr.on('change', () => {
             pickr.applyColor();
             const detail = getPickrState();
+    
             const change = new CustomEvent('change', {
-                detail,
+                bubbles: true,
+                detail
             });
+ 
+            __STheme.applyColor(detail.hex, this._$root);
+
             if (this._$input) {
                 this._$input.value = detail.hex;
             }
@@ -252,6 +264,11 @@ export default class SColorPicker extends __SLitComponent {
                 pickr.setColor(this._$input.value);
             });
         }
+        if (this._$button) {
+            this._$button.addEventListener('focus', () => {
+                pickr.show();
+            });
+        }
 
         const $app = this.querySelector('.pcr-app');
         $app?.classList.add(this.componentUtils.className('__picker'));
@@ -268,6 +285,23 @@ export default class SColorPicker extends __SLitComponent {
                 ` : !this._hasInput ? html`
                     <input type="hidden" name="${this.props.name}" value="${this.props.value}" />
                 ` : ``}
+                ${!this._hasButton && this.props.button
+                    ? html`
+                          <button
+                              onclick="return false"
+                              class="${this.componentUtils.className(
+                                  '__button',
+                                  's-btn',
+                              )}"
+                          >
+                              ${this.props.colorIcon ? html`
+                                ${staticHTML(this.props.colorIcon)}
+                              ` : html`
+                                <i class="s-icon s-icon--calendar"></i>
+                              `}
+                          </button>
+                      `
+                    : ''}
                 <div class="${this.componentUtils.className('__picker')}"></div>
             </div>
         `;

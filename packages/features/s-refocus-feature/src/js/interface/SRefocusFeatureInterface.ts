@@ -24,7 +24,7 @@ export default class SRefocusFeatureInterface extends __SInterface {
         return {
             trigger: {
                 description:
-                    'Specify some trigger(s) on which to refocus a particular element like "event:actual", "anchor", "history", etc...',
+                    'Specify some trigger(s) on which to refocus a particular element like `event:actual`, `anchor`, `history`, etc...',
                 type: {
                     type: 'Array<String>',
                     splitChars: [','],

@@ -14,7 +14,6 @@ import __SPostcssBuilderBuildParamsInterface from './interface/SPostcssBuilderBu
 import __postcss from 'postcss';
 import { PurgeCSS } from 'purgecss';
 import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __resolvePackagePath from '@coffeekraken/sugar/node/esm/resolvePackagePath';
 import __require from '@coffeekraken/sugar/node/esm/require';
 import __SDuration from '@coffeekraken/s-duration';

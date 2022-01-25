@@ -10,48 +10,27 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __packageRoot from './rootPath';
 import __fs from 'fs';
-import __readJson from '../fs/readJson';
-/**
- * @name          json
- * @namespace            node.package
- * @async
- * @type          Function
- * @platform        node
- * @status          beta
- *
- * This function return you the package.json of the current working package into object format
- *
- * @param     {String}      [from=process.cwd()]      The path from where to search upward for the package.json file
- * @return    {Object}          The package.json into object format
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example     js
- * import json from '@coffeekraken/sugar/node/package/json';
- * json();
- *
- * @since       2.0.0
- * @author 		Olivier Bossel<olivier.bossel@gmail.com>
- */
+import __standardizeJson from '../../shared/npm/utils/standardizeJson';
 const __packageJson = {};
-function json(from = process.cwd(), highest = false) {
-    var _a;
-    const prop = highest ? 'highest' : 'default';
-    if ((_a = __packageJson[from]) === null || _a === void 0 ? void 0 : _a[prop]) {
-        return __packageJson[from][prop];
-    }
-    const path = `${__packageRoot(from, highest)}/package.json`;
-    if (!__fs.existsSync(path))
-        return false;
+function json(from = process.cwd(), settings) {
     return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {
-        const json = yield __readJson(path);
-        if (!__packageJson[from])
-            __packageJson[from] = {};
-        __packageJson[from][prop] = json;
+        const finalSettings = Object.assign({ highest: false, standardize: false }, settings !== null && settings !== void 0 ? settings : {});
+        const hash = __objectHash(Object.assign({ from }, finalSettings));
+        if (__packageJson[hash]) {
+            return resolve(__packageJson[hash]);
+        }
+        const path = `${__packageRoot(from, finalSettings.highest)}/package.json`;
+        if (!__fs.existsSync(path))
+            return false;
+        let json = __readJsonSync(path);
+        if (finalSettings.standardize) {
+            json = __standardizeJson(json);
+        }
+        // cache
+        if (!__packageJson[hash])
+            __packageJson[hash] = json;
         resolve(json);
     }));
 }
 export default json;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sYUFBYSxNQUFNLFlBQVksQ0FBQztBQUN2QyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFDdEIsT0FBTyxVQUFVLE1BQU0sZ0JBQWdCLENBQUM7QUFFeEM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBdUJHO0FBQ0gsTUFBTSxhQUFhLEdBQUcsRUFBRSxDQUFDO0FBQ3pCLFNBQVMsSUFBSSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsT0FBTyxHQUFHLEtBQUs7O0lBQy9DLE1BQU0sSUFBSSxHQUFHLE9BQU8sQ0FBQyxDQUFDLENBQUMsU0FBUyxDQUFDLENBQUMsQ0FBQyxTQUFTLENBQUM7SUFFN0MsSUFBSSxNQUFBLGFBQWEsQ0FBQyxJQUFJLENBQUMsMENBQUcsSUFBSSxDQUFDLEVBQUU7UUFDN0IsT0FBTyxhQUFhLENBQUMsSUFBSSxDQUFDLENBQUMsSUFBSSxDQUFDLENBQUM7S0FDcEM7SUFFRCxNQUFNLElBQUksR0FBRyxHQUFHLGFBQWEsQ0FBQyxJQUFJLEVBQUUsT0FBTyxDQUFDLGVBQWUsQ0FBQztJQUM1RCxJQUFJLENBQUMsSUFBSSxDQUFDLFVBQVUsQ0FBQyxJQUFJLENBQUM7UUFBRSxPQUFPLEtBQUssQ0FBQztJQUV6QyxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLEVBQUU7UUFDakMsTUFBTSxJQUFJLEdBQUcsTUFBTSxVQUFVLENBQUMsSUFBSSxDQUFDLENBQUM7UUFFcEMsSUFBSSxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUM7WUFBRSxhQUFhLENBQUMsSUFBSSxDQUFDLEdBQUcsRUFBRSxDQUFDO1FBQ25ELGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxJQUFJLENBQUMsR0FBRyxJQUFJLENBQUM7UUFFakMsT0FBTyxDQUFDLElBQUksQ0FBQyxDQUFDO0lBQ2xCLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDO0FBQ0QsZUFBZSxJQUFJLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoianNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYzs7Ozs7Ozs7OztBQUVkLE9BQU8sYUFBYSxNQUFNLFlBQVksQ0FBQztBQUN2QyxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUFFdEIsT0FBTyxpQkFBaUIsTUFBTSx3Q0FBd0MsQ0FBQztBQWdDdkUsTUFBTSxhQUFhLEdBQUcsRUFBRSxDQUFDO0FBQ3pCLFNBQVMsSUFBSSxDQUFDLElBQUksR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLEVBQUUsUUFBNEM7SUFFNUUsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxFQUFFO1FBRWpDLE1BQU0sYUFBYSxtQkFDZixPQUFPLEVBQUUsS0FBSyxFQUNkLFdBQVcsRUFBRSxLQUFLLElBQ2YsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNwQixDQUFDO1FBRUYsTUFBTSxJQUFJLEdBQUcsWUFBWSxpQkFDckIsSUFBSSxJQUNELGFBQWEsRUFDbEIsQ0FBQztRQUVILElBQUksYUFBYSxDQUFDLElBQUksQ0FBQyxFQUFFO1lBQ3JCLE9BQU8sT0FBTyxDQUFDLGFBQWEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDO1NBQ3ZDO1FBRUQsTUFBTSxJQUFJLEdBQUcsR0FBRyxhQUFhLENBQUMsSUFBSSxFQUFFLGFBQWEsQ0FBQyxPQUFPLENBQUMsZUFBZSxDQUFDO1FBQzFFLElBQUksQ0FBQyxJQUFJLENBQUMsVUFBVSxDQUFDLElBQUksQ0FBQztZQUFFLE9BQU8sS0FBSyxDQUFDO1FBRXpDLElBQUksSUFBSSxHQUFHLGNBQWMsQ0FBQyxJQUFJLENBQUMsQ0FBQztRQUNoQyxJQUFJLGFBQWEsQ0FBQyxXQUFXLEVBQUU7WUFDM0IsSUFBSSxHQUFHLGlCQUFpQixDQUFDLElBQUksQ0FBQyxDQUFDO1NBQ2xDO1FBRUQsUUFBUTtRQUNSLElBQUksQ0FBQyxhQUFhLENBQUMsSUFBSSxDQUFDO1lBQUUsYUFBYSxDQUFDLElBQUksQ0FBQyxHQUFHLElBQUksQ0FBQztRQUVyRCxPQUFPLENBQUMsSUFBSSxDQUFDLENBQUM7SUFDbEIsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUM7QUFDRCxlQUFlLElBQUksQ0FBQyJ9

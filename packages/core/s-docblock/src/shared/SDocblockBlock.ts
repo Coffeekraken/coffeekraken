@@ -313,7 +313,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             add();
 
             if (this.docblockBlockSettings.renderMarkdown) {
-                __marked.setOptions(this.docblockBlockSettings.markedOptions);
+                __marked.setOptions(this.docblockBlockSettings.markedOptions ?? {});
             }
 
             for (let i = 0; i < Object.keys(docblockObj).length; i++) {
@@ -343,35 +343,31 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
                 }
 
                 if (this.docblockBlockSettings.renderMarkdown) {
-                    if (
-                        finalDocblockObj[prop] instanceof String &&
-                        (<any>finalDocblockObj[prop]).render === true
-                    ) {
-                        finalDocblockObj[prop] = __marked.parseInline(
-                            finalDocblockObj[prop].toString(),
-                        );
-                    } else if (Array.isArray(finalDocblockObj[prop])) {
-                        finalDocblockObj[prop] = finalDocblockObj[prop].map((item) => {
-                            if (
-                                item instanceof String &&
-                                (<any>item).render === true
-                            ) {
-                                // console.log('render', item.toString());
-                                return __marked.parseInline(item.toString());
-                            } else return item;
-                        });
-                    } else if (__isPlainObject(value)) {
-                        __deepMap(finalDocblockObj[prop], ({ prop, value: v }) => {
-                            if (
-                                v instanceof String &&
-                                (<any>v).render === true
-                            ) {
-                                // console.log('VVV', v.toString());
-                                return __marked.parseInline(v.toString());
-                            }
-                            return v;
-                        });
+
+                    function renderMarkdown(data: any): any {
+                        if (
+                            data instanceof String &&
+                            (<any>data).render === true
+                        ) {
+                            return __marked.parseInline(
+                                data.toString(),
+                            );
+                        } else if (Array.isArray(data)) {
+                            return data.map((item) => {
+                                return renderMarkdown(item);
+                            });
+                        } else if (__isPlainObject(data)) {
+                            return __deepMap(data, ({ prop, value: v }) => {
+                                return renderMarkdown(v);
+                            });
+                        } else {
+                            return data;
+                        }
                     }
+
+                    finalDocblockObj[prop] = renderMarkdown(finalDocblockObj[prop]);
+
+                    
                 }
             }
 

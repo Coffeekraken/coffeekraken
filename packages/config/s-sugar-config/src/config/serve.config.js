@@ -15,7 +15,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/img' : '/img',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/img' : '/dist/img',
         },
         js: {
             /**
@@ -29,7 +29,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/js' : '/js',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/js' : '/dist/js',
         },
         css: {
             /**
@@ -43,7 +43,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/css' : '/css',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/css' : '/dist/css',
         },
         icons: {
             /**
@@ -57,7 +57,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/icons' : '/icons',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/icons' : '/dist/icons',
         },
         fonts: {
             /**
@@ -71,8 +71,8 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/fonts' : '/fonts',
+            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/fonts' : '/dist/fonts',
         },
     };
 };
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2VydmUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BQU0sVUFBVSxXQUFXLENBQUMsR0FBRyxFQUFFLFdBQVcsRUFBRSxNQUFNO0lBQ2hELE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUM7QUFFRCxlQUFlLENBQUMsR0FBRyxFQUFFLE1BQU0sRUFBRSxFQUFFO0lBQzNCLE9BQU87UUFDSCxHQUFHLEVBQUU7WUFDRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsR0FBRyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssYUFBYSxDQUFDLENBQUMsQ0FBQyxtQ0FBbUMsQ0FBQyxDQUFDLENBQUMsTUFBTTtTQUNoRjtRQUNELEVBQUUsRUFBRTtZQUNBOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsR0FBRyxDQUFDLEdBQUcsS0FBSyxhQUFhLENBQUMsQ0FBQyxDQUFDLGtDQUFrQyxDQUFDLENBQUMsQ0FBQyxLQUFLO1NBQzlFO1FBQ0QsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHLENBQUMsR0FBRyxLQUFLLGFBQWEsQ0FBQyxDQUFDLENBQUMsbUNBQW1DLENBQUMsQ0FBQyxDQUFDLE1BQU07U0FDaEY7UUFDRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsR0FBRyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssYUFBYSxDQUFDLENBQUMsQ0FBQyxxQ0FBcUMsQ0FBQyxDQUFDLENBQUMsUUFBUTtTQUNwRjtRQUNELEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsR0FBRyxDQUFDLEdBQUcsS0FBSyxhQUFhLENBQUMsQ0FBQyxDQUFDLHFDQUFxQyxDQUFDLENBQUMsQ0FBQyxRQUFRO1NBQ3BGO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2VydmUuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2VydmUuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUVBLE1BQU0sVUFBVSxXQUFXLENBQUMsR0FBRyxFQUFFLFdBQVcsRUFBRSxNQUFNO0lBQ2hELE9BQU8sV0FBVyxDQUFDO0FBQ3ZCLENBQUM7QUFFRCxlQUFlLENBQUMsR0FBRyxFQUFFLE1BQU0sRUFBRSxFQUFFO0lBQzNCLE9BQU87UUFDSCxHQUFHLEVBQUU7WUFDRDs7Ozs7Ozs7OztlQVVHO1lBQ0gsR0FBRyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssYUFBYSxDQUFDLENBQUMsQ0FBQyx3Q0FBd0MsQ0FBQyxDQUFDLENBQUMsV0FBVztTQUMxRjtRQUNELEVBQUUsRUFBRTtZQUNBOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsR0FBRyxDQUFDLEdBQUcsS0FBSyxhQUFhLENBQUMsQ0FBQyxDQUFDLHVDQUF1QyxDQUFDLENBQUMsQ0FBQyxVQUFVO1NBQ3hGO1FBQ0QsR0FBRyxFQUFFO1lBQ0Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHLENBQUMsR0FBRyxLQUFLLGFBQWEsQ0FBQyxDQUFDLENBQUMsd0NBQXdDLENBQUMsQ0FBQyxDQUFDLFdBQVc7U0FDMUY7UUFDRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsR0FBRyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssYUFBYSxDQUFDLENBQUMsQ0FBQywwQ0FBMEMsQ0FBQyxDQUFDLENBQUMsYUFBYTtTQUM5RjtRQUNELEtBQUssRUFBRTtZQUNIOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsR0FBRyxDQUFDLEdBQUcsS0FBSyxhQUFhLENBQUMsQ0FBQyxDQUFDLDBDQUEwQyxDQUFDLENBQUMsQ0FBQyxhQUFhO1NBQzlGO0tBQ0osQ0FBQztBQUNOLENBQUMsQ0FBQyJ9

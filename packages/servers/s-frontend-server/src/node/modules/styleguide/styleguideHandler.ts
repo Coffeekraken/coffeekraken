@@ -64,7 +64,7 @@ export default function styleguide(req, res, settings = {}) {
 
         const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
             docblock: {
-                renderMarkdown: true,
+                renderMarkdown: false,
                 filterByTag: {
                     menu: (value) => {
                         if (!value || typeof value !== 'string') return false;

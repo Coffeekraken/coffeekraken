@@ -10,9 +10,25 @@ class ComposerStaticInit6d5f7c04efd6e67fc4d8d228808f8bc0
         'db355bd73bc9a481b222a1dcc9f915c2' => __DIR__ . '/../..' . '/src/php/autoload.php',
     );
 
+    public static $prefixesPsr0 = array (
+        'P' => 
+        array (
+            'Parsedown' => 
+            array (
+                0 => __DIR__ . '/..' . '/erusev/parsedown',
+            ),
+        ),
+    );
+
+    public static $classMap = array (
+        'Composer\\InstalledVersions' => __DIR__ . '/..' . '/composer/InstalledVersions.php',
+    );
+
     public static function getInitializer(ClassLoader $loader)
     {
         return \Closure::bind(function () use ($loader) {
+            $loader->prefixesPsr0 = ComposerStaticInit6d5f7c04efd6e67fc4d8d228808f8bc0::$prefixesPsr0;
+            $loader->classMap = ComposerStaticInit6d5f7c04efd6e67fc4d8d228808f8bc0::$classMap;
 
         }, null, ClassLoader::class);
     }

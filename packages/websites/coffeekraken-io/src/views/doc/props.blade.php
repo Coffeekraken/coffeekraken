@@ -19,7 +19,7 @@
                         </div>
                     @endif
                 </header>
-                <p class="s-typo:p s-p:30">{!! $prop->description !!}</p>
+                <p class="s-typo:p s-format:text s-p:30">{!! \Sugar\markdown\toHtml($prop->description) !!}</p>
             </li>
         @endforeach
     </ol>

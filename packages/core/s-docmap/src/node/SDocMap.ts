@@ -702,11 +702,11 @@ class SDocMap extends __SClass implements ISDocMap {
                     });
 
                     const globs: string[] = [
-                        `${packageRoot}/node_modules/**{0,2}/docmap.json`,
+                        `${packageRoot}/node_modules/*{0,2}/docmap.json`,
                     ];
                     if (packageRoot !== packageMonoRoot) {
                         globs.push(
-                            `${packageMonoRoot}/node_modules/**{0,2}/docmap.json`,
+                            `${packageMonoRoot}/node_modules/*{0,2}/docmap.json`,
                         );
                     }
 
@@ -768,6 +768,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const docblocksInstance = new __SDocblock(content, {
                         docblock: {
+                            renderMarkdown: false,
                             filepath: (<__SFile>file).path,
                         },
                     });
@@ -1151,7 +1152,11 @@ class SDocMap extends __SClass implements ISDocMap {
                     let content = __fs.readFileSync(path, 'utf8').toString();
                     if (docmapObj.type === 'markdown') {
                     } else {
-                        const docblock = new __SDocblock(content);
+                        const docblock = new __SDocblock(content, {
+                            docblock: {
+                                renderMarkdown: false,
+                            }
+                        });
                         content = docblock.toString();
                     }
                     __writeFileSync(

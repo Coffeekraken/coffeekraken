@@ -13,7 +13,7 @@
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:button"></i>
                         <p class="s-p">Buttons</p>
                     </div>
@@ -22,7 +22,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:dropdown"></i>
                         <p class="s-p">Dropdowns</p>
                     </div>
@@ -30,7 +30,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:tooltip"></i>
                         <p class="s-p">Tooltips</p>
                     </div>
@@ -39,7 +39,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:switch"></i>
                         <p class="s-p">Switches</p>
                     </div>
@@ -47,7 +47,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:datepicker"></i>
                         <p class="s-p">Date Picker</p>
                     </div>
@@ -56,7 +56,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:autocomplete"></i>
                         <p class="s-p">Filtrable Input</p>
                     </div>
@@ -64,7 +64,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:copy"></i>
                         <p class="s-p">Clipbord copy</p>
                     </div>
@@ -73,7 +73,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:range"></i>
                         <p class="s-p">Range Input</p>
                     </div>
@@ -81,7 +81,7 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent" style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:code"></i>
                         <p class="s-p">Code Example</p>
                     </div>
@@ -90,7 +90,7 @@
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/icon-card/test.gif);">
                         <i class="s-icon:avatar"></i>
                         <p class="s-p">Avatar</p>
                     </div>

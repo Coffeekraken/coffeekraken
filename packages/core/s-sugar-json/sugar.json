@@ -9,13 +9,18 @@
     },
     "cli": [
         {
-            "stack": "json",
+            "stack": "sugarJson",
             "description": "Sugar.json processes like update, etc...",
             "actions": {
                 "list": {
                     "description": "Search and list for sugar.json files",
                     "interface": "./src/node/list/interface/SSugarJsonListParamsInterface.js",
                     "process": "./src/cli/list.cli.js"
+                },
+                "exec": {
+                    "description": "Execute the actions defined in the sugar.json file",
+                    "interface": "./src/node/exec/interface/SSugarJsonExecParamsInterface.js",
+                    "process": "./src/cli/exec.cli.js"
                 }
             }
         }

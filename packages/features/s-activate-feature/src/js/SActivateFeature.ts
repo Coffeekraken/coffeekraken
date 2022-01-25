@@ -24,15 +24,15 @@ export interface ISActivateFeatureProps {
  * @platform        js
  * @status          beta
  *
- * This feature allows you to activate some elements depending on triggers like "click", "mouseover", "mouseout", "anchor", etc...
- * To be explicit, you can apply this feature on a link tag with the href attribute "#something", and on click,
+ * This feature allows you to activate some elements depending on triggers like `click`, `mouseover`, `mouseout`, `anchor`, etc...
+ * To be explicit, you can apply this feature on a link tag with the href attribute `#something`, and on click,
  * the DOM element that has the id "something" will get the "active" class applied.
  *
  * @feature          Take the `href` attribute as target
- * @feature          Allows to "group" some element for tabs behavior, etc...
+ * @feature          Allows to `group` some element for tabs behavior, etc...
  * @feature         Support the `toggle` mode
  * @feature          Support the `history` mode
- * @feature         Allows you to save state to restore them on page load
+ * @feature         Allows you to `save state` to `restore them` on page load
  * @feature         Available trigger: `click`, `mouseover`, `mouseout`, `anchor` and more to come
  *
  * @support          chromium
@@ -40,18 +40,31 @@ export interface ISActivateFeatureProps {
  * @support          safari
  * @support          edge
  *
- * @example         html
- * <a href="#my-element">Click me!</a>
- * <div id="my-element">I will be activated on click</a>
+ * @example         html            Simple click activation
+ * <a class="s-btn s-color:accent" href="#my-element" s-activate>Click me!</a>
+ * <div id="my-element">I will be activated on click</div>
+ * <style>
+ *    #my-element.active { background: green; }
+ * </style>
  *
- * <a href="#tab1" group="my-tabs">Tab 1</a>
- * <a href="#tab2" group="my-tabs">Tab 1</a>
- * <a href="#tab3" group="my-tabs">Tab 1</a>
- *
- * <div id="tab1">Tab 1 content</div>
- * <div id="tab2">Tab 1 content</div>
- * <div id="tab3">Tab 1 content</div>
- *
+ * @example         html              Grouping
+ * <a href="#my-grouped-element-1" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <a href="#my-grouped-element-2" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <a href="#my-grouped-element-3" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <div id="my-grouped-element-1">Content #1</div>
+ * <div id="my-grouped-element-2">Content #2</div>
+ * <div id="my-grouped-element-3">Content #3</div>
+ * <style>
+ *    [id^="my-grouped-element-"].active { background: green; }
+ * </style>
+ * 
+ * @example         html            Toggle mode
+ * <a class="s-btn s-color:accent" href="#my-element-toggle" s-activate toggle>Click me!</a>
+ * <div id="my-element-toggle">I will be toggled on click</div>
+ * <style>
+ *    #my-element-toggle.active { background: green; }
+ * </style>
+ * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

@@ -11,7 +11,7 @@
                         {{ $cls->name }}
                     </div>
                 </header>
-                <p class="s-typo:p s-p:30">{!! $cls->description !!}</p>
+                <p class="s-typo:p s-format:text s-p:30">{!! \Sugar\markdown\toHtml($cls->description) !!}</p>
             </li>
         @endforeach
     </ol>

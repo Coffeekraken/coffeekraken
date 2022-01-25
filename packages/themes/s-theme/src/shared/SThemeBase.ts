@@ -8,6 +8,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
 import __objectHash from 'object-hash';
+import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 /**
  * @name            SThemeBase
@@ -113,6 +114,11 @@ export interface ISThemesConfig {
     theme: string;
     cssVariables: string[];
     themes: Record<string, ISThemeConfig>;
+}
+
+export interface ISThemeRemapColorResult {
+    vars: string[];
+    properties: Record<string, number | string>;
 }
 
 export interface ISThemeConfig {
@@ -500,58 +506,85 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static remapCssColorVars(from: string, to: string): string[] {
-        let vars: string[] = [];
+    static remapCssColorVars(from: string, to: string): ISThemeRemapColorResult {
+        const result: ISThemeRemapColorResult = {
+            vars: [],
+            properties: {}
+        };
 
-        const toColorName = to.split('-').slice(0, 1)[0],
-            fromColorName = from.split('-').slice(0, 1)[0];
-        let toColorVariant = to.split('-').pop(),
-            fromColorVariant = from.split('-').pop();
-        if (toColorName === toColorVariant) toColorVariant = undefined;
-        if (fromColorName === fromColorVariant) fromColorVariant = undefined;
+        if (__isColor(to)) {
+            const color = new __SColor(to);
+            result.vars = [
+                `--s-theme-color-${from}-h: ${color.h}`,
+                `--s-theme-color-${from}-s: ${color.s}`,
+                `--s-theme-color-${from}-l: ${color.l}`,
+                `--s-theme-color-${from}-a: ${color.a}`
+            ];
+            result.properties[`--s-theme-color-${from}-h`] = color.h;
+            result.properties[`--s-theme-color-${from}-s`] = color.s;
+            result.properties[`--s-theme-color-${from}-l`] = color.l;
+            result.properties[`--s-theme-color-${from}-a`] = color.a;
+        } else {
 
-        let fromVariable = `--s-theme-color-${fromColorName}`,
-            toVariable = `--s-theme-color-${toColorName}`;
+            const toColorName = to.split('-').slice(0, 1)[0],
+                fromColorName = from.split('-').slice(0, 1)[0];
+            let toColorVariant = to.split('-').pop(),
+                fromColorVariant = from.split('-').pop();
+            if (toColorName === toColorVariant) toColorVariant = undefined;
+            if (fromColorName === fromColorVariant) fromColorVariant = undefined;
 
-        this.getTheme().loopOnColors((colorObj) => {
-            if (colorObj.name === toColorName) {
-                if (toColorVariant) {
-                    if (colorObj.variant === toColorVariant) {
-                        vars.push(
-                            `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                        );
-                    }
-                } else {
-                    if (
-                        !colorObj.state &&
-                        !colorObj.variant &&
-                        colorObj.value.color
-                    ) {
-                        vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
-                        vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
-                        vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
-                    } else if (!colorObj.value.color) {
-                        vars.push(
-                            `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-${colorObj.variant}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                        );
+            let fromVariable = `--s-theme-color-${fromColorName}`,
+                toVariable = `--s-theme-color-${toColorName}`;
+
+            this.getTheme().loopOnColors((colorObj) => {
+                if (colorObj.name === toColorName) {
+                    if (toColorVariant) {
+                        if (colorObj.variant === toColorVariant) {
+                            result.vars.push(
+                                `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                        }
+                    } else {
+                        if (
+                            !colorObj.state &&
+                            !colorObj.variant &&
+                            colorObj.value.color
+                        ) {
+                            result.vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
+                            result.properties[`${fromVariable}-h`] = `var(${toVariable}-h)`;
+                            result.vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
+                            result.properties[`${fromVariable}-s`] = `var(${toVariable}-s)`;
+                            result.vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
+                            result.properties[`${fromVariable}-l`] = `var(${toVariable}-l)`;
+                        } else if (!colorObj.value.color) {
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-${colorObj.variant}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.variant}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-${colorObj.variant}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        return vars;
+        return result;
     }
 
     /**
@@ -681,6 +714,27 @@ export default class SThemeBase extends __SClass {
     static config(dotPath: string, theme?: string, variant?: string): any {
         const instance = this.getTheme(theme, variant);
         return instance.config(dotPath);
+    }
+
+    /**
+     * @name            applyColor
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to apply a color on a particular context
+     *
+     * @param       {String}        color               The color name/code you want to apply
+     * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static applyColor(color: string,  $context = document.body): void {
+        const vars = this.remapCssColorVars('current', color);
+        for (let [key, value] of Object.entries(vars.properties)) {
+            // @ts-ignore
+            $context.style.setProperty(key, value);
+        }
     }
 
     /**

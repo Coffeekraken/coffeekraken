@@ -307,6 +307,18 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    /**
+                     * @name            faviconBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.faviconBuild]
+                     *
+                     * Specify the recipe build stack faviconBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    faviconBuild: '[config.frontstack.actions.faviconBuild]'
                 },
             },
         },

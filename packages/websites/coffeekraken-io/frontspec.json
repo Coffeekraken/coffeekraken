@@ -22,21 +22,21 @@
                 "id": "dev",
                 "type": "module",
                 "defer": true,
-                "src": "http://localhost:3000/js/index.ts",
+                "src": "http://localhost:3000/src/js/index.ts",
                 "env": "development"
             },
             "module": {
                 "id": "module",
                 "type": "module",
                 "defer": true,
-                "src": "/js/module.es.js",
+                "src": "/dist/js/module.es.js",
                 "env": "production"
             },
             "main": {
                 "id": "main",
                 "nomodule": true,
                 "defer": true,
-                "src": "/js/index.iife.js",
+                "src": "/dist/js/index.iife.js",
                 "env": "production"
             }
         },
@@ -44,14 +44,20 @@
             "dev": {
                 "id": "dev",
                 "defer": true,
-                "src": "http://localhost:3000/css/index.css",
+                "src": "http://localhost:3000/src/css/index.css",
                 "env": "development"
             },
             "main": {
                 "id": "main",
                 "defer": true,
-                "src": "/css/index.css",
+                "src": "/dist/css/index.css",
                 "env": "production"
+            }
+        },
+        "html": {
+            "manifest": {
+                "id": "manifest",
+                "src": "./dist/favicon/favicon.html"
             }
         }
     },

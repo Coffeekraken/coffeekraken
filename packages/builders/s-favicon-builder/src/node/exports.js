@@ -1,0 +1,4 @@
+import __SFaviconBuilder from './SFaviconBuilder';
+export * from './SFaviconBuilder';
+export default __SFaviconBuilder;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxpQkFBaUIsTUFBTSxtQkFBbUIsQ0FBQztBQUNsRCxjQUFjLG1CQUFtQixDQUFDO0FBQ2xDLGVBQWUsaUJBQWlCLENBQUMifQ==

@@ -19,7 +19,7 @@
                         {{ \Sugar\string\toString($param->type->type ? $param->type->type : $param->type) }}
                     </div>
                 </header>
-                <p class="s-typo:p s-p:30">{!! $param->description !!}</p>
+                <p class="s-typo:p s-format:text s-p:30">{!! \Sugar\markdown\toHtml($param->description) !!}</p>
             </li>
         @endforeach
     </ol>

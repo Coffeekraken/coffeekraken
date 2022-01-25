@@ -5,6 +5,7 @@ import __fs from 'fs';
 import __path from 'path';
 import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 import __fileName from '@coffeekraken/sugar/node/fs/filename';
+import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 
 /**
  * @name              interface
@@ -33,7 +34,6 @@ export default async function interfaceTag(data, blockSettings) {
     if (data.value === true) {
         stringArray = [__fileName(blockSettings.filepath),'default'];
         if (blockSettings.filepath.match(/\.ts$/)) {
-            console.log('RE');
             return;
         }
     } else {
@@ -51,5 +51,19 @@ export default async function interfaceTag(data, blockSettings) {
     if (!potentialPath) return;
 
     const int = await import(potentialPath);
-    return int[importName].toObject();
+
+
+    const interfaceObj = int[importName].toObject();
+
+    interfaceObj.definition = __deepMap(interfaceObj.definition, ({object, prop, value}) => {
+        if (typeof value === 'string') {
+            const newValue = new String(value);
+            // @ts-ignore
+            newValue.render = true;
+            return newValue;
+        }
+        return value;
+    });
+
+    return interfaceObj;
 }

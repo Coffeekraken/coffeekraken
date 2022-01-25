@@ -1,27 +1,20 @@
-.s-form-validate {
-    &.s-form-validate--error {
-        &[s-form-validate-error-container] > *:first-child {
-            margin-bottom: 0 !important;
-        }
-    }
-
-    .s-form-validate__error-message {
-        text-align: end;
-        color: sugar.color(error);
-        overflow: hidden;
-        max-height: 0;
+@keyframes error-message-appear {
+    from {
         line-height: 1;
-        margin: 0;
-        animation: 0.2s error-message-appear sugar.theme(easing.default) forwards;
+        max-height: 0;
     }
-    @keyframes error-message-appear {
-        from {
-            line-height: 1;
-            max-height: 0;
-        }
-        to {
-            max-height: 2em;
-            line-height: 2;
-        }
+    to {
+        max-height: 2em;
+        line-height: 2;
     }
+}
+
+.s-form-validate + .s-form-validate-error-message {
+    text-align: end;
+    color: sugar.color(error);
+    overflow: hidden;
+    max-height: 0;
+    line-height: 1;
+    margin: 0;
+    animation: 0.2s error-message-appear sugar.theme(easing.default) forwards;
 }

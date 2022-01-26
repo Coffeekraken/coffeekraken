@@ -71,9 +71,6 @@
         @include('pages.homepage.features.partials.sugar')
         @include('pages.homepage.features.partials.development')
 
-        <section id="features-documentation">
-            <h1>Documentation at your fingertips</h1>
-        </section>
     </div>
 
 </div>

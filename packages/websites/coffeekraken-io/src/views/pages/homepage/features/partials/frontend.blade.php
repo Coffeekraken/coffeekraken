@@ -12,7 +12,7 @@
 
         <div class="s-layout:112:gutter-x:gutter-between s-pb:50">
             <div>
-                <div class="s-mbe:30">
+                <div class="s-mbe:30 s-mis:-50">
                     @include('generic.code.example', ['examples' => [
                     'css' => '/* import some globs */
                     @sugar.import(\'../views/**/*.css\');
@@ -97,7 +97,7 @@
             </div>
             <div>
 
-                <div class="s-mbe:30">
+                <div class="s-mbe:30 s-mie:-50">
                     @include('generic.code.example', ['examples' => [
                     'css' => "/* simple color management */
                     h1 {
@@ -118,7 +118,7 @@
 
         <div class="s-layout:112:gutter-x:gutter-between s-pb:50">
             <div>
-                <div class="s-mbe:30">
+                <div class="s-mbe:30 s-mis:-50">
                     @include('generic.code.example', ['examples' => [
                     'css' => '/* defining some layouts */
                     .my-layout-1 {

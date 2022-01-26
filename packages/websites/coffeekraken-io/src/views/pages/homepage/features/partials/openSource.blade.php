@@ -1,7 +1,7 @@
 <section id="features-opensource" class="s-pb:50">
     <div class="s-container">
 
-        <div class="__box s-bg:main-surface s-radius s-p:50 s-depth:100">
+        <div class="__box s-bg:main-surface s-radius s-p:50 s-depth:100 s-mi:-50">
 
             <div class="s-layout:1112 s-position:relative">
                 <div class="s-depth:text">
@@ -19,8 +19,10 @@
                         <i class="s-icon:github"></i> Join us on Github
                     </a>
                 </div>
-                <div class="s-text:center s-pbs:50">
-                    <i class="s-icon:opensource s-tc:main-surface s-depth:text:100" style="font-size:200px"></i>
+                <div class="s-text:center">
+                    <img class="__illustration" src="/dist/img/illustrations/opensource.png"
+                        alt="Coffeekraken open source" title="Coffeekraken believe in open source" />
+                    {{-- <i class="s-icon:opensource s-tc:main-surface s-depth:text:100" style="font-size:200px"></i> --}}
                 </div>
             </div>
 

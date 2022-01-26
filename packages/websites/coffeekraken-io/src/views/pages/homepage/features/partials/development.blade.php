@@ -5,63 +5,203 @@
             <div class="s-pb:100">
                 <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
                 <p class="s-typo:lead s-mbe:30">
-                    Coffeekraken has a <span class="s-tc:accent">built-in development stack environment</span> that
-                    you can use
-                    to:
+                    Coffeekraken has a <span class="s-tc:complementary">built-in</span> <span
+                        class="s-tc:accent">development stack environment</span> make to simplify and speed up your
+                    process.
                 </p>
-                <ul class="s-list:ol s-mbe:40">
-                    <li>Simplify and speed up your process</li>
-                    <li>Use the power of the <a href="/doc/@coffeekraken/sugar/README" title="Sugar toolkit">Sugar
-                            toolkit</a></li>
-                    <li>Make use of the tools you want like <a class="s-typo:a"
-                            href="https://www.npmjs.com/package/vite" title="Vite JS" target="_blanl">Vite</a>, <a
-                            class="s-typo:a" href="https://www.npmjs.com/package/postcss" title="PostCSS"
-                            target="_blank">PostCSS</a>, <a class="s-typo:a"
-                            href="https://www.npmjs.com/package/typescript" title="Typescript"
-                            target="_blank">Typescript</a>, etc...</li>
-                    <li>Don't worry about build and compilation processes</li>
-                    <li>Automatically generate documentation from your docblocks</li>
-                    <li>An a lot more to discover...</li>
-                </ul>
-                <a class="s-btn s-color:accent" href="doc/get-started/get-started" title="Get started!">
-                    Get started!
-                </a>
+                <p class="s-typo:p">
+                    Our development stack take care of a lot of things for your like the assets compilation, images
+                    optimisation/generation, template engines implementation (blade, twig) as well as full production
+                    ready build process so <span class="s-tc:accent">you can concentrate on your code</span>. <span
+                        class="s-tc:complementary">We have your back</span>!
+                </p>
             </div>
 
-            <div class="s-pb:100 s-vr">
-                <img src="/dist/img/features-development-logos.svg" class="s-mi:auto s-display:block" />
+            <div>
+                <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
+                    title="Sugar stack" />
+                <img class="__illustration s-when:dark" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
+                    title="Sugar stack" />
+            </div>
+        </div>
 
-                <div class="s-mbs:50">
+        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    <span class="s-tc:accent">Speed up</span><br />your process
+                </h5>
+                <p class="s-typo:p ">
+                    Create projects using our totally customizable <span class="s-typo:code">recipes</span> that let
+                    you start as soom as possible with production grade ready capabilities.
+                </p>
+            </div>
+            <div>
+                <div class="s-mie:-50">
                     @include('generic.code.example', ['examples' => [
-                    'bash' => '# Install sugar globally
-                    npm i @coffeekraken/sugar -g
+                    'bash' => '# Install cli globally
+                    npm i @coffeekraken/cli -g
                     # Init your project using the default "recipe"
-                    sugar init my-cool-project
+                    sugar new
                     # Launch your development environment
-                    sugar start
+                    sugar dev
                     # ...start working... I know I know...'
                     ]])
                 </div>
-
             </div>
         </div>
 
         <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
-
             <div>
-
-                <div class="s-mbs:30 s-mbe:30">
+                <div class="s-mis:-50">
                     @include('generic.code.example', ['examples' => [
-                    'bash' => '# Init a Sugar step by step process
-                    sugar
-                    # Init a default template based website project
-                    sugar init --recipe default
-                    # Init a RiotJs based webcomponent
-                    sugar init --recipe riotComponent'
+                    'css' => '.my-element {
+                    background: sugar.color(accent);
+
+                    @sugar.media(mobile) {
+                    background: sugar.color(complementary);
+                    }
+                    }',
+                    'js' => '
+                    import __querySelectorLive from \'@coffeekraken/sugar/js/dom/query/querySelectorLive\';
+                    __querySelectorLive(\'.my-element\', ($elm) => {
+                    // do something with your element
+                    });
+                    '
                     ]])
                 </div>
+            </div>
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
+                </h5>
+                <p class="s-typo:p ">
+                    Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
+                        class="s-typo:code">js/ts</span> and <span class="s-typo:code">node</span> development
+                    experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
+                    and maintainable css!
+                </p>
+            </div>
+        </div>
 
-                <ul class="__recipes-grid">
+        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    Development<br /><span class="s-tc:accent">server</span>
+                </h5>
+                <p class="s-typo:p ">
+                    Start working as soon as possible with our development server that will gives you the power of the
+                    <span class="s-typo:code">live assets compilation</span> as well as the possibility for you to
+                    write your views using technologies
+                    like <span class="s-typo:code">blade</span>, <span class="s-typo:code">twig</span>, and even
+                    more to come...
+                </p>
+            </div>
+            <div>
+                <div>
+                    @include('generic.code.example', ['examples' => [
+                    'bash' => '# launch the development stack
+                    sugar dev'
+                    ]])
+                </div>
+            </div>
+        </div>
+
+        <div class="s-layout:123:gutter-x:gutter-between s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50">
+            <div>
+                <h5 class="s-typo:h5 s-mbe:30">
+                    Under<br />
+                    <span class="s-tc:complementary">the hood</span>
+                </h5>
+                <p class="s-typo:p ">
+                    Our development server strategy is to make use of <span class="s-typo:code">two different
+                        servers</span>. See aside the explaination
+                    of this...
+                </p>
+            </div>
+            <div>
+                <h5 class="s-typo:h5 s-mbe:30">
+                    <span class="s-tc:accent">ViteJS</span><br />server
+                </h5>
+                <p class="s-typo:p ">
+                    The ViteJs development server is used for the <span class="s-typo:code">js/ts</span> and <span
+                        class="s-typo:code">css</span> assets.
+                    <br />
+                    This gives us the power of live compilation and speed up considerably our workflow.
+                </p>
+            </div>
+            <div>
+                <h5 class="s-typo:h5 s-mbe:30">
+                    <span class="s-tc:complementary">Internal</span><br />server
+                </h5>
+                <p class="s-typo:p ">
+                    Our internal server based on <span class="s-typo:code">Express</span> is used to serve all the
+                    rest like <span class="s-typo:code">views</span> (blade and twig for now), static assets like
+                    images, json, etc...
+                </p>
+            </div>
+        </div>
+
+        <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
+            <div>
+                <div>
+                    @include('generic.code.example', ['examples' => [
+                    'bash' => '# launch the build process
+                    sugar build'
+                    ]])
+                </div>
+            </div>
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    <span class="s-tc:accent">Build</span><br />for production
+                </h5>
+                <p class="s-typo:p ">
+                    Generate all the needed assets for production like bundling your <span
+                        class="s-typo:code">css</span> and <span class="s-typo:code">javascript</span>, as well as
+                    <span class="s-tc:accent">compressing your images</span>, <span
+                        class="s-tc:complementary">generating multiple resolutions for them</span> if needed, generating
+                    favicons,
+                    etc...
+                </p>
+            </div>
+        </div>
+
+        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+            <div>
+                <h4 class="s-typo:h4 s-mbe:30">
+                    Built-in<br /><span class="s-tc:accent">recipes</span>
+                </h4>
+                <p class="s-typo:lead s-mbe:30">
+                    <span class="s-tc:accent">Recipe</span> is our the term to define <span
+                        class="s-tc:complementary">project template</span>.
+                </p>
+                <p class="s-typo:p s-mbe:30">
+                    You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each
+                    recipe comes with the <span class="s-tc:accent">development environment</span>, <span
+                        class="s-tc:complementary">the production testing environment</span> and <span
+                        class="s-tc:accent">the full production build process</span>.
+                </p>
+                {{-- <a class="s-btn s-color:accent" href="/doc/recipes/what-are-recipes" title="What are recipes?">
+                    More on recipes!
+                </a> --}}
+            </div>
+            <div>
+                <ul class="__recipes-grid s-mbe:30">
+                    <li>
+                        <a href="/doc/recipes/built-in/default" title="">
+                            <div class="icon-card s-color:accent">
+                                <i class="s-icon:brand-coffeekraken"></i>
+                                <p class="s-p">Default (generic)</p>
+                            </div>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/doc/recipes/built-in/litElement" title="">
+                            <div class="icon-card s-color:complementary">
+                                <i class="s-icon:brand-lit"></i>
+                                <p class="s-p">LitElement</p>
+                            </div>
+                        </a>
+                    </li>
                     <li>
                         <a href="/doc/recipes/built-in/default" title="">
                             <div class="icon-card s-color:accent">
@@ -80,25 +220,65 @@
                     </li>
                 </ul>
 
-            </div>
-            <div>
-                <h4 class="s-typo:h3 s-mbe:30">
-                    Built-in <span class="s-tc:accent">recipes</span>
-                </h4>
-                <p class="s-typo:lead s-mbe:30">
-                    <span class="s-tc:accent">Recipe</span> is the term used by Coffeekraken to define <span
-                        class="s-tc:accent">project template</span>.
-                </p>
-                <p class="s-typo:p s-mbe:30">
-                    You can check bellow the build-in and official Coffeekraken recipes available and ready to use. Each
-                    recipe comes with the <span class="s-tc:accent">development environment</span>, <span
-                        class="s-tc:complementary">the production testing environment</span> and <span
-                        class="s-tc:accent">the full production build process</span>.
-                </p>
-                <a class="s-btn s-color:accent" href="/doc/recipes/what-are-recipes" title="What are recipes?">
-                    More on recipes!
-                </a>
+                <div>
+                    @include('generic.code.example', ['examples' => [
+                    'bash' => '# Create a project using sugar step by step process
+                    sugar new'
+                    ]])
+                </div>
+
             </div>
         </div>
+
+        <div class="s-text:center s-pbs:50">
+            <p class="s-typo:lead s-mi:auto s-mbe:30">
+
+            </p>
+        </div>
+
+        <div class="s-layout:123:gutter-x:gutter-between s-pb:50">
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    <span class="s-tc:accent">Well known</span><br /> technologies
+                </h5>
+                <p class="s-typo:p ">
+                    Under the hood, our stack make uses of some AMAZING packages like <a href="https://vitejs.dev"
+                        target="_blank" class="s-typo:a">ViteJs</a>, <a href="https://postcss.org/"
+                        target="_blank" class="s-typo:a">Postcss</a>, and more to discover <a
+                        class="s-typo:a" href="/doc/dependencies">on our dependencies page</a>.
+                    This mean that all of the configurations for these packages are well known and easy to override.
+                </p>
+            </div>
+            <div>
+                <h5 class="s-typo:h4 s-mbe:30">
+                    <span class="s-tc:accent">Template</span><br />languages
+                </h5>
+                <p class="s-typo:p ">
+                    Under the hood, our stack make uses of some AMAZING packages like <a href="https://vitejs.dev"
+                        target="_blank" class="s-typo:a">ViteJs</a>, <a href="https://postcss.org/"
+                        target="_blank" class="s-typo:a">Postcss</a>, and more to discover <a
+                        class="s-typo:a" href="/doc/dependencies">on our dependencies page</a>.
+                    This mean that all of the configurations for these packages are well known and easy to override.
+                </p>
+            </div>
+            <div>
+                <img class="__illustration" src="/dist/img/illustrations/opensource.png" alt="Coffeekraken open source"
+                    title="Coffeekraken believe in open source" />
+            </div>
+        </div>
+
+        <div class="s-text:center s-pbs:50">
+            <p class="s-typo:lead s-mi:auto s-mbe:30">
+                This is <span class="s-tc:complementary">just a sneak peak</span> of what you can leverage in the sugar
+                toolkit.<br>
+                Don't be afraid, as usual you can take from it only what you need and <span
+                    class="s-tc:accent">learn
+                    the rest step by step</span>.
+            </p>
+            <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
+                Discover all of what sugar has to offer!
+            </a>
+        </div>
+
     </div>
 </section>

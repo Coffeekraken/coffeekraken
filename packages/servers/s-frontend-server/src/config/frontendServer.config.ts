@@ -58,8 +58,8 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         staticDirs: {
-            '/dist': `[config.storage.dist.rootDir]`,
-            '/src': `[config.storage.src.rootDir]`,
+            '/dist': `[config.storage.src.rootDir]`,
+            // '/src': `[config.storage.src.rootDir]`,
         },
 
         /**

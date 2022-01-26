@@ -376,6 +376,7 @@ export default function ({
    .${clsMarginLeft.replace(':', '--')} {
         margin-inline-start: calc(sugar.margin(${spaceName}) * -1) !important;
    }`);
+   
         const clsMarginRight = `s-mie:-${spaceName}`;
         vars.comment(
             () => `/**

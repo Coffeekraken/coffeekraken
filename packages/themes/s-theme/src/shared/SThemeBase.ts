@@ -491,7 +491,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name                remapCssColorVars
+     * @name                remapCssColor
      * @type                Function
      * @status              beta
      * @static
@@ -506,7 +506,7 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static remapCssColorVars(from: string, to: string): ISThemeRemapColorResult {
+    static remapCssColor(from: string, to: string): ISThemeRemapColorResult {
         const result: ISThemeRemapColorResult = {
             vars: [],
             properties: {}
@@ -730,7 +730,7 @@ export default class SThemeBase extends __SClass {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static applyColor(color: string,  $context = document.body): void {
-        const vars = this.remapCssColorVars('current', color);
+        const vars = this.remapCssColor('current', color);
         for (let [key, value] of Object.entries(vars.properties)) {
             // @ts-ignore
             $context.style.setProperty(key, value);

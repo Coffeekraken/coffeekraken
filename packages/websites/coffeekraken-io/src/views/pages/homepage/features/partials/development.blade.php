@@ -1,6 +1,6 @@
 <section id="features-development" class="s-pbe:100">
     <div class="s-container">
-        <div class="s-layout:122:gutter-x:gutter-between">
+        <div class="s-layout:12:gap-x:gap-between">
 
             <div class="s-pb:100">
                 <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
@@ -25,7 +25,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
@@ -50,7 +50,7 @@
             </div>
         </div>
 
-        <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
+        <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
             <div>
                 <div class="s-mis:-50">
                     @include('generic.code.example', ['examples' => [
@@ -83,7 +83,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
@@ -106,7 +106,7 @@
             </div>
         </div>
 
-        <div class="s-layout:123:gutter-x:gutter-between s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50">
+        <div class="s-layout:123:gap-x:gap-between s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50">
             <div>
                 <h5 class="s-typo:h5 s-mbe:30">
                     Under<br />
@@ -141,7 +141,7 @@
             </div>
         </div>
 
-        <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
+        <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
             <div>
                 <div>
                     @include('generic.code.example', ['examples' => [
@@ -165,7 +165,7 @@
             </div>
         </div>
 
-        <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
             <div>
                 <h4 class="s-typo:h4 s-mbe:30">
                     Built-in<br /><span class="s-tc:accent">recipes</span>
@@ -236,7 +236,7 @@
             </p>
         </div>
 
-        <div class="s-layout:123:gutter-x:gutter-between s-pb:50">
+        <div class="s-layout:123:gap-x:gap-between s-pb:50">
             <div>
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Well known</span><br /> technologies

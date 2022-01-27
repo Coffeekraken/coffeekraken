@@ -28,6 +28,40 @@
             @endif
         </div>
 
+        <div class="">
+            @php
+                $user = $block->author;
+            @endphp
+
+            <div class="s-tooltip-container">
+                <span class="s-avatar s-scale:20">
+                    <a href="{{ $user->url }}" target="_blank">
+                        <img src="{{ \Sugar\gravatar\url($user->email) }}" alt="{{ $user->name }}" />
+                    </a>
+                </span>
+                @if ($block->contributor)
+                    <div class="s-tooltip:interactive s-color:main">
+                        <div class="s-flex s-gap:10">
+                            @foreach ($block->contributor as $contributor)
+                                <div class="s-tooltip:interactive s-color:main">
+                                    <span class="s-avatar s-scale:20">
+                                        <a href="{{ $contributor->url }}" target="_blank">
+                                            <img src="{{ \Sugar\gravatar\url($contributor->email) }}"
+                                                alt="{{ $contributor->name }}" />
+                                        </a>
+                                    </span>
+                                    <div class="s-tooltip:interactive s-color:main">
+                                        {{ $contributor->name }}
+                                    </div>
+                                </div>
+                            @endforeach
+                        </div>
+                    </div>
+                @endif
+            </div>
+
+        </div>
+
         <div>
             Since&nbsp;&nbsp;<span class="s-typo:bold s-tc:accent">{{ $block->since }}</span>
             &nbsp;&nbsp;&nbsp;<span class="s-tc:main-background">│</span>&nbsp;&nbsp;&nbsp;

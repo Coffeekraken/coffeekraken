@@ -4,7 +4,7 @@
 
         <div class="section-top-background"></div>
 
-        <div class="s-layout:122:gutter-x:gutter-between">
+        <div class="s-layout:122:gap-x:gap-between">
 
             <div>
                 <h3 class="s-typo:h2 s-mbe:30">

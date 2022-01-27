@@ -10,7 +10,7 @@
             with a <span class="s-tc:accent">production ready quality grade</span>. Here's some areas where we can
             help you: </p>
 
-        <div class="s-layout:112:gutter-x:gutter-between s-pb:50">
+        <div class="s-layout:112:gap-x:gap-between s-pb:50">
             <div>
                 <div class="s-mbe:30 s-mis:-50">
                     @include('generic.code.example', ['examples' => [
@@ -37,7 +37,7 @@
                             <span class="s-tc:accent">pleasant</span> again
                         </h4>
                     </div>
-                    <ol class="s-list:ol s-color:accent s-mbe:30">
+                    <ol class="s-list:ol s-color:accent s-mbe:50">
                         <li class="s-typo:p">
                             Powerfull and <span class="s-typo:code">pleasant</span> classnames syntax
                         </li>
@@ -54,19 +54,16 @@
                                 class="s-typo:code">filesystem</span>
                             and more...
                         </li>
-                        {{-- <li class="s-typo:p">
-                            Easy grid layout generation through the <a class="s-typo:a" href="/" title="grid">@sugar.grid</a> PostCSS mixin.
-                        </li> --}}
-                        <li class="s-typo:p">
-                            And more...
-                        </li>
                     </ol>
+                    <a class="s-btn s-color:accent" href="/doc/css/overview" title="Coffeekraken CSS pleasant syntax">
+                        Discover more!
+                    </a>
                 </div>
             </div>
         </div>
 
 
-        <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
+        <div class="s-layout:122:gap-x:gap-between s-pb:50">
             <div>
                 <div class="sticky">
                     <div class="s-flex:align-center">
@@ -76,7 +73,7 @@
                             As tasty as a donut
                         </h4>
                     </div>
-                    <ol class="s-list:ol s-color:accent s-mbe:30">
+                    <ol class="s-list:ol s-color:accent s-mbe:50">
                         <li class="s-typo:p">
                             Easy and Powerfull <span class="s-typo:code">color management</span>
                         </li>
@@ -89,10 +86,10 @@
                         <li class="s-typo:p">
                             Easy <span class="s-typo:code">dark mode</span> support
                         </li>
-                        <li class="s-typo:p">
-                            And more...
-                        </li>
                     </ol>
+                    <a class="s-btn s-color:accent" href="/doc/css/overview" title="Coffeekraken CSS pleasant syntax">
+                        Discover more!
+                    </a>
                 </div>
             </div>
             <div>
@@ -116,7 +113,7 @@
 
         </div>
 
-        <div class="s-layout:112:gutter-x:gutter-between s-pb:50">
+        <div class="s-layout:112:gap-x:gap-between s-pb:50">
             <div>
                 <div class="s-mbe:30 s-mis:-50">
                     @include('generic.code.example', ['examples' => [
@@ -157,7 +154,7 @@
                                 Nice to work with
                             </h4>
                         </div>
-                        <ol class="s-list:ol s-color:accent s-mbe:30">
+                        <ol class="s-list:ol s-color:accent s-mbe:50">
                             <li class="s-typo:p">
                                 <span class="s-typo:code">No more</span> pre-defined columns
                             </li>
@@ -173,12 +170,16 @@
                                 Pre defined layouts as well as full custom capabilities
                             </li>
                         </ol>
+                        <a class="s-btn s-color:accent" href="/doc/css/overview"
+                            title="Coffeekraken CSS pleasant syntax">
+                            Discover more!
+                        </a>
                     </div>
                 </div>
 
             </div>
 
-            {{-- <div class="s-layout:122:gutter-x:gutter-between s-pb:50">
+            {{-- <div class="s-layout:122:gap-x:gap-between s-pb:50">
                 <div>
                     <div class="sticky">
                         <div class="s-flex:align-center">

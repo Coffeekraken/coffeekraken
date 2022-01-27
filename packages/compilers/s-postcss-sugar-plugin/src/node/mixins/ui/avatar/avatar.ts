@@ -79,8 +79,8 @@ export default function ({
             position: relative;
             display: inline-block;
             overflow: hidden;
-            width: 1em;
-            height: 1em;
+            width: sugar.scalable(1em);
+            height: sugar.scalable(1em);
         `);
     }
 

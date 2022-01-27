@@ -23,6 +23,8 @@
                         <div class="__subnav-story" id="subnav-{{ \Sugar\string\idCompliant($item->name) }}">
                             @if ($item->content)
                                 {!! $item->content !!}
+                            @elseif ($item->include)
+                                @include($item->include)
                             @else
                                 <ul>
                                     @foreach ($item as $subItem)

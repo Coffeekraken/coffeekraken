@@ -4,7 +4,7 @@
 
         <div class="section-top-background"></div>
 
-        <div class="s-layout:12:gutter-x:gutter-between">
+        <div class="s-layout:12:gap-x:gap-between">
             <div>
                 <h3 class="s-typo:h3 s-mbe:30">
                     Sugar toolkit
@@ -39,7 +39,7 @@
                 Some example of what <span class="s-tc:accent">Sugar</span> has to offer
             </h4> --}}
 
-            <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
+            <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
                 <div>
                     <div class="s-mis:-50">
                         @include('generic.code.example', ['examples' => [
@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+            <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30">
                         querySelector<span class="s-tc:accent">Live</span>
@@ -93,7 +93,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:112:gutter-x:gutter-between:align-center s-pb:50">
+            <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
                 <div>
                     <div class="s-mis:-50">
                         @include('generic.code.example', ['examples' => [
@@ -117,7 +117,7 @@
                 </div>
             </div>
 
-            <div class="s-layout:122:gutter-x:gutter-between:align-center s-pb:50">
+            <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
                 <div>
                     <h5 class="s-typo:h4 s-mbe:30">
                         is(<span class="s-tc:accent">Mobile</span>,<span class="s-tc:accent">Color</span>,<span

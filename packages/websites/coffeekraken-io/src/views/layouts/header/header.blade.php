@@ -59,15 +59,32 @@
                     
                     $apiMenu = (object) [
                         'name' => 'API',
+                        'search' => (object) [
+                            'name' => 'Search',
+                            'include' => 'generic/header/search-api.blade.php',
+                        ],
                         'config' => (object) [
-                            'name' => 'Config',
+                            'name' => 'Configuration',
+                            'overview' => (object) [
+                                'name' => 'Overview',
+                                'slug' => '/doc/config/overview',
+                            ],
                             'explorer' => (object) [
                                 'name' => 'Config Explorer',
                                 'slug' => '/config/explorer',
                             ],
-                        ],
-                        'components' => (object) [
-                            'name' => 'Components',
+                            'builtin' => (object) [
+                                'name' => 'Built-in Config',
+                                'slug' => 'doc/config/built-in',
+                            ],
+                            'override' => (object) [
+                                'name' => 'Override Config',
+                                'slug' => 'doc/config/override',
+                            ],
+                            'register' => (object) [
+                                'name' => 'Register new Config',
+                                'slug' => 'doc/config/register',
+                            ],
                         ],
                         'cssDiscover' => (object) [
                             'name' => 'Discover (css)',
@@ -91,16 +108,16 @@
                         ],
                     ];
                     
-                    foreach ($docmap->map as $item) {
+                @endphp
+
+                {{-- foreach ($docmap->map as $item) {
                         if ($item->type === 'CustomElement') {
                             $apiMenu->components->{$item->name} = (object) [
                                 'name' => $item->name,
                                 'slug' => '/api/' . $item->namespace,
                             ];
                         }
-                    }
-                    
-                @endphp
+                    } --}}
 
                 @include('layouts.header.partials.menuItem', ['menuItem' => $apiMenu, 'class' => ''])
                 {{-- <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">

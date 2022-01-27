@@ -22,7 +22,7 @@
 
         <section class="s-container markdown">
 
-            <div class="s-layout:1222:gutter-between:gutter-50">
+            <div class="s-layout:1222:gap-between:gap-50">
 
                 <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
 

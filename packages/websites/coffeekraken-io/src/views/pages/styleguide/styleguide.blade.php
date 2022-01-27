@@ -22,7 +22,7 @@
 
         <section class="s-container styleguide">
 
-            <div class="s-layout:12222:gutter-between:gutter-50">
+            <div class="s-layout:12222:gap-between:gap-50">
 
                 <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
 

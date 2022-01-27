@@ -2,7 +2,7 @@
 
     <div class="s-container">
 
-        <div class="s-layout:122::gutter-between:gutter-50">
+        <div class="s-layout:122:gap-between:gap-50">
 
             <div>
 

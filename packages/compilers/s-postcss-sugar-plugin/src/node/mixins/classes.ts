@@ -47,6 +47,7 @@ export default async function ({
         '@sugar.color.classes;',
         '@sugar.fit.classes;',
         '@sugar.format.classes;',
+        '@sugar.gap.classes;',
         '@sugar.align.classes;',
         '@sugar.text.classes;',
         '@sugar.font.classes;',

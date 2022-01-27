@@ -183,6 +183,10 @@ export default function ({
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `,
     );

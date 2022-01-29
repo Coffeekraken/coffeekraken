@@ -299,7 +299,8 @@ export default function ({
         .s-when--dark {
             display: none;
         }
-        [theme][variant="dark"] .s-when--dark {
+        
+        [theme$="dark"] .s-when--dark {
             display: inherit;
         }
         `);
@@ -325,7 +326,7 @@ export default function ({
         */
     `,
     ).code(`
-        [theme][variant="dark"] .s-when--light {
+        [theme$="dark"] .s-when--light {
             display: none;
         }
         `);

@@ -51,8 +51,14 @@ export default class STheme extends __SThemeBase {
             timeout: 100
         });
 
-        $context.setAttribute('theme', theme);
-        $context.setAttribute('variant', variant);
+        if (theme && variant) {
+            $context.setAttribute('theme', `${theme}-${variant}`);
+        } else if (theme) {
+            $context.setAttribute('theme', theme);
+        } else if (variant) {
+            $context.setAttribute('theme', variant);
+        }
+
         return this.getCurrentTheme($context);
     }
 
@@ -69,14 +75,33 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getCurrentTheme($context = document.body): STheme {
-        const theme =
-                $context.getAttribute('theme') ??
-                __SSugarConfig.get('theme.theme'),
-            variant =
-                $context.getAttribute('variant') ??
-                __SSugarConfig.get('theme.variant');
 
-        return <STheme>this.getTheme(theme, variant);
+        
+        const theme = __SSugarConfig.get('theme.theme');
+        const variant = __SSugarConfig.get('theme.variant');
+        
+        if (!$context.hasAttribute('theme')) {
+            return <STheme>this.getTheme(theme, variant);
+        }
+        
+        let attr = $context.getAttribute('theme') ?? '',
+        parts = attr.split('-').map(l => l.trim());
+
+        if (parts.length === 2) {
+            return <STheme>this.getTheme(parts[0], parts[1]);
+        }
+        
+        const themes = __SSugarConfig.get('theme.themes');
+        for (let [key, value] of Object.entries(themes)) {
+            if (key === `${parts[0]}-${variant}` || key === `${theme}-${parts[0]}`) {
+                const p = key.split('-').map(l => l.trim()),
+                    t = p[0], v = p[1];
+                console.log('AA', t, v);
+                return <STheme>this.getTheme(t, v);
+            }
+        }
+
+        throw new Error(`The requested current theme with the "theme" attribute "${$context.getAttribute('theme')}" on the context "${$context}" does not exists...`);
     }
 
     /**

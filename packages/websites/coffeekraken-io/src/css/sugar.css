@@ -1,5 +1,5 @@
 @sugar.init;
-@sugar.theme (dark, default, true);
+@sugar.theme (dark, null, true);
 @sugar.classes;
 
 @sugar.ui.filtrableinput.classes;

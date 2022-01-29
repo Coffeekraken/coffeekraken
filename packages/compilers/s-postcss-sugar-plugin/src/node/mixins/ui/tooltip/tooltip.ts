@@ -145,9 +145,6 @@ export default function ({
           padding-block: sugar.theme(ui.tooltip.paddingBlock);
           @sugar.depth( sugar.theme.value(ui.tooltip.depth) );
 
-        & > * {
-            @sugar.color(main);
-        }
 
           &:after {
               content: " ";

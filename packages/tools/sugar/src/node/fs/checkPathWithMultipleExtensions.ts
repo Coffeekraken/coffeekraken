@@ -31,10 +31,6 @@ export default function checkPathWithMultipleExtensions(
 ): string | undefined {
     const extension = __extension(path) || '';
 
-    if (__fs.existsSync(path)) {
-        return path;
-    }
-
     const pathWithoutExt = path.replace(`.${extension}`, '');
     for (let i = 0; i < exts.length; i++) {
         const ext = exts[i];

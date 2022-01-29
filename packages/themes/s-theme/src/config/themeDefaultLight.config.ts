@@ -27,6 +27,42 @@ export default function (env, config) {
         defaultColor: 'main',
 
         color: {
+
+            base: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultLight.color.base
+                 * @type                Color
+                 * @default             hsla(198,0,100,1)
+                 *
+                 * Specify the "base" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                color: 'hsla(198,0,100,1)',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultLight.color.base
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        darken: 40,
+                    },
+                    surface: {
+                        darken: 5
+                    }
+                },
+            },
+
             main: {
                 /**
                  * @name                color

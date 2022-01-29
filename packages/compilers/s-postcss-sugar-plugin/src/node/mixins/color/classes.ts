@@ -85,6 +85,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
     );
 
     Object.keys(__STheme.getTheme().baseColors()).forEach((colorName) => {
+
         cssArray.comment(
             () => `
       /**

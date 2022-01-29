@@ -29,6 +29,7 @@ import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
 import __chokidar from 'chokidar';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
 
 function __toLowerCase(l = '') {
     return l.toLowerCase();
@@ -441,7 +442,14 @@ class SDocMap extends __SClass implements ISDocMap {
                     ) {
                         const namespace = Object.keys(docmapJson.map)[i];
                         const obj = docmapJson.map[namespace];
-                        obj.path = __path.resolve(extendsRootPath, obj.relPath);
+
+                        let ext = obj.relPath.split('.').pop();
+                        const relPath = __checkPathWithMultipleExtensions(obj.relPath, [
+                            `dev.${ext}`,
+                            ext
+                        ]) ?? obj.relPath;
+
+                        obj.path = __path.resolve(extendsRootPath, relPath);
 
                         docmapJson.map[namespace] = obj;
                     }

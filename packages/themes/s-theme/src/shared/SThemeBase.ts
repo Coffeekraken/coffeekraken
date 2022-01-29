@@ -263,13 +263,14 @@ export default class SThemeBase extends __SClass {
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static getTheme(theme?: string, variant?: string): SThemeBase {
-        // console.log(__SSugarConfig.get('theme'));
 
-        theme = theme ?? __SSugarConfig.get('theme.theme');
-        variant = variant ?? __SSugarConfig.get('theme.variant');
-
-        theme = <string>(theme ?? __SSugarConfig.get('theme.theme'));
-
+        if (!theme) {
+            theme = __SSugarConfig.get('theme.theme');
+        }   
+        if (!variant) {
+            variant = __SSugarConfig.get('theme.variant');
+        }
+        
         if (this._instanciatedThemes[`${theme}-${variant}`])
             return this._instanciatedThemes[`${theme}-${variant}`];
 
@@ -601,7 +602,7 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static toCssVars(theme: string, variant?: string): string[] {
+    static toCssVars(theme?: string, variant?: string): string[] {
         // @ts-ignore
 
         const themeInstance = this.getTheme(theme, variant);
@@ -610,7 +611,7 @@ export default class SThemeBase extends __SClass {
                 `Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`,
             );
 
-        const themesConfig = themeInstance.themesConfig();
+        // const themesConfig = themeInstance.themesConfig();
 
         let vars: string[] = [];
 

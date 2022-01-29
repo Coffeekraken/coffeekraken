@@ -69,7 +69,7 @@ export default function ({
         * @cssClass                 s-gap              Apply the default gap to any HTMLElement
         * @cssClass                s-gap:row          Apply the default row gap to any HTMLElement
         * @cssClass                s-gap:column          Apply the default column gap to any HTMLElement
-        ${Object.keys(spacesKeys).map(space => `
+        ${spacesKeys.map(space => `
             * @cssClass                s-gap:${space}          Apply the ${space} gap to any HTMLElement
             * @cssClass                s-gap:row:${space}          Apply the ${space} row gap to any HTMLElement
             * @cssClass                s-gap:column:${space}          Apply the ${space} column gap to any HTMLElement
@@ -87,7 +87,7 @@ export default function ({
     `,
     );
 
-    Object.keys(spacesKeys).forEach(space => {
+    spacesKeys.forEach(space => {
 
         vars.comment(
             () => `/**
@@ -110,7 +110,7 @@ export default function ({
                 */
             `,
         ).code(`
-                .s-gap${space === 'default' ? '' : `--${space}`} {
+                .s-gap${space === 'default' ? '' : `--${space}`}:not(.s-gap--column):not(.s-gap--row) {
                     gap: sugar.space(${space});
                 }`);
 

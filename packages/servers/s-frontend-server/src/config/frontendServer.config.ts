@@ -386,34 +386,34 @@ export default function (env, config) {
                  */
                 handler: 'view',
             },
-            '/doc/api/*': {
-                /**
-                 * @name        handler
-                 * @namespace   config.frontendServer.routes.'/doc/api/*'
-                 * @type        String
-                 * @default         doc
-                 *
-                 * Specify which handle to use for requests on "/doc/api/*"
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: 'doc',
-            },
-            '/api/config': {
-                /**
-                 * @name        handler
-                 * @namespace   config.frontendServer.routes.'/api/config'
-                 * @type        String
-                 * @default         view
-                 *
-                 * Specify which handle to use for requests on "/api/config"
-                 *
-                 * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                handler: 'config',
-            },
+            // '/doc/api/*': {
+            //     /**
+            //      * @name        handler
+            //      * @namespace   config.frontendServer.routes.'/doc/api/*'
+            //      * @type        String
+            //      * @default         doc
+            //      *
+            //      * Specify which handle to use for requests on "/doc/api/*"
+            //      *
+            //      * @since       2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     handler: 'doc',
+            // },
+            // '/api/config': {
+            //     /**
+            //      * @name        handler
+            //      * @namespace   config.frontendServer.routes.'/api/config'
+            //      * @type        String
+            //      * @default         view
+            //      *
+            //      * Specify which handle to use for requests on "/api/config"
+            //      *
+            //      * @since       2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     handler: 'config',
+            // },
             '/docmap.json': {
                 /**
                  * @name        handler

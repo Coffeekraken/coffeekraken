@@ -7,12 +7,10 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
     static get _definition() {
         return {
             variant: {
-                type: 'String',
-                default: __SSugarConfig.get('theme.variant'),
+                type: 'String'
             },
             theme: {
-                type: 'String',
-                default: __SSugarConfig.get('theme.theme'),
+                type: 'String'
             },
         };
     }
@@ -20,8 +18,8 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
 export { postcssSugarPluginThemeWhenMixinInterface as interface };
 
 export interface postcssSugarPluginThemeWhenMixinParams {
-    variant: string;
-    theme: string;
+    variant?: string;
+    theme?: string;
 }
 
 /**

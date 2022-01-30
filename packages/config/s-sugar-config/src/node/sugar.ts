@@ -18,7 +18,7 @@ import __SDocblock from '@coffeekraken/s-docblock';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
 
 /**
- * @name                  sugar
+ * @name                  SSugarConfig
  * @namespace           node
  * @type                  Class
  * @extends             SClass
@@ -38,8 +38,8 @@ import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
  * @todo      Add multi level extends support
  *
  * @example             js
- * import sugar from '@coffeekraken/s-sugar-config';
- * sugar('scss.unit'); // => rem
+ * import __SSugarConfig from '@coffeekraken/s-sugar-config';
+ * __SSugarConfig.get('scss.unit'); // => rem
  *
  * @since           2.0.0
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

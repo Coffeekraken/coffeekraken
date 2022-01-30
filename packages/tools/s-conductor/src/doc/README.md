@@ -39,13 +39,9 @@ __SConductor.setup({
     log: true // log a small analyze of your SConductor execution
 });
 // using promises
-await __SConductor.when('inViewport', $myElement);
-// using callback
-__SConductor.when('interact', $myElement, ($elm) => {
-    // do something
-});
+await __SConductor.when($myElement, 'inViewport');
 // Global "event"
-await __SConductor.when('domReady');
+await __SConductor.when(null, 'domReady');
 ```
 
 ## API

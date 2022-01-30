@@ -33,7 +33,9 @@ import __whenVisible from './whenVisible';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface IWhenNearViewportSettings {}
+export interface IWhenNearViewportSettings {
+    offset: string;
+}
 
 function whenNearViewport(
     elm: HTMLElement,

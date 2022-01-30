@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,12 +38,14 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
@@ -481,38 +483,6 @@
                 "extension": "config",
                 "relPath": "src/config/frontendServer.config.js"
             },
-            "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.doc.api.handler": {
-                "name": "handler",
-                "type": "String",
-                "default": "doc",
-                "description": "Specify which handle to use for requests on \"/doc/api/*\"",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.doc.api",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "frontendServer.config.js",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
-            },
-            "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.config.handler": {
-                "name": "handler",
-                "type": "String",
-                "default": "view",
-                "description": "Specify which handle to use for requests on \"/api/config\"",
-                "namespace": "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.config",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "frontendServer.config.js",
-                "extension": "config",
-                "relPath": "src/config/frontendServer.config.js"
-            },
             "@coffeekraken.s-frontend-server.config.frontendServer.routes.-.api.docmap.handler": {
                 "name": "handler",
                 "type": "String",
@@ -578,6 +548,34 @@
                 "relPath": "src/config/frontendServer.config.js",
                 "children": {}
             },
+            "@coffeekraken.s-frontend-server.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.express": {
                 "name": "express",
                 "type": "Function",
@@ -598,6 +596,330 @@
                 "filename": "frontend.js",
                 "extension": "js",
                 "relPath": "src/node/frontend.js",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.s-frontend-server.SFrontendServer": {
+                "name": "SFrontendServer",
+                "type": "Class",
+                "description": "This class represent a frontend server that handle features like documentation, views rendering,\nfrontspec reading middleware, packageJson middleware and more...",
+                "namespace": "@coffeekraken.s-frontend-server.s-frontend-server",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFrontendServer from '@coffeekraken/s-frontend-server';\nconst server = new SFrontendServer();\nserver.run();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFrontendServer.ts",
+                "extension": "ts",
+                "relPath": "src/node/SFrontendServer.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "start": {
+                        "name": "start",
+                        "type": "Function",
+                        "description": "This function take as parameter an Partial<ISFrontendServerParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-frontend-server.doc.Api": {
+                "name": "Api",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Handlers"
+                    ],
+                    "slug": "/doc/handlers/api"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "api.md",
+                "extension": "md",
+                "relPath": "src/doc/handlers/api.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.doc.Markdown": {
+                "name": "Markdown",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Handlers"
+                    ],
+                    "slug": "/doc/handlers/markdown"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "markdown.md",
+                "extension": "md",
+                "relPath": "src/doc/handlers/markdown.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.doc.Styleguide": {
+                "name": "Styleguide",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Handlers"
+                    ],
+                    "slug": "/doc/handlers/styleguide"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "styleguide.md",
+                "extension": "md",
+                "relPath": "src/doc/handlers/styleguide.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.doc.View": {
+                "name": "View",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Handlers"
+                    ],
+                    "slug": "/doc/handlers/view"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "view.md",
+                "extension": "md",
+                "relPath": "src/doc/handlers/view.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.js.something.MyClass": {
+                "name": "MyClass",
+                "namespace": "@coffeekraken.s-frontend-server.js.something",
+                "filename": "api.md",
+                "extension": "md",
+                "relPath": "src/doc/modules/api.md",
+                "children": {
+                    "api": {
+                        "name": "Api",
+                        "type": "Markdown",
+                        "menu": {
+                            "tree": [
+                                "Documentation",
+                                "Modules"
+                            ],
+                            "slug": "/doc/modules/api"
+                        },
+                        "platform": [
+                            {
+                                "name": "md",
+                                "description": ""
+                            }
+                        ],
+                        "namespace": "@coffeekraken.s-frontend-server.doc",
+                        "status": "stable",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-frontend-server.doc.Config": {
+                "name": "Config",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Modules"
+                    ],
+                    "slug": "/doc/modules/config"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "config.md",
+                "extension": "md",
+                "relPath": "src/doc/modules/config.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.doc.Docmap": {
+                "name": "Docmap",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Modules"
+                    ],
+                    "slug": "/doc/modules/docmap"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "docmap.md",
+                "extension": "md",
+                "relPath": "src/doc/modules/docmap.md",
+                "children": {
+                    "myclass": {
+                        "name": "MyClass",
+                        "menu": {
+                            "tree": [
+                                "Documentation",
+                                "Helpers"
+                            ],
+                            "slug": "/doc/helpers/myClass"
+                        },
+                        "namespace": "@coffeekraken.s-frontend-server.js.something"
+                    }
+                }
+            },
+            "@coffeekraken.s-frontend-server.doc.Frontspec": {
+                "name": "Frontspec",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Modules"
+                    ],
+                    "slug": "/doc/modules/frontspec"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "frontspec.md",
+                "extension": "md",
+                "relPath": "src/doc/modules/frontspec.md",
+                "children": {}
+            },
+            "@coffeekraken.s-frontend-server.doc.Root-Files": {
+                "name": "Root Files",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation",
+                        "Modules"
+                    ],
+                    "slug": "/doc/modules/rootFiles"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-frontend-server.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "rootFiles.md",
+                "extension": "md",
+                "relPath": "src/doc/modules/rootFiles.md",
                 "children": {}
             },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.handlers.doc": {
@@ -668,7 +990,7 @@
                 "relPath": "src/node/handlers/markdown.js",
                 "children": {}
             },
-            "@coffeekraken.s-frontend-server.node.interface.sFrontendServerStartParamsInterface": {
+            "@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface": {
                 "name": "SFrontendServerStartParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -856,6 +1178,29 @@
                 "relPath": "src/node/middleware/resolveExtensionFreePath.js",
                 "children": {}
             },
+            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error": {
+                "name": "error",
+                "type": "Function",
+                "description": "This function simply return the 404 page content to send to the user\nwith the passed data object described here:",
+                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages",
+                "status": "wip",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';\nconst content = await 404('Error', 'Something wrong happened', null, [{\n   text: 'Go to Google',\n   href: 'https://google.com'\n}]);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "error.js",
+                "extension": "js",
+                "relPath": "src/node/pages/error.js",
+                "children": {}
+            },
             "@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.apiHandler": {
                 "name": "apiHandler",
                 "type": "Function",
@@ -975,75 +1320,6 @@
                 "extension": "js",
                 "relPath": "src/node/modules/view/viewHandler.js",
                 "children": {}
-            },
-            "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages.error": {
-                "name": "error",
-                "type": "Function",
-                "description": "This function simply return the 404 page content to send to the user\nwith the passed data object described here:",
-                "namespace": "@coffeekraken.s-frontend-server.sugar.node.server.frontend.pages",
-                "status": "wip",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import 404 from '@coffeekraken/sugar/node/server/frontend/pages/404';\nconst content = await 404('Error', 'Something wrong happened', null, [{\n   text: 'Go to Google',\n   href: 'https://google.com'\n}]);"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "error.js",
-                "extension": "js",
-                "relPath": "src/node/pages/error.js",
-                "children": {}
-            },
-            "@coffeekraken.s-frontend-server.s-frontend-server.sFrontendServer": {
-                "name": "SFrontendServer",
-                "type": "Class",
-                "description": "This class represent a frontend server that handle features like documentation, views rendering,\nfrontspec reading middleware, packageJson middleware and more...",
-                "namespace": "@coffeekraken.s-frontend-server.s-frontend-server",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SFrontendServer from '@coffeekraken/s-frontend-server';\nconst server = new SFrontendServer();\nserver.run();"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SFrontendServer.ts",
-                "extension": "ts",
-                "relPath": "src/node/SFrontendServer.ts",
-                "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "start": {
-                        "name": "start",
-                        "type": "Function",
-                        "description": "This function take as parameter an Partial<ISFrontendServerParams> object,\nstart a server using these parameters and returns an SPromise instance\nthrough which you can subscribe for events, etc...",
-                        "async": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    }
-                }
             }
         }
     }

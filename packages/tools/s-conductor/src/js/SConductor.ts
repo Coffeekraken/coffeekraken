@@ -1,21 +1,15 @@
 // @ts-nocheck
 
 import __SClass from '@coffeekraken/s-class';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SPromise from '@coffeekraken/s-promise';
-import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __SPromise from '@coffeekraken/s-promise';
+import __when, { TWhenTrigger } from '@coffeekraken/sugar/js/dom/detect/when';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
-
 import __SConductorSettingsInterface from './interface/SConductorSettingsInterface';
 
-import __whenDomReady from '@coffeekraken/sugar/js/dom/detect/whenDomReady';
-import __whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
-import __whenNearViewport from '@coffeekraken/sugar/js/dom/detect/whenNearViewport';
-import __whenOutOfViewport from '@coffeekraken/sugar/js/dom/detect/whenOutOfViewport';
-import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/detect/whenStylesheetsReady';
+
 
 /**
  * @name                SConductor
@@ -33,6 +27,7 @@ import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/detect/whenStyles
  * - nearViewport: Execute when the element is near the viewport
  * - outOfViewport: Execute when the element is out of the viewport
  * - domReady: Execute when the DOM is ready
+ * - visible: Execute when the element became visible
  * - stylesheetsReady: Execute when the stylesheets are ready
  * - interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).
  * - idle: Execute when no other task is running
@@ -44,10 +39,9 @@ import __whenStylesheetsReady from '@coffeekraken/sugar/js/dom/detect/whenStyles
  * @todo      tests
  *
  * @example             js
- * import SConductor from '@coffeekraken/s-duration';
- * const duration = new SConductor();
- * await ...
- * console.log(duration.end());
+ * import SConductor from '@coffeekraken/s-conductor';
+ * await SConductor.when($elm, 'interact');
+ * await SConductor.when($elm, ['interact', 'inViewport']);
  *
  * @since           2.0.0
  * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -63,21 +57,12 @@ export interface ISConductorCtorSettings {
     conductor: Partial<ISConductorSettings>;
 }
 
-export type ISConductorTimes =
-    | 'direct'
-    | 'directly'
-    | 'inViewport'
-    | 'nearViewport'
-    | 'outOfViewport'
-    | 'interact'
-    | 'domReady'
-    | 'stylesheetsReady'
-    | 'idle';
+export type TSConductorTrigger = TWhenTrigger | 'idle';
 
 export interface ISConductorTaskObj extends ISDurationObject {
     id: string;
     registerTime: number;
-    times: ISConductorTimes[];
+    triggers: TSConductorTrigger[];
     $elm: HTMLElement;
     task: function;
     watchers: function[];
@@ -137,7 +122,7 @@ export default class SConductor extends __SClass {
      *
      * This static method allows you to register a task to execute at a specific time in the "default" conductor instance.
      *
-     * @param       {ISConductorTimes[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
+     * @param       {TSConductorTrigger[]}     trigger            The trigger when to execute the task. Can be multiple times and the first reached will be the one used
      * @param       {HTMLElement}       [$elm=null]            The element to watch
      * @param       {Function}           task           The task function to execute
      * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
@@ -146,11 +131,11 @@ export default class SConductor extends __SClass {
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
     static when(
-        time: ISConductorTimes[],
         $elm?: HTMLElement,
+        trigger: TSConductorTrigger[],
         task?: Function,
     ): Promise<ISConductorTaskObj> {
-        return this.defaultInstance.when(time, $elm, task);
+        return this.defaultInstance.when($elm, trigger, task);
     }
 
     /**
@@ -290,7 +275,7 @@ export default class SConductor extends __SClass {
 
         let taskToExecute;
         for (let [taskId, taskObj] of Object.entries(this._tasksStack)) {
-            if (taskObj.times.includes('idle')) {
+            if (taskObj.triggers.includes('idle')) {
                 taskToExecute = taskObj;
                 break;
             }
@@ -381,7 +366,7 @@ export default class SConductor extends __SClass {
      * @since      2.0.0
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
-    _elementNeeded($elm = null, time: ISConductorTimes) {
+    _elementNeeded($elm = null, time: TSConductorTrigger) {
         if (!$elm) {
             throw new Error(`To use the "${time}" SConductor.when detector, you MUST pass an HTMLElement...`);
         }
@@ -393,7 +378,7 @@ export default class SConductor extends __SClass {
      *
      * This method allows you to register a task to execute at a specific time in the "default" conductor instance.
      *
-     * @param       {ISConductorTimes[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
+     * @param       {TSConductorTrigger[]}     time            The time to execute the task. Can be multiple times and the first reached will be the one used
      * @param       {HTMLElement}       [$elm=null]            The element to watch. Optional depending on the time listened
      * @param       {Function}           task           The task function to execute
      * @return      {SPromise}                          An SPromise instance resolved when one of the passed time(s) is/are reached
@@ -402,20 +387,20 @@ export default class SConductor extends __SClass {
      * @author      Olivier Bossel <olivier.bossel@gmail.com>
      */
     when(
-        time: ISConductorTimes[],
         $elm?: HTMLElement,
+        trigger: TSConductorTrigger[],
         task?: Function,
     ): Promise<ISConductorTaskObj> {
         return new __SPromise(async ({ resolve, reject }) => {
             // ensure we work with an array of time(s)
-            if (!Array.isArray(time))
-                time = time.split(',').map((t) => t.trim());
+            if (!Array.isArray(trigger))
+                trigger = trigger.split(',').map((t) => t.trim());
 
             // register the task
             const taskObj: ISConductorTaskObj = {
                 id: __uniqid(),
                 registerTime: Date.now(),
-                times: time,
+                triggers: trigger,
                 $elm,
                 task,
                 watchers: [],
@@ -425,50 +410,8 @@ export default class SConductor extends __SClass {
             // adding into tasks stack
             this._tasksStack[taskObj.id] = taskObj;
 
-            // adding watchers
-            time.forEach((t) => {
-                switch (t) {
-                    case 'inViewport':
-                        this._elementNeeded($elm, t);
-                        taskObj.watchers.push(__whenInViewport($elm));
-                        break;
-                    case 'nearViewport':
-                        this._elementNeeded($elm, t);
-                        taskObj.watchers.push(__whenNearViewport($elm));
-                        break;
-                    case 'outOfViewport':
-                        this._elementNeeded($elm, t);
-                        taskObj.watchers.push(__whenOutOfViewport($elm));
-                        break;
-                    case 'interact':
-                        this._elementNeeded($elm, t);
-                        taskObj.watchers.push(__whenInteract($elm));
-                        break;
-                    case 'domReady':
-                        taskObj.watchers.push(__whenDomReady());
-                        break;
-                    case 'stylesheetsReady':
-                        taskObj.watchers.push(__whenStylesheetsReady($elm ? [$elm] : null));
-                        break;
-                    case 'idle':
-                        taskObj.watchers.push(
-                            (() => new __SPromise(() => {}))($elm),
-                        );
-                        break;
-                }
-            });
-
-            // if no times setted, execute directly
-            if (
-                !time.length ||
-                time.includes('direct') ||
-                time.includes('directly')
-            ) {
-                return this._executeTask(taskObj);
-            }
-
             // listen for at least 1 promise resolved
-            await Promise.race(taskObj.watchers);
+            await __when($elm, trigger, {});
 
             // execute the task
             this._executeTask(taskObj);

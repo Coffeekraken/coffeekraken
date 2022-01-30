@@ -12,7 +12,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 /**
  * @name            SThemeBase
- * @namespace       node
+ * @namespace       shared
  * @type            Class
  * @extends         SClass
  *
@@ -619,14 +619,6 @@ export default class SThemeBase extends __SClass {
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
 
-            // if (
-            //     !__micromatch(
-            //         `color.${colorObj.name}`,
-            //         themesConfig.cssVariables,
-            //     ).length
-            // )
-            //     return;
-
             if (!colorObj.state && !colorObj.variant && colorObj.value.color) {
                 vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
                 vars.push(`${baseVariable}-s: ${colorObj.value.s};`);
@@ -715,27 +707,6 @@ export default class SThemeBase extends __SClass {
     static config(dotPath: string, theme?: string, variant?: string): any {
         const instance = this.getTheme(theme, variant);
         return instance.config(dotPath);
-    }
-
-    /**
-     * @name            applyColor
-     * @type            Function
-     * @static
-     *
-     * This static method allows you to apply a color on a particular context
-     *
-     * @param       {String}        color               The color name/code you want to apply
-     * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
-     *
-     * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static applyColor(color: string,  $context = document.body): void {
-        const vars = this.remapCssColor('current', color);
-        for (let [key, value] of Object.entries(vars.properties)) {
-            // @ts-ignore
-            $context.style.setProperty(key, value);
-        }
     }
 
     /**
@@ -869,7 +840,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name        loopOnThemeColors
+     * @name        loopOnColors
      * @type        Function
      * @async
      *

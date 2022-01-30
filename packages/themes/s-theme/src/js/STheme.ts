@@ -42,14 +42,15 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static setTheme(
-        theme: string,
-        variant: string,
+        theme?: string,
+        variant?: string,
         $context = document.body,
     ): STheme {
-
         __clearTransmations(document.body, {
             timeout: 100
         });
+
+        console.log('set theme', theme, variant);
 
         if (theme && variant) {
             $context.setAttribute('theme', `${theme}-${variant}`);
@@ -60,6 +61,24 @@ export default class STheme extends __SThemeBase {
         }
 
         return this.getCurrentTheme($context);
+    }
+
+    /**
+     * @name            setThemeVariant
+     * @type            Function
+     * @static
+     *
+     * This method allows you to set the current applied theme variant and get back an STheme instance
+     *
+     * @param               {String}            variant         The theme variant to apply
+     * @param               {HTMLElement}       [$context=document.body]            The context element on which to apply the theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static setThemeVariant(variant: string, $context = document.body): STheme {
+        return this.setTheme(undefined, variant, $context);
     }
 
     /**
@@ -76,7 +95,6 @@ export default class STheme extends __SThemeBase {
      */
     static getCurrentTheme($context = document.body): STheme {
 
-        
         const theme = __SSugarConfig.get('theme.theme');
         const variant = __SSugarConfig.get('theme.variant');
         
@@ -119,6 +137,27 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
+     * @name            applyCurrentColor
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to apply a color on a particular context
+     *
+     * @param       {String}        color               The color name/code you want to apply
+     * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static applyCurrentColor(color: string,  $context = document.body): void {
+        const vars = this.remapCssColor('current', color);
+        for (let [key, value] of Object.entries(vars.properties)) {
+            // @ts-ignore
+            $context.style.setProperty(key, value);
+        }
+    }
+
+    /**
      * @name            setColor
      * @type            Function
      *
@@ -149,18 +188,20 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
-     * @name            color
+     * @name            getColor
      * @type            Function
      *
      * THis method allows you to access a particular theme color in a particular context
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @param           {String}            name            The color name you want to get
+     * @param           {String}            [variant=null]     The color variant you want to get
+     * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    color(name: string, variant?: string, $context = document.body): __SColor {
+    getColor(name: string, variant?: string, $context = document.body): __SColor {
         const $elm = document.createElement('p');
         $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');

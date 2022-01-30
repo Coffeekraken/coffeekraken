@@ -25,6 +25,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,12 +40,14 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
@@ -287,7 +290,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.layout.container.default.maxWidth": {
+            "@coffeekraken.s-theme.config.themeBase.layout.container.default.max-width": {
                 "name": "max-width",
                 "type": "String",
                 "default": "1280px",
@@ -303,7 +306,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.layout.container.full.maxWidth": {
+            "@coffeekraken.s-theme.config.themeBase.layout.container.full.max-width": {
                 "name": "max-width",
                 "type": "String",
                 "default": "none",
@@ -735,7 +738,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.ratio.219": {
+            "@coffeekraken.s-theme.config.themeBase.ratio.21-9": {
                 "name": "21-9",
                 "type": "Number",
                 "default": "21/9",
@@ -751,7 +754,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.ratio.169": {
+            "@coffeekraken.s-theme.config.themeBase.ratio.16-9": {
                 "name": "16-9",
                 "type": "Number",
                 "default": "16/9",
@@ -767,7 +770,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.ratio.23": {
+            "@coffeekraken.s-theme.config.themeBase.ratio.2-3": {
                 "name": "2-3",
                 "type": "Number",
                 "default": "2/3",
@@ -783,7 +786,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.ratio.43": {
+            "@coffeekraken.s-theme.config.themeBase.ratio.4-3": {
                 "name": "4-3",
                 "type": "Number",
                 "default": "4/3",
@@ -799,7 +802,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.ratio.34": {
+            "@coffeekraken.s-theme.config.themeBase.ratio.3-4": {
                 "name": "3-4",
                 "type": "Number",
                 "default": "3/4",
@@ -836,6 +839,22 @@
                 "type": "Boolean",
                 "default": "true",
                 "description": "Specify if the \"paddings\" are scalable in your theme",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.scalable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.scalable.offsize": {
+                "name": "offsize",
+                "type": "Boolean",
+                "default": "false",
+                "description": "Specify if the \"offsize\" are scalable in your theme",
                 "namespace": "@coffeekraken.s-theme.config.themeBase.scalable",
                 "since": "2.0.0",
                 "author": {
@@ -1903,326 +1922,6 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.color": {
-                "name": "color",
-                "type": "Color",
-                "default": "[theme.color.accent.color]",
-                "description": "Specify the color extension value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.blade": {
-                "name": "blade",
-                "type": "Color",
-                "default": "#ff2d20",
-                "description": "Specify the blade extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.php": {
-                "name": "php",
-                "type": "Color",
-                "default": "#8892BF",
-                "description": "Specify the php extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.js": {
-                "name": "js",
-                "type": "Color",
-                "default": "#f7df1e",
-                "description": "Specify the js extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.ts": {
-                "name": "ts",
-                "type": "Color",
-                "default": "#0374C1",
-                "description": "Specify the ts extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.node": {
-                "name": "node",
-                "type": "Color",
-                "default": "#68A063",
-                "description": "Specify the node extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.css": {
-                "name": "css",
-                "type": "Color",
-                "default": "#498FE1",
-                "description": "Specify the css extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.scss": {
-                "name": "scss",
-                "type": "Color",
-                "default": "#CF649A",
-                "description": "Specify the scss extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.sass": {
-                "name": "sass",
-                "type": "Color",
-                "default": "#CF649A",
-                "description": "Specify the sass extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.json": {
-                "name": "json",
-                "type": "Color",
-                "default": "#000000",
-                "description": "Specify the json extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.jpg": {
-                "name": "jpg",
-                "type": "Color",
-                "default": "#B2C0E1",
-                "description": "Specify the jpg extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.jpeg": {
-                "name": "jpeg",
-                "type": "Color",
-                "default": "#B2C0E1",
-                "description": "Specify the jpeg extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.pdf": {
-                "name": "pdf",
-                "type": "Color",
-                "default": "#E7786E",
-                "description": "Specify the pdf extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.doc": {
-                "name": "doc",
-                "type": "Color",
-                "default": "#60D7FD",
-                "description": "Specify the doc extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.psd": {
-                "name": "psd",
-                "type": "Color",
-                "default": "#F9D659",
-                "description": "Specify the psd extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.mp3": {
-                "name": "mp3",
-                "type": "Color",
-                "default": "#E98C61",
-                "description": "Specify the mp3 extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.png": {
-                "name": "png",
-                "type": "Color",
-                "default": "#C29DFB",
-                "description": "Specify the png extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.aac": {
-                "name": "aac",
-                "type": "Color",
-                "default": "#B1C5C9",
-                "description": "Specify the aac extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.zip": {
-                "name": "zip",
-                "type": "Color",
-                "default": "#9CC04E",
-                "description": "Specify the zip extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
-            "@coffeekraken.s-theme.config.themeBase.color.extension.dmg": {
-                "name": "dmg",
-                "type": "Color",
-                "default": "#E36E4B",
-                "description": "Specify the dmg extension color value",
-                "namespace": "@coffeekraken.s-theme.config.themeBase.color.extension",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "themeBase.config.js",
-                "extension": "config",
-                "relPath": "src/config/themeBase.config.js"
-            },
             "@coffeekraken.s-theme.config.themeBase.size.default": {
                 "name": "default",
                 "type": "String",
@@ -2431,7 +2130,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.default.fontFamily": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.default.font-family": {
                 "name": "font-family",
                 "type": "String",
                 "default": "\"Titillium Web\"",
@@ -2447,7 +2146,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.default.fontWeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.default.font-weight": {
                 "name": "font-weight",
                 "type": "Number",
                 "default": "400",
@@ -2479,7 +2178,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.title.fontFamily": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.title.font-family": {
                 "name": "font-family",
                 "type": "String",
                 "default": "https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap",
@@ -2495,7 +2194,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.title.fontWeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.title.font-weight": {
                 "name": "font-weight",
                 "type": "String",
                 "default": "600",
@@ -2527,7 +2226,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.quote.fontFamily": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.quote.font-family": {
                 "name": "font-family",
                 "type": "String",
                 "default": "\"Palatino, Times, Georgia, serif\"",
@@ -2543,7 +2242,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.quote.fontWeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.quote.font-weight": {
                 "name": "font-weight",
                 "type": "String",
                 "default": "normal",
@@ -2559,7 +2258,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.quote.fontStyle": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.quote.font-style": {
                 "name": "font-style",
                 "type": "String",
                 "default": "normal\"",
@@ -2575,7 +2274,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.quote.fontDisplay": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.quote.font-display": {
                 "name": "font-display",
                 "type": "String",
                 "default": "auto",
@@ -2591,7 +2290,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.quote.capHeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.quote.cap-height": {
                 "name": "cap-height",
                 "type": "Number",
                 "default": "0.65",
@@ -2607,7 +2306,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.code.fontFamily": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.code.font-family": {
                 "name": "font-family",
                 "type": "String",
                 "default": "\"Menlo, Monaco, Consolas, Courier New, monospace\"",
@@ -2623,7 +2322,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.code.fontWeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.code.font-weight": {
                 "name": "font-weight",
                 "type": "String",
                 "default": "normal",
@@ -2639,7 +2338,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.code.fontStyle": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.code.font-style": {
                 "name": "font-style",
                 "type": "String",
                 "default": "normal",
@@ -2655,7 +2354,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.code.fontDisplay": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.code.font-display": {
                 "name": "font-display",
                 "type": "String",
                 "default": "auto",
@@ -2671,7 +2370,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeBase.font.family.code.capHeight": {
+            "@coffeekraken.s-theme.config.themeBase.font.family.code.cap-height": {
                 "name": "cap-height",
                 "type": "Number",
                 "default": "0.65",
@@ -3426,7 +3125,7 @@
             "@coffeekraken.s-theme.config.themeBase.space.80": {
                 "name": "80",
                 "type": "String",
-                "default": "5.25",
+                "default": "5.25rem",
                 "description": "Specify the \"80\" space used for margins and paddings",
                 "namespace": "@coffeekraken.s-theme.config.themeBase.space",
                 "since": "1.0.0",
@@ -3845,6 +3544,198 @@
                 "default": "[theme.space.90]",
                 "description": "Specify the \"100\" space used for paddings",
                 "namespace": "@coffeekraken.s-theme.config.themeBase.padding",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.default": {
+                "name": "default",
+                "type": "String",
+                "default": "[theme.space.default]",
+                "description": "Specify the \"default\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.0": {
+                "name": "0",
+                "type": "String",
+                "default": "[theme.space.0]",
+                "description": "Specify the \"0\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.10": {
+                "name": "10",
+                "type": "String",
+                "default": "[theme.space.10]",
+                "description": "Specify the \"10\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.20": {
+                "name": "20",
+                "type": "String",
+                "default": "[theme.space.20]",
+                "description": "Specify the \"20\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.30": {
+                "name": "30",
+                "type": "String",
+                "default": "[theme.space.30]",
+                "description": "Specify the \"30\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.40": {
+                "name": "40",
+                "type": "String",
+                "default": "[theme.space.40]",
+                "description": "Specify the \"40\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.50": {
+                "name": "50",
+                "type": "String",
+                "default": "[theme.space.50]",
+                "description": "Specify the \"50\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.60": {
+                "name": "60",
+                "type": "String",
+                "default": "[theme.space.60]",
+                "description": "Specify the \"60\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.70": {
+                "name": "70",
+                "type": "String",
+                "default": "[theme.space.70]",
+                "description": "Specify the \"70\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.80": {
+                "name": "80",
+                "type": "String",
+                "default": "[theme.space.80]",
+                "description": "Specify the \"80\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.90": {
+                "name": "90",
+                "type": "String",
+                "default": "[theme.space.90]",
+                "description": "Specify the \"90\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
+                "since": "1.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeBase.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeBase.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeBase.offsize.100": {
+                "name": "100",
+                "type": "String",
+                "default": "[theme.space.100]",
+                "description": "Specify the \"100\" space used for offsize",
+                "namespace": "@coffeekraken.s-theme.config.themeBase.offsize",
                 "since": "1.0.0",
                 "author": {
                     "name": "Olivier Bossel",
@@ -4622,6 +4513,38 @@
                 "extension": "config",
                 "relPath": "src/config/themeDefaultDark.config.js"
             },
+            "@coffeekraken.s-theme.config.themeDefaultLight.color.base.color": {
+                "name": "color",
+                "type": "Color",
+                "default": "hsla(206,11,21,1)",
+                "description": "Specify the \"base\" color value.",
+                "namespace": "@coffeekraken.s-theme.config.themeDefaultLight.color.base",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeDefaultDark.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeDefaultDark.config.js"
+            },
+            "@coffeekraken.s-theme.config.themeDefaultLight.color.base": {
+                "name": "...",
+                "type": "Color",
+                "default": "[extends.colorSchemas]",
+                "description": "Extends the colorSchemas from the extended theme",
+                "namespace": "@coffeekraken.s-theme.config.themeDefaultLight.color.base",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "themeDefaultDark.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeDefaultDark.config.js"
+            },
             "@coffeekraken.s-theme.config.themeDefaultDark.color.main.color": {
                 "name": "color",
                 "type": "Color",
@@ -5102,7 +5025,34 @@
                 "filename": "themeDefaultLight.config.js",
                 "extension": "config",
                 "relPath": "src/config/themeDefaultLight.config.js",
-                "children": {}
+                "children": {
+                    "color": {
+                        "name": "color",
+                        "type": "Color",
+                        "default": "hsla(198,0,100,1)",
+                        "description": "Specify the \"base\" color value.",
+                        "namespace": "@coffeekraken.s-theme.config.themeDefaultLight.color.base",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "...": {
+                        "name": "...",
+                        "type": "Color",
+                        "default": "[extends.colorSchemas]",
+                        "description": "Extends the colorSchemas from the extended theme",
+                        "namespace": "@coffeekraken.s-theme.config.themeDefaultLight.color.base",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
             },
             "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.0.darken": {
                 "name": "darken",
@@ -5440,8 +5390,8 @@
                 "extension": "config",
                 "relPath": "src/config/themeLightBase.config.js"
             },
-            "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.text.lighten": {
-                "name": "lighten",
+            "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.text.darken": {
+                "name": "darken",
                 "type": "Number",
                 "default": "0",
                 "description": "Specify the lighten value for the \"text\" color variant",
@@ -5459,7 +5409,7 @@
             "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.placeholder.darken": {
                 "name": "darken",
                 "type": "Number",
-                "default": "45",
+                "default": "0",
                 "description": "Specify the darken value for the \"placeholder\" color variant",
                 "namespace": "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.placeholder",
                 "since": "2.0.0",
@@ -5475,7 +5425,7 @@
             "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.placeholder.alpha": {
                 "name": "alpha",
                 "type": "Number",
-                "default": "0.4",
+                "default": "0.2",
                 "description": "Specify the alpha value for the \"placeholder\" color variant",
                 "namespace": "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.placeholder",
                 "since": "2.0.0",
@@ -5539,7 +5489,7 @@
             "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.surface.lighten": {
                 "name": "lighten",
                 "type": "Number",
-                "default": "48",
+                "default": "35",
                 "description": "Specify the lighten value for the \"surface\" color variant",
                 "namespace": "@coffeekraken.s-theme.config.themeLightBase.colorSchemas.default.surface",
                 "since": "2.0.0",
@@ -6181,7 +6131,7 @@
             "@coffeekraken.s-theme.config.themeUi.default.depth": {
                 "name": "depth",
                 "type": "String",
-                "default": "[theme.depth.default]",
+                "default": "50",
                 "description": "Specify the default depth for ui's",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.default",
                 "since": "2.0.0",
@@ -6194,7 +6144,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.js"
             },
-            "@coffeekraken.s-theme.config.themeUi.default.rhythmVertical.marginBottom": {
+            "@coffeekraken.s-theme.config.themeUi.default.rhythmVertical.margin-bottom": {
                 "name": "margin-bottom",
                 "type": "Number",
                 "default": "60",
@@ -6357,7 +6307,7 @@
             "@coffeekraken.s-theme.config.themeUi.form.depth": {
                 "name": "depth",
                 "type": "String",
-                "default": "[theme.depth.default]",
+                "default": "0",
                 "description": "Specify the default depth for form items",
                 "namespace": "@coffeekraken.s-theme.config.themeUi.form",
                 "since": "2.0.0",
@@ -6370,7 +6320,7 @@
                 "extension": "config",
                 "relPath": "src/config/themeUi.config.js"
             },
-            "@coffeekraken.s-theme.config.themeUi.form.rhythmVertical.marginBottom": {
+            "@coffeekraken.s-theme.config.themeUi.form.rhythmVertical.margin-bottom": {
                 "name": "margin-bottom",
                 "type": "Number",
                 "default": "40",
@@ -9665,7 +9615,35 @@
                     }
                 }
             },
-            "@coffeekraken.s-theme.js.sTheme": {
+            "@coffeekraken.s-theme.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-theme.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-theme.js.STheme": {
                 "name": "STheme",
                 "type": "Class",
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
@@ -9686,7 +9664,7 @@
                 "extension": "js",
                 "relPath": "src/js/STheme.js",
                 "children": {
-                    "setTheme": {
+                    "settheme": {
                         "name": "setTheme",
                         "type": "Function",
                         "description": "This method allows you to set the current applied theme and get back an STheme instance",
@@ -9698,7 +9676,19 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "getCurrentTheme": {
+                    "setthemevariant": {
+                        "name": "setThemeVariant",
+                        "type": "Function",
+                        "description": "This method allows you to set the current applied theme variant and get back an STheme instance",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getcurrenttheme": {
                         "name": "getCurrentTheme",
                         "type": "Function",
                         "description": "This method allows you to get the current applied theme STheme instance",
@@ -9721,7 +9711,19 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "setColor": {
+                    "applycurrentcolor": {
+                        "name": "applyCurrentColor",
+                        "type": "Function",
+                        "description": "This static method allows you to apply a color on a particular context",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "setcolor": {
                         "name": "setColor",
                         "type": "Function",
                         "description": "THis method allows you to set a color for the theme that represent this instance",
@@ -9732,8 +9734,8 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "color": {
-                        "name": "color",
+                    "getcolor": {
+                        "name": "getColor",
                         "type": "Function",
                         "description": "THis method allows you to access a particular theme color in a particular context",
                         "since": "2.0.0",
@@ -9745,7 +9747,7 @@
                     }
                 }
             },
-            "@coffeekraken.s-theme.node.sTheme": {
+            "@coffeekraken.s-theme.node.STheme": {
                 "name": "STheme",
                 "type": "Class",
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
@@ -9776,10 +9778,33 @@
                             "email": "olivier.bossel@gmail.com",
                             "url": "https://olivierbossel.com"
                         }
+                    },
+                    "getcurrenttheme": {
+                        "name": "getCurrentTheme",
+                        "type": "Function",
+                        "description": "This method allows you to get the current applied theme STheme instance",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getcolor": {
+                        "name": "getColor",
+                        "type": "Function",
+                        "description": "THis method allows you to access a particular theme color",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
                     }
                 }
             },
-            "@coffeekraken.s-theme.node.sThemeBase": {
+            "@coffeekraken.s-theme.node.SThemeBase": {
                 "name": "SThemeBase",
                 "type": "Class",
                 "description": "This class represent the sugar theme you've passed the name in the constructor.\nOnce you have an instance of this theme you will have access to a lot of utilities\nmethods like \"loopOnColors\", etc...",
@@ -9857,7 +9882,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "getTheme": {
+                    "gettheme": {
                         "name": "getTheme",
                         "type": "Function",
                         "description": "This static method allows you to get quicky an STheme instance of the passed theme.\nIt will also check if an instance already exists for this theme and return it if so...",
@@ -9880,7 +9905,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "cssVar": {
+                    "cssvar": {
                         "name": "cssVar",
                         "type": "Function",
                         "description": "This function take a simple theme dot path and returns the proper\nvariable string with the value fallback.",
@@ -9897,7 +9922,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "jsObjectToCssProperties": {
+                    "jsobjecttocssproperties": {
                         "name": "jsObjectToCssProperties",
                         "type": "Function",
                         "description": "This static method allows you to pass a javascript object that contain css properties\nand it will returns the processed css string. Some properties can accept internal theme configuration\nsettings like `font-size`, `color`, etc...:\n\n- `font-family`\n- `font-size`\n- `color`\n- `background-color`\n- `border-radius`: And all border-radius properties like `border-top-left-radius`, etc...\n- `border-width`\n- `transition`\n- `margin`: And all the margins properties like `margin-inline`, etc...\n- `padding`: And all the paddings properties like `padding-block`, etc...\n- `depth`: Special property that will apply nice shadows depending on your theme configuration\n- `default-color`: Apply the default color using `@sugar.color` mixin",
@@ -9910,8 +9935,8 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "remapCssColorVars": {
-                        "name": "remapCssColorVars",
+                    "remapcsscolor": {
+                        "name": "remapCssColor",
                         "type": "Function",
                         "description": "This static method allows you to remap a color to another and returns the needed css\nvariables string.",
                         "status": "beta",
@@ -9923,7 +9948,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "toCssVars": {
+                    "tocssvars": {
                         "name": "toCssVars",
                         "type": "Function",
                         "description": "This static method allows you to transform a theme/variant into css variables",
@@ -9957,7 +9982,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "themesConfig": {
+                    "themesconfig": {
                         "name": "themesConfig",
                         "type": "ISThemesConfig",
                         "description": "Get access to the themes configuration",
@@ -9968,7 +9993,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "baseColors": {
+                    "basecolors": {
                         "name": "baseColors",
                         "type": "Function",
                         "description": "This function returns a simple object with the base colors and their value\nfrom the theme config.",
@@ -9979,8 +10004,8 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "loopOnThemeColors": {
-                        "name": "loopOnThemeColors",
+                    "looponcolors": {
+                        "name": "loopOnColors",
                         "type": "Function",
                         "description": "This utility function allows you to loop quickly and efficiently on\ntheme colors and their's modifiers defined",
                         "async": "true",

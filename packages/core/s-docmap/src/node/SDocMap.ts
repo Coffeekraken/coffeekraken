@@ -36,7 +36,7 @@ function __toLowerCase(l = '') {
 }
 
 /**
- * @name                SDocMap
+ * @name                SDocmap
  * @namespace           node
  * @type                Class
  * @extends             SPromise

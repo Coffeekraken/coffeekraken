@@ -215,7 +215,7 @@ export default class SColorPicker extends __SLitComponent {
             };
         }
 
-        __STheme.applyColor(value, this._$root);
+        __STheme.applyCurrentColor(value, this._$root);
 
 
         pickr.on('change', () => {
@@ -227,7 +227,7 @@ export default class SColorPicker extends __SLitComponent {
                 detail
             });
  
-            __STheme.applyColor(detail.hex, this._$root);
+            __STheme.applyCurrentColor(detail.hex, this._$root);
 
             if (this._$input) {
                 this._$input.value = detail.hex;

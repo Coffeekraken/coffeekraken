@@ -1,4 +1,6 @@
 import __SThemeBase from '../shared/SThemeBase';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __SColor from '@coffeekraken/s-color';
 
 /**
  * @name            STheme
@@ -36,4 +38,54 @@ export default class STheme extends __SThemeBase {
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
     }
+
+    /**
+     * @name            getCurrentTheme
+     * @type            Function
+     * @static
+     *
+     * This method allows you to get the current applied theme STheme instance
+     *
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static getCurrentTheme(): STheme {
+        // @ts-ignore
+        return this.getTheme();
+    }
+
+    /**
+     * @name            getColor
+     * @type            Function
+     *
+     * THis method allows you to access a particular theme color
+     *
+     * @param           {String}            name            The color name you want to get
+     * @param           {String}            [variant=null]     The color variant you want to get
+     * @param           {String}           [state='default']    The state in which to get the color back
+     * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
+     * @return          {SColor}                                    An SColor instance that you can make use of
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    getColor(name: string, variant?: string, state: string = 'default'): __SColor {
+        const color = this.config(`color.${name}.color`);
+        if (!color) {
+            throw new Error(`Sorry but the requested "<yellow>${name}</yellow> color does not exists...`);
+        }
+        if (!variant) {
+            return new __SColor(color);
+        }
+        const variantObj = this.config(`color.${name}.${state}.${variant}`); 
+        if (!variantObj) {
+            throw new Error(`Sorry but the requested "<yellow>${name}</yellow>"color, variant "<cyan>${variant}</cyan>" and state "<magenta>${state}</magenta>" does not exists...`);
+        }
+        const colorInstance = new __SColor(color);
+        colorInstance.apply(variantObj);
+        return colorInstance;
+    }
+
 }

@@ -1,10 +1,8 @@
 import __SStdio from '../shared/SStdio';
-import STerminalStdio from './terminal/STerminalStdio';
-// import SBlessedStdio from './blessed/SBlessedStdio';
+import SBasicStdio from './basic/SBasicStdio';
 
+export * from './basic/SBasicStdio';
 export * from '../shared/SStdio';
-export * from './terminal/STerminalStdio';
-// export * from './blessed/SBlessedStdio';
 
-export { STerminalStdio };
+export { SBasicStdio };
 export default __SStdio;

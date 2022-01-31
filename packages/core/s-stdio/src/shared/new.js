@@ -7,7 +7,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import __SBasicStdio from './basic/SBasicStdio';
+import __isNode from '@coffeekraken/sugar/shared/is/node';
+import __SBasicStdio from '../node/basic/SBasicStdio';
 import __SStdio from './SStdio';
 /**
  * @name            new
@@ -16,10 +17,7 @@ import __SStdio from './SStdio';
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
  * stdio id like:
- * - inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio
- * - terminal: STerminalStdio (node only)
- * - console: SConsoleStdio (browser only)
- * - blessed: SBlessedStdio (node only)
+ * - inherit: If is in node context, will fallback to SBasicStdio, if in browser, in SConsoleStdio
  *
  * @param       {String}        id          A unique id for your stdio instance
  * @param         {SProcess}          proc        The process to display Stdio for
@@ -44,13 +42,18 @@ export default function _new(id, sources, stdio, settings) {
         if (!Array.isArray(sources))
             sources = [sources];
         let stdioInstance;
-        switch (stdio) {
-            case __SStdio.BASIC:
-            default:
-                stdioInstance = new __SBasicStdio(id, sources, settings);
-                break;
+        if (__isNode()) {
+            switch (stdio) {
+                case __SStdio.UI_BASIC:
+                default:
+                    stdioInstance = new __SBasicStdio(id, sources, settings);
+                    break;
+            }
+        }
+        else {
+            throw new Error(`No stdio implementation found for the current "browser" environment...`);
         }
         return stdioInstance;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUdBLE9BQU8sYUFBYSxNQUFNLHFCQUFxQixDQUFDO0FBQ2hELE9BQU8sUUFBdUIsTUFBTSxVQUFVLENBQUM7QUFFL0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBNkJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBZ0IsSUFBSSxDQUM5QixFQUFVLEVBQ1YsT0FBTyxFQUNQLEtBQWlCLEVBQ2pCLFFBQWM7O1FBRWQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLFFBQVEsS0FBSyxFQUFFO1lBRVgsS0FBSyxRQUFRLENBQUMsS0FBSyxDQUFDO1lBQ3BCO2dCQUNJLGFBQWEsR0FBRyxJQUFJLGFBQWEsQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO2dCQUN6RCxNQUFNO1NBQ2I7UUFFRCxPQUFPLGFBQWEsQ0FBQztJQUN6QixDQUFDO0NBQUEifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoibmV3LmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsibmV3LnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUVBLE9BQU8sUUFBUSxNQUFNLG9DQUFvQyxDQUFDO0FBQzFELE9BQU8sYUFBYSxNQUFNLDJCQUEyQixDQUFDO0FBQ3RELE9BQU8sUUFBdUIsTUFBTSxVQUFVLENBQUM7QUFFL0M7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBMEJHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sVUFBZ0IsSUFBSSxDQUM5QixFQUFVLEVBQ1YsT0FBTyxFQUNQLEtBQWlCLEVBQ2pCLFFBQWM7O1FBRWQsSUFBSSxDQUFDLEtBQUssQ0FBQyxPQUFPLENBQUMsT0FBTyxDQUFDO1lBQUUsT0FBTyxHQUFHLENBQUMsT0FBTyxDQUFDLENBQUM7UUFFakQsSUFBSSxhQUFrQixDQUFDO1FBRXZCLElBQUksUUFBUSxFQUFFLEVBQUU7WUFDWixRQUFRLEtBQUssRUFBRTtnQkFDWCxLQUFLLFFBQVEsQ0FBQyxRQUFRLENBQUM7Z0JBQ3ZCO29CQUNJLGFBQWEsR0FBRyxJQUFJLGFBQWEsQ0FBQyxFQUFFLEVBQUUsT0FBTyxFQUFFLFFBQVEsQ0FBQyxDQUFDO29CQUN6RCxNQUFNO2FBQ2I7U0FDSjthQUFNO1lBQ0gsTUFBTSxJQUFJLEtBQUssQ0FBQyx3RUFBd0UsQ0FBQyxDQUFDO1NBQzdGO1FBQ0QsT0FBTyxhQUFhLENBQUM7SUFDekIsQ0FBQztDQUFBIn0=

@@ -10,6 +10,7 @@
   "dependencies": {
     "@coffeekraken/s-duration": "^2.0.0",
     "@coffeekraken/s-file": "^2.0.0",
+    "@coffeekraken/s-sugar-config": "^2.0.0",
     "@coffeekraken/s-process": "^2.0.0",
     "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0",

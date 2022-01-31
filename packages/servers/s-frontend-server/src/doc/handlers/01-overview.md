@@ -1,0 +1,65 @@
+<!--
+/**
+ * @name            Handlers
+ * @namespace       doc.handlers
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation / Handlers           /doc/handlers/overview
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+-->
+
+{{#> layout-doc }}
+
+# Handlers
+
+Handlers are `controllers` for specific routes. This mean that when you call for example the route `/something/cool`, you must have an handler registered to take care of this request.
+
+## Built-in handlers
+
+Some built-in handlers are available out of the box. Here's the list:
+
+-   `api`: Handle routes like `/api/...` to display the api documentation page of each functions, classes, etc...
+-   `styleguide`: Handle route like `/styleguide/...` to display a styleguide page
+-   `view`: Handle route like `/view/...` to display a view that lives under `src/views`
+
+## Registering your own handler
+
+To register your own handler, the easiest way is to register it through a module.
+
+> To check how to register a module, check the [modules documentation page](/doc/servers/modules).
+
+```js
+export default function myModule(express, settings, config) {
+    // register your handler
+    config.handlers.myHandler = `/absolute/path/to/my/handler`;
+
+    // register some routes that will use this handler
+    config.routes['/myHandler/*'] = {
+        handler: 'myHandler',
+    };
+}
+```
+
+## Handler scaffold
+
+Here's some base code that you can use for your handler:
+
+```js
+export default function myHandler(req, res, settings = {}) {
+    return new Promise(async (resolve, reject) => {
+        // do something neat for your handler...
+
+        // send result to the client
+        res.status(200);
+        res.type('text/html');
+        res.send(pageHtml.value);
+        resolve(pageHtml.value);
+    });
+}
+```
+
+{{/layout-doc }}

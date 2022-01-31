@@ -4,21 +4,15 @@ import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
+import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
 }
 
-export interface ISStdioSettingsMetas {
-    time: boolean;
-}
-
 export interface ISStdioSettings {
-    id: string;
     filter: typeof Function;
     processor: typeof Function;
-    metas: ISStdioSettingsMetas;
-    ui: ISStdioUi;
     defaultLogObj: Partial<ISLog>;
     defaultAskObj: Partial<ISLogAsk>;
 }
@@ -312,16 +306,7 @@ export default class SStdio extends __SClass implements ISStdio {
         super(
             __deepMerge(
                 {
-                    stdio: {
-                        filter: null,
-                        processor: null,
-                        metas: {
-                            time: false,
-                        },
-                        defaultLogObj: {
-                            decorators: true,
-                        },
-                    },
+                    stdio: __SStdioSettingsInterface.defaults()
                 },
                 settings,
             ),

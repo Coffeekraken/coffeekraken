@@ -409,7 +409,7 @@ export default class SSugarConfig extends __SClass {
         }
 
         if (!this._sugarJson) {
-            this._sugarJson = sugarJson.read();
+            this._sugarJson = await sugarJson.read();
             Object.keys(this._sugarJson).forEach((packageName) => {
                 // @ts-ignore
                 const jsonObj = this._sugarJson[packageName];

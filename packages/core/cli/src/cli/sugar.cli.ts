@@ -175,6 +175,8 @@ export default class SSugarCli {
         (async () => {
             __SBench.step('sugar.cli', 'beforeLoadConfig');
 
+            await __wait(10);
+
             // load the sugar config
             const config = await __SSugarConfig.load();
             // console.log(

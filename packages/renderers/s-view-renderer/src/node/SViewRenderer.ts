@@ -3,19 +3,22 @@ import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
 import __SFile, { ISFileObject } from '@coffeekraken/s-file';
 // import __page404 from './pages/404';
 import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
-import __SugarConfig from '@coffeekraken/s-sugar-config';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __glob from 'glob';
 import __path from 'path';
+import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsInterface';
 
 /**
- * @name          SViews
- * @namespace     sugar.node.template
+ * @name          SViewRenderer
+ * @namespace     node
  * @type          Class
- * @status              wip
+ * @extends       SClass
+ * @plarform        node
+ * @status              beta
  *
  * This class represent a template that can be rendered using all the supported render engines listed in the features bellow.
  *
@@ -24,11 +27,7 @@ import __path from 'path';
  *
  * @param       {String}        viewPath      The view doted file path relative to the ```rootDir``` setting, or directly a template string to render using the engine specify in ```engine``` setting...
  * @param       {Object}        [settings={}]           An object of settings to configure your template rendering process:
- * - rootDir (@config.views.rootDir) {String}: Specify either 1 rootDir in which to search for your view, or an Array of rootDir to search in
- * - engine (null) {String|SViewsEngine}: Specify the engine to use in order to render your template. By default it will try to automatically detect the engine but you can specify it yourself. Can be a string like "blade.php" that identify a registered template engine, or directly an SViewsEngine based template engine instance
- * - engineSettings ({}) {Object}: Specify some settings that will be passed to the corresponding engine
- * - defaultData ({}) {Object}: A data object to use by default when calling the ```render``` method. Can be overrided obviously in the ```render``` method
- *
+ * 
  * @todo      interface
  * @todo      doc
  * @todo      tests
@@ -50,12 +49,11 @@ import __path from 'path';
 export interface ISViewRendererSettings {
     rootDirs: string[];
     cacheDir: string;
-    engine: string | ISViewRendererEngine;
-    engineSettings?: any;
+    enginesSettings?: any;
     defaultData?: any;
 }
 export interface ISViewCtorSettings {
-    view?: Partial<ISViewRendererSettings>;
+    viewRenderer?: Partial<ISViewRendererSettings>;
 }
 
 export interface ISViewViewMetas extends ISFileObject {}
@@ -84,7 +82,7 @@ export interface ISViewRenderer {
 }
 
 // @ts-ignore
-class SView extends __SClass implements ISViewRenderer {
+class SViewRenderer extends __SClass implements ISViewRenderer {
     /**
      * @name      _viewPath
      * @type      String
@@ -175,7 +173,7 @@ class SView extends __SClass implements ISViewRenderer {
      */
     static get defaultRootDirs(): string[] {
         return [
-            ...__SugarConfig.get('views.rootDirs'),
+            ...__SSugarConfig.get('viewRenderer.rootDirs'),
             __path.resolve(__dirname(), '../php/views/blade'),
         ];
     }
@@ -195,7 +193,7 @@ class SView extends __SClass implements ISViewRenderer {
     static getRootDirs(rootDirs = []): string[] {
         return __unique([
             ...(Array.isArray(rootDirs) ? rootDirs : [rootDirs]),
-            ...SView.defaultRootDirs,
+            ...SViewRenderer.defaultRootDirs,
         ]);
     }
 
@@ -217,11 +215,11 @@ class SView extends __SClass implements ISViewRenderer {
         settings: Partial<ISViewCtorSettings>,
     ) {
         return new __SPromise(async ({ resolve, reject }) => {
-            const viewInstance = new SView(
+            const viewInstance = new SViewRenderer(
                 viewPath,
                 __deepMerge(
                     {
-                        view: {},
+                        viewRenderer: {},
                     },
                     settings ?? {},
                 ),
@@ -230,14 +228,14 @@ class SView extends __SClass implements ISViewRenderer {
             try {
                 resultObj = await viewInstance.render(
                     data,
-                    settings?.view ?? {},
+                    settings?.viewRenderer ?? {},
                 );
                 resultObj.status = 200;
                 return resolve({
                     ...resultObj,
                 });
             } catch (e) {
-                const errorViewInstance = new SView('pages.501', {
+                const errorViewInstance = new SViewRenderer('pages.501', {
                     ...settings,
                 });
                 resultObj = await errorViewInstance.render(
@@ -245,7 +243,7 @@ class SView extends __SClass implements ISViewRenderer {
                         ...data,
                         error: e,
                     },
-                    settings?.view ?? {},
+                    settings?.viewRenderer ?? {},
                 );
                 resultObj.status = 501;
                 return reject({
@@ -286,10 +284,10 @@ class SView extends __SClass implements ISViewRenderer {
             ? extensions
             : extensions.split(',').map((l) => l.trim());
         exts.forEach((ext) => {
-            if (SView.engines[ext]) return;
+            if (SViewRenderer.engines[ext]) return;
 
             // register the engine in the stack
-            SView.engines[ext] = {
+            SViewRenderer.engines[ext] = {
                 path: enginePath,
             };
         });
@@ -324,9 +322,9 @@ class SView extends __SClass implements ISViewRenderer {
             ? extensions
             : extensions.split(',').map((l) => l.trim());
         exts.forEach((extension) => {
-            if (SView.dataHandlers[extension]) return;
+            if (SViewRenderer.dataHandlers[extension]) return;
             // register the engine in the stack
-            SView.dataHandlers[extension] = {
+            SViewRenderer.dataHandlers[extension] = {
                 path: handlerPath,
             };
         });
@@ -348,7 +346,7 @@ class SView extends __SClass implements ISViewRenderer {
      * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getViewMetas(viewPath: string): ISViewViewMetas | undefined {
-        const viewsDirs = __SugarConfig.get('views.rootDirs');
+        const viewsDirs = __SSugarConfig.get('viewRenderer.rootDirs');
 
         for (let i = 0; i < viewsDirs.length; i++) {
             const viewsDir = viewsDirs[i];
@@ -365,8 +363,8 @@ class SView extends __SClass implements ISViewRenderer {
                 const fileName = path.split('/').slice(-1).join('');
                 viewType = fileName.split('.').slice(1).join('.');
             } else {
-                for (let i = 0; i < Object.keys(SView.engines).length; i++) {
-                    const engineExt = Object.keys(SView.engines)[i];
+                for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
+                    const engineExt = Object.keys(SViewRenderer.engines)[i];
                     if (__fs.existsSync(`${path}.${engineExt}`)) {
                         finalViewPath = `${path}.${engineExt}`;
                         viewType = engineExt;
@@ -389,7 +387,7 @@ class SView extends __SClass implements ISViewRenderer {
     }
 
     /**
-     * @name      viewSettings
+     * @name      viewRendererSettings
      * @type      ISViewRendererSettings
      * @get
      *
@@ -398,8 +396,8 @@ class SView extends __SClass implements ISViewRenderer {
      * @since     2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get viewSettings(): ISViewRendererSettings {
-        return (<any>this)._settings.view;
+    get viewRendererSettings(): ISViewRendererSettings {
+        return (<any>this)._settings.viewRenderer;
     }
 
     /**
@@ -417,42 +415,36 @@ class SView extends __SClass implements ISViewRenderer {
         super(
             __deepMerge(
                 {
-                    view: {
-                        rootDirs: __SugarConfig.get('views.rootDirs'),
-                        cacheDir: __SugarConfig.get('views.cacheDir'),
-                        engine: null,
-                        engineSettings: {},
-                        defaultData: {},
-                    },
+                    viewRenderer: __SViewRendererSettingsInterface.defaults(),
                 },
                 settings || {},
             ),
         );
 
-        const defaultEngines = __SugarConfig.get('views.engines') || {};
+        const defaultEngines = __SSugarConfig.get('viewRenderer.engines') || {};
         Object.keys(defaultEngines).forEach((id) => {
             const engineObj = defaultEngines[id];
             engineObj.extensions.forEach((ext) => {
-                SView.registerEngine(engineObj.path, ext);
+                SViewRenderer.registerEngine(engineObj.path, ext);
             });
         });
 
         const defaultDataHandlers =
-            __SugarConfig.get('views.dataHandlers') || {};
+            __SSugarConfig.get('viewRenderer.dataHandlers') || {};
         Object.keys(defaultDataHandlers).forEach((id) => {
             const handlerObj = defaultDataHandlers[id];
             handlerObj.extensions.forEach((ext) => {
-                SView.registerDataHandler(handlerObj.path, ext);
+                SViewRenderer.registerDataHandler(handlerObj.path, ext);
             });
         });
 
         this._originalViewPath = viewPath;
 
-        this.viewSettings.rootDirs = (<any>this.constructor).getRootDirs(
-            this.viewSettings.rootDirs || [],
+        this.viewRendererSettings.rootDirs = (<any>this.constructor).getRootDirs(
+            this.viewRendererSettings.rootDirs || [],
         );
 
-        Object.keys(SView.engines).forEach((ext) => {
+        Object.keys(SViewRenderer.engines).forEach((ext) => {
             viewPath = viewPath.replace(`.${ext}`, '');
         });
 
@@ -468,20 +460,18 @@ class SView extends __SClass implements ISViewRenderer {
                 }
             } else if (!viewPath.match(/\//gm)) {
                 // doted path
-                for (let i = 0; i < this.viewSettings.rootDirs.length; i++) {
-                    const rootDir = this.viewSettings.rootDirs[i];
+                for (let i = 0; i < this.viewRendererSettings.rootDirs.length; i++) {
+                    const rootDir = this.viewRendererSettings.rootDirs[i];
                     const potentialViewPath = `${rootDir}/${viewPath
                         .split('.')
                         .join('/')}.[!data]*`;
                     const matches = __glob.sync(potentialViewPath);
                     if (matches && matches.length) {
                         this._viewPath = matches[0];
-                        const extension = this._viewPath
-                            .split('.')
-                            .slice(1)
-                            .join('.');
-                        if (!this.viewSettings.engine)
-                            this.viewSettings.engine = extension;
+                        // const extension = this._viewPath
+                        //     .split('.')
+                        //     .slice(1)
+                        //     .join('.');
                         break;
                     }
                 }
@@ -496,12 +486,12 @@ class SView extends __SClass implements ISViewRenderer {
 
         // try to get an engine for this view
         if (this._viewPath) {
-            for (let i = 0; i < Object.keys(SView.engines).length; i++) {
-                const engineExt = Object.keys(SView.engines)[i];
+            for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
+                const engineExt = Object.keys(SViewRenderer.engines)[i];
                 const reg = new RegExp(`${engineExt}$`);
                 if (reg.test(this._viewPath)) {
                     viewExt = engineExt;
-                    this._enginePath = SView.engines[engineExt].path;
+                    this._enginePath = SViewRenderer.engines[engineExt].path;
                     break;
                 }
             }
@@ -515,7 +505,7 @@ class SView extends __SClass implements ISViewRenderer {
             );
 
             // loop on each dataHandlers available
-            Object.keys(SView.dataHandlers).forEach((extension) => {
+            Object.keys(SViewRenderer.dataHandlers).forEach((extension) => {
                 if (this._dataHandlerPath) return;
                 if (
                     __fs.existsSync(
@@ -523,7 +513,7 @@ class SView extends __SClass implements ISViewRenderer {
                     )
                 ) {
                     this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
-                    this._dataHandlerPath = SView.dataHandlers[extension].path;
+                    this._dataHandlerPath = SViewRenderer.dataHandlers[extension].path;
                 }
             });
         }
@@ -563,13 +553,13 @@ class SView extends __SClass implements ISViewRenderer {
         // }
 
         return new __SPromise(async ({ resolve, reject }) => {
-            const viewSettings = Object.assign(
+            const viewRendererSettings = Object.assign(
                 {},
                 <ISViewRendererSettings>(
-                    __deepMerge(this.viewSettings, settings || {})
+                    __deepMerge(this.viewRendererSettings, settings || {})
                 ),
             );
-            data = __deepMerge(viewSettings.defaultData, data);
+            data = __deepMerge(viewRendererSettings.defaultData, data);
 
             const duration = new __SDuration();
 
@@ -587,9 +577,9 @@ class SView extends __SClass implements ISViewRenderer {
 
             const engineSettings = __deepMerge(
                 engineObj.settings ?? {},
-                viewSettings.engineSettings ?? {},
+                viewRendererSettings.enginesSettings[engineObj.id] ?? {},
             );
-            viewSettings.engineSettings = engineSettings;
+            viewRendererSettings.enginesSettings = engineSettings;
 
             if (engineObj) {
                 const renderFn = engineObj.render.bind(this);
@@ -597,13 +587,13 @@ class SView extends __SClass implements ISViewRenderer {
                 const renderPromise = renderFn(
                     this._viewPath,
                     data,
-                    viewSettings,
+                    viewRendererSettings,
                 );
                 const result = await renderPromise;
 
                 if (renderPromise.isRejected()) {
                     const resObj: Partial<ISViewRendererRenderResult> = {
-                        view: SView.getViewMetas(this._viewPath),
+                        view: SViewRenderer.getViewMetas(this._viewPath),
                         ...duration.end(),
                     };
                     return reject(resObj);
@@ -612,7 +602,7 @@ class SView extends __SClass implements ISViewRenderer {
                 // resolve the render process
                 const resObj: Partial<ISViewRendererRenderResult> = {
                     // engine: this._engineInstance.engineMetas,
-                    view: SView.getViewMetas(this._viewPath),
+                    view: SViewRenderer.getViewMetas(this._viewPath),
                     ...duration.end(),
                     value: result,
                 };
@@ -622,4 +612,4 @@ class SView extends __SClass implements ISViewRenderer {
     }
 }
 
-export default SView;
+export default SViewRenderer;

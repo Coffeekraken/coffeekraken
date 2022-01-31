@@ -6,7 +6,7 @@ describe('s-view.blade', () => {
         await __SSugarConfig.load();
 
         const view = new __SViewRenderer('default', {
-            view: {
+            viewRenderer: {
                 rootDirs: [`${__dirname}/views`],
             },
         });

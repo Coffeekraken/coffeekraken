@@ -39,6 +39,8 @@ This server is using the AMAZING [Express](https://expressjs.com/) package to ha
 
 All the server is structured around `modules`. A module is simply a function that will take as parameter the `express` app instance and hook the Express server with new middlewares, routes, etc...
 
+[More on modules](/@coffeekraken/s-frontend-server/doc/modules/overview)
+
 ### Built-in modules
 
 By default, the server comes with some built-in modules that handles common stuffs like rendering a `view`, etc. Here's the list of these modules:
@@ -51,11 +53,17 @@ By default, the server comes with some built-in modules that handles common stuf
 - [Frontspec](/@coffeekraken/s-frontend-server/doc/modules/frontspec)
 - [Api](/@coffeekraken/s-frontend-server/doc/modules/api)
 
-<!-- ### Extending the server
+## Handlers
 
-Extending the server lets you add new handlers, register dynamic routes as well as exposing some API's and more.
+Handlers are `controllers` for specific routes. This mean that when you call for example the route `/something/cool`, you must have an handler registered to take care of this request.
 
-To do so, check out [our extend documentation](/@coffeekraken/s-frontend-server/doc/extends/) -->
+[More on handlers](/@coffeekraken/s-frontend-server/doc/handlers/overview)
+
+## Middlewares
+
+Middlewares are functions that will be executed between the incoming request and the response sending to client. For more information about middlewares, I let you check the [express.js middleware documentation](https://expressjs.com/en/guide/using-middleware.html).
+
+[More on middlewares](/@coffeekraken/s-frontend-server/doc/middlewares/overview)
 
 ## API
 

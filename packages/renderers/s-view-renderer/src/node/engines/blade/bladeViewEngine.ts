@@ -23,6 +23,7 @@ import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default {
+    id: 'blade',
     settings: {},
     render(viewPath: string, data: any = {}, settings: ISViewRendererSettings) {
         return new __SPromise(

@@ -14,7 +14,7 @@
             "actions": {
                 "build": {
                     "description": "Build your sitemap depending ton configuration file 'sitemap.config.js'",
-                    "process": "./src/node/build.cli.js"
+                    "process": "./src/cli/build.cli.js"
                 }
             }
         }

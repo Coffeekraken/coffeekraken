@@ -1,8 +1,8 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { ISSitemapResultItem } from './SSitemap';
-import { ISSitemapBuildParams } from './interface/SSitemapBuildInterface';
-import { ISSitemapDocmapSourceCtorSettings } from './sources/SSitemapDocmapSource';
+import { ISSitemapBuilderResultItem } from './SSitemapBuilder';
+import { ISSitemapBuilderBuildParams } from './interface/SSitemapBuilderBuildIParamsInterface';
+import { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuilderDocmapSource';
 
 /**
  * @name            SSitemapSource
@@ -19,13 +19,13 @@ import { ISSitemapDocmapSourceCtorSettings } from './sources/SSitemapDocmapSourc
  */
 
 export interface ISSitemapSourceCtorSettings
-    extends ISSitemapDocmapSourceCtorSettings {
+    extends ISSitemapBuilderDocmapSourceCtorSettings {
     source: Partial<ISSitemapSourceSettings>;
 }
 
 export interface ISSitemapSourceSettings {}
 
-export type ISSitemapSourceResult = ISSitemapResultItem[];
+export type ISSitemapSourceResult = ISSitemapBuilderResultItem[];
 
 export default class SSitemapSource extends __SClass {
     /**
@@ -74,14 +74,14 @@ export default class SSitemapSource extends __SClass {
      * This method MUST be implemented in your child class to build your particular sitemap.
      * Is has to return a Promise and resolve it with an ISSitemapSourceBuildResult object type
      *
-     * @param           {ISSitemapBuildParams}          [params={}]         Some params passed to the build method
+     * @param           {ISSitemapBuilderBuildParams}          [params={}]         Some params passed to the build method
      * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     build(
-        params: Partial<ISSitemapBuildParams> = {},
+        params: Partial<ISSitemapBuilderBuildParams> = {},
     ): Promise<ISSitemapSourceResult> {
         throw new Error(
             `This "<yellow>build</yellow>" method must be overrided by your SitemapSource class implementation...`,

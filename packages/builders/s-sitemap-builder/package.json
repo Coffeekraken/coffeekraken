@@ -1,5 +1,5 @@
 {
-    "name": "@coffeekraken/s-sitemap",
+    "name": "@coffeekraken/s-sitemap-builder",
     "version": "2.0.0",
     "description": "",
     "type": "module",

@@ -1,9 +1,9 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __SSitemapSource from './SSitemapSource';
-import __SSitemapBuildParamsInterface, {
-    ISSitemapBuildParams,
-} from './interface/SSitemapBuildIParamsInterface';
+import __SSitemapBuilderSource from './SSitemapBuilderSource';
+import __SSitemapBuilderBuildParamsInterface, {
+    ISSitemapBuilderBuildParams,
+} from './interface/SSitemapBuilderBuildIParamsInterface';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';
@@ -13,11 +13,13 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __extension from '@coffeekraken/sugar/node/fs/extension';
 import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
+import __SBuilder from '@coffeekraken/s-builder';
 
 /**
- * @name            SSitemap
+ * @name            SSitemapBuilder
  * @namespace       node
  * @type            Class
+ * @extends         SBuilder
  * @platform        js
  * @platform        node
  * @status          beta
@@ -29,17 +31,17 @@ import __writeFileSync from '@coffeekraken/sugar/node/fs/writeFileSync';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export type ISSitemapTypes = 'docmap' | 'frontspec';
+export type ISSitemapBuilderTypes = 'docmap' | 'frontspec';
 
-export interface ISSitemapSources {
-    [key: string]: __SSitemapSource;
+export interface ISSitemapBuilderSources {
+    [key: string]: __SSitemapBuilderSource;
 }
 
-export interface ISSitemapCtopSettings {
-    sitemap: Partial<ISSitemapSettings>;
+export interface ISSitemapBuilderCtopSettings {
+    sitemap: Partial<ISSitemapBuilderSettings>;
 }
 
-export interface ISSitemapResultItem {
+export interface ISSitemapBuilderResultItem {
     loc: string;
     lastmod: string;
     integrity?: string;
@@ -54,26 +56,26 @@ export interface ISSitemapResultItem {
     priority?: number;
 }
 
-export interface ISSitemapBuildResult {}
+export interface ISSitemapBuilderBuildResult {}
 
-export interface ISSitemapSourcesSettings {
-    [key: string]: ISSitemapSourceSettings;
+export interface ISSitemapBuilderSourcesSettings {
+    [key: string]: ISSitemapBuilderSourceSettings;
 }
-export interface ISSitemapSourceSettings {
+export interface ISSitemapBuilderSourceSettings {
     active: boolean;
     settings: any;
     path: string;
 }
 
-export interface ISSitemapSettings {
-    sources: ISSitemapSourcesSettings;
+export interface ISSitemapBuilderSettings {
+    sources: ISSitemapBuilderSourcesSettings;
     useConfig: boolean;
 }
 
-export default class SSitemap extends __SClass {
+export default class SSitemapBuilder extends __SBuilder {
     /**
      * @name            sitemapSettings
-     * @type            ISSitemapSettings
+     * @type            ISSitemapBuilderSettings
      * @get
      *
      * Access the sitemap settings
@@ -81,7 +83,7 @@ export default class SSitemap extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get sitemapSettings(): ISSitemapSettings {
+    get sitemapSettings(): ISSitemapBuilderSettings {
         return (<any>this._settings).sitemap ?? {};
     }
 
@@ -95,7 +97,7 @@ export default class SSitemap extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings?: Partial<ISSitemapCtopSettings>) {
+    constructor(settings?: Partial<ISSitemapBuilderCtopSettings>) {
         super(
             __deepMerge(
                 {
@@ -109,7 +111,7 @@ export default class SSitemap extends __SClass {
         );
 
         if (this.sitemapSettings.useConfig) {
-            const config = __SSugarConfig.get('sitemap');
+            const config = __SSugarConfig.get('sitemapBuilder');
             this.sitemapSettings.sources = __deepMerge(
                 config.sources ?? {},
                 this.sitemapSettings.sources,
@@ -125,19 +127,19 @@ export default class SSitemap extends __SClass {
      * This method allows you to generate your sitemap with all the added sources
      * and save it to disk, or just returns the result as a promise value
      *
-     * @param       {Partial<ISSitemapBuildParams>}          [params={}]         The params for your build process
-     * @return      {SPromise<ISSitemapBuildResult>}                    A promise resolved with the sitemap result when success
+     * @param       {Partial<ISSitemapBuilderBuildParams>}          [params={}]         The params for your build process
+     * @return      {SPromise<ISSitemapBuilderBuildResult>}                    A promise resolved with the sitemap result when success
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    build(
-        params: Partial<ISSitemapBuildParams> = {},
-    ): Promise<ISSitemapBuildResult> {
+    _build(
+        params: Partial<ISSitemapBuilderBuildParams> = {},
+    ): Promise<ISSitemapBuilderBuildResult> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
-            let sitemap: ISSitemapResultItem[] = [];
+            let sitemap: ISSitemapBuilderResultItem[] = [];
 
-            const finalParams = __SSitemapBuildParamsInterface.apply(params);
+            const finalParams = __SSitemapBuilderBuildParamsInterface.apply(params);
 
             const duration = new __SDuration();
 
@@ -225,13 +227,13 @@ export default class SSitemap extends __SClass {
      *
      * This method takes all the sitemap items with an output path and save your sitemap
      *
-     * @param       {ISSitemapResultItem[]}         items           Your sitemap items to save
+     * @param       {ISSitemapBuilderResultItem[]}         items           Your sitemap items to save
      * @param       {String}                        path            The ourput path where you want to save yous sitemap
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    save(items: ISSitemapResultItem[], path: string): void {
+    save(items: ISSitemapBuilderResultItem[], path: string): void {
         switch (__extension(path)) {
             case 'xml':
             default:

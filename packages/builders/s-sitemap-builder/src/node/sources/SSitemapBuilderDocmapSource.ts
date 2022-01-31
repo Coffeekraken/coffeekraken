@@ -1,14 +1,14 @@
-import __SSitemapSource, { ISSitemapSourceResult } from '../SSitemapSource';
-import { ISSitemapResultItem } from '../SSitemap';
+import __SSitemapBuilderSource, { ISSitemapBuilderSourceResult } from '../SSitemapBuilderSource';
+import { ISSitemapBuilderResultItem } from '../SSitemapBuilder';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import { ISSitemapBuildParams } from '../interface/SSitemapBuildInterface';
+import { ISSitemapBuilderBuildParams } from '../interface/SSitemapBuildIParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDocmap from '@coffeekraken/s-docmap';
 import __pad from '@coffeekraken/sugar/shared/number/pad';
 import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
 
 /**
- * @name            SSitemapDocmapSource
+ * @name            SSitemapBuilderDocmapSource
  * @namespace       node
  * @type            Class
  * @platform        js
@@ -21,13 +21,13 @@ import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface ISSitemapDocmapSourceCtorSettings {
-    sitemapDocmapSource: Partial<ISSitemapDocmapSourceSettings>;
+export interface ISSitemapBuilderDocmapSourceCtorSettings {
+    sitemapDocmapSource: Partial<ISSitemapBuilderDocmapSourceSettings>;
 }
 
-export interface ISSitemapDocmapSourceSettings {}
+export interface ISSitemapBuilderDocmapSourceSettings {}
 
-export default class SSitemapDocmapSource extends __SSitemapSource {
+export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource {
     /**
      * @name            id
      * @type            String
@@ -52,7 +52,7 @@ export default class SSitemapDocmapSource extends __SSitemapSource {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    get sitemapDocmapSourceSettings(): ISSitemapDocmapSourceSettings {
+    get sitemapDocmapSourceSettings(): ISSitemapBuilderDocmapSourceSettings {
         return (<any>this._settings).sitemapDocmapSource ?? {};
     }
 
@@ -66,7 +66,7 @@ export default class SSitemapDocmapSource extends __SSitemapSource {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(settings?: Partial<ISSitemapDocmapSourceCtorSettings>) {
+    constructor(settings?: Partial<ISSitemapBuilderDocmapSourceCtorSettings>) {
         super(
             'docmap',
             __deepMerge(
@@ -85,20 +85,20 @@ export default class SSitemapDocmapSource extends __SSitemapSource {
      *
      * This method allows you to build the sitemap from the docmap source.
      *
-     * @param           {ISSitemapBuildParams}          [params={}]         Some params passed to the build method
+     * @param           {ISSitemapBuilderBuildParams}          [params={}]         Some params passed to the build method
      * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     build(
-        params: Partial<ISSitemapBuildParams> = {},
-    ): Promise<ISSitemapSourceResult> {
+        params: Partial<ISSitemapBuilderBuildParams> = {},
+    ): Promise<ISSitemapBuilderSourceResult> {
         return new __SPromise(async ({ resolve, reject, emit, pipe }) => {
             const docmapInstance = new __SDocmap();
             const docmap = await docmapInstance.read();
 
-            const items: ISSitemapResultItem[] = [];
+            const items: ISSitemapBuilderResultItem[] = [];
 
             const date = new Date();
             const lastmod = `${date.getFullYear()}-${__pad(

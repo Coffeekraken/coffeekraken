@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +38,18 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -65,7 +67,210 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-interface.sugar.node.interface.renderers.sInterfaceRenderer": {
+            "@coffeekraken.s-interface.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-interface.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes": {
+                "name": "getAvailableInterfaceTypes",
+                "type": "Function",
+                "description": "This function simply return an object with all the promoted as types interfaces.",
+                "namespace": "@coffeekraken.s-interface.s-interface.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';\ngetAvailableInterfaceTypes();\n// {\n//    MyCoolType: MyInterface\n// }"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "getAvailableInterfaceTypes.js",
+                "extension": "js",
+                "relPath": "src/shared/getAvailableInterfaceTypes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-interface.s-interface.shared.SInterface": {
+                "name": "SInterface",
+                "type": "Class",
+                "description": "This class allows you to define some rules that some object or instance\nhave to follow. You will be able to apply these rules and see what\ndoes not fit correctly.",
+                "namespace": "@coffeekraken.s-interface.s-interface.shared",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SInterface from '@coffeekraken/sugar/js/interface/SInterface';\nclass MyCoolInterface extends SInterface {\n    static rules = {\n         myProperty: {\n             type: 'String',\n             required: true\n         }\n     }\n}\nMyCoolInterface.apply({\n     myProperty: 'Hello'\n}); // => true"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/SInterface.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "interfacesettings": {
+                        "name": "interfaceSettings",
+                        "type": "ISInterfaceSettings",
+                        "description": "Access the interface settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "overrie": {
+                        "name": "overrie",
+                        "type": "Function",
+                        "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "getavailabletypes": {
+                        "name": "getAvailableTypes",
+                        "type": "Function",
+                        "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "makeavailableastype": {
+                        "name": "makeAvailableAsType",
+                        "type": "Function",
+                        "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "toobject": {
+                        "name": "toObject",
+                        "type": "Function",
+                        "description": "This function allows you to get back a simple object describing the interface",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "defaults": {
+                        "name": "defaults",
+                        "type": "Function",
+                        "description": "This function simply returns you the default interface values in object format",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "apply": {
+                        "name": "apply",
+                        "type": "Function",
+                        "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "help": {
+                        "name": "help",
+                        "type": "Function",
+                        "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "description": {
+                        "name": "description",
+                        "type": "String",
+                        "description": "Store the interface description",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerrenderer": {
+                        "name": "registerRenderer",
+                        "type": "Function",
+                        "description": "This static method allows you to register a renderer that you can then\nuse through the ```interface.render('{rendererId}')``` interface method",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceRenderer": {
                 "name": "SInterfaceRenderer",
                 "type": "Class",
                 "description": "This class represent the base for every interface renderers.\nIt handle things like registering types templates, properties to exclude, etc...",
@@ -123,7 +328,7 @@
                     }
                 }
             },
-            "@coffeekraken.s-interface.sugar.node.interface.renderers.sInterfaceTerminalRenderer": {
+            "@coffeekraken.s-interface.sugar.node.interface.renderers.SInterfaceTerminalRenderer": {
                 "name": "SInterfaceTerminalRenderer",
                 "type": "Class",
                 "description": "This class represent the terminal interface renderer",
@@ -213,181 +418,6 @@
                 "extension": "js",
                 "relPath": "src/node/renderers/terminal/type.js",
                 "children": {}
-            },
-            "@coffeekraken.s-interface.s-interface.shared.getAvailableInterfaceTypes": {
-                "name": "getAvailableInterfaceTypes",
-                "type": "Function",
-                "description": "This function simply return an object with all the promoted as types interfaces.",
-                "namespace": "@coffeekraken.s-interface.s-interface.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import getAvailableInterfaceTypes from '@coffeekraken/sugar/js/interface/getAvailableInterfaceTypes';\ngetAvailableInterfaceTypes();\n// {\n//    MyCoolType: MyInterface\n// }"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "getAvailableInterfaceTypes.js",
-                "extension": "js",
-                "relPath": "src/shared/getAvailableInterfaceTypes.js",
-                "children": {}
-            },
-            "@coffeekraken.s-interface.s-interface.shared.sInterface": {
-                "name": "SInterface",
-                "type": "Class",
-                "description": "This class allows you to define some rules that some object or instance\nhave to follow. You will be able to apply these rules and see what\ndoes not fit correctly.",
-                "namespace": "@coffeekraken.s-interface.s-interface.shared",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SInterface from '@coffeekraken/sugar/js/interface/SInterface';\nclass MyCoolInterface extends SInterface {\n    static rules = {\n         myProperty: {\n             type: 'String',\n             required: true\n         }\n     }\n}\nMyCoolInterface.apply({\n     myProperty: 'Hello'\n}); // => true"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SInterface.js",
-                "extension": "js",
-                "relPath": "src/shared/SInterface.js",
-                "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "interfaceSettings": {
-                        "name": "interfaceSettings",
-                        "type": "ISInterfaceSettings",
-                        "description": "Access the interface settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "overrie": {
-                        "name": "overrie",
-                        "type": "Function",
-                        "description": "This static method is usefull to make a duplicate of the base interface with some updates\nin the definition object.",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "getAvailableTypes": {
-                        "name": "getAvailableTypes",
-                        "type": "Function",
-                        "description": "This static method allows you to get the types that have been make widely available\nusing the ```makeAvailableAsType``` method.",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "makeAvailableAsType": {
-                        "name": "makeAvailableAsType",
-                        "type": "Function",
-                        "description": "This static method allows you to promote your interface at the level where it can be\nused in the \"type\" interface definition property like so \"Object<MyCoolType>\"",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "toObject": {
-                        "name": "toObject",
-                        "type": "Function",
-                        "description": "This function allows you to get back a simple object describing the interface",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "defaults": {
-                        "name": "defaults",
-                        "type": "Function",
-                        "description": "This function simply returns you the default interface values in object format",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "apply": {
-                        "name": "apply",
-                        "type": "Function",
-                        "description": "This method allows you to apply the interface on an object instance.\nBy default, if something is wrong in your class implementation, an error with the\ndescription of what's wrong will be thrown. You can change that behavior if you prefer having\ntrue returned when all is ok, or a string describing the current issue by specify the \"settings.throw\" property to false.",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "help": {
-                        "name": "help",
-                        "type": "Function",
-                        "description": "This static method allows you to get back the help using the\npassed renderer. Awailable rendered are for now:\n- terminal (default): The default terminal renderer\n- more to come depending on needs...",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "description": {
-                        "name": "description",
-                        "type": "String",
-                        "description": "Store the interface description",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "registerRenderer": {
-                        "name": "registerRenderer",
-                        "type": "Function",
-                        "description": "This static method allows you to register a renderer that you can then\nuse through the ```interface.render('{rendererId}')``` interface method",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    }
-                }
             }
         }
     }

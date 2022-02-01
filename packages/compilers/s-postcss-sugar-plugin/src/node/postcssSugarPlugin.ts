@@ -50,8 +50,8 @@ const plugin = (settings: any = {}) => {
         settings,
     );
 
-    // remove cache if build for production
-    if (settings.target === 'prod') {
+    // remove cache if not for vite target
+    if (settings.target !== 'vite') {
         settings.cache = false;
     }
 

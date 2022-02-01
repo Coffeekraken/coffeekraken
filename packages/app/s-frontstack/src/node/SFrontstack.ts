@@ -174,13 +174,8 @@ export default class SFrontstack extends __SClass {
                     stack: 'new'
                 })));
 
-            },
-            {
-                eventEmitter: {
-                    bind: this,
-                },
-            },
-        );
+            }
+        ).bind(this);
     }
 
     /**
@@ -259,11 +254,8 @@ export default class SFrontstack extends __SClass {
                 );
             },
             {
-                eventEmitter: {
-                    bind: this,
-                },
             },
-        );
+        ).bind(this);
     }
 
     /**
@@ -549,11 +541,8 @@ export default class SFrontstack extends __SClass {
 
             },
             {
-                eventEmitter: {
-                    bind: this,
-                },
             },
-        );
+        ).bind(this);
     }
 
     /**

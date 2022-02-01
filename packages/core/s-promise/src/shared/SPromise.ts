@@ -7,6 +7,7 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SLog from '@coffeekraken/s-log';
+import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
 import __treatAsValue, {
     ITreatAsValueProxy,
     ITreatAsValueSettings,
@@ -59,18 +60,15 @@ type ISPromiseStateType =
     | 'canceled'
     | 'destroyed';
 
-export interface ISPromiseProxies {
-    resolve: any[];
-    reject: any[];
-}
-
 export interface ISPromiseSettings {
-    destroyTimeout: number;
-    proxies: ISPromiseProxies;
-    preventRejectOnThrow: boolean;
     treatCancelAs: string;
+    destroyTimeout: number;
+    emitLogErrorEventOnThrow: boolean;
+    preventRejectOnThrow: boolean;
     resolveAtResolveEvent: boolean;
     rejectAtRejectEvent: boolean;
+    resolveProxies: Function[];
+    rejectProxies: Function[];
     [key: string]: any;
 }
 
@@ -238,18 +236,7 @@ class SPromise
         super(
             __deepMerge(
                 {
-                    promise: {
-                        treatCancelAs: 'resolve',
-                        destroyTimeout: 1,
-                        preventRejectOnThrow: true,
-                        emitErrorEventOnThrow: true,
-                        resolveAtResolveEvent: false,
-                        rejectAtRejectEvent: false,
-                        proxies: {
-                            resolve: [],
-                            reject: [],
-                        },
-                    },
+                    promise: __SPromiseSettingsInterface.defaults()
                 },
                 typeof executorFnOrSettings === 'object'
                     ? executorFnOrSettings
@@ -298,6 +285,7 @@ class SPromise
                 'eventEmitterSettings',
             ],
         });
+        this.bind = this._eventEmitter.bind.bind(this);
 
         this._resolvers = <ISPromiseResolvers>resolvers;
 
@@ -329,7 +317,7 @@ class SPromise
                 try {
                     await executorFn(api);
                 } catch (e) {
-                    if (this.promiseSettings.emitErrorEventOnThrow) {
+                    if (this.promiseSettings.emitLogErrorEventOnThrow) {
                         this.emit('log', {
                             type: __SLog.TYPE_ERROR,
                             value: e,
@@ -423,7 +411,11 @@ class SPromise
     ): void {
         const ar = point.split(',').map((l) => l.trim());
         ar.forEach((a) => {
-            this._settings.promise.proxies[a].push(proxy);
+            if (a === 'resolve') {
+                this._settings.promise.resolveProxies.push(proxy);
+            } else if (a === 'reject') {
+                this._settings.promise.rejectProxies.push(proxy);
+            }
         });
     }
 
@@ -556,7 +548,7 @@ class SPromise
             arg = await this.eventEmitter.emit(stack, arg);
         }
         // execute proxies
-        for (const proxyFn of this._settings.promise.proxies.resolve || []) {
+        for (const proxyFn of this._settings.promise.resolveProxies || []) {
             arg = await proxyFn(arg);
         }
         // resolve the master promise
@@ -609,7 +601,7 @@ class SPromise
             arg = await this.eventEmitter.emit(stack, arg);
         }
         // execute proxies
-        for (const proxyFn of this._settings.promise.proxies.reject || []) {
+        for (const proxyFn of this._settings.promise.rejectProxies || []) {
             arg = await proxyFn(arg);
         }
         // resolve the master promise

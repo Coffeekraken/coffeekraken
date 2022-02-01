@@ -1,0 +1,78 @@
+<!-- 
+/**
+ * @name            README
+ * @namespace       doc
+ * @type            Markdown
+ * @platform        md
+ * @status          stable
+ * @menu            Documentation           /doc/readme
+ *
+ * @since           2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+-->
+
+{{#> layout-readme }}
+
+## Simple and powerful event system for node
+
+This package gives you access to a simple and powerful **events system** class. This events system gives you features like:
+
+- **Emit** events
+- **Subscribe** to events
+- **Filter** events
+- **Inter process events** using [node-ipc](https://www.npmjs.com/package/node-ipc)
+- **Pipe** events to another emitter capable instance
+- **Miniatch** event name subscription
+- And more...
+
+## Usage
+
+Here's how to use our implementation:
+
+```js
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
+
+const emitter1 = new __SEventEmitter();
+const emitter2 = new __SEventEmitter();
+
+// subscribe
+emitter1.on('something', (data, metas) => {
+    console.log(`Hello ${data} from emitter 1`);
+});
+emitter2.on('something', (data, metas) => {
+    console.log(`Hello ${data} from emitter 2`);
+});
+
+// emit
+emitter1.emit('something', 'world'); // Hello world from emitter 1
+
+// pipe
+emitter2.pipeTo(emitter1);
+
+// emit again
+emitter2.emit('something', 'else');
+// Hello else from emitter 1
+// Hello else from emitter 2
+
+// minimatch event name
+emitter1.on('something.*', (data, metas) => {
+    console.log(`Minimatch ${data}`);
+});
+emitter1.emit('something.else', 'Hello'); // Minimatch Hello
+emitter1.emit('other.thing', 'Plop');
+```
+
+## API
+
+For more information about the API of this class, please check [our API documentation](/api/@coffeekraken.s-event-emitter.shared.SInterface)
+
+#### Settings
+
+{{> interface namespace='@coffeekraken.s-event-emitter.shared.interface.SEventEmitterSettingsInterface' }}
+
+#### Pipe settings
+
+{{> interface namespace='@coffeekraken.s-event-emitter.shared.interface.SEventEmitterPipeSettingsInterface' }}
+
+{{/ layout-readme }}

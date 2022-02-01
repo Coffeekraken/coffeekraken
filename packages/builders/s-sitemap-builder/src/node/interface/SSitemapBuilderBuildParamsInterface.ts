@@ -12,20 +12,11 @@ import __SSugarConfig from '@coffeekraken/s-sugar-config';
  * @status              beta
  * @platform             node
  *
- * This class represent the interface that describe the minimum requirement
- * needed for a process instance usable across the toolkit like in an SCli instance, etc...
+ * This class represent the interface that describe the SSitemapBuilder build params
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-
-export interface ISSitemapBuilderBuildParams {
-    source: string[];
-    sourcesSettings: any;
-    output: string;
-    save: boolean;
-}
-
 export default class SSitemapBuilderBuildParamsInterface extends __SInterface {
     static get _definition() {
         return {

@@ -50,8 +50,10 @@ const plugin = (settings: any = {}) => {
         settings,
     );
 
-    pluginHash = `${Math.round(Math.random() * 9999)}`;
-    pluginHash = 'aaa';
+    // remove cache if build for production
+    if (settings.target === 'prod') {
+        settings.cache = false;
+    }
 
     function contentToArray(content) {
         if (content instanceof CssVars) {
@@ -72,64 +74,22 @@ const plugin = (settings: any = {}) => {
         return;
     }
 
-    async function fromCache(hash, id = 'unknown'): String {
-        if (!settings.cache) return;
-        const idHash = __md5.encrypt(id);
-        const fileName = `${__md5.encrypt(
-            `${__urlCompliant(__fileName(id))}.${idHash}.${hash}`,
-        )}.css`;
+    function cache(id, hash, content: string | string[]): string | string[] {        
+        if (!settings.cache) return content;
+        const fileName = `${hash}.css`;
         const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
-        if (!__fs.existsSync(cachePath)) return;
-
-        let objectId = id;
-        if (__fs.existsSync(objectId)) {
-            objectId = __path.relative(__packageRoot(), objectId);
-        }
-
-        console.log(
-            `<green>[postcss]</green> File "<cyan>${objectId}</cyan>" taken from cache`,
-        );
-        return `@import url('${cachePath}');`;
-    }
-
-    async function toCache(hash, content, id = 'unknown') {
-        if (id.match(/\/postcssSugarPlugin\//)) return;
-
-        const idHash = __md5.encrypt(id);
-        const fileName = `${__md5.encrypt(
-            `${__urlCompliant(__fileName(id))}.${idHash}.${hash}`,
-        )}.css`;
-        const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
-
-        const importMatches = content.match(
-            /@import\surl\(['\`"]?([^\)'\`"]+)['\`"]?\);?/gm,
-        );
-
-        importMatches?.forEach((importStatement) => {
-            const path = importStatement
-                .replace(/^@import url\(['\`"]?/, '')
-                .replace(/['\`"]?\);?/, '');
-
-            if (path.match(/^https?:\/\//)) return;
-            if (path.match(/^\//)) return;
-            if (!path.match(/\.css$/)) return;
-
-            const absolutePath = __path.resolve(rootDir, path);
-            content = content.replace(
-                importStatement,
-                `@import url("${absolutePath}");\n`,
-            );
-        });
-
-        let objectId = id;
-        if (__fs.existsSync(objectId)) {
-            objectId = __path.relative(__packageRoot(), objectId);
+        if (!__fs.existsSync(cachePath)) {
+            console.log(`<yellow>[cache]</yellow> Caching object "<cyan>${id}</cyan>"`);
+            return `
+                /* CACHE:${hash} */
+                ${Array.isArray(content) ? content.join('\n') : content}
+                /* ENDCACHE:${hash} */
+            `;
         }
         console.log(
-            `<yellow>[postcss]</yellow> Compiling the "<cyan>${objectId}</cyan>" file.`,
+            `<green>[postcss]</green> Object "<cyan>${id}</cyan>" taken from cache`,
         );
-
-        __writeFileSync(cachePath, contentToString(content));
+        return `/* FROMCACHE:${hash} */`;
     }
 
     function applyNoScopes(scopes: string[], fromNode): string[] {
@@ -442,25 +402,10 @@ const plugin = (settings: any = {}) => {
                     fileHash,
                     theme: __STheme.hash,
                 });
-
-                // const cached = await fromCache(hash, root.source.input.from);
-                // if (cached) {
-                //     root._fromCache = cached;
-                //     root.walk((node) => {
-                //         if (node.name?.match(/import$/)) {
-                //         } else {
-                //             node.remove();
-                //         }
-                //     });
-                // }
             }
         },
 
         async OnceExit(root) {
-            if (root._fromCache) {
-                root.append(root._fromCache);
-                return;
-            }
 
             for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
                 const fn = postProcessorsRegisteredFn[i];
@@ -482,19 +427,43 @@ const plugin = (settings: any = {}) => {
                 });
             }
 
-            // if (root.source?.input?.from) {
-            //     const fileHash = __fileHash(root.source.input.from, {
-            //         include: {
-            //             ctime: true,
-            //         },
-            //     });
-            //     const hash = __objectHash({
-            //         fileHash,
-            //         theme: __STheme.hash,
-            //     });
+            let cssStr = root.toString();
 
-            //     await toCache(hash, root.toString(), root.source.input.from);
-            // }
+            // CACHE
+            const cacheMatches = cssStr.match(/\/\*\sCACHE:[a-zA-Z0-9@\._-]+\s\*\//gm);
+            cacheMatches?.forEach(cacheStr => {
+                const cacheId = cacheStr.replace('/* CACHE:','').replace(' */', '').trim();
+                const toCache = cssStr.match(new RegExp(`\\/\\*\\sCACHE:${cacheId}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sENDCACHE:${cacheId}\\s\\*\\/`, 'g'));
+                if (!toCache) return;
+
+                const fileName = `${cacheId}.css`;
+                const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
+
+                const toCacheStr = toCache[0].replace(`/* CACHE:${cacheId} */`, '').replace(`/* ENDCACHE:${cacheId} */`, '');
+                __writeFileSync(cachePath, toCacheStr);
+            });
+
+            root.walkComments((comment) => {
+                if (comment.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+
+                    const parts = comment.text.split(':').map(l => l.trim());
+
+                    const cacheHash = parts[1];
+                    const cacheId = parts[2];
+                    const fileName = `${cacheHash}.css`;
+                    const cacheUrl = `/cache/postcssSugarPlugin/${pluginHash}/${fileName}`;
+
+                    let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+                    if (settings.target === 'vite') {
+                        newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+                    }
+
+                    comment.remove();
+                    root.prepend(newRule);
+
+                    comment.replaceWith(newRule);
+                }
+            });
 
             __SBench.end('postcssSugarPlugin').log({
                 body: `File: <cyan>${__path.relative(
@@ -534,8 +503,7 @@ const plugin = (settings: any = {}) => {
                     params,
                     atRule,
                     findUp,
-                    fromCache,
-                    toCache,
+                    cache,
                     CssVars,
                     commentsNeeded,
                     applyNoScopes(scopes = []) {

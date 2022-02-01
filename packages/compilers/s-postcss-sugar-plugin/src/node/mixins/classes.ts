@@ -33,7 +33,8 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 export default async function ({
     params,
     atRule,
-    fromCache,
+    cache,
+    sharedData,
     toCache,
     replaceWith,
 }) {
@@ -78,12 +79,12 @@ export default async function ({
         '@sugar.whiteSpace.classes;',
     ];
 
-    return cssArray;
+    const hash = `@sugar.classes.${__objectHash({
+        css: cssArray,
+        theme: __STheme.hash(),
+    })}`;
 
-    // const hash = `classes-${__objectHash({
-    //     css: cssArray,
-    //     theme: __STheme.hash(),
-    // })}`;
+    return cache('@sugar.classes', hash, cssArray);
 
     // // from cache
     // const cached = await fromCache(hash, '@sugar.classes;');

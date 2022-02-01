@@ -59,6 +59,7 @@ export default function (env, config) {
          */
         staticDirs: {
             '/dist': `[config.storage.src.rootDir]`,
+            '/cache': `[config.storage.package.cacheDir]`,
             // '/src': `[config.storage.src.rootDir]`,
         },
 

@@ -76,5 +76,19 @@ export default (env, config) => {
              */
             url: env.env === 'development' ? '[config.vite.server.hostname]/dist/fonts' : '/dist/fonts',
         },
+        cache: {
+            /**
+             * @name            url
+             * @namespace       config.serve.cache
+             * @type            String
+             * @default         /cache
+             *
+             * Specify the serving cache folder path to use in your views
+             *
+             * @since           2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            url: env.env === 'development' ? '[config.vite.server.hostname]/cache' : '/cache',
+        },
     };
 };

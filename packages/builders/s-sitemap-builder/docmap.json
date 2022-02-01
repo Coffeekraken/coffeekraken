@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,12 +39,14 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
@@ -65,170 +67,101 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-sitemap.config.sitemap.build.output": {
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build.output": {
                 "name": "output",
                 "type": "String",
                 "default": "[config.storage.package.rootDir]/sitemap.xml",
                 "description": "Specify if you want to use the docmap.json as a sitemap source",
-                "namespace": "@coffeekraken.s-sitemap.config.sitemap.build",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.build",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sitemap.config.js",
+                "filename": "sitemapBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/sitemap.config.js"
+                "relPath": "src/config/sitemapBuilder.config.js"
             },
-            "@coffeekraken.s-sitemap.config.sitemap.sources.docmap.active": {
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.active": {
                 "name": "active",
                 "type": "Boolean",
                 "default": "true",
                 "description": "Specify if you want to use the docmap.json as a sitemap source",
-                "namespace": "@coffeekraken.s-sitemap.config.sitemap.sources.docmap",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sitemap.config.js",
+                "filename": "sitemapBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/sitemap.config.js"
+                "relPath": "src/config/sitemapBuilder.config.js"
             },
-            "@coffeekraken.s-sitemap.config.sitemap.sources.docmap.settings": {
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.settings": {
                 "name": "settings",
                 "type": "Object",
                 "default": "{}",
                 "description": "Specify some setting to pass to the docmap sitemap source",
-                "namespace": "@coffeekraken.s-sitemap.config.sitemap.sources.docmap",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sitemap.config.js",
+                "filename": "sitemapBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/sitemap.config.js"
+                "relPath": "src/config/sitemapBuilder.config.js"
             },
-            "@coffeekraken.s-sitemap.config.sitemap.sources.docmap.path": {
+            "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap.path": {
                 "name": "path",
                 "type": "String",
                 "default": "__path.resolve(`${__dirname()}/../node/sources/SSitemapDocmapSource`)",
                 "description": "Specify where to find the docmap source",
-                "namespace": "@coffeekraken.s-sitemap.config.sitemap.sources.docmap",
+                "namespace": "@coffeekraken.s-sitemap-builder.config.sitemapBuilder.sources.docmap",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sitemap.config.js",
+                "filename": "sitemapBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/sitemap.config.js",
+                "relPath": "src/config/sitemapBuilder.config.js",
                 "children": {}
             },
-            "@coffeekraken.s-sitemap.node.interface.sSitemapBuildParamsInterface": {
-                "name": "SSitemapBuildParamsInterface",
-                "type": ".                      Class",
+            "@coffeekraken.s-sitemap-builder.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
                 "platform": [
                     {
-                        "name": "node",
+                        "name": "md",
                         "description": ""
                     }
                 ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded for a process instance usable across the toolkit like in an SCli instance, etc...",
-                "namespace": "@coffeekraken.s-sitemap.node.interface",
-                "status": "beta",
+                "namespace": "@coffeekraken.s-sitemap-builder.doc",
+                "status": "stable",
                 "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSitemapBuildIParamsInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/interface/SSitemapBuildIParamsInterface.ts",
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
                 "children": {}
             },
-            "@coffeekraken.s-sitemap.node.sSitemapDocmapSource": {
-                "name": "SSitemapDocmapSource",
-                "type": "Class",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent a SSitemap docmap source",
-                "namespace": "@coffeekraken.s-sitemap.node",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SSitemapDocmapSource.ts",
-                "extension": "ts",
-                "relPath": "src/node/sources/SSitemapDocmapSource.ts",
-                "children": {
-                    "id": {
-                        "name": "id",
-                        "type": "String",
-                        "description": "Store the source id",
-                        "static": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "sitemapSourceDocmapSettings": {
-                        "name": "sitemapSourceDocmapSettings",
-                        "type": "ISSitemapSourceSettings",
-                        "description": "Access the sitemap source docmap settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "build": {
-                        "name": "build",
-                        "type": "Function",
-                        "description": "This method allows you to build the sitemap from the docmap source.",
-                        "async": "true",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    }
-                }
-            },
-            "@coffeekraken.s-sitemap.node.sSitemap": {
-                "name": "SSitemap",
+            "@coffeekraken.s-sitemap-builder.node.SSitemapBuilder": {
+                "name": "SSitemapBuilder",
                 "type": "Class",
                 "platform": [
                     {
@@ -241,7 +174,7 @@
                     }
                 ],
                 "description": "This class allows you to generate a sitemap easily taking in consideration things like\ndocmap.json, frontspec.json, etc...",
-                "namespace": "@coffeekraken.s-sitemap.node",
+                "namespace": "@coffeekraken.s-sitemap-builder.node",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -249,13 +182,13 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSitemap.ts",
+                "filename": "SSitemapBuilder.ts",
                 "extension": "ts",
-                "relPath": "src/node/SSitemap.ts",
+                "relPath": "src/node/SSitemapBuilder.ts",
                 "children": {
-                    "sitemapSettings": {
+                    "sitemapsettings": {
                         "name": "sitemapSettings",
-                        "type": "ISSitemapSettings",
+                        "type": "ISSitemapBuilderSettings",
                         "description": "Access the sitemap settings",
                         "since": "2.0.0",
                         "author": {
@@ -301,7 +234,7 @@
                     }
                 }
             },
-            "@coffeekraken.s-sitemap.node.sSitemapSource": {
+            "@coffeekraken.s-sitemap-builder.node.SSitemapSource": {
                 "name": "SSitemapSource",
                 "type": "Class",
                 "platform": [
@@ -315,7 +248,7 @@
                     }
                 ],
                 "description": "This class represent a SSitemap source like docmap, frontspec, etc...",
-                "namespace": "@coffeekraken.s-sitemap.node",
+                "namespace": "@coffeekraken.s-sitemap-builder.node",
                 "status": "beta",
                 "since": "2.0.0",
                 "author": {
@@ -323,11 +256,11 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SSitemapSource.ts",
+                "filename": "SSitemapBuilderSource.ts",
                 "extension": "ts",
-                "relPath": "src/node/SSitemapSource.ts",
+                "relPath": "src/node/SSitemapBuilderSource.ts",
                 "children": {
-                    "sitemapSourceSettings": {
+                    "sitemapsourcesettings": {
                         "name": "sitemapSourceSettings",
                         "type": "ISSitemapSourceSettings",
                         "description": "Access the sitemap source settings",
@@ -353,6 +286,163 @@
                         "name": "build",
                         "type": "Function",
                         "description": "This method MUST be implemented in your child class to build your particular sitemap.\nIs has to return a Promise and resolve it with an ISSitemapSourceBuildResult object type",
+                        "async": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderBuildParamsInterface": {
+                "name": "SSitemapBuilderBuildParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the SSitemapBuilder build params",
+                "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSitemapBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "source": {
+                            "description": "Specify the source(s) you want to build your sitemap. Can be all the configured sources specified under the \"config.sitemap.sources\" config",
+                            "type": "Array<String>",
+                            "default": []
+                        },
+                        "sourcesSettings": {
+                            "description": "Specigy sources settings by passing an object under each source \"id\" property",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "output": {
+                            "description": "Specify where to save the sitemap in xml format",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-sitemap-builder/sitemap.xml"
+                        },
+                        "save": {
+                            "description": "Specify if you want to save the sitemap or not",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSitemapBuilderBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SSitemapBuilderBuildParamsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-sitemap-builder.node.interface.SSitemapBuilderSettingsInterface": {
+                "name": "SSitemapBuilderSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the SSitemapBuilder settings",
+                "namespace": "@coffeekraken.s-sitemap-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSitemapBuilderSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "sources": {
+                            "description": "Specify the sources to use to build the sitemap. A source is a objet with the properties \"active\", \"settings\" and \"path\"",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSitemapBuilderSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SSitemapBuilderSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource": {
+                "name": "SSitemapBuilderDocmapSource",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    },
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent a SSitemap docmap source",
+                "namespace": "@coffeekraken.s-sitemap-builder.node",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSitemapBuilderDocmapSource.ts",
+                "extension": "ts",
+                "relPath": "src/node/sources/SSitemapBuilderDocmapSource.ts",
+                "children": {
+                    "id": {
+                        "name": "id",
+                        "type": "String",
+                        "description": "Store the source id",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "sitemapsourcedocmapsettings": {
+                        "name": "sitemapSourceDocmapSettings",
+                        "type": "ISSitemapSourceSettings",
+                        "description": "Access the sitemap source docmap settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "build": {
+                        "name": "build",
+                        "type": "Function",
+                        "description": "This method allows you to build the sitemap from the docmap source.",
                         "async": "true",
                         "since": "2.0.0",
                         "author": {

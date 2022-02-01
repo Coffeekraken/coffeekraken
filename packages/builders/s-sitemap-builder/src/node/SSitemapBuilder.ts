@@ -1,9 +1,7 @@
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSitemapBuilderSource from './SSitemapBuilderSource';
-import __SSitemapBuilderBuildParamsInterface, {
-    ISSitemapBuilderBuildParams,
-} from './interface/SSitemapBuilderBuildIParamsInterface';
+import __SSitemapBuilderBuildParamsInterface from './interface/SSitemapBuilderBuildParamsInterface';
 import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
 import __SPromise from '@coffeekraken/s-promise';
 import __SDuration from '@coffeekraken/s-duration';
@@ -38,7 +36,14 @@ export interface ISSitemapBuilderSources {
 }
 
 export interface ISSitemapBuilderCtopSettings {
-    sitemap: Partial<ISSitemapBuilderSettings>;
+    sitemapBuilder: Partial<ISSitemapBuilderSettings>;
+}
+
+export interface ISSitemapBuilderBuildParams {
+    source: string[];
+    sourcesSettings: any;
+    output: string;
+    save: boolean;
 }
 
 export interface ISSitemapBuilderResultItem {
@@ -69,7 +74,6 @@ export interface ISSitemapBuilderSourceSettings {
 
 export interface ISSitemapBuilderSettings {
     sources: ISSitemapBuilderSourcesSettings;
-    useConfig: boolean;
 }
 
 export default class SSitemapBuilder extends __SBuilder {
@@ -84,7 +88,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     get sitemapSettings(): ISSitemapBuilderSettings {
-        return (<any>this._settings).sitemap ?? {};
+        return (<any>this._settings).sitemapBuilder ?? {};
     }
 
     /**
@@ -101,22 +105,19 @@ export default class SSitemapBuilder extends __SBuilder {
         super(
             __deepMerge(
                 {
-                    sitemap: {
-                        sources: {},
-                        useConfig: true,
+                    sitemapBuilder: {
+                        sources: {}
                     },
                 },
                 settings ?? {},
             ),
         );
 
-        if (this.sitemapSettings.useConfig) {
-            const config = __SSugarConfig.get('sitemapBuilder');
-            this.sitemapSettings.sources = __deepMerge(
-                config.sources ?? {},
-                this.sitemapSettings.sources,
-            );
-        }
+        const config = __SSugarConfig.get('sitemapBuilder');
+        this.sitemapSettings.sources = __deepMerge(
+            config.sources ?? {},
+            this.sitemapSettings.sources,
+        );
     }
 
     /**
@@ -193,7 +194,7 @@ export default class SSitemapBuilder extends __SBuilder {
                 emit('log', {
                     value: `<yellow>[build]</yellow> "<magenta>${sourceId}</magenta>" sitemap builded with <magenta>${
                         buildResult.length
-                    }</magenta> <green>successfully</green> in <yellow>${
+                    }</magenta> item(s) <green>successfully</green> in <yellow>${
                         sourceDuration.end().formatedDuration
                     }</yellow>`,
                 });

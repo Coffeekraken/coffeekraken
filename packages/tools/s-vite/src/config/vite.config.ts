@@ -228,6 +228,7 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
+                '/cache': 'http://localhost:[config.frontendServer.port]',
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
             // watch: {

@@ -9,7 +9,8 @@
         "**/*.js.map": true
     },
     "files.associations": {
-        "*.riot": "html"
+        "*.riot": "html",
+        "*.css": "postcss"
     },
     "editor.codeActionsOnSave": {
         "source.fixAll.eslint": true

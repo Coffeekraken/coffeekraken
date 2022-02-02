@@ -5,23 +5,25 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -37,17 +39,21 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,7 +67,35 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-event-emitter.sugar.js.event.sEventEmitter": {
+            "@coffeekraken.s-event-emitter.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-event-emitter.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-event-emitter.sugar.js.event.SEventEmitter": {
                 "name": "SEventEmitter",
                 "type": "Class",
                 "namespace": "@coffeekraken.s-event-emitter.sugar.js.event",
@@ -98,7 +132,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "eventEmitterSettings": {
+                    "eventemittersettings": {
                         "name": "eventEmitterSettings",
                         "type": "ISEventEmitterSettings",
                         "description": "Access the event emitter settings",
@@ -123,7 +157,17 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "pipeErrors": {
+                    "bind": {
+                        "name": "bind",
+                        "type": "Function",
+                        "description": "This method allows you to bind another object as the emitter.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "pipeerrors": {
                         "name": "pipeErrors",
                         "type": "Function",
                         "description": "This is the exact same as the original ```pipe``` method. It's just pipe only the errors.",
@@ -133,7 +177,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "pipeFrom": {
+                    "pipefrom": {
                         "name": "pipeFrom",
                         "type": "Function",
                         "description": "This is the exacte same as the original ```pipe``` method. It's just an aliasw.",
@@ -146,7 +190,7 @@
                     "start": {
                         "name": "start",
                         "type": "Function",
-                        "description": "This method has to be called when you want to start the event emissions.\nThis is usefull only if you set the setting ```asyncStart``` to true.\nUntill you call this method, all the emitted events (those specified in the settings.bufferedEvents stack)\nare store in memory and emitted after.",
+                        "description": "This method has to be called when you want to start the event emissions.\nThis is usefull only if you set the setting ```asyncStart``` to true.\nUntill you call this method, all the emitted events\nare store in memory and emitted after.",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",
@@ -158,6 +202,7 @@
                         "type": "Function",
                         "description": "This is the method that allows you to emit the callbacks like \"catch\", \"finally\", etc... without actually resolving the Promise itself",
                         "example": [],
+                        "async": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
@@ -193,6 +238,117 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterPipeSettingsInterface": {
+                "name": "SEventEmitterPipeSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SEventEmitter.pipe settings",
+                "namespace": "@coffeekraken.s-event-emitter.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SEventEmitterPipeSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "events": {
+                            "description": "Specify some events to pipe. Default it pipe everything using `*`",
+                            "type": "String",
+                            "default": "*"
+                        },
+                        "overrideEmitter": {
+                            "description": "Specify if the emitter of the event that will be piped has to be overrided by the instance that pipe the event",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "processor": {
+                            "description": "Specify a function that will be called before piping the event value. If you return only 1 value, it will set the value only, otherwise you can return an object with `value` and `metas` property to update also the metas",
+                            "type": "Function"
+                        },
+                        "exclude": {
+                            "description": "Specify some event(s) to not pipe at all like `resolve`, `reject`, etc...",
+                            "type": "Array<String>",
+                            "default": [
+                                "finally",
+                                "resolve",
+                                "reject",
+                                "cancel",
+                                "catch"
+                            ]
+                        },
+                        "filter": {
+                            "description": "Specify a function that will receive the value and the metas object and MUST return `true` or `false` to tell if you want to pipe this current event",
+                            "type": "Function"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SEventEmitterPipeSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SEventEmitterPipeSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-event-emitter.shared.interface.SEventEmitterSettingsInterface": {
+                "name": "SEventEmitterSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SEventEmitter settings",
+                "namespace": "@coffeekraken.s-event-emitter.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SEventEmitterSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "asyncStart": {
+                            "description": "Specify if you want to start the event emitting process by yourself using the `start()` method",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "bufferTimeout": {
+                            "description": "Specify how many ms to wait when the emitter is started to emit the buffered events",
+                            "type": "Number",
+                            "default": 1000
+                        },
+                        "defaults": {
+                            "description": "Specify some default object values for events. The property define the event name (of minimatch pattern) and the value is the default that will be applied at each emit",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "castByEvent": {
+                            "description": "Specify a class by event name in which the value will be casted automatically. For example, the \"log\" event value is casted into an SLog instance",
+                            "type": "Object",
+                            "default": {}
+                        },
+                        "bind": {
+                            "description": "Specify another object that will be used as the event emitter in the events metas. This do the same as using the `emitter.bind(...)` method",
+                            "type": "Object"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SEventEmitterSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SEventEmitterSettingsInterface.js",
+                "children": {}
             }
         }
     }

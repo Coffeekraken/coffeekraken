@@ -33,7 +33,8 @@ export { postcssSugarPluginClassesMixinInterface as interface };
 export default async function ({
     params,
     atRule,
-    fromCache,
+    cache,
+    sharedData,
     toCache,
     replaceWith,
 }) {
@@ -47,12 +48,14 @@ export default async function ({
         '@sugar.color.classes;',
         '@sugar.fit.classes;',
         '@sugar.format.classes;',
+        '@sugar.gap.classes;',
         '@sugar.align.classes;',
         '@sugar.text.classes;',
         '@sugar.font.classes;',
         '@sugar.depth.classes;',
         '@sugar.disabled.classes;',
         '@sugar.flex.classes;',
+        '@sugar.float.classes;',
         '@sugar.ratio.classes;',
         '@sugar.border.classes;',
         '@sugar.display.classes;',
@@ -61,6 +64,7 @@ export default async function ({
         '@sugar.pointer.classes;',
         '@sugar.transition.classes;',
         '@sugar.margin.classes;',
+        '@sugar.offsize.classes;',
         '@sugar.opacity.classes;',
         '@sugar.scale.classes;',
         '@sugar.padding.classes;',
@@ -75,12 +79,12 @@ export default async function ({
         '@sugar.whiteSpace.classes;',
     ];
 
-    return cssArray;
+    const hash = `@sugar.classes.${__objectHash({
+        css: cssArray,
+        theme: __STheme.hash(),
+    })}`;
 
-    // const hash = `classes-${__objectHash({
-    //     css: cssArray,
-    //     theme: __STheme.hash(),
-    // })}`;
+    return cache('@sugar.classes', hash, cssArray);
 
     // // from cache
     // const cached = await fromCache(hash, '@sugar.classes;');

@@ -19,7 +19,7 @@
         width: 350px;
         padding: sugar.padding(30);
         background-color: sugar.color(main, surface);
-        background-image: url('/src/img/discord-illustration-bkg.png');
+        background-image: url('/dist/img/discord-illustration-bkg.png');
         background-position: 50% 50%;
         background-size: cover;
 

@@ -68,6 +68,7 @@ export default function theme({
     const finalParams: IPostcssSugarPluginThemeParams = {
         ...params,
     };
+
     if (finalParams.return === 'var') {
         if (finalParams.scalable) {
             return `sugar.scalable(${__STheme.cssVar(

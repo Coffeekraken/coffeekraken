@@ -18,7 +18,7 @@ import __matches from './matches';
  * @todo      tests
  *
  * @example  	js
- * import closest from '@coffeekraken/sugar/js/dom/closest'
+ * import closest from '@coffeekraken/sugar/js/dom/query/closest'
  * const closestElm = closest(myCoolElement, '.my-cool-class');
  * if (closestElm) {
  * 		// we have found en element that matches the selector

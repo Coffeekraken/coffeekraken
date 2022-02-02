@@ -1,28 +1,18 @@
 import __SClass, { ISClass } from '@coffeekraken/s-class';
 import { ISEventEmitter } from '@coffeekraken/s-event-emitter';
-import __SLog, { ISLog, ISLogAsk } from '@coffeekraken/s-log';
+import { ISLog, ISLogAsk } from '@coffeekraken/s-log';
 import { ISPromise } from '@coffeekraken/s-promise';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __packageJson from '@coffeekraken/sugar/node/package/jsonSync';
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-import __SEnv from '@coffeekraken/s-env';
 import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
+import __SStdioSettingsInterface from './interface/SStdioSettingsInterface';
 
 export interface ISStdioCtorSettings {
     stdio?: ISStdioSettings;
 }
 
-export interface ISStdioSettingsMetas {
-    time: boolean;
-}
-
 export interface ISStdioSettings {
-    id: string;
     filter: typeof Function;
     processor: typeof Function;
-    metas: ISStdioSettingsMetas;
-    ui: ISStdioUi;
     defaultLogObj: Partial<ISLog>;
     defaultAskObj: Partial<ISLogAsk>;
 }
@@ -127,40 +117,16 @@ export default class SStdio extends __SClass implements ISStdio {
     _lastLogObj?: ISLog;
 
     /**
-     * @name      NO_UI
+     * @name      UI_BASIC
      * @type      ISStdioUi
      * @static
      *
-     * Represent the "no" ui
+     * Represent the "basic" stdio
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static NO_UI: ISStdioUi = -1;
-
-    /**
-     * @name      UI_TERMINAL
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "terminal" ui
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static UI_TERMINAL: ISStdioUi = 'terminal';
-
-    /**
-     * @name      UI_CONSOLE
-     * @type      ISStdioUi
-     * @static
-     *
-     * Represent the "console" ui
-     *
-     * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    static UI_CONSOLE: ISStdioUi = 'console';
+    static UI_BASIC: ISStdioUi = -1;
 
     /**
      * @name      _logsBuffer
@@ -246,7 +212,7 @@ export default class SStdio extends __SClass implements ISStdio {
     static existingOrNew(
         id: string,
         sources,
-        stdio: ISStdioUi = SStdio.NO_UI,
+        stdio: ISStdioUi = SStdio.UI_BASIC,
         settings = {},
     ) {
         // @ts-ignore
@@ -340,17 +306,7 @@ export default class SStdio extends __SClass implements ISStdio {
         super(
             __deepMerge(
                 {
-                    stdio: {
-                        filter: null,
-                        processor: null,
-                        metas: {
-                            time: false,
-                        },
-                        ui: SStdio.NO_UI,
-                        defaultLogObj: {
-                            decorators: true,
-                        },
-                    },
+                    stdio: __SStdioSettingsInterface.defaults()
                 },
                 settings,
             ),
@@ -445,6 +401,8 @@ export default class SStdio extends __SClass implements ISStdio {
 
         // "ask" event
         source.on('ask', async (askObj: ISLogAsk, metas, answer) => {
+            // @ts-ignore
+            askObj.metas = metas;
             const res = await this.ask(askObj);
             answer?.(res);
         });

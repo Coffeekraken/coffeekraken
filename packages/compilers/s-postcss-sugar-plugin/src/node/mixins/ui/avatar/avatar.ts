@@ -79,8 +79,8 @@ export default function ({
             position: relative;
             display: inline-block;
             overflow: hidden;
-            width: 1em;
-            height: 1em;
+            width: sugar.scalable(1em);
+            height: sugar.scalable(1em);
         `);
     }
 
@@ -92,7 +92,7 @@ export default function ({
                     border-width: sugar.theme(ui.avatar.borderWidth);
                     border-color: sugar.color(current);
                     border-style: solid;
-                    @sugar.depth(sugar.theme(ui.avatar.depth));
+                    @sugar.depth(sugar.theme.value(ui.avatar.depth));
                 `);
                 break;
         }

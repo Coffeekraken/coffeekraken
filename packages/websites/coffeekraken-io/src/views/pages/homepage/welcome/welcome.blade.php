@@ -1,5 +1,7 @@
 <section id="homepage-welcome">
 
+    <ck-falling-stars></ck-falling-stars>
+
     {{-- <div class="__background"></div>
     <canvas class="__canvas" id="welcome-canvas"></canvas>
     <canvas class="__canvas" id="welcome-canvas-2"></canvas> --}}

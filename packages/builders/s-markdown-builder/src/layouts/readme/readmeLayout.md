@@ -1,8 +1,8 @@
 <!-- image -->
 
-{{#if config.markdownBuilder.layouts.readme.data.headerImageUrl }}
-![{{ config.packageJson.name }}]({{ config.markdownBuilder.layouts.readme.data.headerImageUrl }})
-{{/if}}
+<!-- {{#if settings.layouts.readme.data.headerImageUrl }}
+![{{ packageJson.name }}]({{ settings.layouts.readme.data.headerImageUrl }})
+{{/if}} -->
 
 <!-- header -->
 
@@ -30,9 +30,13 @@
 {{#> section-doc-menu}}{{/ section-doc-menu}}
 {{/isSectionWanted}}
 
+<!-- License -->
+
 {{#isSectionWanted 'license'}}
 {{#> section-license}}{{/section-license}}
 {{/isSectionWanted}}
+
+<!-- Contact -->
 
 {{#isSectionWanted 'contact'}}
 {{#> section-contact}}{{/section-contact}}

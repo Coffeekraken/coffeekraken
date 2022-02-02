@@ -1,4 +1,5 @@
 
+{{#if docMenu.tree.length}}
 {{#*inline "myPartial"}}
 {{#if this.slug}}
 - [{{ this.name }}]({{ this.slug }})
@@ -19,3 +20,4 @@
 {{#each docMenu.tree}}
 {{> myPartial }}
 {{/each}}
+{{/if}}

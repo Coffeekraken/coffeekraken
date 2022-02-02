@@ -45,7 +45,8 @@ export default function ({
     };
 
     const vars: string[] = [
-        `
+      `/* purgecss start ignore */
+
    /*! destyle.css v2.0.2 | MIT License | https://github.com/nicolas-cusan/destyle.css */
 
 /* Reset box-model and set borders */
@@ -508,6 +509,8 @@ th {
   text-align: left;
   font-weight: bold;
 }
+
+/* purgecss end ignore */
   `,
     ];
 

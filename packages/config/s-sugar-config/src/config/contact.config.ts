@@ -44,10 +44,10 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             get url() {
-                return (
+                return `mailto:${(
                     config?.packageJson?.author?.email ??
                     config?.git?.user?.email
-                );
+                )}`;
             },
             /**
              * @name            shield

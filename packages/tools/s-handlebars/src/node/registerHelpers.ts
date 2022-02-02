@@ -27,6 +27,5 @@ import * as __helpers from './helpers/index';
 export default function registerHelpers(handlebars: any): void {
     for (const [key, value] of Object.entries(__helpers)) {
         handlebars.registerHelper(key, value);
-        console.log;
     }
 }

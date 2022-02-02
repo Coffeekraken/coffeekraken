@@ -12,44 +12,85 @@ import __SRequest from '@coffeekraken/s-request';
 import { html } from 'lit';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
-let searchItems;
+import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
+import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 __sFiltrableInputDefine({
     value: 'name',
     label: (item) => {
         return `${item.type} ${item.namespace}`;
     },
     filtrable: ['namespace', 'name', 'type'],
+    searchValuePreprocess: (value) => {
+        // "@" searches
+        if (value.match(/^@[a-z_-]+\s.*/)) {
+            return value.replace(/^@[a-z_-]+\s/, '').trim();
+        }
+        if (value.match(/^@[a-z_-]+/)) {
+            return value.replace(/^@/, '').trim();
+        }
+        // "/" searches
+        if (value.match(/^\/[a-z]+\s.*/)) {
+            return value.replace(/^\/[a-z]+\s/, '').trim();
+        }
+        if (value.match(/^\/[a-z]+/)) {
+            return value.replace(/^\//, '').trim();
+        }
+        // default
+        return value;
+    },
     templates: ({ type, item, html, unsafeHTML }) => {
-        var _a, _b, _c;
+        var _a, _b, _c, _d;
         if (type === 'item') {
-            return html `
-                    <div class="__item">
-                        <div class="s-flex s-mbe:10">
-                            <h4
-                                class="__title s-typo:bold s-tc:accent s-flex-item:grow"
-                            >
-                                ${unsafeHTML(item.name)}
-                            </h4>
-                            <div>
-                                ${item.platform.map((platform) => html `
-                                        <i
-                                            class="s-platform:${platform.name}"
-                                        ></i>
-                                    `)}
-                                &nbsp;
-                                <span class="s-badge s-color:main"
-                                    >${unsafeHTML((_a = item.type) !== null && _a !== void 0 ? _a : '')}</span
-                                >
+            switch (item.type) {
+                case 'category':
+                case 'package':
+                    return html `
+                            <div class="ck-search__list-item">
+                                <div class="s-flex s-mbe:10">
+                                    <h4
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                    >
+                                        ${unsafeHTML(item.name)}
+                                    </h4>
+                                </div>
+                                <p class="__description s-typo:p s-truncate:2">
+                                    ${unsafeHTML((_a = item.description) !== null && _a !== void 0 ? _a : '')}
+                                </p>
                             </div>
-                        </div>
-                        <p class="__namespace s-opacity:50 s-font:20 s-mbe:20">
-                            ${unsafeHTML((_b = item.namespace) !== null && _b !== void 0 ? _b : '')}
-                        </p>
-                        <p class="__description s-typo:p s-truncate:2">
-                            ${unsafeHTML((_c = item.description) !== null && _c !== void 0 ? _c : '')}
-                        </p>
-                    </div>
-                `;
+                        `;
+                    break;
+                default:
+                    return html `
+                            <div class="ck-search__list-item">
+                                <div class="s-flex s-mbe:10">
+                                    <h4
+                                        class="ck-search__list-item-title s-typo:bold s-tc:accent s-flex-item:grow"
+                                    >
+                                        ${unsafeHTML(item.name)}
+                                    </h4>
+                                    <div>
+                                        ${item.platform.map((platform) => html `
+                                                <i
+                                                    class="s-platform:${platform.name}"
+                                                ></i>
+                                            `)}
+                                        &nbsp;
+                                        <span class="s-badge s-color:main"
+                                            >${unsafeHTML((_b = item.type) !== null && _b !== void 0 ? _b : '')}</span
+                                        >
+                                    </div>
+                                </div>
+                                <p class="__namespace s-opacity:50 s-font:20 s-mbe:20">
+                                    ${unsafeHTML((_c = item.namespace) !== null && _c !== void 0 ? _c : '')}
+                                </p>
+                                <p class="__description s-typo:p s-truncate:2">
+                                    ${unsafeHTML((_d = item.description) !== null && _d !== void 0 ? _d : '')}
+                                </p>
+                            </div>
+                        `;
+                    break;
+            }
         }
     },
     items: ({ value }) => __awaiter(void 0, void 0, void 0, function* () {
@@ -69,55 +110,156 @@ __sFiltrableInputDefine({
                 return items;
             });
         }
+        let items;
         const cached = window.localStorage.getItem('ck-search-items');
         if (!cached) {
-            const items = yield fetchItems();
-            return items;
+            items = yield fetchItems();
         }
         else {
             fetchItems();
-            const items = JSON.parse(cached);
-            return items;
+            items = JSON.parse(cached);
         }
+        if (value.match(/^@([a-z_-]+)?$/)) {
+            let packageName = value.replace(/^@/, '');
+            let packages = {};
+            items.forEach((item) => {
+                if (item.package.name.includes(`@coffeekraken/${packageName}`)) {
+                    if (!packages[item.package.name]) {
+                        packages[item.package.name] = {
+                            value: `@${item.package.name.replace('@coffeekraken/', '')}`,
+                            namespace: item.package.name,
+                            type: 'package',
+                            name: item.package.name,
+                            description: item.package.description,
+                            props: {
+                                value: 'value'
+                            }
+                        };
+                    }
+                }
+            });
+            return Object.values(packages);
+        }
+        if (value.match(/^\/([a-z]+)?$/)) {
+            return [{
+                    value: '/doc',
+                    namespace: '/doc',
+                    type: 'category',
+                    name: 'Documentation',
+                    description: 'Search through the documentation',
+                    props: {
+                        value: 'value'
+                    }
+                }, {
+                    value: '/styleguide',
+                    namespace: '/styleguide',
+                    type: 'category',
+                    name: 'Styleguide',
+                    description: 'Search through the styleguide',
+                    props: {
+                        value: 'value'
+                    }
+                }, {
+                    value: '/api',
+                    namespace: '/api',
+                    type: 'category',
+                    name: 'API',
+                    description: 'Search through the API',
+                    props: {
+                        value: 'value'
+                    }
+                }];
+        }
+        if (value.match(/^@[a-z_-]+\s.*?/)) {
+            console.log(`"${value}"`);
+            const packageName = `@coffeekraken/${value.replace(/^@/, '').split(' ')[0].trim()}`;
+            console.log(packageName);
+            return items.filter(item => {
+                return item.package.name.startsWith(packageName);
+            });
+        }
+        if (value.match(/^\/[a-z]+.*?/)) {
+            if (value.startsWith('/doc')) {
+                return items.filter(item => {
+                    return item.type === 'Markdown';
+                });
+            }
+            if (value.startsWith('/styleguide')) {
+                return items.filter(item => {
+                    return item.type === 'Styleguide';
+                });
+            }
+            if (value.startsWith('/api')) {
+                return items.filter(item => {
+                    return item.type !== 'Markdown' && item.type !== 'Styleguide';
+                });
+            }
+        }
+        return items;
     }),
 }, 'ck-search-input');
 export default class CKSearch extends __SLitComponent {
     constructor() {
+        var _a, _b;
         super({
             litComponent: {
                 shadowDom: false,
             },
         });
+        const queryObj = __queryStringToObject((_a = document.location.search) !== null && _a !== void 0 ? _a : '');
+        this._search = (_b = queryObj.search) !== null && _b !== void 0 ? _b : '';
     }
     firstUpdated() {
-        this.addEventListener('select', (e) => {
+        this._$input = this.querySelector('input');
+        __hotkey('ctrl+p').on('press', () => {
+            __cursorToEnd(this._$input);
+        });
+        this.addEventListener('selectItem', (e) => {
             var _a;
             const item = e.detail;
-            if ((_a = item.menu) === null || _a === void 0 ? void 0 : _a.slug) {
-                if (item.package !== window.packageJson.name) {
-                    document.location.href = `${item.package}${item.menu.slug}`;
-                }
-                else {
-                    document.location.href = item.menu.slug;
-                }
+            if (item.type === 'category' || item.type === 'package') {
+                this._$input.value = item.value + ' ';
+                __cursorToEnd(this._$input);
             }
             else {
-                document.location.href = `/api/${item.fullNamespace}`;
+                if ((_a = item.menu) === null || _a === void 0 ? void 0 : _a.slug) {
+                    if (item.package.name !== window.packageJson.name) {
+                        document.location.href = `/${item.package.name}${item.menu.slug}`;
+                    }
+                    else {
+                        document.location.href = item.menu.slug;
+                    }
+                }
+                else {
+                    document.location.href = `/api/${item.fullNamespace}`;
+                }
             }
         });
     }
     render() {
         return html `
             <div class="ck-search">
-                <div class="__background"></div>
-                <div class="__content s-color:accent">
+                <div class="ck-search__background"></div>
+                <div class="ck-search__content s-color:accent">
                     <ck-search-input>
                         <input
-                            placeholder="API search..."
+                            placeholder="Search..."
                             type="text"
                             name="search"
+                            value="${this._search}"
                             class="s-input s-color:accent s-scale:11"
                         />
+                        <template type="before">
+                            <div class="s-p:30" id="search-tips">
+                                <p class="s-mbe:20">
+                                    <span class="s-typo:p s-tc:current">Search tips</span>
+                                    <i class="s-icon:close s-float:right" s-activate href="#search-tips"></i>
+                                </p>
+                                <p class="s-typo:p">
+                                    <span class="s-badge:outline s-mie:10">/...</span> Categories&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge:outline s-mie:10">@...</span> Packages&nbsp;&nbsp;&nbsp;&nbsp;<span class="s-badge s-color:complementary s-mie:10">CMD+P</span> Search shortcut
+                                </p>
+                            </div>
+                        </template>
                     </ck-search-input>
                 </div>
             </div>
@@ -128,4 +270,4 @@ export function define(props = {}, tagName = 'ck-search') {
     __SLitComponent.setDefaultProps(tagName, props);
     customElements.define(tagName, CKSearch);
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ0tTZWFyY2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDS1NlYXJjaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7O0FBRWQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFDakQsT0FBTyxFQUFFLElBQUksRUFBRSxNQUFNLEtBQUssQ0FBQztBQUMzQixPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUU1RCxPQUFPLEVBQUUsTUFBTSxJQUFJLHVCQUF1QixFQUFFLE1BQU0sMkNBQTJDLENBQUM7QUFJOUYsSUFBSSxXQUFXLENBQUM7QUFDaEIsdUJBQXVCLENBQ25CO0lBQ0ksS0FBSyxFQUFFLE1BQU07SUFDYixLQUFLLEVBQUUsQ0FBQyxJQUFJLEVBQUUsRUFBRTtRQUNaLE9BQU8sR0FBRyxJQUFJLENBQUMsSUFBSSxJQUFJLElBQUksQ0FBQyxTQUFTLEVBQUUsQ0FBQztJQUM1QyxDQUFDO0lBQ0QsU0FBUyxFQUFFLENBQUMsV0FBVyxFQUFFLE1BQU0sRUFBRSxNQUFNLENBQUM7SUFDeEMsU0FBUyxFQUFFLENBQUMsRUFBRSxJQUFJLEVBQUUsSUFBSSxFQUFFLElBQUksRUFBRSxVQUFVLEVBQUUsRUFBRSxFQUFFOztRQUM1QyxJQUFJLElBQUksS0FBSyxNQUFNLEVBQUU7WUFDakIsT0FBTyxJQUFJLENBQUE7Ozs7OztrQ0FNTyxVQUFVLENBQUMsSUFBSSxDQUFDLElBQUksQ0FBQzs7O2tDQUdyQixJQUFJLENBQUMsUUFBUSxDQUFDLEdBQUcsQ0FDZixDQUFDLFFBQVEsRUFBRSxFQUFFLENBQUMsSUFBSSxDQUFBOztnRUFFVSxRQUFRLENBQUMsSUFBSTs7cUNBRXhDLENBQ0o7Ozt1Q0FHTSxVQUFVLENBQUMsTUFBQSxJQUFJLENBQUMsSUFBSSxtQ0FBSSxFQUFFLENBQUM7Ozs7OzhCQUtwQyxVQUFVLENBQUMsTUFBQSxJQUFJLENBQUMsU0FBUyxtQ0FBSSxFQUFFLENBQUM7Ozs4QkFHaEMsVUFBVSxD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiQ0tTZWFyY2guanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJDS1NlYXJjaC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjOzs7Ozs7Ozs7O0FBRWQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUFDakQsT0FBTyxFQUFFLElBQUksRUFBRSxNQUFNLEtBQUssQ0FBQztBQUMzQixPQUFPLGVBQWUsTUFBTSwrQkFBK0IsQ0FBQztBQUU1RCxPQUFPLEVBQUUsTUFBTSxJQUFJLHVCQUF1QixFQUFFLE1BQU0sMkNBQTJDLENBQUM7QUFDOUYsT0FBTyxxQkFBcUIsTUFBTSxvREFBb0QsQ0FBQztBQUN2RixPQUFPLFFBQVEsTUFBTSx3Q0FBd0MsQ0FBQztBQUM5RCxPQUFPLGFBQWEsTUFBTSw4Q0FBOEMsQ0FBQztBQUV6RSx1QkFBdUIsQ0FDbkI7SUFDSSxLQUFLLEVBQUUsTUFBTTtJQUNiLEtBQUssRUFBRSxDQUFDLElBQUksRUFBRSxFQUFFO1FBQ1osT0FBTyxHQUFHLElBQUksQ0FBQyxJQUFJLElBQUksSUFBSSxDQUFDLFNBQVMsRUFBRSxDQUFDO0lBQzVDLENBQUM7SUFDRCxTQUFTLEVBQUUsQ0FBQyxXQUFXLEVBQUUsTUFBTSxFQUFFLE1BQU0sQ0FBQztJQUN4QyxxQkFBcUIsRUFBRSxDQUFDLEtBQUssRUFBRSxFQUFFO1FBRTdCLGVBQWU7UUFDZixJQUFJLEtBQUssQ0FBQyxLQUFLLENBQUMsZ0JBQWdCLENBQUMsRUFBRTtZQUMvQixPQUFPLEtBQUssQ0FBQyxPQUFPLENBQUMsY0FBYyxFQUFFLEVBQUUsQ0FBQyxDQUFDLElBQUksRUFBRSxDQUFDO1NBQ25EO1FBQ0QsSUFBSSxLQUFLLENBQUMsS0FBSyxDQUFDLFlBQVksQ0FBQyxFQUFFO1lBQzNCLE9BQU8sS0FBSyxDQUFDLE9BQU8sQ0FBQyxJQUFJLEVBQUUsRUFBRSxDQUFDLENBQUMsSUFBSSxFQUFFLENBQUM7U0FDekM7UUFFRCxlQUFlO1FBQ2YsSUFBSSxLQUFLLENBQUMs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

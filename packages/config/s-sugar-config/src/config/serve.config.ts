@@ -1,49 +1,6 @@
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 
 export function postprocess(env, serveConfig, config) {
-    if (env.env === 'production') {
-        serveConfig.img.url = config.storage.dist.imgDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.js.url = config.storage.dist.jsDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.css.url = config.storage.dist.cssDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.icons.url = config.storage.dist.iconsDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.fonts.url = config.storage.dist.fontsDir.replace(
-            __packageRoot(),
-            '',
-        );
-    } else {
-        serveConfig.img.url = config.storage.src.imgDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.js.url = config.storage.src.jsDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.css.url = config.storage.src.cssDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.icons.url = config.storage.src.iconsDir.replace(
-            __packageRoot(),
-            '',
-        );
-        serveConfig.fonts.url = config.storage.src.fontsDir.replace(
-            __packageRoot(),
-            '',
-        );
-    }
     return serveConfig;
 }
 
@@ -54,70 +11,84 @@ export default (env, config) => {
              * @name            url
              * @namespace       config.serve.img
              * @type            String
-             * @default         config.storage.(src|dist).imgDir.replace(__packageRoot(),'')
+             * @default         /dist/img
              *
              * Specify the serving img folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: '',
+            url: '/dist/img',
         },
         js: {
             /**
              * @name            url
              * @namespace       config.serve.js
              * @type            String
-             * @default         config.storage.(src|dist).jsDir.replace(__packageRoot(),'')
+             * @default         /dist/js
              *
              * Specify the serving js folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: '',
+            url: '/dist/js',
         },
         css: {
             /**
              * @name            url
              * @namespace       config.serve.css
              * @type            String
-             * @default         config.storage.(src|dist).cssDir.replace(__packageRoot(),'')
+             * @default         /dist/css
              *
              * Specify the serving css folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: '',
+            url: '/dist/css',
         },
         icons: {
             /**
              * @name            url
              * @namespace       config.serve.icons
              * @type            String
-             * @default         config.storage.(src|dist).iconsDir.replace(__packageRoot(),'')
+             * @default         /dist/icons
              *
              * Specify the serving icons folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: '',
+            url: '/dist/icons',
         },
         fonts: {
             /**
              * @name            url
              * @namespace       config.serve.fonts
              * @type            String
-             * @default         config.storage.(src|dist).fontsDir.replace(__packageRoot(),'')
+             * @default         /dist/fonts
              *
              * Specify the serving fonts folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: '',
+            url: '/dist/fonts',
+        },
+        cache: {
+            /**
+             * @name            url
+             * @namespace       config.serve.cache
+             * @type            String
+             * @default         /cache
+             *
+             * Specify the serving cache folder path to use in your views
+             *
+             * @since           2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            url: '/cache',
         },
     };
 };

@@ -51,10 +51,10 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
                 type: 'String',
                 required: true,
             },
-            gutter: {
+            gap: {
                 type: 'Number',
             },
-            gutterBetween: {
+            gapBetween: {
                 type: 'Boolean',
                 default: false,
             },
@@ -70,8 +70,8 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
             },
             scope: {
                 type: 'Array<String>',
-                values: ['bare', 'lnf', 'gutter', 'align', 'justify'],
-                default: ['bare', 'lnf', 'gutter', 'align', 'justify'],
+                values: ['bare', 'lnf', 'gap', 'align', 'justify'],
+                default: ['bare', 'lnf', 'gap', 'align', 'justify'],
             },
         };
     }
@@ -79,8 +79,8 @@ class postcssSugarPluginLayoutInterface extends __SInterface {
 
 export interface IPostcssSugarPluginLayoutParams {
     layout: string;
-    gutter: number;
-    gutterBetween: boolean;
+    gap: number;
+    gapBetween: boolean;
     align: 'start' | 'end' | 'center' | 'stretch';
     justify: 'start' | 'end' | 'center' | 'stretch';
     scope: string[];
@@ -227,8 +227,8 @@ export default function ({
               grid-row-start: ${rowsStartByArea[areaId]};
               grid-row-end: ${rowsEndByArea[areaId] + 1};
               ${
-                  finalParams.gutter
-                      ? `padding: sugar.space(${finalParams.gutter})`
+                  finalParams.gap
+                      ? `padding: sugar.space(${finalParams.gap})`
                       : ''
               }
           }
@@ -236,19 +236,19 @@ export default function ({
         });
     }
 
-    if (finalParams.scope.indexOf('gutter') !== -1 && finalParams.gutter) {
+    if (finalParams.scope.indexOf('gap') !== -1 && finalParams.gap) {
         areas.forEach((areaId) => {
             vars.push(`
           .area-${areaId}, & > *:nth-child(${areaId}) {
-            padding: sugar.space(${finalParams.gutter});
+            padding: sugar.space(${finalParams.gap});
           }
       `);
         });
 
-        if (finalParams.gutterBetween) {
+        if (finalParams.gapBetween) {
             vars.push(`
-        width: calc(100% + sugar.space(${finalParams.gutter}) * 2);
-        margin-left: calc(sugar.space(${finalParams.gutter}) * -1);
+        width: calc(100% + sugar.space(${finalParams.gap}) * 2);
+        margin-left: calc(sugar.space(${finalParams.gap}) * -1);
       `);
         }
     }

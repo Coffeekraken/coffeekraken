@@ -23,16 +23,16 @@ import { spawnSync } from 'child_process';
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default async function commandExists(command: string): Promise<boolean> {
+export default async function commandExists(command: string): Promise<boolean|string> {
     const isWin = process.platform === 'win32';
     const where = isWin ? 'where' : 'whereis';
 
     // check by version
-    const versionOut = spawnSync(`${command} -v`, ['/?'], {
+    const versionOut = spawnSync(`${command} --version`, ['/?'], {
         encoding: 'utf-8',
         shell: true,
     });
-    if (versionOut.stdout) return true;
+    if (versionOut.stdout) return versionOut.stdout;
 
     const out = spawnSync(where + ' ' + command, ['/?'], {
         encoding: 'utf8',

@@ -1,36 +1,35 @@
 <ul class="s-fs-tree">
 
     @foreach ($menu as $item)
-        
+
         @php
             $subId = $id . '-' . \Sugar\string\idCompliant($item->name);
         @endphp
 
         @if (is_object($item))
-            <li id="{{ $subId }}">
-                @if ($item->slug)
+            @if ($item->slug)
+                <li>
                     <i class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent"></i>
                     <a href="{{ $item->slug }}">
-                @else
-                    <i class="s-icon:folder-opened s-tc:info s-when:active"></i>
-                    <i class="s-icon:folder"></i>
-                    <span s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle save-state>
-                @endif
-                @if ($item->name)
-                    {{ $item->name }}
-                @endif
-                @if ($item->slug)
+                        {{ $item->name }}
                     </a>
-                @else
+                </li>
+            @else
+                <li id="{{ $subId }}" s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle
+                    save-state trigger="click,event:actual">
+                    <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
+                    <i class="s-icon:folder"></i>
+                    <span>
+                        {{ $item->name }}
                     </span>
-                @endif
-                @if (!$item->tree)
-                    @include('pages.markdown.menu', [
+                    @if (!$item->tree)
+                        @include('pages.markdown.menu', [
                         'menu' => $item,
                         'id' => $subId
-                    ])
-                @endif
-            </li>
+                        ])
+                    @endif
+                </li>
+            @endif
         @else
             {{-- World --}}
         @endif

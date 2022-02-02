@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name           classes
@@ -47,7 +48,8 @@ export default function ({
 
     const vars = new CssVars();
 
-    const marginsObj = __STheme.config('padding');
+    const paddingsObj = __STheme.config('padding');
+    const paddingsKeys = __keysFirst(Object.keys(paddingsObj), ['default']);
 
     vars.comment(
         () => `
@@ -68,7 +70,7 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        ${Object.keys(marginsObj)
+        ${paddingsKeys
             .map((spaceName) => {
                 if (spaceName === 'default') return '';
                 return [
@@ -90,29 +92,24 @@ export default function ({
             .join('\n')}
         *
         * 
-        * @example        html
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding inline</h3>
-        *   <p class="s-bg:accent s-pi:30">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">${__faker.name.findName()}</p>
-        *   <p class="s-bg:ui s-pie:30">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">${__faker.name.findName()}</p>
-        * </div>
+        * @example        html          Inline
+        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * 
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
-        *   <p class="s-bg:accent s-pi:30">${__faker.name.findName()}</p>
-        *   <p class="s-bg:complementary s-pis:20 s-pie:50">${__faker.name.findName()}</p>
-        *   <p class="s-bg:ui s-pie:30">${__faker.name.findName()}</p>
-        *   <p class="s-bg:error s-pis:20 s-pie:40">${__faker.name.findName()}</p>
-        * </div>
+        * @example            html                Block
+        *   <div class="s-bg:accent s-radius s-pbs:30 s-pbe:40 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bg:complementary s-radius s-pb:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bg:main s-radius s-pbs:50 s-pbe:30 s-text:center s-mbe:20">${__faker.name.findName()}</div>
+        *   <div class="s-bg:error s-radius s-pbs:100 s-pbe:60 s-text:center s-mbe:20">${__faker.name.findName()}</div>
         * 
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Padding Block</h3>
-        *   <div class="s-bg:accent s-pbe:40 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:complementary s-pb:30 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:ui s-pbs:20 s-pbe:10 s-text:center">${__faker.name.findName()}</div>
-        *   <div class="s-bg:error s-pbs:20 s-pbe:60 s-text:center">${__faker.name.findName()}</div>
+        * @example       html          RTL
+        * <div dir="rtl">
+        *   <p class="s-bg:accent s-radius s-pi:30 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:complementary s-radius s-pis:50 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:main s-radius s-pis:80 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
+        *   <p class="s-bg:error s-radius s-pis:100 s-pb:30 s-mbe:20">${__faker.name.findName()}</p>
         * </div>
         * 
         * @since      2.0.0
@@ -121,7 +118,7 @@ export default function ({
     `,
     );
 
-    Object.keys(marginsObj).forEach((spaceName) => {
+    paddingsKeys.forEach((spaceName) => {
         // margins
         const clsMargin = `s-p:${spaceName}`;
         vars.comment(

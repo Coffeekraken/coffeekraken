@@ -2,69 +2,108 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [
-            "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-color",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-date-picker-component",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-frontstack",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
-            "@coffeekraken/s-vite-plugin-riotjs",
-            "@coffeekraken/s-vite-plugin-sugar",
-            "@coffeekraken/s-vite",
-            "@coffeekraken/sugar"
-        ],
+        "extends": [],
         "map": {
-            "@coffeekraken.s-glob.node.sGlob": {
+            "@coffeekraken.s-glob.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-glob.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-glob.node.interface.SGlobSettingsInterface": {
+                "name": "SGlobSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the SGlob settings.",
+                "namespace": "@coffeekraken.s-glob.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SGlobSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "cwd": {
+                            "description": "Specify the working directory to run the command in.",
+                            "type": "String",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-glob"
+                        },
+                        "symlinks": {
+                            "description": "Specify if you want to follow symlinks or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "nodir": {
+                            "description": "Specify if you want to ignore directories or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "contentRegExp": {
+                            "description": "Specify a regex to use on the file content to filter resolved files",
+                            "type": "RegExp"
+                        },
+                        "SFile": {
+                            "description": "Specify if you want back some SFile instances or simple string path",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "exclude": {
+                            "description": "Specify some paths or patterns you want to exclude from your resolve process",
+                            "type": "Array<String>",
+                            "default": []
+                        },
+                        "defaultExcludes": {
+                            "description": "Specfy if you want to use the default excludes globs setted under the config.storage.exclude configuration",
+                            "type": "Boolean",
+                            "default": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SGlobSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SGlobSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-glob.node.SGlob": {
                 "name": "SGlob",
                 "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
                 "description": "This class represent a glob pattern and can be used to resolve some globs and get back\nan array of SFile instances or to extract some part of the pattern, etc...",
                 "namespace": "@coffeekraken.s-glob.node",
                 "status": "beta",
@@ -84,7 +123,7 @@
                 "extension": "ts",
                 "relPath": "src/node/SGlob.ts",
                 "children": {
-                    "isGlob": {
+                    "isglob": {
                         "name": "isGlob",
                         "type": "Function",
                         "description": "Alias to the ```isGlob``` function available in sugar under \"shared.is.isGlob\" namespace",
@@ -108,7 +147,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "extractGlob": {
+                    "extractglob": {
                         "name": "extractGlob",
                         "type": "Function",
                         "description": "This function simply return you the glob part of the glob(s) passed in constructor",
@@ -119,7 +158,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "extractNoneGlob": {
+                    "extractnoneglob": {
                         "name": "extractNoneGlob",
                         "type": "Function",
                         "description": "This function simply return you the none glob part of the glob(s) passed in constructor",

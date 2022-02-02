@@ -129,71 +129,64 @@ export default function ({
             .join('\n')}
         * @cssClass             s-avatar:interactive            Specify that this avatar is interactive
         * 
-        * @example        html
         ${finalParams.styles.map((style) => {
-            return ` * <!-- ${style} -->
-                  * <div class="s-mbe:50">
-                  *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+            return ` * @example        html         ${style}
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20" src="https://picsum.photos/300/300?v=23" />
+                  } s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23" />
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
+                  } s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
+                  } s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
+                  } s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
+                  } s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
                   *   <img class="s-avatar${
                       style === finalParams.defaultStyle ? '' : `:${style}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />
-                  * </div>`;
+                  } s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />`;
         })}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes.map((shape) => {
-            return ` * <!-- ${shape} -->
-                  * <div class="s-mbe:50">
-                  *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+            return ` * @example        html         ${shape}
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20" src="https://picsum.photos/300/300?v=23" />
+                  } s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23" />
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
+                  } s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=24" />
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
+                  } s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=26" />
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
+                  } s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=21" />
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
+                  } s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=255" />
                   *   <img class="s-avatar${
                       shape === finalParams.defaultShape ? '' : `:${shape}`
-                  } s-font:100 s-mie:20 s-mbe:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />
-                  * </div>`;
+                  } s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=2121" />`;
         })}
         * 
-        * * <!-- interactive -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Interactive style</h3>
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20" src="https://picsum.photos/300/300?v=23223434" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20 s-color:accent" src="https://picsum.photos/300/300?v=2333234234" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20 s-color:complementary" src="https://picsum.photos/300/300?v=2113111" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20 s-color:info" src="https://picsum.photos/300/300?v=26663332" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20 s-color:success" src="https://picsum.photos/300/300?v=288333232" />
-        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-mbe:20 s-color:error" src="https://picsum.photos/300/300?v=23343222" />
-        * </div>
+        * @example       html         Interactive
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20" src="https://picsum.photos/300/300?v=23223434" />
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:accent" src="https://picsum.photos/300/300?v=2333234234" />
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:complementary" src="https://picsum.photos/300/300?v=2113111" />
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:info" src="https://picsum.photos/300/300?v=26663332" />
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:success" src="https://picsum.photos/300/300?v=288333232" />
+        *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=23343222" />
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
     `,
     );

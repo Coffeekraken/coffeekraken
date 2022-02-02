@@ -8,6 +8,7 @@ import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SClass from '@coffeekraken/s-class';
+import __SRequestParamsInterface from './interface/SRequestParamsInterface';
 
 /**
  * @name 		                    SRequest
@@ -50,9 +51,37 @@ export interface ISRequestCtorSettings {
 }
 export interface ISRequestSettings {}
 
+export interface ISRequestParams {
+    url: string;
+    baseUrl?: string;
+    method: 'GET' | 'DELETE' | 'HEAD' | 'OPTIONS' | 'POST' | 'PUT' | 'PATCH';
+    headers: any;
+    params: any;
+    data: any;
+    timeout: number;
+}
+
+export interface ISRequestAxiosResonse {
+    data: any;
+    status: number;
+    statusText: string;
+    headers: any;
+    config: any;
+    request: any;
+}
+
+export interface ISRequestResponse {
+   status: number;
+    statusText: string;
+    data: any;
+    count: number;
+    axiosResponse: ISRequestAxiosResonse,
+    axiosResponses: ISRequestAxiosResonse[], 
+}
+
 export default class SRequest extends __SClass {
     /**
-     * @name                      _defaultRequestSettings
+     * @name                      _defaultRequestParams
      * @type                      {SRequestConfig}
      * @private
      *
@@ -60,7 +89,7 @@ export default class SRequest extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    _defaultRequestSettings = {};
+    _defaultRequestParams = {};
 
     /**
      * @name                      _currentRequestSettings
@@ -104,11 +133,9 @@ export default class SRequest extends __SClass {
      *
      * Constructor
      *
-     * @param           	{SRequestConfig|Object} 		            request 	            	The request object used to make ajax call
-     *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(request, settings?: Partial<ISRequestCtorSettings>) {
+    constructor(params: Partial<ISRequestParams>, settings?: Partial<ISRequestCtorSettings>) {
         super(
             __deepMerge(
                 {
@@ -119,11 +146,7 @@ export default class SRequest extends __SClass {
         );
 
         // if the request is not an SRequestConfig, create it
-        if (!(request instanceof __SRequestConfig)) {
-            this._defaultRequestSettings = new __SRequestConfig(request);
-        } else {
-            this._defaultRequestSettings = request;
-        }
+        this._defaultRequestParams = __SRequestParamsInterface.apply(params ?? {});
     }
 
     /**
@@ -173,21 +196,8 @@ export default class SRequest extends __SClass {
         // save the processed data in the response object
         response.data = finalResponse;
 
-        // remove some useless response properties
-        delete response.config;
-        delete response.request;
-
         // append the new response inside the responsesArray
         this._responsesArray.push(response);
-
-        // check if an "everyResponse" setting has been set
-        if (this._currentRequestSettings.everyResponse) {
-            // call the callback function
-            this._currentRequestSettings.everyResponse(
-                Object.assign({}, response),
-                this._requestsCount,
-            );
-        }
 
         const lastResponse = this._responsesArray.slice(-1)[0];
 
@@ -199,8 +209,8 @@ export default class SRequest extends __SClass {
                 statusText: lastResponse.statusText,
                 data: lastResponse.data,
                 count: this._responsesArray.length,
-                response: lastResponse,
-                responses: this._responsesArray,
+                axiosResponse: lastResponse,
+                axiosResponses: this._responsesArray,
             });
         } else {
             // send a new request
@@ -241,8 +251,11 @@ export default class SRequest extends __SClass {
 
         // process request settings
         requestSettings = __deepMerge(
-            this._defaultRequestSettings,
+            this._defaultRequestParams,
             requestSettings,
+            {
+                sendCount: 0
+            }
         );
         if (requestSettings.beforeSend) {
             requestSettings = requestSettings.beforeSend(
@@ -295,12 +308,12 @@ export default class SRequest extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    send(requestSettings = {}) {
+    send(requestSettings = {}): Promise<ISRequestResponse> {
         // return a promise
         return new Promise((resolve, reject) => {
             // // check if a cache exist and if we have the content
             // if (this._settings.cache) {
-            //   const response = this._settings.cache.get(this._defaultRequestSettings.url);
+            //   const response = this._settings.cache.get(this._defaultRequestParams.url);
             //   if (response) {
             //     resolve(response);
             //     return;

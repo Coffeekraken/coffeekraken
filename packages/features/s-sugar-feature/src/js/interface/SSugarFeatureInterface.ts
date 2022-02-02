@@ -1,11 +1,30 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name                SSugarFeatureInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This interface represent the attributes of the SSugarFeature
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 export default class SSugarFeatureInterface extends __SInterface {
     static get _definition() {
         return {
             scrolled: {
                 description:
-                    'Specify if you want the "scrolled" class to be applied on the "body" element when the page has been scrolled',
+                    'Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled',
                 type: 'Boolean',
                 default: true,
             },
@@ -17,7 +36,7 @@ export default class SSugarFeatureInterface extends __SInterface {
             },
             vhvar: {
                 description:
-                    'Specify if you want the "--vh" css variable to be computed and available',
+                    'Specify if you want the `--vh` css variable to be computed and available',
                 type: 'Boolean',
                 default: true,
             },

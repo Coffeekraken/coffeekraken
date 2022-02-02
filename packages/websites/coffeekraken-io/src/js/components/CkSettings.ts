@@ -52,10 +52,11 @@ export default class CkSettings extends __SLitComponent {
 
     toggleMode(dark) {
         this._state.darkMode = dark;
+
         if (dark) {
-            this._theme = __STheme.setTheme('default', 'dark');
+            this._theme = __STheme.setThemeVariant('dark');
         } else {
-            this._theme = __STheme.setTheme('default', 'light');
+            this._theme = __STheme.setThemeVariant('light');
         }
         setState(this._state);
     }
@@ -104,7 +105,7 @@ export default class CkSettings extends __SLitComponent {
                                 <input
                                     type="text"
                                     class="s-input"
-                                    value="${this._theme.color('main').toHex()}"
+                                    value="${this._theme.getColor('main').toHex()}"
                                 />
                             </s-color-picker>
                         </label>
@@ -120,7 +121,7 @@ export default class CkSettings extends __SLitComponent {
                                     type="text"
                                     class="s-input"
                                     value="${this._theme
-                                        .color('accent')
+                                        .getColor('accent')
                                         .toHex()}"
                                 />
                             </s-color-picker>
@@ -137,7 +138,7 @@ export default class CkSettings extends __SLitComponent {
                                     type="text"
                                     class="s-input"
                                     value="${this._theme
-                                        .color('complementary')
+                                        .getColor('complementary')
                                         .toHex()}"
                                 />
                             </s-color-picker>

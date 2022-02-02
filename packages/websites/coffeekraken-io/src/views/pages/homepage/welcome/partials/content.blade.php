@@ -4,9 +4,15 @@
 
 
 
-<h1 class="s-typo:h3:bold s-mbe:50">The frontend toolkit<br>that works for <span class="s-tc:accent">everyone</span><br />Experts, <span class="s-tc:complementary">professionals</span> and new-comers<br /></h1>
+<h1 class="s-typo:h3:bold s-mbe:50">The frontend toolkit<br>that works for <span
+        class="s-tc:accent">everyone</span><br />Experts, <span class="s-tc:complementary">professionals</span> and
+    new-comers<br /></h1>
 
-<p class="s-typo:lead s-mbe:60">Everything you need like full <span class="s-tc:accent">UI components library</span>,<br />strong theming support as well as <span class="s-tc:complementary">full development stack</span> based<br />on <a href="https://vitejs.dev"  class="s-tc:complementary" title="Vite js" target="_blank">Vite JS</a>. All of this with <span class="s-tc:accent">extrem customization</span> capabilities!</p>
+<p class="s-typo:lead s-mbe:60">Everything you need like full <span class="s-tc:accent">UI components
+        library</span>,<br />strong theming support as well as <span class="s-tc:complementary">full development
+        stack</span> based<br />on <a href="https://vitejs.dev" class="s-tc:complementary" title="Vite js"
+        target="_blank">Vite JS</a>. All of this with <span class="s-tc:accent">extrem customization</span>
+    capabilities!</p>
 
 
 {{-- <p class="s-typo:h6:bold s-mbe:60 s-mi:auto">Our toolkit is build around the <span class="s-tc:accent">strong defaults</span> principle, but let you change <span class="s-tc:accent">every configurations</span> to fit your needs</p> --}}
@@ -24,5 +30,12 @@ sugar frontstack.init my-cool-project'
     Get started!
 </a>
 <a class="s-btn s-color:complementary" href="/#join-us" title="Join us!">
-    Join us on discord
+    <i class="s-icon:discord"></i> Join us on discord
 </a>
+
+<p class="s-typo:p s-mbs:50">
+    Version: <span class="s-tc:accent">{{ $packageJson->version }}</span> - License <a class="s-tc:accent"
+        href="https://opensource.org/licenses/MIT" target="_blank">{{ $packageJson->license }}</a>
+    <br />Fully open source
+    <i class="s-icon:opensource s-tc:accent"></i>
+</p>

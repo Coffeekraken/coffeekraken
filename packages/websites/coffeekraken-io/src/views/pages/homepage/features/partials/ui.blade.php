@@ -3,25 +3,72 @@
 
         <div class="section-top-background"></div>
 
-        <h3 class="s-typo:h2 s-mbe:30">Full <span class="s-tc:accent">UI<br>Components</span> library</h3>
+        <h3 class="s-typo:h2 s-mbe:30">Full premium <span class="s-tc:accent">UI<br>Components</span> library</h3>
         <p class="s-typo:lead s-mbe:50">
-            As part of our ecosystem, you will have access to a nice list of fully customizable, themeing ready UI
+            As part of our ecosystem, you will have access to a nice list of <span class="s-tc:complementary">fully
+                customizable</span>, themeing ready UI
             library. This gives you access to components like:
         </p>
 
         <ul class="__webcomponents-grid s-mbe:50">
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent"
+                        style="background-image: url(/dist/img/previews/preview-button.jpg);">
                         <i class="s-icon:button"></i>
-                        <p class="s-p">Button</p>
+                        <p class="s-p">Buttons</p>
                     </div>
                 </a>
             </li>
             <li>
                 <a href="/" title="">
                     <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                        style="background-image: url(/dist/img/previews/preview-dropdown.jpg);">
+                        <i class="s-icon:dropdown"></i>
+                        <p class="s-p">Dropdowns</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/" title="">
+                    <div class="icon-card s-color:accent"
+                        style="background-image: url(/dist/img/previews/preview-tooltip.jpg);">
+                        <i class="s-icon:tooltip"></i>
+                        <p class="s-p">Tooltips</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/" title="">
+                    <div class="icon-card s-color:complementary"
+                        style="background-image: url(/dist/img/previews/preview-switch.jpg);">
+                        <i class="s-icon:switch"></i>
+                        <p class="s-p">Switches</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/" title="">
+                    <div class="icon-card s-color:accent"
+                        style="background-image: url(/dist/img/previews/preview-datepicker.jpg);">
+                        <i class="s-icon:datepicker"></i>
+                        <p class="s-p">Date Picker</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/" title="">
+                    <div class="icon-card s-color:complementary"
+                        style="background-image: url(/dist/img/previews/preview-filtrable-input.jpg);">
+                        <i class="s-icon:autocomplete"></i>
+                        <p class="s-p">Filtrable Input</p>
+                    </div>
+                </a>
+            </li>
+            <li>
+                <a href="/" title="">
+                    <div class="icon-card s-color:accent"
+                        style="background-image: url(/dist/img/previews/preview-button.jpg);">
                         <i class="s-icon:copy"></i>
                         <p class="s-p">Clipbord copy</p>
                     </div>
@@ -29,7 +76,8 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:complementary"
+                        style="background-image: url(/dist/img/previews/preview-range.jpg);">
                         <i class="s-icon:range"></i>
                         <p class="s-p">Range Input</p>
                     </div>
@@ -37,8 +85,8 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:complementary"
-                        style="background-image: url(/src/img/icon-card/test.gif);">
+                    <div class="icon-card s-color:accent"
+                        style="background-image: url(/dist/img/previews/preview-code-example.jpg);">
                         <i class="s-icon:code"></i>
                         <p class="s-p">Code Example</p>
                     </div>
@@ -46,23 +94,20 @@
             </li>
             <li>
                 <a href="/" title="">
-                    <div class="icon-card s-color:accent" style="background-image: url(/src/img/icon-card/test.gif);">
-                        <i class="s-icon:datepicker"></i>
-                        <p class="s-p">Date Picker</p>
+                    <div class="icon-card s-color:complementary"
+                        style="background-image: url(/dist/img/previews/preview-avatar.jpg);">
+                        <i class="s-icon:avatar"></i>
+                        <p class="s-p">Avatar</p>
                     </div>
                 </a>
             </li>
         </ul>
 
 
-        <div class="s-text:center s-pt:50 s-mis:-50">
+        <div class="s-text:center s-pt:50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
                 Keep in mind that <span class="s-tc:accent">all of these features are
-                    optional</span>.
-                This
-                mean
-                that
-                you can work with the things you like and let the rest aside...
+                    optional</span>. This mean that you can work with the things you like and let the rest aside...
             </p>
             <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
                 Get started!

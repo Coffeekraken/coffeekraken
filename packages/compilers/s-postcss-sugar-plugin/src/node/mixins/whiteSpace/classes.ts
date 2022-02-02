@@ -71,69 +71,50 @@ export default function ({
         * @cssClass         s-white-space:revert             Apply the \`white-space\` to \`revert\`
         * @cssClass         s-white-space:unset             Apply the \`white-space\` to \`unset\`
         * 
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Wrap</h3>
+        * @example        html          Wrap
         *   <p class="s-white-space:wrap">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">nowrap</h3>
+        * @example      html            Nowrap
         *   <p class="s-white-space:nowrap">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Break spaces</h3>
+        * @example          html            Break spaces
         *   <p class="s-white-space:break-spaces">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Normal</h3>
+        * @example          html                Normal
         *   <p class="s-white-space:normal">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Pre</h3>
+        * @example      html            Pre
         *   <p class="s-white-space:pre">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Pre line</h3>
+        * @example      html            Pre-line
         *   <p class="s-white-space:pre-line">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Pre wrap</h3>
+        * @example      html            Pre-wrap
         *   <p class="s-white-space:pre-wrap">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Revert</h3>
+        * @example          html            Revert
         *   <p class="s-white-space:revert">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Unset</h3>
+        * @example          html                Unset
         *   <p class="s-white-space:unset">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

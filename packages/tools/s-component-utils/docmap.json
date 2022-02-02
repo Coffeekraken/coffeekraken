@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,14 +15,16 @@
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -37,11 +40,13 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
@@ -49,6 +54,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +67,133 @@
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-component-utils.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-component-utils.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsDefaultPropsInterface": {
+                "name": "SComponentUtilsDefaultPropsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of a basic SComponent",
+                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SComponentUtilsDefaultPropsInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "type": "String",
+                            "physical": true
+                        },
+                        "mounted": {
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "mountWhen": {
+                            "type": "String",
+                            "values": [
+                                "directly",
+                                "direct",
+                                "inViewport"
+                            ],
+                            "default": "direct"
+                        },
+                        "adoptStyle": {
+                            "type": "Boolean",
+                            "default": true,
+                            "physical": true
+                        },
+                        "bare": {
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SComponentUtilsDefaultPropsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SComponentUtilsDefaultPropsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-component-utils.js.interface.SComponentUtilsSettingsInterface": {
+                "name": "SComponentUtilsSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SComponentUtils settings",
+                "namespace": "@coffeekraken.s-component-utils.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SComponentUtilsSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "interface": {
+                            "description": "Specify an SInterface class to use as our properties definition",
+                            "type": "SInterface"
+                        },
+                        "style": {
+                            "description": "Specify a style string to use as style to inject for our component",
+                            "type": "String"
+                        },
+                        "defaultProps": {
+                            "description": "Pass an object that act as the default properties value for our component",
+                            "type": "Object"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SComponentUtilsSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SComponentUtilsSettingsInterface.js",
+                "children": {}
+            }
+        }
     }
 }

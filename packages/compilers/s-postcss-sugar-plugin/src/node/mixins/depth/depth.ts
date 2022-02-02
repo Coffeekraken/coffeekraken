@@ -29,12 +29,18 @@ class postcssSugarPluginDepthInterface extends __SInterface {
                 required: true,
                 alias: 'd',
             },
+            type: {
+                type: 'String',
+                values: ['box','text'],
+                default: 'box'
+            }
         };
     }
 }
 
 export interface IPostcssSugarPluginDepthParams {
     depth: string | number;
+    type: 'box' | 'text';
 }
 
 export { postcssSugarPluginDepthInterface as interface };
@@ -50,9 +56,10 @@ export default function ({
 }) {
     const finalParams: IPostcssSugarPluginDepthParams = {
         depth: 0,
+        type: 'box',
         ...params,
     };
 
-    const vars: string[] = [`box-shadow: sugar.depth(${finalParams.depth});`];
+    const vars: string[] = [`${finalParams.type}-shadow: sugar.depth(${finalParams.depth});`];
     return vars;
 }

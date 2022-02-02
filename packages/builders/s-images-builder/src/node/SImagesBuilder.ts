@@ -296,8 +296,8 @@ export default class SImagesBuilder extends __SBuilder {
                     if (!params.compressExts.includes(file.extension)) {
 
                         emit('log', {
-                            clear: true,
-                            type: __SLog.TYPE_VERBOSE,
+                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                            type: __SLog.TYPE_INFO,
                             value: `<cyan>[copy]</cyan> Copying file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>"`,
                         });
 
@@ -311,8 +311,8 @@ export default class SImagesBuilder extends __SBuilder {
                         __copySync(file.path, outPath);
 
                         emit('log', {
-                            clear: true,
-                            type: __SLog.TYPE_VERBOSE,
+                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                            type: __SLog.TYPE_INFO,
                             value: `<green>[copy]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" copied <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
                         });
 
@@ -408,8 +408,8 @@ export default class SImagesBuilder extends __SBuilder {
                                 file.extension === 'jpg' ? 'jpeg' : file.extension;
 
                             emit('log', {
-                                clear: true,
-                                type: __SLog.TYPE_VERBOSE,
+                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                                type: __SLog.TYPE_INFO,
                                 // @ts-ignore
                                 value: `<yellow>[compress]</yellow> Compressing file "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" ${imgParams.specific ? ` with <red>specific parameters</red>` : ''}`,
                             });
@@ -436,8 +436,8 @@ export default class SImagesBuilder extends __SBuilder {
                             filesStack[path].builded.push(buildedFile);
 
                             emit('log', {
-                                clear: true,
-                                type: __SLog.TYPE_VERBOSE,
+                                clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : true,
+                               type: __SLog.TYPE_INFO,
                                 value: `<green>[compress]</green> File "<cyan>${__path.relative(__packageRoot(), file.path)}</cyan>" compressed <green>successfully</green> under "<magenta>${__path.relative(__packageRoot(), imgObj.outPath)}</magenta>" in <yellow>${duration.end().formatedDuration}</yellow>`,
                             });
 

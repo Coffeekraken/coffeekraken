@@ -4,6 +4,7 @@
     "generated": {
         "extends": [
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,11 +15,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +65,97 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.cli.cli.interface.sSugarCliParamsInterface": {
+                "name": "SSugarCliParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSugarCli class",
+                "namespace": "@coffeekraken.cli.cli.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarCliParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "bench": {
+                            "type": {
+                                "type": "Array<String> | Boolean",
+                                "splitChars": [
+                                    ","
+                                ]
+                            },
+                            "default": false,
+                            "explicit": true
+                        },
+                        "logPreset": {
+                            "type": "String",
+                            "values": [
+                                "silent",
+                                "default",
+                                "warn",
+                                "error",
+                                "verbose",
+                                "verboser"
+                            ],
+                            "default": "default",
+                            "explicit": true
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSugarCliParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/interface/SSugarCliParamsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.cli.cli.process.interface.sSugarCliProcessKillParamsInterface": {
+                "name": "SSugarCliProcessKillParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the `sugar process.kill` command",
+                "namespace": "@coffeekraken.cli.cli.process.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSugarCliProcessKillParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "id": {
+                            "description": "Specify the process id you want to kill",
+                            "type": "Number",
+                            "alias": "i"
+                        },
+                        "port": {
+                            "description": "Specify the port on which the process you want to kill is binded",
+                            "type": "Number",
+                            "alias": "p"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SSugarCliProcessKillParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/cli/process/interface/SSugarCliProcessKillParamsInterface.js",
+                "children": {}
+            },
             "@coffeekraken.cli.cli.sugar.cli": {
                 "name": "sugar.cli",
                 "type": "File",
@@ -71,10 +166,54 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "sugar.cli.ts",
+                "filename": "sugar.cli.js",
                 "extension": "cli",
-                "relPath": "src/cli/sugar.cli.ts",
-                "children": {}
+                "relPath": "src/cli/sugar.cli.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "command": {
+                        "name": "command",
+                        "type": "String",
+                        "description": "Get the correct sugar or sugard commant depending on the environment in which the cli is running",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "replaceTokens": {
+                        "name": "replaceTokens",
+                        "type": "Function",
+                        "description": "Replace tokens in a passed command like:\n- %sugar: Replaced by either \"sugar\" or \"sugard\" depending on the environment\n- Support all the tokens supported by the \"replaceTokens\" function of the sugar package",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "replaceSugarCommandForDev": {
+                        "name": "replaceSugarCommandForDev",
+                        "type": "Function",
+                        "description": "Replace the starting \"sugar\" by \"sugard\" in the command line when needed",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
             }
         }
     }

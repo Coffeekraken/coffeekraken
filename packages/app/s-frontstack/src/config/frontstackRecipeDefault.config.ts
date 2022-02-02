@@ -1,10 +1,11 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
-
-const recipe = 'default';
+import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 export default function (env, config) {
     if (env.platform !== 'node') return;
+
     return {
         /**
          * @name            title
@@ -43,6 +44,20 @@ export default function (env, config) {
          */
         templateDir: __path.resolve(`${__dirname()}/../templates/default`),
         /**
+         * @name            requirements
+         * @namespace       config.frontstackRecipeDefault
+         * @type            Object
+         * @default         dev
+         *
+         * Specify some requirements for this recipe like commands (npm, composer, etc...)
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        requirements: {
+            commands: ['[config.package.manager]','composer']
+        },
+        /**
          * @name            defaultStack
          * @namespace       config.frontstackRecipeDefault
          * @type            String
@@ -55,6 +70,94 @@ export default function (env, config) {
          */
         defaultStack: 'dev',
         stacks: {
+            new: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontstackRecipeDefault.stacks.init
+                 * @type            String
+                 * @default         Init a new project with this recipe
+                 *
+                 * Specify the recipe init stack description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'Init a new project with this recipe',
+                actions: {
+                    /**
+                     * @name            copy
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack copy action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    copy: __deepMerge(config.frontstack.actions.copy, {
+                        params: {
+                            'src': __path.resolve(__dirname(), `../templates/default/.`),
+                            'dest': `${process.cwd()}/default`,
+                            'chdir': true
+                        }
+                    }),
+                    /**
+                     * @name            rename
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack rename action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    rename: __deepMerge(config.frontstack.actions.rename, {
+                        params: {
+                        }
+                    }),
+                    /**
+                     * @name            addSugarJson
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addSugarJson action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    addSugarJson: __deepMerge(config.frontstack.actions.addSugarJson, {
+                        params: {
+                            recipe: 'default'
+                        }
+                    }),
+                    /**
+                     * @name            addManifestJson
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack addManifestJson action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    addManifestJson: __deepMerge(config.frontstack.actions.addManifestJson, {
+                        params: {}
+                    }),
+                    /**
+                     * @name            installDependencies
+                     * @namespace       config.frontstackRecipeDefault.stacks.new.actions
+                     * @type            String
+                     *
+                     * Specify the recipe init stack installDependencies action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    installDependencies: __deepMerge(config.frontstack.actions.installDependencies, {
+                        params: {}
+                    })
+                },
+            },
             dev: {
                 /**
                  * @name            description
@@ -165,7 +268,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    prod: true,
+                    // prod: true,
                 },
                 actions: {
                     /**
@@ -204,6 +307,30 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     imagesBuild: '[config.frontstack.actions.imagesBuild]',
+                    /**
+                     * @name            faviconBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.faviconBuild]
+                     *
+                     * Specify the recipe build stack faviconBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    faviconBuild: '[config.frontstack.actions.faviconBuild]',
+                    /**
+                     * @name            sitemapBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.sitemapBuild]
+                     *
+                     * Specify the recipe build stack sitemapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
                 },
             },
         },

@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -63,7 +67,7 @@
         "map": {
             "@coffeekraken.s-log.shared.iSLog": {
                 "name": "ISLog",
-                "type": "Interface",
+                "type": ".                      Class",
                 "platform": [
                     {
                         "name": "js",
@@ -71,6 +75,10 @@
                     },
                     {
                         "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
                         "description": ""
                     }
                 ],
@@ -96,7 +104,7 @@
             },
             "@coffeekraken.s-log.shared.iSLogAsk": {
                 "name": "ISLogAsk",
-                "type": "Interface",
+                "type": ".                      Class",
                 "platform": [
                     {
                         "name": "js",
@@ -104,6 +112,10 @@
                     },
                     {
                         "name": "node",
+                        "description": ""
+                    },
+                    {
+                        "name": "ts",
                         "description": ""
                     }
                 ],
@@ -122,9 +134,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "ISLogAsk.ts",
-                "extension": "ts",
-                "relPath": "src/shared/ISLogAsk.ts",
+                "filename": "ISLogAsk.js",
+                "extension": "js",
+                "relPath": "src/shared/ISLogAsk.js",
                 "children": {}
             },
             "@coffeekraken.s-log.shared.sLog": {
@@ -133,10 +145,6 @@
                 "platform": [
                     {
                         "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
                         "description": ""
                     },
                     {
@@ -150,7 +158,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import __SLog from '@coffeekraken/s-log';\nconst myLog = new __SLog({\n   value: 'Hello world',\n   type: __SLog.WARN\n});\n\n// Or thgouth an SPromise emit\nimport __SPromise from '@coffeekraken/s-promise';\nnew __SPromise(({resolve, reject, emit}) => {\n     emit('log', {\n         value: 'Hello world',\n         type: __SLog.ERROR\n     });\n});"
+                        "code": "import __SLog from '@coffeekraken/s-log';\nconst myLog = new __SLog({\n   value: 'Hello world',\n   type: __SLog.TYPE_WARN\n});\n\n// Or thgouth an SPromise emit\nimport __SPromise from '@coffeekraken/s-promise';\nnew __SPromise(({resolve, reject, emit}) => {\n     emit('log', {\n         value: 'Hello world',\n         type: __SLog.TYPE_ERROR\n     });\n});"
                     }
                 ],
                 "since": "2.0.0",
@@ -162,9 +170,9 @@
                 "extension": "ts",
                 "relPath": "src/shared/SLog.ts",
                 "children": {
-                    "lOG": {
-                        "name": "LOG",
-                        "type": "Number",
+                    "tYPELOG": {
+                        "name": "TYPE_LOG",
+                        "type": "ISLogType[]",
                         "description": "This static constant tells a log that it is of type \"LOG\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -174,9 +182,9 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "iNFO": {
-                        "name": "INFO",
-                        "type": "Number",
+                    "tYPEINFO": {
+                        "name": "TYPE_INFO",
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"INFO\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -186,9 +194,9 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "wARN": {
-                        "name": "WARN",
-                        "type": "Number",
+                    "tYPEWARN": {
+                        "name": "TYPE_WARN",
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"WARN\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -198,9 +206,9 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "eRROR": {
-                        "name": "ERROR",
-                        "type": "Number",
+                    "tYPEERROR": {
+                        "name": "TYPE_ERROR",
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"ERROR\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -210,9 +218,9 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "vERBOSE": {
-                        "name": "VERBOSE",
-                        "type": "Number",
+                    "tYPEVERBOSE": {
+                        "name": "TYPE_VERBOSE",
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"VERBOSE\"",
                         "static": "true",
                         "since": "2.0.0",
@@ -222,10 +230,142 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "cHILDPROCESS": {
-                        "name": "CHILD_PROCESS",
-                        "type": "Number",
+                    "tYPEVERBOSER": {
+                        "name": "TYPE_VERBOSER",
+                        "type": "ISLogType",
+                        "description": "This static constant tells a log that it is of type \"VERBOSER\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "tYPEDECORATOR": {
+                        "name": "TYPE_DECORATOR",
+                        "type": "ISLogType",
+                        "description": "This static constant tells a log that it is of type \"DECORATOR\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "tYPESUMMARY": {
+                        "name": "TYPE_SUMMARY",
+                        "type": "ISLogType",
+                        "description": "This static constant tells a log that it is of type \"SUMMARY\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "tYPECHILDPROCESS": {
+                        "name": "TYPE_CHILD_PROCESS",
+                        "type": "ISLogType",
                         "description": "This static constant tells a log that it is of type \"CHILD_PROCESS\"",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "tYPES": {
+                        "name": "TYPES",
+                        "type": "ISLogType[]",
+                        "description": "This static constant store all the log types available",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETSILENT": {
+                        "name": "PRESET_SILENT",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"silent\" that display nothing",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETDEFAULT": {
+                        "name": "PRESET_DEFAULT",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"default\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- DECORATOR\n- SUMMARY",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETWARN": {
+                        "name": "PRESET_WARN",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"warn\" that display:\n- WARN\n- ERROR",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETERROR": {
+                        "name": "PRESET_ERROR",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"error\" that display:\n- ERROR",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETVERBOSE": {
+                        "name": "PRESET_VERBOSE",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"verbose\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- DECORATOR\n- SUMMARY",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETVERBOSER": {
+                        "name": "PRESET_VERBOSER",
+                        "type": "ISLogType[]",
+                        "description": "This static constant define a log preset called \"verboser\" that display:\n- LOG\n- INFO\n- WARN\n- ERROR\n- VERBOSE\n- VERBOSER\n- DECORATOR\n- SUMMARY",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "pRESETS": {
+                        "name": "PRESETS",
+                        "type": "String[]",
+                        "description": "This static constant store all the log presets available",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -264,10 +404,10 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "removeFilter": {
-                        "name": "removeFilter",
+                    "setDefaultLogObj": {
+                        "name": "setDefaultLogObj",
                         "type": "Function",
-                        "description": "This static method allows you to remove a particular filter by its name",
+                        "description": "This static method allows you to set a default log object\nabove every others will be extended.",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -276,10 +416,10 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "setDefaultLogObj": {
-                        "name": "setDefaultLogObj",
+                    "isTypeEnabled": {
+                        "name": "isTypeEnabled",
                         "type": "Function",
-                        "description": "This static method allows you to set a default log object\nabove every others will be extended.",
+                        "description": "This static method allows you Check if a particular log type is enabled or not.\nYou can pass as well multiple log types as an array.",
                         "static": "true",
                         "since": "2.0.0",
                         "author": {
@@ -369,6 +509,17 @@
                         "name": "clear",
                         "type": "Boolean",
                         "description": "Access the \"clear\" property of the SLog object.\nThis specify if the previous logs have to be cleared before printing this one",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "margin": {
+                        "name": "margin",
+                        "type": "ISLogMargin",
+                        "description": "Access the \"margin\" property of the SLog object.",
                         "since": "2.0.0",
                         "author": {
                             "name": "Olivier Bossel",

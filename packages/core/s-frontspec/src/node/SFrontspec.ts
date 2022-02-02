@@ -11,6 +11,7 @@ import __path from 'path';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __delete from '@coffeekraken/sugar/shared/object/delete';
+import __folderPath from '@coffeekraken/sugar/node/fs/folderPath';
 
 /**
  * @name                SFrontspec
@@ -97,6 +98,11 @@ export default class SFrontspec extends __SPromise {
                 __SSugarConfig.get('frontspec') ?? {},
                 frontspecJson,
             );
+
+            res.metas = {
+                path: frontspecPath,
+                folderPath: __folderPath(frontspecPath),
+            };
 
             if (res.assets) {
                 Object.keys(res.assets).forEach((type) => {

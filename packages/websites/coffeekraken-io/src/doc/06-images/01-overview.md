@@ -45,6 +45,6 @@ Don't worry, if our default configuration does not suits your needs, you can as 
 
 To do so, simply create a file `.sugar/imageBuilder.config.js` and override the settings you want.
 
-{{> config path='@coffeekraken.s-images-builder.config.imagesBuilder'}}
+{{> config namespace='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
 {{/layout-doc }}

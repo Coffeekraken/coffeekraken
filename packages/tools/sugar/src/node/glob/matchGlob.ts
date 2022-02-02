@@ -17,7 +17,7 @@ import __path from 'path';
  * This function take as input a file path and a glob pattern that can be an extended one (this mean that is support the listed features above).
  * Then it check if the passed filepath match the passed glob pattern or not and return true or false depending on the result.
  *
- * @feature         Support extended glob syntax like "something/**{1,4}/*"
+ * @feature         Support extended glob syntax like "something/*{1,4}/*"
  * @feature         Support content regex syntax like "something/*:/.+namespace.+/gm"
  *
  * @param       {String}        input            The file path to check

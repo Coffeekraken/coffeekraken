@@ -62,15 +62,15 @@
             </div>
         </div> --}}
 
-        @include('pages.homepage.features.partials.frontend')
+
+        @include('pages.homepage.features.partials.openSource')
         @include('pages.homepage.features.partials.ui')
-        @include('pages.homepage.features.partials.webcomponents')
+        @include('pages.homepage.features.partials.helpers')
+        @include('pages.homepage.features.partials.frontend')
+        {{-- @include('pages.homepage.features.partials.webcomponents') --}}
         @include('pages.homepage.features.partials.sugar')
         @include('pages.homepage.features.partials.development')
 
-        <section id="features-documentation">
-            <h1>Documentation at your fingertips</h1>
-        </section>
     </div>
 
 </div>

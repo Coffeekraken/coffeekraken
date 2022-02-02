@@ -1,5 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name                SActivateFeatureInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This interface represent the attributes of the SActivateFeature
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 export default class SActivateFeatureInterface extends __SInterface {
     static get _definition() {
         return {
@@ -70,6 +89,10 @@ export default class SActivateFeatureInterface extends __SInterface {
                     'Specify a timeout before unactivate the target(s)',
                 type: 'Number',
                 default: 0,
+            },
+            triggerer: {
+                description: 'Specify an element selector that will be used as the triggerer instead of this current element',
+                type: 'String'
             },
             trigger: {
                 description:

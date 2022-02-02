@@ -25,63 +25,99 @@
                     <span>Get started</span>
                 </a>
 
-    @php
-        $documentationMenu = (object)array_merge((array)$docmap->menu->tree->documentation, []);
-    @endphp
+                @php
+                    $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
+                    $packagesMenu = (object) [
+                        'name' => 'Packages',
+                    ];
+                    foreach ((array) $docmap->menu->packages as $package) {
+                        if (!property_exists($package, 'tree') || !property_exists($package->tree, 'documentation')) {
+                            continue;
+                        }
+                    
+                        $vars = array_keys((array) $package->tree->documentation);
+                    
+                        if (count($vars) <= 1) {
+                            continue;
+                        }
+                    
+                        $packagesMenu->{$package->name} = (object) [
+                            'name' => $package->name,
+                            'slug' => $package->tree->documentation->{$vars[1]}->slug,
+                        ];
+                    }
+                    array_push($documentationMenu, $packagesMenu);
+                    $documentationMenu = (object) $documentationMenu;
+                @endphp
 
-                @include('layouts.header.partials.menuItem', ['menuItem' => $documentationMenu, 'class' => '__subnav-doc'])
-                @include('layouts.header.partials.menuItem', ['menuItem' => $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
-                {{-- <a class="s-typo:bold __main-link" href="/config/explorer" title="Configuration explorer">
-                    <span>Config explorer</span>
-                </a> --}}
+                @include('layouts.header.partials.menuItem', ['menuItem' => $documentationMenu, 'class' =>
+                '__subnav-doc'])
+                @include('layouts.header.partials.menuItem', ['menuItem' =>
+                $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
 
                 @php
-
-                    $apiMenu = (Object)[
+                    
+                    $apiMenu = (object) [
                         'name' => 'API',
-                        'config' => (Object)[
-                            'name' => 'Config',
-                            'explorer' => (Object)[
+                        'search' => (object) [
+                            'name' => 'Search',
+                            'include' => 'generic/header/search-api.blade.php',
+                        ],
+                        'config' => (object) [
+                            'name' => 'Configuration',
+                            'overview' => (object) [
+                                'name' => 'Overview',
+                                'slug' => '/doc/config/overview',
+                            ],
+                            'explorer' => (object) [
                                 'name' => 'Config Explorer',
-                                'slug' => '/config/explorer'
+                                'slug' => '/config/explorer',
+                            ],
+                            'builtin' => (object) [
+                                'name' => 'Built-in Config',
+                                'slug' => 'doc/config/built-in',
+                            ],
+                            'override' => (object) [
+                                'name' => 'Override Config',
+                                'slug' => 'doc/config/override',
+                            ],
+                            'register' => (object) [
+                                'name' => 'Register new Config',
+                                'slug' => 'doc/config/register',
                             ],
                         ],
-                        'components' => (Object)[
-                            'name' => 'Components'
-                        ],
-                        'cssDiscover' => (Object)[
+                        'cssDiscover' => (object) [
                             'name' => 'Discover (css)',
-                            'content' => '<ck-discover platform="css"></ck-discover>'
+                            'content' => '<ck-discover platform="css"></ck-discover>',
                         ],
-                        'jsDiscover' => (Object)[
+                        'jsDiscover' => (object) [
                             'name' => 'Discover (js)',
-                            'content' => '<ck-discover platform="js"></ck-discover>'
+                            'content' => '<ck-discover platform="js"></ck-discover>',
                         ],
-                        'postcssDiscover' => (Object)[
+                        'postcssDiscover' => (object) [
                             'name' => 'Discover (PostCSS)',
-                            'content' => '<ck-discover platform="postcss"></ck-discover>'
+                            'content' => '<ck-discover platform="postcss"></ck-discover>',
                         ],
-                        'nodeDiscover' => (Object)[
+                        'nodeDiscover' => (object) [
                             'name' => 'Discover (node)',
-                            'content' => '<ck-discover platform="node"></ck-discover>'
+                            'content' => '<ck-discover platform="node"></ck-discover>',
                         ],
-                        'phpDiscover' => (Object)[
+                        'phpDiscover' => (object) [
                             'name' => 'Discover (php)',
-                            'content' => '<ck-discover platform="php"></ck-discover>'
+                            'content' => '<ck-discover platform="php"></ck-discover>',
                         ],
                     ];
+                    
+                @endphp
 
-                    foreach($docmap->map as $item) {
+                {{-- foreach ($docmap->map as $item) {
                         if ($item->type === 'CustomElement') {
-                            $apiMenu->components->{$item->name} = (Object)[
+                            $apiMenu->components->{$item->name} = (object) [
                                 'name' => $item->name,
-                                'slug' => '/api/'.$item->namespace
+                                'slug' => '/api/' . $item->namespace,
                             ];
                         }
-                    }
-
-
-                @endphp
+                    } --}}
 
                 @include('layouts.header.partials.menuItem', ['menuItem' => $apiMenu, 'class' => ''])
                 {{-- <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">

@@ -1,9 +1,6 @@
 import SRequest from './SRequest';
-import SRequestConfig from './SRequestConfig';
-import request from './request';
+import SRequestParamsInterface from './interface/SRequestParamsInterface';
 
+export { SRequestParamsInterface };
 export * from './SRequest';
-export * from './SRequestConfig';
-
-export { SRequestConfig, request };
 export default SRequest;

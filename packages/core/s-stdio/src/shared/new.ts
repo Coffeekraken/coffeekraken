@@ -1,8 +1,7 @@
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __isPath from '@coffeekraken/sugar/node/is/path';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
-import __STerminalStdio from '../node/terminal/STerminalStdio';
-import __SNoUiStdio from './noUi/SNoUiStdio';
+import __SBasicStdio from '../node/basic/SBasicStdio';
 import __SStdio, { ISStdioUi } from './SStdio';
 
 /**
@@ -12,10 +11,7 @@ import __SStdio, { ISStdioUi } from './SStdio';
  * This static method is a sugar to instanciate an stdio by specifying some sources,
  * and either a path to a SStdio class, an SStdio class directly or a pre-registered
  * stdio id like:
- * - inherit: If is in node context, will fallback to STerminalStdio, if in browser, in SConsoleStdio
- * - terminal: STerminalStdio (node only)
- * - console: SConsoleStdio (browser only)
- * - blessed: SBlessedStdio (node only)
+ * - inherit: If is in node context, will fallback to SBasicStdio, if in browser, in SConsoleStdio
  *
  * @param       {String}        id          A unique id for your stdio instance
  * @param         {SProcess}          proc        The process to display Stdio for
@@ -45,28 +41,15 @@ export default async function _new(
 
     let stdioInstance: any;
 
-    switch (stdio) {
-        case __SStdio.UI_TERMINAL:
-            if (__isNode()) {
-                stdioInstance = new __STerminalStdio(id, sources, settings);
-            } else {
-                throw new Error(
-                    `<red>[SStdio.new]</red> Sorry but the "<yellow>SConsoleStdio</yellow>" class is not yet implemented...`,
-                );
-            }
-            break;
-        case __SStdio.UI_CONSOLE:
-            // if (!__isNode())
-            //     throw new Error(
-            //         `<red>[SStdio.new]</<red> Sorry but to use the "<yellow>STerminalStdio</yellow>" output, you must be in a <magenta>node</magenta> context...`,
-            //     );
-            // stdioInstance = new __STerminalStdio(id, sources, settings);
-            break;
-        case __SStdio.NO_UI:
-        default:
-            stdioInstance = new __SNoUiStdio(id, sources, settings);
-            break;
+    if (__isNode()) {
+        switch (stdio) {
+            case __SStdio.UI_BASIC:
+            default:
+                stdioInstance = new __SBasicStdio(id, sources, settings);
+                break;
+        }
+    } else {
+        throw new Error(`No stdio implementation found for the current "browser" environment...`);
     }
-
     return stdioInstance;
 }

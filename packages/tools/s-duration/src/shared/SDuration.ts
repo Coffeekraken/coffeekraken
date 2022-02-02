@@ -1,7 +1,6 @@
 // @ts-nocheck
 
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __convert from '@coffeekraken/sugar/shared/time/convert';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 
 /**
@@ -38,7 +37,6 @@ export interface ISDurationObject {
   endTime: number;
   duration: number;
   formatedDuration: string;
-  convertedDuration: number;
 }
 
 export default class SDuration {
@@ -102,10 +100,7 @@ export default class SDuration {
    */
   constructor(settings = {}) {
     this._settings = __deepMerge(
-      {
-        format: 's',
-        suffix: true
-      },
+      {},
       settings
     );
     this.start();
@@ -133,14 +128,12 @@ export default class SDuration {
 
     const durationMs = this.endTime - this.startTime;
     this.duration = durationMs;
-    const convertedDuration = __convert(durationMs, settings.format);
     const formatedDuration = __formatDuration(durationMs);
 
     return <ISDurationObject>{
       startTime: this.startTime || -1,
       endTime: this.endTime || -1,
       duration: this.duration || -1,
-      convertedDuration,
       formatedDuration
     };
   }

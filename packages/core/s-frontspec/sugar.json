@@ -14,7 +14,8 @@
       "actions": {
         "read": {
           "description": "Find the frontspec.json files that are relative to your cwd and read their content",
-          "process": "./src/node/read.cli.js"
+          "interface": "./src/node/interface/SFrontspecReadParamsInterface.js",
+          "process": "./src/cli/read.cli.js"
         }
       }
     }

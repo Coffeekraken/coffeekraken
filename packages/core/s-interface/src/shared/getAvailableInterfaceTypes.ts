@@ -1,3 +1,5 @@
+import __isNode from '@coffeekraken/sugar/shared/is/node';
+
 /**
  * @name                getAvailableInterfaceTypes
  * @namespace           s-interface.shared
@@ -20,7 +22,7 @@
  */
 function getAvailableInterfaceTypes() {
   // @ts-ignore
-  if (global !== undefined) return global._registeredInterfacesTypes || {};
+  if (__isNode()) return global._registeredInterfacesTypes || {};
   // @ts-ignore
   else if (window !== undefined) return window._registeredInterfacesTypes || {};
   else return {};

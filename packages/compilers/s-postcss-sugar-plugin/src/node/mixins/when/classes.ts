@@ -67,11 +67,11 @@ export default function ({
         */
     `,
     ).code(`
-        .s-when.s-when--mounted:not(.s-when--sibling):not([mounted]):not(.mounted) {
+        .s-when.s-when--mounted:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent):not([mounted]):not(.mounted) {
             display: none;
         }
-        .s-when.s-when--mounted:not(.s-when--sibling)[mounted],
-        .s-when.s-when--mounted:not(.s-when--sibling).mounted {
+        .s-when.s-when--mounted:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent)[mounted],
+        .s-when.s-when--mounted:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent).mounted {
             display: block;
         }`);
 
@@ -106,6 +106,64 @@ export default function ({
 
     vars.comment(
         () => `/**
+        * @name          s-when:parent:mounted
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when his direct parent has reached the state "mounted".
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:parent:mounted">
+        *       Display something when the previous webcomponent has been mounted
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        *:not([mounted]):not(.mounted) + .s-when.s-when--parent.s-when--mounted {
+            display: none;
+        }
+        *[mounted] + .s-when.s-when--parent.s-when--mounted,
+        *.mounted + .s-when.s-when--parent.s-when--mounted {
+            display: block;
+        }`);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:ancestor:mounted
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when any ancestor has reached the state "mounted".
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:ancestor:mounted">
+        *       Display something when the previous webcomponent has been mounted
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        *:not([mounted]):not(.mounted) + .s-when.s-when--ancestor.s-when--mounted {
+            display: none;
+        }
+        *[mounted] + .s-when.s-when--ancestor.s-when--mounted,
+        *.mounted + .s-when.s-when--ancestor.s-when--mounted {
+            display: block;
+        }`);
+
+    vars.comment(
+        () => `/**
         * @name          s-when:active
         * @namespace          sugar.css.when
         * @type               CssClass
@@ -122,11 +180,11 @@ export default function ({
         */
     `,
     ).code(`
-        .s-when.s-when--active:not(.s-when--sibling):not([active]):not(.active) {
+        .s-when.s-when--active:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent):not([active]):not(.active) {
             display: none;
         }
-        .s-when.s-when--active:not(.s-when--sibling)[active],
-        .s-when.s-when--active:not(.s-when--sibling).active {
+        .s-when.s-when--active:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent)[active],
+        .s-when.s-when--active:not(.s-when--sibling):not(.s-when--ancestor):not(.s-when--parent).active {
             display: block;
         }`);
 
@@ -158,6 +216,120 @@ export default function ({
         *.active + .s-when.s-when--sibling.s-when--active {
             display: block;
         }`);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:parent:active
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when his direct parent has reached the state "active".
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:parent:active">
+        *       Display something when the previous webcomponent has been active
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        *:not([active]):not(.active) + .s-when.s-when--parent.s-when--active {
+            display: none;
+        }
+        *[active] + .s-when.s-when--parent.s-when--active,
+        *.active + .s-when.s-when--parent.s-when--active {
+            display: block;
+        }`);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:ancestor:active
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when his direct ancestor has reached the state "active".
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:ancestor:active">
+        *       Display something when the previous webcomponent has been active
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        *:not([active]):not(.active) + .s-when.s-when--ancestor.s-when--active {
+            display: none;
+        }
+        *[active] + .s-when.s-when--ancestor.s-when--active,
+        *.active + .s-when.s-when--ancestor.s-when--active {
+            display: block;
+        }`);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:dark
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when the prefered color scheme is not dark.
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:dark">
+        *       Display something when the color scheme is dark
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        .s-when--dark {
+            display: none;
+        }
+        
+        [theme$="dark"] .s-when--dark {
+            display: inherit;
+        }
+        `);
+
+    vars.comment(
+        () => `/**
+        * @name          s-when:light
+        * @namespace          sugar.css.when
+        * @type               CssClass
+        * @platform             css
+        * @status             beta
+        * 
+        * This class allows you to hide any HTMLElement when the prefered color scheme is not light.
+        * 
+        * @example        html
+        * <s-range name="myCoolRange" />
+        * <div class="s-when:light">
+        *       Display something when the color scheme is light
+        * </div>
+        * 
+        * @since            2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `,
+    ).code(`
+        [theme$="dark"] .s-when--light {
+            display: none;
+        }
+        `);
 
     return vars;
 }

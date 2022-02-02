@@ -50,8 +50,10 @@ const plugin = (settings: any = {}) => {
         settings,
     );
 
-    pluginHash = `${Math.round(Math.random() * 9999)}`;
-    pluginHash = 'aaa';
+    // remove cache if not for vite target
+    if (settings.target !== 'vite') {
+        settings.cache = false;
+    }
 
     function contentToArray(content) {
         if (content instanceof CssVars) {
@@ -72,64 +74,22 @@ const plugin = (settings: any = {}) => {
         return;
     }
 
-    async function fromCache(hash, id = 'unknown'): String {
-        if (!settings.cache) return;
-        const idHash = __md5.encrypt(id);
-        const fileName = `${__md5.encrypt(
-            `${__urlCompliant(__fileName(id))}.${idHash}.${hash}`,
-        )}.css`;
+    function cache(id, hash, content: string | string[]): string | string[] {        
+        if (!settings.cache) return content;
+        const fileName = `${hash}.css`;
         const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
-        if (!__fs.existsSync(cachePath)) return;
-
-        let objectId = id;
-        if (__fs.existsSync(objectId)) {
-            objectId = __path.relative(__packageRoot(), objectId);
-        }
-
-        console.log(
-            `<green>[postcss]</green> File "<cyan>${objectId}</cyan>" taken from cache`,
-        );
-        return `@import url('${cachePath}');`;
-    }
-
-    async function toCache(hash, content, id = 'unknown') {
-        if (id.match(/\/postcssSugarPlugin\//)) return;
-
-        const idHash = __md5.encrypt(id);
-        const fileName = `${__md5.encrypt(
-            `${__urlCompliant(__fileName(id))}.${idHash}.${hash}`,
-        )}.css`;
-        const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
-
-        const importMatches = content.match(
-            /@import\surl\(['\`"]?([^\)'\`"]+)['\`"]?\);?/gm,
-        );
-
-        importMatches?.forEach((importStatement) => {
-            const path = importStatement
-                .replace(/^@import url\(['\`"]?/, '')
-                .replace(/['\`"]?\);?/, '');
-
-            if (path.match(/^https?:\/\//)) return;
-            if (path.match(/^\//)) return;
-            if (!path.match(/\.css$/)) return;
-
-            const absolutePath = __path.resolve(rootDir, path);
-            content = content.replace(
-                importStatement,
-                `@import url("${absolutePath}");\n`,
-            );
-        });
-
-        let objectId = id;
-        if (__fs.existsSync(objectId)) {
-            objectId = __path.relative(__packageRoot(), objectId);
+        if (!__fs.existsSync(cachePath)) {
+            console.log(`<yellow>[cache]</yellow> Caching object "<cyan>${id}</cyan>"`);
+            return `
+                /* CACHE:${hash} */
+                ${Array.isArray(content) ? content.join('\n') : content}
+                /* ENDCACHE:${hash} */
+            `;
         }
         console.log(
-            `<yellow>[postcss]</yellow> Compiling the "<cyan>${objectId}</cyan>" file.`,
+            `<green>[postcss]</green> Object "<cyan>${id}</cyan>" taken from cache`,
         );
-
-        __writeFileSync(cachePath, contentToString(content));
+        return `/* FROMCACHE:${hash} */`;
     }
 
     function applyNoScopes(scopes: string[], fromNode): string[] {
@@ -154,7 +114,7 @@ const plugin = (settings: any = {}) => {
     }
 
     function commentsNeeded() {
-        return settings.target === 'dev';
+        return settings.target !== 'vite';
     }
 
     function replaceWith(atRule, nodes) {
@@ -264,6 +224,85 @@ const plugin = (settings: any = {}) => {
         }
     }
 
+    async function _processDeclaration(value: string) {
+        // replace vh units
+        const vhMatches = value.match(
+            /(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm,
+        );
+        if (vhMatches) {
+            vhMatches.forEach((match) => {
+                if (match.match(/^var\(--vh,/)) return;
+                const val = match.replace('vh', '');
+                value = value.replace(
+                    match,
+                    `calc(${val} * var(--vh,1vh)) `,
+                );
+            });
+        }
+
+        if (!value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return value;
+        const calls = value.match(
+            /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
+        );
+
+        if (!calls || !calls.length) return value;
+
+        for (let i = 0; i < calls.length; i++) {
+            let sugarStatement: string = calls[i] ?? '';
+
+            // FIX. sugarStatement comes with none corresponding count of "(" and ")"
+            const openingParenthesisCount = (
+                sugarStatement.match(/\(/g) || []
+            ).length;
+            const closingParenthesisCount = (
+                sugarStatement.match(/\)/g) || []
+            ).length;
+
+            if (openingParenthesisCount > closingParenthesisCount) {
+                sugarStatement += ')'.repeat(
+                    openingParenthesisCount - closingParenthesisCount,
+                );
+            }
+
+            // @ts-ignore
+            const functionName = sugarStatement.match(
+                /sugar\.([a-zA-Z0-9\.]+)/,
+            )[1];
+            const paramsStatement = sugarStatement.replace(
+                /sugar\.[a-zA-Z0-9\.]+/,
+                '',
+            );
+
+            let fnId = functionName;
+            if (!functionsStack[fnId]) {
+                fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
+            }
+
+            const fnObject = functionsStack[fnId];
+
+            if (!fnObject) {
+                throw new Error(
+                    `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
+                );
+            }
+
+            const functionInterface = functionsStack[fnId].interface;
+            const params = functionInterface.apply(paramsStatement, {});
+            delete params.help;
+
+            try {
+                const result = await fnObject.fn({
+                    params,
+                    settings,
+                });
+                value = value.replace(sugarStatement, result);
+            } catch (e) {
+                console.error(e.message);
+            }
+        }
+        return value;
+    }
+
     function _load() {
         if (loadedPromise) return loadedPromise;
         loadedPromise = new Promise(async (resolve, reject) => {
@@ -345,9 +384,7 @@ const plugin = (settings: any = {}) => {
     return {
         postcssPlugin: 'sugar',
         async Once(root) {
-            if (__SBench.isBenchActive('postcssSugarPlugin')) {
-                __SBench.start('postcssSugarPlugin');
-            }
+            __SBench.start('postcssSugarPlugin');
 
             await _load();
 
@@ -365,25 +402,10 @@ const plugin = (settings: any = {}) => {
                     fileHash,
                     theme: __STheme.hash,
                 });
-
-                // const cached = await fromCache(hash, root.source.input.from);
-                // if (cached) {
-                //     root._fromCache = cached;
-                //     root.walk((node) => {
-                //         if (node.name?.match(/import$/)) {
-                //         } else {
-                //             node.remove();
-                //         }
-                //     });
-                // }
             }
         },
 
         async OnceExit(root) {
-            if (root._fromCache) {
-                root.append(root._fromCache);
-                return;
-            }
 
             for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
                 const fn = postProcessorsRegisteredFn[i];
@@ -405,30 +427,50 @@ const plugin = (settings: any = {}) => {
                 });
             }
 
-            // if (root.source?.input?.from) {
-            //     const fileHash = __fileHash(root.source.input.from, {
-            //         include: {
-            //             ctime: true,
-            //         },
-            //     });
-            //     const hash = __objectHash({
-            //         fileHash,
-            //         theme: __STheme.hash,
-            //     });
+            let cssStr = root.toString();
 
-            //     await toCache(hash, root.toString(), root.source.input.from);
-            // }
+            // CACHE
+            const cacheMatches = cssStr.match(/\/\*\sCACHE:[a-zA-Z0-9@\._-]+\s\*\//gm);
+            cacheMatches?.forEach(cacheStr => {
+                const cacheId = cacheStr.replace('/* CACHE:','').replace(' */', '').trim();
+                const toCache = cssStr.match(new RegExp(`\\/\\*\\sCACHE:${cacheId}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sENDCACHE:${cacheId}\\s\\*\\/`, 'g'));
+                if (!toCache) return;
 
-            if (__SBench.isBenchActive('postcssSugarPlugin')) {
-                console.log(
-                    __SBench.end('postcssSugarPlugin').toString({
-                        body: `File: <cyan>${__path.relative(
-                            __packageRoot(),
-                            root.source?.input?.from,
-                        )}</cyan>`,
-                    }),
-                );
-            }
+                const fileName = `${cacheId}.css`;
+                const cachePath = `${__packageCacheDir()}/postcssSugarPlugin/${pluginHash}/${fileName}`;
+
+                const toCacheStr = toCache[0].replace(`/* CACHE:${cacheId} */`, '').replace(`/* ENDCACHE:${cacheId} */`, '');
+                __writeFileSync(cachePath, toCacheStr);
+            });
+
+            root.walkComments((comment) => {
+                if (comment.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+
+                    const parts = comment.text.split(':').map(l => l.trim());
+
+                    const cacheHash = parts[1];
+                    const cacheId = parts[2];
+                    const fileName = `${cacheHash}.css`;
+                    const cacheUrl = `/cache/postcssSugarPlugin/${pluginHash}/${fileName}`;
+
+                    let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+                    if (settings.target === 'vite') {
+                        newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+                    }
+
+                    comment.remove();
+                    root.prepend(newRule);
+
+                    comment.replaceWith(newRule);
+                }
+            });
+
+            __SBench.end('postcssSugarPlugin').log({
+                body: `File: <cyan>${__path.relative(
+                    __packageRoot(),
+                    root.source?.input?.from,
+                )}</cyan>`,
+            });
         },
         async AtRule(atRule, postcssApi) {
             if (atRule.name.match(/^sugar\./)) {
@@ -453,17 +495,15 @@ const plugin = (settings: any = {}) => {
                 const mixinFn = mixinsStack[mixinId].mixin;
                 const mixinInterface = mixinsStack[mixinId].interface;
 
-                const sanitizedParams = atRule.params;
-
-                const params = mixinInterface.apply(sanitizedParams, {});
+                const processedParams = await _processDeclaration(atRule.params);
+                const params = mixinInterface.apply(processedParams, {});
 
                 delete params.help;
                 let result = await mixinFn({
                     params,
                     atRule,
                     findUp,
-                    fromCache,
-                    toCache,
+                    cache,
                     CssVars,
                     commentsNeeded,
                     applyNoScopes(scopes = []) {
@@ -521,81 +561,8 @@ const plugin = (settings: any = {}) => {
             }
         },
         async Declaration(decl) {
-            // replace vh units
-            const vhMatches = decl.value.match(
-                /(var\(--vh,)?([0-9\.]+)vh(\s|;)?/gm,
-            );
-            if (vhMatches) {
-                vhMatches.forEach((match) => {
-                    if (match.match(/^var\(--vh,/)) return;
-                    const val = match.replace('vh', '');
-                    decl.value = decl.value.replace(
-                        match,
-                        `calc(${val} * var(--vh,1vh)) `,
-                    );
-                });
-            }
-
-            if (!decl.prop || !decl.value) return;
-            if (!decl.value.match(/\s?sugar\.[a-zA-Z0-9]+.*/)) return;
-            const calls = decl.value.match(
-                /sugar\.[a-zA-Z0-9\.]+\((?:[^\)]+|\([^\(;,]*\(;,){0,999999999999999999999}\)/gm,
-            );
-
-            if (!calls || !calls.length) return;
-
-            for (let i = 0; i < calls.length; i++) {
-                let sugarStatement = calls[i];
-
-                // FIX. sugarStatement comes with none corresponding count of "(" and ")"
-                const openingParenthesisCount = (
-                    sugarStatement.match(/\(/g) || []
-                ).length;
-                const closingParenthesisCount = (
-                    sugarStatement.match(/\)/g) || []
-                ).length;
-
-                if (openingParenthesisCount > closingParenthesisCount) {
-                    sugarStatement += ')'.repeat(
-                        openingParenthesisCount - closingParenthesisCount,
-                    );
-                }
-
-                const functionName = sugarStatement.match(
-                    /sugar\.([a-zA-Z0-9\.]+)/,
-                )[1];
-                const paramsStatement = sugarStatement.replace(
-                    /sugar\.[a-zA-Z0-9\.]+/,
-                    '',
-                );
-
-                let fnId = functionName;
-                if (!functionsStack[fnId]) {
-                    fnId = `${fnId}.${fnId.split('.').slice(-1)[0]}`;
-                }
-
-                const fnObject = functionsStack[fnId];
-
-                if (!fnObject) {
-                    throw new Error(
-                        `<red>[postcssSugarPlugin]</red> Sorry but the requested function "<yellow>${fnId}</yellow>" does not exists...`,
-                    );
-                }
-
-                const functionInterface = functionsStack[fnId].interface;
-                const params = functionInterface.apply(paramsStatement, {});
-                delete params.help;
-
-                try {
-                    const result = await fnObject.fn({
-                        params,
-                        settings,
-                    });
-                    decl.value = decl.value.replace(sugarStatement, result);
-                } catch (e) {
-                    console.error(e.message);
-                }
-            }
+            if (!decl.prop) return;
+            decl.value = await _processDeclaration(decl.value);
         },
     };
 };

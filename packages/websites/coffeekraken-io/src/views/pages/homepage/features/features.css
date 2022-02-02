@@ -29,18 +29,6 @@
 
     .__header {
         position: relative;
-
-        /* &:before {
-        content: '';
-        display: block;
-        width: 100vw; height: 40%;
-        transform: translate(-50%);
-        position: absolute;
-        bottom: -33px; left: 50%;
-        z-index: -1;
-
-        @sugar.gradient(rgba(255,255,255,.03), rgba(255,255,255,0.02), $angle: 180deg);
-      } */
     }
 
     .__tabs {
@@ -68,31 +56,20 @@
     }
     .__contents {
         position: relative;
-        /* top: -66px; */
-
-        /* & > *:not(.active) {
-      display: none;
-    } */
-    }
-
-    .__illustration {
-        position: absolute;
-        width: 40%;
-        transform: translate(-15%, -15%);
     }
 
     .__recipes-grid {
         @sugar.layout (
       1 2 3 4
       5 6 7 8
-    , $gutter: 20, $gutterBetween: true);
+    , $gap: 20, $gapBetween: true);
     }
 
     .__webcomponents-grid {
         @sugar.layout (
       1 2 3 4 5
       6 7 8 9 10
-    , $gutter: 20, $gutterBetween: true);
+    , $gap: 20, $gapBetween: true);
     }
 
     #features-development,
@@ -104,37 +81,6 @@
         }
     }
 
-    /* #features-development:before,
-    #features-webcomponents:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        background-color: sugar.color(main, background);
-        background-image: radial-gradient(
-            closest-side,
-            sugar.color(complementary, --alpha 0.05),
-            sugar.color(complementary, --alpha 0)
-        ) !important;
-        z-index: -1;
-    } */
-
-    /* .section-top-background {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 100vw;
-        height: 100vh;
-        transform: translateX(-50%);
-        background: linear-gradient(
-            5deg,
-            sugar.color(main, --alpha 0),
-            sugar.color(main, --alpha 0.03)
-        );
-    } */
-
     #features-frontend,
     #features-sugar {
         position: relative;
@@ -144,21 +90,11 @@
         }
     }
 
-    /* #features-frontend:before,
-    #features-sugar:before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        width: 200%;
-        height: 100%;
-        transform: translate(-50%, 0);
-        background-color: sugar.color(main, background);
-        background-image: radial-gradient(
-            closest-side,
-            sugar.color(accent, --alpha 0.05),
-            sugar.color(accent, --alpha 0)
-        ) !important;
-        z-index: -1;
-    } */
+    #features-sugar {
+
+        .__illustration {
+            transform-origin: 0 0;
+            transform: scale(1.3);
+        }
+    }
 }

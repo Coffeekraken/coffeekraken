@@ -2,9 +2,10 @@ import __SClass from '@coffeekraken/s-class';
 import __SDuration from '@coffeekraken/s-duration';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
-import __SFrontstackActionInterface from './action/interface/SFrontstackActionInterface';
-import __SFrontstackRecipeParamsInterface from './recipe/interface/SFrontstackRecipeParamsInterface';
-import __SFrontstackListParamsInterface from './list/interface/SFrontstackListParamsInterface';
+import __SFrontstackActionInterface from './interface/SFrontstackActionInterface';
+import __SFrontstackRecipeParamsInterface from './interface/SFrontstackRecipeParamsInterface';
+import __SFrontstackListParamsInterface from './interface/SFrontstackListParamsInterface';
+import __SFronstackNewParamsInterface from './interface/SFrontstackNewParamsInterface';
 import __SPromise from '@coffeekraken/s-promise';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import __argsToString from '@coffeekraken/sugar/shared/cli/argsToString';
@@ -14,14 +15,21 @@ import __SProcess, {
     ISProcessSettings,
     ISProcessManagerProcessSettings,
 } from '@coffeekraken/s-process';
+import __stripAnsi from '@coffeekraken/sugar/shared/string/stripAnsi';
 import __SLog from '@coffeekraken/s-log';
 import __SSugarCli from '@coffeekraken/cli';
+import __filter from '@coffeekraken/sugar/shared/object/filter';
+import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
 
 export interface ISFrontstackSettings {}
 export interface ISFrontstackCtorSettings {
     frontstack: Partial<ISFrontstackSettings>;
+}
+
+export interface ISFrontstackNewParams {
+    
 }
 
 export interface ISFrontstackRecipesettings {
@@ -46,20 +54,24 @@ export interface ISFrontstackActionWrapper {
     [key: string]: any;
 }
 
+export interface ISFrontstackRecipeRequirements {
+    commands: string[];
+}
+
 export interface ISFrontstackRecipeStack {
     description: string;
     sharedParams: any;
     runInParallel: boolean;
     actions:
-        | Record<string, ISFrontstackAction>
-        | Record<string, ISFrontstackActionWrapper>;
+    | Record<string, ISFrontstackAction>
+    | Record<string, ISFrontstackActionWrapper>;
 }
 
 export interface ISFrontstackRecipe {
     id: string;
     title: string;
     description: string;
-    templateDir: string;
+    requirements?: ISFrontstackRecipeRequirements;
     defaultStack: string;
     stacks: Record<string, ISFrontstackRecipeStack>;
 }
@@ -120,6 +132,53 @@ export default class SFrontstack extends __SClass {
     }
 
     /**
+     * @name        new
+     * @type        Function
+     * @async
+     *
+     * This method allows you to create a new project using one of the available recipe(s)
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    new(params: ISFrontstackNewParams | string) {
+        return new __SPromise(
+            async ({ resolve, reject, emit, pipe }) => {
+                const frontstackConfig = __SSugarConfig.get('frontstack');
+                const recipesObj = __filter(frontstackConfig.recipes, (key, recipeObj) => {
+                    return recipeObj.stacks?.new !== undefined;
+                });
+
+                const finalParams: ISFrontstackNewParams =
+                    __SFronstackNewParamsInterface.apply(params);
+
+                const availableRecipes = Object.keys(recipesObj);
+
+                const recipe = await emit('ask', {
+                    type: 'autocomplete',
+                    message: 'Please select one of the available recipes',
+                    choices: availableRecipes,
+                });
+
+                if (!recipe) process.exit();
+
+                const recipeObj = recipesObj[recipe];
+
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `Starting project creation using the "<yellow>${recipe}</yellow>" recipe...`,
+                });
+
+                resolve(pipe(this.recipe({
+                    recipe,
+                    stack: 'new'
+                })));
+
+            }
+        ).bind(this);
+    }
+
+    /**
      * @name        action
      * @type        Function
      * @async
@@ -174,6 +233,7 @@ export default class SFrontstack extends __SClass {
                 const finalCommand = __SSugarCli.replaceTokens(
                     // @ts-ignore
                     actionObj.command ?? actionObj.process,
+                    // params
                 );
 
                 const actionId = actionObj.id ?? finalParams.action;
@@ -194,11 +254,8 @@ export default class SFrontstack extends __SClass {
                 );
             },
             {
-                eventEmitter: {
-                    bind: this,
-                },
             },
-        );
+        ).bind(this);
     }
 
     /**
@@ -211,7 +268,7 @@ export default class SFrontstack extends __SClass {
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    recipe(params: ISFrontstackRecipeParams | string) {
+    recipe(params: Partial<ISFrontstackRecipeParams> | string) {
 
         const processesPromises: any[] = [];
 
@@ -225,8 +282,9 @@ export default class SFrontstack extends __SClass {
                 const finalParams =
                     __SFrontstackRecipeParamsInterface.apply(params);
 
+                const sugarJson = new __SSugarJson().current();
+                
                 if (!finalParams.recipe) {
-                    const sugarJson = new __SSugarJson().current();
                     if (sugarJson.recipe) finalParams.recipe = sugarJson.recipe;
                 }
                 if (!finalParams.recipe) {
@@ -260,9 +318,21 @@ export default class SFrontstack extends __SClass {
                 }
 
                 // get the recipe object and treat it
-                const recipeObj: Partial<ISFrontstackRecipe> =
+                const recipeObj: ISFrontstackRecipe =
                     // @ts-ignore
                     recipesObj[finalParams.recipe];
+
+                // defined actions in the sugar.jcon file
+                if (sugarJson.frontstack?.[finalParams.stack]) {
+                    for (let [key, value] of Object.entries(sugarJson.frontstack?.[finalParams.stack])) {
+                        if (!frontstackConfig.actions[value.action]) {
+                            throw new Error(`The requested action "<yellow>${value.action}</yellow>" does not exists in the config.frontstack.actions stack... Here's the available ones: <green>${Object.keys(frontstackConfig.actions).join(',')}</green>`)
+                        }
+                        // @ts-ignore
+                        recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`] = __deepMerge(Object.assign({}, frontstackConfig.actions[value.action], value));
+                        delete recipeObj.stacks[finalParams.stack].actions[`sugarJson-${value.action}`].action;
+                    }
+                }
 
                 // check the recipe stacks
                 if (
@@ -290,8 +360,30 @@ export default class SFrontstack extends __SClass {
                     );
                 }
 
-                const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
+                // requirements
+                if (recipeObj.requirements) {
+                    if (recipeObj.requirements.commands) {
+                        for (let i=0; i<recipeObj.requirements.commands.length; i++) {
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`
+                            });
+                            const version = await __commandExists(recipeObj.requirements.commands[i])
+                            if (!version) {
+                                throw new Error(
+                                    `<red>[requirements]</red> Sorry but the command "<yellow>${recipeObj.requirements.commands[i]}</yellow>" is required but it does not exists.`,
+                                );
+                            } else {
+                                emit('log', {
+                                    type: __SLog.TYPE_INFO,
+                                    value: `<green>[requirements]</green> Command "<magenta>${recipeObj.requirements.commands[i]}</magenta>" available in version <cyan>${__stripAnsi(String(version).replace('\n',''))}</cyan>.`
+                                });
+                            }
+                        }
+                    }
+                }
 
+                const stackObj: Partial<ISFrontstackRecipeStack> = recipeObj.stacks[finalParams.stack];
                 
                 if (!finalParams.runInParallel) {
                     finalParams.runInParallel = stackObj.runInParallel ?? false;
@@ -395,25 +487,26 @@ export default class SFrontstack extends __SClass {
                             __argsToString(sharedParams).trim();
 
                         // build shared params cli string
-                        const paramsStr =
-                            __argsToString(finalActionParams).trim();
 
                         const actionId = actionObj.id ?? actionName;
                         // create a process from the recipe object
                         let finalCommand =
                             (actionObj.command ?? actionObj.process).trim() +
                             ' ' +
-                            sharedParamsStr +
-                            ' ' +
-                            paramsStr;
-                        finalCommand = __SSugarCli.replaceTokens(finalCommand);
+                            sharedParamsStr;
+                        finalCommand = __SSugarCli.replaceTokens(finalCommand, finalActionParams);
 
                         emit('log', {
                             type: __SLog.TYPE_INFO,
                             value: `<yellow>○</yellow> <yellow>${actionName}</yellow> : <cyan>${finalCommand}</cyan>`,
                         });
 
-                        const pro = await __SProcess.from(finalCommand);
+                        const pro = await __SProcess.from(finalCommand, {
+                            process: {
+                                before: actionObj.before,
+                                after: actionObj.after,
+                            }
+                        });
 
                         const finalProcessManagerParams = {
                             ...sharedParams,
@@ -439,11 +532,6 @@ export default class SFrontstack extends __SClass {
 
                 await Promise.all(processesPromises);
 
-
-                emit('log', {
-                    type: __SLog.TYPE_DECORATOR,
-                    value: `<green>${'-'.repeat(process.stdout.columns)}</green>`,
-                });
                 emit('log', {
                     type: __SLog.TYPE_INFO,
                     value: `<green>[success]</green> All actions have been executed <green>successfully</green> in <yellow>${duration.end().formatedDuration}</yellow>`,
@@ -453,11 +541,8 @@ export default class SFrontstack extends __SClass {
 
             },
             {
-                eventEmitter: {
-                    bind: this,
-                },
             },
-        );
+        ).bind(this);
     }
 
     /**

@@ -1,14 +1,16 @@
 // @ts-nocheck
 
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInterface';
 
 /**
  * @name      whenInteract
  * @namespace            js.dom.detect
  * @type      Function
+ * @interface       ./interface/WhenInteractSettingsInterface.js
  * @async
  * @platform          js
- * @stable
+ * @status           beta
  *
  * Wait that an interaction is made with the passed element like "focus", "focusIn", "mouseover", etc...
  *
@@ -22,30 +24,19 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  *
  * @example  	js
  * import whenInteract from '@coffeekraken/sugar/js/dom/detect/whenInteract'
- * await whenInteract(myCoolElement, {
- *  focus: true,
- *  touch: false,
- *  mouse: true
- * });
+ * await whenInteract(myCoolElement, {});
  *
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 
-export interface IWhenInteractTouchSettings {
-    start: boolean;
-    end: boolean;
-}
-
-export interface IWhenInteractMouseSettings {
-    over: boolean;
-    out: boolean;
-    click: boolean;
-}
-
 export interface IWhenInteractSettings {
-    touch: boolean | Partial<IWhenInteractTouchSettings>;
-    mouse: booleam | Partial<IWhenInteractMouseSettings>;
+    mouseover: boolean;
+    mouseout: boolean;
+    click: boolean;
+    touchstart: boolean;
+    touchend: boolean;
+    focus: boolean;
 }
 
 export default function whenInteract(
@@ -53,21 +44,8 @@ export default function whenInteract(
     settings?: Partial<IWhenInteractSettings>,
 ): Promise<any> {
     return new Promise((resolve, reject) => {
-        settings = <IWhenInteractSettings>__deepMerge(
-            {
-                mouse: {
-                    over: true,
-                    out: true,
-                    click: true,
-                },
-                touch: {
-                    start: true,
-                    end: true,
-                },
-                focus: true,
-            },
-            settings ?? {},
-        );
+
+        settings = <IWhenInteractSettings>__WhenInteractSettingsInterface.apply(settings ?? {});
 
         function interacted(interaction) {
             // resolving the promise
@@ -85,35 +63,35 @@ export default function whenInteract(
         function mouseover(e) {
             interacted('mouseover');
         }
-        if (settings.mouse === true || settings.mouse.over) {
+        if (settings.mouseover) {
             elm.addEventListener('mouseover', mouseover);
         }
 
         function mouseout(e) {
             interacted('mouseout');
         }
-        if (settings.mouse === true || settings.mouse.out) {
+        if (settings.mouseout) {
             elm.addEventListener('mouseout', mouseout);
         }
 
         function click(e) {
             interacted('click');
         }
-        if (settings.mouse === true || settings.mouse.click) {
+        if (settings.click) {
             elm.addEventListener('click', click);
         }
 
         function touchstart(e) {
             interacted('touchstart');
         }
-        if (settings.touch === true || settings.touch.start) {
+        if (settings.touchstart) {
             elm.addEventListener('touchstart', touchstart);
         }
 
         function touchend(e) {
             interacted('touchend');
         }
-        if (settings.touch === true || settings.touch.start) {
+        if (settings.touchend) {
             elm.addEventListener('touchend', touchend);
         }
 

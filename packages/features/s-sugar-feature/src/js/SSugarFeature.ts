@@ -13,7 +13,7 @@ export interface ISSugarFeatureProps {
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SSugarFeatureInterface.js
- * @menu            Styleguide / Forms               /styleguide/features/s-sugar-feature
+ * @menu            Styleguide / Features               /styleguide/features/s-sugar-feature
  * @platform        js
  * @status          beta
  *
@@ -29,9 +29,10 @@ export interface ISSugarFeatureProps {
  * @support          safari
  * @support          edge
  *
- * @example         html
- * <body s-sugar>
- * </body>
+ * @example         html        Simple usage        Simply add the `s-sugar` property on your body tag
+ * <bodyTag s-sugar>
+ * 
+ * </bodyTag>
  *
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

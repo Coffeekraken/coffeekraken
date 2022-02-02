@@ -605,6 +605,18 @@ export default function (env, config) {
              */
             padding: true,
             /**
+             * @name                offsize
+             * @namespace           config.themeBase.scalable
+             * @type                Boolean
+             * @default             false
+             *
+             * Specify if the "offsize" are scalable in your theme
+             *
+             * @since               2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            offsize: false,
+            /**
              * @name                font
              * @namespace           config.themeBase.scalable
              * @type                Boolean
@@ -1464,248 +1476,248 @@ export default function (env, config) {
         },
 
         color: {
-            extension: {
-                /**
-                 * @name                color
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             [theme.color.accent.color]
-                 *
-                 * Specify the color extension value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                color: '[theme.color.accent.color]',
-                /**
-                 * @name                blade
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #ff2d20
-                 *
-                 * Specify the blade extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                blade: '#ff2d20',
-                /**
-                 * @name                php
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #8892BF
-                 *
-                 * Specify the php extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                php: '#8892BF',
-                /**
-                 * @name                js
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #f7df1e
-                 *
-                 * Specify the js extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                js: '#f7df1e',
-                /**
-                 * @name                ts
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #0374C1
-                 *
-                 * Specify the ts extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                ts: '#0374C1',
-                /**
-                 * @name                node
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #68A063
-                 *
-                 * Specify the node extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                node: '#68A063',
-                /**
-                 * @name                css
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #498FE1
-                 *
-                 * Specify the css extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                css: '#498FE1',
-                /**
-                 * @name                scss
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #CF649A
-                 *
-                 * Specify the scss extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                scss: '#CF649A',
-                /**
-                 * @name                sass
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #CF649A
-                 *
-                 * Specify the sass extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                sass: '#CF649A',
-                /**
-                 * @name                json
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #000000
-                 *
-                 * Specify the json extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                json: '#000000',
-                /**
-                 * @name                jpg
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #B2C0E1
-                 *
-                 * Specify the jpg extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                jpg: '#B2C0E1',
-                /**
-                 * @name                jpeg
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #B2C0E1
-                 *
-                 * Specify the jpeg extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                jpeg: '#B2C0E1',
-                /**
-                 * @name                pdf
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #E7786E
-                 *
-                 * Specify the pdf extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                pdf: '#E7786E',
-                /**
-                 * @name                doc
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #60D7FD
-                 *
-                 * Specify the doc extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                doc: '#60D7FD',
-                /**
-                 * @name                psd
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #F9D659
-                 *
-                 * Specify the psd extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                psd: '#F9D659',
-                /**
-                 * @name                mp3
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #E98C61
-                 *
-                 * Specify the mp3 extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                mp3: '#E98C61',
-                /**
-                 * @name                png
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #C29DFB
-                 *
-                 * Specify the png extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                png: '#C29DFB',
-                /**
-                 * @name                aac
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #B1C5C9
-                 *
-                 * Specify the aac extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                aac: '#B1C5C9',
-                /**
-                 * @name                zip
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #9CC04E
-                 *
-                 * Specify the zip extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                zip: '#9CC04E',
-                /**
-                 * @name                dmg
-                 * @namespace           config.themeBase.color.extension
-                 * @type                Color
-                 * @default             #E36E4B
-                 *
-                 * Specify the dmg extension color value
-                 *
-                 * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                dmg: '#E36E4B',
-            },
+            // extension: {
+            //     /**
+            //      * @name                color
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             [theme.color.accent.color]
+            //      *
+            //      * Specify the color extension value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     color: '[theme.color.accent.color]',
+            //     /**
+            //      * @name                blade
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #ff2d20
+            //      *
+            //      * Specify the blade extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     blade: '#ff2d20',
+            //     /**
+            //      * @name                php
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #8892BF
+            //      *
+            //      * Specify the php extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     php: '#8892BF',
+            //     /**
+            //      * @name                js
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #f7df1e
+            //      *
+            //      * Specify the js extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     js: '#f7df1e',
+            //     /**
+            //      * @name                ts
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #0374C1
+            //      *
+            //      * Specify the ts extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     ts: '#0374C1',
+            //     /**
+            //      * @name                node
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #68A063
+            //      *
+            //      * Specify the node extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     node: '#68A063',
+            //     /**
+            //      * @name                css
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #498FE1
+            //      *
+            //      * Specify the css extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     css: '#498FE1',
+            //     /**
+            //      * @name                scss
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #CF649A
+            //      *
+            //      * Specify the scss extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     scss: '#CF649A',
+            //     /**
+            //      * @name                sass
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #CF649A
+            //      *
+            //      * Specify the sass extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     sass: '#CF649A',
+            //     /**
+            //      * @name                json
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #000000
+            //      *
+            //      * Specify the json extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     json: '#000000',
+            //     /**
+            //      * @name                jpg
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #B2C0E1
+            //      *
+            //      * Specify the jpg extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     jpg: '#B2C0E1',
+            //     /**
+            //      * @name                jpeg
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #B2C0E1
+            //      *
+            //      * Specify the jpeg extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     jpeg: '#B2C0E1',
+            //     /**
+            //      * @name                pdf
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #E7786E
+            //      *
+            //      * Specify the pdf extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     pdf: '#E7786E',
+            //     /**
+            //      * @name                doc
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #60D7FD
+            //      *
+            //      * Specify the doc extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     doc: '#60D7FD',
+            //     /**
+            //      * @name                psd
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #F9D659
+            //      *
+            //      * Specify the psd extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     psd: '#F9D659',
+            //     /**
+            //      * @name                mp3
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #E98C61
+            //      *
+            //      * Specify the mp3 extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     mp3: '#E98C61',
+            //     /**
+            //      * @name                png
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #C29DFB
+            //      *
+            //      * Specify the png extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     png: '#C29DFB',
+            //     /**
+            //      * @name                aac
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #B1C5C9
+            //      *
+            //      * Specify the aac extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     aac: '#B1C5C9',
+            //     /**
+            //      * @name                zip
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #9CC04E
+            //      *
+            //      * Specify the zip extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     zip: '#9CC04E',
+            //     /**
+            //      * @name                dmg
+            //      * @namespace           config.themeBase.color.extension
+            //      * @type                Color
+            //      * @default             #E36E4B
+            //      *
+            //      * Specify the dmg extension color value
+            //      *
+            //      * @since               2.0.0
+            //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     dmg: '#E36E4B',
+            // },
         },
 
         size: {
@@ -2699,14 +2711,14 @@ export default function (env, config) {
              * @name            80
              * @namespace       config.themeBase.space
              * @type            String
-             * @default         5.25
+             * @default         5.25rem
              *
              * Specify the "80" space used for margins and paddings
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            80: '5.25',
+            80: '5.25rem',
 
             /**
              * @name            90
@@ -3044,6 +3056,164 @@ export default function (env, config) {
              * @default         [theme.space.90]
              *
              * Specify the "100" space used for paddings
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            100: '[theme.space.100]',
+        },
+
+        offsize: {
+            /**
+             * @name            default
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.default]
+             *
+             * Specify the "default" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            default: '[theme.space.default]',
+
+            /**
+             * @name            0
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.0]
+             *
+             * Specify the "0" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            0: '[theme.space.0]',
+
+            /**
+             * @name            10
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.10]
+             *
+             * Specify the "10" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            10: '[theme.space.10]',
+
+            /**
+             * @name            20
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.20]
+             *
+             * Specify the "20" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            20: '[theme.space.20]',
+
+            /**
+             * @name            30
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.30]
+             *
+             * Specify the "30" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            30: '[theme.space.30]',
+
+            /**
+             * @name            40
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.40]
+             *
+             * Specify the "40" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            40: '[theme.space.40]',
+
+            /**
+             * @name            50
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.50]
+             *
+             * Specify the "50" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            50: '[theme.space.50]',
+
+            /**
+             * @name            60
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.60]
+             *
+             * Specify the "60" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            60: '[theme.space.60]',
+
+            /**
+             * @name            70
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.70]
+             *
+             * Specify the "70" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            70: '[theme.space.70]',
+
+            /**
+             * @name            80
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.80]
+             *
+             * Specify the "80" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            80: '[theme.space.80]',
+
+            /**
+             * @name            90
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.90]
+             *
+             * Specify the "90" space used for offsize
+             *
+             * @since           1.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            90: '[theme.space.90]',
+
+            /**
+             * @name            100
+             * @namespace       config.themeBase.offsize
+             * @type            String
+             * @default         [theme.space.100]
+             *
+             * Specify the "100" space used for offsize
              *
              * @since           1.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

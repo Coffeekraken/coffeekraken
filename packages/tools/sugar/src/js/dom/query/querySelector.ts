@@ -30,7 +30,7 @@ import __closestNotVisible from './closestNotVisible';
  * @todo      tests
  *
  * @example 	js
- * import querySelector from '@coffeekraken/sugar/js/dom/querySelector';
+ * import querySelector from '@coffeekraken/sugar/js/dom/query/querySelector';
  * // simple query
  * const elm = querySelector('.a-cool-css-selector');
  *

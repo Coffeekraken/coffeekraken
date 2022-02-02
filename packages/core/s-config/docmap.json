@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,10 +16,11 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -45,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +65,93 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-config.sugar.js.config.adapters.sConfigLsAdapter": {
+                "name": "SConfigLsAdapter",
+                "type": "Class",
+                "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
+                "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConfigLsAdapter.ts",
+                "extension": "ts",
+                "relPath": "src/js/adapters/SConfigLsAdapter.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-config.s-config.node.adapters.sConfigFolderAdapter": {
+                "name": "SConfigFolderAdapter",
+                "type": "Class",
+                "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
+                "namespace": "@coffeekraken.s-config.s-config.node.adapters",
+                "status": "beta",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConfigFolderAdapter.ts",
+                "extension": "ts",
+                "relPath": "src/node/adapters/SConfigFolderAdapter.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-config.s-config.shared.adapters.sConfigAdapter": {
+                "name": "SConfigAdapter",
+                "type": "Class",
+                "description": "Base class for SCache adapters",
+                "namespace": "@coffeekraken.s-config.s-config.shared.adapters",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "class SConfigCoolAdapter extends SConfigAdapter {\n   constructor(settings = {}) {\n     super(settings);\n     // settings are accessible through this._settings\n   }\n   async load() {\n     // load the config the way you want and return it in Object format\n     return {};\n   }\n   async save(newConfig) {\n     // save the newConfig object the way you want and return true when all it ok\n     return true;\n   }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConfigAdapter.ts",
+                "extension": "ts",
+                "relPath": "src/shared/adapters/SConfigAdapter.ts",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "update": {
+                        "name": "update",
+                        "type": "Function",
+                        "description": "Function that you have to call with the new config when it has been updated",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "name": {
+                        "name": "name",
+                        "type": "String",
+                        "description": "Access the adapter setted name",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
             "@coffeekraken.s-config.node.config.SConfig.set": {
                 "name": "set",
                 "type": "Function",
@@ -72,6 +163,123 @@
                         "code": "config.set('log.frontend.mail.host', 'coffeekraken.io');"
                     }
                 ],
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConfig.js",
+                "extension": "js",
+                "relPath": "src/shared/SConfig.js",
+                "children": {
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Init the config instance by passing a name and a settings object to configure your instance",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "config": {
+                        "name": "config",
+                        "type": "Object",
+                        "description": "Store the loaded config obect",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "load": {
+                        "name": "load",
+                        "type": "Function",
+                        "description": "Load the config from the default adapter or from the passed adapter",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "const config = await config.load();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "save": {
+                        "name": "save",
+                        "type": "Function",
+                        "description": "Save the config through all the registered adapters or just the one specify in params",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "await config.save();"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "get": {
+                        "name": "get",
+                        "type": "Function",
+                        "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "await config.get('log.frontend.mail.host'); // => gmail.google.com"
+                            }
+                        ],
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerPostprocess": {
+                        "name": "registerPostprocess",
+                        "type": "Function",
+                        "description": "This method allows you to register a postprocess function that will be fired once the config is ready so you can make updates as needed",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "registerPreprocess": {
+                        "name": "registerPreprocess",
+                        "type": "Function",
+                        "description": "This method allows you to register a preprocess function that will be fired once the config is ready so you can make updates as needed",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-config.s-config.shared.config": {
+                "name": "config",
+                "type": "Class",
+                "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
+                "namespace": "@coffeekraken.s-config.s-config.shared",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SConfig, { SConfigLsAdapter } from '@coffeekraken/s-config';\nconst config = new SConfig({\n  adapters: [\n   new SConfigLsAdapter()\n  ]\n});\nawait config.get('log.frontend.mail.host'); // => gmail.google.com\nawait config.set('log.frontend.mail.host', 'mailchimp.com');"
+                    }
+                ],
+                "since": "2.0.0",
                 "author": {
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com",
@@ -173,110 +381,18 @@
                             "email": "olivier.bossel@gmail.com",
                             "url": "https://olivierbossel.com"
                         }
-                    }
-                }
-            },
-            "@coffeekraken.s-config.s-config.shared.config": {
-                "name": "config",
-                "type": "Class",
-                "description": "This class allows you to quickly access/update some configuration depending on the data adapters specified.\nThe base available data adapters are:\n- For node:\n- File system adapter: @coffeekraken/s-config/src/node/adapters/SConfigFsAdapter\n- For js:\n- Localstorage adapter: @coffeekraken/s-config/src/js/adapters/SConfigLsAdapter",
-                "namespace": "@coffeekraken.s-config.s-config.shared",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SConfig, { SConfigLsAdapter } from '@coffeekraken/s-config';\nconst config = new SConfig({\n  adapters: [\n   new SConfigLsAdapter()\n  ]\n});\nawait config.get('log.frontend.mail.host'); // => gmail.google.com\nawait config.set('log.frontend.mail.host', 'mailchimp.com');"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SConfig.ts",
-                "extension": "ts",
-                "relPath": "src/shared/SConfig.ts"
-            },
-            "@coffeekraken.s-config.sugar.js.config.adapters.sConfigLsAdapter": {
-                "name": "SConfigLsAdapter",
-                "type": "Class",
-                "description": "This Local Storage adapter for the SConfig class let you define a name for your config and then you can just\nlet the SConfig class do the work for you...",
-                "namespace": "@coffeekraken.s-config.sugar.js.config.adapters",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SConfigLsAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/js/adapters/SConfigLsAdapter.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-config.s-config.node.adapters.sConfigFolderAdapter": {
-                "name": "SConfigFolderAdapter",
-                "type": "Class",
-                "description": "This adapter let you specify a folder in which to put all the config files and access it normaly as you would with the SConfig system.\nEach file in the folder will be the first level of the final config object like for example the file \"colors.config.js\" will be stored\nin the final object under ```{ colors: ... }```.",
-                "namespace": "@coffeekraken.s-config.s-config.node.adapters",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SConfigFolderAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/node/adapters/SConfigFolderAdapter.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-config.s-config.shared.adapters.sConfigAdapter": {
-                "name": "SConfigAdapter",
-                "type": "Class",
-                "description": "Base class for SCache adapters",
-                "namespace": "@coffeekraken.s-config.s-config.shared.adapters",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "class SConfigCoolAdapter extends SConfigAdapter {\n   constructor(settings = {}) {\n     super(settings);\n     // settings are accessible through this._settings\n   }\n   async load() {\n     // load the config the way you want and return it in Object format\n     return {};\n   }\n   async save(newConfig) {\n     // save the newConfig object the way you want and return true when all it ok\n     return true;\n   }\n}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SConfigAdapter.ts",
-                "extension": "ts",
-                "relPath": "src/shared/adapters/SConfigAdapter.ts",
-                "children": {
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Construct the SConfigAdapter instance with the settings passed in object format. See description bellow.",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
                     },
-                    "update": {
-                        "name": "update",
+                    "set": {
+                        "name": "set",
                         "type": "Function",
-                        "description": "Function that you have to call with the new config when it has been updated",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "name": {
-                        "name": "name",
-                        "type": "String",
-                        "description": "Access the adapter setted name",
+                        "description": "Get a config depending on the dotted object path passed and either using the first registered adapter found, or the passed one",
+                        "namespace": "@coffeekraken.s-config.node.config.SConfig",
+                        "example": [
+                            {
+                                "language": "js",
+                                "code": "config.set('log.frontend.mail.host', 'coffeekraken.io');"
+                            }
+                        ],
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com",

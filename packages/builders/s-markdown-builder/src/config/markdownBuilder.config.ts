@@ -103,6 +103,18 @@ export default function (env, config) {
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             target: 'markdown',
+            /**
+             * @name            protectedTags.default
+             * @namespace       config.markdownBuilder
+             * @type            String[]
+             * @default         ['template','code']
+             *
+             * Specify some tags that should be protected from the markdown transformations like "template" or "code"...
+             *
+             * @since       2.0.0
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            protectedTags: ['template','code'],
         },
         presets: {},
         transformers: {

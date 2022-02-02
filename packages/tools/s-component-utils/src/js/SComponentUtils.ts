@@ -2,50 +2,18 @@
 // @TODO            check how to override private static methods
 
 // import __mustache from 'mustache';
-import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
+import __SClass from '@coffeekraken/s-class';
+import __SConductor from '@coffeekraken/s-conductor';
 import __SInterface from '@coffeekraken/s-interface';
+import __SPromise from '@coffeekraken/s-promise';
 import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';
 import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
-import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
+import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
+import __autoCast from '@coffeekraken/sugar/shared/string/autoCast';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
-import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __SClass from '@coffeekraken/s-class';
-import __inViewportStatusChange from '@coffeekraken/sugar/js/dom/detect/inViewportStatusChange';
-import __SPromise from '@coffeekraken/s-promise';
-import __SConductor from '@coffeekraken/s-conductor';
-
-export class SComponentDefaultInterface extends __SInterface {
-    static get _definition() {
-        return {
-            id: {
-                type: 'String',
-                physical: true,
-            },
-            mounted: {
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
-            mountWhen: {
-                type: 'String',
-                values: ['directly', 'inViewport'],
-                default: 'directly',
-            },
-            adoptStyle: {
-                type: 'Boolean',
-                default: true,
-                physical: true,
-            },
-            bare: {
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
-        };
-    }
-}
+import __SComponentUtilsDefaultPropsInterface from './interface/SComponentUtilsDefaultPropsInterface';
 
 export interface ISComponentUtilsSettings {
     interface?: typeof __SInterface;
@@ -57,9 +25,10 @@ export interface ISComponentUtilsCtorSettings {
     componentUtils: Partial<ISComponentUtilsSettings>;
 }
 
-export interface ISComponentDefaultProps {
+export interface ISComponentUtilsDefaultProps {
     id: string;
-    mountWhen: 'directly' | 'inViewport';
+    mounted: boolean;
+    mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     bare: boolean;
 }
@@ -227,7 +196,7 @@ export default class SComponent extends __SClass {
         };
         // @ts-ignore
         InterfaceToApply.definition = {
-            ...Object.assign({}, SComponentDefaultInterface.definition),
+            ...Object.assign({}, __SComponentUtilsDefaultPropsInterface.definition),
             // @ts-ignore
             ...(this.componentUtilsSettings.interface?.definition ?? {}),
         };
@@ -410,11 +379,11 @@ export default class SComponent extends __SClass {
 
     static getFinalInterface(int?: typeof __SInterface): __SInterface {
         class InlineSComponentUtilsInterface extends __SInterface {
-            static definition = SComponentDefaultInterface.definition;
+            static definition = __SComponentUtilsDefaultPropsInterface.definition;
         }
         if (int) {
             InlineSComponentUtilsInterface.definition = {
-                ...SComponentDefaultInterface.definition,
+                ...__SComponentUtilsDefaultPropsInterface.definition,
                 // @ts-ignore
                 ...int.definition,
             };

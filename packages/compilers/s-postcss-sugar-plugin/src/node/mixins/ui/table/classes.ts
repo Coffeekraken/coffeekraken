@@ -110,12 +110,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <table class="s-table${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-mbe:30">
@@ -154,17 +151,13 @@ export default function ({
             *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *   </table>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <table class="s-table${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-mbe:30">
@@ -184,14 +177,12 @@ export default function ({
             *           <td>${__faker.name.findName()}</td>
             *       </tr>
             *   </table>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- RTL -->
-        * <div class="s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL Support</h3>
+        * @example      html        RTL
+        * <div dir="rtl">
         *   <table class="s-table">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -211,9 +202,7 @@ export default function ({
         *   </table>
         * </div>
         * 
-        * <!-- scales -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
+        * @example      html        Scales
         *   <table class="s-table s-scale:15">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -231,14 +220,8 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        * </div>
         * 
-        * <!-- Text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`table\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example      html        Text format
         *   <div class="s-format:text">
         *       <table>
         *       <tr>
@@ -258,7 +241,6 @@ export default function ({
         *       </tr>
         *   </table>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

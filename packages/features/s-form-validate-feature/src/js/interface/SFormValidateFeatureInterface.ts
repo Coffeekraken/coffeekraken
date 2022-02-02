@@ -1,5 +1,24 @@
 import __SInterface from '@coffeekraken/s-interface';
 
+/**
+ * @name                SFormValidateFeatureInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This interface represent the attributes of the SFormValidateFeature
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
 export default class SFormValidateFeatureInterface extends __SInterface {
     static get _definition() {
         return {
@@ -13,33 +32,27 @@ export default class SFormValidateFeatureInterface extends __SInterface {
                 description:
                     'Specify when to trigger a validation. Can be "change","submit","enter" and/or "reset"',
                 type: 'Array<String>',
-                values: ['change', 'submit', 'enter', 'reset'],
-                default: ['change', 'submit', 'enter', 'reset'],
+                values: ['keyup', 'change', 'submit', 'enter', 'reset'],
+                default: ['keyup', 'change', 'submit', 'enter', 'reset'],
             },
             wrap: {
                 description:
                     'Specify if you want to wrap your s-form-validate element when theres an error',
                 type: 'Boolean',
-                default: true,
+                default: false,
             },
             errorClass: {
                 description: 'Specify the class to apply when theres an error',
                 type: 'String',
                 default:
-                    's-form-validate s-form-validate--error s-color--error',
-            },
-            errorMessageClass: {
-                description:
-                    'Specify the class to apply on the injected error message container',
-                type: 'String',
-                default: 's-form-validate__error-message',
+                    's-form-validate--error s-color--error',
             },
             validClass: {
                 description:
                     'Specify the class to apply on your s-form-validate element when validation is passed successfully',
                 type: 'String',
                 default:
-                    's-form-validate s-form-validate--valid s-color--success',
+                    's-form-validate--valid s-color--success',
             },
             customValidations: {
                 description:

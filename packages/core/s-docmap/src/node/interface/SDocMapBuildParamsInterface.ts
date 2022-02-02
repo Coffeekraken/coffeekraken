@@ -6,8 +6,11 @@ import __SInterface from '@coffeekraken/s-interface';
 /**
  * @name                SDocmapBuildParamsInterface
  * @namespace           node.interface
- * @type                Class
+ * @type.                      Class
  * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             node
  *
  * This class represent the interface that describe the minimum requirement
  * needed to build the docMap.json file

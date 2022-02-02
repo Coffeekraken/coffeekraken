@@ -1,1 +1,1 @@
-##### {{ config.packageJson.name }}
+##### {{ packageJson.name }}

@@ -2,6 +2,7 @@
 
 import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from '../utlls/requestAnimationFrame';
+import __isUserScrolling from '../is/userScrolling';
 
 /**
  * @name      scrollTo
@@ -37,23 +38,15 @@ import requestAnimationFrame from '../utlls/requestAnimationFrame';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-let isUserScrolling = false;
-let userScrollingTimeout;
-let isScrollingHappening = false;
-document.addEventListener('mousewheel', (e) => {
-    if (!isScrollingHappening) return;
-    isUserScrolling = true;
-    clearTimeout(userScrollingTimeout);
-    userScrollingTimeout = setTimeout(() => {
-        isUserScrolling = false;
-    }, 200);
-});
-
 export interface IScrollToSettings {
+    $elm: HTMLElement;
     duration: number;
     easing: Function;
     offset: number;
-    align: 'top' | 'center' | 'bottom';
+    offsetX: number;
+    offsetY: number;
+    align: 'start' | 'center' | 'end';
+    justify: 'start' | 'center' | 'end';
     onFinish: Function;
 }
 
@@ -63,55 +56,103 @@ function scrollTo(
 ): Promise<any> {
     return new Promise((resolve, reject) => {
         settings = {
+            $elm: window,
             duration: 500,
             easing: easeInOutQuad,
             offset: 0,
-            align: 'top',
+            offsetX: undefined,
+            offsetY: undefined,
+            align: 'start',
+            justify: 'start',
             onFinish: null,
             ...settings,
         };
 
-        const docElem = document.documentElement; // to facilitate minification better
-        const windowHeight = window.innerHeight;
-        const maxScroll = docElem.scrollHeight - windowHeight;
-        const currentY = window.pageYOffset;
+        // remap element if needed
+        if (settings.$elm === document.body) settings.$elm = window;
+        if (settings.$elm === document) settings.$elm = window;
 
-        isScrollingHappening = true;
+        const $scrollElm = settings.$elm === window ? document.body : settings.$elm;
+        
+        let elmHeight = settings.$elm === window ? window.innerHeight : settings.$elm.offsetHeight;
+        let elmWidth = settings.$elm === window ? window.innerWidth : settings.$elm.offsetWidth;
+        
+        let maxScrollY = $scrollElm.scrollHeight - elmHeight;
+        let maxScrollX = $scrollElm.scrollWidth - elmWidth;
 
-        let targetY = currentY;
-        const elementBounds = isNaN(target)
-            ? target.getBoundingClientRect()
-            : 0;
+        const currentY = settings.$elm === window ? window.pageYOffset : settings.$elm?.scrollTop;
+        const currentX = settings.$elm === window ? window.pageXOffset : settings.$elm?.scrollLeft;
 
-        if (settings.align === 'center') {
-            targetY += elementBounds.top + elementBounds.height / 2;
-            targetY -= windowHeight / 2;
-            targetY -= settings.offset;
-        } else if (settings.align === 'bottom') {
-            targetY += elementBounds.bottom;
-            targetY -= windowHeight;
-            targetY += settings.offset;
-        } else {
-            // top, undefined
-            targetY += elementBounds.top;
-            targetY -= settings.offset;
+        // handle paddings
+        if (settings.$elm !== window) {
+            const computedScrollStyles = window.getComputedStyle(settings.$elm);
+            maxScrollY += parseInt(computedScrollStyles.paddingTop);
+            maxScrollY += parseInt(computedScrollStyles.paddingBottom);
+            maxScrollX += parseInt(computedScrollStyles.paddingLeft);
+            maxScrollX += parseInt(computedScrollStyles.paddingRight);
         }
 
-        targetY = Math.max(Math.min(maxScroll, targetY), 0);
+        let targetY = currentY, targetX = currentX;
+        const targetBounds = target.getBoundingClientRect();
 
+        const offsetY = settings.offsetY ?? settings.offset;
+        const offsetX = settings.offsetX ?? settings.offset;
+
+        // y
+        if (settings.align === 'center') {
+            targetY += targetBounds.top + targetBounds.height / 2;
+            targetY -= elmHeight / 2;
+            targetY -= offsetY;
+        } else if (settings.align === 'end') {
+            targetY += targetBounds.bottom;
+            targetY -= elmHeight;
+            targetY += offsetY;
+        } else {
+            // start, undefined
+            targetY += targetBounds.top;
+            targetY -= offsetY;
+        }
+
+        targetY = Math.max(Math.min(maxScrollY, targetY), 0);
         const deltaY = targetY - currentY;
+    
+        // x
+        if (settings.justify === 'center') {
+            targetX += targetBounds.left + targetBounds.width / 2;
+            targetX -= elmWidth / 2;
+            targetX -= offsetX;
+        } else if (settings.justify === 'end') {
+            targetX += targetBounds.right;
+            targetX -= elmWidth;
+            targetX += offsetX;
+        } else {
+            // start, undefined
+            targetX += targetBounds.left;
+            targetX -= offsetX;
+        }
+        targetX = Math.max(Math.min(maxScrollX, targetX), 0);
+        const deltaX = targetX - currentX;
+
+        // element position
+        const elmBounds = settings.$elm.getBoundingClientRect();
+        targetY -= elmBounds.top;
+        targetX -= elmBounds.left;
 
         const obj = {
-            targetY: targetY,
-            deltaY: deltaY,
+            targetY,
+            targetX,
+            deltaY,
+            deltaX,
+            currentY,
+            currentX,
             duration: settings.duration,
             easing: settings.easing,
+            $elm: settings.$elm,
             onFinish() {
                 settings.onFinish && settings.onFinish();
                 resolve();
             },
             startTime: Date.now(),
-            lastY: currentY,
             step: scrollTo.step,
         };
 
@@ -120,25 +161,25 @@ function scrollTo(
 }
 
 scrollTo.step = function () {
-    if (this.lastY !== window.pageYOffset && this.onFinish) {
-        isScrollingHappening = false;
-        this.onFinish();
-        return;
-    }
-
     // Calculate how much time has passed
     const t = Math.min((Date.now() - this.startTime) / this.duration, 1);
 
+    let $scrollElm = this.$elm;
+    if (this.$elm === document.body || this.$elm === document) {
+        $scrollElm = window;
+    }
+
     // Scroll window amount determined by easing
+    const x = this.targetX - (1 - this.easing(t)) * this.deltaX;
     const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
-    window.scrollTo(window.scrollX, y);
+    $scrollElm.scrollTo(x, y);
+
+    if (__isUserScrolling(this.$elm)) return;
 
     // Continue animation as long as duration hasn't surpassed
-    if (t !== 1 && !isUserScrolling) {
-        this.lastY = window.pageYOffset;
+    if (t !== 1) {
         requestAnimationFrame(this.step.bind(this));
     } else {
-        isScrollingHappening = false;
         if (this.onFinish) this.onFinish();
     }
 };

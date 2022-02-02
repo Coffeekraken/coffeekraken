@@ -1,1 +1,1 @@
-{{ config.packageJson.description }}
+{{ packageJson.description }}

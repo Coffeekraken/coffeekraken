@@ -16,19 +16,14 @@ import __matchExcludeGlobs from '@coffeekraken/sugar/node/path/matchExcludeGlobs
 import __SBench from '@coffeekraken/s-bench';
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
-
-export interface ISSugarJsonIncludeSettings {
-    package: boolean;
-    modules: boolean;
-    global: boolean;
-    top: boolean;
-}
+import __SFrontstack, { ISFrontstackAction } from '@coffeekraken/s-frontstack';
 
 export interface ISSugarJsonSettings {
-    modules: string | boolean;
-    include: ISSugarJsonIncludeSettings;
-    cache: boolean;
-    cacheId: string;
+    packages: string | boolean;
+    includePackage: boolean;
+    includeModules: boolean;
+    includeGlobal: boolean;
+    includeTop: boolean;
 }
 
 export interface ISSugarJsonFileCliAction {
@@ -44,7 +39,7 @@ export interface ISSugarJsonCtorSettings {
 export interface ISSugarJsonFileCli {
     stack: string;
     description: string;
-    interactive: Record<string, ISSugarJsonFileCliAction>;
+    // interactive: Record<string, ISSugarJsonFileCliAction>;
     defaultAction: string;
     actions: Record<string, ISSugarJsonFileCliAction>;
 }
@@ -64,6 +59,7 @@ export interface ISSugarJsonFile {
     recipe?: string;
     cli?: ISSugarJsonFileCli;
     config?: ISSugarJsonFileConfig;
+    frontstack?: Record<string, ISFrontstackAction>
 }
 
 export default class SSugarJson extends __SClass {
@@ -96,30 +92,15 @@ export default class SSugarJson extends __SClass {
             __deepMerge(
                 {
                     sugarJson: {
-                        modules: false,
-                        include: {
-                            package: true,
-                            modules: true,
-                            top: true,
-                            global: true,
-                        },
-                        cache: true,
+                        includePackage: true,
+                        includeModules: true,
+                        includeGlobal: true,
+                        includeTop: true,
                     },
                 },
                 settings ?? {},
             ),
         );
-
-        this.sugarJsonSettings.cacheId = __md5.encrypt({
-            context: __packageRoot(),
-            ...this._settings,
-        });
-
-        __onProcessExit(() => {
-            try {
-                __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-            } catch (e) {}
-        });
     }
 
     /**
@@ -156,10 +137,12 @@ export default class SSugarJson extends __SClass {
      * @since             2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    read(settings?: Partial<ISSugarJsonSettings>): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
+    async read(settings?: Partial<ISSugarJsonSettings>): Record<string, ISSugarJsonFile> | ISSugarJsonFile {
         __SBench.start('SSugarJson.read');
 
+        // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
         const finalSettings = <ISSugarJsonSettings>{
+            // ...SSugarJsonSettingsInterface.default.defaults(),
             ...this.sugarJsonSettings,
             ...settings,
         };
@@ -167,7 +150,7 @@ export default class SSugarJson extends __SClass {
         let sugarJsonPaths: string[] = [];
 
         if (!sugarJsonPaths.length) {
-            sugarJsonPaths = this.search(finalSettings);
+            sugarJsonPaths = await this.search(finalSettings);
         }
 
         const results = {};
@@ -216,6 +199,7 @@ export default class SSugarJson extends __SClass {
     /**
      * @name      search
      * @type      Function
+     * @async
      *
      * This method make the actual research of the files on the filesystem
      * and return the founded files pathes
@@ -226,7 +210,7 @@ export default class SSugarJson extends __SClass {
      * @since         2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    search(settings?: ISSugarJsonSettings): string[] {
+    async search(settings?: ISSugarJsonSettings): string[] {
         const finalSettings = <ISSugarJsonSettings>{
             ...this.sugarJsonSettings,
             ...(settings ?? {}),
@@ -237,7 +221,7 @@ export default class SSugarJson extends __SClass {
         // get global node modules directory path
         const globalNodeModulesPath = __childProcess.execSync(`npm root -g`).toString().trim();
 
-        const packagesArray = typeof finalSettings.modules === 'string' ? finalSettings.modules.split(',') : [];
+        const packagesArray = typeof finalSettings.packages === 'string' ? finalSettings.packages.split(',') : [];
 
         // get local node modules directory path
         const localNodeModulesPath = `${__packageRoot()}/node_modules`;
@@ -249,14 +233,14 @@ export default class SSugarJson extends __SClass {
         const globs: string[] = [];
 
         // local first
-        if (localNodeModulesPath && finalSettings.include.modules) {
+        if (localNodeModulesPath && finalSettings.includeModules) {
             // coffeekraken modules are always loaded
             globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
 
-            if (finalSettings.modules === '*') {
+            if (finalSettings.packages === '*') {
                 globs.push(`${localNodeModulesPath}/*/sugar.json`);
                 globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
-            } else if (finalSettings.modules !== false) {
+            } else if (finalSettings.packages !== false) {
                 packagesArray.forEach((name) => {
                     globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
                 });
@@ -266,13 +250,13 @@ export default class SSugarJson extends __SClass {
         // top local
         if (
             localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.include.modules &&
-            finalSettings.include.top
+            finalSettings.includeModules &&
+            finalSettings.includeTop
         ) {
             // coffeekraken modules are always loaded
             globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
 
-            if (finalSettings.modules === '*') {
+            if (finalSettings.packages === '*') {
                 globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
                 globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
             } else {
@@ -282,11 +266,11 @@ export default class SSugarJson extends __SClass {
             }
         }
         // then global
-        if (globalNodeModulesPath && finalSettings.include.modules && finalSettings.include.global) {
+        if (globalNodeModulesPath && finalSettings.includeModules && finalSettings.includeGlobal) {
             // coffeekraken modules are always loaded
             globs.push(`${globalNodeModulesPath}/@coffeekraken/*/sugar.json`);
 
-            if (finalSettings.modules === '*') {
+            if (finalSettings.packages === '*') {
                 globs.push(`${globalNodeModulesPath}/*/sugar.json`);
                 globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
             } else {
@@ -296,13 +280,13 @@ export default class SSugarJson extends __SClass {
             }
         }
 
-        if (finalSettings.include.package) {
+        if (finalSettings.includePackage) {
             globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
         }
         if (
             localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.include.package &&
-            finalSettings.include.top
+            finalSettings.includePackage &&
+            finalSettings.includeTop
         ) {
             globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
         }
@@ -316,7 +300,7 @@ export default class SSugarJson extends __SClass {
 
         __SBench.end('SSugarJson.search');
 
-        return __unique(
+        const finalFiles = __unique(
             files
                 .map((f) => __fs.realpathSync(f))
                 .filter((f) => {
@@ -326,40 +310,6 @@ export default class SSugarJson extends __SClass {
                     return true;
                 }),
         );
-    }
-
-    /**
-     * @name          updateCache
-     * @type          Function
-     *
-     * This method search for files and update the cache once finished
-     *
-     * @param         {String[]}        [filesPaths=[]]         An array of files paths to save in cache. If not passed, the system will search for files and update the cache with this result
-     * @return        {String[]}          An array of found files just like the ```search``` method
-     *
-     * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    updateCache(filesPaths?: string[]): string[] {
-        if (__fs.existsSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`)) return [];
-
-        __fs.writeFileSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`, '');
-
-        // console.log(
-        //   'WRITE',
-        //   `${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`
-        // );
-
-        if (!filesPaths) {
-            filesPaths = this.search();
-        }
-        __fs.writeFileSync(
-            `${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.json`,
-            JSON.stringify(filesPaths, null, 4),
-        );
-
-        __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-
-        return filesPaths;
+        return finalFiles;
     }
 }

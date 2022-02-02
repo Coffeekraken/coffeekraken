@@ -26,7 +26,7 @@ export interface ISLitComponentCtorSettings {
 
 export interface ISLitComponentDefaultProps {
     id: string;
-    mountWhen: 'directly' | 'inViewport';
+    mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     defaultStyle: boolean;
 }

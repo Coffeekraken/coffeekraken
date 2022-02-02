@@ -2,65 +2,7 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [
-            "@coffeekraken/cli",
-            "@coffeekraken/coffeekraken-io",
-            "@coffeekraken/s-activate-feature",
-            "@coffeekraken/s-bench",
-            "@coffeekraken/s-builder",
-            "@coffeekraken/s-class",
-            "@coffeekraken/s-clipboard-copy-component",
-            "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
-            "@coffeekraken/s-color-picker-component",
-            "@coffeekraken/s-color",
-            "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
-            "@coffeekraken/s-config",
-            "@coffeekraken/s-date-picker-component",
-            "@coffeekraken/s-descriptor",
-            "@coffeekraken/s-docblock",
-            "@coffeekraken/s-duration",
-            "@coffeekraken/s-env",
-            "@coffeekraken/s-event-emitter",
-            "@coffeekraken/s-feature",
-            "@coffeekraken/s-file",
-            "@coffeekraken/s-filtrable-input-component",
-            "@coffeekraken/s-form-validate-feature",
-            "@coffeekraken/s-frontend-server",
-            "@coffeekraken/s-frontspec",
-            "@coffeekraken/s-frontstack",
-            "@coffeekraken/s-glob",
-            "@coffeekraken/s-handlebars",
-            "@coffeekraken/s-images-builder",
-            "@coffeekraken/s-interface",
-            "@coffeekraken/s-lit-component",
-            "@coffeekraken/s-log",
-            "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
-            "@coffeekraken/s-postcss-builder",
-            "@coffeekraken/s-postcss-sugar-plugin",
-            "@coffeekraken/s-process",
-            "@coffeekraken/s-promise",
-            "@coffeekraken/s-range-component",
-            "@coffeekraken/s-request",
-            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
-            "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
-            "@coffeekraken/s-static-builder",
-            "@coffeekraken/s-stdio",
-            "@coffeekraken/s-sugar-config",
-            "@coffeekraken/s-sugar-json",
-            "@coffeekraken/s-theme",
-            "@coffeekraken/s-timer",
-            "@coffeekraken/s-type",
-            "@coffeekraken/s-url",
-            "@coffeekraken/s-view-renderer",
-            "@coffeekraken/s-vite-plugin-postcss",
-            "@coffeekraken/s-vite-plugin-riotjs",
-            "@coffeekraken/s-vite-plugin-sugar",
-            "@coffeekraken/sugar"
-        ],
+        "extends": [],
         "map": {
             "@coffeekraken.s-vite.config.vite.root": {
                 "name": "root",
@@ -74,9 +16,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.base": {
                 "name": "base",
@@ -90,9 +32,25 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
+            },
+            "@coffeekraken.s-vite.config.vite.logLevel": {
+                "name": "logLevel",
+                "type": "String",
+                "default": "error",
+                "description": "Specify the log level",
+                "namespace": "@coffeekraken.s-vite.config.vite",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "vite.config.js",
+                "extension": "config",
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.mode": {
                 "name": "mode",
@@ -106,9 +64,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.resolve.alias.vue": {
                 "name": "vue",
@@ -122,9 +80,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.plugins": {
                 "name": "plugins",
@@ -138,9 +96,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.publicDir": {
                 "name": "publicDir",
@@ -154,9 +112,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.cacheDir": {
                 "name": "cacheDir",
@@ -170,9 +128,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.clearScreen": {
                 "name": "clearScreen",
@@ -186,9 +144,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.entry": {
                 "name": "entry",
@@ -202,9 +160,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.build.lib.name": {
                 "name": "name",
@@ -218,9 +176,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.build.outDir": {
                 "name": "outDir",
@@ -234,9 +192,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.server.host": {
                 "name": "host",
@@ -250,9 +208,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.server.post": {
                 "name": "post",
@@ -266,9 +224,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts"
+                "relPath": "src/config/vite.config.js"
             },
             "@coffeekraken.s-vite.config.vite.server.hostname": {
                 "name": "hostname",
@@ -282,9 +240,188 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "vite.config.ts",
+                "filename": "vite.config.js",
                 "extension": "config",
-                "relPath": "src/config/vite.config.ts",
+                "relPath": "src/config/vite.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-vite.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-vite.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface": {
+                "name": "SViteBuildParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
+                "namespace": "@coffeekraken.s-vite.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SViteBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input js/ts file to use for the build",
+                            "type": "String",
+                            "path": {
+                                "exists": true,
+                                "absolute": true
+                            },
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/tools/s-vite/src/js/index.ts",
+                            "required": true
+                        },
+                        "type": {
+                            "description": "Specify the type(s) of build you want. Can be \"lib\", \"bundle\" or \"module\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "lib",
+                                "bundle",
+                                "module"
+                            ],
+                            "default": [
+                                "bundle",
+                                "module"
+                            ],
+                            "alias": "t"
+                        },
+                        "format": {
+                            "description": "Specify the format(s) of the output build. Can be \"es\",\"umd\",\"cjs\" or \"iife\"",
+                            "type": "Array<String>",
+                            "values": [
+                                "es",
+                                "umd",
+                                "cjs",
+                                "iife"
+                            ],
+                            "default": [],
+                            "alias": "f"
+                        },
+                        "target": {
+                            "description": "Specify the target you want for your build. Can be \"modules\",\"esnext\",\"es2015\",\"es2016\" or \"es2020\"",
+                            "type": "String",
+                            "values": [
+                                "modules",
+                                "esnext",
+                                "es2015",
+                                "es2016",
+                                "es2020"
+                            ]
+                        },
+                        "watch": {
+                            "description": "Specify if you want the process to watch for updates and rebuild automatically",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "w"
+                        },
+                        "lib": {
+                            "description": "Specify if your build type is \"lib\". Same as setting the \"type\" argument to \"lib\"",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "l"
+                        },
+                        "bundle": {
+                            "description": "Specify if your build type is \"bundle\". Same as setting the \"type\" argument to \"bundle\"",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "b"
+                        },
+                        "noWrite": {
+                            "description": "Specify if you want to ust build but not write file(s) to the filesystem",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "prod": {
+                            "description": "Specify if your build is made for production environment or not. This will automatically minify and optimize your build",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "p"
+                        },
+                        "chunks": {
+                            "description": "Specify if you allow your build to be separated into multiple chunks or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "c"
+                        },
+                        "minify": {
+                            "description": "Specify if you want to minify your build or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "m"
+                        },
+                        "analyze": {
+                            "description": "Specify if you want an analyze report of your build. This use the rollup analyze plugin under the hood",
+                            "type": "Boolean",
+                            "default": false,
+                            "alias": "a"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SViteBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SViteBuildParamsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-vite.node.interface.SViteStartParamsInterface": {
+                "name": "SViteStartParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
+                "namespace": "@coffeekraken.s-vite.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SViteStartParamsInterface",
+                    "description": "",
+                    "definition": {}
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SViteStartParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SViteStartParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-vite.node.plugins.importCssPlugin": {
@@ -329,40 +466,6 @@
                 "filename": "rewritesPlugin.ts",
                 "extension": "ts",
                 "relPath": "src/node/plugins/rewritesPlugin.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-vite.s-vite.sViteBuildInterface": {
-                "name": "SViteBuildInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
-                "namespace": "@coffeekraken.s-vite.s-vite",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SViteBuildInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/build/interface/SViteBuildInterface.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-vite.s-vite.sViteStartInterface": {
-                "name": "SViteStartInterface",
-                "type": "Class",
-                "description": "This class represent the interface that describe parameters of the SFrontstackViteProcess",
-                "namespace": "@coffeekraken.s-vite.s-vite",
-                "status": "wip",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SViteStartInterface.ts",
-                "extension": "ts",
-                "relPath": "src/node/start/interface/SViteStartInterface.ts",
                 "children": {}
             }
         }

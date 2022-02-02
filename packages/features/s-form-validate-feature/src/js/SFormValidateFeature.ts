@@ -30,66 +30,80 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @support          safari
  * @support          edge
  *
- * @example         html
- * <form action="." method="get">
- * <h3 class="s-tc:accent s-font:30 s-mbe:30">Simple fields</h3>
- * <label class="s-label s-mbe:30" s-form-validate email>
- *    <input type="text" class="s-input s-width\:60" placeholder="olivier.bossel@coffeekraken.io" />
+ * @example         html            Email field
+ * <label class="s-label" s-form-validate email>
+ *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
  *    Email address
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate domain>
- *    <input type="text" class="s-input s-width\:60" placeholder="coffeekraken.io" />
+ * 
+ * @example         html            Domain field
+ * <label class="s-label" s-form-validate domain>
+ *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  *    Domain name
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate alphanum>
- *    <input type="text" class="s-input s-width\:60" placeholder="a-zA-Z0-9" />
+ * 
+ * @example         html        Alphanumeric field
+ * <label class="s-label" s-form-validate alphanum>
+ *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  *    Alphanumeric
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate credit-card>
- *    <input type="text" class="s-input s-width\:60" placeholder="340716737808634" />
+ * 
+ * @example         html       Credit card field
+ * <label class="s-label" s-form-validate credit-card>
+ *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  *    Credit card
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate min="3" max="6">
- *    <input type="text" class="s-input s-width\:60" placeholder="3 to 6" />
+ * 
+ * @example         html       Min / Max
+ * <label class="s-label" s-form-validate min="3" max="6">
+ *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  *    Min and max
  * </label>
  *
- * <h3 class="s-tc:accent s-font:30 s-mbe:30">Complexe fields</h3>
- * <label class="s-label s-mbe:30" s-form-validate>
- *    <select class="s-select s-width\:60">
+ * @example         html        Select field
+ * <label class="s-label" s-form-validate>
+ *    <select class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
  *        <option value="value 3">Third...</option>
  *    </select>
  *    Select
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
- *    <select multiple class="s-select s-width\:60">
+ * 
+ * @example         html        Select min / max
+ * <label class="s-label" s-form-validate min="2" max="2">
+ *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
  *        <option value="value 3">Third...</option>
  *    </select>
  *    Multiple select
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate date>
- *    <s-date-picker name="my-cool-date" placeholder="2021-09-16" class="s-width\:60"></s-date-picker>
- *    Date
+ * 
+ * @example         html            ISO date field
+ * <label class="s-label" s-form-validate iso-date>
+ *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
+ *    ISO date
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate min="25" max="75">
- *    <s-range class="s-width\:60" min="0" max="100" tooltip></s-range>
+ * 
+ * @example         html            Range min / max
+ * <label class="s-label" s-form-validate min="25" max="75">
+ *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  *    Value between 25 and 75
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
- *      <div class="s-flex s-width\:60">
- *         <label class="s-label s-mb\:20">
+ * 
+ * @example        html            Checkboxes min / max
+ * <label class="s-label" s-form-validate min="2" max="2">
+ *      <div class="s-flex s-width:60">
+ *         <label class="s-label s-mb:20">
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
  *            <span>Item 1</span>
  *         </label>
- *         <label class="s-label s-mb\:20">
+ *         <label class="s-label s-mb:20">
  *            <input type="checkbox" class="s-checkbox" value="value 2" />
  *            <span>Item 1</span>
  *         </label>
- *         <label class="s-label s-mb\:20">
+ *         <label class="s-label s-mb:20">
  *            <input type="checkbox" class="s-checkbox" value="value 3" />
  *            <span>Item 1</span>
  *         </label>
@@ -97,17 +111,30 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  *      Choose at least 2 items
  * </label>
  *
- * <h3 class="s-tc:accent s-font:30 s-mbe:30">Custom validation</h3>
- * <label class="s-label s-mbe:30" s-form-validate coffeekraken>
- *    <input type="text" class="s-input s-width\:60" placeholder="coffeekraken" />
+ * @example             html           Custom validation
+ * <label class="s-label" s-form-validate coffeekraken>
+ *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken" />
  *    Try taping "coffeekraken"
  * </label>
  *
- * <div class="s-text\:end">
+ * @example            html           Submit / Reset
+ * <form>
+ * <label class="s-label s-mbe:30" s-form-validate min="3" max="6">
+ *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
+ *    Min and max
+ * </label>
+ * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
+ *    <select multiple class="s-select s-width:60">
+ *        <option value="value 1">This is the first option...</option>
+ *        <option value="value 2">This is the second...</option>
+ *        <option value="value 3">Third...</option>
+ *    </select>
+ *    Multiple select
+ * </label>
+ * <div class="s-text:end">
  *      <input type="reset" class="s-btn" value="Reset!" />
- *      <input type="submit" class="s-btn s-color:complementary s-ml\:20" value="Submit!" />
+ *      <input type="submit" class="s-btn s-color:complementary s-ml:20" value="Submit!" />
  * </div>
- *
  * </form>
  *
  * @since       2.0.0
@@ -152,6 +179,9 @@ export default class SFormValidateFeature extends __SFeature {
 
     private _$field;
 
+    // the field become dirty when it is in error state
+    private _isDirty = false;
+
     // @ts-ignore
     constructor(name: string, node: HTMLElement, settings: any) {
         Object.keys(
@@ -185,6 +215,8 @@ export default class SFormValidateFeature extends __SFeature {
             },
             this,
         );
+
+        this.node.classList.add('s-form-validate');
     }
 
     mount() {
@@ -217,13 +249,19 @@ export default class SFormValidateFeature extends __SFeature {
                 this._$field.form?.addEventListener(on, (e) => {
                     this.validate(e);
                 });
+            } else if (on === 'keyup') {
+                this.node.addEventListener(on, (e) => {
+                    if (!this._isDirty) return;
+                    this.validate(e);
+                });
             } else {
                 this.node.addEventListener(on, (e) => {
                     this.validate(e);
                 });
             }
         });
-
+        
+        console.log(this.props);
         // preparing the joi schema
         let schema = __joi[this._validationType]();
         let isCustom = false;
@@ -380,96 +418,48 @@ export default class SFormValidateFeature extends __SFeature {
         );
     }
 
+    _$error;
     _applyResult(res, event) {
         // @ts-ignore
         if (res.error) {
-            // @ts-ignore
-            const marginBottom = getComputedStyle(this.node).marginBottom;
-            // wrap item into an error container
-            let $container = (<HTMLElement>(
-                this.node.parentNode
-            ))?.hasAttribute?.('s-form-validate-error-container')
-                ? this.node.parentNode
-                : undefined;
-
-            if (!$container && this.props.wrap) {
-                $container = document.createElement('div');
-                // @ts-ignore
-                $container.setAttribute(
-                    's-form-validate-error-container',
-                    'true',
-                );
-                // @ts-ignore
-                $container.classList.remove(
-                    ...this.props.validClass.split(' '),
-                );
-                // @ts-ignore
-                $container.classList.add(...this.props.errorClass.split(' '));
-                // @ts-ignore
-                __wrap(this.node, $container);
-            }
+            // set the field as dirty
+            this._isDirty = true;
 
             // add error class on the node itself
-            if (!this.props.wrap) {
-                this.node.classList.add(...this.props.errorClass.split(' '));
-            }
+            this.node.classList.add(...this.props.errorClass.split(' '));
 
             // remove valid class on the node itself
             this.node.classList.remove(...this.props.validClass.split(' '));
 
             // display error if needed
             if (this.props.displayError) {
-                const alreadyExists = !!$container?.querySelector(
-                    'p[s-form-validate-error-message]',
-                );
-
-                const $error = alreadyExists
-                    ? <HTMLElement>(
-                          $container?.querySelector(
-                              'p[s-form-validate-error-message]',
-                          )
-                      )
-                    : document.createElement('p');
-
-                if (!alreadyExists) {
-                    $error.setAttribute(
-                        's-form-validate-error-message',
-                        'true',
-                    );
-                    $error.setAttribute('class', this.props.errorMessageClass);
-                    $error.innerHTML = res.error.message;
-                    $error.style.marginBottom = marginBottom;
-                    if ($container) {
-                        $container.appendChild($error);
-                    } else {
-                        __insertAfter($error, this.node);
-                    }
-                } else {
-                    $error.innerHTML = res.error.message;
+                
+                this._$error = this.node.nextElementSibling;
+                if (!this._$error || !this._$error.hasAttribute('s-form-validate-error')) {
+                    this._$error = document.createElement('p');
+                    this._$error.setAttribute('s-form-validate-error', 'true');
+                    this._$error.classList.add('s-form-validate-error-message');
+                    // @ts-ignore
+                    this.node.parentNode.insertBefore(this._$error, this.node.nextSibling);
                 }
+                this._$error.innerHTML = res.error.message;
             }
         } else if (!res.error) {
+            // reset dirty state
+            this._isDirty = false;
             // reset the field state
             if (event.type !== 'reset') {
                 this.node.classList.add(...this.props.validClass.split(' '));
             } else {
                 this.node.classList.remove(...this.props.validClass.split(' '));
             }
+            this.node.classList.remove(...this.props.errorClass.split(' '));
 
             // unwrap the field
-            if (this.props.wrap) {
-                const $container = <HTMLElement>this.node.parentNode;
-                if (!$container.hasAttribute('s-form-validate-error-container'))
-                    return;
-                __insertAfter(this.node, $container);
-                $container?.remove();
-            } else {
-                const $errorMessage = <HTMLElement>this.node.nextSibling;
-                if (
-                    $errorMessage?.hasAttribute('s-form-validate-error-message')
-                ) {
-                    $errorMessage?.remove();
-                }
+            if (
+                this._$error?.hasAttribute('s-form-validate-error')
+            ) {
+                this._$error?.remove();
             }
         }
     }

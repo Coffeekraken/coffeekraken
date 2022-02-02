@@ -1,0 +1,242 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-favicon-builder.config.favicon.input": {
+                "name": "input",
+                "type": "String",
+                "default": "[config.storage.src.rootDir]/favicon/favicon.png",
+                "description": "Specify where the favicon source file is stored",
+                "namespace": "@coffeekraken.s-favicon-builder.config.favicon",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "faviconBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/faviconBuilder.config.js"
+            },
+            "@coffeekraken.s-favicon-builder.config.favicon.outDir": {
+                "name": "outDir",
+                "type": "String",
+                "default": "[config.storage.dist.rootDir]/favicon",
+                "description": "Specify where the favicon output files have to be stored",
+                "namespace": "@coffeekraken.s-favicon-builder.config.favicon",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "faviconBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/faviconBuilder.config.js"
+            },
+            "@coffeekraken.s-favicon-builder.config.favicon.settings": {
+                "name": "settings",
+                "type": "String",
+                "default": "{}",
+                "description": "Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder",
+                "namespace": "@coffeekraken.s-favicon-builder.config.favicon",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "faviconBuilder.config.js",
+                "extension": "config",
+                "relPath": "src/config/faviconBuilder.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-favicon-builder.node.SFaviconBuilder": {
+                "name": "SFaviconBuilder",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class allows you to generate all the favicons you need for your website.",
+                "namespace": "@coffeekraken.s-favicon-builder.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SFaviconBuilder from '@coffeekraken/s-favicon-builder';\nconst builder = new SFaviconBuilder({\n     faviconBuilder: {\n         // some settings...\n     }\n});\nawait builder.build('src /.jpg');"
+                    }
+                ],
+                "interface": {
+                    "name": "SFaviconBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input image file to use",
+                            "type": "String",
+                            "required": true,
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-favicon-builder/src/favicon/favicon.png"
+                        },
+                        "outDir": {
+                            "description": "Specify the output directory ou want your icons in",
+                            "type": "String",
+                            "required": true,
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-favicon-builder/dist/favicon"
+                        },
+                        "settings": {
+                            "description": "Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFaviconBuilder.ts",
+                "extension": "ts",
+                "relPath": "src/node/SFaviconBuilder.ts",
+                "children": {
+                    "faviconbuildersettings": {
+                        "name": "faviconBuilderSettings",
+                        "type": "ISFaviconBuilderSettings",
+                        "description": "Access the favicon builder settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-favicon-builder.node.interface.SFaviconBuilderBuildParamsInterface": {
+                "name": "SFaviconBuilderBuildParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SFaviconBuilder.build method",
+                "namespace": "@coffeekraken.s-favicon-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFaviconBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "input": {
+                            "description": "Specify the input image file to use",
+                            "type": "String",
+                            "required": true,
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-favicon-builder/src/favicon/favicon.png"
+                        },
+                        "outDir": {
+                            "description": "Specify the output directory ou want your icons in",
+                            "type": "String",
+                            "required": true,
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-favicon-builder/dist/favicon"
+                        },
+                        "settings": {
+                            "description": "Specify some settings to override and pass to the [favicons](https://www.npmjs.com/package/favicons) builder",
+                            "type": "Object",
+                            "default": {}
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFaviconBuilderBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SFaviconBuilderBuildParamsInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

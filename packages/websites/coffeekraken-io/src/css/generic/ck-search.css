@@ -1,64 +1,33 @@
 .ck-search {
-    /* position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-
-    .__background {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 100vw;
-        height: 100vh;
-        backdrop-filter: blur(10px);
-    }
-
-    .__content {
-        position: absolute;
-        top: 150px;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        min-width: 800px;
-        background: sugar.color(main, background);
-        padding: sugar.padding(30);
-        border-radius: sugar.border.radius();
-        z-index: 1000;
-        @sugar.depth (100);
-    } */
-
     .s-highlight {
         background: sugar.color(accent);
         color: black;
         border-radius: sugar.border.radius(10);
     }
 
-    /* .ck-search-input:focus-within {
-        &:before {
-            content: '';
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -10%);
-            width: 100vw;
-            height: calc(100vh + 10%);
-            backdrop-filter: blur(5px) grayscale(95%);
-        }
-    } */
+    #search-tips {
+        max-height: 250px;
+        transition: sugar.transition();
+        overflow: hidden;
+    }
+    #search-tips.active {
+        max-height: 0;
+        padding-block: 0;
+    }
 
-    .ck-search-input {
+    .s-filtrable-input {
         width: 100%;
         @sugar.color (accent, accent, main);
     }
 
-    .ck-search-input__list {
+    .s-filtrable-input__dropdown {
+        background: sugar.color(main, surface);
         width: 300% !important;
         left: auto !important;
         right: 0 !important;
     }
 
-    .ck-search-input__list-item {
+    .s-filtrable-input__list-item {
         padding-inline: sugar.padding(30) !important;
         padding-block: sugar.padding(30) !important;
     }

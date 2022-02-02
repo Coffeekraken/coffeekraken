@@ -236,6 +236,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             let currentContent: string[] = [];
             let currentObj: any = {};
             let docblockObj: any = {};
+            let finalDocblockObj: any = {};
             let previousWasEmptyLine = false;
 
             function add() {
@@ -312,68 +313,72 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
             add();
 
             if (this.docblockBlockSettings.renderMarkdown) {
-                __marked.setOptions(this.docblockBlockSettings.markedOptions);
+                __marked.setOptions(this.docblockBlockSettings.markedOptions ?? {});
             }
 
             for (let i = 0; i < Object.keys(docblockObj).length; i++) {
                 const prop = Object.keys(docblockObj)[i];
                 const value = docblockObj[prop];
 
+                // do not process two times the same property
+                if (finalDocblockObj[prop]) continue;
+                
+                // private props
                 if (!prop || prop.length <= 1 || prop.slice(0, 1) === '_')
                     continue;
+
+                // process with tags
                 if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-                    docblockObj[prop] = await this.docblockBlockSettings.tags[
+                    const res = await this.docblockBlockSettings.tags[
                         prop
                     ](value, this.docblockBlockSettings);
+                    if (res !== undefined) {
+                        finalDocblockObj[prop] = res;
+                    }
                 } else {
-                    docblockObj[prop] = __simpleValueTag(
+                    finalDocblockObj[prop] = __simpleValueTag(
                         value,
                         this.docblockBlockSettings,
                     );
                 }
 
                 if (this.docblockBlockSettings.renderMarkdown) {
-                    if (
-                        docblockObj[prop] instanceof String &&
-                        (<any>docblockObj[prop]).render === true
-                    ) {
-                        // console.log('AAAAAAA', docblockObj[prop].toString());
-                        docblockObj[prop] = __marked.parseInline(
-                            docblockObj[prop].toString(),
-                        );
-                    } else if (Array.isArray(docblockObj[prop])) {
-                        docblockObj[prop] = docblockObj[prop].map((item) => {
-                            if (
-                                item instanceof String &&
-                                (<any>item).render === true
-                            ) {
-                                // console.log('render', item.toString());
-                                return __marked.parseInline(item.toString());
-                            } else return item;
-                        });
-                    } else if (__isPlainObject(value)) {
-                        __deepMap(docblockObj[prop], ({ prop, value: v }) => {
-                            if (
-                                v instanceof String &&
-                                (<any>v).render === true
-                            ) {
-                                // console.log('VVV', v.toString());
-                                return __marked.parseInline(v.toString());
-                            }
-                            return v;
-                        });
+
+                    function renderMarkdown(data: any): any {
+                        if (
+                            data instanceof String &&
+                            (<any>data).render === true
+                        ) {
+                            return __marked.parseInline(
+                                data.toString(),
+                            );
+                        } else if (Array.isArray(data)) {
+                            return data.map((item) => {
+                                return renderMarkdown(item);
+                            });
+                        } else if (__isPlainObject(data)) {
+                            return __deepMap(data, ({ prop, value: v }) => {
+                                return renderMarkdown(v);
+                            });
+                        } else {
+                            return data;
+                        }
                     }
+
+                    finalDocblockObj[prop] = renderMarkdown(finalDocblockObj[prop]);
+
+                    
                 }
             }
 
             // save the raw string
-            docblockObj.raw = this._source.toString();
+            finalDocblockObj.raw = this._source.toString();
 
             // save into internal property
-            this._blockObj = docblockObj;
+            this._blockObj = finalDocblockObj;
 
             // return the parsed docblock object
-            return resolve(docblockObj);
+            return resolve(finalDocblockObj);
         });
     }
 }

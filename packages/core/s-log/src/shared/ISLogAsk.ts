@@ -2,10 +2,10 @@
 /**
  * @name                    ISLogAsk
  * @namespace           shared
- * @type                    Interface
+ * @type.                      Class
  * @platform            js
  * @platform            node
- * @plaform             ts
+ * @platform             ts
  * @status              beta
  *
  * This interface define the shape a an log ask object that can be used
@@ -109,6 +109,7 @@ export interface ISLogAskTogglePromptParams {
 
 export interface ISLogAskBase {
   type: 'select' | 'autocomplete' | 'confirm' | 'form' | 'input' | 'secret' | 'list' | 'multiselect' | 'number' | 'password' | 'toggle';
+  metas: any;
 }
 type ISLogAskExtender<Type> = Type extends any ? ISLogAskBase : ISLogAskBase;
 type ISLogAsk = ISLogAskExtender<ISLogAskSelectPromptParams | ISLogAskAutoCompletePromptParams | ISLogAskConfirmPromptParams | ISLogAskFormPromptParams | ISLogAskInputPromptParams | ISLogAskSecretPromptParams | ISLogAskListPromptParams | ISLogAskMultiSelectPromptParams | ISLogAskNumberPromptParams | ISLogAskPasswordPromptParams | ISLogAskTogglePromptParams>;

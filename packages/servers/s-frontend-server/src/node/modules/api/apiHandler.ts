@@ -1,5 +1,7 @@
 // @ts-nocheck
 
+import __urlCompliant from '@coffeekraken/sugar/shared/string/urlCompliant';
+import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SDocMap from '@coffeekraken/s-docmap';
 import __SDocblock from '@coffeekraken/s-docblock';
@@ -54,6 +56,12 @@ export default function api(req, res, settings = {}) {
         const docblocksInstance = new __SDocblock(docmapObj.path, {
             docblock: {
                 renderMarkdown: true,
+                filter: (docblock) => {
+                    if (__namespaceCompliant(`${docblock.namespace}.${docblock.name}`) === namespace) {
+                        return true;
+                    }
+                    return false;
+                }
             },
         });
         await docblocksInstance.parse();

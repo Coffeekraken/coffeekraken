@@ -44,10 +44,10 @@ export default function ({ params, atRule, replaceWith, }) {
         * @cssClass         s-visually:hidden             Make the element hidden in the ui
         * @cssClass         s-visually:visible            Make the element visible in the ui
         * 
-        * @example        html
-        * <div class="s-bg:main">
-        *   <div style="height: 100px" class="s-bg:accent">I'm visible</div>
-        *   <div style="height: 100px" class="s-visually:hidden s-bg:complementary">I'm hidden</div>
+        * @example        html             Visually
+        * <div class="s-bg:main s-radius s-p:30">
+        *   <div style="height: 100px" class="s-bg:accent s-radius s-p:30">I'm visible</div>
+        *   <div style="height: 100px" class="s-visually:hidden s-bg:complementary s-radius s-p:30">I'm hidden</div>
         * </div>
         * 
         * @since      2.0.0

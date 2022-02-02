@@ -52,7 +52,7 @@
 :not([bare]) .s-code-example__content {
     transition: sugar.theme(ui.code.transition);
     border-radius: sugar.theme(ui.code.borderRadius);
-    @sugar.depth (sugar.theme(ui.code.depth));
+    @sugar.depth (sugar.theme.value(ui.code.depth));
 }
 
 .s-code-example__more-bar {

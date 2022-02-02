@@ -8,6 +8,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 import __SInterface from '@coffeekraken/s-interface';
+import __objectHash from '@coffeekraken/sugar/shared/object/objectHash';
+import __STheme from '@coffeekraken/s-theme';
 class postcssSugarPluginClassesMixinInterface extends __SInterface {
     static get _definition() {
         return {};
@@ -31,7 +33,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * @since       2.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
+export default function ({ params, atRule, cache, sharedData, toCache, replaceWith, }) {
     return __awaiter(this, void 0, void 0, function* () {
         const cssArray = [
             '@sugar.reset.styleguide;',
@@ -43,12 +45,14 @@ export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
             '@sugar.color.classes;',
             '@sugar.fit.classes;',
             '@sugar.format.classes;',
+            '@sugar.gap.classes;',
             '@sugar.align.classes;',
             '@sugar.text.classes;',
             '@sugar.font.classes;',
             '@sugar.depth.classes;',
             '@sugar.disabled.classes;',
             '@sugar.flex.classes;',
+            '@sugar.float.classes;',
             '@sugar.ratio.classes;',
             '@sugar.border.classes;',
             '@sugar.display.classes;',
@@ -57,6 +61,7 @@ export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
             '@sugar.pointer.classes;',
             '@sugar.transition.classes;',
             '@sugar.margin.classes;',
+            '@sugar.offsize.classes;',
             '@sugar.opacity.classes;',
             '@sugar.scale.classes;',
             '@sugar.padding.classes;',
@@ -70,11 +75,11 @@ export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
             '@sugar.components.classes;',
             '@sugar.whiteSpace.classes;',
         ];
-        return cssArray;
-        // const hash = `classes-${__objectHash({
-        //     css: cssArray,
-        //     theme: __STheme.hash(),
-        // })}`;
+        const hash = `@sugar.classes.${__objectHash({
+            css: cssArray,
+            theme: __STheme.hash(),
+        })}`;
+        return cache('@sugar.classes', hash, cssArray);
         // // from cache
         // const cached = await fromCache(hash, '@sugar.classes;');
         // if (cached) {
@@ -87,4 +92,4 @@ export default function ({ params, atRule, fromCache, toCache, replaceWith, }) {
         // }
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFRckQsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBaUIsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixTQUFTLEVBQ1QsT0FBTyxFQUNQLFdBQVcsR0FDZDs7UUFDRyxNQUFNLFFBQVEsR0FBYTtZQUN2QiwwQkFBMEI7WUFDMUIsb0JBQW9CO1lBQ3BCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsd0JBQXdCO1lBQ3hCLDBCQUEwQjtZQUMxQix1QkFBdUI7WUFDdkIscUJBQXFCO1lBQ3JCLHdCQUF3QjtZQUN4Qix1QkFBdUI7WUFDdkIsc0JBQXNCO1lBQ3RCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsMEJBQTBCO1lBQzFCLHNCQUFzQjtZQUN0Qix1QkFBdUI7WUFDdkIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6QiwwQkFBMEI7WUFDMUIsMEJBQTBCO1lBQzFCLHlCQUF5QjtZQUN6Qiw0QkFBNEI7WUFDNUIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6Qix1QkFBdUI7WUFDdkIseUJBQXlCO1lBQ3pCLDRCQUE0QjtZQUM1QiwwQkFBMEI7WUFDMUIsMEJBQTBCO1lBQzFCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsMkJBQTJCO1lBQzNCLHVCQUF1QjtZQUN2Qiw0QkFBNEI7WUFDNUIsNEJBQTRCO1NBQy9CLENBQUM7UUFFRixPQUFPLFFBQVEsQ0FBQztRQUVoQix5Q0FBeUM7UUFDekMscUJBQXFCO1FBQ3JCLDhCQUE4QjtRQUM5QixRQUFRO1FBRVIsZ0JBQWdCO1FBQ2hCLDJEQUEyRDtRQUMzRCxnQkFBZ0I7UUFDaEIscUJBQXFCO1FBQ3JCLFdBQVc7UUFDWCxtQkFBbUI7UUFDbkIsOElBQThJO1FBQzlJLFNBQVM7UUFDVCx5REFBeUQ7UUFDekQsSUFBSTtJQUNSLENBQUM7Q0FBQSJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xhc3Nlcy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsYXNzZXMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxZQUFZLE1BQU0sMkJBQTJCLENBQUM7QUFFckQsT0FBTyxZQUFZLE1BQU0sOENBQThDLENBQUM7QUFDeEUsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFLN0MsTUFBTSx1Q0FBd0MsU0FBUSxZQUFZO0lBQzlELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU8sRUFBRSxDQUFDO0lBQ2QsQ0FBQztDQUNKO0FBQ0QsT0FBTyxFQUFFLHVDQUF1QyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRWhFOzs7Ozs7Ozs7Ozs7Ozs7O0dBZ0JHO0FBQ0gsTUFBTSxDQUFDLE9BQU8sV0FBaUIsRUFDM0IsTUFBTSxFQUNOLE1BQU0sRUFDTixLQUFLLEVBQ0wsVUFBVSxFQUNWLE9BQU8sRUFDUCxXQUFXLEdBQ2Q7O1FBQ0csTUFBTSxRQUFRLEdBQWE7WUFDdkIsMEJBQTBCO1lBQzFCLG9CQUFvQjtZQUNwQix1QkFBdUI7WUFDdkIsc0JBQXNCO1lBQ3RCLHdCQUF3QjtZQUN4QiwwQkFBMEI7WUFDMUIsdUJBQXVCO1lBQ3ZCLHFCQUFxQjtZQUNyQix3QkFBd0I7WUFDeEIscUJBQXFCO1lBQ3JCLHVCQUF1QjtZQUN2QixzQkFBc0I7WUFDdEIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2QiwwQkFBMEI7WUFDMUIsc0JBQXNCO1lBQ3RCLHVCQUF1QjtZQUN2Qix1QkFBdUI7WUFDdkIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6QiwwQkFBMEI7WUFDMUIsMEJBQTBCO1lBQzFCLHlCQUF5QjtZQUN6Qiw0QkFBNEI7WUFDNUIsd0JBQXdCO1lBQ3hCLHlCQUF5QjtZQUN6Qix5QkFBeUI7WUFDekIsdUJBQXVCO1lBQ3ZCLHlCQUF5QjtZQUN6Qiw0QkFBNEI7WUFDNUIsMEJBQTBCO1lBQzFCLDBCQUEwQjtZQUMxQix1QkFBdUI7WUFDdkIsc0JBQXNCO1lBQ3RCLDJCQUEyQjtZQUMzQix1QkFBdUI7WUFDdkIsNEJBQTRCO1lBQzVCLDRCQUE0QjtTQUMvQixDQUFDO1FBRUYsTUFBTSxJQUFJLEdBQUcsa0JBQWtCLFlBQVksQ0FBQztZQUN4QyxHQUFHLEVBQUUsUUFBUTtZQUNiLEtBQUssRUFBRSxRQUFRLENBQUMsSUFBSSxFQUFFO1NBQ3pCLENBQUMsRUFBRSxDQUFDO1FBRUwsT0FBTyxLQUFLLENBQUMsZ0JBQWdCLEVBQUUsSUFBSSxFQUFFLFFBQVEsQ0FBQyxDQUFDO1FBRS9DLGdCQUFnQjtRQUNoQiwyREFBMkQ7UUFDM0QsZ0JBQWdCO1FBQ2hCLHFCQUFxQjtRQUNyQixXQUFXO1FBQ1gsbUJBQW1CO1FBQ25CLDhJQUE4STtRQUM5SSxTQUFTO1FBQ1QseURBQXlEO1FBQ3pELElBQUk7SUFDUixDQUFDO0NBQUEifQ==

@@ -15,7 +15,7 @@ import {
 	RawShaderMaterial,
 	Vector2,
 	WebGLRenderTarget
-} from '../../../build/three.module.js';
+} from 'three';
 
 const _mipmapMaterial = _getMipmapMaterial();
 

@@ -105,12 +105,9 @@ export default function ({
         * @cssClass         s-badge:square       Display your badge with squared corners
         * @cssClass         s-badge:pill         Display your badge with rounded corners
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:40 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <a class="s-badge:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20">Say hello!</a>
@@ -123,17 +120,13 @@ export default function ({
             *   <a class="s-badge:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:error">Say hello!</a>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:40 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:20">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <a class="s-badge:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20">Say hello!</a>
@@ -146,20 +139,16 @@ export default function ({
             *   <a class="s-badge:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:error">Say hello!</a>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- scales -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:20">Scales</h3>
+        * @example        html       Scales
         *   <a class="s-badge s-scale:05 s-mie:20 s-mbe:20">Say hello!</a>
         *   <a class="s-badge s-scale:1 s-mie:20 s-mbe:20">Say hello!</a>
         *   <a class="s-badge s-scale:12 s-mie:20 s-mbe:20">Say hello!</a>
         *   <a class="s-badge s-scale:15 s-mie:20 s-mbe:20">Say hello!</a>
         *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

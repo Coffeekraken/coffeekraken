@@ -7,14 +7,14 @@ export default function (env, config) {
              * @name            headerImageUrl
              * @namespace       config.readme.layout
              * @type            String
-             * @default         /dist/img/doc/readmeHeader.jpg
+             * @default         [config.serve.img.url]/img/doc/readmeHeader.jpg
              *
              * Specify the header image to use for displaying readme. This has to be relative to your project root directory
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            headerImageUrl: '/dist/img/doc/readmeHeader.jpg',
+            headerImageUrl: '[config.serve.img.url]/doc/readmeHeader.jpg',
         },
         /**
          * @name            shields
@@ -30,4 +30,4 @@ export default function (env, config) {
         shields: '[config.shieldsio.shields]',
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZG1lLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlYWRtZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILE1BQU0sRUFBRTtZQUNKOzs7Ozs7Ozs7O2VBVUc7WUFDSCxjQUFjLEVBQUUsZ0NBQWdDO1NBQ25EO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSw0QkFBNEI7S0FDeEMsQ0FBQztBQUNOLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVhZG1lLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInJlYWRtZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxJQUFJLEdBQUcsQ0FBQyxRQUFRLEtBQUssTUFBTTtRQUFFLE9BQU87SUFFcEMsT0FBTztRQUNILE1BQU0sRUFBRTtZQUNKOzs7Ozs7Ozs7O2VBVUc7WUFDSCxjQUFjLEVBQUUsNkNBQTZDO1NBQ2hFO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILE9BQU8sRUFBRSw0QkFBNEI7S0FDeEMsQ0FBQztBQUNOLENBQUMifQ==

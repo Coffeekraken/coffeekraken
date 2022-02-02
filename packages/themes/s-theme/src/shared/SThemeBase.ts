@@ -8,10 +8,11 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __knownCssProperties from 'known-css-properties';
 import __objectHash from 'object-hash';
+import __isColor from '@coffeekraken/sugar/shared/is/color';
 
 /**
  * @name            SThemeBase
- * @namespace       node
+ * @namespace       shared
  * @type            Class
  * @extends         SClass
  *
@@ -113,6 +114,11 @@ export interface ISThemesConfig {
     theme: string;
     cssVariables: string[];
     themes: Record<string, ISThemeConfig>;
+}
+
+export interface ISThemeRemapColorResult {
+    vars: string[];
+    properties: Record<string, number | string>;
 }
 
 export interface ISThemeConfig {
@@ -257,13 +263,14 @@ export default class SThemeBase extends __SClass {
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static getTheme(theme?: string, variant?: string): SThemeBase {
-        // console.log(__SSugarConfig.get('theme'));
 
-        theme = theme ?? __SSugarConfig.get('theme.theme');
-        variant = variant ?? __SSugarConfig.get('theme.variant');
-
-        theme = <string>(theme ?? __SSugarConfig.get('theme.theme'));
-
+        if (!theme) {
+            theme = __SSugarConfig.get('theme.theme');
+        }   
+        if (!variant) {
+            variant = __SSugarConfig.get('theme.variant');
+        }
+        
         if (this._instanciatedThemes[`${theme}-${variant}`])
             return this._instanciatedThemes[`${theme}-${variant}`];
 
@@ -485,7 +492,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name                remapCssColorVars
+     * @name                remapCssColor
      * @type                Function
      * @status              beta
      * @static
@@ -500,58 +507,85 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static remapCssColorVars(from: string, to: string): string[] {
-        let vars: string[] = [];
+    static remapCssColor(from: string, to: string): ISThemeRemapColorResult {
+        const result: ISThemeRemapColorResult = {
+            vars: [],
+            properties: {}
+        };
 
-        const toColorName = to.split('-').slice(0, 1)[0],
-            fromColorName = from.split('-').slice(0, 1)[0];
-        let toColorVariant = to.split('-').pop(),
-            fromColorVariant = from.split('-').pop();
-        if (toColorName === toColorVariant) toColorVariant = undefined;
-        if (fromColorName === fromColorVariant) fromColorVariant = undefined;
+        if (__isColor(to)) {
+            const color = new __SColor(to);
+            result.vars = [
+                `--s-theme-color-${from}-h: ${color.h}`,
+                `--s-theme-color-${from}-s: ${color.s}`,
+                `--s-theme-color-${from}-l: ${color.l}`,
+                `--s-theme-color-${from}-a: ${color.a}`
+            ];
+            result.properties[`--s-theme-color-${from}-h`] = color.h;
+            result.properties[`--s-theme-color-${from}-s`] = color.s;
+            result.properties[`--s-theme-color-${from}-l`] = color.l;
+            result.properties[`--s-theme-color-${from}-a`] = color.a;
+        } else {
 
-        let fromVariable = `--s-theme-color-${fromColorName}`,
-            toVariable = `--s-theme-color-${toColorName}`;
+            const toColorName = to.split('-').slice(0, 1)[0],
+                fromColorName = from.split('-').slice(0, 1)[0];
+            let toColorVariant = to.split('-').pop(),
+                fromColorVariant = from.split('-').pop();
+            if (toColorName === toColorVariant) toColorVariant = undefined;
+            if (fromColorName === fromColorVariant) fromColorVariant = undefined;
 
-        this.getTheme().loopOnColors((colorObj) => {
-            if (colorObj.name === toColorName) {
-                if (toColorVariant) {
-                    if (colorObj.variant === toColorVariant) {
-                        vars.push(
-                            `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                        );
-                    }
-                } else {
-                    if (
-                        !colorObj.state &&
-                        !colorObj.variant &&
-                        colorObj.value.color
-                    ) {
-                        vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
-                        vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
-                        vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
-                    } else if (!colorObj.value.color) {
-                        vars.push(
-                            `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-${colorObj.variant}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
-                        );
-                        vars.push(
-                            `${fromVariable}-a: var(${toVariable}-a, 1);`,
-                        );
+            let fromVariable = `--s-theme-color-${fromColorName}`,
+                toVariable = `--s-theme-color-${toColorName}`;
+
+            this.getTheme().loopOnColors((colorObj) => {
+                if (colorObj.name === toColorName) {
+                    if (toColorVariant) {
+                        if (colorObj.variant === toColorVariant) {
+                            result.vars.push(
+                                `${fromVariable}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                        }
+                    } else {
+                        if (
+                            !colorObj.state &&
+                            !colorObj.variant &&
+                            colorObj.value.color
+                        ) {
+                            result.vars.push(`${fromVariable}-h: var(${toVariable}-h);`);
+                            result.properties[`${fromVariable}-h`] = `var(${toVariable}-h)`;
+                            result.vars.push(`${fromVariable}-s: var(${toVariable}-s);`);
+                            result.properties[`${fromVariable}-s`] = `var(${toVariable}-s)`;
+                            result.vars.push(`${fromVariable}-l: var(${toVariable}-l);`);
+                            result.properties[`${fromVariable}-l`] = `var(${toVariable}-l)`;
+                        } else if (!colorObj.value.color) {
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.variant}-saturation-offset: var(${toVariable}-${colorObj.variant}-saturation-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-${colorObj.variant}-saturation-offset`] = `var(${toVariable}-${colorObj.variant}-saturation-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-${colorObj.variant}-lightness-offset: var(${toVariable}-${colorObj.variant}-lightness-offset, 0);`,
+                            );
+                            result.properties[`${fromVariable}-${colorObj.variant}-lightness-offset`] = `var(${toVariable}-${colorObj.variant}-lightness-offset, 0)`;
+                            result.vars.push(
+                                `${fromVariable}-a: var(${toVariable}-a, 1);`,
+                            );
+                            result.properties[`${fromVariable}-a`] = `var(${toVariable}-a, 1)`;
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
 
-        return vars;
+        return result;
     }
 
     /**
@@ -568,7 +602,7 @@ export default class SThemeBase extends __SClass {
      * @since       2.0.0
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static toCssVars(theme: string, variant?: string): string[] {
+    static toCssVars(theme?: string, variant?: string): string[] {
         // @ts-ignore
 
         const themeInstance = this.getTheme(theme, variant);
@@ -577,21 +611,13 @@ export default class SThemeBase extends __SClass {
                 `Sorry but the requested theme "<yellow>${theme}-${variant}</yellow>" does not exists...`,
             );
 
-        const themesConfig = themeInstance.themesConfig();
+        // const themesConfig = themeInstance.themesConfig();
 
         let vars: string[] = [];
 
         // handle colors
         themeInstance.loopOnColors((colorObj) => {
             const baseVariable = colorObj.value.variable;
-
-            // if (
-            //     !__micromatch(
-            //         `color.${colorObj.name}`,
-            //         themesConfig.cssVariables,
-            //     ).length
-            // )
-            //     return;
 
             if (!colorObj.state && !colorObj.variant && colorObj.value.color) {
                 vars.push(`${baseVariable}-h: ${colorObj.value.h};`);
@@ -814,7 +840,7 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
-     * @name        loopOnThemeColors
+     * @name        loopOnColors
      * @type        Function
      * @async
      *

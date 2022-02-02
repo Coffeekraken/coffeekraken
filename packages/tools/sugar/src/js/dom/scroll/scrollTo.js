@@ -1,118 +1,116 @@
 // @ts-nocheck
 import easeInOutQuad from '../../../shared/easing/easeInOutQuad';
 import requestAnimationFrame from '../utlls/requestAnimationFrame';
-/**
- * @name      scrollTo
- * @namespace            js.dom.scroll
- * @type      Function
- * @platform          js
- * @status          beta
- *
- * Function that let you make a smooth page scroll to a specific element in the page
- *
- * @feature       Promise based API
- * @feature       Tweak the scroll behavior like duration, easing, etc...
- *
- * @setting 		{Number} 					[duration=1000] 		The animation duration
- * @setting 		{Function} 					[easing=easeInOutQuad] 			An easing Function
- * @setting 		{Number} 					[offset=0] 			The destination offset
- * @setting 		{String} 					[align='top'] 			The destination align (top, center, bottom)
- * @setting 		{Function} 					[onFinish=null] 		A callback to call when the animation if finished
- *
- * @param 		{HTMLElement} 				target 			The element to scroll to
- * @param       {IScrollToSettings}     [settings={}]       Some settings to tweak the scroll behavior
- * @return      {Promise}           A promise resolved once the scroll has ended
- *
- * @todo      interface
- * @todo      doc
- * @todo      tests
- *
- * @example 	js
- * import scrollTop from '@coffeekraken/sugar/js/dom/scrollTo'
- * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
- * scrollTo(myCoolHTMLElement);
- *
- * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-let isUserScrolling = false;
-let userScrollingTimeout;
-let isScrollingHappening = false;
-document.addEventListener('mousewheel', (e) => {
-    if (!isScrollingHappening)
-        return;
-    isUserScrolling = true;
-    clearTimeout(userScrollingTimeout);
-    userScrollingTimeout = setTimeout(() => {
-        isUserScrolling = false;
-    }, 200);
-});
+import __isUserScrolling from '../is/userScrolling';
 function scrollTo(target, settings = {}) {
     return new Promise((resolve, reject) => {
-        settings = Object.assign({ duration: 500, easing: easeInOutQuad, offset: 0, align: 'top', onFinish: null }, settings);
-        const docElem = document.documentElement; // to facilitate minification better
-        const windowHeight = window.innerHeight;
-        const maxScroll = docElem.scrollHeight - windowHeight;
-        const currentY = window.pageYOffset;
-        isScrollingHappening = true;
-        let targetY = currentY;
-        const elementBounds = isNaN(target)
-            ? target.getBoundingClientRect()
-            : 0;
-        if (settings.align === 'center') {
-            targetY += elementBounds.top + elementBounds.height / 2;
-            targetY -= windowHeight / 2;
-            targetY -= settings.offset;
+        var _a, _b, _c, _d;
+        settings = Object.assign({ $elm: window, duration: 500, easing: easeInOutQuad, offset: 0, offsetX: undefined, offsetY: undefined, align: 'start', justify: 'start', onFinish: null }, settings);
+        // remap element if needed
+        if (settings.$elm === document.body)
+            settings.$elm = window;
+        if (settings.$elm === document)
+            settings.$elm = window;
+        const $scrollElm = settings.$elm === window ? document.body : settings.$elm;
+        let elmHeight = settings.$elm === window ? window.innerHeight : settings.$elm.offsetHeight;
+        let elmWidth = settings.$elm === window ? window.innerWidth : settings.$elm.offsetWidth;
+        let maxScrollY = $scrollElm.scrollHeight - elmHeight;
+        let maxScrollX = $scrollElm.scrollWidth - elmWidth;
+        const currentY = settings.$elm === window ? window.pageYOffset : (_a = settings.$elm) === null || _a === void 0 ? void 0 : _a.scrollTop;
+        const currentX = settings.$elm === window ? window.pageXOffset : (_b = settings.$elm) === null || _b === void 0 ? void 0 : _b.scrollLeft;
+        // handle paddings
+        if (settings.$elm !== window) {
+            const computedScrollStyles = window.getComputedStyle(settings.$elm);
+            maxScrollY += parseInt(computedScrollStyles.paddingTop);
+            maxScrollY += parseInt(computedScrollStyles.paddingBottom);
+            maxScrollX += parseInt(computedScrollStyles.paddingLeft);
+            maxScrollX += parseInt(computedScrollStyles.paddingRight);
         }
-        else if (settings.align === 'bottom') {
-            targetY += elementBounds.bottom;
-            targetY -= windowHeight;
-            targetY += settings.offset;
+        let targetY = currentY, targetX = currentX;
+        const targetBounds = target.getBoundingClientRect();
+        const offsetY = (_c = settings.offsetY) !== null && _c !== void 0 ? _c : settings.offset;
+        const offsetX = (_d = settings.offsetX) !== null && _d !== void 0 ? _d : settings.offset;
+        // y
+        if (settings.align === 'center') {
+            targetY += targetBounds.top + targetBounds.height / 2;
+            targetY -= elmHeight / 2;
+            targetY -= offsetY;
+        }
+        else if (settings.align === 'end') {
+            targetY += targetBounds.bottom;
+            targetY -= elmHeight;
+            targetY += offsetY;
         }
         else {
-            // top, undefined
-            targetY += elementBounds.top;
-            targetY -= settings.offset;
+            // start, undefined
+            targetY += targetBounds.top;
+            targetY -= offsetY;
         }
-        targetY = Math.max(Math.min(maxScroll, targetY), 0);
+        targetY = Math.max(Math.min(maxScrollY, targetY), 0);
         const deltaY = targetY - currentY;
+        // x
+        if (settings.justify === 'center') {
+            targetX += targetBounds.left + targetBounds.width / 2;
+            targetX -= elmWidth / 2;
+            targetX -= offsetX;
+        }
+        else if (settings.justify === 'end') {
+            targetX += targetBounds.right;
+            targetX -= elmWidth;
+            targetX += offsetX;
+        }
+        else {
+            // start, undefined
+            targetX += targetBounds.left;
+            targetX -= offsetX;
+        }
+        targetX = Math.max(Math.min(maxScrollX, targetX), 0);
+        const deltaX = targetX - currentX;
+        // element position
+        const elmBounds = settings.$elm.getBoundingClientRect();
+        targetY -= elmBounds.top;
+        targetX -= elmBounds.left;
         const obj = {
-            targetY: targetY,
-            deltaY: deltaY,
+            targetY,
+            targetX,
+            deltaY,
+            deltaX,
+            currentY,
+            currentX,
             duration: settings.duration,
             easing: settings.easing,
+            $elm: settings.$elm,
             onFinish() {
                 settings.onFinish && settings.onFinish();
                 resolve();
             },
             startTime: Date.now(),
-            lastY: currentY,
             step: scrollTo.step,
         };
         requestAnimationFrame(obj.step.bind(obj));
     });
 }
 scrollTo.step = function () {
-    if (this.lastY !== window.pageYOffset && this.onFinish) {
-        isScrollingHappening = false;
-        this.onFinish();
-        return;
-    }
     // Calculate how much time has passed
     const t = Math.min((Date.now() - this.startTime) / this.duration, 1);
+    let $scrollElm = this.$elm;
+    if (this.$elm === document.body || this.$elm === document) {
+        $scrollElm = window;
+    }
     // Scroll window amount determined by easing
+    const x = this.targetX - (1 - this.easing(t)) * this.deltaX;
     const y = this.targetY - (1 - this.easing(t)) * this.deltaY;
-    window.scrollTo(window.scrollX, y);
+    $scrollElm.scrollTo(x, y);
+    if (__isUserScrolling(this.$elm))
+        return;
     // Continue animation as long as duration hasn't surpassed
-    if (t !== 1 && !isUserScrolling) {
-        this.lastY = window.pageYOffset;
+    if (t !== 1) {
         requestAnimationFrame(this.step.bind(this));
     }
     else {
-        isScrollingHappening = false;
         if (this.onFinish)
             this.onFinish();
     }
 };
 export default scrollTo;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG8uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JvbGxUby50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sc0NBQXNDLENBQUM7QUFDakUsT0FBTyxxQkFBcUIsTUFBTSxnQ0FBZ0MsQ0FBQztBQUVuRTs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBaUNHO0FBQ0gsSUFBSSxlQUFlLEdBQUcsS0FBSyxDQUFDO0FBQzVCLElBQUksb0JBQW9CLENBQUM7QUFDekIsSUFBSSxvQkFBb0IsR0FBRyxLQUFLLENBQUM7QUFDakMsUUFBUSxDQUFDLGdCQUFnQixDQUFDLFlBQVksRUFBRSxDQUFDLENBQUMsRUFBRSxFQUFFO0lBQzFDLElBQUksQ0FBQyxvQkFBb0I7UUFBRSxPQUFPO0lBQ2xDLGVBQWUsR0FBRyxJQUFJLENBQUM7SUFDdkIsWUFBWSxDQUFDLG9CQUFvQixDQUFDLENBQUM7SUFDbkMsb0JBQW9CLEdBQUcsVUFBVSxDQUFDLEdBQUcsRUFBRTtRQUNuQyxlQUFlLEdBQUcsS0FBSyxDQUFDO0lBQzVCLENBQUMsRUFBRSxHQUFHLENBQUMsQ0FBQztBQUNaLENBQUMsQ0FBQyxDQUFDO0FBVUgsU0FBUyxRQUFRLENBQ2IsTUFBbUIsRUFDbkIsV0FBdUMsRUFBRTtJQUV6QyxPQUFPLElBQUksT0FBTyxDQUFDLENBQUMsT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1FBQ25DLFFBQVEsbUJBQ0osUUFBUSxFQUFFLEdBQUcsRUFDYixNQUFNLEVBQUUsYUFBYSxFQUNyQixNQUFNLEVBQUUsQ0FBQyxFQUNULEtBQUssRUFBRSxLQUFLLEVBQ1osUUFBUSxFQUFFLElBQUksSUFDWCxRQUFRLENBQ2QsQ0FBQztRQUVGLE1BQU0sT0FBTyxHQUFHLFFBQVEsQ0FBQyxlQUFlLENBQUMsQ0FBQyxvQ0FBb0M7UUFDOUUsTUFBTSxZQUFZLEdBQUcsTUFBTSxDQUFDLFdBQVcsQ0FBQztRQUN4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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2Nyb2xsVG8uanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJzY3JvbGxUby50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxjQUFjO0FBRWQsT0FBTyxhQUFhLE1BQU0sc0NBQXNDLENBQUM7QUFDakUsT0FBTyxxQkFBcUIsTUFBTSxnQ0FBZ0MsQ0FBQztBQUNuRSxPQUFPLGlCQUFpQixNQUFNLHFCQUFxQixDQUFDO0FBZ0RwRCxTQUFTLFFBQVEsQ0FDYixNQUFtQixFQUNuQixXQUF1QyxFQUFFO0lBRXpDLE9BQU8sSUFBSSxPQUFPLENBQUMsQ0FBQyxPQUFPLEVBQUUsTUFBTSxFQUFFLEVBQUU7O1FBQ25DLFFBQVEsbUJBQ0osSUFBSSxFQUFFLE1BQU0sRUFDWixRQUFRLEVBQUUsR0FBRyxFQUNiLE1BQU0sRUFBRSxhQUFhLEVBQ3JCLE1BQU0sRUFBRSxDQUFDLEVBQ1QsT0FBTyxFQUFFLFNBQVMsRUFDbEIsT0FBTyxFQUFFLFNBQVMsRUFDbEIsS0FBSyxFQUFFLE9BQU8sRUFDZCxPQUFPLEVBQUUsT0FBTyxFQUNoQixRQUFRLEVBQUUsSUFBSSxJQUNYLFFBQVEsQ0FDZCxDQUFDO1FBRUYsMEJBQTBCO1FBQzFCLElBQUksUUFBUSxDQUFDLElBQUksS0FBSyxRQUFRLENBQUMsSUFBSTtZQUFFLFFBQVEsQ0FBQyxJQUFJLEdBQUcsTUFBTSxDQUFDO1FBQzVELElBQUksUUFBUSxDQUFDLElBQUksS0FBSyxRQUFRO1lBQUUsUUFBUSxDQUFDLElBQUksR0FBRyxNQUFNLENBQUM7UUFFdkQsTUFBTSxVQUFVLEdBQUcsUUFBUSxDQUFDLElBQUksS0FBSyxNQUFNLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLFFBQVEsQ0FBQyxJQUFJLENBQUM7UUFFNUUsSUFBSSxTQUFTLEdBQUcsUUFBUSxDQUFDLElBQUksS0FBSyxNQUFNLENBQUMsQ0FBQyxDQUFDLE1BQU0sQ0FBQyxXQUFXLENBQUMsQ0FBQyxDQUFDLFFBQVEs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

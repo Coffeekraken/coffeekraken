@@ -5,24 +5,26 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +40,20 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,11 +67,39 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-promise.sugar.js.promise.sPromise": {
+            "@coffeekraken.s-promise.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-promise.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-promise.shared.SPromise": {
                 "name": "SPromise",
                 "type": "Class",
                 "description": "This class works the same as the default Promise one. The difference is that you have more control on this one like\nthe possibility to resolve it multiple times. Here's a list of the \"differences\" and the \"features\" that this class provide:",
-                "namespace": "@coffeekraken.s-promise.sugar.js.promise",
+                "namespace": "@coffeekraken.s-promise.shared",
                 "status": "beta",
                 "example": [
                     {
@@ -82,7 +116,18 @@
                 "extension": "ts",
                 "relPath": "src/shared/SPromise.ts",
                 "children": {
-                    "treatAsValue": {
+                    "queue": {
+                        "name": "queue",
+                        "type": "Function",
+                        "description": "This static method allows you to pass an array of promises that will be executed one after the other.\nIt will call the \"callback\" function if specified with the resolved promise as argument.",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "treatasvalue": {
                         "name": "treatAsValue",
                         "type": "Function",
                         "description": "This method wrap the promise into a revocable proxy to allow\npassing this Promise to methods like ```then```, etc... and make\nthis promise treated as a value and not as a chained promise.\nOnce you have done with this behavior, you just have to call\nthe ```restorePromiseBehavior``` on the returned proxy and\nthe default promise behavior will be restored",
@@ -92,7 +137,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "promiseSettings": {
+                    "promisesettings": {
                         "name": "promiseSettings",
                         "type": "ISPromiseSettings",
                         "description": "Access to the spromise settings",
@@ -117,7 +162,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "promiseState": {
+                    "promisestate": {
                         "name": "promiseState",
                         "type": "String",
                         "description": "Access the promise state. Can be one of these:\n- pending: When the promise is waiting for resolution or rejection\n- resolved: When the promise has been resolved\n- rejected: When the promise has been rejected\n- canceled: When the promise has been canceled\n- destroyed: When the promise has been destroyed",
@@ -126,7 +171,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "registerProxy": {
+                    "registerproxy": {
                         "name": "registerProxy",
                         "type": "Function",
                         "description": "ALlows you to register a proxy at a certain point of the promise lifecycle like:\n- resolve: Allows you to edit the value that will be sent to the resolve point\n- reject: Allows you to edit the value that will be sent to the reject point",
@@ -145,7 +190,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "isPending": {
+                    "ispending": {
                         "name": "isPending",
                         "type": "Function",
                         "description": "Return back true or false depending on the promise status",
@@ -154,7 +199,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "isResolved": {
+                    "isresolved": {
                         "name": "isResolved",
                         "type": "Function",
                         "description": "Return back true or false depending on the promise status",
@@ -163,7 +208,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "isRejected": {
+                    "isrejected": {
                         "name": "isRejected",
                         "type": "Function",
                         "description": "Return back true or false depending on the promise status",
@@ -172,7 +217,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "isCanceled": {
+                    "iscanceled": {
                         "name": "isCanceled",
                         "type": "Function",
                         "description": "Return back true or false depending on the promise status",
@@ -181,7 +226,7 @@
                             "email": "olivier.bossel@gmail.com"
                         }
                     },
-                    "isDestroyed": {
+                    "isdestroyed": {
                         "name": "isDestroyed",
                         "type": "Function",
                         "description": "Return back true or false depending on the promise status",
@@ -194,6 +239,7 @@
                         "name": "resolve",
                         "type": "Function",
                         "description": "This is the \"resolve\" method exposed on the promise itself for convinience",
+                        "async": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
@@ -203,6 +249,7 @@
                         "name": "reject",
                         "type": "Function",
                         "description": "This is the \"reject\" method exposed on the promise itself for convinience",
+                        "async": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
@@ -212,6 +259,7 @@
                         "name": "cancel",
                         "type": "Function",
                         "description": "This is the \"cancel\" method exposed on the promise itself for convinience",
+                        "async": "true",
                         "author": {
                             "name": "Olivier Bossel",
                             "email": "olivier.bossel@gmail.com"
@@ -275,9 +323,82 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "treatAsValue.ts",
-                "extension": "ts",
-                "relPath": "src/shared/treatAsValue.ts",
+                "filename": "treatAsValue.js",
+                "extension": "js",
+                "relPath": "src/shared/treatAsValue.js",
+                "children": {}
+            },
+            "@coffeekraken.s-promise.shared.interface.SPromiseSettingsInterface": {
+                "name": "SPromiseSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe SPromise settings",
+                "namespace": "@coffeekraken.s-promise.shared.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SPromiseSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "treatCancelAs": {
+                            "description": "Specify if a \"cancel\" event/call has to be treated like a \"resolve\", or like a \"reject\" a promise level",
+                            "type": "String",
+                            "values": [
+                                "resolve",
+                                "reject"
+                            ],
+                            "default": "resolve"
+                        },
+                        "destroyTimeout": {
+                            "description": "Specify after how many milliseconds the promise will be destroyed after a \"finally\" event",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "preventRejectOnThrow": {
+                            "description": "Specify if you prefer your promise to be \"resolved\" when an underlying error is catched, or if is has to be rejected normally",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "emitLogErrorEventOnThrow": {
+                            "description": "Specify if you want a \"log\" of type \"error\" to be emitted when an underlying error is catched",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "resolveAtResolveEvent": {
+                            "description": "Specify if youw promise has to be resolved when catching a \"resolve\" event from deeper emitter",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "rejectAtRejectEvent": {
+                            "description": "Specify if youw promise has to be rejected when catching a \"reject\" event from deeper emitter",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "resolveProxies": {
+                            "description": "Specify some functions to be called just before resolving the promise. This function will take the current promise resolve value and must return the updated value",
+                            "type": "Array<Function>",
+                            "default": []
+                        },
+                        "rejectProxies": {
+                            "description": "Specify some functions to be called just before rejecting the promise. This function will take the current promise resolve value and must return the updated value",
+                            "type": "Array<Function>",
+                            "default": []
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SPromiseSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/shared/interface/SPromiseSettingsInterface.js",
                 "children": {}
             }
         }

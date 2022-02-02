@@ -151,9 +151,9 @@ export default function ({
     const spaces = __STheme.config('space');
 
     Object.keys(spaces).forEach((spaceName) => {
-        const clsX = `s-layout:gutter-x-${spaceName}`.replace('-default', '');
-        const clsY = `s-layout:gutter-y-${spaceName}`.replace('-default', '');
-        const cls = `s-layout:gutter-${spaceName}`.replace('-default', '');
+        const clsX = `s-layout:gap-x-${spaceName}`.replace('-default', '');
+        const clsY = `s-layout:gap-y-${spaceName}`.replace('-default', '');
+        const cls = `s-layout:gap-${spaceName}`.replace('-default', '');
 
         vars.comment(
             () => `
@@ -164,7 +164,7 @@ export default function ({
        * @platform      postcss
        * @status        beta
        * 
-       * This class allows you to apply some left and right gutters on your s-layout items
+       * This class allows you to apply some left and right gap on your s-layout items
        * 
        * @example     html
        * <div class="s-layout:123 ${clsX.replace(':', ':')}">
@@ -195,7 +195,7 @@ export default function ({
        * @platform      postcss
        * @status        beta
        * 
-       * This class allows you to apply some left and right gutters on your s-layout items
+       * This class allows you to apply some left and right gap on your s-layout items
        * 
        * @example     html
        * <div class="s-layout:123 ${clsY.replace(':', ':')}">
@@ -226,7 +226,7 @@ export default function ({
        * @platform      postcss
        * @status      beta
        * 
-       * This class allows you to apply some left and right gutters on your s-layout items
+       * This class allows you to apply some left and right gap on your s-layout items
        * 
        * @example     html
        * <div class="s-layout:123 ${cls.replace(':', ':')}">
@@ -251,16 +251,16 @@ export default function ({
     vars.comment(
         () => `
      /**
-       * @name       s-layout:gutter-between
+       * @name       s-layout:gap-between
        * @namespace     sugar.css.layout
        * @type          CssClass
        * @platform      postcss
        * @status      beta
        * 
-       * This class allows you to specify that you want only gutters between layout items
+       * This class allows you to specify that you want only gaps between layout items
        * 
        * @example     html
-       * <div class="s-layout:123 s-layout:gutter-between">
+       * <div class="s-layout:123 s-layout:gap-between">
        *    ${Array(3)
            .map((idx) => {
                return `<div>I'm the area ${idx}</div>`;
@@ -273,7 +273,7 @@ export default function ({
        */
       `,
     ).code(`
-      .s-layout--gutter-between > * {
+      .s-layout--gap-between > * {
         &:first-child {
           padding-left: 0 !important;
         }

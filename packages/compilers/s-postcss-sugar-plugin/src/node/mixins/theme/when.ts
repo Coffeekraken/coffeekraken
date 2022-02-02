@@ -1,17 +1,16 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __astNodesToString from '../../utils/astNodesToString';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __STheme from '@coffeekraken/s-theme';
 
 class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
     static get _definition() {
         return {
             variant: {
-                type: 'String',
-                default: __SSugarConfig.get('theme.variant'),
+                type: 'String'
             },
             theme: {
-                type: 'String',
-                default: __SSugarConfig.get('theme.theme'),
+                type: 'String'
             },
         };
     }
@@ -19,8 +18,8 @@ class postcssSugarPluginThemeWhenMixinInterface extends __SInterface {
 export { postcssSugarPluginThemeWhenMixinInterface as interface };
 
 export interface postcssSugarPluginThemeWhenMixinParams {
-    variant: string;
-    theme: string;
+    variant?: string;
+    theme?: string;
 }
 
 /**
@@ -65,14 +64,36 @@ export default function ({
         ...(params ?? {}),
     };
 
-    // console.log(finalParams);
+    let theme = finalParams.theme,
+        variant = finalParams.variant;
+    // if (!theme) theme = __STheme.config('theme.theme');
+    // if (!variant) variant = __STheme.config('theme.variant');
 
-    const container = new postcssApi.Rule({
-        selectors: [
-            `[theme="${finalParams.theme}"][variant="${finalParams.variant}"] &`,
-            `&[theme="${finalParams.theme}"][variant="${finalParams.variant}"]`,
-        ],
-    });
+    let container;
+
+    if (theme && variant) {
+        container = new postcssApi.Rule({
+            selectors: [
+                `[theme^="${theme}"][theme$="${variant}"] &`,
+                `&[theme^="${theme}"][theme$="${variant}"]`
+            ]
+        });
+    } else if (theme) {
+        container = new postcssApi.Rule({
+            selectors: [
+                `[theme^="${theme}"] &`,
+                `&[theme^="${theme}"]`
+            ]
+        });
+    } else if (variant) {
+        container = new postcssApi.Rule({
+            selectors: [
+                `[theme$="${variant}"] &`,
+                `&[theme$="${variant}"]`
+            ]
+        });
+    }
+
     atRule.nodes.forEach((n) => {
         container.append(n.clone());
     });

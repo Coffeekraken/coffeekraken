@@ -82,19 +82,6 @@ export default function onScrollEnd(
             fullHeight = $scrollHeightElm.scrollHeight;
         }
 
-        console.log('is', active);
-        console.log(
-            $elm,
-            scrollTop,
-            viewportHeight,
-            fullHeight,
-            finalSettings.offset,
-        );
-        console.log(
-            scrollTop + viewportHeight,
-            fullHeight - finalSettings.offset,
-        );
-
         if (
             active &&
             scrollTop + viewportHeight >= fullHeight - finalSettings.offset
@@ -124,8 +111,6 @@ export default function onScrollEnd(
             active = true;
         }
     };
-
-    console.log($scrollListenedElm);
 
     $scrollListenedElm.addEventListener('scroll', internalCallback);
 }

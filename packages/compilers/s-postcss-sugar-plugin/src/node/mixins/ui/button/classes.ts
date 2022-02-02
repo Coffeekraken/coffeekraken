@@ -116,12 +116,9 @@ export default function ({
         * @cssClass            s-btn-group s-btn                Apply the button group style on a buttons wrapper
         * @cssClass            s-rhythm:vertical              Apply the default vertical rhythm on scoped button(s)
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
@@ -148,17 +145,13 @@ export default function ({
             *   <a tabindex="0" disabled class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
@@ -185,25 +178,16 @@ export default function ({
             *   <a tabindex="0" disabled class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- scales -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
+        * @example       html       Scales
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
         *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
         *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
-        * </div>
         * 
-        * <!-- Rhythm and text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Vertical rhythm and text formatting</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`button\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example       html       Vertical rhythm / Text format
         *   <div class="s-format:text s-rhythm:vertical">
         *       <button>
         *          ${__faker.name.findName()}
@@ -213,7 +197,6 @@ export default function ({
         *           ${__faker.name.findName()}
         *       </button>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

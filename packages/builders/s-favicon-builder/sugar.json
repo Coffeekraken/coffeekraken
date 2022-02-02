@@ -1,0 +1,23 @@
+{
+  "config": {
+    "folders": [
+      {
+        "scope": "default",
+        "path": "./src/config"
+      }
+    ]
+  },
+  "cli": [
+    {
+      "stack": "favicon",
+      "description": "Favicon related actions",
+      "defaultAction": "build",
+      "actions": {
+        "build": {
+          "description": "Generate all the favicons files you need from a single source file",
+          "process": "./src/cli/build.cli.js"
+        }
+      }
+    }
+  ]
+}

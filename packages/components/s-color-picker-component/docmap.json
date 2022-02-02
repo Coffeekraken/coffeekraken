@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -14,16 +15,18 @@
             "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
             "@coffeekraken/s-form-validate-feature",
             "@coffeekraken/s-frontend-server",
             "@coffeekraken/s-frontspec",
@@ -35,7 +38,7 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -44,9 +47,11 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -60,6 +65,83 @@
             "@coffeekraken/sugar"
         ],
         "map": {
+            "@coffeekraken.s-color-picker-component.js.interface.sColorPickerComponentInterface": {
+                "name": "SColorPickerComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SColorPickerComponent",
+                "namespace": "@coffeekraken.s-color-picker-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SColorPickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "date"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": "String"
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "Select a color"
+                        },
+                        "theme": {
+                            "description": "Specify the theme you want to use for this picker",
+                            "type": "String",
+                            "values": [
+                                "nano",
+                                "monolith"
+                            ],
+                            "default": "nano"
+                        },
+                        "noInput": {
+                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "noPreview": {
+                            "description": "Specify if you want to display the preview or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "position": {
+                            "description": "Specify the position of the picker. Can be \"top\" or \"bottom\"",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "bottom"
+                            ],
+                            "default": "bottom"
+                        },
+                        "swatches": {
+                            "description": "Specify some colors you want in your swatches",
+                            "type": "Array<String>",
+                            "default": []
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColorPickerComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SColorPickerComponentInterface.js",
+                "children": {}
+            },
             "@coffeekraken.s-color-picker-component.js.colorPicker": {
                 "name": "Color Picker",
                 "type": "CustomElement",
@@ -82,7 +164,7 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<label class=\"s-label s-mb--30\">\n     Simply color picker\n     <s-color-picker></s-color-picker>\n</label>"
+                        "code": "<label class=\"s-label s-mbe:30\">\n     Simple color picker\n     <s-color-picker></s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with an input and no preview\n     <s-color-picker no-preview>\n          <input class=\"s-input\" type=\"text\" value=\"#ff000f\" />\n      </s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with an input and a preview\n     <s-color-picker>\n          <input class=\"s-input\" type=\"text\" value=\"#ff000f\" />\n      </s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with only a preview\n     <s-color-picker no-input></s-color-picker>\n</label>"
                     },
                     {
                         "language": "js",
@@ -93,9 +175,53 @@
                     "name": "SColorPickerComponentInterface",
                     "description": "",
                     "definition": {
-                        "value": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
                             "type": "String",
-                            "default": "#ff0000"
+                            "default": "date"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": "String"
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "Select a color"
+                        },
+                        "theme": {
+                            "description": "Specify the theme you want to use for this picker",
+                            "type": "String",
+                            "values": [
+                                "nano",
+                                "monolith"
+                            ],
+                            "default": "nano"
+                        },
+                        "noInput": {
+                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "noPreview": {
+                            "description": "Specify if you want to display the preview or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "position": {
+                            "description": "Specify the position of the picker. Can be \"top\" or \"bottom\"",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "bottom"
+                            ],
+                            "default": "bottom"
+                        },
+                        "swatches": {
+                            "description": "Specify some colors you want in your swatches",
+                            "type": "Array<String>",
+                            "default": []
                         }
                     }
                 },
@@ -105,9 +231,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "SColorPickerComponent.ts",
-                "extension": "ts",
-                "relPath": "src/js/SColorPickerComponent.ts",
+                "filename": "SColorPickerComponent.js",
+                "extension": "js",
+                "relPath": "src/js/SColorPickerComponent.js",
                 "children": {}
             }
         }

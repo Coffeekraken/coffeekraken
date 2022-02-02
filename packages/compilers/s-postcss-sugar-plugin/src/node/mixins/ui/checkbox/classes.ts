@@ -114,12 +114,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-${style}-1" value="hello 1" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -132,14 +129,11 @@ export default function ({
             *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-${style}-3" value="hello 3" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- Colors -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        * @example      html       Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -156,14 +150,10 @@ export default function ({
         *     <input type="checkbox" disabled class="s-checkbox s-color:error" name="checkbox-style-color-4" value="hello 4" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
-        * <!-- shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <label class="s-mbe:30 s-label">
             *     <input type="checkbox" checked class="s-checkbox:${shape}" name="checkbox-shape-${shape}-1" value="hello 1" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -176,14 +166,12 @@ export default function ({
             *     <input type="checkbox" class="s-checkbox:${shape} s-color:accent" name="checkbox-shape-${shape}-3" value="hello 3" />
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- LTR -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">LTR Support</h3>
+        * @example          html        RTL
+        * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -198,9 +186,7 @@ export default function ({
         *   </label>
         * </div>
         * 
-        * <!-- Scale -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scale</h3>
+        * @example          html        Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
@@ -213,18 +199,11 @@ export default function ({
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        * </div>
         * 
-        * <!-- Text format -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Text format</h3>
-        *   <p class="s-typo:p s-mbe:30">
-        *       Text format mean that all the \`input[type="checkbox"\` tags inside the \`s-format:text\` class scope will be **styled automatically** using the default style and color.
-        *   </p>
+        * @example      html        Vertical rhythm / Text format
         *   <div class="s-format:text">
         *     <input type="checkbox" />
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

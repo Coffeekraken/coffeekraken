@@ -22,6 +22,18 @@ export default function (env, config) {
              */
             default: '[config.frontstackRecipeDefault]',
             /**
+             * @name            nextJs
+             * @namespace       config.frontstack.recipes
+             * @type            String
+             * @default         [config.frontstackRecipeNextJs]
+             *
+             * Specify the next.js recipe
+             *
+             * @since       2.0.0
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            nextJs: '[config.frontstackRecipeNextJs]',
+            /**
              * @name            litElement
              * @namespace       config.frontstack.recipes
              * @type            String
@@ -48,6 +60,211 @@ export default function (env, config) {
         },
 
         actions: {
+            copy: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Specify the frontend server action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Copy file/directory',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontend server action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Copy a file or a directory from the source to the destination passed in params',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.copy
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontend server action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar fs.copy [arguments]`,
+                params: {},
+                settings: {},
+            },
+            rename: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        Frontend server
+                 *
+                 * Rename a project (folder, package.json, etc...)
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Rename project',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack rename action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Rename a project (folder, package.json, etc...)',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.rename
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack rename action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar package.rename [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addSugarJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        Adding sugar.json file
+                 *
+                 * Add the sugar.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Adding sugar.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addSugarJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Adding the sugar.json file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addSugarJson
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addSugarJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar add.sugarJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            addManifestJson: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        Adding manifest.json file
+                 *
+                 * Add the manifest.json file
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Adding manifest.json file',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addManifestJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Adding the manifest.json file to the project',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.addManifestJson
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addManifestJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar add.manifestJson [arguments]`,
+                params: {},
+                settings: {},
+            },
+            installDependencies: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        Install dependencies
+                 *
+                 * Install dependencies like node_modules and composer if exists
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Install dependencies',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the frontstack addManifestJson action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Install dependencies like node_modules and composer if exists',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.installDependencies
+                 * @type            String
+                 * @default        sugar 
+                 *
+                 * Specify the frontstack addManifestJson action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: `sugar package.install [arguments]`,
+                params: {},
+                settings: {},
+            },
             frontendServer: {
                 /**
                  * @name            title
@@ -85,7 +302,7 @@ export default function (env, config) {
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                process: '%sugar frontendServer.start',
+                command: '%sugar frontendServer.start',
                 params: {},
                 settings: {
                     processManager: {
@@ -360,6 +577,92 @@ export default function (env, config) {
                     processManager: {},
                 },
             },
+            sitemapBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.sitemapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Sitemap build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to build and maintain up to date the sitemap.xml file',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        sugar docmap.build --noExtends
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: '%sugar sitemap.build',
+                params: {},
+                settings: {
+                    processManager: {},
+                },
+            },
+            faviconBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Docmap build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.faviconBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the favicon build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to build and maintain up to date your favicon files and the manifest.json',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        sugar favicon.build
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: '%sugar favicon.build',
+                params: {},
+                settings: {
+                    processManager: {},
+                },
+            }
         },
     };
 }

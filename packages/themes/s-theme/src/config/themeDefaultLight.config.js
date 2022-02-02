@@ -25,6 +25,40 @@ export default function (env, config) {
          */
         defaultColor: 'main',
         color: {
+            base: {
+                /**
+                 * @name                color
+                 * @namespace            config.themeDefaultLight.color.base
+                 * @type                Color
+                 * @default             hsla(198,0,100,1)
+                 *
+                 * Specify the "base" color value.
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                color: 'hsla(198,0,100,1)',
+                /**
+                 * @name                ...
+                 * @namespace            config.themeDefaultLight.color.base
+                 * @type                Color
+                 * @default             [extends.colorSchemas]
+                 *
+                 * Extends the colorSchemas from the extended theme
+                 *
+                 * @since             2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        darken: 40,
+                    },
+                    surface: {
+                        darken: 5
+                    }
+                },
+            },
             main: {
                 /**
                  * @name                color
@@ -54,6 +88,9 @@ export default function (env, config) {
                     text: {
                         darken: 10,
                     },
+                    surface: {
+                        lighten: 48
+                    }
                 },
             },
             accent: {
@@ -216,8 +253,13 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '...': '[extends.colorSchemas]',
+                default: {
+                    text: {
+                        darken: 10,
+                    }
+                }
             },
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0TGlnaHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWVEZWZhdWx0TGlnaHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsZ0JBQWdCO1FBRXpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsTUFBTTtRQUVwQixLQUFLLEVBQUU7WUFDSCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLG1CQUFtQjtnQkFDMUI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLHdCQUF3QjtnQkFDL0IsT0FBTyxFQUFFO29CQUNMLElBQUksRUFBRTt3QkFDRixNQUFNLEVBQUUsRUFBRTtxQkFDYjtpQkFDSjthQUNKO1lBRUQsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsYUFBYSxFQUFFO2dCQUNYOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2dCQUMvQixPQUFPLEVBQUU7b0JBQ0wsVUFBVSxFQUFFO3dCQUNSLE1BQU0sRUFBRSxFQUFFO3FCQUNiO2lCQUNKO2FBQ0o7WUFFRCxPQUFPLEVBQUU7Z0JBQ0w7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVEZWZhdWx0TGlnaHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsidGhlbWVEZWZhdWx0TGlnaHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsT0FBTztRQUNIOzs7Ozs7Ozs7O1dBVUc7UUFDSCxPQUFPLEVBQUUsZ0JBQWdCO1FBRXpCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxZQUFZLEVBQUUsTUFBTTtRQUVwQixLQUFLLEVBQUU7WUFFSCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLG1CQUFtQjtnQkFDMUI7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLHdCQUF3QjtnQkFDL0IsT0FBTyxFQUFFO29CQUNMLElBQUksRUFBRTt3QkFDRixNQUFNLEVBQUUsRUFBRTtxQkFDYjtvQkFDRCxPQUFPLEVBQUU7d0JBQ0wsTUFBTSxFQUFFLENBQUM7cUJBQ1o7aUJBQ0o7YUFDSjtZQUVELElBQUksRUFBRTtnQkFDRjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsbUJBQW1CO2dCQUMxQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2dCQUMvQixPQUFPLEVBQUU7b0JBQ0wsSUFBSSxFQUFFO3dCQUNGLE1BQU0sRUFBRSxFQUFFO3FCQUNiO29CQUNELE9BQU8sRUFBRTt3QkFDTCxPQUFPLEVBQUUsRUFBRTtxQkFDZDtpQkFDSjthQUNKO1lBRUQsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsYUFBYSxFQUFFO2dCQUNYOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2FBQ2xDO1lBRUQsT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxTQUFTO2dCQUNoQjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsd0JBQXdCO2dCQUMvQixPQUFPLEVBQUU7b0JBQ0wsVUFBVSxFQUFFO3dCQUNSLE1BQU0sRUFBRSxFQUFFO3FCQUNiO2lCQUNKO2FBQ0o7WUFFRCxPQUFPLEVBQUU7Z0JBQ0w7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7YUFDbEM7WUFFRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLFNBQVM7Z0JBQ2hCOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSx3QkFBd0I7Z0JBQy9CLE9BQU8sRUFBRTtvQkFDTCxJQUFJLEVBQUU7d0JBQ0YsTUFBTSxFQUFFLEVBQUU7cUJBQ2I7aUJBQ0o7YUFDSjtTQUNKO0tBQ0osQ0FBQztBQUNOLENBQUMifQ==

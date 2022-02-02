@@ -37,7 +37,7 @@ To compress, resize, etc... your images, we use the more than awesome [Sharp](ht
 
 ## Default configurations
 
-{{> config path='@coffeekraken.s-images-builder.config.imagesBuilder'}}
+{{> config namespace='@coffeekraken.s-images-builder.config.imagesBuilder'}}
 
 ## `@coffeekraken/s-images-builder` package
 

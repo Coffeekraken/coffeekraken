@@ -4,7 +4,8 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __hljs from 'highlight.js/lib/core';
 import __langBash from 'highlight.js/lib/languages/bash';
-import __langCss from 'highlight.js/lib/languages/css';
+import __langCss from './languages/css';
+// import __langCss from 'highlight.js/lib/languages/css';
 import __langJavascript from 'highlight.js/lib/languages/javascript';
 import __langPhp from 'highlight.js/lib/languages/php';
 import __langHtml from 'highlight.js/lib/languages/xml';
@@ -15,15 +16,17 @@ import __decodeHtmlEntities from '@coffeekraken/sugar/js/html/decodeHtmlEntities
 // @ts-ignore
 import __css from '../css/s-code-example.css';
 import __SCodeExampleComponentInterface from './interface/SCodeExampleComponentInterface';
+import __scrollTo, { IScrollToSettings } from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 
 // // @ts-ignore
-// import __prettier from 'prettier/esm/standalone.mjs';
-// // @ts-ignore
-// import __prettierJs from 'prettier/esm/parser-babel.mjs';
-// // @ts-ignore
-// import __prettierHtml from 'prettier/esm/parser-html.mjs';
-// // @ts-ignore
-// import __prettierCss from 'prettier/esm/parser-postcss.mjs';
+import __prettier from 'prettier/esm/standalone.mjs';
+// @ts-ignore
+import __prettierJs from 'prettier/esm/parser-babel.mjs';
+// @ts-ignore
+import __prettierHtml from 'prettier/esm/parser-html.mjs';
+// @ts-ignore
+import __prettierCss from 'prettier/esm/parser-postcss.mjs';
+import __prettierPhp from '@prettier/plugin-php/standalone';
 
 __SClipboardCopy();
 
@@ -37,6 +40,8 @@ export interface ISCodeExampleComponentProps {
     lessLabel: string;
     moreAction: 'toggle' | string;
     more: boolean;
+    scrollOnMore: boolean;
+    scrollToSettings: Partial<IScrollToSettings>
 }
 
 /**
@@ -142,6 +147,7 @@ export default class SCodeExample extends __SLitComponent {
             bash: __langBash,
             shell: __langBash,
             css: __langCss,
+            scss: __langCss,
             ...(this.props.languages ?? {}),
         };
 
@@ -163,6 +169,7 @@ export default class SCodeExample extends __SLitComponent {
                     parser = 'html';
                     break;
                 case 'css':
+                case 'scss':
                 case 'postcss':
                     parser = 'css';
                     break;
@@ -177,11 +184,17 @@ export default class SCodeExample extends __SLitComponent {
             );
             let formatedCode = rawCode;
             try {
-                // formatedCode = __prettier.format(rawCode, {
-                //     parser,
-                //     plugins: [__prettierCss, __prettierHtml, __prettierJs],
-                // });
-            } catch (e) {}
+                formatedCode = __prettier.format(rawCode, {
+                    parser,
+                    plugins: [
+                        __prettierCss,
+                        __prettierHtml,
+                        __prettierJs,
+                        __prettierPhp
+                    ],
+                });
+            } catch (e) {
+            }
             this._items = [
                 ...this._items,
                 {
@@ -242,6 +255,9 @@ export default class SCodeExample extends __SLitComponent {
     toggleMore() {
         this._more = !this._more;
         this.setMoreClass();
+        __scrollTo(this, {
+            ...this.props.scrollToSettings ?? {}
+        });
     }
     initPrismOnTab(id) {
         const $content = <HTMLElement>(
@@ -257,14 +273,18 @@ export default class SCodeExample extends __SLitComponent {
         $content.setAttribute('inited', 'true');
         let code;
         try {
-            const code = __hljs.highlight(
-                $content.innerHTML.replace(/<!--\?lit.*-->/, ''),
+            const codeToHighlight = __decodeHtmlEntities($content.innerHTML.replace(/<!--\?lit.*-->/, ''));
+            code = __hljs.highlight(
+                codeToHighlight,
                 {
                     language: <string>$content.getAttribute('lang'),
                 },
             );
-        } catch (e) {}
-        item.highlightedCode = __decodeHtmlEntities(code?.value ?? '');
+        } catch (e) {
+            // console.log(e);
+        }
+        // @ts-ignore
+        item.highlightedCode = code?.value ?? '';
         this.setMoreClass();
     }
     copy() {

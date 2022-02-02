@@ -30,11 +30,9 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
         return {
             variant: {
                 type: 'String',
-                default: __SSugarConfig.get('theme.variant'),
             },
             theme: {
                 type: 'String',
-                default: __SSugarConfig.get('theme.theme'),
             },
             scope: {
                 type: 'Boolean',
@@ -45,8 +43,8 @@ class postcssSugarPluginThemeinInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginThemeParams {
-    variant: string;
-    theme: string;
+    variant: string|undefined;
+    theme: string|undefined;
     scope: boolean;
 }
 
@@ -61,18 +59,24 @@ export default function ({
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginThemeParams = {
-        variant: '',
-        theme: '',
+        variant: undefined,
+        theme: undefined,
         scope: false,
         ...params,
     };
 
     const vars = __STheme.toCssVars(finalParams.theme, finalParams.variant);
 
+    const selectors: string[] = [];
+    if (finalParams.theme) selectors.push(`[theme^="${finalParams.theme}"]`);
+    if (finalParams.variant) selectors.push(`[theme$="${finalParams.variant}"]`);
+
+    
     if (finalParams.scope) {
-        vars.unshift(
-            `[theme="${finalParams.theme}"][variant="${finalParams.variant}"] {`,
-        );
+        vars.unshift(`${
+            selectors.length === 2 ? `${selectors[0]}${selectors[1]}` :
+            selectors.join(',')
+        } {`);
         vars.push(`@sugar.lnf.base;`);
         vars.push('}');
     } else if (atRule.parent.type === 'root') {

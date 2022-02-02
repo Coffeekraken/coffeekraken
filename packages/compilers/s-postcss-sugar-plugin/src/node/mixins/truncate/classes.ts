@@ -79,19 +79,13 @@ export default function ({
             }         Truncate the container to ${i + 1} line(s)`;
         })}
         *
-        * @example        html
         ${[...Array(finalParams.count).keys()]
             .map((i) => {
-                return ` * <!-- truncate ${i + 1} -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Truncate to ${
-                i + 1
-            } line(s)</h3>
+                return ` * @example          html        ${i + 1} ${i <= 1 ? 'line' : 'lines'}
             *   <p class="s-typo:p s-truncate:${i + 1}">${__faker.lorem
                     .lines(finalParams.count + 5)
                     .split('\n')
                     .join('<br />')}</p>
-            * </div>
             * `;
             })
             .join('\n')}

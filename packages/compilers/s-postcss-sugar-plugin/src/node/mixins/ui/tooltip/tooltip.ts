@@ -143,11 +143,8 @@ export default function ({
           transition: sugar.theme(ui.tooltip.transition);
           padding-inline: sugar.theme(ui.tooltip.paddingInline);
           padding-block: sugar.theme(ui.tooltip.paddingBlock);
-          @sugar.depth( sugar.theme(ui.tooltip.depth) );
+          @sugar.depth( sugar.theme.value(ui.tooltip.depth) );
 
-        & > * {
-            @sugar.color(main);
-        }
 
           &:after {
               content: " ";

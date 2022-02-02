@@ -10,7 +10,7 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 
 export interface IConfigExplorerNavComponentProps {}
 
-export default class ConfigExplorerNav extends __SLitComponent {
+export class ConfigExplorerNav extends __SLitComponent {
     constructor() {
         super({
             litComponent: {
@@ -174,6 +174,8 @@ export default class ConfigExplorerNav extends __SLitComponent {
     }
 }
 
-if (!customElements.get('config-explorer-nav')) {
-    customElements.define('config-explorer-nav', ConfigExplorerNav);
+export default () => {
+    if (!customElements.get('config-explorer-nav')) {
+        customElements.define('config-explorer-nav', ConfigExplorerNav);
+    }
 }

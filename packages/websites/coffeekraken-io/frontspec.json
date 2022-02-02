@@ -53,6 +53,12 @@
                 "src": "/dist/css/index.css",
                 "env": "production"
             }
+        },
+        "html": {
+            "manifest": {
+                "id": "manifest",
+                "src": "./dist/favicon/favicon.html"
+            }
         }
     },
     "head": {}

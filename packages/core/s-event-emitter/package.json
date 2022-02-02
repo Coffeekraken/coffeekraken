@@ -3,15 +3,16 @@
     "version": "2.0.0",
     "description": "",
     "type": "module",
-    "main": "./src/shared/exports.js",
+    "main": "./src/node/exports.js",
+    "browser": "./src/js/exports.js",
     "scripts": {},
     "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",
-        "@coffeekraken/sugar": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
-        "node-ipc": "^7.0.0"
+        "@coffeekraken/sugar": "^2.0.0",
+        "node-ipc": "^10.1.0"
     },
     "devDependencies": {}
 }

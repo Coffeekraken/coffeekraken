@@ -5,10 +5,11 @@ import __isNode from '@coffeekraken/sugar/src/shared/is/node';
 
 /**
  * @name            SCacheSettingsInterface
- * @namespace       sugar.js.cache.interface
- * @type            Class
+ * @namespace       js.interface
+ * @type.                      Class
  * @extends         SInterface
- * @status          beta
+ * @interface
+ * @status              beta
  *
  * Represent the SCache settings interface
  *

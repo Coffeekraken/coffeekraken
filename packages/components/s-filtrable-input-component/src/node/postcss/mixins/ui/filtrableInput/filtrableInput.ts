@@ -85,8 +85,12 @@ export default function ({
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
         
+            .s-filtrable-input__dropdown {
+                overflow: hidden;
+                @sugar.depth(sugar.theme.value(ui.filtrableInput.depth));
+                transition: sugar.theme(ui.filtrableInput.transition);
+            }
             .s-filtrable-input__list {
-                @sugar.depth(sugar.theme(ui.filtrableInput.depth));
                 width: 100%;
                 transition: sugar.theme(ui.filtrableInput.transition);
                 @sugar.scrollbar;
@@ -101,7 +105,7 @@ export default function ({
             default:
                 vars.push(`
 
-                .s-filtrable-input__list {
+                .s-filtrable-input__dropdown {
                     background-color: sugar.color(secondary, background);
                     border-radius: sugar.theme(ui.filtrableInput.borderRadius);
                 }
@@ -131,17 +135,6 @@ export default function ({
                             color: sugar.color(primary, foreground) !important;
                         }
                     }
-
-                    &:first-child {
-                        border-top-left-radius: sugar.theme(ui.filtrableInput.borderRadius);
-                        border-top-right-radius: sugar.theme(ui.filtrableInput.borderRadius);
-                        border-top: none !important;
-                    }
-                    &:last-child {
-                        border-bottom-left-radius: sugar.theme(ui.filtrableInput.borderRadius);
-                        border-bottom-right-radius: sugar.theme(ui.filtrableInput.borderRadius);
-                    }
-
                 }
         `);
                 break;

@@ -1,5 +1,6 @@
 import __extension from './extension';
 import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name            checkPathWithMultipleExtensions
@@ -30,10 +31,6 @@ export default function checkPathWithMultipleExtensions(
     exts: string[],
 ): string | undefined {
     const extension = __extension(path) || '';
-
-    if (__fs.existsSync(path)) {
-        return path;
-    }
 
     const pathWithoutExt = path.replace(`.${extension}`, '');
     for (let i = 0; i < exts.length; i++) {

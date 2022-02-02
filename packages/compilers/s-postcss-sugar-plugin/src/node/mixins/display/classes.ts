@@ -73,79 +73,61 @@ export default function ({
         * @cssClass                 s-display:inline-grid           Apply the display \`inline-grid\` to any HTMLElement
         * @cssClass                 s-display:none           Apply the display \`none\` to any HTMLElement
         * 
-        * @example        html
-        * <!-- block -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Block</h3>
+        * @example    html      Block
         *   <div class="s-display:block">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- inline-block -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline block</h3>
+        * 
+        * @example    html      Inline-block
         *   <div class="s-display:inline-block">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- contents -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Contens</h3>
+        * 
+        * @example   html      Contents
         *   <div class="s-display:contents">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- flex -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Flex</h3>
+        * 
+        * @example          html      Flex 
         *   <div class="s-display:flex">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- grid -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Grid</h3>
+        * 
+        * @example          html      Grid
         *   <div class="s-display:grid">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- inline-flex -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline flex</h3>
+        * 
+        * @example          html      Inline-flex
         *   <div class="s-display:inline-flex">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- inline-grid -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Inline grid</h3>
+        * 
+        * @example         html      Inline-grid
         *   <div class="s-display:inline-grid">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
-        * <!-- none -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">None</h3>
+        * 
+        * @example     html      None
         *   <div class="s-display:none">
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *     <p class="s-typo:p">${__faker.name.findName()}</p>
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

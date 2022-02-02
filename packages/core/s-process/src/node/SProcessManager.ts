@@ -212,14 +212,6 @@ class SProcessManager extends __SEventEmitter {
             clearTimeout(this._parallelRunTimeout);
             this._parallelRunTimeout = setTimeout(() => {
                 __SPromise.queue(this._processesQueue, (processId, promise) => {
-                    this.emit('log', {
-                        margin: {
-                            top: 1,
-                            bottom: 1
-                        },
-                        type: __SLog.TYPE_INFO,
-                        value: `<bgYellow><black> Starting process ${processId} </black></bgYellow><yellow>${'-'.repeat(process.stdout.columns - 19 - processId.length)}</yellow>`
-                    });
                 }).then((results) => {
                     resolve(results);
                     this._queuePromise = undefined;

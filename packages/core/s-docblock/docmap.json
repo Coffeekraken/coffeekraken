@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,9 +16,11 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -35,7 +38,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -81,9 +84,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "firstDocblocksWithNamespaceInFolder.ts",
-                "extension": "ts",
-                "relPath": "src/node/utils/firstDocblocksWithNamespaceInFolder.ts",
+                "filename": "firstDocblocksWithNamespaceInFolder.js",
+                "extension": "js",
+                "relPath": "src/node/utils/firstDocblocksWithNamespaceInFolder.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.sDockblock": {
@@ -292,9 +295,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "author.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/author.ts",
+                "filename": "author.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/author.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.contributor": {
@@ -310,9 +313,9 @@
                 "namespace": "@coffeekraken.s-docblock.shared.tags",
                 "status": "beta",
                 "since": "2.0.0",
-                "filename": "contributor.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/contributor.ts",
+                "filename": "contributor.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/contributor.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.cssClass": {
@@ -332,9 +335,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "cssClass.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/cssClass.ts",
+                "filename": "cssClass.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/cssClass.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.description": {
@@ -354,9 +357,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "description.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/description.ts",
+                "filename": "description.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/description.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.example": {
@@ -377,9 +380,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "example.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/example.ts",
+                "filename": "example.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/example.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.interface": {
@@ -400,9 +403,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "interface.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/interface.ts",
+                "filename": "interface.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/interface.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.menuTag": {
@@ -422,9 +425,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "menu.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/menu.ts",
+                "filename": "menu.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/menu.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.param": {
@@ -444,9 +447,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "platform.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/platform.ts",
+                "filename": "param.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/param.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.return": {
@@ -466,9 +469,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "return.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/return.ts",
+                "filename": "return.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/return.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.see": {
@@ -488,9 +491,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "see.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/see.ts",
+                "filename": "see.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/see.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.simpleRepeatableValue": {
@@ -510,9 +513,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "simpleRepeatableValue.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/simpleRepeatableValue.ts",
+                "filename": "simpleRepeatableValue.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/simpleRepeatableValue.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.simpleValue": {
@@ -532,9 +535,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "simpleValue.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/simpleValue.ts",
+                "filename": "simpleValue.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/simpleValue.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.snippet": {
@@ -554,9 +557,9 @@
                     "name": "Olivier Bossel",
                     "email": "olivier.bossel@gmail.com"
                 },
-                "filename": "snippet.ts",
-                "extension": "ts",
-                "relPath": "src/shared/tags/snippet.ts",
+                "filename": "snippet.js",
+                "extension": "js",
+                "relPath": "src/shared/tags/snippet.js",
                 "children": {}
             },
             "@coffeekraken.s-docblock.shared.tags.support": {

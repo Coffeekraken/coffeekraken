@@ -10,7 +10,7 @@ import __fs from 'fs';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
 import { createProxyMiddleware } from 'http-proxy-middleware';
 import __path from 'path';
-import __SFrontendServerInterface from './interface/SFrontendServerInterface';
+import __SFrontendServerStartParamsInterface from './interface/SFrontendServerStartParamsInterface';
 // import __vhost from 'vhost';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __SBench from '@coffeekraken/s-bench';
@@ -74,7 +74,7 @@ export default class SFrontendServer extends __SClass {
      */
     start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
         const finalParams: ISFrontendServerParams =
-            __SFrontendServerInterface.apply(params);
+            __SFrontendServerStartParamsInterface.apply(params);
 
         return new __SPromise(
             async ({ resolve, reject, emit, pipe }) => {
@@ -119,6 +119,7 @@ export default class SFrontendServer extends __SClass {
                         const moduleObj =
                             frontendServerConfig.modules[moduleId];
                         let module;
+
                         try {
                             module = await import(moduleObj.path);
                         } catch (e) {

@@ -60,7 +60,7 @@ export default function ({
     };
 
     const vars: string[] = [
-        ...__STheme.remapCssColorVars(finalParams.color, finalParams.toColor),
+        ...__STheme.remapCssColor(finalParams.color, finalParams.toColor).vars,
     ];
 
     if (atRule.parent.type === 'root') {

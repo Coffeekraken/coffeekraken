@@ -5,6 +5,7 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
             "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
@@ -15,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +38,7 @@
             "@coffeekraken/s-interface",
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
-            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -74,9 +77,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inDir": {
                 "name": "inDir",
@@ -90,9 +93,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inPath": {
                 "name": "inPath",
@@ -106,9 +109,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.inRaw": {
                 "name": "inRaw",
@@ -122,9 +125,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outDir": {
                 "name": "outDir",
@@ -138,9 +141,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.outPath": {
                 "name": "outPath",
@@ -154,9 +157,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.save": {
                 "name": "save",
@@ -170,9 +173,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.default.target": {
                 "name": "target",
@@ -186,9 +189,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.match": {
                 "name": "match",
@@ -202,15 +205,15 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code.markdown": {
                 "name": "markdown",
                 "type": "String",
-                "default": "__path.resolve(__dirname(),'../transformers/code/code.html')",
-                "description": "Specify the \"html\" template to transform this match",
+                "default": "__path.resolve(__dirname(),'../transformers/code/code.md')",
+                "description": "Specify the \"markdown\" template to transform this match",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.transformers.code",
                 "since": "2.0.0",
                 "author": {
@@ -218,9 +221,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license.markdown": {
                 "name": "markdown",
@@ -234,9 +237,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.markdown": {
                 "name": "markdown",
@@ -250,9 +253,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mit.html": {
                 "name": "html",
@@ -266,9 +269,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.markdown": {
                 "name": "markdown",
@@ -282,9 +285,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-gpl.html": {
                 "name": "html",
@@ -298,9 +301,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.markdown": {
                 "name": "markdown",
@@ -314,9 +317,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-lgpl.html": {
                 "name": "html",
@@ -330,9 +333,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.markdown": {
                 "name": "markdown",
@@ -346,9 +349,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-epl-20.html": {
                 "name": "html",
@@ -362,9 +365,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.markdown": {
                 "name": "markdown",
@@ -378,9 +381,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-mpl-20.html": {
                 "name": "html",
@@ -394,9 +397,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.markdown": {
                 "name": "markdown",
@@ -410,9 +413,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-cddl-10.html": {
                 "name": "html",
@@ -426,9 +429,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.markdown": {
                 "name": "markdown",
@@ -442,9 +445,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-apache-20.html": {
                 "name": "html",
@@ -458,9 +461,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.markdown": {
                 "name": "markdown",
@@ -474,9 +477,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-2-clause.html": {
                 "name": "html",
@@ -490,9 +493,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.markdown": {
                 "name": "markdown",
@@ -506,9 +509,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.license-bsd-3-clause.html": {
                 "name": "html",
@@ -522,9 +525,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.markdown": {
                 "name": "markdown",
@@ -538,9 +541,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.html": {
                 "name": "html",
@@ -554,9 +557,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.shields.data": {
                 "name": "data",
@@ -570,9 +573,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.markdown": {
                 "name": "markdown",
@@ -586,9 +589,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.interface.html": {
                 "name": "html",
@@ -602,9 +605,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.markdown": {
                 "name": "markdown",
@@ -618,9 +621,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.configFiles.html": {
                 "name": "html",
@@ -634,9 +637,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.markdown": {
                 "name": "markdown",
@@ -650,9 +653,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.config.html": {
                 "name": "html",
@@ -666,9 +669,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.markdown": {
                 "name": "markdown",
@@ -682,9 +685,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.partials.docMenu.html": {
                 "name": "html",
@@ -698,9 +701,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.markdown": {
                 "name": "markdown",
@@ -714,9 +717,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.doc.html": {
                 "name": "html",
@@ -730,15 +733,15 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.data": {
                 "name": "data",
                 "type": "String",
-                "default": "[config.readme.layout]",
-                "description": "Specify the data to use for the \"readme\" layout",
+                "default": "[config.doc.layout]",
+                "description": "Specify the data to use for the \"doc\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
                 "since": "2.0.0",
                 "author": {
@@ -746,9 +749,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.markdown": {
                 "name": "markdown",
@@ -762,9 +765,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme.html": {
                 "name": "html",
@@ -778,15 +781,15 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.markdown": {
                 "name": "markdown",
                 "type": "String",
-                "default": "[config.license.layout]",
-                "description": "Specify the data to use for the \"license\" layout",
+                "default": "__path.resolve(__dirname(),'../layouts/license/licenseLayout.md')",
+                "description": "Specify the \"markdown\" template for the \"license\" layout",
                 "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
                 "since": "2.0.0",
                 "author": {
@@ -794,9 +797,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license.html": {
                 "name": "html",
@@ -810,9 +813,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.markdown": {
                 "name": "markdown",
@@ -826,9 +829,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.readme-header.html": {
                 "name": "html",
@@ -842,9 +845,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.markdown": {
                 "name": "markdown",
@@ -858,9 +861,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-header.html": {
                 "name": "html",
@@ -874,9 +877,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.markdown": {
                 "name": "markdown",
@@ -890,9 +893,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.doc-menu.html": {
                 "name": "html",
@@ -906,9 +909,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.markdown": {
                 "name": "markdown",
@@ -922,9 +925,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.description.html": {
                 "name": "html",
@@ -938,9 +941,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.markdown": {
                 "name": "markdown",
@@ -954,9 +957,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.install.html": {
                 "name": "html",
@@ -970,9 +973,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.markdown": {
                 "name": "markdown",
@@ -986,9 +989,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.license.html": {
                 "name": "html",
@@ -1002,9 +1005,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.markdown": {
                 "name": "markdown",
@@ -1018,9 +1021,9 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts"
+                "relPath": "src/config/markdownBuilder.config.js"
             },
             "@coffeekraken.s-markdown-builder.config.markdownBuilder.sections.contact.html": {
                 "name": "html",
@@ -1034,9 +1037,124 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://olivierbossel.com"
                 },
-                "filename": "markdownBuilder.config.ts",
+                "filename": "markdownBuilder.config.js",
                 "extension": "config",
-                "relPath": "src/config/markdownBuilder.config.ts",
+                "relPath": "src/config/markdownBuilder.config.js",
+                "children": {
+                    "markdown": {
+                        "name": "markdown",
+                        "type": "String",
+                        "default": "[config.license.layout]",
+                        "description": "Specify the data to use for the \"license\" layout",
+                        "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.license",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "data": {
+                        "name": "data",
+                        "type": "String",
+                        "default": "[config.readme.layout]",
+                        "description": "Specify the data to use for the \"readme\" layout",
+                        "namespace": "@coffeekraken.s-markdown-builder.config.markdownBuilder.layouts.readme",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-markdown-builder.node.interface.sMarkdownBuilderBuildParamsInterface": {
+                "name": "SMarkdownBuilderBuildParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SMarkdownBuilder.build method",
+                "namespace": "@coffeekraken.s-markdown-builder.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SMarkdownBuilderBuildParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "glob": {
+                            "description": "Specify a glob pattern to target all the markdown files you want to build. This is relative the the \"inDir\" parameter",
+                            "type": "String",
+                            "required": true,
+                            "alias": "g",
+                            "default": "**/+(README|LICENSE|*.md)"
+                        },
+                        "inDir": {
+                            "description": "Specify the input directory where your source files are standing",
+                            "type": "String",
+                            "required": true,
+                            "alias": "d",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/src"
+                        },
+                        "inPath": {
+                            "description": "Specify a direct path to a markdown file to build",
+                            "type": "String",
+                            "alias": "p",
+                            "default": null
+                        },
+                        "inRaw": {
+                            "description": "Specify a raw markkdown string to build",
+                            "type": "String",
+                            "alias": "r",
+                            "default": null
+                        },
+                        "outDir": {
+                            "description": "Specify the directory where you want to save your builded files",
+                            "type": "String",
+                            "alias": "o",
+                            "default": "/Users/olivierbossel/data/web/coffeekraken/coffeekraken/packages/builders/s-markdown-builder/dist"
+                        },
+                        "outPath": {
+                            "description": "Specify a path to the output file when you make use of the \"inPath\" parameter",
+                            "type": "String",
+                            "default": null
+                        },
+                        "save": {
+                            "description": "Specify if you want to save the builded files or not",
+                            "type": "Boolean",
+                            "alias": "s",
+                            "default": true
+                        },
+                        "target": {
+                            "description": "Specify the target format of the build. Supported values are \"html\" and \"markdown\"",
+                            "type": "String",
+                            "values": [
+                                "html",
+                                "markdown"
+                            ],
+                            "alias": "t",
+                            "default": "markdown"
+                        },
+                        "preset": {
+                            "description": "Specify some preset(s) to use for your build. Presets are defined in the config.markdownBuilder.presets configuration path",
+                            "type": "Array<String>",
+                            "values": [],
+                            "alias": "p"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SMarkdownBuilderBuildParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SMarkdownBuilderBuildParamsInterface.js",
                 "children": {}
             },
             "@coffeekraken.s-markdown-builder.node.sMarkdownBuilder": {
@@ -1045,10 +1163,6 @@
                 "platform": [
                     {
                         "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
                         "description": ""
                     }
                 ],
@@ -1166,107 +1280,6 @@
                         }
                     }
                 }
-            },
-            "@coffeekraken.s-markdown-builder.node.helpers.ifEqual": {
-                "name": "ifEqual",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This represent the `match` handlebars helper that allows you to execute a passed regex on the passed string",
-                "namespace": "@coffeekraken.s-markdown-builder.node.helpers",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "{{#each object}}\n{{ifEqual 'my-cool-string' 'something' }}\n <h1>Hello world</h1>\n{{/ifEqual}}\n{{/each}}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "ifEqual.ts",
-                "extension": "ts",
-                "relPath": "src/node/helpers/ifEqual.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-markdown-builder.node.helpers.ifMatch": {
-                "name": "ifMatch",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    },
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This represent the `match` handlebars helper that allows you to execute a passed regex on the passed string",
-                "namespace": "@coffeekraken.s-markdown-builder.node.helpers",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "{{#each object}}\n{{ifMatch 'my-cool-string' '.-cool-.*' }}\n <h1>Hello world</h1>\n{{/ifMatch}}\n{{/each}}"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "ifMatch.ts",
-                "extension": "ts",
-                "relPath": "src/node/helpers/ifMatch.ts",
-                "children": {}
-            },
-            "@coffeekraken.s-markdown-builder.node.helpers.shieldsioHandlebarsHelper": {
-                "name": "ShieldsioHandlebarsHelper",
-                "type": "Function",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    },
-                    {
-                        "name": "ts",
-                        "description": ""
-                    }
-                ],
-                "description": "This token allows to transform code like:\n```js\nconsole.log('coco');\n```\nInto an s-code-example tag when targeting html",
-                "namespace": "@coffeekraken.s-markdown-builder.node.helpers",
-                "status": "beta",
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "shieldsioHandlebarsHelper.ts",
-                "extension": "ts",
-                "relPath": "src/node/helpers/shieldsioHandlebarsHelper.ts",
-                "children": {}
             }
         }
     }

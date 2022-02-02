@@ -42,11 +42,17 @@ function linksStateAttributes(
     function handleLink($linkElm) {
         if ($linkElm.getAttribute('href') === document.location.pathname) {
             $linkElm.setAttribute('actual', true);
+            $linkElm.dispatchEvent(new CustomEvent('actual', {
+                bubbles: true,
+            }));
         } else if (
             $linkElm.getAttribute('href').startsWith(document.location.pathname)
         ) {
             $linkElm.removeAttribute('actual');
             $linkElm.setAttribute('actual-child', true);
+            $linkElm.dispatchEvent(new CustomEvent('actual', {
+                bubbles: true,
+            }));
         } else {
             $linkElm.removeAttribute('actual');
             $linkElm.removeAttribute('actual-child');
@@ -55,6 +61,9 @@ function linksStateAttributes(
 
     querySelectorLive(`[href]`, ($linkElm) => {
         handleLink($linkElm);
+        setTimeout(() => {
+            handleLink($linkElm);
+        }, 500);
     });
     window.addEventListener('locationchange', () => {
         Array.from(document.querySelectorAll('[href]')).forEach(($linkElm) => {

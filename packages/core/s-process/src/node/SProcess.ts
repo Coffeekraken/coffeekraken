@@ -529,6 +529,9 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         // update state
         this.state('running');
 
+        // before callback
+        processSettings.before?.(this);
+        
         if (processSettings.runAsChild && !__isChildProcess()) {
             // build the command to run depending on the passed command in the constructor and the params
             const commandToRun = __buildCommandLine(
@@ -630,6 +633,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     if (this.processSettings.exitAtEnd === true) {
                         process.exit();
                     }
+                    // after callback
+                    processSettings.after?.(this);
                 });
 
             // register some proxies
@@ -661,6 +666,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                             ],
                             value,
                         });
+                        // after callback
+                        processSettings.after?.(this);
                     })
                     .catch((error) => {
                         this.state('error');
@@ -670,6 +677,8 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                             ],
                             error,
                         });
+                         // after callback
+                        processSettings.after?.(this);
                     });
             });
         }

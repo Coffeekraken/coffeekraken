@@ -64,6 +64,9 @@ export default function (env, config) {
         mode: 'development',
         resolve: {
             alias: {
+
+                static: '',
+
                 /**
                  * @name          vue
                  * @namespace     config.vite.resolve.alias
@@ -107,7 +110,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        publicDir: '[config.storage.src.rootDir]',
+        publicDir: '[config.storage.src.rootDir]/src',
         /**
          * @name          cacheDir
          * @namespace     config.vite
@@ -132,20 +135,20 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         clearScreen: false,
-        // optimizeDeps: {
-        //     /**
-        //      * @name          exclude
-        //      * @namespace     config.vite.optimizeDeps
-        //      * @type          String[]
-        //      * @default      false
-        //      *
-        //      * Specify some packages to exclude from build
-        //      *
-        //      * @since       2.0.0
-        //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        //      */
-        //     exclude: ['vue'],
-        // },
+        optimizeDeps: {
+            /**
+             * @name          exclude
+             * @namespace     config.vite.optimizeDeps
+             * @type          String[]
+             * @default      false
+             *
+             * Specify some packages to exclude from build
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            // exclude: ['static'],
+        },
         build: {
             lib: {
                 /**
@@ -225,6 +228,7 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
+                '/cache': 'http://localhost:[config.frontendServer.port]',
                 '/api/config': 'http://localhost:[config.frontendServer.port]',
             },
             // watch: {

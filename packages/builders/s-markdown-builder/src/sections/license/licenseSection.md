@@ -1,3 +1,3 @@
 ### License
 
-Distributed under the **{{ config.packageJson.license }}** License. See **[LICENSE](./license)** for more information.
+Distributed under the **{{packageJson.license }}** License. See **[LICENSE](./license)** for more information.

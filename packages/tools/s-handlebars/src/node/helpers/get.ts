@@ -24,14 +24,14 @@ export default function get(
     resolveDots = true,
     insidePath = null,
 ) {
+
+    if (typeof insidePath !== 'string') insidePath = null;
+
     let res;
     if (resolveDots) {
         res = __get(object, path);
     } else {
-        if (path === '@coffeekraken.s-images-builder.node.sImagesBuilder') {
-            res = object[path];
-            // console.log('re', res);
-        }
+        res = object[path];
     }
     if (insidePath) {
         return __get(res, insidePath);

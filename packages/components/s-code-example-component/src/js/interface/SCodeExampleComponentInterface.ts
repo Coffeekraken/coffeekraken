@@ -1,6 +1,25 @@
 import __SInterface from '@coffeekraken/s-interface';
 
-export default class SCodeExampleInterface extends __SInterface {
+/**
+ * @name                SCodeExampleComponentInterface
+ * @namespace           js.interface
+ * @type.                      Class
+ * @extends             SInterface
+ * @interface
+ * @status              beta
+ * @platform             js
+ *
+ * This class represent the interface that describe parameters of the SCodeExampleComponent
+ *
+ * @todo      interface
+ * @todo      doc
+ * @todo      tests
+ *
+ * @since       2.0.0
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ */
+
+export default class SCodeExampleComponentInterface extends __SInterface {
     static get _definition() {
         return {
             active: {
@@ -52,6 +71,16 @@ export default class SCodeExampleInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
+            scrollOnMore: {
+                description: 'Specify if you want to scroll to the code when clicking on the "show more/less" button',
+                type: 'Boolean',
+                default: true
+            },
+            scrollToSettings: {
+                description: 'Specify some scrollTo settings',
+                type: 'IScrollToSettings',
+                default: {}
+            }
         };
     }
 }

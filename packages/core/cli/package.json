@@ -18,6 +18,7 @@
         "@coffeekraken/s-sugar-config": "^2.0.0",
         "@coffeekraken/s-stdio": "^2.0.0",
         "@coffeekraken/s-log": "^2.0.0",
+        "@coffeekraken/s-glob": "^2.0.0",
         "@coffeekraken/s-event-emitter": "^2.0.0",
         "@coffeekraken/s-sugar-json": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",

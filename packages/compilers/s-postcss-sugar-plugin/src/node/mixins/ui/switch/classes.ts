@@ -114,12 +114,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${style} style</h3>
+                return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${
@@ -160,17 +157,13 @@ export default function ({
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 } s-color:accent" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mb\:20">${shape} shape</h3>
+                return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <input type="checkbox" ${
@@ -211,14 +204,12 @@ export default function ({
                     shape === finalParams.defaultShape ? '' : `:${shape}`
                 } s-color:accent" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- RTL -->
-        * <div class="s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">RTL Support</h3>
+        * @example      html            RTL
+        * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${
@@ -239,9 +230,7 @@ export default function ({
         *   </label>
         * </div>
         * 
-        * <!-- scales -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mb\:20">Scales</h3>
+        * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale\:05">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${
@@ -260,7 +249,6 @@ export default function ({
             Math.random() > 0.5 ? 'checked' : ''
         } class="s-switch s-color:accent" />
         *   </label>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

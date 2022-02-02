@@ -3,6 +3,7 @@
     position: relative;
     border-radius: sugar.border.radius();
     @sugar.depth (100);
+    @sugar.depth (100, $type: text);
     background-size: cover;
     background-position: 50% 50%;
     filter: grayscale(0.1);
@@ -12,7 +13,6 @@
     p {
         transition: all 0.3s sugar.theme(easing.default);
         transform-origin: -100% 100%;
-        text-shadow: 0 0 5px sugar.color(current, --darken 10 --alpha 0.3);
         text-align: center;
         color: sugar.color(current, foreground);
     }

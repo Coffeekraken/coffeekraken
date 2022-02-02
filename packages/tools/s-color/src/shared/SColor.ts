@@ -7,6 +7,7 @@ import __rgba2hex from '@coffeekraken/sugar/shared/color/rgba2hex';
 import __rgba2hsl from '@coffeekraken/sugar/shared/color/rgba2hsla';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface';
+import __SColorSettingsInterface from './interface/SColorSettingsInterface';
 
 /**
  * @name 		SColor
@@ -17,22 +18,25 @@ import __SColorApplyParamsInterface from './interface/SColorApplyParamsInterface
  *
  * Class that provide complete and simple to use color manupilation capabilities like:
  * - Modifiers
- * 	- opacity
- * 	- darken
  * 	- lighten
- * 	- desaturate
+ * 	- darken
  * 	- saturate
+ * 	- desaturate
  * 	- spin (change hue)
- * 	- transparentize
  * 	- alpha
+ * 	- opacity
  * 	- grayscale
  * - Conversions
+ *  - rgb
  * 	- rgba
+ *  - hsl
  * 	- hsla
  * 	- hex
  * - Print out formats
+ *  - toRgbString
  * 	- toRgbaString
  * 	- toHslString
+ *  - toHslaString
  * 	- toHexString
  * 	- toString(format = null)
  *
@@ -294,17 +298,14 @@ class SColor extends __SClass {
      *
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    constructor(color, settings = {}) {
+    constructor(color: string, settings?: Partial<ISColorCtorSettings>) {
         // save the instance settings
         super(
             __deepMerge(
                 {
-                    color: {
-                        returnNewInstance: false,
-                        defaultFormat: 'hex',
-                    },
+                    color: __SColorSettingsInterface.defaults(),
                 },
-                settings,
+                settings ?? {},
             ),
         );
 
@@ -431,6 +432,40 @@ class SColor extends __SClass {
      */
     toHsl() {
         return this._convert2('hsl');
+    }
+
+    /**
+     * @name            toHsla
+     * @type            Function
+     *
+     * To hsla
+     *
+     * @return 	{object} 		The hsla object representation
+     *
+     * @example       js
+     * myColor.toHsla();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toHsla() {
+        return this._convert2('hsla');
+    }
+
+    /**
+     * @name            toRgb
+     * @type            Function
+     *
+     * To rgb
+     *
+     * @return 	{object} 		The rgb object representation
+     *
+     * @example         js
+     * myColor.toRgb();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toRgb() {
+        return this._convert2('rgb');
     }
 
     /**
@@ -785,35 +820,6 @@ class SColor extends __SClass {
     }
 
     /**
-     * @name              transparentize
-     * @type              Function
-     *
-     * Transparentize
-     *
-     * @param             	{Number} 	          	amount 		          	The amount of transparence to apply between 0-100|0-1
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-     * @return            	{SColor} 					                        	A new SColor instance or the actual one
-     *
-     * @example           js
-     * myColor.transparenize(30);
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    transparentize(
-        amount,
-        returnNewInstance = this.colorSettings.returnNewInstance,
-    ) {
-        amount = parseFloat(amount);
-        if (returnNewInstance) {
-            const n = new SColor(this.toHex());
-            n.a -= amount;
-            return n;
-        }
-        this.a -= amount;
-        return this;
-    }
-
-    /**
      * @name                alpha
      * @type                Function
      *
@@ -836,53 +842,6 @@ class SColor extends __SClass {
             return n;
         }
         this.a = alpha;
-        return this;
-    }
-
-    /**
-     * @name                  opacity
-     * @type                  Function
-     *
-     * Set the opacity (alias for alpha)
-     *
-     * @param 	                {Number}          	opacity 	              	The new opacity value to apply between 0-100|0-1
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-     * @return                	{SColor} 			                            		A new SColor instance or the actual one
-     *
-     * @example               js
-     * myColor.opacity(20);
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    opacity(opacity, returnNewInstance = this.colorSettings.returnNewInstance) {
-        return this.alpha(opacity, returnNewInstance);
-    }
-
-    /**
-     * @name                  opacify
-     * @type                  Function
-     *
-     * Opacify
-     *
-     * @param 	          {Number} 	            amount 		              The amount of transparence to remove between 0-100|0-1
-     * @param           {Boolean}           [returnNewInstance=this.colorSettings.returnNewInstance]        Specify if you want back a new SColor instance of the actual one
-     * @return          	{SColor} 			                              	A new SColor instance or the actual one
-     *
-     * @example           js
-     * myColor.opacify(18);
-     *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    opacify(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
-        amount = parseFloat(amount);
-        if (returnNewInstance) {
-            const n = new SColor(this.toHex());
-            n.a += amount;
-            return n;
-        }
-        this.a += amount;
-        if (this.a < 0) this.a = 0;
-        else if (this.a > 1) this.a = 0;
         return this;
     }
 
@@ -994,6 +953,23 @@ class SColor extends __SClass {
     }
 
     /**
+     * @name                  toRgbString
+     * @type                  Function
+     *
+     * To rgb string
+     *
+     * @return 	              {string} 	              	The rgb string representation of the color
+     *
+     * @example           js
+     * myColor.toRgbString();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toRgbString() {
+        return `rgb(${this._r},${this._g},${this._b})`;
+    }
+
+    /**
      * @name                  toRgbaString
      * @type                  Function
      *
@@ -1029,6 +1005,24 @@ class SColor extends __SClass {
     }
 
     /**
+     * @name                    toHslaString
+     * @type                    Function
+     *
+     * To hsla string
+     *
+     * @return 	              {string} 	              	The hsl string representation of the color
+     *
+     * @example             js
+     * myColor.toHslaString();
+     *
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    toHslaString() {
+        const hsla = this._convert2('hsla');
+        return `hsla(${hsla.h},${hsla.s},${hsla.l},${hsla.a})`;
+    }
+
+    /**
      * @name                toString
      * @type                Function
      *
@@ -1050,6 +1044,12 @@ class SColor extends __SClass {
                 break;
             case 'hsl':
                 return this.toHslString();
+                break;
+            case 'hsla':
+                return this.toHslaString();
+                break;
+            case 'rgb':
+                return this.toRgbString();
                 break;
             case 'rgba':
             default:

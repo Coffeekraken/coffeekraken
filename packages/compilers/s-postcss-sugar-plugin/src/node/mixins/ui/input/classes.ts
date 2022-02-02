@@ -1,6 +1,7 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 import __faker from 'faker';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 class postcssSugarPluginUiFormClassesInterface extends __SInterface {
     static get _definition() {
@@ -100,12 +101,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
-        ${finalParams.styles
+        ${__keysFirst(finalParams.styles, ['default'])
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style} style
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
@@ -130,17 +128,13 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-scale\:15 s-color:accent" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
-        ${finalParams.shapes
+        ${__keysFirst(finalParams.shapes, ['default'])
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape} shape
             *   <label class="s-label s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />
@@ -153,7 +147,6 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40 s-color:complementary" />
             *   </label>
-            * </div>
             * `;
             })
             .join('\n')}

@@ -20,7 +20,7 @@ import __matches from './matches';
  * @todo      tests
  *
  * @example  	js
- * import next from '@coffeekraken/sugar/js/dom/next'
+ * import next from '@coffeekraken/sugar/js/dom/query/next'
  * const nextElm = next(myCoolElement, '.my-cool-class');
  * if (nextElm) {
  * 		// we have found en element that matches the selector

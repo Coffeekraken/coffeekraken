@@ -5,6 +5,8 @@
         "extends": [
             "@coffeekraken/cli",
             "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
             "@coffeekraken/s-bench",
             "@coffeekraken/s-builder",
             "@coffeekraken/s-class",
@@ -14,11 +16,12 @@
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
-            "@coffeekraken/s-config-explorer-component",
+            "@coffeekraken/s-conductor",
             "@coffeekraken/s-config",
             "@coffeekraken/s-date-picker-component",
             "@coffeekraken/s-descriptor",
             "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
@@ -36,7 +39,6 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
-            "@coffeekraken/s-notification",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
@@ -49,6 +51,7 @@
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
             "@coffeekraken/s-sugar-json",
             "@coffeekraken/s-theme",
             "@coffeekraken/s-timer",
@@ -61,6 +64,148 @@
             "@coffeekraken/s-vite",
             "@coffeekraken/sugar"
         ],
-        "map": {}
+        "map": {
+            "@coffeekraken.s-parallax-feature.js.interface.sParallaxFeatureInterface": {
+                "name": "SParallaxFeatureInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the attributes of the SParallaxFeature",
+                "namespace": "@coffeekraken.s-parallax-feature.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SParallaxFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "amount": {
+                            "description": "Specify the amount of parallax you want to apply",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountX": {
+                            "description": "Specify the amount of parallax you want for the x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountY": {
+                            "description": "Specify the amount of parallax you want for the y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountTranslateX": {
+                            "description": "Specify the amount of parallax you want for the translate x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountTranslateY": {
+                            "description": "Specify the amount of parallax you want for the translate y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountRotateX": {
+                            "description": "Specify the amount of parallax you want for the rotate x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountRotateY": {
+                            "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SParallaxFeatureInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SParallaxFeatureInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-parallax-feature.js.sParallaxFeature": {
+                "name": "SParallaxFeature",
+                "type": "Feature",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/forms/s-parallax-feature"
+                },
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This feature allows you to easily apply some parallax effect to any HTMLElement items you want.",
+                "namespace": "@coffeekraken.s-parallax-feature.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "code": "<div s-parallax amount=\"0.1\">I will move on mousemove</div>\n<div s-parallax amount=\"0.3\">I will move on mousemove</div>\n<div s-parallax amount=\"0.5\">I will move on mousemove</div>"
+                    }
+                ],
+                "interface": {
+                    "name": "SParallaxFeatureInterface",
+                    "description": "",
+                    "definition": {
+                        "amount": {
+                            "description": "Specify the amount of parallax you want to apply",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountX": {
+                            "description": "Specify the amount of parallax you want for the x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountY": {
+                            "description": "Specify the amount of parallax you want for the y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountTranslateX": {
+                            "description": "Specify the amount of parallax you want for the translate x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountTranslateY": {
+                            "description": "Specify the amount of parallax you want for the translate y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountRotateX": {
+                            "description": "Specify the amount of parallax you want for the rotate x axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        },
+                        "amountRotateY": {
+                            "description": "Specify the amount of parallax you want for the rotate y axis. This will be applied on top of the global amount",
+                            "type": "Number",
+                            "default": 1
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SParallaxFeature.js",
+                "extension": "js",
+                "relPath": "src/js/SParallaxFeature.js",
+                "children": {}
+            }
+        }
     }
 }

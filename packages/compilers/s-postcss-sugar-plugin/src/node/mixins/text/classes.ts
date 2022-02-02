@@ -80,52 +80,44 @@ export default function ({
         * @cssClass             s-text:uppercase             Apply the uppercase text transform
         * @cssClass             s-text:capitalize             Apply the capitalize text transform
         * 
-        * @example        html
-        * <!-- align -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Aligns</h3>
-        *   <div class="s-text:left s-bg:main s-p:20 s-mbe:20">
+        * @example        html          Aligns
+        *   <div class="s-text:left s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (left) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:right s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:right s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (right) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:center s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:center s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (center) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:start s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:start s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (start) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:end s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:end s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (end) ${__faker.name.findName()}
         *   </div>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Decorations</h3>
-        *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:20">
+        * @example        html          Decorations
+        *   <div class="s-text:overline s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (overline) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:underline s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (underline) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:line-through s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (line-through) ${__faker.name.findName()}
         *   </div>
-        * </div>
         * 
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Transforms</h3>
-        *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:20">
+        * @example        html          Transforms
+        *   <div class="s-text:lowercase s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (lowercase) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:uppercase s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (uppercase) ${__faker.name.findName()}
         *   </div>
-        *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:20">
+        *   <div class="s-text:capitalize s-bg:main s-p:20 s-mbe:30 s-radius">
         *       (capitalize) ${__faker.name.findName()}
         *   </div>
-        * </div>
         * 
         * 
         * @since      2.0.0

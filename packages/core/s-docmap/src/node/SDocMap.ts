@@ -20,7 +20,6 @@ import __packageRootDir from '@coffeekraken/sugar/node/path/packageRootDir';
 import __deepFilter from '@coffeekraken/sugar/shared/object/deepFilter';
 import __deepMap from '@coffeekraken/sugar/shared/object/deepMap';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
-import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __namespaceCompliant from '@coffeekraken/sugar/shared/string/namespaceCompliant';
 import __fs from 'fs';
 import __path from 'path';
@@ -30,9 +29,14 @@ import __SDocMapReadParamsInterface from './interface/SDocMapReadParamsInterface
 import __SDocmapSnapshotParamsInterface from './interface/SDocmapSnapshotParamsInterface';
 import __chokidar from 'chokidar';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import __checkPathWithMultipleExtensions from '@coffeekraken/sugar/node/fs/checkPathWithMultipleExtensions';
+
+function __toLowerCase(l = '') {
+    return l.toLowerCase();
+}
 
 /**
- * @name                SDocMap
+ * @name                SDocmap
  * @namespace           node
  * @type                Class
  * @extends             SPromise
@@ -394,15 +398,23 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     Object.keys(docmapJson.map).forEach((namespace) => {
                         if (docmapJson.map[namespace]) {
-                            docmapJson.map[namespace].package =
-                                currentPackageJson.name;
+                            docmapJson.map[namespace].package = {
+                                name: currentPackageJson.name,
+                                description: currentPackageJson.description,
+                                version: currentPackageJson.version,
+                                license: currentPackageJson.license
+                            };
                         }
                     });
                     Object.keys(docmapJson.generated?.map ?? []).forEach(
                         (namespace) => {
                             if (docmapJson.generated.map[namespace]) {
-                                docmapJson.generated.map[namespace].package =
-                                    currentPackageJson.name;
+                                docmapJson.generated.map[namespace].package = {
+                                    name: currentPackageJson.name,
+                                    description: currentPackageJson.description,
+                                    version: currentPackageJson.version,
+                                    license: currentPackageJson.license
+                                }
                             }
                         },
                     );
@@ -430,8 +442,16 @@ class SDocMap extends __SClass implements ISDocMap {
                     ) {
                         const namespace = Object.keys(docmapJson.map)[i];
                         const obj = docmapJson.map[namespace];
+
                         obj.path = __path.resolve(extendsRootPath, obj.relPath);
 
+                        // checking ".dev...."
+                        let ext = obj.relPath.split('.').pop();
+                        obj.path = __checkPathWithMultipleExtensions(obj.path, [
+                            `dev.${ext}`,
+                            ext
+                        ]) ?? obj.path;
+                        
                         docmapJson.map[namespace] = obj;
                     }
 
@@ -498,10 +518,10 @@ class SDocMap extends __SClass implements ISDocMap {
             // @ts-ignore
             const docmapObj = docmapJson.map[namespace];
             if (!docmapObj.menu) return;
-            if (!docmapJsonMenuByPackage[docmapObj.package]) {
-                docmapJsonMenuByPackage[docmapObj.package] = [];
+            if (!docmapJsonMenuByPackage[docmapObj.package.name]) {
+                docmapJsonMenuByPackage[docmapObj.package.name] = [];
             }
-            docmapJsonMenuByPackage[docmapObj.package].push(docmapObj);
+            docmapJsonMenuByPackage[docmapObj.package.name].push(docmapObj);
         });
 
         let finalMenu: ISDocmapMenuObj = {
@@ -597,7 +617,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
             const dotPath = docmapObj.menu.tree
                 .map((l) => {
-                    return __camelCase(l);
+                    return __toLowerCase(l);
                 })
                 .join('.');
 
@@ -611,7 +631,7 @@ class SDocMap extends __SClass implements ISDocMap {
                 }
 
                 if (i >= dotPath.split('.').length - 1) {
-                    currentObj[part][__camelCase(docmapObj.name)] = {
+                    currentObj[part][docmapObj.name] = {
                         name: docmapObj.name,
                         slug: docmapObj.menu.slug,
                         tree: docmapObj.menu.tree,
@@ -691,11 +711,11 @@ class SDocMap extends __SClass implements ISDocMap {
                     });
 
                     const globs: string[] = [
-                        `${packageRoot}/node_modules/**{0,2}/docmap.json`,
+                        `${packageRoot}/node_modules/*{0,2}/docmap.json`,
                     ];
                     if (packageRoot !== packageMonoRoot) {
                         globs.push(
-                            `${packageMonoRoot}/node_modules/**{0,2}/docmap.json`,
+                            `${packageMonoRoot}/node_modules/*{0,2}/docmap.json`,
                         );
                     }
 
@@ -757,6 +777,7 @@ class SDocMap extends __SClass implements ISDocMap {
 
                     const docblocksInstance = new __SDocblock(content, {
                         docblock: {
+                            renderMarkdown: false,
                             filepath: (<__SFile>file).path,
                         },
                     });
@@ -817,7 +838,11 @@ class SDocMap extends __SClass implements ISDocMap {
                             }
                         }
 
-                        if (docblock.namespace) {
+                        const namespaceIdCompliant = __namespaceCompliant(
+                                    `${docblock.namespace}.${docblock.name}`,
+                                )
+
+                        if (docblock.namespace && !this._entries[namespaceIdCompliant]) {
                             docblockObj = {
                                 ...docblockEntryObj,
                                 filename,
@@ -828,14 +853,10 @@ class SDocMap extends __SClass implements ISDocMap {
                                 ),
                             };
                             this._entries[
-                                __namespaceCompliant(
-                                    `${docblock.namespace}.${__camelCase(
-                                        docblock.name,
-                                    )}`,
-                                )
+                                namespaceIdCompliant
                             ] = docblockObj;
                         } else if (docblock.name) {
-                            children[__camelCase(docblock.name)] =
+                            children[__toLowerCase(docblock.name)] =
                                 docblockEntryObj;
                         }
                     }
@@ -1140,7 +1161,11 @@ class SDocMap extends __SClass implements ISDocMap {
                     let content = __fs.readFileSync(path, 'utf8').toString();
                     if (docmapObj.type === 'markdown') {
                     } else {
-                        const docblock = new __SDocblock(content);
+                        const docblock = new __SDocblock(content, {
+                            docblock: {
+                                renderMarkdown: false,
+                            }
+                        });
                         content = docblock.toString();
                     }
                     __writeFileSync(

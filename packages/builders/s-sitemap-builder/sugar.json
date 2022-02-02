@@ -1,0 +1,22 @@
+{
+    "config": {
+        "folders": [
+            {
+                "path": "./src/config",
+                "scope": "default"
+            }
+        ]
+    },
+    "cli": [
+        {
+            "stack": "sitemap",
+            "description": "Sitemap related CLI",
+            "actions": {
+                "build": {
+                    "description": "Build your sitemap depending ton configuration file 'sitemap.config.js'",
+                    "process": "./src/cli/build.cli.js"
+                }
+            }
+        }
+    ]
+}

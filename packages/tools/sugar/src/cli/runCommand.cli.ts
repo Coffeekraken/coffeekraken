@@ -6,35 +6,12 @@ import __SPromise from '@coffeekraken/s-promise';
 import __path from 'path';
 import __SDuration from '@coffeekraken/s-duration';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
-
-export class SRunCommandInterface extends __SInterface {
-    static get _definition() {
-        return {
-            command: {
-                type: 'String',
-                description: 'Specify the command you want to execute',
-                alias: 'c',
-            },
-            directory: {
-                type: 'String',
-                description:
-                    'Specify where you want to execute this command. Can be a glob to execute command into multiple directories at once',
-                alias: 'd',
-            },
-            verbose: {
-                type: 'Boolean',
-                description: 'Specify if you want each process to log or not',
-                default: false,
-                alias: 'v',
-            },
-        };
-    }
-}
+import __SRunCommandParamsInterface from './interface/SRunCommandParamsInterface';
 
 export default function runCommand(stringArgs = '') {
     return new __SPromise(
         async ({ resolve, reject, emit, pipe, pipeErrors }) => {
-            const props = SRunCommandInterface.apply(stringArgs);
+            const props = __SRunCommandParamsInterface.apply(stringArgs);
 
             let paths: string[] = [];
 
@@ -45,6 +22,7 @@ export default function runCommand(stringArgs = '') {
             if (props.directory) {
                 paths = <string[]>__SGlob.resolve(props.directory, {
                     cwd: process.cwd(),
+                    nodir: false,
                     SFile: false,
                 });
             } else {
@@ -118,7 +96,7 @@ export default function runCommand(stringArgs = '') {
                     props.command
                 }</yellow>" executed <green>successfully</green> in <cyan>${
                     paths.length
-                }</cyan> in <yellow>${
+                }</cyan> folder(s) in <yellow>${
                     duration.end().formatedDuration
                 }</yellow>`,
             });

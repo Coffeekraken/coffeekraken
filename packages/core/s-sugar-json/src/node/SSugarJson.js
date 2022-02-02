@@ -1,13 +1,19 @@
+var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, generator) {
+    function adopt(value) { return value instanceof P ? value : new P(function (resolve) { resolve(value); }); }
+    return new (P || (P = Promise))(function (resolve, reject) {
+        function fulfilled(value) { try { step(generator.next(value)); } catch (e) { reject(e); } }
+        function rejected(value) { try { step(generator["throw"](value)); } catch (e) { reject(e); } }
+        function step(result) { result.done ? resolve(result.value) : adopt(result.value).then(fulfilled, rejected); }
+        step((generator = generator.apply(thisArg, _arguments || [])).next());
+    });
+};
 import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __fs from 'fs';
 import __glob from 'glob-all';
-import __tmpDir from 'temp-dir';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
-import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
 import __childProcess from 'child_process';
-import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
 import __SBench from '@coffeekraken/s-bench';
 import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
 export default class SSugarJson extends __SClass {
@@ -37,23 +43,12 @@ export default class SSugarJson extends __SClass {
     constructor(settings) {
         super(__deepMerge({
             sugarJson: {
-                modules: false,
-                include: {
-                    package: true,
-                    modules: true,
-                    top: true,
-                    global: true,
-                },
-                cache: true,
+                includePackage: true,
+                includeModules: true,
+                includeGlobal: true,
+                includeTop: true,
             },
         }, settings !== null && settings !== void 0 ? settings : {}));
-        this.sugarJsonSettings.cacheId = __md5.encrypt(Object.assign({ context: __packageRoot() }, this._settings));
-        __onProcessExit(() => {
-            try {
-                __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-            }
-            catch (e) { }
-        });
     }
     /**
      * @name              sanitizeJson
@@ -89,26 +84,29 @@ export default class SSugarJson extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     read(settings) {
-        __SBench.start('SSugarJson.read');
-        const finalSettings = Object.assign(Object.assign({}, this.sugarJsonSettings), settings);
-        let sugarJsonPaths = [];
-        if (!sugarJsonPaths.length) {
-            sugarJsonPaths = this.search(finalSettings);
-        }
-        const results = {};
-        sugarJsonPaths.forEach((path) => {
-            const jsonStr = __fs.readFileSync(path, 'utf8').toString();
-            const json = JSON.parse(jsonStr);
-            // read the file
-            const packageJson = JSON.parse(__fs.readFileSync(path.replace('sugar.json', 'package.json')).toString());
-            const resultJson = this.sanitizeJson(Object.assign({ metas: {
-                    path,
-                    folderPath: path.split('/').slice(0, -1).join('/'),
-                } }, json));
-            results[packageJson.name] = resultJson;
+        return __awaiter(this, void 0, void 0, function* () {
+            __SBench.start('SSugarJson.read');
+            // const SSugarJsonSettingsInterface = await import('./interface/SSugarJsonSettingsInterface');
+            const finalSettings = Object.assign(Object.assign({}, this.sugarJsonSettings), settings);
+            let sugarJsonPaths = [];
+            if (!sugarJsonPaths.length) {
+                sugarJsonPaths = yield this.search(finalSettings);
+            }
+            const results = {};
+            sugarJsonPaths.forEach((path) => {
+                const jsonStr = __fs.readFileSync(path, 'utf8').toString();
+                const json = JSON.parse(jsonStr);
+                // read the file
+                const packageJson = JSON.parse(__fs.readFileSync(path.replace('sugar.json', 'package.json')).toString());
+                const resultJson = this.sanitizeJson(Object.assign({ metas: {
+                        path,
+                        folderPath: path.split('/').slice(0, -1).join('/'),
+                    } }, json));
+                results[packageJson.name] = resultJson;
+            });
+            __SBench.end('SSugarJson.read');
+            return results;
         });
-        __SBench.end('SSugarJson.read');
-        return results;
     }
     /**
      * @name      current
@@ -132,6 +130,7 @@ export default class SSugarJson extends __SClass {
     /**
      * @name      search
      * @type      Function
+     * @async
      *
      * This method make the actual research of the files on the filesystem
      * and return the founded files pathes
@@ -143,112 +142,88 @@ export default class SSugarJson extends __SClass {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     search(settings) {
-        const finalSettings = Object.assign(Object.assign({}, this.sugarJsonSettings), (settings !== null && settings !== void 0 ? settings : {}));
-        __SBench.start('SSugarJson.search');
-        // get global node modules directory path
-        const globalNodeModulesPath = __childProcess.execSync(`npm root -g`).toString().trim();
-        const packagesArray = typeof finalSettings.modules === 'string' ? finalSettings.modules.split(',') : [];
-        // get local node modules directory path
-        const localNodeModulesPath = `${__packageRoot()}/node_modules`;
-        // get local node modules directory path
-        const topLocalNodeModulesPath = `${__packageRoot(process.cwd(), true)}/node_modules`;
-        // build globs
-        const globs = [];
-        // local first
-        if (localNodeModulesPath && finalSettings.include.modules) {
-            // coffeekraken modules are always loaded
-            globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
-            if (finalSettings.modules === '*') {
-                globs.push(`${localNodeModulesPath}/*/sugar.json`);
-                globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
+        return __awaiter(this, void 0, void 0, function* () {
+            const finalSettings = Object.assign(Object.assign({}, this.sugarJsonSettings), (settings !== null && settings !== void 0 ? settings : {}));
+            __SBench.start('SSugarJson.search');
+            // get global node modules directory path
+            const globalNodeModulesPath = __childProcess.execSync(`npm root -g`).toString().trim();
+            const packagesArray = typeof finalSettings.packages === 'string' ? finalSettings.packages.split(',') : [];
+            // get local node modules directory path
+            const localNodeModulesPath = `${__packageRoot()}/node_modules`;
+            // get local node modules directory path
+            const topLocalNodeModulesPath = `${__packageRoot(process.cwd(), true)}/node_modules`;
+            // build globs
+            const globs = [];
+            // local first
+            if (localNodeModulesPath && finalSettings.includeModules) {
+                // coffeekraken modules are always loaded
+                globs.push(`${localNodeModulesPath}/@coffeekraken/*/sugar.json`);
+                if (finalSettings.packages === '*') {
+                    globs.push(`${localNodeModulesPath}/*/sugar.json`);
+                    globs.push(`${localNodeModulesPath}/*/*/sugar.json`);
+                }
+                else if (finalSettings.packages !== false) {
+                    packagesArray.forEach((name) => {
+                        globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
+                    });
+                }
             }
-            else if (finalSettings.modules !== false) {
-                packagesArray.forEach((name) => {
-                    globs.push(`${localNodeModulesPath}/${name}/sugar.json`);
-                });
+            // top local
+            if (localNodeModulesPath !== topLocalNodeModulesPath &&
+                finalSettings.includeModules &&
+                finalSettings.includeTop) {
+                // coffeekraken modules are always loaded
+                globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
+                if (finalSettings.packages === '*') {
+                    globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
+                    globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
+                }
+                else {
+                    packagesArray.forEach((name) => {
+                        globs.push(`${topLocalNodeModulesPath}/${name}/sugar.json`);
+                    });
+                }
             }
-        }
-        // top local
-        if (localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.include.modules &&
-            finalSettings.include.top) {
-            // coffeekraken modules are always loaded
-            globs.push(`${topLocalNodeModulesPath}/@coffeekraken/*/sugar.json`);
-            if (finalSettings.modules === '*') {
-                globs.push(`${topLocalNodeModulesPath}/*/sugar.json`);
-                globs.push(`${topLocalNodeModulesPath}/*/*/sugar.json`);
+            // then global
+            if (globalNodeModulesPath && finalSettings.includeModules && finalSettings.includeGlobal) {
+                // coffeekraken modules are always loaded
+                globs.push(`${globalNodeModulesPath}/@coffeekraken/*/sugar.json`);
+                if (finalSettings.packages === '*') {
+                    globs.push(`${globalNodeModulesPath}/*/sugar.json`);
+                    globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
+                }
+                else {
+                    packagesArray.forEach((name) => {
+                        globs.push(`${globalNodeModulesPath}/${name}/sugar.json`);
+                    });
+                }
             }
-            else {
-                packagesArray.forEach((name) => {
-                    globs.push(`${topLocalNodeModulesPath}/${name}/sugar.json`);
-                });
+            if (finalSettings.includePackage) {
+                globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
             }
-        }
-        // then global
-        if (globalNodeModulesPath && finalSettings.include.modules && finalSettings.include.global) {
-            // coffeekraken modules are always loaded
-            globs.push(`${globalNodeModulesPath}/@coffeekraken/*/sugar.json`);
-            if (finalSettings.modules === '*') {
-                globs.push(`${globalNodeModulesPath}/*/sugar.json`);
-                globs.push(`${globalNodeModulesPath}/*/*/sugar.json`);
+            if (localNodeModulesPath !== topLocalNodeModulesPath &&
+                finalSettings.includePackage &&
+                finalSettings.includeTop) {
+                globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
             }
-            else {
-                packagesArray.forEach((name) => {
-                    globs.push(`${globalNodeModulesPath}/${name}/sugar.json`);
-                });
-            }
-        }
-        if (finalSettings.include.package) {
-            globs.push(`${__packageRoot(process.cwd())}/sugar.json`);
-        }
-        if (localNodeModulesPath !== topLocalNodeModulesPath &&
-            finalSettings.include.package &&
-            finalSettings.include.top) {
-            globs.push(`${__packageRoot(process.cwd(), true)}/sugar.json`);
-        }
-        // search for "sugar.json" files
-        const files = __glob.sync(globs, {}).filter((path) => {
-            const packageJsonPath = path.replace(/sugar\.json$/, 'package.json');
-            if (__fs.existsSync(packageJsonPath))
-                return true;
-            return false;
-        });
-        __SBench.end('SSugarJson.search');
-        return __unique(files
-            .map((f) => __fs.realpathSync(f))
-            .filter((f) => {
-            if (f.toLowerCase().split('__wip__').length > 1 || f.toLowerCase().split('__tests__').length > 1) {
+            // search for "sugar.json" files
+            const files = __glob.sync(globs, {}).filter((path) => {
+                const packageJsonPath = path.replace(/sugar\.json$/, 'package.json');
+                if (__fs.existsSync(packageJsonPath))
+                    return true;
                 return false;
-            }
-            return true;
-        }));
-    }
-    /**
-     * @name          updateCache
-     * @type          Function
-     *
-     * This method search for files and update the cache once finished
-     *
-     * @param         {String[]}        [filesPaths=[]]         An array of files paths to save in cache. If not passed, the system will search for files and update the cache with this result
-     * @return        {String[]}          An array of found files just like the ```search``` method
-     *
-     * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-     */
-    updateCache(filesPaths) {
-        if (__fs.existsSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`))
-            return [];
-        __fs.writeFileSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`, '');
-        // console.log(
-        //   'WRITE',
-        //   `${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`
-        // );
-        if (!filesPaths) {
-            filesPaths = this.search();
-        }
-        __fs.writeFileSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.json`, JSON.stringify(filesPaths, null, 4));
-        __fs.unlinkSync(`${__tmpDir}/sugarJsonPaths.${this.sugarJsonSettings.cacheId}.lock`);
-        return filesPaths;
+            });
+            __SBench.end('SSugarJson.search');
+            const finalFiles = __unique(files
+                .map((f) => __fs.realpathSync(f))
+                .filter((f) => {
+                if (f.toLowerCase().split('__wip__').length > 1 || f.toLowerCase().split('__tests__').length > 1) {
+                    return false;
+                }
+                return true;
+            }));
+            return finalFiles;
+        });
     }
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N1Z2FySnNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTdWdhckpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sTUFBTSxNQUFNLFVBQVUsQ0FBQztBQUM5QixPQUFPLFFBQVEsTUFBTSxVQUFVLENBQUM7QUFDaEMsT0FBTyxRQUFRLE1BQU0seUNBQXlDLENBQUM7QUFDL0QsT0FBTyxLQUFLLE1BQU0sc0NBQXNDLENBQUM7QUFFekQsT0FBTyxhQUFhLE1BQU0sMkNBQTJDLENBQUM7QUFDdEUsT0FBTyxjQUFjLE1BQU0sZUFBZSxDQUFDO0FBSTNDLE9BQU8sZUFBZSxNQUFNLGdEQUFnRCxDQUFDO0FBRTdFLE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDLE9BQU8sY0FBYyxNQUFNLDBDQUEwQyxDQUFDO0FBbUR0RSxNQUFNLENBQUMsT0FBTyxPQUFPLFVBQVcsU0FBUSxRQUFRO0lBQzVDOzs7Ozs7Ozs7T0FTRztJQUNILElBQUksaUJBQWlCO1FBQ2pCLE9BQWEsSUFBSyxDQUFDLFNBQVMsQ0FBQyxTQUFTLENBQUM7SUFDM0MsQ0FBQztJQUVEOzs7Ozs7Ozs7T0FTRztJQUNILFlBQVksUUFBa0M7UUFDMUMsS0FBSyxDQUNELFdBQVcsQ0FDUDtZQUNJLFNBQVMsRUFBRTtnQkFDUCxPQUFPLEVBQUUsS0FBSztnQkFDZCxPQUFPLEVBQUU7b0JBQ0wsT0FBTyxFQUFFLElBQUk7b0JBQ2IsT0FBTyxFQUFFLElBQUk7b0JBQ2IsR0FBRyxFQUFFLElBQUk7b0JBQ1QsTUFBTSxFQUFFLElBQUk7aUJBQ2Y7Z0JBQ0QsS0FBSyxFQUFFLElBQUk7YUFDZDtTQUNKLEVBQ0QsUUFBUSxhQUFSLFFBQVEsY0FBUixRQUFRLEdBQUksRUFBRSxDQUNqQixD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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiU1N1Z2FySnNvbi5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIlNTdWdhckpzb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7Ozs7Ozs7O0FBQUEsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFDN0MsT0FBTyxXQUFXLE1BQU0sNkNBQTZDLENBQUM7QUFDdEUsT0FBTyxJQUFJLE1BQU0sSUFBSSxDQUFDO0FBQ3RCLE9BQU8sTUFBTSxNQUFNLFVBQVUsQ0FBQztBQUU5QixPQUFPLFFBQVEsTUFBTSx5Q0FBeUMsQ0FBQztBQUcvRCxPQUFPLGFBQWEsTUFBTSwyQ0FBMkMsQ0FBQztBQUN0RSxPQUFPLGNBQWMsTUFBTSxlQUFlLENBQUM7QUFNM0MsT0FBTyxRQUFRLE1BQU0sdUJBQXVCLENBQUM7QUFFN0MsT0FBTyxjQUFjLE1BQU0sMENBQTBDLENBQUM7QUErQ3RFLE1BQU0sQ0FBQyxPQUFPLE9BQU8sVUFBVyxTQUFRLFFBQVE7SUFDNUM7Ozs7Ozs7OztPQVNHO0lBQ0gsSUFBSSxpQkFBaUI7UUFDakIsT0FBYSxJQUFLLENBQUMsU0FBUyxDQUFDLFNBQVMsQ0FBQztJQUMzQyxDQUFDO0lBRUQ7Ozs7Ozs7OztPQVNHO0lBQ0gsWUFBWSxRQUFrQztRQUMxQyxLQUFLLENBQ0QsV0FBVyxDQUNQO1lBQ0ksU0FBUyxFQUFFO2dCQUNQLGNBQWMsRUFBRSxJQUFJO2dCQUNwQixjQUFjLEVBQUUsSUFBSTtnQkFDcEIsYUFBYSxFQUFFLElBQUk7Z0JBQ25CLFVBQVUsRUFBRSxJQUFJO2FBQ25CO1NBQ0osRUFDRCxRQUFRLGFBQVIsUUFBUSxjQUFSLFFBQVEsR0FBSSxFQUFFLENBQ2pCLENBQ0osQ0FBQztJQUNOLENBQUM7SUFFRDs7Ozs7Ozs7Ozs7T0FXRztJQUNILFlBQVksQ0FBQyxTQUFjO1FBQ3ZCLGtCQUFrQjtRQUNsQixTQUFTLEdBQUcsTUFBTSxDQUFDLE1BQU0sQ0FBQyxFQUFFLEVBQUUsU0FBUyxDQUFDLENBQUM7UUFFekMsVUFBVTtRQUNW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

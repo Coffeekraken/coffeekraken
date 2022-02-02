@@ -82,9 +82,6 @@ export interface ISEventEmitterCallbackFn {
     (value: any, metas: ISEventEmitterMetas, answer?: Function): any;
 }
 
-export interface ISEventEmitterSettingsCallTime {
-    [key: string]: number;
-}
 
 export interface ISEventEmitterEventStackItem {
     callback: ISEventEmitterCallbackFn;
@@ -115,14 +112,10 @@ export interface ISEventEmitterInstanceSettings {
 }
 
 export interface ISEventEmitterSettings {
-    defaultCallTime: ISEventEmitterSettingsCallTime;
     bufferTimeout: number;
-    bufferedEvents: string[];
     asyncStart: boolean;
     defaults: Record<string, any>;
-    forceObject: boolean | string[];
     castByEvent: Record<string, Function | Instantiable>;
-    crossProcess: boolean;
     bind: any;
 }
 
@@ -141,6 +134,7 @@ export interface ISEventEmitter extends ISClass {
 }
 class SEventEmitter extends SClass implements ISEventEmitter {
     static usableAsMixin = true;
+    static _ipcInstance;
 
     /**
      * @name            global
@@ -191,12 +185,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         // settings
         const set: ISEventEmitterPipeSettings = {
             events: '*',
-            prefixEvent: false,
-            prefixValue: undefined,
-            stripAnsi: false,
-            trim: true,
-            keepLineBreak: true,
-            overrideEmitter: 'bind',
+            overrideEmitter: false,
             processor: undefined,
             exclude: ['finally', 'resolve', 'reject', 'cancel', 'catch'],
             filter: undefined,
@@ -235,28 +224,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             // check if we have a filter setted
             if (set.filter && !set.filter(value, metas)) return;
 
-            // strip ansi
-            if (set.stripAnsi) {
-                if (value && value.value && typeof value.value === 'string')
-                    value.value = __stripAnsi(value.value);
-                else if (typeof value === 'string') value = __stripAnsi(value);
-            }
-
-            // trim
-            if (set.trim) {
-                if (value && value.value && typeof value.value === 'string')
-                    value.value = value.value.trim();
-                else if (typeof value === 'string') value = value.trim();
-            }
-
-            // line breaks
-            if (set.keepLineBreak === false) {
-                if (value && value.value && typeof value.value === 'string')
-                    value.value = value.value.replace(/\r?\n|\r/g, '');
-                else if (typeof value === 'string')
-                    value = value.replace(/\r?\n|\r/g, '');
-            }
-
             // check if need to process the value
             if (set.processor) {
                 const res = set.processor(value, metas);
@@ -275,28 +242,12 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 }
             }
 
-            if (set.prefixValue) {
-                if (value && value.value && typeof value.value === 'string') {
-                    value.value = `${set.prefixValue}${value.value}`;
-                } else if (typeof value === 'string') {
-                    value = `${set.prefixValue}${value}`;
-                }
-            }
-
             if (metas && metas.event) {
                 // append the source promise id to the stack
                 let emitStack = metas.event;
                 // emitter
                 if (!metas.emitter) {
                     metas.emitter = this;
-                }
-                if (set.prefixEvent) {
-                    if (typeof set.prefixEvent === 'string') {
-                        emitStack = `${set.prefixEvent}.${metas.event}`;
-                    } else {
-                        emitStack = `${metas.name}`;
-                    }
-                    metas.event = emitStack;
                 }
 
                 // emit on the destination promise
@@ -307,7 +258,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
                 if (destSEventEmitter instanceof SEventEmitter) {
                     if (
-                        set.overrideEmitter === 'bind' &&
+                        !set.overrideEmitter &&
                         destSEventEmitter.eventEmitterSettings.bind
                     ) {
                         emitMetas.emitter =
@@ -319,20 +270,29 @@ class SEventEmitter extends SClass implements ISEventEmitter {
 
                 if (
                     destSEventEmitter === process &&
-                    __isChildProcess() &&
-                    process.send
+                    __isChildProcess()
+                    // process.send
                 ) {
                     if (value.value && value.value instanceof Error) {
                         value.value = __toString(value.value);
                     }
 
-                    // @todo            check why need this and from where comes from the "metas" property in the value...
-                    // if (value.metas?.event) delete value.metas;
+                    // @ts-ignore
+                    if (this._ipcInstance) {
+                        // @ts-ignore
+                        this._ipcInstance.of[`ipc-${process.ppid}`].emit(
+                            'message',
+                            {
+                            value,
+                            metas: emitMetas   
+                            }
+                        );
+                    }
 
-                    process.send({
-                        value: value,
-                        metas: emitMetas,
-                    });
+                    // process.send({
+                    //     value: value,
+                    //     metas: emitMetas,
+                    // });
                 } else {
                     (<SEventEmitter>destSEventEmitter).emit(
                         metas.event,
@@ -362,7 +322,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      * @private
      *
      * Store all the emited data that does not have any registered listener
-     * and that match with the ```settings.bufferedEvents``` stack
      *
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
@@ -435,12 +394,8 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             __deepMerge(
                 {
                     eventEmitter: {
-                        emitter: undefined,
                         asyncStart: false,
-                        defaultCallTime: {},
                         bufferTimeout: 1000,
-                        bufferedEvents: [],
-                        forceObject: ['log'],
                         defaults: {},
                         castByEvent: {
                             log: __SLog,
@@ -451,6 +406,20 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                 settings || {},
             ),
         );
+    }
+
+    /**
+     * @name          bind
+     * @type      Function 
+     * 
+     * This method allows you to bind another object as the emitter.
+     * 
+     * @since       2.0.0
+     * @author 		Olivier Bossel<olivier.bossel@gmail.com>
+     */
+    bind(obj: any) {
+        this.eventEmitterSettings.bind = obj;
+        return this;
     }
 
     /**
@@ -530,7 +499,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
      *
      * This method has to be called when you want to start the event emissions.
      * This is usefull only if you set the setting ```asyncStart``` to true.
-     * Untill you call this method, all the emitted events (those specified in the settings.bufferedEvents stack)
+     * Untill you call this method, all the emitted events
      * are store in memory and emitted after.
      *
      * @since         2.0.0
@@ -654,7 +623,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                     logObj.resolve(answer);
                 },
             );
-            this._emitEvents(logObj.event, logObj.value, logObj.metas);
+            this._emitEvents(logObj.event, logObj.value, Object.assign({}, logObj.metas));
         } else {
             const res = await this._emitEvents(
                 logObj.event,
@@ -741,14 +710,7 @@ class SEventEmitter extends SClass implements ISEventEmitter {
         let callNumber = settings.callNumber;
 
         // process the args
-        if (
-            callNumber === undefined &&
-            // @ts-ignore
-            this.eventEmitterSettings.defaultCallTime[event] !== undefined
-        ) {
-            // @ts-ignore
-            callNumber = this.eventEmitterSettings.defaultCallTime[event];
-        } else if (callNumber === undefined) {
+        if (callNumber === undefined) {
             callNumber = -1;
         }
 

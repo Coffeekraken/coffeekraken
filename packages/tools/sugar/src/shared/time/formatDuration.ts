@@ -25,28 +25,35 @@
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function formatDuration(estimation: number): string {
-    if (estimation === Infinity) {
+function formatDuration(duration: number): string {
+    if (duration === Infinity) {
         return '...';
     }
-    if (estimation < 1000) {
-        return `${estimation}ms`;
+    if (duration < 1000) {
+        return `${duration}ms`;
     }
-    if (estimation < 1000 * 60) {
-        const s = (estimation / 1000).toFixed(0);
-        const ms = (estimation - s * 1000).toFixed(0);
+    if (duration < 1000 * 60) {
+        const s = (duration / 1000).toFixed(0);
+        const ms = (duration - s * 1000).toFixed(0);
 
-        return `${s}s${ms > 0 ? `${ms}ms` : ''}`;
+        return `${s}.${ms}s`;
+        
+        // if (s > 10) {
+        //     return `${s}s`;
+        // } else {
+        //     return `${s}s${ms > 0 ? `${ms}ms` : ''}`;
+        // }
+
     }
-    if (estimation < 1000 * 60 * 60) {
-        const m = Math.floor(estimation / 1000 / 60);
-        const s = ((estimation - m * 1000 * 60) / 1000).toFixed(0);
+    if (duration < 1000 * 60 * 60) {
+        const m = Math.floor(duration / 1000 / 60);
+        const s = ((duration - m * 1000 * 60) / 1000).toFixed(0);
 
         return `${m}m${s > 0 ? `${s}s` : ''}`;
     }
-    // if (estimation < 1000 * 60 * 60 * 60) {
-    const h = Math.floor(estimation / 1000 / 60 / 60);
-    const m = ((estimation - h * 1000 * 60 * 60) / 1000 / 60).toFixed(0);
+    // if (duration < 1000 * 60 * 60 * 60) {
+    const h = Math.floor(duration / 1000 / 60 / 60);
+    const m = ((duration - h * 1000 * 60 * 60) / 1000 / 60).toFixed(0);
 
     return `${h}h${m > 0 ? `${m}m` : ''}`;
     // }

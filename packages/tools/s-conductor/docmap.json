@@ -1,0 +1,156 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [],
+        "map": {
+            "@coffeekraken.s-conductor.doc.README": {
+                "name": "README",
+                "type": "Markdown",
+                "menu": {
+                    "tree": [
+                        "Documentation"
+                    ],
+                    "slug": "/doc/readme"
+                },
+                "platform": [
+                    {
+                        "name": "md",
+                        "description": ""
+                    }
+                ],
+                "namespace": "@coffeekraken.s-conductor.doc",
+                "status": "stable",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "README.md",
+                "extension": "md",
+                "relPath": "src/doc/README.md",
+                "children": {}
+            },
+            "@coffeekraken.s-conductor.js.interface.SConductorSettingsInterface": {
+                "name": "SConductorSettingsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This interface represent the SConductor settings.",
+                "namespace": "@coffeekraken.s-conductor.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SConductorSettingsInterface",
+                    "description": "",
+                    "definition": {
+                        "idleTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to be considered as idle ",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "logTimeout": {
+                            "description": "Specify after how many milliseconds of inactity the SConductor has to log the small analysis",
+                            "type": "Number",
+                            "default": 2000
+                        },
+                        "log": {
+                            "description": "Specify if you want to log the small analysis when the SConductor is idle",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SConductorSettingsInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SConductorSettingsInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-conductor.s-duration.SConductor": {
+                "name": "SConductor",
+                "type": "Class",
+                "description": "This class represent the conductor for your UI. With it you can register some \"task\" to execute\nat a specific time. The \"times\" available are these ones:\n\n- direct: Execute directly the task\n- directly: Execute directly the task\n- inViewport: Execute when the element enter the viewport\n- nearViewport: Execute when the element is near the viewport\n- outOfViewport: Execute when the element is out of the viewport\n- domReady: Execute when the DOM is ready\n- stylesheetsReady: Execute when the stylesheets are ready\n- interact: Execute when the user interact with the element. See the [whenInteract API documentation](/api/@coffeekraken.sugar.js.dom.detect.whenInteract).\n- idle: Execute when no other task is running",
+                "namespace": "@coffeekraken.s-conductor.s-duration",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SConductor from '@coffeekraken/s-duration';\nconst duration = new SConductor();\nawait ...\nconsole.log(duration.end());"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com"
+                },
+                "filename": "SConductor.ts",
+                "extension": "ts",
+                "relPath": "src/js/SConductor.ts",
+                "children": {
+                    "defaultinstance": {
+                        "name": "defaultInstance",
+                        "type": "SConductor",
+                        "description": "Access the default instance of the SConductor class",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "when": {
+                        "name": "when",
+                        "type": "Function",
+                        "description": "This method allows you to register a task to execute at a specific time in the \"default\" conductor instance.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "setup": {
+                        "name": "setup",
+                        "type": "Function",
+                        "description": "This static method allows you to setup the \"default\" SConductor instance created when you use the static methods like \"when\", etc...",
+                        "static": "true",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "conductorsettings": {
+                        "name": "conductorSettings",
+                        "type": "ISConductorSettings",
+                        "description": "Access the settings of the conductor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}

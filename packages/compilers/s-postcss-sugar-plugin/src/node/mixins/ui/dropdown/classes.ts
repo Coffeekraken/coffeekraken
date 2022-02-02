@@ -110,12 +110,9 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
         ${finalParams.styles
             .map((style) => {
-                return ` * <!-- ${style} style -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${style} style</h3>
+                return ` * @example        html       ${style}
             *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
             *       Click me!
             *       <div class="s-dropdown">
@@ -140,17 +137,13 @@ export default function ({
             *           </div>
             *       </button>
             *   </span>
-            * </div>
             * `;
             })
             .join('\n')}
         *
-        * <!-- Shapes -->
         ${finalParams.shapes
             .map((shape) => {
-                return ` * <!-- ${shape} shape -->
-            * <div class="s-font:30 s-mbe:50">
-            *   <h3 class="s-tc:accent s-font:30 s-mbe:30">${shape} shape</h3>
+                return ` * @example        html       ${shape}
             *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
             *       Click me!
             *       <div class="s-dropdown:${shape}">
@@ -175,14 +168,11 @@ export default function ({
             *           </div>
             *       </button>
             *   </span>
-            * </div>
             * `;
             })
             .join('\n')}
         * 
-        * <!-- Positions -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Position</h3>
+        * @example        html       Position
         *   <button class="s-btn s-mbe:30 s-mie:20">
         *       Bottom (default)
         *       <div class="s-dropdown">
@@ -225,11 +215,8 @@ export default function ({
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         *   </button>
-        * </div>
         * 
-        * <!-- Colors -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Colors (non-exhaustive)</h3>
+        * @example      html        Colors (none-exhaustive)
         *   <button class="s-btn s-mbe:30 s-mie:20">
         *       Accent
         *       <div class="s-dropdown s-color:accent">
@@ -258,11 +245,9 @@ export default function ({
         *          <a class="s-btn">You find me!</a>
         *       </div>
         *   </button>
-        * </div>
         * 
-        * <!-- RTL -->
-        * <div class="s-font:30 s-mbe:50" dir="rtl">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">RTL Support</h3>
+        * @example      html        RTL
+        * <div dir="rtl">
         *   <button class="s-btn s-mbe:30">
         *       Click me!
         *       <div class="s-dropdown">
@@ -286,9 +271,7 @@ export default function ({
         *   </button>
         * </div>
         * 
-        * <!-- Scales -->
-        * <div class="s-font:30 s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Scales</h3>
+        * @example      html        Scales
         *   <button class="s-btn s-mbe:30 s-mie:20">
         *       Scale 0.7
         *       <div class="s-dropdown s-scale:07">
@@ -310,9 +293,6 @@ export default function ({
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
         *   </button>
-        * </div>
-        * 
-        *
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

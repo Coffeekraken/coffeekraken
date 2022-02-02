@@ -1,3 +1,15 @@
 {
-  "recipe": "default"
+  "recipe": "default",
+  "frontstack": {
+    "build": [ 
+        {
+          "action": "copy",
+          "params": {
+            "src": "src",
+            "glob": "+(fonts|doc)",
+            "dest": "dist"
+          }
+        }
+    ]    
+  }
 }

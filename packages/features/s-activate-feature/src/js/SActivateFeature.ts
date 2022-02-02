@@ -1,6 +1,8 @@
 import __SFeature from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
+import __unique from '@coffeekraken/sugar/shared/array/unique';
+import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
 
 export interface ISActivateFeatureProps {
     href: string;
@@ -22,15 +24,15 @@ export interface ISActivateFeatureProps {
  * @platform        js
  * @status          beta
  *
- * This feature allows you to activate some elements depending on triggers like "click", "mouseover", "mouseout", "anchor", etc...
- * To be explicit, you can apply this feature on a link tag with the href attribute "#something", and on click,
+ * This feature allows you to activate some elements depending on triggers like `click`, `mouseover`, `mouseout`, `anchor`, etc...
+ * To be explicit, you can apply this feature on a link tag with the href attribute `#something`, and on click,
  * the DOM element that has the id "something" will get the "active" class applied.
  *
  * @feature          Take the `href` attribute as target
- * @feature          Allows to "group" some element for tabs behavior, etc...
+ * @feature          Allows to `group` some element for tabs behavior, etc...
  * @feature         Support the `toggle` mode
  * @feature          Support the `history` mode
- * @feature         Allows you to save state to restore them on page load
+ * @feature         Allows you to `save state` to `restore them` on page load
  * @feature         Available trigger: `click`, `mouseover`, `mouseout`, `anchor` and more to come
  *
  * @support          chromium
@@ -38,24 +40,38 @@ export interface ISActivateFeatureProps {
  * @support          safari
  * @support          edge
  *
- * @example         html
- * <a href="#my-element">Click me!</a>
- * <div id="my-element">I will be activated on click</a>
+ * @example         html            Simple click activation
+ * <a class="s-btn s-color:accent" href="#my-element" s-activate>Click me!</a>
+ * <div id="my-element">I will be activated on click</div>
+ * <style>
+ *    #my-element.active { background: green; }
+ * </style>
  *
- * <a href="#tab1" group="my-tabs">Tab 1</a>
- * <a href="#tab2" group="my-tabs">Tab 1</a>
- * <a href="#tab3" group="my-tabs">Tab 1</a>
- *
- * <div id="tab1">Tab 1 content</div>
- * <div id="tab2">Tab 1 content</div>
- * <div id="tab3">Tab 1 content</div>
- *
+ * @example         html              Grouping
+ * <a href="#my-grouped-element-1" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <a href="#my-grouped-element-2" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <a href="#my-grouped-element-3" class="s-btn s-color:accent" s-activate group="my-tabs">Tab 1</a>
+ * <div id="my-grouped-element-1">Content #1</div>
+ * <div id="my-grouped-element-2">Content #2</div>
+ * <div id="my-grouped-element-3">Content #3</div>
+ * <style>
+ *    [id^="my-grouped-element-"].active { background: green; }
+ * </style>
+ * 
+ * @example         html            Toggle mode
+ * <a class="s-btn s-color:accent" href="#my-element-toggle" s-activate toggle>Click me!</a>
+ * <div id="my-element-toggle">I will be toggled on click</div>
+ * <style>
+ *    #my-element-toggle.active { background: green; }
+ * </style>
+ * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default class SActivateFeature extends __SFeature {
     _hrefSelector?: string;
     _$targets?: HTMLElement[];
+    _$triggerers: HTMLElement[];
     _$groupElements?: HTMLElement[];
     _unactivateTimeout;
 
@@ -73,6 +89,12 @@ export default class SActivateFeature extends __SFeature {
                 settings ?? {},
             ),
         );
+
+        if (this.props.triggerer) {
+            this._$triggerers = Array.from(document.querySelectorAll(this.props.triggerer));
+        } else {
+            this._$triggerers = [this.node];
+        }
 
         // expose the api on node
         this.componentUtils.exposeApi(
@@ -96,6 +118,7 @@ export default class SActivateFeature extends __SFeature {
         if (this._hrefSelector)
             targets = Array.from(document.querySelectorAll(this._hrefSelector));
         if (targets?.length) this._$targets = targets;
+        else this._$targets = [this.node];
 
         if (this.props.group) {
             this._$groupElements = Array.from(
@@ -105,41 +128,64 @@ export default class SActivateFeature extends __SFeature {
             );
         }
 
-        this.props.trigger.forEach((trigger) => {
-            switch (trigger) {
-                case 'click':
-                    this.node.addEventListener('click', (e) => {
-                        if (this.isActive() && this.props.toggle) {
-                            this.unactivate();
-                        } else {
-                            this.activate();
-                        }
-                    });
-                    break;
-                case 'mousenter':
-                case 'mouseover':
-                    this.node.addEventListener('mouseover', (e) => {
-                        this.activate();
-                    });
-                    break;
-                case 'mouseout':
-                case 'mouseleave':
-                    this.node.addEventListener('mouseleave', (e) => {
-                        this.unactivate();
-                    });
-                    break;
-                case 'anchor':
-                    if (document.location.hash === this._hrefSelector) {
-                        this.activate();
-                    }
-                    window.addEventListener('hashchange', (e) => {
-                        if (document.location.hash === this._hrefSelector) {
-                            this.activate();
-                        }
-                    });
+        this._$triggerers.forEach($triggerer => {
 
-                    break;
-            }
+            // @ts-ignore
+            const triggererTriggers = $triggerer.hasAttribute('trigger') ? $triggerer.getAttribute('trigger').split(',').map(l => l.trim()) : [];
+            const triggers = __unique([...this.props.trigger, ...triggererTriggers]);
+
+            triggers.forEach((trigger) => {
+
+                if (trigger.match(/^event:/)) {
+                    this.node.addEventListener('actual', (e) => {
+                        this.activate();
+                    });
+                } else {
+
+                    switch (trigger) {
+                        case 'click':
+                            $triggerer.addEventListener('click', (e) => {
+                                // only direct child(s) of the triggerer can trigger the activation
+                                if (e.target !== $triggerer) {
+                                    // @ts-ignore
+                                    if (e.target.parentElement !== $triggerer) return;
+                                    if (e.currentTarget !== $triggerer) return;
+                                }
+                                e.preventDefault();
+                                e.stopPropagation();
+                                if (this.isActive() && this.props.toggle) {
+                                    this.unactivate();
+                                } else {
+                                    this.activate();
+                                }
+                            });
+                            break;
+                        case 'mousenter':
+                        case 'mouseover':
+                            $triggerer.addEventListener('mouseover', (e) => {
+                                this.activate();
+                            });
+                            break;
+                        case 'mouseout':
+                        case 'mouseleave':
+                            $triggerer.addEventListener('mouseleave', (e) => {
+                                this.unactivate();
+                            });
+                            break;
+                        case 'anchor':
+                            if (document.location.hash === this._hrefSelector) {
+                                this.activate();
+                            }
+                            window.addEventListener('hashchange', (e) => {
+                                if (document.location.hash === this._hrefSelector) {
+                                    this.activate();
+                                }
+                            });
+
+                            break;
+                    }
+                }
+            });
         });
 
         // activate if has the "active" attribute

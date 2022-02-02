@@ -20,7 +20,7 @@ import __matches from './matches';
  * @todo      tests
  *
  * @example  	js
- * import previous from '@coffeekraken/sugar/js/dom/previous'
+ * import previous from '@coffeekraken/sugar/js/dom/query/previous'
  * const previousElm = previous(myCoolElement, '.my-cool-class');
  * if (previousElm) {
  * 		// we have found en element that matches the selector

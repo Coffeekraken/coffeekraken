@@ -7,14 +7,14 @@ export default function (env, config) {
              * @name            headerImageUrl
              * @namespace       config.readme.layout
              * @type            String
-             * @default         /dist/img/doc/readmeHeader.jpg
+             * @default         [config.serve.img.url]/img/doc/readmeHeader.jpg
              *
              * Specify the header image to use for displaying readme. This has to be relative to your project root directory
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            headerImageUrl: '/dist/img/doc/readmeHeader.jpg',
+            headerImageUrl: '[config.serve.img.url]/doc/readmeHeader.jpg',
         },
         /**
          * @name            shields

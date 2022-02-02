@@ -1,12 +1,13 @@
 import { html, css, unsafeCSS } from 'lit';
 import { unsafeHTML } from 'lit/directives/unsafe-html.js';
-import { property } from 'lit/decorators.js';
 import __SFiltrableInputComponentInterface from './interface/SFiltrableInputComponentInterface';
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import __copy from '@coffeekraken/sugar/js/clipboard/copy';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+
+import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
 import __clone from '@coffeekraken/sugar/shared/object/clone';
 import __SComponent from '@coffeekraken/s-lit-component';
@@ -22,7 +23,35 @@ import __onScrollEnd from '@coffeekraken/sugar/js/dom/detect/onScrollEnd';
 // @ts-ignore
 import __css from '../css/s-filtrable-input.css';
 
-export interface ISFiltrableInputComponentProps {}
+export interface ISFiltrableInputComponentProps {
+    items: any[];
+    value: string;
+    label: string;
+    emptyText: string;
+    loadingText: string;
+    searchValudPreprocess: Function;
+    filterItems: Function;
+    filtrable: string[];
+    templates: Record<string, Function>;
+    closeTimeout: number;
+    interactive: boolean;
+    notSelectable: boolean;
+    maxItems: number;
+}
+
+export interface ISFiltrableInputState {
+    baseTemplates: Record<string, Function>;
+    preselectedItem: any;
+    preselectedItemIdx: number;
+    selectedItem: any;
+    selectedItemIdx:number;
+    displayedMaxItems: number;
+    value: string;
+    isActive: boolean;
+    isLoading: boolean;
+    items: any[];
+    filteredItems: any[];
+}
 
 export default class SFiltrableInput extends __SLitComponent {
     static get styles() {
@@ -36,19 +65,21 @@ export default class SFiltrableInput extends __SLitComponent {
     // @ts-ignore
     $list: HTMLElement;
     // @ts-ignore
-    $input: HTMLElement;
+    $dropdown: HTMLElement;
     // @ts-ignore
-    $itemTemplateElm: HTMLElement;
+    $input: HTMLInputElement;
     // @ts-ignore
-    $noItemTemplateElm: HTMLElement;
-    // @ts-ignore
-    $loadingTemplateElm: HTMLElement;
+    $form: HTMLFormElement;
 
-    state = {
-        baseTemplates: undefined,
-        preselectedItem: undefined,
+    _templatesFromHtml: any = {};
+
+
+    state: ISFiltrableInputState = {
+        baseTemplates: {},
+        preselectedItem: {},
         preselectedItemIdx: -1,
         selectedItemIdx: -1,
+        selectedItem: {},
         displayedMaxItems: 0,
         value: '',
         isActive: false,
@@ -118,8 +149,22 @@ export default class SFiltrableInput extends __SLitComponent {
     }
 
     async firstUpdated() {
+
+        // input
         this.$input = <any>this.querySelector('input');
         this.$input.setAttribute('autocomplete', 'off');
+
+        // @ts-ignore
+        this.$form = this.$input.form;
+        // prevent from sending form if search is opened
+        this.$form.addEventListener('submit', e => {
+            if (this.state.isActive) {
+                e.preventDefault();
+            }
+        });
+
+        // grab templates
+        this._grabTemplates();
 
         if (!this.props.bare) {
             // @ts-ignore
@@ -128,11 +173,17 @@ export default class SFiltrableInput extends __SLitComponent {
 
         // @ts-ignore
         this.$input.addEventListener('keyup', (e) => {
+            this.state.isActive = true;
             // @ts-ignore
             const value = e.target.value;
             this.state.value = value;
             this.state.displayedMaxItems = this.props.maxItems;
             this.filterItems();
+        });
+        this.$input.addEventListener('focus', (e) => {
+            this.state.isActive = true;
+            this.filterItems();
+            this._updateListSizeAndPosition();
         });
 
         // @ts-ignore
@@ -143,16 +194,13 @@ export default class SFiltrableInput extends __SLitComponent {
         this.$container.classList.add(this.componentUtils.className());
         // @ts-ignore
         this.$list = this.querySelector('ul');
+        // @ts-ignore
+        this.$dropdown = this.querySelector(`.s-filtrable-input__dropdown`);
 
         this.prepend(this.$input);
         this.filterItems();
 
         document.addEventListener('scroll', () => {
-            this._updateListSizeAndPosition();
-        });
-        this.$input.addEventListener('focus', (e) => {
-            this.state.isActive = true;
-            this.filterItems();
             this._updateListSizeAndPosition();
         });
         this._updateListSizeAndPosition();
@@ -198,6 +246,43 @@ export default class SFiltrableInput extends __SLitComponent {
             if (!this.state.isActive) return;
             this.validateAndClose();
         });
+
+        // open if a value exists
+        if (this.$input.value) {
+            this.state.value = this.$input.value;
+            __cursorToEnd(this.$input);
+            this.filterItems(true);
+        }
+
+    }
+
+    _grabTemplates() {
+        this.querySelectorAll('template').forEach($template => {
+            if (!$template.hasAttribute('type')) return;
+            // @ts-ignore
+            this._templatesFromHtml[$template.getAttribute('type')] = $template.innerHTML;
+        });
+    }
+
+    _getTemplate(type: string) {
+        if (this.props.templates) {
+            const res = this.props.templates({
+                type,
+                html
+            });
+            if (res) return res;
+        }
+        // from template tags
+        if (this._templatesFromHtml[type]) {
+            return html`
+                ${unsafeHTML(this._templatesFromHtml[type])}
+            `;
+        }
+        // @ts-ignore
+        return this.state.baseTemplates({
+            type,
+            html
+        });
     }
 
     get selectedItem() {
@@ -210,19 +295,23 @@ export default class SFiltrableInput extends __SLitComponent {
     }
     validate() {
         // protect against not selected item
-        if (!this.state.preselectedItem) return;
+        if (this.state.preselectedItemIdx === -1) return;
         // set the value in the input
-        if (this.state.preselectedItem) {
+        if (this.preselectedItem) {
+
+            const itemProps: Partial<ISFiltrableInputComponentProps> = __deepMerge(Object.assign({}, this.props), this.state.preselectedItem.props ?? {});
+
             if (
-                typeof this.props.value === 'string' &&
-                this.state.preselectedItem?.[this.props.value]
+                typeof itemProps.value === 'string' &&
+                this.preselectedItem?.[itemProps.value]
             ) {
                 (<HTMLInputElement>this.$input).value = __stripTags(
                     // @ts-ignore
-                    this.state.preselectedItem[this.props.value],
+                    this.preselectedItem[itemProps.value],
                 );
-            } else if (typeof this.props.value === 'function') {
-                const v = this.props.value({
+            } else if (typeof itemProps.value === 'function') {
+                // @ts-ignore
+                const v = itemProps.value({
                     item: this.state.filteredItems[
                         this.state.preselectedItemIdx
                     ],
@@ -240,7 +329,7 @@ export default class SFiltrableInput extends __SLitComponent {
         this.state.value = this.$input.value;
         this.requestUpdate();
         // dispatch an event
-        const event = new CustomEvent('select', {
+        const event = new CustomEvent('selectItem', {
             bubbles: true,
             detail: this.selectedItem,
         });
@@ -253,9 +342,19 @@ export default class SFiltrableInput extends __SLitComponent {
             this.close();
         }, this.props.closeTimeout);
     }
+    resetSelected() {
+        this.state.preselectedItemIdx = -1;
+        this.state.preselectedItem = {};
+        this.state.selectedItemIdx = -1;
+        this.state.selectedItem = {};
+    }
+    reset() {
+        this.resetSelected();
+        this.$input.value = '';
+    }
     close() {
-        this.$input.focus();
-        this.$input.blur();
+        __cursorToEnd(this.$input);
+        // this.$input.blur();
         this.state.isActive = false;
     }
     async refreshItems() {
@@ -276,59 +375,74 @@ export default class SFiltrableInput extends __SLitComponent {
         }
     }
     async filterItems(needUpdate = true) {
+
         if (needUpdate) await this.refreshItems();
+
+        // reset selected
+        this.resetSelected();
 
         let items = this.state.items;
 
-        let matchedItemsCount = 0;
-        const filteredItems = items
-            .map((item) => __clone(item))
-            .filter((item) => {
-                if (matchedItemsCount >= this.state.displayedMaxItems)
-                    return false;
+        let searchValue = this.state.value;
+        if (this.props.searchValuePreprocess) {
+            searchValue = this.props.searchValuePreprocess(searchValue);
+        }
 
-                if (!this.props.filtrable.length) return true;
+        let filteredItems = items.map(item => __clone(item));
 
-                let matchFilter = false;
-                for (let i = 0; i < Object.keys(item).length; i++) {
-                    const propName = Object.keys(item)[i],
-                        propValue = item[propName];
+        // custom function
+        if (this.props.filterItems) {
+            filteredItems = await this.props.filterItems(filteredItems, searchValue, this.state);
+        } else {
+            let matchedItemsCount = 0;
+            filteredItems = filteredItems
+                .filter((item) => {
+                    if (matchedItemsCount >= this.state.displayedMaxItems)
+                        return false;
 
-                    // prevent not string value
-                    if (typeof propValue !== 'string') continue;
+                    if (!this.props.filtrable.length) return true;
 
-                    // check if the current propName is specified in the filtrable list
-                    if (this.props.filtrable.indexOf(propName) !== -1) {
-                        const reg = new RegExp(
-                            this.state.value.split(' ').join('|'),
-                            'gi',
-                        );
-                        if (propValue.match(reg)) {
-                            matchFilter = true;
-                            if (this.state.value && this.state.value !== '') {
-                                const reg = new RegExp(
-                                    this.state.value.split(' ').join('|'),
-                                    'gi',
-                                );
-                                const finalString = propValue.replace(
-                                    reg,
-                                    (str) => {
-                                        return `<span class="${this.componentUtils.className(
-                                            '__list-item-highlight',
-                                        )} s-highlight"
-                                                >${str}</span>`;
-                                    },
-                                );
-                                item[propName] = finalString;
+                    let matchFilter = false;
+                    for (let i = 0; i < Object.keys(item).length; i++) {
+                        const propName = Object.keys(item)[i],
+                            propValue = item[propName];
+
+                        // prevent not string value
+                        if (typeof propValue !== 'string') continue;
+
+                        // check if the current propName is specified in the filtrable list
+                        if (this.props.filtrable.indexOf(propName) !== -1) {
+                            const reg = new RegExp(
+                                searchValue.split(' ').join('|'),
+                                'gi',
+                            );
+                            if (propValue.match(reg)) {
+                                matchFilter = true;
+                                if (searchValue && searchValue !== '') {
+                                    const reg = new RegExp(
+                                        searchValue.split(' ').join('|'),
+                                        'gi',
+                                    );
+                                    const finalString = propValue.replace(
+                                        reg,
+                                        (str) => {
+                                            return `<span class="${this.componentUtils.className(
+                                                '__list-item-highlight',
+                                            )} s-highlight"
+                                                    >${str}</span>`;
+                                        },
+                                    );
+                                    item[propName] = finalString;
+                                }
                             }
                         }
                     }
-                }
-                if (matchFilter) {
-                    matchedItemsCount++;
-                }
-                return matchFilter;
-            });
+                    if (matchFilter) {
+                        matchedItemsCount++;
+                    }
+                    return matchFilter;
+                });
+        }
 
         // @ts-ignore
         this.state.filteredItems = filteredItems;
@@ -339,33 +453,40 @@ export default class SFiltrableInput extends __SLitComponent {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
     }
-    selectAndValidate(idx) {
+    preselectAndValidate(idx) {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
         // validate
         this.validate();
     }
-    selectValidateAndClose(idx) {
+    preselectValidateAndClose(idx) {
         // set the selected idx
         this._setPreselectedItemByIdx(idx);
         // validate
         this.validateAndClose();
     }
+    _setSelectedItemByIdx(idx) {
+        // check if the component is in not selectable mode
+        if (this.props.notSelectable) return;
+        this.state.selectedItemIdx = idx;
+        this.state.selectedItem = this.selectedItem;
+        this.requestUpdate();
+    }
     _setPreselectedItemByIdx(idx) {
         // check if the component is in not selectable mode
         if (this.props.notSelectable) return;
         this.state.preselectedItemIdx = idx;
-        this.state.preselectedItem = this.state.items[idx];
+        this.state.preselectedItem = this.preselectedItem;
         this.requestUpdate();
     }
     _updateListSizeAndPosition() {
         //   if (!__isFocus(this.$input)) return;
         if (!this.state.isActive) return;
 
-        const marginTop = __getStyleProperty(this.$list, 'marginTop'),
-            marginLeft = __getStyleProperty(this.$list, 'marginLeft'),
-            marginRight = __getStyleProperty(this.$list, 'marginRight'),
-            marginBottom = __getStyleProperty(this.$list, 'marginBottom');
+        const marginTop = __getStyleProperty(this.$dropdown, 'marginTop'),
+            marginLeft = __getStyleProperty(this.$dropdown, 'marginLeft'),
+            marginRight = __getStyleProperty(this.$dropdown, 'marginRight'),
+            marginBottom = __getStyleProperty(this.$dropdown, 'marginBottom');
         const distanceTop = __distanceFromElementTopToViewportTop(this.$input);
         const distanceBottom =
             __distanceFromElementTopToViewportBottom(this.$input) -
@@ -374,106 +495,105 @@ export default class SFiltrableInput extends __SLitComponent {
 
         if (distanceTop > distanceBottom) {
             this.$container.classList.add('s-filtrable-input--top');
-            this.$list.style.top = `auto`;
-            this.$list.style.bottom = `calc(100% - ${marginBottom})`;
+            this.$dropdown.style.top = `auto`;
+            this.$dropdown.style.bottom = `calc(100% - ${marginBottom})`;
             maxHeight = distanceTop - parseInt(marginTop);
         } else {
             this.$container.classList.remove('s-filtrable-input--top');
-            this.$list.style.bottom = `auto`;
-            this.$list.style.top = `calc(100% - ${marginTop})`;
+            this.$dropdown.style.bottom = `auto`;
+            this.$dropdown.style.top = `calc(100% - ${marginTop})`;
             maxHeight = distanceBottom - parseInt(marginBottom);
         }
 
-        this.$list.style.maxHeight = `${maxHeight}px`;
+        this.$dropdown.style.maxHeight = `${maxHeight}px`;
     }
 
     render() {
         return html`
-            <ul
-                class="s-filtrable-input__list ${this.componentUtils.className(
-                    '__list',
-                )}"
-            >
-                ${this.state.isLoading
-                    ? html`
-                          <li
-                              class="s-filtrable-input__list-item s-filtrable-input__list-loading ${this.componentUtils.className(
-                                  '__list-item __list-loading',
-                              )}"
-                          >
-                              ${this.props.templates?.({
-                                  type: 'loading',
-                                  html,
-                              }) ??
-                              // @ts-ignore
-                              this.state.baseTemplates({
-                                  type: 'loading',
-                                  html,
-                              })}
-                          </li>
-                      `
-                    : !this.state.isLoading &&
-                      this.state.filteredItems.length <= 0
-                    ? html`
-                          <li
-                              class="s-filtrable-input__list-item s-filtrable-input__list-no-item  ${this.componentUtils.className(
-                                  '__list-item __list-no-item',
-                              )}"
-                          >
-                              ${this.props.templates?.({
-                                  type: 'empty',
-                                  html,
-                              }) ??
-                              // @ts-ignore
-                              this.state.baseTemplates({
-                                  type: 'empty',
-                                  html,
-                              })}
-                          </li>
-                      `
-                    : !this.state.isLoading && this.state.filteredItems.length
-                    ? this.state.filteredItems.map((item, idx) =>
-                          idx < this.state.displayedMaxItems
-                              ? html`
-                                    <li
-                                        @click=${() =>
-                                            this.selectAndValidate(idx)}
-                                        @dblclick=${() =>
-                                            this.selectValidateAndClose(idx)}
-                                        @focus=${() =>
-                                            this._setPreselectedItemByIdx(idx)}
-                                        style="z-index: ${999999999 - idx}"
-                                        tabindex="0"
-                                        class="s-filtrable-input__list-item ${this.componentUtils.className(
-                                            '__list-item',
-                                        ) +
-                                        ' ' +
-                                        (this.state.selectedItemIdx === idx
-                                            ? 'active'
-                                            : '')}"
-                                        hoverable
-                                    >
-                                        ${this.props.templates?.({
-                                            type: 'item',
-                                            html,
-                                            unsafeHTML,
-                                            item,
-                                            idx,
-                                        }) ??
-                                        // @ts-ignore
-                                        this.state.baseTemplates({
-                                            type: 'item',
-                                            html,
-                                            unsafeHTML,
-                                            item,
-                                            idx,
-                                        })}
-                                    </li>
-                                `
-                              : '',
-                      )
-                    : ''}
-            </ul>
+            <div class="s-filtrable-input__dropdown">
+                <div class="s-filtrable-input__before" tabindex="0">
+                    ${this._getTemplate('before')}
+                </div>
+                <ul class="s-filtrable-input__list">
+                    ${this.state.isLoading
+                        ? html`
+                            <li
+                                class="s-filtrable-input__list-item s-filtrable-input__list-loading"
+                            >
+                                ${this.props.templates?.({
+                                    type: 'loading',
+                                    html,
+                                }) ??
+                                // @ts-ignore
+                                this.state.baseTemplates({
+                                    type: 'loading',
+                                    html,
+                                })}
+                            </li>
+                        `
+                        : !this.state.isLoading &&
+                        this.state.filteredItems.length <= 0
+                        ? html`
+                            <li
+                                class="s-filtrable-input__list-item s-filtrable-input__list-no-item"
+                            >
+                                ${this.props.templates?.({
+                                    type: 'empty',
+                                    html,
+                                }) ??
+                                // @ts-ignore
+                                this.state.baseTemplates({
+                                    type: 'empty',
+                                    html,
+                                })}
+                            </li>
+                        `
+                        : !this.state.isLoading && this.state.filteredItems.length
+                        ? this.state.filteredItems.map((item, idx) =>
+                            idx < this.state.displayedMaxItems
+                                ? html`
+                                        <li
+                                            @click=${() =>
+                                                this.preselectAndValidate(idx)}
+                                            @dblclick=${() =>
+                                                this.preselectValidateAndClose(idx)}
+                                            @focus=${() =>
+                                                this._setPreselectedItemByIdx(idx)}
+                                            style="z-index: ${999999999 - idx}"
+                                            tabindex="0"
+                                            class="s-filtrable-input__list-item ${(this.state.selectedItemIdx === idx
+                                                ? 'active'
+                                                : '')}"
+                                            hoverable
+                                        >
+                                            ${this.props.templates?.({
+                                                type: 'item',
+                                                html,
+                                                unsafeHTML,
+                                                item,
+                                                idx,
+                                            }) ??
+                                            // @ts-ignore
+                                            this.state.baseTemplates({
+                                                type: 'item',
+                                                html,
+                                                unsafeHTML,
+                                                item,
+                                                idx,
+                                            })}
+                                        </li>
+                                    `
+                                : '',
+                        )
+                        : ''}
+                </ul>
+                <div class="s-filtrable-input__after" tabindex="0">
+                    ${this.props.templates?.({
+                        type: 'after',
+                        html,
+                    })}
+                </div>
+            </div>
         `;
     }
 }

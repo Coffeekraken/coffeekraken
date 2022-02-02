@@ -42,6 +42,8 @@ export interface ISProcessSettings {
     runAsChild: boolean;
     interface: ISInterface;
     processPath: string;
+    before: Function;
+    after: Function;
     notification: ISProcessNotificationSettings;
     env: Record<string, unknown>;
     spawn: Record<string, unknown>;

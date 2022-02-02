@@ -43,6 +43,7 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterDocmapRead');
 
+        
         const styleguideObj = styleguideMenu.slug[req.path];
 
         if (!styleguideObj || !__fs.existsSync(styleguideObj.docmap.path)) {
@@ -63,7 +64,7 @@ export default function styleguide(req, res, settings = {}) {
 
         const docblocksInstance = new __SDocblock(styleguideObj.docmap.path, {
             docblock: {
-                renderMarkdown: true,
+                renderMarkdown: false,
                 filterByTag: {
                     menu: (value) => {
                         if (!value || typeof value !== 'string') return false;
@@ -91,7 +92,7 @@ export default function styleguide(req, res, settings = {}) {
 
         __SBench.step('handlers.styleguide', 'afterViewRendering');
 
-        console.log(__SBench.end('handlers.styleguide', {}).toString());
+        __SBench.end('handlers.styleguide', {}).log();
 
         res.status(200);
         res.type('text/html');

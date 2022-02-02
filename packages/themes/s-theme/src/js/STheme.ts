@@ -1,6 +1,7 @@
 import __SThemeBase from '../shared/SThemeBase';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SColor from '@coffeekraken/s-color';
+import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 
 /**
  * @name            STheme
@@ -41,13 +42,43 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static setTheme(
-        theme: string,
-        variant: string,
+        theme?: string,
+        variant?: string,
         $context = document.body,
     ): STheme {
-        $context.setAttribute('theme', theme);
-        $context.setAttribute('variant', variant);
+        __clearTransmations(document.body, {
+            timeout: 100
+        });
+
+        console.log('set theme', theme, variant);
+
+        if (theme && variant) {
+            $context.setAttribute('theme', `${theme}-${variant}`);
+        } else if (theme) {
+            $context.setAttribute('theme', theme);
+        } else if (variant) {
+            $context.setAttribute('theme', variant);
+        }
+
         return this.getCurrentTheme($context);
+    }
+
+    /**
+     * @name            setThemeVariant
+     * @type            Function
+     * @static
+     *
+     * This method allows you to set the current applied theme variant and get back an STheme instance
+     *
+     * @param               {String}            variant         The theme variant to apply
+     * @param               {HTMLElement}       [$context=document.body]            The context element on which to apply the theme
+     * @return          {STheme}                                    The STheme instance that represent the current applied theme
+     *
+     * @since           2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static setThemeVariant(variant: string, $context = document.body): STheme {
+        return this.setTheme(undefined, variant, $context);
     }
 
     /**
@@ -63,14 +94,32 @@ export default class STheme extends __SThemeBase {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     static getCurrentTheme($context = document.body): STheme {
-        const theme =
-                $context.getAttribute('theme') ??
-                __SSugarConfig.get('theme.theme'),
-            variant =
-                $context.getAttribute('variant') ??
-                __SSugarConfig.get('theme.variant');
 
-        return <STheme>this.getTheme(theme, variant);
+        const theme = __SSugarConfig.get('theme.theme');
+        const variant = __SSugarConfig.get('theme.variant');
+        
+        if (!$context.hasAttribute('theme')) {
+            return <STheme>this.getTheme(theme, variant);
+        }
+        
+        let attr = $context.getAttribute('theme') ?? '',
+        parts = attr.split('-').map(l => l.trim());
+
+        if (parts.length === 2) {
+            return <STheme>this.getTheme(parts[0], parts[1]);
+        }
+        
+        const themes = __SSugarConfig.get('theme.themes');
+        for (let [key, value] of Object.entries(themes)) {
+            if (key === `${parts[0]}-${variant}` || key === `${theme}-${parts[0]}`) {
+                const p = key.split('-').map(l => l.trim()),
+                    t = p[0], v = p[1];
+                console.log('AA', t, v);
+                return <STheme>this.getTheme(t, v);
+            }
+        }
+
+        throw new Error(`The requested current theme with the "theme" attribute "${$context.getAttribute('theme')}" on the context "${$context}" does not exists...`);
     }
 
     /**
@@ -85,6 +134,27 @@ export default class STheme extends __SThemeBase {
      */
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
+    }
+
+    /**
+     * @name            applyCurrentColor
+     * @type            Function
+     * @static
+     *
+     * This static method allows you to apply a color on a particular context
+     *
+     * @param       {String}        color               The color name/code you want to apply
+     * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
+     *
+     * @since       2.0.0
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     */
+    static applyCurrentColor(color: string,  $context = document.body): void {
+        const vars = this.remapCssColor('current', color);
+        for (let [key, value] of Object.entries(vars.properties)) {
+            // @ts-ignore
+            $context.style.setProperty(key, value);
+        }
     }
 
     /**
@@ -118,18 +188,20 @@ export default class STheme extends __SThemeBase {
     }
 
     /**
-     * @name            color
+     * @name            getColor
      * @type            Function
      *
      * THis method allows you to access a particular theme color in a particular context
      *
-     * @param           {String}            [dotPath='']            The dot path of the config you want to hash
+     * @param           {String}            name            The color name you want to get
+     * @param           {String}            [variant=null]     The color variant you want to get
+     * @param           {HTMLElement}       [$context=document.body]        The context in which to get the color
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    color(name: string, variant?: string, $context = document.body): __SColor {
+    getColor(name: string, variant?: string, $context = document.body): __SColor {
         const $elm = document.createElement('p');
         $elm.classList.add(`s-bg--${name}${variant ? `-${variant}` : ''}`);
         const $wrapper = document.createElement('div');

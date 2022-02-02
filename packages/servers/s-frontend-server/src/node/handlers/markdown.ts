@@ -47,14 +47,15 @@ export default function markdown(req, res, settings = {}) {
         }
 
         if (slugObj) {
-            const markdownStr = __fs
-                .readFileSync(slugObj.docmap.path, 'utf8')
-                .toString();
+            // const markdownStr = __fs
+            //     .readFileSync(slugObj.docmap.path, 'utf8')
+            //     .toString();
 
             const builder = new __SMarkdownBuilder();
-            const res = await pipeErrors(
+            const res = await pipe(
                 builder.build({
-                    inRaw: markdownStr,
+                    // inRaw: markdownStr,
+                    inPath: slugObj.docmap.path,
                     target: 'html',
                     save: false,
                 }),

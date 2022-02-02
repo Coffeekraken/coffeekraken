@@ -18,7 +18,7 @@
  * @todo      tests
  *
  * @example  	js
- * import matches from '@coffeekraken/sugar/js/dom/matches'
+ * import matches from '@coffeekraken/sugar/js/dom/query/matches'
  * if (matches(myCoolHTMLElement, '.my-cool-css-selector')) {
  * 		// the element match the selector
  * }

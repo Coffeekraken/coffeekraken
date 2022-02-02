@@ -1,8 +1,11 @@
 import __SDocmap from '@coffeekraken/s-docmap';
+import __SPromise from '@coffeekraken/s-promise';
 import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
+import __fs from 'fs';
+import __SLog from '@coffeekraken/s-log';
 
 export default function sitemap() {
-    return new Promise(async (resolve, reject) => {
+    return new __SPromise(async ({resolve, reject, emit}) => {
         const items = [
             {
                 loc: '/config/explorer',
@@ -19,10 +22,18 @@ export default function sitemap() {
             let hash = hashesByPath[docmapObj.path];
             if (!hash) {
                 // @ts-ignore
-                hash = __fileHash(docmapObj.path);
-                // save in stack
-                // @ts-ignore
-                hashesByPath[docmapObj.path] = hash;
+                if (!__fs.existsSync(docmapObj.path)) {
+                    emit('log', {
+                        type: __SLog.TYPE_WARN,
+                        value: `<red>[sitemap]</red> The file "<cyan>${docmapObj.path}</cyan>" has been skipped cause it does not exists...`
+                    });
+                } else {
+                    // @ts-ignore
+                    hash = __fileHash(docmapObj.path);
+                    // save in stack
+                    // @ts-ignore
+                    hashesByPath[docmapObj.path] = hash;
+                }
             }
 
             items.push({

@@ -3,13 +3,17 @@
 <dl>
     {{#each (get docmap.map namespace false 'interface.definition')}}
     <dt class="s-font:40 s-mbe:30">
-        <header class="s-flex s-bg:main-surface s-radius">
-            <div class="s-flex-item:grow s-tc:accent s-p:30">{{ @key }}</div>
-            {{#if this.default}}
-            <div class="s-tc:info s-p:30">{{ configValue this.default }}</div>
-            {{/if}}
-            <div class="s-typo:bold s-p:30">{{ this.type }}</div>
+        <header class="s-flex s-bg:main-surface s-radius s-depth:100">
+            <div class="s-flex-item:grow s-tc:accent s-p:30 s-typo:strong">
+                {{ @key }}
+            </div>
+            <div class="s-typo:bold s-p:30 s-tc:info">{{ this.type }}</div>
         </header>
+        {{#if this.default}}
+        <div class="s-pi:30 s-mbs:40">
+            <div class="s-typo:code">{{ configValue this.default }}</div>
+        </div>
+        {{/if}}
         <p class="s-typo:p s-p:30">{{{ this.description }}}</p>
     </dt>
     {{/each}}

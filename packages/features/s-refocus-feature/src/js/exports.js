@@ -1,0 +1,4 @@
+import __SRefocusFeature from './SRefocusFeature';
+export * from './SRefocusFeature';
+export default __SRefocusFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyxpQkFBaUIsTUFBTSxtQkFBbUIsQ0FBQztBQUNsRCxjQUFjLG1CQUFtQixDQUFDO0FBQ2xDLGVBQWUsaUJBQWlCLENBQUMifQ==

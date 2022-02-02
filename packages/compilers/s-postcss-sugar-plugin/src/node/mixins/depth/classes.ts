@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
 
 /**
  * @name           classes
@@ -45,6 +46,7 @@ export default function ({
     };
 
     const depthsObj = __STheme.config('depth');
+    const depthsArray = __keysFirst(Object.keys(depthsObj), ['default']);
 
     const vars = new CssVars();
 
@@ -66,21 +68,24 @@ export default function ({
         * @support      safari          
         * @support      edge           
         * 
-        ${Object.keys(depthsObj)
+        ${depthsArray
             .map((depthName) => {
-                return ` * @cssClass          s-depth:${depthName}      Apply the depth ${depthName} to any HTMLElement`;
+                return [
+                    ` * @cssClass          s-depth:${depthName}      Apply the depth ${depthName} to any HTMLElement`,
+                    ` * @cssClass          s-depth:text:${depthName}      Apply the text depth ${depthName} to any HTMLElement`,
+                    ` * @cssClass          s-depth:box:${depthName}      Apply the depth ${depthName} to any HTMLElement`
+                ].join('\n');
             })
             .join('\n')}
         *
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Depths</h3>
-        ${Object.keys(depthsObj)
+        ${depthsArray
             .map((depthName) => {
-                return ` * <div class="s-depth:${depthName} s-bg:main-surface s-mbe:100 s-text:center s-radius:30 s-p:30">s-depth:${depthName}</div>`;
+                return ` * @example          html        Depth ${depthName}
+                <div class="s-depth:${depthName} s-bg:main-surface s-text:center s-radius s-p:30">
+                    <span class="s-depth:text:${depthName}">s-depth:${depthName}    
+                </div>`;
             })
             .join('\n')}
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -88,10 +93,10 @@ export default function ({
     `,
     );
 
-    Object.keys(depthsObj).forEach((depthName) => {
+    depthsArray.forEach((depthName) => {
         vars.comment(
             () => `/**
-                * @name          s-depth:${depthName}
+                * @name          s-depth:${depthName === 'default' ? '' : depthName}
                 * @namespace          sugar.css.depth
                 * @type               CssClass
                 * @platform         css
@@ -100,12 +105,34 @@ export default function ({
                 * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any HTMLElement
                 * 
                 * @example        html
-                * <a class="s-btn s-btn--primary s-depth\:${depthName}">I'm a cool depth button</a>
+                * <a class="s-btn s-btn--primary s-depth:${depthName === 'default' ? '' : depthName}">I'm a cool depth button</a>
                 */
                 `,
         ).code(`
-.s-depth--${depthName} {
-    @sugar.depth(${depthName});
+.s-depth${depthName === 'default' ? '' : `--${depthName}`}:not(.s-depth--text),
+.s-depth--box.s-depth--${depthName === 'default' ? '' : `--${depthName}`} {
+    @sugar.depth('${depthName}');
+}`);
+    });
+
+    depthsArray.forEach((depthName) => {
+        vars.comment(
+            () => `/**
+                * @name          s-depth:text:${depthName === 'default' ? '' : depthName}
+                * @namespace          sugar.css.depth
+                * @type               CssClass
+                * @platform         css
+                * @status           beta
+                * 
+                * This class allows you to apply a "<yellow>${depthName}</yellow>" depth style to any text
+                * 
+                * @example        html
+                * <a class="s-btn s-btn--primary s-depth:text:${depthName === 'default' ? '' : depthName}">I'm a cool depth button</a>
+                */
+                `,
+        ).code(`
+.s-depth--text.s-depth${depthName === 'default' ? '' : `--${depthName}`} {
+    @sugar.depth(${depthName}, $type: text);
 }`);
     });
 

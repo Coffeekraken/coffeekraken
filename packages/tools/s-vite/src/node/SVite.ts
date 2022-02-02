@@ -13,10 +13,10 @@ import { uglify as __uglifyPlugin } from 'rollup-plugin-uglify';
 import { build as __viteBuild, createServer as __viteServer } from 'vite';
 import __sInternalWatcherReloadVitePlugin from './plugins/internalWatcherReloadPlugin';
 import __rewritesPlugin from './plugins/rewritesPlugin';
-import __SViteStartInterface from './start/interface/SViteStartInterface';
+import __SViteStartParamsInterface from './interface/SViteStartParamsInterface';
 import __kill from '@coffeekraken/sugar/node/process/kill';
 import __isPortFree from '@coffeekraken/sugar/node/network/utils/isPortFree';
-import __SViteBuildInterface from './build/interface/SViteBuildInterface';
+import __SViteBuildParamsInterface from './interface/SViteBuildParamsInterface';
 import __SLog from '@coffeekraken/s-log';
 
 export interface ISViteSettings {}
@@ -43,7 +43,7 @@ export interface ISViteBuildParams {
 
 export default class SVite extends __SClass {
     static interfaces = {
-        startParams: __SViteStartInterface,
+        startParams: __SViteStartParamsInterface,
     };
 
     /**
@@ -131,7 +131,6 @@ export default class SVite extends __SClass {
                     await __kill(`:${config.server.port}`);
                 }
 
-
                 const server = await __viteServer(config);
                 let listen;
                 try {
@@ -152,14 +151,6 @@ export default class SVite extends __SClass {
                         `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
                     ].join('\n'),
                 });
-                // emit('log', {
-                //     type: __SLog.TYPE_SUMMARY,
-                //     value: {
-                //         status: 'success',
-                //         value: `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
-                //         collapse: true,
-                //     },
-                // });
             },
             {
                 metas: {
@@ -187,7 +178,7 @@ export default class SVite extends __SClass {
                 const duration = new __SDuration();
 
                 const finalParams: ISViteBuildParams =
-                    __SViteBuildInterface.apply(params);
+                    __SViteBuildParamsInterface.apply(params);
 
                 // if (params.watch) {
                 //   throw new Error('The watch feature is not implemented yet...');
@@ -208,16 +199,28 @@ export default class SVite extends __SClass {
                 for (let i = 0; i < finalParams.type.length; i++) {
                     const buildType = finalParams.type[i];
 
+                    // @ts-ignore
+                    const buildParams: ISViteBuildParams = __deepMerge(Object.assign(finalParams), {});
+
+                    // shortcuts
+                    if (buildType === 'lib') {
+                        buildParams.minify = true;
+                    }
+                    if (buildParams.prod) {
+                        buildParams.minify = true;
+                    }
+
                     const config: any = __deepMerge(viteConfig, {
                         logLevel: 'silent',
                         build: {
-                            watch: finalParams.watch ? {} : false,
-                            target: finalParams.target ?? 'modules',
+                            watch: buildParams.watch ? {} : false,
+                            target: buildParams.target ?? 'modules',
                             write: false,
-                            minify: finalParams.minify,
+                            minify: buildParams.minify,
                             cssCodeSplit: false,
                             rollupOptions: {
-                                input: finalParams.input,
+                                input: buildParams.input,
+                                external: [],
                                 plugins: [],
                                 output: {
                                     compact: true,
@@ -229,23 +232,18 @@ export default class SVite extends __SClass {
                         },
                     });
 
-                    // shortcuts
-                    if (finalParams.prod) {
-                        finalParams.minify = true;
-                    }
-
                     // library mode
                     if (buildType.toLowerCase() !== 'lib') {
                         delete config.build.lib;
                     }
 
                     // plugins
-                    if (finalParams.minify) {
+                    if (buildParams.minify) {
                         config.build.rollupOptions.plugins.push(
                             __uglifyPlugin(),
                         );
                     }
-                    if (finalParams.analyze) {
+                    if (buildParams.analyze) {
                         config.build.rollupOptions.plugins.push(
                             __rollupAnalyzerPlugin({
                                 limit: 10,
@@ -274,17 +272,17 @@ export default class SVite extends __SClass {
                     config.plugins = plugins;
 
                     // mode (production, development)
-                    if (finalParams.prod) {
+                    if (buildParams.prod) {
                         config.mode = 'production';
                     }
 
                     // target
                     if (buildType.toLowerCase() === 'bundle') {
-                        config.build.target = finalParams.target ?? 'es2015';
+                        config.build.target = buildParams.target ?? 'es2015';
                     } else if (buildType.toLowerCase() === 'lib') {
-                        config.build.target = finalParams.target ?? 'esnext';
+                        config.build.target = buildParams.target ?? 'esnext';
                     } else if (buildType.toLowerCase() === 'module') {
-                        config.build.target = finalParams.target ?? 'modules';
+                        config.build.target = buildParams.target ?? 'modules';
                     }
 
                     // external packages for library mode
@@ -293,14 +291,17 @@ export default class SVite extends __SClass {
                             ...(config.build.rollupOptions.external ?? []),
                             ...Object.keys(
                                 __listNodeModulesPackages({ monorepo: true }),
-                            ),
-                            'vue',
+                            ).filter(item => {
+                                return !item.match(/^(\/|\.)/);
+                            }).map(item => {
+                                return new RegExp(`^${item}`);
+                            })
                         ];
                     }
 
                     // automatic formats
-                    let finalFormats = finalParams.format;
-                    if (!finalParams.format.length) {
+                    let finalFormats = buildParams.format;
+                    if (!buildParams.format.length) {
                         switch (buildType) {
                             case 'bundle':
                                 finalFormats = ['iife'];
@@ -330,13 +331,6 @@ export default class SVite extends __SClass {
                         );
                     });
 
-                    // // prod filename
-                    // if (finalParams.prod) {
-                    //     outputsFilenames = outputsFilenames.map((filename) => {
-                    //         return filename.replace(/\.js$/, '.prod.js');
-                    //     });
-                    // }
-
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>[build]</yellow> Starting "<magenta>${buildType}</magenta>" build`,
@@ -344,7 +338,7 @@ export default class SVite extends __SClass {
                     emit('log', {
                         type: __SLog.TYPE_INFO,
                         value: `<yellow>○</yellow> Environment : ${
-                            finalParams.prod
+                            buildParams.prod
                                 ? '<green>production</green>'
                                 : '<yellow>development</yellow>'
                         }`,
@@ -442,7 +436,7 @@ export default class SVite extends __SClass {
                     results[buildType] = res;
 
                     // handle generated bundles
-                    if (!finalParams.noWrite) {
+                    if (!buildParams.noWrite) {
                         // @ts-ignore
                         res.forEach((bundleObj, i) => {
                             const output = bundleObj.output[0];

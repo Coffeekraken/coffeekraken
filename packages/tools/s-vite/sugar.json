@@ -15,11 +15,11 @@
       "actions": {
         "start": {
           "description": "Start the vite server and compilators development stack",
-          "process": "./src/node/start/start.cli.js"
+          "process": "./src/cli/start.cli.js"
         },
         "build": {
-          "description": "Start the vite server and compilators development stack",
-          "process": "./src/node/build/build.cli.js"
+          "description": "Build your assets like js, and css using vite",
+          "process": "./src/cli/build.cli.js"
         }
       }
     }

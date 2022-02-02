@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +38,18 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -82,40 +84,7 @@
                 "relPath": "src/config/frontspec.config.js",
                 "children": {}
             },
-            "@coffeekraken.s-frontspec.node.interface.sFrontspecParamsInterface": {
-                "name": "SFrontspecParamsInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
-                "namespace": "@coffeekraken.s-frontspec.node.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SFrontspecParamsInterface",
-                    "description": "",
-                    "definition": {
-                        "env": {
-                            "description": "Specify the environment for which to read the frontspec for",
-                            "type": "String"
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SFrontspecParamsInterface.js",
-                "extension": "js",
-                "relPath": "src/node/interface/SFrontspecParamsInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-frontspec.node.sFrontspec": {
+            "@coffeekraken.s-frontspec.node.SFrontspec": {
                 "name": "SFrontspec",
                 "type": "Class",
                 "description": "This class represent the ```frontspec.json``` file and allows you to generate it from some sources (glob pattern(s))\nand save it inside a directory you choose.",
@@ -159,7 +128,7 @@
                             "url": "https://olivierbossel.com"
                         }
                     },
-                    "assetsToServe": {
+                    "assetstoserve": {
                         "name": "assetsToServe",
                         "type": "Function",
                         "description": "This method will returns all the files that need to be served using a web server\nthat are defined in the frontspec.json files like some css, js etc...",
@@ -172,6 +141,39 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-frontspec.node.interface.SFrontspecReadParamsInterface": {
+                "name": "SFrontspecReadParamsInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe the minimum requirement\nneeded to build the docMap.json file",
+                "namespace": "@coffeekraken.s-frontspec.node.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SFrontspecReadParamsInterface",
+                    "description": "",
+                    "definition": {
+                        "env": {
+                            "description": "Specify the environment for which to read the frontspec for",
+                            "type": "String"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SFrontspecReadParamsInterface.js",
+                "extension": "js",
+                "relPath": "src/node/interface/SFrontspecReadParamsInterface.js",
+                "children": {}
             }
         }
     }

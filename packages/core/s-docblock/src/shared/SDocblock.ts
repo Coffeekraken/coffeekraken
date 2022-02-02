@@ -41,6 +41,7 @@ export interface ISDocblockSortFnSetting {
 }
 export interface ISDocblockSettings {
     filepath?: string;
+    filter?: Function;
     filterByTag: Record<string, any>;
     renderMarkdown: boolean;
     markedOptions: any;
@@ -120,6 +121,7 @@ class SDocblock extends __SClass implements ISDocblock {
             __deepMerge(
                 {
                     docblock: {
+                        filter: undefined,
                         filterByTag: undefined,
                         sortFunction: (a, b) => {
                             let res = 0;
@@ -252,7 +254,6 @@ class SDocblock extends __SClass implements ISDocblock {
         } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
             blocksArrayStr = blocksArrayStr.map((t) => t.trim());
             if (!blocksArrayStr || !blocksArrayStr.length) return [];
-
             blocksArrayStr = blocksArrayStr.filter((blockStr) => {
                 const lines = blockStr.split('\n');
                 for (let i = 0; i < lines.length; i++) {
@@ -339,6 +340,14 @@ class SDocblock extends __SClass implements ISDocblock {
 
         if (blocks && blocks.length) {
             this._blocks = blocks;
+        }
+
+        if (typeof this.docblockSettings.filter === 'function') {
+            // @ts-ignore
+            this._blocks = this._blocks.filter((docblockBlock) => {
+                // @ts-ignore
+                return this.docblockSettings.filter(docblockBlock.toObject(), docblockBlock);
+            });        
         }
 
         // sort

@@ -577,6 +577,49 @@ export default function (env, config) {
                     processManager: {},
                 },
             },
+            sitemapBuild: {
+                /**
+                 * @name            title
+                 * @namespace       config.frontstack.actions.sitemapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action title
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                title: 'Sitemap build action',
+                /**
+                 * @name            description
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        ...
+                 *
+                 * Specify the doc build action description
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description:
+                    'Allow to build and maintain up to date the sitemap.xml file',
+                /**
+                 * @name            command
+                 * @namespace       config.frontstack.actions.docmapBuild
+                 * @type            String
+                 * @default        sugar docmap.build --noExtends
+                 *
+                 * Specify the doc build action command
+                 *
+                 * @since       2.0.0
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                command: '%sugar sitemap.build',
+                params: {},
+                settings: {
+                    processManager: {},
+                },
+            },
             faviconBuild: {
                 /**
                  * @name            title

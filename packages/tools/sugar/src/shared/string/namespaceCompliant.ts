@@ -36,7 +36,7 @@ export default function namespaceCompliant(
     };
 
     // spaces
-    str = str.replace(' ', '-');
+    str = str.replace(/\s{1,9999999999999999}/gm, '-');
     // special characters
     str = __simplifySpecialChars(str);
     // replace characters like /, etc...

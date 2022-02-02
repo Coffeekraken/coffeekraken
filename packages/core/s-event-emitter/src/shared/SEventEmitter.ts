@@ -11,28 +11,6 @@ import __SLog from '@coffeekraken/s-log';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
 import __getColorFor from '@coffeekraken/sugar/shared/dev/color/getColorFor';
 
-let _ipcInstance;
-if (__isNode()) {
-    (async () => {
-        const { default: __nodeIpc } = await import('node-ipc');
-        _ipcInstance = new __nodeIpc.IPC();
-        _ipcInstance.config.id = `ipc-${process.pid}`;
-        _ipcInstance.config.retry = 1500;
-        _ipcInstance.config.silent = true;
-
-        if (__isChildProcess()) {
-            _ipcInstance.connectTo(`ipc-${process.ppid}`, () => {
-                _ipcInstance.of[`ipc-${process.ppid}`].on('connect', () => {
-                });
-                _ipcInstance.of[`ipc-${process.ppid}`].on('answer', (data) => {
-                    _ipcInstance.log(data);
-                    SEventEmitter.global.emit(`answer.${data.metas.askId}`, data.value, data.metas);
-                });
-            });
-        }
-    })();
-}
-
 /**
  * @name                  SEventEmitter
  * @namespace           sugar.js.event
@@ -156,6 +134,7 @@ export interface ISEventEmitter extends ISClass {
 }
 class SEventEmitter extends SClass implements ISEventEmitter {
     static usableAsMixin = true;
+    static _ipcInstance;
 
     /**
      * @name            global
@@ -179,53 +158,6 @@ class SEventEmitter extends SClass implements ISEventEmitter {
             });
         }
         return this._globalInstance;
-    }
-
-    static _ipcPromise;
-    static ipcServer(ipcSettings?: any, eventEmitterSettings?: Partial<ISEventEmitterSettings>) {
-
-        if (this._ipcPromise) return this._ipcPromise;
-
-        this._ipcPromise = new Promise(async (resolve, reject) => {
-
-            const eventEmitter = new this({
-                eventEmitter: eventEmitterSettings ?? {}
-            });
-
-            const { default: __nodeIpc } = await import('node-ipc');
-
-            const ipcInstance = new __nodeIpc.IPC();
-
-            ipcInstance.config = __deepMerge(ipcInstance.config ?? {}, {
-                id: `ipc-${process.pid}`,
-                retry: 1500,
-                silent: true
-            }, ipcSettings ?? {});
-
-            ipcInstance.serve(() => {
-                ipcInstance.server.on('message', async (data, socket) =>{
-
-                    if (data.metas.event === 'ask', data.metas) {
-                        const res = await eventEmitter.emit(data.metas.event, data.value, data.metas);
-                        ipcInstance.server.emit(
-                            socket,
-                            `answer`,
-                            {
-                                value: res,
-                                metas: data.metas
-                            }
-                        );
-                    } else {
-                        eventEmitter.emit(data.metas.event, data.value, data.metas);
-                    }
-                });
-                resolve(eventEmitter);
-                
-            });
-            ipcInstance.server.start();
-        });
-
-        return this._ipcPromise;
     }
 
     /**
@@ -345,13 +277,17 @@ class SEventEmitter extends SClass implements ISEventEmitter {
                         value.value = __toString(value.value);
                     }
 
-                    _ipcInstance.of[`ipc-${process.ppid}`].emit(
-                        'message',
-                        {
-                         value,
-                         metas: emitMetas   
-                        }
-                    );
+                    // @ts-ignore
+                    if (this._ipcInstance) {
+                        // @ts-ignore
+                        this._ipcInstance.of[`ipc-${process.ppid}`].emit(
+                            'message',
+                            {
+                            value,
+                            metas: emitMetas   
+                            }
+                        );
+                    }
 
                     // process.send({
                     //     value: value,

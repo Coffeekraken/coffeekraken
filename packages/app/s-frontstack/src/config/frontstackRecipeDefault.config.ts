@@ -268,7 +268,7 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    prod: true,
+                    // prod: true,
                 },
                 actions: {
                     /**
@@ -318,7 +318,19 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    faviconBuild: '[config.frontstack.actions.faviconBuild]'
+                    faviconBuild: '[config.frontstack.actions.faviconBuild]',
+                    /**
+                     * @name            sitemapBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.sitemapBuild]
+                     *
+                     * Specify the recipe build stack sitemapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
                 },
             },
         },

@@ -123,7 +123,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
     _currentLogId = '';
-    _lastLogLinesCount = 0;
+    _lastLogLinesCountStack = [];
     _lastLogObj;
     _loggedGroups: any = {};
     _logsStack: ISBasicStdioLogsContainer[] = [];
@@ -151,8 +151,18 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         }
 
         if (logObj.clear && this._lastLogObj?.type !== __SLog.TYPE_WARN && this._lastLogObj?.type !== __SLog.TYPE_ERROR) {
-            process.stdout.moveCursor(0, this._lastLogLinesCount * -1) // up one line
-            process.stdout.clearLine(1) // from cursor to end
+            if (typeof logObj.clear === 'number') {
+                // @ts-ignore
+                const toClear = this._lastLogLinesCountStack.slice(logObj.clear * -1).reduce((a, b) => a + b);
+                process.stdout.moveCursor(0, toClear * -1) // up one line
+                process.stdout.clearScreenDown();
+                // for (let i = 0; i < toClear; i++) {
+                //     process.stdout.clearLine(1); // clear current line
+                // }
+            } else {
+                process.stdout.moveCursor(0, this._lastLogLinesCountStack.slice(-1)[0] * -1) // up one line
+                process.stdout.clearLine(1) // from cursor to end
+            }
         }
 
         let logLinesCount = 0;
@@ -177,7 +187,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         }
 
         // @ts-ignore)
-        this._lastLogLinesCount = logLinesCount;
+        this._lastLogLinesCountStack.push(logLinesCount);
         this._lastLogObj = logObj;
     }
 

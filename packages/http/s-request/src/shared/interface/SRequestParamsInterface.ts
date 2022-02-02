@@ -110,13 +110,11 @@ export default class SRequestParamsInterface extends __SInterface {
             },
             maxContentLength: {
                 description: 'Defines the max size of the http response content in bytes allowed in node.js',
-                type: 'Number',
-                default: 2000
+                type: 'Number'
             },
             maxBodyLength: {
                 description: '(Node only option) defines the max size of the http request content in bytes allowed',
-                type: 'Number',
-                default: 2000
+                type: 'Number'
             },
             validateStatus: {
                 description: 'Defines whether to resolve or reject the promise for a give HTTP response status code. See [axios](https://github.com/axios/axios#response-schema) documentation for more.',

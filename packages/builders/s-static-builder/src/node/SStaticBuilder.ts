@@ -88,6 +88,7 @@ export interface ISStaticBuilderBuildParams {
     failAfter: number;
     requestTimeout: number;
     minify: boolean;
+    prod: boolean;
 }
 
 export default class SStaticBuilder extends __SBuilder {
@@ -160,6 +161,25 @@ export default class SStaticBuilder extends __SBuilder {
                     's-static-builder/incremental-cache.json',
                 );
 
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>[build]</yellow> Starting Static Build`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Environment : ${
+                        params.prod
+                            ? '<green>production</green>'
+                            : '<yellow>development</yellow>'
+                    }`,
+                });
+                emit('log', {
+                    type: __SLog.TYPE_INFO,
+                    value: `<yellow>○</yellow> Host : <cyan>${params.host}</cyan>`,
+                });
+
+                let byItemAverage = 0;
+
                 // handle params
                 if (params.clean) {
                     emit('log', {
@@ -200,7 +220,10 @@ export default class SStaticBuilder extends __SBuilder {
 
                 let failsCount = 0,
                     failedUrls: string[] = [],
+                    leftDuration = 0,
                     currentDuration = 0;
+
+                let logsCount = 0;
 
                 // loop on each urls to get his content
                 for (let i = 0; i < xml.urlset.url.length; i++) {
@@ -217,6 +240,23 @@ export default class SStaticBuilder extends __SBuilder {
                             urlLoc === '/' ? 'index' : urlLoc
                         }.html`.replace(/\/{2,20}/gm, '/');
 
+                    emit('log', {
+                        clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
+                    });
+                    logsCount = 1;
+
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[build]</yellow> <magenta>${
+                            xml.urlset.url.length - i
+                        }</magenta> url(s), <cyan>~${__formatDuration(
+                            leftDuration,
+                        )}</cyan> remaining`,
+                    });
+                    logsCount++;
+
                     // incremental build
                     if (params.incremental) {
                         if (
@@ -228,6 +268,7 @@ export default class SStaticBuilder extends __SBuilder {
                                     type: __SLog.TYPE_INFO,
                                     value: `<yellow>[build]</yellow> Incremental build for url <cyan>${urlLoc}</cyan>`,
                                 });
+                                logsCount++;
 
                                 __copySync(cacheOutPath, outPath);
                                 // continue with next url
@@ -235,11 +276,6 @@ export default class SStaticBuilder extends __SBuilder {
                             }
                         }
                     }
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> Reaching the url "<cyan>${urlLoc}</cyan>"...`,
-                    });
 
                     const start = Date.now();
 
@@ -249,9 +285,11 @@ export default class SStaticBuilder extends __SBuilder {
                     });
                     const res = await request.send().catch((e) => {
                         emit('log', {
+                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
                             type: __SLog.TYPE_INFO,
                             value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
                         });
+                        logsCount = 0;
                         failsCount++;
                         failedUrls.push(urlLoc);
 
@@ -273,7 +311,7 @@ export default class SStaticBuilder extends __SBuilder {
                     const end = Date.now();
 
                     currentDuration += end - start;
-                    const average = currentDuration / i;
+                    leftDuration = (end - start) * (xml.urlset.url.length - i) - currentDuration;
 
                     // @ts-ignore
                     if (res?.data) {
@@ -282,6 +320,7 @@ export default class SStaticBuilder extends __SBuilder {
                             type: __SLog.TYPE_INFO,
                             value: `<green>[build]</green> Saving the page from url "<cyan>${urlLoc}</cyan>"...`,
                         });
+                        logsCount++;
                         // @ts-ignore
                         __writeFileSync(cacheOutPath, res.data);
                         __writeFileSync(outPath, res.data);
@@ -295,17 +334,6 @@ export default class SStaticBuilder extends __SBuilder {
                             );
                         }
                     }
-
-                    emit('log', {
-                        type: __SLog.TYPE_INFO,
-                        value: `<yellow>[build]</yellow> <magenta>${
-                            xml.urlset.url.length - i
-                        }</magenta> url(s), <cyan>~${__formatDuration(
-                            average * (xml.urlset.url.length - i),
-                        )}</cyan> remaining`,
-                    });
-
-                    // if (i >= 1) break;
                 }
 
                 // assets

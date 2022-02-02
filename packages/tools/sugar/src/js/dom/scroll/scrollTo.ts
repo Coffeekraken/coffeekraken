@@ -93,23 +93,23 @@ function scrollTo(
         }
 
         let targetY = currentY, targetX = currentX;
-        const elementBounds = target.getBoundingClientRect();
+        const targetBounds = target.getBoundingClientRect();
 
         const offsetY = settings.offsetY ?? settings.offset;
         const offsetX = settings.offsetX ?? settings.offset;
 
         // y
         if (settings.align === 'center') {
-            targetY += elementBounds.top + elementBounds.height / 2;
+            targetY += targetBounds.top + targetBounds.height / 2;
             targetY -= elmHeight / 2;
             targetY -= offsetY;
         } else if (settings.align === 'end') {
-            targetY += elementBounds.bottom;
+            targetY += targetBounds.bottom;
             targetY -= elmHeight;
             targetY += offsetY;
         } else {
             // start, undefined
-            targetY += elementBounds.top;
+            targetY += targetBounds.top;
             targetY -= offsetY;
         }
 
@@ -118,20 +118,25 @@ function scrollTo(
     
         // x
         if (settings.justify === 'center') {
-            targetX += elementBounds.left + elementBounds.width / 2;
+            targetX += targetBounds.left + targetBounds.width / 2;
             targetX -= elmWidth / 2;
             targetX -= offsetX;
         } else if (settings.justify === 'end') {
-            targetX += elementBounds.right;
+            targetX += targetBounds.right;
             targetX -= elmWidth;
             targetX += offsetX;
         } else {
             // start, undefined
-            targetX += elementBounds.left;
+            targetX += targetBounds.left;
             targetX -= offsetX;
         }
         targetX = Math.max(Math.min(maxScrollX, targetX), 0);
         const deltaX = targetX - currentX;
+
+        // element position
+        const elmBounds = settings.$elm.getBoundingClientRect();
+        targetY -= elmBounds.top;
+        targetX -= elmBounds.left;
 
         const obj = {
             targetY,

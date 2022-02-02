@@ -82,6 +82,12 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 'm',
                 default: false,
             },
+            prod: {
+                description: 'Shorthand to set a production ready build',
+                type: 'Boolean',
+                default: false,
+                alias: 'p',
+            },
         };
     }
 }

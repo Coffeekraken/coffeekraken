@@ -52,7 +52,7 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         staticDirs: {
-            '/dist': `[config.storage.src.rootDir]`,
+            '/dist': env.env === 'production' ? `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
             '/cache': `[config.storage.package.cacheDir]`,
             // '/src': `[config.storage.src.rootDir]`,
         },
@@ -82,46 +82,46 @@ export default function (env, config) {
          */
         logLevel: 'info',
         proxy: {
-            assets: {
-                /**
-                 * @name            route
-                 * @namespace       config.frontendServer.proxy.assets
-                 * @type            String
-                 * @default         [config.storage.package.rootDir]
-                 *
-                 * Specify which route to proxy for the assets
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                route: '[config.storage.package.rootDir]',
-                settings: {
-                    /**
-                     * @name        target
-                     * @namespace   config.frontendServer.proxy.assets.settings
-                     * @type         String
-                     * @default         [config.vite.server.hostname]
-                     *
-                     * Specify where to redirect the assets requests
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    target: '[config.vite.server.hostname]',
-                    /**
-                     * @name        changeOrigin
-                     * @namespace       config.frontendServer.proxy.assets.settings
-                     * @type        Boolean
-                     * @default         true
-                     *
-                     * Specify if you want the redirection to change the origin or not
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    changeOrigin: true,
-                },
-            },
+            // assets: {
+            //     /**
+            //      * @name            route
+            //      * @namespace       config.frontendServer.proxy.assets
+            //      * @type            String
+            //      * @default         [config.storage.package.rootDir]
+            //      *
+            //      * Specify which route to proxy for the assets
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //      */
+            //     route: '[config.storage.package.rootDir]',
+            //     settings: {
+            //         /**
+            //          * @name        target
+            //          * @namespace   config.frontendServer.proxy.assets.settings
+            //          * @type         String
+            //          * @default         [config.vite.server.hostname]
+            //          *
+            //          * Specify where to redirect the assets requests
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //          */
+            //         target: '[config.vite.server.hostname]',
+            //         /**
+            //          * @name        changeOrigin
+            //          * @namespace       config.frontendServer.proxy.assets.settings
+            //          * @type        Boolean
+            //          * @default         true
+            //          *
+            //          * Specify if you want the redirection to change the origin or not
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            //          */
+            //         changeOrigin: true,
+            //     },
+            // },
             vitePing: {
                 /**
                  * @name            route
@@ -455,4 +455,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsT0FBTyxFQUFFLDhCQUE4QjtZQUN2QyxRQUFRLEVBQUUsbUNBQW1DO1lBQzdDLDBDQUEwQztTQUM3QztRQUVEOzs7Ozs7Ozs7O1dBVUc7UUFDSCxRQUFRLEVBQUUsb0NBQW9DO1FBRTlDOzs7Ozs7Ozs7OztXQVdHO1FBQ0gsUUFBUSxFQUFFLE1BQU07UUFFaEIsS0FBSyxFQUFFO1lBQ0gsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxrQ0FBa0M7Z0JBQ3pDLFFBQVEsRUFBRTtvQkFDTjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsK0JBQStCO29CQUV2Qzs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxZQUFZLEVBQUUsSUFBSTtpQkFDckI7YUFDSjtZQUNELFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxLQUFLLEVBQUUsY0FBYztnQkFDckIsUUFBUSxFQUFFO29CQUNO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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsT0FBTyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBRSwrQkFBK0IsQ0FBQyxDQUFDLENBQUMsOEJBQThCO1lBQ3JHLFFBQVEsRUFBRSxtQ0FBbUM7WUFDN0MsMENBQTBDO1NBQzdDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxRQUFRLEVBQUUsTUFBTTtRQUVoQixLQUFLLEVBQUU7WUFDSCxZQUFZO1lBQ1osVUFBVTtZQUNWLGdDQUFnQztZQUNoQyw2REFBNkQ7WUFDN0QsaUNBQWlDO1lBQ2pDLDJEQUEyRDtZQUMzRCxTQUFTO1lBQ1QscURBQXFEO1lBQ3JELFNBQVM7WUFDVCxnQ0FBZ0M7WUFDaEMsd0dBQXdHO1lBQ3hHLFVBQVU7WUFDVixpREFBaUQ7WUFDakQsa0JBQWtCO1lBQ2xCLGNBQWM7WUFDZCxpQ0FBaUM7WUFD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

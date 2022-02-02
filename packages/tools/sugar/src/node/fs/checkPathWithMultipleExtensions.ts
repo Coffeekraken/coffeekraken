@@ -1,5 +1,6 @@
 import __extension from './extension';
 import __fs from 'fs';
+import __path from 'path';
 
 /**
  * @name            checkPathWithMultipleExtensions

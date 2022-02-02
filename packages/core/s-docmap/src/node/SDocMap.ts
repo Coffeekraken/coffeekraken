@@ -443,14 +443,15 @@ class SDocMap extends __SClass implements ISDocMap {
                         const namespace = Object.keys(docmapJson.map)[i];
                         const obj = docmapJson.map[namespace];
 
+                        obj.path = __path.resolve(extendsRootPath, obj.relPath);
+
+                        // checking ".dev...."
                         let ext = obj.relPath.split('.').pop();
-                        const relPath = __checkPathWithMultipleExtensions(obj.relPath, [
+                        obj.path = __checkPathWithMultipleExtensions(obj.path, [
                             `dev.${ext}`,
                             ext
-                        ]) ?? obj.relPath;
-
-                        obj.path = __path.resolve(extendsRootPath, relPath);
-
+                        ]) ?? obj.path;
+                        
                         docmapJson.map[namespace] = obj;
                     }
 

@@ -11,70 +11,70 @@ export default (env, config) => {
              * @name            url
              * @namespace       config.serve.img
              * @type            String
-             * @default         /img
+             * @default         /dist/img
              *
              * Specify the serving img folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/img' : '/dist/img',
+            url: '/dist/img',
         },
         js: {
             /**
              * @name            url
              * @namespace       config.serve.js
              * @type            String
-             * @default         /js
+             * @default         /dist/js
              *
              * Specify the serving js folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/js' : '/dist/js',
+            url: '/dist/js',
         },
         css: {
             /**
              * @name            url
              * @namespace       config.serve.css
              * @type            String
-             * @default         /css
+             * @default         /dist/css
              *
              * Specify the serving css folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/css' : '/dist/css',
+            url: '/dist/css',
         },
         icons: {
             /**
              * @name            url
              * @namespace       config.serve.icons
              * @type            String
-             * @default         /icons
+             * @default         /dist/icons
              *
              * Specify the serving icons folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/icons' : '/dist/icons',
+            url: '/dist/icons',
         },
         fonts: {
             /**
              * @name            url
              * @namespace       config.serve.fonts
              * @type            String
-             * @default         /fonts
+             * @default         /dist/fonts
              *
              * Specify the serving fonts folder path to use in your views
              *
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/dist/fonts' : '/dist/fonts',
+            url: '/dist/fonts',
         },
         cache: {
             /**
@@ -88,7 +88,7 @@ export default (env, config) => {
              * @since           2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            url: env.env === 'development' ? '[config.vite.server.hostname]/cache' : '/cache',
+            url: '/cache',
         },
     };
 };

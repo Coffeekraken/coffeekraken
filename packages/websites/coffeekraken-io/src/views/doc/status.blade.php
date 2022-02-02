@@ -41,11 +41,22 @@
                     }
                 @endphp
 
-                <span class="s-avatar s-scale:20">
-                    <a href="{{ $user->url }}" target="_blank">
-                        <img src="{{ \Sugar\gravatar\url($user->email) }}" alt="{{ $user->name }}" />
-                    </a>
-                </span>
+                @if (!$block->contributor)
+                    <span class="s-avatar s-scale:20">
+                        <a href="{{ $user->url }}" target="_blank">
+                            <img src="{{ \Sugar\gravatar\url($user->email) }}" alt="{{ $user->name }}" />
+                        </a>
+                    </span>
+                    <div class="s-tooltip s-white-space:nowrap s-color:accent">
+                        {{ $user->name }}
+                    </div>
+                @else
+                    <span class="s-avatar s-scale:20">
+                        <a href="{{ $user->url }}" target="_blank">
+                            <img src="{{ \Sugar\gravatar\url($user->email) }}" alt="{{ $user->name }}" />
+                        </a>
+                    </span>
+                @endif
                 @if ($block->contributor)
                     <div class="s-tooltip:interactive s-color:base">
                         <div class="s-flex s-gap:column:10">

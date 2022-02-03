@@ -614,6 +614,191 @@
        <integrity>+335ibloKfL8Ra7rmNq+U0WSuffacjCHTrIEXl+LAKE=</integrity>
   </url>
   <url>
+        <loc>/@coffeekraken/s-bench/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>zbLHKwU8mv63blU9LQTjnxJziW7jfH2TLmOGp9pKySk=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-color/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>DBx+hXg8Z8wG0qCiQn1lGnspihgc9SYceZc8hHLXSJM=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-conductor/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>OHDd+10DuKfQQ65dmxiVO2DNOIWuc3yomNBoU0yytE4=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-duration/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>+/BH+nR2txu2zecfybfU8cW8MssoEjZIqtUb1E++ydI=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-glob/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>HpKhUQUUoxa5kQO8jnReX8AUN2V5hR8vjjBThpGrRUk=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-sugar-feature/styleguide/features/s-sugar-feature</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>dTqJ/iyu2HP8nESf+vDdO3XbSyBKnHioGKtejGBRzbY=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-vite/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>Np96f5/rLMAZgpPm2Ic2o/WuwsEGtmOS4UBOXjVGOkU=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-sitemap-builder/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>e25cQQpjgtzi9TFB2PUawbsfB4BHwgVZoBdPKJ9gchY=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/sugar/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>0ik00Kl2KvDjkO+0f84V/wECwsmLpwTltjpRD/Aujys=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-view-renderer/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>+4yq68B8fwrTkM+7YGHcQtsVvnwB9alIIx1cWJeOIFE=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-theme/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>Y6l1EFYONtoEcX4nS6g6Uwj/s81b5fZJykq6o6n/kHE=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-sugar-json/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>JyxWDVhAkkuRAU+srSaF01maX5mBUvEMIs0Xm+GJYCU=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-stdio/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>6MIdBIJSwUDaqt1YgdJXWv9viovTN2YOoXPgWdYq5Kw=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-request/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>XzdVSA8FdpwERKe00LEnWK+HJFAMKe4fpY+/JjaDM+M=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-refocus-feature/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>KtzhSllAm7tPAkev18pz8wysXC4kbjIczXJRhdi4Rd4=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-refocus-feature/styleguide/features/s-activate-feature</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>8IKTuw+XWVh3z1An10qmkzAS4yVd9hdNveIORkwN1mo=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-range-component/styleguide/forms/s-range</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>IpHd8EqVDsRPvpR/Q3KtFJUewV7QlLIocvQP6mtNcN8=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-promise/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>4S2X1t8dElFjTxNLbHwQDFWwNo0D2HcwuzIavht5cGY=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-parallax-feature/styleguide/forms/s-parallax-feature</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>mWF8j0LF0WpafLLtgwaBfVKXD5tdg5wHR74Up0IxRss=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-interface/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>IekDxdePXg92xuKnEdG6+hUFIPE/tuw+YReuu26IuYE=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>kP5mKQHXTJN5tNoZRAHcVdhv+A/uDKGSaR9gV2sR46o=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/handlers/api</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>2gR9tetjEXN8zASW4rNtMvir6P2zIrLmMMDm3cqc/yo=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/handlers/markdown</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>cWPUef32nw/EjuZj7FzNlyjAwzQV9snxZgrFffYGTo0=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/handlers/styleguide</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>cFpjY/0mudC17R1REDKYkgiHEvtt8iImBMtkh5ArQJU=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/handlers/view</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>YmgxfPPf/losH9txI9IEnxUWept6jL2QII57/iIEZNU=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/modules/config</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>bOPSaIswXYSA0LNL6t5jWkizrSqh6dfJi0yR21wPmbc=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/modules/docmap</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>QBMuNjffZ3cJ0qpGObCciysbpMdD3/0W+lXlTsZXIKA=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/modules/frontspec</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>n38659gdprnD5+lD2JBDPEaKp3jzjHFZYD4uN244WdQ=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-frontend-server/doc/modules/rootFiles</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>PJjQ5seNSkUSwm+qg5KInqkXx8fWoIqpIoY16vHInSA=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-form-validate-feature/styleguide/forms/s-form-validate-feature</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>2TmPxPvjir4tXv/m0yLocuSlc1IEtWU7Z8WztQLGeYo=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-filtrable-input-component/styleguide/ui/filtrable-input</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>0AwjYfueOx3xb1tOjrJaZaLCZky+AjN7Fjmx/51pkD4=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-event-emitter/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>05pmyG1mme3xIQUAsNJzXdv5QGmmbXmFbZ/Qt8uoo9s=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-date-picker-component/styleguide/forms/s-date-picker</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>yJ6s+kDqZhFZUYm/Wu2YG3ICfS72p1U3+DM1tMyqA70=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-component-utils/doc/readme</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>LPmPKJABzzIyGrZDU5TJ1MQ9eQuVWXMYT/r2w/pa0/8=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-color-picker-component/styleguide/forms/s-color-picker</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>s/iAfM7MIHVlyUNKBPF10F0RdIu+uwDZx/OlaIn2hGo=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>2twf25ez5J3KSMwe2iFCuOjL/c7D+fYs4mnIymuTimA=</integrity>
+  </url>
+  <url>
+        <loc>/@coffeekraken/s-activate-feature/styleguide/features/s-activate-feature</loc>
+      <lastmod>2022-01-02</lastmod>
+       <integrity>OFS6HZ2r9M8k0FV8NTk3yde6fQj/w1GRErHLq861MME=</integrity>
+  </url>
+  <url>
         <loc>/config/explorer</loc>
   </url>
   <url>
@@ -810,7 +995,7 @@
   </url>
   <url>
         <loc>/api/@coffeekraken.s-sitemap-builder.node.SSitemapBuilderDocmapSource</loc>
-       <integrity>NW5FPbJvZYXgCfiB3+FuPySObTrkX6Xj5esqk24OUK4=</integrity>
+       <integrity>zZmJhLrNqlC7FXQVMVRl3xKXYpya/MHktO5Nes/THs0=</integrity>
   </url>
   <url>
         <loc>/api/@coffeekraken.sugar.doc.README</loc>
@@ -5869,18 +6054,6 @@
        <integrity>TkvnW1lhQCylVOW7V4KxulkgoJNCf+oikHx3lZsOVOg=</integrity>
   </url>
   <url>
-        <loc>/api/@coffeekraken.s-refocus-feature.doc.README</loc>
-       <integrity>KtzhSllAm7tPAkev18pz8wysXC4kbjIczXJRhdi4Rd4=</integrity>
-  </url>
-  <url>
-        <loc>/api/@coffeekraken.s-refocus-feature.js.SRefocusFeature</loc>
-       <integrity>8IKTuw+XWVh3z1An10qmkzAS4yVd9hdNveIORkwN1mo=</integrity>
-  </url>
-  <url>
-        <loc>/api/@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface</loc>
-       <integrity>OgnQT0Nc1ZMipIJAvKyN1N5JDit7G+CSVlqR5njmMWo=</integrity>
-  </url>
-  <url>
         <loc>/api/@coffeekraken.s-request.doc.README</loc>
        <integrity>XzdVSA8FdpwERKe00LEnWK+HJFAMKe4fpY+/JjaDM+M=</integrity>
   </url>
@@ -5893,12 +6066,24 @@
        <integrity>vg4vKRpT4EGiahpfufMowNr4UIyfB/JQIgggs2CvdmQ=</integrity>
   </url>
   <url>
-        <loc>/api/@coffeekraken.s-range-component.js.interface.sRangeComponentInterface</loc>
-       <integrity>MSuj2MIUL2h5BiBkfi6WU0RGQXm8iH74DPqws6PjqPU=</integrity>
+        <loc>/api/@coffeekraken.s-refocus-feature.doc.README</loc>
+       <integrity>KtzhSllAm7tPAkev18pz8wysXC4kbjIczXJRhdi4Rd4=</integrity>
   </url>
   <url>
-        <loc>/api/@coffeekraken.s-range-component.js.range</loc>
+        <loc>/api/@coffeekraken.s-refocus-feature.js.SRefocusFeature</loc>
+       <integrity>8IKTuw+XWVh3z1An10qmkzAS4yVd9hdNveIORkwN1mo=</integrity>
+  </url>
+  <url>
+        <loc>/api/@coffeekraken.s-refocus-feature.js.interface.SRefocusFeatureInterface</loc>
+       <integrity>OgnQT0Nc1ZMipIJAvKyN1N5JDit7G+CSVlqR5njmMWo=</integrity>
+  </url>
+  <url>
+        <loc>/api/@coffeekraken.s-range-component.js.Range</loc>
        <integrity>IpHd8EqVDsRPvpR/Q3KtFJUewV7QlLIocvQP6mtNcN8=</integrity>
+  </url>
+  <url>
+        <loc>/api/@coffeekraken.s-range-component.js.interface.SRangeComponentInterface</loc>
+       <integrity>MSuj2MIUL2h5BiBkfi6WU0RGQXm8iH74DPqws6PjqPU=</integrity>
   </url>
   <url>
         <loc>/api/@coffeekraken.s-promise.doc.README</loc>
@@ -6874,7 +7059,7 @@
   </url>
   <url>
         <loc>/api/@coffeekraken.s-frontend-server.sugar.node.server.frontend.modules.styleguide.apiHandler</loc>
-       <integrity>MeUgP1nzjeGB4ihEX2/nLIuPMgKyOtU4/MyDTuWfVzk=</integrity>
+       <integrity>t5BdNBuQoaCnH3/bQR8qAqqLr15ELrADEcXqoXTMyh0=</integrity>
   </url>
   <url>
         <loc>/api/@coffeekraken.s-frontend-server.sugar.node.server.frontend.middleware.configMiddleware</loc>
@@ -7090,7 +7275,7 @@
   </url>
   <url>
         <loc>/api/@coffeekraken.s-docblock.shared.sDockblock</loc>
-       <integrity>18o+zsZAuxsbSfunaSYvIXSPDO6D8pUR1+QVaWH5D4U=</integrity>
+       <integrity>now53sLDWK9mexuXznureQwsyYebN8FoSThYj8lEimo=</integrity>
   </url>
   <url>
         <loc>/api/@coffeekraken.s-docblock.shared.sDocblockBlock</loc>

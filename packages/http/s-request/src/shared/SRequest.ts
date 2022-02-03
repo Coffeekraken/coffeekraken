@@ -189,9 +189,11 @@ export default class SRequest extends __SClass {
                     finalResponse = __htmlToString($part);
                 }
             }
-        } else if (contentType === 'application/json') {
-            finalResponse = JSON.parse(response.data);
         }
+        
+        try {
+            finalResponse = JSON.parse(response.data);
+        } catch(e) {}
 
         // save the processed data in the response object
         response.data = finalResponse;

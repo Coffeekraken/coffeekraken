@@ -1,4 +1,4 @@
-<div class="tools" theme="default-dark">
+<div class="tools s-until:media:mobile" theme="default-dark">
 
     <div class="tools__issue s-tooltip-container">
         <a class="s-btn:block s-color:error" href="https://olivierbossel.com" title="Share the love" target="_blank">

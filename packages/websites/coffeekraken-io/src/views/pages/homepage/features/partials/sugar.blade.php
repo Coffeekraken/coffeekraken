@@ -26,9 +26,9 @@
                 </a>
             </div>
             <div>
-                <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.svg" alt="Sugar toolkit"
+                <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
                     title="Sugar toolkit" />
-                <img class="__illustration s-when:dark" src="/dist/img/illustrations/toolkit-dark.svg"
+                <img class="__illustration s-when:dark" src="/dist/img/illustrations/toolkit-dark.png"
                     alt="Sugar toolkit" title="Sugar toolkit" />
             </div>
         </div>

@@ -3,7 +3,7 @@
 
         <div class="section-top-background"></div>
 
-        <h3 class="s-typo:h2 s-mbe:30">Frontend<br><span class="s-tc:accent">sugar</span></h3>
+        <h3 class="s-typo:h2 s-mbe:30">Frontend<br><span class="s-tc:accent">Sugar</span></h3>
         <p class="s-typo:lead s-mbe:50">
             The goal of Coffeekraken is to help having a <span class="s-tc:complementary">better development
                 experience</span>
@@ -55,7 +55,8 @@
                             and more...
                         </li>
                     </ol>
-                    <a class="s-btn s-color:accent" href="/doc/css/overview" title="Coffeekraken CSS pleasant syntax">
+                    <a class="s-btn s-color:complementary" href="/doc/css/overview"
+                        title="Coffeekraken CSS pleasant syntax">
                         Discover more!
                     </a>
                 </div>
@@ -170,7 +171,7 @@
                                 Pre defined layouts as well as full custom capabilities
                             </li>
                         </ol>
-                        <a class="s-btn s-color:accent" href="/doc/css/overview"
+                        <a class="s-btn s-color:complementary" href="/doc/css/overview"
                             title="Coffeekraken CSS pleasant syntax">
                             Discover more!
                         </a>

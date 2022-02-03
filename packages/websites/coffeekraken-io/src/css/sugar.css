@@ -1,6 +1,10 @@
 @sugar.init;
 @sugar.theme (dark, null, true);
+
 @sugar.classes;
+@sugar.media.classes(mobile) {
+  @sugar.classes;
+}
 
 @sugar.ui.filtrableinput.classes;
 @sugar.platform.classes;
@@ -12,10 +16,14 @@
   fa:eye:preview
   fab:css3-alt:css
   fa:calendar-alt:calendar
+  fa:angle-down:arrow-down
+  fa:angle-up:arrow-up
   fa:box-open:box
   fa:palette:color
   fa:info:info
+  fa:bars:menu
   fa:times-circle:close
+  fa:times:cross
   fa:chalkboard-teacher:example
   fa:list-ul:list-ul
   fa:cogs:setting

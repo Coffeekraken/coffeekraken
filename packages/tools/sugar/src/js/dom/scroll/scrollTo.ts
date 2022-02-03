@@ -134,9 +134,11 @@ function scrollTo(
         const deltaX = targetX - currentX;
 
         // element position
-        const elmBounds = settings.$elm.getBoundingClientRect();
-        targetY -= elmBounds.top;
-        targetX -= elmBounds.left;
+        if (settings.$elm?.getBoundingClientRect) {
+            const elmBounds = settings.$elm.getBoundingClientRect();
+            targetY -= elmBounds.top;
+            targetX -= elmBounds.left;
+        }
 
         const obj = {
             targetY,

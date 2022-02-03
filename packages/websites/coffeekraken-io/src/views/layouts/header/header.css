@@ -1,3 +1,6 @@
+@import url('./menu.css');
+@import url('./menu-mobile.css');
+
 #header {
     position: fixed;
     top: 50px;
@@ -24,19 +27,11 @@
         sugar.color(main, surface),
         sugar.color(main, surface)
     );
-    /* @sugar.theme (dark); */
 
-    @sugar.theme.when (dark) {
-        /* box-shadow: 5px 40px 40px rgba(0, 0, 0, 0.05);
-        background: linear-gradient(
-            90deg,
-            sugar.color(main, --darken 23),
-            sugar.color(main, --darken 27)
-        ); */
-    }
-
-    #nav {
-        user-select: none;
+    .__body {
+        order: 10;
+        display: flex;
+        align-items: center;
     }
 
     &:not(#homepage &),
@@ -46,12 +41,6 @@
         border-top-left-radius: 0;
         border-top-right-radius: 0;
     }
-
-    /* #homepage & {
-        pointer-events: none;
-        opacity: 0;
-        height: 0;
-    } */
 
     .s-container {
         flex-grow: 1;
@@ -73,228 +62,39 @@
         fill: sugar.color(accent);
     }
 
-    .__main-link {
-        & > *:first-child {
-            position: relative;
-        }
-
-        & > *:first-child:before {
-            content: '';
-            position: absolute;
-            top: calc(100% + 5px);
-            left: 50%;
-            width: 20px;
-            height: 20px;
-            transform: translate(-50%, 0) scale(0);
-            background: sugar.color(accent);
-            border-radius: 9999px;
-            @sugar.depth (50);
-            z-index: 100;
-            transition: sugar.transition(fast);
-        }
-
-        &:hover,
-        &:focus-within {
-            & > *:first-child {
-                color: sugar.color(accent);
-
-                &:before {
-                    transform: translate(-50%, 0) scale(1);
-                }
-            }
-        }
-    }
-
-    @keyframes subnav-bkg {
-        from {
-            background-position: 0 0;
-        }
-        50% {
-            background-position: 100vw 0;
-        }
-        to {
-            background-position: 0 0;
-        }
-    }
-
-    .__subnav {
-        --max-height: 50vh;
-
-        position: absolute;
-        top: 50px;
-        left: 50%;
-        height: calc(var(--max-height) + 96px);
-        width: 1240px;
-        max-width: 100vw;
-        transform: translateX(-50%);
-        z-index: 10;
-        /* width: 100vw; */
-        background-color: sugar.color(main, surface);
-        background-position: 0 0;
-        background-size: contain;
-        text-align: left;
-        display: none;
-        /* animation: subnav-bkg 480s linear;
-        animation-fill-mode: both;
-        animation-iteration-count: infinite; */
-        overflow: hidden;
-        border-radius: sugar.border.radius(30);
-        /* 
-        background: url('/src/img/landscape-01.jpg');
-        background-size: cover;
-        background-position: 50% 50%; */
-
-        @sugar.depth (10);
-
-        @sugar.theme.when (dark) {
-            /* background-color: sugar.color(main, 85); */
-            /* background-image: url('/src/img/discord-illustration-02-bkg.png'); */
-        }
-
-        /* &:before {
-            z-index: -1;
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 50%;
-            transform: translate(-50%, 0);
-            width: 100vw;
-            height: 100vh;
-            transition: sugar.transition(fast);
-            pointer-events: none;
-            backdrop-filter: blur(30px);
-        } */
-    }
-    [active] .__subnav {
-        display: block;
-        /* border-bottom: 1px solid sugar.color(accent, border); */
-    }
-
-    .__subnav-footer {
-        background: sugar.color(main, --lighten 43);
-        padding: sugar.padding(30);
-
-        @sugar.theme.when (dark) {
-            background: sugar.color(main, --darken 33);
-        }
-    }
-
-    .__subnav-chapters {
-        overflow-y: auto;
-        height: var(--max-height);
-        padding: sugar.padding(50);
+    .__menu-icon {
         position: relative;
-        @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
+        width: 16px; height: 16px;
+        display: inline-block;
 
-        background: linear-gradient(
-            -90deg,
-            sugar.color(main, --alpha 0.03),
-            sugar.color(main, --alpha 0)
-        );
-
-        s-activate {
-            display: block;
-        }
-
-        ul {
-            display: flex;
-            position: relative;
-            z-index: 10;
-        }
-
-        li:hover {
-            background-color: sugar.color(accent, --alpha 0.5);
-        }
-        li:hover,
-        li[active] {
-            background-color: sugar.color(accent);
-            color: sugar.color(accent, foreground);
-        }
-
-        li {
-            padding: sugar.padding(20) sugar.padding(30);
-            border-radius: sugar.theme(ui.default.borderRadius);
-            cursor: pointer;
-        }
-
-        &:before {
-            content: '';
+        .__open, .__close {
             position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: sugar.color(main, surface);
-            opacity: 0.95;
-            z-index: -1;
+            top: 0; left: 0;
         }
-    }
 
-    .__subnav-stories {
-        position: relative;
-        overflow-y: auto;
-        height: var(--max-height);
-        padding: sugar.padding(50);
-        background-color: sugar.color(main, background);
-        background-image: radial-gradient(
-            circle at bottom,
-            sugar.color(complementary, --alpha 0.02),
-            transparent
-        ) !important;
-
-        @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
-
-        /* &:before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            
-            opacity: 0.98;
-        } */
-    }
-
-    .__subnav-story {
-        width: 100%;
-
-        ul {
-            position: relative;
-            z-index: 1;
-            display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-
-            li {
-                padding: sugar.padding(20) sugar.padding(30);
-                border-radius: sugar.theme(ui.default.borderRadius);
-                cursor: pointer;
-                width: 33.3%;
-
-                &:hover {
-                    background-color: sugar.color(complementary);
-                    color: sugar.color(complementary, foreground);
-                }
-            }
+        .__open {
+            opacity: 1;
+            transform: rotate(0);
+            transition: sugar.transition();
         }
-    }
-    /* .__subnav-doc .__subnav-story li {
-        width: 50%;
-    } */
-
-    .__subnav-story {
-        display: none;
-        position: relative;
+        .__close {
+            opacity: 0;
+            transform: rotate(0);
+            transition: sugar.transition();
+        }
 
         &[active] {
-            display: block;
+            .__open {
+                opacity: 0;
+                transform: rotate(180deg);
+            }
+            .__close {
+                opacity: 1;
+                transform: rotate(180deg);
+            }
         }
     }
 
-    .ck-discover p {
-        @sugar.truncate (3);
-    }
 }
 
 #settings .s-side-panel__container {

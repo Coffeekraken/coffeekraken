@@ -19,7 +19,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @platform            html
  * @status              beta
  *
- * This component specify a range with some additional features that the native one like
+ * This component specify a range with some additional features than the native one like
  * displaying the value automatically in tooltip or inline.
  *
  * @feature         All the built-in input type range features are supported

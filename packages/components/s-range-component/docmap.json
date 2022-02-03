@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,15 +39,17 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -65,67 +67,7 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-range-component.js.interface.sRangeComponentInterface": {
-                "name": "SRangeComponentInterface",
-                "type": ".                      Class",
-                "platform": [
-                    {
-                        "name": "js",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the interface that describe parameters of the SRangeComponent",
-                "namespace": "@coffeekraken.s-range-component.js.interface",
-                "status": "beta",
-                "interface": {
-                    "name": "SRangeComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "name": {
-                            "type": "String",
-                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
-                        },
-                        "value": {
-                            "type": "String",
-                            "description": "Specify the initial range value"
-                        },
-                        "min": {
-                            "type": "Number",
-                            "description": "Specify the minimal value or the range",
-                            "default": 0
-                        },
-                        "max": {
-                            "type": "Number",
-                            "description": "Specify the maximal value of the range",
-                            "default": 100
-                        },
-                        "step": {
-                            "type": "Number",
-                            "description": "Specify the steps between each values"
-                        },
-                        "target": {
-                            "type": "String",
-                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
-                        },
-                        "tooltip": {
-                            "type": "Boolean",
-                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
-                            "default": false
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SRangeComponentInterface.js",
-                "extension": "js",
-                "relPath": "src/js/interface/SRangeComponentInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-range-component.js.range": {
+            "@coffeekraken.s-range-component.js.Range": {
                 "name": "Range",
                 "type": "CustomElement",
                 "menu": {
@@ -147,11 +89,37 @@
                 "example": [
                     {
                         "language": "html",
-                        "code": "<s-range name=\"myCoolRange\" value=\"90\" class=\"s-color:accent:deep s-mbe:30\"></s-range>\n\n<s-range name=\"myOtherRanfe\" class=\"s-mbe:30\" tooltip></s-range>\n\n<s-range name=\"myOtherRanfe\" class=\"s-mbe:30 s-color:accent:deep\" tooltip></s-range>\n\n<s-range name=\"myRangeWithSteps\" value=\"70\" class=\"s-color:complementary:deep s-mbe:30\" step=\"5\"></s-range>\n\n<div class=\"s-flex:align-center s-mbe:30\">\n <s-range name=\"myRangeWithTarget\" value=\"30\" target=\"#my-range-with-target-target\"></s-range>\n <span class=\"s-pis:20\" id=\"my-range-with-target-target\"></span>\n</div>\n\n<s-range name=\"myRangeColoredSuccess\" value=\"30\" class=\"s-color:success:deep s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredWarning\" value=\"0\" class=\"s-color:warning:deep s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredError\" value=\"1\" min=\"0\" max=\"10\" class=\"s-color:error:deep s-mbe:30\"></s-range>"
+                        "title": "Simple range",
+                        "code": "<s-range name=\"myCoolRange\" value=\"90\" class=\"s-color:accent s-mbe:30\"></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With tooltop",
+                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30\" tooltip></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With tooltop and colored",
+                        "code": "<s-range name=\"myOtherRanfe\" class=\"s-mbe:30 s-color:accent\" tooltip></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With steps",
+                        "code": "<s-range name=\"myRangeWithSteps\" value=\"70\" class=\"s-color:complementary s-mbe:30\" step=\"5\"></s-range>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "External target input",
+                        "code": "<div class=\"s-flex:align-center s-mbe:30\">\n <s-range name=\"myRangeWithTarget\" value=\"30\" target=\"#my-range-with-target-target\"></s-range>\n <span class=\"s-pis:20\" id=\"my-range-with-target-target\"></span>\n</div>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Some colors",
+                        "code": "<s-range name=\"myRangeColoredSuccess\" value=\"30\" class=\"s-color:success s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredWarning\" value=\"0\" class=\"s-color:warning s-mbe:30\"></s-range>\n<s-range name=\"myRangeColoredError\" value=\"1\" min=\"0\" max=\"10\" class=\"s-color:error s-mbe:30\"></s-range>"
                     },
                     {
                         "language": "js",
-                        "code": "import { webcomponent as SRangeWebcomponent } from '@coffeekraken/s-range-component';\nSRangeWebcomponent();"
+                        "code": "import { define } from '@coffeekraken/s-range-component';\ndefine();"
                     }
                 ],
                 "interface": {
@@ -213,6 +181,66 @@
                         }
                     }
                 }
+            },
+            "@coffeekraken.s-range-component.js.interface.SRangeComponentInterface": {
+                "name": "SRangeComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SRangeComponent",
+                "namespace": "@coffeekraken.s-range-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SRangeComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "description": "Specify the name to assign to the internal input[type=\"range\"]"
+                        },
+                        "value": {
+                            "type": "String",
+                            "description": "Specify the initial range value"
+                        },
+                        "min": {
+                            "type": "Number",
+                            "description": "Specify the minimal value or the range",
+                            "default": 0
+                        },
+                        "max": {
+                            "type": "Number",
+                            "description": "Specify the maximal value of the range",
+                            "default": 100
+                        },
+                        "step": {
+                            "type": "Number",
+                            "description": "Specify the steps between each values"
+                        },
+                        "target": {
+                            "type": "String",
+                            "description": "Specify a css selector of any HTMLElement or HTMLInputElement in which to inject the value when the range is updated"
+                        },
+                        "tooltip": {
+                            "type": "Boolean",
+                            "description": "Specify if you want to display the value inside a tooltip on top of the thumb",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SRangeComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SRangeComponentInterface.js",
+                "children": {}
             }
         }
     }

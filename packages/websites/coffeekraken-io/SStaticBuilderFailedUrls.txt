@@ -1,1 +1,2 @@
-/api/@coffeekraken.coffeekraken-io.sugar.css.font.default
+/
+/config/explorer

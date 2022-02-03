@@ -189,9 +189,9 @@ export default class SActivateFeature extends __SFeature {
         });
 
         // activate if has the "active" attribute
-        // if (this.props.active) {
-        //     this.activate(true);
-        // }
+        if (this.props.active) {
+            this.activate(true);
+        }
     }
     get saveStateId(): string {
         // @ts-ignore

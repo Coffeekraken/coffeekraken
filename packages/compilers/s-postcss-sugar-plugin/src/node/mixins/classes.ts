@@ -83,17 +83,6 @@ export default async function ({
         css: cssArray,
         theme: __STheme.hash(),
     })}`;
-
-    return cache('@sugar.classes', hash, cssArray);
-
-    // // from cache
-    // const cached = await fromCache(hash, '@sugar.classes;');
-    // if (cached) {
-    //     return cached;
-    // } else {
-    //     console.log(
-    //         `<yellow>[postcss]</yellow> This can take some time but will be cached <cyan>until you change your theme configuration</cyan>....`,
-    //     );
-    //     return toCache(hash, cssArray, '@sugar.classes;');
-    // }
+    const c = cache('@sugar.classes', hash, cssArray);
+    return c;
 }

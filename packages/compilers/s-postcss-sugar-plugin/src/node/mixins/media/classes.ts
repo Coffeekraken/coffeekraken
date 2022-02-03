@@ -1,5 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
+import __fs from 'fs';
 
 /**
  * @name           classes
@@ -65,12 +66,16 @@ export { postcssSugarPluginMediaClassesMixinInterface as interface };
 export default function ({
     params,
     atRule,
+    getCacheFilePath,
+    getRoot,
     postcssApi,
     registerPostProcessor,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginMediaMixinClassesParams>;
     atRule: any;
+    getCacheFilePath: Function;
+    getRoot: Function;
     postcssApi: any;
     registerPostProcessor: Function;
     replaceWith: Function;
@@ -96,15 +101,51 @@ export default function ({
     });
 
     atRule.nodes?.forEach((node) => {
-        if (!node.selector) return;
 
         medias.forEach((media) => {
-            const mediaNode = node.clone();
-            const selectorParts = mediaNode.selector.split(' ');
-            selectorParts[0] = `${selectorParts[0]}___${media}`;
-            mediaNode.selectors[0] = selectorParts[0];
-            mediaNode.selector = selectorParts.join(' ');
-            mediasRules[media].append(mediaNode);
+
+            if (node.type === 'comment' && node.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+
+                const parts = node.text.split(':').map(l => l.trim());
+
+                const cacheId = parts[1];
+                const cacheUrl = getCacheFilePath(cacheId);
+
+                let cachedStr;
+                try {
+                    cachedStr = __fs.readFileSync(cacheUrl);
+                } catch(e) {
+                    // console.log(e);
+                }
+
+                if (!cachedStr) return;
+
+                console.log(cachedStr);
+
+
+                // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+                // if (settings.target === 'vite') {
+                //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+                // }
+
+                // // comment.remove();
+                // root.prepend(newRule);
+
+                // comment.replaceWith(newRule);
+            } else if (node.name === 'sugar.classes') {
+                getRoot(atRule).append(`/* MEDIACLASSES:${media} */`);
+            } else {
+
+                const mediaNode = node.clone();
+                if (mediaNode.selector) {
+                    const selectorParts = mediaNode.selector.split(' ');
+                    selectorParts[0] = `${selectorParts[0]}___${media}`;
+                    mediaNode.selectors[0] = selectorParts[0];
+                    mediaNode.selector = selectorParts.join(' ');
+                }
+                mediasRules[media].append(mediaNode);
+
+            }
         });
     });
     for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {

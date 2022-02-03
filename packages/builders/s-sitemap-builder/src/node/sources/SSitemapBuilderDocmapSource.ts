@@ -117,6 +117,19 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
                 });
             }
 
+            // @ts-ignore
+            for (let [packageName, packageObj] of Object.entries(docmap.menu.packages)) {
+                for (let [slug, docmapObj] of Object.entries(packageObj.slug)) {
+                    // @ts-ignore
+                    const hash = __fileHash(docmapObj.docmap.path);
+                    items.push({
+                        loc: slug,
+                        lastmod,
+                        integrity: hash,
+                    });
+                }
+            }
+
             resolve(items);
         });
     }

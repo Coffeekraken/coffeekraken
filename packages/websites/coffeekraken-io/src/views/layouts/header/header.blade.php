@@ -3,24 +3,20 @@
     <div class="s-container">
 
         <div class="s-flex:align-center" style="position: relative">
-            <a href="/" title="Coffeekraken.io">
-                @include ('layouts.header.partials.logo')
-            </a>
-            <div class="s-flex-item:order-10 s-flex:align-center">
-                <form action="/doc/api" method="get" name="search" id="search-form">
-                    <ck-search></ck-search>
-                </form>
-
-                <div class="s-tooltip-container s-mis:20">
-                    <a class="s-btn s-color:complementary s-scale:08" id="settings-opener">
-                        <i class="s-icon:settings"></i>
+            <div class="__actions">
+                <div class="s-mis:30">
+                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle>
+                        <i class="s-icon:menu __open"></i>
+                        <i class="s-icon:cross __close"></i>
                     </a>
-                    <div class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">
-                        Display website settings
-                    </div>
                 </div>
             </div>
-            <nav id="nav" class="s-flex-item:grow-1 s-flex:justify-space-evenly s-text:center s-font:40">
+            <div class="__logo">
+                <a href="/" title="Coffeekraken.io">
+                    @include ('layouts.header.partials.logo')
+                </a>
+            </div>
+            <nav id="nav" class="__nav s-until:media:mobile">
                 <a class="s-typo:bold __main-link" href="/doc/get-started/get-started" title="Get Started">
                     <span>Get started</span>
                 </a>
@@ -50,13 +46,16 @@
                     $documentationMenu = (object) $documentationMenu;
                 @endphp
 
+                {{-- Documentation --}}
                 @include('layouts.header.partials.menuItem', ['menuItem' => $documentationMenu, 'class' =>
                 '__subnav-doc'])
+
+                {{-- Styleguide --}}
                 @include('layouts.header.partials.menuItem', ['menuItem' =>
                 $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
 
+                {{-- API --}}
                 @php
-                    
                     $apiMenu = (object) [
                         'name' => 'API',
                         'search' => (object) [
@@ -109,24 +108,146 @@
                     ];
                     
                 @endphp
-
-                {{-- foreach ($docmap->map as $item) {
-                        if ($item->type === 'CustomElement') {
-                            $apiMenu->components->{$item->name} = (object) [
-                                'name' => $item->name,
-                                'slug' => '/api/' . $item->namespace,
-                            ];
-                        }
-                    } --}}
-
                 @include('layouts.header.partials.menuItem', ['menuItem' => $apiMenu, 'class' => ''])
-                {{-- <a class="__main-link s-pr:50 s-typo:bold" href="/doc/api" title="API">
-                    <span>API</span>
-                </a> --}}
 
             </nav>
+            <div class="__actions">
+                <form class="s-until:media:mobile" action="/doc/api" method="get" name="search" id="search-form">
+                    <ck-search></ck-search>
+                </form>
+                {{-- <div class="s-mis:20 s-when:media:mobile">
+                    <a class="s-btn s-color:main s-scale:08" id="settings-opener">
+                        <i class="s-icon:search"></i>
+                    </a>
+                </div> --}}
+                <div class="s-tooltip-container s-mie:30">
+                    <a class="" id="settings-opener">
+                        <i class="s-icon:settings"></i>
+                    </a>
+                    <div class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">
+                        Display website settings
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
+
+    <nav id="nav-mobile" class="__nav-mobile s-when:media:mobile">
+        @php
+            $documentationMenu = array_merge((array) $docmap->menu->tree->documentation, []);
+            $packagesMenu = (object) [
+                'name' => 'Packages',
+            ];
+            foreach ((array) $docmap->menu->packages as $package) {
+                if (!property_exists($package, 'tree') || !property_exists($package->tree, 'documentation')) {
+                    continue;
+                }
+            
+                $vars = array_keys((array) $package->tree->documentation);
+            
+                if (count($vars) <= 1) {
+                    continue;
+                }
+            
+                $packagesMenu->{$package->name} = (object) [
+                    'name' => $package->name,
+                    'slug' => $package->tree->documentation->{$vars[1]}->slug,
+                ];
+            }
+            array_push($documentationMenu, $packagesMenu);
+            $documentationMenu = (object) $documentationMenu;
+        @endphp
+
+
+        <nav class="__links">
+
+            {{-- Documentation --}}
+            <a class="s-typo:bold __main-link" s-activate active href="#menu-mobile-doc" group="menu-mobile"
+                title="Documentation">
+                <span>Documentation</span>
+            </a>
+
+            {{-- Styleguide --}}
+            <a class="s-typo:bold __main-link" s-activate href="#menu-mobile-styleguide" group="menu-mobile"
+                title="Styleguide">
+                <span>Styleguide</span>
+            </a>
+
+            {{-- API --}}
+            <a class="s-typo:bold __main-link" s-activate href="#menu-mobile-api" group="menu-mobile" title="Api">
+                <span>Api</span>
+            </a>
+
+        </nav>
+
+        <div class="__subnav" id="menu-mobile-doc">
+            @include('layouts.header.partials.menuMobileItem', ['menuItem' => $documentationMenu, 'class' =>
+            '__subnav-doc'])
+        </div>
+
+        <div class="__subnav" id="menu-mobile-styleguide">
+            @include('layouts.header.partials.menuMobileItem', ['menuItem' =>
+            $docmap->menu->custom->styleguide->tree->styleguide, 'class' => ''])
+        </div>
+
+        <div class="__subnav" id="menu-mobile-api">
+            @php
+                $apiMenu = (object) [
+                    'name' => 'API',
+                    'search' => (object) [
+                        'name' => 'Search',
+                        'include' => 'generic/header/search-api.blade.php',
+                    ],
+                    'config' => (object) [
+                        'name' => 'Configuration',
+                        'overview' => (object) [
+                            'name' => 'Overview',
+                            'slug' => '/doc/config/overview',
+                        ],
+                        'explorer' => (object) [
+                            'name' => 'Config Explorer',
+                            'slug' => '/config/explorer',
+                        ],
+                        'builtin' => (object) [
+                            'name' => 'Built-in Config',
+                            'slug' => 'doc/config/built-in',
+                        ],
+                        'override' => (object) [
+                            'name' => 'Override Config',
+                            'slug' => 'doc/config/override',
+                        ],
+                        'register' => (object) [
+                            'name' => 'Register new Config',
+                            'slug' => 'doc/config/register',
+                        ],
+                    ],
+                    'cssDiscover' => (object) [
+                        'name' => 'Discover (css)',
+                        'content' => '<ck-discover platform="css"></ck-discover>',
+                    ],
+                    'jsDiscover' => (object) [
+                        'name' => 'Discover (js)',
+                        'content' => '<ck-discover platform="js"></ck-discover>',
+                    ],
+                    'postcssDiscover' => (object) [
+                        'name' => 'Discover (PostCSS)',
+                        'content' => '<ck-discover platform="postcss"></ck-discover>',
+                    ],
+                    'nodeDiscover' => (object) [
+                        'name' => 'Discover (node)',
+                        'content' => '<ck-discover platform="node"></ck-discover>',
+                    ],
+                    'phpDiscover' => (object) [
+                        'name' => 'Discover (php)',
+                        'content' => '<ck-discover platform="php"></ck-discover>',
+                    ],
+                ];
+                
+            @endphp
+            @include('layouts.header.partials.menuMobileItem', ['menuItem' => $apiMenu, 'class' => ''])
+        </div>
+
+    </nav>
 
 </header>

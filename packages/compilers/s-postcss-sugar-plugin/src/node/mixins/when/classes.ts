@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __STheme from '@coffeekraken/s-theme';
 
 /**
  * @name           classes
@@ -46,6 +47,8 @@ export default function ({
     const finalParams: IPostcssSugarPluginActiveClassesParams = {
         ...params,
     };
+
+    const queries = __STheme.config('media.queries');
 
     const vars = new CssVars();
 
@@ -330,6 +333,40 @@ export default function ({
             display: none;
         }
         `);
+
+    // Queries
+    vars.comment(
+            () => ``,
+        ).code(`
+            .s-when--media {
+                display: none;
+            }`);
+
+    Object.keys(queries).forEach(query => {
+        vars.comment(
+            () => `/**
+            * @name          s-when:media:${query}
+            * @namespace          sugar.css.when
+            * @type               CssClass
+            * @platform             css
+            * @status             beta
+            * 
+            * This class allows you to show any HTMLElement for the passed query.
+            * 
+            * @example        html
+            * <s-range class="s-when:media:${query}" />
+            * 
+            * @since            2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+        `,
+        ).code(`
+            @sugar.media(${query}) {
+                .s-when--media.s-when--${query} {
+                    display: unset;
+                }
+            }`);
+    });
 
     return vars;
 }

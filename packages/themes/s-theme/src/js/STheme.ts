@@ -50,8 +50,6 @@ export default class STheme extends __SThemeBase {
             timeout: 100
         });
 
-        console.log('set theme', theme, variant);
-
         if (theme && variant) {
             $context.setAttribute('theme', `${theme}-${variant}`);
         } else if (theme) {

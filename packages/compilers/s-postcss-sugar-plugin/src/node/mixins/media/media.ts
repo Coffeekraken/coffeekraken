@@ -59,11 +59,14 @@ export default function ({
     params,
     atRule,
     postcssApi,
+    registerPostProcessor,
 }: {
     params: any;
     atRule: any;
     postcssApi: any;
+    registerPostProcessor: Function;
 }) {
+
     const mediaConfig = __STheme.config('media');
 
     const queries: string[] = [];

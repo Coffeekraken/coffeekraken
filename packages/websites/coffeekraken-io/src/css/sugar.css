@@ -2,9 +2,6 @@
 @sugar.theme (dark, null, true);
 
 @sugar.classes;
-@sugar.media.classes(mobile) {
-  @sugar.classes;
-}
 
 @sugar.ui.filtrableinput.classes;
 @sugar.platform.classes;
@@ -98,3 +95,5 @@
   fs:src/icons/safari.svg:support-safari
   fs:src/icons/vuejs.svg:vue
 );
+
+@sugar.media.classes(mobile);

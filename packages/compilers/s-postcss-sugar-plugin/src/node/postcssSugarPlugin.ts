@@ -429,7 +429,7 @@ const plugin = (settings: any = {}) => {
 
             for (let i = 0; i < postProcessorsRegisteredFn.length; i++) {
                 const fn = postProcessorsRegisteredFn[i];
-                await fn();
+                await fn(root);
             }
 
             const postProcessorsPaths = __glob.sync('**/*.js', {
@@ -462,32 +462,32 @@ const plugin = (settings: any = {}) => {
                 __writeFileSync(cachePath, toCacheStr);
             });
 
-            root.walkComments((comment) => {
-                if (comment.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+            // root.walkComments((comment) => {
+            //     if (comment.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
 
-                    const parts = comment.text.split(':').map(l => l.trim());
+            //         const parts = comment.text.split(':').map(l => l.trim());
 
-                    const cacheHash = parts[1];
-                    const cacheId = parts[2];
-                    const fileName = `${cacheHash}.css`;
-                    const cacheUrl = `/cache/postcssSugarPlugin/${pluginHash}/${fileName}`;
+            //         const cacheHash = parts[1];
+            //         const cacheId = parts[2];
+            //         const fileName = `${cacheHash}.css`;
+            //         const cacheUrl = `/cache/postcssSugarPlugin/${pluginHash}/${fileName}`;
 
-                    let newRule = __postcss.parse(`@import "${cacheUrl}";`);
-                    if (settings.target === 'vite') {
-                        newRule = __postcss.parse(`@import url("${cacheUrl}");`);
-                    }
+            //         let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+            //         if (settings.target === 'vite') {
+            //             newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+            //         }
 
-                    // comment.remove();
-                    root.prepend(newRule);
+            //         // comment.remove();
+            //         root.prepend(newRule);
 
-                    // comment.replaceWith(newRule);
-                }
-            });
+            //         // comment.replaceWith(newRule);
+            //     }
+            // });
 
             // MEDIA CLASSES
             const mediaClassesMatches = cssStr.match(/\/\*\sMEDIACLASSES:[a-zA-Z0-9_-]+\s\*\//gm);
             mediaClassesMatches?.forEach(mediaStr => {
-                const media = mediaStr.repclaslace('/* MEDIACLASSES:','').replace(' */', '').trim();
+                const media = mediaStr.replace('/* MEDIACLASSES:','').replace(' */', '').trim();
                 console.log('MED', media);
             });
 

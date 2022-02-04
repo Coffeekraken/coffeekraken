@@ -340,6 +340,128 @@ export default class SThemeBase extends __SClass {
     }
 
     /**
+     * @name                buildMediaQuery
+     * @type                Function
+     * @status              beta
+     * @platform            js
+     * @platform            node
+     * @static
+     * 
+     * This static method allows you to built a media query by passing args like "mobile", ">tablet", etc...
+     * 
+     * @param               {String}    query    The media query you want to build
+     * @return              {String}                The builded media query (without brackets)
+     * 
+     * @since               2.0.0
+     * 
+     */
+    static buildMediaQuery(queryString: string): string {
+        const currentQueryList: string[] = [this.config('media.defaultQuery'), 'and'];
+
+        const queryAr = queryString.split(' ').map(l => l.trim());
+
+        queryAr.forEach((query, i) => {
+
+            if (query === 'and' || query === 'or') {
+                currentQueryList.push(query);
+                return;
+            }
+
+            const firstChar = query.slice(0, 1);
+            const firstTwoChar = query.slice(0, 2);
+            const lastChar = query.slice(-1);
+            let action = this.config('media.defaultAction');
+            let mediaName = query;
+
+            if (lastChar === '-' || lastChar === '|')
+                mediaName = mediaName.slice(0, -1);
+
+            if (
+                firstTwoChar === '>=' ||
+                firstTwoChar === '<=' ||
+                firstTwoChar === '=='
+            ) {
+                mediaName = mediaName.slice(2);
+                action = firstTwoChar;
+            } else if (
+                firstChar === '<' ||
+                firstChar === '>' ||
+                firstChar === '='
+            ) {
+                mediaName = mediaName.slice(1);
+                action = firstChar;
+            }
+
+            const mediaQueryConfig = this.config('media.queries')[mediaName];
+            if (!mediaQueryConfig)
+                throw new Error(
+                    `<red>[postcssSugarPlugin.media]</red> Sorry but the requested media "<yellow>${mediaName}</yellow>" does not exists in the config. Here's the available medias: ${Object.keys(
+                        this.config('media.queries'),
+                    )
+                        .map((l) => `<green>${l}</green>`)
+                        .join(',')}`,
+                );
+
+            const queryList: string[] = [];
+
+            Object.keys(mediaQueryConfig).forEach((prop) => {
+                const value = mediaQueryConfig[prop];
+                if (!value) return;
+
+                if (
+                    [
+                        'min-width',
+                        'max-width',
+                        'min-device-width',
+                        'max-device-width',
+                    ].indexOf(prop) !== -1
+                ) {
+                    if (action === '>') {
+                        if (prop === 'max-width' || prop === 'max-device-width') {
+                            let argName = 'min-width';
+                            if (prop.includes('-device'))
+                                argName = 'min-device-width';
+                            queryList.push(`(${argName}: ${value + 1}px)`);
+                        }
+                    } else if (action === '<') {
+                        if (prop === 'min-width' || prop === 'min-device-width') {
+                            let argName = 'max-width';
+                            if (prop.includes('-device'))
+                                argName = 'max-device-width';
+                            queryList.push(`(${argName}: ${value}px)`);
+                        }
+                    } else if (action === '=') {
+                        queryList.push(`(${prop}: ${value}px)`);
+                    } else if (action === '>=') {
+                        if (prop === 'min-width' || prop === 'min-device-width') {
+                            queryList.push(`(${prop}: ${value}px)`);
+                        }
+                    } else if (action === '<=') {
+                        if (prop === 'max-width' || prop === 'max-device-width') {
+                            queryList.push(`(${prop}: ${value}px)`);
+                        }
+                    } else {
+                        queryList.push(`(${prop}: ${value}px)`);
+                    }
+                } else {
+                    queryList.push(`(${prop}: ${value}px)`);
+                }
+            });
+
+            if (lastChar === '-') {
+                queryList.push('(orientation: landscape)');
+            } else if (lastChar === '|') {
+                queryList.push('(orientation: portrait)');
+            }
+
+            currentQueryList.push(queryList.join(' and '));
+        });
+
+        return `@media ${currentQueryList.join(' ')}`;
+
+    }
+
+    /**
      * @name                jsObjectToCssProperties
      * @type                Function
      * @status              beta

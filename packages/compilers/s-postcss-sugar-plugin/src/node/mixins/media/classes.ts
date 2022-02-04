@@ -88,75 +88,142 @@ export default function ({
 
     const mediaConfig = __STheme.config('media');
 
-    const medias = finalParams.query
-        ? finalParams.query.split(' ').map((l) => l.trim())
-        : Object.keys(mediaConfig.queries);
+    registerPostProcessor((root) => {
+        const cssStr = root.toString();
 
-    const mediasRules = {};
-    medias.forEach((media) => {
-        mediasRules[media] = new postcssApi.AtRule({
-            name: 'sugar.media',
-            params: `(${media})`,
+        // search for imported files
+        const importedMatches = cssStr.match(/\/\*\sS-IMPORTED:[a-zA-Z0-9@\/\._-]+\s\*\//gm);
+        importedMatches?.forEach(cacheStr => {
+
+            console.log('imPO', cacheStr);
+
+            // loop on the imported files (globs)
+            files.forEach(file => {
+                const relPath = cacheStr.replace('/* S-IMPORTED:','').replace(' */', '').trim();
+                // do the rest only if the file is the good one
+                if (relPath !== file.relPath) return;
+                // get the css string to mediatize
+                const cssToMediatize = cssStr.match(new RegExp(`\\/\\*\\sS-IMPORTED:${relPath}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sS-ENDIMPORTED:${relPath}\\s\\*\\/`, 'g'));
+                if (!cssToMediatize) return;
+                // loop on all the medias to process
+                finalParams.media.split(',').map(l => l.trim()).forEach(media => {
+                    // build the mediatized file path                
+                    const mediatizesFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '').replace('.css',`.${media}.css`)}`;
+                    // search for css declarations
+                    const ast = postcss.parse(cssToMediatize[0]);
+                    ast.walkRules(rule => {
+                        let sels = rule.selector.split(',').map(l => l.trim());
+                        sels = sels.map(sel => {
+                            const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
+                            if (!selectors) return sel;
+                            selectors.forEach(selector => {
+                                sel = sel.replace(selector, `${selector}___${media}`);
+                            });
+                            return sel;
+                        });
+                        rule.selector = sels.join(',');
+                    });
+                    // remove all comments
+                    ast.walkComments(comment => comment.remove());
+                    // build the mediatized css
+                    const mediatizedCss = `
+                        ${__STheme.buildMediaQuery(media)} {
+                            ${ ast.toString()}
+                        }
+                    `;
+                    // import or include file depending on target
+                    if (settings.target === 'vite') {
+                        // write the mediatized file
+                        __writeFileSync(mediatizesFilePath, mediatizedCss);
+                        // add the import to the root
+                        console.log('PREPEND', mediatizesFilePath);
+                        root.prepend(postcss.parse(`@import "${mediatizesFilePath}";`));
+                    } else {
+                        root.append(mediatizedCss);
+                    }
+
+                });
+            });
+            // console.log(toCache);
+
+            // const cachePath = getCacheFilePath(relPath);
+
+            // const toCacheStr = toCache[0].replace(`/* CACHE:${relPath} */`, '').replace(`/* ENDCACHE:${relPath} */`, '');
+            // __writeFileSync(cachePath, toCacheStr);
         });
+
+
     });
 
-    atRule.nodes?.forEach((node) => {
+    // const medias = finalParams.query
+    //     ? finalParams.query.split(' ').map((l) => l.trim())
+    //     : Object.keys(mediaConfig.queries);
 
-        medias.forEach((media) => {
+    // const mediasRules = {};
+    // medias.forEach((media) => {
+    //     mediasRules[media] = new postcssApi.AtRule({
+    //         name: 'sugar.media',
+    //         params: `(${media})`,
+    //     });
+    // });
 
-            if (node.type === 'comment' && node.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
+    // atRule.nodes?.forEach((node) => {
 
-                const parts = node.text.split(':').map(l => l.trim());
+    //     medias.forEach((media) => {
 
-                const cacheId = parts[1];
-                const cacheUrl = getCacheFilePath(cacheId);
+    //         if (node.type === 'comment' && node.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
 
-                let cachedStr;
-                try {
-                    cachedStr = __fs.readFileSync(cacheUrl);
-                } catch(e) {
-                    // console.log(e);
-                }
+    //             const parts = node.text.split(':').map(l => l.trim());
 
-                if (!cachedStr) return;
+    //             const cacheId = parts[1];
+    //             const cacheUrl = getCacheFilePath(cacheId);
 
-                console.log(cachedStr);
+    //             let cachedStr;
+    //             try {
+    //                 cachedStr = __fs.readFileSync(cacheUrl);
+    //             } catch(e) {
+    //                 // console.log(e);
+    //             }
+
+    //             if (!cachedStr) return;
+
+    //             console.log(cachedStr);
 
 
-                // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
-                // if (settings.target === 'vite') {
-                //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
-                // }
+    //             // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+    //             // if (settings.target === 'vite') {
+    //             //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+    //             // }
 
-                // // comment.remove();
-                // root.prepend(newRule);
+    //             // // comment.remove();
+    //             // root.prepend(newRule);
 
-                // comment.replaceWith(newRule);
-            } else if (node.name === 'sugar.classes') {
-                getRoot(atRule).append(`/* MEDIACLASSES:${media} */`);
-            } else {
+    //             // comment.replaceWith(newRule);
+    //         } else if (node.name === 'sugar.classes') {
+    //             getRoot(atRule).append(`/* MEDIACLASSES:${media} */`);
+    //         } else {
 
-                const mediaNode = node.clone();
-                if (mediaNode.selector) {
-                    const selectorParts = mediaNode.selector.split(' ');
-                    selectorParts[0] = `${selectorParts[0]}___${media}`;
-                    mediaNode.selectors[0] = selectorParts[0];
-                    mediaNode.selector = selectorParts.join(' ');
-                }
-                mediasRules[media].append(mediaNode);
+    //             const mediaNode = node.clone();
+    //             if (mediaNode.selector) {
+    //                 const selectorParts = mediaNode.selector.split(' ');
+    //                 selectorParts[0] = `${selectorParts[0]}___${media}`;
+    //                 mediaNode.selectors[0] = selectorParts[0];
+    //                 mediaNode.selector = selectorParts.join(' ');
+    //             }
+    //             mediasRules[media].append(mediaNode);
 
-            }
-        });
-    });
-    for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {
-        atRule.after(mediasRules[Object.keys(mediasRules)[i]]);
-    }
+    //         }
+    //     });
+    // });
+    // for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {
+    //     atRule.after(mediasRules[Object.keys(mediasRules)[i]]);
+    // }
 
-    registerPostProcessor(() => {
-        if (finalParams.mediasOnly) {
-            atRule.remove();
-        } else {
-            atRule.replaceWith(atRule.nodes);
-        }
-    });
+    // registerPostProcessor(() => {
+    //     if (finalParams.mediasOnly) {
+    //         atRule.remove();
+    //     } else {
+    //         atRule.replaceWith(atRule.nodes);
+    //     }
+    // });
 }

@@ -1,9 +1,8 @@
-<section id="features-frontend" class="s-pb:100">
+<section id="features-frontend" class="s-pb:100 @mobile s-mi:30">
     <div class="s-container">
 
-        <div class="section-top-background"></div>
-
-        <h3 class="s-typo:h2 s-mbe:30">Full premium <span class="s-tc:accent">UI<br>Components</span> library</h3>
+        <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">Full premium <span class="s-tc:accent">UI<br>Components</span>
+            library</h3>
         <p class="s-typo:lead s-mbe:50">
             As part of our ecosystem, you will have access to a nice list of <span class="s-tc:complementary">fully
                 customizable</span>, themeing ready UI

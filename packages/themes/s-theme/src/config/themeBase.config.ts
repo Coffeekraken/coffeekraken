@@ -346,6 +346,45 @@ export default function (env, config) {
                  */
                 '12': '1 2',
                 /**
+                 * @name                1_2
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2
+                 *
+                 * Specify the 2 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_2': '1 _ 2',
+                /**
+                 * @name                21
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             2 1
+                 *
+                 * Specify the 2 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '21': '21',
+                /**
+                 * @name                2_1
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             2 _ 1
+                 *
+                 * Specify the 2 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '2_1': '2 _ 1',
+                /**
                  * @name                123
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -358,6 +397,84 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '123': '1 2 3',
+                /**
+                 * @name                12_3
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 _ 3
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '12_3': '1 2 _ 3',
+                /**
+                 * @name                1_23
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2 3
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_23': '1 _ 2 3',
+                /**
+                 * @name                1_2_3
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2 _ 3
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_2_3': '1 _ 2 _ 3',
+                /**
+                 * @name                321
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             3 2 1
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '321': '3 2 1',
+                /**
+                 * @name                32_1
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             2 3 _ 1
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '32_1': '3 2 _ 1',
+                /**
+                 * @name                3_21
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             3 _ 2 1
+                 *
+                 * Specify the 3 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '3_21': '3 _ 2 1',
                 /**
                  * @name                1234
                  * @namespace           config.themeBase.layout.layout
@@ -372,6 +489,58 @@ export default function (env, config) {
                  */
                 '1234': '1 2 3 4',
                 /**
+                 * @name                12_34
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 _ 3 4
+                 *
+                 * Specify the 4 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '12_34': '1 2 _ 3 4',
+                /**
+                 * @name                123_4
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 _ 4
+                 *
+                 * Specify the 4 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '123_4': '1 2 3 _ 4',
+                /**
+                 * @name                1_234
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2 3 4
+                 *
+                 * Specify the 4 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_234': '1 _ 2 3 4',
+                /**
+                 * @name                1_2_3_4
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2 _ 3 _ 4
+                 *
+                 * Specify the 4 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_2_3_4': '1 _ 2 _ 3 _ 4',
+                /**
                  * @name                122
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -384,6 +553,19 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '122': '1 2 2',
+                /**
+                 * @name                221
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2
+                 *
+                 * Specify the 2 columns (1/3 - 2/3) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '221': '2 2 1',
                 /**
                  * @name                122
                  * @namespace           config.themeBase.layout.layout
@@ -398,6 +580,19 @@ export default function (env, config) {
                  */
                 '112': '1 1 2',
                 /**
+                 * @name                211
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 1 2
+                 *
+                 * Specify the 2 columns (2/3 - 1/3) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '211': '2 1 1',
+                /**
                  * @name                1222
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -410,6 +605,19 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '1222': '1 2 2 2',
+                /**
+                 * @name                2221
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 2 2
+                 *
+                 * Specify the 2 columns (1/4 - 3/4) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '2221': '2 2 2 1',
                 /**
                  * @name                1112
                  * @namespace           config.themeBase.layout.layout
@@ -450,6 +658,19 @@ export default function (env, config) {
                  */
                 '11112': '1 1 1 1 2',
                 /**
+                 * @name                22221
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             2 2 2 2 1
+                 *
+                 * Specify the 2 columns (4/5 - 1/5) layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '22221': '2 2 2 2 1',
+                /**
                  * @name                122222
                  * @namespace           config.themeBase.layout.layout
                  * @type                String
@@ -488,6 +709,71 @@ export default function (env, config) {
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 '12345': '1 2 3 4 5',
+                /**
+                 * @name                123_45
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 _ 4 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '123_45': '1 2 3 _ 4 5',
+                /**
+                 * @name                12_345
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 _ 3 4 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '12_345': '1 2 _ 3 4 5',
+                 /**
+                 * @name                1_2345
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 _ 2 3 4 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_2345': '1 _ 2 3 4 5',
+                 /**
+                 * @name                1234_5
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 4 _ 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1234_5': '1 2 3 4 _ 5',
+                /**
+                 * @name                1_2_3_4_5
+                 * @namespace           config.themeBase.layout.layout
+                 * @type                String
+                 * @default             1 2 3 4 _ 5
+                 *
+                 * Specify the 5 columns layout for your theme.
+                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
+                 *
+                 * @since               2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                '1_2_3_4_5': '1 _ 2 _ 3 _ 4 _ 5',
                 /**
                  * @name                123456
                  * @namespace           config.themeBase.layout.layout

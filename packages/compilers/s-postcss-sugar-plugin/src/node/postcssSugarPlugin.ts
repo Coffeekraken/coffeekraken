@@ -81,8 +81,7 @@ const plugin = (settings: any = {}) => {
 
     const _cacheHashById = {};
     function cache(id, hash, content: string | string[]): string | string[] {        
-        // return `/* FROMCACHE:${hash} */`;
-        // if (!settings.cache) return content;
+        if (!settings.cache) return content;
 
         // store the hash for the id
         if (!_cacheObjById[id]) _cacheObjById[id] = {};
@@ -102,9 +101,13 @@ const plugin = (settings: any = {}) => {
         console.log(
             `<green>[postcss]</green> Object "<cyan>${id}</cyan>" taken from cache`,
         );
-        const returned = `/* FROMCACHE:${hash} */`;
-        _cacheObjById[id].return = returned;
-        return returned;
+        // const returned = `/* FROMCACHE:${hash} */`;
+        try {
+            const returned = __fs.readFileSync(cachePath, 'utf8').toString();
+            _cacheObjById[id].return = returned;
+            return returned;
+        } catch(e) {}
+        return content;
     }
 
     function getCacheFilePath(cacheId) {
@@ -470,26 +473,24 @@ const plugin = (settings: any = {}) => {
             //         const cacheHash = parts[1];
             //         const cacheId = parts[2];
             //         const fileName = `${cacheHash}.css`;
-            //         const cacheUrl = `/cache/postcssSugarPlugin/${pluginHash}/${fileName}`;
+            //         const cacheUrl = getCacheFilePath(cacheHash);
 
-            //         let newRule = __postcss.parse(`@import "${cacheUrl}";`);
-            //         if (settings.target === 'vite') {
-            //             newRule = __postcss.parse(`@import url("${cacheUrl}");`);
-            //         }
+            //         const cachedCss = __fs.readFileSync(cacheUrl).toString();
+
+            //         // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
+            //         // if (settings.target === 'vite') {
+            //         //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
+            //         // }
+
+            //         root.append(cachedCss);
+
 
             //         // comment.remove();
-            //         root.prepend(newRule);
+            //         // root.prepend(newRule);
 
             //         // comment.replaceWith(newRule);
             //     }
             // });
-
-            // MEDIA CLASSES
-            const mediaClassesMatches = cssStr.match(/\/\*\sMEDIACLASSES:[a-zA-Z0-9_-]+\s\*\//gm);
-            mediaClassesMatches?.forEach(mediaStr => {
-                const media = mediaStr.replace('/* MEDIACLASSES:','').replace(' */', '').trim();
-                console.log('MED', media);
-            });
 
             __SBench.end('postcssSugarPlugin').log({
                 body: `File: <cyan>${__path.relative(

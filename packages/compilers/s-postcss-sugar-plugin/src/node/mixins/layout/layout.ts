@@ -113,7 +113,7 @@ export default function ({
     const colsEndByArea = {};
     const rowsEndByArea = {};
 
-    const rows = finalParams.layout.split('\n').map((l) => l.trim());
+    const rows = finalParams.layout.split(/(\\n|_)/gm).map((l) => l.trim()).filter(l => l != '_');
 
     const rowsCount = rows.length;
     let colsCount = 0;

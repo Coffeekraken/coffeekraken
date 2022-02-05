@@ -26,6 +26,9 @@ body {
 }
 
 .sticky {
-    position: sticky;
-    top: 100px;
+
+    @sugar.media(>=desktop) {
+        position: sticky;
+        top: 100px;
+    }
 }

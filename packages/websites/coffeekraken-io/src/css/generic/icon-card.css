@@ -24,6 +24,10 @@
         top: calc(50% - 20px);
         left: 50%;
         transform: translate(-50%, -50%);
+
+        @sugar.media mobile {
+            font-size: 50px;
+        }
     }
     p {
         position: absolute;
@@ -33,6 +37,10 @@
         transform: translate(-50%, -50%);
         transition-duration: 0.3s;
         transition-delay: 0.15s;
+
+        @sugar.media mobile {
+            top: calc(50% + 30px);
+        }
     }
 
     &:after {

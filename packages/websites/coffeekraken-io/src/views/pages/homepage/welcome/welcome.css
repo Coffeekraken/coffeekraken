@@ -4,7 +4,11 @@
     position: relative;
     z-index: 10;
     margin-bottom: 50px;
-    background: red;
+
+    @sugar.media mobile {
+        height: auto;
+        text-align: center;
+    }
 
     @sugar.theme.when (dark) {
         background: sugar.color(main, background) !important;
@@ -24,6 +28,10 @@
         border-radius: 50%;
         transform-origin: 50% 100%;
         transform: scaleX(2) scaleY(2);
+
+        @sugar.media mobile {
+            height: 30%;
+        }
     }
 
     .__illustration {
@@ -40,7 +48,6 @@
             top: 100px; left: 0;
             width: 100%; height: 350px;
             transform: scale(1.4);
-            text-align: center;
         }
 
         ck-blob {
@@ -68,7 +75,6 @@
             top: 0; left: 0;
             width: 100%;
             transform: none;
-            text-align: center;
             padding: sugar.padding(100) sugar.padding(30);
         }
     }

@@ -121,91 +121,21 @@ export default function ({
 
     files.forEach((file) => {
 
-        const cachedFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '')}`;
-        const newFileContent = `
-            /* S-IMPORTED:${file.relPath} */
-            ${file.content}
-            /* S-ENDIMPORTED:${file.relPath} */
-        `;
-        __writeFileSync(cachedFilePath, newFileContent);
+        // const cachedFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '')}`;
+        // const newFileContent = `
+        //     /* S-IMPORTED:${file.relPath} */
+        //     ${file.content}
+        //     /* S-ENDIMPORTED:${file.relPath} */
+        // `;
+        // __writeFileSync(cachedFilePath, newFileContent);
 
-        let newRule = postcss.parse(`@import "${cachedFilePath}";`);
+        let newRule = postcss.parse(`@import "${file.relPath}";`);
         if (settings.target === 'vite') {
             newRule = postcss.parse(`@import url("${file.relPath}");`);
         }
         newRule.source.input.file = atRule.source.input.file;
         atRule.parent.insertAfter(atRule, newRule);
     });
-
-    // registerPostProcessor((root) => {
-    //     // do thing only if some media are specified
-    //     if (!finalParams.media) return;
-
-    //     const cssStr = root.toString();
-
-    //     // search for imported files
-    //     const importedMatches = cssStr.match(/\/\*\sS-IMPORTED:[a-zA-Z0-9@\/\._-]+\s\*\//gm);
-    //     importedMatches?.forEach(cacheStr => {
-
-    //         console.log('imPO', cacheStr);
-
-    //         // loop on the imported files (globs)
-    //         files.forEach(file => {
-    //             const relPath = cacheStr.replace('/* S-IMPORTED:','').replace(' */', '').trim();
-    //             // do the rest only if the file is the good one
-    //             if (relPath !== file.relPath) return;
-    //             // get the css string to mediatize
-    //             const cssToMediatize = cssStr.match(new RegExp(`\\/\\*\\sS-IMPORTED:${relPath}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sS-ENDIMPORTED:${relPath}\\s\\*\\/`, 'g'));
-    //             if (!cssToMediatize) return;
-    //             // loop on all the medias to process
-    //             finalParams.media.split(',').map(l => l.trim()).forEach(media => {
-    //                 // build the mediatized file path                
-    //                 const mediatizesFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '').replace('.css',`.${media}.css`)}`;
-    //                 // search for css declarations
-    //                 const ast = postcss.parse(cssToMediatize[0]);
-    //                 ast.walkRules(rule => {
-    //                     let sels = rule.selector.split(',').map(l => l.trim());
-    //                     sels = sels.map(sel => {
-    //                         const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
-    //                         if (!selectors) return sel;
-    //                         selectors.forEach(selector => {
-    //                             sel = sel.replace(selector, `${selector}___${media}`);
-    //                         });
-    //                         return sel;
-    //                     });
-    //                     rule.selector = sels.join(',');
-    //                 });
-    //                 // remove all comments
-    //                 ast.walkComments(comment => comment.remove());
-    //                 // build the mediatized css
-    //                 const mediatizedCss = `
-    //                     ${__STheme.buildMediaQuery(media)} {
-    //                         ${ ast.toString()}
-    //                     }
-    //                 `;
-    //                 // import or include file depending on target
-    //                 if (settings.target === 'vite') {
-    //                     // write the mediatized file
-    //                     __writeFileSync(mediatizesFilePath, mediatizedCss);
-    //                     // add the import to the root
-    //                     console.log('PREPEND', mediatizesFilePath);
-    //                     root.prepend(postcss.parse(`@import "${mediatizesFilePath}";`));
-    //                 } else {
-    //                     root.append(mediatizedCss);
-    //                 }
-
-    //             });
-    //         });
-    //         // console.log(toCache);
-
-    //         // const cachePath = getCacheFilePath(relPath);
-
-    //         // const toCacheStr = toCache[0].replace(`/* CACHE:${relPath} */`, '').replace(`/* ENDCACHE:${relPath} */`, '');
-    //         // __writeFileSync(cachePath, toCacheStr);
-    //     });
-
-
-    // });
 
     atRule.remove();
 }

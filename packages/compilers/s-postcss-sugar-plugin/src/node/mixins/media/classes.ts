@@ -88,32 +88,59 @@ export default function ({
 
     const mediaConfig = __STheme.config('media');
 
+    const medias = finalParams.query
+        ? finalParams.query.split(' ').map((l) => l.trim())
+        : Object.keys(mediaConfig.queries);
+
+    atRule.replaceWith(`
+        /* S-MEDIA-CLASSES:${medias.join(',')} */
+        ${atRule.nodes.map(node => node.toString())}
+        /* S-END-MEDIA-CLASSES:${medias.join(',')} */
+    `);
+
     registerPostProcessor((root) => {
-        const cssStr = root.toString();
 
-        // search for imported files
-        const importedMatches = cssStr.match(/\/\*\sS-IMPORTED:[a-zA-Z0-9@\/\._-]+\s\*\//gm);
-        importedMatches?.forEach(cacheStr => {
+        const mediaNodes: any[] = [];
+        let currentMedias = [];
 
-            console.log('imPO', cacheStr);
+        root.nodes.forEach((node, i) => {
+            if (node.type === 'comment' && node.text.includes('S-MEDIA-CLASSES:')) {
+                const medias = node.text.replace('S-MEDIA-CLASSES:', '').split(',').map(l => l.trim());
+                currentMedias = medias;
+                mediaNodes.push({
+                    nodes: [],
+                    medias
+                });
+            } else if (node.type === 'comment' && node.text.includes('S-END-MEDIA-CLASSES:')) {
+                const medias = node.text.replace('S-END-MEDIA-CLASSES:', '').split(',').map(l => l.trim());
+                currentMedias = [];
+            } else if (currentMedias.length) {
+                const mediaNodeObj = mediaNodes.slice(-1)[0];
+                // @ts-ignore
+                mediaNodeObj.nodes.push(node.clone());
+            }
+        });
 
-            // loop on the imported files (globs)
-            files.forEach(file => {
-                const relPath = cacheStr.replace('/* S-IMPORTED:','').replace(' */', '').trim();
-                // do the rest only if the file is the good one
-                if (relPath !== file.relPath) return;
-                // get the css string to mediatize
-                const cssToMediatize = cssStr.match(new RegExp(`\\/\\*\\sS-IMPORTED:${relPath}\\s\\*\\/(.|\\r|\\t|\\n)*\\/\\*\\sS-ENDIMPORTED:${relPath}\\s\\*\\/`, 'g'));
-                if (!cssToMediatize) return;
-                // loop on all the medias to process
-                finalParams.media.split(',').map(l => l.trim()).forEach(media => {
-                    // build the mediatized file path                
-                    const mediatizesFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '').replace('.css',`.${media}.css`)}`;
-                    // search for css declarations
-                    const ast = postcss.parse(cssToMediatize[0]);
-                    ast.walkRules(rule => {
-                        let sels = rule.selector.split(',').map(l => l.trim());
+
+        mediaNodes.forEach(mediaObj => {
+
+            mediaObj.medias.forEach((media) => {
+
+                const mediaRule = new postcssApi.AtRule({
+                    name: 'media',
+                    params: __STheme.buildMediaQuery(media).replace('@media ', ''),
+                });
+
+                mediaObj.nodes.forEach(node => {
+                    node = node.clone();
+                    if (node.type === 'comment') return;
+                    if (node.selector === ':root') return;
+                    if (!node.selector) {
+                        mediaRule.append(node);
+                    } else {
+                        let sels = node.selector.split(',').map(l => l.trim());
                         sels = sels.map(sel => {
+                            // sel = sel.replace(/___[a-zA-Z0-9_-]+/gm, '');
                             const selectors = sel.match(/\.[a-zA-Z0-9_-]+/gm);
                             if (!selectors) return sel;
                             selectors.forEach(selector => {
@@ -121,109 +148,13 @@ export default function ({
                             });
                             return sel;
                         });
-                        rule.selector = sels.join(',');
-                    });
-                    // remove all comments
-                    ast.walkComments(comment => comment.remove());
-                    // build the mediatized css
-                    const mediatizedCss = `
-                        ${__STheme.buildMediaQuery(media)} {
-                            ${ ast.toString()}
-                        }
-                    `;
-                    // import or include file depending on target
-                    if (settings.target === 'vite') {
-                        // write the mediatized file
-                        __writeFileSync(mediatizesFilePath, mediatizedCss);
-                        // add the import to the root
-                        console.log('PREPEND', mediatizesFilePath);
-                        root.prepend(postcss.parse(`@import "${mediatizesFilePath}";`));
-                    } else {
-                        root.append(mediatizedCss);
+                        node.selector = sels.join(',');
+                        mediaRule.append(node);
                     }
-
                 });
+
+                root.append(mediaRule);
             });
-            // console.log(toCache);
-
-            // const cachePath = getCacheFilePath(relPath);
-
-            // const toCacheStr = toCache[0].replace(`/* CACHE:${relPath} */`, '').replace(`/* ENDCACHE:${relPath} */`, '');
-            // __writeFileSync(cachePath, toCacheStr);
         });
-
-
     });
-
-    // const medias = finalParams.query
-    //     ? finalParams.query.split(' ').map((l) => l.trim())
-    //     : Object.keys(mediaConfig.queries);
-
-    // const mediasRules = {};
-    // medias.forEach((media) => {
-    //     mediasRules[media] = new postcssApi.AtRule({
-    //         name: 'sugar.media',
-    //         params: `(${media})`,
-    //     });
-    // });
-
-    // atRule.nodes?.forEach((node) => {
-
-    //     medias.forEach((media) => {
-
-    //         if (node.type === 'comment' && node.text.trim().match(/FROMCACHE:[a-zA-Z0-9@\._-]+/)) {
-
-    //             const parts = node.text.split(':').map(l => l.trim());
-
-    //             const cacheId = parts[1];
-    //             const cacheUrl = getCacheFilePath(cacheId);
-
-    //             let cachedStr;
-    //             try {
-    //                 cachedStr = __fs.readFileSync(cacheUrl);
-    //             } catch(e) {
-    //                 // console.log(e);
-    //             }
-
-    //             if (!cachedStr) return;
-
-    //             console.log(cachedStr);
-
-
-    //             // let newRule = __postcss.parse(`@import "${cacheUrl}";`);
-    //             // if (settings.target === 'vite') {
-    //             //     newRule = __postcss.parse(`@import url("${cacheUrl}");`);
-    //             // }
-
-    //             // // comment.remove();
-    //             // root.prepend(newRule);
-
-    //             // comment.replaceWith(newRule);
-    //         } else if (node.name === 'sugar.classes') {
-    //             getRoot(atRule).append(`/* MEDIACLASSES:${media} */`);
-    //         } else {
-
-    //             const mediaNode = node.clone();
-    //             if (mediaNode.selector) {
-    //                 const selectorParts = mediaNode.selector.split(' ');
-    //                 selectorParts[0] = `${selectorParts[0]}___${media}`;
-    //                 mediaNode.selectors[0] = selectorParts[0];
-    //                 mediaNode.selector = selectorParts.join(' ');
-    //             }
-    //             mediasRules[media].append(mediaNode);
-
-    //         }
-    //     });
-    // });
-    // for (let i = Object.keys(mediasRules).length - 1; i >= 0; i--) {
-    //     atRule.after(mediasRules[Object.keys(mediasRules)[i]]);
-    // }
-
-    // registerPostProcessor(() => {
-    //     if (finalParams.mediasOnly) {
-    //         atRule.remove();
-    //     } else {
-    //         atRule.replaceWith(atRule.nodes);
-    //     }
-    // });
 }

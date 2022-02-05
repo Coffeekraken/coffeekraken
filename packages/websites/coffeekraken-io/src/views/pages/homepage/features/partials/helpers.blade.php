@@ -1,9 +1,10 @@
-<section id="features-frontend" class="s-pb:100">
+<section id="features-frontend" class="s-pb:100 @mobile s-pi:30">
     <div class="s-container">
 
         <div class="section-top-background"></div>
 
-        <h3 class="s-typo:h2 s-mbe:30">All the <span class="s-tc:accent">helpers<br></span> you ever need</h3>
+        <h3 class="s-typo:h2 s-mbe:30 @mobile s-typo:h4">All the <span class="s-tc:accent">helpers<br></span> you ever
+            need</h3>
         <p class="s-typo:lead s-mbe:50">
             As part of our ecosystem, you will have access to a nice list of fully customizable, themeing ready UI
             library. This gives you access to components like:
@@ -98,7 +99,7 @@
         </ul>
 
 
-        <div class="s-text:center s-pt:50 s-mis:-50">
+        <div class="s-text:center s-pt:50 s-mis:-50 @mobile s-mis:0">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
                 Keep in mind that <span class="s-tc:accent">all of these features are
                     optional</span>.

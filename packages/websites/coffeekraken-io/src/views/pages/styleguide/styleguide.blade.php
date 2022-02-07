@@ -22,9 +22,9 @@
 
         <section class="s-container styleguide">
 
-            <div class="s-layout:12222:gap-between:gap-50">
+            <div class="s-layout:12222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-                <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
+                <nav class="sidemenu s-pb:50 @mobile s-display:none" s-refocus trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:30">
                         Styleguide

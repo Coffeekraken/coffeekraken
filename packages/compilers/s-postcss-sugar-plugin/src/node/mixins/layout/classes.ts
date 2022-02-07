@@ -148,35 +148,35 @@ export default function ({
     `);
     });
 
-    vars.comment(
-            () => `
-      /**
-       * @name       s-layout:${id}
-       * @namespace     sugar.css.layout
-       * @type          CssClass
-       * @platform      postcss
-       * @status      beta
-       * 
-       * This class represent a layout of "<yellow>${layout}</yellow>"
-       * 
-       * @example     html
-       * <div class="s-container s-layout:${id}">
-       *    ${Array(colsCount)
-           .map((idx) => {
-               return `<div>I'm the area ${idx}</div>`;
-           })
-           .join('\n')}
-       * </div>
-       * 
-       * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-       */
-      `,
-        ).code(`
-      .s-layout--${id} {
-        @sugar.layout(${layout}, $scope: bare);
-      }
-    `);
+    // vars.comment(
+    //         () => `
+    //   /**
+    //    * @name       s-layout:${id}
+    //    * @namespace     sugar.css.layout
+    //    * @type          CssClass
+    //    * @platform      postcss
+    //    * @status      beta
+    //    * 
+    //    * This class represent a layout of "<yellow>${layout}</yellow>"
+    //    * 
+    //    * @example     html
+    //    * <div class="s-container s-layout:${id}">
+    //    *    ${Array(colsCount)
+    //        .map((idx) => {
+    //            return `<div>I'm the area ${idx}</div>`;
+    //        })
+    //        .join('\n')}
+    //    * </div>
+    //    * 
+    //    * @since     2.0.0
+    //    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    */
+    //   `,
+    //     ).code(`
+    //   .s-layout--${id} {
+    //     @sugar.layout(${layout}, $scope: bare);
+    //   }
+    // `);
 
     const spaces = __STheme.config('space');
 

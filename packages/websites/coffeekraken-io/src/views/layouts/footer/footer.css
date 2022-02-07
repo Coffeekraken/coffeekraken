@@ -2,6 +2,8 @@
     background-color: sugar.color(main, surface);
     padding-block: sugar.padding(50);
 
+    padding-inline: sugar.padding(50);
+
     svg {
         width: 100px;
     }
@@ -16,5 +18,14 @@
     .__columns {
         display: flex;
         justify-content: space-between;
+
+        @sugar.media mobile {
+            flex-wrap: wrap;
+
+            > div {
+                width: 100%;
+                margin-block-start: sugar.margin(30);
+            }
+        }
     }
 }

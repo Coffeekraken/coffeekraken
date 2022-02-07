@@ -370,7 +370,7 @@ export default function (env, config) {
                  * @since               2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                '21': '21',
+                '21': '2 1',
                 /**
                  * @name                2_1
                  * @namespace           config.themeBase.layout.layout

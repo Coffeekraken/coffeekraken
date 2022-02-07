@@ -1,7 +1,12 @@
-<section id="features-development" class="s-pbe:100">
+<section id="features-development" class="s-pbe:100 @mobile s-pi:30">
     <div class="s-container">
-        <div class="s-layout:12:gap-x:gap-between">
-
+        <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
+            <div>
+                <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
+                    title="Sugar stack" />
+                <img class="__illustration s-when:dark" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
+                    title="Sugar stack" />
+            </div>
             <div class="s-pb:100">
                 <h3 class="s-typo:h2 s-mbe:30">Built-in<br /><span class="s-tc:accent">development<br>stack</span></h3>
                 <p class="s-typo:lead s-mbe:30">
@@ -16,17 +21,10 @@
                         class="s-tc:complementary">We have your back</span>!
                 </p>
             </div>
-
-            <div>
-                <img class="__illustration s-when:light" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
-                    title="Sugar stack" />
-                <img class="__illustration s-when:dark" src="/dist/img/illustrations/stack.png" alt="Sugar stack"
-                    title="Sugar stack" />
-            </div>
         </div>
 
-        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
-            <div>
+        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
                 </h5>
@@ -36,7 +34,7 @@
                 </p>
             </div>
             <div>
-                <div class="s-mie:-50">
+                <div class="s-mie:-50 @mobile s-mie:0">
                     @include('generic.code.example', ['examples' => [
                     'bash' => '# Install cli globally
                     npm i @coffeekraken/cli -g
@@ -50,9 +48,20 @@
             </div>
         </div>
 
-        <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
+        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="@mobile s-mbe:50">
+                <h5 class="s-typo:h4 s-mbe:30">
+                    All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
+                </h5>
+                <p class="s-typo:p ">
+                    Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
+                        class="s-typo:code">js/ts</span> and <span class="s-typo:code">node</span> development
+                    experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
+                    and maintainable css!
+                </p>
+            </div>
             <div>
-                <div class="s-mis:-50">
+                <div class="s-mis:-50 @mobile s-mis:0">
                     @include('generic.code.example', ['examples' => [
                     'css' => '.my-element {
                     background: sugar.color(accent);
@@ -70,21 +79,10 @@
                     ]])
                 </div>
             </div>
-            <div>
-                <h5 class="s-typo:h4 s-mbe:30">
-                    All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
-                </h5>
-                <p class="s-typo:p ">
-                    Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
-                        class="s-typo:code">js/ts</span> and <span class="s-typo:code">node</span> development
-                    experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
-                    and maintainable css!
-                </p>
-            </div>
         </div>
 
-        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
-            <div>
+        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
                 </h5>
@@ -106,8 +104,9 @@
             </div>
         </div>
 
-        <div class="s-layout:123:gap-x:gap-between s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50">
-            <div>
+        <div
+            class="s-layout:123 s-gap:column:50 s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50 @mobile s-layout:1_2_3 s-depth:0">
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h5 s-mbe:30">
                     Under<br />
                     <span class="s-tc:complementary">the hood</span>
@@ -118,7 +117,7 @@
                     of this...
                 </p>
             </div>
-            <div>
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:accent">ViteJS</span><br />server
                 </h5>
@@ -129,7 +128,7 @@
                     This gives us the power of live compilation and speed up considerably our workflow.
                 </p>
             </div>
-            <div>
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h5 s-mbe:30">
                     <span class="s-tc:complementary">Internal</span><br />server
                 </h5>
@@ -141,16 +140,8 @@
             </div>
         </div>
 
-        <div class="s-layout:112:gap-x:gap-between:align-center s-pb:50">
-            <div>
-                <div>
-                    @include('generic.code.example', ['examples' => [
-                    'bash' => '# launch the build process
-                    sugar build'
-                    ]])
-                </div>
-            </div>
-            <div>
+        <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Build</span><br />for production
                 </h5>
@@ -163,10 +154,18 @@
                     etc...
                 </p>
             </div>
+            <div>
+                <div>
+                    @include('generic.code.example', ['examples' => [
+                    'bash' => '# launch the build process
+                    sugar build'
+                    ]])
+                </div>
+            </div>
         </div>
 
-        <div class="s-layout:122:gap-x:gap-between:align-center s-pb:50">
-            <div>
+        <div class="s-layout:122 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="@mobile s-mbe:50">
                 <h4 class="s-typo:h4 s-mbe:30">
                     Built-in<br /><span class="s-tc:accent">recipes</span>
                 </h4>
@@ -236,8 +235,8 @@
             </p>
         </div>
 
-        <div class="s-layout:123:gap-x:gap-between s-pb:50">
-            <div>
+        <div class="s-layout:123 s-gap:column:50 s-pb:50 @mobile s-layout:1_2_3">
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Well known</span><br /> technologies
                 </h5>
@@ -249,7 +248,7 @@
                     This mean that all of the configurations for these packages are well known and easy to override.
                 </p>
             </div>
-            <div>
+            <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Template</span><br />languages
                 </h5>

@@ -22,9 +22,9 @@
 
         <section class="s-container markdown">
 
-            <div class="s-layout:1222:gap-between:gap-50">
+            <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2">
 
-                <nav class="sidemenu s-pb:50" s-refocus trigger="event:actual">
+                <nav class="sidemenu s-pb:50 @mobile s-pi:30" s-refocus trigger="event:actual">
 
                     <h5 class="s-typo:h5 s-mbe:30">
                         API

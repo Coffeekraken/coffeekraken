@@ -113,7 +113,13 @@ export default function ({
     const colsEndByArea = {};
     const rowsEndByArea = {};
 
-    const rows = finalParams.layout.split(/(\\n|_)/gm).map((l) => l.trim()).filter(l => l != '_');
+    
+
+    const rows = finalParams.layout.split(/(\n|_)/gm).map((l) => l.trim()).filter(l => l != '_' && l != '');
+
+    // if (finalParams.layout.includes('1 2 3 4 5')) {
+    //     console.log(finalParams.layout, rows);
+    // }
 
     const rowsCount = rows.length;
     let colsCount = 0;
@@ -201,7 +207,7 @@ export default function ({
             `
         display: grid;
         grid-template-columns: ${colsStatement.join(' ')};
-        grid-template-rows: ${rowsStatement.join(' ')};
+        grid-template-rows: auto;
       `,
         );
     }

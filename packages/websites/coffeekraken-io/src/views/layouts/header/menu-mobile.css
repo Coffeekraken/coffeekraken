@@ -35,7 +35,8 @@
         .__subnav {
             display: none;
             height: calc(100vh - 150px);
-            overflow-y: auto;
+            overflow: auto;
+            @sugar.scrollbar ($color: sugar.color(accent));
         }
         .__subnav[active] {
             display: block;

@@ -6,9 +6,9 @@
     <section class="s-container config-explorer">
 
 
-        <div class="s-layout:1222:gap-between:gap-50">
+        <div class="s-layout:1222 s-gap:column:50 @mobile s-layout:1_2 s-mi:30">
 
-            <nav class="sidemenu s-pb:50">
+            <nav class="sidemenu s-pb:50 @mobile s-display:none">
 
                 <h5 class="s-typo:h5 s-mbe:30">
                     Configs

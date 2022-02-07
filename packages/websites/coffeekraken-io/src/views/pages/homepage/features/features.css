@@ -63,6 +63,15 @@
       1 2 3 4
       5 6 7 8
     , $gap: 20, $gapBetween: true);
+
+        @sugar.media mobile {
+            @sugar.layout (
+            1 2
+            3 4
+            5 6
+            7 8
+            , $gap: 20, $gapBetween: true);
+        }
     }
 
     .__webcomponents-grid {
@@ -102,11 +111,27 @@
         }
     }
 
+    #features-development {
+
+        .__illustration {
+
+            @sugar.media mobile {
+                width: 60%;
+                position: relative;
+                left: 20%;
+            }
+        }
+    }
+
     #features-sugar {
 
         .__illustration {
             transform-origin: 0 0;
             transform: scale(1.3);
+
+            @sugar.media mobile {
+                transform: none;
+            }
         }
     }
 }

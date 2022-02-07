@@ -29,6 +29,10 @@ class postcssSugarPluginScrollbarInterface extends __SInterface {
                 type: 'String',
                 default: __STheme.config('ui.scrollbar.defaultColor'),
             },
+            background: {
+                type: 'String',
+                default: __STheme.config('ui.scrollbar.defaultColor'),
+            },
             size: {
                 type: 'String',
                 default: __STheme.config('ui.scrollbar.size'),
@@ -40,6 +44,7 @@ class postcssSugarPluginScrollbarInterface extends __SInterface {
 export interface IPostcssSugarPluginScrollbarParams {
     size: string;
     color: string;
+    background: string;
 }
 
 export { postcssSugarPluginScrollbarInterface as interface };
@@ -55,6 +60,7 @@ export default function ({
     const finalParams: IPostcssSugarPluginScrollbarParams = {
         size: '5px',
         color: 'accent',
+        background: 'main',
         ...params,
     };
 
@@ -67,8 +73,7 @@ export default function ({
           height: ${finalParams.size};
       }
       &::-webkit-scrollbar-track {
-          background-color: ${finalParams.color};
-          background: rgba(0,0,0,0);
+          background-color: ${finalParams.background};
       }
       &::-webkit-scrollbar-thumb {
           background-color: ${finalParams.color};

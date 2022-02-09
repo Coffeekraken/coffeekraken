@@ -194,11 +194,16 @@ export default function ({
     const colsStatement: string[] = [],
         rowsStatement: string[] = [];
     for (let i = 0; i < colsCount; i++) {
-        colsStatement.push(`${100 / colsCount}%`);
+        // colsStatement.push(`${100 / colsCount}%`);
+        if (colsCount <= 1) {
+            colsStatement.push('100%');
+        } else {
+            colsStatement.push('1fr');
+        }
     }
-    for (let i = 0; i < rowsCount; i++) {
-        rowsStatement.push(`${100 / rowsCount}%`);
-    }
+    // for (let i = 0; i < rowsCount; i++) {
+    //     rowsStatement.push(`${100 / rowsCount}%`);
+    // }
 
     const vars: string[] = [];
 

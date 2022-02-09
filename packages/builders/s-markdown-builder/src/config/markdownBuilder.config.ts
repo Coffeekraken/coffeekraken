@@ -118,6 +118,61 @@ export default function (env, config) {
         },
         presets: {},
         transformers: {
+            og: {
+                /**
+                 * @name            match
+                 * @namespace       config.markdownBuilder.transformers.og
+                 * @type            String
+                 * @default         /^<!-- og:(.*) -->$/gm
+                 *
+                 * Specify the regex to match "code" string
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                match: /^<!-- og:(.*) -->$/gm,
+                /**
+                 * @name            preprocessor
+                 * @namespace       config.markdownBuilder.transformers.og
+                 * @type            String
+                 *
+                 * Specify a path to a file that export a function which will be used to preprocess data passed to the view.
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                preprocessor: __path.resolve(__dirname(), '../transformers/og/og'),
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.transformers.og
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../transformers/og/og.md')
+                 *
+                 * Specify the "markdown" template to transform this match
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../transformers/og/og.md',
+                ),
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.transformers.og
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../transformers/og/og.html')
+                 *
+                 * Specify the "html" template to transform this match
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                html: __path.resolve(
+                    __dirname(),
+                    '../transformers/og/og.html',
+                ),
+            },
             code: {
                 /**
                  * @name            match

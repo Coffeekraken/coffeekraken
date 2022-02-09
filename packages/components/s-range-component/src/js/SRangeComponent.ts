@@ -14,7 +14,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SRangeComponentInterface.js
- * @menu                Styleguide / Forms              /styleguide/forms/s-range
+ * @menu                Styleguide / Forms              /styleguide/form/s-range
  * @install             npm i @coffeekraken/s-range-component
  * @platform            html
  * @status              beta

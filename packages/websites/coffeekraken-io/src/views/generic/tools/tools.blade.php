@@ -4,7 +4,7 @@
         <a class="s-btn:block s-color:error" href="https://olivierbossel.com" title="Share the love" target="_blank">
             <i class="s-icon:fire"></i>
         </a>
-        <div class="s-tooltip:inline-start:interactive:wrap:discord s-text:center">
+        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:github s-font:100 s-mbe:30"></i>
                 <p class="s-typo:p s-font:30 s-mbe:30">
@@ -27,7 +27,7 @@
         <a class="s-btn:block s-color:accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
             <i class="s-icon:heart"></i>
         </a>
-        <div class="s-tooltip:inline-start:interactive:wrap:discord s-text:center">
+        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:heart s-font:100 s-mbe:30"></i>
                 <p class="s-typo:p s-font:30 s-mbe:30">
@@ -57,7 +57,7 @@
             target="_blank">
             <i class="s-icon:user"></i>
         </a>
-        <div class="s-tooltip:inline-start:interactive:wrap:discord s-text:center">
+        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:discord s-font:100 s-mbe:30"></i>
                 <p class="s-typo:p s-font:30 s-mbe:30">
@@ -75,7 +75,7 @@
             target="_blank">
             <i class="s-icon:opensource"></i>
         </a>
-        <div class="s-tooltip:inline-start:interactive:wrap:discord s-text:center">
+        <div s-floating placement="left" class="s-tooltip:interactive s-text:center">
             <div class="s-position:relative">
                 <i class="s-icon:opensource s-font:100 s-mbe:30"></i>
                 <p class="s-typo:p s-font:30 s-mbe:30">

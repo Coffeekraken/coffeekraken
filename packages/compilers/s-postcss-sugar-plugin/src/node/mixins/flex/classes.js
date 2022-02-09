@@ -28,10 +28,10 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     const vars = new CssVars();
     vars.comment(() => `
       /**
-        * @name          Flex
+        * @name          Flexbox
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/flex
+        * @menu           Styleguide / Helpers        /styleguide/helpers/flexbox
         * @platform       css
         * @status       beta
         * 

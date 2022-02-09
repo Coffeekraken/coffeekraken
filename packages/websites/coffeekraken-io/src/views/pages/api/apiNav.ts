@@ -121,7 +121,8 @@ export class ApiNav extends __SLitComponent {
     }
 
     _renderList(obj, currentNamespace = '') {
-        const items = Object.keys(obj).map((itemName) => {
+        const itemsKeys = Object.keys(obj);
+        const items =itemsKeys.map((itemName) => {
             const itemObj = obj[itemName];
             const itemNamespace = `${
                 currentNamespace ? `${currentNamespace}.` : ''
@@ -146,7 +147,7 @@ export class ApiNav extends __SLitComponent {
                 `;
             } else {
                 return html`
-                    <li class="${this._isAcive(itemNamespace) ? 'active' : ''}">
+                    <li class="${itemsKeys.length <= 2 || this._isAcive(itemNamespace) ? 'active' : ''}">
                         <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
                         <i class="s-icon:folder"></i>
                         <span

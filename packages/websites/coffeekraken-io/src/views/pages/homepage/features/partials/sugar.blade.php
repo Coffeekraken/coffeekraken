@@ -2,8 +2,6 @@
 
     <div class="s-container">
 
-        <div class="section-top-background"></div>
-
         <div class="s-layout:21 s-gap:column:50 @mobile s-layout:1_2">
             <div class="">
                 <img class="__illustration s-when:light" src="/dist/img/illustrations/toolkit.png" alt="Sugar toolkit"
@@ -35,13 +33,13 @@
         </div>
 
         <div class="s-pbs:100">
-            <div class="s-layout:211 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         A coherant <span class="s-tc:accent">CLI</span> with some cool features
                     </h5>
                     <p class="s-typo:p ">
-                        The "<span class="s-typo:code">@@coffeekraken/cli</span> package is the one that provides
+                        The <span class="s-typo:code">@@coffeekraken/cli</span> package is the one that provides
                         you these CLI features.
                         <br>Some other packages are extending the CLI with new features like the "<span
                             class="s-typo:code">@@coffeekraken/s-frontstack</span>" that represent the
@@ -72,23 +70,31 @@
                     <p class="s-typo:p ">
                         This function allows you to do exactly the same as the <span
                             class="s-typo:code">querySelector</span> but
-                        will listen for new element that match your selector in the DOM and execute
+                        will <span class="s-tc:complementary">listen for new element that match your selector in the
+                            DOM</span> and execute
                         your callback function with it as soon as it appears in your document.
                     </p>
                 </div>
                 <div>
-                    <div class="s-mie:-100 @mobile s-mie:0">
+                    <div class="s-mie:-100 s-mbe:30 @mobile s-mie:0">
                         @include('generic.code.example', ['examples' => [
-                        'js' => 'import querySelectorLive from \'@@coffeekraken/sugar/js/dom/query/querySelectorLive\';
-                        querySelectorLive(\'.my-cool-component\', (elm) => {
+                        'js' => 'import __querySelectorLive from
+                        \'@@coffeekraken/sugar/js/dom/query/querySelectorLive\';
+                        __querySelectorLive(\'.my-cool-component\', (elm) => {
                         // do something with your element..
                         });'
                         ]])
                     </div>
+                    <blockquote class="s-blockquote s-color:accent">
+                        Note that the <code class="s-typo:code">__</code> at the start of our imports is just <span
+                            class="s-tc:accent">a convention</span> that we follow. It helps to see what is an
+                        imported item
+                        in our code...
+                    </blockquote>
                 </div>
             </div>
 
-            <div class="s-layout:211 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
+            <div class="s-layout:221 s-gap:column:50 s-pb:50 @mobile s-layout:1_2">
                 <div class="@mobile s-mbe:50">
                     <h5 class="s-typo:h4 s-mbe:30">
                         sha256,<span class="s-tc:accent">base64</span>/etc...
@@ -103,10 +109,10 @@
                 <div>
                     <div class="s-mis:-50 @mobile s-mis:0">
                         @include('generic.code.example', ['examples' => [
-                        'js' => 'import base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
-                        import md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
-                        base64(\'Hello world\'); // SGVsbG8gd29ybGQ=
-                        md5(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
+                        'js' => 'import __base64 from \'@@coffeekraken/sugar/shared/crypt/base64\';
+                        import __md5 from \'@@coffeekraken/sugar/shared/crypt/md5\';
+                        __base64.encrypt(\'Hello world\'); // SGVsbG8gd29ybGQ=
+                        __md5.encrypt(\'Hello world\'); // 3e25960a79dbc69b674cd4ec67a72c62'
                         ]])
                     </div>
                 </div>
@@ -126,10 +132,10 @@
                 <div>
                     <div class="s-mie:-50 @mobile s-mie:0">
                         @include('generic.code.example', ['examples' => [
-                        'js' => 'import isEmail from \'@@coffeekraken/sugar/shared/is/email\';
-                        import isColor from \'@@coffeekraken/sugar/shared/is/color\';
-                        isEmail(\'hello@world.com\'); // true
-                        isColor(\'rgba(10,20,30,1)\'); // true'
+                        'js' => 'import __isEmail from \'@@coffeekraken/sugar/shared/is/email\';
+                        import __isColor from \'@@coffeekraken/sugar/shared/is/color\';
+                        __isEmail(\'hello@world.com\'); // true
+                        __isColor(\'rgba(10,20,30,1)\'); // true'
                         ]])
                     </div>
                 </div>
@@ -138,12 +144,13 @@
 
         <div class="s-text:center s-pbs:50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
-                This is <span class="s-tc:complementary">just a sneak peak</span> of what you can leverage in the sugar
+                This is <span class="s-tc:accent">just a sneak peak</span> of what you can leverage in the sugar
                 toolkit.<br>
-                Don't be afraid, as usual you can take from it only what you need and <span class="s-tc:accent">learn
+                Don't be afraid, as usual you can take from it only what you need and <span
+                    class="s-tc:complementary">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/doc/get-started/get-started" title="Get started!">
                 Discover all of what sugar has to offer!
             </a>
         </div>

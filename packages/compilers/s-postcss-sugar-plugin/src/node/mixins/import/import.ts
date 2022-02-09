@@ -119,22 +119,17 @@ export default function ({
         });
     }
 
+    
+    const commentRule = postcss.parse(`/* S */`);
+    atRule.parent.insertAfter(atRule, commentRule);
+        
     files.forEach((file) => {
-
-        // const cachedFilePath = `${__packageCacheDir()}/postcssSugarPlugin/import/${file.relPath.replace(/\.{1,2}\//gm, '')}`;
-        // const newFileContent = `
-        //     /* S-IMPORTED:${file.relPath} */
-        //     ${file.content}
-        //     /* S-ENDIMPORTED:${file.relPath} */
-        // `;
-        // __writeFileSync(cachedFilePath, newFileContent);
-
         let newRule = postcss.parse(`@import "${file.relPath}";`);
         if (settings.target === 'vite') {
             newRule = postcss.parse(`@import url("${file.relPath}");`);
         }
         newRule.source.input.file = atRule.source.input.file;
-        atRule.parent.insertAfter(atRule, newRule);
+        atRule.parent.insertBefore(atRule, newRule);
     });
 
     atRule.remove();

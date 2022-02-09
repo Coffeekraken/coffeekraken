@@ -3,7 +3,7 @@
     <div class="s-container">
 
         <div class="s-flex:align-center" style="position: relative">
-            <div class="__actions">
+            <div class="__actions s-display:none @mobile s-display:inline-block">
                 <div class="s-mis:30">
                     <a s-activate class="__menu-icon" href="#nav-mobile" toggle>
                         <i class="s-icon:menu __open"></i>
@@ -111,7 +111,7 @@
                 @include('layouts.header.partials.menuItem', ['menuItem' => $apiMenu, 'class' => ''])
 
             </nav>
-            <div class="__actions">
+            <div class="s-flex:align-center">
                 <form class="s-until:media:mobile" action="/doc/api" method="get" name="search" id="search-form">
                     <ck-search></ck-search>
                 </form>
@@ -120,11 +120,11 @@
                         <i class="s-icon:search"></i>
                     </a>
                 </div> --}}
-                <div class="s-tooltip-container s-mie:30">
-                    <a class="" id="settings-opener">
+                <div class="s-tooltip-container s-mis:30 @mobile s-mie:30">
+                    <a class="s-cursor:pointer" id="settings-opener">
                         <i class="s-icon:settings"></i>
                     </a>
-                    <div class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">
+                    <div s-floating class="s-tooltip:block-end s-color:accent s-white-space:nowrap s-text:center">
                         Display website settings
                     </div>
                 </div>
@@ -163,19 +163,20 @@
         <nav class="__links">
 
             {{-- Documentation --}}
-            <a class="s-typo:bold __main-link" s-activate active href="#menu-mobile-doc" group="menu-mobile"
-                title="Documentation">
+            <a class="s-typo:bold __main-link" id="menu-mobile-doc" s-activate active href="#menu-mobile-doc" save-state
+                group="menu-mobile" title="Documentation">
                 <span>Documentation</span>
             </a>
 
             {{-- Styleguide --}}
-            <a class="s-typo:bold __main-link" s-activate href="#menu-mobile-styleguide" group="menu-mobile"
-                title="Styleguide">
+            <a class="s-typo:bold __main-link" id="menu-mobile-styleguide" s-activate href="#menu-mobile-styleguide"
+                save-state group="menu-mobile" title="Styleguide">
                 <span>Styleguide</span>
             </a>
 
             {{-- API --}}
-            <a class="s-typo:bold __main-link" s-activate href="#menu-mobile-api" group="menu-mobile" title="Api">
+            <a class="s-typo:bold __main-link" id="menu-mobile-api" s-activate href="#menu-mobile-api" save-state
+                group="menu-mobile" title="Api">
                 <span>Api</span>
             </a>
 

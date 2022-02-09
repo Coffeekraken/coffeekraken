@@ -69,6 +69,16 @@ export default class SStaticBuilderBuildParamsInterface extends __SInterface {
                 alias: 't',
                 default: __SSugarConfig.get('staticBuilder.requestTimeout'),
             },
+            requestRetry: {
+                description: 'Specify the number of retry to do by request before considering it as failed',
+                type: 'Number',
+                default: __SSugarConfig.get('staticBuilder.requestRetry')
+            },
+            requestRetryTimeout: {
+                description: 'Specify how many long the builder has to wait between tries',
+                type: 'Number',
+                default: __SSugarConfig.get('staticBuilder.requestRetryTimeout')
+            },
             assets: {
                 description:
                     'Specify some "assets" directories/files to copy into the static directory',

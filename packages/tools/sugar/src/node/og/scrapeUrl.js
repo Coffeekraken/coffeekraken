@@ -9,10 +9,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 import __deepMerge from '../../shared/object/deepMerge';
 import __openGraphScraper from 'open-graph-scraper';
-import __SCache from '@coffeekraken/s-cache';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __fs from 'fs';
 export default function srapeUrl(url, settings = {}) {
     return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
-        var _a;
         const finalSettings = __deepMerge({
             id: undefined,
             scraper: {},
@@ -20,13 +22,13 @@ export default function srapeUrl(url, settings = {}) {
                 ttl: '1w',
             },
         }, settings);
-        let cache;
+        const cacheFilePath = `${__packageCacheDir()}/sugar/scrapeUrl.json`;
+        let cacheJson = {};
         // leverage cache
-        if (finalSettings.cache) {
-            cache = new __SCache((_a = finalSettings.id) !== null && _a !== void 0 ? _a : 'sugar.node.og.scrapeUrl', finalSettings.cache);
-            const cachedValue = yield cache.get(url);
-            if (cachedValue) {
-                return resolve(cachedValue);
+        if (finalSettings.cache && __fs.existsSync(cacheFilePath)) {
+            cacheJson = __readJsonSync(cacheFilePath);
+            if (cacheJson[url]) {
+                return resolve(cacheJson[url]);
             }
         }
         // process to actual scraping
@@ -37,10 +39,11 @@ export default function srapeUrl(url, settings = {}) {
         }
         // cache if needed
         if (finalSettings.cache && data.result) {
-            yield cache.set(url, data.result);
+            cacheJson[url] = data.result;
+            __writeJsonSync(cacheFilePath, cacheJson);
         }
         // return the resuls
         return resolve(data.result);
     }));
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyYXBlVXJsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NyYXBlVXJsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBQ3hELE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxRQUE2QixNQUFNLHVCQUF1QixDQUFDO0FBdURsRSxNQUFNLENBQUMsT0FBTyxVQUFVLFFBQVEsQ0FDNUIsR0FBVyxFQUNYLFdBQXdDLEVBQUU7SUFFMUMsT0FBTyxJQUFJLE9BQU8sQ0FBQyxDQUFPLE9BQU8sRUFBRSxNQUFNLEVBQUUsRUFBRTs7UUFDekMsTUFBTSxhQUFhLEdBQXVCLFdBQVcsQ0FDakQ7WUFDSSxFQUFFLEVBQUUsU0FBUztZQUNiLE9BQU8sRUFBRSxFQUFFO1lBQ1gsS0FBSyxFQUFFO2dCQUNILEdBQUcsRUFBRSxJQUFJO2FBQ1o7U0FDSixFQUNELFFBQVEsQ0FDWCxDQUFDO1FBRUYsSUFBSSxLQUFLLENBQUM7UUFFVixpQkFBaUI7UUFDakIsSUFBSSxhQUFhLENBQUMsS0FBSyxFQUFFO1lBQ3JCLEtBQUssR0FBRyxJQUFJLFFBQVEsQ0FDaEIsTUFBQSxhQUFhLENBQUMsRUFBRSxtQ0FBSSx5QkFBeUIsRUFDN0MsYUFBYSxDQUFDLEtBQUssQ0FDdEIsQ0FBQztZQUNGLE1BQU0sV0FBVyxHQUFHLE1BQU0sS0FBSyxDQUFDLEdBQUcsQ0FBQyxHQUFHLENBQUMsQ0FBQztZQUN6QyxJQUFJLFdBQVcsRUFBRTtnQkFDYixPQUFPLE9BQU8sQ0FBQyxXQUFXLENBQUMsQ0FBQzthQUMvQjtTQUNKO1FBRUQsNkJBQTZCO1FBQzdCLE1BQU0sSUFBSSxHQUFHLE1BQU0sa0JBQWtCLGlDQUM5QixhQUFhLENBQUMsT0FBTyxLQUN4QixHQUFHLElBQ0wsQ0FBQztRQUVILDRCQUE0QjtRQUM1QixJQUFJLElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDWixPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDOUI7UUFFRCxrQkFBa0I7UUFDbEIsSUFBSSxhQUFhLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDcEMsTUFBTSxLQUFLLENBQUMsR0FBRyxDQUFDLEdBQUcsRUFBRSxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDckM7UUFFRCxvQkFBb0I7UUFDcEIsT0FBTyxPQUFPLENBQUMsSUFBSSxDQUFDLE1BQU0sQ0FBQyxDQUFDO0lBQ2hDLENBQUMsQ0FBQSxDQUFDLENBQUM7QUFDUCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic2NyYXBlVXJsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsic2NyYXBlVXJsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUFBLE9BQU8sV0FBVyxNQUFNLCtCQUErQixDQUFDO0FBQ3hELE9BQU8sa0JBQWtCLE1BQU0sb0JBQW9CLENBQUM7QUFDcEQsT0FBTyxpQkFBaUIsTUFBTSwrQ0FBK0MsQ0FBQztBQUM5RSxPQUFPLGNBQWMsTUFBTSwwQ0FBMEMsQ0FBQztBQUN0RSxPQUFPLGVBQWUsTUFBTSwyQ0FBMkMsQ0FBQztBQUN4RSxPQUFPLElBQUksTUFBTSxJQUFJLENBQUM7QUF1RHRCLE1BQU0sQ0FBQyxPQUFPLFVBQVUsUUFBUSxDQUM1QixHQUFXLEVBQ1gsV0FBd0MsRUFBRTtJQUUxQyxPQUFPLElBQUksT0FBTyxDQUFDLENBQU8sT0FBTyxFQUFFLE1BQU0sRUFBRSxFQUFFO1FBQ3pDLE1BQU0sYUFBYSxHQUF1QixXQUFXLENBQ2pEO1lBQ0ksRUFBRSxFQUFFLFNBQVM7WUFDYixPQUFPLEVBQUUsRUFBRTtZQUNYLEtBQUssRUFBRTtnQkFDSCxHQUFHLEVBQUUsSUFBSTthQUNaO1NBQ0osRUFDRCxRQUFRLENBQ1gsQ0FBQztRQUVGLE1BQU0sYUFBYSxHQUFHLEdBQUcsaUJBQWlCLEVBQUUsdUJBQXVCLENBQUM7UUFFcEUsSUFBSSxTQUFTLEdBQUcsRUFBRSxDQUFDO1FBRW5CLGlCQUFpQjtRQUNqQixJQUFJLGFBQWEsQ0FBQyxLQUFLLElBQUksSUFBSSxDQUFDLFVBQVUsQ0FBQyxhQUFhLENBQUMsRUFBRTtZQUN2RCxTQUFTLEdBQUcsY0FBYyxDQUFDLGFBQWEsQ0FBQyxDQUFDO1lBQzFDLElBQUksU0FBUyxDQUFDLEdBQUcsQ0FBQyxFQUFFO2dCQUNoQixPQUFPLE9BQU8sQ0FBQyxTQUFTLENBQUMsR0FBRyxDQUFDLENBQUMsQ0FBQzthQUNsQztTQUNKO1FBRUQsNkJBQTZCO1FBQzdCLE1BQU0sSUFBSSxHQUFHLE1BQU0sa0JBQWtCLGlDQUM5QixhQUFhLENBQUMsT0FBTyxLQUN4QixHQUFHLElBQ0wsQ0FBQztRQUVILDRCQUE0QjtRQUM1QixJQUFJLElBQUksQ0FBQyxLQUFLLEVBQUU7WUFDWixPQUFPLE1BQU0sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7U0FDOUI7UUFFRCxrQkFBa0I7UUFDbEIsSUFBSSxhQUFhLENBQUMsS0FBSyxJQUFJLElBQUksQ0FBQyxNQUFNLEVBQUU7WUFDcEMsU0FBUyxDQUFDLEdBQUcsQ0FBQyxHQUFHLElBQUksQ0FBQyxNQUFNLENBQUM7WUFDN0IsZUFBZSxDQUFDLGFBQWEsRUFBRSxTQUFTLENBQUMsQ0FBQztTQUM3QztRQUVELG9CQUFvQjtRQUNwQixPQUFPLE9BQU8sQ0FBQyxJQUFJLENBQUMsTUFBTSxDQUFDLENBQUM7SUFDaEMsQ0FBQyxDQUFBLENBQUMsQ0FBQztBQUNQLENBQUMifQ==

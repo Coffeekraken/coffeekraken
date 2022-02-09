@@ -51,15 +51,25 @@
     }
 
     svg {
-        height: 50px;
+        height: 44px;
+        width:120px;
         transform-origin: 0 50%;
-        transform: scale(0.8);
     }
+
     svg .main {
-        fill: sugar.color(main, text);
+        fill: sugar.color(accent);
     }
     svg .accent {
-        fill: sugar.color(accent);
+        fill: sugar.color(base, --darken 55);
+    }
+
+    @sugar.theme.when(dark) {
+        svg .main {
+            fill: sugar.color(main, text);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
     }
 
     .__menu-icon {
@@ -95,18 +105,4 @@
         }
     }
 
-}
-
-#settings .s-side-panel__container {
-    background-color: sugar.color(main, background);
-    min-width: 300px;
-    width: 33vw;
-    max-width: 500px;
-    overflow-y: scroll;
-    @sugar.scrollbar();
-    @sugar.depth (10);
-
-    .s-label > *:last-child {
-        max-width: 50%;
-    }
 }

@@ -1,0 +1,4 @@
+.s-tabs {
+    background: sugar.color(current, --darken 15);
+    display: inline-flex !important;
+}

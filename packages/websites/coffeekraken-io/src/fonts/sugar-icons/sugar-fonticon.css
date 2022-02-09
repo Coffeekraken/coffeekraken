@@ -1,11 +1,11 @@
 @font-face {
     font-family: "sugar-fonticon";
-    src: url("./sugar-fonticon.eot?c3155ff7fd8cf14ad186df4fe6b064d7#iefix") format("embedded-opentype"),
-url("./sugar-fonticon.woff2?c3155ff7fd8cf14ad186df4fe6b064d7") format("woff2"),
-url("./sugar-fonticon.woff?c3155ff7fd8cf14ad186df4fe6b064d7") format("woff");
+    src: url("./sugar-fonticon.eot?f118fbe54d03dde8664a2b9f5300a36a#iefix") format("embedded-opentype"),
+url("./sugar-fonticon.woff2?f118fbe54d03dde8664a2b9f5300a36a") format("woff2"),
+url("./sugar-fonticon.woff?f118fbe54d03dde8664a2b9f5300a36a") format("woff");
 }
 
-.s-icon--align:before,.s-icon--autocomplete:before,.s-icon--avatar:before,.s-icon--brand-coffeekraken:before,.s-icon--brand-lit:before,.s-icon--button:before,.s-icon--code:before,.s-icon--colors:before,.s-icon--copy:before,.s-icon--datepicker:before,.s-icon--display-preview:before,.s-icon--dropdown:before,.s-icon--easing:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--flex:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--helpers:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--layout:before,.s-icon--opensource:before,.s-icon--radius:before,.s-icon--range:before,.s-icon--ratio:before,.s-icon--refresh:before,.s-icon--scale:before,.s-icon--space:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--switch:before,.s-icon--theme:before,.s-icon--tooltip:before,.s-icon--typography:before,.s-icon--visibility:before,.s-icon--vue:before {
+.s-icon--align:before,.s-icon--autocomplete:before,.s-icon--avatar:before,.s-icon--brand-coffeekraken:before,.s-icon--brand-lit:before,.s-icon--button:before,.s-icon--code:before,.s-icon--colors:before,.s-icon--copy:before,.s-icon--datepicker:before,.s-icon--display-preview:before,.s-icon--dropdown:before,.s-icon--easing:before,.s-icon--file-css:before,.s-icon--file-html:before,.s-icon--file-js:before,.s-icon--file-md:before,.s-icon--file-php:before,.s-icon--file-ts:before,.s-icon--flex:before,.s-icon--folder-opened:before,.s-icon--folder:before,.s-icon--helpers:before,.s-icon--lang-css:before,.s-icon--lang-html:before,.s-icon--lang-js:before,.s-icon--lang-md:before,.s-icon--lang-php:before,.s-icon--lang-ts:before,.s-icon--layout:before,.s-icon--loader:before,.s-icon--opensource:before,.s-icon--radius:before,.s-icon--range:before,.s-icon--ratio:before,.s-icon--refresh:before,.s-icon--scale:before,.s-icon--space:before,.s-icon--support-chromium:before,.s-icon--support-edge:before,.s-icon--support-firefox:before,.s-icon--support-rtl:before,.s-icon--support-safari:before,.s-icon--switch:before,.s-icon--theme:before,.s-icon--tooltip:before,.s-icon--typography:before,.s-icon--visibility:before,.s-icon--vue:before {
 position: relative;
 
     font-family: sugar-fonticon !important;
@@ -108,61 +108,64 @@ position: relative;
 .s-icon--layout:before {
     content: "\f11e";
 }
-.s-icon--opensource:before {
+.s-icon--loader:before {
     content: "\f11f";
 }
-.s-icon--radius:before {
+.s-icon--opensource:before {
     content: "\f120";
 }
-.s-icon--range:before {
+.s-icon--radius:before {
     content: "\f121";
 }
-.s-icon--ratio:before {
+.s-icon--range:before {
     content: "\f122";
 }
-.s-icon--refresh:before {
+.s-icon--ratio:before {
     content: "\f123";
 }
-.s-icon--scale:before {
+.s-icon--refresh:before {
     content: "\f124";
 }
-.s-icon--space:before {
+.s-icon--scale:before {
     content: "\f125";
 }
-.s-icon--support-chromium:before {
+.s-icon--space:before {
     content: "\f126";
 }
-.s-icon--support-edge:before {
+.s-icon--support-chromium:before {
     content: "\f127";
 }
-.s-icon--support-firefox:before {
+.s-icon--support-edge:before {
     content: "\f128";
 }
-.s-icon--support-rtl:before {
+.s-icon--support-firefox:before {
     content: "\f129";
 }
-.s-icon--support-safari:before {
+.s-icon--support-rtl:before {
     content: "\f12a";
 }
-.s-icon--switch:before {
+.s-icon--support-safari:before {
     content: "\f12b";
 }
-.s-icon--theme:before {
+.s-icon--switch:before {
     content: "\f12c";
 }
-.s-icon--tooltip:before {
+.s-icon--theme:before {
     content: "\f12d";
 }
-.s-icon--typography:before {
+.s-icon--tooltip:before {
     content: "\f12e";
 }
-.s-icon--visibility:before {
+.s-icon--typography:before {
     content: "\f12f";
 }
-.s-icon--vue:before {
+.s-icon--visibility:before {
     content: "\f130";
 }
-.s-icon--align,.s-icon--autocomplete,.s-icon--avatar,.s-icon--brand-coffeekraken,.s-icon--brand-lit,.s-icon--button,.s-icon--code,.s-icon--colors,.s-icon--copy,.s-icon--datepicker,.s-icon--display-preview,.s-icon--dropdown,.s-icon--easing,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--flex,.s-icon--folder-opened,.s-icon--folder,.s-icon--helpers,.s-icon--lang-css,.s-icon--lang-html,.s-icon--lang-js,.s-icon--lang-md,.s-icon--lang-php,.s-icon--lang-ts,.s-icon--layout,.s-icon--opensource,.s-icon--radius,.s-icon--range,.s-icon--ratio,.s-icon--refresh,.s-icon--scale,.s-icon--space,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--switch,.s-icon--theme,.s-icon--tooltip,.s-icon--typography,.s-icon--visibility,.s-icon--vue {
+.s-icon--vue:before {
+    content: "\f131";
+}
+.s-icon--align,.s-icon--autocomplete,.s-icon--avatar,.s-icon--brand-coffeekraken,.s-icon--brand-lit,.s-icon--button,.s-icon--code,.s-icon--colors,.s-icon--copy,.s-icon--datepicker,.s-icon--display-preview,.s-icon--dropdown,.s-icon--easing,.s-icon--file-css,.s-icon--file-html,.s-icon--file-js,.s-icon--file-md,.s-icon--file-php,.s-icon--file-ts,.s-icon--flex,.s-icon--folder-opened,.s-icon--folder,.s-icon--helpers,.s-icon--lang-css,.s-icon--lang-html,.s-icon--lang-js,.s-icon--lang-md,.s-icon--lang-php,.s-icon--lang-ts,.s-icon--layout,.s-icon--loader,.s-icon--opensource,.s-icon--radius,.s-icon--range,.s-icon--ratio,.s-icon--refresh,.s-icon--scale,.s-icon--space,.s-icon--support-chromium,.s-icon--support-edge,.s-icon--support-firefox,.s-icon--support-rtl,.s-icon--support-safari,.s-icon--switch,.s-icon--theme,.s-icon--tooltip,.s-icon--typography,.s-icon--visibility,.s-icon--vue {
 display: inline-block;
 line-height: 1;
 width: 1em;

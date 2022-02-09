@@ -64,6 +64,32 @@ export default function (env, config) {
         requestTimeout: 5000,
 
         /**
+         * @name            requestRetry
+         * @namespace       config.staticBuilder
+         * @type            Number
+         * @default         5
+         *
+         * Specify the number of retry to do by request before considering it as failed
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        requestRetry: 5,
+
+        /**
+         * @name            requestRetryTimeout
+         * @namespace       config.staticBuilder
+         * @type            Number
+         * @default         1000
+         *
+         * Specify how many long the builder has to wait between tries
+         *
+         * @since           2.0.0
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        requestRetryTimeout: 1000,
+
+        /**
          * @name            clean
          * @namespace       config.staticBuilder
          * @type            Boolean

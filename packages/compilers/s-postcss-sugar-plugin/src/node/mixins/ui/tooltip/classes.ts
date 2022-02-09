@@ -82,7 +82,7 @@ export default function ({
         * @name          Tooltips
         * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/tooltips
+        * @menu           Styleguide / UI        /styleguide/ui/tooltip
         * @platform       css
         * @status       beta
         * 
@@ -105,11 +105,11 @@ export default function ({
                 }           Apply the ${shape} tooltip shape`;
             })
             .join('\n')}
-        * @cssClass             s-tooltip:block-start                 Align your tooltip at "top". This is the default         
-        * @cssClass             s-tooltip:inline-end               Align your tooltip at "right"
-        * @cssClass             s-tooltip:inline-start               Align your tooltip at "left"
-        * @cssClass             s-tooltip:block-end               Align your tooltip at "bottom"
-        * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip
+        * @cssClass             s-tooltip:top                 Align your tooltip at "top". This is the default. Only then not using the "s-floating" feature       
+        * @cssClass             s-tooltip:right               Align your tooltip at "right". Only then not using the "s-floating" feature
+        * @cssClass             s-tooltip:left               Align your tooltip at "left". Only then not using the "s-floating" feature
+        * @cssClass             s-tooltip:bottom               Align your tooltip at "bottom". Only then not using the "s-floating" feature
+        * @cssClass             s-tooltip:interactive          Allow the user to interact with the tooltip. Only then not using the "s-floating" feature
         * 
         ${finalParams.styles.map((style) => {
             return ` * @example        html       ${style}
@@ -117,7 +117,7 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
-                } s-color:accent">
+                } s-color:accent" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
@@ -125,7 +125,7 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
-                } s-color:complementary">
+                } s-color:complementary" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
@@ -133,7 +133,7 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
-                } s-color:info">
+                } s-color:info" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
@@ -146,7 +146,7 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
-                } s-color:accent">
+                } s-color:accent" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
@@ -154,7 +154,7 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
-                } s-color:complementary">
+                } s-color:complementary" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
@@ -162,14 +162,14 @@ export default function ({
                 *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
-                } s-color:info">
+                } s-color:info" s-floating>
                 *           ${__faker.name.title()} ${__faker.name.findName()}
                 *       </div>
                 *   </span>
             `;
         })}
         * 
-        * @example      html        Positions
+        * @example      html        Positions (no s-floating feature)
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Block start (default)</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
@@ -178,19 +178,19 @@ export default function ({
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Inline end</a>
-        *       <div class="s-tooltip:inline-end s-white-space:nowrap s-color:accent">
+        *       <div class="s-tooltip:right s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Block end</a>
-        *       <div class="s-tooltip:block-end s-white-space:nowrap s-color:accent">
+        *       <div class="s-tooltip:bottom s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Inline start</a>
-        *       <div class="s-tooltip:inline-start s-white-space:nowrap s-color:accent">
+        *       <div class="s-tooltip:left s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -198,25 +198,25 @@ export default function ({
         * @example      html        Colors (none-exhaustive)
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Accent</a>
-        *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:accent" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Complementary</a>
-        *       <div class="s-tooltip s-white-space:nowrap s-color:complementary">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:complementary" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Error</a>
-        *       <div class="s-tooltip s-white-space:nowrap s-color:error">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:error" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">Info</a>
-        *       <div class="s-tooltip s-white-space:nowrap s-color:info">
+        *       <div class="s-tooltip s-white-space:nowrap s-color:info" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
@@ -224,13 +224,13 @@ export default function ({
         * @example      html        Interactive
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">I'm not interactive</a>
-        *       <div class="s-tooltip s-white-space:nowrap">
+        *       <div class="s-tooltip s-white-space:nowrap" s-floating>
         *           <a class="s-btn s-color:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
         *       <a class="s-btn s-mie:20 s-mbe:20">I'm interactive</a>
-        *       <div class="s-tooltip:interactive s-white-space:nowrap">
+        *       <div class="s-tooltip:interactive s-white-space:nowrap" s-floating>
         *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>
@@ -451,7 +451,7 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip {
-            @sugar.ui.tooltip($position: block-start, $scope: 'position');
+            @sugar.ui.tooltip($position: top, $scope: 'position');
         }
     `,
     );
@@ -497,7 +497,7 @@ export default function ({
     // RIGHT
     vars.comment(
         () => `/**
-        * @name           s-tooltip:inline-end
+        * @name           s-tooltip:right
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
@@ -506,7 +506,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip:inline-end">Something cool</div>
+        *   <div class="s-tooltip:right">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -515,8 +515,8 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip--inline-end {
-            @sugar.ui.tooltip($position: inline-end, $scope: 'position');
+        .s-tooltip--right {
+            @sugar.ui.tooltip($position: right, $scope: 'position');
         }
     `,
     );
@@ -638,7 +638,7 @@ export default function ({
     // left
     vars.comment(
         () => `/**
-        * @name           s-tooltip:inline-start
+        * @name           s-tooltip:left
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
@@ -647,7 +647,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip:inline-start">Something cool</div>
+        *   <div class="s-tooltip:left">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -656,8 +656,8 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip--inline-start {
-            @sugar.ui.tooltip($position: inline-start, $scope: 'position');
+        .s-tooltip--left {
+            @sugar.ui.tooltip($position: left, $scope: 'position');
         }
     `,
     );
@@ -779,7 +779,7 @@ export default function ({
     // BOTTOM
     vars.comment(
         () => `/**
-        * @name           s-tooltip:block-end
+        * @name           s-tooltip:bottom
         * @namespace      sugar.css.ui.tooltip
         * @type           CssClass
         * 
@@ -788,7 +788,7 @@ export default function ({
         * @example        html
         * <a class="s-tooltip-container s-btn">
         *   I'm a cool button
-        *   <div class="s-tooltip:block-end">Something cool</div>
+        *   <div class="s-tooltip:bottom">Something cool</div>
         * </a>
         * 
         * @since    2.0.0
@@ -797,8 +797,8 @@ export default function ({
     );
     vars.code(
         () => `
-        .s-tooltip--block-end {
-            @sugar.ui.tooltip($position: block-end, $scope: 'position');
+        .s-tooltip--bottom {
+            @sugar.ui.tooltip($position: bottom, $scope: 'position');
         }
     `,
     );

@@ -64,7 +64,7 @@
 
     .__content {
         position: absolute;
-        z-index: 10;
+        z-index: 9;
         top: 50%;
         left: 50%;
         width: 1280px;

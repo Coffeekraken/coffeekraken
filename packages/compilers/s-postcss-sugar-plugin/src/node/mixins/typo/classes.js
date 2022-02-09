@@ -34,7 +34,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @name          Typography
         * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/typography
+        * @menu           Styleguide / Helpers        /styleguide/helpers/typography
         * @platform       css
         * @status       beta
         * 

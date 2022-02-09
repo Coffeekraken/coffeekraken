@@ -1,6 +1,9 @@
 import __deepMerge from '../../shared/object/deepMerge';
 import __openGraphScraper from 'open-graph-scraper';
-import __SCache, { ISCacheSettings } from '@coffeekraken/s-cache';
+import __packageCacheDir from '@coffeekraken/sugar/node/path/packageCacheDir';
+import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
+import __writeJsonSync from '@coffeekraken/sugar/node/fs/writeJsonSync';
+import __fs from 'fs';
 
 /**
  * @name            scrapeUrl
@@ -71,17 +74,15 @@ export default function srapeUrl(
             settings,
         );
 
-        let cache;
+        const cacheFilePath = `${__packageCacheDir()}/sugar/scrapeUrl.json`;
+
+        let cacheJson = {};
 
         // leverage cache
-        if (finalSettings.cache) {
-            cache = new __SCache(
-                finalSettings.id ?? 'sugar.node.og.scrapeUrl',
-                finalSettings.cache,
-            );
-            const cachedValue = await cache.get(url);
-            if (cachedValue) {
-                return resolve(cachedValue);
+        if (finalSettings.cache && __fs.existsSync(cacheFilePath)) {
+            cacheJson = __readJsonSync(cacheFilePath);
+            if (cacheJson[url]) {
+                return resolve(cacheJson[url]);
             }
         }
 
@@ -98,7 +99,8 @@ export default function srapeUrl(
 
         // cache if needed
         if (finalSettings.cache && data.result) {
-            await cache.set(url, data.result);
+            cacheJson[url] = data.result;
+            __writeJsonSync(cacheFilePath, cacheJson);
         }
 
         // return the resuls

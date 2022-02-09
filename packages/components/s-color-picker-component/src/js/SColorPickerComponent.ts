@@ -21,7 +21,7 @@ export interface ISColorPickerComponentProps {
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SColorPickerComponentInterface.js
- * @menu                Styleguide / Forms              /styleguide/forms/s-color-picker
+ * @menu                Styleguide / Forms              /styleguide/form/s-color-picker
  * @install             npm i @coffeekraken/s-color-picker-component
  * @platform            html
  * @status              beta

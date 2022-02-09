@@ -5,14 +5,24 @@
     padding-inline: sugar.padding(50);
 
     svg {
-        width: 100px;
+        height: 40px;
+        width: 120px;
+        margin-block-end: sugar.margin(30);
     }
-
     svg .main {
-        fill: sugar.color(main, text);
+        fill: sugar.color(accent);
     }
     svg .accent {
-        fill: sugar.color(accent);
+        fill: sugar.color(base, --darken 55);
+    }
+
+    @sugar.theme.when(dark) {
+        svg .main {
+            fill: sugar.color(main, text);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
     }
 
     .__columns {

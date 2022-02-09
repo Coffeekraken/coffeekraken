@@ -56,7 +56,7 @@ export default function ({
         * @name          Transitions
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/transitions
+        * @menu           Styleguide / Helpers        /styleguide/helpers/transition
         * @platform       css
         * @status       beta
         * 

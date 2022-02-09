@@ -82,7 +82,7 @@ export default function ({
         * @name          Buttons
         * @namespace          sugar.css.ui
         * @type               Styleguide
-        * @menu           Styleguide / UI        /styleguide/ui/buttons
+        * @menu           Styleguide / UI        /styleguide/ui/button
         * @platform       css
         * @status       beta
         * 

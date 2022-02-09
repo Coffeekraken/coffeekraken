@@ -16,9 +16,13 @@ s-code-example {
 }
 
 .s-code-example__toolbar {
-    color: sugar.color(current, text);
+    color: rgba(0,0,0,.3);
     position: relative;
     top: calc(sugar.margin(10) * -1) !important;
+
+    @sugar.theme.when(dark) {
+        color: rgba(255,255,255,.3);
+    }
 }
 
 .s-code-example-loader {
@@ -27,7 +31,6 @@ s-code-example {
     padding: sugar.padding(30);
     @sugar.depth (100);
     text-align: center;
-    /* mask-image: radial-gradient(ellipse at bottom, black, transparent); */
 
     @sugar.theme.when dark {
         background: sugar.color(main, surface);

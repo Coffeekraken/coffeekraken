@@ -30,7 +30,8 @@
                 </h5>
                 <p class="s-typo:p ">
                     Create projects using our totally customizable <span class="s-typo:code">recipes</span> that let
-                    you start as soom as possible with production grade ready capabilities.
+                    you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
+                    capabilities.
                 </p>
             </div>
             <div>
@@ -38,7 +39,7 @@
                     @include('generic.code.example', ['examples' => [
                     'bash' => '# Install cli globally
                     npm i @coffeekraken/cli -g
-                    # Init your project using the default "recipe"
+                    # Init your project using with an interactive wizard
                     sugar new
                     # Launch your development environment
                     sugar dev
@@ -105,7 +106,7 @@
         </div>
 
         <div
-            class="s-layout:123 s-gap:column:50 s-p:50 s-mbe:50 s-bg:main-surface s-radius s-depth s-mi:-50 @mobile s-layout:1_2_3 s-depth:0">
+            class="s-layout:123 s-gap:column:50 s-p:50 s-mbe:100 s-bg:main-surface s-radius s-depth @mobile s-layout:1_2_3 s-depth:0">
             <div class="@mobile s-mbe:50">
                 <h5 class="s-typo:h5 s-mbe:30">
                     Under<br />
@@ -170,7 +171,7 @@
                     Built-in<br /><span class="s-tc:accent">recipes</span>
                 </h4>
                 <p class="s-typo:lead s-mbe:30">
-                    <span class="s-tc:accent">Recipe</span> is our the term to define <span
+                    <span class="s-tc:accent">Recipe</span> is our term to define <span
                         class="s-tc:complementary">project template</span>.
                 </p>
                 <p class="s-typo:p s-mbe:30">
@@ -179,9 +180,6 @@
                         class="s-tc:complementary">the production testing environment</span> and <span
                         class="s-tc:accent">the full production build process</span>.
                 </p>
-                {{-- <a class="s-btn s-color:accent" href="/doc/recipes/what-are-recipes" title="What are recipes?">
-                    More on recipes!
-                </a> --}}
             </div>
             <div>
                 <ul class="__recipes-grid s-mbe:30">
@@ -205,7 +203,7 @@
                         <a href="/doc/recipes/built-in/default" title="">
                             <div class="icon-card s-color:accent">
                                 <i class="s-icon:brand-coffeekraken"></i>
-                                <p class="s-p">Default (generic)</p>
+                                <p class="s-p">NextJS</p>
                             </div>
                         </a>
                     </li>
@@ -231,50 +229,12 @@
 
         <div class="s-text:center s-pbs:50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
-
-            </p>
-        </div>
-
-        <div class="s-layout:123 s-gap:column:50 s-pb:50 @mobile s-layout:1_2_3">
-            <div class="@mobile s-mbe:50">
-                <h5 class="s-typo:h4 s-mbe:30">
-                    <span class="s-tc:accent">Well known</span><br /> technologies
-                </h5>
-                <p class="s-typo:p ">
-                    Under the hood, our stack make uses of some AMAZING packages like <a href="https://vitejs.dev"
-                        target="_blank" class="s-typo:a">ViteJs</a>, <a href="https://postcss.org/"
-                        target="_blank" class="s-typo:a">Postcss</a>, and more to discover <a
-                        class="s-typo:a" href="/doc/dependencies">on our dependencies page</a>.
-                    This mean that all of the configurations for these packages are well known and easy to override.
-                </p>
-            </div>
-            <div class="@mobile s-mbe:50">
-                <h5 class="s-typo:h4 s-mbe:30">
-                    <span class="s-tc:accent">Template</span><br />languages
-                </h5>
-                <p class="s-typo:p ">
-                    Under the hood, our stack make uses of some AMAZING packages like <a href="https://vitejs.dev"
-                        target="_blank" class="s-typo:a">ViteJs</a>, <a href="https://postcss.org/"
-                        target="_blank" class="s-typo:a">Postcss</a>, and more to discover <a
-                        class="s-typo:a" href="/doc/dependencies">on our dependencies page</a>.
-                    This mean that all of the configurations for these packages are well known and easy to override.
-                </p>
-            </div>
-            <div>
-                <img class="__illustration" src="/dist/img/illustrations/opensource.png" alt="Coffeekraken open source"
-                    title="Coffeekraken believe in open source" />
-            </div>
-        </div>
-
-        <div class="s-text:center s-pbs:50">
-            <p class="s-typo:lead s-mi:auto s-mbe:30">
                 This is <span class="s-tc:complementary">just a sneak peak</span> of what you can leverage in the sugar
                 toolkit.<br>
-                Don't be afraid, as usual you can take from it only what you need and <span
-                    class="s-tc:accent">learn
+                Don't be afraid, as usual you can take from it only what you need and <span class="s-tc:accent">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/#get-started" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/doc/get-started/get-started" title="Get started!">
                 Discover all of what sugar has to offer!
             </a>
         </div>

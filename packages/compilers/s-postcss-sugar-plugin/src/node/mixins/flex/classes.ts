@@ -49,10 +49,10 @@ export default function ({
     vars.comment(
         () => `
       /**
-        * @name          Flex
+        * @name          Flexbox
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/flex
+        * @menu           Styleguide / Helpers        /styleguide/helpers/flexbox
         * @platform       css
         * @status       beta
         * 

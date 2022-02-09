@@ -31,7 +31,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * @name          Text
         * @namespace          sugar.css.helpers
         * @type               Styleguide
-        * @menu           Styleguide / Helpers        /styleguide/helpers/scale
+        * @menu           Styleguide / Helpers        /styleguide/helpers/text
         * @platform       css
         * @status       beta
         * 

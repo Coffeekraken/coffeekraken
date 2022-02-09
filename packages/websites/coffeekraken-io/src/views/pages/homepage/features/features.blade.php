@@ -70,6 +70,7 @@
         {{-- @include('pages.homepage.features.partials.webcomponents') --}}
         @include('pages.homepage.features.partials.sugar')
         @include('pages.homepage.features.partials.development')
+        @include('pages.homepage.features.partials.why')
 
     </div>
 

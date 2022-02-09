@@ -20,6 +20,7 @@ import __copy from '@coffeekraken/sugar/node/fs/copy';
 import __formatDuration from '@coffeekraken/sugar/shared/time/formatDuration';
 import __removeSync from '@coffeekraken/sugar/node/fs/removeSync';
 import __copySync from '@coffeekraken/sugar/node/fs/copySync';
+import __wait from '@coffeekraken/sugar/shared/time/wait';
 
 /**
  * @name                SStaticBuilder
@@ -87,6 +88,8 @@ export interface ISStaticBuilderBuildParams {
     assets: ISStaticBuilderAssets;
     failAfter: number;
     requestTimeout: number;
+    requestRetry: number;
+    requestRetryTimeout: number;
     minify: boolean;
     prod: boolean;
 }
@@ -188,6 +191,10 @@ export default class SStaticBuilder extends __SBuilder {
                     });
 
                     try {
+                        // failed url file
+                        __removeSync(`${__packageRoot()}/SStaticBuilderFailedUrls.txt`)
+                        // remove the existing static directory
+                        __removeSync(params.outDir);
                         // remove the cache build dir
                         __removeSync(cacheBuildDir);
                         // delete the integrity cache
@@ -283,30 +290,44 @@ export default class SStaticBuilder extends __SBuilder {
                         url: `${params.host}${urlLoc}`,
                         timeout: params.requestTimeout,
                     });
-                    const res = await request.send().catch((e) => {
-                        emit('log', {
-                            clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
-                            type: __SLog.TYPE_INFO,
-                            value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
-                        });
-                        logsCount = 0;
-                        failsCount++;
-                        failedUrls.push(urlLoc);
 
-                        __writeFileSync(
-                            `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
-                            failedUrls.join('\n'),
-                        );
+                    let res, tries = 0;
 
-                        if (
-                            params.failAfter !== -1 &&
-                            failsCount >= params.failAfter
-                        ) {
-                            throw new Error(
-                                `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
-                            );
+                    while (!res && tries < params.requestRetry) {
+
+                        if (tries > 0) {
+                            await __wait(params.requestRetryTimeout);
                         }
-                    });
+
+                        res = await request.send().catch((e) => {
+                            emit('log', {
+                                // clear: __SLog.isTypeEnabled(__SLog.TYPE_VERBOSE) ? false : logsCount,
+                                type: __SLog.TYPE_INFO,
+                                value: `<red>[error]</red> The url "<cyan>${urlLoc}</cyan>" cannot be reached...`,
+                            });
+                            tries++;
+
+                            if (tries >= params.requestRetry) {
+                                logsCount = 0;
+                                failsCount++;
+                                failedUrls.push(urlLoc);
+
+                                __writeFileSync(
+                                    `${__packageRoot()}/SStaticBuilderFailedUrls.txt`,
+                                    failedUrls.join('\n'),
+                                );
+
+                                if (
+                                    params.failAfter !== -1 &&
+                                    failsCount >= params.failAfter
+                                ) {
+                                    throw new Error(
+                                        `<red>[error]</red> The static builder has reached the available issues which is set using the "<yellow>failAfter</yellow>" param that is set to <magenta>${params.failAfter}</magenta>`,
+                                    );
+                                }
+                            }
+                        });
+                    }
 
                     const end = Date.now();
 

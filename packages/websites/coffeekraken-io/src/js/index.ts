@@ -5,6 +5,8 @@ import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
 import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
+import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
+
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
@@ -23,6 +25,8 @@ import { define as __VersionSelector } from './components/VersionSelector';
 // others
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 import __SConductor from '@coffeekraken/s-conductor';
+
+import __krakenLogo from './generic/krakenLogo';
 
 // @ts-ignore
 const viewsRelated = import.meta.globEager('../views/**/*.ts');
@@ -78,6 +82,7 @@ __SConductor.setup({
 
     // features
     __sSugarFeature();
+    __sFloatingFeature();
     __sRefocusFeature();
     __sParallaxFeature();
     __sFormValidateFeature({
@@ -93,8 +98,10 @@ __SConductor.setup({
         },
     });
 
+    __krakenLogo();
+
     setTimeout(() => {
-    __linksStateAttributes();
+        __linksStateAttributes();
     }, 1000);
 
 })();

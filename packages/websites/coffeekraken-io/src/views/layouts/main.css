@@ -21,6 +21,7 @@
     opacity: 0.15;
     mask-image: linear-gradient(black, transparent);
     transition: opacity 0.6s ease-out;
+    pointer-events: none;
 
     @sugar.theme.when dark {
         opacity: 0.15;

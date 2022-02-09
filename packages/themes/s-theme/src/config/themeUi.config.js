@@ -2272,14 +2272,14 @@ export default (env, config) => {
              * @name          arrowSize
              * @namespace     config.themeUi.tooltip
              * @type          Object
-             * @default      20px
+             * @default      15px
              *
              * Specify if the arrow size of the tooltips
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            arrowSize: '20px',
+            arrowSize: '15px',
         },
         code: {
             /**

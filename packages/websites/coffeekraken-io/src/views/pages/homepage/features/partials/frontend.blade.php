@@ -12,7 +12,7 @@
             <div class="@mobile s-mbe:50">
                 <div class="sticky">
                     <div class="s-flex:align-center">
-                        <i class="s-icon:file-css s-tc:main s-opacity:20 s-font:90 s-pie:20 @mobile s-display:none"></i>
+                        {{-- <i class="s-icon:file-css s-tc:main s-opacity:20 s-font:90 s-pie:20 @mobile s-display:none"></i> --}}
                         <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                             CSS made<br>
                             <span class="s-tc:accent">pleasant</span> again
@@ -45,10 +45,36 @@
             <div>
                 <div class="s-mbe:30 s-mis:-50 @mobile s-mis:0">
                     @include('generic.code.example', ['examples' => [
+                    'html' => '
+                    <!-- Pleasant syntax -->
+                    <h1 class="s-typo:h1 s-font:100">
+                        Hello world
+                    </h1>
+                    <!-- Responsive classes -->
+                    <p class="s-typo:lead @mobile s-typo:p">
+                        Hello world
+                    </p>
+                    <!-- Apply a specific color to a UI element -->
+                    <s-range class="s-color:accent" value="40"></s-range>
+                    <!-- Apply some margins and color -->
+                    <p class="s-tc:accent s-mbe:50 @mobile s-mbe:30">
+                        Hello world
+                    </p>
+                    <!-- Extend with your own classes -->
+                    <div class="s-typo:p @mobile my-cool-class">
+                        Hello world
+                    </div>',
                     'css' => '/* import some globs */
                     @sugar.import(\'../views/**/*.css\');
                     /* init sugar (classes, resetcss, etc...) */
                     @sugar.init;
+                    /* Register some new responsive classes */
+                    @sugar.media.classes(mobile) {
+                    .my-cool-class {
+                    color: red;
+                    font-size: 100px;
+                    }
+                    }
                     /* list icons you want in your project */
                     /* want the fontawesome "user" icon named as "custom-user" */
                     @sugar.icons(
@@ -66,7 +92,7 @@
             <div class="@mobile s-pbe:50">
                 <div class="sticky">
                     <div class="s-flex:align-center">
-                        <i class="s-icon:theme s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i>
+                        {{-- <i class="s-icon:theme s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i> --}}
                         <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                             <span class="s-tc:accent">Theming</span> made<br>
                             As tasty as a donut
@@ -117,8 +143,8 @@
                 <div>
                     <div class="sticky">
                         <div class="s-flex:align-center">
-                            <i
-                                class="s-icon:layout s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i>
+                            {{-- <i
+                                class="s-icon:layout s-tc:main s-opacity:20 s-font:90 s-pie:30 @mobile s-display:none"></i> --}}
                             <h4 class="s-typo:h4 s-mbe:30 s-pbs:30">
                                 <span class="s-tc:accent">Layout</span> finally<br>
                                 Nice to work with
@@ -158,11 +184,13 @@
                     .my-layout-2 {
                     @sugar.layout("1 2 _ 3 2");
                     }
-                    '
-                    ]])
-                </div>
-                <div class="s-mbe:30">
-                    @include('generic.code.example', ['examples' => [
+                    /* Redefine layout 1 on mobile */
+                    @sugar.media(mobile) {
+                    .my-layout-1 {
+                    @sugar.layout("1 _ 2 _ 3");
+                    }
+                    }
+                    ',
                     'html' => '
                     <!-- using my layout -->
                     <section class="my-layout-1">
@@ -179,11 +207,10 @@
                             ]])
                         </div>
                 </div>
+
             </div>
 
         </div>
-
-    </div>
 
 
 </section>

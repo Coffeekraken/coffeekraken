@@ -614,16 +614,9 @@ export default class SMarkdownBuilder extends __SBuilder {
                         currentTransformedString = tplFn(viewData);
 
                         // processing transformers
-                        Object.keys(
+                        // @ts-ignore
+                        for (let [transformerId, transformerObj] of Object.entries(this.constructor._registeredTransformers)) {
                             // @ts-ignore
-                            this.constructor._registeredTransformers,
-                        ).forEach((transformerId) => {
-                            const transformerObj =
-                                // @ts-ignore
-                                this.constructor._registeredTransformers[
-                                    transformerId
-                                ];
-
                             if (!transformerObj[finalParams.target]) return;
 
                             const matches = [
@@ -632,7 +625,7 @@ export default class SMarkdownBuilder extends __SBuilder {
                                 ),
                             ];
 
-                            if (!matches.length) return;
+                            if (!matches.length) continue;
 
                             const transformerStr = __fs
                                 .readFileSync(
@@ -640,19 +633,30 @@ export default class SMarkdownBuilder extends __SBuilder {
                                     'utf8',
                                 )
                                 .toString();
+
+
+
                             const tplFn = handlebars.compile(transformerStr);
 
-                            matches.forEach((match) => {
+                            for (let i = 0; i < matches.length; i++) {
+                                const match = matches[i];
+                                let preprocessedData = match;
+                                // @ts-ignore
+                                if (transformerObj.preprocessor) {
+                                    const preprocessorFn = await import(transformerObj.preprocessor);
+                                    preprocessedData = await preprocessorFn.default(match);
+                                }
+
                                 const result = tplFn({
-                                    data: match,
+                                    data: preprocessedData,
                                 });
                                 currentTransformedString =
                                     currentTransformedString.replace(
                                         match[0],
                                         result,
                                     );
-                            });
-                        });
+}
+                        }
 
                         // protected tags like "template"
                         let protectedTagsMatches: string[] = [];

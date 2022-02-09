@@ -48,6 +48,7 @@ class postcssSugarPluginMediaClassesMixinInterface extends __SInterface {
         return {
             query: {
                 type: 'String',
+                default: Object.keys(__STheme.config('media.queries')).join(',')
             },
             mediasOnly: {
                 type: 'Boolean',

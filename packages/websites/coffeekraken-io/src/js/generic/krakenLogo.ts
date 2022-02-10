@@ -8,7 +8,7 @@ export default function() {
 
         let isHover = false, hoverTimeout;
 
-        const $squareItems = $elm.querySelectorAll('.__square *');
+        const $squareItems = $elm.querySelectorAll('*:not(g path):not(mask)');
         $squareItems.forEach($item => {
             $item.style.transition = 'transform 0.1s cubic-bezier(0.700, 0.000, 0.305, 0.995)';
         })

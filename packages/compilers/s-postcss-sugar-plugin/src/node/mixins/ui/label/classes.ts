@@ -88,6 +88,7 @@ export default function ({
                 }           Apply the ${style} label style`;
             })
             .join('\n')}
+        * @cssClass         s-label:inline          Make sure the input and label stay inline even on mobile. Usefull for checkbox and radio for example.
         * 
         ${finalParams.styles
             .map((style) => {
@@ -189,6 +190,26 @@ export default function ({
             );
         }
     });
+
+    vars.comment(
+            () => `/**
+                * @name           s-label:inline
+                * @namespace      sugar.css.ui.label
+                * @type           CssClass
+                * 
+                * This class represent a(n) "<s-color="accent">inline</s-color>" label
+                * 
+                * @example        html
+                * <label class="s-label:inline">
+                *   Hello world
+                *   <input type="checkbox" class="s-checkbox" />
+                * </label>
+                * 
+                * @since    2.0.0
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */
+        `,
+        );
 
     return vars;
 }

@@ -125,11 +125,6 @@ export default function ({
         & > .s-icon {
           font-size: 1em;
         }
-
-        @sugar.state.disabled {
-          @sugar.disabled;
-        }
-
     `);
     }
 
@@ -191,9 +186,11 @@ export default function ({
                 vars.push(`
                 background-color: sugar.color(current, --alpha 0);
                 border: sugar.color(current) solid sugar.theme(ui.button.borderWidth);
+                color: sugar.color(current);
 
                 &:hover, &:focus {
-                  background-color: sugar.color(current, --alpha 0.3);
+                  background-color: sugar.color(current);
+                  color: sugar.color(current, foreground);
                 }
               `);
                 break;
@@ -205,6 +202,7 @@ export default function ({
                   box-shadow: none !important;
 
                   &:hover, &:focus {
+                    color: sugar.color(current);
                     transform: scale(1.1);
                   }
 
@@ -221,7 +219,7 @@ export default function ({
                   color: sugar.color(current, foreground);
 
                   &:hover, &:focus {
-                    background-color: sugar.color(current, 55);
+                    background-color: sugar.color(current, 60);
                     color: sugar.color(current, foreground);
                   }
         `);

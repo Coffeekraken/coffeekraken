@@ -65,6 +65,11 @@ export default class SDatePickerComponentInterface extends __SInterface {
                 description: 'disallow selection of Saturdays or Sundays',
                 default: false,
             },
+            disabled: {
+                type: 'Boolean',
+                description: 'Specify if your date picker is disabled',
+                default: false
+            },
             yearRange: {
                 type: {
                     type: 'Array<Number>',

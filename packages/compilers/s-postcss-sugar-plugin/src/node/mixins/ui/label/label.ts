@@ -181,12 +181,19 @@ export default function ({
             default:
                 vars.push(`
                   display: flex;
-                  align-items: center;
                   justify-content: space-between;    
+                  gap: sugar.margin(20);
 
                   & > *:first-child {
                     order: 2;
-                    margin-inline-start: sugar.margin(20);
+                  }
+
+                  @sugar.media(mobile) {
+                    flex-direction: column;
+
+                    & > *:first-child:not([type="checkbox"]):not([type="radio"]) {
+                      width: 100%;
+                    }
                   }
 
                 `);

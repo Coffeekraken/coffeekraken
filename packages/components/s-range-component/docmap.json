@@ -75,7 +75,7 @@
                         "Styleguide",
                         "Forms"
                     ],
-                    "slug": "/styleguide/forms/s-range"
+                    "slug": "/styleguide/form/s-range"
                 },
                 "platform": [
                     {
@@ -83,7 +83,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This component specify a range with some additional features that the native one like\ndisplaying the value automatically in tooltip or inline.",
+                "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
                 "namespace": "@coffeekraken.s-range-component.js",
                 "status": "beta",
                 "example": [

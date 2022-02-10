@@ -12,7 +12,7 @@ import {computePosition,flip,shift,offset,arrow,getScrollParents,autoPlacement,i
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SFloatingFeatureInterface.js
- * @menu            Styleguide / Features               /styleguide/features/s-floating-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-floating-feature
  * @platform        js
  * @status          beta
  *

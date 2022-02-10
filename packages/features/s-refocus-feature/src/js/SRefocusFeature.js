@@ -7,7 +7,7 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SRefocusFeatureInterface.js
- * @menu            Styleguide / Features               /styleguide/features/s-activate-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-activate-feature
  * @platform        js
  * @status          beta
  *

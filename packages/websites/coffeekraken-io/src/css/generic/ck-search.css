@@ -9,6 +9,7 @@
         max-height: 250px;
         transition: sugar.transition();
         overflow: hidden;
+        background: sugar.color(main, background);
     }
     #search-tips.active {
         max-height: 0;

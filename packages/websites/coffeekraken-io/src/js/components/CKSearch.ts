@@ -183,9 +183,7 @@ __sFiltrableInputDefine(
             }
 
             if (value.match(/^@[a-z_-]+\s.*?/)) {
-                console.log(`"${value}"`);
                 const packageName = `@coffeekraken/${value.replace(/^@/, '').split(' ')[0].trim()}`;
-                console.log(packageName);
                 return items.filter(item => {
                     return item.package.name.startsWith(packageName);
                 });

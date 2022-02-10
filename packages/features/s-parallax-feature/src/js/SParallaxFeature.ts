@@ -14,7 +14,7 @@ export interface ISParallaxFeatureProps {
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SParallaxFeatureInterface.js
- * @menu            Styleguide / Forms               /styleguide/forms/s-parallax-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-parallax-feature
  * @platform        js
  * @status          beta
  *

@@ -16,7 +16,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SActivateFeatureInterface.js
- * @menu            Styleguide / Features               /styleguide/features/s-activate-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-activate-feature
  * @platform        js
  * @status          beta
  *

@@ -5,8 +5,10 @@
     </h4>
 
     <s-code-example class="">
-        <template lang="bash">
-            {{ $block->install }}
-        </template>
+        @foreach ($block->install as $install)
+            <template lang="{{ $install->language }}">
+                {{ $install->code }}
+            </template>
+        @endforeach
     </s-code-example>
 @endif

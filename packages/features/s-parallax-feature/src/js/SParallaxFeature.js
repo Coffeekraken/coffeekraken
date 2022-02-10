@@ -8,7 +8,7 @@ import __throttle from '@coffeekraken/sugar/shared/function/throttle';
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SParallaxFeatureInterface.js
- * @menu            Styleguide / Forms               /styleguide/forms/s-parallax-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-parallax-feature
  * @platform        js
  * @status          beta
  *

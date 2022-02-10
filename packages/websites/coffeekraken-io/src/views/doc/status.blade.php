@@ -13,26 +13,29 @@
         }
     @endphp
 
-    <div class="s-bg:main-surface s-p:30 s-radius s-depth:100 s-flex:align-center s-mbs:50">
+    <div class="s-bg:main-surface s-p:30 s-radius s-depth:100 s-flex:align-center s-mbs:50 @mobile s-display:block">
         <div class="s-flex-item:grow">
             @if ($block->platform)
-                Platform
-                &nbsp;
-                @include('generic.platforms.icons', ['platforms' => $block->platform])
+                <span class="@mobile s-mie:20">
+                    Platform
+                    &nbsp;
+                    @include('generic.platforms.icons', ['platforms' => $block->platform])
+                </span>
             @endif
             @if ($block->support)
-                &nbsp;&nbsp;&nbsp;<span class="s-tc:base s-opacity:20">│</span>&nbsp;&nbsp;&nbsp; Support
+                <span class="s-tc:base s-opacity:20 @mobile s-display:none">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>
+                Support
                 &nbsp;
                 @include('generic.support.icons', ['supports' => $block->support])
             @endif
         </div>
-        <div>
+        <div class="@mobile s-mbs:10">
             Since&nbsp;&nbsp;<span class="s-typo:bold s-tc:accent">{{ $block->since }}</span>
         </div>
-        <div>
-            &nbsp;&nbsp;&nbsp;<span class="s-tc:base s-opacity:20">│</span>&nbsp;&nbsp;&nbsp;
+        <div class="@mobile s-display:none">
+            <span class="s-tc:base s-opacity:20">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>
         </div>
-        <div theme="dark">
+        <div theme="dark" class="@mobile s-mbs:20 s-float:right">
             <div class="s-tooltip-container" style="line-height:0">
                 @php
                     $user = $block->author;
@@ -79,10 +82,10 @@
 
             </div>
         </div>
-        <div>
+        <div class="@mobile s-display:none">
             &nbsp;&nbsp;&nbsp;<span class="s-tc:base s-opacity:20">│</span>&nbsp;&nbsp;&nbsp;
         </div>
-        <div>
+        <div class="@mobile s-mbs:20">
             <span
                 class="s-badge:pill s-font:30 s-color:{{ $statusColor }}">{{ $block->status ? $block->status : 'beta' }}</span>
         </div>

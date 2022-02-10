@@ -1,6 +1,14 @@
 s-date-picker {
     display: inline-block;
     position: relative;
+
+    &[disabled] {
+        pointer-events: none;
+    }
+
+    *[disabled] {
+        opacity: 1 !important;
+    }
 }
 .s-date-picker {
     display: flex;

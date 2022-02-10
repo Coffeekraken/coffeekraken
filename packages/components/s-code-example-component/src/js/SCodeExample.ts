@@ -50,7 +50,6 @@ export interface ISCodeExampleComponentProps {
  * @type                CustomElement
  * @interface           ./interface/SCodeExampleComponentInterface.js
  * @menu                Styleguide / UI              /styleguide/ui/s-code-example
- * @install             npm i @coffeekraken/s-code-example-component
  * @platform            html
  * @status              beta
  *
@@ -64,6 +63,13 @@ export interface ISCodeExampleComponentProps {
  * @support         firefox
  * @support         safari
  * @support         edge
+ * 
+ * @install           shell
+ * npm i @coffeekraken/s-code-example-component
+ * 
+ * @install           js
+ * import { define } from '@coffeekraken/s-code-example-component';
+ * define();
  *
  * @example         html
  * <s-code-example>

@@ -76,7 +76,7 @@ export default function ({
 
     vars.comment(
         () => `/**
-            * @name          s-disabled
+            * @name          s-disabled,[disabled]
             * @namespace          sugar.css.disabled
             * @type               CssClass
             * @platform         css
@@ -95,7 +95,8 @@ export default function ({
             */
         `,
     ).code(`
-            .s-disabled {
+            .s-disabled,
+            [disabled] {
                 @sugar.disabled;
             }`);
 

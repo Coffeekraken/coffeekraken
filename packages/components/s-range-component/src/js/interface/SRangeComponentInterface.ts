@@ -56,6 +56,11 @@ export default class SRangeComponentInterface extends __SInterface {
                     'Specify if you want to display the value inside a tooltip on top of the thumb',
                 default: false,
             },
+            disabled: {
+                type: 'Boolean',
+                description: 'Specify if this range is disabled',
+                default: false
+            }
         };
     }
 }

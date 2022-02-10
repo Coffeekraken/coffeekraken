@@ -117,6 +117,7 @@ export default function ({
             .map((style) => {
                 return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-width:40" name="select-style-${style}">
@@ -124,9 +125,9 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:accent s-width:40" name="select-style-${style}">
@@ -134,9 +135,9 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:accent s-width:40" name="select-style-${style}">
@@ -144,7 +145,16 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *   </label>
+            *   <label class="s-mbe:30 s-label">
+            *     I'm disabled
+            *     <select disabled class="s-select${
+                finalParams.defaultStyle === style ? '' : `:${style}`
+            } s-color:accent s-width:40" name="select-style-${style}">
+            *       <option value="value1">${__faker.name.findName()}</option>
+            *       <option value="value2">${__faker.name.findName()}</option>
+            *       <option value="value3">${__faker.name.findName()}</option>
+            *     </select>
             *   </label>
             * `;
             })
@@ -154,6 +164,7 @@ export default function ({
             .map((shape) => {
                 return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-width:40" name="select-shape-${shape}">
@@ -161,9 +172,9 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:accent s-width:40" name="select-shape-${shape}">
@@ -171,9 +182,9 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
             *   <label class="s-mbe:30 s-label">
+            *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:accent s-width:40" name="select-shape-${shape}">
@@ -181,7 +192,16 @@ export default function ({
             *       <option value="value2">${__faker.name.findName()}</option>
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+            *   </label>
+            *   <label class="s-mbe:30 s-label">
+            *     I'm disabled
+            *     <select disabled class="s-select${
+                finalParams.defaultShape === shape ? '' : `:${shape}`
+            } s-color:accent s-width:40" name="select-shape-${shape}">
+            *       <option value="value1">${__faker.name.findName()}</option>
+            *       <option value="value2">${__faker.name.findName()}</option>
+            *       <option value="value3">${__faker.name.findName()}</option>
+            *     </select>
             *   </label>
             * `;
             })
@@ -189,74 +209,83 @@ export default function ({
         * 
         * @example      html            Colors (none-exhaustive)
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-complementary">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:complementary s-width:40" name="select-color-error">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:error s-width:40" name="select-color-error" disabled>
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * 
         * @example      html            Multiple
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" multiple name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         * 
         * @example          html            RTL
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
         *   <label class="s-mbe:30 s-label">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
         *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     I'm disabled
+        *     <select disabled class="s-select s-color:accent s-width:40" name="select-color-accent">
+        *       <option value="value1">${__faker.name.findName()}</option>
+        *       <option value="value2">${__faker.name.findName()}</option>
+        *       <option value="value3">${__faker.name.findName()}</option>
+        *     </select>
+        *   </label>
+        * </div>
         * 
         * @example          html           Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
@@ -265,7 +294,7 @@ export default function ({
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
@@ -273,7 +302,7 @@ export default function ({
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
@@ -281,7 +310,7 @@ export default function ({
         *       <option value="value2">${__faker.name.findName()}</option>
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
-        *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
+        *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
         * 
         * @example          html            Text format

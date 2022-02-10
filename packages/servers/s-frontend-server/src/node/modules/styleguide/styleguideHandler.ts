@@ -6,6 +6,7 @@ import __SDocblock from '@coffeekraken/s-docblock';
 import __SPromise from '@coffeekraken/s-promise';
 import __marked from 'marked';
 import __fs from 'fs';
+import __SLog from '@coffeekraken/s-log';
 import __SViewRenderer from '@coffeekraken/s-view-renderer';
 import __SMarkdownBuilder from '@coffeekraken/s-markdown-builder';
 import { page404 } from '@coffeekraken/s-view-renderer';
@@ -32,7 +33,7 @@ import __SBench from '@coffeekraken/s-bench';
  * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
 export default function styleguide(req, res, settings = {}) {
-    return new __SPromise(async ({ resolve, reject }) => {
+    return new __SPromise(async ({ resolve, reject, emit }) => {
         __SBench.start('handlers.styleguide');
 
         __SBench.step('handlers.styleguide', 'beforeDocmapRead');
@@ -78,6 +79,18 @@ export default function styleguide(req, res, settings = {}) {
         });
         await docblocksInstance.parse();
         const docblocks = docblocksInstance.toObject();
+
+        if (docblocks.length) {
+            if (docblocks[0].see) {
+                for (let i=0; i<docblocks[0].see.length; i++) {
+                    emit('log', {
+                        type: __SLog.TYPE_INFO,
+                        value: `<yellow>[og]</yellow> Scraping opengraph from url "<cyan>${docblocks[0].see[i].url}</cyan>"`
+                    });
+                    docblocks[0].see[i].og = await __scrapeUrl(docblocks[0].see[i].url);
+                }
+            }
+        }
 
         __SBench.step('handlers.styleguide', 'afterDocblockParsing');
 

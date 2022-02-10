@@ -22,7 +22,6 @@ export interface ISColorPickerComponentProps {
  * @type                CustomElement
  * @interface           ./interface/SColorPickerComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/form/s-color-picker
- * @install             npm i @coffeekraken/s-color-picker-component
  * @platform            html
  * @status              beta
  *
@@ -37,6 +36,13 @@ export interface ISColorPickerComponentProps {
  * @support         firefox
  * @support         safari
  * @support         edge
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-color-picker-component
+ * 
+ * @install         js
+ * import { define } from '@coffeekraken/s-color-picker-component';
+ * define();
  *
  * @event           change              Emitted when the color is changing inside the picker
  * @event           show                Emitted when the color picker is shown

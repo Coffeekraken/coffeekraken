@@ -15,7 +15,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @type                CustomElement
  * @interface           ./interface/SRangeComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/form/s-range
- * @install             npm i @coffeekraken/s-range-component
  * @platform            html
  * @status              beta
  *
@@ -32,6 +31,13 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * @support         safari
  * @support         edge
  *
+ * @install          bash 
+ * npm i @coffeekraken/s-range-component
+ * 
+ * @install         js
+ * import { define } from '@coffeekraken/s-range-component';
+ * define();
+ * 
  * @example         html        Simple range
  * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
  *
@@ -43,6 +49,9 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  *
  * @example         html        With steps
  * <s-range name="myRangeWithSteps" value="70" class="s-color:complementary s-mbe:30" step="5"></s-range>
+ * 
+ * @example         html        Disabled
+ * <s-range name="myRangeWithSteps" disabled value="70" class="s-color:complementary s-mbe:30" step="5"></s-range>
  *
  * @example         html        External target input
  * <div class="s-flex:align-center s-mbe:30">
@@ -72,6 +81,7 @@ export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
     step: number;
     target: string;
     tooltip: boolean;
+    disabled: boolean;
 }
 
 export default class SRange extends __SLitComponent {
@@ -151,6 +161,7 @@ export default class SRange extends __SLitComponent {
                         's-range',
                     )}"
                     type="range"
+                    ?disabled="${this.props.disabled}"
                     name="${this.name}"
                     value="${this.value}"
                     min="${this.min}"

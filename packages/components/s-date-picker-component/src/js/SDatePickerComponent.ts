@@ -25,7 +25,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @type                CustomElement
  * @interface           ./interface/SDatePickerComponentInterface.js
  * @menu                Styleguide / Forms              /styleguide/form/s-date-picker
- * @install             npm i @coffeekraken/s-date-picker-component
  * @platform            html
  * @status              beta
  *
@@ -40,6 +39,13 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * @support         firefox
  * @support         safari
  * @support         edge
+ * 
+ * @install         bash
+ * npm i @coffeekraken/s-date-picker-component
+ * 
+ * @install         js
+ * import { define } from '@coffeekraken/s-date-picker-component';
+ * define();
  *
  * @example         html            Min and max dates
  *      <s-date-picker
@@ -79,6 +85,16 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *         button
  *     ></s-date-picker>
  * 
+ * @example         html            Disabled
+ *     <s-date-picker
+ *         placeholder="Select a date"
+ *         class="s-color:accent s-width--30"
+ *         name="myDatePicker4"
+ *          disabled
+ *         input
+ *         button
+ *     ></s-date-picker>
+ * 
  * @example         html            Display more than 1 month
  *     <s-date-picker
  *         placeholder="Select a date"
@@ -113,10 +129,6 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *       <button class="s-btn">Select a date</button>
  *     </s-date-picker>
  *
- * @example         js
- * import { define } from '@coffeekraken/s-date-picker-component';
- * define();
- *
  * @todo            Support for the "showWeekNumber" setting
  *
  * @see             https://www.npmjs.com/package/pikaday
@@ -132,6 +144,7 @@ export interface ISDatePickerComponentProps {
     minDate: string;
     maxDate: string;
     disableWeekends: boolean;
+    disabled: boolean;
     yearRange: number[];
     // showWeekNumber: boolean;
     rtl: boolean;
@@ -305,13 +318,14 @@ export default class SDatePicker extends __SLitComponent {
         return html`
             <div class="${this.componentUtils.className('')}" ${this.props.rtl ? 'dir="rtl"' : ''}>
                 ${!this._hasInput && this.props.input ? html`
-                    <input type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
+                    <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
                 ` : !this._hasInput ? html`
-                    <input type="hidden" name="${this.props.name}" value="${this.props.value}" />
+                    <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
                 ` : ``}
                 ${!this._hasButton && this.props.button
                     ? html`
                           <button
+                                ?disabled=${this.props.disabled}
                               onclick="return false"
                               class="${this.componentUtils.className(
                                   '__button',

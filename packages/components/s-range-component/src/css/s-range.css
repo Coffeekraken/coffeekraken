@@ -5,6 +5,11 @@ s-range {
     &:not([mounted]) > * {
         display: none;
     }
+
+    &[disabled] {
+        pointer-events: none;
+    }
+
 }
 .s-range {
     display: flex;
@@ -13,6 +18,7 @@ s-range {
 
 .s-range__input {
     flex-grow: 1;
+    opacity: 1 !important;
 }
 
 .s-range__tooltip {

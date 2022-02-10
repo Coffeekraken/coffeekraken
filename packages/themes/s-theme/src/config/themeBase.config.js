@@ -111,7 +111,7 @@ export default function (env, config) {
                  * @name            opacity
                  * @namespace       config.themeBase.helpers.disabled
                  * @type            Number
-                 * @default         0.3
+                 * @default         0.4
                  *
                  * Specify the opacity of disabled items applied either using the `@sugar.disabled` mixin, of through
                  * the `s-disabled` helper class
@@ -119,7 +119,7 @@ export default function (env, config) {
                  * @cince       2.0.0
                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                opacity: 0.3,
+                opacity: 0.4,
             },
             truncate: {
                 /**

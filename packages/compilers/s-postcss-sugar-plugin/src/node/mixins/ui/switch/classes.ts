@@ -150,7 +150,7 @@ export default function ({
                 } s-color:error" />
             *   </label>
                 <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     I'm disabled
             *     <input type="checkbox" disabled ${
                 Math.random() > 0.5 ? 'checked' : ''
             } class="s-switch${
@@ -197,7 +197,7 @@ export default function ({
                 } s-color:error" />
             *   </label>
                 <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
+            *     I'm disabled
             *     <input type="checkbox" disabled ${
                 Math.random() > 0.5 ? 'checked' : ''
             } class="s-switch${
@@ -225,6 +225,12 @@ export default function ({
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" ${
+            Math.random() > 0.5 ? 'checked' : ''
+        } class="s-switch s-color:accent" />
+        *   </label>
+        *   <label class="s-mbe:30 s-label">
+        *     I'm disabled
+        *     <input type="checkbox" disabled ${
             Math.random() > 0.5 ? 'checked' : ''
         } class="s-switch s-color:accent" />
         *   </label>

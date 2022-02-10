@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __fileName from '@coffeekraken/sugar/node/fs/filename';
 
 /**
  * @name           classes
@@ -109,12 +110,12 @@ export default function ({
             case 'fs':
                 splits = iconStr.split(':');
                 const path = splits[1];
-                as = splits[2];
+                as = splits[2] ?? __fileName(path).split('.')[0];
                 return {
                     str: iconStr,
                     protocol,
                     path,
-                    icon: as,
+                    name: as,
                     as: as,
                 };
                 break;
@@ -154,22 +155,19 @@ export default function ({
             })
             .join('\n')}
         * 
-        * @example        html
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30">Icons (non-exhaustive)</h3>
-        *   <div class="s-grid:5">
+        * @example        html          Used icons in this website
+        *   <div class="s-grid:5 @mobile s-grid:2">
         ${icons
             .map((iconObj) => {
                 return ` *
         *   <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *     <i class="s-icon:${(<any>iconObj).as} s-font:50"></i><br/>
+        *     <i class="s-icon:${(<any>iconObj).as} s-font:70"></i><br/>
         *     <p class="s-typo:p s-mbs:20">${(<any>iconObj).as}</p>
         *     <p class="s-typo:p:bold">Source: ${iconObj?.protocol}</p>
         *   </div>`;
             })
             .join('\n')}
         *   </div>
-        * </div>
         * 
         * @example      css
         * @sugar.icon.classes(

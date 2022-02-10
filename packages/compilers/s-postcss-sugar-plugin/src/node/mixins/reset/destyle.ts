@@ -33,10 +33,12 @@ export { postcssSugarPluginResetDestyleInterface as interface };
 
 export default function ({
     params,
+    CssVars,
     atRule,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginResetDestyleParams>;
+    CssVars: any;
     atRule: any;
     replaceWith: Function;
 }) {
@@ -44,8 +46,42 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [
-      `/* purgecss start ignore */
+    const vars = new CssVars();
+
+    vars.comment(() => `
+       /**
+        * @name          Destyle reset
+        * @namespace          sugar.css.resets
+        * @type               Styleguide
+        * @menu           Styleguide / Resets        /styleguide/resets/destyle
+        * @platform       css
+        * @status       beta
+        * 
+        * These mixins allows you to apply the \`destyle\` reset easily.
+        * 
+        * @feature      Ensures consistency across browsers as much as possible
+        * @feature      Prevents the necessity of reseting user agent styles
+        * @feature      Prevents style inspector bloat by only targeting what is necessary
+        * @feature      Removes margins & paddings
+        * @feature      Removes default font styles and ensures proper inheritance
+        * @feature      Contributes to the separation of presentation and semantics
+        * @feature      Sets sensible default styles
+        * @feature      Well suited for utility class libraries and large codebases
+        * @feature      Made for modern browsers only, therefor small in size (~0.95kb)
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @example        postcss
+        * \@sugar.reset.destyle;
+        * 
+        * @see          https://github.com/nicolas-cusan/destyle.css
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+    `).code(`/* purgecss start ignore */
 
    /*! destyle.css v2.0.2 | MIT License | https://github.com/nicolas-cusan/destyle.css */
 
@@ -511,10 +547,7 @@ th {
 }
 
 /* purgecss end ignore */
-  `,
-    ];
-
-    return vars;
+  `);
 
     return vars;
 }

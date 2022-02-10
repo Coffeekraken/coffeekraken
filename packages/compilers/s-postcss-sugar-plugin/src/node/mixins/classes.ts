@@ -39,7 +39,7 @@ export default async function ({
     replaceWith,
 }) {
     const cssArray: string[] = [
-        '@sugar.reset.styleguide;',
+        '@sugar.reset;',
         '@sugar.ui.classes;',
         '@sugar.typo.classes;',
         '@sugar.layout.classes;',

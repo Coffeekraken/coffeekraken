@@ -7,19 +7,16 @@
     @foreach ($block->see as $see)
         <section class="s-bg:main-surface s-radius">
             @if ($see->og)
-                <div class="s-layout:122">
-                    <div class="s-ratio:1 s-bg:accent s-radius">
-                        <img src="{{ $see->og->ogImage->url }}" />
+
+                <div class="s-layout:1_2 s-bg:main-surface s-radius s-overflow:hidden s-depth:100 s-mbe:50">
+                    <div class="s-ratio:21-9">
+                        <img class="s-ratio:1 s-fit:cover" src="{{ $see->og->ogImage->url }}"
+                            alt="{{ $see->og->ogTitle }}" />
                     </div>
-                    <div class="s-p:50">
-                        <h5 class="s-typo:h3 s-mbe:30">{!! $see->og->ogTitle !!}</h5>
-                        <p class="s-typo:p s-mbe:30">
-                            {!! $see->og->ogDescription !!}
-                        </p>
-                        <a class="s-btn s-color:info" href="{{ $see->og->ogUrl }}" title="{{ $see->og->ogTitle }}"
-                            target="_blank">
-                            Check that out!
-                        </a>
+                    <div class="s-p:30">
+                        <h4 class="s-typo:h4 s-mbe:30">{{ $see->og->ogTitle }}</h4>
+                        <p class="s-typo:p s-mbe:30">{{ $see->og->ogDescription }}</p>
+                        <a class="s-typo:a" href="{{ $see->og->ogUrl }}" target="_blank">Check out more...</a>
                     </div>
                 </div>
             @endif

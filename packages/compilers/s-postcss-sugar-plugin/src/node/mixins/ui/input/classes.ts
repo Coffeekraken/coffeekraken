@@ -128,6 +128,7 @@ export default function ({
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-scale\:15 s-color:accent" />
             *   </label>
+            * 
             * `;
             })
             .join('\n')}
@@ -151,6 +152,16 @@ export default function ({
             })
             .join('\n')}
         * 
+        * @example       html       States
+        * <label class="s-label s-mbe:30">
+        *       Disabled state
+        *       <input type="text" disabled placeholder="Type something!" class="s-input s-width:40" />
+        * </label>
+        * <label class="s-label s-mbe:30">
+        *       Disabled with class
+        *       <input type="text" placeholder="Type something!" class="s-input s-disabled s-width:40" />
+        * </label>
+        * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */
@@ -168,6 +179,9 @@ export default function ({
         * 
         * @example        html
         * <input type="text" class="s-input" placeholder="Hello world" />
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
       */
      `,
         ).code(`
@@ -194,6 +208,9 @@ export default function ({
             * 
             * @example        html
             * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`,
             ).code(
                 [
@@ -222,6 +239,9 @@ export default function ({
             * 
             * @example        html
             * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
+            * 
+            * @since      2.0.0
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
         */`,
             ).code(
                 [

@@ -17,7 +17,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @namespace       js
  * @type            Feature
  * @interface       ./interface/SFormValidateFeatureInterface.js
- * @menu            Styleguide / Forms               /styleguide/forms/s-form-validate-feature
+ * @menu            Styleguide / Features               /styleguide/feature/s-form-validate-feature
  * @platform        js
  * @status          beta
  *
@@ -29,114 +29,122 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * @support          firefox
  * @support          safari
  * @support          edge
+ * 
+ * @install         bash 
+ * npm i @coffeekraken/s-form-validate-feature
+ * 
+ * @install        js   
+ * import { define } from '@coffeekraken/s-form-validate-feature';
+ * define();
  *
  * @example         html            Email field
  * <label class="s-label" s-form-validate email>
- *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
  *    Email address
+ *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
  * </label>
  * 
  * @example         html            Domain field
  * <label class="s-label" s-form-validate domain>
- *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  *    Domain name
+ *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  * </label>
  * 
  * @example         html        Alphanumeric field
  * <label class="s-label" s-form-validate alphanum>
- *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  *    Alphanumeric
+ *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  * </label>
  * 
  * @example         html       Credit card field
  * <label class="s-label" s-form-validate credit-card>
- *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  *    Credit card
+ *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  * </label>
  * 
  * @example         html       Min / Max
  * <label class="s-label" s-form-validate min="3" max="6">
- *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  *    Min and max
+ *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
  *
  * @example         html        Select field
  * <label class="s-label" s-form-validate>
+ *    Select
  *    <select class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
  *        <option value="value 3">Third...</option>
  *    </select>
- *    Select
  * </label>
  * 
  * @example         html        Select min / max
  * <label class="s-label" s-form-validate min="2" max="2">
+ *    Multiple select
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
  *        <option value="value 3">Third...</option>
  *    </select>
- *    Multiple select
  * </label>
  * 
  * @example         html            ISO date field
  * <label class="s-label" s-form-validate iso-date>
- *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
  *    ISO date
+ *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
  * </label>
  * 
  * @example         html            Range min / max
  * <label class="s-label" s-form-validate min="25" max="75">
- *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  *    Value between 25 and 75
+ *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  * </label>
  * 
  * @example        html            Checkboxes min / max
  * <label class="s-label" s-form-validate min="2" max="2">
- *      <div class="s-flex s-width:60">
- *         <label class="s-label s-mb:20">
+ *      Choose at least 2 items
+ *      <div class="">
+ *         <label class="s-label:inline s-mb:20">
+ *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
- *            <span>Item 1</span>
  *         </label>
  *         <label class="s-label s-mb:20">
+ *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 2" />
- *            <span>Item 1</span>
  *         </label>
  *         <label class="s-label s-mb:20">
+ *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 3" />
- *            <span>Item 1</span>
  *         </label>
  *      </div>
- *      Choose at least 2 items
  * </label>
  *
  * @example             html           Custom validation
  * <label class="s-label" s-form-validate coffeekraken>
- *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken" />
  *    Try taping "coffeekraken"
+ *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken" />
  * </label>
  *
  * @example            html           Submit / Reset
  * <form>
- * <label class="s-label s-mbe:30" s-form-validate min="3" max="6">
- *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
+ * <label class="s-label" s-form-validate min="3" max="6">
  *    Min and max
+ *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
- * <label class="s-label s-mbe:30" s-form-validate min="2" max="2">
+ * <label class="s-label s-mbs:30" s-form-validate min="2" max="2">
+ *    Multiple select
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
  *        <option value="value 2">This is the second...</option>
  *        <option value="value 3">Third...</option>
  *    </select>
- *    Multiple select
  * </label>
- * <div class="s-text:end">
+ * <div class="s-text:end s-mbs:30">
  *      <input type="reset" class="s-btn" value="Reset!" />
  *      <input type="submit" class="s-btn s-color:complementary s-ml:20" value="Submit!" />
  * </div>
  * </form>
  *
+ * @see         https://github.com/sideway/joi
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

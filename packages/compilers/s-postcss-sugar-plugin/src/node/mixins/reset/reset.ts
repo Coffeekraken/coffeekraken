@@ -42,10 +42,12 @@ export function dependencies() {
 
 export default function ({
     params,
+    CssVars,
     atRule,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginResetParams>;
+    CssVars: any;
     atRule: any;
     replaceWith: Function;
 }) {
@@ -53,9 +55,36 @@ export default function ({
         ...params,
     };
 
-    const vars: string[] = [];
+    const vars = new CssVars();
 
-    vars.push(`
+    vars.comment(() => `
+        /**
+        * @name          Global reset
+        * @namespace          sugar.css.resets
+        * @type               Styleguide
+        * @menu           Styleguide / Resets        /styleguide/resets/global
+        * @platform       css
+        * @status       beta
+        * 
+        * These mixins allows you to apply some resets like \`destyle\` and/or the \`sugar\` one.
+        * The \`destyle\` one is well known and you can find the documentation on their website.
+        * The \`sugar\` one is our own that add some resets like setting max-width to 100% for images, and some more. Check our his own documentation page.
+        * 
+        * @feature      Apply the \`destyle\` reset
+        * @feature      Apply the \`sugar\` reset
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @example        css
+        * \@sugar.reset;
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */
+        `).code(`
       @sugar.reset.destyle;
       @sugar.reset.sugar;
   `);

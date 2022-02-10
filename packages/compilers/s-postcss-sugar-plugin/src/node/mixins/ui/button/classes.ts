@@ -154,38 +154,38 @@ export default function ({
                 return ` * @example        html       ${shape}
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20">Click me!</a>
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:accent"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20 s-color:accent">Click me!</a>
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:complementary"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20 s-color:complementary">Click me!</a>
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:info"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20 s-color:info">Click me!</a>
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20 s-color:error"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20 s-color:error">Click me!</a>
             *   <span class="s-btn-group s-mie:20 s-mbe:20">
             *       <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            }"><span>Click me!</span></a>
+            }">Click me!</a>
             *       <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             }"><span>+</span></a>
             *   </span>
             *   <a tabindex="0" disabled class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-mie:20 s-mbe:20"><span>Click me!</span></a>
+            } s-mie:20 s-mbe:20">Click me!</a>
             * `;
             })
             .join('\n')}
         * 
         * @example       html       Scales
-        *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20"><span>Click me!</span></a>
-        *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20"><span>Click me!</span></a>
+        *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20">Click me!</a>
+        *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20">Click me!</a>
         * 
         * @example       html       Vertical rhythm / Text format
         *   <div class="s-format:text s-rhythm:vertical">
@@ -197,6 +197,10 @@ export default function ({
         *           ${__faker.name.findName()}
         *       </button>
         *   </div>
+        * 
+        * @example      html       States
+        * <button disabled tabindex="0" class="s-btn s-mie:20 s-mbe:20">I'm disabled</button>
+        * <button tabindex="0" class="s-btn s-disabled s-mie:20 s-mbe:20">I'm disabled using class</button>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

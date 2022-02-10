@@ -9,14 +9,6 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * This mixin print the sugar css reset that makes:
  *
- * 1. Handle body height for IOS devices using the "fill-available" and "min-height: -webkit-fill-available;" technique
- * 2. Ensure template are not displayed
- * 3. Ensure hidden things are not displayed
- * 4. Set the box-sizing to border box for all HTMLElement
- * 5. Set the webkit highlight color to transparent color
- * 6. Remote outline on every elements
- * 7. Set the max-width to 100% for images
- *
  * @feature     Handle body height for IOS devices using the "fill-available" and "min-height: -webkit-fill-available;" technique
  * @feature     Ensure template are not displayed
  * @feature     Ensure hidden things are not displayed
@@ -24,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @feature     Set the webkit highlight color to transparent color
  * @feature     Remote outline on every elements
  * @feature     Set the max-width to 100% for images
- *
+ * 
  * @return        {Css}         The generated css
  *
  * @example         postcss
@@ -47,73 +39,96 @@ export { postcssSugarPluginResetDestyleInterface as interface };
 
 export default function ({
     params,
-    atRule,
+    CssVars,
     replaceWith,
 }: {
     params: Partial<IPostcssSugarPluginResetDestyleParams>;
-    atRule: any;
+    CssVars: any;
     replaceWith: Function;
 }) {
     const finalParams: IPostcssSugarPluginResetDestyleParams = {
         ...params,
     };
 
-    const vars: string[] = [
-        `
+    const vars = new CssVars();
 
-        /* purgecss start ignore */
-
-
-        /**
-         * Body height
-         */
-        html {
-            height: fill-available;
-        }
-        body {
-            min-height: 100vh;
-            min-height: -webkit-fill-available;
-        }
-
-        /**
-         * Add the correct display in IE 10+.
-         */
-        template {
-            display: none;
-        }
-
-        /**
-         * Add the correct display in IE 10.
-         */
-        [hidden] {
-            display: none;
-        }
-
-        /**
-         * Set box sizing to berder box
-         * Set the webkit highlight color to transparent color
-         * Remote outline on every elements
-         */
-        * {
-            box-sizing: border-box;
-            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-            outline: none;
-        }
-
-        /**
-         * Max width 100% for images
-         */
-        img {
-            max-width: 100%;
-        }
-
-        /* purgecss end ignore */
+    vars.comment(() => `/**
+        * @name          Sugar reset
+        * @namespace          sugar.css.resets
+        * @type               Styleguide
+        * @menu           Styleguide / Resets        /styleguide/resets/sugar
+        * @platform       css
+        * @status       beta
+        * 
+        * This mixin allows you to apply the \`sugar\` reset easily.
+        * 
+        * @feature     Handle body height for IOS devices using the \`fill-available\` and \`min-height: -webkit-fill-available;\` technique
+        * @feature     Ensure template are not displayed
+        * @feature     Ensure hidden things are not displayed
+        * @feature     Set the \`box-sizing\` to \`border-box\` for all HTMLElement
+        * @feature     Set the webkit highlight color to transparent color
+        * @feature     Remote outline on every elements
+        * @feature     Set the \`max-width\` to \`100%\` for images     
+        * 
+        * @support      chromium
+        * @support      firefox
+        * @support      safari
+        * @support      edge
+        * 
+        * @example        postcss
+        * \@sugar.reset.sugar;
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        */`).code(`
+            /* purgecss start ignore */
 
 
-  `,
-    ];
+            /**
+             * Body height
+             */
+            html {
+                height: fill-available;
+            }
+            body {
+                min-height: 100vh;
+                min-height: -webkit-fill-available;
+            }
 
-    return vars;
+            /**
+             * Add the correct display in IE 10+.
+             */
+            template {
+                display: none;
+            }
+
+            /**
+             * Add the correct display in IE 10.
+             */
+            [hidden] {
+                display: none;
+            }
+
+            /**
+             * Set box sizing to berder box
+             * Set the webkit highlight color to transparent color
+             * Remote outline on every elements
+             */
+            * {
+                box-sizing: border-box;
+                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+                outline: none;
+            }
+
+            /**
+             * Max width 100% for images
+             */
+            img {
+                max-width: 100%;
+            }
+
+            /* purgecss end ignore */
+  `);
 
     return vars;
 }

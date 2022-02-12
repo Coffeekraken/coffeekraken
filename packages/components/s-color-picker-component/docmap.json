@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
             "@coffeekraken/s-conductor",
@@ -24,6 +23,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -38,16 +38,18 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -65,7 +67,143 @@
             "@coffeekraken/sugar"
         ],
         "map": {
-            "@coffeekraken.s-color-picker-component.js.interface.sColorPickerComponentInterface": {
+            "@coffeekraken.s-color-picker-component.js.Color-Picker": {
+                "name": "Color Picker",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/form/s-color-picker"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the Pickr options are available through properties. Check out the api documentation for more details...",
+                "namespace": "@coffeekraken.s-color-picker-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple input",
+                        "code": "<s-color-picker value=\"#FABB03\" placeholder=\"Select a color\" input></s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With an input and a button",
+                        "code": "<s-color-picker value=\"#5101FF\" placeholder=\"Select a color\" input button></s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Just a button",
+                        "code": "<s-color-picker value=\"#55FFFF\" button></s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom input",
+                        "code": "<s-color-picker>\n     <input type=\"text\" placeholder=\"Select a color\" value=\"#FABB03\" />\n</s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom button",
+                        "code": "<s-color-picker>\n     <button class=\"s-btn s-color:error\">Select a color</button>\n</s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom input and button",
+                        "code": "<s-color-picker>\n     <input type=\"text\" placeholder=\"Select a color\" value=\"#FABB03\" />\n     <button class=\"s-btn s-color:error\">Select a color</button>\n</s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "With a custom button",
+                        "code": "<s-color-picker>\n     <button class=\"s-btn s-color:error\">Select a color</button>\n</s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "Disabled",
+                        "code": "<s-color-picker disabled input button>\n</s-color-picker>"
+                    },
+                    {
+                        "language": "html",
+                        "title": "RTL",
+                        "code": "<s-color-picker value=\"#FABB03\" placeholder=\"Select a color\" input button dir=\"rtl\"></s-color-picker>"
+                    }
+                ],
+                "interface": {
+                    "name": "SColorPickerComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "color"
+                        },
+                        "value": {
+                            "description": "Specify the initial value for your picker",
+                            "type": "String"
+                        },
+                        "placeholder": {
+                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
+                            "type": "String",
+                            "default": "Select a color"
+                        },
+                        "theme": {
+                            "description": "Specify the theme you want to use for this picker",
+                            "type": "String",
+                            "values": [
+                                "nano",
+                                "monolith"
+                            ],
+                            "default": "nano"
+                        },
+                        "input": {
+                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "button": {
+                            "description": "Specify if you want to display the button or not",
+                            "type": "Boolean",
+                            "default": false,
+                            "physical": true
+                        },
+                        "position": {
+                            "description": "Specify the position of the picker. Can be \"top\" or \"bottom\"",
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "bottom"
+                            ],
+                            "default": "bottom"
+                        },
+                        "swatches": {
+                            "description": "Specify some colors you want in your swatches",
+                            "type": "Array<String>",
+                            "default": []
+                        },
+                        "disabled": {
+                            "description": "Specify if the color picker is disabled",
+                            "type": "Boolean",
+                            "default": false
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SColorPickerComponent.js",
+                "extension": "js",
+                "relPath": "src/js/SColorPickerComponent.js",
+                "children": {}
+            },
+            "@coffeekraken.s-color-picker-component.js.interface.SColorPickerComponentInterface": {
                 "name": "SColorPickerComponentInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -84,7 +222,7 @@
                         "name": {
                             "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
                             "type": "String",
-                            "default": "date"
+                            "default": "color"
                         },
                         "value": {
                             "description": "Specify the initial value for your picker",
@@ -104,13 +242,13 @@
                             ],
                             "default": "nano"
                         },
-                        "noInput": {
+                        "input": {
                             "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
                             "type": "Boolean",
                             "default": false
                         },
-                        "noPreview": {
-                            "description": "Specify if you want to display the preview or not",
+                        "button": {
+                            "description": "Specify if you want to display the button or not",
                             "type": "Boolean",
                             "default": false,
                             "physical": true
@@ -128,6 +266,11 @@
                             "description": "Specify some colors you want in your swatches",
                             "type": "Array<String>",
                             "default": []
+                        },
+                        "disabled": {
+                            "description": "Specify if the color picker is disabled",
+                            "type": "Boolean",
+                            "default": false
                         }
                     }
                 },
@@ -140,100 +283,6 @@
                 "filename": "SColorPickerComponentInterface.js",
                 "extension": "js",
                 "relPath": "src/js/interface/SColorPickerComponentInterface.js",
-                "children": {}
-            },
-            "@coffeekraken.s-color-picker-component.js.colorPicker": {
-                "name": "Color Picker",
-                "type": "CustomElement",
-                "menu": {
-                    "tree": [
-                        "Styleguide",
-                        "Forms"
-                    ],
-                    "slug": "/styleguide/forms/s-color-picker"
-                },
-                "platform": [
-                    {
-                        "name": "html",
-                        "description": ""
-                    }
-                ],
-                "description": "This component specify a color picker. It uses under the hood the **AMAZING Pickr library** with some additional features like\nsugar theming support as well as some events and more.\nAlmost all the Pickr options are available through properties. Check out the api documentation for more details...",
-                "namespace": "@coffeekraken.s-color-picker-component.js",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "html",
-                        "code": "<label class=\"s-label s-mbe:30\">\n     Simple color picker\n     <s-color-picker></s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with an input and no preview\n     <s-color-picker no-preview>\n          <input class=\"s-input\" type=\"text\" value=\"#ff000f\" />\n      </s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with an input and a preview\n     <s-color-picker>\n          <input class=\"s-input\" type=\"text\" value=\"#ff000f\" />\n      </s-color-picker>\n</label>\n<label class=\"s-label s-mbe:30\">\n     Color picker with only a preview\n     <s-color-picker no-input></s-color-picker>\n</label>"
-                    },
-                    {
-                        "language": "js",
-                        "code": "import { define } from '@coffeekraken/s-color-picker-component';\ndefine();"
-                    }
-                ],
-                "interface": {
-                    "name": "SColorPickerComponentInterface",
-                    "description": "",
-                    "definition": {
-                        "name": {
-                            "description": "Specify the name that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
-                            "default": "date"
-                        },
-                        "value": {
-                            "description": "Specify the initial value for your picker",
-                            "type": "String"
-                        },
-                        "placeholder": {
-                            "description": "Specify the placeholder that will be assigned to the injected input if you don't provide one yourself",
-                            "type": "String",
-                            "default": "Select a color"
-                        },
-                        "theme": {
-                            "description": "Specify the theme you want to use for this picker",
-                            "type": "String",
-                            "values": [
-                                "nano",
-                                "monolith"
-                            ],
-                            "default": "nano"
-                        },
-                        "noInput": {
-                            "description": "Specify if you dont want an automatically injected text input when you dont provide yours",
-                            "type": "Boolean",
-                            "default": false
-                        },
-                        "noPreview": {
-                            "description": "Specify if you want to display the preview or not",
-                            "type": "Boolean",
-                            "default": false,
-                            "physical": true
-                        },
-                        "position": {
-                            "description": "Specify the position of the picker. Can be \"top\" or \"bottom\"",
-                            "type": "String",
-                            "values": [
-                                "top",
-                                "bottom"
-                            ],
-                            "default": "bottom"
-                        },
-                        "swatches": {
-                            "description": "Specify some colors you want in your swatches",
-                            "type": "Array<String>",
-                            "default": []
-                        }
-                    }
-                },
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SColorPickerComponent.js",
-                "extension": "js",
-                "relPath": "src/js/SColorPickerComponent.js",
                 "children": {}
             }
         }

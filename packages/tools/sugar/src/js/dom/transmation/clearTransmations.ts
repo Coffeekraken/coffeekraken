@@ -13,7 +13,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  *
  * @param    {HTMLElement}      $elm        The dom element to clear the animations/transitions from
  * @param       {IClearTransmationsSettings}    [settings={}]    The settings to use
- * @return      {HTMLStyleElement}              The style element that clear all the transitions and animations down bellow
+ * @return      {Function}              A function to reset the styles
  * 
  * @setting         {Number}        [timeout=0]    The timeout in ms to wait before removing the animations/transitions clearing
  * 
@@ -26,6 +26,8 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * clearTransmations($myElement, {
  *  timeout: 1000
  * });
+ * const reset = clearTransmations($myElement);
+ * setTimeout(() => reset(), 2000);
  *
  * @since     1.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -36,7 +38,7 @@ export interface IClearTransmationsSettings {
 }
 
 export default function clearTransmations(
-    $elm: HTMLElement,
+    $elm: HTMLElement = document.body,
     settings?: Partial<IClearTransmationsSettings>
 ): HTMLStyleElement {
 
@@ -58,12 +60,16 @@ export default function clearTransmations(
     `;
     document.head.appendChild($tag);
 
+    function reset() {
+        $elm.classList.remove(cls);
+        $tag.remove();
+    }
+
     if (settings?.timeout) {
         setTimeout(() => {
-            $elm.classList.remove(cls);
-            $tag.remove();
+            reset();
         }, settings.timeout);
     }
 
-    return $tag;
+    return reset;
 }

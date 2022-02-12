@@ -51,7 +51,7 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
 }
 
 export interface IPostcssSugarPluginUiLabelParams {
-    style: 'inline' | 'float';
+    style: 'inline' | 'block' | 'float';
     shape: 'default' | 'square' | 'pill';
     scope: ('bare' | 'lnf' | 'shape')[];
 }
@@ -177,6 +177,21 @@ export default function ({
                   }
                 `);
                 break;
+            case 'block':
+                vars.push(`
+                  display: flex;
+                  justify-content: space-between;
+                  gap: sugar.margin(20);
+                  flex-direction: column;
+
+                  & > *:first-child {
+                    order: 2;
+                  }
+                  & > *:first-child:not([type="checkbox"]):not([type="radio"]) {
+                    width: 100%;
+                  }
+                `);
+                break;
             case 'inline':
             default:
                 vars.push(`
@@ -186,14 +201,6 @@ export default function ({
 
                   & > *:first-child {
                     order: 2;
-                  }
-
-                  @sugar.media(mobile) {
-                    flex-direction: column;
-
-                    & > *:first-child:not([type="checkbox"]):not([type="radio"]) {
-                      width: 100%;
-                    }
                   }
 
                 `);
@@ -241,6 +248,7 @@ export default function ({
                 `);
                 break;
             case 'inline':
+            case 'block':
             default:
                 break;
         }

@@ -73,9 +73,9 @@
                 "menu": {
                     "tree": [
                         "Styleguide",
-                        "Forms"
+                        "Features"
                     ],
-                    "slug": "/styleguide/form/s-form-validate-feature"
+                    "slug": "/styleguide/feature/s-form-validate-feature"
                 },
                 "platform": [
                     {
@@ -90,62 +90,62 @@
                     {
                         "language": "html",
                         "title": "Email field",
-                        "code": "<label class=\"s-label\" s-form-validate email>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"olivier.bossel@coffeekraken.io\" />\n   Email address\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate email>\n   Email address\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"olivier.bossel@coffeekraken.io\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Domain field",
-                        "code": "<label class=\"s-label\" s-form-validate domain>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"coffeekraken.io\" />\n   Domain name\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate domain>\n   Domain name\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"coffeekraken.io\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Alphanumeric field",
-                        "code": "<label class=\"s-label\" s-form-validate alphanum>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"a-zA-Z0-9\" />\n   Alphanumeric\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate alphanum>\n   Alphanumeric\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"a-zA-Z0-9\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Credit card field",
-                        "code": "<label class=\"s-label\" s-form-validate credit-card>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"340716737808634\" />\n   Credit card\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate credit-card>\n   Credit card\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"340716737808634\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Min / Max",
-                        "code": "<label class=\"s-label\" s-form-validate min=\"3\" max=\"6\">\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"3 to 6\" />\n   Min and max\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate min=\"3\" max=\"6\">\n   Min and max\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"3 to 6\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Select field",
-                        "code": "<label class=\"s-label\" s-form-validate>\n   <select class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n   Select\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate>\n   Select\n   <select class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Select min / max",
-                        "code": "<label class=\"s-label\" s-form-validate min=\"2\" max=\"2\">\n   <select multiple class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n   Multiple select\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate min=\"2\" max=\"2\">\n   Multiple select\n   <select multiple class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "ISO date field",
-                        "code": "<label class=\"s-label\" s-form-validate iso-date>\n   <s-date-picker input button name=\"my-cool-date\" placeholder=\"2021-09-16\" class=\"s-width:60\"></s-date-picker>\n   ISO date\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate iso-date>\n   ISO date\n   <s-date-picker input button name=\"my-cool-date\" placeholder=\"2021-09-16\" class=\"s-width:60\"></s-date-picker>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Range min / max",
-                        "code": "<label class=\"s-label\" s-form-validate min=\"25\" max=\"75\">\n   <s-range class=\"s-width:60\" min=\"0\" max=\"100\" tooltip></s-range>\n   Value between 25 and 75\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate min=\"25\" max=\"75\">\n   Value between 25 and 75\n   <s-range class=\"s-width:60\" min=\"0\" max=\"100\" tooltip></s-range>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Checkboxes min / max",
-                        "code": "<label class=\"s-label\" s-form-validate min=\"2\" max=\"2\">\n     <div class=\"s-flex s-width:60\">\n        <label class=\"s-label s-mb:20\">\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 1\" />\n           <span>Item 1</span>\n        </label>\n        <label class=\"s-label s-mb:20\">\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 2\" />\n           <span>Item 1</span>\n        </label>\n        <label class=\"s-label s-mb:20\">\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 3\" />\n           <span>Item 1</span>\n        </label>\n     </div>\n     Choose at least 2 items\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate min=\"2\" max=\"2\">\n     Choose at least 2 items\n     <div class=\"\">\n        <label class=\"s-label:inline s-mb:20\">\n           Item 1\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 1\" />\n        </label>\n        <label class=\"s-label s-mb:20\">\n           Item 1\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 2\" />\n        </label>\n        <label class=\"s-label s-mb:20\">\n           Item 1\n           <input type=\"checkbox\" class=\"s-checkbox\" value=\"value 3\" />\n        </label>\n     </div>\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Custom validation",
-                        "code": "<label class=\"s-label\" s-form-validate coffeekraken>\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"coffeekraken\" />\n   Try taping \"coffeekraken\"\n</label>"
+                        "code": "<label class=\"s-label\" s-form-validate coffeekraken>\n   Try taping \"coffeekraken\"\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"coffeekraken\" />\n</label>"
                     },
                     {
                         "language": "html",
                         "title": "Submit / Reset",
-                        "code": "<form>\n<label class=\"s-label s-mbe:30\" s-form-validate min=\"3\" max=\"6\">\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"3 to 6\" />\n   Min and max\n</label>\n<label class=\"s-label s-mbe:30\" s-form-validate min=\"2\" max=\"2\">\n   <select multiple class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n   Multiple select\n</label>\n<div class=\"s-text:end\">\n     <input type=\"reset\" class=\"s-btn\" value=\"Reset!\" />\n     <input type=\"submit\" class=\"s-btn s-color:complementary s-ml:20\" value=\"Submit!\" />\n</div>\n</form>"
+                        "code": "<form>\n<label class=\"s-label\" s-form-validate min=\"3\" max=\"6\">\n   Min and max\n   <input type=\"text\" class=\"s-input s-width:60\" placeholder=\"3 to 6\" />\n</label>\n<label class=\"s-label s-mbs:30\" s-form-validate min=\"2\" max=\"2\">\n   Multiple select\n   <select multiple class=\"s-select s-width:60\">\n       <option value=\"value 1\">This is the first option...</option>\n       <option value=\"value 2\">This is the second...</option>\n       <option value=\"value 3\">Third...</option>\n   </select>\n</label>\n<div class=\"s-text:end s-mbs:30\">\n     <input type=\"reset\" class=\"s-btn\" value=\"Reset!\" />\n     <input type=\"submit\" class=\"s-btn s-color:complementary s-ml:20\" value=\"Submit!\" />\n</div>\n</form>"
                     }
                 ],
                 "interface": {

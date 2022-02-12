@@ -116,7 +116,7 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @example        html       ${style} style
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -126,7 +126,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -136,7 +136,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -146,7 +146,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     I'm disabled
             *     <select disabled class="s-select${
                 finalParams.defaultStyle === style ? '' : `:${style}`
@@ -163,7 +163,7 @@ export default function ({
         ${finalParams.shapes
             .map((shape) => {
                 return ` * @example        html       ${shape} shape
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -173,7 +173,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -183,7 +183,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     ${__faker.name.title()} ${__faker.name.findName()}
             *     <select class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -193,7 +193,7 @@ export default function ({
             *       <option value="value3">${__faker.name.findName()}</option>
             *     </select>
             *   </label>
-            *   <label class="s-mbe:30 s-label">
+            *   <label class="s-mbe:30 s-label:responsive">
             *     I'm disabled
             *     <select disabled class="s-select${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
@@ -208,7 +208,7 @@ export default function ({
             .join('\n')}
         * 
         * @example      html            Colors (none-exhaustive)
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -216,7 +216,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-complementary">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -224,7 +224,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:complementary s-width:40" name="select-color-error">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -232,7 +232,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:error s-width:40" name="select-color-error" disabled>
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -242,7 +242,7 @@ export default function ({
         *   </label>
         * 
         * @example      html            Multiple
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" multiple name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -253,7 +253,7 @@ export default function ({
         * 
         * @example          html            RTL
         * <div dir="rtl">
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -261,7 +261,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -269,7 +269,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -277,7 +277,7 @@ export default function ({
         *       <option value="value3">${__faker.name.findName()}</option>
         *     </select>
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     I'm disabled
         *     <select disabled class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
@@ -288,7 +288,7 @@ export default function ({
         * </div>
         * 
         * @example          html           Scales
-        *   <label class="s-mbe:30 s-label s-scale:07">
+        *   <label class="s-mbe:30 s-label:responsive s-scale:07">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
@@ -296,7 +296,7 @@ export default function ({
         *     </select>
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label">
+        *   <label class="s-mbe:30 s-label:responsive">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>
@@ -304,7 +304,7 @@ export default function ({
         *     </select>
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *   </label>
-        *   <label class="s-mbe:30 s-label s-scale:13">
+        *   <label class="s-mbe:30 s-label:responsive s-scale:13">
         *     <select class="s-select s-color:accent s-width:40" name="select-color-accent">
         *       <option value="value1">${__faker.name.findName()}</option>
         *       <option value="value2">${__faker.name.findName()}</option>

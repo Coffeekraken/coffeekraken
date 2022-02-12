@@ -14,6 +14,13 @@ import __STheme from '@coffeekraken/s-theme';
 export interface ISColorPickerComponentProps {
     name: string;
     value: string;
+    placeholder: string;
+    theme: 'nano' | 'monolith';
+    input: boolean;
+    button: boolean;
+    position: 'top' | 'bottom';
+    swatches: string[];
+    disabled: boolean;
 }
 
 /**
@@ -49,25 +56,41 @@ export interface ISColorPickerComponentProps {
  * @event           hide                Emitted when the color picker is hided
  *
  * @example         html            Simple input
- * <s-color-picker value="#FABB03" input></s-color-picker>
+ * <s-color-picker value="#FABB03" placeholder="Select a color" input></s-color-picker>
  * 
  * @example         html            With an input and a button
- * <s-color-picker value="#5101FF" input button></s-color-picker>
+ * <s-color-picker value="#5101FF" placeholder="Select a color" input button></s-color-picker>
  * 
  * @example         html            Just a button
  * <s-color-picker value="#55FFFF" button></s-color-picker>
  * 
  * @example         html            With a custom input
  * <s-color-picker>
- *      <input type="text" placeholder="Enter a color..." value="#FABB03" />
+ *      <input type="text" placeholder="Select a color" value="#FABB03" />
+ * </s-color-picker>
+ * 
+ * @example         html            With a custom button
+ * <s-color-picker>
+ *      <button class="s-btn s-color:error">Select a color</button>
+ * </s-color-picker>
+ * 
+ * @example         html            With a custom input and button
+ * <s-color-picker>
+ *      <input type="text" placeholder="Select a color" value="#FABB03" />
+ *      <button class="s-btn s-color:error">Select a color</button>
+ * </s-color-picker>
+ * 
+ * @example         html            With a custom button
+ * <s-color-picker>
+ *      <button class="s-btn s-color:error">Select a color</button>
+ * </s-color-picker>
+ * 
+ * @example         html            Disabled
+ * <s-color-picker disabled input button>
  * </s-color-picker>
  *
  * @example         html            RTL
- * <s-color-picker value="#FABB03" input button dir="rtl"></s-color-picker>
- * 
- * @example         js
- * import { define } from '@coffeekraken/s-color-picker-component';
- * define();
+ * <s-color-picker value="#FABB03" placeholder="Select a color" input button dir="rtl"></s-color-picker>
  *
  * @see             https://www.npmjs.com/package/@simonwep/pickr
  * @since           2.0.0
@@ -287,13 +310,14 @@ export default class SColorPicker extends __SLitComponent {
                 )} ${this.componentUtils.className('')}--${this.props.position}"
             >
                 ${!this._hasInput && this.props.input ? html`
-                    <input type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
+                    <input ?disabled=${this.props.disabled} type="text" autocomplete="off" name="${this.props.name}" value="${this.props.value}" placeholder="${this.props.placeholder}" class="${this.componentUtils.className('__input','s-input')}" />
                 ` : !this._hasInput ? html`
-                    <input type="hidden" name="${this.props.name}" value="${this.props.value}" />
+                    <input ?disabled=${this.props.disabled} type="hidden" name="${this.props.name}" value="${this.props.value}" />
                 ` : ``}
                 ${!this._hasButton && this.props.button
                     ? html`
                           <button
+                                ?disabled=${this.props.disabled} 
                               onclick="return false"
                               class="${this.componentUtils.className(
                                   '__button',

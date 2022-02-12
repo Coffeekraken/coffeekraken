@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -49,7 +49,7 @@
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -103,7 +103,7 @@
                         "Styleguide",
                         "Features"
                     ],
-                    "slug": "/styleguide/features/s-activate-feature"
+                    "slug": "/styleguide/feature/s-activate-feature"
                 },
                 "platform": [
                     {
@@ -117,6 +117,7 @@
                 "example": [
                     {
                         "language": "html",
+                        "title": "Simple usage",
                         "code": "<div class=\"scrollable\" s-refocus trigger=\"event:actual\">\n   <ul>\n      <li>\n         <a href=\"#hello\">Hello</a>\n         <!-- when this element dispatch an \"actual\" event,\n              it will be refocused -->\n      </li>\n      <li>\n         <a href=\"#world\">World</a>\n      </li>\n   </ul>\n</div>"
                     }
                 ],

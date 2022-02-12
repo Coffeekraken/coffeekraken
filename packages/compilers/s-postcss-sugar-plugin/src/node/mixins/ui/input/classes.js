@@ -68,27 +68,27 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         ${__keysFirst(finalParams.styles, ['default'])
         .map((style) => {
         return ` * @example        html       ${style} style
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-color:accent" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-color:complementary" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-color:error" />
             *   </label>
-            *   <label dir="rtl" class="s-label s-mbe:30">
+            *   <label dir="rtl" class="s-label:responsive s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something! (RTL)" class="s-input\:${style} s-width:40 s-color:accent" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${style} s-width:40 s-scale\:15 s-color:accent" />
             *   </label>
@@ -100,15 +100,15 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         ${__keysFirst(finalParams.shapes, ['default'])
         .map((shape) => {
         return ` * @example        html       ${shape} shape
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *       ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40 s-color:accent" />
             *   </label>
-            *   <label class="s-label s-mbe:30">
+            *   <label class="s-label:responsive s-mbe:30">
             *        ${__faker.name.findName()}
             *       <input type="text" placeholder="Type something!" class="s-input\:${shape} s-width:40 s-color:complementary" />
             *   </label>
@@ -117,11 +117,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @example       html       States
-        * <label class="s-label s-mbe:30">
+        * <label class="s-label:responsive s-mbe:30">
         *       Disabled state
         *       <input type="text" disabled placeholder="Type something!" class="s-input s-width:40" />
         * </label>
-        * <label class="s-label s-mbe:30">
+        * <label class="s-label:responsive s-mbe:30">
         *       Disabled with class
         *       <input type="text" placeholder="Type something!" class="s-input s-disabled s-width:40" />
         * </label>

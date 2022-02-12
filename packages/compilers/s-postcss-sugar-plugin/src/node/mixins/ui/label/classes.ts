@@ -7,17 +7,12 @@ class postcssSugarPluginUiLabelClassesInterface extends __SInterface {
         return {
             styles: {
                 type: 'String[]',
-                values: ['inline', 'float'],
-                default: ['inline', 'float'],
+                values: ['inline', 'block', 'float'],
+                default: ['inline', 'block', 'float'],
             },
-            // shapes: {
-            //     type: 'String[]',
-            //     values: ['default', 'square', 'pill'],
-            //     default: ['default', 'square', 'pill'],
-            // },
             defaultStyle: {
                 type: 'String',
-                values: ['inline', 'float'],
+                values: ['inline', 'block', 'float'],
                 default: __STheme.config('ui.label.defaultStyle'),
             },
             scope: {
@@ -193,23 +188,30 @@ export default function ({
 
     vars.comment(
             () => `/**
-                * @name           s-label:inline
-                * @namespace      sugar.css.ui.label
-                * @type           CssClass
-                * 
-                * This class represent a(n) "<s-color="accent">inline</s-color>" label
-                * 
-                * @example        html
-                * <label class="s-label:inline">
-                *   Hello world
-                *   <input type="checkbox" class="s-checkbox" />
-                * </label>
-                * 
-                * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            */
-        `,
-        );
+        * @name           s-label:responsive
+        * @namespace      sugar.css.ui.input
+        * @type           CssClass
+        * 
+        * This class represent a(n) "<yellow>responsive</yellow>" label.
+        * This mean that on desktop and tablet it will be "inline", and on mobile it will be "block".
+        * 
+        * @example        html
+        * <label class="s-label:responsive">
+        *   Hello world
+        *   <input type="text" class="s-input" placeholder="Hello world" />
+        * </label>
+        * 
+        * @since      2.0.0
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      */
+     `,
+        ).code(`
+        .s-label--responsive {
+            @sugar.media(mobile) {
+                @sugar.ui.label($style: block, $scope: bare);
+            }
+        }
+        `);
 
     return vars;
 }

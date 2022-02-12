@@ -70,6 +70,11 @@ export default class SColorPickerComponentInterface extends __SInterface {
                 type: 'Array<String>',
                 default: [],
             },
+            disabled: {
+                description: 'Specify if the color picker is disabled',
+                type: 'Boolean',
+                default: false,
+            }
         };
     }
 }

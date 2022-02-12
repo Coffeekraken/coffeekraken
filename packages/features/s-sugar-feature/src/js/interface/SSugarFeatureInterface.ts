@@ -40,6 +40,11 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            resizeTransmations: {
+                description: 'Specify if you want all the transitions and animations cleared during window resize',
+                type: 'Boolean',
+                default: true
+            }
         };
     }
 }

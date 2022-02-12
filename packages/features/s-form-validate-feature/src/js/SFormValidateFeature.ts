@@ -38,37 +38,37 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * define();
  *
  * @example         html            Email field
- * <label class="s-label" s-form-validate email>
+ * <label class="s-label:responsive" s-form-validate email>
  *    Email address
  *    <input type="text" class="s-input s-width:60" placeholder="olivier.bossel@coffeekraken.io" />
  * </label>
  * 
  * @example         html            Domain field
- * <label class="s-label" s-form-validate domain>
+ * <label class="s-label:responsive" s-form-validate domain>
  *    Domain name
  *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken.io" />
  * </label>
  * 
  * @example         html        Alphanumeric field
- * <label class="s-label" s-form-validate alphanum>
+ * <label class="s-label:responsive" s-form-validate alphanum>
  *    Alphanumeric
  *    <input type="text" class="s-input s-width:60" placeholder="a-zA-Z0-9" />
  * </label>
  * 
  * @example         html       Credit card field
- * <label class="s-label" s-form-validate credit-card>
+ * <label class="s-label:responsive" s-form-validate credit-card>
  *    Credit card
  *    <input type="text" class="s-input s-width:60" placeholder="340716737808634" />
  * </label>
  * 
  * @example         html       Min / Max
- * <label class="s-label" s-form-validate min="3" max="6">
+ * <label class="s-label:responsive" s-form-validate min="3" max="6">
  *    Min and max
  *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
  *
  * @example         html        Select field
- * <label class="s-label" s-form-validate>
+ * <label class="s-label:responsive" s-form-validate>
  *    Select
  *    <select class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
@@ -78,7 +78,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * </label>
  * 
  * @example         html        Select min / max
- * <label class="s-label" s-form-validate min="2" max="2">
+ * <label class="s-label:responsive" s-form-validate min="2" max="2">
  *    Multiple select
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>
@@ -88,13 +88,13 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * </label>
  * 
  * @example         html            ISO date field
- * <label class="s-label" s-form-validate iso-date>
+ * <label class="s-label:responsive" s-form-validate iso-date>
  *    ISO date
  *    <s-date-picker input button name="my-cool-date" placeholder="2021-09-16" class="s-width:60"></s-date-picker>
  * </label>
  * 
  * @example         html            Range min / max
- * <label class="s-label" s-form-validate min="25" max="75">
+ * <label class="s-label:responsive" s-form-validate min="25" max="75">
  *    Value between 25 and 75
  *    <s-range class="s-width:60" min="0" max="100" tooltip></s-range>
  * </label>
@@ -103,7 +103,7 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * <label class="s-label" s-form-validate min="2" max="2">
  *      Choose at least 2 items
  *      <div class="">
- *         <label class="s-label:inline s-mb:20">
+ *         <label class="s-label s-mb:20">
  *            Item 1
  *            <input type="checkbox" class="s-checkbox" value="value 1" />
  *         </label>
@@ -119,18 +119,18 @@ import __SComponentUtils from '@coffeekraken/s-component-utils';
  * </label>
  *
  * @example             html           Custom validation
- * <label class="s-label" s-form-validate coffeekraken>
+ * <label class="s-label:responsive" s-form-validate coffeekraken>
  *    Try taping "coffeekraken"
  *    <input type="text" class="s-input s-width:60" placeholder="coffeekraken" />
  * </label>
  *
  * @example            html           Submit / Reset
  * <form>
- * <label class="s-label" s-form-validate min="3" max="6">
+ * <label class="s-label:responsive" s-form-validate min="3" max="6">
  *    Min and max
  *    <input type="text" class="s-input s-width:60" placeholder="3 to 6" />
  * </label>
- * <label class="s-label s-mbs:30" s-form-validate min="2" max="2">
+ * <label class="s-label:responsive s-mbs:30" s-form-validate min="2" max="2">
  *    Multiple select
  *    <select multiple class="s-select s-width:60">
  *        <option value="value 1">This is the first option...</option>

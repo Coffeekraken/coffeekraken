@@ -1,6 +1,7 @@
 import __SFeature, { ISFeature } from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
+import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 
 export interface ISSugarFeatureProps {
     scrolled: boolean;
@@ -24,6 +25,10 @@ export interface ISSugarFeatureProps {
  * value of the `--vh` variable if it exists.
  * More feature can be added in the future depending on the needs.
  *
+ * @feature        `scrolled` class applied on the body when the user has scrolled the page
+ * @feature         Access to a `--vh` css variable that represent the exact viewport innerHeight and avoid having issues with mobile different viewport height values
+ * @feature         Clear all transitions and animations on all the page during a window resize. Helps for performances and cleaner for user
+ * 
  * @support          chromium
  * @support          firefox
  * @support          safari
@@ -61,6 +66,25 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.componentUtils.props.scrolled) this._scrolled();
         // vhvar
         if (this.componentUtils.props.vhvar) this._vhvar();
+        // resizeTransmations
+        if (this.componentUtils.props.resizeTransmations) this._clearTransmationsOnResize();
+    }
+    _clearTransmationsOnResizeTimeout;
+    _isResizing = false;
+    _clearTransmationsOnResize() {
+        let resetFn;
+        window.addEventListener('resize', () => {
+            if (!this._isResizing) {
+                resetFn = __clearTransmations();
+            }
+            this._isResizing = true;
+
+            clearTimeout(this._clearTransmationsOnResizeTimeout);
+            this._clearTransmationsOnResizeTimeout = setTimeout(() => {
+                this._isResizing = false;
+                resetFn?.();
+            }, 100); 
+        });
     }
     _scrolled() {
         document.addEventListener('scroll', (e) => {

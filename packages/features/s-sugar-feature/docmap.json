@@ -2,7 +2,70 @@
     "map": {},
     "extends": [],
     "generated": {
-        "extends": [],
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
         "map": {
             "@coffeekraken.s-sugar-feature.js.SSugarFeature": {
                 "name": "SSugarFeature",
@@ -12,7 +75,7 @@
                         "Styleguide",
                         "Features"
                     ],
-                    "slug": "/styleguide/features/s-sugar-feature"
+                    "slug": "/styleguide/feature/s-sugar-feature"
                 },
                 "platform": [
                     {
@@ -20,14 +83,14 @@
                         "description": ""
                     }
                 ],
-                "description": "This feature allows you to apply some &quot;nice to have&quot; features like having a &quot;scrolled&quot; class applied on the body\nwhen the user has scroll in the page or having access to a <code>--vh</code> css variable that represent the exact\nviewport innerHeight and avoid having issues with mobile different viewport height values. Note that if you use\nthe <code>sPostcssSugarPlugin</code> postcss plugin, you can use the <code>vh</code> unit as normal and if will automatically take the\nvalue of the <code>--vh</code> variable if it exists.\nMore feature can be added in the future depending on the needs.",
+                "description": "This feature allows you to apply some \"nice to have\" features like having a \"scrolled\" class applied on the body\nwhen the user has scroll in the page or having access to a `--vh` css variable that represent the exact\nviewport innerHeight and avoid having issues with mobile different viewport height values. Note that if you use\nthe `sPostcssSugarPlugin` postcss plugin, you can use the `vh` unit as normal and if will automatically take the\nvalue of the `--vh` variable if it exists.\nMore feature can be added in the future depending on the needs.",
                 "namespace": "@coffeekraken.s-sugar-feature.js",
                 "status": "beta",
                 "example": [
                     {
                         "language": "html",
                         "title": "Simple usage",
-                        "description": "Simply add the <code>s-sugar</code> property on your body tag",
+                        "description": "Simply add the `s-sugar` property on your body tag",
                         "code": "<bodyTag s-sugar>\n\n</bodyTag>"
                     }
                 ],
@@ -36,7 +99,7 @@
                     "description": "",
                     "definition": {
                         "scrolled": {
-                            "description": "Specify if you want the \"scrolled\" class to be applied on the \"body\" element when the page has been scrolled",
+                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
                             "type": "Boolean",
                             "default": true
                         },
@@ -46,7 +109,12 @@
                             "default": 10
                         },
                         "vhvar": {
-                            "description": "Specify if you want the \"--vh\" css variable to be computed and available",
+                            "description": "Specify if you want the `--vh` css variable to be computed and available",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "resizeTransmations": {
+                            "description": "Specify if you want all the transitions and animations cleared during window resize",
                             "type": "Boolean",
                             "default": true
                         }
@@ -80,7 +148,7 @@
                     "description": "",
                     "definition": {
                         "scrolled": {
-                            "description": "Specify if you want the \"scrolled\" class to be applied on the \"body\" element when the page has been scrolled",
+                            "description": "Specify if you want the `scrolled` class to be applied on the `body` element when the page has been scrolled",
                             "type": "Boolean",
                             "default": true
                         },
@@ -90,7 +158,12 @@
                             "default": 10
                         },
                         "vhvar": {
-                            "description": "Specify if you want the \"--vh\" css variable to be computed and available",
+                            "description": "Specify if you want the `--vh` css variable to be computed and available",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "resizeTransmations": {
+                            "description": "Specify if you want all the transitions and animations cleared during window resize",
                             "type": "Boolean",
                             "default": true
                         }
@@ -116,7 +189,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This declare the @font-face for the &quot;<yellow>default</yellow> font family&quot;",
+                "description": "This declare the @font-face for the \"<yellow>default</yellow> font family\"",
                 "namespace": "@coffeekraken.s-sugar-feature.sugar.css.font",
                 "status": "beta",
                 "since": "2.0.0",
@@ -138,7 +211,7 @@
                         "description": ""
                     }
                 ],
-                "description": "This declare the @font-face for the &quot;<yellow>title</yellow> font family&quot;",
+                "description": "This declare the @font-face for the \"<yellow>title</yellow> font family\"",
                 "namespace": "@coffeekraken.s-sugar-feature.sugar.css.font",
                 "status": "beta",
                 "since": "2.0.0",

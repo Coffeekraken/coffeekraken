@@ -27,8 +27,9 @@
             border-color: sugar.color(main, surface) transparent transparent
                 transparent;
         }
-    }
 
-    .s-tooltip--discord {
+        .s-floating__arrow {
+            background: sugar.color(main, surface);
+        }
     }
 }

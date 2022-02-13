@@ -5,21 +5,47 @@
     z-index: 10;
     margin-bottom: 50px;
 
+    
+
     @sugar.media mobile {
         height: auto;
         text-align: center;
     }
 
-    @sugar.theme.when (dark) {
+    /* @sugar.theme.when (dark) {
         background: sugar.color(main, background) !important;
         background: radial-gradient(
             circle at bottom,
             sugar.color(complementary, --alpha 0.02),
             transparent
         ) !important;
+    } */
+
+    .__bkg {
+        position: absolute;
+        top: 15%;
+        left: 100%;
+        width: 100%;
+        height: 100%;
+        background-image: url('/dist/img/discord-illustration-bkg.png');
+        background-position: 50% 260%;
+        background-size: 50%;
+        border-bottom-left-radius: 50%;
+        border-bottom-right-radius: 50%;
+        transform: scale(2) translateX(-50%) translateY(-50%);
+        overflow: hidden;
+        opacity: 0.5;
+
+        /* &:after {
+            content: '';
+            position: absolute;
+            top: 0; left: 0;
+            width: 100%; height: 100%;
+            background: sugar.color(main, surface);
+        } */
     }
 
-    &:before {
+    /* &:before {
         content: '';
         position: absolute;
         top: 0; left: 0;
@@ -32,7 +58,7 @@
         @sugar.media mobile {
             height: 30%;
         }
-    }
+    } */
 
     .__illustration {
         position: absolute;

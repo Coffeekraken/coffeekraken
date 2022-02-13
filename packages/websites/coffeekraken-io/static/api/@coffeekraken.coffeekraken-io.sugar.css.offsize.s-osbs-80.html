@@ -1,0 +1,2906 @@
+<!--
+* @name               main
+* @namespace          php.views.layouts
+* @type               blade
+*
+* Main layout that handle things like scripts import, stylesheets import, etc...
+*
+* @since            2.0.0
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+-->
+<!doctype html>
+<html lang="en">
+
+<head>
+ <meta charset="utf-8">
+ <meta http-equiv="X-UA-Compatible" content="chrome=1">
+ <meta name="description"
+ content="">
+ <meta name="robots" content="noindex, nofollow" />
+ <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+ <title>
+ 
+ </title>
+
+ 
+ <!-- stylesheets -->
+    <link rel="stylesheet" id="main" href="/dist/css/index.css" />
+    <!-- scripts -->
+    <script type="module" id="module"
+  src="/dist/js/module.es.js">
+ </script>
+    <script type="text/javascript" id="main"
+ nomodule src="/dist/js/index.iife.js">
+ </script>
+    <!-- html -->
+    <link rel="shortcut icon" href="/dist/favicon/favicon.ico">
+<link rel="icon" type="image/png" sizes="16x16" href="/dist/favicon/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/dist/favicon/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="48x48" href="/dist/favicon/favicon-48x48.png">
+<link rel="manifest" href="/dist/favicon/manifest.json">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#fff">
+<meta name="application-name" content="@coffeekraken/coffeekraken-io">
+<link rel="apple-touch-icon" sizes="57x57" href="/dist/favicon/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="60x60" href="/dist/favicon/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="72x72" href="/dist/favicon/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="76x76" href="/dist/favicon/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="114x114" href="/dist/favicon/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="120x120" href="/dist/favicon/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="144x144" href="/dist/favicon/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="152x152" href="/dist/favicon/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="167x167" href="/dist/favicon/apple-touch-icon-167x167.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/dist/favicon/apple-touch-icon-180x180.png">
+<link rel="apple-touch-icon" sizes="1024x1024" href="/dist/favicon/apple-touch-icon-1024x1024.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="@coffeekraken/coffeekraken-io">
+<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-640x1136.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-750x1334.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-828x1792.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1125x2436.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1242x2208.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1242x2688.png">
+<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1536x2048.png">
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1668x2224.png">
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1668x2388.png">
+<link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-2048x2732.png">
+<link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)" href="/dist/favicon/apple-touch-startup-image-1620x2160.png">
+<link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-1136x640.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-1334x750.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-1792x828.png">
+<link rel="apple-touch-startup-image" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2436x1125.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 736px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2208x1242.png">
+<link rel="apple-touch-startup-image" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2688x1242.png">
+<link rel="apple-touch-startup-image" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2048x1536.png">
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1112px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2224x1668.png">
+<link rel="apple-touch-startup-image" media="(device-width: 834px) and (device-height: 1194px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2388x1668.png">
+<link rel="apple-touch-startup-image" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2732x2048.png">
+<link rel="apple-touch-startup-image" media="(device-width: 810px) and (device-height: 1080px) and (-webkit-device-pixel-ratio: 2) and (orientation: landscape)" href="/dist/favicon/apple-touch-startup-image-2160x1620.png">
+<link rel="icon" type="image/png" sizes="228x228" href="/dist/favicon/coast-228x228.png">
+<meta name="msapplication-TileColor" content="#fff">
+<meta name="msapplication-TileImage" content="/dist/favicon/mstile-144x144.png">
+<meta name="msapplication-config" content="/dist/favicon/browserconfig.xml">
+<link rel="yandex-tableau-widget" href="/dist/favicon/yandex-browser-manifest.json">
+    </head>
+
+<body s-refocus trigger="anchor,history">
+
+ 
+ <div s-sugar id="api-coffeekraken-coffeekraken-io-sugar-css-offsize-s-osbs-80">
+
+ <script>
+ window.packageJson = {"name":"@coffeekraken\/coffeekraken-io","version":"2.0.0","description":"wefuih owiehf owuhe fioquwh efiuh qweuihqweu qufouihw efuih woieuh wiuehuqwhe fiuhq efhwiuehfiwqhefuiqhw efjb wqfhjb oqweuhf euf huoqehbu","main":".\/src\/shared\/exports.js","type":"module","scripts":{"dev":"sugar frontstack dev","prod":"sugar frontstack prod","build":"sugar frontstack build","publish.bogdanov":"rsync -avzh --progress --stats .\/static fe0mt_bogdanov_ssh@fe0mt.ftp.infomaniak.com:~\/sites\/bogdanov.coffeekraken.io"},"repository":{"type":"git","url":"https:\/\/olivierbossel.com"},"author":{"name":"Olivier Bossel","email":"olivier.bossel@gmail.com","url":"https:\/\/olivierbossel.com"},"license":"MIT","dependencies":{"@coffeekraken\/cli":"^2.0.0","@coffeekraken\/s-activate-feature":"^2.0.0","@coffeekraken\/s-sitemap-builder":"^2.0.0","@coffeekraken\/s-bench":"^2.0.0","@coffeekraken\/s-builder":"^2.0.0","@coffeekraken\/s-class":"^2.0.0","@coffeekraken\/s-clipboard-copy-component":"^2.0.0","@coffeekraken\/s-code-example-component":"^2.0.0","@coffeekraken\/s-floating-feature":"^2.0.0","@coffeekraken\/s-refocus-feature":"^2.0.0","@coffeekraken\/s-color":"^2.0.0","@coffeekraken\/s-color-picker-component":"^2.0.0","@coffeekraken\/s-component-utils":"^2.0.0","@coffeekraken\/s-config":"^2.0.0","@coffeekraken\/s-date-picker-component":"^2.0.0","@coffeekraken\/s-descriptor":"^2.0.0","@coffeekraken\/s-docblock":"^2.0.0","@coffeekraken\/s-docmap":"^2.0.0","@coffeekraken\/s-duration":"^2.0.0","@coffeekraken\/s-sugar-feature":"^2.0.0","@coffeekraken\/s-conductor":"^2.0.0","@coffeekraken\/s-env":"^2.0.0","@coffeekraken\/s-event-emitter":"^2.0.0","@coffeekraken\/s-feature":"^2.0.0","@coffeekraken\/s-file":"^2.0.0","@coffeekraken\/s-filtrable-input-component":"^2.0.0","@coffeekraken\/s-form-validate-feature":"^2.0.0","@coffeekraken\/s-frontend-server":"^2.0.0","@coffeekraken\/s-frontspec":"^2.0.0","@coffeekraken\/s-frontstack":"^2.0.0","@coffeekraken\/s-glob":"^2.0.0","@coffeekraken\/s-handlebars":"^2.0.0","@coffeekraken\/s-images-builder":"^2.0.0","@coffeekraken\/s-interface":"^2.0.0","@coffeekraken\/s-lit-component":"^2.0.0","@coffeekraken\/s-log":"^2.0.0","@coffeekraken\/s-markdown-builder":"^2.0.0","@coffeekraken\/s-parallax-feature":"^2.0.0","@coffeekraken\/s-postcss-sugar-plugin":"^2.0.0","@coffeekraken\/s-process":"^2.0.0","@coffeekraken\/s-promise":"^2.0.0","@coffeekraken\/s-range-component":"^2.0.0","@coffeekraken\/s-request":"^2.0.0","@coffeekraken\/s-riotjs-plugin-postcss-preprocessor":"^2.0.0","@coffeekraken\/s-side-panel-component":"^2.0.0","@coffeekraken\/s-static-builder":"^2.0.0","@coffeekraken\/s-stdio":"^2.0.0","@coffeekraken\/s-sugar-config":"^2.0.0","@coffeekraken\/s-sugar-json":"^2.0.0","@coffeekraken\/s-theme":"^2.0.0","@coffeekraken\/s-timer":"^2.0.0","@coffeekraken\/s-type":"^2.0.0","@coffeekraken\/s-url":"^2.0.0","@coffeekraken\/s-view-renderer":"^2.0.0","@coffeekraken\/s-vite":"^2.0.0","@coffeekraken\/s-vite-plugin-postcss":"^2.0.0","@coffeekraken\/s-vite-plugin-riotjs":"^2.0.0","@coffeekraken\/s-vite-plugin-sugar":"^2.0.0","@coffeekraken\/sugar":"^2.0.0","animejs":"^3.2.1","http-server":"^14.0.0","lit-element":"^2.5.1","minisearch":"^3.0.4","noise-canvas":"^1.1.1","postprocessing":"^6.23.2","three":"^0.134.0","tumult":"^3.0.14","vue":"^3.1.5","vue3-webcomponent-wrapper":"^0.1.4"},"devDependencies":{"esbuild":"^0.13.13"}};
+ </script>
+
+ <script>
+ const state = JSON.parse(window.localStorage.getItem('coffeekrakenio') ?? '{}');
+ if (state.darkMode) {
+ document.body.setAttribute('theme', 'dark');
+ }
+ </script>
+
+ <header id="header">
+
+ <div class="s-container">
+
+ <div class="s-flex s-flex--align-center" style="position: relative">
+ <div class="__actions s-display s-display--none s-display___mobile s-display--inline-block___mobile">
+ <div class="s-mis s-mis--30">
+ <a s-activate class="__menu-icon" href="#nav-mobile" toggle>
+ <i class="s-icon s-icon--menu __open"></i>
+ <i class="s-icon s-icon--cross __close"></i>
+ </a>
+ </div>
+ </div>
+ <div class="__logo">
+ <a href="/" title="Coffeekraken.io">
+ <svg s-kraken-logo width="231" height="86" viewBox="0 0 231 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <mask id="mask0_1073_7644" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="231" height="86">
+ <path d="M115.5 85.999C80 85.999 72 78 58.5 78C41.5 78 43 85.999 0 85.999V0H231V85.999H193.5H124.5H115.5Z"
+ fill="#282D33" />
+ </mask>
+ <g class="kraken-logo" mask="url(#mask0_1073_7644)">
+ <path
+ d="M103.161 85.9748V82.4733H106.716V58.2864H103.267V54.8389H111.917V74.6085L120.249 68.1443H116.746V64.6429H128.156V68.1443H125.343L117.224 74.6624L124.812 82.4733H128.315V85.9748H121.788L111.917 75.5243V82.4733H115.048V85.9748H103.161Z"
+ class="main" />
+ <path
+ d="M125.926 85.9748V82.4733H129.535V68.1443H125.926V64.6429H134.736V71.0532H133.94C134.399 69.3294 134.948 67.9827 135.585 67.0131C136.257 66.0435 137 65.3611 137.814 64.9661C138.627 64.5352 139.441 64.3197 140.255 64.3197C140.998 64.3197 141.705 64.4095 142.377 64.589C143.085 64.7686 143.775 65.02 144.447 65.3432L143.28 69.9759C142.678 69.5808 142.041 69.2935 141.369 69.114C140.732 68.8985 140.06 68.7908 139.352 68.7908C138.185 68.7908 137.124 69.2576 136.168 70.1913C135.249 71.1251 134.789 72.5077 134.789 74.3392L134.736 82.4733H138.238V85.9748H125.926Z"
+ class="main" />
+ <path
+ d="M147.896 86.5673C145.738 86.5673 144.005 85.9748 142.696 84.7897C141.422 83.5686 140.785 82.0603 140.785 80.2647C140.785 78.6128 141.174 77.302 141.953 76.3323C142.731 75.3627 143.757 74.6624 145.031 74.2315C146.304 73.8005 147.684 73.585 149.17 73.585C150.408 73.585 151.611 73.6928 152.779 73.9083C153.946 74.1237 155.043 74.3931 156.069 74.7163L154.583 74.9318V72.5077C154.583 70.9275 154.176 69.7604 153.362 69.0062C152.549 68.2521 151.417 67.875 149.966 67.875C148.975 67.875 147.843 68.0366 146.57 68.3598C145.331 68.683 144.093 69.1499 142.855 69.7604L141.475 66.5283C142.89 65.7023 144.412 65.0918 146.039 64.6968C147.702 64.3017 149.241 64.1042 150.656 64.1042C152.602 64.1042 154.247 64.4274 155.591 65.0738C156.971 65.7203 158.015 66.654 158.722 67.875C159.43 69.0601 159.784 70.4607 159.784 72.0767V82.4733H162.809V85.9748H155.326L154.742 82.8504L156.5 85.4899C155.226 86.7469 153.752 85.041 152.407 85.6515C151.098 86.2621 149.595 86.5673 147.896 86.5673ZM149.223 83.3352C150.355 83.3352 151.47 83.0838 152.566 82.5811C153.699 82.0783 154.848 81.2882 156.016 80.2108L154.583 82.204V76.2785L155.75 77.302C154.972 77.0147 154.088 76.7812 153.097 76.6017C152.106 76.4221 151.08 76.3323 150.019 76.3323C148.887 76.3323 147.861 76.5837 146.941 77.0865C146.057 77.5893 145.614 78.5409 145.614 79.9415C145.614 80.9111 145.933 81.7192 146.57 82.3656C147.207 83.012 148.091 83.3352 149.223 83.3352Z"
+ class="main" />
+ <path
+ d="M159.89 85.9748V82.4733H163.445V58.2864H159.996V54.8389H168.646V74.6085L176.978 68.1443H173.475V64.6429H184.885V68.1443H182.072L173.953 74.6624L181.541 82.4733H191.465V85.9748H178.517L168.646 75.5243V82.4733H171.777V85.9748H159.89Z"
+ class="main" />
+ <path
+ d="M194.808 86.5673C192.509 86.5673 190.457 86.1184 188.653 85.2206C186.848 84.2869 185.433 82.9761 184.407 81.2882C183.381 79.6003 182.868 77.6072 182.868 75.3088C182.868 73.0464 183.363 71.0712 184.354 69.3833C185.345 67.6954 186.671 66.4026 188.334 65.5048C190.032 64.5711 191.943 64.1042 194.065 64.1042C196.224 64.1042 198.081 64.5711 199.638 65.5048C201.194 66.4026 202.379 67.6775 203.193 69.3294C204.042 70.9814 204.467 72.9027 204.467 75.0934V76.3323H186.636L186.689 73.4773H199.425C199.425 72.2922 199.195 71.2687 198.735 70.4068C198.276 69.5449 197.639 68.8985 196.825 68.4676C196.011 68.0007 195.074 67.7673 194.012 67.7673C192.845 67.7673 191.801 68.0546 190.881 68.6292C189.997 69.2037 189.289 70.0118 188.759 71.0532C188.263 72.0947 188.016 73.3696 188.016 74.8779C188.016 76.458 188.299 77.8227 188.865 78.9719C189.466 80.1211 190.298 81.0009 191.359 81.6114C192.42 82.2219 193.641 82.5272 195.021 82.5272C196.507 82.5272 197.886 82.2399 199.16 81.6653C200.434 81.0907 201.548 80.3725 202.503 79.5106L204.148 82.7427C203.122 83.82 201.813 84.7358 200.221 85.4899C198.665 86.2082 196.86 86.5673 194.808 86.5673Z"
+ class="main" />
+ <path
+ d="M195.18 85.9748V82.4733H207.704V68.1443H204.095V64.6429H212.745L212.798 67.4979L211.153 67.8211C212.639 66.7438 214.125 65.8639 215.611 65.1816C217.097 64.4633 218.636 64.1042 220.228 64.1042C222.28 64.1042 223.96 64.7506 225.269 66.0435C226.578 67.3363 227.233 69.114 227.233 71.3764V82.4733H230.735V85.9748H218.954V82.4733H221.979V72.2922C221.979 70.9635 221.661 69.922 221.024 69.1678C220.387 68.4137 219.503 68.0366 218.371 68.0366C217.274 68.0366 216.142 68.288 214.974 68.7908C213.842 69.2935 212.639 69.9938 211.366 70.8916L212.958 68.6292V82.4733H216.195V85.9748H195.18Z"
+ class="main" />
+ <path
+ d="M121.415 52.7985C118.694 52.7985 116.183 52.4119 113.884 51.6388C111.584 50.8271 109.572 49.6867 107.847 48.2178C106.161 46.7103 104.838 44.8934 103.88 42.7674C102.96 40.6413 102.5 38.2254 102.5 35.5195C102.5 31.9632 103.267 28.8901 104.8 26.3001C106.371 23.6716 108.479 21.6615 111.124 20.2699C113.807 18.8396 116.873 18.1245 120.323 18.1245C122.737 18.1245 124.845 18.4917 126.647 19.2262C128.487 19.9606 129.981 20.9657 131.131 22.2413C132.319 23.517 133.124 25.0245 133.546 26.764L131.246 25.0825V18.7043H137.685V30.6489H132.166C131.17 28.7548 129.905 27.3245 128.372 26.3581C126.877 25.3531 124.999 24.8506 122.737 24.8506C120.629 24.8506 118.809 25.2951 117.276 26.1842C115.781 27.0733 114.612 28.3102 113.769 29.8951C112.964 31.4413 112.561 33.2775 112.561 35.4035C112.561 37.027 112.791 38.496 113.251 39.8102C113.711 41.0859 114.344 42.2069 115.148 43.1733C115.992 44.101 116.988 44.8161 118.138 45.3187C119.288 45.8212 120.572 46.0724 121.99 46.0724C123.561 46.0724 124.941 45.7825 126.129 45.2027C127.318 44.6229 128.314 43.7724 129.119 42.6514C129.924 41.4918 130.518 40.0808 130.901 38.4186L138.548 41.0859C138.011 43.4439 136.976 45.5119 135.443 47.2901C133.948 49.0296 132.013 50.3825 129.636 51.3489C127.298 52.3153 124.558 52.7985 121.415 52.7985Z"
+ class="accent" />
+ <path
+ d="M143.435 52.8565C140.867 52.8565 138.624 52.354 136.708 51.3489C134.792 50.3052 133.297 48.8556 132.224 47.0002C131.15 45.1447 130.614 42.9993 130.614 40.564C130.614 38.1287 131.15 36.0027 132.224 34.1859C133.297 32.3691 134.792 30.9581 136.708 29.9531C138.624 28.9094 140.867 28.3875 143.435 28.3875C146.002 28.3875 148.245 28.9094 150.161 29.9531C152.077 30.9581 153.572 32.3691 154.645 34.1859C155.719 36.0027 156.255 38.1287 156.255 40.564C156.255 42.9993 155.719 45.1447 154.645 47.0002C153.572 48.8556 152.077 50.3052 150.161 51.3489C148.245 52.354 146.002 52.8565 143.435 52.8565ZM143.435 46.3624C144.431 46.3624 145.293 46.1304 146.022 45.6666C146.788 45.2027 147.363 44.5455 147.746 43.6951C148.13 42.806 148.321 41.7623 148.321 40.564C148.321 39.3657 148.13 38.3413 147.746 37.4909C147.363 36.6405 146.788 35.9833 146.022 35.5195C145.293 35.0556 144.431 34.8237 143.435 34.8237C142.4 34.8237 141.518 35.0556 140.79 35.5195C140.1 35.9833 139.544 36.6405 139.123 37.4909C138.739 38.3413 138.548 39.3657 138.548 40.564C138.548 41.7623 138.739 42.806 139.123 43.6951C139.544 44.5455 140.1 45.2027 140.79 45.6666C141.518 46.1304 142.4 46.3624 143.435 46.3624Z"
+ class="accent" />
+ <path
+ d="M154.818 52.2187V47.1161H157.808V34.0699H154.76V29.0254H157.808V26.88C157.808 23.9422 158.651 21.6228 160.337 19.922C162.024 18.2211 164.419 17.3707 167.524 17.3707C170.513 17.3707 172.775 18.0472 174.308 19.4001C175.879 20.7144 176.799 22.5119 177.067 24.7926L171.146 25.7783C171.107 24.7346 170.897 23.9228 170.513 23.343C170.168 22.7245 169.593 22.4153 168.788 22.4153C167.984 22.4153 167.37 22.7438 166.949 23.401C166.527 24.0195 166.316 25.0438 166.316 26.4741V29.0254H174.193V26.0682C174.193 24.2514 174.576 22.6279 175.343 21.1976C176.109 19.7674 177.259 18.627 178.792 17.7766C180.364 16.9262 182.357 16.501 184.771 16.501C186.764 16.501 188.412 16.7909 189.716 17.3707C191.057 17.9119 192.111 18.7237 192.878 19.806C193.644 20.8497 194.123 22.164 194.315 23.7489L187.818 24.9086C187.78 23.8649 187.569 23.0531 187.186 22.4733C186.803 21.8934 186.189 21.6035 185.346 21.6035C184.503 21.6035 183.851 21.9127 183.391 22.5312C182.97 23.1497 182.759 24.2707 182.759 25.8943V29.0254H186.726V34.0699H182.759V47.1161H186.669V52.2187H171.031V47.1161H174.193V34.0699H166.316V47.1161H171.433V52.2187H154.818Z"
+ class="accent" />
+ <path
+ d="M198.282 52.8565C195.637 52.8565 193.318 52.3733 191.325 51.4069C189.371 50.4405 187.838 49.0489 186.726 47.2321C185.614 45.3766 185.059 43.1733 185.059 40.622C185.059 38.1867 185.595 36.0607 186.669 34.2439C187.742 32.427 189.217 30.9968 191.095 29.9531C193.012 28.9094 195.196 28.3875 197.649 28.3875C200.064 28.3875 202.115 28.9094 203.801 29.9531C205.526 30.9581 206.829 32.3691 207.711 34.1859C208.63 35.964 209.09 38.0321 209.09 40.3901V41.9556H189.773L189.831 38.3027H201.214C201.214 37.3749 201.061 36.6018 200.754 35.9834C200.486 35.3262 200.064 34.8237 199.489 34.4758C198.914 34.1279 198.205 33.9539 197.362 33.9539C196.404 33.9539 195.599 34.2052 194.947 34.7077C194.296 35.1716 193.798 35.8674 193.453 36.7951C193.146 37.6842 192.993 38.7472 192.993 39.9842C192.993 41.4144 193.261 42.6128 193.798 43.5792C194.372 44.5069 195.139 45.222 196.097 45.7245C197.055 46.1884 198.167 46.4203 199.432 46.4203C200.812 46.4203 202.115 46.1884 203.341 45.7245C204.568 45.2607 205.641 44.6615 206.561 43.9271L208.918 49.0296C207.615 50.1892 206.062 51.117 204.261 51.8128C202.46 52.5086 200.467 52.8565 198.282 52.8565Z"
+ class="accent" />
+ <path
+ d="M219.266 52.8565C216.622 52.8565 214.303 52.3733 212.31 51.4069C210.355 50.4405 208.822 49.0489 207.711 47.2321C206.599 45.3766 206.043 43.1733 206.043 40.622C206.043 38.1867 206.58 36.0607 207.653 34.2439C208.726 32.427 210.202 30.9968 212.08 29.9531C213.996 28.9094 216.181 28.3875 218.634 28.3875C221.049 28.3875 223.099 28.9094 224.786 29.9531C226.51 30.9581 227.814 32.3691 228.695 34.1859C229.615 35.964 230.075 38.0321 230.075 40.3901V41.9556H210.758L210.815 38.3027H222.199C222.199 37.3749 222.045 36.6018 221.739 35.9834C221.47 35.3262 221.049 34.8237 220.474 34.4758C219.899 34.1279 219.19 33.9539 218.347 33.9539C217.388 33.9539 216.584 34.2052 215.932 34.7077C215.28 35.1716 214.782 35.8674 214.437 36.7951C214.131 37.6842 213.977 38.7472 213.977 39.9842C213.977 41.4144 214.246 42.6128 214.782 43.5792C215.357 44.5069 216.124 45.222 217.082 45.7245C218.04 46.1884 219.152 46.4203 220.416 46.4203C221.796 46.4203 223.099 46.1884 224.326 45.7245C225.552 45.2607 226.625 44.6615 227.545 43.9271L229.903 49.0296C228.599 50.1892 227.047 51.117 225.246 51.8128C223.444 52.5086 221.451 52.8565 219.266 52.8565Z"
+ class="accent" />
+ <mask id="mask1_1073_7644" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="-12" width="116"
+ height="99">
+ <rect y="-11" width="114" height="97" fill="#C4C4C4" stroke="black" />
+ </mask>
+ <g mask="url(#mask1_1073_7644)">
+ <path
+ d="M56.9726 24.9571C58.2833 24.3399 59.7711 24.1674 60.9429 24.1897C62.8497 24.226 64.7941 24.7417 66.4785 25.5658C68.1629 26.3898 69.5969 27.5269 70.4526 28.8421C71.1785 29.9576 71.7261 31.6511 70.7728 33.2987C73.6508 34.0815 75.2 36.0314 75.8804 37.6246C76.6606 39.4516 76.7001 41.5486 76.1139 43.5512C75.5277 45.5538 74.3242 47.4342 72.602 48.8252C71.3458 49.8398 69.4018 50.8781 67.0236 51.0458C67.2145 51.9754 67.1854 52.8956 67.0336 53.7123C66.6229 55.9217 65.2498 58.1589 63.2408 60.0645C61.2318 61.9702 58.6727 63.4631 55.9528 64.2233C55.5824 64.3268 55.1907 64.4206 54.7829 64.5L71.2091 56.5629C74.0013 56.2356 77 63.5 82.4129 55.5155C91.5361 41.8024 89.002 35.5849 83.9172 29.8945C80.096 25.6182 67.4287 22.3285 59.7859 20.3436C57.2585 19.6872 55.2805 19.1736 54.3536 18.8141C51.3697 17.6569 46.4865 12.5772 52.811 3.5C40.4732 12.1996 46.831 18.8056 49.7992 21.4978C50.7087 22.3227 52.8157 23.2075 55.357 24.2747C55.8794 24.4941 56.4202 24.7212 56.9726 24.9571Z"
+ class="main" />
+ <path
+ d="M66.6335 32.3367C65.7135 33.4002 63.0073 33.3513 60.5891 32.2274C58.1708 31.1035 56.9562 29.3303 57.8761 28.2667C58.7961 27.2032 61.5023 27.2521 63.9206 28.376C66.3389 29.4999 67.5535 31.2731 66.6335 32.3367Z"
+ class="main" />
+ <path
+ d="M65.3948 47.0571C63.0616 46.6708 61.8822 44.0472 62.7604 41.1969C63.6386 38.3466 66.2419 36.3491 68.575 36.7354C70.9082 37.1216 72.0876 39.7453 71.2094 42.5955C70.3312 45.4458 67.7279 47.4433 65.3948 47.0571Z"
+ class="main" />
+ <path
+ d="M50.4215 52.1548C47.2269 55.0335 46.5474 58.5061 48.9039 59.911C51.2603 61.316 55.7603 60.1213 58.9549 57.2426C62.1495 54.3639 62.829 50.8913 60.4725 49.4863C58.1161 48.0814 53.6161 49.2761 50.4215 52.1548Z"
+ class="main" />
+ <path
+ d="M50 48C48.7201 47.2042 45.2314 45.78 44.862 41.9607C44.3194 36.351 43.2553 34.6495 42.7911 34.5C43.3521 34.8998 44.17 36.8739 42.9539 41.5712C42.8184 42.0948 42.6905 42.5783 42.5718 43.0274C41.6827 46.3906 41.3044 47.822 42.0094 49.6921C39.456 48.0314 36.6704 46.6786 34.9397 46.9622C30.9639 47.6138 30.392 48.4678 27.7526 52.4101C27.4942 52.796 27.2158 53.2118 26.9127 53.6596C24.1927 57.6777 22.1709 58.3692 21.5 58.2127C21.9191 58.4621 23.8992 58.1354 28.4665 54.8335C34.1757 50.7062 35.5369 51.7983 38.203 55.5433C39.4079 57.2357 41.976 57.4259 44.1603 56.8188C43.9793 55.9626 43.9877 55.1022 44.0955 54.3506C44.351 52.5685 45 52 46 51C47.3672 49.6328 49.7445 48.2619 50 48Z"
+ class="main" />
+ <path fill-rule="evenodd" clip-rule="evenodd"
+ d="M26.5464 54.2061H85.7178C89.861 54.2061 93.2198 57.5648 93.2198 61.7081V113.378C93.2198 121.665 86.5022 128.382 78.2157 128.382H34.0484C25.7619 128.382 19.0443 121.665 19.0443 113.378V109.838H15.5038C7.21731 109.838 0.499756 103.12 0.499756 94.8335V85.8995C0.499756 77.6129 7.21732 70.8954 15.5039 70.8954H19.0443V61.7081C19.0443 57.5648 22.4031 54.2061 26.5464 54.2061ZM85.0083 65.9371C87.2546 70.3979 86.5444 75.2887 83.4219 76.8612C80.2993 78.4336 75.947 76.0922 73.7007 71.6315C71.4543 67.1707 72.1646 62.2799 75.2871 60.7074C78.4096 59.135 82.762 61.4764 85.0083 65.9371ZM11.1173 87.8688C11.1173 83.7256 14.4761 80.3668 18.6193 80.3668H21.6202C25.7634 80.3668 29.1222 83.7256 29.1222 87.8688V90.8697C29.1222 95.0129 25.7634 98.3717 21.6202 98.3717H18.6193C14.4761 98.3717 11.1173 95.0129 11.1173 90.8697V87.8688ZM86.8975 88.504C87.1579 92.169 85.2893 95.2879 82.7238 95.4702C80.1582 95.6525 77.8673 92.8292 77.6069 89.1642C77.3465 85.4991 78.9345 84.6823 81.5 84.5C84.0655 84.3177 86.6371 84.8389 86.8975 88.504Z"
+ class="accent" />
+ <path
+ d="M28.4665 54.8335C23.8992 58.1354 21.9191 58.4621 21.5 58.2127C22.1381 58.3615 23.9981 57.7433 26.5186 54.2256L29.3315 54.2256C29.0547 54.4141 28.7666 54.6166 28.4665 54.8335Z"
+ class="main" />
+ <path
+ d="M29.3525 57.8613H68.0305C68.4176 58.7518 68.6324 59.7353 68.6324 60.7693V110.84C68.6324 118.87 62.1558 125.38 54.1667 125.38H26.2547C23.6968 122.757 22.1196 119.165 22.1196 115.202V101.373H23.62C27.7633 101.373 31.1221 98.0144 31.1221 93.8712V90.8704C31.1221 86.7271 27.7633 83.3683 23.62 83.3683H22.1196V65.1312C22.1196 61.1161 25.3579 57.8613 29.3525 57.8613Z"
+ fill="black" fill-opacity="0.05" />
+ </g>
+ </g>
+</svg>
+ </a>
+ </div>
+ <nav id="nav" class="__nav s-until s-until--media s-until--mobile">
+ <a class="s-typo s-typo--bold __main-link" href="/doc/get-started/get-started" title="Get Started">
+ <span>Get started</span>
+ </a>
+
+ 
+  <span s-activate class="__main-link s-display s-display--inline-block" href="body" trigger="mouseover,mouseout"
+ active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
+ <span class="s-depth s-depth--text s-depth--100">Documentation</span>
+
+ <div class="__subnav __subnav-doc">
+
+ <div class="s-container s-layout s-layout--1222">
+ <ul class="__subnav-chapters">
+     <li s-activate href="#subnav-Get-Started"
+ active="true" id="subnav-item-Get-Started"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Get Started
+ </li>
+    <li s-activate href="#subnav-Configuration"
+  id="subnav-item-Configuration"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Configuration
+ </li>
+    <li s-activate href="#subnav-Recipes"
+  id="subnav-item-Recipes"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Recipes
+ </li>
+    <li s-activate href="#subnav-CSS"
+  id="subnav-item-CSS"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ CSS
+ </li>
+    <li s-activate href="#subnav-JS-Node"
+  id="subnav-item-JS-Node"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ JS - Node
+ </li>
+    <li s-activate href="#subnav-Components"
+  id="subnav-item-Components"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Components
+ </li>
+    <li s-activate href="#subnav-Images"
+  id="subnav-item-Images"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Images
+ </li>
+    <li s-activate href="#subnav-Views"
+  id="subnav-item-Views"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Views
+ </li>
+    <li s-activate href="#subnav-Servers"
+  id="subnav-item-Servers"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Servers
+ </li>
+    <li s-activate href="#subnav-Docmap"
+  id="subnav-item-Docmap"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Docmap
+ </li>
+    <li s-activate href="#subnav-Markdown"
+  id="subnav-item-Markdown"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Markdown
+ </li>
+    <li s-activate href="#subnav-CLI"
+  id="subnav-item-CLI"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ CLI
+ </li>
+    <li s-activate href="#subnav-Dependencies"
+  id="subnav-item-Dependencies"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Dependencies
+ </li>
+    <li s-activate href="#subnav-Packages"
+  id="subnav-item-Packages"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Documentation">
+ Packages
+ </li>
+   </ul>
+ <div class="__subnav-stories">
+     <div class="__subnav-story" id="subnav-Get-Started">
+  <ul>
+     <li>
+ <a href="/doc/get-started/get-started" title="Get Started">
+ Get Started
+ </a>
+ </li>
+    <li>
+ <a href="/doc/get-started/first-project" title="First project">
+ First project
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Configuration">
+  <ul>
+     <li>
+ <a href="/doc/config/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/built-in" title="Built-in configs">
+ Built-in configs
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/override" title="Override configs">
+ Override configs
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/references" title="References">
+ References
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/register" title="Register new config files">
+ Register new config files
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/explorer" title="Configuration explorer">
+ Configuration explorer
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Recipes">
+  <ul>
+     <li>
+ <a href="/doc/recipes/what-are-recipes" title="What are recipes?">
+ What are recipes?
+ </a>
+ </li>
+    <li>
+ <a href="/doc/recipes/create-your-recipe" title="Create your recipe">
+ Create your recipe
+ </a>
+ </li>
+     </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-CSS">
+  <ul>
+     <li>
+ <a href="/doc/css/languages" title="Languages">
+ Languages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/pleasant-syntax" title="Pleasant syntax">
+ Pleasant syntax
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/classes" title="Classes">
+ Classes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/mixins" title="Mixins">
+ Mixins
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/theming" title="Theming">
+ Theming
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/colors" title="Colors">
+ Colors
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/typography" title="Typography">
+ Typography
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/ui" title="UI">
+ UI
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/icons" title="Icons">
+ Icons
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/layout" title="Layout">
+ Layout
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/responsive" title="Responsive">
+ Responsive
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/scopes" title="Scopes">
+ Scopes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-JS-Node">
+  <ul>
+     <li>
+ <a href="/doc/js/supported-languages" title="Supported languages">
+ Supported languages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/sugar" title="Sugar toolkit">
+ Sugar toolkit
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/packages" title="Packages">
+ Packages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/build" title="Build">
+ Build
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Components">
+  <ul>
+     <li>
+ <a href="/doc/components/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/customizable" title="Fully customizable">
+ Fully customizable
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/official" title="Official components">
+ Official components
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/create-your-own" title="Create your own">
+ Create your own
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/scopes" title="Scopes">
+ Scopes
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Images">
+  <ul>
+     <li>
+ <a href="/doc/images/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/formats" title="Supported formats">
+ Supported formats
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Views">
+  <ul>
+     <li>
+ <a href="/doc/views/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/views/languages" title="Supported languages">
+ Supported languages
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Servers">
+  <ul>
+     <li>
+ <a href="/doc/servers/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/modules" title="Modules">
+ Modules
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/handlers" title="Handlers">
+ Handlers
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/middlewares" title="Middlewares">
+ Middlewares
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/routes" title="Routes">
+ Routes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Docmap">
+  <ul>
+     <li>
+ <a href="/doc/docmap/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/writing-documentation" title="Writing documentation">
+ Writing documentation
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/api" title="API">
+ API
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Markdown">
+  <ul>
+     <li>
+ <a href="/doc/markdown/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/layouts" title="Layouts">
+ Layouts
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/sections" title="Sections">
+ Sections
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/partials" title="Partials">
+ Partials
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/extends" title="Extends views">
+ Extends views
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-CLI">
+  <ul>
+     <li>
+ <a href="/doc/cli/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/cli/extends" title="Extend the CLI">
+ Extend the CLI
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Dependencies">
+  <ul>
+     <li>
+ <a href="/doc/dependencies/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Packages">
+  <ul>
+     <li>
+ <a href="/@coffeekraken/s-bench/doc/readme" title="@coffeekraken/s-bench">
+ s-bench
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-color/doc/readme" title="@coffeekraken/s-color">
+ s-color
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-conductor/doc/readme" title="@coffeekraken/s-conductor">
+ s-conductor
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-duration/doc/readme" title="@coffeekraken/s-duration">
+ s-duration
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-glob/doc/readme" title="@coffeekraken/s-glob">
+ s-glob
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-vite/doc/readme" title="@coffeekraken/s-vite">
+ s-vite
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/sugar/doc/readme" title="@coffeekraken/sugar">
+ sugar
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-view-renderer/doc/readme" title="@coffeekraken/s-view-renderer">
+ s-view-renderer
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-theme/doc/readme" title="@coffeekraken/s-theme">
+ s-theme
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-sugar-json/doc/readme" title="@coffeekraken/s-sugar-json">
+ s-sugar-json
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-sitemap-builder/doc/readme" title="@coffeekraken/s-sitemap-builder">
+ s-sitemap-builder
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-stdio/doc/readme" title="@coffeekraken/s-stdio">
+ s-stdio
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-request/doc/readme" title="@coffeekraken/s-request">
+ s-request
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-refocus-feature/doc/readme" title="@coffeekraken/s-refocus-feature">
+ s-refocus-feature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-promise/doc/readme" title="@coffeekraken/s-promise">
+ s-promise
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-interface/doc/readme" title="@coffeekraken/s-interface">
+ s-interface
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-frontend-server/doc/readme" title="@coffeekraken/s-frontend-server">
+ s-frontend-server
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-event-emitter/doc/readme" title="@coffeekraken/s-event-emitter">
+ s-event-emitter
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-component-utils/doc/readme" title="@coffeekraken/s-component-utils">
+ s-component-utils
+ </a>
+ </li>
+   </ul>
+  </div>
+   </div>
+
+ </div>
+
+ <div class="__subnav-footer s-layout s-layout--12">
+
+ <div class="__subnav-footer-body">
+ <p class="s-typo s-typo--p">Need something that <span class="s-tc s-tc--accent">you don't find?</span> Don't
+ hesite to <span class="s-tc s-tc--accent">join us through our channels</span> like discord, github,
+ etc...</p>
+ </div>
+
+ <div class="__subnav-footer-links s-text s-text--right">
+ <a class="s-btn s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ Github
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
+ target="_blank">
+ Discord
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <i class="s-icon s-icon--user"></i>
+ &nbsp;
+ <span>Join us!</span>
+ </a>
+ </div>
+
+ </div>
+
+ </div>
+</span>
+
+  <span s-activate class="__main-link s-display s-display--inline-block" href="body" trigger="mouseover,mouseout"
+ active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
+ <span class="s-depth s-depth--text s-depth--100">Styleguide</span>
+
+ <div class="__subnav ">
+
+ <div class="s-container s-layout s-layout--1222">
+ <ul class="__subnav-chapters">
+     <li s-activate href="#subnav-Resets"
+ active="true" id="subnav-item-Resets"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Resets
+ </li>
+    <li s-activate href="#subnav-UI"
+  id="subnav-item-UI"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ UI
+ </li>
+    <li s-activate href="#subnav-Forms"
+  id="subnav-item-Forms"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Forms
+ </li>
+    <li s-activate href="#subnav-Helpers"
+  id="subnav-item-Helpers"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Helpers
+ </li>
+    <li s-activate href="#subnav-Tools"
+  id="subnav-item-Tools"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Tools
+ </li>
+    <li s-activate href="#subnav-Fonts"
+  id="subnav-item-Fonts"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Fonts
+ </li>
+    <li s-activate href="#subnav-Features"
+  id="subnav-item-Features"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-Styleguide">
+ Features
+ </li>
+   </ul>
+ <div class="__subnav-stories">
+     <div class="__subnav-story" id="subnav-Resets">
+  <ul>
+     <li>
+ <a href="/styleguide/resets/global" title="Global reset">
+ Global reset
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/resets/destyle" title="Destyle reset">
+ Destyle reset
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/resets/sugar" title="Sugar reset">
+ Sugar reset
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-UI">
+  <ul>
+     <li>
+ <a href="/styleguide/ui/avatar" title="Avatar">
+ Avatar
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/badges" title="Badges">
+ Badges
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/blockquote" title="Blockquote">
+ Blockquote
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/button" title="Buttons">
+ Buttons
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/dropdown" title="Dropdown">
+ Dropdown
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/fs-tree" title="Fs Tree">
+ Fs Tree
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/lists" title="Lists">
+ Lists
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/loaders" title="Loaders">
+ Loaders
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/tabs" title="Tabs">
+ Tabs
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/table" title="Table">
+ Table
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/tooltip" title="Tooltips">
+ Tooltips
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/scrollbar" title="Scrollbar">
+ Scrollbar
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-filtrable-input-component/styleguide/ui/filtrable-input" title="Filtrable Input">
+ Filtrable Input
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/icons" title="Icons">
+ Icons
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example" title="Code Example">
+ Code Example
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Forms">
+  <ul>
+     <li>
+ <a href="/styleguide/forms/checkbox" title="Checkbox">
+ Checkbox
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/text-input" title="Text Input">
+ Text Input
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/labels" title="Labels">
+ Labels
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/radio" title="Radio">
+ Radio
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-range-component/styleguide/form/s-range" title="Range">
+ Range
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/select" title="Select">
+ Select
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/form/switch" title="Switch">
+ Switch
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-date-picker-component/styleguide/form/s-date-picker" title="Date Picker">
+ Date Picker
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-color-picker-component/styleguide/form/s-color-picker" title="Color Picker">
+ Color Picker
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Helpers">
+  <ul>
+     <li>
+ <a href="/styleguide/helpers/typography" title="Typography">
+ Typography
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/clearfix" title="Clearfix">
+ Clearfix
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/cursor" title="Cursor">
+ Cursor
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/colors" title="Colors">
+ Colors
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/fit-sizes" title="Fit Sizes">
+ Fit Sizes
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/gap" title="Gap">
+ Gap
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/heights" title="Heights">
+ Heights
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/text" title="Text">
+ Text
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/depth" title="Depth">
+ Depth
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/disabled" title="Disabled">
+ Disabled
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/flexbox" title="Flexbox">
+ Flexbox
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/float" title="Float">
+ Float
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/ratio" title="Ratio">
+ Ratio
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/radius" title="Radius">
+ Radius
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/border-width" title="Border width">
+ Border width
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/border-color" title="Border color">
+ Border color
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/display" title="Display">
+ Display
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/positions" title="Positions">
+ Positions
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/transition" title="Transitions">
+ Transitions
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/margin" title="Margin">
+ Margin
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/offsize" title="Offsize">
+ Offsize
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/padding" title="Padding">
+ Padding
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/user-select" title="User select">
+ User select
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/visibility" title="Visibility">
+ Visibility
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/visually" title="Visually">
+ Visually
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/truncate" title="Truncate">
+ Truncate
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/widths" title="Widths">
+ Widths
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/white-space" title="White space">
+ White space
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Tools">
+  <ul>
+     <li>
+ <a href="/styleguide/tools/format-text" title="Format text">
+ Format text
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/tools/rhythm-vertical" title="Rhythm vertical">
+ Rhythm vertical
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/tools/scale" title="Scale">
+ Scale
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Fonts">
+  <ul>
+     <li>
+ <a href="/styleguide/fonts/families" title="Families">
+ Families
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/sizes" title="Sizes">
+ Sizes
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/styles" title="Styles">
+ Styles
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/weights" title="Weights">
+ Weights
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/stretches" title="Stretches">
+ Stretches
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/resets" title="Resets">
+ Resets
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Features">
+  <ul>
+     <li>
+ <a href="/@coffeekraken/s-sugar-feature/styleguide/feature/s-sugar-feature" title="SSugarFeature">
+ SSugarFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-refocus-feature/styleguide/feature/s-activate-feature" title="SRefocusFeature">
+ SRefocusFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-parallax-feature/styleguide/feature/s-parallax-feature" title="SParallaxFeature">
+ SParallaxFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-form-validate-feature/styleguide/feature/s-form-validate-feature" title="SFormValidateFeature">
+ SFormValidateFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-activate-feature/styleguide/feature/s-activate-feature" title="SActivateFeature">
+ SActivateFeature
+ </a>
+ </li>
+   </ul>
+  </div>
+   </div>
+
+ </div>
+
+ <div class="__subnav-footer s-layout s-layout--12">
+
+ <div class="__subnav-footer-body">
+ <p class="s-typo s-typo--p">Need something that <span class="s-tc s-tc--accent">you don't find?</span> Don't
+ hesite to <span class="s-tc s-tc--accent">join us through our channels</span> like discord, github,
+ etc...</p>
+ </div>
+
+ <div class="__subnav-footer-links s-text s-text--right">
+ <a class="s-btn s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ Github
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
+ target="_blank">
+ Discord
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <i class="s-icon s-icon--user"></i>
+ &nbsp;
+ <span>Join us!</span>
+ </a>
+ </div>
+
+ </div>
+
+ </div>
+</span>
+
+   <span s-activate class="__main-link s-display s-display--inline-block" href="body" trigger="mouseover,mouseout"
+ active-class="subnav-active" active-attribute="subnav-active" unactivate-timeout="150">
+ <span class="s-depth s-depth--text s-depth--100">API</span>
+
+ <div class="__subnav ">
+
+ <div class="s-container s-layout s-layout--1222">
+ <ul class="__subnav-chapters">
+     <li s-activate href="#subnav-Search"
+ active="true" id="subnav-item-Search"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Search
+ </li>
+    <li s-activate href="#subnav-Configuration"
+  id="subnav-item-Configuration"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Configuration
+ </li>
+    <li s-activate href="#subnav-Discover-css"
+  id="subnav-item-Discover-css"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Discover (css)
+ </li>
+    <li s-activate href="#subnav-Discover-js"
+  id="subnav-item-Discover-js"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Discover (js)
+ </li>
+    <li s-activate href="#subnav-Discover-PostCSS"
+  id="subnav-item-Discover-PostCSS"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Discover (PostCSS)
+ </li>
+    <li s-activate href="#subnav-Discover-node"
+  id="subnav-item-Discover-node"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Discover (node)
+ </li>
+    <li s-activate href="#subnav-Discover-php"
+  id="subnav-item-Discover-php"
+ save-state trigger="click" mount-when="direct"
+ group="subnav-API">
+ Discover (php)
+ </li>
+   </ul>
+ <div class="__subnav-stories">
+     <div class="__subnav-story" id="subnav-Search">
+  <h3 class="s-typo s-typo--h3 s-mbe s-mbe--50">
+ Searching the API
+</h3>
+
+<p class="s-typo s-typo--lead s-mbe s-mbe--50">
+ To access the search, simply click in the <span class="s-tc s-tc--accent">search input on top of the page</span>, of
+ make use of the <span class="s-badge s-color s-color--complementary">CTRL + P</span> shortcut...
+</p>
+
+<p class="s-typo s-typo--p">
+ You can make a search through the entire website or scope them using <span
+ class="s-badge s-badge--outline s-color s-color--accent">/doc ...</span> for the documentation, <span
+ class="s-badge s-badge--outline s-color s-color--accent">/style ...</span> for the styleguide and <span
+ class="s-badge s-badge--outline s-color s-color--accent">/api ...</span> for the API.
+</p>
+
+<p class="s-typo s-typo--p">
+ To search for packages, simply use the <span class="s-badge s-badge--outline s-color s-color--accent">@...</span> filter pattern.
+</p>
+  </div>
+    <div class="__subnav-story" id="subnav-Configuration">
+  <ul>
+     <li>
+ <a href="/doc/config/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/config/explorer" title="Config Explorer">
+ Config Explorer
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/built-in" title="Built-in Config">
+ Built-in Config
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/override" title="Override Config">
+ Override Config
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/register" title="Register new Config">
+ Register new Config
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-story" id="subnav-Discover-css">
+  <ck-discover platform="css"></ck-discover>
+  </div>
+    <div class="__subnav-story" id="subnav-Discover-js">
+  <ck-discover platform="js"></ck-discover>
+  </div>
+    <div class="__subnav-story" id="subnav-Discover-PostCSS">
+  <ck-discover platform="postcss"></ck-discover>
+  </div>
+    <div class="__subnav-story" id="subnav-Discover-node">
+  <ck-discover platform="node"></ck-discover>
+  </div>
+    <div class="__subnav-story" id="subnav-Discover-php">
+  <ck-discover platform="php"></ck-discover>
+  </div>
+   </div>
+
+ </div>
+
+ <div class="__subnav-footer s-layout s-layout--12">
+
+ <div class="__subnav-footer-body">
+ <p class="s-typo s-typo--p">Need something that <span class="s-tc s-tc--accent">you don't find?</span> Don't
+ hesite to <span class="s-tc s-tc--accent">join us through our channels</span> like discord, github,
+ etc...</p>
+ </div>
+
+ <div class="__subnav-footer-links s-text s-text--right">
+ <a class="s-btn s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ Github
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
+ target="_blank">
+ Discord
+ </a>
+ &nbsp;
+ <a class="s-btn s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <i class="s-icon s-icon--user"></i>
+ &nbsp;
+ <span>Join us!</span>
+ </a>
+ </div>
+
+ </div>
+
+ </div>
+</span>
+
+ </nav>
+ <div class="s-flex s-flex--align-center">
+ <form class="s-until s-until--media s-until--mobile" action="/doc/api" method="get" name="search" id="search-form">
+ <ck-search></ck-search>
+ </form>
+  <div class="s-tooltip-container s-mis s-mis--30 s-mie___mobile s-mie--30___mobile">
+ <a class="s-cursor s-cursor--pointer" id="settings-opener">
+ <i class="s-icon s-icon--settings"></i>
+ </a>
+ <div s-floating class="s-tooltip s-tooltip--block-end s-color s-color--accent s-white-space s-white-space--nowrap s-text s-text--center">
+ Display website settings
+ </div>
+ </div>
+ </div>
+ </div>
+
+ </div>
+
+ <nav id="nav-mobile" class="__nav-mobile s-when s-when--media s-when--mobile">
+ 
+
+ <nav class="__links">
+
+  <a class="s-typo s-typo--bold __main-link" id="menu-mobile-doc" s-activate active href="#menu-mobile-doc" save-state
+ group="menu-mobile" title="Documentation">
+ <span>Documentation</span>
+ </a>
+
+  <a class="s-typo s-typo--bold __main-link" id="menu-mobile-styleguide" s-activate href="#menu-mobile-styleguide"
+ save-state group="menu-mobile" title="Styleguide">
+ <span>Styleguide</span>
+ </a>
+
+  <a class="s-typo s-typo--bold __main-link" id="menu-mobile-api" s-activate href="#menu-mobile-api" save-state
+ group="menu-mobile" title="Api">
+ <span>Api</span>
+ </a>
+
+ </nav>
+
+ <div class="__subnav" id="menu-mobile-doc">
+ <div class="__subnav-accordion">
+      <div class="__subnav-title" s-activate href="#subnav-mobile-Get-Started"
+ active="true" id="subnav-mobile-item-Get-Started"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Get Started
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Get-Started">
+  <ul>
+     <li>
+ <a href="/doc/get-started/get-started" title="Get Started">
+ Get Started
+ </a>
+ </li>
+    <li>
+ <a href="/doc/get-started/first-project" title="First project">
+ First project
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Configuration"
+  id="subnav-mobile-item-Configuration"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Configuration
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Configuration">
+  <ul>
+     <li>
+ <a href="/doc/config/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/built-in" title="Built-in configs">
+ Built-in configs
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/override" title="Override configs">
+ Override configs
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/references" title="References">
+ References
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/register" title="Register new config files">
+ Register new config files
+ </a>
+ </li>
+    <li>
+ <a href="/doc/config/explorer" title="Configuration explorer">
+ Configuration explorer
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Recipes"
+  id="subnav-mobile-item-Recipes"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Recipes
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Recipes">
+  <ul>
+     <li>
+ <a href="/doc/recipes/what-are-recipes" title="What are recipes?">
+ What are recipes?
+ </a>
+ </li>
+    <li>
+ <a href="/doc/recipes/create-your-recipe" title="Create your recipe">
+ Create your recipe
+ </a>
+ </li>
+     </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-CSS"
+  id="subnav-mobile-item-CSS"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ CSS
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-CSS">
+  <ul>
+     <li>
+ <a href="/doc/css/languages" title="Languages">
+ Languages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/pleasant-syntax" title="Pleasant syntax">
+ Pleasant syntax
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/classes" title="Classes">
+ Classes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/mixins" title="Mixins">
+ Mixins
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/theming" title="Theming">
+ Theming
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/colors" title="Colors">
+ Colors
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/typography" title="Typography">
+ Typography
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/ui" title="UI">
+ UI
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/icons" title="Icons">
+ Icons
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/layout" title="Layout">
+ Layout
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/responsive" title="Responsive">
+ Responsive
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/scopes" title="Scopes">
+ Scopes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/css/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-JS-Node"
+  id="subnav-mobile-item-JS-Node"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ JS - Node
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-JS-Node">
+  <ul>
+     <li>
+ <a href="/doc/js/supported-languages" title="Supported languages">
+ Supported languages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/sugar" title="Sugar toolkit">
+ Sugar toolkit
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/packages" title="Packages">
+ Packages
+ </a>
+ </li>
+    <li>
+ <a href="/doc/js/build" title="Build">
+ Build
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Components"
+  id="subnav-mobile-item-Components"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Components
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Components">
+  <ul>
+     <li>
+ <a href="/doc/components/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/customizable" title="Fully customizable">
+ Fully customizable
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/official" title="Official components">
+ Official components
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/create-your-own" title="Create your own">
+ Create your own
+ </a>
+ </li>
+    <li>
+ <a href="/doc/components/scopes" title="Scopes">
+ Scopes
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Images"
+  id="subnav-mobile-item-Images"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Images
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Images">
+  <ul>
+     <li>
+ <a href="/doc/images/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/formats" title="Supported formats">
+ Supported formats
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/images/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Views"
+  id="subnav-mobile-item-Views"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Views
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Views">
+  <ul>
+     <li>
+ <a href="/doc/views/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/views/languages" title="Supported languages">
+ Supported languages
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Servers"
+  id="subnav-mobile-item-Servers"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Servers
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Servers">
+  <ul>
+     <li>
+ <a href="/doc/servers/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/modules" title="Modules">
+ Modules
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/handlers" title="Handlers">
+ Handlers
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/middlewares" title="Middlewares">
+ Middlewares
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/routes" title="Routes">
+ Routes
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+    <li>
+ <a href="/doc/servers/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Docmap"
+  id="subnav-mobile-item-Docmap"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Docmap
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Docmap">
+  <ul>
+     <li>
+ <a href="/doc/docmap/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/writing-documentation" title="Writing documentation">
+ Writing documentation
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/api" title="API">
+ API
+ </a>
+ </li>
+    <li>
+ <a href="/doc/docmap/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Markdown"
+  id="subnav-mobile-item-Markdown"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Markdown
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Markdown">
+  <ul>
+     <li>
+ <a href="/doc/markdown/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/layouts" title="Layouts">
+ Layouts
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/sections" title="Sections">
+ Sections
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/partials" title="Partials">
+ Partials
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/extends" title="Extends views">
+ Extends views
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/build" title="Build">
+ Build
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/configuration" title="Configuration">
+ Configuration
+ </a>
+ </li>
+    <li>
+ <a href="/doc/markdown/more" title="More...">
+ More...
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-CLI"
+  id="subnav-mobile-item-CLI"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ CLI
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-CLI">
+  <ul>
+     <li>
+ <a href="/doc/cli/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/doc/cli/extends" title="Extend the CLI">
+ Extend the CLI
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Dependencies"
+  id="subnav-mobile-item-Dependencies"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Dependencies
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Dependencies">
+  <ul>
+     <li>
+ <a href="/doc/dependencies/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Packages"
+  id="subnav-mobile-item-Packages"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Packages
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Packages">
+  <ul>
+     <li>
+ <a href="/@coffeekraken/s-bench/doc/readme" title="@coffeekraken/s-bench">
+ s-bench
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-color/doc/readme" title="@coffeekraken/s-color">
+ s-color
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-conductor/doc/readme" title="@coffeekraken/s-conductor">
+ s-conductor
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-duration/doc/readme" title="@coffeekraken/s-duration">
+ s-duration
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-glob/doc/readme" title="@coffeekraken/s-glob">
+ s-glob
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-vite/doc/readme" title="@coffeekraken/s-vite">
+ s-vite
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/sugar/doc/readme" title="@coffeekraken/sugar">
+ sugar
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-view-renderer/doc/readme" title="@coffeekraken/s-view-renderer">
+ s-view-renderer
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-theme/doc/readme" title="@coffeekraken/s-theme">
+ s-theme
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-sugar-json/doc/readme" title="@coffeekraken/s-sugar-json">
+ s-sugar-json
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-sitemap-builder/doc/readme" title="@coffeekraken/s-sitemap-builder">
+ s-sitemap-builder
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-stdio/doc/readme" title="@coffeekraken/s-stdio">
+ s-stdio
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-request/doc/readme" title="@coffeekraken/s-request">
+ s-request
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-refocus-feature/doc/readme" title="@coffeekraken/s-refocus-feature">
+ s-refocus-feature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-promise/doc/readme" title="@coffeekraken/s-promise">
+ s-promise
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-interface/doc/readme" title="@coffeekraken/s-interface">
+ s-interface
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-frontend-server/doc/readme" title="@coffeekraken/s-frontend-server">
+ s-frontend-server
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-event-emitter/doc/readme" title="@coffeekraken/s-event-emitter">
+ s-event-emitter
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-component-utils/doc/readme" title="@coffeekraken/s-component-utils">
+ s-component-utils
+ </a>
+ </li>
+   </ul>
+  </div>
+  </div>
+ </div>
+
+ <div class="__subnav" id="menu-mobile-styleguide">
+ <div class="__subnav-accordion">
+      <div class="__subnav-title" s-activate href="#subnav-mobile-Resets"
+ active="true" id="subnav-mobile-item-Resets"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Resets
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Resets">
+  <ul>
+     <li>
+ <a href="/styleguide/resets/global" title="Global reset">
+ Global reset
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/resets/destyle" title="Destyle reset">
+ Destyle reset
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/resets/sugar" title="Sugar reset">
+ Sugar reset
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-UI"
+  id="subnav-mobile-item-UI"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ UI
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-UI">
+  <ul>
+     <li>
+ <a href="/styleguide/ui/avatar" title="Avatar">
+ Avatar
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/badges" title="Badges">
+ Badges
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/blockquote" title="Blockquote">
+ Blockquote
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/button" title="Buttons">
+ Buttons
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/dropdown" title="Dropdown">
+ Dropdown
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/fs-tree" title="Fs Tree">
+ Fs Tree
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/lists" title="Lists">
+ Lists
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/loaders" title="Loaders">
+ Loaders
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/tabs" title="Tabs">
+ Tabs
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/table" title="Table">
+ Table
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/tooltip" title="Tooltips">
+ Tooltips
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/scrollbar" title="Scrollbar">
+ Scrollbar
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-filtrable-input-component/styleguide/ui/filtrable-input" title="Filtrable Input">
+ Filtrable Input
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/ui/icons" title="Icons">
+ Icons
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-code-example-component/styleguide/ui/s-code-example" title="Code Example">
+ Code Example
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Forms"
+  id="subnav-mobile-item-Forms"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Forms
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Forms">
+  <ul>
+     <li>
+ <a href="/styleguide/forms/checkbox" title="Checkbox">
+ Checkbox
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/text-input" title="Text Input">
+ Text Input
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/labels" title="Labels">
+ Labels
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/radio" title="Radio">
+ Radio
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-range-component/styleguide/form/s-range" title="Range">
+ Range
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/forms/select" title="Select">
+ Select
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/form/switch" title="Switch">
+ Switch
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-date-picker-component/styleguide/form/s-date-picker" title="Date Picker">
+ Date Picker
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-color-picker-component/styleguide/form/s-color-picker" title="Color Picker">
+ Color Picker
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Helpers"
+  id="subnav-mobile-item-Helpers"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Helpers
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Helpers">
+  <ul>
+     <li>
+ <a href="/styleguide/helpers/typography" title="Typography">
+ Typography
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/clearfix" title="Clearfix">
+ Clearfix
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/cursor" title="Cursor">
+ Cursor
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/colors" title="Colors">
+ Colors
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/fit-sizes" title="Fit Sizes">
+ Fit Sizes
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/gap" title="Gap">
+ Gap
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/heights" title="Heights">
+ Heights
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/text" title="Text">
+ Text
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/depth" title="Depth">
+ Depth
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/disabled" title="Disabled">
+ Disabled
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/flexbox" title="Flexbox">
+ Flexbox
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/float" title="Float">
+ Float
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/ratio" title="Ratio">
+ Ratio
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/radius" title="Radius">
+ Radius
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/border-width" title="Border width">
+ Border width
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/border-color" title="Border color">
+ Border color
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/display" title="Display">
+ Display
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/positions" title="Positions">
+ Positions
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/transition" title="Transitions">
+ Transitions
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/margin" title="Margin">
+ Margin
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/offsize" title="Offsize">
+ Offsize
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/padding" title="Padding">
+ Padding
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/user-select" title="User select">
+ User select
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/visibility" title="Visibility">
+ Visibility
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/visually" title="Visually">
+ Visually
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/truncate" title="Truncate">
+ Truncate
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/widths" title="Widths">
+ Widths
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/helpers/white-space" title="White space">
+ White space
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Tools"
+  id="subnav-mobile-item-Tools"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Tools
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Tools">
+  <ul>
+     <li>
+ <a href="/styleguide/tools/format-text" title="Format text">
+ Format text
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/tools/rhythm-vertical" title="Rhythm vertical">
+ Rhythm vertical
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/tools/scale" title="Scale">
+ Scale
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Fonts"
+  id="subnav-mobile-item-Fonts"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Fonts
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Fonts">
+  <ul>
+     <li>
+ <a href="/styleguide/fonts/families" title="Families">
+ Families
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/sizes" title="Sizes">
+ Sizes
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/styles" title="Styles">
+ Styles
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/weights" title="Weights">
+ Weights
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/stretches" title="Stretches">
+ Stretches
+ </a>
+ </li>
+    <li>
+ <a href="/styleguide/fonts/resets" title="Resets">
+ Resets
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Features"
+  id="subnav-mobile-item-Features"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Features
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Features">
+  <ul>
+     <li>
+ <a href="/@coffeekraken/s-sugar-feature/styleguide/feature/s-sugar-feature" title="SSugarFeature">
+ SSugarFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-refocus-feature/styleguide/feature/s-activate-feature" title="SRefocusFeature">
+ SRefocusFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-parallax-feature/styleguide/feature/s-parallax-feature" title="SParallaxFeature">
+ SParallaxFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-form-validate-feature/styleguide/feature/s-form-validate-feature" title="SFormValidateFeature">
+ SFormValidateFeature
+ </a>
+ </li>
+    <li>
+ <a href="/@coffeekraken/s-activate-feature/styleguide/feature/s-activate-feature" title="SActivateFeature">
+ SActivateFeature
+ </a>
+ </li>
+   </ul>
+  </div>
+  </div>
+ </div>
+
+ <div class="__subnav" id="menu-mobile-api">
+  <div class="__subnav-accordion">
+      <div class="__subnav-title" s-activate href="#subnav-mobile-Search"
+ active="true" id="subnav-mobile-item-Search"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Search
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Search">
+  <h3 class="s-typo s-typo--h3 s-mbe s-mbe--50">
+ Searching the API
+</h3>
+
+<p class="s-typo s-typo--lead s-mbe s-mbe--50">
+ To access the search, simply click in the <span class="s-tc s-tc--accent">search input on top of the page</span>, of
+ make use of the <span class="s-badge s-color s-color--complementary">CTRL + P</span> shortcut...
+</p>
+
+<p class="s-typo s-typo--p">
+ You can make a search through the entire website or scope them using <span
+ class="s-badge s-badge--outline s-color s-color--accent">/doc ...</span> for the documentation, <span
+ class="s-badge s-badge--outline s-color s-color--accent">/style ...</span> for the styleguide and <span
+ class="s-badge s-badge--outline s-color s-color--accent">/api ...</span> for the API.
+</p>
+
+<p class="s-typo s-typo--p">
+ To search for packages, simply use the <span class="s-badge s-badge--outline s-color s-color--accent">@...</span> filter pattern.
+</p>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Configuration"
+  id="subnav-mobile-item-Configuration"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Configuration
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Configuration">
+  <ul>
+     <li>
+ <a href="/doc/config/overview" title="Overview">
+ Overview
+ </a>
+ </li>
+    <li>
+ <a href="/config/explorer" title="Config Explorer">
+ Config Explorer
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/built-in" title="Built-in Config">
+ Built-in Config
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/override" title="Override Config">
+ Override Config
+ </a>
+ </li>
+    <li>
+ <a href="doc/config/register" title="Register new Config">
+ Register new Config
+ </a>
+ </li>
+   </ul>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-css"
+  id="subnav-mobile-item-Discover-css"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Discover (css)
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Discover-css">
+  <ck-discover platform="css"></ck-discover>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-js"
+  id="subnav-mobile-item-Discover-js"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Discover (js)
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Discover-js">
+  <ck-discover platform="js"></ck-discover>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-PostCSS"
+  id="subnav-mobile-item-Discover-PostCSS"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Discover (PostCSS)
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Discover-PostCSS">
+  <ck-discover platform="postcss"></ck-discover>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-node"
+  id="subnav-mobile-item-Discover-node"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Discover (node)
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Discover-node">
+  <ck-discover platform="node"></ck-discover>
+  </div>
+    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-php"
+  id="subnav-mobile-item-Discover-php"
+ trigger="click" mount-when="direct" toggle save-state>
+ <i class="s-icon s-icon--arrow-down"></i>
+ Discover (php)
+ </div>
+   <div class="__subnav-content" id="subnav-mobile-Discover-php">
+  <ck-discover platform="php"></ck-discover>
+  </div>
+  </div>
+ </div>
+
+ </nav>
+
+</header>
+
+ <div class="__stars"></div>
+
+ <div class="bg">
+ <div class="__gradient1"></div>
+ <div class="__gradient2"></div>
+ </div>
+
+ <div class="content">
+ 
+ 
+ 
+ <div id="api">
+
+ <section class="s-container markdown">
+
+ <div class="s-layout s-layout--1222 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile">
+
+ <nav class="sidemenu s-pb s-pb--50 s-pi___mobile s-pi--30___mobile" s-refocus trigger="event:actual">
+
+ <h5 class="s-typo s-typo--h5 s-mbe s-mbe--30">
+ API
+ </h5>
+
+ <api-nav></api-nav>
+
+ </nav>
+
+ <div class="__content s-pb s-pb--50">
+
+   <section class="docblock first"
+ id="CssClass-s-osbs-80">
+
+  <h1 class="s-typo s-typo--h1 s-mbe s-mbe--30 s-tc s-tc--accent">
+
+  s-osbs:80
+ </h1>
+ 
+ 
+    <p class="s-typo s-typo--lead s-format s-format--text s-mbs s-mbs--50">This class allows you to apply the &quot;<yellow>80</yellow>&quot; block start offsize style to any HTMLElement</p>
+
+  <div class="s-bg s-bg--main-surface s-p s-p--30 s-radius s-depth s-depth--100 s-flex s-flex--align-center s-mbs s-mbs--50 s-display___mobile s-display--block___mobile">
+ <div class="s-flex-item s-flex-item--grow">
+  <span class="s-mie___mobile s-mie--20___mobile">
+ Platform
+ &nbsp;
+ <span class="s-tooltip-container">
+ <i class="s-platform s-platform--css"></i>
+ <div class="s-tooltip s-color s-color--complementary s-white-space s-white-space--nowrap">
+ css
+ </div>
+ </span>
+ </span>
+   </div>
+ <div class="s-mbs___mobile s-mbs--10___mobile">
+ Since&nbsp;&nbsp;<span class="s-typo s-typo--bold s-tc s-tc--accent">2.0.0</span>
+ </div>
+ <div class="s-display___mobile s-display--none___mobile">
+ <span class="s-tc s-tc--base s-opacity s-opacity--20">&nbsp;&nbsp;&nbsp;│&nbsp;&nbsp;&nbsp;</span>
+ </div>
+ <div theme="dark" class="s-mbs___mobile s-mbs--20___mobile s-float___mobile s-float--right___mobile">
+ <div class="s-tooltip-container" style="line-height:0">
+ 
+  <span class="s-avatar s-scale s-scale--20">
+ <a href="https://olivierbossel.com" target="_blank">
+ <img src="https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f?s=80&amp;d=mp&amp;r=g" alt="Olivier Bossel" />
+ </a>
+ </span>
+ <div class="s-tooltip s-white-space s-white-space--nowrap s-color s-color--accent">
+ Olivier Bossel
+ </div>
+  
+ </div>
+ </div>
+ <div class="s-display___mobile s-display--none___mobile">
+ &nbsp;&nbsp;&nbsp;<span class="s-tc s-tc--base s-opacity s-opacity--20">│</span>&nbsp;&nbsp;&nbsp;
+ </div>
+ <div class="s-mbs___mobile s-mbs--20___mobile">
+ <span
+ class="s-badge s-badge--pill s-font s-font--30 s-color s-color--complementary">beta</span>
+ </div>
+ </div>
+       <h4 id="example-s-osbs-80" class="s-typo s-typo--h4 s-mbs80 s-mbe s-mbe--50 s-mbs s-mbs--50">
+ <i class="s-icon s-icon--example s-tc s-tc--accent"></i>&nbsp;&nbsp;Example
+ </h4>
+
+ <s-code-example class=""  lines="10"
+>
+ <code lang="html">
+ <span class="s-osbs:80">Something cool</span>
+ </code>
+</s-code-example>
+         
+ 
+</section>
+  
+ </div>
+
+ </div>
+ </section>
+
+ </div>
+
+ </div>
+
+ <div class="tools s-until s-until--media s-until--mobile" theme="default-dark">
+
+ <div class="tools__issue s-tooltip-container">
+ <a class="s-btn s-btn--block s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <i class="s-icon s-icon--fire"></i>
+ </a>
+ <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
+ <div class="s-position s-position--relative">
+ <i class="s-icon s-icon--github s-font s-font--100 s-mbe s-mbe--30"></i>
+ <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
+ Don't hesitate to declare an issue if something does not works as expected.
+ <br />
+ We are a community and this is what makes the strengh of this project.
+ </p>
+ <a class="s-btn s-color s-color--error s-display s-display--block s-mbe s-mbe--20 s-depth s-depth--50" href="https://olivierbossel.com"
+ title="Share the love" target="_blank">
+ <i class="s-icon s-icon--github"></i> Declare my issue on Github
+ </a>
+ <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
+ title="Share the love" target="_blank">
+ <i class="s-icon s-icon--discord"></i> Talk about it on Discord
+ </a>
+ </div>
+ </div>
+ </div>
+ <div class="tools__share s-tooltip-container">
+ <a class="s-btn s-btn--block s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <i class="s-icon s-icon--heart"></i>
+ </a>
+ <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
+ <div class="s-position s-position--relative">
+ <i class="s-icon s-icon--heart s-font s-font--100 s-mbe s-mbe--30"></i>
+ <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
+ The more we are, the stronger we become.
+ <br />
+ Don't hesitate to tell some words to you friends about us. The goal is to became more and more each
+ days to help each others...
+ </p>
+ <input type="text" value="" class="s-input s-color s-color--accent s-p s-p--20 s-mbe s-mbe--20" id="share-input" />
+ <script>
+ document.querySelector('#share-input').value = document.location;
+ </script>
+ <a href="https://www.facebook.com/sharer/sharer.php?u=#url" class="s-btn s-btn--block s-color s-color--accent s-mbe s-mbe--20"
+ title="Share the love" target="_blank">
+ <i class="s-icon s-icon--facebook s-font s-font--50 s-mi s-mi--10"></i> Share on Facebook!
+ </a>
+ <a href="https://twitter.com/intent/tweet?url=" class="s-btn s-btn--block s-color s-color--complementary"
+ title="Share the love" target="_blank">
+ <i class="s-icon s-icon--twitter s-font s-font--50 s-mi s-mi--10"></i> Make a tweet!
+ </a>
+
+ </div>
+ </div>
+ </div>
+ <div class="tools__share s-tooltip-container">
+ <a class="s-btn s-btn--block s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
+ target="_blank">
+ <i class="s-icon s-icon--user"></i>
+ </a>
+ <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
+ <div class="s-position s-position--relative">
+ <i class="s-icon s-icon--discord s-font s-font--100 s-mbe s-mbe--30"></i>
+ <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
+ Don't be afraid to join us on Discord.
+ </p>
+ <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
+ title="Share the love" target="_blank">
+ <i class="s-icon s-icon--discord"></i> Join us on discord!
+ </a>
+ </div>
+ </div>
+ </div>
+ <div class="tools__opensource s-tooltip-container">
+ <a class="s-btn s-btn--block s-bg s-bg--main-surface" href="https://olivierbossel.com" title="We love open source!"
+ target="_blank">
+ <i class="s-icon s-icon--opensource"></i>
+ </a>
+ <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
+ <div class="s-position s-position--relative">
+ <i class="s-icon s-icon--opensource s-font s-font--100 s-mbe s-mbe--30"></i>
+ <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
+ All of our codebase can be found on Github. We hope that <span class="s-tc s-tc--accent">you may
+ contribute to help us make our
+ tools even better</span>!
+ </p>
+ <a class="s-btn s-color s-color--accent s-display s-display--block" href="https://olivierbossel.com" title="Share the love"
+ target="_blank">
+ <i class="s-icon s-icon--github"></i> Discover the code!
+ </a>
+ </div>
+ </div>
+ </div>
+</div>
+
+ <s-side-panel id="settings" side="right" triggerer="#settings-opener" overlay>
+ <ck-settings mount-when="inViewport"></ck-settings>
+ </s-side-panel>
+
+ 
+ <section class="footer">
+
+ <div class="s-container">
+
+ <div class="s-layout s-layout--122 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile">
+
+ <div>
+
+ <a href="/" title="Coffeekraken.io">
+ <svg s-kraken-logo width="231" height="86" viewBox="0 0 231 86" fill="none" xmlns="http://www.w3.org/2000/svg">
+ <mask id="mask0_1073_7644" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="0" y="0" width="231" height="86">
+ <path d="M115.5 85.999C80 85.999 72 78 58.5 78C41.5 78 43 85.999 0 85.999V0H231V85.999H193.5H124.5H115.5Z"
+ fill="#282D33" />
+ </mask>
+ <g class="kraken-logo" mask="url(#mask0_1073_7644)">
+ <path
+ d="M103.161 85.9748V82.4733H106.716V58.2864H103.267V54.8389H111.917V74.6085L120.249 68.1443H116.746V64.6429H128.156V68.1443H125.343L117.224 74.6624L124.812 82.4733H128.315V85.9748H121.788L111.917 75.5243V82.4733H115.048V85.9748H103.161Z"
+ class="main" />
+ <path
+ d="M125.926 85.9748V82.4733H129.535V68.1443H125.926V64.6429H134.736V71.0532H133.94C134.399 69.3294 134.948 67.9827 135.585 67.0131C136.257 66.0435 137 65.3611 137.814 64.9661C138.627 64.5352 139.441 64.3197 140.255 64.3197C140.998 64.3197 141.705 64.4095 142.377 64.589C143.085 64.7686 143.775 65.02 144.447 65.3432L143.28 69.9759C142.678 69.5808 142.041 69.2935 141.369 69.114C140.732 68.8985 140.06 68.7908 139.352 68.7908C138.185 68.7908 137.124 69.2576 136.168 70.1913C135.249 71.1251 134.789 72.5077 134.789 74.3392L134.736 82.4733H138.238V85.9748H125.926Z"
+ class="main" />
+ <path
+ d="M147.896 86.5673C145.738 86.5673 144.005 85.9748 142.696 84.7897C141.422 83.5686 140.785 82.0603 140.785 80.2647C140.785 78.6128 141.174 77.302 141.953 76.3323C142.731 75.3627 143.757 74.6624 145.031 74.2315C146.304 73.8005 147.684 73.585 149.17 73.585C150.408 73.585 151.611 73.6928 152.779 73.9083C153.946 74.1237 155.043 74.3931 156.069 74.7163L154.583 74.9318V72.5077C154.583 70.9275 154.176 69.7604 153.362 69.0062C152.549 68.2521 151.417 67.875 149.966 67.875C148.975 67.875 147.843 68.0366 146.57 68.3598C145.331 68.683 144.093 69.1499 142.855 69.7604L141.475 66.5283C142.89 65.7023 144.412 65.0918 146.039 64.6968C147.702 64.3017 149.241 64.1042 150.656 64.1042C152.602 64.1042 154.247 64.4274 155.591 65.0738C156.971 65.7203 158.015 66.654 158.722 67.875C159.43 69.0601 159.784 70.4607 159.784 72.0767V82.4733H162.809V85.9748H155.326L154.742 82.8504L156.5 85.4899C155.226 86.7469 153.752 85.041 152.407 85.6515C151.098 86.2621 149.595 86.5673 147.896 86.5673ZM149.223 83.3352C150.355 83.3352 151.47 83.0838 152.566 82.5811C153.699 82.0783 154.848 81.2882 156.016 80.2108L154.583 82.204V76.2785L155.75 77.302C154.972 77.0147 154.088 76.7812 153.097 76.6017C152.106 76.4221 151.08 76.3323 150.019 76.3323C148.887 76.3323 147.861 76.5837 146.941 77.0865C146.057 77.5893 145.614 78.5409 145.614 79.9415C145.614 80.9111 145.933 81.7192 146.57 82.3656C147.207 83.012 148.091 83.3352 149.223 83.3352Z"
+ class="main" />
+ <path
+ d="M159.89 85.9748V82.4733H163.445V58.2864H159.996V54.8389H168.646V74.6085L176.978 68.1443H173.475V64.6429H184.885V68.1443H182.072L173.953 74.6624L181.541 82.4733H191.465V85.9748H178.517L168.646 75.5243V82.4733H171.777V85.9748H159.89Z"
+ class="main" />
+ <path
+ d="M194.808 86.5673C192.509 86.5673 190.457 86.1184 188.653 85.2206C186.848 84.2869 185.433 82.9761 184.407 81.2882C183.381 79.6003 182.868 77.6072 182.868 75.3088C182.868 73.0464 183.363 71.0712 184.354 69.3833C185.345 67.6954 186.671 66.4026 188.334 65.5048C190.032 64.5711 191.943 64.1042 194.065 64.1042C196.224 64.1042 198.081 64.5711 199.638 65.5048C201.194 66.4026 202.379 67.6775 203.193 69.3294C204.042 70.9814 204.467 72.9027 204.467 75.0934V76.3323H186.636L186.689 73.4773H199.425C199.425 72.2922 199.195 71.2687 198.735 70.4068C198.276 69.5449 197.639 68.8985 196.825 68.4676C196.011 68.0007 195.074 67.7673 194.012 67.7673C192.845 67.7673 191.801 68.0546 190.881 68.6292C189.997 69.2037 189.289 70.0118 188.759 71.0532C188.263 72.0947 188.016 73.3696 188.016 74.8779C188.016 76.458 188.299 77.8227 188.865 78.9719C189.466 80.1211 190.298 81.0009 191.359 81.6114C192.42 82.2219 193.641 82.5272 195.021 82.5272C196.507 82.5272 197.886 82.2399 199.16 81.6653C200.434 81.0907 201.548 80.3725 202.503 79.5106L204.148 82.7427C203.122 83.82 201.813 84.7358 200.221 85.4899C198.665 86.2082 196.86 86.5673 194.808 86.5673Z"
+ class="main" />
+ <path
+ d="M195.18 85.9748V82.4733H207.704V68.1443H204.095V64.6429H212.745L212.798 67.4979L211.153 67.8211C212.639 66.7438 214.125 65.8639 215.611 65.1816C217.097 64.4633 218.636 64.1042 220.228 64.1042C222.28 64.1042 223.96 64.7506 225.269 66.0435C226.578 67.3363 227.233 69.114 227.233 71.3764V82.4733H230.735V85.9748H218.954V82.4733H221.979V72.2922C221.979 70.9635 221.661 69.922 221.024 69.1678C220.387 68.4137 219.503 68.0366 218.371 68.0366C217.274 68.0366 216.142 68.288 214.974 68.7908C213.842 69.2935 212.639 69.9938 211.366 70.8916L212.958 68.6292V82.4733H216.195V85.9748H195.18Z"
+ class="main" />
+ <path
+ d="M121.415 52.7985C118.694 52.7985 116.183 52.4119 113.884 51.6388C111.584 50.8271 109.572 49.6867 107.847 48.2178C106.161 46.7103 104.838 44.8934 103.88 42.7674C102.96 40.6413 102.5 38.2254 102.5 35.5195C102.5 31.9632 103.267 28.8901 104.8 26.3001C106.371 23.6716 108.479 21.6615 111.124 20.2699C113.807 18.8396 116.873 18.1245 120.323 18.1245C122.737 18.1245 124.845 18.4917 126.647 19.2262C128.487 19.9606 129.981 20.9657 131.131 22.2413C132.319 23.517 133.124 25.0245 133.546 26.764L131.246 25.0825V18.7043H137.685V30.6489H132.166C131.17 28.7548 129.905 27.3245 128.372 26.3581C126.877 25.3531 124.999 24.8506 122.737 24.8506C120.629 24.8506 118.809 25.2951 117.276 26.1842C115.781 27.0733 114.612 28.3102 113.769 29.8951C112.964 31.4413 112.561 33.2775 112.561 35.4035C112.561 37.027 112.791 38.496 113.251 39.8102C113.711 41.0859 114.344 42.2069 115.148 43.1733C115.992 44.101 116.988 44.8161 118.138 45.3187C119.288 45.8212 120.572 46.0724 121.99 46.0724C123.561 46.0724 124.941 45.7825 126.129 45.2027C127.318 44.6229 128.314 43.7724 129.119 42.6514C129.924 41.4918 130.518 40.0808 130.901 38.4186L138.548 41.0859C138.011 43.4439 136.976 45.5119 135.443 47.2901C133.948 49.0296 132.013 50.3825 129.636 51.3489C127.298 52.3153 124.558 52.7985 121.415 52.7985Z"
+ class="accent" />
+ <path
+ d="M143.435 52.8565C140.867 52.8565 138.624 52.354 136.708 51.3489C134.792 50.3052 133.297 48.8556 132.224 47.0002C131.15 45.1447 130.614 42.9993 130.614 40.564C130.614 38.1287 131.15 36.0027 132.224 34.1859C133.297 32.3691 134.792 30.9581 136.708 29.9531C138.624 28.9094 140.867 28.3875 143.435 28.3875C146.002 28.3875 148.245 28.9094 150.161 29.9531C152.077 30.9581 153.572 32.3691 154.645 34.1859C155.719 36.0027 156.255 38.1287 156.255 40.564C156.255 42.9993 155.719 45.1447 154.645 47.0002C153.572 48.8556 152.077 50.3052 150.161 51.3489C148.245 52.354 146.002 52.8565 143.435 52.8565ZM143.435 46.3624C144.431 46.3624 145.293 46.1304 146.022 45.6666C146.788 45.2027 147.363 44.5455 147.746 43.6951C148.13 42.806 148.321 41.7623 148.321 40.564C148.321 39.3657 148.13 38.3413 147.746 37.4909C147.363 36.6405 146.788 35.9833 146.022 35.5195C145.293 35.0556 144.431 34.8237 143.435 34.8237C142.4 34.8237 141.518 35.0556 140.79 35.5195C140.1 35.9833 139.544 36.6405 139.123 37.4909C138.739 38.3413 138.548 39.3657 138.548 40.564C138.548 41.7623 138.739 42.806 139.123 43.6951C139.544 44.5455 140.1 45.2027 140.79 45.6666C141.518 46.1304 142.4 46.3624 143.435 46.3624Z"
+ class="accent" />
+ <path
+ d="M154.818 52.2187V47.1161H157.808V34.0699H154.76V29.0254H157.808V26.88C157.808 23.9422 158.651 21.6228 160.337 19.922C162.024 18.2211 164.419 17.3707 167.524 17.3707C170.513 17.3707 172.775 18.0472 174.308 19.4001C175.879 20.7144 176.799 22.5119 177.067 24.7926L171.146 25.7783C171.107 24.7346 170.897 23.9228 170.513 23.343C170.168 22.7245 169.593 22.4153 168.788 22.4153C167.984 22.4153 167.37 22.7438 166.949 23.401C166.527 24.0195 166.316 25.0438 166.316 26.4741V29.0254H174.193V26.0682C174.193 24.2514 174.576 22.6279 175.343 21.1976C176.109 19.7674 177.259 18.627 178.792 17.7766C180.364 16.9262 182.357 16.501 184.771 16.501C186.764 16.501 188.412 16.7909 189.716 17.3707C191.057 17.9119 192.111 18.7237 192.878 19.806C193.644 20.8497 194.123 22.164 194.315 23.7489L187.818 24.9086C187.78 23.8649 187.569 23.0531 187.186 22.4733C186.803 21.8934 186.189 21.6035 185.346 21.6035C184.503 21.6035 183.851 21.9127 183.391 22.5312C182.97 23.1497 182.759 24.2707 182.759 25.8943V29.0254H186.726V34.0699H182.759V47.1161H186.669V52.2187H171.031V47.1161H174.193V34.0699H166.316V47.1161H171.433V52.2187H154.818Z"
+ class="accent" />
+ <path
+ d="M198.282 52.8565C195.637 52.8565 193.318 52.3733 191.325 51.4069C189.371 50.4405 187.838 49.0489 186.726 47.2321C185.614 45.3766 185.059 43.1733 185.059 40.622C185.059 38.1867 185.595 36.0607 186.669 34.2439C187.742 32.427 189.217 30.9968 191.095 29.9531C193.012 28.9094 195.196 28.3875 197.649 28.3875C200.064 28.3875 202.115 28.9094 203.801 29.9531C205.526 30.9581 206.829 32.3691 207.711 34.1859C208.63 35.964 209.09 38.0321 209.09 40.3901V41.9556H189.773L189.831 38.3027H201.214C201.214 37.3749 201.061 36.6018 200.754 35.9834C200.486 35.3262 200.064 34.8237 199.489 34.4758C198.914 34.1279 198.205 33.9539 197.362 33.9539C196.404 33.9539 195.599 34.2052 194.947 34.7077C194.296 35.1716 193.798 35.8674 193.453 36.7951C193.146 37.6842 192.993 38.7472 192.993 39.9842C192.993 41.4144 193.261 42.6128 193.798 43.5792C194.372 44.5069 195.139 45.222 196.097 45.7245C197.055 46.1884 198.167 46.4203 199.432 46.4203C200.812 46.4203 202.115 46.1884 203.341 45.7245C204.568 45.2607 205.641 44.6615 206.561 43.9271L208.918 49.0296C207.615 50.1892 206.062 51.117 204.261 51.8128C202.46 52.5086 200.467 52.8565 198.282 52.8565Z"
+ class="accent" />
+ <path
+ d="M219.266 52.8565C216.622 52.8565 214.303 52.3733 212.31 51.4069C210.355 50.4405 208.822 49.0489 207.711 47.2321C206.599 45.3766 206.043 43.1733 206.043 40.622C206.043 38.1867 206.58 36.0607 207.653 34.2439C208.726 32.427 210.202 30.9968 212.08 29.9531C213.996 28.9094 216.181 28.3875 218.634 28.3875C221.049 28.3875 223.099 28.9094 224.786 29.9531C226.51 30.9581 227.814 32.3691 228.695 34.1859C229.615 35.964 230.075 38.0321 230.075 40.3901V41.9556H210.758L210.815 38.3027H222.199C222.199 37.3749 222.045 36.6018 221.739 35.9834C221.47 35.3262 221.049 34.8237 220.474 34.4758C219.899 34.1279 219.19 33.9539 218.347 33.9539C217.388 33.9539 216.584 34.2052 215.932 34.7077C215.28 35.1716 214.782 35.8674 214.437 36.7951C214.131 37.6842 213.977 38.7472 213.977 39.9842C213.977 41.4144 214.246 42.6128 214.782 43.5792C215.357 44.5069 216.124 45.222 217.082 45.7245C218.04 46.1884 219.152 46.4203 220.416 46.4203C221.796 46.4203 223.099 46.1884 224.326 45.7245C225.552 45.2607 226.625 44.6615 227.545 43.9271L229.903 49.0296C228.599 50.1892 227.047 51.117 225.246 51.8128C223.444 52.5086 221.451 52.8565 219.266 52.8565Z"
+ class="accent" />
+ <mask id="mask1_1073_7644" style="mask-type:alpha" maskUnits="userSpaceOnUse" x="-1" y="-12" width="116"
+ height="99">
+ <rect y="-11" width="114" height="97" fill="#C4C4C4" stroke="black" />
+ </mask>
+ <g mask="url(#mask1_1073_7644)">
+ <path
+ d="M56.9726 24.9571C58.2833 24.3399 59.7711 24.1674 60.9429 24.1897C62.8497 24.226 64.7941 24.7417 66.4785 25.5658C68.1629 26.3898 69.5969 27.5269 70.4526 28.8421C71.1785 29.9576 71.7261 31.6511 70.7728 33.2987C73.6508 34.0815 75.2 36.0314 75.8804 37.6246C76.6606 39.4516 76.7001 41.5486 76.1139 43.5512C75.5277 45.5538 74.3242 47.4342 72.602 48.8252C71.3458 49.8398 69.4018 50.8781 67.0236 51.0458C67.2145 51.9754 67.1854 52.8956 67.0336 53.7123C66.6229 55.9217 65.2498 58.1589 63.2408 60.0645C61.2318 61.9702 58.6727 63.4631 55.9528 64.2233C55.5824 64.3268 55.1907 64.4206 54.7829 64.5L71.2091 56.5629C74.0013 56.2356 77 63.5 82.4129 55.5155C91.5361 41.8024 89.002 35.5849 83.9172 29.8945C80.096 25.6182 67.4287 22.3285 59.7859 20.3436C57.2585 19.6872 55.2805 19.1736 54.3536 18.8141C51.3697 17.6569 46.4865 12.5772 52.811 3.5C40.4732 12.1996 46.831 18.8056 49.7992 21.4978C50.7087 22.3227 52.8157 23.2075 55.357 24.2747C55.8794 24.4941 56.4202 24.7212 56.9726 24.9571Z"
+ class="main" />
+ <path
+ d="M66.6335 32.3367C65.7135 33.4002 63.0073 33.3513 60.5891 32.2274C58.1708 31.1035 56.9562 29.3303 57.8761 28.2667C58.7961 27.2032 61.5023 27.2521 63.9206 28.376C66.3389 29.4999 67.5535 31.2731 66.6335 32.3367Z"
+ class="main" />
+ <path
+ d="M65.3948 47.0571C63.0616 46.6708 61.8822 44.0472 62.7604 41.1969C63.6386 38.3466 66.2419 36.3491 68.575 36.7354C70.9082 37.1216 72.0876 39.7453 71.2094 42.5955C70.3312 45.4458 67.7279 47.4433 65.3948 47.0571Z"
+ class="main" />
+ <path
+ d="M50.4215 52.1548C47.2269 55.0335 46.5474 58.5061 48.9039 59.911C51.2603 61.316 55.7603 60.1213 58.9549 57.2426C62.1495 54.3639 62.829 50.8913 60.4725 49.4863C58.1161 48.0814 53.6161 49.2761 50.4215 52.1548Z"
+ class="main" />
+ <path
+ d="M50 48C48.7201 47.2042 45.2314 45.78 44.862 41.9607C44.3194 36.351 43.2553 34.6495 42.7911 34.5C43.3521 34.8998 44.17 36.8739 42.9539 41.5712C42.8184 42.0948 42.6905 42.5783 42.5718 43.0274C41.6827 46.3906 41.3044 47.822 42.0094 49.6921C39.456 48.0314 36.6704 46.6786 34.9397 46.9622C30.9639 47.6138 30.392 48.4678 27.7526 52.4101C27.4942 52.796 27.2158 53.2118 26.9127 53.6596C24.1927 57.6777 22.1709 58.3692 21.5 58.2127C21.9191 58.4621 23.8992 58.1354 28.4665 54.8335C34.1757 50.7062 35.5369 51.7983 38.203 55.5433C39.4079 57.2357 41.976 57.4259 44.1603 56.8188C43.9793 55.9626 43.9877 55.1022 44.0955 54.3506C44.351 52.5685 45 52 46 51C47.3672 49.6328 49.7445 48.2619 50 48Z"
+ class="main" />
+ <path fill-rule="evenodd" clip-rule="evenodd"
+ d="M26.5464 54.2061H85.7178C89.861 54.2061 93.2198 57.5648 93.2198 61.7081V113.378C93.2198 121.665 86.5022 128.382 78.2157 128.382H34.0484C25.7619 128.382 19.0443 121.665 19.0443 113.378V109.838H15.5038C7.21731 109.838 0.499756 103.12 0.499756 94.8335V85.8995C0.499756 77.6129 7.21732 70.8954 15.5039 70.8954H19.0443V61.7081C19.0443 57.5648 22.4031 54.2061 26.5464 54.2061ZM85.0083 65.9371C87.2546 70.3979 86.5444 75.2887 83.4219 76.8612C80.2993 78.4336 75.947 76.0922 73.7007 71.6315C71.4543 67.1707 72.1646 62.2799 75.2871 60.7074C78.4096 59.135 82.762 61.4764 85.0083 65.9371ZM11.1173 87.8688C11.1173 83.7256 14.4761 80.3668 18.6193 80.3668H21.6202C25.7634 80.3668 29.1222 83.7256 29.1222 87.8688V90.8697C29.1222 95.0129 25.7634 98.3717 21.6202 98.3717H18.6193C14.4761 98.3717 11.1173 95.0129 11.1173 90.8697V87.8688ZM86.8975 88.504C87.1579 92.169 85.2893 95.2879 82.7238 95.4702C80.1582 95.6525 77.8673 92.8292 77.6069 89.1642C77.3465 85.4991 78.9345 84.6823 81.5 84.5C84.0655 84.3177 86.6371 84.8389 86.8975 88.504Z"
+ class="accent" />
+ <path
+ d="M28.4665 54.8335C23.8992 58.1354 21.9191 58.4621 21.5 58.2127C22.1381 58.3615 23.9981 57.7433 26.5186 54.2256L29.3315 54.2256C29.0547 54.4141 28.7666 54.6166 28.4665 54.8335Z"
+ class="main" />
+ <path
+ d="M29.3525 57.8613H68.0305C68.4176 58.7518 68.6324 59.7353 68.6324 60.7693V110.84C68.6324 118.87 62.1558 125.38 54.1667 125.38H26.2547C23.6968 122.757 22.1196 119.165 22.1196 115.202V101.373H23.62C27.7633 101.373 31.1221 98.0144 31.1221 93.8712V90.8704C31.1221 86.7271 27.7633 83.3683 23.62 83.3683H22.1196V65.1312C22.1196 61.1161 25.3579 57.8613 29.3525 57.8613Z"
+ fill="black" fill-opacity="0.05" />
+ </g>
+ </g>
+</svg>
+ </a>
+
+ <p class="s-typo s-typo--p s-mbe s-mbe--30">
+ Designed and built with all the love in the world <span class="s-tc s-tc--accent">+1</span> by the
+ Coffeekraken team with the help of our
+ friends and partners.
+ </p>
+
+ <p>Under <a class="s-typo s-typo--bold s-tc s-tc--accent"
+ href="https://github.com/Coffeekraken/coffeekraken/blob/master/LICENSE" target="_blank"
+ title="Coffeekraken.io">MIT</a> License</p>
+ <p>Current version: <bold class="s-typo s-typo--bold s-tc s-tc--accent">2.0.0</bold>
+ </p>
+
+ </div>
+
+
+ <div class="__columns">
+ <div>
+ <h3 class="s-typo s-typo--h5">
+ Links
+ </h3>
+ <ol class="s-list">
+ <li>
+ <a href="/doc/get-started/get-started" title="Get Started with Coffeekraken">Get Started</a>
+ </li>
+ <li>
+ <a href="/doc/get-started/first-project"
+ title="Coffeekraken documentation">Documentation</a>
+ </li>
+ <li>
+ <a href="/styleguide/ui/avatar" title="Coffeekraken styleguide">Styleguide</a>
+ </li>
+ <li>
+ <a href="/api/@coffeekraken.sugar.js.dom.query.querySelectorLive"
+ title="Coffeekraken API">API</a>
+ </li>
+ </ol>
+ </div>
+
+ <div>
+ <h3 class="s-typo s-typo--h5">
+ Usefull
+ </h3>
+ <ol class="s-list">
+ <li>
+ <a href="https://www.npmjs.com/search?q=coffeekraken" title="NPM" target="_blank">NPM
+ Packages</a>
+ </li>
+ <li>
+ <a href="/doc/cli/overview" title="CLI">Start using the CLI</a>
+ </li>
+ <li>
+ <a href="/doc/css/theming" title="Start using the Coffeekraken theming features">Start with
+ theming</a>
+ </li>
+ </ol>
+ </div>
+
+ <div>
+ <h3 class="s-typo s-typo--h5">
+ Community
+ </h3>
+ <ol class="s-list">
+ <li>
+ <a href="https://discord.com/channels/940362961682333767/940362962223378494" title="Discord"
+ target="_blank">Join us on Discord</a>
+ </li>
+ <li>
+ <a href="https://github.com/Coffeekraken/coffeekraken/issues"
+ title="Coffeekraken issues on Github" target="_blank">Issues on Github</a>
+ </li>
+ <li>
+ <a href="https://www.patreon.com/coffeekraken" title="Contribute to Coffeekraken"
+ target="_blank">Support us on
+ Patreon</a>
+ </li>
+ <li>
+ <a href="https://github.com/Coffeekraken/coffeekraken" title="Our contributors">Our
+ contributors</a>
+ </li>
+ </ol>
+ </div>
+
+ </div>
+
+ </div>
+
+ </div>
+
+ <div>
+
+ </div>
+
+</section>
+
+ </div>
+
+
+</body>
+
+</html>

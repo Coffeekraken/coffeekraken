@@ -1,17 +1,7 @@
 // @ts-nocheck
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
-import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
-import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
-// import { BokehPass } from './lib/three/examples/jsm/postprocessing/BokehPass.js';
-import { ShaderPass } from './lib/three/examples/jsm/postprocessing/ShaderPass';
-import { RGBShiftShader } from './lib/three/examples/jsm/shaders/RGBShiftShader';
-import { CopyShader } from './lib/three/examples/jsm/shaders/CopyShader';
-import { BlendShader } from './lib/three/examples/jsm/shaders/BlendShader';
-// import { FXAAShader } from './lib/three/examples/jsm/shaders/FXAAShader';
-// import { MTLLoader } from './lib/three/examples/jsm/loaders/MTLLoader.js';
-import { UnrealBloomPass } from './lib/FixesUnrealBloomPass';
-import { SavePass } from './lib/three/examples/jsm/postprocessing/SavePass';
+import __SSugarConfig from '@coffeekraken/s-sugar-config';
 // import { TextureLoader } from './lib/three/examples/jsm/loaders/TextureLoader.js';
 // import {
 //     BloomEffect,
@@ -29,14 +19,14 @@ import { SavePass } from './lib/three/examples/jsm/postprocessing/SavePass';
 //     RenderPass,
 // } from 'postprocessing';
 import { OrbitControls } from 'https://cdn.jsdelivr.net/npm/three@0.121.1/examples/jsm/controls/OrbitControls.js';
-import { html } from 'lit';
 import * as THREE from 'three';
+import { html } from 'lit';
 import __perlin from './lib/perlinNoise';
-import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
 // import { RGBELoader } from './lib/RGBELoader';
 import { OBJLoader } from './lib/three/examples/jsm/loaders/OBJLoader.js';
-import { Triangle } from 'three/build/three.module';
-import __SSugarConfig from '@coffeekraken/s-sugar-config';
+import { RGBELoader } from './lib/three/examples/jsm/loaders/RGBELoader';
+import { EffectComposer } from './lib/three/examples/jsm/postprocessing/EffectComposer.js';
+import { RenderPass } from './lib/three/examples/jsm/postprocessing/RenderPass.js';
 
 interface IFlyingCoffee {
     grain: any;
@@ -156,11 +146,15 @@ export default class CKBlob extends __SLitComponent {
         const planeGeometry = new THREE.PlaneGeometry(20, 20, 32, 32);
         const planeMaterial = new THREE.ShadowMaterial({
             opacity: this._isDark ? .2 : .05,
+            // opacity: 1,
+            // color: 0xff0000
         });
         const plane = new THREE.Mesh(planeGeometry, planeMaterial);
-        plane.receiveShadow = true;
+        // plane.receiveShadow = true;
         plane.position.set(0, -12, 0);
+        plane.scale.set(2, 2, 2);
         plane.rotation.x = (Math.PI / 2) * -1;
+        this._plane = plane;
 
         var ambientLight;
         if (this._isDark) {
@@ -183,68 +177,12 @@ export default class CKBlob extends __SLitComponent {
         // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
         // pointsSphere3.scale.set(9, 9, 9);
 
-        // const html5 = await this.createIconSphere('/src/3d/logo-html5.jpg');
-        // html5.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const css3 = await this.createIconSphere('/src/3d/logo-css3.jpg');
-        // css3.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const js = await this.createIconSphere('/src/3d/logo-js.jpg');
-        // js.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const vitejs = await this.createIconSphere('/src/3d/logo-vitejs.jpg');
-        // vitejs.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const postcss = await this.createIconSphere('/src/3d/logo-postcss.jpg');
-        // postcss.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const npm = await this.createIconSphere('/src/3d/logo-npm.jpg');
-        // npm.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const yarn = await this.createIconSphere('/src/3d/logo-yarn.jpg');
-        // yarn.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const typescript = await this.createIconSphere(
-        //     '/src/3d/logo-typescript.jpg',
-        // );
-        // typescript.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const php = await this.createIconSphere('/src/3d/logo-php.jpg');
-        // php.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
-        // const node = await this.createIconSphere('/src/3d/logo-node.jpg');
-        // node.rotation.set(
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        //     Math.random() * 360,
-        // );
+        // this._oceanWaves();
+
+        this._planePoints = this.createPlanePoints(0x262C2E);
+
+        this._planePointsLight = this.createPlanePoints(0x262C2E, 1, '6.0');
+            this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
 
         this._pointSpheres = [pointsSphere1];
 
@@ -253,211 +191,63 @@ export default class CKBlob extends __SLitComponent {
         }
         this._scene.add(light);
         this._scene.add(ambientLight);
-        this._scene.add(sphere);
-        // this._scene.add(html5);
-        // this._scene.add(css3);
-        // this._scene.add(js);
-        // this._scene.add(vitejs);
-        // this._scene.add(postcss);
-        // this._scene.add(npm);
-        // this._scene.add(yarn);
-        // this._scene.add(typescript);
-        // this._scene.add(php);
-        // this._scene.add(node);
-        // this._scene.add(grains);
+        // this._scene.add(sphere);
         // this._pointSpheres.forEach((s) => this._scene.add(s));
 
         this._scene.add(plane);
+        this._scene.add(this._planePoints);
+        this._scene.add(this._planePointsLight);
         // this._scene.add(helper);
 
         this.initPostprocessing();
 
-        this.addControls();
+        // this.addControls();
 
         setInterval(() => {
             this._scene.updateMatrixWorld();
-
-            this._grains.forEach((grainObj) => {
-                if (!grainObj.trail) grainObj.trail = [];
-
-                if (grainObj.trail.length >= grainObj.trailLength) {
-                    const last = grainObj.trail.shift();
-                    last.geometry.dispose();
-                    last.material.dispose();
-                    this._scene.remove(last._light);
-                    this._scene.remove(last);
-                }
-
-                grainObj.trail.forEach((s, i) => {
-                    const scale = (0.2 / grainObj.trailLength) * i;
-                    s.scale.set(scale, scale, scale);
-                });
-
-                const color = Math.random() > 0.5 ? 0xffffff : 0xffffff;
-                const ballMat = new THREE.MeshStandardMaterial({
-                    color,
-                    emissive: color,
-                    emissiveIntensity: 0,
-                });
-                const geom = new THREE.SphereGeometry(1, 4, 4);
-                const sphere = new THREE.Mesh(geom, ballMat);
-                sphere.scale.set(0.2, 0.2, 0.2);
-                grainObj.trail.push(sphere);
-                sphere.castShadow = true;
-                sphere.layers.toggle(this.BLOOM_SCENE);
-                this._scene.add(sphere);
-                sphere.position.copy(
-                    new THREE.Vector3().setFromMatrixPosition(
-                        grainObj.localGroup.matrixWorld,
-                    ),
-                );
-            });
         }, 50);
 
         this._scene.traverse( function( child ) { 
-
-    if ( child.isMesh ) {
-
-        child.castShadow = true;
-        child.receiveShadow = true;
-
-    }
-
-} );
+            if ( child.isMesh ) {
+                child.castShadow = true;
+                child.receiveShadow = true;
+            }
+        });
 
 
         this.animate();
     }
 
+    _updatePlaneWave(object) {
+
+        var pos = object.geometry.attributes.position;
+        let center = new THREE.Vector3(0,0,0);
+        var vec3 = new THREE.Vector3(); // for re-use
+        
+        function wavesBuffer( waveSize, magnitude ){
+            
+            const theTime = performance.now() * .001;
+            for ( var i = 0, l = pos.count; i < l; i ++ ) {
+
+                vec3.fromBufferAttribute(pos, i);
+                vec3.sub(center);
+                
+                var z = Math.sin( vec3.length() /- waveSize + (theTime)) * magnitude;
+            
+
+                pos.setZ(i, z);
+
+            }
+            pos.needsUpdate = true
+
+        }
+
+        wavesBuffer(2, .8);
+
+    }
+
     initPostprocessing() {
         const renderPass = new RenderPass(this._scene, this._camera);
-
-        // const bokehPass = new BokehPass(this._scene, this._camera, {
-        //     // focus: 1.0,
-        //     // aperture: 0.005 * 0.00001,
-        //     // maxblur: 0.5,
-
-        //     focus: 10.0,
-        //     aperture: 1 * 0.00001,
-        //     maxblur: 50,
-
-        //     width: this.offsetWidth,
-        //     height: this.offsetHeight,
-        // });
-
-        // renderPass.clearColor = new THREE.Color(0, 0, 0);
-        // renderPass.clearAlpha = 0;
-
-        // const composer = new EffectComposer(this._renderer);
-
-        // composer.addPass(renderPass);
-        // // composer.addPass(
-        // //     new EffectPass(
-        // //         this._camera,
-        // //         new DepthOfFieldEffect(this._camera, {
-        // //             focusDistance: 0.4,
-        // //             focalLength: 0.1,
-        // //             bokehScale: 1,
-        // //         }),
-        // //     ),
-        // // );
-        // composer.addPass(
-        //     new EffectPass(
-        //         this._camera,
-        //         new OutlineEffect(this._scene, this._camera),
-        //     ),
-        // );
-        // // composer.addPass(
-        // //     new EffectPass(
-        // //         this._camera,
-        // //         new BloomEffect({
-        // //             intensity: 2,
-        // //         }),
-        // //     ),
-        // // );
-        // composer.addPass(
-        //     new EffectPass(
-        //         this._camera,
-        //         new GlitchEffect({
-        //             delay: new THREE.Vector2(5, 15),
-        //             duration: new THREE.Vector2(0.05, 0.2),
-        //             ratio: 0.1,
-        //             strengh: new THREE.Vector2(0.01, 0.02),
-        //         }),
-        //     ),
-        // );
-        // // composer.addPass(bokehPass);
-        // // composer.addPass(fxaaPass);
-
-        // this._bloomLayer = new THREE.Layers();
-        // this._bloomLayer.set(this.BLOOM_SCENE);
-
-        // const params = {
-        //     exposure: 1,
-        //     bloomStrength: 1.5,
-        //     bloomThreshold: 0,
-        //     bloomRadius: 0,
-        // };
-
-        // const bloomPass = new UnrealBloomPass(
-        //     new THREE.Vector2(this.offsetWidth, this.offsetHeight),
-        //     1.5,
-        //     0.4,
-        //     0.85,
-        // );
-        // bloomPass.threshold = params.bloomThreshold;
-        // bloomPass.strength = params.bloomStrength;
-        // bloomPass.radius = params.bloomRadius;
-
-        // const renderPass = new RenderPass(this._scene, this._camera);
-
-        // // renderPass.clearColor = new THREE.Color(0, 0, 0);
-        // // renderPass.clearAlpha = true;
-
-        // const bloomComposer = new EffectComposer(
-        //     this._renderer,
-        //     // this._renderTarget,
-        // );
-        // bloomComposer.renderToScreen = false;
-        // bloomComposer.addPass(renderPass);
-        // bloomComposer.addPass(bloomPass);
-
-        // const finalPass = new ShaderPass(
-        //     new THREE.ShaderMaterial({
-        //         uniforms: {
-        //             baseTexture: { value: null },
-        //             bloomTexture: {
-        //                 value: bloomComposer.renderTarget2.texture,
-        //             },
-        //         },
-        //         vertexShader: `
-        //             varying vec2 vUv;
-
-		// 	void main() {
-
-		// 		vUv = uv;
-
-		// 		gl_Position = projectionMatrix * modelViewMatrix * vec4( position, 1.0 );
-
-		// 	}
-        //         `,
-        //         fragmentShader: `
-        //         uniform sampler2D baseTexture;
-		// 	uniform sampler2D bloomTexture;
-
-		// 	varying vec2 vUv;
-
-		// 	void main() {
-
-		// 		gl_FragColor = ( texture2D( baseTexture, vUv ) + vec4( 1.0 ) * texture2D( bloomTexture, vUv ) );
-
-		// 	}
-        //     `,
-        //         defines: {},
-        //     }),
-        //     'baseTexture',
-        // );
-        // finalPass.needsSwap = true;
 
         const finalComposer = new EffectComposer(
             this._renderer,
@@ -594,39 +384,76 @@ export default class CKBlob extends __SLitComponent {
         return this._sphere;
     }
 
-    async createIconSphere(texturePath) {
-        const texture = await this.loadTexture(texturePath);
+    createPlanePoints(color, alphaVariation, pointSize = '8.0') {
+        const numVertices = this._plane.geometry.attributes.position.count;
+        var alphas = new Float32Array(numVertices * 1); // 1 values per vertex
 
-        const ballMaterial = {
-            clearcoat: 0.1,
-            clearcoatRoughness: 0,
-            metalness: 0,
-            roughness: 0.5,
-            // color: 0xf2a22b,
-            color: 0xffffff,
-            // color: 0xffffff,
-            // normalMap: texture,
-            // bumpMap: texture,
-            map: texture,
-            // normalScale: new THREE.Vector2(0.15, 2),
-            envMap: this._envMap.texture,
-        };
+        const vec3 = new THREE.Vector3();
 
-        const ballMat = new THREE.MeshPhysicalMaterial(ballMaterial);
-        const geom = new THREE.SphereGeometry(1, 32, 32);
-        const sphere = new THREE.Mesh(geom, ballMat);
+        const ballMat = new THREE.MeshBasicMaterial({
+            color: this._isDark ? 0x000000 : 0x000000,
+        });
+        const geom = new THREE.PlaneGeometry(30, 50, 16, 16);
 
-        const scale = 0.3 + Math.random() * 0.5;
-        sphere.scale.set(scale, scale, scale);
-        sphere.position.x = 6;
+        const plane = new THREE.Mesh(geom, ballMat);
 
-        const group = new THREE.Group();
-        group.add(sphere);
+        var pos = plane.geometry.attributes.position;
+        let center = new THREE.Vector3(0,0,0);
 
-        this._icons.push(sphere);
-        this._iconsGroups.push(group);
+        for (var i = 0; i < numVertices; i++) {
 
-        return group;
+            vec3.fromBufferAttribute(pos, i);
+            vec3.sub(center);
+            const length = 12;
+            let alpha = 1 / length * (length - vec3.length());
+
+            if (alphaVariation) {
+                alpha = 0 + Math.random() / 3;
+                // alpha += -alphaVariation + Math.random() * alphaVariation * 2;
+            }
+
+            // set alpha randomly
+            alphas[i] = alpha;
+        }
+
+        const vertexShader = `attribute float alpha;
+        varying float vAlpha;
+
+        void main() {
+        vAlpha = alpha;
+        vec4 mvPosition = modelViewMatrix * vec4( position, 1.0 );
+        gl_PointSize = ${pointSize};
+        gl_Position = projectionMatrix * mvPosition;
+        }`,
+                fragmentShader = `uniform vec3 color;
+        varying float vAlpha;
+
+        void main() {
+        gl_FragColor = vec4( color, vAlpha );
+        }`;
+
+        plane.geometry.setAttribute(
+            'alpha',
+            new THREE.BufferAttribute(alphas, 1),
+        );
+        // point cloud material
+        var shaderMaterial = new THREE.ShaderMaterial({
+            uniforms: {
+                color: { value: new THREE.Color(color) },
+            },
+            vertexShader,
+            fragmentShader,
+            transparent: true,
+        });
+
+        const cloud = new THREE.Points(plane.geometry, shaderMaterial);
+
+        cloud._object = plane;
+        cloud.rotation.set(Math.PI / 2, 0, 0);
+        cloud.position.set(0, -10, 0);
+        cloud.scale.set(2,2,1);
+
+        return cloud;
     }
 
     createPointsSphere(color, minAlpha = 0, maxAlpha = 1) {
@@ -659,6 +486,7 @@ export default class CKBlob extends __SLitComponent {
         const ballMat = new THREE.MeshBasicMaterial({
             color: this._isDark ? 0xffffff : 0x000000,
         });
+
         const geom = new THREE.SphereGeometry(1, 32, 32);
 
         const sphere = new THREE.Mesh(geom, ballMat);
@@ -770,7 +598,7 @@ export default class CKBlob extends __SLitComponent {
 
             v.normalize().multiplyScalar(
                 1 +
-                    0.3 *
+                    100 *
                         this._perlin.perlin3(v.x * k + time, v.y * k, v.z * k),
             );
 
@@ -802,7 +630,9 @@ export default class CKBlob extends __SLitComponent {
             return;
         }
 
-        this.updateGeometryOf(this._sphere, 1.4);
+        this._updatePlaneWave(this._planePoints);
+        this._updatePlaneWave(this._planePointsLight);
+
         // this._pointSpheres.forEach((p) => {
         //     this.updateGeometryOf(p, 8, 0.0001);
         //     p.geometry.attributes.alpha.needsUpdate = true;
@@ -813,7 +643,7 @@ export default class CKBlob extends __SLitComponent {
         //     p.rotation.z -= p._speed;
         // });
         // this._sphere.rotation.x += 0.001;
-        this._sphere.rotation.y += 0.003;
+        // this._sphere.rotation.y += 0.003;
         // this._sphere.rotation.z += 0.005;
 
         this._grains.forEach((grainObj) => {
@@ -842,6 +672,8 @@ export default class CKBlob extends __SLitComponent {
             // grainObj.grain.rotation.y = group.rotation.y;
             // grainObj.grain.rotation.z = group.rotation.z;
         });
+
+        // this._tuniform.time.value += 0.05;
 
         // this._icons.forEach((icon) => {
         //     this.updateGeometryOf(icon, 1, 0.001);

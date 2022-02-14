@@ -104,9 +104,9 @@ export default class SColorPicker extends __SLitComponent {
     static get styles() {
         return css`
             ${unsafeCSS(`
-            ${__baseCss}
-            ${__css}
-        `)}
+                ${__baseCss}
+                ${__css}
+            `)}
         `;
     }
 

@@ -133,12 +133,15 @@ export default class SCodeExample extends __SLitComponent {
     @query('.templates')
     $templatesContainer;
 
-    @queryAssignedNodes()
+    // @queryAssignedNodes()
     $templates;
 
     constructor() {
         super(
             __deepMerge({
+                litComponent: {
+                    shadowDom: false,
+                },
                 componentUtils: {
                     interface: __SCodeExampleComponentInterface,
                 },
@@ -162,6 +165,9 @@ export default class SCodeExample extends __SLitComponent {
         });
     }
     async firstUpdated() {
+
+        this.$templates = this.querySelectorAll('template,code');
+
         this.$templates.forEach(($template: HTMLElement) => {
             if (!$template.getAttribute) return;
             let parser = 'babel';
@@ -234,8 +240,8 @@ export default class SCodeExample extends __SLitComponent {
         // this._$content = this.shadowRoot?.querySelector(
         //     '.s-code-example__content',
         // );
-        this._$pre = this.shadowRoot?.querySelector('.s-code-example__code');
-        this._$root = this.shadowRoot?.querySelector('.s-code-example');
+        this._$pre = this.querySelector('.s-code-example__code');
+        this._$root = this.querySelector('.s-code-example');
         return true;
     }
     setActiveTabByTab(e) {
@@ -248,7 +254,7 @@ export default class SCodeExample extends __SLitComponent {
     async setActiveTab(id) {
         await __wait();
         this._activeTabId = id;
-        this.initPrismOnTab(id);
+        this.highlight(id);
     }
     async setMoreClass() {
         if (this._more) {
@@ -265,9 +271,9 @@ export default class SCodeExample extends __SLitComponent {
             ...this.props.scrollToSettings ?? {}
         });
     }
-    initPrismOnTab(id) {
+    highlight(id) {
         const $content = <HTMLElement>(
-            this.shadowRoot?.querySelector(`pre#${id} code`)
+            this.querySelector(`pre#${id} code`)
         );
 
         const item = this._items.find((i) => i.id === id);
@@ -287,7 +293,7 @@ export default class SCodeExample extends __SLitComponent {
                 },
             );
         } catch (e) {
-            // console.log(e);
+            console.log(e);
         }
         // @ts-ignore
         item.highlightedCode = code?.value ?? '';
@@ -324,11 +330,10 @@ export default class SCodeExample extends __SLitComponent {
                 }"
             >
                 <div class="templates">
-                    <slot></slot>
                 </div>
 
                 <header class="${this.componentUtils.className('__nav')}">
-                    <ol
+                    <div
                         class="${this.componentUtils.className(
                             '__tabs',
                             's-tabs',
@@ -336,7 +341,7 @@ export default class SCodeExample extends __SLitComponent {
                     >
                         ${(this._items ?? []).map(
                             (item) => html`
-                                <li
+                                <div
                                     class="${this.componentUtils.className(
                                         '__tab',
                                     )}"
@@ -345,10 +350,10 @@ export default class SCodeExample extends __SLitComponent {
                                     @click="${this.setActiveTabByTab}"
                                 >
                                     ${item.lang}
-                                </li>
+                                </div>
                             `,
                         )}
-                    </ol>
+                    </div>
                     ${
                         // @ts-ignore
                         this.toolbarPosition === 'nav'

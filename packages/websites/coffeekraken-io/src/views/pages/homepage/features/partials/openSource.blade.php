@@ -4,7 +4,7 @@
         <div class="__box s-bg:main-surface s-radius s-p:50 s-depth:100 s-mi:-50 @mobile s-mi:0 s-depth:0">
 
             <div class="s-layout:1112 s-position:relative @mobile s-display:block">
-                <div class="s-depth:text @mobile s-text:center">
+                <div class="@mobile s-text:center">
                     <h3 class="s-typo:h2 s-mbe:30"><span class="s-tc:accent">Open</span> Source</h3>
                     <p class="s-typo:lead s-mbe:50 @mobile s-typo:p">
                         Note that this project is all open sourced. This mean <span class="s-tc:complementary">it

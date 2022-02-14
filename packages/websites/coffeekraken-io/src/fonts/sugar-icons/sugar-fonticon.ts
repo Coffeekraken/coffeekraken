@@ -4,6 +4,9 @@ export type SugarFonticonId =
   | "avatar"
   | "brand-coffeekraken"
   | "brand-lit"
+  | "brand-nextjs"
+  | "brand-opensource"
+  | "build"
   | "button"
   | "code"
   | "colors"
@@ -30,7 +33,7 @@ export type SugarFonticonId =
   | "lang-ts"
   | "layout"
   | "loader"
-  | "opensource"
+  | "more"
   | "radius"
   | "range"
   | "ratio"
@@ -55,6 +58,9 @@ export type SugarFonticonKey =
   | "Avatar"
   | "BrandCoffeekraken"
   | "BrandLit"
+  | "BrandNextjs"
+  | "BrandOpensource"
+  | "Build"
   | "Button"
   | "Code"
   | "Colors"
@@ -81,7 +87,7 @@ export type SugarFonticonKey =
   | "LangTs"
   | "Layout"
   | "Loader"
-  | "Opensource"
+  | "More"
   | "Radius"
   | "Range"
   | "Ratio"
@@ -106,6 +112,9 @@ export enum SugarFonticon {
   Avatar = "avatar",
   BrandCoffeekraken = "brand-coffeekraken",
   BrandLit = "brand-lit",
+  BrandNextjs = "brand-nextjs",
+  BrandOpensource = "brand-opensource",
+  Build = "build",
   Button = "button",
   Code = "code",
   Colors = "colors",
@@ -132,7 +141,7 @@ export enum SugarFonticon {
   LangTs = "lang-ts",
   Layout = "layout",
   Loader = "loader",
-  Opensource = "opensource",
+  More = "more",
   Radius = "radius",
   Range = "range",
   Ratio = "ratio",
@@ -158,48 +167,51 @@ export const SUGAR_FONTICON_CODEPOINTS: { [key in SugarFonticon]: string } = {
   [SugarFonticon.Avatar]: "61699",
   [SugarFonticon.BrandCoffeekraken]: "61700",
   [SugarFonticon.BrandLit]: "61701",
-  [SugarFonticon.Button]: "61702",
-  [SugarFonticon.Code]: "61703",
-  [SugarFonticon.Colors]: "61704",
-  [SugarFonticon.Copy]: "61705",
-  [SugarFonticon.Datepicker]: "61706",
-  [SugarFonticon.DisplayPreview]: "61707",
-  [SugarFonticon.Dropdown]: "61708",
-  [SugarFonticon.Easing]: "61709",
-  [SugarFonticon.FileCss]: "61710",
-  [SugarFonticon.FileHtml]: "61711",
-  [SugarFonticon.FileJs]: "61712",
-  [SugarFonticon.FileMd]: "61713",
-  [SugarFonticon.FilePhp]: "61714",
-  [SugarFonticon.FileTs]: "61715",
-  [SugarFonticon.Flex]: "61716",
-  [SugarFonticon.FolderOpened]: "61717",
-  [SugarFonticon.Folder]: "61718",
-  [SugarFonticon.Helpers]: "61719",
-  [SugarFonticon.LangCss]: "61720",
-  [SugarFonticon.LangHtml]: "61721",
-  [SugarFonticon.LangJs]: "61722",
-  [SugarFonticon.LangMd]: "61723",
-  [SugarFonticon.LangPhp]: "61724",
-  [SugarFonticon.LangTs]: "61725",
-  [SugarFonticon.Layout]: "61726",
-  [SugarFonticon.Loader]: "61727",
-  [SugarFonticon.Opensource]: "61728",
-  [SugarFonticon.Radius]: "61729",
-  [SugarFonticon.Range]: "61730",
-  [SugarFonticon.Ratio]: "61731",
-  [SugarFonticon.Refresh]: "61732",
-  [SugarFonticon.Scale]: "61733",
-  [SugarFonticon.Space]: "61734",
-  [SugarFonticon.SupportChromium]: "61735",
-  [SugarFonticon.SupportEdge]: "61736",
-  [SugarFonticon.SupportFirefox]: "61737",
-  [SugarFonticon.SupportRtl]: "61738",
-  [SugarFonticon.SupportSafari]: "61739",
-  [SugarFonticon.Switch]: "61740",
-  [SugarFonticon.Theme]: "61741",
-  [SugarFonticon.Tooltip]: "61742",
-  [SugarFonticon.Typography]: "61743",
-  [SugarFonticon.Visibility]: "61744",
-  [SugarFonticon.Vue]: "61745",
+  [SugarFonticon.BrandNextjs]: "61702",
+  [SugarFonticon.BrandOpensource]: "61703",
+  [SugarFonticon.Build]: "61704",
+  [SugarFonticon.Button]: "61705",
+  [SugarFonticon.Code]: "61706",
+  [SugarFonticon.Colors]: "61707",
+  [SugarFonticon.Copy]: "61708",
+  [SugarFonticon.Datepicker]: "61709",
+  [SugarFonticon.DisplayPreview]: "61710",
+  [SugarFonticon.Dropdown]: "61711",
+  [SugarFonticon.Easing]: "61712",
+  [SugarFonticon.FileCss]: "61713",
+  [SugarFonticon.FileHtml]: "61714",
+  [SugarFonticon.FileJs]: "61715",
+  [SugarFonticon.FileMd]: "61716",
+  [SugarFonticon.FilePhp]: "61717",
+  [SugarFonticon.FileTs]: "61718",
+  [SugarFonticon.Flex]: "61719",
+  [SugarFonticon.FolderOpened]: "61720",
+  [SugarFonticon.Folder]: "61721",
+  [SugarFonticon.Helpers]: "61722",
+  [SugarFonticon.LangCss]: "61723",
+  [SugarFonticon.LangHtml]: "61724",
+  [SugarFonticon.LangJs]: "61725",
+  [SugarFonticon.LangMd]: "61726",
+  [SugarFonticon.LangPhp]: "61727",
+  [SugarFonticon.LangTs]: "61728",
+  [SugarFonticon.Layout]: "61729",
+  [SugarFonticon.Loader]: "61730",
+  [SugarFonticon.More]: "61731",
+  [SugarFonticon.Radius]: "61732",
+  [SugarFonticon.Range]: "61733",
+  [SugarFonticon.Ratio]: "61734",
+  [SugarFonticon.Refresh]: "61735",
+  [SugarFonticon.Scale]: "61736",
+  [SugarFonticon.Space]: "61737",
+  [SugarFonticon.SupportChromium]: "61738",
+  [SugarFonticon.SupportEdge]: "61739",
+  [SugarFonticon.SupportFirefox]: "61740",
+  [SugarFonticon.SupportRtl]: "61741",
+  [SugarFonticon.SupportSafari]: "61742",
+  [SugarFonticon.Switch]: "61743",
+  [SugarFonticon.Theme]: "61744",
+  [SugarFonticon.Tooltip]: "61745",
+  [SugarFonticon.Typography]: "61746",
+  [SugarFonticon.Visibility]: "61747",
+  [SugarFonticon.Vue]: "61748",
 };

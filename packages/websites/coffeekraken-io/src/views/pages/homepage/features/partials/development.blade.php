@@ -184,7 +184,7 @@
             <div>
                 <ul class="__recipes-grid s-mbe:30">
                     <li>
-                        <a href="/doc/recipes/built-in/default" title="">
+                        <a href="/doc/recipes/built-in/default" title="Coffeekraken generic recipe">
                             <div class="icon-card s-color:accent">
                                 <i class="s-icon:brand-coffeekraken"></i>
                                 <p class="s-p">Default (generic)</p>
@@ -192,26 +192,26 @@
                         </a>
                     </li>
                     <li>
-                        <a href="/doc/recipes/built-in/litElement" title="">
+                        <a href="/doc/recipes/built-in/litElement" title="Coffeekraken LitElement recipe">
                             <div class="icon-card s-color:complementary">
                                 <i class="s-icon:brand-lit"></i>
                                 <p class="s-p">LitElement</p>
                             </div>
                         </a>
                     </li>
-                    <li>
-                        <a href="/doc/recipes/built-in/default" title="">
+                    <li class="s-disabled">
+                        <a href="/doc/recipes/built-in/default" title="Coffeekraken NextJs recipe">
                             <div class="icon-card s-color:accent">
-                                <i class="s-icon:brand-coffeekraken"></i>
-                                <p class="s-p">NextJS</p>
+                                <i class="s-icon:brand-nextjs"></i>
+                                <p class="s-p">NextJS<br />coming soom</p>
                             </div>
                         </a>
                     </li>
                     <li>
-                        <a href="/doc/recipes/built-in/litElement" title="">
-                            <div class="icon-card s-color:complementary">
-                                <i class="s-icon:brand-lit"></i>
-                                <p class="s-p">LitElement</p>
+                        <a href="/doc/recipes/create-your-recipe" title="Create your own recipe">
+                            <div class="icon-card">
+                                <i class="s-icon:build"></i>
+                                <p class="s-p">Build your<br />own</p>
                             </div>
                         </a>
                     </li>

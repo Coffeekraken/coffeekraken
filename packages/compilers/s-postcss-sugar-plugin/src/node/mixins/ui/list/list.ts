@@ -79,7 +79,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
         position: relative;
-        font-size: sugar.scalable(1rem);
+        font-size: sugar.font.size(30);
 
         ${finalParams.style === 'ol' ? 'counter-reset: s-ol-list;' : ''}
 

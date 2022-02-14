@@ -55,6 +55,8 @@ const plugin = (settings: any = {}) => {
         settings,
     );
 
+    settings.cache = false;
+
     // remove cache if not for vite target
     if (settings.target !== 'vite') {
         settings.cache = false;

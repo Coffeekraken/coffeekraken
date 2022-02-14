@@ -89,7 +89,7 @@ export default function ({
 
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
-            font-size: sugar.scalable(1rem);
+            font-size: sugar.font.size(30);
             user-select: none;
 
             ul, ol {

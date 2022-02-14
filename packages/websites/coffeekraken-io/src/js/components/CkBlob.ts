@@ -57,7 +57,7 @@ export default class CKBlob extends __SLitComponent {
 
     _perlin = __perlin();
 
-    _isDark = document.body.getAttribute('class')?.toString().includes('-dark');
+    _isDark = document.body.getAttribute('theme')?.toString().includes('dark');
 
     _postprocessing = {};
 
@@ -179,9 +179,9 @@ export default class CKBlob extends __SLitComponent {
 
         // this._oceanWaves();
 
-        this._planePoints = this.createPlanePoints(0x262C2E);
+        this._planePoints = this.createPlanePoints(0x212728);
 
-        this._planePointsLight = this.createPlanePoints(0x262C2E, 1, '6.0');
+        this._planePointsLight = this.createPlanePoints(0x212728, 1, '6.0');
             this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
 
         this._pointSpheres = [pointsSphere1];
@@ -391,7 +391,7 @@ export default class CKBlob extends __SLitComponent {
         const vec3 = new THREE.Vector3();
 
         const ballMat = new THREE.MeshBasicMaterial({
-            color: this._isDark ? 0x000000 : 0x000000,
+            color: this._isDark ? 0x000000 : 0xffffff,
         });
         const geom = new THREE.PlaneGeometry(30, 50, 16, 16);
 
@@ -439,7 +439,7 @@ export default class CKBlob extends __SLitComponent {
         // point cloud material
         var shaderMaterial = new THREE.ShaderMaterial({
             uniforms: {
-                color: { value: new THREE.Color(color) },
+                color: { value: new THREE.Color(this._isDark ? color : 0xE7E7E7) },
             },
             vertexShader,
             fragmentShader,

@@ -27,14 +27,19 @@
         left: 100%;
         width: 100%;
         height: 100%;
-        background-image: url('/dist/img/discord-illustration-bkg.png');
+        background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg');
         background-position: 50% 260%;
         background-size: 50%;
         border-bottom-left-radius: 50%;
         border-bottom-right-radius: 50%;
         transform: scale(2) translateX(-50%) translateY(-50%);
         overflow: hidden;
-        opacity: 0.5;
+        opacity: 0.6;
+
+        @sugar.theme.when dark {
+            background-image: url('/dist/img/welcome/welcome-bg-dark-01.jpg');
+            opacity: 0.13;
+        }
 
         /* &:after {
             content: '';
@@ -68,6 +73,7 @@
         top: 50vh;
         left: calc(50% - 250px);
         transform: scale(1) translateY(-50%);
+        pointer-events: none;
 
         @sugar.media mobile {
             position: relative;

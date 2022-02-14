@@ -79,7 +79,6 @@ export default async function ({
         '@sugar.components.classes;',
         '@sugar.whiteSpace.classes;',
     ];
-
     const hash = `@sugar.classes.${__objectHash({
         css: cssArray,
         theme: __STheme.hash(),

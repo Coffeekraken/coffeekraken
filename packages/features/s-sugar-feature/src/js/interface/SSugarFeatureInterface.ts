@@ -40,8 +40,18 @@ export default class SSugarFeatureInterface extends __SInterface {
                 type: 'Boolean',
                 default: true,
             },
+            inputAdditionalAttributes: {
+                description: 'Specify if you want to have the additional attributes on inputs like "has-value", "empty" and "dirty" or not',
+                type: 'Boolean',
+                default: true
+            },
             resizeTransmations: {
                 description: 'Specify if you want all the transitions and animations cleared during window resize',
+                type: 'Boolean',
+                default: true
+            },
+            linksStateAttributes: {
+                description: 'Specify if you want to have the state attributes on links like "actual" and "actual-child" or not',   
                 type: 'Boolean',
                 default: true
             }

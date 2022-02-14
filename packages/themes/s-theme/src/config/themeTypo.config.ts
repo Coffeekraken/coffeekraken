@@ -19,6 +19,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 50,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          h2
@@ -39,6 +42,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 50,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          h3
@@ -59,6 +65,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 50,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          h4
@@ -79,6 +88,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 50,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          h5
@@ -99,6 +111,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 40,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          h6
@@ -119,6 +134,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 40,
             },
+            mobile: {
+                'word-break': 'break-all'
+            }
         },
         /**
          * @name          p
@@ -335,6 +353,48 @@ export default (env, config) => {
             'font-style': 'italic',
         },
         /**
+         * @name          large
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the large typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        large: {
+            'font-size': '1.1em',
+        },
+        /**
+         * @name          larger
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the larger typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        larger: {
+            'font-size': '1.2em',
+        },
+        /**
+         * @name          largest
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the largest typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        largest: {
+            'font-size': '1.3em',
+        },
+        /**
          * @name          small
          * @namespace     config.themeTypo
          * @type          Object
@@ -346,7 +406,35 @@ export default (env, config) => {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
         small: {
-            'font-size': '0.5em',
+            'font-size': '0.9em',
+        },
+        /**
+         * @name          smaller
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the small typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        smaller: {
+            'font-size': '0.8em',
+        },
+        /**
+         * @name          smallest
+         * @namespace     config.themeTypo
+         * @type          Object
+         * @default      {}
+         *
+         * Specify the css object for the small typo element
+         *
+         * @since       2.0.0
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         */
+        smallest: {
+            'font-size': '0.7em',
         },
         /**
          * @name          mark

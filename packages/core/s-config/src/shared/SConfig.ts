@@ -599,12 +599,15 @@ export default class SConfig {
     }
 
     _resolveEnvironments() {
-        __applyScope(
-            this.config,
-            __SEnv.get('env') === 'production'
-                ? ['prod', 'production']
-                : ['dev', 'development'],
-        );
+        // __applyScope(
+        //     this.config,
+        //     __SEnv.get('env') === 'production'
+        //         ? ['prod', 'production']
+        //         : ['dev', 'development'],
+        //     {
+        //         prefix: 'env:'
+        //     }
+        // );
     }
 
     /**

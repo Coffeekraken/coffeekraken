@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import fastdom from 'fastdom';
-import __querySelectorLive from '../dom/querySelectorLive';
+import __querySelectorLive from '../dom/query/querySelectorLive';
 
 /**
  * @name 		handleInputAttributes

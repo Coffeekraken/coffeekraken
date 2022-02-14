@@ -82,7 +82,7 @@ export default function ({
     if (finalParams.scope.indexOf('bare') !== -1) {
         vars.push(`
           width: 100%;
-          font-size: sugar.scalable(1rem);
+          font-size: sugar.font.size(30);
 
           > * {
             cursor: pointer;

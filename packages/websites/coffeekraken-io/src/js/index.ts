@@ -12,9 +12,10 @@ import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
 import { define as __SRangeWebcomponent } from '@coffeekraken/s-range-component';
 import { define as __SSidePanelWebcomponent } from '@coffeekraken/s-side-panel-component';
 
-// features
-import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
+import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
+
+// features
 import { define as __CKBlobComponent } from './components/CkBlob';
 import { define as __CkFallingStarsComponent } from './components/CkFallingStars';
 import { define as __CKDiscoverComponent } from './components/CKDiscover';
@@ -23,9 +24,7 @@ import { define as __CKSettingsComponent } from './components/CkSettings';
 import { define as __VersionSelector } from './components/VersionSelector';
 
 // others
-import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 import __SConductor from '@coffeekraken/s-conductor';
-
 import __krakenLogo from './generic/krakenLogo';
 
 // @ts-ignore
@@ -61,8 +60,6 @@ __SConductor.setup({
     __CKBlobComponent();
     __CkFallingStarsComponent();
 
-    // await __wait(1500);
-
     // views related
     for (let [key, value] of Object.entries(viewsRelated)) {
         // @ts-ignore
@@ -77,8 +74,6 @@ __SConductor.setup({
     __SColorPickerWebcomponent();
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
-
-    // await __wait(1000);
 
     // features
     __sSugarFeature();
@@ -99,9 +94,5 @@ __SConductor.setup({
     });
 
     __krakenLogo();
-
-    setTimeout(() => {
-        __linksStateAttributes();
-    }, 1000);
 
 })();

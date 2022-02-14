@@ -525,89 +525,97 @@ export default class SThemeBase extends __SClass {
 
             let color, modifier;
 
-            switch (prop) {
-                case 'font-family':
-                    propsStack.push(`@sugar.font.family(${value});`);
-                    break;
-                case 'font-size':
-                    propsStack.push(`@sugar.font.size(${value});`);
-                    break;
-                case 'color':
-                    color = value;
-                    modifier = '';
-                    if (Array.isArray(value)) {
-                        color = value[0];
-                        modifier = value[1];
-                    }
-                    propsStack.push(
-                        `color: sugar.color(${color}, ${modifier});`,
-                    );
-                    break;
-                case 'background-color':
-                    color = value;
-                    modifier = '';
-                    if (Array.isArray(value)) {
-                        color = value[0];
-                        modifier = value[1];
-                    }
-                    propsStack.push(
-                        `background-color: sugar.color(${color}, ${modifier});`,
-                    );
-                    break;
-                case 'border-radius':
-                case 'border-top-left-radius':
-                case 'border-top-right-radius':
-                case 'border-bottom-right-radius':
-                case 'border-bottom-left-radius':
-                    propsStack.push(
-                        `border-radius: sugar.border.radius(${value});`,
-                    );
-                    break;
-                case 'border-width':
-                    propsStack.push(
-                        `border-width: sugar.border.width(${value});`,
-                    );
-                    break;
-                case 'transition':
-                    propsStack.push(`transition: sugar.transition(${value});`);
-                    break;
-                case 'margin-inline':
-                case 'margin-block':
-                case 'margin-inline-start':
-                case 'margin-inline-end':
-                case 'margin-block-start':
-                case 'margin-block-end':
-                case 'margin':
-                case 'margin-top':
-                case 'margin-bottom':
-                case 'margin-left':
-                case 'margin-right':
-                    propsStack.push(`${prop}: sugar.margin(${value});`);
-                    break;
-                case 'padding-inline':
-                case 'padding-block':
-                case 'padding-inline-start':
-                case 'padding-inline-end':
-                case 'padding-block-start':
-                case 'padding-block-end':
-                case 'padding':
-                case 'padding-top':
-                case 'padding-bottom':
-                case 'padding-left':
-                case 'padding-right':
-                    propsStack.push(`${prop}: sugar.padding(${value});`);
-                    break;
-                case 'depth':
-                    propsStack.push(`@sugar.depth(${value});`);
-                    break;
-                case 'default-color':
-                    propsStack.push(`@sugar.color(${value});`);
-                    break;
-                default:
-                    const props = __knownCssProperties.all;
-                    if (props.indexOf(prop) === -1) return;
-                    propsStack.push(`${prop}: ${value};`);
-                    break;
+            // media queries
+            const medias = Object.keys(this.config('media.queries'));
+            if (medias.includes(originalProp)) {
+                propsStack.push(`@sugar.media(${prop.replace(/^@/, '')}) {`);
+                propsStack.push(this.jsObjectToCssProperties(value, finalSettings));
+                propsStack.push(`}`);
+            } else {
+                switch (prop) {
+                    case 'font-family':
+                        propsStack.push(`@sugar.font.family(${value});`);
+                        break;
+                    case 'font-size':
+                        propsStack.push(`@sugar.font.size(${value});`);
+                        break;
+                    case 'color':
+                        color = value;
+                        modifier = '';
+                        if (Array.isArray(value)) {
+                            color = value[0];
+                            modifier = value[1];
+                        }
+                        propsStack.push(
+                            `color: sugar.color(${color}, ${modifier});`,
+                        );
+                        break;
+                    case 'background-color':
+                        color = value;
+                        modifier = '';
+                        if (Array.isArray(value)) {
+                            color = value[0];
+                            modifier = value[1];
+                        }
+                        propsStack.push(
+                            `background-color: sugar.color(${color}, ${modifier});`,
+                        );
+                        break;
+                    case 'border-radius':
+                    case 'border-top-left-radius':
+                    case 'border-top-right-radius':
+                    case 'border-bottom-right-radius':
+                    case 'border-bottom-left-radius':
+                        propsStack.push(
+                            `border-radius: sugar.border.radius(${value});`,
+                        );
+                        break;
+                    case 'border-width':
+                        propsStack.push(
+                            `border-width: sugar.border.width(${value});`,
+                        );
+                        break;
+                    case 'transition':
+                        propsStack.push(`transition: sugar.transition(${value});`);
+                        break;
+                    case 'margin-inline':
+                    case 'margin-block':
+                    case 'margin-inline-start':
+                    case 'margin-inline-end':
+                    case 'margin-block-start':
+                    case 'margin-block-end':
+                    case 'margin':
+                    case 'margin-top':
+                    case 'margin-bottom':
+                    case 'margin-left':
+                    case 'margin-right':
+                        propsStack.push(`${prop}: sugar.margin(${value});`);
+                        break;
+                    case 'padding-inline':
+                    case 'padding-block':
+                    case 'padding-inline-start':
+                    case 'padding-inline-end':
+                    case 'padding-block-start':
+                    case 'padding-block-end':
+                    case 'padding':
+                    case 'padding-top':
+                    case 'padding-bottom':
+                    case 'padding-left':
+                    case 'padding-right':
+                        propsStack.push(`${prop}: sugar.padding(${value});`);
+                        break;
+                    case 'depth':
+                        propsStack.push(`@sugar.depth(${value});`);
+                        break;
+                    case 'default-color':
+                        propsStack.push(`@sugar.color(${value});`);
+                        break;
+                    default:
+                        const props = __knownCssProperties.all;
+                        if (props.indexOf(prop) === -1) return;
+                        propsStack.push(`${prop}: ${value};`);
+                        break;
+                }
             }
         });
         return propsStack.join('\n');

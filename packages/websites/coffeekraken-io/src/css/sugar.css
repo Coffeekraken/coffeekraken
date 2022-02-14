@@ -62,6 +62,7 @@
   fs:src/icons/coffeekraken/file/file-php.svg
   fs:src/icons/coffeekraken/file/file-html.svg
   fs:src/icons/coffeekraken/file/file-md.svg
+  fs:src/icons/coffeekraken/etc/more.svg
   fs:src/icons/coffeekraken/ui/button.svg
   fs:src/icons/coffeekraken/ui/theme.svg
   fs:src/icons/coffeekraken/ui/dropdown.svg
@@ -81,7 +82,8 @@
   fs:src/icons/coffeekraken/helpers/scale.svg
   fs:src/icons/coffeekraken/brand/brand-lit.svg
   fs:src/icons/coffeekraken/brand/brand-coffeekraken.svg
-  fs:src/icons/coffeekraken/brand/opensource.svg
+  fs:src/icons/coffeekraken/brand/brand-opensource.svg
+  fs:src/icons/coffeekraken/brand/brand-nextjs.svg
   fs:src/icons/coffeekraken/fs/folder.svg
   fs:src/icons/coffeekraken/tools/helpers.svg
   fs:src/icons/coffeekraken/html/autocomplete.svg
@@ -90,6 +92,7 @@
   fs:src/icons/coffeekraken/html/code.svg
   fs:src/icons/coffeekraken/html/datepicker.svg
   fs:src/icons/coffeekraken/action/copy.svg
+  fs:src/icons/coffeekraken/action/build.svg
   fs:src/icons/coffeekraken/action/refresh.svg
   fs:src/icons/coffeekraken/fs/folder-opened.svg
   fs:src/icons/coffeekraken/display/display-preview.svg

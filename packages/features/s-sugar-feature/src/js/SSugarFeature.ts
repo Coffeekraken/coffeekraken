@@ -2,11 +2,15 @@ import __SFeature, { ISFeature } from '@coffeekraken/s-feature';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
+import __inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
+import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
 
 export interface ISSugarFeatureProps {
     scrolled: boolean;
     scrolledDelta: number;
     vhvar: boolean;
+    inputAdditionalAttributes: boolean;
+    linksStateAttributes: boolean;
 }
 
 /**
@@ -28,6 +32,8 @@ export interface ISSugarFeatureProps {
  * @feature        `scrolled` class applied on the body when the user has scrolled the page
  * @feature         Access to a `--vh` css variable that represent the exact viewport innerHeight and avoid having issues with mobile different viewport height values
  * @feature         Clear all transitions and animations on all the page during a window resize. Helps for performances and cleaner for user
+ * @feature         Additional input attributes like `empty`, `dirty` and `has-value`
+ * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
  * 
  * @support          chromium
  * @support          firefox
@@ -68,6 +74,10 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.componentUtils.props.vhvar) this._vhvar();
         // resizeTransmations
         if (this.componentUtils.props.resizeTransmations) this._clearTransmationsOnResize();
+        // inputAdditionalAttributes
+        if (this.componentUtils.props.inputAdditionalAttributes) __inputAdditionalAttributes();
+        // linksStateAttributes
+        if (this.componentUtils.props.linksStateAttributes) __linksStateAttributes();
     }
     _clearTransmationsOnResizeTimeout;
     _isResizing = false;

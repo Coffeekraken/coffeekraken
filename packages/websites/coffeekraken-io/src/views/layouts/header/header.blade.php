@@ -193,60 +193,7 @@
         </div>
 
         <div class="__subnav" id="menu-mobile-api">
-            @php
-                $apiMenu = (object) [
-                    'name' => 'API',
-                    'search' => (object) [
-                        'name' => 'Search',
-                        'include' => 'generic/header/search-api.blade.php',
-                    ],
-                    'config' => (object) [
-                        'name' => 'Configuration',
-                        'overview' => (object) [
-                            'name' => 'Overview',
-                            'slug' => '/doc/config/overview',
-                        ],
-                        'explorer' => (object) [
-                            'name' => 'Config Explorer',
-                            'slug' => '/config/explorer',
-                        ],
-                        'builtin' => (object) [
-                            'name' => 'Built-in Config',
-                            'slug' => 'doc/config/built-in',
-                        ],
-                        'override' => (object) [
-                            'name' => 'Override Config',
-                            'slug' => 'doc/config/override',
-                        ],
-                        'register' => (object) [
-                            'name' => 'Register new Config',
-                            'slug' => 'doc/config/register',
-                        ],
-                    ],
-                    'cssDiscover' => (object) [
-                        'name' => 'Discover (css)',
-                        'content' => '<ck-discover platform="css"></ck-discover>',
-                    ],
-                    'jsDiscover' => (object) [
-                        'name' => 'Discover (js)',
-                        'content' => '<ck-discover platform="js"></ck-discover>',
-                    ],
-                    'postcssDiscover' => (object) [
-                        'name' => 'Discover (PostCSS)',
-                        'content' => '<ck-discover platform="postcss"></ck-discover>',
-                    ],
-                    'nodeDiscover' => (object) [
-                        'name' => 'Discover (node)',
-                        'content' => '<ck-discover platform="node"></ck-discover>',
-                    ],
-                    'phpDiscover' => (object) [
-                        'name' => 'Discover (php)',
-                        'content' => '<ck-discover platform="php"></ck-discover>',
-                    ],
-                ];
-                
-            @endphp
-            @include('layouts.header.partials.menuMobileItem', ['menuItem' => $apiMenu, 'class' => ''])
+            <api-nav></api-nav>
         </div>
 
     </nav>

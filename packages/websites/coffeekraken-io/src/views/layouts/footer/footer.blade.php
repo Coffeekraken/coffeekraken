@@ -10,7 +10,7 @@
                     @include ('layouts.header.partials.logo')
                 </a>
 
-                <p class="s-typo:p s-mbe:30">
+                <p class="s-typo:p:small s-mbe:30">
                     Designed and built with all the love in the world <span class="s-tc:accent">+1</span> by the
                     Coffeekraken team with the help of our
                     friends and partners.

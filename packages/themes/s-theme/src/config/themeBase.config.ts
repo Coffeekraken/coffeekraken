@@ -2060,6 +2060,19 @@ export default function (env, config) {
             10: '0.65rem',
 
             /**
+             * @name          15
+             * @namespace     config.themeBase.size
+             * @type          String
+             * @default       0.7rem
+             *
+             * Declare the font size "10"
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            15: '0.7rem',
+
+            /**
              * @name          20
              * @namespace     config.themeBase.size
              * @type          String
@@ -2073,17 +2086,30 @@ export default function (env, config) {
             20: '0.75rem',
 
             /**
+             * @name          25
+             * @namespace     config.themeBase.size
+             * @type          String
+             * @default       0.9rem
+             *
+             * Declare the font size "20"
+             *
+             * @since         2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            25: '0.9rem',
+
+            /**
              * @name          30
              * @namespace     config.themeBase.size
              * @type          String
-             * @default       1rem
+             * @default       1.1rem
              *
              * Declare the font size "30"
              *
              * @since         2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            30: '1rem',
+            30: '1.1rem',
 
             /**
              * @name          40

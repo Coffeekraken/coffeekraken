@@ -94,13 +94,14 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    copy: __deepMerge(config.frontstack.actions.copy, {
+                    copy: {
+                        extends: 'copy',
                         params: {
                             'src': __path.resolve(__dirname(), `../templates/default/.`),
                             'dest': `${process.cwd()}/default`,
                             'chdir': true
                         }
-                    }),
+                    },
                     /**
                      * @name            rename
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -111,10 +112,11 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    rename: __deepMerge(config.frontstack.actions.rename, {
+                    rename: {
+                        extends: 'rename',
                         params: {
                         }
-                    }),
+                    },
                     /**
                      * @name            addSugarJson
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -125,11 +127,12 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    addSugarJson: __deepMerge(config.frontstack.actions.addSugarJson, {
+                    addSugarJson: {
+                        extends: 'addSugarJson',
                         params: {
                             recipe: 'default'
                         }
-                    }),
+                    },
                     /**
                      * @name            addManifestJson
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -140,9 +143,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    addManifestJson: __deepMerge(config.frontstack.actions.addManifestJson, {
+                    addManifestJson: {
+                        extends: 'addManifestJson',
                         params: {}
-                    }),
+                    },
                     /**
                      * @name            installDependencies
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -153,9 +157,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    installDependencies: __deepMerge(config.frontstack.actions.installDependencies, {
+                    installDependencies: {
+                        extends: 'installDependencies',
                         params: {}
-                    })
+                    }
                 },
             },
             dev: {
@@ -319,18 +324,18 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     faviconBuild: '[config.frontstack.actions.faviconBuild]',
-                    /**
-                     * @name            sitemapBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.frontstack.actions.sitemapBuild]
-                     *
-                     * Specify the recipe build stack sitemapBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
+                    // /**
+                    //  * @name            sitemapBuild
+                    //  * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.frontstack.actions.sitemapBuild]
+                    //  *
+                    //  * Specify the recipe build stack sitemapBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                    //  */
+                    // sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
                 },
             },
         },

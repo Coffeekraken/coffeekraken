@@ -16,11 +16,13 @@ export default (stringArgs = '') => {
             });
         }
         
-        finalParams.folder = await emit('ask', {
-            type: 'confirm',
-            message: 'Do you want to rename the folder as well ?',
-            default: true
-        });        
+        if (finalParams.folder === undefined) {
+            finalParams.folder = await emit('ask', {
+                type: 'confirm',
+                message: 'Do you want to rename the folder as well ?',
+                default: true
+            });        
+        }
         
         // rename package
         emit('log', {

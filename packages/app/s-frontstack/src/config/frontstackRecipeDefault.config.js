@@ -1,6 +1,5 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
-import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 export default function (env, config) {
     if (env.platform !== 'node')
         return;
@@ -92,13 +91,14 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    copy: __deepMerge(config.frontstack.actions.copy, {
+                    copy: {
+                        extends: 'copy',
                         params: {
                             'src': __path.resolve(__dirname(), `../templates/default/.`),
                             'dest': `${process.cwd()}/default`,
                             'chdir': true
                         }
-                    }),
+                    },
                     /**
                      * @name            rename
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -109,9 +109,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    rename: __deepMerge(config.frontstack.actions.rename, {
+                    rename: {
+                        extends: 'rename',
                         params: {}
-                    }),
+                    },
                     /**
                      * @name            addSugarJson
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -122,11 +123,12 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    addSugarJson: __deepMerge(config.frontstack.actions.addSugarJson, {
+                    addSugarJson: {
+                        extends: 'addSugarJson',
                         params: {
                             recipe: 'default'
                         }
-                    }),
+                    },
                     /**
                      * @name            addManifestJson
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -137,9 +139,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    addManifestJson: __deepMerge(config.frontstack.actions.addManifestJson, {
+                    addManifestJson: {
+                        extends: 'addManifestJson',
                         params: {}
-                    }),
+                    },
                     /**
                      * @name            installDependencies
                      * @namespace       config.frontstackRecipeDefault.stacks.new.actions
@@ -150,9 +153,10 @@ export default function (env, config) {
                      * @since       2.0.0
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
-                    installDependencies: __deepMerge(config.frontstack.actions.installDependencies, {
+                    installDependencies: {
+                        extends: 'installDependencies',
                         params: {}
-                    })
+                    }
                 },
             },
             dev: {
@@ -314,21 +318,21 @@ export default function (env, config) {
                      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                      */
                     faviconBuild: '[config.frontstack.actions.faviconBuild]',
-                    /**
-                     * @name            sitemapBuild
-                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
-                     * @type            String
-                     * @default         [config.frontstack.actions.sitemapBuild]
-                     *
-                     * Specify the recipe build stack sitemapBuild action
-                     *
-                     * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                     */
-                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
+                    // /**
+                    //  * @name            sitemapBuild
+                    //  * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                    //  * @type            String
+                    //  * @default         [config.frontstack.actions.sitemapBuild]
+                    //  *
+                    //  * Specify the recipe build stack sitemapBuild action
+                    //  *
+                    //  * @since       2.0.0
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                    //  */
+                    // sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
                 },
             },
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUMxQixPQUFPLFdBQVcsTUFBTSw2Q0FBNkMsQ0FBQztBQUd0RSxNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBQ2hCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsOEJBQThCO1FBQzNDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLFNBQVMsRUFBRSx1QkFBdUIsQ0FBQztRQUNsRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsUUFBUSxFQUFFLENBQUMsMEJBQTBCLEVBQUMsVUFBVSxDQUFDO1NBQ3BEO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxLQUFLO1FBQ25CLE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxJQUFJLEVBQUUsV0FBVyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLElBQUksRUFBRTt3QkFDOUMsTUFBTSxFQUFFOzRCQUNKLEtBQUssRUFBRSxNQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLHdCQUF3QixDQUFDOzRCQUM1RCxNQUFNLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLFVBQVU7NEJBQ2xDLE9BQU8sRUFBRSxJQUFJO3lCQUNoQjtxQkFDSixDQUFDO29CQUNGOzs7Ozs7Ozs7dUJBU0c7b0JBQ0gsTUFBTSxFQUFFLFdBQVcsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxNQUFNLEVBQUU7d0JBQ2xELE1BQU0sRUFBRSxFQUNQO3FCQUNKLENBQUM7b0JBQ0Y7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxZQUFZLEVBQUUsV0FBVyxDQUFDLE1BQU0sQ0FBQyxVQUFVLENBQUMsT0FBTyxDQUFDLFlBQVksRUFBRTt3QkFDOUQsTUFBTSxFQUFFOzRCQUNKLE1BQU0sRUFBRSxTQUFTO3lCQUNwQjtxQkFDSixDQUFDO29CQUNGOzs7Ozs7Ozs7dUJBU0c7b0JBQ0gsZUFBZSxFQUFFLFdBQVcsQ0FBQyxNQUFNLENBQUMsVUFBVSxDQUFDLE9BQU8sQ0FBQyxlQUFlLEVBQUU7d0JBQ3BFLE1BQU0sRUFBRSxFQUFFO3FCQUNiLENBQUM7b0JBQ0Y7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxtQkFBbUIsRUFBRSxXQUFXLENBQUMsTUFBTSxDQUFDLFVBQVUsQ0FBQyxPQUFPLENBQUMsbUJBQW1CLEVBQUU7d0JBQzVFLE1BQU0sRUFBRSxFQUFFO3FCQUNiLENBQUM7aUJBQ0w7YUFDSjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsNkJBQTZCO2dCQUMxQyxhQUFhLEVBQUUsSUFBSTtnQkFDbkIsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILGNBQWMsRUFDViw0Q0FBNEM7b0JBQ2hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILElBQUksRUFBRSxrQ0FBa0M7aUJBQzNDO2FBQ0o7WUFDRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLG9DQUFvQztnQkFDakQsWUFBWSxFQUFFO29CQUNWOzs7Ozs7Ozs7O3VCQVVHO29CQUNILEdBQUcsRUFBRSxZQUFZO2lCQUNwQjtnQkFDRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsY0FBYyxFQUNWLDRDQUE0QztpQkFDbkQ7YUFDSjtZQUNELEtBQUssRUFBRTtnQkFDSDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsZ0RBQWdEO2dCQUM3RCxZQUFZLEVBQUU7Z0JBQ1Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsY0FBYztpQkFDakI7Z0JBQ0QsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFNBQVMsRUFBRSx1Q0FBdUM7b0JBQ2xEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFdBQVcsRUFBRSx5Q0FBeUM7b0JBQ3REOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7aUJBQzNEO2FBQ0o7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUkxQixNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBQ2hCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsOEJBQThCO1FBQzNDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLFNBQVMsRUFBRSx1QkFBdUIsQ0FBQztRQUNsRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsUUFBUSxFQUFFLENBQUMsMEJBQTBCLEVBQUMsVUFBVSxDQUFDO1NBQ3BEO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxLQUFLO1FBQ25CLE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxJQUFJLEVBQUU7d0JBQ0YsT0FBTyxFQUFFLE1BQU07d0JBQ2YsTUFBTSxFQUFFOzRCQUNKLEtBQUssRUFBRSxNQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLHdCQUF3QixDQUFDOzRCQUM1RCxNQUFNLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLFVBQVU7NEJBQ2xDLE9BQU8sRUFBRSxJQUFJO3lCQUNoQjtxQkFDSjtvQkFDRDs7Ozs7Ozs7O3VCQVNHO29CQUNILE1BQU0sRUFBRTt3QkFDSixPQUFPLEVBQUUsUUFBUTt3QkFDakIsTUFBTSxFQUFFLEVBQ1A7cUJBQ0o7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxZQUFZLEVBQUU7d0JBQ1YsT0FBTyxFQUFFLGNBQWM7d0JBQ3ZCLE1BQU0sRUFBRTs0QkFDSixNQUFNLEVBQUUsU0FBUzt5QkFDcEI7cUJBQ0o7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxlQUFlLEVBQUU7d0JBQ2IsT0FBTyxFQUFFLGlCQUFpQjt3QkFDMUIsTUFBTSxFQUFFLEVBQUU7cUJBQ2I7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxtQkFBbUIsRUFBRTt3QkFDakIsT0FBTyxFQUFFLHFCQUFxQjt3QkFDOUIsTUFBTSxFQUFFLEVBQUU7cUJBQ2I7aUJBQ0o7YUFDSjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsNkJBQTZCO2dCQUMxQyxhQUFhLEVBQUUsSUFBSTtnQkFDbkIsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILGNBQWMsRUFDViw0Q0FBNEM7b0JBQ2hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILElBQUksRUFBRSxrQ0FBa0M7aUJBQzNDO2FBQ0o7WUFDRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLG9DQUFvQztnQkFDakQsWUFBWSxFQUFFO29CQUNWOzs7Ozs7Ozs7O3VCQVVHO29CQUNILEdBQUcsRUFBRSxZQUFZO2lCQUNwQjtnQkFDRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsY0FBYyxFQUNWLDRDQUE0QztpQkFDbkQ7YUFDSjtZQUNELEtBQUssRUFBRTtnQkFDSDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsZ0RBQWdEO2dCQUM3RCxZQUFZLEVBQUU7Z0JBQ1Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsY0FBYztpQkFDakI7Z0JBQ0QsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFNBQVMsRUFBRSx1Q0FBdUM7b0JBQ2xEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFdBQVcsRUFBRSx5Q0FBeUM7b0JBQ3REOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hELE1BQU07b0JBQ04sbUNBQW1DO29CQUNuQywwRUFBMEU7b0JBQzFFLDZCQUE2QjtvQkFDN0IsK0RBQStEO29CQUMvRCxLQUFLO29CQUNMLHdEQUF3RDtvQkFDeEQsS0FBSztvQkFDTCx3QkFBd0I7b0JBQ3hCLHNGQUFzRjtvQkFDdEYsTUFBTTtvQkFDTiwyREFBMkQ7aUJBQzlEO2FBQ0o7U0FDSjtLQUNKLENBQUM7QUFDTixDQUFDIn0=

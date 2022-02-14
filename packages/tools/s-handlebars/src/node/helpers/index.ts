@@ -13,6 +13,7 @@ import rootRelative from './rootRelative';
 import sanitizeValue from './sanitizeValue';
 import sfile from './sfile';
 import shieldsioHandlebarsHelper from './shieldsioHandlebarsHelper';
+import length from './length';
 
 export {
     configFileNameFromDocmapPath,
@@ -26,6 +27,7 @@ export {
     isLicense,
     isSectionWanted,
     jsonStringify,
+    length,
     rootRelative,
     sanitizeValue,
     sfile,

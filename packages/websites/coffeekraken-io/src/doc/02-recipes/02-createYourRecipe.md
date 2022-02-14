@@ -16,4 +16,6 @@
 
 # Create your own recipe
 
+Documentation coming soon...
+
 {{/layout-doc }}

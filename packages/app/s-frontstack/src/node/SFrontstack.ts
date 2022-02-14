@@ -278,6 +278,7 @@ export default class SFrontstack extends __SClass {
             async ({ resolve, reject, emit, pipe }) => {
                 const frontstackConfig = __SSugarConfig.get('frontstack');
                 const recipesObj = frontstackConfig.recipes;
+                const actionsObj = frontstackConfig.actions;
 
                 const finalParams =
                     __SFrontstackRecipeParamsInterface.apply(params);
@@ -465,6 +466,19 @@ export default class SFrontstack extends __SClass {
                             stackObj.actions[
                                 actionName
                             ];
+
+                        // check `extends` property
+                        if (actionObj.extends) {
+                            if (!actionsObj[actionObj.extends]) {
+                                throw new Error(`<red>[action]</red> Your action "<yellow>${actionName}</yellow>" tries to extends the "<cyan>${actionObj.extends}</cyan>" action that does not exists... Here's the available actions at this time: <green>${Object.keys(actionsObj).join(',')}</green>`);
+                            }
+                            emit('log', {
+                                type: __SLog.TYPE_INFO,
+                                value: `<yellow>○</yellow> <magenta>extends</magenta> : Your action "<yellow>${actionName}</yellow>" extends the "<cyan>${actionObj.extends}</cyan>" one`,
+                            })
+                            actionObj = <ISFrontstackAction>__deepMerge(Object.assign({}, actionsObj[actionObj.extends]), actionObj);
+                        }
+
                         let actionSpecificParams = {},
                             actionParams = {};
 

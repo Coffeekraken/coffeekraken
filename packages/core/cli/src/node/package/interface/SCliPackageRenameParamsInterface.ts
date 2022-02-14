@@ -26,8 +26,7 @@ export default class SCliPackageRenameParamsInterface extends __SInterface {
             },
             folder: {
                 description: 'Specify if the folder has to be renames as well',
-                type: 'Boolean',
-                default: true
+                type: 'Boolean'
             }
         };
     }

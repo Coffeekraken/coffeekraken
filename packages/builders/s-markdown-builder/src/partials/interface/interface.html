@@ -1,11 +1,12 @@
-{{#with (get docmap.map namespace)}} {{this.interface.name}} {{/with}}
+{{#with (get docmap.map namespace)}} <span class="s-typo:code">{{this.interface.name}}</span> {{/with}}
 
+{{#if (length (get docmap.map namespace false 'interface.definition'))}}
 <dl>
     {{#each (get docmap.map namespace false 'interface.definition')}}
     <dt class="s-font:40 s-mbe:30">
         <header class="s-flex s-bg:main-surface s-radius s-depth:100">
             <div class="s-flex-item:grow s-tc:accent s-p:30 s-typo:strong">
-                {{ @key }}
+                {{ @key }} {{#if this.required}}*{{/if}}
             </div>
             <div class="s-typo:bold s-p:30 s-tc:info">{{ this.type }}</div>
         </header>
@@ -18,3 +19,9 @@
     </dt>
     {{/each}}
 </dl>
+
+{{else}}
+
+<pre class="s-typo:pre">No parameters available...</pre>
+
+{{/if}}

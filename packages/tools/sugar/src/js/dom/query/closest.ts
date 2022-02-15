@@ -1,6 +1,5 @@
 // @ts-nocheck
-
-import __matches from './matches';
+import __querySelectorUp from './querySelectorUp';
 
 /**
  * @name        closest
@@ -33,17 +32,4 @@ import __matches from './matches';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function closest($elm: HTMLElement, selector: string | Function): HTMLElement {
-    const originalElm = $elm;
-    $elm = $elm.parentNode;
-    while ($elm && $elm != originalElm.ownerDocument) {
-        if (typeof selector === 'function') {
-            if (selector($elm)) return $elm;
-        } else if (typeof selector === 'string' && __matches($elm, selector)) {
-            return $elm;
-        }
-        $elm = $elm.parentNode;
-    }
-    return null;
-}
-export default closest;
+export default __querySelectorUp;

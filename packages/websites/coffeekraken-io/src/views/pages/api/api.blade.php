@@ -34,7 +34,7 @@
 
                 </nav>
 
-                <div class="__content s-pb:50">
+                <div s-page-transition-container="api" class="__content s-pb:50">
 
                     @foreach ($docblocks as $docblock)
                         @if (!$docblock->private)

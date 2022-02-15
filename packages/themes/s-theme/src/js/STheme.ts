@@ -44,7 +44,7 @@ export default class STheme extends __SThemeBase {
     static setTheme(
         theme?: string,
         variant?: string,
-        $context = document.body,
+        $context = document.querySelector('html'),
     ): STheme {
         __clearTransmations(document.body, {
             timeout: 100
@@ -75,7 +75,7 @@ export default class STheme extends __SThemeBase {
      * @since           2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
      */
-    static setThemeVariant(variant: string, $context = document.body): STheme {
+    static setThemeVariant(variant: string, $context = document.querySelector('html')): STheme {
         return this.setTheme(undefined, variant, $context);
     }
 

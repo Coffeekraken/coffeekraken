@@ -246,13 +246,28 @@ export default class CKSearch extends __SLitComponent {
 
                 if (item.menu?.slug) {
                     if (item.package.name !== window.packageJson.name) {
-                        document.location.href = `/${item.package.name}${item.menu.slug}`;
+                        document.dispatchEvent(new CustomEvent('location.href', {
+                            detail: `/${item.package.name}${item.menu.slug}`,
+                            bubbles: true
+                        }));
+                        // document.location.href = `/${item.package.name}${item.menu.slug}`;
                     } else {
-                        document.location.href = item.menu.slug;
+                        document.dispatchEvent(new CustomEvent('location.href', {
+                            detail: item.menu.slug,
+                            bubbles: true
+                        }));
+                        // document.location.href = item.menu.slug;
                     }
                 } else {
-                    document.location.href = `/api/${item.fullNamespace}`;
+                    document.dispatchEvent(new CustomEvent('location.href', {
+                        detail: `/api/${item.fullNamespace}`,
+                        bubbles: true
+                    }));
+                    // document.location.href = `/api/${item.fullNamespace}`;
                 }
+
+                this._$input.value = '';
+                this._$input.blur();
             }
         });
     }

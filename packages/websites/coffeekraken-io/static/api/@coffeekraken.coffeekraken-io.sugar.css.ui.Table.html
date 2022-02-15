@@ -348,7 +348,7 @@
  Create your recipe
  </a>
  </li>
-     </ul>
+       </ul>
   </div>
     <div class="__subnav-story" id="subnav-CSS">
   <ul>
@@ -1513,7 +1513,7 @@
  Create your recipe
  </a>
  </li>
-     </ul>
+       </ul>
   </div>
     <div class="__subnav-title" s-activate href="#subnav-mobile-CSS"
   id="subnav-mobile-item-CSS"
@@ -2404,115 +2404,7 @@
  </div>
 
  <div class="__subnav" id="menu-mobile-api">
-  <div class="__subnav-accordion">
-      <div class="__subnav-title" s-activate href="#subnav-mobile-Search"
- active="true" id="subnav-mobile-item-Search"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Search
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Search">
-  <h3 class="s-typo s-typo--h3 s-mbe s-mbe--50">
- Searching the API
-</h3>
-
-<p class="s-typo s-typo--lead s-mbe s-mbe--50">
- To access the search, simply click in the <span class="s-tc s-tc--accent">search input on top of the page</span>, of
- make use of the <span class="s-badge s-color s-color--complementary">CTRL + P</span> shortcut...
-</p>
-
-<p class="s-typo s-typo--p">
- You can make a search through the entire website or scope them using <span
- class="s-badge s-badge--outline s-color s-color--accent">/doc ...</span> for the documentation, <span
- class="s-badge s-badge--outline s-color s-color--accent">/style ...</span> for the styleguide and <span
- class="s-badge s-badge--outline s-color s-color--accent">/api ...</span> for the API.
-</p>
-
-<p class="s-typo s-typo--p">
- To search for packages, simply use the <span class="s-badge s-badge--outline s-color s-color--accent">@...</span> filter pattern.
-</p>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Configuration"
-  id="subnav-mobile-item-Configuration"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Configuration
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Configuration">
-  <ul>
-     <li>
- <a href="/doc/config/overview" title="Overview">
- Overview
- </a>
- </li>
-    <li>
- <a href="/config/explorer" title="Config Explorer">
- Config Explorer
- </a>
- </li>
-    <li>
- <a href="doc/config/built-in" title="Built-in Config">
- Built-in Config
- </a>
- </li>
-    <li>
- <a href="doc/config/override" title="Override Config">
- Override Config
- </a>
- </li>
-    <li>
- <a href="doc/config/register" title="Register new Config">
- Register new Config
- </a>
- </li>
-   </ul>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-css"
-  id="subnav-mobile-item-Discover-css"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (css)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-css">
-  <ck-discover platform="css"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-js"
-  id="subnav-mobile-item-Discover-js"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (js)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-js">
-  <ck-discover platform="js"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-PostCSS"
-  id="subnav-mobile-item-Discover-PostCSS"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (PostCSS)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-PostCSS">
-  <ck-discover platform="postcss"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-node"
-  id="subnav-mobile-item-Discover-node"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (node)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-node">
-  <ck-discover platform="node"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-php"
-  id="subnav-mobile-item-Discover-php"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (php)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-php">
-  <ck-discover platform="php"></ck-discover>
-  </div>
-  </div>
+ <api-nav></api-nav>
  </div>
 
  </nav>
@@ -2534,9 +2426,9 @@
 
  <section class="s-container markdown">
 
- <div class="s-layout s-layout--1222 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile">
+ <div class="s-layout s-layout--1222 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile s-mi___mobile s-mi--30___mobile">
 
- <nav class="sidemenu s-pb s-pb--50 s-pi___mobile s-pi--30___mobile" s-refocus trigger="event:actual">
+ <nav class="sidemenu s-pb s-pb--50 s-display___mobile s-display--none___mobile" s-refocus trigger="event:actual">
 
  <h5 class="s-typo s-typo--h5 s-mbe s-mbe--30">
  API
@@ -2655,74 +2547,74 @@
  <code lang="html">
  <table class="s-table s-mbe:30">
       <tr>
-          <th>Lynda Rowe</th>
-          <th>Phillip Purdy</th>
-          <th>Jermaine Cole</th>
+          <th>Dwayne Schaefer</th>
+          <th>Hugo Wuckert</th>
+          <th>Jack Miller</th>
       </tr>
       <tr>
-          <td>Carmen Miller</td>
-          <td>Leonard Dietrich PhD</td>
-          <td>Inez Frami</td>
+          <td>Marian McKenzie</td>
+          <td>Wesley Hodkiewicz</td>
+          <td>Robin Kshlerin</td>
       </tr>
       <tr>
-          <td>Louise Turcotte</td>
-          <td>Ms. Charlene Stehr</td>
-          <td>Mercedes Nitzsche MD</td>
+          <td>Alice Nicolas</td>
+          <td>Vicky Keeling</td>
+          <td>Celia Brown</td>
       </tr>
   </table>
   <table class="s-table s-color:accent s-mbe:30">
       <tr>
-          <th>Jamie Stoltenberg</th>
-          <th>Wilson Schinner</th>
-          <th>Jenna Kreiger</th>
+          <th>Mrs. Cecelia Gleason</th>
+          <th>Trevor Friesen</th>
+          <th>Iris Ryan</th>
       </tr>
       <tr>
-          <td>Geraldine Rippin</td>
-          <td>Miss Elmer Dach</td>
-          <td>Howard Jacobson</td>
+          <td>Tara Kunze</td>
+          <td>Margaret Oberbrunner</td>
+          <td>Sue Nolan MD</td>
       </tr>
       <tr>
-          <td>Lynn Senger</td>
-          <td>Roberta Douglas</td>
-          <td>Gregory Borer</td>
+          <td>Alex Runte</td>
+          <td>Bradley Bradtke IV</td>
+          <td>Bennie Luettgen</td>
       </tr>
   </table>
  </code>
  <code lang="html">
  <table class="s-table s-mbe:30">
       <tr>
-          <th>Hubert Kling</th>
-          <th>Earnest Dibbert</th>
-          <th>Sheila Brakus</th>
+          <th>Isabel Koelpin Jr.</th>
+          <th>Dr. Scott West</th>
+          <th>Dr. Felix Cremin</th>
       </tr>
       <tr>
-          <td>Katherine Stark</td>
-          <td>Samantha McClure</td>
-          <td>Dr. Jacquelyn Schuster</td>
+          <td>Kristin Price</td>
+          <td>Ernestine Bahringer</td>
+          <td>Ginger Veum</td>
       </tr>
       <tr>
-          <td>Sherri Nolan</td>
-          <td>Natalie Gleichner V</td>
-          <td>Darin O'Reilly</td>
+          <td>Shannon Hand</td>
+          <td>Ray Auer</td>
+          <td>Johnnie Altenwerth</td>
       </tr>
   </table>
  </code>
  <code lang="html">
  <table class="s-table:square s-mbe:30">
       <tr>
-          <th>Maureen Bahringer</th>
-          <th>Gerard Grant</th>
-          <th>Jose Spinka</th>
+          <th>Earnest Anderson</th>
+          <th>Angelo Cruickshank</th>
+          <th>Don Labadie</th>
       </tr>
       <tr>
-          <td>Darrin Satterfield Jr.</td>
-          <td>Patrick Schuppe</td>
-          <td>Clifton Willms</td>
+          <td>Rudy Stokes III</td>
+          <td>Dr. Sherri Sipes</td>
+          <td>Danny Koss</td>
       </tr>
       <tr>
-          <td>Lynette Bartell</td>
-          <td>Sarah Casper</td>
-          <td>Susan Reinger</td>
+          <td>Heather Rowe</td>
+          <td>Guadalupe Luettgen</td>
+          <td>Juanita Pacocha</td>
       </tr>
   </table>
  </code>
@@ -2730,19 +2622,19 @@
  <div dir="rtl">
   <table class="s-table">
       <tr>
-          <th>Dianne Dietrich III</th>
-          <th>Caleb Schneider</th>
-          <th>Sheila Cronin</th>
+          <th>Jonathan Ferry</th>
+          <th>Shawn Olson</th>
+          <th>Naomi Quigley</th>
       </tr>
       <tr>
-          <td>Cary Cummings PhD</td>
-          <td>Lyle Mills</td>
-          <td>Marsha Stehr</td>
+          <td>Carrie Considine</td>
+          <td>Angel Cassin DVM</td>
+          <td>Sandy Braun</td>
       </tr>
       <tr>
-          <td>Kristy Fay</td>
-          <td>Madeline Keeling</td>
-          <td>Sonia Stark</td>
+          <td>Duane Sporer</td>
+          <td>Nellie Franecki</td>
+          <td>Lloyd Labadie</td>
       </tr>
   </table>
 </div>
@@ -2750,19 +2642,19 @@
  <code lang="html">
  <table class="s-table s-scale:15">
       <tr>
-          <th>Bernard Harvey</th>
-          <th>Dr. Aaron Berge</th>
-          <th>Marcia Murazik DDS</th>
+          <th>Latoya Hodkiewicz</th>
+          <th>Dwight Kirlin Sr.</th>
+          <th>Miss Stuart Parker</th>
       </tr>
       <tr>
-          <td>Chad Prohaska</td>
-          <td>Monique Cole</td>
-          <td>Trevor Kiehn</td>
+          <td>Dustin Dare</td>
+          <td>Regina Leannon</td>
+          <td>Joshua Barton</td>
       </tr>
       <tr>
-          <td>Ms. Joan Ebert</td>
-          <td>Hector Lubowitz</td>
-          <td>William Will</td>
+          <td>Lorraine Turcotte</td>
+          <td>Miss Clifton Bosco</td>
+          <td>Beatrice Franecki</td>
       </tr>
   </table>
  </code>
@@ -2770,19 +2662,19 @@
  <div class="s-format:text">
       <table>
       <tr>
-          <th>Jessica Wuckert PhD</th>
-          <th>Jan Baumbach</th>
-          <th>Hattie Skiles Sr.</th>
+          <th>Lowell Rempel</th>
+          <th>Elena Keebler</th>
+          <th>Rolando Wyman</th>
       </tr>
       <tr>
-          <td>Gayle Dooley</td>
-          <td>Orlando Wiegand</td>
-          <td>Melinda Zulauf</td>
+          <td>Doreen Franecki</td>
+          <td>Kerry DuBuque</td>
+          <td>Lorene Little</td>
       </tr>
       <tr>
-          <td>Clinton Hackett</td>
-          <td>Justin Sawayn</td>
-          <td>Olive Stanton</td>
+          <td>Belinda Bartoletti</td>
+          <td>Ms. Tammy Welch</td>
+          <td>Guadalupe Schumm</td>
       </tr>
   </table>
   </div>
@@ -2826,37 +2718,40 @@
  <div class="tools s-until s-until--media s-until--mobile" theme="default-dark">
 
  <div class="tools__issue s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--error" title="Share the love" target="_blank">
  <i class="s-icon s-icon--fire"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--github s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- Don't hesitate to declare an issue if something does not works as expected.
+ <span class="s-tc s-tc--accent">Don't hesitate</span> to declare an issue if something does not works as
+ expected.
  <br />
  We are a community and this is what makes the strengh of this project.
  </p>
- <a class="s-btn s-color s-color--error s-display s-display--block s-mbe s-mbe--20 s-depth s-depth--50" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--error s-display s-display--block s-mbe s-mbe--20 s-depth s-depth--50"
+ href="https://github.com/Coffeekraken/coffeekraken/issues" title="Declare my issue on Github"
+ target="_blank">
  <i class="s-icon s-icon--github"></i> Declare my issue on Github
  </a>
- <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--complementary s-display s-display--block"
+ href="https://discord.com/channels/940362961682333767/940362962223378494"
+ title="Coffeekraken on Discord" target="_blank">
  <i class="s-icon s-icon--discord"></i> Talk about it on Discord
  </a>
  </div>
  </div>
  </div>
  <div class="tools__share s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--accent" title="Share the love" target="_blank">
  <i class="s-icon s-icon--heart"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--heart s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- The more we are, the stronger we become.
+ <span class="s-tc s-tc--accent">The more we are</span>, the stronger we become.
  <br />
  Don't hesitate to tell some words to you friends about us. The goal is to became more and more each
  days to help each others...
@@ -2865,12 +2760,16 @@
  <script>
  document.querySelector('#share-input').value = document.location;
  </script>
- <a href="https://www.facebook.com/sharer/sharer.php?u=#url" class="s-btn s-btn--block s-color s-color--accent s-mbe s-mbe--20"
- title="Share the love" target="_blank">
+ <a href="https://www.patreon.com/coffeekraken" class="s-btn s-btn--block s-color s-color--error s-mbe s-mbe--20"
+ title="Support us on Patreon" target="_blank">
+ <i class="s-icon s-icon--patreon s-font s-font--50 s-mi s-mi--10"></i> Support us on Patreon!
+ </a>
+ <a href="https://www.facebook.com/sharer/sharer.php?u=https://coffeekraken.io"
+ class="s-btn s-btn--block s-color s-color--accent s-mbe s-mbe--20" title="Share the love on facebook" target="_blank">
  <i class="s-icon s-icon--facebook s-font s-font--50 s-mi s-mi--10"></i> Share on Facebook!
  </a>
- <a href="https://twitter.com/intent/tweet?url=" class="s-btn s-btn--block s-color s-color--complementary"
- title="Share the love" target="_blank">
+ <a href="https://twitter.com/intent/tweet?url=https://coffeekraken.io"
+ class="s-btn s-btn--block s-color s-color--complementary" title="Share the love on twitter" target="_blank">
  <i class="s-icon s-icon--twitter s-font s-font--50 s-mi s-mi--10"></i> Make a tweet!
  </a>
 
@@ -2878,26 +2777,25 @@
  </div>
  </div>
  <div class="tools__share s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
- target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--complementary" title="Join us on Discord" target="_blank">
  <i class="s-icon s-icon--user"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--discord s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- Don't be afraid to join us on Discord.
+ <span class="s-tc s-tc--accent">Don't be afraid</span> to join us on Discord.
  </p>
- <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--complementary s-display s-display--block"
+ href="https://discord.com/channels/940362961682333767/940362962223378494" title="Join us on Discord"
+ target="_blank">
  <i class="s-icon s-icon--discord"></i> Join us on discord!
  </a>
  </div>
  </div>
  </div>
  <div class="tools__opensource s-tooltip-container">
- <a class="s-btn s-btn--block s-bg s-bg--main-surface" href="https://olivierbossel.com" title="We love open source!"
- target="_blank">
+ <a class="s-btn s-btn--block s-bg s-bg--main-surface" title="We love open source!" target="_blank">
  <i class="s-icon s-icon--opensource"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
@@ -2908,9 +2806,9 @@
  contribute to help us make our
  tools even better</span>!
  </p>
- <a class="s-btn s-color s-color--accent s-display s-display--block" href="https://olivierbossel.com" title="Share the love"
- target="_blank">
- <i class="s-icon s-icon--github"></i> Discover the code!
+ <a class="s-btn s-color s-color--accent s-display s-display--block" href="https://github.com/Coffeekraken/coffeekraken"
+ title="Coffeekraken is 100% open sourced" target="_blank">
+ <i class="s-icon s-icon--github"></i> Discover our codebase!
  </a>
  </div>
  </div>
@@ -3004,7 +2902,7 @@
 </svg>
  </a>
 
- <p class="s-typo s-typo--p s-mbe s-mbe--30">
+ <p class="s-typo s-typo--p s-typo--small s-mbe s-mbe--30">
  Designed and built with all the love in the world <span class="s-tc s-tc--accent">+1</span> by the
  Coffeekraken team with the help of our
  friends and partners.

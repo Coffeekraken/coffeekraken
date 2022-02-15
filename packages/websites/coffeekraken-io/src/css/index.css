@@ -21,6 +21,11 @@ body {
     border: none !important;
 }
 
+.s-page-transition * {
+    user-select: none;
+    pointer-events: none !important;
+}
+
 .s-btn {
     @sugar.depth (50);
 }

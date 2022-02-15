@@ -295,14 +295,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.frontendServer
                  * @type            String
-                 * @default        sugar frontendServer.start
+                 * @default        sugar frontendServer.start [arguments]
                  *
                  * Specify the frontend server action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar frontendServer.start',
+                command: '%sugar frontendServer.start [arguments]',
                 params: {},
                 settings: {
                     processManager: {
@@ -350,14 +350,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.postcssBuild
                  * @type            String
-                 * @default        Frontend server
+                 * @default        %sugar postcss.build [arguments]
                  *
                  * Specify the postcss build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar postcss.build',
+                command: '%sugar postcss.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -393,14 +393,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.imagesBuild
                  * @type            String
-                 * @default        sugar images.build
+                 * @default        sugar images.build [arguments]
                  *
                  * Specify the images build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar images.build',
+                command: '%sugar images.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -435,14 +435,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.vite
                  * @type            String
-                 * @default        sugar vite
+                 * @default        sugar vite [arguments]
                  *
                  * Specify the vite action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar vite',
+                command: '%sugar vite [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -478,57 +478,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.viteBuild
                  * @type            String
-                 * @default        sugar vite.build
+                 * @default        sugar vite.build [arguments]
                  *
                  * Specify the vite build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar vite.build',
-                params: {},
-                settings: {
-                    processManager: {},
-                },
-            },
-            docBuild: {
-                /**
-                 * @name            title
-                 * @namespace       config.frontstack.actions.docBuild
-                 * @type            String
-                 * @default        ...
-                 *
-                 * Specify the doc build action title
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                title: 'Markdown doc build stack',
-                /**
-                 * @name            description
-                 * @namespace       config.frontstack.actions.docBuild
-                 * @type            String
-                 * @default        ...
-                 *
-                 * Specify the doc build action description
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                description:
-                    'Allow to build markdown documentation with special features files easily. Take care of src/README and src/doc/**/*.md files',
-                /**
-                 * @name            command
-                 * @namespace       config.frontstack.actions.docBuild
-                 * @type            String
-                 * @default        sugar markdown.build -p readme -p doc
-                 *
-                 * Specify the doc build action command
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                 */
-                command: '%sugar markdown.build -p readme -p doc',
+                command: '%sugar vite.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -564,14 +521,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.docmapBuild
                  * @type            String
-                 * @default        sugar docmap.build --noExtends
+                 * @default        sugar docmap.build [arguments]
                  *
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar docmap.build --noExtends',
+                command: '%sugar docmap.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -607,14 +564,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.docmapBuild
                  * @type            String
-                 * @default        sugar docmap.build --noExtends
+                 * @default        sugar sitemap.build [arguments]
                  *
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar sitemap.build',
+                command: '%sugar sitemap.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},
@@ -650,14 +607,14 @@ export default function (env, config) {
                  * @name            command
                  * @namespace       config.frontstack.actions.docmapBuild
                  * @type            String
-                 * @default        sugar favicon.build
+                 * @default        sugar favicon.build [arguments]
                  *
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
                  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                command: '%sugar favicon.build',
+                command: '%sugar favicon.build [arguments]',
                 params: {},
                 settings: {
                     processManager: {},

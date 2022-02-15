@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __matches from './matches';
+import __querySelectorUp from './querySelectorUp';
 /**
  * @name        closest
  * @namespace            js.dom.query
@@ -31,20 +31,5 @@ import __matches from './matches';
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */
-function closest($elm, selector) {
-    const originalElm = $elm;
-    $elm = $elm.parentNode;
-    while ($elm && $elm != originalElm.ownerDocument) {
-        if (typeof selector === 'function') {
-            if (selector($elm))
-                return $elm;
-        }
-        else if (typeof selector === 'string' && __matches($elm, selector)) {
-            return $elm;
-        }
-        $elm = $elm.parentNode;
-    }
-    return null;
-}
-export default closest;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvc2VzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsb3Nlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUVkLE9BQU8sU0FBUyxNQUFNLFdBQVcsQ0FBQztBQUVsQzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBOEJHO0FBQ0gsU0FBUyxPQUFPLENBQUMsSUFBaUIsRUFBRSxRQUEyQjtJQUMzRCxNQUFNLFdBQVcsR0FBRyxJQUFJLENBQUM7SUFDekIsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7SUFDdkIsT0FBTyxJQUFJLElBQUksSUFBSSxJQUFJLFdBQVcsQ0FBQyxhQUFhLEVBQUU7UUFDOUMsSUFBSSxPQUFPLFFBQVEsS0FBSyxVQUFVLEVBQUU7WUFDaEMsSUFBSSxRQUFRLENBQUMsSUFBSSxDQUFDO2dCQUFFLE9BQU8sSUFBSSxDQUFDO1NBQ25DO2FBQU0sSUFBSSxPQUFPLFFBQVEsS0FBSyxRQUFRLElBQUksU0FBUyxDQUFDLElBQUksRUFBRSxRQUFRLENBQUMsRUFBRTtZQUNsRSxPQUFPLElBQUksQ0FBQztTQUNmO1FBQ0QsSUFBSSxHQUFHLElBQUksQ0FBQyxVQUFVLENBQUM7S0FDMUI7SUFDRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDO0FBQ0QsZUFBZSxPQUFPLENBQUMifQ==
+export default __querySelectorUp;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY2xvc2VzdC5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImNsb3Nlc3QudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsY0FBYztBQUNkLE9BQU8saUJBQWlCLE1BQU0sbUJBQW1CLENBQUM7QUFFbEQ7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7OztHQThCRztBQUNILGVBQWUsaUJBQWlCLENBQUMifQ==

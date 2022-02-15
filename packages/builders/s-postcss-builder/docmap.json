@@ -12,7 +12,6 @@
             "@coffeekraken/s-class",
             "@coffeekraken/s-clipboard-copy-component",
             "@coffeekraken/s-code-example-component",
-            "@coffeekraken/s-coffeekraken-theme",
             "@coffeekraken/s-color-picker-component",
             "@coffeekraken/s-color",
             "@coffeekraken/s-component-utils",
@@ -25,6 +24,7 @@
             "@coffeekraken/s-duration",
             "@coffeekraken/s-env",
             "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
             "@coffeekraken/s-feature",
             "@coffeekraken/s-file",
             "@coffeekraken/s-filtrable-input-component",
@@ -39,15 +39,17 @@
             "@coffeekraken/s-lit-component",
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-sugar-plugin",
             "@coffeekraken/s-process",
             "@coffeekraken/s-promise",
             "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
             "@coffeekraken/s-request",
             "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
             "@coffeekraken/s-side-panel-component",
-            "@coffeekraken/s-sitemap",
+            "@coffeekraken/s-sitemap-builder",
             "@coffeekraken/s-static-builder",
             "@coffeekraken/s-stdio",
             "@coffeekraken/s-sugar-config",
@@ -164,7 +166,59 @@
                 "relPath": "src/config/purgecss.config.js",
                 "children": {}
             },
-            "@coffeekraken.s-postcss-builder.node.interface.sPostcssBuilderBuildParamsInterface": {
+            "@coffeekraken.s-postcss-builder.node.SPostcssBuilder": {
+                "name": "SPostcssBuilder",
+                "type": "Class",
+                "platform": [
+                    {
+                        "name": "node",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the postcss builder that you can use to build your postcss files\nwith a simple and efficient API.",
+                "namespace": "@coffeekraken.s-postcss-builder.node",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "js",
+                        "code": "import SPostcssBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SPostcssBuilder({\n     postcssBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "SPostcssBuilder.ts",
+                "extension": "ts",
+                "relPath": "src/node/SPostcssBuilder.ts",
+                "children": {
+                    "postcssbuildersettings": {
+                        "name": "postcssBuilderSettings",
+                        "type": "ISPostcssBuilderSettings",
+                        "description": "Access the postcss builder settings",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    },
+                    "constructor": {
+                        "name": "constructor",
+                        "type": "Function",
+                        "description": "Constructor",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://olivierbossel.com"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface": {
                 "name": "SPostcssBuilderBuildParamsInterface",
                 "type": ".                      Class",
                 "platform": [
@@ -227,58 +281,6 @@
                 "extension": "js",
                 "relPath": "src/node/interface/SPostcssBuilderBuildParamsInterface.js",
                 "children": {}
-            },
-            "@coffeekraken.s-postcss-builder.node.sPostcssBuilder": {
-                "name": "SPostcssBuilder",
-                "type": "Class",
-                "platform": [
-                    {
-                        "name": "node",
-                        "description": ""
-                    }
-                ],
-                "description": "This class represent the postcss builder that you can use to build your postcss files\nwith a simple and efficient API.",
-                "namespace": "@coffeekraken.s-postcss-builder.node",
-                "status": "beta",
-                "example": [
-                    {
-                        "language": "js",
-                        "code": "import SPostcssBuilder from '@coffeekraken/s-postcss-builder';\nconst builder = new SPostcssBuilder({\n     postcssBuilder: {\n         // settings here...\n     }\n});\nawait builder.build({\n     input: 'my-cool-file.css',\n     output: 'my/cool/file-output.css'\n});"
-                    }
-                ],
-                "since": "2.0.0",
-                "author": {
-                    "name": "Olivier Bossel",
-                    "email": "olivier.bossel@gmail.com",
-                    "url": "https://olivierbossel.com"
-                },
-                "filename": "SPostcssBuilder.ts",
-                "extension": "ts",
-                "relPath": "src/node/SPostcssBuilder.ts",
-                "children": {
-                    "postcssBuilderSettings": {
-                        "name": "postcssBuilderSettings",
-                        "type": "ISPostcssBuilderSettings",
-                        "description": "Access the postcss builder settings",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    },
-                    "constructor": {
-                        "name": "constructor",
-                        "type": "Function",
-                        "description": "Constructor",
-                        "since": "2.0.0",
-                        "author": {
-                            "name": "Olivier Bossel",
-                            "email": "olivier.bossel@gmail.com",
-                            "url": "https://olivierbossel.com"
-                        }
-                    }
-                }
             }
         }
     }

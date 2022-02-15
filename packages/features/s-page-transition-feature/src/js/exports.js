@@ -1,0 +1,4 @@
+import __SPageTransitionFeature from './SPageTransitionFeature';
+export * from './SPageTransitionFeature';
+export default __SPageTransitionFeature;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTyx3QkFBd0IsTUFBTSwwQkFBMEIsQ0FBQztBQUNoRSxjQUFjLDBCQUEwQixDQUFDO0FBQ3pDLGVBQWUsd0JBQXdCLENBQUMifQ==

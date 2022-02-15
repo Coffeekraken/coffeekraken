@@ -348,7 +348,7 @@
  Create your recipe
  </a>
  </li>
-     </ul>
+       </ul>
   </div>
     <div class="__subnav-story" id="subnav-CSS">
   <ul>
@@ -1513,7 +1513,7 @@
  Create your recipe
  </a>
  </li>
-     </ul>
+       </ul>
   </div>
     <div class="__subnav-title" s-activate href="#subnav-mobile-CSS"
   id="subnav-mobile-item-CSS"
@@ -2404,115 +2404,7 @@
  </div>
 
  <div class="__subnav" id="menu-mobile-api">
-  <div class="__subnav-accordion">
-      <div class="__subnav-title" s-activate href="#subnav-mobile-Search"
- active="true" id="subnav-mobile-item-Search"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Search
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Search">
-  <h3 class="s-typo s-typo--h3 s-mbe s-mbe--50">
- Searching the API
-</h3>
-
-<p class="s-typo s-typo--lead s-mbe s-mbe--50">
- To access the search, simply click in the <span class="s-tc s-tc--accent">search input on top of the page</span>, of
- make use of the <span class="s-badge s-color s-color--complementary">CTRL + P</span> shortcut...
-</p>
-
-<p class="s-typo s-typo--p">
- You can make a search through the entire website or scope them using <span
- class="s-badge s-badge--outline s-color s-color--accent">/doc ...</span> for the documentation, <span
- class="s-badge s-badge--outline s-color s-color--accent">/style ...</span> for the styleguide and <span
- class="s-badge s-badge--outline s-color s-color--accent">/api ...</span> for the API.
-</p>
-
-<p class="s-typo s-typo--p">
- To search for packages, simply use the <span class="s-badge s-badge--outline s-color s-color--accent">@...</span> filter pattern.
-</p>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Configuration"
-  id="subnav-mobile-item-Configuration"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Configuration
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Configuration">
-  <ul>
-     <li>
- <a href="/doc/config/overview" title="Overview">
- Overview
- </a>
- </li>
-    <li>
- <a href="/config/explorer" title="Config Explorer">
- Config Explorer
- </a>
- </li>
-    <li>
- <a href="doc/config/built-in" title="Built-in Config">
- Built-in Config
- </a>
- </li>
-    <li>
- <a href="doc/config/override" title="Override Config">
- Override Config
- </a>
- </li>
-    <li>
- <a href="doc/config/register" title="Register new Config">
- Register new Config
- </a>
- </li>
-   </ul>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-css"
-  id="subnav-mobile-item-Discover-css"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (css)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-css">
-  <ck-discover platform="css"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-js"
-  id="subnav-mobile-item-Discover-js"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (js)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-js">
-  <ck-discover platform="js"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-PostCSS"
-  id="subnav-mobile-item-Discover-PostCSS"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (PostCSS)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-PostCSS">
-  <ck-discover platform="postcss"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-node"
-  id="subnav-mobile-item-Discover-node"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (node)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-node">
-  <ck-discover platform="node"></ck-discover>
-  </div>
-    <div class="__subnav-title" s-activate href="#subnav-mobile-Discover-php"
-  id="subnav-mobile-item-Discover-php"
- trigger="click" mount-when="direct" toggle save-state>
- <i class="s-icon s-icon--arrow-down"></i>
- Discover (php)
- </div>
-   <div class="__subnav-content" id="subnav-mobile-Discover-php">
-  <ck-discover platform="php"></ck-discover>
-  </div>
-  </div>
+ <api-nav></api-nav>
  </div>
 
  </nav>
@@ -2534,9 +2426,9 @@
 
  <section class="s-container markdown">
 
- <div class="s-layout s-layout--1222 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile">
+ <div class="s-layout s-layout--1222 s-gap s-gap--column s-gap--50 s-layout___mobile s-layout--1_2___mobile s-mi___mobile s-mi--30___mobile">
 
- <nav class="sidemenu s-pb s-pb--50 s-pi___mobile s-pi--30___mobile" s-refocus trigger="event:actual">
+ <nav class="sidemenu s-pb s-pb--50 s-display___mobile s-display--none___mobile" s-refocus trigger="event:actual">
 
  <h5 class="s-typo s-typo--h5 s-mbe s-mbe--30">
  API
@@ -2643,51 +2535,51 @@
  <code lang="html">
  <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">bold</h3>
-  <p class="s-font:bold:50">Cupiditate in officia id veniam et blanditiis.</p>
+  <p class="s-font:bold:50">Quae nemo et possimus nobis quo ea dolor voluptatem et.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">bolder</h3>
-  <p class="s-font:bolder:50">Alias adipisci ut impedit magni dicta voluptates hic et numquam.</p>
+  <p class="s-font:bolder:50">Eaque distinctio provident repudiandae.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">lighter</h3>
-  <p class="s-font:lighter:50">Placeat quaerat itaque veniam saepe.</p>
+  <p class="s-font:lighter:50">Cupiditate magnam amet illum qui est.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-100</h3>
-  <p class="s-font:weight-100:50">Cupiditate aspernatur quaerat.</p>
+  <p class="s-font:weight-100:50">Est voluptas id a non et placeat nulla.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-200</h3>
-  <p class="s-font:weight-200:50">Ratione accusantium enim.</p>
+  <p class="s-font:weight-200:50">Vel tempore dolores non.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-300</h3>
-  <p class="s-font:weight-300:50">Adipisci pariatur ut repellat.</p>
+  <p class="s-font:weight-300:50">Dolorem id nobis.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-400</h3>
-  <p class="s-font:weight-400:50">Temporibus inventore qui accusamus quidem reprehenderit velit nihil sed.</p>
+  <p class="s-font:weight-400:50">Dignissimos dolorem quasi et molestiae.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-500</h3>
-  <p class="s-font:weight-500:50">Aut recusandae nihil eos optio dolore quam voluptatum dolor.</p>
+  <p class="s-font:weight-500:50">Nesciunt repudiandae occaecati aut odio et accusamus sapiente.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-600</h3>
-  <p class="s-font:weight-600:50">Sit ut tenetur tempora impedit accusantium beatae deleniti.</p>
+  <p class="s-font:weight-600:50">Quod odit nihil.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-700</h3>
-  <p class="s-font:weight-700:50">Laborum tenetur itaque sit et pariatur voluptatibus odio.</p>
+  <p class="s-font:weight-700:50">Quia quo officia consectetur culpa.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-800</h3>
-  <p class="s-font:weight-800:50">Temporibus eum aliquam ea aperiam eos est.</p>
+  <p class="s-font:weight-800:50">Soluta modi non non nam totam dolore.</p>
 </div>
 <div class="s-mbe:50">
   <h3 class="s-tc:accent s-font:30 s-mbe:30">weight-900</h3>
-  <p class="s-font:weight-900:50">Eos consequatur porro nemo illum quidem porro laborum qui.</p>
+  <p class="s-font:weight-900:50">Minima aut quaerat.</p>
 </div>
  </code>
 </s-code-example>
@@ -2809,37 +2701,40 @@
  <div class="tools s-until s-until--media s-until--mobile" theme="default-dark">
 
  <div class="tools__issue s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--error" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--error" title="Share the love" target="_blank">
  <i class="s-icon s-icon--fire"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--github s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- Don't hesitate to declare an issue if something does not works as expected.
+ <span class="s-tc s-tc--accent">Don't hesitate</span> to declare an issue if something does not works as
+ expected.
  <br />
  We are a community and this is what makes the strengh of this project.
  </p>
- <a class="s-btn s-color s-color--error s-display s-display--block s-mbe s-mbe--20 s-depth s-depth--50" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--error s-display s-display--block s-mbe s-mbe--20 s-depth s-depth--50"
+ href="https://github.com/Coffeekraken/coffeekraken/issues" title="Declare my issue on Github"
+ target="_blank">
  <i class="s-icon s-icon--github"></i> Declare my issue on Github
  </a>
- <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--complementary s-display s-display--block"
+ href="https://discord.com/channels/940362961682333767/940362962223378494"
+ title="Coffeekraken on Discord" target="_blank">
  <i class="s-icon s-icon--discord"></i> Talk about it on Discord
  </a>
  </div>
  </div>
  </div>
  <div class="tools__share s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--accent" href="https://olivierbossel.com" title="Share the love" target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--accent" title="Share the love" target="_blank">
  <i class="s-icon s-icon--heart"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--heart s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- The more we are, the stronger we become.
+ <span class="s-tc s-tc--accent">The more we are</span>, the stronger we become.
  <br />
  Don't hesitate to tell some words to you friends about us. The goal is to became more and more each
  days to help each others...
@@ -2848,12 +2743,16 @@
  <script>
  document.querySelector('#share-input').value = document.location;
  </script>
- <a href="https://www.facebook.com/sharer/sharer.php?u=#url" class="s-btn s-btn--block s-color s-color--accent s-mbe s-mbe--20"
- title="Share the love" target="_blank">
+ <a href="https://www.patreon.com/coffeekraken" class="s-btn s-btn--block s-color s-color--error s-mbe s-mbe--20"
+ title="Support us on Patreon" target="_blank">
+ <i class="s-icon s-icon--patreon s-font s-font--50 s-mi s-mi--10"></i> Support us on Patreon!
+ </a>
+ <a href="https://www.facebook.com/sharer/sharer.php?u=https://coffeekraken.io"
+ class="s-btn s-btn--block s-color s-color--accent s-mbe s-mbe--20" title="Share the love on facebook" target="_blank">
  <i class="s-icon s-icon--facebook s-font s-font--50 s-mi s-mi--10"></i> Share on Facebook!
  </a>
- <a href="https://twitter.com/intent/tweet?url=" class="s-btn s-btn--block s-color s-color--complementary"
- title="Share the love" target="_blank">
+ <a href="https://twitter.com/intent/tweet?url=https://coffeekraken.io"
+ class="s-btn s-btn--block s-color s-color--complementary" title="Share the love on twitter" target="_blank">
  <i class="s-icon s-icon--twitter s-font s-font--50 s-mi s-mi--10"></i> Make a tweet!
  </a>
 
@@ -2861,26 +2760,25 @@
  </div>
  </div>
  <div class="tools__share s-tooltip-container">
- <a class="s-btn s-btn--block s-color s-color--complementary" href="https://olivierbossel.com" title="Share the love"
- target="_blank">
+ <a class="s-btn s-btn--block s-color s-color--complementary" title="Join us on Discord" target="_blank">
  <i class="s-icon s-icon--user"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
  <div class="s-position s-position--relative">
  <i class="s-icon s-icon--discord s-font s-font--100 s-mbe s-mbe--30"></i>
  <p class="s-typo s-typo--p s-font s-font--30 s-mbe s-mbe--30">
- Don't be afraid to join us on Discord.
+ <span class="s-tc s-tc--accent">Don't be afraid</span> to join us on Discord.
  </p>
- <a class="s-btn s-color s-color--complementary s-display s-display--block" href="https://olivierbossel.com"
- title="Share the love" target="_blank">
+ <a class="s-btn s-color s-color--complementary s-display s-display--block"
+ href="https://discord.com/channels/940362961682333767/940362962223378494" title="Join us on Discord"
+ target="_blank">
  <i class="s-icon s-icon--discord"></i> Join us on discord!
  </a>
  </div>
  </div>
  </div>
  <div class="tools__opensource s-tooltip-container">
- <a class="s-btn s-btn--block s-bg s-bg--main-surface" href="https://olivierbossel.com" title="We love open source!"
- target="_blank">
+ <a class="s-btn s-btn--block s-bg s-bg--main-surface" title="We love open source!" target="_blank">
  <i class="s-icon s-icon--opensource"></i>
  </a>
  <div s-floating placement="left" class="s-tooltip s-tooltip--interactive s-text s-text--center">
@@ -2891,9 +2789,9 @@
  contribute to help us make our
  tools even better</span>!
  </p>
- <a class="s-btn s-color s-color--accent s-display s-display--block" href="https://olivierbossel.com" title="Share the love"
- target="_blank">
- <i class="s-icon s-icon--github"></i> Discover the code!
+ <a class="s-btn s-color s-color--accent s-display s-display--block" href="https://github.com/Coffeekraken/coffeekraken"
+ title="Coffeekraken is 100% open sourced" target="_blank">
+ <i class="s-icon s-icon--github"></i> Discover our codebase!
  </a>
  </div>
  </div>
@@ -2987,7 +2885,7 @@
 </svg>
  </a>
 
- <p class="s-typo s-typo--p s-mbe s-mbe--30">
+ <p class="s-typo s-typo--p s-typo--small s-mbe s-mbe--30">
  Designed and built with all the love in the world <span class="s-tc s-tc--accent">+1</span> by the
  Coffeekraken team with the help of our
  friends and partners.

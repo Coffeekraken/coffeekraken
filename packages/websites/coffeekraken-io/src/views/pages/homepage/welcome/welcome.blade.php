@@ -1,7 +1,5 @@
 <section id="homepage-welcome">
 
-    <div class="__bkg"></div>
-
     <ck-falling-stars></ck-falling-stars>
 
     <div class="__illustration">

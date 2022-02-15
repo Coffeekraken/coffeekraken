@@ -3,9 +3,10 @@ import { define as __SCodeExampleWebcomponent } from '@coffeekraken/s-code-examp
 import { define as __SColorPickerWebcomponent } from '@coffeekraken/s-color-picker-component';
 import { define as __SDatePickerWebcomponent } from '@coffeekraken/s-date-picker-component';
 import { define as __sFormValidateFeature } from '@coffeekraken/s-form-validate-feature';
-import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
+import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
+import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
@@ -53,6 +54,7 @@ __SConductor.setup({
 
     // features
     __sActivateFeature();
+    __sPageTransitionFeature();
 
     // internal components
     __VersionSelector();

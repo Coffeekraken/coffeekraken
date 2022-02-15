@@ -48,7 +48,7 @@
 
                 </nav>
 
-                <div class="__content s-pb:50 s-rhythm:vertical s-format:text">
+                <div s-page-transition-container="markdown" class="__content s-pb:50 s-rhythm:vertical s-format:text">
                     {!! $body !!}
                 </div>
 

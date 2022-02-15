@@ -57,7 +57,7 @@ export default class CKBlob extends __SLitComponent {
 
     _perlin = __perlin();
 
-    _isDark = document.body.getAttribute('theme')?.toString().includes('dark');
+    _isDark = document.querySelector('html').getAttribute('theme')?.toString().includes('dark');
 
     _postprocessing = {};
 
@@ -166,12 +166,12 @@ export default class CKBlob extends __SLitComponent {
         //Create a helper for the shadow camera (optional)
         const helper = new THREE.CameraHelper(light.shadow.camera);
 
-        const pointsSphere1 = this.createPointsSphere(
-            this._isDark ? 0xffffff : 0x000000,
-            0,
-            0.1,
-        );
-        pointsSphere1.scale.set(9, 9, 9);
+        // const pointsSphere1 = this.createPointsSphere(
+        //     this._isDark ? 0xffffff : 0x000000,
+        //     0,
+        //     0.1,
+        // );
+        // pointsSphere1.scale.set(9, 9, 9);
         // const pointsSphere2 = this.createPointsSphere(0x7043ff, 0, 0.3);
         // pointsSphere2.scale.set(7.5, 7.5, 7.5);
         // const pointsSphere3 = this.createPointsSphere(0xffffff, 0, 0.1);
@@ -184,7 +184,7 @@ export default class CKBlob extends __SLitComponent {
         this._planePointsLight = this.createPlanePoints(0x212728, 1, '6.0');
             this._planePointsLight.rotation.set(Math.PI / 2, 0, Math.PI / 9);
 
-        this._pointSpheres = [pointsSphere1];
+        // this._pointSpheres = [pointsSphere1];
 
         if (this._isDark) {
             this._scene.add(backLight);
@@ -308,7 +308,7 @@ export default class CKBlob extends __SLitComponent {
             newGrain.castShadow = true;
             // newGrain.receiveShadow = true;
 
-            let scale = 0.2 + Math.random() - 0.2;
+            let scale = 0.2 + Math.random();
             // scale = 1;
 
             newGrain.traverse(function (child) {

@@ -80,6 +80,14 @@ export default class SRefocusFeature extends __SFeature {
                             }
                         }
                     });
+                    window.addEventListener('popstate', (e) => {
+                        if (document.location.hash) {
+                            const $targetElm = this.node.querySelector(document.location.hash);
+                            if ($targetElm) {
+                                this._scrollTo($targetElm);
+                            }
+                        }
+                    });
                 break;
                 default:
                     if (trigger.match(/^event:/)) {

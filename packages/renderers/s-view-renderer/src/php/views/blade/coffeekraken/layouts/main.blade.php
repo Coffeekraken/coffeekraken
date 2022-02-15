@@ -20,11 +20,11 @@ $metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
     <meta name="description"
-        content="{{ ($metas->description ? $metas->description : $frontspec->metas->description) ? $frontspec->metas->description : '' }}">
+        content="{{ ($metas->description? $metas->description: $frontspec->metas->description)? $frontspec->metas->description: '' }}">
     <meta name="robots" content="{{ $env === 'production' ? 'all' : 'noindex, nofollow' }}" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
     <title>
-        {{ (($title ? $title : $metas->title) ? $metas->title : $frontspec->metas->title) ? $frontspec->metas->title : $package->name }}
+        {{ (($title? $title: $metas->title)? $metas->title: $frontspec->metas->title)? $frontspec->metas->title: $package->name }}
     </title>
 
     @if ($metasOg)
@@ -79,7 +79,7 @@ $metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas
     @yield('head')
 </head>
 
-<body s-refocus trigger="anchor,history">
+<body @if ($bodyAttributes) @foreach ($bodyAttributes as $key => $value) {{ $key }}="{{ $value }}" @endforeach @endif>
 
     @yield('body')
 

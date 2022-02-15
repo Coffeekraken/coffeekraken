@@ -5,65 +5,10 @@
     z-index: 10;
     margin-bottom: 50px;
 
-    
-
     @sugar.media mobile {
         height: auto;
         text-align: center;
     }
-
-    /* @sugar.theme.when (dark) {
-        background: sugar.color(main, background) !important;
-        background: radial-gradient(
-            circle at bottom,
-            sugar.color(complementary, --alpha 0.02),
-            transparent
-        ) !important;
-    } */
-
-    .__bkg {
-        position: absolute;
-        top: 15%;
-        left: 100%;
-        width: 100%;
-        height: 100%;
-        background-image: url('/dist/img/welcome/welcome-bg-light-01.jpg');
-        background-position: 50% 260%;
-        background-size: 50%;
-        border-bottom-left-radius: 50%;
-        border-bottom-right-radius: 50%;
-        transform: scale(2) translateX(-50%) translateY(-50%);
-        overflow: hidden;
-        opacity: 0.6;
-
-        @sugar.theme.when dark {
-            background-image: url('/dist/img/welcome/welcome-bg-dark-01.jpg');
-            opacity: 0.13;
-        }
-
-        /* &:after {
-            content: '';
-            position: absolute;
-            top: 0; left: 0;
-            width: 100%; height: 100%;
-            background: sugar.color(main, surface);
-        } */
-    }
-
-    /* &:before {
-        content: '';
-        position: absolute;
-        top: 0; left: 0;
-        width: 100%; height: 64%;
-        background: linear-gradient(90deg, sugar.color(main, --alpha 0.06), sugar.color(main, --alpha 0));
-        border-radius: 50%;
-        transform-origin: 50% 100%;
-        transform: scaleX(2) scaleY(2);
-
-        @sugar.media mobile {
-            height: 30%;
-        }
-    } */
 
     .__illustration {
         position: absolute;

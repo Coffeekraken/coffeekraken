@@ -63,13 +63,23 @@ export default class SRefocusFeature extends __SFeature {
     mount() {
         this.props.trigger.forEach((trigger) => {
             switch(trigger) {
-                case 'anchor':
-                    if (document.location.hash) {
-                        const $targetElm = this.node.querySelector(document.location.hash);
+                case 'actual':
+                    setTimeout(() => {
+                        const $targetElm = this.node.querySelector(`[href="${document.location.pathname}"]`);
                         if ($targetElm) {
                             this._scrollTo($targetElm);
                         }
-                    }
+                    }, this.props.timeout);
+                break;
+                case 'anchor':
+                    setTimeout(() => {
+                        if (document.location.hash) {
+                            const $targetElm = this.node.querySelector(document.location.hash);
+                            if ($targetElm) {
+                                this._scrollTo($targetElm);
+                            }
+                        }
+                    }, this.props.timeout);
                 break;
                 case 'history':
                     window.addEventListener('hashchange', (e) => {
@@ -105,7 +115,7 @@ export default class SRefocusFeature extends __SFeature {
             $elm: this.node,
             ...this.props.scrollToSettings ?? {},
         // @ts-ignore
-        }, this.props.timeout);
+        });
     }
     
 }

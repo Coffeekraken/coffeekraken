@@ -92,64 +92,70 @@ export default function ({
             font-size: sugar.font.size(30);
             user-select: none;
 
-            ul, ol {
-                margin-inline-start: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
 
-                li {
-                    margin-inline-start: cale(1em * var(--s-fs-tree-inline-space-ratio, 1));
+            li > div {
+                position: relative;
+                margin-inline-start: cale(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                > a {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-
-                    > a {
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-
-                    &:before {
-                        content: '';
-                        font-weight:bold;
-                        position: absolute;
-                        z-index: -1;
-                        top: 0;
-                        left: calc(0.15em * var(--s-fs-tree-inline-space-ratio, 1));
-                        width: 1px; height: 100%;
-                        background-color: sugar.color(current, border);
-                    }
-
-
                 }
 
+                &:before {
+                    content: '';
+                    display: block;
+                    font-weight:bold;
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
+                    width: 1px; height: 100%;
+                    background-color: sugar.color(current, border);
+                }
+
+                &:after {
+                    content: '';
+                    display: block;
+                    font-weight:bold;
+                    position: absolute;
+                    z-index: -1;
+                    bottom: 0;
+                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
+                    width: 1em;
+                    height: 1px;
+                    background-color: sugar.color(current, border);
+                }
+
+
             }
+
 
             li {
                 position: relative;
 
-                & > *:not(ul):not(ol):not(i) {
+                > div {
                     padding-inline: sugar.theme(ui.fsTree.paddingInline);
                     padding-block: sugar.theme(ui.fsTree.paddingBlock);
-                    padding-inline-start: calc((sugar.theme(ui.fsTree.paddingInline) + 1em) * var(--s-fs-tree-inline-space-ratio, 1));
-                    display: block;
                     border-radius: sugar.theme(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
-
-                    &:not(.s-disabled &) {
-                        cursor: pointer;
-                    }
                 }
 
-                & > i {
-                    position: absolute;
-                    top: sugar.theme(ui.fsTree.paddingBlock, true);
-                    left: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                &:not(.s-disabled &) {
+                    cursor: pointer;
                 }
 
-                & > i.s-when--active {
+                & > i.s-when--active,
+                & > div > i.s-when--active {
                     display: none;
                 }
                 &.active, &[active] {
-                    & > i.s-when--active {
+                    & > i.s-when--active,
+                    & > div i.s-when--active {
                         display: inline-block;
 
                         & + i {
@@ -158,7 +164,7 @@ export default function ({
                     }
                 }
 
-                &.active > *:not(ul):not(ol):not(i) {
+                &.active {
                     font-weight: bold;
                 }
 
@@ -170,6 +176,11 @@ export default function ({
 
                 & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
                     @sugar.outline;
+                }
+
+                & > ul,
+                & > ol {
+                    margin-inline-start: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
                 }
 
                 &:hover, &:focus, &:focus-within {
@@ -191,13 +202,6 @@ export default function ({
                         }
                     }
                 }
-
-                li {
-                    & > i {
-                        right: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
-                        left: auto;
-                    }
-                }
             }
 
         `);
@@ -212,14 +216,11 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-
                     li:not(.s-disabled) {
-                        a:hover,
-                        span:hover {
+                        > div:hover {
                             background-color: sugar.color(current, surface);
                         }
                     }
-
                 `);
                 break;
         }
@@ -230,7 +231,7 @@ export default function ({
             case 'square':
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: 0;
                         }
                     }
@@ -239,7 +240,7 @@ export default function ({
             case 'pill':
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: 9999px;
                         }
                     }
@@ -248,7 +249,7 @@ export default function ({
             default:
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: sugar.theme(ui.fsTree.borderRadius);
                         }
                     }

@@ -111,6 +111,10 @@ export default class SActivateFeatureInterface extends __SInterface {
                 ],
                 default: ['click'],
             },
+            unactivateOn: {
+                description: 'Specify some event(s) catched on the body tag that will unactivate the target(s)',
+                type: 'Array<String>'
+            }
         };
     }
 }

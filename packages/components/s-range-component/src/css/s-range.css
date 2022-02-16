@@ -21,6 +21,11 @@ s-range {
     opacity: 1 !important;
 }
 
+.s-range__input:hover + .s-range__tooltip,
+.s-range__input:focus + .s-range__tooltip {
+    opacity: 1 !important;
+}
+
 .s-range__tooltip {
     transition: none;
 }

@@ -3,6 +3,7 @@
         "lang": "en",
         "title": "Plop",
         "description": "Hello world",
+        "themeColor": "#FFBB00",
         "author": {
             "name": "Olivier Bossel",
             "email": "olivier.bossel@gmail.com",

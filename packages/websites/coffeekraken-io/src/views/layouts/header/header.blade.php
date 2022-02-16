@@ -5,15 +5,20 @@
         <div class="s-flex:align-center" style="position: relative">
             <div class="__actions s-display:none @mobile s-display:inline-block">
                 <div class="s-mis:30">
-                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle>
+                    <a s-activate class="__menu-icon" href="#nav-mobile" toggle unactivate-on="page-transition-end">
                         <i class="s-icon:menu __open"></i>
                         <i class="s-icon:cross __close"></i>
                     </a>
                 </div>
             </div>
             <div class="__logo">
-                <a href="/" title="Coffeekraken.io">
-                    @include ('layouts.header.partials.logo')
+                <a href="/" title="Coffeekraken.io" class="s-text:center">
+                    <div class="s-until:parent:loading">
+                        @include ('layouts.header.partials.logo')
+                    </div>
+                    <span class="s-when:parent:loading">
+                        <div class="s-loader:spinner s-color:accent s-mie:10"></div>
+                    </span>
                 </a>
             </div>
             <nav id="nav" class="__nav s-until:media:mobile">

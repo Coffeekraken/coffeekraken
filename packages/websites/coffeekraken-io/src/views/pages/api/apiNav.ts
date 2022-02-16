@@ -120,7 +120,7 @@ export class ApiNav extends __SLitComponent {
         this.requestUpdate();
     }
 
-    _renderList(obj, currentNamespace = '') {
+    _renderList(obj, currentNamespace = '', level = 0) {
         const itemsKeys = Object.keys(obj);
         const items =itemsKeys.map((itemName) => {
             const itemObj = obj[itemName];
@@ -135,31 +135,32 @@ export class ApiNav extends __SLitComponent {
             }
 
             if (itemObj.name && itemObj.namespace) {
-                let icon = itemObj.platform[0].name;
 
                 return html`
                     <li>
-                        <i
-                            class="s-icon:file-${icon} s-tc:extension-${icon}"
-                        ></i>
-                        <a href="/api/${itemNamespace}" namespace="${itemNamespace}">${itemObj.name}</a>
+                        <div class="s-flex">
+                            <a href="/api/${itemNamespace}" namespace="${itemNamespace}" class="s-link:stretch s-order:2">${itemObj.name}</a>
+                            <i
+                                class="s-icon:file-${itemObj.extension} s-tc:accent s-until:sibling:loading s-mie:10"
+                            ></i>
+                            <div class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading"></div>
+                        </div>
                     </li>
                 `;
             } else {
                 return html`
-                    <li class="${itemsKeys.length <= 2 || this._isAcive(itemNamespace) ? 'active' : ''}">
-                        <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
-                        <i class="s-icon:folder"></i>
-                        <span
-                            @click=${() => {
-                                this._toggle(itemNamespace);
-                            }}
-                        >
+                    <li class="${level === 0 || this._isAcive(itemNamespace) ? 'active' : ''}">
+                        <div @click=${() => {
+                                    this._toggle(itemNamespace);
+                                }}>
+                            <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
+                            <i class="s-icon:folder"></i>
                             ${itemName}
-                        </span>
+                        </div>
                         ${this._renderList(
                             __get(this._menuStack, itemNamespace),
                             itemNamespace,
+                            level + 1
                         )}
                     </li>
                 `;

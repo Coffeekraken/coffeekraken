@@ -12,6 +12,7 @@ body {
     }
 }
 
+@sugar.highlightjs.theme;
 .hljs > * {
     display: inline-block !important;
 }

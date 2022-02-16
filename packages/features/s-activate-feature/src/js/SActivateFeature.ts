@@ -13,6 +13,7 @@ export interface ISActivateFeatureProps {
     activeClass: string;
     saveState: boolean;
     trigger: string[];
+    unactivateOn: string[];
 }
 
 /**
@@ -187,6 +188,15 @@ export default class SActivateFeature extends __SFeature {
                 }
             });
         });
+
+        // handle `unactivateOn` events
+        if (this.props.unactivateOn) {
+            this.props.unactivateOn.forEach((event) => {
+                document.body.addEventListener(event, (e) => {
+                    this.unactivate();
+                });
+            });
+        }
 
         // activate if has the "active" attribute
         if (this.props.active) {

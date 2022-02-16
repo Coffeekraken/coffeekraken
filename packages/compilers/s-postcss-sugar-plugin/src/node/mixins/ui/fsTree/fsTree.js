@@ -62,64 +62,70 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
             font-size: sugar.font.size(30);
             user-select: none;
 
-            ul, ol {
-                margin-inline-start: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
 
-                li {
-                    margin-inline-start: cale(1em * var(--s-fs-tree-inline-space-ratio, 1));
+            li > div {
+                position: relative;
+                margin-inline-start: cale(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+
+                > a {
                     white-space: nowrap;
                     overflow: hidden;
                     text-overflow: ellipsis;
-
-                    > a {
-                        white-space: nowrap;
-                        overflow: hidden;
-                        text-overflow: ellipsis;
-                    }
-
-                    &:before {
-                        content: '';
-                        font-weight:bold;
-                        position: absolute;
-                        z-index: -1;
-                        top: 0;
-                        left: calc(0.15em * var(--s-fs-tree-inline-space-ratio, 1));
-                        width: 1px; height: 100%;
-                        background-color: sugar.color(current, border);
-                    }
-
-
                 }
 
+                &:before {
+                    content: '';
+                    display: block;
+                    font-weight:bold;
+                    position: absolute;
+                    z-index: -1;
+                    top: 0;
+                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
+                    width: 1px; height: 100%;
+                    background-color: sugar.color(current, border);
+                }
+
+                &:after {
+                    content: '';
+                    display: block;
+                    font-weight:bold;
+                    position: absolute;
+                    z-index: -1;
+                    bottom: 0;
+                    left: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
+                    width: 1em;
+                    height: 1px;
+                    background-color: sugar.color(current, border);
+                }
+
+
             }
+
 
             li {
                 position: relative;
 
-                & > *:not(ul):not(ol):not(i) {
+                > div {
                     padding-inline: sugar.theme(ui.fsTree.paddingInline);
                     padding-block: sugar.theme(ui.fsTree.paddingBlock);
-                    padding-inline-start: calc((sugar.theme(ui.fsTree.paddingInline) + 1em) * var(--s-fs-tree-inline-space-ratio, 1));
-                    display: block;
                     border-radius: sugar.theme(ui.fsTree.borderRadius);
                     text-overflow: ellipsis;
-
-                    &:not(.s-disabled &) {
-                        cursor: pointer;
-                    }
                 }
 
-                & > i {
-                    position: absolute;
-                    top: sugar.theme(ui.fsTree.paddingBlock, true);
-                    left: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
+                &:not(.s-disabled &) {
+                    cursor: pointer;
                 }
 
-                & > i.s-when--active {
+                & > i.s-when--active,
+                & > div > i.s-when--active {
                     display: none;
                 }
                 &.active, &[active] {
-                    & > i.s-when--active {
+                    & > i.s-when--active,
+                    & > div i.s-when--active {
                         display: inline-block;
 
                         & + i {
@@ -128,7 +134,7 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
                     }
                 }
 
-                &.active > *:not(ul):not(ol):not(i) {
+                &.active {
                     font-weight: bold;
                 }
 
@@ -140,6 +146,11 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
 
                 & > [tabindex]:focus:not(:hover):not(.s-disabled &) {
                     @sugar.outline;
+                }
+
+                & > ul,
+                & > ol {
+                    margin-inline-start: calc(0.5em * var(--s-fs-tree-inline-space-ratio, 1));
                 }
 
                 &:hover, &:focus, &:focus-within {
@@ -161,13 +172,6 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
                         }
                     }
                 }
-
-                li {
-                    & > i {
-                        right: calc(1em * var(--s-fs-tree-inline-space-ratio, 1));
-                        left: auto;
-                    }
-                }
             }
 
         `);
@@ -180,14 +184,11 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
             case 'solid':
             default:
                 vars.push(`
-
                     li:not(.s-disabled) {
-                        a:hover,
-                        span:hover {
+                        > div:hover {
                             background-color: sugar.color(current, surface);
                         }
                     }
-
                 `);
                 break;
         }
@@ -197,7 +198,7 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
             case 'square':
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: 0;
                         }
                     }
@@ -206,7 +207,7 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
             case 'pill':
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: 9999px;
                         }
                     }
@@ -215,7 +216,7 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
             default:
                 vars.push(`
                     li {
-                        & > *:not(ul):not(ol):not(i) {
+                        & > div {
                             border-radius: sugar.theme(ui.fsTree.borderRadius);
                         }
                     }
@@ -225,4 +226,4 @@ export default function ({ params, atRule, atRootStart, applyNoScopes, replaceWi
     }
     return vars;
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnNUcmVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnNUcmVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxZQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx3QkFBd0IsQ0FBQzthQUNyRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsd0JBQXdCLENBQUM7YUFDckQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBQ1gsYUFBYSxFQUNiLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsT0FBTyxFQUNkLEtBQUssRUFBRSxTQUFTLEVBQ2hCLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxDQUFDLElBQzVCLE1BQU0sQ0FDWixDQUFDO0lBQ0YsV0FBVyxDQUFDLEtBQUssR0FBRyxhQUFhLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixXQUFXLENBQUM7Ozs7S0FJWCxDQUFDLENBQUM7SUFFSCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7U0FnSFQsQ0FBQyxDQUFDO0tBQ047SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLEtBQUssQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQ3pDLElBQUksQ0FBQyxJQUFJLENBQUM7O1NBRVQsQ0FBQyxDQUFDO1FBRUgsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssT0FBTyxDQUFDO1lBQ2I7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7Ozs7O2lCQVNULENBQUMsQ0FBQztnQkFDSCxNQUFNO1NBQ2I7S0FDSjtJQUVELElBQUksV0FBVyxDQUFDLEtBQUssQ0FBQyxRQUFRLENBQUMsT0FBTyxDQUFDLEVBQUU7UUFDckMsUUFBUSxXQUFXLENBQUMsS0FBSyxFQUFFO1lBQ3ZCLEtBQUssUUFBUTtnQkFDVCxJQUFJLENBQUMsSUFBSSxDQUFDOzs7Ozs7aUJBTVQsQ0FBQyxDQUFDO2dCQUNILE1BQU07WUFDVixLQUFLLE1BQU07Z0JBQ1AsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1Y7Z0JBQ0ksSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ULENBQUMsQ0FBQztnQkFDSCxNQUFNO1NBQ2I7S0FDSjtJQUVELE9BQU8sSUFBSSxDQUFDO0FBQ2hCLENBQUMifQ==
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnNUcmVlLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnNUcmVlLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sWUFBWSxNQUFNLDJCQUEyQixDQUFDO0FBQ3JELE9BQU8sUUFBUSxNQUFNLHVCQUF1QixDQUFDO0FBRTdDOzs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O0dBc0JHO0FBRUgsTUFBTSxtQ0FBb0MsU0FBUSxZQUFZO0lBQzFELE1BQU0sS0FBSyxXQUFXO1FBQ2xCLE9BQU87WUFDSCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFLFFBQVE7Z0JBQ2QsTUFBTSxFQUFFLENBQUMsT0FBTyxDQUFDO2dCQUNqQixPQUFPLEVBQUUsUUFBUSxDQUFDLE1BQU0sQ0FBQyx3QkFBd0IsQ0FBQzthQUNyRDtZQUNELEtBQUssRUFBRTtnQkFDSCxJQUFJLEVBQUUsUUFBUTtnQkFDZCxNQUFNLEVBQUUsQ0FBQyxTQUFTLEVBQUUsUUFBUSxFQUFFLE1BQU0sQ0FBQztnQkFDckMsT0FBTyxFQUFFLFFBQVEsQ0FBQyxNQUFNLENBQUMsd0JBQXdCLENBQUM7YUFDckQ7WUFDRCxLQUFLLEVBQUU7Z0JBQ0gsSUFBSSxFQUFFO29CQUNGLElBQUksRUFBRSxlQUFlO29CQUNyQixVQUFVLEVBQUUsQ0FBQyxHQUFHLEVBQUUsR0FBRyxDQUFDO2lCQUN6QjtnQkFDRCxNQUFNLEVBQUUsQ0FBQyxNQUFNLEVBQUUsS0FBSyxFQUFFLE9BQU8sQ0FBQztnQkFDaEMsT0FBTyxFQUFFLENBQUMsTUFBTSxFQUFFLEtBQUssRUFBRSxPQUFPLENBQUM7YUFDcEM7U0FDSixDQUFDO0lBQ04sQ0FBQztDQUNKO0FBUUQsT0FBTyxFQUFFLG1DQUFtQyxJQUFJLFNBQVMsRUFBRSxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsRUFDckIsTUFBTSxFQUNOLE1BQU0sRUFDTixXQUFXLEVBQ1gsYUFBYSxFQUNiLFdBQVcsR0FPZDtJQUNHLE1BQU0sV0FBVyxtQkFDYixLQUFLLEVBQUUsT0FBTyxFQUNkLEtBQUssRUFBRSxTQUFTLEVBQ2hCLEtBQUssRUFBRSxDQUFDLE1BQU0sRUFBRSxLQUFLLEVBQUUsT0FBTyxDQUFDLElBQzVCLE1BQU0sQ0FDWixDQUFDO0lBQ0YsV0FBVyxDQUFDLEtBQUssR0FBRyxhQUFhLENBQUMsV0FBVyxDQUFDLEtBQUssQ0FBQyxDQUFDO0lBRXJELE1BQU0sSUFBSSxHQUFhLEVBQUUsQ0FBQztJQUUxQixXQUFXLENBQUM7Ozs7S0FJWCxDQUFDLENBQUM7SUFFSCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsT0FBTyxDQUFDLE1BQU0sQ0FBQyxLQUFLLENBQUMsQ0FBQyxFQUFFO1FBQzFDLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7Ozs7O1NBb0hULENBQUMsQ0FBQztLQUNOO0lBRUQsSUFBSSxXQUFXLENBQUMsS0FBSyxDQUFDLE9BQU8sQ0FBQyxLQUFLLENBQUMsS0FBSyxDQUFDLENBQUMsRUFBRTtRQUN6QyxJQUFJLENBQUMsSUFBSSxDQUFDOztTQUVULENBQUMsQ0FBQztRQUVILFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLE9BQU8sQ0FBQztZQUNiO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0tBQ0o7SUFFRCxJQUFJLFdBQVcsQ0FBQyxLQUFLLENBQUMsUUFBUSxDQUFDLE9BQU8sQ0FBQyxFQUFFO1FBQ3JDLFFBQVEsV0FBVyxDQUFDLEtBQUssRUFBRTtZQUN2QixLQUFLLFFBQVE7Z0JBQ1QsSUFBSSxDQUFDLElBQUksQ0FBQzs7Ozs7O2lCQU1ULENBQUMsQ0FBQztnQkFDSCxNQUFNO1lBQ1YsS0FBSyxNQUFNO2dCQUNQLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtZQUNWO2dCQUNJLElBQUksQ0FBQyxJQUFJLENBQUM7Ozs7OztpQkFNVCxDQUFDLENBQUM7Z0JBQ0gsTUFBTTtTQUNiO0tBQ0o7SUFFRCxPQUFPLElBQUksQ0FBQztBQUNoQixDQUFDIn0=

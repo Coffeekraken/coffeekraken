@@ -35,6 +35,7 @@ export interface ISFiltrableInputComponentProps {
     templates: Record<string, Function>;
     closeTimeout: number;
     interactive: boolean;
+    closeOnSelect: boolean;
     notSelectable: boolean;
     maxItems: number;
 }
@@ -325,16 +326,29 @@ export default class SFiltrableInput extends __SLitComponent {
             }
         }
         this.state.selectedItemIdx = this.state.preselectedItemIdx;
-        // @ts-ignore
-        this.state.value = this.$input.value;
-        this.requestUpdate();
+
+        const $selectedItem = this.$list.children[this.state.selectedItemIdx];
+
         // dispatch an event
         const event = new CustomEvent('selectItem', {
             bubbles: true,
-            detail: this.selectedItem,
+            detail: {
+                item: this.selectedItem,
+                $elm: $selectedItem
+            }
         });
         // @ts-ignore
         this.dispatchEvent(event);
+        // @ts-ignore
+        this.state.value = this.$input.value;
+        this.requestUpdate();
+        // close on select if needed
+        if (this.props.closeOnSelect) {
+            // reset
+            this.reset();
+            this.filterItems();
+            this.close();
+        }
     }
     validateAndClose() {
         this.validate();
@@ -354,7 +368,7 @@ export default class SFiltrableInput extends __SLitComponent {
     }
     close() {
         __cursorToEnd(this.$input);
-        // this.$input.blur();
+        this.$input.blur();
         this.state.isActive = false;
     }
     async refreshItems() {

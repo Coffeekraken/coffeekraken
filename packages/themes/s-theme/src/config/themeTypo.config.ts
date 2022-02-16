@@ -20,7 +20,7 @@ export default (env, config) => {
                 'margin-bottom': 50,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 70,
             }
         },
         /**
@@ -43,7 +43,7 @@ export default (env, config) => {
                 'margin-bottom': 50,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 60,
             }
         },
         /**
@@ -66,7 +66,7 @@ export default (env, config) => {
                 'margin-bottom': 50,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 50,
             }
         },
         /**
@@ -89,7 +89,7 @@ export default (env, config) => {
                 'margin-bottom': 50,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 40,
             }
         },
         /**
@@ -112,7 +112,7 @@ export default (env, config) => {
                 'margin-bottom': 40,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 30,
             }
         },
         /**
@@ -135,7 +135,7 @@ export default (env, config) => {
                 'margin-bottom': 40,
             },
             mobile: {
-                'word-break': 'break-all'
+                'font-size': 30,
             }
         },
         /**
@@ -177,6 +177,9 @@ export default (env, config) => {
             rhythmVertical: {
                 'margin-bottom': 50,
             },
+            mobile: {
+                'font-size': 40,
+            }
         },
         /**
          * @name          hr
@@ -207,7 +210,7 @@ export default (env, config) => {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
          */
-        pre: {
+        'pre:not([class])': {
             'font-family': 'code',
             color: ['main', 'text'],
             'background-color': ['main', 'surface'],

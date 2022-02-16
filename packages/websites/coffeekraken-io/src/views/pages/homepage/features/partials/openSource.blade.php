@@ -27,7 +27,7 @@
                 <div class="s-text:center @mobile s-mbs:50">
                     <img class="__illustration" src="/dist/img/illustrations/opensource.png"
                         alt="Coffeekraken open source" title="Coffeekraken believe in open source" />
-                    {{-- <i class="s-icon:opensource s-tc:main-surface s-depth:text:100" style="font-size:200px"></i> --}}
+                    {{-- <i class="s-icon:brand-opensource s-tc:main-surface s-depth:text:100" style="font-size:200px"></i> --}}
                 </div>
             </div>
 

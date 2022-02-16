@@ -31,5 +31,5 @@ sugar frontstack.init my-cool-project'
     Version: <span class="s-tc:accent">{{ $packageJson->version }}</span> - License <a class="s-tc:accent"
         href="https://opensource.org/licenses/MIT" target="_blank">{{ $packageJson->license }}</a>
     <br />Fully open source
-    <i class="s-icon:opensource s-tc:accent"></i>
+    <i class="s-icon:brand-opensource s-tc:accent"></i>
 </p>

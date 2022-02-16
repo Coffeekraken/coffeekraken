@@ -15,6 +15,7 @@ __sFiltrableInputDefine(
         label: (item) => {
             return `${item.type} ${item.namespace}`;
         },
+        closeOnSelect: true,
         filtrable: ['namespace', 'name', 'type'],
         searchValuePreprocess: (value) => {
 
@@ -235,7 +236,7 @@ export default class CKSearch extends __SLitComponent {
         });
 
         this.addEventListener('selectItem', (e) => {
-            const item = e.detail;
+            const {item, $elm} = e.detail;
 
             if (item.type === 'category' || item.type === 'package') {
 
@@ -246,20 +247,20 @@ export default class CKSearch extends __SLitComponent {
 
                 if (item.menu?.slug) {
                     if (item.package.name !== window.packageJson.name) {
-                        document.dispatchEvent(new CustomEvent('location.href', {
+                        $elm.dispatchEvent(new CustomEvent('location.href', {
                             detail: `/${item.package.name}${item.menu.slug}`,
                             bubbles: true
                         }));
                         // document.location.href = `/${item.package.name}${item.menu.slug}`;
                     } else {
-                        document.dispatchEvent(new CustomEvent('location.href', {
+                        $elm.dispatchEvent(new CustomEvent('location.href', {
                             detail: item.menu.slug,
                             bubbles: true
                         }));
                         // document.location.href = item.menu.slug;
                     }
                 } else {
-                    document.dispatchEvent(new CustomEvent('location.href', {
+                    $elm.dispatchEvent(new CustomEvent('location.href', {
                         detail: `/api/${item.fullNamespace}`,
                         bubbles: true
                     }));

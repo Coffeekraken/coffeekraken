@@ -9,19 +9,24 @@
         @if (is_object($item))
             @if ($item->slug)
                 <li>
-                    <i class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent"></i>
-                    <a href="{{ $item->slug }}">
-                        {{ $item->name }}
-                    </a>
+                    <div class="s-flex">
+                        <a href="{{ $item->slug }}" class="s-link:stretch s-order:2">
+                            {{ $item->name }}
+                        </a>
+                        <i
+                            class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                        <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
+                        </div>
+                    </div>
                 </li>
             @else
                 <li id="{{ $subId }}" s-activate href="#{{ $subId }}" id="doc-{{ $subId }}" toggle
                     save-state trigger="click,event:actual">
-                    <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
-                    <i class="s-icon:folder"></i>
-                    <span>
+                    <div>
+                        <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active s-mie:10"></i>
+                        <i class="s-icon:folder s-mie:10"></i>
                         {{ $item->name }}
-                    </span>
+                    </div>
                     @if (!$item->tree)
                         @include('pages.markdown.menu', [
                         'menu' => $item,

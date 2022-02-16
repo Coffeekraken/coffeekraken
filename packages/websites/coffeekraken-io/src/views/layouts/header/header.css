@@ -46,10 +46,6 @@
         flex-grow: 1;
     }
 
-    a {
-        text-align: left;
-    }
-
     svg {
         height: 60px;
         width:140px;

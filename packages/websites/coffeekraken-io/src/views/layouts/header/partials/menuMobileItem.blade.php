@@ -18,10 +18,16 @@
                     <ul>
                         @foreach ($item as $subItem)
                             @if ($subItem->slug)
-                                <li>
-                                    <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}">
+                                <li class="s-flex s-position:relative">
+                                    <a href="{{ $subItem->slug }}" title="{{ $subItem->name }}"
+                                        class="s-link:stretch s-order:2">
                                         {!! str_replace('@coffeekraken/', '', $subItem->name) !!}
                                     </a>
+                                    <i
+                                        class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                                    <div
+                                        class="s-loader:spinner s-color:accent s-mie:10 s-float:right s-when:siblings:loading">
+                                    </div>
                                 </li>
                             @endif
                         @endforeach

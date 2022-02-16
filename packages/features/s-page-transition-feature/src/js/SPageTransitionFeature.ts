@@ -8,6 +8,8 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 export interface ISPageTransitionFeatureProps {
     patchBody: boolean;
     scrollTop: boolean;
+    before: Function;
+    after: Function;
 }
 
 /**
@@ -60,40 +62,62 @@ export default class SPageTransitionFeature extends __SFeature {
             if (!e.state?.html) return;
             if (e.state.containerId) {
                 const $elm = document.querySelector(`[s-page-transition-container="${e.state.containerId}"]`);
+                if (!$elm) return;
                 $elm.innerHTML = e.state.html;
-                __scrollTo($elm);
+                __scrollTo(<HTMLElement>$elm);
             } else {
                 this.node.innerHTML = e.state.html;
-                __scrollTo($elm);
+                __scrollTo(this.node);
             }
         });
 
         // listen for "location.href" event
         window.addEventListener('location.href', (e) => {
-            this.transitionTo(e.detail);
+            this.transitionTo((<CustomEvent>e).detail, e.target);
         }); 
 
         // listen for clicks to prevent default behaviors
         window.addEventListener('click', (e) => {   
-            const $target = <HTMLElement>e.target;            
-            if ($target.hasAttribute('href')) {
+            const $target = <HTMLElement>e.target;  
+            // @ts-ignore          
+            if ($target.hasAttribute('href') && !$target.getAttribute('href').match(/^https?:\/\//) && !$target.hasAttribute('target')) {
                 e.preventDefault();
-                this.transitionTo(<string>$target.getAttribute('href'));
+                this.transitionTo(<string>$target.getAttribute('href'), $target);
             } else {
-                const $upHrefElm = __querySelectorUp($target, '[href]');
+                const $upHrefElm = __querySelectorUp($target, 'a[href]');
                 if ($upHrefElm) {
                     e.preventDefault();
-                    this.transitionTo(<string>$upHrefElm.getAttribute('href'));
+                    this.transitionTo(<string>$upHrefElm.getAttribute('href'), $upHrefElm);
                 }
             }
         });
 
     }
     mount() {}
-    transitionTo(url: string): Promise<void> {
+    transitionTo(url: string, $source): Promise<void> {
         return new Promise(async (resolve, reject) => {
 
+            // dispatch an event
+            $source.dispatchEvent(new CustomEvent('page-transition-start', {
+                detail: {
+                    url
+                },
+                bubbles: true
+            }));
+
+            // add classes
             document.body.classList.add('s-page-transition');
+            document.body.classList.add('loading');
+            document.body.setAttribute('loading', true);
+            $source.classList.add('s-page-transition-source');
+            $source.classList.add('loading');
+            $source.setAttribute('loading', true);
+
+            // before callback
+            this.props.before?.({
+                url,
+                $source
+            });
 
             const request = new __SRequest({
                 url
@@ -121,10 +145,12 @@ export default class SPageTransitionFeature extends __SFeature {
                 const $newBody = dom.querySelector('body');
                 if ($inPageBody && $newBody) {
                     const newAttrNames: string[] = [];
+                    // @ts-ignore
                     for (let attr of $newBody.attributes) {
                         $inPageBody.setAttribute(attr.name, attr.value);
                         newAttrNames.push(attr.name);
                     }
+                    // @ts-ignore
                     for (let attr of $inPageBody.attributes) {
                         if (!newAttrNames.includes(attr.name)) {
                             $inPageBody.removeAttribute(attr.name);
@@ -152,10 +178,31 @@ export default class SPageTransitionFeature extends __SFeature {
             
             // scrolltop if needed
             if (this.props.scrollTop) {
+                // @ts-ignore
                 __scrollTo($inPageScopedContainer ?? $inPageContainer);
             }
 
+            // remove class on body
             document.body.classList.remove('s-page-transition');
+            document.body.classList.remove('loading');
+            document.body.removeAttribute('loading');
+            $source.classList.remove('s-page-transition-source');
+            $source.classList.remove('loading');
+            $source.removeAttribute('loading');
+
+            // before callback
+            this.props.after?.({
+                url,
+                $source
+            });
+
+            // dispatch an event
+            $source.dispatchEvent(new CustomEvent('page-transition-end', {
+                detail: {
+                    url
+                },
+                bubbles: true
+            }));
 
         });
     }

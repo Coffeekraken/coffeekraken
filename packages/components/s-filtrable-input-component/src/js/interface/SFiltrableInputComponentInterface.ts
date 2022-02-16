@@ -85,6 +85,11 @@ export default class SFiltrableInputComponentInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
+            closeOnSelect: {
+                description: 'Specify if you wantr to close the list when selecting an item',
+                type: 'Boolean',
+                default: false
+            },
             notSelectable: {
                 description:
                     'Specify if you want the items to be not selectable',

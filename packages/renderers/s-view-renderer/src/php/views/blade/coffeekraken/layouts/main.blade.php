@@ -11,20 +11,26 @@
 <?php
 $settings = $settings ? json_decode($settings) : null;
 $package = $package ? json_decode($package) : null;
-$metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas->og : null;
+$metasOg = ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->og) ? $frontspec->metas->og : null;
 ?>
 <!doctype html>
-<html lang="{{ ($metas->lang ? $metas->lang : $frontspec->metas->lang) ? $frontspec->metas->lang : 'en' }}">
+<html
+    lang="{{ ($frontspec->metas->lang? $frontspec->metas->lang: $frontspec->metas->lang)? $frontspec->metas->lang: 'en' }}">
 
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="chrome=1">
-    <meta name="description"
-        content="{{ ($metas->description? $metas->description: $frontspec->metas->description)? $frontspec->metas->description: '' }}">
+    @if ($frontspec->metas->description)
+        <meta name="description" content="{{ $frontspec->metas->description }}">
+    @endif
     <meta name="robots" content="{{ $env === 'production' ? 'all' : 'noindex, nofollow' }}" />
     <meta name="viewport" content="width=device-width, minimum-scale=1, maximum-scale=1" />
+    @if ($frontspec->metas->themeColor)
+        <meta name="theme-color" content="{{ $frontspec->metas->themeColor }}" />
+    @endif
+
     <title>
-        {{ (($title? $title: $metas->title)? $metas->title: $frontspec->metas->title)? $frontspec->metas->title: $package->name }}
+        {{ (($title? $title: $frontspec->metas->title)? $frontspec->metas->title: $frontspec->metas->title)? $frontspec->metas->title: $package->name }}
     </title>
 
     @if ($metasOg)
@@ -41,7 +47,8 @@ $metasOg = ($metas->og ? $metas->og : $frontspec->metas->og) ? $frontspec->metas
             @if ($css->raw)
                 {!! $css->raw !!}
             @elseif (Sugar\is\absolutePath($css->src) || Sugar\is\url($css->src))
-                <link rel="stylesheet" id="{{ $name }}" href="{{ Sugar\string\replaceTokens($css->src) }}" />
+                <link rel="stylesheet" id="{{ $name }}"
+                    href="{{ Sugar\string\replaceTokens($css->src) }}" />
             @else
                 <link rel="stylesheet" id="{{ $name }}"
                     href="/{{ Sugar\string\replaceTokens($css->src) }}" />

@@ -1,4 +1,4 @@
-@sugar.highlightjs.theme;
+/* @sugar.highlightjs.theme; */
 
 :host {
     display: block;
@@ -48,6 +48,11 @@
     .s-code-example--more & {
         max-height: 99999px !important;
     }
+
+    @sugar.media(mobile) {
+        --paddingBlock: calc(var(--paddingBlock) * 0.5);
+    }
+
 }
 :not([bare]) .s-code-example__content {
     transition: sugar.theme(ui.code.transition);

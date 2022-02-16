@@ -31,7 +31,15 @@ export default class SPageTransitionFeatureInterface extends __SInterface {
                 description: 'Specify if you want to scroll to the top of the updated element after a transition',
                 type: 'Boolean',
                 default: true
-            }
+            },
+            before: {
+                description: 'Specify a function to run before the transition',
+                type: 'Function'
+            },
+            after: {
+                description: 'Specify a function to run after the transition',
+                type: 'Function'
+            },
         };
     }
 }

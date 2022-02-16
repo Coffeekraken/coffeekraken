@@ -94,6 +94,18 @@ export default function (env, config) {
         },
 
         helpers: {
+             /**
+              * @name            states
+              * @namespace       config.themeBase.helpers
+              * @type            String[]
+              * @default         ['mounted','active','loading']
+              *
+              * Specify some states for which you want to generate helper classes like `s-when:mounted`, `s-until:loading`, etc...
+              *
+              * @since       2.0.0
+              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+              */
+            states: ['mounted','active','loading'],
             clearfix: {
                 /**
                  * @name            default
@@ -139,6 +151,20 @@ export default function (env, config) {
                  */
                 count: 10,
             },
+            order: {
+                /**
+                 * @name               count
+                 * @namespace           config.themeBase.helpers.order
+                 * @type                Number
+                 * @default             20
+                 *
+                 * Specify how many s-order:{i} classes you want to generate. By default this count is set to 20.
+                 *
+                 * @since           2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                count: 20,
+            }
         },
 
         layout: {

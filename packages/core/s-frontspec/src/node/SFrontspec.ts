@@ -99,7 +99,7 @@ export default class SFrontspec extends __SPromise {
                 frontspecJson,
             );
 
-            res.metas = {
+            res.frontspec = {
                 path: frontspecPath,
                 folderPath: __folderPath(frontspecPath),
             };

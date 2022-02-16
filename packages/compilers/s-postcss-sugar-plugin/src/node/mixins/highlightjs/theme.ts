@@ -54,6 +54,13 @@ export default function ({
     color: sugar.color(current, surfaceForeground);
     line-height: 1.5 !important;
 
+    @sugar.media(mobile) {
+        padding: clamp(10px, calc(sugar.theme(ui.code.paddingBlock) * 0.5), 100px) clamp(10px, calc(sugar.theme(ui.code.paddingInline) * 0.5), 100px);
+        overflow: auto !important;
+        white-space: pre !important;
+        @sugar.scrollbar;
+    }
+
     .hljs-sugar-function {
         color: sugar.color(accent, --lighten 20);
         border-bottom: 1px solid sugar.color(accent, --lighten 20);

@@ -88,12 +88,12 @@ export default class SSugarConfig extends __SClass {
      */
     static registerFolder(
         path: string,
-        scope?: 'default' | 'module' | 'repo' | 'package' | 'user',
+        scope?: 'default' | 'module' | 'repo' | 'package' | 'user' = 'default',
         packageName?: string,
     ): void {
         this._registeredConfigFolderPaths.push({
             path,
-            scope: scope ?? 'default',
+            scope,
             packageName,
         });
 

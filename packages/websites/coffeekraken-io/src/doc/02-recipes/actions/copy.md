@@ -18,12 +18,6 @@
 
 This action allows you to copy files/folder from a source (`src`), to a destination (`dest`).
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -57,5 +51,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.cli.node.fs.interface.SCliFsCopyParamsInterface' }}
 
 {{/layout-doc }}

@@ -3,7 +3,6 @@
     "config": {
         "folders": [
             {
-                "scope": "default",
                 "path": "./src/config"
             }
         ]

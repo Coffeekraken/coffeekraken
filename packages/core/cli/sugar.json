@@ -1,11 +1,8 @@
 {
     "config": {
-        "folders": [
-            {
-                "scope": "default",
-                "path": "./src/config"
-            }
-        ]
+        "folders": [{
+            "path": "./src/config"
+        }]
     },
     "cli": [
         {

@@ -2,8 +2,7 @@
   "config": {
     "folders": [
       {
-        "path": "./src/config",
-        "scope": "default"
+        "path": "./src/config"
       }
     ]
   },

@@ -680,6 +680,70 @@ export default function (env, config) {
                     '../partials/config/config.html',
                 ),
             },
+            recipesList: {
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.partials.recipesList
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../partials/recipesList/recipesList.md')
+                 *
+                 * Specify the "markdown" template for the "recipesList" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/recipesList/recipesList.md',
+                ),
+                /**
+                 * @name            html
+                 * @namespace       config.markdownBuilder.partials.recipesList
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../partials/recipesList/recipesList.md')
+                 *
+                 * Specify the "html" template for the "recipesList" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                html: __path.resolve(
+                    __dirname(),
+                    '../partials/recipesList/recipesList.md',
+                ),
+            },
+            recipe: {
+                /**
+                 * @name            markdown
+                 * @namespace       config.markdownBuilder.partials.recipe
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../partials/recipe/recipe.md')
+                 *
+                 * Specify the "markdown" template for the "recipe" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                markdown: __path.resolve(
+                    __dirname(),
+                    '../partials/recipe/recipe.md',
+                ),
+                /**
+                 * @name            html
+                 * @namespace       config.markdownBuilder.partials.recipe
+                 * @type            String
+                 * @default         __path.resolve(__dirname(),'../partials/recipe/recipe.md')
+                 *
+                 * Specify the "html" template for the "recipe" partial
+                 *
+                 * @since       2.0.0
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                html: __path.resolve(
+                    __dirname(),
+                    '../partials/recipe/recipe.md',
+                ),
+            },
             docMenu: {
                 /**
                  * @name            markdown

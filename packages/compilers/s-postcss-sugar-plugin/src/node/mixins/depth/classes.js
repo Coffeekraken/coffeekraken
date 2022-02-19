@@ -59,8 +59,8 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         ${depthsArray
         .map((depthName) => {
         return ` * @example          html        Depth ${depthName}
-                <div class="s-depth:${depthName} s-bg:main-surface s-text:center s-radius s-p:30">
-                    <span class="s-depth:text:${depthName}">s-depth:${depthName}    
+                <div class="s-depth:${depthName} s-bg:main s-text:center s-radius s-p:30">
+                    <span class="s-depth:text:${depthName}">s-depth:${depthName}</span>
                 </div>`;
     })
         .join('\n')}

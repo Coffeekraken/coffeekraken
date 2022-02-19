@@ -18,12 +18,6 @@
 
 This action allows you to install your dependencies like the `node_modules` ones as well as the `composer` if present.
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.cli.node.package.interface.SCliPackageInstallParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -53,5 +47,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.cli.node.package.interface.SCliPackageInstallParamsInterface' }}
 
 {{/layout-doc }}

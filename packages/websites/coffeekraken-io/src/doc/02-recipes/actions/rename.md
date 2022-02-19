@@ -21,14 +21,6 @@ This action allows you to rename a package. This will take care of:
 1. Renaming the folder we're in
 2. Renaming the package inside the `package.json` file
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.cli.node.package.interface.SCliPackageRenameParamsInterface' }}
-
-> If you don't specify some parameters in your recipe, the user will be prompted for them...
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -61,5 +53,13 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.cli.node.package.interface.SCliPackageRenameParamsInterface' }}
+
+> If you don't specify some parameters in your recipe, the user will be prompted for them...
 
 {{/layout-doc }}

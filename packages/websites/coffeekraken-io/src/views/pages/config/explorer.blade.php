@@ -19,9 +19,12 @@
                     @foreach ($configFiles as $file)
 
                         <li id="{{ $subId }}">
-                            <i class="s-icon:{{ $icon ? $icon : 'file-md' }} s-tc:accent"></i>
-                            <a
-                                href="/config/explorer/{{ $file->name }}">{{ str_replace('.config.js', '', $file->name) }}</a>
+                            <div class="s-flex">
+                                <a class="s-link:stretch s-order:2"
+                                    href="/config/explorer/{{ $file->name }}">{{ str_replace('.config.js', '', $file->name) }}</a>
+                                <i class="s-icon:file-js }} s-tc:accent s-until:sibling:loading s-mie:10"></i>
+                                <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
+                                </div>
                         </li>
 
                     @endforeach

@@ -86,8 +86,9 @@ export default function ({
         & > * {
             display: block !important;
             padding-inline-start: 1em;
-            margin-bottom: 1em;
-            margin-top: 1em;
+            margin-bottom: 0.3em;
+            margin-top: 0.3em;
+            line-height: 1.8;
         }
         `);
     }

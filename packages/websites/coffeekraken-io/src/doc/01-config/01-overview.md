@@ -16,9 +16,9 @@
 
 # Configuration overview
 
-All the Coffeekraken echosystem is builded on the same simple and efficient configuration principle.
+All the Coffeekraken ecosystem is build on the same simple and efficient configuration principle.
 
-> The package that correspond to this system is [@coffeekraken/s-sugar-config](https:/www.npmjs.com/package/@coffeekraken/s-sugar-config)
+> The package that correspond to this system is [@coffeekraken/s-sugar-config]/@coffeekraken/s-sugar-config/doc/readme)
 
 This configuration system has as it's center principles these points:
 
@@ -38,7 +38,7 @@ This configuration system has as it's center principles these points:
 
 #### Each configurations are simple js files:
 
--   Depending on the "level", the storage path is different:
+-   Depending on the `level`, the storage path is different:
     -   **default**: `src/config/*.config.js`
     -   **module**: `node_modules/*/src/config/*.config.js`
     -   **repo/package**: `.sugar/*.config.js`
@@ -63,7 +63,7 @@ Here's a simple package structure that integrate the configurations files.
 
 To access your configuration, simply install the `@coffeekraken/s-sugar-config` package like so:
 
-```shell
+```bash
 # Using npm
 npm i @coffeekraken/s-sugar-config
 # Using yarn
@@ -76,8 +76,8 @@ Then, here's an example to access the "storage" configurations. (more on built-i
 // import the package
 import **SSugarConfig from '@coffeekraken/s-sugar-config';
 // access your configurations using dot pathes like:
-**SSugarConfig.get('storage.package.rootDir');
-\_\_SSugarConfig.get('storage.src.jsDir');
+__SSugarConfig.get('storage.package.rootDir');
+__SSugarConfig.get('storage.src.jsDir');
 // etc...
 ```
 

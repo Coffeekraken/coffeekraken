@@ -20,12 +20,6 @@ This action allows you to build, compress and optimize your images using our `@c
 
 > For more informations about our images builder, please check the [@coffeekraken/s-images-builder documentation](/@coffeekraken/s-images-builder/doc/readme)
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -52,5 +46,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.s-images-builder.node.interface.SImagesBuilderBuildParamsInterface' }}
 
 {{/layout-doc }}

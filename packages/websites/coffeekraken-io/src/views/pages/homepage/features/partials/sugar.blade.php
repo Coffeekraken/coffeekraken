@@ -26,7 +26,7 @@
                     forget about
                     it and import your own tools.
                 </p>
-                <a class="s-btn s-color:accent" href="/#get-started" title="Get started!">
+                <a class="s-btn s-color:accent" href="/@coffeekraken/sugar/doc/readme" title="Get started with Sugar!">
                     Discover that Sugar has to offer
                 </a>
             </div>
@@ -150,7 +150,7 @@
                     class="s-tc:complementary">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/doc/get-started/get-started" title="Get started!">
+            <a class="s-btn s-color:complementary" href="/@coffeekraken/sugar/doc/readme" title="Get started!">
                 Discover all of what sugar has to offer!
             </a>
         </div>

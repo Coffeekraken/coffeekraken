@@ -14,6 +14,6 @@
 
 {{#> layout-doc }}
 
-# Lit Element recipe `litElement`
+{{> recipe config.frontstack.recipes.litElement id='litElement' }}
 
 {{/layout-doc }}

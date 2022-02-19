@@ -35,15 +35,15 @@ that directly integrate all access to your toolchain power like:
 
 To start using and discover what the CLI can do for your, the easiest way it to simple call it like so:
 
-```shell
-sugar
+```bash
+sugar 
 ```
 
 > calling sugar this way will start a simple interactive process that will let you discover his features
 
 You can as well access to the help by taping:
 
-```shell
+```bash
 sugar --help
 ```
 

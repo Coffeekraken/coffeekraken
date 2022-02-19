@@ -20,12 +20,6 @@ This action allows you to start a `development` server that will handle things l
 
 > For more informations about our frontend server, please check the [@coffeekraken/s-frontend-server documentation](/@coffeekraken/s-frontend-server/doc/readme)
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -52,5 +46,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.s-frontend-server.node.interface.SFrontendServerStartParamsInterface' }}
 
 {{/layout-doc }}

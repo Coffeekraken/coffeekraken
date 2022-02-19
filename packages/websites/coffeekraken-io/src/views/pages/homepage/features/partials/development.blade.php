@@ -28,11 +28,14 @@
                 <h5 class="s-typo:h4 s-mbe:30">
                     <span class="s-tc:accent">Speed up</span><br />your process
                 </h5>
-                <p class="s-typo:p ">
+                <p class="s-typo:p s-mbe:30">
                     Create projects using our totally customizable <span class="s-typo:code">recipes</span> that let
                     you <span class="s-tc:accent">start as soom as possible</span> with production grade ready
                     capabilities.
                 </p>
+                <a class="s-btn s-color:accent" href="/@coffeekraken/cli/doc/readme" title="More on the Sugar CLI">
+                    Discover more about the Sugar CLI
+                </a>
             </div>
             <div>
                 <div class="s-mie:-50 @mobile s-mie:0">
@@ -54,12 +57,15 @@
                 <h5 class="s-typo:h4 s-mbe:30">
                     All the <span class="s-tc:accent">sugar</span> power<br />ready to go!
                 </h5>
-                <p class="s-typo:p ">
+                <p class="s-typo:p s-mbe:30">
                     Make use of the power of the <span class="s-typo:code">Sugar</span> toolkit to enhance your <span
                         class="s-typo:code">js/ts</span> and <span class="s-typo:code">node</span> development
                     experience as well as our powerfull <span class="s-typo:code">postcss</span> plugin to write nice
                     and maintainable css!
                 </p>
+                <a class="s-btn s-color:complementary" href="/@coffeekraken/sugar/doc/readme" title="More on Sugar">
+                    Discover more Sugar
+                </a>
             </div>
             <div>
                 <div class="s-mis:-50 @mobile s-mis:0">
@@ -87,13 +93,17 @@
                 <h5 class="s-typo:h4 s-mbe:30">
                     Development<br /><span class="s-tc:accent">server</span>
                 </h5>
-                <p class="s-typo:p ">
+                <p class="s-typo:p s-mbe:30">
                     Start working as soon as possible with our development server that will gives you the power of the
                     <span class="s-typo:code">live assets compilation</span> as well as the possibility for you to
                     write your views using technologies
                     like <span class="s-typo:code">blade</span>, <span class="s-typo:code">twig</span>, and even
                     more to come...
                 </p>
+                <a class="s-btn s-color:accent" href="/@coffeekraken/s-frontend-server/doc/readme"
+                    title="More on the Coffeekraken frontend server">
+                    Discover more on our frontend server
+                </a>
             </div>
             <div>
                 <div>
@@ -229,13 +239,14 @@
 
         <div class="s-text:center s-pbs:50">
             <p class="s-typo:lead s-mi:auto s-mbe:30">
-                This is <span class="s-tc:complementary">just a sneak peak</span> of what you can leverage in the sugar
-                toolkit.<br>
-                Don't be afraid, as usual you can take from it only what you need and <span class="s-tc:accent">learn
+                This is <span class="s-tc:complementary">just a sneak peak</span> of what our built-in development stack
+                has to offer. Don't be afraid, as usual
+                you can take from it only what you need and <span class="s-tc:accent">learn
                     the rest step by step</span>.
             </p>
-            <a class="s-btn s-color:complementary" href="/doc/get-started/get-started" title="Get started!">
-                Discover all of what sugar has to offer!
+            <a class="s-btn s-color:complementary" href="/doc/recipes/what-are-recipes"
+                title="More on what Coffeekraken recipes are">
+                Discover more on recipes!
             </a>
         </div>
 

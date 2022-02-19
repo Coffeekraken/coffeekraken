@@ -20,10 +20,11 @@ sugar frontstack.init my-cool-project'
     ]])
 </div> --}}
 
-<a class="s-btn s-color:accent s-mie:20" href="/#get-started" title="Get started!">
+<a class="s-btn s-color:accent s-mie:20" href="/doc/get-started/get-started" title="Coffeekraken get started!">
     Get started!
 </a>
-<a class="s-btn s-color:complementary" href="/#join-us" title="Join us!">
+<a class="s-btn s-color:complementary" href="https://discord.com/channels/940362961682333767/940362962223378494"
+    title="Join us on Discord!">
     <i class="s-icon:discord"></i> Join us on discord
 </a>
 

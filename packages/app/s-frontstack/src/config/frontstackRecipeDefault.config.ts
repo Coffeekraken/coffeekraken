@@ -96,6 +96,8 @@ export default function (env, config) {
                      */
                     copy: {
                         extends: 'copy',
+                        title: 'Copy default template',
+                        description: 'Copy the default template files',
                         params: {
                             'src': __path.resolve(__dirname(), `../templates/default/.`),
                             'dest': `${process.cwd()}/default`,
@@ -114,6 +116,8 @@ export default function (env, config) {
                      */
                     rename: {
                         extends: 'rename',
+                        title: 'Rename default template package',
+                        description: 'Renamt the default template package with the user input',
                         params: {
                         }
                     },
@@ -129,6 +133,8 @@ export default function (env, config) {
                      */
                     addSugarJson: {
                         extends: 'addSugarJson',
+                        title: 'Add the sugar.json file',
+                        description: 'Add the sugar.json file',
                         params: {
                             recipe: 'default'
                         }
@@ -145,6 +151,8 @@ export default function (env, config) {
                      */
                     addManifestJson: {
                         extends: 'addManifestJson',
+                        title: 'Add manifest.json file',
+                        description: 'Add the manifest.json file',
                         params: {}
                     },
                     /**
@@ -159,6 +167,8 @@ export default function (env, config) {
                      */
                     installDependencies: {
                         extends: 'installDependencies',
+                        title: 'Install the dependencies',
+                        description: 'Install the package dependencies (npm,composer)',
                         params: {}
                     }
                 },

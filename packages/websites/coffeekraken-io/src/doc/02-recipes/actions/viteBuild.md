@@ -22,12 +22,6 @@ Note that this embed the `@coffeekraken/s-postcss-sugar-plugin` plugin so you ca
 
 > For more informations about our viteBuildjs integration, please check the [@coffeekraken/s-vite documentation](/@coffeekraken/s-vite/doc/readme)
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -55,5 +49,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.s-vite.node.interface.SViteBuildParamsInterface' }}
 
 {{/layout-doc }}

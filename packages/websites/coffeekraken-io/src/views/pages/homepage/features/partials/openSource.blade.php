@@ -17,10 +17,11 @@
                             use under the hood</a>. Without them the web development wouldn't be so exciting...
                     </p>
 
-                    <a class="s-btn s-color:complementary s-mie:20 @mobile s-mbe:20 s-mie:0">
+                    <a href="https://discord.com/channels/940362961682333767/940362962223378494"
+                        class="s-btn s-color:complementary s-mie:20 @mobile s-mbe:20 s-mie:0">
                         <i class="s-icon:discord"></i> Join us on Discord
                     </a>
-                    <a class="s-btn s-color:accent">
+                    <a href="https://github.com/Coffeekraken/coffeekraken" class="s-btn s-color:accent">
                         <i class="s-icon:github"></i> Join us on Github
                     </a>
                 </div>

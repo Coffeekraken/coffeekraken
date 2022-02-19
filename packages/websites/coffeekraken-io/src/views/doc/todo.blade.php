@@ -14,7 +14,7 @@
                     $todoColor = 'error';
                 }
             @endphp
-            <li class="s-typo:p">
+            <li>
                 <span class="s-tooltip-container">
                     <i class="s-icon:todo s-tc:{{ $todoColor }}"></i>
                     <div class="s-tooltip:nowrap">

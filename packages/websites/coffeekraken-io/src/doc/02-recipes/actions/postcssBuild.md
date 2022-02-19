@@ -20,12 +20,6 @@ This action allows you to build your postcss files down to a production ready cs
 
 > For more informations about our postcss builder, please check the [@coffeekraken/s-postcss-builder documentation](/@coffeekraken/s-postcss-builder/doc/readme)
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -52,5 +46,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.s-postcss-builder.node.interface.SPostcssBuilderBuildParamsInterface' }}
 
 {{/layout-doc }}

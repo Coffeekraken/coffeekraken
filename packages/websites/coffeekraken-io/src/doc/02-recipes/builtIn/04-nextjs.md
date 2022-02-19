@@ -1,11 +1,11 @@
 <!--
 /**
- * @name            More...
- * @namespace       doc.markdown
+ * @name            NextJs
+ * @namespace       doc.recipes.builtIn
  * @type            Markdown
  * @platform        md
  * @status          stable
- * @menu            Documentation / Markdown           /doc/markdown/more
+ * @menu            Documentation / Recipes / Built-in           /doc/recipes/built-in/nextjs
  *
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -14,6 +14,6 @@
 
 {{#> layout-doc }}
 
-# More on markdowns
+{{> recipe config.frontstack.recipes.nextJs id='nextJs' }}
 
 {{/layout-doc }}

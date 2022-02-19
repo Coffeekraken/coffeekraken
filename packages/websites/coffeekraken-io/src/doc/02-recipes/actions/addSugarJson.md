@@ -18,12 +18,6 @@
 
 This action allows you to make sure the current project has a `sugar.json` file.
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -55,5 +49,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.cli.node.add.interface.SCliAddSugarJsonParamsInterface' }}
 
 {{/layout-doc }}

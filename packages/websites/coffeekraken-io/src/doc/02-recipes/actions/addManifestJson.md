@@ -18,12 +18,6 @@
 
 This action allows you to make sure the current project has a `manifest.json` file. If not, it will create it using the informations found in the `package.json` file.
 
-### Parameters
-
-Here's the parameters that you can pass to this action:
-
-{{> interface namespace='@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface' }}
-
 ### Example
 
 Here's an example of usage in a fictive recipe config file:
@@ -53,5 +47,11 @@ export default function(env, config) {
     }
 }
 ```
+
+### Parameters
+
+Here's the parameters that you can pass to this action:
+
+{{> interface namespace='@coffeekraken.cli.node.add.interface.SCliAddManifestJsonParamsInterface' }}
 
 {{/layout-doc }}

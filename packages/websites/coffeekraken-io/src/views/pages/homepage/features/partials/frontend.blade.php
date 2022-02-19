@@ -19,17 +19,17 @@
                         </h4>
                     </div>
                     <ol class="s-list:ol s-color:accent s-mbe:50">
-                        <li class="s-typo:p">
+                        <li>
                             Powerfull and <span class="s-typo:code">pleasant</span> classnames syntax
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Color management simplified
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Quick compilation through <a class="s-typo:a" href="https://vitejs.dev/"
                                 title="ViteJs" target="_blank">ViteJs</a>
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Automatic icons integration from <a class="s-typo:code" href="https://fontawesome.com/"
                                 title="Fontawesome" target="_blank">Fontawesome</a>, <span
                                 class="s-typo:code">filesystem</span>
@@ -99,16 +99,16 @@
                         </h4>
                     </div>
                     <ol class="s-list:ol s-color:accent s-mbe:50">
-                        <li class="s-typo:p">
+                        <li>
                             Easy and Powerfull <span class="s-typo:code">color management</span>
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Based on powerfull configuration system
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Colors function to apply and tweak colors
                         </li>
-                        <li class="s-typo:p">
+                        <li>
                             Easy <span class="s-typo:code">dark mode</span> support
                         </li>
                     </ol>
@@ -151,18 +151,18 @@
                             </h4>
                         </div>
                         <ol class="s-list:ol s-color:accent s-mbe:50">
-                            <li class="s-typo:p">
+                            <li>
                                 <span class="s-typo:code">No more</span> pre-defined columns
                             </li>
-                            <li class="s-typo:p">
+                            <li>
                                 Auto-generated classes for your templates
                             </li>
-                            <li class="s-typo:p">
+                            <li>
                                 Powerfull layout system to handle <span class="s-typo:code">simple</span> and
                                 <span class="s-typo:code">complex</span>
                                 layouts
                             </li>
-                            <li class="s-typo:p">
+                            <li>
                                 Pre defined layouts as well as full custom capabilities
                             </li>
                         </ol>

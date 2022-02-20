@@ -9,11 +9,9 @@ export default {
             },
         },
         '/config/explorer': {
-            handler: 'view',
+            handler: 'redirect',
             request: {
-                params: {
-                    '0': 'pages/config/explorer',
-                },
+                redirect: '/config/explorer/docmap.config.js'
             },
         },
         '/doc/api': {

@@ -1,7 +1,7 @@
 s-code-example {
     display: block;
     position: relative;
-    @sugar.theme (dark);
+    /* @sugar.theme (dark); */
 
     /* @sugar.shadow.gradient (0, 10px, 10px, 1, sugar.color(accent), sugar.color(complementary)) {
         width: calc(100% - 40px);
@@ -29,7 +29,6 @@ s-code-example {
     background: sugar.color(main, --lighten 46);
     border-radius: sugar.border.radius();
     padding: sugar.padding(30);
-    @sugar.depth (100);
     text-align: center;
 
     @sugar.theme.when dark {

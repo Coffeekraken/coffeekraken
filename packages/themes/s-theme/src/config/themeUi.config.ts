@@ -102,14 +102,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.default
              * @type          String
-             * @default      50
+             * @default      [theme.depth.default]
              *
              * Specify the default depth for ui's
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: 50,
+            depth: '[theme.depth.default]',
 
             rhythmVertical: {
                 /**
@@ -239,14 +239,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      0
+             * @default      [theme.ui.default.depth]
              *
              * Specify the default depth for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: 0,
+            depth: '[theme.ui.default.depth]',
             rhythmVertical: {
                 /**
                  * @name          margin-bottom
@@ -1803,7 +1803,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            bulletChar: '●',
+            bulletChar: '-',
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.list
@@ -2035,7 +2035,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: 0,
+            depth: '[theme.ui.default.depth]',
             /**
              * @name          outline
              * @namespace     config.themeUi.tabs
@@ -2597,7 +2597,7 @@ export default (env, config) => {
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: 0,
+            depth: '[theme.ui.default.depth]',
             /**
              * @name          rhythmVertical
              * @namespace     config.themeUi.table
@@ -2700,7 +2700,7 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.badge
              * @type          String
-             * @default      [theme.ui.default.depth]
+             * @default      0
              *
              * Specify the default depth for badge items
              *

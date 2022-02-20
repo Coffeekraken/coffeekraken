@@ -13,7 +13,7 @@
         }
     @endphp
 
-    <div class="s-bg:main-surface s-p:30 s-radius s-depth:100 s-flex:align-center s-mbs:50 @mobile s-display:block">
+    <div class="s-bg:main-surface s-p:30 s-radius s-border:10 s-flex:align-center s-mbs:50 @mobile s-display:block">
         <div class="s-flex-item:grow">
             @if ($block->platform)
                 <span class="@mobile s-mie:20">

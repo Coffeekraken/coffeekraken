@@ -138,13 +138,14 @@ export default class SFloatingFeature extends __SFeature {
             }
         }
 
+        // first update
         update();
 
+        // update when parent scrolling element resize or scroll
         [
             ...getScrollParents(this._$ref),
             ...getScrollParents(this.node),
         ].forEach((el) => {
-            console.log(el);
             el.addEventListener('scroll', update);
             el.addEventListener('resize', update);
         });

@@ -8,7 +8,7 @@
 }
 
 .bkg {
-    position: fixed;
+    position: absolute;
     z-index: -1;
     top: 15%;
     left: 100%;
@@ -39,13 +39,13 @@
 }
 [s-sugar]:not(#homepage) .bkg,
 .scrolled .bkg {
-    opacity: 0.3;
+    opacity: 0;
 }
 [s-sugar]:not(#homepage) ,
 .scrolled {
     @sugar.theme.when dark {
         .bkg {
-            opacity: 0.02;
+            opacity: 0;
     }
     }
 }

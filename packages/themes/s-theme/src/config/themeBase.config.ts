@@ -183,6 +183,20 @@ export default function (env, config) {
                      */
                     'max-width': '1280px',
                 },
+                wide: {
+                    /**
+                     * @name                max-width
+                     * @namespace           config.themeBase.layout.container.wide
+                     * @type                String
+                     * @default             1640px
+                     *
+                     * Specify the "wide" container max-width for your theme
+                     *
+                     * @since               2.0.0
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     */
+                    'max-width': '1640px',
+                },
                 full: {
                     /**
                      * @name                max-width
@@ -1595,14 +1609,14 @@ export default function (env, config) {
              * @name                default
              * @namespace           config.themeBase.depth
              * @type                String
-             * @default             [theme.depth.50]
+             * @default             [theme.depth.0]
              *
              * Specify the default depth for your theme
              *
              * @since               2.0.0
              * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            default: '[theme.depth.50]',
+            default: '[theme.depth.0]',
             /**
              * @name                0
              * @namespace           config.themeBase.depth
@@ -2773,14 +2787,14 @@ export default function (env, config) {
                  * @name              default
                  * @namespace         config.themeBase.border.radius
                  * @type              Number
-                 * @default           10px
+                 * @default           5px
                  *
-                 * Specify the "0" border radius
+                 * Specify the "default" border radius
                  *
                  * @since             2.0.0
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
-                default: '10px',
+                default: '5px',
 
                 /**
                  * @name              0
@@ -3626,7 +3640,7 @@ export default function (env, config) {
                  * @name          desktop
                  * @namespace     config.themeBase.media.queries
                  * @type          Object
-                 * @default       {'min-width': 1280, 'max-width': null}
+                 * @default       {'min-width': 1280, 'max-width': 2047}
                  *
                  * Specify the media query arguments needed to target desktop
                  *
@@ -3635,6 +3649,22 @@ export default function (env, config) {
                  */
                 desktop: {
                     'min-width': 1280,
+                    'max-width': 2047,
+                },
+
+                /**
+                 * @name          wide
+                 * @namespace     config.themeBase.media.queries
+                 * @type          Object
+                 * @default       {'min-width': 2048, 'max-width': null}
+                 *
+                 * Specify the media query arguments needed to target wide
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                wide: {
+                    'min-width': 2048,
                     'max-width': null,
                 },
             },

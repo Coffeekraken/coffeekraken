@@ -116,12 +116,12 @@ export default function ({
                     pointer-events: none;
                 }
             `);
+            break;
             case 'solid':
             default:
                 vars.push(`
                      color: sugar.color(current, foreground);
                      background-color: sugar.color(current);
-                     text-shadow: 0 0 3px sugar.color(current, --darken 10);
                 `);
                 break;
         }

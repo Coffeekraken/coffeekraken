@@ -18,12 +18,10 @@
 
 Out of the box, the `postcssSugarPlugin` can generate a lot of helper classes based for the most part on your theme configuration. Here's a small non-exhaustive list of classes that are available:
 
--   Alignement
-    -   `s-align:abs-left`
-    -   `s-align:abs-right`,
-    -   `s-align:abs-top`,
-    -   `s-align:abs-top-left`,
-    -   `s-align:abs-top-center`,
+-   Position
+    -   `s-position:absolute:top:right`
+    -   `s-position:absolute:bottom:center`
+    -   `s-position:relative`
     -   etc...
 -   Clearfix
     -   `s-clearfix`
@@ -32,6 +30,7 @@ Out of the box, the `postcssSugarPlugin` can generate a lot of helper classes ba
 -   Colors
     -   `s-tc:accent`: Text color to accent.
     -   `s-bg:accent`: Background color to accent.
+    -   `s-color:accent`: Apply the `accent` color schema.
     -   etc...
 -   Fonts
     -   `s-font:bold`
@@ -46,8 +45,8 @@ Out of the box, the `postcssSugarPlugin` can generate a lot of helper classes ba
     -   etc...
 -   Paddings / Margins
     -   `s-p:30`: Apply a `30` padding. The value of this `30` depends on your theme configuration
-    -   `s-pbe:50`: Apply a `50` padding-block-end padding.
-    -   `s-mis:20`: Apply a `20` margin-inline-start margin.
+    -   `s-pbe:50`: Apply a `50` **padding-block-end** padding.
+    -   `s-mis:20`: Apply a `20` **margin-inline-start** margin.
     -   etc...
 -   Ratios
     -   `s-ratio:16-9`: Apply a 16/9 ratio.

@@ -91,47 +91,6 @@ export default function (env, config) {
         logLevel: 'info',
 
         proxy: {
-            // assets: {
-            //     /**
-            //      * @name            route
-            //      * @namespace       config.frontendServer.proxy.assets
-            //      * @type            String
-            //      * @default         [config.storage.package.rootDir]
-            //      *
-            //      * Specify which route to proxy for the assets
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //      */
-            //     route: '[config.storage.package.rootDir]',
-            //     settings: {
-            //         /**
-            //          * @name        target
-            //          * @namespace   config.frontendServer.proxy.assets.settings
-            //          * @type         String
-            //          * @default         [config.vite.server.hostname]
-            //          *
-            //          * Specify where to redirect the assets requests
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //          */
-            //         target: '[config.vite.server.hostname]',
-
-            //         /**
-            //          * @name        changeOrigin
-            //          * @namespace       config.frontendServer.proxy.assets.settings
-            //          * @type        Boolean
-            //          * @default         true
-            //          *
-            //          * Specify if you want the redirection to change the origin or not
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //          */
-            //         changeOrigin: true,
-            //     },
-            // },
             vitePing: {
                 /**
                  * @name            route
@@ -266,6 +225,21 @@ export default function (env, config) {
                  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
                  */
                 path: `${__dirname()}/../node/modules/docmap/docmap`,
+                settings: {},
+            },
+            redirect: {
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.modules.redirect
+                 * @type            String
+                 * @default             ${__dirname()}/../node/modules/redirect/redirect
+                 *
+                 * Specify where to find the "redirect" module
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/modules/redirect/redirect`,
                 settings: {},
             },
             styleguide: {

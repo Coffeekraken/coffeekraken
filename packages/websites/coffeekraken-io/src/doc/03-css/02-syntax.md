@@ -40,8 +40,8 @@ In order for this transformation to happen, you'll need to use one of these tran
 **expandPleasantCssClassnames**: This will take your classes string and expand theme:
 
 ```js
-import expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/expandPleasantCssClassnames';
-expandPleasantCssClassnames('...');
+import __expandPleasantCssClassnames from '@coffeekraken/sugar/shared/html/__expandPleasantCssClassnames';
+__expandPleasantCssClassnames('...');
 ```
 
 #### Js
@@ -49,8 +49,8 @@ expandPleasantCssClassnames('...');
 **expandPleasantCssClassnamesLive**: This will monitor your app and transform classes live when they appears into the HTML.
 
 ```js
-import expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expandPleasantCssClassnamesLive';
-expandPleasantCssClassnamesLive();
+import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/__expandPleasantCssClassnamesLive';
+__expandPleasantCssClassnamesLive();
 ```
 
 > Note that this can be very useful but may occurs some "layout shift" at page display time

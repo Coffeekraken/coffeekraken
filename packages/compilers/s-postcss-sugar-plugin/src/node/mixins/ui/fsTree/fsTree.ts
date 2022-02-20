@@ -164,8 +164,10 @@ export default function ({
                     }
                 }
 
-                &.active {
-                    font-weight: bold;
+                &.active, &[active] {
+                    & > div {
+                        font-weight: bold;
+                    }
                 }
 
                 &:not(.active, [active]) > ul,

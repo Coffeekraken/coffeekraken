@@ -19,8 +19,8 @@
 Out of the box, the coffeekraken development stack support these languages:
 
 1. `CSS`: Plain old css
-2. `PortCss`: PostCss with some plugins that are:
-    - @coffeekraken/s-postcss-sugar-plugin
+2. `PostCss`: PostCss with some plugins that are:
+    - [@coffeekraken/s-postcss-sugar-plugin](/@coffeekraken/s-postcss-sugar-plugin/doc/readme)
     - [postcss-nested](https://github.com/postcss/postcss-nested)
     - [postcss-atroot](https://www.npmjs.com/package/postcss-atroot)
     - [postcss-extend-rule](https://github.com/csstools/postcss-extend-rule)
@@ -29,7 +29,7 @@ Out of the box, the coffeekraken development stack support these languages:
 
 ## @coffeekraken/s-postcss-sugar-plugin
 
-The sugar plugin for PostCss gives you a lot features like:
+The sugar plugin for PostCss gives you a lot of features like:
 
 1. Access theme configuration properties like `margins`, `colors`, `paddings`, etc... using some `sugar` functions like so:
     - `color: sugar.color(main)`: Apply the main color to the text

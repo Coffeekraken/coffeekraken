@@ -57,8 +57,12 @@
             text-align: left;
             display: none;
             overflow: hidden;
-            border-radius: sugar.border.radius(30);
+            border-radius: sugar.border.radius();
             @sugar.depth (10);
+
+            @sugar.media(>=wide) {
+                width: 1640px;
+            }
 
             @sugar.media mobile {
                 width: 100vw;

@@ -1,7 +1,7 @@
 <section id="features-opensource" class="s-pb:50">
     <div class="s-container">
 
-        <div class="__box s-bg:main-surface s-radius s-p:50 s-depth:100 s-mi:-50 @mobile s-mi:0 s-depth:0">
+        <div class="__box s-bg:main-surface s-radius s-p:50 s-mi:-50 @mobile s-mi:0 s-depth:0">
 
             <div class="s-layout:1112 s-position:relative @mobile s-display:block">
                 <div class="@mobile s-text:center">

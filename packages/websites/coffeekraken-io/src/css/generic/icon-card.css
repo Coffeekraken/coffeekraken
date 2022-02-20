@@ -2,7 +2,6 @@
     aspect-ratio: 1;
     position: relative;
     border-radius: sugar.border.radius();
-    @sugar.depth (100);
     @sugar.depth (100, $type: text);
     background-size: cover;
     background-position: 50% 50%;

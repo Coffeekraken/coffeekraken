@@ -88,48 +88,36 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @example        html       ${style} style
-            *   <label class="s-mbe:30 s-color:accent s-label${
+            *   <label class="s-mbe:30 s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
             *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mbe:30 s-color:info s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *   </label>
-            *   <label class="s-mbe:30 s-color:error s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
-            *   </label>
-            *   <label class="s-mbe:30 s-color:accent s-label${
+            *   <label class="s-mbe:30 s-label${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
             *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label dir="rtl" class="s-mbe:30 s-color:accent s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()} (RTL)</span>
-            *   </label>
-            *   <label class="s-mbe:30 s-scale\:15 s-color:accent s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
-            *   </label>
-            *   <label class="s-mbe:30 s-color:accent s-label${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
-            *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
-            *   </label>
+            *   <label class="s-mbe:30 s-scale:15 s-label${
+            style === finalParams.defaultStyle ? '' : `:${style}`
+        }">
+        *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+        *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
+        *   </label>
+        *   <label class="s-mbe:30 s-label${
+        style === finalParams.defaultStyle ? '' : `:${style}`
+    }">
+    *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
+    *     <span>${__faker.name.title()} ${__faker.name.findName()} (Disabled)</span>
+    *   </label>
+    *   <label dir="rtl" class="s-mbe:30 s-label${
+        style === finalParams.defaultStyle ? '' : `:${style}`
+    }">
+    *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+    *     <span>${__faker.name.title()} ${__faker.name.findName()} (RTL)</span>
+    *   </label>
             * `;
             })
             .join('\n')}

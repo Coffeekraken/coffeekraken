@@ -123,6 +123,7 @@ export default class SPageTransitionFeature extends __SFeature {
                 url
             });
             const response = await request.send();
+            console.log(response);
             const domParser = new DOMParser();
             const dom = domParser.parseFromString(response.data ?? '', 'text/html');
             

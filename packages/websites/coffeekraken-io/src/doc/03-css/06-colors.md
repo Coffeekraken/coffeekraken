@@ -52,7 +52,7 @@ Colors can be defined in your theme configuration using one of these syntax:
 -   `rgba(245,234,65,1)`: RGBA syntax
 -   `#ff347f`: Hexadecimal syntax
 
-> It's preferable to set your colors directly in HSL(A) syntax cause under the hood this will be the used one. Setting them directly in HSL avoid unecessary conversion.
+> It's preferable to **set your colors directly in HSL(A)** syntax cause under the hood this will be the used one. Setting them directly in HSL avoid unecessary conversion.
 
 ## Variants
 

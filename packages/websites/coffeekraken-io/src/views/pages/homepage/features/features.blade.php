@@ -6,7 +6,7 @@
 
             <div class="s-container">
 
-                <div class="s-bg:main-surface s-scale:15 s-radius s-depth:100 s-mbe:50">
+                <div class="s-bg:main-surface s-scale:15 s-radius s-mbe:50">
                     <ul class="s-tabs:grow s-color:complementary">
                         <li s-activate href="#homepage-discover-js" id="homepage-discover-js-tab"
                             group="homepage-discover" active save-state>
@@ -44,7 +44,7 @@
 
         {{-- <div class="s-container">
 
-            <div class="s-bg:main-surface s-scale:15 s-radius s-depth:100 s-mbe:50">
+            <div class="s-bg:main-surface s-scale:15 s-radius s-mbe:50">
                 <ul class="s-tabs:grow">
                     <li class="s-color:accent" href="#homepage-discover-js" id="homepage-discover-js-tab">
                         <i class="s-icon:lang-js s-mie:20"></i>Frontend Sugar

@@ -97,21 +97,21 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
-            *   <ul class="s-list\:${style} ${
+                return ` * @example        html       ${style} style ${params.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+            *   <ul class="s-list:${style} ${
                     style === 'ol' ? 's-color:accent s-scale:15' : ''
                 }">
             *     <li>${
-                style === 'icon' ? `<i class="s-icon\:user"></i>` : ''
+                style === 'icon' ? `<i class="s-icon:user"></i>` : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
                 style === 'icon'
-                    ? `<i class="s-icon\:heart s-color:accent"></i>`
+                    ? `<i class="s-icon:heart s-color:accent"></i>`
                     : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *     <li>${
                 style === 'icon'
-                    ? `<i class="s-icon\:fire s-color:error"></i>`
+                    ? `<i class="s-icon:fire s-color:error"></i>`
                     : ''
             }${__faker.name.title()} ${__faker.name.findName()}</li>
             *   </ul>
@@ -119,42 +119,28 @@ export default function ({
             })
             .join('\n')}
         *
-        * @example        html          RTL
+        * @example        html          RTL Support
         * <div dir="rtl">
-        *   <ul class="s-list\:ul s-color:accent s-mbe:30">
+        *   <ul class="s-list:ul s-color:accent s-mbe:30">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        *   <ul class="s-list\:ol s-color:accent s-mbe:30">
+        *   <ul class="s-list:ol s-color:accent s-mbe:30">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        *   <ul class="s-list\:icon s-color:accent s-mbe:30">
-        *     <li><i class="s-icon\:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
-        *     <li><i class="s-icon\:heart s-color:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+        *   <ul class="s-list:icon s-color:accent s-mbe:30">
+        *     <li><i class="s-icon:user"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
+        *     <li><i class="s-icon:heart s-color:error"></i> ${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
         * </div>
         * 
         * @example          html         Colors (none-exhaustive)
-        *   <ul class="s-list s-scale\:12 s-color:accent">
+        *   <ul class="s-list:ol s-color:accent">
         *     <li>${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li class="s-color:complementary">${__faker.name.title()} ${__faker.name.findName()}</li>
         *     <li class="s-color:error">${__faker.name.title()} ${__faker.name.findName()}</li>
         *   </ul>
-        * 
-        * @example          html            Vertical Rhythm / Text format
-        *   <div class="s-format:text s-rhythm:vertical">
-        *       <ul>
-        *           <li>${__faker.name.findName()}</li>
-        *           <li>${__faker.name.findName()}</li>
-        *           <li>${__faker.name.findName()}</li>
-        *       </ul>
-        *       <ol>
-        *           <li>${__faker.name.findName()}</li>
-        *           <li>${__faker.name.findName()}</li>
-        *           <li>${__faker.name.findName()}</li>
-        *       </ol>
-        *   </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -236,7 +222,7 @@ export default function ({
         * @feature       Support vertical rhythm
         * 
         * @example        html
-        * <ul class="s-list\:ul">
+        * <ul class="s-list:ul">
         *   <li>Hello</li>
         *   <li>World</li>
         * </ul>
@@ -261,7 +247,7 @@ export default function ({
         * This class represent an "<yellow>ul</yellow>" list with some "<cyan>icon</cyan>" instead of the default bullet
         * 
         * @example        html
-        * <ul class="s-list\:icon">
+        * <ul class="s-list:icon">
         *   <li>
         *     <i class="s-icon-user" />
         *     Hello

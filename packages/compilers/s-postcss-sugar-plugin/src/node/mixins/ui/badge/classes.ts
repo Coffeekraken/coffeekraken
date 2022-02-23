@@ -108,16 +108,16 @@ export default function ({
         ${finalParams.styles
             .map((style) => {
                 return ` * @example        html       ${style}
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-color:error">Say hello!</a>
             * `;
@@ -127,16 +127,16 @@ export default function ({
         ${finalParams.shapes
             .map((shape) => {
                 return ` * @example        html       ${shape}
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-color:accent">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-color:complementary">Say hello!</a>
-            *   <a class="s-badge:${
+            *   <a class="s-badge${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-color:error">Say hello!</a>
             * `;

@@ -95,6 +95,7 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
+        * @cssClass             s-dropdown-container        The container of the dropdown that will trigger the display, hide, etc...
         ${finalParams.styles
             .map((style) => {
                 return ` * @cssClass     s-dropdown${
@@ -109,190 +110,129 @@ export default function ({
                 }           Apply the ${shape} dropdown shape`;
             })
             .join('\n')}
+        * @cssClass       s-dropdown:bottom      Apply the bottom dropdown position
+        * @cssClass       s-dropdown:bottom-start        Apply the bottom start dropdown position
+        * @cssClass       s-dropdown:bottom-end        Apply the bottom end dropdown position
+        * @cssClass       s-dropdown:top        Apply the top dropdown position
+        * @cssClass       s-dropdown:top-start        Apply the top start dropdown position
+        * @cssClass       s-dropdown:top-end        Apply the top end dropdown position
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
-            *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
-            *       Click me!
-            *       <div class="s-dropdown">
-            *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-color:accent">You find me!</a>
-            *       </div>
+                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+            * <div class="s-dropdown-container">
+            *   <button class="s-btn s-color:accent">
+            *      Click me!
             *   </button>
-            *   <button class="s-btn s-color:complementary s-mbe:30 s-mie:20">
-            *       I'm disabled
-            *       <div class="s-dropdown" disabled>
-            *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-color:accent">You find me!</a>
-            *       </div>
-            *   </button>
-            *   <span class="s-btn-group s-mbe:30 s-mie:20">
-            *       <a class="s-btn">Click me!</a>
-            *       <button class="s-btn s-color:complementary">
-            *           +
-            *           <div class="s-dropdown:bottom-end">
-            *               <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *               <a class="s-btn s-color:accent">You find me!</a>
-            *           </div>
-            *       </button>
-            *   </span>
+            *   <div class="s-dropdown s-bg:base s-p:30 s-radius">
+            *      <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
+            *      <a class="s-btn s-color:accent">You find me!</a>
+            *   </div>
+            * </div>
             * `;
             })
             .join('\n')}
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <button class="s-btn s-color:accent s-mbe:30 s-mie:20">
+                return ` * @example        html       ${shape} style ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+            * <div class="s-dropdown-container">
+            *   <button class="s-btn s-color:accent">
             *       Click me!
-            *       <div class="s-dropdown:${shape}">
+            *   </button>
+            *   <div class="s-dropdown:${shape}">
             *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
             *          <a class="s-btn s-color:accent">You find me!</a>
             *       </div>
-            *   </button>
-            *   <button class="s-btn s-color:complementary s-mbe:30 s-mie:20">
-            *       I'm disabled
-            *       <div class="s-dropdown:${shape}" disabled>
-            *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *          <a class="s-btn s-color:accent">You find me!</a>
-            *       </div>
-            *   </button>
-            *   <span class="s-btn-group s-mbe:30 s-mie:20">
-            *       <a class="s-btn">Click me!</a>
-            *       <button class="s-btn s-color:complementary">
-            *           +
-            *           <div class="s-dropdown:${shape}:bottom-end">
-            *               <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-            *               <a class="s-btn s-color:accent">You find me!</a>
-            *           </div>
-            *       </button>
-            *   </span>
+            * </div>
             * `;
             })
             .join('\n')}
         * 
         * @example        html       Position
-        *   <button class="s-btn s-mbe:30 s-mie:20">
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
         *       Bottom (default)
-        *       <div class="s-dropdown">
+        *   </button>
+        *   <div class="s-dropdown">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
+        * </div>
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
         *       Bottom start
-        *       <div class="s-dropdown:bottom-start">
+        *   </button>
+        *   <div class="s-dropdown:bottom-start">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
+        * </div>
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
         *       Bottom end
-        *       <div class="s-dropdown:bottom-end">
+        *   </button>
+        *   <div class="s-dropdown:bottom-end">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
+        * </div>
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
         *       Top
-        *       <div class="s-dropdown:top">
+        *   </button>
+        *   <div class="s-dropdown:top">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
+        * </div>
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
         *       Top start
-        *       <div class="s-dropdown:top-start">
+        *   </button>
+        *   <div class="s-dropdown:top-start">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
+        * </div>
+        * <div class="s-dropdown-container s-mie:20">
+        *   <button class="s-btn s-color:accent">
+        *      Top end
         *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Top end
-        *       <div class="s-dropdown:top-end">
+        *   <div class="s-dropdown:top-end">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
-        * 
-        * @example      html        Colors (none-exhaustive)
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Accent
-        *       <div class="s-dropdown s-color:accent">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:complementary">You find me!</a>
-        *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Complementary
-        *       <div class="s-dropdown s-color:complementary">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
-        *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Info
-        *       <div class="s-dropdown s-color:info">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
-        *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Error
-        *       <div class="s-dropdown s-color:error">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn">You find me!</a>
-        *       </div>
-        *   </button>
-        * 
-        * @example      html        RTL
-        * <div dir="rtl">
-        *   <button class="s-btn s-mbe:30">
-        *       Click me!
-        *       <div class="s-dropdown">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
-        *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Top start
-        *       <div class="s-dropdown:top-start">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
-        *       </div>
-        *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Top end
-        *       <div class="s-dropdown:top-end">
-        *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
-        *          <a class="s-btn s-color:accent">You find me!</a>
-        *       </div>
-        *   </button>
         * </div>
         * 
-        * @example      html        Scales
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Scale 0.7
-        *       <div class="s-dropdown s-scale:07">
+        * @example      html        RTL Support
+        *  <div class="s-dropdown-container s-mie:20" dir="rtl">
+        *   <button class="s-btn s-color:accent">
+        *       Click me!
+        *   </button>
+        *   <div class="s-dropdown">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
+        * </div>
+        *  <div class="s-dropdown-container s-mie:20" dir="rtl">
+        *   <button class="s-btn s-color:accent">
+        *       Top start
         *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       No scale
-        *       <div class="s-dropdown">
+        *   <div class="s-dropdown:top-start">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
+        * </div>
+        * <div class="s-dropdown-container s-mie:20" dir="rtl">
+        *   <button class="s-btn s-color:accent">
+        *       Top end
         *   </button>
-        *   <button class="s-btn s-mbe:30 s-mie:20">
-        *       Scale 1.3
-        *       <div class="s-dropdown s-scale:13">
+        *   <div class="s-dropdown:top-end">
         *          <p class="s-typo:p s-mbe:30">${__faker.name.title()} ${__faker.name.findName()}</p>
         *          <a class="s-btn s-color:accent">You find me!</a>
         *       </div>
-        *   </button>
+        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -568,6 +508,69 @@ export default function ({
             @sugar.ui.dropdown($position: top-end, $scope: position);
         }
         `);
+
+    if (finalParams.scope.includes('bare')) {
+        vars.comment(
+            () => `/**
+            * @name           s-dropdown-container
+            * @namespace      sugar.css.ui.tooltip
+            * @type           CssClass
+            * 
+            * This class represent the tooltip container in which you have to put your actual .s-tooltip element
+            * and anything you want as a tooltip activator. Can be a button, an image, really anything
+            * 
+            * @example        html
+            * <div class="s-tooltip-container">
+            *   <img src="..." />
+            *   <div class="s-tooltip">Something cool</div>
+            * </div>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */`,
+        );
+        vars.code(
+            () => `
+            .s-dropdown-container {
+                position: relative;
+                display: inline-block;
+
+                & > .s-dropdown {
+                    opacity: 0;
+                    pointer-events: none;
+                }
+
+                &:focus > .s-dropdown,
+                &:focus-within > .s-dropdown,
+                & > .s-dropdown:hover,
+                & > .s-dropdown:focus,
+                & > .s-dropdown:focus-within {
+                    pointer-events: all;
+                    opacity: 1;
+                }
+            }
+        `,
+        );
+        vars.comment(
+            () => `/**
+            * @name           s-dropdown-container:active
+            * @namespace      sugar.css.ui.dropdown
+            * @type           CssClass
+            * 
+            * This class allows you to display a dropdown inside a dropdown container without needing hover by the user
+            * 
+            * @example        html
+            * <div class="s-dropdown-container:active">
+            *   <img src="..." />
+            *   <div class="s-dropdown">Something cool</div>
+            * </div>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            */`,
+        );
+        // no need to write a class here cause this is handled in the dropdown.ts file directly...
+    }
 
     return vars;
 }

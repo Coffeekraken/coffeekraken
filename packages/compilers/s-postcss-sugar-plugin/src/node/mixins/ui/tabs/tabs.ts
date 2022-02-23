@@ -142,7 +142,6 @@ export default function ({
 
     if (finalParams.scope.indexOf('lnf') !== -1) {
         vars.push(`
-          /** background-color: sugar.color(current, surface); */
           user-select: none;
 
           & > * > * {
@@ -172,6 +171,7 @@ export default function ({
             }
             @sugar.state.hover {
               background-color: sugar.color(current, --lighten 5);
+              color: sugar.color(current, foreground);
             }       
           }
         `);

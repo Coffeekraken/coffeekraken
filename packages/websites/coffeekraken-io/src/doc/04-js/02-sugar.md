@@ -16,7 +16,7 @@
 
 # Sugar toolkit
 
-Sugar is the name of the toolkit used across all of our packages. This toolkit has some goals to achieve which are:
+**Sugar** is the name of the toolkit used across all of our packages. This toolkit has some goals to achieve which are:
 
 ## Utilities
 
@@ -31,7 +31,7 @@ These utilities covers things like `DOM` helpers, `Network` helpers, and many mo
 -   `Colors` helpers like `convert`, `hsla2rgba`, etc...
 -   `Is` helpers like `isBrowser`, `isEmail`, `isJson`, etc...
 -   `Crypto` helpers like `base64`, etc...
--   And many many more...
+-   [And many many more...](#search=@coffeekraken.sugar.js)
 
 #### Node
 
@@ -39,7 +39,7 @@ These utilities covers things like `DOM` helpers, `Network` helpers, and many mo
 -   `Network` helpers like `ipAddress`, `isPortFree`, etc...
 -   `PHP` helpers like `execPhp`, etc...
 -   `Zip` helpers like `unzip`, etc...
--   And many many more...
+-   [And many many more...](#search=@coffeekraken.sugar.node)
 
 ## CLI
 

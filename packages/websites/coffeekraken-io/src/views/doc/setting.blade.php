@@ -6,7 +6,7 @@
     <ol class="">
         @foreach ($block->setting as $setting)
             <li class="s-font:40 s-mbe:30">
-                <header class="s-flex:align-center s-bg:main-surface s-radius s-depth:100 s-mbe:20">
+                <header class="s-flex:align-center s-bg:main-surface s-radius s-mbe:20">
                     <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
                         {{ $setting->name }}
                     </div>

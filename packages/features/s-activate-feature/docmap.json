@@ -39,6 +39,7 @@
             "@coffeekraken/s-log",
             "@coffeekraken/s-markdown-builder",
             "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
             "@coffeekraken/s-parallax-feature",
             "@coffeekraken/s-postcss-builder",
             "@coffeekraken/s-postcss-sugar-plugin",
@@ -189,6 +190,10 @@
                             "default": [
                                 "click"
                             ]
+                        },
+                        "unactivateOn": {
+                            "description": "Specify some event(s) catched on the body tag that will unactivate the target(s)",
+                            "type": "Array<String>"
                         }
                     }
                 },
@@ -334,6 +339,10 @@
                             "default": [
                                 "click"
                             ]
+                        },
+                        "unactivateOn": {
+                            "description": "Specify some event(s) catched on the body tag that will unactivate the target(s)",
+                            "type": "Array<String>"
                         }
                     }
                 },

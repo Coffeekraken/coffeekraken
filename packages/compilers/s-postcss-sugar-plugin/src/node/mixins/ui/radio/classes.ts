@@ -12,8 +12,8 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
             },
             shapes: {
                 type: 'String[]',
-                values: ['default', 'square', 'pill', 'circle'],
-                default: ['default', 'square', 'pill', 'circle'],
+                values: ['default', 'square', 'circle'],
+                default: ['default', 'square', 'circle'],
             },
             defaultStyle: {
                 type: 'String',
@@ -39,9 +39,9 @@ class postcssSugarPluginUiRadioClassesInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiRangeClassesParams {
     styles: 'solid'[];
-    shapes: ('default' | 'square' | 'pill' | 'circle')[];
+    shapes: ('default' | 'square' | 'circle')[];
     defaultStyle: 'solid';
-    defaultShape: 'default' | 'square' | 'pill' | 'circle';
+    defaultShape: 'default' | 'square' | 'circle';
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -122,12 +122,8 @@ export default function ({
             *     <input type="radio" checked class="s-radio" name="radio-style-${style}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="radio" class="s-radio s-color:accent" name="radio-style-${style}" value="hello 2" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="radio" class="s-radio s-color:accent" name="radio-style-${style}" value="hello 3" />
+            *     I'm disabled
+            *     <input type="radio" disabled class="s-radio" name="radio-style-${style}" value="hello 3" />
             *   </label>
             * `;
             })
@@ -143,16 +139,10 @@ export default function ({
             }" name="radio-shape-${shape}" value="hello 1" checked />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="radio" class="s-radio${
+            *     I'm disabled
+            *     <input type="radio" disabled class="s-radio${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-color:accent" name="radio-shape-${shape}" value="hello 2" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="radio" class="s-radio${
-                finalParams.defaultShape === shape ? '' : `:${shape}`
-            } s-color:accent" name="radio-shape-${shape}" value="hello 3" />
+            }" name="radio-shape-${shape}" value="hello 1" />
             *   </label>
             * `;
             })
@@ -182,18 +172,6 @@ export default function ({
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="radio" checked class="s-radio s-color:accent" name="radio-style-ltr" value="hello 1" checked />
         *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="radio" class="s-radio s-color:accent" name="radio-style-ltr" value="hello 2" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="radio" class="s-radio s-color:accent" name="radio-style-ltr" value="hello 3" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     I'm disabled
-        *     <input type="radio" disabled class="s-radio s-color:accent" name="radio-style-ltr" value="hello 3" />
-        *   </label>
         * </div>
         * 
         * @example        html          Scales
@@ -209,11 +187,10 @@ export default function ({
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
         *   </label>
-        * 
-        * @example      html         Text format
-        *   <div class="s-format:text">
-        *     <input type="radio" />
-        *   </div>
+        *   <label class="s-mbe:30 s-label s-scale:16">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <input type="radio" class="s-radio s-color:accent" name="radio-style-scale" value="hello 3" />
+        *   </label>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -48,7 +48,7 @@ npm i @coffeekraken/s-images-builder --save-dev
 ```
 
 ```js
-{{get docmap.map '@coffeekraken.s-images-builder.node.sImagesBuilder' false 'example.0.code' }}
+{{get docmap.map '@coffeekraken.s-images-builder.node.SImagesBuilder' false 'example.0.code' }}
 ```
 
 {{/layout-doc }}

@@ -531,7 +531,6 @@ export default class SFrontstack extends __SClass {
                         // @TODO    integrate log filter feature
                         processManager.attachProcess(actionId, pro, {});
 
-
                         const processPro = processManager.run(
                             actionId,
                             finalProcessManagerParams,

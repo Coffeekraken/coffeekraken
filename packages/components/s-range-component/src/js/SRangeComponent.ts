@@ -64,10 +64,6 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * <s-range name="myRangeColoredWarning" value="0" class="s-color:warning s-mbe:30"></s-range>
  * <s-range name="myRangeColoredError" value="1" min="0" max="10" class="s-color:error s-mbe:30"></s-range>
  *
- * @example         js
- * import { define } from '@coffeekraken/s-range-component';
- * define();
- *
  * @see             https://github.com/darlanrod/input-range-scss
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

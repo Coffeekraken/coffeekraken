@@ -11,7 +11,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * Apply the label style to any element
  *
- * @param       {'inline'|'float'}           [style='theme.ui.label.defaultStyle']        The style you want for your label
+ * @param       {'inline'|'block'|'float'}           [style='theme.ui.label.defaultStyle']        The style you want for your label
  * @param       {'default'|'square'|'pill'}     [shape=theme.ui.label.defaultShape]      The shape you want for your label
  * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
@@ -30,7 +30,7 @@ class postcssSugarPluginUiLabelInterface extends __SInterface {
         return {
             style: {
                 type: 'String',
-                values: ['inline', 'float'],
+                values: ['inline', 'block', 'float'],
                 default: __STheme.config('ui.label.defaultStyle'),
             },
             shape: {
@@ -118,16 +118,18 @@ export default function ({
                   &:focus,
                   &:focus-within {
                     & > *:not(input):not(textarea):not(select) {
-                      top: calc(var(--top) + 0.3em);
-                      left: 0.3em;
-                      transform: scale(0.7);
+                      top: calc(var(--top) + 0.2em);
+                      left: 0.2em;
+                      transform: scale(0.6);
+                      opacity: 0.6;
                     }
                   }
                   & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
                   & > textarea:not(:placeholder-shown) + * {
-                    top: calc(var(--top) + 0.3em);
-                    left: 0.3em;
-                    transform: scale(0.7);
+                    top: calc(var(--top) + 0.2em);
+                    left: 0.2em;
+                    transform: scale(0.6);
+                    opacity: 0.6;
                   }
 
                   [dir="rtl"] &,
@@ -141,13 +143,15 @@ export default function ({
                     &:focus-within {
                       & > *:not(input):not(textarea):not(select) {
                         left: auto;
-                        right: 0.3em;
+                        right: 0.2em;
+                        opacity: 0.6;
                       }
                     }
                     & > input:not(:placeholder-shown):not([type="checkbox"]):not([type="radio"]) + *,
                     & > textarea:not(:placeholder-shown) + * {
                       left: auto;
-                      right: 0.3em;
+                      right: 0.2em;
+                      opacity: 0.6;
                     }
                   }
 
@@ -175,6 +179,12 @@ export default function ({
                     padding-block-start: calc(sugar.theme(ui.form.paddingBlock, true) + 0.7em + calc(var(--delta) * 2));
                     padding-block-end: sugar.theme(ui.form.paddingBlock, true);
                   }
+
+                  & > .disabled + *,
+                  & > [disabled] + * {
+                    @sugar.disabled();
+                  }
+
                 `);
                 break;
             case 'block':
@@ -216,6 +226,10 @@ export default function ({
                   
                   & > *:not(input):not(textarea):not(select) {
                     transition: sugar.theme(ui.label.transition);
+                  }
+
+                  & > *:not(input):not(textarea):not(select) {
+                    color: sugar.color(current);
                   }
 
                   & > input:not([type="checkbox"]):not([type="radio"]),

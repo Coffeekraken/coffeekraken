@@ -182,6 +182,9 @@ export default class SFiltrableInput extends __SLitComponent {
             this.filterItems();
         });
         this.$input.addEventListener('focus', (e) => {
+            // @ts-ignore
+            const value = e.target.value;
+            this.state.value = value;
             this.state.isActive = true;
             this.filterItems();
             this._updateListSizeAndPosition();

@@ -25,6 +25,11 @@ class postcssSugarPluginUiBlockquoteClassesInterface extends __SInterface {
                 values: ['default', 'square', 'pill'],
                 default: __STheme.config('ui.blockquote.defaultShape'),
             },
+            defaultColor: {
+                type: 'String',
+                values: Object.keys(__STheme.config('color')),
+                default: __STheme.config('ui.blockquote.defaultColor'),
+            },
             scope: {
                 type: {
                     type: 'Array<String>',
@@ -42,6 +47,7 @@ export interface IPostcssSugarPluginUiBlockquoteClassesParams {
     shapes: ('default' | 'square' | 'pill')[];
     defaultStyle: 'solid';
     defaultShape: 'default' | 'square' | 'pill';
+    defaultColor: string;
     scope: ('bare' | 'lnf' | 'shape' | 'vr' | 'tf')[];
 }
 
@@ -121,7 +127,7 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style
             *   <p class="s-blockquote${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             }">
@@ -133,7 +139,7 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
+                return ` * @example        html       ${shape} shape
             *   <p class="s-blockquote${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             }">
@@ -154,25 +160,24 @@ export default function ({
         *       ${__faker.lorem.paragraph()}
         *   </p>
         *
-        * @example    html       RTL
+        * @example    html       RTL Support
         *   <p class="s-blockquote s-mbe:30" dir="rtl">
         *       ${__faker.lorem.paragraph()}
         *   </p>
         * 
         * @example          html        Scales
-        *   <p class="s-blockquote s-scale:15 s-mbe:30">
+        * <p class="s-blockquote s-scale:07 s-mbe:30">
         *       ${__faker.lorem.paragraph()}
         *   </p>
-        * 
-        * @example          html        Vertical Rhythm / Text format
-        *   <div class="s-format:text s-rhythm:vertical">
-        *       <blockquote>
-        *          ${__faker.lorem.paragraph()}
-        *       </blockquote>
-        *       <blockquote>
-        *           ${__faker.lorem.paragraph()}
-        *       </blockquote>
-        *   </div>
+        *   <p class="s-blockquote s-scale:10 s-mbe:30">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
+        * <p class="s-blockquote s-scale:13 s-mbe:30">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
+        * <p class="s-blockquote s-scale:16 s-mbe:30">
+        *       ${__faker.lorem.paragraph()}
+        *   </p>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
@@ -205,6 +210,7 @@ export default function ({
     }
 
     if (finalParams.scope.includes('lnf')) {
+
         finalParams.styles.forEach((style) => {
             let cls = `s-blockquote`;
             if (style !== finalParams.defaultStyle) {
@@ -266,6 +272,15 @@ export default function ({
         });
     }
 
+    // default color
+    if (finalParams.scope.includes('lnf')) {
+        vars.code(() => `
+            .s-blockquote:not(.s-color) {
+                @sugar.color(${finalParams.defaultColor});
+            }
+        `);
+    }
+
     if (finalParams.scope.indexOf('tf') !== -1) {
         vars.comment(
             () => `/**
@@ -291,7 +306,8 @@ export default function ({
                 blockquote {
                     @sugar.ui.blockquote($scope: '${finalParams.scope.join(
                         ',',
-                    )}');
+                        )}');
+                    @sugar.color(${finalParams.defaultColor});
                 } 
             }
         `);

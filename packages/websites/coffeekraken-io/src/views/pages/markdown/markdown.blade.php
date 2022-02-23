@@ -26,17 +26,18 @@
 
                         <ul class="s-fs-tree">
                             @foreach ((array) $docmap->menu->packages as $package)
-
-                                @if (!$package->tree->documentation) @continue @endif
+                                @if (!$package->tree->documentation)
+                                    @continue
+                                @endif
 
                                 <li id="{{ \Sugar\string\idCompliant($package->name) }}" s-activate
                                     trigger="click,event:actual" href="#{{ \Sugar\string\idCompliant($package->name) }}"
                                     toggle save-state mount-when="direct" trigger="click,event:actual">
-                                    <i class="s-icon:folder-opened s-tc:complementary s-when:parent:active"></i>
-                                    <i class="s-icon:folder"></i>
-                                    <span>
+                                    <div>
+                                        <i class="s-icon:folder-opened s-tc:complementary s-when:grandparent:active"></i>
+                                        <i class="s-icon:folder"></i>
                                         {{ str_replace('@coffeekraken/', '', $package->name) }}
-                                    </span>
+                                    </div>
 
                                     @php $menu = get_object_vars($package->tree->documentation); @endphp
                                     @include('pages.markdown.menu', ['menu' => $menu, 'id' =>

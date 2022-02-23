@@ -113,7 +113,7 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
             *   <ul class="s-tabs${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-color:accent">

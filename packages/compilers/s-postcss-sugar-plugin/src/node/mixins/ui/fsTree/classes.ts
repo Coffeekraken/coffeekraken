@@ -74,6 +74,72 @@ export default function ({
 
     const vars = new CssVars();
 
+    function _example(classes, isDefault = false) {
+        return `*   <ul class="s-fs-tree${
+                isDefault ? '' : `:${classes}`
+            }">
+            *       <li class="active">
+            *           <div>
+            *               <i class="s-icon:folder-open"></i>
+            *               <span tabindex="0">${__faker.name.findName()}</span>
+            *           </div>
+            *           <ul>
+            *               <li>
+            *                   <div>
+            *                       <i class="s-icon:file"></i>
+            *                       <a tabindex="0">${__faker.name.findName()}</a>
+            *                   </div>
+            *               </li>
+            *               <li class="active">
+            *                   <div>
+            *                       <i class="s-icon:folder-open"></i>
+            *                       <span tabindex="0">${__faker.name.findName()}</span>
+            *                   </div>
+                                <ul>
+                    *               <li>
+                    *                   <div>
+                    *                       <i class="s-icon:file-pdf"></i>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
+                    *                   </div>
+                    *               </li>
+                    *               <li>
+                    *                  <div>
+                    *                       <i class="s-icon:file-code"></i>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
+                    *                  </div>
+                    *               </li>
+                    *              <li>
+                    *                   <div>
+                    *                       <i class="s-icon:file-image"></i>
+                    *                       <a tabindex="0">${__faker.name.findName()}</a>
+                    *                   </div>
+                    *               </li>
+                    *           </ul>
+            *               </li>
+            *              <li>
+            *                   <div>
+            *                       <i class="s-icon:file-archive"></i>
+            *                       <a tabindex="0">${__faker.name.findName()}</a>
+            *                   </div>
+            *               </li>
+            *           </ul>
+            *           <li class="s-disabled">
+            *               <div>
+        *                       <i class="s-icon:file"></i>
+        *                       <a tabindex="0">${__faker.name.findName()}</a>
+        *                  </div>
+        *               </li>
+            *           <li>
+            *               <div>
+        *                       <i class="s-icon:file-code"></i>
+        *                       <a tabindex="0">${__faker.name.findName()}</a>
+        *                 </div>
+        *               </li>
+            *       </li>
+            *   </ul>
+            *`;
+    }
+
     vars.comment(
         () => `
       /**
@@ -111,181 +177,22 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
-            *   <ul class="s-fs-tree${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            }">
-            *       <li class="active">
-            *           <i class="s-icon:folder-open"></i>
-            *           <span tabindex="0">${__faker.name.findName()}</span>
-            *           <ul>
-            *               <li>
-            *                   <i class="s-icon:file"></i>
-            *                   <a tabindex="0">${__faker.name.findName()}</a>
-            *               </li>
-            *               <li class="active">
-            *                   <i class="s-icon:folder-open"></i>
-            *                   <span tabindex="0">${__faker.name.findName()}</span>
-                                <ul>
-                    *               <li>
-                    *                   <i class="s-icon:file-pdf"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *               <li>
-                    *                   <i class="s-icon:file-code"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *              <li>
-                    *                   <i class="s-icon:file-image"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *           </ul>
-            *               </li>
-            *              <li>
-            *                   <i class="s-icon:file-archive"></i>
-            *                   <a tabindex="0">${__faker.name.findName()}</a>
-            *               </li>
-            *           </ul>
-            *           <li class="s-disabled">
-        *                   <i class="s-icon:file"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-            *           <li>
-        *                   <i class="s-icon:file-code"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-            *       </li>
-            *   </ul>
-            * `;
+                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                    ${_example(style, params.defaultStyle === style)}`;
             })
             .join('\n')}
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
-            *   <ul class="s-fs-tree${
-                shape === finalParams.defaultShape ? '' : `:${shape}`
-            }">
-            *       <li class="active">
-            *           <i class="s-icon:folder-open"></i>
-            *           <span tabindex="0">${__faker.name.findName()}</span>
-            *           <ul>
-            *               <li>
-            *                   <i class="s-icon:file"></i>
-            *                   <a tabindex="0">${__faker.name.findName()}</a>
-            *               </li>
-            *               <li class="active">
-            *                   <i class="s-icon:folder-open"></i>
-            *                   <span tabindex="0">${__faker.name.findName()}</span>
-                                <ul>
-                    *               <li>
-                    *                   <i class="s-icon:file-pdf"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *               <li>
-                    *                   <i class="s-icon:file-code"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *              <li>
-                    *                   <i class="s-icon:file-image"></i>
-                    *                   <a tabindex="0">${__faker.name.findName()}</a>
-                    *               </li>
-                    *           </ul>
-            *               </li>
-            *              <li>
-            *                   <i class="s-icon:file-archive"></i>
-            *                   <a tabindex="0">${__faker.name.findName()}</a>
-            *               </li>
-            *           </ul>
-            *           <li class="s-disabled">
-        *                   <i class="s-icon:file"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-            *           <li>
-        *                   <i class="s-icon:file-code"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-            *       </li>
-            *   </ul>
-            * `;
+                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
+                ${_example(shape, params.defaultShape === shape)}`;
             })
             .join('\n')}
         *
         * @example        html       RTL
         * <div dir="rtl">
-        *   <ul class="s-fs-tree">
-        *       <li class="active">
-        *           <i class="s-icon:folder-open"></i>
-        *           <span tabindex="0">${__faker.name.findName()}</span>
-        *           <ul>
-        *               <li>
-        *                   <i class="s-icon:file"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-        *               <li class="active">
-        *                   <i class="s-icon:folder-open"></i>
-        *                   <span tabindex="0">${__faker.name.findName()}</span>
-                            <ul>
-                *               <li>
-                *                   <i class="s-icon:file-pdf"></i>
-                *                   <a tabindex="0">${__faker.name.findName()}</a>
-                *               </li>
-                *               <li>
-                *                   <i class="s-icon:file-code"></i>
-                *                   <a tabindex="0">${__faker.name.findName()}</a>
-                *               </li>
-                *              <li>
-                *                   <i class="s-icon:file-image"></i>
-                *                   <a tabindex="0">${__faker.name.findName()}</a>
-                *               </li>
-                *           </ul>
-        *               </li>
-        *              <li>
-        *                   <i class="s-icon:file-archive"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-        *           </ul>
-        *           <li>
-    *                   <i class="s-icon:file-code"></i>
-    *                   <a tabindex="0">${__faker.name.findName()}</a>
-    *               </li>
-        *           <li>
-    *                   <i class="s-icon:file-code"></i>
-    *                   <a tabindex="0">${__faker.name.findName()}</a>
-    *               </li>
-        *       </li>
-        *   </ul>
+        ${_example('')}
         * </div>
-        * 
-        * @example        html       Scales
-        *   <ul class="s-fs-tree s-scale:08">
-        *       <li class="active">
-        *           <i class="s-icon:folder-open"></i>
-        *           <span tabindex="0">${__faker.name.findName()}</span>
-        *           <ul>
-        *               <li>
-        *                   <i class="s-icon:file"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-        *               <li>
-        *                   <i class="s-icon:folder-open"></i>
-        *                   <span tabindex="0">${__faker.name.findName()}</span>
-        *               </li>
-        *              <li>
-        *                   <i class="s-icon:file-archive"></i>
-        *                   <a tabindex="0">${__faker.name.findName()}</a>
-        *               </li>
-        *           </ul>
-        *           <li>
-    *                   <i class="s-icon:file-code"></i>
-    *                   <a tabindex="0">${__faker.name.findName()}</a>
-    *               </li>
-        *           <li>
-    *                   <i class="s-icon:file-code"></i>
-    *                   <a tabindex="0">${__faker.name.findName()}</a>
-    *               </li>
-        *       </li>
-        *   </ul>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

@@ -16,9 +16,9 @@
 
 # What is a docmap?
 
-A docmap is nothing more that a json file that lists all of the documentation you can have inside your project.
+A docmap is nothing more that a **json file that lists all of the documentation you can have** inside your project.
 
-When we say "documentation", it means meanly "docblocks" that you may have written in your source files.
+When we say "**documentation**", it means meanly "**docblocks**" that you may have written in your source files.
 
 ## What is a docblock?
 
@@ -46,11 +46,11 @@ export default function (force = false): string {
 
 ## What is the purpose of a docmap
 
-A docmap can be useful for many things like indexing where to find the documentation for a particular function, class, etc...
+A docmap can be useful for many things like **indexing where to find the documentation** for a particular function, class, etc...
 
-It can be used to generate a documentation website as we are doing for the whole Coffeekraken ecosystem.
+It can be used to generate a documentation website **as we are doing for the whole Coffeekraken ecosystem**.
 
-The only thing that limit what you can do with that is your imagination. As the docmap is just a "directory" of your documentation, you can build everything you want on top of that.
+The only thing that limit what you can do with that is your imagination. As the docmap is just a "**directory**" of your documentation, you can build everything you want on top of that.
 
 > Make sure to take a look at the others documentation about docmap to learn how to build your own, how to write your docblocks for the best results as well as how to access your docmap through his simple API...
 

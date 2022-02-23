@@ -114,7 +114,7 @@ export default function ({
         ${finalParams.styles.map((style) => {
             return ` * @example        html       ${style}
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:accent" s-floating>
@@ -122,7 +122,7 @@ export default function ({
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:complementary" s-floating>
@@ -130,7 +130,7 @@ export default function ({
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultStyle === style ? '' : `:${style}`
                 } s-color:info" s-floating>
@@ -143,7 +143,7 @@ export default function ({
         ${finalParams.shapes.map((shape) => {
             return ` * @example        html       ${shape}
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:accent" s-floating>
@@ -151,7 +151,7 @@ export default function ({
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:complementary" s-floating>
@@ -159,7 +159,7 @@ export default function ({
                 *       </div>
                 *   </span>
                 *   <span class="s-tooltip-container">
-                *       <a class="s-btn s-mie:20 s-mbe:20">Hover me!</a>
+                *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Hover me!</a>
                 *       <div class="s-white-space:nowrap s-tooltip${
                     finalParams.defaultShape === shape ? '' : `:${shape}`
                 } s-color:info" s-floating>
@@ -171,25 +171,25 @@ export default function ({
         * 
         * @example      html        Positions (no s-floating feature)
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Block start (default)</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Block start (default)</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Inline end</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Inline end</a>
         *       <div class="s-tooltip:right s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Block end</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Block end</a>
         *       <div class="s-tooltip:bottom s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Inline start</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Inline start</a>
         *       <div class="s-tooltip:left s-white-space:nowrap s-color:accent">
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
@@ -197,25 +197,25 @@ export default function ({
         * 
         * @example      html        Colors (none-exhaustive)
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Accent</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Accent</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:accent" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Complementary</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Complementary</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:complementary" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Error</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Error</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:error" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">Info</a>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">Info</a>
         *       <div class="s-tooltip s-white-space:nowrap s-color:info" s-floating>
         *           ${__faker.name.title()} ${__faker.name.findName()}
         *       </div>
@@ -223,14 +223,14 @@ export default function ({
         * 
         * @example      html        Interactive
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">I'm not interactive</a>
-        *       <div class="s-tooltip s-white-space:nowrap" s-floating>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">I'm not interactive</a>
+        *       <div class="s-tooltip s-white-space:nowrap">
         *           <a class="s-btn s-color:accent">Click me if you can!</a>
         *       </div>
         *   </span>
         *   <span class="s-tooltip-container">
-        *       <a class="s-btn s-mie:20 s-mbe:20">I'm interactive</a>
-        *       <div class="s-tooltip:interactive s-white-space:nowrap" s-floating>
+        *       <a class="s-btn s-color:accent s-mie:20 s-mbe:20">I'm interactive</a>
+        *       <div class="s-tooltip:interactive s-white-space:nowrap">
         *           <a class="s-btn s-color:accent">Click me because you can!</a>
         *       </div>
         *   </span>
@@ -269,6 +269,15 @@ export default function ({
 
                 & > .s-tooltip {
                     opacity: 0;
+                }
+
+                &:focus,
+                &:focus-within,
+                &:hover {
+                    & > .s-tooltip--interactive {
+                        pointer-events: all;
+                        opacity: 1;
+                    }
                 }
 
                 &:focus > .s-tooltip,
@@ -451,48 +460,10 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip {
-            @sugar.ui.tooltip($position: top, $scope: 'position');
+            @sugar.ui.tooltip($position: top, $scope: position);
         }
     `,
     );
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--top-left
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple top-left tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--top-left {
-    //         @sugar.ui.tooltip($position: top-left, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--top-right
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple top-right tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--top-right {
-    //         @sugar.ui.tooltip($position: top-right, $scope: 'position');
-    //     }
-    // `);
 
     // RIGHT
     vars.comment(
@@ -516,125 +487,11 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip--right {
-            @sugar.ui.tooltip($position: right, $scope: 'position');
+            @sugar.ui.tooltip($position: right, $scope: position);
         }
     `,
     );
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-center-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a right tooltip centered and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-center-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-center-top {
-    //         @sugar.ui.tooltip($position: right-center-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple right-top tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-top {
-    //         @sugar.ui.tooltip($position: right-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-top-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a right tooltip top and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-top-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-top-top {
-    //         @sugar.ui.tooltip($position: right-top-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-bottom-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a right tooltip bottom and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-bottom-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-bottom-top {
-    //         @sugar.ui.tooltip($position: right-bottom-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-bottom
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple right-bottom tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-bottom {
-    //         @sugar.ui.tooltip($position: right-bottom, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--right-bottom-bottom
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a right tooltip bottom and aligned bottom
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:right-bottom-bottom">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--right-bottom-bottom {
-    //         @sugar.ui.tooltip($position: right-bottom-bottom, $scope: 'position');
-    //     }
-    // `);
-
+   
     // left
     vars.comment(
         () => `/**
@@ -657,124 +514,10 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip--left {
-            @sugar.ui.tooltip($position: left, $scope: 'position');
+            @sugar.ui.tooltip($position: left, $scope: position);
         }
     `,
     );
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-center-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a left tooltip centered and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-center-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-center-top {
-    //         @sugar.ui.tooltip($position: left-center-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple left-top tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-top {
-    //         @sugar.ui.tooltip($position: left-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-top-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a left tooltip top and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-top-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-top-top {
-    //         @sugar.ui.tooltip($position: left-top-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-bottom-top
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a left tooltip bottom and aligned top
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-bottom-top">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-bottom-top {
-    //         @sugar.ui.tooltip($position: left-bottom-top, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-bottom-bottom
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a left tooltip bottom and aligned bottom
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip:left-bottom-bottom">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-bottom-bottom {
-    //         @sugar.ui.tooltip($position: left-bottom-bottom, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--left-bottom
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple left-bottom tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--left-bottom {
-    //         @sugar.ui.tooltip($position: left-bottom, $scope: 'position');
-    //     }
-    // `);
 
     // BOTTOM
     vars.comment(
@@ -798,48 +541,10 @@ export default function ({
     vars.code(
         () => `
         .s-tooltip--bottom {
-            @sugar.ui.tooltip($position: bottom, $scope: 'position');
+            @sugar.ui.tooltip($position: bottom, $scope: position);
         }
     `,
     );
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--bottom-left
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple bottom-left tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--bottom-left {
-    //         @sugar.ui.tooltip($position: bottom-left, $scope: 'position');
-    //     }
-    // `);
-    // vars.comment(() => `/**
-    //     * @name           s-tooltip--bottom-right
-    //     * @namespace      sugar.css.ui.tooltip
-    //     * @type           CssClass
-    //     *
-    //     * This class represent a simple bottom-right tooltip
-    //     *
-    //     * @example        html
-    //     * <a class="s-tooltip-container">I'm a cool button</a>
-    //     * <div class="s-tooltip">Something cool</div>
-    //     *
-    //     * @since    2.0.0
-    //     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-    //     */`);
-    // vars.code(() => `
-    //     .s-tooltip--bottom-right {
-    //         @sugar.ui.tooltip($position: bottom-right, $scope: 'position');
-    //     }
-    // `);
 
     return vars;
 }

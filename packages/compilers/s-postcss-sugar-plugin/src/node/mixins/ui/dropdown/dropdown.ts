@@ -112,20 +112,6 @@ export default function ({
           cursor: auto;
           z-index: 10;
 
-            opacity: 0;
-            pointer-events: none;
-
-            *:focus + &,
-            *:focus-within + &,
-            *:focus > &,
-            *:focus-within > &,
-            &:hover,
-            &:focus,
-            &:focus-within {
-                opacity: 1;
-                pointer-events: all;
-            }
-
             @sugar.state.disabled {
                 @sugar.disabled;
                 opacity: 0 !important;
@@ -141,8 +127,7 @@ export default function ({
             case 'solid':
             default:
                 vars.push(`
-                    background-color: sugar.color(current);
-                    color: sugar.color(current, foreground);
+                    background-color: sugar.color(base);
                     padding-inline: sugar.theme(ui.dropdown.paddingInline);
                     padding-block: sugar.theme(ui.dropdown.paddingBlock);
                     border: sugar.theme(ui.dropdown.borderWidth) solid sugar.color(current, border);

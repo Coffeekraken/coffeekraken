@@ -16,22 +16,22 @@
 
 # CLI overview
 
-The `sugar` CLI is mainly the best entry point to the Coffeekraken ecosystem.
+The `sugar` CLI is mainly **the best entry point to the Coffeekraken ecosystem**.
 
 ## What is it offering?
 
 Through the CLI you will have access to all the primary features that Coffeekraken has to offer. This mean:
 
-1. Full development environment
-2. Full production ready build stack for:
-    - JS/TS
-    - CSS through [PostCSS](https://postcss.org) and our `@coffeekraken/s-postcss-sugar-plugin`
-    - Images optimization and different resolutions generation
+1. Full **development environment**
+2. Full **production ready build** stack for:
+    - `js/ts`
+    - `css` through [PostCSS](https://postcss.org) and our `@coffeekraken/s-postcss-sugar-plugin`
+    - **Images optimization** and different resolutions generation
     - and more...
 3. Nice tooling like:
-    - Sitemap generation
-    - Static website generation for non-headless websites
-    - Project scaffolding for different things like website templates, lit element, etc...
+    - **Sitemap** generation
+    - **Static website generation** for non-headless websites
+    - **Project scaffolding** for different things like website templates, lit element, etc...
     - Utils like launching a command in multiple directories at once
     - Killing processes by id or by port
     - and more...
@@ -46,9 +46,9 @@ npm i @coffeekraken/cli -g
 
 Then you will have access to the `sugar` command that you can use first like so:
 
-1. `sugar`: Will launch a simple interactive process to guide you
+1. `sugar`: Will launch a **simple interactive process** to guide you
 2. `sugar --help`: Display the complete sugar CLI commands list
-3. `sugar {stack}.{action} --help`: Display a particular stack/action help with detailed arguments list, etc...
+3. `sugar {stack}.{action} --help`: Display a **particular stack/action help** with detailed arguments list, etc...
 
 These are the main entry points with the ones you can discover and try our features
 

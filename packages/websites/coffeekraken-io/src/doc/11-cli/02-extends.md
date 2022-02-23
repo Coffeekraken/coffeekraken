@@ -16,7 +16,7 @@
 
 # Extends the CLI
 
-As the rest of our ecosystem, the CLI is modular and you can extends it as you want.
+As the rest of our ecosystem, the CLI is modular and **you can extends it as you want**.
 
 The CLI features are declared inside a `sugar.json` file at the root of your package. When I say package it can be a private project as a published one on NPM for example.
 
@@ -40,7 +40,7 @@ Consider implementing a wonderful command that will simply display `hello world`
 
 Create the `sugar.jcon` file at your project root and fill it like so:
 
-```json
+```js
 {
     "cli": [
         {
@@ -105,13 +105,13 @@ To make use of your command, make sure to launch it either through your project 
 
 Then, simply launch:
 
-```shell
+```bash
 sugar mySoCool.prettyCommand
 ```
 
 As your `prettyCommand` has been declared as the "defaultAction", you can also launch it like so:
 
-```shell
+```bash
 sugar mySoCool
 ```
 
@@ -121,7 +121,7 @@ Some additional features can be applied like a documentation when the users ente
 
 For that, simply add the `interface` property inside your `sugar.json` file like so:
 
-```json
+```js
 {
     "cli": [
         {

@@ -122,14 +122,6 @@ export default function ({
             *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-${style}-1" value="hello 1" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-${style}-2" value="hello 2" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-${style}-3" value="hello 3" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
             *     I'm disabled
             *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-style-${style}-3" value="hello 3" />
             *   </label>
@@ -138,10 +130,6 @@ export default function ({
             .join('\n')}
         * 
         * @example      html       Colors (none-exhaustive)
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-color-1" value="hello 1" />
-        *   </label>
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
         *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-color-2" value="hello 2" />
@@ -163,16 +151,8 @@ export default function ({
             *     <input type="checkbox" checked class="s-checkbox:${shape}" name="checkbox-shape-${shape}-1" value="hello 1" />
             *   </label>
             *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" class="s-checkbox:${shape} s-color:accent" name="checkbox-shape-${shape}-2" value="hello 2" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" class="s-checkbox:${shape} s-color:accent" name="checkbox-shape-${shape}-3" value="hello 3" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
             *     I'm disabled
-            *     <input type="checkbox" disabled class="s-checkbox:${shape} s-color:accent" name="checkbox-shape-${shape}-3" value="hello 3" />
+            *     <input type="checkbox" disabled class="s-checkbox:${shape}" name="checkbox-shape-${shape}-3" value="hello 3" />
             *   </label>
             * `;
             })
@@ -182,34 +162,26 @@ export default function ({
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-2" value="hello 2" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
+        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     I'm disabled
-        *     <input type="checkbox" disabled class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
+        *     <input type="checkbox" disabled class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
         * </div>
         * 
         * @example          html        Scales
         *   <label class="s-mbe:30 s-label s-scale:07">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" checked class="s-checkbox s-color:accent" name="checkbox-style-ltr-1" value="hello 1" />
+        *     <input type="checkbox" checked class="s-checkbox" name="checkbox-style-ltr-1" value="hello 1" />
         *   </label>
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-2" value="hello 2" />
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-2" value="hello 2" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale:13">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" class="s-checkbox s-color:accent" name="checkbox-style-ltr-3" value="hello 3" />
+        *     <input type="checkbox" class="s-checkbox" name="checkbox-style-ltr-3" value="hello 3" />
         *   </label>
         * 
         * @example      html        Vertical rhythm / Text format

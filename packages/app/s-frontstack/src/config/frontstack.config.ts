@@ -1,6 +1,8 @@
 import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 import __path from 'path';
 
+import __SFrontstackCopyActionParamsInterface from '../node/interface/actions/SFrontstackCopyActionParamsInterface';
+
 export default function (env, config) {
     if (env.platform !== 'node') return;
     return {

@@ -2,20 +2,19 @@ import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
 /**
- * @name           depth
- * @namespace      node.mixins.depth
+ * @name           disabled
+ * @namespace      node.mixins.disabled
  * @type           PostcssMixin
  * @platform      postcss
  * @status        beta
  *
- * This mixin allows you to apply a certain depth that are defined
- * in the config.theme.depth stack like 10, 20, etc...
+ * This mixin allows you to apply a the disabled styling to any HTMLElement.
  *
  * @return        {Css}         The generated css for all the classes in the toolkit
  *
  * @example         postcss
  * .my-element {
- *    \@sugar.depth(20);
+ *    \@sugar.disabled();
  * }
  *
  * @since       2.0.0

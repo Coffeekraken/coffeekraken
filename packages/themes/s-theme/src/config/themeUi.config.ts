@@ -143,14 +143,14 @@ export default (env, config) => {
              * @name          paddingBlock
              * @namespace     config.themeUi.form
              * @type          String
-             * @default      0.375em
+             * @default      0.5em
              *
              * Specify the default padding block for form items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            paddingBlock: '0.375em',
+            paddingBlock: '0.5em',
             /**
              * @name          borderRadius
              * @namespace     config.themeUi.form
@@ -329,14 +329,14 @@ export default (env, config) => {
              * @name          defaultColor
              * @namespace     config.themeUi.scrollbar
              * @type          String
-             * @default      [theme.ui.default.defaultColor]
+             * @default      accent
              *
              * Specify the default color for scrollbar
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            defaultColor: '[theme.ui.default.defaultColor]',
+            defaultColor: 'accent',
         },
         button: {
             /**
@@ -1638,14 +1638,14 @@ export default (env, config) => {
              * @name          borderWidth
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      [theme.ui.default.borderWidth]
+             * @default      0
              *
              * Specify the default border width for dropdown ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            borderWidth: '[theme.ui.default.borderWidth]',
+            borderWidth: 0,
             /**
              * @name          transition
              * @namespace     config.themeUi.dropdown
@@ -1686,14 +1686,14 @@ export default (env, config) => {
              * @name          depth
              * @namespace     config.themeUi.dropdown
              * @type          String
-             * @default      [theme.ui.default.depth]
+             * @default      50
              *
              * Specify the default depth for dropdown items
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
-            depth: '[theme.ui.default.depth]',
+            depth: 50,
             /**
              * @name          outline
              * @namespace     config.themeUi.dropdown
@@ -2476,6 +2476,18 @@ export default (env, config) => {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
+            /**
+             * @name          defaultColor
+             * @namespace     config.themeUi.blockquote
+             * @type          String
+             * @default      accent
+             *
+             * Specify the default color for your blockquote ui
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             */
+            defaultColor: 'accent',
             /**
              * @name          depth
              * @namespace     config.themeUi.blockquote

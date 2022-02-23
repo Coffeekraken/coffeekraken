@@ -7,6 +7,7 @@ import __expandPleasantCssClassnamesLive from '@coffeekraken/sugar/js/html/expan
 import { define as __sFiltrableInputDefine } from '@coffeekraken/s-filtrable-input-component';
 import __queryStringToObject from '@coffeekraken/sugar/shared/url/queryStringToObject';
 import __hotkey from '@coffeekraken/sugar/js/keyboard/hotkey';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __cursorToEnd from '@coffeekraken/sugar/js/dom/input/cursorToEnd';
 
 __sFiltrableInputDefine(
@@ -224,12 +225,30 @@ export default class CKSearch extends __SLitComponent {
         });
         const queryObj = __queryStringToObject(document.location.search ?? '');
         this._search = queryObj.search ?? '';
+
+        __querySelectorLive('[href^="#search="]', ($elm) => {
+            $elm.addEventListener('click', (e) => {
+                this._handleAnchor(e.target.href.split('#').pop());
+                e.preventDefault();
+                e.stopPropagation();
+            });
+        });
+
+    }
+    _handleAnchor(anchor) {
+        const keywords = anchor.replace('search=', '').split('=').pop();
+        this._$input.value = keywords;
+        this._$input.focus();
     }
     _$input;
     _search;
     firstUpdated() {
 
         this._$input = this.querySelector('input');
+
+        if (document.location.hash) {
+            this,this._handleAnchor(document.location.hash.replace('#', ''))
+        }
 
         __hotkey('ctrl+p').on('press', () => {
             __cursorToEnd(this._$input);
@@ -283,7 +302,7 @@ export default class CKSearch extends __SLitComponent {
                             type="text"
                             name="search"
                             value="${this._search}"
-                            class="s-input s-color:accent s-scale:11"
+                            class="s-input s-color:accent"
                         />
                         <template type="before">
                             <div class="s-p:30" id="search-tips">

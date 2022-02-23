@@ -1,7 +1,7 @@
 <!--
 /**
  * @name            Configuration
- * @namespace       doc.images
+ * @namespace       doc.views
  * @type            Markdown
  * @platform        md
  * @status          stable
@@ -22,7 +22,7 @@ This mean that the configurations stands into two configuration files that you c
 
 ## `views.config.js`
 
-{{> config namespace='@coffeekraken.s-view-renderer.config.views'}}
+{{> config namespace='@coffeekraken.s-view-renderer.config.viewRenderer'}}
 
 ## `frontendServer.config.js`
 

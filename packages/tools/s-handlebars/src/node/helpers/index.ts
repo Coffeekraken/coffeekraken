@@ -4,7 +4,9 @@ import configFromDocmap from './configFromDocmap';
 import configValue from './configValue';
 import get from './get';
 import __import from './import';
+import __includes from './includes';
 import ifEqual from './ifEqual';
+import __replace from './replace';
 import ifMatch from './ifMatch';
 import isLicense from './isLicense';
 import isSectionWanted from './isSectionWanted';
@@ -22,6 +24,8 @@ export {
     configValue,
     get,
     __import as import,
+    __includes as includes,
+    __replace as replace,
     ifEqual,
     ifMatch,
     isLicense,

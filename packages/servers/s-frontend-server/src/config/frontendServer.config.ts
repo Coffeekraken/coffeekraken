@@ -136,6 +136,17 @@ export default function (env, config) {
         middlewares: {
             bench: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.bench
+                 * @type            String
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Track how many times take a request`,
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.bench
                  * @type            String
@@ -150,6 +161,17 @@ export default function (env, config) {
                 settings: {},
             },
             request: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.bench
+                 * @type            String
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject the "request" object for views`,
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.request
@@ -166,6 +188,18 @@ export default function (env, config) {
             },
             env: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.env
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject an "env" object for the views`,
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.env
                  * @type            String
@@ -180,6 +214,18 @@ export default function (env, config) {
                 settings: {},
             },
             packageJson: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.packageJson
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject a "packageJson" object for the views`,
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.packageJson
@@ -199,6 +245,17 @@ export default function (env, config) {
         modules: {
             rootFiles: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.rootFiles
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module allows you to serve files from the root directory',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.rootFiles
                  * @type            String
@@ -214,6 +271,17 @@ export default function (env, config) {
             },
             docmap: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module gives you access to a "docmap" object in the views',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.docmap
                  * @type            String
@@ -228,6 +296,17 @@ export default function (env, config) {
                 settings: {},
             },
             redirect: {
+                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.redirect
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module allows you to make redirections depending on requested path',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.redirect
@@ -243,6 +322,17 @@ export default function (env, config) {
                 settings: {},
             },
             styleguide: {
+                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.styleguide
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module handle the /styleguide/... views display',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.styleguide
@@ -258,6 +348,17 @@ export default function (env, config) {
                 settings: {},
             },
             config: {
+                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.config
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module gives you access to a "config" and a "configFiles" object into the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.config
@@ -273,6 +374,17 @@ export default function (env, config) {
                 settings: {},
             },
             frontspec: {
+                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.frontspec
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module gives you access to a "frontspec" object into the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.frontspec
@@ -289,6 +401,17 @@ export default function (env, config) {
             },
             api: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.frontspec
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module handle the /api/... views display',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.api
                  * @type            String
@@ -303,6 +426,17 @@ export default function (env, config) {
                 settings: {},
             },
             view: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.view
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module handle the /view/... views display',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.view
@@ -361,34 +495,6 @@ export default function (env, config) {
                  */
                 handler: 'view',
             },
-            // '/doc/api/*': {
-            //     /**
-            //      * @name        handler
-            //      * @namespace   config.frontendServer.routes.'/doc/api/*'
-            //      * @type        String
-            //      * @default         doc
-            //      *
-            //      * Specify which handle to use for requests on "/doc/api/*"
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //      */
-            //     handler: 'doc',
-            // },
-            // '/api/config': {
-            //     /**
-            //      * @name        handler
-            //      * @namespace   config.frontendServer.routes.'/api/config'
-            //      * @type        String
-            //      * @default         view
-            //      *
-            //      * Specify which handle to use for requests on "/api/config"
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //      */
-            //     handler: 'config',
-            // },
             '/docmap.json': {
                 /**
                  * @name        handler
@@ -406,42 +512,81 @@ export default function (env, config) {
         },
 
         handlers: {
-            /**
-             * @name            doc
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/doc
-             *
-             * Store all the "doc" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            doc: `${__dirname()}/../node/handlers/doc`,
-            /**
-             * @name            markdown
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/markdown
-             *
-             * Store all the "markdown" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            markdown: `${__dirname()}/../node/handlers/markdown`,
-            /**
-             * @name            docmap
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/docmap
-             *
-             * Store all the "api doc" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            docmap: `${__dirname()}/../node/handlers/docmap`,
+            doc: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.doc
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Display some documentation sourced from markdown files`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.doc
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/doc
+                 *
+                 * Store all the "doc" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/doc`,
+            },
+            markdown: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.markdown
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Display some documentation sourced from markdown files`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.markdown
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/markdown
+                 *
+                 * Store all the "markdown" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/markdown`,
+            },
+            docmap: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.docmap
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Serve some docmap item(s) depending on request`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.docmap
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/docmap
+                 *
+                 * Store all the "api doc" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/docmap`,
+            }
         },
     };
 }

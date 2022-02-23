@@ -7,8 +7,7 @@
     @foreach ($block->see as $see)
         <section class="s-bg:main-surface s-radius">
             @if ($see->og)
-
-                <div class="s-layout:1_2 s-bg:main-surface s-radius s-overflow:hidden s-depth:100 s-mbe:50">
+                <div class="s-layout:1_2 s-bg:main-surface s-radius s-overflow:hidden s-depth:10 s-mbe:50">
                     <div class="s-ratio:21-9">
                         <img class="s-ratio:1 s-fit:cover" src="{{ $see->og->ogImage->url }}"
                             alt="{{ $see->og->ogTitle }}" />

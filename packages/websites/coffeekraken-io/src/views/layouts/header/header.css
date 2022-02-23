@@ -42,11 +42,12 @@
     body.scrolled & {
         top: 0;
         width: calc(1280px + sugar.padding(40) * 2);
+        width: 100%;
         border-top-left-radius: 0;
         border-top-right-radius: 0;
 
         @sugar.media(>=wide) {
-            width: calc(1640px + sugar.padding(40) * 2);
+            width: 100%;
         }
     }
 

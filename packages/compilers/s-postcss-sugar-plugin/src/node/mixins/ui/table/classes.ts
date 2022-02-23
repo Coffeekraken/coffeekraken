@@ -112,29 +112,10 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
             *   <table class="s-table${
                 style === finalParams.defaultStyle ? '' : `:${style}`
             } s-mbe:30">
-            *       <tr>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *           <th>${__faker.name.findName()}</th>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *       <tr>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *           <td>${__faker.name.findName()}</td>
-            *       </tr>
-            *   </table>
-            *   <table class="s-table${
-                style === finalParams.defaultStyle ? '' : `:${style}`
-            } s-color:accent s-mbe:30">
             *       <tr>
             *           <th>${__faker.name.findName()}</th>
             *           <th>${__faker.name.findName()}</th>
@@ -157,7 +138,7 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
+                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
             *   <table class="s-table${
                 shape === finalParams.defaultShape ? '' : `:${shape}`
             } s-mbe:30">
@@ -181,7 +162,7 @@ export default function ({
             })
             .join('\n')}
         *
-        * @example      html        RTL
+        * @example      html        RTL Support
         * <div dir="rtl">
         *   <table class="s-table">
         *       <tr>
@@ -203,7 +184,8 @@ export default function ({
         * </div>
         * 
         * @example      html        Scales
-        *   <table class="s-table s-scale:15">
+        * ${['07','1','13','16'].map(scale => `
+        *   <table class="s-table s-scale:${scale}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
         *           <th>${__faker.name.findName()}</th>
@@ -220,10 +202,11 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
+        * `).join('\n')}
         * 
-        * @example      html        Text format
-        *   <div class="s-format:text">
-        *       <table>
+        * @example      html        Colors (non-exhaustive)
+        * ${['main','accent','complementary','error'].map(color => `
+        *   <table class="s-table s-color:${color}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
         *           <th>${__faker.name.findName()}</th>
@@ -240,7 +223,7 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        *   </div>
+        * `).join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

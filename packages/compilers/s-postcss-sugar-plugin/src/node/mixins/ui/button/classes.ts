@@ -118,7 +118,7 @@ export default function ({
         * 
         ${finalParams.styles
             .map((style) => {
-                return ` * @example        html       ${style}
+                return ` * @example        html       ${style} style ${finalParams.defaultStyle === style ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultStyle === style ? '' : `:${style}`
             } s-mie:20 s-mbe:20"><span>Click me!</span></a>
@@ -151,7 +151,7 @@ export default function ({
         *
         ${finalParams.shapes
             .map((shape) => {
-                return ` * @example        html       ${shape}
+                return ` * @example        html       ${shape} shape ${finalParams.defaultShape === shape ? '<span class="s-badge:outline s-scale:05">default</span>' : ''}
             *   <a tabindex="0" class="s-btn:${
                 finalParams.defaultShape === shape ? '' : `:${shape}`
             } s-mie:20 s-mbe:20">Click me!</a>
@@ -186,21 +186,7 @@ export default function ({
         *   <a tabindex="0" class="s-btn s-scale:07 s-mie:20">Click me!</a>
         *   <a tabindex="0" class="s-btn s-scale:1 s-mie:20">Click me!</a>
         *   <a tabindex="0" class="s-btn s-scale:13 s-mie:20">Click me!</a>
-        * 
-        * @example       html       Vertical rhythm / Text format
-        *   <div class="s-format:text s-rhythm:vertical">
-        *       <button>
-        *          ${__faker.name.findName()}
-        *       </button>
-        *       <br />
-        *       <button>
-        *           ${__faker.name.findName()}
-        *       </button>
-        *   </div>
-        * 
-        * @example      html       States
-        * <button disabled tabindex="0" class="s-btn s-mie:20 s-mbe:20">I'm disabled</button>
-        * <button tabindex="0" class="s-btn s-disabled s-mie:20 s-mbe:20">I'm disabled using class</button>
+        *   <a tabindex="0" class="s-btn s-scale:16 s-mie:20">Click me!</a>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

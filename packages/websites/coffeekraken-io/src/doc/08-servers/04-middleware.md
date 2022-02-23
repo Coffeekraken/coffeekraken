@@ -18,23 +18,6 @@
 
 Middlewares are functions that will be executed between the incoming request and the response sending to client. For more information about middlewares, I let you check the [express.js middleware documentation](https://expressjs.com/en/guide/using-middleware.html).
 
-## Built-in middlewares
-
-Some built-in middlewares are available out of the box. Here's the list:
-
--   `config`: This middleware will gives you access through the `res.templateData` object to:
-    -   `config`: The configuration json
-    -   `configFiles`: The list of configuration files paths
-    -   `requestedConfig`: When requesting a config through `/config/...`, the docblock objects of this config file
--   `docmap`: This middleware will gives you access through the `res.templateData` object to:
-    -   `docmap`: The docmap object for your current project
--   `frontspec`: This middleware will gives you access through the `res.templateData` object to:
-    -   `frontspec`: The frontspec object of your current project
--   `env`: This middleware will gives you access through the `res.templateData` object to:
-    -   `env`: The SEnv `env` object containing `ENV` and `PLATFORM` keys
--   `packageJson`: This middleware will gives you access through the `res.templateData` object to:
-    -   `packageJson`: The package.json object for your current project
-
 ## Registering your own middleware
 
 To register your own handler, the easiest way is to register it through a module.

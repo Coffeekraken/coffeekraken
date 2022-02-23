@@ -108,7 +108,9 @@ export default function ({
         inline-size: var(--track-size);
         block-size: var(--thumb-size);
         
-        appearance: none;
+        -webkit-appearance: none !important;
+        -moz-appearance: none !important;
+        appearance: none !important;
         pointer-events: all;
         cursor: pointer;
         touch-action: pan-y;

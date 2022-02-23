@@ -56,41 +56,59 @@ export interface ISColorPickerComponentProps {
  * @event           hide                Emitted when the color picker is hided
  *
  * @example         html            Simple input
- * <s-color-picker value="#FABB03" placeholder="Select a color" input></s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker value="#FABB03" placeholder="Choose a color" input></s-color-picker>
+ * </label>
  * 
  * @example         html            With an input and a button
- * <s-color-picker value="#5101FF" placeholder="Select a color" input button></s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker value="#5101FF" placeholder="Choose a color" input button></s-color-picker>
+ * </label>
  * 
  * @example         html            Just a button
- * <s-color-picker value="#55FFFF" button></s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker value="#55FFFF" button></s-color-picker>
+ * </label>
  * 
  * @example         html            With a custom input
- * <s-color-picker>
- *      <input type="text" placeholder="Select a color" value="#FABB03" />
- * </s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker>
+ *          <input type="text" placeholder="Choose a color" value="#FABB03" />
+ *      </s-color-picker>
+ * </label>
  * 
  * @example         html            With a custom button
- * <s-color-picker>
- *      <button class="s-btn s-color:error">Select a color</button>
- * </s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker>
+ *          <button class="s-btn s-color:error">Choose a color</button>
+ *      </s-color-picker>
+ * </label>
  * 
  * @example         html            With a custom input and button
- * <s-color-picker>
- *      <input type="text" placeholder="Select a color" value="#FABB03" />
- *      <button class="s-btn s-color:error">Select a color</button>
- * </s-color-picker>
- * 
- * @example         html            With a custom button
- * <s-color-picker>
- *      <button class="s-btn s-color:error">Select a color</button>
- * </s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker>
+ *          <input type="text" placeholder="Choose a color" value="#FABB03" />
+ *          <button class="s-btn s-color:error">Choose a color</button>
+ *      </s-color-picker>
+ * </label>
  * 
  * @example         html            Disabled
- * <s-color-picker disabled input button>
- * </s-color-picker>
+ * <label class="s-label:responsive">
+ *      Choose a color
+ *      <s-color-picker disabled input button></s-color-picker>
+ * </label>
  *
- * @example         html            RTL
- * <s-color-picker value="#FABB03" placeholder="Select a color" input button dir="rtl"></s-color-picker>
+ * @example         html            RTL Support
+ * <label class="s-label:responsive" dir="rtl">
+ *      Choose a color
+ *      <s-color-picker value="#FABB03" placeholder="Choose a color" input button dir="rtl"></s-color-picker>
+ * </label>
  *
  * @see             https://www.npmjs.com/package/@simonwep/pickr
  * @since           2.0.0

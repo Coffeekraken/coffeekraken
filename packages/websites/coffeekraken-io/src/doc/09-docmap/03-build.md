@@ -31,9 +31,15 @@ This `@namespace` tag is required as the builder uses it to store the item under
 
 As you may doubt, the builder will not take a look inside the `node_modules` directory to search for files with the `@namespace` tag. This would be way to slow and not requested. In fact, the builder will take a look in your files using these glob patterns:
 
--   `*`: Search inside all root files
--   `src/+(cli|doc|js|node|views)/**/*`: Search inside some directories from the `src` one
--   `dist/+(css)/*`: Search inside the generated css from the `dist/css` directory
+{{#each config.docmap.build.globs}}
+- `{{this}}`
+{{/each}}
+
+Here's are the excluded folders:
+
+{{#each config.docmap.build.exclude}}
+- `{{this}}`
+{{/each}}
 
 If you need to update or add some globs to search in, simply create a file under `.sugar/docmap.config.ts` and fill it like so:
 

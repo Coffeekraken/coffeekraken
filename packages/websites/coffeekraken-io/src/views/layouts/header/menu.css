@@ -97,7 +97,7 @@
             height: var(--max-height);
             padding: sugar.padding(50);
             position: relative;
-            @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
+            @sugar.scrollbar ();
 
             background: linear-gradient(
                 -90deg,
@@ -155,7 +155,7 @@
                 transparent
             ) !important;
 
-            @sugar.scrollbar (sugar.color(accent, --alpha 0.3));
+            @sugar.scrollbar ();
 
             /* &:before {
                 content: '';
@@ -183,7 +183,7 @@
                     padding: sugar.padding(20) sugar.padding(30);
                     border-radius: sugar.theme(ui.default.borderRadius);
                     cursor: pointer;
-                    width: 33.3%;
+                    width: 50%;
 
                     &:hover {
                         background-color: sugar.color(complementary);

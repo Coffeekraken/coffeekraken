@@ -5,7 +5,10 @@ import __set from '@coffeekraken/sugar/shared/object/set';
 
 export default async function api(express, settings, config) {
     // register handler
-    config.handlers['api'] = `${__dirname()}/apiHandler`;
+    config.handlers.api = {
+        description: 'Handler that display the api documentation',
+        path: `${__dirname()}/apiHandler`
+    };
 
     const docmap = new __SDocmap();
     const docmapJson = await docmap.read();

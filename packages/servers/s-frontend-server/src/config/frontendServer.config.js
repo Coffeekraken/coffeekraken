@@ -126,6 +126,17 @@ export default function (env, config) {
         middlewares: {
             bench: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.bench
+                 * @type            String
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Track how many times take a request`,
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.bench
                  * @type            String
@@ -140,6 +151,17 @@ export default function (env, config) {
                 settings: {},
             },
             request: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.bench
+                 * @type            String
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject the "request" object for views`,
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.request
@@ -156,6 +178,18 @@ export default function (env, config) {
             },
             env: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.env
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject an "env" object for the views`,
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.env
                  * @type            String
@@ -170,6 +204,18 @@ export default function (env, config) {
                 settings: {},
             },
             packageJson: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.packageJson
+                 * @type            String
+                 * @default             ${__dirname()}/../node/middleware/benchMiddleware
+                 *
+                 * Middleware description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Inject a "packageJson" object for the views`,
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.packageJson
@@ -188,6 +234,17 @@ export default function (env, config) {
         modules: {
             rootFiles: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.rootFiles
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module allows you to serve files from the root directory',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.rootFiles
                  * @type            String
@@ -202,6 +259,17 @@ export default function (env, config) {
                 settings: {},
             },
             docmap: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.docmap
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module gives you access to a "docmap" object in the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.docmap
@@ -218,6 +286,17 @@ export default function (env, config) {
             },
             redirect: {
                 /**
+                * @name            description
+                * @namespace       config.frontendServer.modules.redirect
+                * @type            String
+                *
+                * Specify the module description
+                *
+                * @since           2.0.0
+                * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+                description: 'This module allows you to make redirections depending on requested path',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.redirect
                  * @type            String
@@ -232,6 +311,17 @@ export default function (env, config) {
                 settings: {},
             },
             styleguide: {
+                /**
+                * @name            description
+                * @namespace       config.frontendServer.modules.styleguide
+                * @type            String
+                *
+                * Specify the module description
+                *
+                * @since           2.0.0
+                * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+                description: 'This module handle the /styleguide/... views display',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.styleguide
@@ -248,6 +338,17 @@ export default function (env, config) {
             },
             config: {
                 /**
+                * @name            description
+                * @namespace       config.frontendServer.modules.config
+                * @type            String
+                *
+                * Specify the module description
+                *
+                * @since           2.0.0
+                * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+                description: 'This module gives you access to a "config" and a "configFiles" object into the views',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.config
                  * @type            String
@@ -262,6 +363,17 @@ export default function (env, config) {
                 settings: {},
             },
             frontspec: {
+                /**
+                * @name            description
+                * @namespace       config.frontendServer.modules.frontspec
+                * @type            String
+                *
+                * Specify the module description
+                *
+                * @since           2.0.0
+                * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                */
+                description: 'This module gives you access to a "frontspec" object into the views',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.frontspec
@@ -278,6 +390,17 @@ export default function (env, config) {
             },
             api: {
                 /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.frontspec
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module handle the /api/... views display',
+                /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.api
                  * @type            String
@@ -292,6 +415,17 @@ export default function (env, config) {
                 settings: {},
             },
             view: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.modules.view
+                 * @type            String
+                 *
+                 * Specify the module description
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: 'This module handle the /view/... views display',
                 /**
                  * @name            path
                  * @namespace       config.frontendServer.modules.view
@@ -347,34 +481,6 @@ export default function (env, config) {
                  */
                 handler: 'view',
             },
-            // '/doc/api/*': {
-            //     /**
-            //      * @name        handler
-            //      * @namespace   config.frontendServer.routes.'/doc/api/*'
-            //      * @type        String
-            //      * @default         doc
-            //      *
-            //      * Specify which handle to use for requests on "/doc/api/*"
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //      */
-            //     handler: 'doc',
-            // },
-            // '/api/config': {
-            //     /**
-            //      * @name        handler
-            //      * @namespace   config.frontendServer.routes.'/api/config'
-            //      * @type        String
-            //      * @default         view
-            //      *
-            //      * Specify which handle to use for requests on "/api/config"
-            //      *
-            //      * @since       2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-            //      */
-            //     handler: 'config',
-            // },
             '/docmap.json': {
                 /**
                  * @name        handler
@@ -391,43 +497,82 @@ export default function (env, config) {
             },
         },
         handlers: {
-            /**
-             * @name            doc
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/doc
-             *
-             * Store all the "doc" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            doc: `${__dirname()}/../node/handlers/doc`,
-            /**
-             * @name            markdown
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/markdown
-             *
-             * Store all the "markdown" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            markdown: `${__dirname()}/../node/handlers/markdown`,
-            /**
-             * @name            docmap
-             * @namespace       config.frontendServer.handlers
-             * @type            String
-             * @default         ${__dirname()}/../node/handlers/docmap
-             *
-             * Store all the "api doc" configuration access like the route, the title, etc...
-             *
-             * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-             */
-            docmap: `${__dirname()}/../node/handlers/docmap`,
+            doc: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.doc
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Display some documentation sourced from markdown files`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.doc
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/doc
+                 *
+                 * Store all the "doc" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/doc`,
+            },
+            markdown: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.markdown
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Display some documentation sourced from markdown files`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.markdown
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/markdown
+                 *
+                 * Store all the "markdown" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/markdown`,
+            },
+            docmap: {
+                /**
+                 * @name            description
+                 * @namespace       config.frontendServer.handlers.docmap
+                 * @type            String
+                 *
+                 * Handler description
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                description: `Serve some docmap item(s) depending on request`,
+                /**
+                 * @name            path
+                 * @namespace       config.frontendServer.handlers.docmap
+                 * @type            String
+                 * @default         ${__dirname()}/../node/handlers/docmap
+                 *
+                 * Store all the "api doc" configuration access like the route, the title, etc...
+                 *
+                 * @since         2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 */
+                path: `${__dirname()}/../node/handlers/docmap`,
+            }
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsT0FBTyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBRSwrQkFBK0IsQ0FBQyxDQUFDLENBQUMsOEJBQThCO1lBQ3JHLFFBQVEsRUFBRSxtQ0FBbUM7WUFDN0MsMENBQTBDO1NBQzdDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxRQUFRLEVBQUUsTUFBTTtRQUVoQixLQUFLLEVBQUU7WUFDSCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLGNBQWM7Z0JBQ3JCLFFBQVEsRUFBRTtvQkFDTjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsK0JBQStCO29CQUN2Qzs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxZQUFZLEVBQUUsSUFBSTtpQkFDckI7YUFDSjtTQUNKO1FBRUQsV0FBVyxFQUFFO1lBQ1QsS0FBSyxFQUFFO2dCQUNIOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxxQ0FBcUM7Z0JBQ3pELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxPQUFPLEVBQUU7Z0JBQ0w7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHVDQUF1QztnQkFDM0QsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsbUNBQW1DO2dCQUN2RCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsV0FBVyxFQUFFO2dCQUNUOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSwyQ0FBMkM7Z0JBQy9ELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7U0FDSjtRQUVELE9BQU8sRUFBRTtZQUNMLFNBQVMsRUFBRTtnQkFDUDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsc0NBQXNDO2dCQUMxRCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxnQ0FBZ0M7Z0JBQ3BELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG9DQUFvQztnQkFDeEQsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELFVBQVUsRUFBRTtnQkFDUjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsd0NBQXdDO2dCQUM1RCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsTUFBTSxFQUFFO2dCQUNKOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxnQ0FBZ0M7Z0JBQ3BELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxTQUFTLEVBQUU7Z0JBQ1A7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHNDQUFzQztnQkFDMUQsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsMEJBQTBCO2dCQUM5QyxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSw0QkFBNEI7Z0JBRWhELFFBQVEsRUFBRTtvQkFDTjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxJQUFJLEVBQUUsU0FBUztvQkFFZjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxTQUFTLEVBQUUsT0FBTztpQkFDckI7YUFDSjtTQUNKO1FBRUQsTUFBTSxFQUFFO1lBQ0osR0FBRyxFQUFFO2dCQUNEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILE9BQU8sRUFBRSxNQUFNO2FBQ2xCO1lBQ0Qsa0JBQWtCO1lBQ2xCLFVBQVU7WUFDViw4QkFBOEI7WUFDOUIsZ0VBQWdFO1lBQ2hFLDZCQUE2QjtZQUM3Qiw4QkFBOEI7WUFDOUIsU0FBUztZQUNULGtFQUFrRTtZQUNsRSxTQUFTO1lBQ1QsNEJBQTRCO1lBQzVCLHdHQUF3RztZQUN4RyxVQUFVO1lBQ1Ysc0JBQXNCO1lBQ3RCLEtBQUs7WUFDTCxtQkFBbUI7WUFDbkIsVUFBVTtZQUNWLDhCQUE4QjtZQUM5QixpRUFBaUU7WUFDakUsNkJBQTZCO1lBQzdCLCtCQUErQjtZQUMvQixTQUFTO1lBQ1QsbUVBQW1FO1lBQ25FLFNBQVM7WUFDVCw0QkFBNEI7WUFDNUIsd0dBQXdHO1lBQ3hHLFVBQVU7WUFDVix5QkFBeUI7WUFDekIsS0FBSztZQUNMLGNBQWMsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsUUFBUTthQUNwQjtTQUNKO1FBRUQsUUFBUSxFQUFFO1lBQ047Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHLFNBQVMsRUFBRSx1QkFBdUI7WUFDMUM7Ozs7Ozs7Ozs7ZUFVRztZQUNILFFBQVEsRUFBRSxHQUFHLFNBQVMsRUFBRSw0QkFBNEI7WUFDcEQ7Ozs7Ozs7Ozs7ZUFVRztZQUNILE1BQU0sRUFBRSxHQUFHLFNBQVMsRUFBRSwwQkFBMEI7U0FDbkQ7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsT0FBTyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBRSwrQkFBK0IsQ0FBQyxDQUFDLENBQUMsOEJBQThCO1lBQ3JHLFFBQVEsRUFBRSxtQ0FBbUM7WUFDN0MsMENBQTBDO1NBQzdDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxRQUFRLEVBQUUsTUFBTTtRQUVoQixLQUFLLEVBQUU7WUFDSCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLGNBQWM7Z0JBQ3JCLFFBQVEsRUFBRTtvQkFDTjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsK0JBQStCO29CQUN2Qzs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxZQUFZLEVBQUUsSUFBSTtpQkFDckI7YUFDSjtTQUNKO1FBRUQsV0FBVyxFQUFF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

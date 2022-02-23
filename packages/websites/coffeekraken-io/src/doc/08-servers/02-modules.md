@@ -18,6 +18,14 @@
 
 The SFrontendServer is based on the AMAZING [ExpressJs](https://expressjs.com/) server. This mean that you can extend it as you want by following these steps described bellow:
 
+## Built-in modules
+
+Our server comes with some built-in modules. Here's the list:
+
+{{#each config.frontendServer.modules}}
+- `{{@key}}`: {{this.description}}
+{{/each}}
+
 ## Create your module
 
 First of all, create a file (where you want) `src/node/myModule.ts` that will be the entry point of your module.

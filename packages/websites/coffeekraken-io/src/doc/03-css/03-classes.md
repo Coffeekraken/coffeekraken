@@ -16,7 +16,21 @@
 
 # Classes
 
-Out of the box, the `postcssSugarPlugin` can generate a lot of helper classes based for the most part on your theme configuration. Here's a small non-exhaustive list of classes that are available:
+Out of the box, the `postcssSugarPlugin` can generate a lot of helper classes based for the most part on your theme configuration.
+
+To generate all these classes, you can simply add this to your css file:
+
+```css
+/* init the sugar toolkit */
+@sugar.init();
+/* generate ALL the classes */
+@sugar.classes();
+/* or generate only the classes you need */
+@sugar.position.classes(); 
+@sugar.ui.avatar.classes();
+```
+
+Here's a small non-exhaustive list of classes that are available:
 
 -   Position
     -   `s-position:absolute:top:right`

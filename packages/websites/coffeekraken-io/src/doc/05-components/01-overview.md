@@ -24,6 +24,24 @@ We call `component` everything that takes place inside your HTML like a `button`
 
 Inside the component category, we also include `web`components. These are new custom elements that you can use within your HTML like `s-date-picker`, `s-color-picker`, `s-side-panel`, etc...
 
+## Offial components
+
+Here's the list of currently official available components:
+
+{{#each docmap.menu.slug}}
+{{#ifMatch @key 'styleguide\/ui' }}
+- [`{{replace @key '/styleguide/ui/' ''}}`]({{@key}})
+{{/ifMatch}}
+{{/each}}
+
+And here's the list of our official `web`components:
+
+{{#each docmap.menu.packages }}
+{{#ifMatch @key '-component$' }}
+- [`{{replace @key '@coffeekraken/' ''}}`](/{{@key}}/doc/readme)
+{{/ifMatch}}
+{{/each}}
+
 ## Components MUST follow some simple rules
 
 All the components that we provide follows these simple rules:

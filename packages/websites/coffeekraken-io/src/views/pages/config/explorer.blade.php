@@ -17,7 +17,6 @@
                 <ul class="s-fs-tree">
 
                     @foreach ($configFiles as $file)
-
                         <li id="{{ $subId }}">
                             <div class="s-flex">
                                 <a class="s-link:stretch s-order:2"
@@ -26,7 +25,6 @@
                                 <div class="s-loader:spinner s-color:accent s-mie:10 s-when:siblings:loading">
                                 </div>
                         </li>
-
                     @endforeach
 
             </nav>
@@ -48,12 +46,10 @@
                     </h3>
 
                     @foreach ($requestedConfig as $configObj)
-
                         <ol>
                             @foreach ($configObj->docblocks as $docblock)
-
                                 <li class="s-font:40 s-mbe:30">
-                                    <header class="s-flex s-bg:main-surface s-radius s-depth:100">
+                                    <header class="s-flex s-bg:main-surface s-radius">
                                         <div class="s-flex-item:grow s-tc:accent s-p:30 s-color:complementary">
 
                                             @php
@@ -77,10 +73,8 @@
                                     @endif
                                     <p class="s-typo:p s-p:30">{!! $docblock->description !!}</p>
                                 </li>
-
                             @endforeach
                         </ol>
-
                     @endforeach
 
                 @endif

@@ -11,10 +11,11 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
 export default function config(express, settings, config) {
     return __awaiter(this, void 0, void 0, function* () {
         config.middlewares.config = {
+            description: 'Middleware that inject a "config" and a "configFiles" object for the views',
             path: `${__dirname()}/configMiddleware`,
             settings: {},
         };
         return true;
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUVBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFVBQWdCLE1BQU0sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzFELE1BQU0sQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHO1lBQ3hCLElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxtQkFBbUI7WUFDdkMsUUFBUSxFQUFFLEVBQUU7U0FDZixDQUFDO1FBRUYsT0FBTyxJQUFJLENBQUM7SUFDaEIsQ0FBQztDQUFBIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7OztBQUVBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRTVELE1BQU0sQ0FBQyxPQUFPLFVBQWdCLE1BQU0sQ0FBQyxPQUFPLEVBQUUsUUFBUSxFQUFFLE1BQU07O1FBQzFELE1BQU0sQ0FBQyxXQUFXLENBQUMsTUFBTSxHQUFHO1lBQ3hCLFdBQVcsRUFBRSw0RUFBNEU7WUFDekYsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG1CQUFtQjtZQUN2QyxRQUFRLEVBQUUsRUFBRTtTQUNmLENBQUM7UUFFRixPQUFPLElBQUksQ0FBQztJQUNoQixDQUFDO0NBQUEifQ==

@@ -8,7 +8,9 @@ export default async function docmap(express, settings, config) {
     const menu = docmapJson.menu;
 
     // register handler
-    config.handlers['styleguide'] = `${__dirname()}/styleguideHandler`;
+    config.handlers.styleguide = {
+        path: `${__dirname()}/styleguideHandler`
+    };
 
     // @ts-ignore
     Object.keys(menu.custom.styleguide?.slug).forEach((slug) => {

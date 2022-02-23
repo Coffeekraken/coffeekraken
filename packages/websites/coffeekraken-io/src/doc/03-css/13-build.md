@@ -27,10 +27,13 @@ To compile your CSS, you can simply run one of these commands in your terminal a
 # Compile only the CSS
 sugar postcss.build
 # Launch the development environment with local server, CSS compilation, JS compilation, etc...
-sugar
+sugar dev
 ```
 
-By default, the compiler will take the `src/css/index.css` file as input and will save the builded one to `dist/css/index.css`.
+By default, the compiler will take the `src/css/index.css` file as input and will save the builded one to:
+
+- `dist/css/index.css`: Production ready css
+- `dist/css/index.dev.css`: Development css with docblocks, etc...
 
 All of these configurations are specified inside the `postcssBuilder.config.ts` config file that you can override as all the others settings following the [configuration documentation](/doc/config/overview).
 

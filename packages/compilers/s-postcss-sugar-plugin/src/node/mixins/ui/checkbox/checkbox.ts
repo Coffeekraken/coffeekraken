@@ -12,7 +12,7 @@ import __STheme from '@coffeekraken/s-theme';
  * Apply the checkbox style to any element
  *
  * @param       {'solid'}           [style='theme.ui.checkbox.defaultStyle']        The style you want for your checkbox
- * @param       {'default'|'square'|'pill'}     [shape=theme.ui.checkbox.defaultShape]      The shape you want for your checkbox
+ * @param       {'default'|'square'|'circle'}     [shape=theme.ui.checkbox.defaultShape]      The shape you want for your checkbox
  * @param       {('bare'|'lnf'|'shape')[]}      [scope=['bare','lnf','shape']]                      The scope(s) you want to generate
  * @return      {String}            The generated css
  *
@@ -35,7 +35,7 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
             },
             shape: {
                 type: 'String',
-                values: ['default', 'square', 'pill', 'circle'],
+                values: ['default', 'square', 'circle'],
                 default: __STheme.config('ui.checkbox.defaultShape'),
             },
             scope: {
@@ -52,7 +52,7 @@ class postcssSugarPluginUiCheckboxInterface extends __SInterface {
 
 export interface IPostcssSugarPluginUiCheckboxParams {
     style: 'solid';
-    shape: 'default' | 'square' | 'pill' | 'circle';
+    shape: 'default' | 'square' | 'circle';
     scope: ('bare' | 'lnf' | 'shape')[];
 }
 
@@ -142,7 +142,6 @@ export default function ({
                 `);
                 break;
             case 'circle':
-            case 'pill':
                 vars.push(`
                     border-radius: 9999px;
                 `);

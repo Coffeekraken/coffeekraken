@@ -100,23 +100,23 @@ export default function ({
             *     <textarea class="s-input s-width:40" placeholder="Type something!" rows="3"></textarea>
             *     <span>${__faker.name.title()} ${__faker.name.findName()}</span>
             *   </label>
-            *   <label class="s-mbe:30 s-scale:15 s-label${
-            style === finalParams.defaultStyle ? '' : `:${style}`
-        }">
-        *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-        *     <span>${__faker.name.title()} ${__faker.name.findName()} (Scaled)</span>
-        *   </label>
         *   <label class="s-mbe:30 s-label${
         style === finalParams.defaultStyle ? '' : `:${style}`
     }">
     *     <input type="text" disabled class="s-input s-width:40" placeholder="Type something!" />
-    *     <span>${__faker.name.title()} ${__faker.name.findName()} (Disabled)</span>
+    *     <span>I'm disabled</span>
     *   </label>
     *   <label dir="rtl" class="s-mbe:30 s-label${
         style === finalParams.defaultStyle ? '' : `:${style}`
     }">
     *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
-    *     <span>${__faker.name.title()} ${__faker.name.findName()} (RTL)</span>
+    *     <span>Support RTL</span>
+    *   </label>
+    *   <label class="s-mbe:30 s-label${
+        style === finalParams.defaultStyle ? '' : `:${style}`
+    } s-color:accent">
+    *     <input type="text" class="s-input s-width:40" placeholder="Type something!" />
+    *     <span>With the accent color</span>
     *   </label>
             * `;
             })

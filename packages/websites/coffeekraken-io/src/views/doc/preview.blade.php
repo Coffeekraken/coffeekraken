@@ -18,7 +18,7 @@
         <div class="s-format:none s-rhythm:none preview s-mbe:50">
             @foreach ($block->example as $example)
                 @if ($example->title)
-                    <h4 class="s-typo:h3 s-mb:50">{{ ucfirst($example->title) }}</h4>
+                    <h4 class="s-typo:h3 s-mb:50">{!! ucfirst($example->title) !!}</h4>
                 @endif
                 @if ($example->description)
                     <p class="s-typo:p s-format:text">{!! \Sugar\markdown\toHtml($example->description) !!}</p>

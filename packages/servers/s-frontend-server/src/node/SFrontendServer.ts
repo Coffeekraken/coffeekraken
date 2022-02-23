@@ -240,9 +240,12 @@ export default class SFrontendServer extends __SClass {
                             const routeObj =
                                 frontendServerConfig.routes[routeSlug];
 
-                            const handlerPath =
+                            const handlerObj =
                                 frontendServerConfig.handlers[routeObj.handler];
-                            if (!handlerPath) return;
+                            const handlerPath = handlerObj.path;
+                            if (!handlerPath) {
+                                return;
+                            }
 
                             const { default: handlerFn } = await import(
                                 handlerPath

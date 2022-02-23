@@ -40,7 +40,7 @@ On top of that, we make use of our own `SLitComponent` class that extends the `L
 To create a new component project, simply launch this command:
 
 ```shell
-sugar new component
+sugar new litElement
 ```
 
 > You need to have the `sugar` CLI installed using `npm i @coffeekraken/cli -g`
@@ -53,7 +53,7 @@ Once that is finished, simple cd into your project directory and launch
 sugar dev
 ```
 
-This will start the development environment in which you can implement and test your component. Once your component is ready, launch this command to build it for production
+This will start the **development environment** in which you can implement and test your component. Once your component is ready, launch this command to build it for production
 
 ```shell
 sugar build

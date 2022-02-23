@@ -48,90 +48,157 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * define();
  *
  * @example         html            Min and max dates
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *      <s-date-picker
- *          placeholder="Select a date"
- *          class="s-color:accent s-width--30"
+ *          placeholder="Choose a date"
+ *          class="s-width:40"
  *          min-date="2021-08-10"
  *          max-date="2021-08-20"
  *          name="myDatePicker2"
  *          input
  *      ></s-date-picker>
+ * </label>
  *
  * @example         html            Disable weekends
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:complementary s-width--30"
+ *         placeholder="Choose a date"
+ *         class="s-width:40"
  *         name="myDatePicker3"
  *         disable-weekends
  *         input
  *     ></s-date-picker>
- *
- * @example         html            RTL
- *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:accent s-width--30"
- *         min-date="2021-08-10"
- *         name="myDatePicker1"
- *         input
- *         rtl
- *     ></s-date-picker>
+ * </label>
  *
  * @example         html            With a button
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:accent s-width--30"
+ *         placeholder="Choose a date"
+ *         class="s-width:40"
  *         name="myDatePicker4"
  *         input
  *         button
  *     ></s-date-picker>
+ * </label>
  * 
  * @example         html            Disabled
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:accent s-width--30"
+ *         placeholder="Choose a date"
+ *         class="s-width:40"
  *         name="myDatePicker4"
  *          disabled
  *         input
  *         button
  *     ></s-date-picker>
+ * </label>
  * 
  * @example         html            Display more than 1 month
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:accent s-width--30"
+ *         placeholder="Choose a date"
+ *         class="s-width:40"
  *         name="myDatePicker4"
  *         number-of-months="2"
  *          input
  *          button
  *     ></s-date-picker>
+ * </label>
  *
  * @example         html            With custom input
- *  <s-date-picker name="something" class="s-color:accent">
- *      <input type="text" name="something" placeholder="Select a date" class="s-width--30" />
- *  </s-date-picker>
+ * <label class="s-label:resonsive">
+ *      Choose a date
+ *      <s-date-picker name="something">
+ *          <input type="text" name="something" placeholder="Choose a date" class="s-width:40" />
+ *      </s-date-picker>
+ * </label>
  * 
  * @example         html            With a custom button
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:error"
+ *         placeholder="Choose a date"
  *         name="myDatePicker5"
  *     >
- *       <button class="s-btn">Select a date</button>
+ *       <button class="s-btn">Choose a date</button>
  *     </s-date-picker>
+ * </label>
  * 
  * @example         html            With a custom input and button
+ * <label class="s-label:resonsive">
+ *      Choose a date
  *     <s-date-picker
- *         placeholder="Select a date"
- *         class="s-color:error"
+ *         placeholder="Choose a date"
  *         name="myDatePicker5"
  *     >
- *       <input type="text" name="something" placeholder="Select a date" class="s-width--30" />
- *       <button class="s-btn">Select a date</button>
+ *       <input type="text" name="something" placeholder="Choose a date" class="s-width:40" />
+ *       <button class="s-btn">Choose a date</button>
  *     </s-date-picker>
+ * </label>
+ * 
+ * @example         html            Colors (non-exhaustive)
+ * <label class="s-label:resonsive s-mbe:20">
+ *      Choose a date
+ *     <s-date-picker
+ *         placeholder="Choose a date"
+ *         name="myDatePicker5"
+ *          input
+ *         button
+ *     >
+ *     </s-date-picker>
+ * </label>
+ * <label class="s-label:resonsive s-mbe:20 s-color:accent">
+ *      Choose a date
+ *     <s-date-picker
+ *         placeholder="Choose a date"
+ *         name="myDatePicker5"
+ *          input
+ *         button
+ *     >
+ *     </s-date-picker>
+ * </label>
+ * <label class="s-label:resonsive s-mbe:20 s-color:complementary">
+ *      Choose a date
+ *     <s-date-picker
+ *         placeholder="Choose a date"
+ *         name="myDatePicker5"
+ *          input
+ *         button
+ *     >
+ *     </s-date-picker>
+ * </label>
+ * <label class="s-label:resonsive s-mbe:20 s-color:error">
+ *      Choose a date
+ *     <s-date-picker
+ *         placeholder="Choose a date"
+ *         name="myDatePicker5"
+ *          input
+ *         button
+ *     >
+ *     </s-date-picker>
+ * </label>
+ * 
+ * @example         html            RTL Support
+ * <label class="s-label:resonsive" dir="rtl">
+ *      Choose a date
+ *     <s-date-picker
+ *         placeholder="Choose a date"
+ *         class="s-width:40"
+ *         min-date="2021-08-10"
+ *         name="myDatePicker1"
+ *         input
+ *         rtl
+ *     ></s-date-picker>
+ * </label>
  *
  * @todo            Support for the "showWeekNumber" setting
  *
- * @see             https://www.npmjs.com/package/pikaday
+ * @see             https://github.com/Pikaday/Pikaday
  * @since           2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
  */

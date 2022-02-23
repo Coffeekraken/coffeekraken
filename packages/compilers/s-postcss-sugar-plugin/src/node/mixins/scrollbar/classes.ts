@@ -70,22 +70,16 @@ export default function ({
         * 
         * @cssClass     s-scrollbar         Apply the custom scrollbar
         * 
-        * @example        html
+        * @example        html          Vertical scrollbar
         * <!-- scrollbar vertical -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30"><Vertical</h3>
-        *   <div class="s-scrollbar" style="height:50px; overflow: auto;">
-        *       ${[...Array(20)].map((l) => `${__faker.name.findName()}<br>`)}
+        *   <div class="s-scrollbar" style="height:100px; overflow-y: auto;">
+        *       ${__faker.lorem.paragraphs(10)}
         *   </div>
-        * </div>
         * 
-        * <!-- scrollbar orizontal -->
-        * <div class="s-mbe:50">
-        *   <h3 class="s-tc:accent s-font:30 s-mbe:30"><Horizontal</h3>
-        *   <div class="s-scrollbar" style="white-space:nowrap; height: 30px; overflow: auto;">
-        *       ${__faker.lorem.paragraphs(3)}
+        * @example        html          Horizontal scrollbar
+        *   <div class="s-scrollbar" style="white-space:nowrap; width: 200px; height: 2em; overflow-x: auto; overflow-y: hidden;">
+        *       ${__faker.lorem.paragraphs(1)}
         *   </div>
-        * </div>
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)

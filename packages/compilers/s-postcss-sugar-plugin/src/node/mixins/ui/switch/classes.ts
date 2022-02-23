@@ -119,43 +119,15 @@ export default function ({
                 return ` * @example        html       ${style} style
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
+            *     <input type="checkbox" class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
                 }" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                } s-color:accent" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                } s-color:complementary" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    style === finalParams.defaultStyle ? '' : `:${style}`
-                } s-color:error" />
-            *   </label>
                 <label class="s-mbe:30 s-label">
             *     I'm disabled
-            *     <input type="checkbox" disabled ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
+            *     <input type="checkbox" disabled class="s-switch${
                     style === finalParams.defaultStyle ? '' : `:${style}`
-                } s-color:accent" />
+                }" />
             *   </label>
             * `;
             })
@@ -166,94 +138,52 @@ export default function ({
                 return ` * @example        html       ${shape} shape
             *   <label class="s-mbe:30 s-label">
             *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
+            *     <input type="checkbox" class="s-switch${
                     shape === finalParams.defaultShape ? '' : `:${shape}`
                 }" />
             *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                } s-color:accent" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                } s-color:complementary" />
-            *   </label>
-            *   <label class="s-mbe:30 s-label">
-            *     ${__faker.name.title()} ${__faker.name.findName()}
-            *     <input type="checkbox" ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
-                    shape === finalParams.defaultShape ? '' : `:${shape}`
-                } s-color:error" />
-            *   </label>
                 <label class="s-mbe:30 s-label">
             *     I'm disabled
-            *     <input type="checkbox" disabled ${
-                Math.random() > 0.5 ? 'checked' : ''
-            } class="s-switch${
+            *     <input type="checkbox" disabled class="s-switch${
                     shape === finalParams.defaultShape ? '' : `:${shape}`
-                } s-color:accent" />
+                }" />
             *   </label>
             * `;
             })
             .join('\n')}
         *
-        * @example      html            RTL
+        * @example      html            RTL Support
         * <div dir="rtl">
         *   <label class="s-mbe:30 s-label">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
-        *   </label>
-        *   <label class="s-mbe:30 s-label">
-        *     I'm disabled
-        *     <input type="checkbox" disabled ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
+        *     <input type="checkbox" class="s-switch" />
         *   </label>
         * </div>
+        * 
+        * @example      html            Colors (non-exhauustive)
+        ${['main','accent','complementary','error'].map(color => `
+        *   <label class="s-mbe:30 s-label s-color:${color}">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <input type="checkbox" class="s-switch" />
+        *   </label>
+        `).join('\n')}
         * 
         * @example      html            Scales
         *   <label class="s-mbe:30 s-label s-scale\:05">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
+        *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:10">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
+        *     <input type="checkbox" class="s-switch" />
         *   </label>
         *   <label class="s-mbe:30 s-label s-scale\:15">
         *     ${__faker.name.title()} ${__faker.name.findName()}
-        *     <input type="checkbox" ${
-            Math.random() > 0.5 ? 'checked' : ''
-        } class="s-switch s-color:accent" />
+        *     <input type="checkbox" class="s-switch" />
+        *   </label>
+        *   <label class="s-mbe:30 s-label s-scale\:20">
+        *     ${__faker.name.title()} ${__faker.name.findName()}
+        *     <input type="checkbox" class="s-switch" />
         *   </label>
         * 
         * @since      2.0.0

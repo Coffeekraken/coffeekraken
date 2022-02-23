@@ -1,7 +1,7 @@
 <!--
 /**
  * @name            Sections
- * @namespace       doc.markdown
+ * @_namespace       doc.markdown
  * @type            Markdown
  * @platform        md
  * @status          stable

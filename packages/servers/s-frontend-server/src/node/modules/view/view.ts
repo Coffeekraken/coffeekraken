@@ -8,7 +8,9 @@ export default async function view(express, settings, config) {
     const menu = docmapJson.menu;
 
     // register handler
-    config.handlers['view'] = `${__dirname()}/viewHandler`;
+    config.handlers.view = {
+        path: `${__dirname()}/viewHandler`
+    };
 
     // @ts-ignore
     config.routes[settings.slug ?? '/view/*'] = {

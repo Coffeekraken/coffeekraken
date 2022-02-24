@@ -14,7 +14,7 @@ export default function (env) {
              * Specify the directories from which to try to resolve modules
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             dirs: ['[config.storage.package.nodeModulesDir]'],
 
@@ -27,7 +27,7 @@ export default function (env) {
              * Specify the extensions you want to check if a path extension free is passed
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             extensions: ['js', 'mjs', 'json', 'node'],
 
@@ -40,7 +40,7 @@ export default function (env) {
              * Specify which fields to check first to resolve the package file
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             fields: ['main', 'module', 'browser'],
 
@@ -53,7 +53,7 @@ export default function (env) {
              * Specify if you want to take care of built-in modules for node like "fs", "path", etc...
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             builtInModules: __isNode() ? true : false,
 
@@ -66,7 +66,7 @@ export default function (env) {
              * Specify if you want to check the "exports" field before the specified ones in the "fields" setting
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             preferExports: true,
 
@@ -79,7 +79,7 @@ export default function (env) {
              * Specify the default method to use when requesting to resolve a path. Can be "import" or "require"
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             method: 'import',
 
@@ -92,7 +92,7 @@ export default function (env) {
              * Specify the default target to use when requesting to resolve a path. Can be "node" or "default"
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             target: __isNode() ? 'node' : 'default',
         },

@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $lang = Thorin::browser_language();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function browser_language() {
 	$lang = false;

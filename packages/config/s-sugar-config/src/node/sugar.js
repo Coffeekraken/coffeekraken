@@ -30,7 +30,7 @@ export default class SSugarConfig extends __SClass {
      * Constructor
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -53,7 +53,7 @@ export default class SSugarConfig extends __SClass {
      * registerFolder('/something/cool');
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerFolder(path, scope = 'default', packageName) {
         this._registeredConfigFolderPaths.push({
@@ -84,7 +84,7 @@ export default class SSugarConfig extends __SClass {
      * Access the config files real paths
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get filesRealPaths() {
         return this._registeredConfigFilesPaths
@@ -102,7 +102,7 @@ export default class SSugarConfig extends __SClass {
      * Access the config files paths
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get filesPaths() {
         return this._registeredConfigFilesPaths;
@@ -116,7 +116,7 @@ export default class SSugarConfig extends __SClass {
      * Access the config registered folders real pathes
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get foldersRealPaths() {
         return this._registeredConfigFolderPaths
@@ -134,7 +134,7 @@ export default class SSugarConfig extends __SClass {
      * Access the config folders pathes
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get foldersPaths() {
         return this._registeredConfigFolderPaths.map((f) => f.path);
@@ -192,7 +192,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {Boolean}                           true if is loaded, false if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static isLoaded(id = 'default') {
         if (!this._sSugarConfigInstances[id])
@@ -211,7 +211,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {ISugarConfigToDocblocksResult[]}                         An array containing ISugarConfigToDocblocksResult objects
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static toDocblocks(configId) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -245,7 +245,7 @@ export default class SSugarConfig extends __SClass {
      * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static hash(dotPath = '') {
         const config = this.get(dotPath);
@@ -263,7 +263,7 @@ export default class SSugarConfig extends __SClass {
      * @returns     {Any}                                       The configuration object filtered and ready for the asked target
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static toObject(target = 'node') {
         // get the configuration
@@ -291,7 +291,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {String}                                    The json string
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static toJson(target = 'node') {
         return JSON.stringify(this.toObject(target));
@@ -310,7 +310,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {any}                           The getted configuration
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get(dotPath, id = 'default') {
         if (!this._sSugarConfigInstances[id]) {
@@ -355,7 +355,7 @@ export default class SSugarConfig extends __SClass {
      * Access the sugar config settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sugarConfigSettings() {
         return this._settings.sugarConfig;
@@ -371,7 +371,7 @@ export default class SSugarConfig extends __SClass {
      * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hash(dotPath = '') {
         const config = this.get(dotPath);
@@ -387,7 +387,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {any}                           The getted configuration
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get(dotpath) {
         return this._configInstance.get(dotpath);
@@ -403,7 +403,7 @@ export default class SSugarConfig extends __SClass {
      * @return      {Any[]}                         An array of docblocks objects
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toDocblocks(configId) {
         return this.constructor.toDocblocks(configId);
@@ -418,7 +418,7 @@ export default class SSugarConfig extends __SClass {
      * @return          {Promise<any>}          Return a promise resolved once the configuration has been loaded
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _load() {
         var _a;

@@ -14,7 +14,7 @@ export default function (env) {
              * Configure where is located the system "temp" folder
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tmpDir: __systemTmpDir(),
         },
@@ -28,7 +28,7 @@ export default function (env) {
              * Configure the root directory. Usually the package root dir
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rootDir: `${__packageRoot(process.cwd())}`,
             /**
@@ -40,7 +40,7 @@ export default function (env) {
              * Configure where is located the ".local" folder in which are stored usually some things like cache, etc...
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             localDir: `[config.storage.package.rootDir]/.local`,
             /**
@@ -52,7 +52,7 @@ export default function (env) {
              * Configure where is located the "cache" folder
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             cacheDir: `[config.storage.package.localDir]/cache`,
             /**
@@ -64,7 +64,7 @@ export default function (env) {
              * Configure where is located the "temp" folder
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tmpDir: `[config.storage.package.localDir]/temp`,
             /**
@@ -76,7 +76,7 @@ export default function (env) {
              * Configure where is located the "node_modules" folder
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nodeModulesDir: `[config.storage.package.rootDir]/node_modules`,
         },
@@ -90,7 +90,7 @@ export default function (env) {
              * Configure where is located sugar package directory. Usually in the node_modules/@coffeekraken/sugar folder
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rootDir: `${__packageRoot(__dirname())}`,
         },
@@ -104,7 +104,7 @@ export default function (env) {
              * Configure where is located the "src" directory where are stored all the sources like js, ts, css, images, etc...
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rootDir: `[config.storage.package.rootDir]/src`,
             /**
@@ -116,7 +116,7 @@ export default function (env) {
              * Configure where is located the javascript/typescript source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             jsDir: `[config.storage.src.rootDir]/js`,
             /**
@@ -128,7 +128,7 @@ export default function (env) {
              * Configure where is located the javascript/typescript node source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nodeDir: `[config.storage.src.rootDir]/node`,
             /**
@@ -140,7 +140,7 @@ export default function (env) {
              * Configure where is located the css source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             cssDir: `[config.storage.src.rootDir]/css`,
             /**
@@ -152,7 +152,7 @@ export default function (env) {
              * Configure where is located the documentation markdown source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             docDir: `[config.storage.src.rootDir]/doc`,
             /**
@@ -164,7 +164,7 @@ export default function (env) {
              * Configure where is located the fonts source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             fontsDir: `[config.storage.src.rootDir]/fonts`,
             /**
@@ -176,7 +176,7 @@ export default function (env) {
              * Configure where is located the icons source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             iconsDir: `[config.storage.src.rootDir]/icons`,
             /**
@@ -188,7 +188,7 @@ export default function (env) {
              * Configure where is located the images source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             imgDir: `[config.storage.src.rootDir]/img`,
             /**
@@ -200,7 +200,7 @@ export default function (env) {
              * Configure where is located the views (blade, twig, etc...) source files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             viewsDir: `[config.storage.src.rootDir]/views`,
         },
@@ -214,7 +214,7 @@ export default function (env) {
              * Configure where is located the "dist" folder in which are stored usually the "distribution" files like production css, js, images, etc...
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rootDir: `[config.storage.package.rootDir]/dist`,
             /**
@@ -226,7 +226,7 @@ export default function (env) {
              * Configure where is located the javascript/typescript distribution files
              *
              * @since           2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             jsDir: `[config.storage.dist.rootDir]/js`,
             /**
@@ -238,7 +238,7 @@ export default function (env) {
              * Configure where is located the javascript/typescript node distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nodeDir: `[config.storage.dist.rootDir]/node`,
             /**
@@ -250,7 +250,7 @@ export default function (env) {
              * Configure where is located the css distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             cssDir: `[config.storage.dist.rootDir]/css`,
             /**
@@ -262,7 +262,7 @@ export default function (env) {
              * Configure where is located the doc markdown distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             docDir: `[config.storage.dist.rootDir]/doc`,
             /**
@@ -274,7 +274,7 @@ export default function (env) {
              * Configure where is located the fonts distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             fontsDir: `[config.storage.dist.rootDir]/fonts`,
             /**
@@ -286,7 +286,7 @@ export default function (env) {
              * Configure where is located the icons distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             iconsDir: `[config.storage.dist.rootDir]/icons`,
             /**
@@ -298,7 +298,7 @@ export default function (env) {
              * Configure where is located the images distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             imgDir: `[config.storage.dist.rootDir]/img`,
             /**
@@ -310,7 +310,7 @@ export default function (env) {
              * Configure where is located the views (blade, twig, etc...) distribution files
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             viewsDir: `[config.storage.dist.rootDir]/views`,
         },
@@ -324,7 +324,7 @@ export default function (env) {
          * This accept globs.
          *
          * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         exclude: [
             '**/bin/**',

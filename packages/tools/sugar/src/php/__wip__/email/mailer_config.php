@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $disk = Thorin::mailer_config('gmail');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function mailer_config($name = null) {
 	if ($name === null) {

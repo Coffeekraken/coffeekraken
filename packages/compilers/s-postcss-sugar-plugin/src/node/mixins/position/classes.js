@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.position.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginPositionClassesInterface extends __SInterface {
     static get _definition() {
@@ -90,7 +90,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -99,7 +99,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * @name            s-position:absolute
        * @namespace       sugar.css.position
        * @type            CssClass
-       * @platform      postcss
+       * @platform      css
        * @status        stable
        * 
        * This class allows you to apply the value "<yellow>absolute</yellow>" to the position property on any HTMLElement
@@ -110,7 +110,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * </div>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `).code(`
       .s-position--absolute{
@@ -134,7 +134,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
            * </div>
            * 
            * @since       2.0.0
-           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
         `).code(`
       .s-position--relative{
@@ -157,7 +157,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
            * </div>
            * 
            * @since       2.0.0
-           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
         `).code(`
       .s-position--fixed{
@@ -180,7 +180,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--sticky{
@@ -203,7 +203,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--top {
@@ -226,7 +226,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--left {
@@ -249,7 +249,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--bottom {
@@ -272,7 +272,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--right {
@@ -295,7 +295,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `).code(`
       .s-position--center:not(.s-position--top):not(.s-position--bottom):not(.s-position--left):not(.s-position--right) {

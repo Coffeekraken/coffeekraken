@@ -22,7 +22,7 @@ import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTra
  * });
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class STheme extends __SThemeBase {
     /**
@@ -38,7 +38,7 @@ export default class STheme extends __SThemeBase {
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static setTheme(theme, variant, $context = document.querySelector('html')) {
         __clearTransmations(document.body, {
@@ -67,7 +67,7 @@ export default class STheme extends __SThemeBase {
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static setThemeVariant(variant, $context = document.querySelector('html')) {
         return this.setTheme(undefined, variant, $context);
@@ -82,7 +82,7 @@ export default class STheme extends __SThemeBase {
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getCurrentTheme($context = document.body) {
         var _a;
@@ -113,7 +113,7 @@ export default class STheme extends __SThemeBase {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(theme, variant) {
         super(theme, variant);
@@ -129,7 +129,7 @@ export default class STheme extends __SThemeBase {
      * @param       {HTMLElement}       [$context=document.body]        The context on which to apply the color
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static applyCurrentColor(color, $context = document.body) {
         const vars = this.remapCssColor('current', color);
@@ -149,7 +149,7 @@ export default class STheme extends __SThemeBase {
      * @param           {HTMLElement}       [$context=document.body]        The context in which to set the color
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     setColor(color, value, $context = document.body) {
         const colorInstance = new __SColor(value);
@@ -169,7 +169,7 @@ export default class STheme extends __SThemeBase {
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getColor(name, variant, $context = document.body) {
         const $elm = document.createElement('p');

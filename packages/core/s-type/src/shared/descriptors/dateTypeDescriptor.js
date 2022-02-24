@@ -17,7 +17,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  * };
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor = {
     name: 'Date',

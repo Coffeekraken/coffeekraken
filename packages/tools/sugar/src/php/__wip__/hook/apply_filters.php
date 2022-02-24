@@ -17,7 +17,7 @@ use voku\helper\Hooks;
  * });
  * print Thorin::apply_filters('my-filter', 'world'); // Hello world
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/voku/php-hooks
  */
 function apply_filters() {

@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::array_pull_at($array, [1, 3]);
  * // ['b', 'd']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/pullAt.php
  */
 function array_pull_at(array $array, $indexes): array {

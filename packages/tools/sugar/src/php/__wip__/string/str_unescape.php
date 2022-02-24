@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::str_unescape('fred, barney, &amp; pebbles');
  * // 'fred, barney, & pebbles'
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/unescape.php
  */
 function str_unescape(string $string):string {

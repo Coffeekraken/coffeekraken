@@ -21,7 +21,7 @@ export default function (env, config) {
          * - verbose: Detailed logs
          *
          * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         types: ['info', 'warning', 'error'],
     };

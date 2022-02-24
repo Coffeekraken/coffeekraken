@@ -26,7 +26,7 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
  * @todo      tests
  *
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function view(req, res, settings = {}) {
     var _a, _b;

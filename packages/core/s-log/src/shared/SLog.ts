@@ -69,7 +69,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "LOG"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_LOG: ISLogType = 'log';
 
@@ -81,7 +81,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "INFO"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_INFO: ISLogType = 'info';
 
@@ -93,7 +93,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "WARN"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_WARN: ISLogType = 'warn';
 
@@ -105,7 +105,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "ERROR"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_ERROR: ISLogType = 'error';
 
@@ -117,7 +117,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "VERBOSE"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_VERBOSE: ISLogType = 'verbose';
 
@@ -129,7 +129,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "VERBOSER"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_VERBOSER: ISLogType = 'verboser';
 
@@ -141,7 +141,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "DECORATOR"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_DECORATOR: ISLogType = 'decorator';
 
@@ -153,7 +153,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "SUMMARY"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_SUMMARY: ISLogType = 'summary';
 
@@ -165,7 +165,7 @@ export default class SLog {
      * This static constant tells a log that it is of type "CHILD_PROCESS"
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPE_CHILD_PROCESS: ISLogType = 'child_process';
 
@@ -177,7 +177,7 @@ export default class SLog {
      * This static constant store all the log types available
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static TYPES: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
 
@@ -189,7 +189,7 @@ export default class SLog {
      * This static constant define a log preset called "silent" that display nothing
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_SILENT: ISLogType[] = [];
 
@@ -207,7 +207,7 @@ export default class SLog {
      * - SUMMARY
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_DEFAULT: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_SUMMARY, SLog.TYPE_DECORATOR, SLog.TYPE_CHILD_PROCESS];
 
@@ -221,7 +221,7 @@ export default class SLog {
      * - ERROR
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_WARN: ISLogType[] = [SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
 
@@ -234,7 +234,7 @@ export default class SLog {
      * - ERROR
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_ERROR: ISLogType[] = [SLog.TYPE_ERROR, SLog.TYPE_CHILD_PROCESS];
 
@@ -253,7 +253,7 @@ export default class SLog {
      * - SUMMARY
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_VERBOSE: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
 
@@ -273,7 +273,7 @@ export default class SLog {
      * - SUMMARY
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESET_VERBOSER: ISLogType[] = [SLog.TYPE_LOG, SLog.TYPE_INFO, SLog.TYPE_WARN, SLog.TYPE_ERROR, SLog.TYPE_VERBOSE, SLog.TYPE_VERBOSER, SLog.TYPE_DECORATOR, SLog.TYPE_SUMMARY, SLog.TYPE_CHILD_PROCESS];
 
@@ -285,7 +285,7 @@ export default class SLog {
      * This static constant store all the log presets available
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static PRESETS: String[] = ['silent', 'default', 'warn', 'error', 'verbose', 'verboser'];
 
@@ -311,7 +311,7 @@ export default class SLog {
      * });
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _filteredTypes: ISLogType[] = [];
     static filter(types: ISLogType[]): void {
@@ -326,7 +326,7 @@ export default class SLog {
      * This static method allows you to reset all the filters applied
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static clearFilters(): void {
         this._filteredTypes = [];
@@ -343,7 +343,7 @@ export default class SLog {
      * @param       {Partial<ISLog>}        defaultLogObj       Your default log object
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _defaultLogObj: Partial<ISLog> = {};
     static setDefaultLogObj(logObj: Partial<ISLog>): void {
@@ -362,7 +362,7 @@ export default class SLog {
      * @return      {Boolean}                              True if the log type is enabled, false otherwise                 
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static isTypeEnabled(types: ISLogType | ISLogType[]): boolean {
         if (!Array.isArray(types)) types = [types];
@@ -380,7 +380,7 @@ export default class SLog {
      * Store the logObj passed in constructor
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _logObj: ISLog;
 
@@ -392,7 +392,7 @@ export default class SLog {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(logObj: Partial<ISLog>) {
         // @ts-ignore
@@ -427,7 +427,7 @@ export default class SLog {
      * Access the "value" property of the SLog object
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     public get value(): any {
         return this._logObj.value;
@@ -445,7 +445,7 @@ export default class SLog {
      * This specify which type if the log. LOG, INFO, WARN, ERROR or VERBODE
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get type(): string {
         // @ts-ignore
@@ -462,7 +462,7 @@ export default class SLog {
      * Check the documentation of this static method for more info.
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get active(): boolean {
         // logs that does not have types are always active
@@ -486,7 +486,7 @@ export default class SLog {
      * This specify if the log has to be printed with decorators or not
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get decorators(): boolean {
         // @ts-ignore
@@ -505,7 +505,7 @@ export default class SLog {
      * This specify if the log has to be printed with his time or not
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get time(): boolean {
         // @ts-ignore
@@ -520,7 +520,7 @@ export default class SLog {
      * Access the "timestamp" property of the SLog object
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get timestamp(): number {
         // @ts-ignore
@@ -536,7 +536,7 @@ export default class SLog {
      * This specify if the previous logs have to be cleared before printing this one
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get clear(): boolean {
         // @ts-ignore
@@ -551,7 +551,7 @@ export default class SLog {
      * Access the "margin" property of the SLog object.
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get margin(): ISLogMargin {
         // @ts-ignore
@@ -570,7 +570,7 @@ export default class SLog {
      * when the next log appear.
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get temp(): boolean {
         // @ts-ignore
@@ -587,7 +587,7 @@ export default class SLog {
      * This depends on the logger you use and how it can display logs.
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get as(): string {
         // @ts-ignore

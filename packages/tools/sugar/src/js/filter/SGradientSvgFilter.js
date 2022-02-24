@@ -23,7 +23,7 @@ import SSvgFilter from './SSvgFilter';
  * filter.applyTo(myCoolHTMLElement);
  *
  * @since           1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SGradientSvgFilter extends SSvgFilter {
     /**
@@ -32,7 +32,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *
      * Constructor
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor() {
         super(`
@@ -51,7 +51,7 @@ class SGradientSvgFilter extends SSvgFilter {
      * @param 		{Array} 			colors 			An array of colors for your gradient
      * @param 		{Object} 			settings 		The settings of your gradient that consist of an object like : ```{width: 512, height: 512, x0: 0, x1: 512, y0: 0, y1: 1}```
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     linear(colors, settings = {}) {
         const width = settings.width || 512, height = settings.height || 512, x0 = settings.x0 || 0, x1 = settings.x1 || width, y0 = settings.y0 || 0, y1 = settings.y1 || 0;
@@ -85,7 +85,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *    height: 300
      * });
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     radial(colors, settings = {}) {
         const width = settings.width || 512, height = settings.height || 512, x0 = settings.x0 || width / 2, x1 = settings.x1 || width / 2, r0 = settings.r0 || 0, y0 = settings.y0 || height / 2, y1 = settings.y1 || height / 2, r1 = settings.r1 || width;
@@ -113,7 +113,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *
      * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     applyTo(elm) {
         super.applyTo(elm);
@@ -129,7 +129,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *
      * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unapplyFrom(elm) {
         super.unapplyFrom(elm);
@@ -144,7 +144,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *
      * @param 		{Event} 		e 		The resize event
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onWindowResize(e) {
         // set the image size
@@ -157,7 +157,7 @@ class SGradientSvgFilter extends SSvgFilter {
      *
      * Set image width
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _setImageSize() {
         const width = this.elms[0].offsetWidth, height = this.elms[0].offsetHeight;

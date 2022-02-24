@@ -50,7 +50,7 @@ class SDocMap extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -79,7 +79,7 @@ class SDocMap extends __SClass {
          * This store the docMap.json entries
          *
          * @since         2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._entries = {};
         // @ts-ignore
@@ -107,7 +107,7 @@ class SDocMap extends __SClass {
      * @param               {ISDocMapTagProxyFn}      processor       The processor function
      *
      * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerTagProxy(tag, processor) {
         this._registeredTagsProxy[tag] = processor;
@@ -120,7 +120,7 @@ class SDocMap extends __SClass {
      * Access the docmap settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docmapSettings() {
         return this._settings.docmap;
@@ -140,7 +140,7 @@ class SDocMap extends __SClass {
      * @return      {SPromise<ISDocMapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(params) {
         return new __SPromise(({ resolve, pipe, emit }) => __awaiter(this, void 0, void 0, function* () {
@@ -284,7 +284,7 @@ class SDocMap extends __SClass {
      * @return        {Record<string: SFile>}       The structured menu tree with an SFile instance attached for each source file
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _extractMenu(docmapJson = this._docmapJson) {
         const docmapJsonMenuByPackage = {};
@@ -410,7 +410,7 @@ class SDocMap extends __SClass {
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params) {
         const finalParams = (__deepMerge(__SDocmapBuildParamsInterface.defaults(), params));
@@ -583,7 +583,7 @@ class SDocMap extends __SClass {
      * @returns       {Promise<any>}              A promise resolved with the installation process result
      *
      * @since   2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     installSnapshot(params) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
@@ -683,7 +683,7 @@ class SDocMap extends __SClass {
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     snapshot(params) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {

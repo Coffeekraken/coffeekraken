@@ -16,7 +16,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *
  * @see             https://www.npmjs.com/package/blessed
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const nodeAdapter: ISNotificationAdapter = {
   id: 'blessed',

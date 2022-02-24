@@ -21,7 +21,7 @@ namespace thorin;
  * Thorin::partition($users, function($user) { return $user['active']; });
  * // objects for [['fred'], ['barney', 'pebbles']]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/partition.php
  */
 function partition(iterable $collection, $predicate = null):array {

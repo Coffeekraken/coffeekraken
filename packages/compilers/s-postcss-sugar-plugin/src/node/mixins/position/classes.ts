@@ -17,7 +17,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * \@sugar.position.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginPositionClassesInterface extends __SInterface {
@@ -113,7 +113,7 @@ export default function ({
         *   </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -125,7 +125,7 @@ export default function ({
        * @name            s-position:absolute
        * @namespace       sugar.css.position
        * @type            CssClass
-       * @platform      postcss
+       * @platform      css
        * @status        stable
        * 
        * This class allows you to apply the value "<yellow>absolute</yellow>" to the position property on any HTMLElement
@@ -136,7 +136,7 @@ export default function ({
        * </div>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `,
     ).code(`
@@ -163,7 +163,7 @@ export default function ({
            * </div>
            * 
            * @since       2.0.0
-           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
         `,
     ).code(`
@@ -189,7 +189,7 @@ export default function ({
            * </div>
            * 
            * @since       2.0.0
-           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
         `,
     ).code(`
@@ -215,7 +215,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`
@@ -241,7 +241,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`
@@ -267,7 +267,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`
@@ -293,7 +293,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`
@@ -319,7 +319,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`
@@ -345,7 +345,7 @@ export default function ({
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
       `,
     ).code(`

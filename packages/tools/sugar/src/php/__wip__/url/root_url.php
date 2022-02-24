@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::root_url('my/cool/file.pdf', true);
  * // https://thorin.io/my/cool/file.pdf
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function root_url($slug = '', $include_domain = false) {
 	if ($include_domain) {

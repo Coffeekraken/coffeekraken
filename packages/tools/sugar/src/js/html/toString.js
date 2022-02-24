@@ -22,7 +22,7 @@
  * toString(myDomNode, false) // <div class="my-dom-node"></div>
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function toStringFn(html, deep = true) {
     if (document !== undefined && document.createElement !== undefined) {

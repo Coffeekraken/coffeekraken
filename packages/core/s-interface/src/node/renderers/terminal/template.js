@@ -15,7 +15,7 @@ import __countLine from '@coffeekraken/sugar/shared/string/countLine';
  * @return              String                  The renderer template string
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ interfaceClass, properties }) {
     let tpl = [];

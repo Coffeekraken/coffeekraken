@@ -27,7 +27,7 @@ import __formSerialize from 'form-serialize';
  * })
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function sendForm(form: HTMLFormElement): Promise<any> {
     // protect

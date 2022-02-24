@@ -11,7 +11,7 @@ export default function (env, config) {
          * Specify a glob pattern relative to the "inDir" to specify files you want to compress
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         glob: '**/*',
 
@@ -24,7 +24,7 @@ export default function (env, config) {
          * Specify a which file extensions you want to compress
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         compressExts: ['jpg', 'jpeg', 'png', 'svg', 'webp'],
 
@@ -37,7 +37,7 @@ export default function (env, config) {
          * Specify a directory from where you want to  compress files
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         inDir: '[config.storage.src.imgDir]',
 
@@ -50,7 +50,7 @@ export default function (env, config) {
          * Specify a directory where you want to put the compressed files
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         outDir: '[config.storage.dist.imgDir]',
 
@@ -63,7 +63,7 @@ export default function (env, config) {
          * Specify an overall quality percentage that you want to target
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         quality: 80,
 
@@ -76,7 +76,7 @@ export default function (env, config) {
          * Specify if you want to generate a webp version of each images
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         webp: true,
 
@@ -89,7 +89,7 @@ export default function (env, config) {
          * Specify a max width you want your resolution 1 images to target
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         width: null,
 
@@ -102,7 +102,7 @@ export default function (env, config) {
          * Specify a max height you want your resolution 1 images to target
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         height: null,
 
@@ -115,7 +115,7 @@ export default function (env, config) {
          * Specify some resolutions you want your images to be generated
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         resolution: [1, 2],
 
@@ -128,7 +128,7 @@ export default function (env, config) {
          * Specify if you want to clear the outDir before the generation
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         clear: true,
 
@@ -151,7 +151,7 @@ export default function (env, config) {
          * }
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         specificParams: {},
     };

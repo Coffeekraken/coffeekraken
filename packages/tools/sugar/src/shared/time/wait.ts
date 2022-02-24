@@ -23,7 +23,7 @@
  * await wait(2000);
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function wait(timeout: number = 0) {
     return new Promise((resolve) => {

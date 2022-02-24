@@ -25,7 +25,7 @@
  * extractSame('Hello world', 'Hello plop'); // => 'Hello '
  *
  * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function extractSame(string1, string2, multiple = false) {
     // compare letter by letter

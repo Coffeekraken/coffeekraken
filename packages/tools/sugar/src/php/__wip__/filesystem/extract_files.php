@@ -10,7 +10,7 @@ use \wapmorgan\UnifiedArchive\UnifiedArchive;
  * @example    php
  * Thorin::extract_files('my-archive.zip','my-output-folder');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/wapmorgan/UnifiedArchive
  */
 function extract_files($archive, $output) {

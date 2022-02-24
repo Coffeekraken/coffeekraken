@@ -21,7 +21,7 @@ import scriptLoaded from '../scriptLoaded';
  * appendScriptTag('dist/js/app.js')
  *
  * @since     1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function appendScriptTag(src, $parent = document.body) {
     const $script = document.createElement('script');

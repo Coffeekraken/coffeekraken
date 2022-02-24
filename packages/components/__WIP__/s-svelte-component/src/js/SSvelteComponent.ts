@@ -42,7 +42,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * Access the svelteComponent settings
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get svelteComponentSettings(): ISSvelteComponentSettings {
     return (<any>this)._settings.svelteComponent;
@@ -56,7 +56,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * Access the document style string
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _styleStr: string = '';
   get styleStr(): string {
@@ -73,7 +73,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * Access the root HTMLElement inside the shadow dom
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   // _currentComponent;
   _$root: HTMLElement;
@@ -99,7 +99,7 @@ class SSVelteComponent extends __SClass implements ISSvelteComponent {
    * Access the root style HTMLElement inside the shadow dom
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get styleElm(): HTMLElement | undefined {
     for (let i = 0; i < this._componentElm.shadowRoot.children.length; i++) {

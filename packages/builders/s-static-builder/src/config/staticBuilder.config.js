@@ -11,7 +11,7 @@ export default function (env, config) {
          * Specify the input sitemap file to use for building your static website
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         input: '[config.storage.package.rootDir]/sitemap.xml',
         /**
@@ -23,7 +23,7 @@ export default function (env, config) {
          * Specify the outDir folder path to save your builded website
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         outDir: '[config.storage.package.rootDir]/static',
         /**
@@ -35,7 +35,7 @@ export default function (env, config) {
          * Specify the host on which to make requests to
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         host: 'http://[config.frontendServer.hostname]:[config.frontendServer.port]',
         /**
@@ -47,7 +47,7 @@ export default function (env, config) {
          * Specify the number of failures after which the build is considered as rejected. -1 to disable this feature
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         failAfter: -1,
         /**
@@ -59,7 +59,7 @@ export default function (env, config) {
          * Specify after how many ms a request has to be considered as failed
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requestTimeout: 5000,
         /**
@@ -71,7 +71,7 @@ export default function (env, config) {
          * Specify the number of retry to do by request before considering it as failed
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requestRetry: 5,
         /**
@@ -83,7 +83,7 @@ export default function (env, config) {
          * Specify how many long the builder has to wait between tries
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requestRetryTimeout: 1000,
         /**
@@ -95,7 +95,7 @@ export default function (env, config) {
          * Specify if you want to clean the past builds before rebuilding. THis would do the same as setting the "incremental" option to false
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         clean: false,
         /**
@@ -107,7 +107,7 @@ export default function (env, config) {
          * Specify if you want to use incremental build
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         incremental: true,
         assets: {
@@ -121,7 +121,7 @@ export default function (env, config) {
                  * Specify the directory/file/url from which to get the asset to copy
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 from: '[config.staticBuilder.host]/docmap.json',
                 /**
@@ -133,7 +133,7 @@ export default function (env, config) {
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 to: '[config.staticBuilder.outDir]/docmap.json',
             },
@@ -147,7 +147,7 @@ export default function (env, config) {
                  * Specify the directory/file to copy
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 from: '[config.storage.package.rootDir]/manifest.json',
                 /**
@@ -159,7 +159,7 @@ export default function (env, config) {
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 to: '[config.staticBuilder.outDir]/manifest.json',
             },
@@ -173,7 +173,7 @@ export default function (env, config) {
                  * Specify the directory/file to copy
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 from: '[config.storage.package.rootDir]/sitemap.xml',
                 /**
@@ -185,7 +185,7 @@ export default function (env, config) {
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 to: '[config.staticBuilder.outDir]/sitemap.xml',
             },
@@ -199,7 +199,7 @@ export default function (env, config) {
                  * Specify the directory/file to copy
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 from: '[config.storage.package.rootDir]/favicon.ico',
                 /**
@@ -211,7 +211,7 @@ export default function (env, config) {
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 to: '[config.staticBuilder.outDir]/favicon.ico',
             },
@@ -225,7 +225,7 @@ export default function (env, config) {
                  * Specify the directory/file to copy
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 from: '[config.storage.dist.rootDir]',
                 /**
@@ -237,7 +237,7 @@ export default function (env, config) {
                  * Specify the directory where you want to paste the asset(s)
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 to: '[config.staticBuilder.outDir]',
             },

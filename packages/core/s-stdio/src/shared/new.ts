@@ -29,7 +29,7 @@ import __SStdio, { ISStdioUi } from './SStdio';
  * await SStdio.new('default', proc);
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default async function _new(
     id: string,

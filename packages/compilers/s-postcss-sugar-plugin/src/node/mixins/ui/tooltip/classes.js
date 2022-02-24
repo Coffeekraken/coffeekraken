@@ -188,7 +188,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   </span>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -207,7 +207,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
         vars.code(() => `
             .s-tooltip-container {
@@ -249,7 +249,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
         // no need to write a class here cause this is handled in the tooltip.ts file directly...
     }
@@ -268,7 +268,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
         vars.code(() => `
             .s-tooltip {
@@ -292,7 +292,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * </a>
                 * 
                 * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */`);
             vars.code(() => `
                 .s-tooltip${finalParams.defaultStyle === style ? '' : `--${style}`} {
@@ -317,7 +317,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * </a>
                 * 
                 * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */`);
             vars.code(() => `
                 .s-tooltip${finalParams.defaultShape === shape ? '' : `--${shape}`} {
@@ -342,7 +342,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
     vars.code(() => `
         .s-tooltip--interactive {
@@ -364,7 +364,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
     vars.code(() => `
         .s-tooltip {
@@ -386,7 +386,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
     vars.code(() => `
         .s-tooltip--right {
@@ -408,7 +408,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
     vars.code(() => `
         .s-tooltip--left {
@@ -430,7 +430,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`);
     vars.code(() => `
         .s-tooltip--bottom {

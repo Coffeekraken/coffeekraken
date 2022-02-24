@@ -39,7 +39,7 @@ class SDocblockBlock extends __SClass {
      *
      * Constructor
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(source, settings = {}) {
         super(__deepMerge({
@@ -91,7 +91,7 @@ class SDocblockBlock extends __SClass {
      * Access the docblockBlock settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docblockBlockSettings() {
         return this._settings.docblockBlock;
@@ -104,7 +104,7 @@ class SDocblockBlock extends __SClass {
      *
      * @return      {String}              The passed docblock string
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         return this._source.trim();
@@ -117,7 +117,7 @@ class SDocblockBlock extends __SClass {
      *
      * @return      {Object}              The parsed dobclock object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
         if (!this._blockObj) {
@@ -135,7 +135,7 @@ class SDocblockBlock extends __SClass {
      *
      * @return      {Object}          The object version of the source string
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse() {
         return new Promise((resolve) => __awaiter(this, void 0, void 0, function* () {

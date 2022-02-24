@@ -105,7 +105,7 @@ import __STheme from '@coffeekraken/s-theme';
  *
  * @see             https://www.npmjs.com/package/@simonwep/pickr
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SColorPicker extends __SLitComponent {
     constructor() {

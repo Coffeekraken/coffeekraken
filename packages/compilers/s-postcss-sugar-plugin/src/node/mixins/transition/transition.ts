@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.platform.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginTransitionMixinInterface extends __SInterface {
@@ -55,7 +55,7 @@ export interface postcssSugarPluginTransitionMixinParams {
  * <h1 class="my-cool-element">Hello world</h1>
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({
     params,

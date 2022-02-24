@@ -15,7 +15,7 @@ export default function (env, config) {
          * Allows you to disable all notifications
          *
          * @since           2.0.'0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         enable: true,
 
@@ -28,7 +28,7 @@ export default function (env, config) {
          * Specify the adapters to use
          *
          * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         adapters: [__isNode() ? 'node' : 'browser'],
 
@@ -41,7 +41,7 @@ export default function (env, config) {
          * Specify the adaptersSettings to use
          *
          * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         adaptersSettings: {},
 
@@ -56,7 +56,7 @@ export default function (env, config) {
                  * Default title for default notification
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: '[title]',
 
@@ -69,7 +69,7 @@ export default function (env, config) {
                  * Default message for default notification
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 message: '[message]',
 
@@ -84,7 +84,7 @@ export default function (env, config) {
                  * @todo          implement the ck_default.png icon
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_default.png`,
             },
@@ -99,7 +99,7 @@ export default function (env, config) {
                  * Default title for starting notification
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: '[title]',
 
@@ -112,7 +112,7 @@ export default function (env, config) {
                  * Default message for starting notification
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 message: '[message]',
 
@@ -125,7 +125,7 @@ export default function (env, config) {
                  * Specify the "start" default icon to use
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_start.png`,
             },
@@ -140,7 +140,7 @@ export default function (env, config) {
                  * Default title for success notification
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: '[title]',
 
@@ -153,7 +153,7 @@ export default function (env, config) {
                  * Default message for success notification
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 message: '[message]',
 
@@ -166,7 +166,7 @@ export default function (env, config) {
                  * Specify the "success" default icon to use
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_success.png`,
             },
@@ -181,7 +181,7 @@ export default function (env, config) {
                  * Default title for warning notification
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: '[title]',
 
@@ -194,7 +194,7 @@ export default function (env, config) {
                  * Default message for warning notification
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 message: '[message]',
 
@@ -209,7 +209,7 @@ export default function (env, config) {
                  * @todo          implement the ck_warning.png icon
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_warning.png`,
             },
@@ -224,7 +224,7 @@ export default function (env, config) {
                  * Default title for error notification
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: '[title]',
 
@@ -237,7 +237,7 @@ export default function (env, config) {
                  * Default message for error notification
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 message: '[message]',
 
@@ -250,7 +250,7 @@ export default function (env, config) {
                  * Specify the "error" default icon to use
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 icon: `${__packageRootDir(__dirname())}/src/data/notifications/ck_error.png`,
             },

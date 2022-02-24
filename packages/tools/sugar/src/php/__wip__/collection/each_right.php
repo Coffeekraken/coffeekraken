@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::each_right([1, 2], function($value) { echo $value; })
  * // Echoes `2` then `1`
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/eachRight.php
  */
 function each_right($collection, callable $iteratee) {

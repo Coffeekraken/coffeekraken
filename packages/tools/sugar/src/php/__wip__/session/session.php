@@ -14,7 +14,7 @@ use duncan3dc\Sessions\Session;
  * @example    php
  * Thorin::session('my-key', 'my value');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function session($key, $value = null) {
 	if ($value === -1) {

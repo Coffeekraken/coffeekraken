@@ -18,7 +18,7 @@ namespace Sugar\ar;
  * \Sugar\ar\pickRandom(['hello','world','test']);
  * 
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function pickRandom(array $array) {
     return $array[array_rand($array, 1)];

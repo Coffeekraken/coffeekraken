@@ -21,7 +21,7 @@
  * insertAfter(myElementToInsert, theReferenceElement);
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function insertAfter(elm, refElm) {
     // next sibling of ref elm

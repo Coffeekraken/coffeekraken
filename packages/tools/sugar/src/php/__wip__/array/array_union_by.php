@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::array_union_by([2.1], [1.2, 2.3], 'floor');
  * // [2.1, 1.2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/unionBy.php
  */
 function array_union_by(...$arrays): array {

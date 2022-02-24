@@ -35,7 +35,7 @@ import __isPlain from '../is/plainObject';
  * });
  *
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function flatten(object, settings = {}) {
     const toReturn = {};

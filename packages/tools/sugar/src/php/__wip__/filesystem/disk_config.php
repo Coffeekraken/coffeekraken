@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $config = Thorin::disk_config('base');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function disk_config($name = 'base') {
 	$name = strtolower($name);

@@ -14,7 +14,7 @@ namespace thorin;
  * @example    php
  * $lang = Thorin::language(['en','fr'], 'en');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function language($available = null, $default = null, $getParam = 'lang') {
 	// default parameters

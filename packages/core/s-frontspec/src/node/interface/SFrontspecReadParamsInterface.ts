@@ -17,7 +17,7 @@ import __SEnv from '@coffeekraken/s-env';
  * needed to build the docMap.json file
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SFrontspecReadParamsInterface extends __SInterface {
     static get _definition() {

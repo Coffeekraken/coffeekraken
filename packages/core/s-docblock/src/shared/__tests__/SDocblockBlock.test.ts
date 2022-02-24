@@ -35,7 +35,7 @@ describe('s-docblock.shared.SDocblockBlock', () => {
  * });
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
         `;
 
@@ -132,7 +132,7 @@ describe('s-docblock.shared.SDocblockBlock', () => {
                 '* });\n' +
                 '*\n' +
                 '* @since           2.0.0\n' +
-                '* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\n' +
+                '* @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\n' +
                 '\n' +
                 '*/',
         });

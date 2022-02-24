@@ -28,7 +28,7 @@ export default class SFrontspec extends __SPromise {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings = {}) {
         super(__deepMerge({
@@ -49,7 +49,7 @@ export default class SFrontspec extends __SPromise {
      * @return      {SPromise}                          An SPromise instance that will be resolved once the frontspec.json file has been correctly read
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read() {
         return new __SPromise(({ resolve, pipe, emit }) => __awaiter(this, void 0, void 0, function* () {
@@ -90,7 +90,7 @@ export default class SFrontspec extends __SPromise {
      * that are defined in the frontspec.json files like some css, js etc...
      *
      * @since     2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     assetsToServe() {
         return __awaiter(this, void 0, void 0, function* () {

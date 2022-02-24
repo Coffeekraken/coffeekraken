@@ -18,7 +18,7 @@ import { parse, stringify } from 'scss-parser';
  * @param         {String}            [return=null]     You can tell what you want back between "string" and "object". By default it will return the same style type that you have passed
  * @return        {String}                              The prefixed style
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function autoPrefix(style) {
   let styleObj = typeof style === 'object' ? style : {};

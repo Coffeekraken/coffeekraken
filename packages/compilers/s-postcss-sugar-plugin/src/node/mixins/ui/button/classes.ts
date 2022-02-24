@@ -189,7 +189,7 @@ export default function ({
         *   <a tabindex="0" class="s-btn s-scale:16 s-mie:20">Click me!</a>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -207,7 +207,7 @@ export default function ({
             * <a class="s-btn">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`
@@ -237,7 +237,7 @@ export default function ({
                 .trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
             ).code(`
@@ -268,7 +268,7 @@ export default function ({
                 .trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
             ).code(`
@@ -290,7 +290,7 @@ export default function ({
         * <a class="s-btn--block">I'm a cool block button</a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`,
     ).code(`
       .s-btn--block {
@@ -313,7 +313,7 @@ export default function ({
         * </span>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`,
     );
     vars.code(`
@@ -366,7 +366,7 @@ export default function ({
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`
@@ -403,7 +403,7 @@ export default function ({
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`

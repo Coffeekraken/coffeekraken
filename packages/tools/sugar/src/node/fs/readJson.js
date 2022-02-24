@@ -25,7 +25,7 @@ import __fs from 'fs';
  * await readJson('my-cool-json/file.json');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function readJson(path) {
     if (!__fs.existsSync(path)) {

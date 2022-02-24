@@ -21,7 +21,7 @@ namespace Thorin;
  * }
  * $myInstance = MySingletonClassWithArgs::getInstance('hello');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class Singleton
 {
@@ -34,7 +34,7 @@ class Singleton
 	/**
 	 * Singleton class constructor
 	 *
-	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 	 */
     protected function __construct() {
     }
@@ -50,7 +50,7 @@ class Singleton
 	 * // with arguments
 	 * $myInstance = MySingletonClassWithArgs::getInstance('hello');
 	 *
-	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 	 */
     public static function getInstance() {
         if (!isset(static::$instance)) {

@@ -28,7 +28,7 @@ import __set from './set';
  * delete(myObject, 'plop');
  *
  * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function del(object, dotPath) {
     const parentDotPath = dotPath.split('.').slice(0, -1).join('.');

@@ -41,7 +41,7 @@
         }
 
         .__subnav {
-            --max-height: 50vh;
+            --max-height: 60vh;
 
             position: absolute;
             top: 60px;
@@ -62,6 +62,9 @@
 
             @sugar.media(>=wide) {
                 width: 1640px;
+            }
+            @sugar.media(<=dwarf) {
+                --max-height: calc(100vh - 200px);
             }
 
             @sugar.media mobile {
@@ -188,6 +191,10 @@
                     &:hover {
                         background-color: sugar.color(complementary);
                         color: sugar.color(complementary, foreground);
+                    }
+
+                    &[actual-parent] {
+                        background-color: sugar.color(complementary, --alpha 0.8);
                     }
                 }
             }

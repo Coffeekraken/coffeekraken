@@ -22,7 +22,7 @@ import __offset from './offset';
  * // output : { top : 200, left : 300 }
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function offsetParent(elm) {
     const parentOffset = __offset(elm.parentNode);

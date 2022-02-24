@@ -29,7 +29,7 @@ import __parse from '../string/parse';
  * env('something.cool', { hello: 'world' });
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function env(dotPath, value?) {
     if (!__isNode()) {

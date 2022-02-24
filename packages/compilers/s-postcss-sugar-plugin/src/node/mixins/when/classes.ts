@@ -20,7 +20,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.when.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginActiveClassesInterface extends __SInterface {
@@ -70,7 +70,7 @@ export default function ({
             * <s-range class="s-when:${state}" />
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -99,7 +99,7 @@ export default function ({
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -128,7 +128,7 @@ export default function ({
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -157,7 +157,7 @@ export default function ({
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -186,7 +186,7 @@ export default function ({
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -215,7 +215,7 @@ export default function ({
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`
@@ -245,7 +245,7 @@ export default function ({
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     ).code(`
@@ -275,7 +275,7 @@ export default function ({
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     ).code(`
@@ -307,7 +307,7 @@ export default function ({
             * <s-range class="s-when:media:${query}" />
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`

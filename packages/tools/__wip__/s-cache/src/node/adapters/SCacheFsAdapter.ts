@@ -27,7 +27,7 @@ import __SCacheAdapter from './SCacheAdapter';
  * @todo      tests
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SCacheFsAdapter extends __SCacheAdapter {
   static id = 'fs';
@@ -40,7 +40,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * Access the fs cache adapter settings
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get fsCacheAdapterSettings(): any {
     return (<any>this)._settings.fsCacheAdapter;
@@ -55,7 +55,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
    * - rootDir (config.storage.package.cacheDir) {String}: Specify the root directory where to put all the files to cache
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(settings = {}) {
     super(
@@ -86,7 +86,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    *    ttl: 40000
    * });
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async set(name, value) {
     // generate the item fs name
@@ -121,7 +121,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.get('myCoolItem');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async get(name) {
     // generate the item fs name
@@ -151,7 +151,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.delete('myCoolItem');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async delete(name) {
     // generate the item fs name
@@ -171,7 +171,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.clear();
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async clear() {
     // read the json file
@@ -193,7 +193,7 @@ export default class SCacheFsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.keys();
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async keys() {
     return [];

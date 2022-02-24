@@ -12,7 +12,7 @@ export default function (env, config) {
              * This define the class prefix applied when rendering a docblock in html
              *
              * @since       2.0.0
-             * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             classPrefix: 's-',
         },

@@ -45,7 +45,7 @@ class SNpmUnusedProcess extends __SProcess {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(initialParams = {}, settings) {
         super(initialParams, settings !== null && settings !== void 0 ? settings : {});
@@ -60,7 +60,7 @@ class SNpmUnusedProcess extends __SProcess {
      * @param       {Partial<ISNpmUnusedProcessSettings>}         [settings={}]           Some settings to override
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     process(params, settings) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {

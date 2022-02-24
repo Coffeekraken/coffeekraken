@@ -29,7 +29,7 @@ import { sprintf as _sprintf } from 'sprintf-js';
  *
  * @see    https://github.com/alexei/sprintf.js
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function sprintf() {
     return _sprintf.apply(this, arguments);

@@ -24,7 +24,7 @@
  * isUrl('hello') => false
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function isUrl(data) {
     const strRegex =

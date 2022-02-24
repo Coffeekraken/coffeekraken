@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::array_take_while($users, function($value) { return $value['active']; });
  * // objects for ['barney', 'fred']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/takeWhile.php
  */
 function array_take_while(array $array, $predicate): array {

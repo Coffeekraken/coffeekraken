@@ -32,7 +32,7 @@ import __SLog from '@coffeekraken/s-log';
  * }
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISBuilderSettings {
@@ -56,7 +56,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * Access the builder settings
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get builderSettings(): any {
         return (<any>this._settings).builder;
@@ -70,7 +70,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings: ISBuilderCtorSettings) {
         super(
@@ -96,7 +96,7 @@ class SBuilder extends __SClass implements ISBuilder {
      * @param           {Object}                        [settings={}]       Specify an object of settings to configure your compilation process
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params: any = {}, settings: any = {}) {
         settings = __deepMerge(this.builderSettings, settings);

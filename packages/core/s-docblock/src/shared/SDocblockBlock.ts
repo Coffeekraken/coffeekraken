@@ -142,7 +142,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      * Access the docblockBlock settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docblockBlockSettings(): ISDocblockBlockSettings {
         return (<any>this._settings).docblockBlock;
@@ -155,7 +155,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * Constructor
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(source, settings = {}) {
         super(
@@ -193,7 +193,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @return      {String}              The passed docblock string
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         return this._source.trim();
@@ -207,7 +207,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @return      {Object}              The parsed dobclock object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
         if (!this._blockObj) {
@@ -228,7 +228,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      *
      * @return      {Object}          The object version of the source string
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(): Promise<any> {
         return new Promise(async (resolve) => {

@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::array_intersection_by([2.1, 1.2], [2.3, 3.4], Math.floor);
  * // [2.1]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/intersectionBy.php
  */
 function array_intersection_by(...$arrays/*, callable $iteratee*/): array {

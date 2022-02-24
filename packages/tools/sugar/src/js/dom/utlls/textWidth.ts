@@ -27,7 +27,7 @@ import __getStyleProperty from '../style/getStyleProperty';
  * const width = textWidth('Hello World');
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function textWidth(source: string | HTMLElement): number {
     // create an element

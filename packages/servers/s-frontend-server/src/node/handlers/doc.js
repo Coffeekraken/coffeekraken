@@ -30,7 +30,7 @@ import __scrapeUrl from '@coffeekraken/sugar/node/og/scrapeUrl';
  * @todo      tests
  *
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 let _docmapJson;
 export default function doc(req, res, settings = {}) {

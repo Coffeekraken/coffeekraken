@@ -27,7 +27,7 @@ import __packageRoot from '@coffeekraken/sugar/node/path/packageRoot';
  * @todo      tests
  *
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function markdown(req, res, settings = {}) {
     return new __SPromise(async ({ resolve, reject, pipe, pipeErrors }) => {

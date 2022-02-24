@@ -11,7 +11,7 @@ namespace thorin;
  * $ext = Thorin::hash_directory('my/cool/directory');
  * // A92B0AB54ACC099B298B9DA94AFB4461
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function hash_directory($directory_path) {
 	if (! is_dir($directory_path))

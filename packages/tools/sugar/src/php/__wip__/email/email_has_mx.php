@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::email_has_mx('example.com');
  * // null
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/nojacko/email-validator
  */
 function email_has_mx($email) {

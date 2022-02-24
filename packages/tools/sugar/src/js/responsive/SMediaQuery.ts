@@ -29,7 +29,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * SMediaQuery.getActiveMedia(); // => mobile
  *
  * @since           2.0.0
- * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SMediaQuery extends __SPromise {
     /**
@@ -40,7 +40,7 @@ class SMediaQuery extends __SPromise {
      * Store the active media name
      *
      * @since           2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _activeMedia = 'desktop';
 
@@ -52,7 +52,7 @@ class SMediaQuery extends __SPromise {
      * Store all the promises for each media
      *
      * @since           2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _promisesStack = {};
 
@@ -64,7 +64,7 @@ class SMediaQuery extends __SPromise {
      * Add the global listener based on the "init-body-media-queries" scss mixin
      *
      * @since             2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getActiveMedia() {
         return this._activeMedia;
@@ -78,7 +78,7 @@ class SMediaQuery extends __SPromise {
      * Add the global listener based on the "init-body-media-queries" scss mixin
      *
      * @since             2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static startListener() {
         document.addEventListener('animationend', (e) => {
@@ -135,7 +135,7 @@ class SMediaQuery extends __SPromise {
      * Constructor
      *
      * @since           2.0.0
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(mediaName, settings = {}) {
         if (!Array.isArray(mediaName)) mediaName = [mediaName];

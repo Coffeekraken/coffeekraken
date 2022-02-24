@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::clamp(-10, -5, 5);
  * // -5
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Number/clamp.php
  */
 function clamp(int $number, int $lower, int $upper):int {

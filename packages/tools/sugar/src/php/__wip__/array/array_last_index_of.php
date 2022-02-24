@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::array_last_index_of([1, 2, 1, 2], 2);
  * // 3
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/lastIndexOf.php
  */
 function array_last_index_of(array $array, $value, int $fromIndex = null): int {

@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::domain('http://thorin.io/hello/world?query=value1');
  * // thorin.io
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function domain($url = null) {
 	if (!$url) {

@@ -15,7 +15,7 @@ export default function (env, config) {
          * Specify the recipe title
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         title: 'LitElement component',
         /**
@@ -27,7 +27,7 @@ export default function (env, config) {
          * Specify the recipe description
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         description: 'LitElement webcomponent recipe',
         /**
@@ -39,7 +39,7 @@ export default function (env, config) {
          * Specify the recipe template directory
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         templateDir: __path.resolve(`${__dirname()}/../templates/litElement`),
         /**
@@ -51,7 +51,7 @@ export default function (env, config) {
          * Specify the recipe default stack
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultStack: 'dev',
         stacks: {
@@ -65,7 +65,7 @@ export default function (env, config) {
                  * Specify the recipe dev stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the development stack',
                 actions: {
@@ -78,7 +78,7 @@ export default function (env, config) {
                      * Specify the recipe dev stack vite action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     vite: '[config.frontstack.actions.vite]',
                 },
@@ -93,7 +93,7 @@ export default function (env, config) {
                  * Specify the recipe build stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Build your final production ready dist package',
                 actions: {
@@ -107,7 +107,7 @@ export default function (env, config) {
                          * Specify the recipe build stack viteBuild action
                          *
                          * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                          */
                         action: '[config.frontstack.actions.viteBuild]',
                         params: {
@@ -120,7 +120,7 @@ export default function (env, config) {
                              * Specify the recipe build stack viteBuild action lib param
                              *
                              * @since       2.0.0
-                             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                              */
                             lib: true,
                         },

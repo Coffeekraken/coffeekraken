@@ -41,7 +41,7 @@ import __SConfigAdapter from './adapters/SConfigAdapter';
  * await config.set('log.frontend.mail.host', 'mailchimp.com');
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISConfigPostprocessFn {
@@ -93,7 +93,7 @@ export default class SConfig {
      *
      * The name of the config
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _name = null;
 
@@ -104,7 +104,7 @@ export default class SConfig {
      *
      * Save the registered adapters instances
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _adapters = {};
 
@@ -115,7 +115,7 @@ export default class SConfig {
      *
      * Store the actual settings object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _settings = {};
 
@@ -126,7 +126,7 @@ export default class SConfig {
      * Store the loaded config obect
      *
      * @since   2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     config: any = {};
 
@@ -142,7 +142,7 @@ export default class SConfig {
      * @param     {ISConfigPostprocessFn}     postprocessFn         The post process function that MUST return the new current config and that take as parameters the current config object and the whole config object
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _registeredPostprocess: any = {};
     static registerPostprocess(
@@ -167,7 +167,7 @@ export default class SConfig {
      * @param     {ISConfigPreprocessFn}     preprocessFn         The preprocess function that MUST return the new current config and that take as parameters the current config object and the whole config object
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _registeredPreprocesses: any = {};
     static registerPreprocess(
@@ -201,7 +201,7 @@ export default class SConfig {
      * - throwErrorOnUndefinedConfig (true) {Boolean}: Specify if you want the class to throw some errors when get undefined configs
      * - resolvers ([]) {ISConfigResolverObj[]}: Specify some resolvers function to handle special values like "[theme.something....]"
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(name, settings: ISConfigSettings = {}) {
         // store the name
@@ -366,7 +366,7 @@ export default class SConfig {
      * @example           js
      * const config = await config.load();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async load(adapter = this._settings.defaultAdapter, isUpdate = false) {
         const duration = new __SDuration();
@@ -622,7 +622,7 @@ export default class SConfig {
      * @example           js
      * await config.save();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     save(adapters = Object.keys(this._adapters)) {
         if (!this._settings.allowSave) {
@@ -777,7 +777,7 @@ export default class SConfig {
      * @example               js
      * await config.get('log.frontend.mail.host'); // => gmail.google.com
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get(
         path,
@@ -828,7 +828,7 @@ export default class SConfig {
      * @example               js
      * config.set('log.frontend.mail.host', 'coffeekraken.io');
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set(path, value, adapters = Object.keys(this._adapters)) {
         if (!this._settings.allowSet) {

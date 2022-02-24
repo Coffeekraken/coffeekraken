@@ -14,7 +14,7 @@ export default class SClass {
      * Constructor
      *
      * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings = {}) {
         /**
@@ -25,7 +25,7 @@ export default class SClass {
          * Store the class settings
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._settings = {};
         /**
@@ -36,7 +36,7 @@ export default class SClass {
          * Store the interfaces objects by class
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._interfacesStack = {};
         generateInterfacesStack(this);
@@ -72,7 +72,7 @@ export default class SClass {
      * Access the process name and (not the same as a node process name)
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get formattedName() {
         var _a, _b, _c;

@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.font.faces;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginFontFacesInterface extends __SInterface {
     static get _definition() {
@@ -41,7 +41,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * This declare the @font-face for the "<yellow>${fontName}</yellow> font family"
         * 
         * @since          2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
         @import url("${fontObj.import}");

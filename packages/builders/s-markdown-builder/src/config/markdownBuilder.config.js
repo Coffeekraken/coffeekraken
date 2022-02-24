@@ -14,7 +14,7 @@ export default function (env, config) {
              * Specify a glob pattern relative to your "inDir" config
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             glob: '**/+(README|LICENSE|*.md)',
             /**
@@ -26,7 +26,7 @@ export default function (env, config) {
              * Specify the input directory where to search for files to build using the "glob" config
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             inDir: '[config.storage.src.rootDir]',
             /**
@@ -38,7 +38,7 @@ export default function (env, config) {
              * Specify a file path to process.
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             inPath: null,
             /**
@@ -50,7 +50,7 @@ export default function (env, config) {
              * Specify some markdown to build in string format.
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             inRaw: null,
             /**
@@ -62,7 +62,7 @@ export default function (env, config) {
              * Specify the output directory where to save the processed files.
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outDir: '[config.storage.dist.rootDir]',
             /**
@@ -74,7 +74,7 @@ export default function (env, config) {
              * Specify an output file path when using the "inPath" config
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outPath: null,
             /**
@@ -86,7 +86,7 @@ export default function (env, config) {
              * Specify if you want to save the processed files out or not
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             save: true,
             /**
@@ -99,7 +99,7 @@ export default function (env, config) {
              * Specify the output target you want. Can be "markdown" or "html"
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             target: 'markdown',
             /**
@@ -111,7 +111,7 @@ export default function (env, config) {
              * Specify some tags that should be protected from the markdown transformations like "template" or "code"...
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             protectedTags: ['template', 'code'],
         },
@@ -127,7 +127,7 @@ export default function (env, config) {
                  * Specify the regex to match "code" string
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 match: /^<!-- og:(.*) -->$/gm,
                 /**
@@ -138,7 +138,7 @@ export default function (env, config) {
                  * Specify a path to a file that export a function which will be used to preprocess data passed to the view.
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 preprocessor: __path.resolve(__dirname(), '../transformers/og/og'),
                 /**
@@ -150,7 +150,7 @@ export default function (env, config) {
                  * Specify the "markdown" template to transform this match
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../transformers/og/og.md'),
                 /**
@@ -162,7 +162,7 @@ export default function (env, config) {
                  * Specify the "html" template to transform this match
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../transformers/og/og.html'),
             },
@@ -176,7 +176,7 @@ export default function (env, config) {
                  * Specify the regex to match "code" string
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 match: /^```([a-zA-Z0-9]+)\n([\s\S]*?)```$/gm,
                 /**
@@ -188,7 +188,7 @@ export default function (env, config) {
                  * Specify the "markdown" template to transform this match
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../transformers/code/code.md'),
                 /**
@@ -200,7 +200,7 @@ export default function (env, config) {
                  * Specify the "html" template to transform this match
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../transformers/code/code.html'),
             },
@@ -217,7 +217,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/license/license.md'),
                 /**
@@ -229,7 +229,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/license/license.md'),
             },
@@ -243,7 +243,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-mit" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseMit/licenseMit.md'),
                 /**
@@ -255,7 +255,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-mit" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseMit/licenseMit.md'),
             },
@@ -269,7 +269,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-gpl" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseGpl/licenseGpl.md'),
                 /**
@@ -281,7 +281,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-gpl" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseGpl/licenseGpl.md'),
             },
@@ -295,7 +295,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-lgpl" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseLgpl/licenseLgpl.md'),
                 /**
@@ -307,7 +307,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-lgpl" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseLgpl/licenseLgpl.md'),
             },
@@ -321,7 +321,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-epl-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseEpl20/licenseEpl20.md'),
                 /**
@@ -333,7 +333,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-epl-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseEpl20/licenseEpl20.md'),
             },
@@ -347,7 +347,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-mpl-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseMpl20/licenseMpl20.md'),
                 /**
@@ -359,7 +359,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-mpl-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseMpl20/licenseMpl20.md'),
             },
@@ -373,7 +373,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-cddl-10" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseCddl10/licenseCddl10.md'),
                 /**
@@ -385,7 +385,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-cddl-10" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseCddl10/licenseCddl10.md'),
             },
@@ -399,7 +399,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-apache-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseApache20/licenseApache20.md'),
                 /**
@@ -411,7 +411,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-apache-20" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseApache20/licenseApache20.md'),
             },
@@ -425,7 +425,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-bsd-2-clause" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseBsd2Clause/licenseBsd2Clause.md'),
                 /**
@@ -437,7 +437,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-bsd-2-clause" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseBsd2Clause/licenseBsd2Clause.md'),
             },
@@ -451,7 +451,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "license-bsd-3-clause" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/licenseBsd3Clause/licenseBsd3Clause.md'),
                 /**
@@ -463,7 +463,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "license-bsd-3-clause" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/licenseBsd3Clause/licenseBsd3Clause.md'),
             },
@@ -477,7 +477,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for this "shields" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/shields/shields.md'),
                 /**
@@ -489,7 +489,7 @@ export default function (env, config) {
                  * Specify the "html" template for this "shields" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/shields/shields.md'),
                 /**
@@ -501,7 +501,7 @@ export default function (env, config) {
                  * Specify specify the datas to use to display the correct shields
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 data: '[config.shieldsio]',
             },
@@ -515,7 +515,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "interface" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/interface/interface.md'),
                 /**
@@ -527,7 +527,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "interface" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/interface/interface.html'),
             },
@@ -541,7 +541,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "configFiles" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/configFiles/configFiles.md'),
                 /**
@@ -553,7 +553,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "configFiles" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/configFiles/configFiles.md'),
             },
@@ -567,7 +567,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "config" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/config/config.md'),
                 /**
@@ -579,7 +579,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "config" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/config/config.html'),
             },
@@ -593,7 +593,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "recipesList" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/recipesList/recipesList.md'),
                 /**
@@ -605,7 +605,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "recipesList" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/recipesList/recipesList.md'),
             },
@@ -619,7 +619,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "recipe" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/recipe/recipe.md'),
                 /**
@@ -631,7 +631,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "recipe" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/recipe/recipe.md'),
             },
@@ -645,7 +645,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "docMenu" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md'),
                 /**
@@ -657,7 +657,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "docMenu" partial
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../partials/docMenu/docMenu.md'),
             },
@@ -673,7 +673,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "doc" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../layouts/doc/docLayout.md'),
                 /**
@@ -685,7 +685,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "doc" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../layouts/doc/docLayout.md'),
                 /**
@@ -697,7 +697,7 @@ export default function (env, config) {
                  * Specify the data to use for the "doc" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 data: '[config.doc.layout]',
             },
@@ -711,7 +711,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "readme" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../layouts/readme/readmeLayout.md'),
                 /**
@@ -723,7 +723,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "readme" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../layouts/readme/readmeLayout.md'),
                 /**
@@ -735,7 +735,7 @@ export default function (env, config) {
                  * Specify the data to use for the "readme" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 data: '[config.readme.layout]',
             },
@@ -749,7 +749,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "license" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../layouts/license/licenseLayout.md'),
                 /**
@@ -761,7 +761,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "license" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../layouts/license/licenseLayout.md'),
                 /**
@@ -773,7 +773,7 @@ export default function (env, config) {
                  * Specify the data to use for the "license" layout
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 data: '[config.license.layout]',
             },
@@ -789,7 +789,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "readme-header" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/readmeHeader/readmeHeaderSection.md'),
                 /**
@@ -801,7 +801,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "readme-header" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/readmeHeader/readmeHeaderSection.md'),
             },
@@ -815,7 +815,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "doc-header" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/docHeader/docHeaderSection.md'),
                 /**
@@ -827,7 +827,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "doc-header" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/docHeader/docHeaderSection.md'),
             },
@@ -841,7 +841,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "doc-menu" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/docMenu/docMenuSection.md'),
                 /**
@@ -853,7 +853,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "doc-menu" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/docMenu/docMenuSection.md'),
             },
@@ -867,7 +867,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "description" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/description/descriptionSection.md'),
                 /**
@@ -879,7 +879,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "description" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/description/descriptionSection.md'),
             },
@@ -893,7 +893,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "install" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/install/installSection.md'),
                 /**
@@ -905,7 +905,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "install" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/install/installSection.md'),
             },
@@ -919,7 +919,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "license" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/license/licenseSection.md'),
                 /**
@@ -931,7 +931,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "license" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/license/licenseSection.md'),
             },
@@ -945,7 +945,7 @@ export default function (env, config) {
                  * Specify the "markdown" template for the "contact" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 markdown: __path.resolve(__dirname(), '../sections/contact/contactSection.md'),
                 /**
@@ -957,7 +957,7 @@ export default function (env, config) {
                  * Specify the "html" template for the "contact" section
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 html: __path.resolve(__dirname(), '../sections/contact/contactSection.md'),
             },

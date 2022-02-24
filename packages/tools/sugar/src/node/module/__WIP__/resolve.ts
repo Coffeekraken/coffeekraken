@@ -42,7 +42,7 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * resolve('@coffeekraken/sugar'); // => /something/node_modules/@coffeekraken/sugar/index.js
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export class ResolveSettingsInterface extends __SInterface {

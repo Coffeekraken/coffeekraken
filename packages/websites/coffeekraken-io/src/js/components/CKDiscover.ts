@@ -4,6 +4,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
 import { html } from 'lit';
 import { loadDocmap } from '../state/state';
 import __filterObject from '@coffeekraken/sugar/shared/object/filter';
+import __md5 from '@coffeekraken/sugar/shared/crypt/md5';
 
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 export default class CKDiscover extends __SLitComponent {
@@ -29,7 +30,7 @@ export default class CKDiscover extends __SLitComponent {
 
         await __wait();
 
-        const newMap = __filterObject(this._docmap.map, (key, item) => {
+        const newMap = __filterObject(this._docmap.map, (key, item) => {            
             if (!item.platform) return false;
             if (item.platform[0].name !== this.props.platform) return false;
             if (!item.example) return false;
@@ -44,47 +45,50 @@ export default class CKDiscover extends __SLitComponent {
     }
 
     render() {
+        console.log(this.item);
         return html`
             <div class="ck-discover">
                 ${!this.item
-                    ? html`<div class="s-code-example-loader">
-                          <i class="s-loader:spinner s-color:accent"></i>
-                          &nbsp;
-                          <p class="s-typo:p s-display:inline-block">
-                              Loading code example. Please wait...
-                          </p>
-                      </div>`
-                    : html`
+                    ? html`
+                        <div class="s-code-example-loader">
+                            <i class="s-loader:spinner s-color:accent"></i>
+                            &nbsp;
+                            <p class="s-typo:p s-display:inline-block">
+                                Loading code example. Please wait...
+                            </p>
+                        </div>
+                    ` : html`
+                        <a
+                            @click="${this.grabItem}"
+                            class="s-btn s-radius:100 s-align:abs-top-right s-color:accent s-float:right"
+                        >
+                            <i class="s-icon:refresh"></i>
+                        </a>
+                         ${this.item.async
+                            ? html`
+                                    <span
+                                        class="s-badge:outline s-color:accent"
+                                        >Async</span
+                                    >&nbsp;
+                                `
+                            : ''}
+                        <span class="s-badge s-color:complementary">${this.item.type}</span>
+                        <br/>
+                        <br/>
                           <h1 class="s-typo:h3 s-mbe:30">
-                              ${this.item.async
-                                  ? html`
-                                        <span
-                                            class="s-badge:outline s-color:accent"
-                                            >Async</span
-                                        >&nbsp;
-                                    `
-                                  : ''}
                               ${this.item.name}
-                              <a
-                                  @click="${this.grabItem}"
-                                  class="s-btn s-radius:100 s-align:abs-top-right s-color:accent s-float:right"
-                              >
-                                  <i class="s-icon:refresh"></i>
-                              </a>
                           </h1>
                           <p class="s-typo:p s-mbe:30">
                               ${this.item.description}
                           </p>
                           <s-code-example>
-                              <textarea
+                              <code
                                   lang="${this.props.platform === 'ts' ||
                                   this.props.platform === 'node'
                                       ? 'js'
-                                      : this.props.platform}"
-                              >
+                                      : this.props.platform === 'postcss' ? 'css' : this.props.platform}">
                                 ${this.item.example[0].code}
-                              </textarea
-                              >
+                              </code>
                           </s-code-example>
                           <div
                               class="s-until:sibling:mounted s-code-example-loader"

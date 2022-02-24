@@ -11,7 +11,7 @@ namespace thorin;
  * @example    php
  * Thorin::array_drop_right([1,2,3], 2) // [1]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function array_drop_right($items, $n = 1) {

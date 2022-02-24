@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::array_zip(['a', 'b'], [1, 2], [true, false]);
  * // [['a', 1, true], ['b', 2, false]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/zip.php
  */
 function array_zip(array ...$arrays): array {

@@ -39,7 +39,7 @@ import __SCache, { ISCacheSetSettings } from '../SCache';
  * }
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISCacheAdapter {
@@ -67,7 +67,7 @@ export default abstract class SCacheAdapter extends __SClass {
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheAdapter instance. This is specific to each adapters.settings.settings...
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(settings = {}) {
     super(
@@ -96,7 +96,7 @@ export default abstract class SCacheAdapter extends __SClass {
    * @return    {Promise}               A promise resolved when the item has been correctly getted
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   abstract get(name: string): Promise<any>;
 
@@ -114,7 +114,7 @@ export default abstract class SCacheAdapter extends __SClass {
    * @return    {Promise}               A promise resolved when the item has been correctly saved
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   abstract set(
     name: string,
@@ -134,7 +134,7 @@ export default abstract class SCacheAdapter extends __SClass {
    * @return    {Promise}               A promise resolved when the item has been correctly deleted
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   abstract delete(name: string): Promise<any>;
 
@@ -149,7 +149,7 @@ export default abstract class SCacheAdapter extends __SClass {
    * @return    {Promise}               A promise resolved when the cache has been correctly cleared
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   abstract clear(): Promise<any>;
 
@@ -164,7 +164,7 @@ export default abstract class SCacheAdapter extends __SClass {
    * @return    {Promise<string[]>}               A promise resolved with all the cache items keys
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   abstract keys(): Promise<string[]>;
 }

@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::some([null, 0, 'yes', false], , function ($value) { return \is_bool($value); }));
  * // true
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/some.php
  */
 function some(iterable $collection, $predicate = null):bool {

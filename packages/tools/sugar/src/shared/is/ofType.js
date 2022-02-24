@@ -30,7 +30,7 @@ import __SType from '@coffeekraken/s-type';
  * isOfType(['hello',true], 'Array<String|Boolean>'); // => true
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function ofType(value, typeString, settings = {}) {
     settings = Object.assign({ verbose: false }, settings);

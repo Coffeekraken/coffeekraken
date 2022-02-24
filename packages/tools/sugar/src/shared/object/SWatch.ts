@@ -44,7 +44,7 @@ import __clone from '../object/clone';
  * watchedObj.title = 'Hello Universe';
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SWatch {
     /**
@@ -54,7 +54,7 @@ export default class SWatch {
      *
      * Watch stack
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _watchStack = {};
 
@@ -66,7 +66,7 @@ export default class SWatch {
      * Store the settings object to configure your watch instance
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _settings = {};
 
@@ -76,7 +76,7 @@ export default class SWatch {
      *
      * Constructor
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(object, settings = {}) {
         // check if the passed object is already an SWatch instance

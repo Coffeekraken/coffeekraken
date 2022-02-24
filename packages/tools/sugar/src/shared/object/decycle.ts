@@ -23,7 +23,7 @@ import { decycle as __decycle } from 'json-cyclic';
  *
  * @see         https://www.npmjs.com/package/json-cyclic
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function decycle(obj) {
     return __decycle(obj);

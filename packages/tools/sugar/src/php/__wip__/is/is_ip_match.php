@@ -13,7 +13,7 @@ namespace thorin;
  *   // user ip is banned so do something
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function is_ip_match($ipsList, $ip = null) {
 	// read user ip adress:

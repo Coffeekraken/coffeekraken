@@ -20,7 +20,7 @@ import __filesize from 'filesize';
  *
  * @see             https://www.npmjs.com/package/filesize
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function formatFileSize(size, settings = {}) {
     return __filesize(size, settings);

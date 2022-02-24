@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::array_take_right([1, 2, 3], 2);
  * // [2,3]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/takeRight.php
  */
 function array_take_right(array $array, int $n = 1): array {

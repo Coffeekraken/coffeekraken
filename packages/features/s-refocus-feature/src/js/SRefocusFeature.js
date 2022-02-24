@@ -33,7 +33,7 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
  * </div>
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SRefocusFeature extends __SFeature {
     constructor(name, node, settings) {

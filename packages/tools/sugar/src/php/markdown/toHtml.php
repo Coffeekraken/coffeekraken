@@ -21,7 +21,7 @@ require_once(__DIR__.'/../_libs/Parsedown.php');
  * Sugar\markdown\toHtml('...');
  * 
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function toHtml($markdown, $inline = true) {
     $parsedown = new \Parsedown();

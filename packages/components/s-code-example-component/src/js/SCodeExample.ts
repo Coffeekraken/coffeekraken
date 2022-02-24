@@ -94,7 +94,7 @@ export interface ISCodeExampleComponentProps {
  *
  * @see             https://highlightjs.org/
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SCodeExample extends __SLitComponent {
     static get properties() {
@@ -285,7 +285,7 @@ export default class SCodeExample extends __SLitComponent {
         $content.setAttribute('inited', 'true');
         let code;
         try {
-            const codeToHighlight = __decodeHtmlEntities($content.innerHTML.replace(/<!--\?lit.*-->/, ''));
+            const codeToHighlight = __decodeHtmlEntities($content.innerHTML.replace(/(<|&lt;)!\s?--\?lit.*--\s?(>|&gt;)/, ''));
             code = __hljs.highlight(
                 codeToHighlight,
                 {

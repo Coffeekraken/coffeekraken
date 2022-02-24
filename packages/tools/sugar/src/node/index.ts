@@ -14,7 +14,7 @@ import __onProcessExit from './process/onProcessExit';
  * - Logging: Get the powerfull options of the SLog class without any change in your codebase
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 // handle the errors

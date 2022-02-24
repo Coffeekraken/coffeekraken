@@ -17,7 +17,7 @@ import __faker from 'faker';
  * \@sugar.truncate.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginRatioClassesInterface extends __SInterface {
     static get _definition() {
@@ -65,7 +65,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     [...Array(finalParams.count).keys()].forEach((i) => {

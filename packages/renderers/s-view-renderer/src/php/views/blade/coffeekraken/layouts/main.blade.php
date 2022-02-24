@@ -6,7 +6,7 @@
 * Main layout that handle things like scripts import, stylesheets import, etc...
 *
 * @since            2.0.0
-* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+* @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 -->
 <?php
 $settings = $settings ? json_decode($settings) : null;
@@ -86,7 +86,9 @@ $metasOg = ($frontspec->metas->og ? $frontspec->metas->og : $frontspec->metas->o
     @yield('head')
 </head>
 
-<body @if ($bodyAttributes) @foreach ($bodyAttributes as $key => $value) {{ $key }}="{{ $value }}" @endforeach @endif>
+<body
+    @if ($bodyAttributes) @foreach ($bodyAttributes as $key => $value) {{ $key }}="{{ $value }}" @endforeach
+    @endif>
 
     @yield('body')
 

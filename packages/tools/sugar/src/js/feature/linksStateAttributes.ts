@@ -11,7 +11,7 @@ import querySelectorLive from '../dom/query/querySelectorLive';
  * @status      beta
  *
  * This feature simply add some special attributes on links like "actual" when the link correspond to the actual visited page url,
- * "actual-child" when the link point to a child page, and maybe some more depending on needs
+ * "actual-child" when the link point to a child page, and maybe some more depending on needs and "actual-parent" on the actual link parent node
  *
  * @param       {Object}        [settings={}]         An object of settings to configure your feature
  *
@@ -29,7 +29,7 @@ import querySelectorLive from '../dom/query/querySelectorLive';
  * <a href="/something/cool" actual-child>World</a>
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IlinksStateAttributesSettings {}
 
@@ -44,6 +44,7 @@ function linksStateAttributes(
     function handleLink($linkElm) {
         if ($linkElm.getAttribute('href') === document.location.pathname) {
             $linkElm.setAttribute('actual', true);
+            $linkElm.parentNode.setAttribute('actual-parent', true);
             $linkElm.dispatchEvent(new CustomEvent('actual', {
                 bubbles: true,
             }));
@@ -58,6 +59,7 @@ function linksStateAttributes(
         } else {
             $linkElm.removeAttribute('actual');
             $linkElm.removeAttribute('actual-child');
+            $linkElm.parentNode.removeAttribute('actual-parent');
         }
     }
 

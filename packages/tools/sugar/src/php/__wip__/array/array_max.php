@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::array_max([4, 2, 8, 6]);
  * // 8
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Math/max.php
  */
 function array_max(?array $array):?int {

@@ -31,12 +31,12 @@ import __isUserScrolling from '../is/userScrolling';
  * @todo      tests
  *
  * @example 	js
- * import scrollTop from '@coffeekraken/sugar/js/dom/scrollTo'
+ * import scrollTop from '@coffeekraken/sugar/js/dom/scroll/scrollTo'
  * import easeInOutQuad from '@coffeekraken/sugar/js/easings/easeInOutQuad'
  * scrollTo(myCoolHTMLElement);
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IScrollToSettings {
     $elm: HTMLElement;

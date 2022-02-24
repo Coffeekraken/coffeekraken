@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.clearfix.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginFixClassesInterface extends __SInterface {
     static get _definition() {
@@ -66,7 +66,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     fitSizes.forEach((fitSizeName) => {
@@ -85,7 +85,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 *   </div>
                 * 
                 * @since        2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
                 .s-fit--${fitSizeName} {

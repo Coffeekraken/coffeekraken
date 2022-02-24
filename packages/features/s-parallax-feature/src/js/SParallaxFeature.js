@@ -28,7 +28,7 @@ import * as __rematrix from 'rematrix';
  * <div s-parallax amount="0.5">I will move on mousemove</div>
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SParallaxFeature extends __SFeature {
     constructor(name, node, settings) {

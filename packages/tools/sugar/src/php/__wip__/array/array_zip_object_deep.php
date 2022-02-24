@@ -27,7 +27,7 @@ namespace thorin;
  *  }
  * *\/
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/zipObjectDeep.php
  */
 function array_zip_object_deep(array $props = [], array $values = []): \stdClass {

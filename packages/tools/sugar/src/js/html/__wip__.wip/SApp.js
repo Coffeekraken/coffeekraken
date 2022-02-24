@@ -19,7 +19,7 @@ let __decryptedConfig, __decryptedMeta;
  * }
  * const myApp = new MyCoolApp();
  *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SApp {
     /**
@@ -29,7 +29,7 @@ export default class SApp {
      *
      * @setting            {String}                  [name='SApp']         The application name that you want. This will gives you access to your app instance through window.{settings.name}
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings = {}) {
         /**
@@ -80,7 +80,7 @@ export default class SApp {
      * @example           js
      * const host = await myApp.config('log.frontend.mail.host');
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     config(path = null) {
         let config = window['_' + this.__settings.name + 'Data'].config || {};
@@ -102,7 +102,7 @@ export default class SApp {
      * @example           js
      * const name = await myApp.meta('name');
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     meta(path = null) {
         let meta = window['_' + this.__settings.name + 'Data'].meta || {};
@@ -128,7 +128,7 @@ export default class SApp {
      *    // do something if needed...
      * });
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     log(message, type = 'info', transports = null) {
         return new Promise((resolve, reject) => {

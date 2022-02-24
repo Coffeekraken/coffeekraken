@@ -16,7 +16,7 @@ export default function (env, config) {
          * Specify the recipe name
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         title: 'NextJs',
         /**
@@ -28,7 +28,7 @@ export default function (env, config) {
          * Specify the recipe description
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         description: 'Create easily a next.js app with coffeekraken tools support',
         /**
@@ -40,7 +40,7 @@ export default function (env, config) {
          * Specify some requirements for this recipe like commands (npm, composer, etc...)
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
             commands: ['[config.package.manager]']
@@ -54,7 +54,7 @@ export default function (env, config) {
          * Specify the recipe default stack
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultStack: 'dev',
         stacks: {
@@ -68,7 +68,7 @@ export default function (env, config) {
                  * Specify the recipe init stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Init a new next.js project',
                 actions: {
@@ -80,7 +80,7 @@ export default function (env, config) {
                      * Specify the recipe init stack copy action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     createApp: __deepMerge(config.frontstack.actions.copy, {
                         title: 'Create the app',
@@ -100,7 +100,7 @@ export default function (env, config) {
                      * Specify the recipe init stack rename action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     rename: __deepMerge(config.frontstack.actions.rename, {
                         params: {
@@ -114,7 +114,7 @@ export default function (env, config) {
                      * Specify the recipe init stack addSugarJson action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addSugarJson: __deepMerge(config.frontstack.actions.addSugarJson, {
                         params: {
@@ -129,7 +129,7 @@ export default function (env, config) {
                      * Specify the recipe init stack addManifestJson action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addManifestJson: __deepMerge(config.frontstack.actions.addManifestJson, {
                         params: {}
@@ -142,7 +142,7 @@ export default function (env, config) {
                     //  * Specify the recipe init stack installDependencies action
                     //  *
                     //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                     //  */
                     // installDependencies: __deepMerge(config.frontstack.actions.installDependencies, {
                     //     params: {}
@@ -159,7 +159,7 @@ export default function (env, config) {
                  * Specify the recipe dev stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the development stack',
                 runInParallel: true,
@@ -173,7 +173,7 @@ export default function (env, config) {
                      * Specify the recipe dev stack frontendServer action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     frontendServer:
                         '[config.frontstack.actions.frontendServer]',
@@ -186,7 +186,7 @@ export default function (env, config) {
                      * Specify the recipe dev stack description
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     vite: '[config.frontstack.actions.vite]',
                 },
@@ -201,7 +201,7 @@ export default function (env, config) {
                  * Specify the recipe prod stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the production testing stack',
                 sharedParams: {
@@ -214,7 +214,7 @@ export default function (env, config) {
                      * Specify the recipe prod stack env shared param
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     env: 'production',
                 },
@@ -228,7 +228,7 @@ export default function (env, config) {
                      * Specify the recipe prod stack frontendServer action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     frontendServer:
                         '[config.frontstack.actions.frontendServer]',
@@ -244,7 +244,7 @@ export default function (env, config) {
                  * Specify the recipe build stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Build your final production ready dist package',
                 sharedParams: {
@@ -257,7 +257,7 @@ export default function (env, config) {
                      * Specify that the build is made for production
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     prod: true,
                 },
@@ -271,7 +271,7 @@ export default function (env, config) {
                      * Specify the recipe build stack postcssBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     postcssBuild: '[config.frontstack.actions.postcssBuild]',
                     /**
@@ -283,7 +283,7 @@ export default function (env, config) {
                      * Specify the recipe build stack viteBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     viteBuild: '[config.frontstack.actions.viteBuild]',
                     /**
@@ -295,7 +295,7 @@ export default function (env, config) {
                      * Specify the recipe build stack imagesBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     imagesBuild: '[config.frontstack.actions.imagesBuild]',
                 },

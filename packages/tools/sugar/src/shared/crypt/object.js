@@ -14,7 +14,7 @@ import __encodeObject from 'object-encode';
  * @todo        doc
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
     /**
@@ -27,7 +27,7 @@ export default {
      * @param       {String}       [salt="coffeekraken.sugar.crypt.object"]   The salt to encode the object. Needed to decode correctly the object
      * @return      {String}                       The encrypted object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     encrypt: function (object, salt = 'coffeekraken.sugar.crypt.object') {
         return __encodeObject.encode_object(object, 'base64', salt);
@@ -42,7 +42,7 @@ export default {
      * @param       {String}      [salt='coffeekraken.sugar.crypt.object']        The salt to decode the object
      * @return      {Object}                      The decrypted object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     decrypt: function (encodedObject, salt = 'coffeekraken.sugar.crypt.object') {
         return __encodeObject.decode_object(encodedObject, 'base64', salt);

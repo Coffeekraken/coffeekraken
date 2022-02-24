@@ -11,7 +11,7 @@ namespace thorin;
  * print Thorin::str_slug('Hello world and universe');
  * // hello-world-and-universe
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function str_slug($string) {
 	$slug=preg_replace('/[^A-Za-z0-9-]+/', '-', $string);

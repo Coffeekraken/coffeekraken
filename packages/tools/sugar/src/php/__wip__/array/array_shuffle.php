@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::array_shuffle([1, 2, 3, 4]);
  * // [4, 1, 3, 2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/shuffle.php
  */
 function array_shuffle(array $array = []):array {

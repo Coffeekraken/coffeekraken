@@ -125,7 +125,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -140,7 +140,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <input type="text" class="s-input" placeholder="Hello world" />
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-input {
@@ -164,7 +164,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code([
                 `${cls} {`,
                 ` @sugar.ui.input($style: ${style}, $scope: lnf);`,
@@ -188,7 +188,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <input type="text" class="${cls.trim()}" placeholder="Hello world" />
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code([
                 `${cls} {`,
                 ` @sugar.ui.input($shape: ${shape}, $scope: shape);`,

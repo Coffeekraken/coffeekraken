@@ -7,7 +7,7 @@
  * @platform          node
  * @status        beta
  *
- * This function simply take an author string like "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)" and
+ * This function simply take an author string like "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)" and
  * transform it into a plain object with these properties: name, email and url
  *
  * @param       {String}          string          The string to parse
@@ -19,7 +19,7 @@
  *
  * @example       js
  * import parseAuthorString from '@coffeekraken/sugar/js/npm/utils/parseAuthorString';
- * parseAuthorString("Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)")
+ * parseAuthorString("Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)")
  * // => {
  *   "name": "Olivier Bossel",
  *   "email": "olivier.bossel@gmail.com",
@@ -27,7 +27,7 @@
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function parseAuthorString(string) {
     const reg = /(.*)\s?<(.*)>\s?\((.*)\)/gm;

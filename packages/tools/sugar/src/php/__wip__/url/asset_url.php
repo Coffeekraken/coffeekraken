@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::asset_url('my/cool/image.jpg', true);
  * // https://thorin.io/dist/my/cool/image.jpg
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function asset_url($slug, $include_domain = false) {
 	// need to strip the `path.document_root` part from the `app.ASSET_PATH` to get the

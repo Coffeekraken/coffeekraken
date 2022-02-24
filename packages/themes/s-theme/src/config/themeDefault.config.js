@@ -9,7 +9,7 @@ export default function (env, config) {
          * Specify the default theme name
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         themeName: 'default',
         variants: {
@@ -22,7 +22,7 @@ export default function (env, config) {
              * Specify the default theme light variant
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             light: '[config.themeDefaultLight]',
             /**
@@ -34,7 +34,7 @@ export default function (env, config) {
              * Specify the default theme dark variant
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             dark: '[config.themeDefaultDark]',
         },

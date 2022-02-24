@@ -23,7 +23,7 @@ import forceRedraw from '../dom/utlls/forceRedraw';
  * // now when your element will move, it will be blured accordingly
  *
  * @since         1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SMotionblurSvgFilter extends SSvgFilter {
     /**
@@ -34,7 +34,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * @param 		{Number} 		[amount=0.5] 			The motion blur amount
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(amount = 0.5) {
         super(`
@@ -47,7 +47,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
          *
          * Store the amount of motion blur to apply
          *
-         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this.amount = 0.5;
         /**
@@ -56,7 +56,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
          *
          * Store the status of the animation
          *
-         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._isMoving = false;
         /**
@@ -65,7 +65,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
          *
          * Store the starting moment when the element move
          *
-         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._startMoveTimeout = null;
         // settings
@@ -84,7 +84,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * @param 		{HTMLElement} 		elm 		The element on which to apply the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     applyTo(elm) {
         // call parent method
@@ -109,7 +109,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * @param 	{HTMLElement} 	elm 	The element to unapply the filter from
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unapplyFrom(elm) {
         // remove event listeners
@@ -129,7 +129,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * When the animation, transition or draging start
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onMotionStart(e) {
         if (e.target !== this.elms[0])
@@ -148,7 +148,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * Transition / animation end
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onMotionStop(e) {
         if (e.target !== this.elms[0])
@@ -173,7 +173,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * @param 		{Boolean} 		recusrive 			If the function need to be called again at the end of it's execution
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _handleFilter() {
         // animation or move is finished
@@ -193,7 +193,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * Set motion blur
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _setMotionBlur() {
         this._currentPos = __offset(this.elms[0]);
@@ -216,7 +216,7 @@ export default class SMotionblurSvgFilter extends SSvgFilter {
      *
      * Destroy the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     destroy() {
         cancelAnimationFrame(this._animationFrame);

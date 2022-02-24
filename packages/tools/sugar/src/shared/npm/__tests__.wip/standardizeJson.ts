@@ -9,10 +9,10 @@ module.exports = (__standardizeJson) => {
               email: 'olivier.bossel@gmail.com',
               url: 'https://olivierbossel.com'
             },
-            'Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)'
+            'Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)'
           ],
           author:
-            'Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) '
+            'Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) '
         })
       ).toEqual({
         contributors: [

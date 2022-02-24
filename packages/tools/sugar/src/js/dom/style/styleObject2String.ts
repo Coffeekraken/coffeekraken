@@ -27,7 +27,7 @@ import __uncamelize from '../../shared/string/uncamelize';
  * // output => padding-left:20px; display:block;
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function styleObject2String(styleObj: any): string {
     // process the style object

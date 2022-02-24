@@ -16,7 +16,7 @@
  * const extensions = __commonFontFileExtensions();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonFontFileExtensions(withDot = false) {
     return ['fnt', 'fon', 'otf', 'ttf', 'woff', 'woff2'].map(ext => withDot ? `.${ext}` : ext);

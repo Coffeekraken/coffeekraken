@@ -33,7 +33,7 @@ import __convert from '../../../shared/time/convert';
  * // }
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 // export interface IGetAnimationPropertiesObject {
 //   name : ['animation1'],

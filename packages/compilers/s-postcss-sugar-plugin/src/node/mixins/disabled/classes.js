@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.disabled.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginFixClassesInterface extends __SInterface {
     static get _definition() {
@@ -48,7 +48,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <input type="text" class="s-input s-disabled" placeholder="I'm disabled" />
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `/**
@@ -67,7 +67,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since        2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             .s-disabled,

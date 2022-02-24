@@ -14,7 +14,7 @@ export default function (env, config) {
          * Specify the roots views directories
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         rootDirs: [`[config.storage.src.rootDir]/views`],
 
@@ -27,7 +27,7 @@ export default function (env, config) {
          * Specify the views template rendering cache directory
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         cacheDir: `[config.storage.package.cacheDir]/views`,
 
@@ -42,7 +42,7 @@ export default function (env, config) {
                  * Store which extensions match this engine
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 extensions: ['blade.php'],
 
@@ -54,7 +54,7 @@ export default function (env, config) {
                  * Store the path where to find the blade.php template engine
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
                     __dirname(),
@@ -74,7 +74,7 @@ export default function (env, config) {
                  * Store which extensions match this handler
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 extensions: ['js', 'json'],
                 /**
@@ -86,7 +86,7 @@ export default function (env, config) {
                  * Store the path to the jsJson handler
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(__dirname(), '../node/dataHandlers/js.js'),
             },

@@ -16,7 +16,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  * \@sugar.gap.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginGapClassesInterface extends __SInterface {
     static get _definition() {
@@ -60,7 +60,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     spacesKeys.forEach(space => {
@@ -80,7 +80,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * </div>
                 * 
                 * @since      2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
                 .s-gap${space === 'default' ? '' : `--${space}`}:not(.s-gap--column):not(.s-gap--row) {
@@ -102,7 +102,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * </div>
                 * 
                 * @since      2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
                 .s-gap--row.s-gap${space === 'default' ? '' : `--${space}`} {
@@ -124,7 +124,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 * </div>
                 * 
                 * @since      2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
                 .s-gap--column.s-gap${space === 'default' ? '' : `--${space}`} {

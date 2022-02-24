@@ -14,7 +14,7 @@ export default function (env, config) {
                      * Specify the darken value for the "0" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 50,
                 },
@@ -28,7 +28,7 @@ export default function (env, config) {
                      * Specify the darken value for the "5" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 45,
                 },
@@ -42,7 +42,7 @@ export default function (env, config) {
                      * Specify the darken value for the "10" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 40,
                 },
@@ -56,7 +56,7 @@ export default function (env, config) {
                      * Specify the darken value for the "15" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 35,
                 },
@@ -70,7 +70,7 @@ export default function (env, config) {
                      * Specify the darken value for the "20" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 30,
                 },
@@ -84,7 +84,7 @@ export default function (env, config) {
                      * Specify the darken value for the "25" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 25,
                 },
@@ -98,7 +98,7 @@ export default function (env, config) {
                      * Specify the darken value for the "30" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 20,
                 },
@@ -112,7 +112,7 @@ export default function (env, config) {
                      * Specify the darken value for the "35" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 15,
                 },
@@ -126,7 +126,7 @@ export default function (env, config) {
                      * Specify the darken value for the "40" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 10,
                 },
@@ -140,7 +140,7 @@ export default function (env, config) {
                      * Specify the darken value for the "45" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 5,
                 },
@@ -154,7 +154,7 @@ export default function (env, config) {
                      * Specify the darken value for the "50" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 0,
                 },
@@ -168,7 +168,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "55" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 5,
                 },
@@ -182,7 +182,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "60" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 10,
                 },
@@ -196,7 +196,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "65" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 15,
                 },
@@ -210,7 +210,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "70" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 20,
                 },
@@ -224,7 +224,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "75" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 25,
                 },
@@ -238,7 +238,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "80" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 30,
                 },
@@ -252,7 +252,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "85" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 35,
                 },
@@ -266,7 +266,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "90" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 40,
                 },
@@ -280,7 +280,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "95" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 48,
                 },
@@ -294,7 +294,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "100" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 50,
                 },
@@ -308,7 +308,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "text" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 0
                 },
@@ -322,7 +322,7 @@ export default function (env, config) {
                      * Specify the darken value for the "placeholder" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 0,
                     /**
@@ -334,7 +334,7 @@ export default function (env, config) {
                      * Specify the alpha value for the "placeholder" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     alpha: 0.2,
                 },
@@ -348,7 +348,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "foreground" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 50,
                 },
@@ -362,7 +362,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "background" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 50,
                 },
@@ -376,7 +376,7 @@ export default function (env, config) {
                      * Specify the darken value for the "backgroundForeground" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 45,
                 },
@@ -390,7 +390,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "surface" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 35,
                 },
@@ -404,7 +404,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "surfaceForeground" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 45,
                 },
@@ -418,7 +418,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "ui" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 50,
                 },
@@ -432,7 +432,7 @@ export default function (env, config) {
                      * Specify the darken value for the "uiForeground" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     darken: 25,
                 },
@@ -446,7 +446,7 @@ export default function (env, config) {
                      * Specify the alpha value for the "border" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     alpha: 0.2,
                 },
@@ -460,7 +460,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "gradientStart" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 0,
                 },
@@ -474,7 +474,7 @@ export default function (env, config) {
                      * Specify the lighten value for the "gradientEnd" color variant
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     lighten: 20,
                 },

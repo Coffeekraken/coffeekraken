@@ -11,7 +11,7 @@ namespace thorin;
  *   // do something
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/serbanghita/Mobile-Detect
  */
 function is_ios() {

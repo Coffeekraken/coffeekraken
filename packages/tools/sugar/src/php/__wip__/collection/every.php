@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::every([true, 1, null, 'yes'], function ($value) { return is_bool($value);});
  * // false
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/every.php
  */
 function every(iterable $collection, $predicate): bool {

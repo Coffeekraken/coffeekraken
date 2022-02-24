@@ -137,7 +137,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         *   </p>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -154,7 +154,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * </blockquote>
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-blockquote {
@@ -180,7 +180,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </blockquote>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             .${cls} {
@@ -207,7 +207,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * </blockquote>
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .${cls} {
@@ -239,7 +239,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.format.text {
@@ -274,7 +274,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.rhythm.vertical {

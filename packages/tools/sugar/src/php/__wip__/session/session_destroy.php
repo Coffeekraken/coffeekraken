@@ -9,7 +9,7 @@ use duncan3dc\Sessions\Session;
  * @example    php
  * Thorin::session_destroy();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function session_destroy() {
 	Session::destroy();

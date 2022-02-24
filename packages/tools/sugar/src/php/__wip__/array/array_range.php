@@ -12,7 +12,7 @@ namespace thorin;
  * $ranges = Thorin::array_range(0,10);
  * // [0,1,2,3,4,5,6,7,8,9,10]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://www.jonasjohn.de/snippets/php/array-range.htm
  */
 function array_range($from, $to, $step=1){

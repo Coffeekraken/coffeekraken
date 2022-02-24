@@ -19,7 +19,7 @@ use \Volnix\CSRF\CSRF;
  *   // handle error
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/volnix/csrf
  */
 function csrf_validate($name = CSRF::TOKEN_NAME, $request_data = null) {

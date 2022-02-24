@@ -3,7 +3,7 @@ module.exports = (__parseAuthorString) => {
     it('Should parse the passed author string correctly', (done) => {
       expect(
         __parseAuthorString(
-          'Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) '
+          'Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) '
         )
       ).toEqual({
         name: 'Olivier Bossel',

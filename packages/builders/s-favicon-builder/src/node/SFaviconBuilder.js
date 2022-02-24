@@ -27,7 +27,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * Access the favicon builder settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get faviconBuilderSettings() {
         return this._settings.faviconBuilder;
@@ -40,7 +40,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -60,7 +60,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * @return      {SPromise<ISFaviconBuilderResult>}        A promise resolved with the ISFaviconBuilderResult object that store all the builded files stats, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(params, settings) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {

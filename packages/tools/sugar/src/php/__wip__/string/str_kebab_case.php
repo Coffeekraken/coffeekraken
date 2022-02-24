@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::str_kebab_case('fooBar');
  * // foo-bar
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/kebabCase.php
  */
 function str_kebab_case(string $string) {

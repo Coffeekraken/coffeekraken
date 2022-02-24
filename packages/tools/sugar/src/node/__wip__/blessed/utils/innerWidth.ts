@@ -19,7 +19,7 @@ import __blessed from 'blessed';
  * innerWidth(myBlessedComponent); // => 10
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function innerWidth(component: __blessed.box): Integer {
   if (!(component instanceof __blessed.box)) return -1;

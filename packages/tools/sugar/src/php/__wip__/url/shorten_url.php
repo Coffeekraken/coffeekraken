@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::shorten_url('https://thorin.io');
  * // http://tinyurl.com/y9tcvddg
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function shorten_url($url) {
 	$ch = curl_init();

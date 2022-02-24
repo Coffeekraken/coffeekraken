@@ -10,7 +10,7 @@ export default function (env, config) {
              * Specify which configuration you want to include for the "browser". If the array is empty, will include all the configs
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             include: ['contact', 'datetime', 'log', 'serve', 'env', 'theme'],
         },
@@ -24,7 +24,7 @@ export default function (env, config) {
              * Specify which configuration you want to include for the "browser". If the array is empty, will include all the configs
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             include: [],
         },

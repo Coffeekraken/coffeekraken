@@ -18,7 +18,7 @@ namespace thorin;
  * Thorin::array_intersection_with($objects, $others, 'Thorin::is_equal');
  * // [[ 'x' => 1, 'y' => 2 ]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/intersectionWith.php
  */
 function array_intersection_with(...$arrays /*, callable $comparator = null*/): array {

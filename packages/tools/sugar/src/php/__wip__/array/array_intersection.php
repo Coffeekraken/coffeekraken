@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::array_intersection([2, 1], [2, 3]);
  * // [2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/intersection.php
  */
 function array_intersection(array ...$arrays): array {

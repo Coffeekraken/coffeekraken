@@ -16,7 +16,7 @@
  * const extensions = __commonCompressedFileExtensions();
  * 
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonCompressedFileExtensions(withDot = false): string[] {
     return ['7z','arj','deb','pkg','rar','rpm','tar.gz','z','zip'].map(ext => withDot ? `.${ext}` : ext);

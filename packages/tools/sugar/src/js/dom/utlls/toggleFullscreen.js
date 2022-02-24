@@ -22,7 +22,7 @@ import exitFullscreen from './exitFullscreen';
  * toggleFullscreen(myDomElm)
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function toggleFullscreen(elm) {
     const fullscreenElm = document.fullscreenElement ||

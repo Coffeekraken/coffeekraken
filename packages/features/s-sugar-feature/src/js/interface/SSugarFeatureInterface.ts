@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * @todo      tests
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export default class SSugarFeatureInterface extends __SInterface {
@@ -52,6 +52,11 @@ export default class SSugarFeatureInterface extends __SInterface {
             },
             linksStateAttributes: {
                 description: 'Specify if you want to have the state attributes on links like "actual" and "actual-child" or not',   
+                type: 'Boolean',
+                default: true
+            },
+            preventScrollRestoration: {
+                description: 'Specify if you want to prevent the scroll restoration behavior on chrome that can usually be anoying',
                 type: 'Boolean',
                 default: true
             }

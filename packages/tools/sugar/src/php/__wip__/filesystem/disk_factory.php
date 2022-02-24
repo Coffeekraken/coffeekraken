@@ -19,7 +19,7 @@ $t_filesystems = [];
  * $ftp = Thorin::fs_disk_factory('ftp');
  * $contents = $ftp->listContents('/')
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function disk_factory($disk = null) {
 	global $t_filesystems;

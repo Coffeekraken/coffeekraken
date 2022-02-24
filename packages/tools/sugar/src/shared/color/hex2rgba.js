@@ -22,7 +22,7 @@ import * as __convertColors from 'colors-convert';
  * hex2rgba('#ff00ff');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function hex2rgba(hex) {
     return __convertColors.hexToRgba(hex, 1);

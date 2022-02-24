@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $size = Thorin::dir_size('my_cool_directory');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function dir_size($directory_path) {
 

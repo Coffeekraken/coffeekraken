@@ -79,7 +79,7 @@ else window._registeredInterfacesTypes = {};
  * }); // => true
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 // @ts-ignore
@@ -93,7 +93,7 @@ export default class SInterface extends __SClass {
      * implements for each properties
      *
      * @since             2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     // static definition: ISDescriptorRules = {};
     // @ts-ignore
@@ -116,7 +116,7 @@ export default class SInterface extends __SClass {
      * Store the interface description
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static description = '';
 
@@ -128,7 +128,7 @@ export default class SInterface extends __SClass {
      * Access the interface settings
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get interfaceSettings(): ISInterfaceSettings {
         return (<any>this)._settings.interface;
@@ -145,7 +145,7 @@ export default class SInterface extends __SClass {
      * @param     {SInterfaceRenderer}      rendererClass       The renderer class you want to register
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _registeredRenderers: Record<string, any> = {};
     static registerRenderer(rendererClass: any): void {
@@ -169,7 +169,7 @@ export default class SInterface extends __SClass {
      * @return    {SInterface}                  A new interface overrided with your new values
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static override(definition) {
         const _this = this;
@@ -191,7 +191,7 @@ export default class SInterface extends __SClass {
      * @return      {Object<SInterface>}          An object listing all the interface types maked available widely
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getAvailableTypes() {
         return __getAvailableInterfaceTypes();
@@ -208,7 +208,7 @@ export default class SInterface extends __SClass {
      * @param       {String}      [name=null]       A custom name to register your interface. Otherwise take the class name and register two types: MyClassInterface => MyClassInterface && MyClass
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static makeAvailableAsType(name = null) {
         const n = (name || this.name).toLowerCase();
@@ -236,7 +236,7 @@ export default class SInterface extends __SClass {
      * implements for each properties
      *
      * @since             2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _definition: ISInterfaceDefinitionMap = {};
 
@@ -250,7 +250,7 @@ export default class SInterface extends __SClass {
      * @return              {ISInterfaceObj}                The interface in plain object format
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static toObject(): ISInterfaceObj {
         return {
@@ -270,7 +270,7 @@ export default class SInterface extends __SClass {
      * This function simply returns you the default interface values in object format
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static defaults() {
         const defaults = {};
@@ -300,7 +300,7 @@ export default class SInterface extends __SClass {
      * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static apply(
         objectOrString: any,
@@ -330,7 +330,7 @@ export default class SInterface extends __SClass {
      * @setting     {Array<String>}     [exclude=['help']]                An array of properties you don't want to render
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static render(
         renderer = 'terminal',
@@ -369,7 +369,7 @@ export default class SInterface extends __SClass {
      * Constructor
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISInterfaceCtorSettings>) {
         // @ts-ignore
@@ -401,7 +401,7 @@ export default class SInterface extends __SClass {
      * @return      {Boolean|String}                              true if all is ok, a string describing the issue if not...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     apply(objectOrString: any, settings?: Partial<ISInterfaceSettings>): any {
         const set = <ISInterfaceSettings>(

@@ -30,7 +30,7 @@ import __getTransitionProperties from './style/getTransitionProperties';
  * });
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function whenTransitionEnd(elm: HTMLElement, cb = null) {
     return new Promise((resolve, reject) => {

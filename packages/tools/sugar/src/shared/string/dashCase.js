@@ -23,7 +23,7 @@ import { paramCase } from 'param-case';
  *
  * @see             https://www.npmjs.com/package/param-case
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function dashCase(text) {
     return paramCase(text);

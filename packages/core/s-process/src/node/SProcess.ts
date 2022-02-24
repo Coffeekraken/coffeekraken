@@ -48,7 +48,7 @@ import __SFeature from '@coffeekraken/s-feature';
  * @todo      tests
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class SProcess extends __SEventEmitter implements ISProcessInternal {
@@ -67,7 +67,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Access the process params
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _params?: Record<string, unknown>;
     get params() {
@@ -81,7 +81,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Access the stdio class initiated if exists
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     stdio = undefined;
 
@@ -92,7 +92,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Access the process state like 'idle', 'ready', 'running', 'killed', 'error', 'success'
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _state = 'idle';
 
@@ -104,7 +104,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * that store the duration, startTime, endTime, state, etc...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     executionsStack: ISProcessProcessObj[] = [];
 
@@ -115,7 +115,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Store the current execution object info like startTime, endTime, duration, state, etc...
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     currentExecutionObj?: ISProcessProcessObj;
 
@@ -127,7 +127,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Can come from the static ```interfaces.params``` property or the ```settings.interface``` one.
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     paramsInterface: any;
 
@@ -139,7 +139,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Store the initial params passed in the constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     initialParams: Record<string, unknown>;
 
@@ -151,7 +151,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Store the current process promise returned by the ```spawn``` function
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _processPromise?: __SPromise;
 
@@ -179,7 +179,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return        {SProcess}              An SProcess based class instance that you can use to execute your process
      *
      * @since
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static async from(
         what: string | Function | Promise<any> | __SPromise | SProcess,
@@ -286,7 +286,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return       {SCommandProcess}               An instance of the SCommandProcess class
      *
      * @since 				2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static async fromCommand(
         initialParams: Partial<ISCommandProcessParams> = {},
@@ -311,7 +311,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static async run(
         paramsOrStringArgs: string | Partial<ISProcessParams> = {},
@@ -329,7 +329,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
         initialParams?: Partial<ISProcessParams>,
@@ -402,7 +402,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * track of your process state, logs, etc...
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
 
     /**
@@ -413,7 +413,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * This will make the stdio initialize, etc...
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     ready() {
         if (this.state() === 'ready') return;
@@ -434,7 +434,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _duration: any;
     run(
@@ -731,7 +731,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * on the SPromise super instance as well as on the passed "promise" instance
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     kill(data) {
         // call the cancel method on the parent SPromise instance
@@ -746,7 +746,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * This method allows you to cancel the process
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     cancel(data) {
         if (this.state() === 'running') this.state('killed');
@@ -770,7 +770,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @param     {String}        state       The new state
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onStateChange(state) {
         // update the current execution state
@@ -805,7 +805,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is running, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isRunning() {
         return this.state() === 'running';
@@ -820,7 +820,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is idle, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isIdle() {
         return this.state() === 'idle';
@@ -835,7 +835,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is ready, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isReady() {
         return this.state() !== 'idle';
@@ -850,7 +850,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is killed, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isKilled() {
         return this.state() === 'killed';
@@ -865,7 +865,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is in error state, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isError() {
         return this.state() === 'error';
@@ -880,7 +880,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      * @return      {Boolean}         true if is in success state, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isSuccess() {
         return this.state() === 'success';
@@ -894,7 +894,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @param       {String}        message           The message you want to log
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     log(...logs: ISLog[]) {
         logs.forEach((log) => {
@@ -915,7 +915,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
      *
      * @param       {String}        message           The message you want to error
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     error(...errors: ISLog[]) {
         errors.forEach((error) => {

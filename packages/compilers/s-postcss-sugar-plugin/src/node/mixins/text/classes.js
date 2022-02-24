@@ -15,7 +15,7 @@ import __faker from 'faker';
  * \@sugar.text.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginTextClassesInterface extends __SInterface {
     static get _definition() {
@@ -97,7 +97,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * 
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     // align
@@ -106,7 +106,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:left
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to align text to the left side
@@ -115,7 +115,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:left">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
         .s-text--left {
@@ -127,7 +127,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:right
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to align text to the right side
@@ -136,7 +136,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:right">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--right {
@@ -148,7 +148,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:center
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to align text to the center
@@ -157,7 +157,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:center">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
          `).code(`
         .s-text--center {
@@ -169,7 +169,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:start
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to align text to the start (left) side, (right) when rtl
@@ -178,7 +178,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:start">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--start {
@@ -190,7 +190,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:end
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to align text to the end (right) side, (left) when rtl
@@ -199,7 +199,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:end">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--end {
@@ -211,7 +211,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:justify
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to justify the text
@@ -220,7 +220,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:justify">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--justify {
@@ -232,7 +232,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:overline
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to overline the text
@@ -241,7 +241,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:overline">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--overline {
@@ -253,7 +253,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:underline
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to underline the text
@@ -262,7 +262,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:underline">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--underline {
@@ -274,7 +274,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:line-through
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to line-through the text
@@ -283,7 +283,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:line-through">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--line-through {
@@ -295,7 +295,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:lowercase
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to lowercase the text
@@ -304,7 +304,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:lowercase">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--lowercase {
@@ -316,7 +316,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:uppercase
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to uppercase the text
@@ -325,7 +325,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:uppercase">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--uppercase {
@@ -337,7 +337,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * @name            s-text:capitalize
          * @namespace       sugar.css.mixins.text
          * @type            CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This class allows you to capitalize the text
@@ -346,7 +346,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <div class="s-text:capitalize">Hello world</div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-text--capitalize {

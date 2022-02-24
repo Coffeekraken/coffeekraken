@@ -16,7 +16,7 @@
  * const extensions = __commonDataFileExtensions();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonDataFileExtensions(withDot = false) {
     return ['csv', 'dat', 'db', 'dbf', 'json', 'log', 'mdb', 'sav', 'sql', 'tar', 'xml'].map(ext => withDot ? `.${ext}` : ext);

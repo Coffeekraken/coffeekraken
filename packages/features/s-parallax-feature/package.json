@@ -9,7 +9,7 @@
         "build": "sugar frontstack build",
         "test": "echo \"Error: no test specified\" && exit 1"
     },
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",

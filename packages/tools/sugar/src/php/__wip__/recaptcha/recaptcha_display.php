@@ -13,7 +13,7 @@ namespace thorin;
  * @example    php
  * print Thorin::recaptcha_display();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/ARCANEDEV/noCAPTCHA
  */
 function recaptcha_display($secret = null, $sitekey = null, $lang = null, $attributes = null) {

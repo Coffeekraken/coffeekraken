@@ -25,7 +25,7 @@
  * // 2
  * // 3
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 interface IAsyncForEach {
     (value: any, index: number, array: any[]): void;

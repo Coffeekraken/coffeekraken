@@ -11,7 +11,7 @@ use duncan3dc\Sessions\Session;
  * @example    php
  * $sessionId = Thorin::session_id();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function session_id() {
 	$instance = Session::getInstance();

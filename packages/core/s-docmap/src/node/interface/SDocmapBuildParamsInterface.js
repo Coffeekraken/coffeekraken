@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * needed to build the docMap.json file
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SDocmapBuildParamsInterface extends __SInterface {
     static get _definition() {

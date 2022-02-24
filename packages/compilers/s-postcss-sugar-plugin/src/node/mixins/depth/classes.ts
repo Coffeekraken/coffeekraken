@@ -17,7 +17,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  * \@sugar.depth.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginDepthClassesInterface extends __SInterface {
@@ -88,7 +88,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );

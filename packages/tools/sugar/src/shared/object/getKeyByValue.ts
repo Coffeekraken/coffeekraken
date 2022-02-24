@@ -23,7 +23,7 @@
  * console.log(getKeyByValue({ hello: 'world' }, 'world')); // => hello
  *
  * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function getKeyByValue(object, value) {
     return Object.keys(object).find((key) => object[key] === value);

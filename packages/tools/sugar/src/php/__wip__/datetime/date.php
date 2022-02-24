@@ -15,7 +15,7 @@ use Carbon\Carbon;
  * Thorin::date(2018, 11, 21)
  * // 2018-11-21 00:00:00
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://carbon.nesbot.com/    Carbon documentation
  */
 function date(int $year=null, int $month=null, int $day=null):Carbon {

@@ -6,7 +6,7 @@
     "main": "./src/node/exports.js",
     "browser": "./src/js/exports.js",
     "scripts": {},
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-class": "^2.0.0",

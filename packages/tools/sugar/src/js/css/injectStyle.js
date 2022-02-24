@@ -21,7 +21,7 @@ import __uniqid from '../../shared/string/uniqid';
  * injectStyle('a { color: red; }');
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function injectStyle(style, id = `injected-style-${__uniqid()}`, node = document.head) {
     const $tag = document.createElement('style');

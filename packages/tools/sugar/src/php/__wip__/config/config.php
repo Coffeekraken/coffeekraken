@@ -10,7 +10,7 @@ $t_configs = [];
  * @example    php
  * print Thorin::config('app.environment');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function config($path) {
 	global $t_configs;

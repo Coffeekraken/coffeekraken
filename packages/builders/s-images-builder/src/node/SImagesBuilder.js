@@ -34,7 +34,7 @@ export default class SImagesBuilder extends __SBuilder {
      * Access the images compressor settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get imagesBuilderSettings() {
         return this._settings.imagesBuilder;
@@ -47,7 +47,7 @@ export default class SImagesBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -69,7 +69,7 @@ export default class SImagesBuilder extends __SBuilder {
      * @return      {SPromise<ISImagesBuilderResult>}        A promise resolved with the ISImagesBuilderResult object that store all the builded files stats, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(params, settings) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {

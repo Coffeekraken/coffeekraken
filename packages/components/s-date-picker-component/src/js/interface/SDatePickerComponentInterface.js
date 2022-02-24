@@ -17,7 +17,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * @todo      tests
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SDatePickerComponentInterface extends __SInterface {
     static get _definition() {

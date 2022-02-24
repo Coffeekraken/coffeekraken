@@ -65,7 +65,7 @@ export interface ISStdio extends ISClass {
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SStdio extends __SClass implements ISStdio {
     /**
@@ -76,7 +76,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Store sources passed in the contructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     sources: ISEventEmitter[];
 
@@ -88,7 +88,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Store all the instanciated stdio
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _instanciatedStdio = {};
 
@@ -100,7 +100,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Store the registered stdio components
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registeredComponents: ISStdioRegisteredComponents = {};
 
@@ -112,7 +112,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Store the last log object logged
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _lastLogObj?: ISLog;
 
@@ -124,7 +124,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Represent the "basic" stdio
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static UI_BASIC: ISStdioUi = -1;
 
@@ -136,7 +136,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Store the logs that does not have been displayed yet
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _logsBuffer: ISLog[] = [];
 
@@ -148,7 +148,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Keep track of the display status
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _isDisplayed = false;
 
@@ -165,7 +165,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @param     {string}      [as=null]           Specify the id you want to use for this component. Overrides the static "id" property of the component itself
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerComponent(
         component: ISStdioComponent,
@@ -207,7 +207,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @todo      tests
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static existingOrNew(
         id: string,
@@ -249,7 +249,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * SStdio.new('default', proc);
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static new(id: string, sources, stdio: ISStdioUi, settings = {}) {
         return new Promise(async (resolve) => {
@@ -267,7 +267,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Access the stdio settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get stdioSettings(): ISStdioSettings {
         return (<any>this)._settings.stdio;
@@ -281,7 +281,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Access the stdio id
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _id: string = '';
     get id(): string {
@@ -296,7 +296,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
         id: string,
@@ -342,7 +342,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * This method simply take the buffered logs and log them in the feed
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _logBuffer() {
         this._logsBuffer = this._logsBuffer.filter((log) => {
@@ -358,7 +358,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * This method tells the stdio instance that it has been showned.
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     display() {
         // update the status
@@ -375,7 +375,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * This method tells the stdio instance that it has been hided
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hide() {
         this._isDisplayed = false;
@@ -391,7 +391,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @param     {SPromise}      source        The source to register
      * @param     {ISBlessedStdioSettings}     [settings={}]
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     registerSource(source, settings?: Partial<ISStdioSettings>) {
         const set = (<ISStdioSettings>(
@@ -435,7 +435,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _isClearing = false;
     _hashBuffer: string[] = [];
@@ -546,7 +546,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * @param         {ISLog[]}        ...logObj      The log object(s) you want to log
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     // _isCleared = true;
     async ask(askObj: Partial<ISLogAsk>) {
@@ -566,7 +566,7 @@ export default class SStdio extends __SClass implements ISStdio {
      * true if the stdio if actually displayed, false if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isDisplayed() {
         return this._isDisplayed;

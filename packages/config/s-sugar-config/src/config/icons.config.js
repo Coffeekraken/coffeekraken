@@ -16,7 +16,7 @@ export default function (env) {
              * loaded in your css if you use some fontawesome icons.
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: 'https://use.fontawesome.com/releases/v5.15.3/css/all.css',
         },
@@ -30,7 +30,7 @@ export default function (env) {
              * Specify the name of the generated font
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             name: 'sugar-fonticon',
             /**
@@ -42,7 +42,7 @@ export default function (env) {
              * Specify the output directory to generate fonticon in
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outputDir: '[config.storage.src.fontsDir]/sugar-icons',
         },

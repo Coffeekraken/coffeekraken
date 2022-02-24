@@ -15,7 +15,7 @@ $t_emitters = [];
  *   // do something here...
  * });
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    http://event.thephpleague.com/2.0/emitter/basic-usage/
  */
 function emitter($name = 'default') {

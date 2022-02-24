@@ -11,7 +11,7 @@ namespace thorin;
  * @example    php
  * $myCoolString = Thorin::lang('newsletter.title');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function lang($path, $lang = null) {
 	// if no lang is passed as parameter,

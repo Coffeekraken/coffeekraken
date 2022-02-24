@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::str_capitalize('FRED');
  * // Fred
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/capitalize.php
  */
 function str_capitalize(string $string):string {

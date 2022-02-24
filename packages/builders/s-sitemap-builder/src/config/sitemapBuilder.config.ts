@@ -14,7 +14,7 @@ export default (env, config) => {
              * Specify if you want to use the docmap.json as a sitemap source
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             output: `[config.storage.package.rootDir]/sitemap.xml`,
         },
@@ -29,7 +29,7 @@ export default (env, config) => {
                  * Specify if you want to use the docmap.json as a sitemap source
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 active: true,
                 /**
@@ -41,7 +41,7 @@ export default (env, config) => {
                  * Specify some setting to pass to the docmap sitemap source
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 settings: {},
                 /**
@@ -53,7 +53,7 @@ export default (env, config) => {
                  * Specify where to find the docmap source
                  *
                  * @since           2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: __path.resolve(
                     `${__dirname()}/../node/sources/SSitemapBuilderDocmapSource`,

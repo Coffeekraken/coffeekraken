@@ -30,7 +30,7 @@ import __deepize from './deepize';
  * get('myObject.cool.value'); // => 'Hello world'
  *
  * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function getGlob(obj, glob, settings = {}) {
     settings = Object.assign({ deepize: true }, settings);

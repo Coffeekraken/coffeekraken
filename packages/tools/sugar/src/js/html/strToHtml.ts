@@ -18,7 +18,7 @@
  * strToHtml(myString) // <p>Hello World</p>
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function strToHtml(string: string): HTMLElement | string {
     if (document !== undefined && document.createElement !== undefined) {

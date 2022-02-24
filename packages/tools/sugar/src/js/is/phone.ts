@@ -25,7 +25,7 @@ import MobileDetect from 'mobile-detect';
  *
  * @see       https://www.npmjs.com/package/mobile-detect
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function isPhone(ua: string = navigator.userAgent): boolean {
     const md = new MobileDetect(ua);

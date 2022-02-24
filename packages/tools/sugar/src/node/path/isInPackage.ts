@@ -23,7 +23,7 @@ import __readJsonSync from '@coffeekraken/sugar/node/fs/readJsonSync';
  * const root = isInPackage();
  *
  * @see       https://www.npmjs.com/package/find-package-json
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function isInPackage(name, from = process.cwd(), highest = false) {
     const packageRootDir = __packageRootDir(from);

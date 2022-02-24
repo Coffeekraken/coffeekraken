@@ -33,7 +33,7 @@ if (!__isNode() && !window.env) {
  * // etc...
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 // @ts-ignore
@@ -47,7 +47,7 @@ export default class SEnv {
      * window.env
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _env;
     static get env() {
@@ -82,7 +82,7 @@ export default class SEnv {
      * @return    {Boolean}               true if is the passed environment, false if not
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static is(env: string): boolean {
         env = env.toLowerCase();
@@ -108,7 +108,7 @@ export default class SEnv {
      * @return    {Any}                   The variable getted or undefined
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get(name: string): any {
         // @ts-ignore
@@ -128,7 +128,7 @@ export default class SEnv {
      * @return    {Any}                  The value setted
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static set(name: string, value: any): any {
         SEnv.env[name.toUpperCase()] = value;
@@ -148,7 +148,7 @@ export default class SEnv {
      * @return    {Any}                  The value setted
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static delete(name: string): void {
         delete SEnv.env[name.toUpperCase()];
@@ -163,7 +163,7 @@ export default class SEnv {
      * runs in.
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static packageJson = __packageJsonSync();
 }

@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          switch
  * @namespace     ui.switch
- * @type          CssMixin
+ * @type               PostcssMixin
  * @interface     ./switch          interface
  * @platform      postcss
  * @status        beta
@@ -21,7 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
  * }
  *
  * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginUiSwitchMixinInterface extends __SInterface {
     static get _definition() {

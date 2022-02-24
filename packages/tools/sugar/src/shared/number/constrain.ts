@@ -24,7 +24,7 @@
  * constrain(100, 0, 50) // 50
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function constrain(value, min = null, max = null) {
     if (min !== null && value < min) value = min;

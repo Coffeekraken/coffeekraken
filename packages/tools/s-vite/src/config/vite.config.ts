@@ -21,7 +21,7 @@ export default function (env, config) {
          * Specify the root directory to work with
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         root: '[config.storage.package.rootDir]',
         /**
@@ -33,7 +33,7 @@ export default function (env, config) {
          * Specify the base directory to work with
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         base: '/',
         /**
@@ -45,7 +45,7 @@ export default function (env, config) {
          * Specify the log level
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         logLevel: 'error',
 
@@ -59,7 +59,7 @@ export default function (env, config) {
          * Specify the mode to work with. Can be "development" or "production"
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mode: 'development',
         resolve: {
@@ -76,7 +76,7 @@ export default function (env, config) {
                  * Specify the esm builder alias resolution path
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 vue: 'vue/dist/vue.esm-bundler.js',
             },
@@ -90,7 +90,7 @@ export default function (env, config) {
          * Specify the plugins to use
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         plugins: [
             __path.resolve(`${__dirname()}/../node/plugins/sugarPlugin`),
@@ -108,7 +108,7 @@ export default function (env, config) {
          * Specify the public directory to use
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         publicDir: '[config.storage.src.rootDir]/src',
         /**
@@ -120,7 +120,7 @@ export default function (env, config) {
          * Specify the cache directory to use
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         cacheDir: '[config.storage.package.cacheDir]/vite',
         /**
@@ -132,7 +132,7 @@ export default function (env, config) {
          * Specify if the terminal screen has to be cleared or not
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         clearScreen: false,
         optimizeDeps: {
@@ -145,7 +145,7 @@ export default function (env, config) {
              * Specify some packages to exclude from build
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             // exclude: ['static'],
         },
@@ -160,7 +160,7 @@ export default function (env, config) {
                  * Specify the entry file for a "lib" build
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 entry: '[config.storage.src.rootDir]/js/index.ts',
                 /**
@@ -172,7 +172,7 @@ export default function (env, config) {
                  * Specify the entry name for a "lib" build
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 name: 'index',
             },
@@ -185,7 +185,7 @@ export default function (env, config) {
              * Specify the output directory for the build
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outDir: '[config.storage.dist.jsDir]',
         },
@@ -199,7 +199,7 @@ export default function (env, config) {
              * Specify the hostname for the vite server
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             host: '127.0.0.1',
             /**
@@ -211,7 +211,7 @@ export default function (env, config) {
              * Specify the port for the vite server
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             port: 3000,
             /**
@@ -223,7 +223,7 @@ export default function (env, config) {
              * Specify the full hostname for the vite server
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',

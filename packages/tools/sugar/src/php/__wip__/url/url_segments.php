@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::url_segments('http://thorin.io/hello/world?query=value1');
  * // ['hello','world']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function url_segments($url = null) {
 	if (!$url) {

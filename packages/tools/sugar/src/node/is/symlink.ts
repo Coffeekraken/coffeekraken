@@ -25,7 +25,7 @@ import __fs from 'fs';
  * @todo        Tests
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function isSymlink(path) {
     return __fs.existsSync(path) && __fs.lstatSync(path).isSymbolicLink();

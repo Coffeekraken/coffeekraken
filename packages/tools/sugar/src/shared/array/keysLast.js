@@ -18,7 +18,7 @@ import uniq from 'lodash/uniq';
  * keysLast(['a','b','d','g','c'], ['d','g'])
  * // ['a','b','c','d','g']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function keysLast(array, keys) {
     // all the keys has to exist in the array stack

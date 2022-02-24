@@ -22,7 +22,7 @@ import __fs from 'fs-extra';
  * packageLocalDir(); // => '/my/cool/path/.local'
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const fn: IpackageLocalDir = function () {
     const path = __SSugarConfig.get('storage.package.localDir');

@@ -17,7 +17,7 @@ import __isMap from '@coffeekraken/sugar/shared/is/map';
  * };
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor = {
     name: 'Map',

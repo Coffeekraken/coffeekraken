@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * needed to install snapshots
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SDocmapInstallSnapshotParamsInterface extends __SInterface {
     static get _definition() {

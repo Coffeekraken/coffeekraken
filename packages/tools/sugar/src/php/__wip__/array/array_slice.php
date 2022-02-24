@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::array_slide($array, 1, 3);
  * // [2,3,4]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/slice.php
  */
 function array_slice(array $array, int $start, int $end = null): array {

@@ -25,7 +25,7 @@ import * as __convertColors from 'colors-convert';
  * hsla2rgba(10,20,30);
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function hsla2rgba(h, s, l, a = 1) {
     if (typeof h === 'object') {

@@ -48,7 +48,7 @@ export interface ISSugarCliAvailableCli {
  * This is the main sugar cli file that split the commands
  * by calling the proper files with the parsed cli args
  *
- * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author                 Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 const cliParams = __SSugarCliParamsInterface.apply(

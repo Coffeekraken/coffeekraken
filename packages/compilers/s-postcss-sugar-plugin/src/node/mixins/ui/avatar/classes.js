@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.ui.avatar.classes();
  *
  * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginUiAvatarClassesInterface extends __SInterface {
     static get _definition() {
@@ -121,11 +121,11 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   <img class="s-avatar:interactive s-font:100 s-mie:20 s-color:error" src="https://picsum.photos/300/300?v=23343222" />
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-        * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+ * @contributor 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -142,7 +142,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           * </span>
           * 
           * @since    2.0.0
-          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
           .s-avatar {
@@ -165,7 +165,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </span>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`).code(`
             .s-avatar${style === finalParams.defaultStyle ? '' : `--${style}`} {
                 @sugar.ui.avatar($style: ${style}, $scope: lnf);
@@ -188,7 +188,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           * </span>
           * 
           * @since    2.0.0
-          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
           .s-avatar${shape === finalParams.defaultShape ? '' : `--${shape}`} {
             @sugar.ui.avatar($shape: ${shape}, $scope: shape);
@@ -209,7 +209,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
           * </span>
           * 
           * @since    2.0.0
-          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+          * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
           .s-avatar--interactive {
               @sugar.ui.avatar($scope: 'interactive');

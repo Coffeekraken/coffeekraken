@@ -33,7 +33,7 @@ import __SCacheSettingsInterface from './interface/SCacheSettingsInterface';
  * cache.set('myCoolCacheItem', someData);
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISCacheGetSettings {
@@ -73,7 +73,7 @@ class SCache extends __SClass implements ISCache {
    * Store the cache if passed in constructor
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   id: string;
 
@@ -85,7 +85,7 @@ class SCache extends __SClass implements ISCache {
    * Store all the registered adapters
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registeredAdapters: Record<string, ISCacheAdapter> = {};
 
@@ -97,7 +97,7 @@ class SCache extends __SClass implements ISCache {
    * Access the cache settings
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get cacheSettings(): ISCacheSettings {
     return (<any>this._settings).cache;
@@ -114,7 +114,7 @@ class SCache extends __SClass implements ISCache {
    * @param       {ISCacheAdapter}      adapter       The adapter class
    *
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerAdapter(adapter: ISCacheAdapter, id?: string): void {
     if (this.registeredAdapters[id || adapter.id]) return;
@@ -137,7 +137,7 @@ class SCache extends __SClass implements ISCache {
    * - parse (JSON.parse) {Function}: Specify the function used to parse the items once theirs get back from theirs save place
    * - stringify (JSON.stringify) {Function}: Specify the function used to stringify the item object before saving it
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(id, settings = {}) {
     super(
@@ -201,7 +201,7 @@ class SCache extends __SClass implements ISCache {
    *
    * Access this cache instance adapter
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _adapter?: ISCacheAdapter;
   get adapter(): ISCacheAdapter {
@@ -239,7 +239,7 @@ class SCache extends __SClass implements ISCache {
    * @example             js
    * const myValue = myCache.get('coolValue');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async get(name, settings?: Partial<ISCacheGetSettings>) {
     const set: ISCacheGetSettings = {
@@ -310,7 +310,7 @@ class SCache extends __SClass implements ISCache {
    *    ttl: 1000
    * });
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async set(name, value, settings?: Partial<ISCacheSetSettings>) {
     const set: ISCacheSetSettings = {
@@ -389,7 +389,7 @@ class SCache extends __SClass implements ISCache {
    * @example           js
    * await myCache.exists('coco'); // => true
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async exists(name) {
     // check
@@ -411,7 +411,7 @@ class SCache extends __SClass implements ISCache {
    * @example           js
    * await myCache.delete('coco');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async delete(name) {
     // get the adapter
@@ -431,7 +431,7 @@ class SCache extends __SClass implements ISCache {
    * @example           js
    * await myCache.clear();
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async clear() {
     // get the adapter
@@ -451,7 +451,7 @@ class SCache extends __SClass implements ISCache {
    * @param               {String}                      rawValue                    The raw value to transform into an object
    * @return              {Object}                                                  The object format of the value getted back from the cache system
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _parse(rawValue) {
     return this.cacheSettings.parse(rawValue);
@@ -468,7 +468,7 @@ class SCache extends __SClass implements ISCache {
    * @param               {Object}                      object                       The object to save to the cache system that have to transformed in string before...
    * @return              {String}                                                  The string format of the item to save to cache
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _stringify(object) {
     return this.cacheSettings.stringify(object);

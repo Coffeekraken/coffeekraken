@@ -27,7 +27,7 @@ import __toString from '../../../shared/string/toString';
  * dataset(myCoolElement, 'hello', 'world'); // => 'world';
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function dataset($elm, key, value = null) {
     if (!$elm.getAttribute) return;

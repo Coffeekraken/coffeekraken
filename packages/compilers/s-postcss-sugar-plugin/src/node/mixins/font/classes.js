@@ -16,7 +16,7 @@ import __faker from 'faker';
  * \@sugar.font.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginFontClassesInterface extends __SInterface {
     static get _definition() {
@@ -83,7 +83,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -120,7 +120,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -154,7 +154,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -198,7 +198,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -237,7 +237,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -266,7 +266,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     Object.keys(fontsFamiliesObj).forEach((fontName) => {
@@ -284,7 +284,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <h1 class="s-font:${fontName}">Hello world</h1>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
 .s-font--${fontName} {
@@ -325,7 +325,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * <h1 class="s-font:reset-size">Hello world</h1>
   * 
   * @since      2.0.0
-  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `).code(`
 .s-font--reset-size {
@@ -344,7 +344,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
   * <h1 class="s-font:reset-family">Hello world</h1>
   * 
   * @since      2.0.0
-  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `).code(`
 .s-font--reset-family {
@@ -364,7 +364,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <h1 class="s-font:${value}">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .s-font--${value} {
@@ -384,7 +384,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <h1 class="s-font:italic">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .s-font--italic {
@@ -403,7 +403,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <h1 class="s-font:oblique">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .s-font--oblique {
@@ -423,7 +423,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <h1 class="s-font:${value.replace('weight-', '')}">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             .s-font--${value} {

@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.visually.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginOverflowClassesInterface extends __SInterface {
     static get _definition() {
@@ -51,7 +51,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.push(`/**

@@ -12,7 +12,7 @@ export default function (env, config) {
              * Specify the url for the "discord" contact
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '[config.discord.server.url]',
             /**
@@ -24,7 +24,7 @@ export default function (env, config) {
              * Specify the shield url for the "discord" contact
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             shield: 'https://img.shields.io/badge/Join%20us%20on%20discord-Join-blueviolet?style=[config.shieldsio.style]&logo=discord',
         },
@@ -38,7 +38,7 @@ export default function (env, config) {
              * Specify the url for the "email" contact
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             get url() {
                 var _a, _b, _c, _d, _e;
@@ -53,7 +53,7 @@ export default function (env, config) {
              * Specify the shield url for the "email" contact
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             shield: 'https://img.shields.io/badge/Email%20us-Go-green?style=[config.shieldsio.style]&logo=Mail.Ru',
         },

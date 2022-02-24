@@ -31,7 +31,7 @@ import __errorBasicStdioComponent from './components/errorBasicStdioComponent';
  * const terminal = new SBasicStdio(mySource);
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISBasicStdioCtorSettings {
@@ -53,7 +53,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * Access the stdio settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get basicStdioSettings(): ISBasicStdioSettings {
         return (<any>this)._settings.basicStdio;
@@ -67,7 +67,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
         id: string,
@@ -120,7 +120,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * @param         {ISStdioComponent}      component       The component to use for logging
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _currentLogId = '';
     _lastLogLinesCountStack = [];
@@ -252,7 +252,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
      * @param         {ISStdioComponent}      component       The component to use for logging
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _ask(askObj) {
         return new __SPromise(async ({ resolve, reject, emit }) => {

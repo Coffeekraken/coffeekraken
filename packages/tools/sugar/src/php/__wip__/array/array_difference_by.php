@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::array_difference_by([2.1, 1.2], [2.3, 3.4], 'floor');
  * // [1.2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/differenceBy.php
  */
 function array_difference_by(array $array, ...$values): array {

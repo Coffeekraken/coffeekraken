@@ -27,7 +27,7 @@ import __isClass from '../../is/class';
  * getExtendsStack(Plop); // => {Coco: [class ...], Error: [class ...]};
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface IGetExtendsStackSettings {

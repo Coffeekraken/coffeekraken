@@ -54,7 +54,7 @@ import sinceTag from './html/tags/since';
  * docblockOutput.render();
  *
  * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDocblockHtmlRendererCtorSettings {
@@ -76,7 +76,7 @@ class SDocblockHtmlRenderer
    * Store the list of supported docblock tags
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static supportedTags = [
     '@type',
@@ -100,7 +100,7 @@ class SDocblockHtmlRenderer
    * Constructor
    *
    * @since     2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(
     docblockInstance: ISDocblock,

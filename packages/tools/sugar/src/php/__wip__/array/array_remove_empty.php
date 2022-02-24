@@ -11,7 +11,7 @@ namespace thorin;
  * $newArray = Thorin::array_remove_empty(['','hello','','world']);
  * // ['hello','world']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see
  */
 function array_remove_empty($array){

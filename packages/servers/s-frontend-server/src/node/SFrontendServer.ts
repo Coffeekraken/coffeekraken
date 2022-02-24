@@ -34,7 +34,7 @@ import __onProcessExit from '@coffeekraken/sugar/node/process/onProcessExit';
  * server.run();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISFrontendServerParams {
     port: number;
@@ -54,7 +54,7 @@ export default class SFrontendServer extends __SClass {
      * Constructor
      *
      * @since 					2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor() {
         super();
@@ -70,7 +70,7 @@ export default class SFrontendServer extends __SClass {
      * through which you can subscribe for events, etc...
      *
      * @since       2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params: Partial<ISFrontendServerParams> | string): Promise<any> {
         const finalParams: ISFrontendServerParams =

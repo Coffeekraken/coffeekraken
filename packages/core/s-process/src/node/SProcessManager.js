@@ -13,7 +13,7 @@ class SProcessManager extends __SEventEmitter {
      *
      * Constructor
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -31,7 +31,7 @@ class SProcessManager extends __SEventEmitter {
          * Store all the processes that this manager has launched
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._processesStack = {};
         /**
@@ -42,7 +42,7 @@ class SProcessManager extends __SEventEmitter {
          * Store all the processed ONLY when runInParallel is false to manage the processed queue
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._processesQueue = {};
         /**
@@ -53,7 +53,7 @@ class SProcessManager extends __SEventEmitter {
          * Store a flag to know if the queue is running
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._isQueueRunning = false;
         // __onProcessExit(() => {
@@ -82,7 +82,7 @@ class SProcessManager extends __SEventEmitter {
      * Access the process manager process settings
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerSettings() {
         return this._settings.processManager;
@@ -99,7 +99,7 @@ class SProcessManager extends __SEventEmitter {
      * @param       {ISProcessManagerProcessWrapperSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     attachProcess(id, processInstance, settings) {
         // avoid multiple same processes
@@ -128,7 +128,7 @@ class SProcessManager extends __SEventEmitter {
      * @param       {String}      id        The process id to detach
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     detachProcess(id) {
         if (!this._processesStack[id])

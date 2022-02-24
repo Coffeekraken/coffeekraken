@@ -20,7 +20,7 @@ namespace Sugar\is;
  * Sugar\is\absolutePath('/my/cool/path'); // => true
  * 
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function absolutePath($path) {
     if (!is_string($path)) {

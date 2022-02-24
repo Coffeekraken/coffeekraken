@@ -8,7 +8,7 @@ module.exports = {
    *
    * @see         https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
    * @since       2.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   default: `
     only screen
@@ -26,7 +26,7 @@ module.exports = {
    *
    * @see         https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
    * @since       2.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   portrait: `
     only screen
@@ -45,7 +45,7 @@ module.exports = {
    *
    * @see         https://css-tricks.com/snippets/css/media-queries-for-standard-devices/
    * @since       2.0.0
-   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   landscape: `
     only screen

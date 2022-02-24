@@ -26,7 +26,7 @@
  * // => ?value1=coco&value2=plop
  *
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function toQueryString(obj) {
     return (

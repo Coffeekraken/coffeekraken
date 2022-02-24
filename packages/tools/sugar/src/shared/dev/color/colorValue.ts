@@ -16,7 +16,7 @@ import __SugarConfig from '@coffeekraken/s-sugar-config';
  * colorValue('black'); => #000000
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function colorValue(color) {
     if (!__SugarConfig.get('dev.colors')[color]) {

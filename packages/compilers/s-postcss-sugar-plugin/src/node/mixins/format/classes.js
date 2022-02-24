@@ -16,7 +16,7 @@ import __faker from 'faker';
  * \@sugar.format.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginFormatClassesInterface extends __SInterface {
     static get _definition() {
@@ -112,7 +112,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     const typoRhythmElements = Object.keys(__STheme.config('typo'))
@@ -198,7 +198,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     return vars;

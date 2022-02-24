@@ -32,7 +32,7 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDescriptorResultObj {}
@@ -67,7 +67,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Store the result objects added with the ```add``` method
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _issues: any = {};
 
@@ -79,7 +79,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Store the descriptor assiciated with this result object
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _descriptor: ISDescriptor;
 
@@ -91,7 +91,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Store the descriptor settings assiciated with this result object
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _descriptorSettings: ISDescriptorSettings;
 
@@ -103,7 +103,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Store the value that has been validated
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     value: any;
 
@@ -115,7 +115,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Store the value that has to been validated
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _originalValue: any;
 
@@ -127,7 +127,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(descriptor: ISDescriptor, value: any, descriptorSettings: ISDescriptorSettings) {
         super({});
@@ -150,7 +150,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * @return        {Boolean}           true if no issue(s), false if not
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hasIssues(): boolean {
         return Object.keys(this._issues).length >= 1;
@@ -165,7 +165,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * @param         {ISDescriptorResultRule}        ruleResult      The rule result object you want to add
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     add(ruleResult: ISDescriptorResultRule): void {
         if (!ruleResult.__ruleObj.id) return;
@@ -181,7 +181,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * @return        {String}                The result object in string format
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString(): string {
         if (__isNode()) {
@@ -201,7 +201,7 @@ class SDescriptorResult extends __SClass implements ISDescriptorResult {
      * @return        {String}                The result object in string format
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toConsole(): string {
         // handle descriptor header

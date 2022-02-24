@@ -33,7 +33,7 @@ export default class SFrontstack extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -48,7 +48,7 @@ export default class SFrontstack extends __SClass {
      * Access the frontstack settings
      *
      * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get frontstackSettings() {
         return this._settings.frontstack;
@@ -61,7 +61,7 @@ export default class SFrontstack extends __SClass {
      * This method allows you to create a new project using one of the available recipe(s)
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     new(params) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
@@ -98,7 +98,7 @@ export default class SFrontstack extends __SClass {
      * This method allows you to action a frontstack process
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     action(params) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
@@ -152,7 +152,7 @@ export default class SFrontstack extends __SClass {
      * This method allows you to exec a frontstack process
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     recipe(params) {
         const processesPromises = [];
@@ -359,7 +359,7 @@ export default class SFrontstack extends __SClass {
      * @return     {Record<string, ISFrontstackRecipe>}        The recipes objects
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     listRecipes() {
         const recipes = __SSugarConfig.get('frontstack.recipes');
@@ -375,7 +375,7 @@ export default class SFrontstack extends __SClass {
      * @return      {}
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     list(params) {
         return new __SPromise(({ resolve, reject, emit }) => {

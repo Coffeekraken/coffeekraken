@@ -30,7 +30,7 @@ import __SPromise from '@coffeekraken/s-promise';
  *
  * @see 		https://developer.mozilla.org/en/docs/Web/API/MutationObserver
  * @since       1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function observeAttributes(
     target: HTMLElement,

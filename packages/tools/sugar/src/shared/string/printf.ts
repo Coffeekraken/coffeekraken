@@ -28,7 +28,7 @@ import __sprintf from 'sprintf-js';
  *
  * @see 				https://www.npmjs.com/package/sprintf-js
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function _printf(...args) {
     return __sprintf.sprintf.apply(null, args);

@@ -66,7 +66,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  *
  * @see             https://github.com/darlanrod/input-range-scss
  * @since           2.0.0
- * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISRangeComponentProps extends ISLitComponentDefaultProps {
@@ -189,7 +189,7 @@ export default class SRange extends __SLitComponent {
  * @param           {any}           [props={}]              Some default props you want to set for your webcomponent
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export function define(
     props: Partial<ISRangeComponentProps> = {},

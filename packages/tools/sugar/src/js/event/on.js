@@ -25,7 +25,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * });
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function on(name, callback) {
     // check that the global SPromise exists

@@ -45,7 +45,7 @@ import __SLog from '@coffeekraken/s-log';
  * });
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISMarkdownBuilderSettings {}
@@ -107,7 +107,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerTransformer(name: string, transformerPath: string): void {
         // @ts-ignore
@@ -125,7 +125,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerHelper(name: string, helperPath: string): void {
         // @ts-ignore
@@ -143,7 +143,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @param           {Function<ISMarkdownBuilderToken>>}         token           A token function that returns an ISMarkdownBuilderToken object
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerLayout(
         name: string,
@@ -167,7 +167,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @param           {Record<'markdown'|'html',string>}      partial     The partial object with the targets properties like markdown and html that point to their proper handlebar syntax files
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerPartial(
         name: string,
@@ -188,7 +188,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @param               {Record<'markdown'|'html', string>}     sectionObj          The section object with the targets properties like markdown and html that point to their proper handlebar syntax files
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerSection(
         name: string,
@@ -208,7 +208,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * Access the marked object through this property
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static marked = __marked;
 
@@ -220,7 +220,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * Access the postcss builder settings
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get markdownBuilderSettings(): ISMarkdownBuilderSettings {
         return (<any>this)._settings.markdownBuilder;
@@ -233,7 +233,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISMarkdownBuilderCtorSettings>) {
         super(
@@ -302,7 +302,7 @@ export default class SMarkdownBuilder extends __SBuilder {
      * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(
         params: ISMarkdownBuilderBuildParams,

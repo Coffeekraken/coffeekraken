@@ -14,7 +14,7 @@ use Arcanedev\NoCaptcha\NoCaptcha;
  * @example    php
  * $recaptcha = Thorin::recaptcha_factory();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/ARCANEDEV/noCAPTCHA
  */
 function recaptcha_factory($secret = null, $sitekey = null, $lang = null, $attributes = []) {

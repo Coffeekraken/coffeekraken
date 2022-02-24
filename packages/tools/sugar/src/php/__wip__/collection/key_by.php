@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::key_by($array, function ($o) { return \chr($o['code']); });
  * // ['a' => ['direction' => 'left', 'code' => 97], 'd' => ['direction' => 'right', 'code' => 100]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/keyBy.php
  */
 function key_by(iterable $collection, $iteratee):array {

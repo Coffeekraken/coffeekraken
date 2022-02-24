@@ -36,7 +36,7 @@ export default class SVite extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -53,7 +53,7 @@ export default class SVite extends __SClass {
      * Access the vite settings
      *
      * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viteSettings() {
         return this._settings.vite;
@@ -67,7 +67,7 @@ export default class SVite extends __SClass {
      * @param         {ISViteStartParams}         [params={}]             Some parameters to customize your process
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {
@@ -132,7 +132,7 @@ export default class SVite extends __SClass {
      * @param         {ISViteStartParams}         [params={}]             Some parameters to customize your process
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {

@@ -38,7 +38,7 @@ import __observeAttribute from '../observe/observeAttributes';
  * });
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function whenAttribute(elm, attrName, checkFn = null) {
     return new Promise((resolve, reject) => {

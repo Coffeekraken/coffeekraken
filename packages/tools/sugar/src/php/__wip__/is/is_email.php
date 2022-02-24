@@ -12,7 +12,7 @@ namespace thorin;
  *     // do something
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function is_email($value) {
 	return \filter_var($value, FILTER_VALIDATE_EMAIL) !== false;

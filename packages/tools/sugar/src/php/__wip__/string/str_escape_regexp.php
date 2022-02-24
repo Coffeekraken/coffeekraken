@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::str_escape_regexp('[lodash](https://lodash.com/)');
  * // \[lodash\]\(https://lodash\.com/\)
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see   https://github.com/lodash-php/lodash-php/blob/master/src/String/escapeRegExp.php
  */
 function str_escape_regexp(string $string):string {

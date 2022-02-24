@@ -18,7 +18,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  * \@sugar.offsize.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginOffSizeClassesInterface extends __SInterface {
@@ -109,7 +109,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -131,7 +131,7 @@ export default function ({
     * <span class="${clsMargin.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -164,7 +164,7 @@ export default function ({
     * <span class="${clsMarginTop.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -188,7 +188,7 @@ export default function ({
     * <span class="${clsMarginBottom.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -212,7 +212,7 @@ export default function ({
     * <span class="${clsMarginLeft.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -241,7 +241,7 @@ export default function ({
     * <span class="${clsMarginRight.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -270,7 +270,7 @@ export default function ({
     * <span class="${clsMarginX.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -294,7 +294,7 @@ export default function ({
     * <span class="${clsMarginY.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `,
         ).code(`
@@ -319,7 +319,7 @@ export default function ({
 //     * <span class="s-m:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -341,7 +341,7 @@ export default function ({
 //     * <span class="s-mbs:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -363,7 +363,7 @@ export default function ({
 //     * <span class="s-mie:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -385,7 +385,7 @@ export default function ({
 //     * <span class="s-mbe:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -407,7 +407,7 @@ export default function ({
 //     * <span class="s-mis:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -429,7 +429,7 @@ export default function ({
 //     * <span class="s-mi:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`
@@ -452,7 +452,7 @@ export default function ({
 //     * <span class="s-mb:auto">Something cool</span>
 //     * 
 //     * @since        2.0.0
-//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //     */
 //    `,
 //     ).code(`

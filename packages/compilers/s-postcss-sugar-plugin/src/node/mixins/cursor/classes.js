@@ -16,7 +16,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * \@sugar.cursor.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginCursorClassesInterface extends __SInterface {
     static get _definition() {
@@ -63,7 +63,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     cursors.forEach(cursor => {
@@ -82,7 +82,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since         2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`
         .s-cursor--${cursor} {

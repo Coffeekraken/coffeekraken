@@ -15,7 +15,7 @@ export default function (env, config) {
          * Specify the port to use for the frontend server
          *
          * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         port: env.env === 'production' ? 9090 : 8080,
 
@@ -28,7 +28,7 @@ export default function (env, config) {
          * Specify the hostname to use for the frontend server
          *
          * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         // hostname: __ipAddress(),
         hostname: '127.0.0.1',
@@ -42,7 +42,7 @@ export default function (env, config) {
          * Specify the root directory to use for the frontend server
          *
          * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         rootDir: `[config.storage.package.rootDir]`,
 
@@ -55,7 +55,7 @@ export default function (env, config) {
          * Specify a directory that will be served as static files
          *
          * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         staticDirs: {
             '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
@@ -72,7 +72,7 @@ export default function (env, config) {
          * Specify the views directory path
          *
          * @since         2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         viewsDir: `[config.storage.src.rootDir]/views`,
 
@@ -86,7 +86,7 @@ export default function (env, config) {
          * Specify which log level you want for your server.
          *
          * @since             2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         logLevel: 'info',
 
@@ -101,7 +101,7 @@ export default function (env, config) {
                  * Specify which route to proxy for the vitePing
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 route: '/__vite_ping',
                 settings: {
@@ -114,7 +114,7 @@ export default function (env, config) {
                      * Specify where to redirect the vitePing requests
                      *
                      * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     target: '[config.vite.server.hostname]',
                     /**
@@ -126,7 +126,7 @@ export default function (env, config) {
                      * Specify if you want the redirection to change the origin or not
                      *
                      * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     changeOrigin: true,
                 },
@@ -143,7 +143,7 @@ export default function (env, config) {
                  * Middleware description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Track how many times take a request`,
                 /**
@@ -155,7 +155,7 @@ export default function (env, config) {
                  * Specify where to find the "bench" middleware
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/middleware/benchMiddleware`,
                 settings: {},
@@ -169,7 +169,7 @@ export default function (env, config) {
                  * Middleware description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Inject the "request" object for views`,
                 /**
@@ -181,7 +181,7 @@ export default function (env, config) {
                  * Specify where to find the "request" middleware
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/middleware/requestMiddleware`,
                 settings: {},
@@ -196,7 +196,7 @@ export default function (env, config) {
                  * Middleware description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Inject an "env" object for the views`,
                 /**
@@ -208,7 +208,7 @@ export default function (env, config) {
                  * Specify where to find the "env" middleware
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/middleware/envMiddleware`,
                 settings: {},
@@ -223,7 +223,7 @@ export default function (env, config) {
                  * Middleware description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Inject a "packageJson" object for the views`,
                 /**
@@ -235,7 +235,7 @@ export default function (env, config) {
                  * Specify where to find the "packageJson" middleware
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/middleware/packageJsonMiddleware`,
                 settings: {},
@@ -252,7 +252,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module allows you to serve files from the root directory',
                 /**
@@ -264,7 +264,7 @@ export default function (env, config) {
                  * Specify where to find the "rootFiles" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
                 settings: {},
@@ -278,7 +278,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module gives you access to a "docmap" object in the views',
                 /**
@@ -290,7 +290,7 @@ export default function (env, config) {
                  * Specify where to find the "docmap" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/docmap/docmap`,
                 settings: {},
@@ -304,7 +304,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module allows you to make redirections depending on requested path',
                 /**
@@ -316,7 +316,7 @@ export default function (env, config) {
                  * Specify where to find the "redirect" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/redirect/redirect`,
                 settings: {},
@@ -330,7 +330,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module handle the /styleguide/... views display',
                 /**
@@ -342,7 +342,7 @@ export default function (env, config) {
                  * Specify where to find the "styleguide" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/styleguide/styleguide`,
                 settings: {},
@@ -356,7 +356,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module gives you access to a "config" and a "configFiles" object into the views',
                 /**
@@ -368,7 +368,7 @@ export default function (env, config) {
                  * Specify where to find the "config" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/config/config`,
                 settings: {},
@@ -382,7 +382,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module gives you access to a "frontspec" object into the views',
                 /**
@@ -394,7 +394,7 @@ export default function (env, config) {
                  * Specify where to find the "frontspec" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/frontspec/frontspec`,
                 settings: {},
@@ -408,7 +408,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module handle the /api/... views display',
                 /**
@@ -420,7 +420,7 @@ export default function (env, config) {
                  * Specify where to find the "api" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/api/api`,
                 settings: {},
@@ -434,7 +434,7 @@ export default function (env, config) {
                  * Specify the module description
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'This module handle the /view/... views display',
                 /**
@@ -446,7 +446,7 @@ export default function (env, config) {
                  * Specify where to find the "view" module
                  *
                  * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/modules/view/view`,
 
@@ -460,7 +460,7 @@ export default function (env, config) {
                      * Specify the slug you want that trigger the view handler
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     slug: '/view/*',
 
@@ -473,7 +473,7 @@ export default function (env, config) {
                      * Specify the dotpath of the view that has to be used as "index" when the path is just "/"
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     indexView: 'index',
                 },
@@ -491,7 +491,7 @@ export default function (env, config) {
                  * Specify which handle to use for requests on "/"
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 handler: 'view',
             },
@@ -505,7 +505,7 @@ export default function (env, config) {
                  * Specify which handle to use for requests on "/docmap.json"
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 handler: 'docmap',
             },
@@ -521,7 +521,7 @@ export default function (env, config) {
                  * Handler description
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Display some documentation sourced from markdown files`,
                 /**
@@ -533,7 +533,7 @@ export default function (env, config) {
                  * Store all the "doc" configuration access like the route, the title, etc...
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/handlers/doc`,
             },
@@ -546,7 +546,7 @@ export default function (env, config) {
                  * Handler description
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Display some documentation sourced from markdown files`,
                 /**
@@ -558,7 +558,7 @@ export default function (env, config) {
                  * Store all the "markdown" configuration access like the route, the title, etc...
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/handlers/markdown`,
             },
@@ -571,7 +571,7 @@ export default function (env, config) {
                  * Handler description
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: `Serve some docmap item(s) depending on request`,
                 /**
@@ -583,7 +583,7 @@ export default function (env, config) {
                  * Store all the "api doc" configuration access like the route, the title, etc...
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 path: `${__dirname()}/../node/handlers/docmap`,
             }

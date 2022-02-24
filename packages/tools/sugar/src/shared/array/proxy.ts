@@ -27,7 +27,7 @@ import __uniqid from '../string/uniqid';
  *    }
  * });
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function proxy(array) {
     if (array.__$proxied) return array;
@@ -105,7 +105,7 @@ function proxy(array) {
      *    // do something...
      * });
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     Object.defineProperty(array, 'watch', {
         writable: false,
@@ -137,7 +137,7 @@ function proxy(array) {
      * const watchId = myArray.watch('push', (obj) => //...);
      * myArray.unwatch(watchId);
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     Object.defineProperty(array, 'unwatch', {
         writable: false,

@@ -17,7 +17,7 @@ import __isObject from '@coffeekraken/sugar/shared/is/object';
  * };
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const descriptor = {
     name: 'Object',

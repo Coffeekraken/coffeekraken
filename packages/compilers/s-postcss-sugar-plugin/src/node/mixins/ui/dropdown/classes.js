@@ -199,7 +199,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -220,7 +220,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </span>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             .s-dropdown {
@@ -247,7 +247,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </span>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             .s-dropdown${finalParams.defaultStyle === style ? '' : `--${style}`} {
@@ -275,7 +275,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </span>
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown${finalParams.defaultShape === shape ? '' : `--${shape}`} {
@@ -302,7 +302,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown {
@@ -327,7 +327,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown--bottom-start {
@@ -352,7 +352,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown--bottom-end {
@@ -377,7 +377,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown--top {
@@ -402,7 +402,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown--top-start {
@@ -427,7 +427,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *     
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .s-dropdown--top-end {
@@ -450,7 +450,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
         vars.code(() => `
             .s-dropdown-container {
@@ -486,7 +486,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */`);
         // no need to write a class here cause this is handled in the dropdown.ts file directly...
     }

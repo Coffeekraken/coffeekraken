@@ -15,7 +15,7 @@ namespace thorin;
  * var_dump($array);
  * // ['b', 'b']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/pullAll.php
  */
 function array_pull_all(array $array, array $values): array {

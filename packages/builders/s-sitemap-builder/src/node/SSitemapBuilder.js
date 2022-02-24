@@ -28,7 +28,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * Access the sitemap settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSettings() {
         var _a;
@@ -42,7 +42,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         var _a;
@@ -66,7 +66,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @return      {SPromise<ISSitemapBuilderBuildResult>}                    A promise resolved with the sitemap result when success
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(params = {}) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
@@ -133,7 +133,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @param       {String}                        path            The ourput path where you want to save yous sitemap
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     save(items, path) {
         switch (__extension(path)) {

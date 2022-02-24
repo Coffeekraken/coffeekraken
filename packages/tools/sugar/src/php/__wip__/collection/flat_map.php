@@ -18,7 +18,7 @@ namespace thorin;
  * Thorin::flat_map([1, 2], 'duplicate');
  * // [1, 1, 2, 2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/flatMap.php
  */
 function flat_map(iterable $collection, callable $iteratee):array {

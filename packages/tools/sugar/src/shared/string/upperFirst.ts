@@ -22,7 +22,7 @@
  * upperFirst('hello world') // Hello world
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function upperFirst(string) {
     return string.charAt(0).toUpperCase() + string.slice(1);

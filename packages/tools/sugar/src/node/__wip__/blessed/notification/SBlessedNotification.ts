@@ -44,7 +44,7 @@ import __SBlessedComponent from '../SBlessedComponent';
  * });
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SBlessedNotification extends __SBlessedComponent {
   static displayStacks = {
@@ -91,7 +91,7 @@ export default class SBlessedNotification extends __SBlessedComponent {
    * Constructor
    *
    * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(title, body, settings = {}) {
     settings = __deepMerge(

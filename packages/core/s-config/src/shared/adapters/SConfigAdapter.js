@@ -11,7 +11,7 @@ export default class SConfigAdapter {
      * - name (null) {String}: Specify a simple name for this adapter instance. This name will be used to save the configs, etc...
      * - ...others: All the settings you need for your specific adapter
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         /**
@@ -23,7 +23,7 @@ export default class SConfigAdapter {
          * @param      {String}         identifier        A string identifier for the update. Can be a file path, an object hash, etc...
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._updatesTimeoutsStack = {};
         this._settings = __deepMerge(settings || {});
@@ -50,7 +50,7 @@ export default class SConfigAdapter {
      *
      * Access the adapter setted name
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get name() {
         return this._settings.name;

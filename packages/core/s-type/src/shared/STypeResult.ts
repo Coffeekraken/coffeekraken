@@ -15,7 +15,7 @@ import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
  * @todo        integrate ```toHtml``` method
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISTypeResultTypeObj {
@@ -78,7 +78,7 @@ class STypeResult implements ISTypeResult {
    * Store the interface result data like the SType.apply retuls, etc...
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _data: ISTypeResultData;
 
@@ -90,7 +90,7 @@ class STypeResult implements ISTypeResult {
    * Access the type in string format
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get typeString(): string {
     return this._data.typeString;
@@ -104,7 +104,7 @@ class STypeResult implements ISTypeResult {
    * Access the value passed to be type validated
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get value(): any {
     return this._data.value;
@@ -118,7 +118,7 @@ class STypeResult implements ISTypeResult {
    * Access the received descriptor object
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get received(): ISTypeResultReceived {
     return this._data.received;
@@ -132,7 +132,7 @@ class STypeResult implements ISTypeResult {
    * Access the expected descriptor object
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get expected(): ISTypeResultExpected {
     return this._data.expected;
@@ -146,7 +146,7 @@ class STypeResult implements ISTypeResult {
    * Access the issues array
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get issues(): ISTypeResultIssueObj[] {
     return this._data.issues;
@@ -160,7 +160,7 @@ class STypeResult implements ISTypeResult {
    * Access the settings object
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get settings(): ISTypeResultSettings {
     return this._data.settings;
@@ -174,7 +174,7 @@ class STypeResult implements ISTypeResult {
    * Constructor
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(data: ISTypeResultData) {
     this._data = data;
@@ -189,7 +189,7 @@ class STypeResult implements ISTypeResult {
    * @return        {Boolean}       true if has some issues, false if not
    *
    * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   hasIssues() {
     if (this._data) return true;
@@ -205,7 +205,7 @@ class STypeResult implements ISTypeResult {
    * @return        {String}                The result object in string format
    *
    * @since          2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   toString(): string {
     if (__isNode()) {
@@ -225,7 +225,7 @@ class STypeResult implements ISTypeResult {
    * @return        {String}                A string compatible with the terminal
    *
    * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   toConsole(): string {
     // handle descriptor header

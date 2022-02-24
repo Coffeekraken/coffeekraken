@@ -9,7 +9,7 @@ export default (env, config) => {
          * Specify the css object for the h1 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h1: {
             'font-family': 'title',
@@ -32,7 +32,7 @@ export default (env, config) => {
          * Specify the css object for the h2 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h2: {
             'font-family': 'title',
@@ -55,7 +55,7 @@ export default (env, config) => {
          * Specify the css object for the h3 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h3: {
             'font-family': 'title',
@@ -78,7 +78,7 @@ export default (env, config) => {
          * Specify the css object for the h4 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h4: {
             'font-family': 'title',
@@ -101,7 +101,7 @@ export default (env, config) => {
          * Specify the css object for the h5 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h5: {
             'font-family': 'title',
@@ -124,7 +124,7 @@ export default (env, config) => {
          * Specify the css object for the h6 typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         h6: {
             'font-family': 'title',
@@ -147,7 +147,7 @@ export default (env, config) => {
          * Specify the css object for the p typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         p: {
             'font-family': 'default',
@@ -167,7 +167,7 @@ export default (env, config) => {
          * Specify the css object for the lead typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         lead: {
             'font-family': 'default',
@@ -190,7 +190,7 @@ export default (env, config) => {
          * Specify the css object for the hr typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         hr: {
             color: '[theme.color.main.color]',
@@ -208,7 +208,7 @@ export default (env, config) => {
          * Specify the css object for the pre typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'pre:not([class])': {
             'font-family': 'code',
@@ -232,7 +232,7 @@ export default (env, config) => {
          * Specify the css object for the code typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         'code:not(pre > code)': {
             display: 'inline-block',
@@ -252,7 +252,7 @@ export default (env, config) => {
          * Specify the css object for the a typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         a: {
             color: 'accent',
@@ -266,7 +266,7 @@ export default (env, config) => {
          * Specify the css object for the quote typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         quote: {
             'font-family': 'quote',
@@ -280,7 +280,7 @@ export default (env, config) => {
          * Specify the css object for the b typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         b: {
             'font-weight': 'bold',
@@ -294,7 +294,7 @@ export default (env, config) => {
          * Specify the css object for the bold typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         bold: {
             'font-weight': 'bold',
@@ -308,7 +308,7 @@ export default (env, config) => {
          * Specify the css object for the strong typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         strong: {
             'font-weight': 'bold',
@@ -322,7 +322,7 @@ export default (env, config) => {
          * Specify the css object for the i typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         i: {
             'font-style': 'italic',
@@ -336,7 +336,7 @@ export default (env, config) => {
          * Specify the css object for the italic typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         italic: {
             'font-style': 'italic',
@@ -350,7 +350,7 @@ export default (env, config) => {
          * Specify the css object for the em typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         em: {
             'font-style': 'italic',
@@ -364,7 +364,7 @@ export default (env, config) => {
          * Specify the css object for the large typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         large: {
             'font-size': '1.1em',
@@ -378,7 +378,7 @@ export default (env, config) => {
          * Specify the css object for the larger typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         larger: {
             'font-size': '1.2em',
@@ -392,7 +392,7 @@ export default (env, config) => {
          * Specify the css object for the largest typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         largest: {
             'font-size': '1.3em',
@@ -406,7 +406,7 @@ export default (env, config) => {
          * Specify the css object for the small typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         small: {
             'font-size': '0.9em',
@@ -420,7 +420,7 @@ export default (env, config) => {
          * Specify the css object for the small typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         smaller: {
             'font-size': '0.8em',
@@ -434,7 +434,7 @@ export default (env, config) => {
          * Specify the css object for the small typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         smallest: {
             'font-size': '0.7em',
@@ -448,7 +448,7 @@ export default (env, config) => {
          * Specify the css object for the mark typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         mark: {
             'background-color': '[theme.color.accent.color]',
@@ -463,7 +463,7 @@ export default (env, config) => {
          * Specify the css object for the del typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         del: {
             'text-decoration': 'line-through',
@@ -477,7 +477,7 @@ export default (env, config) => {
          * Specify the css object for the ins typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ins: {
             'text-decoration': 'underline',
@@ -491,7 +491,7 @@ export default (env, config) => {
          * Specify the css object for the sub typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sub: {
             'vertical-align': 'sub',
@@ -506,7 +506,7 @@ export default (env, config) => {
          * Specify the css object for the sup typo element
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         sup: {
             'vertical-align': 'sup',

@@ -13,7 +13,7 @@ namespace thorin;
  * });
  * $currieAdd(10)(15); // 25
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function curry($function) {

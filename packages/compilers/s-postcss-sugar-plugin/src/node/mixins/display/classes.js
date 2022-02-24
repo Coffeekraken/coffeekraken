@@ -15,7 +15,7 @@ import __faker from 'faker';
  * \@sugar.display.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginDisplayClassesInterface extends __SInterface {
     static get _definition() {
@@ -109,7 +109,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.comment(() => `
@@ -129,7 +129,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * </div>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `).code(`
       .s-display--block{
@@ -152,7 +152,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * </div>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
     `).code(`
       .s-display--inline-block{
@@ -175,7 +175,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
       .s-display--contents{
@@ -198,7 +198,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
       .s-display--flex{
@@ -221,7 +221,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
        * </div>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `).code(`
       .s-display--grid{
@@ -244,7 +244,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
       .s-display--inline-flex{
@@ -267,7 +267,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
     `).code(`
       .s-display--inline-grid{
@@ -290,7 +290,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * </div>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
       .s-display--none{

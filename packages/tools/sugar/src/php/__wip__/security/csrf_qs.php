@@ -12,7 +12,7 @@ use \Volnix\CSRF\CSRF;
  * @example    php
  * $myQueryString = Thorin::csrf_qs();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/volnix/csrf
  */
 function csrf_qs($name = CSRF::TOKEN_NAME) {

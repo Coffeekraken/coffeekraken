@@ -23,7 +23,7 @@
  * autoCast('{"hello":"world"}') // {hello:'world'}
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function autoCast(string) {
     // if the passed string is not a string, return the value

@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::array_unzip($zipped);
  * // [['a', 'b'], [1, 2], [true, false]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/unzip.php
  */
 function array_unzip(array $array): array {

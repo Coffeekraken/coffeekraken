@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::eq(['a' => 1], ['a' => 1]);
  * // true
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Lang/eq.php
  */
 function eq($value, $other):bool {

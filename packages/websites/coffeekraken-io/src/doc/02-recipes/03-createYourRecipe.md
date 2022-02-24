@@ -8,7 +8,7 @@
  * @menu            Documentation / Recipes           /doc/recipes/create-your-recipe
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 -->
 

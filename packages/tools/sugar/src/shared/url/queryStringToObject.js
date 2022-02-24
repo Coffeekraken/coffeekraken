@@ -26,7 +26,7 @@ import ltrim from '../string/ltrim';
  *
  * @see  	http://stackoverflow.com/questions/8648892/convert-url-parameters-to-a-javascript-object
  * @since     2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function queryStringToObject(str) {
     str = ltrim(str, '?');

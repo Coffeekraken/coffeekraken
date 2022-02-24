@@ -29,7 +29,7 @@ import __styleObject2String from '../styleObject2String';
  * });
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function style(elm: HTMLElement, styleObj: any): any {
     // convert style string to object

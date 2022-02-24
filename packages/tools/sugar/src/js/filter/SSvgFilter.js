@@ -29,7 +29,7 @@ import uniqid from '../../shared/string/uniqid';
  * myFilter.applyTo(myCoolHTMLElement);
  *
  * @since           1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SSvgFilter {
     /**
@@ -40,7 +40,7 @@ export default class SSvgFilter {
      *
      * @param 			{String} 			filter          The SVG filter string representation
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(filter_content) {
         // save the reference of each elements
@@ -63,7 +63,7 @@ export default class SSvgFilter {
      *
      * @param 		{HTMLElement} 			elm 			The element on which to apply the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     applyTo(elm) {
         ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
@@ -79,7 +79,7 @@ export default class SSvgFilter {
      *
      * @param 		{HTMLElement} 			elm 			The element from which to remove the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unapplyFrom(elm) {
         ['-webkit-', '-moz-', '-ms-', '-o-', ''].forEach((vendor) => {
@@ -98,7 +98,7 @@ export default class SSvgFilter {
      *
      * Insert the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _insertFilter() {
         const svg = `
@@ -124,7 +124,7 @@ export default class SSvgFilter {
      *
      * Destroy the filter
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     destroy() {
         // loop on each element savec in stack to remove the filter
@@ -142,7 +142,7 @@ export default class SSvgFilter {
      *
      * Inject the svg that will contains all the filters created through this class
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _injectFiltersContainer() {
         const style = ['position:absolute;', 'left:-1000px;', 'top:-300px;'];

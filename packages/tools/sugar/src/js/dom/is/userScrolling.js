@@ -23,7 +23,7 @@
  * }
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 let _isUserScrolling = false, _userScrollingTimeout;
 document.addEventListener('wheel', (e) => {

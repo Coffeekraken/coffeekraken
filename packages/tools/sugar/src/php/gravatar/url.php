@@ -24,7 +24,7 @@ namespace Sugar\gravatar;
  * \Sugar\gravatar\url('olivier.bossel@gmail.com');
  * 
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function url( $email, $s = 80, $d = 'mp', $r = 'g', $img = false, $atts = array() ) {
     $url = 'https://www.gravatar.com/avatar/';

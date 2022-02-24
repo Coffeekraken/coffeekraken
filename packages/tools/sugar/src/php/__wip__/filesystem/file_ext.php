@@ -11,7 +11,7 @@ namespace thorin;
  * $ext = Thorin::file_ext('my/cool/file.jpg');
  * // jpg
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function file_ext($filepath) {
 	$fileinfo = \pathinfo($filepath);

@@ -10,7 +10,7 @@ describe('sugar.shared.string.stripDocblocks', () => {
              * @param       {String}            something           Hello world
              * 
              * @since       2.0.0
-              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+              * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
 
             Hello world

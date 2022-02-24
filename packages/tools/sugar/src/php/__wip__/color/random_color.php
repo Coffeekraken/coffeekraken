@@ -10,7 +10,7 @@ namespace thorin;
  * Thorin::random_color();
  * // F4A342
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function random_color(){
     mt_srand((double)microtime()*1000000);

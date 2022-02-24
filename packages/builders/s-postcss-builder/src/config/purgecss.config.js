@@ -29,7 +29,7 @@ export default function (env, config) {
          * Specify the content files to take in consideration to purge your css
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         content: [
             'index.html',

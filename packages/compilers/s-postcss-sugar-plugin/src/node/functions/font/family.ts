@@ -19,7 +19,7 @@ import __isValidUnitValue from '@coffeekraken/sugar/shared/css/isValidUnitValue'
  * }
  *
  * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginFontFamilyInterface extends __SInterface {

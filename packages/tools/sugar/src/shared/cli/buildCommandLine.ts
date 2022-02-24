@@ -58,7 +58,7 @@ import __argsToString from './argsToString';
  * // => php localhost:8888 . -a
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface IBuildCommandLineSettings {

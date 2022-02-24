@@ -24,7 +24,7 @@ import __fs from 'fs';
  * exists('/something/cool.txt'); // => true
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IExistsSettings {
     directory: boolean;

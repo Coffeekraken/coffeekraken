@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::is_error(new \Exception());
  * // true
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Lang/isError.php
  */
 function is_error($value):bool {

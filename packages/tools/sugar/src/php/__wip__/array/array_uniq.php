@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::array_uniq([2, 1, 2]);
  * // [2,1]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/uniq.php
  */
 function array_uniq(array $array = []): array {

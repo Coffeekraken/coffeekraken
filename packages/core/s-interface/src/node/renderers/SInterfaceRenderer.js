@@ -35,7 +35,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SInterfaceRenderer extends __SClass {
     /**
@@ -46,7 +46,7 @@ class SInterfaceRenderer extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(int, settings) {
         super(__deepMerge({}, settings));
@@ -63,7 +63,7 @@ class SInterfaceRenderer extends __SClass {
      * @return            {String}                    The rendered interface string
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     render(settings) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -129,7 +129,7 @@ class SInterfaceRenderer extends __SClass {
  * This id has to be used when you call the ```interface.render('{id}', {})``` method of the SInterface instance.
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SInterfaceRenderer.id = 'default';
 export default SInterfaceRenderer;

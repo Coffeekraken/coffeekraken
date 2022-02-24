@@ -21,7 +21,7 @@ import __packageJson from './utils/packageJson';
  *
  * @see             https://www.npmjs.com/package/depcheck
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 interface ISNpmUnusedProcessSettings extends ISProcessSettings {}
@@ -75,7 +75,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
         initialParams = {},
@@ -94,7 +94,7 @@ class SNpmUnusedProcess extends __SProcess implements ISNpmUnusedProcess {
      * @param       {Partial<ISNpmUnusedProcessSettings>}         [settings={}]           Some settings to override
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     process(
         params?: ISNpmUnusedProcessParams,

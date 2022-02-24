@@ -28,7 +28,7 @@ import __SWatch from './SWatch';
  * myObj.hello = 'plop';
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function watch(target, settings = {}) {
     const watchedObj = new __SWatch(target, settings);

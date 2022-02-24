@@ -14,7 +14,7 @@ namespace thorin;
  * $path = Thorin::normalize_path('hello/world/../universe');
  * // hello/universe
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function normalize_path($path)
 {

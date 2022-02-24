@@ -21,7 +21,7 @@ import __diff from '@coffeekraken/sugar/shared/object/diff';
  * - userConfig ({}) {Object}: This specify the "user" level config that you want. It's usually this config that is updated
  * @return                  {Promise}                                         A promise that will be resolved once the data has been getted/saved...
  *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISConfigLsAdapterSettings {}

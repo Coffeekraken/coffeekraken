@@ -19,7 +19,7 @@ namespace thorin;
  * Thorin::is_equal([ 'a' => 1], ['a' => '1'])
  * // true
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Lang/isEqual.php
  */
 function is_equal($value, $other) {

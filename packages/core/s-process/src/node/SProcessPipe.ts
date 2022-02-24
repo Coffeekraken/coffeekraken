@@ -47,7 +47,7 @@ import __typeof from '@coffeekraken/sugar/shared/value/typeof';
  * });
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISProcessPipeSettings {
@@ -88,7 +88,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * Store the processes array to execute
    *
    * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _processes: ISProcessCtor | ISProcessCtor[];
 
@@ -102,7 +102,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * Access the process pipe settings
    *
    * @since           2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   public get processPipeSettings() {
     return (<any>this)._settings.processPipe;
@@ -116,7 +116,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * Constructor
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(
     processes: ISProcessCtor | ISProcessCtor[],
@@ -147,7 +147,7 @@ class SProcessPipe extends __SEventEmitter implements ISProcessPipe {
    * @return        {SPromise}                              An SPromise instance through which you can get events piped from processes
    *
    * @since         2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   run(params = {}, settings: Partial<ISProcessPipeSettings> = {}) {
     // extends settings

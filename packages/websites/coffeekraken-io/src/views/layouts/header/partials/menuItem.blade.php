@@ -5,7 +5,7 @@
 
     <div class="__subnav {{ $class }}">
 
-        <div class="s-container s-layout:1222">
+        <div class="s-container s-layout:122">
             <ul class="__subnav-chapters">
                 @foreach ($menuItem as $item)
                     @if ($item->name)

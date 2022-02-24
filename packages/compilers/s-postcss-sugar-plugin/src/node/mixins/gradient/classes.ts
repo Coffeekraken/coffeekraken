@@ -18,7 +18,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.gradient.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginGradientClassesInterface extends __SInterface {
@@ -82,7 +82,7 @@ export default function ({
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
     .s-gradient--linear {
@@ -107,7 +107,7 @@ export default function ({
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
     .s-gradient--radial {
@@ -134,7 +134,7 @@ export default function ({
          * </div>
          * 
          * @since            2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-gradient--${angle}deg {
@@ -167,7 +167,7 @@ export default function ({
            * </div>
            *
            * @since       2.0.0
-           * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+           * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
            */
           `).code(`
           .s-gradient--${name} {
@@ -203,7 +203,7 @@ export default function ({
         * </div>
         *
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
       .${startColorClassName.replace(':', '--')} {
@@ -235,7 +235,7 @@ export default function ({
       * </div>
       *
       * @since            2.0.0
-      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
     .${endColorClassName.replace(':', '--')} {

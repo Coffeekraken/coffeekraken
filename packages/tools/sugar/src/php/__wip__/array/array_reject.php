@@ -14,7 +14,7 @@ namespace thorin;
  * });
  * // ['Pear','Kiwi']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function array_reject($items, $func) {

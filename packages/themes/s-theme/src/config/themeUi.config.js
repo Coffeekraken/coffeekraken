@@ -12,7 +12,7 @@ export default (env, config) => {
              * Specify the default padding inline for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '1.5em',
             /**
@@ -24,7 +24,7 @@ export default (env, config) => {
              * Specify the default padding block for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '0.75em',
             /**
@@ -36,7 +36,7 @@ export default (env, config) => {
              * Specify the default border radius for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.border.radius.default]',
             /**
@@ -48,7 +48,7 @@ export default (env, config) => {
              * Specify the default border width for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.border.width.default]',
             /**
@@ -60,7 +60,7 @@ export default (env, config) => {
              * Specify the default transition for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.transition.fast]',
             /**
@@ -72,7 +72,7 @@ export default (env, config) => {
              * Specify the default color for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: 'main',
             /**
@@ -84,7 +84,7 @@ export default (env, config) => {
              * Specify the default style for ui's.
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'solid',
             /**
@@ -96,7 +96,7 @@ export default (env, config) => {
              * Specify the default style for ui's.
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: 'default',
             /**
@@ -108,7 +108,7 @@ export default (env, config) => {
              * Specify the default depth for ui's
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.depth.default]',
             rhythmVertical: {
@@ -121,7 +121,7 @@ export default (env, config) => {
                  * Specify the default margin bottom when in vertical rhythm scope for ui's
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 'margin-bottom': 60,
             },
@@ -136,7 +136,7 @@ export default (env, config) => {
              * Specify the default padding inline for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '0.75em',
             /**
@@ -148,7 +148,7 @@ export default (env, config) => {
              * Specify the default padding block for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '0.5em',
             /**
@@ -160,7 +160,7 @@ export default (env, config) => {
              * Specify the default border radius for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.border.radius.default]',
             /**
@@ -172,7 +172,7 @@ export default (env, config) => {
              * Specify the default border width for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.border.width.default]',
             /**
@@ -184,7 +184,7 @@ export default (env, config) => {
              * Specify the default transition for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.transition.fast]',
             /**
@@ -196,7 +196,7 @@ export default (env, config) => {
              * Specify if the outline is enabled for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -208,7 +208,7 @@ export default (env, config) => {
              * Specify the default color for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: 'accent',
             /**
@@ -220,7 +220,7 @@ export default (env, config) => {
              * Specify the default style for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'solid',
             /**
@@ -232,7 +232,7 @@ export default (env, config) => {
              * Specify the default shape for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: 'default',
             /**
@@ -244,7 +244,7 @@ export default (env, config) => {
              * Specify the default depth for form items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             rhythmVertical: {
@@ -257,7 +257,7 @@ export default (env, config) => {
                  * Specify the default margin bottom for form items when in vertical rhythm scope
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 'margin-bottom': 40,
             },
@@ -272,7 +272,7 @@ export default (env, config) => {
              * Specify if the outline is activated by default for ui elements
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             active: true,
             /**
@@ -284,7 +284,7 @@ export default (env, config) => {
              * Specify the border width for outline ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '10px',
             /**
@@ -296,7 +296,7 @@ export default (env, config) => {
              * Specify the border radius for outline ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.border.radius.default]',
             /**
@@ -308,7 +308,7 @@ export default (env, config) => {
              * Specify the transition for outline ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: 'all .2s ease-out',
         },
@@ -322,7 +322,7 @@ export default (env, config) => {
              * Specify the size (width/height) for scrollbar
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             size: '2px',
             /**
@@ -334,7 +334,7 @@ export default (env, config) => {
              * Specify the default color for scrollbar
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: 'accent',
         },
@@ -348,7 +348,7 @@ export default (env, config) => {
              * Specify the default padding inline for button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -360,7 +360,7 @@ export default (env, config) => {
              * Specify the default padding block for button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -372,7 +372,7 @@ export default (env, config) => {
              * Specify the default border radius for button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -384,7 +384,7 @@ export default (env, config) => {
              * Specify the default border width for button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -396,7 +396,7 @@ export default (env, config) => {
              * Specify the default transition for button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -408,7 +408,7 @@ export default (env, config) => {
              * Specify if you want the outline on your button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -420,7 +420,7 @@ export default (env, config) => {
              * Specify the default depth for your button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -432,7 +432,7 @@ export default (env, config) => {
              * Specify the default style for your button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -444,7 +444,7 @@ export default (env, config) => {
              * Specify the default style for your button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -456,7 +456,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your button ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -471,7 +471,7 @@ export default (env, config) => {
              * Specify the default border width for avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '2px',
             /**
@@ -483,7 +483,7 @@ export default (env, config) => {
              * Specify the default transition for avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -495,7 +495,7 @@ export default (env, config) => {
              * Specify the default depth for your avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -507,7 +507,7 @@ export default (env, config) => {
              * Specify the default style for your avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -519,7 +519,7 @@ export default (env, config) => {
              * Specify the default shape for your avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -531,7 +531,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your avatar ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -545,7 +545,7 @@ export default (env, config) => {
              * Specify the default padding inline for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -557,7 +557,7 @@ export default (env, config) => {
              * Specify the default padding block for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -569,7 +569,7 @@ export default (env, config) => {
              * Specify the default border radius for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -581,7 +581,7 @@ export default (env, config) => {
              * Specify the default border width for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -593,7 +593,7 @@ export default (env, config) => {
              * Specify the default transition for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -605,7 +605,7 @@ export default (env, config) => {
              * Specify the default color for colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: '[theme.ui.form.defaultColor]',
             /**
@@ -617,7 +617,7 @@ export default (env, config) => {
              * Specify the default style for your colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -629,7 +629,7 @@ export default (env, config) => {
              * Specify the default depth for colorPicker items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -641,7 +641,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -653,7 +653,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your colorPicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -667,7 +667,7 @@ export default (env, config) => {
              * Specify the default padding inline for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -679,7 +679,7 @@ export default (env, config) => {
              * Specify the default padding block for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -691,7 +691,7 @@ export default (env, config) => {
              * Specify the default border radius for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -703,7 +703,7 @@ export default (env, config) => {
              * Specify the default border width for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -715,7 +715,7 @@ export default (env, config) => {
              * Specify the default transition for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -727,7 +727,7 @@ export default (env, config) => {
              * Specify the default color for datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: ['theme.ui.form.defaultColor'],
             /**
@@ -739,7 +739,7 @@ export default (env, config) => {
              * Specify the default style for your datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -751,7 +751,7 @@ export default (env, config) => {
              * Specify the default depth for datePicker items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -763,7 +763,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -775,7 +775,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your datePicker ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -789,7 +789,7 @@ export default (env, config) => {
              * Specify the default padding inline for input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -801,7 +801,7 @@ export default (env, config) => {
              * Specify the default padding block for input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -813,7 +813,7 @@ export default (env, config) => {
              * Specify the default border radius for input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -825,7 +825,7 @@ export default (env, config) => {
              * Specify the default border width for input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -837,7 +837,7 @@ export default (env, config) => {
              * Specify the default transition for input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -849,7 +849,7 @@ export default (env, config) => {
              * Specify the default style for your input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'solid',
             /**
@@ -861,7 +861,7 @@ export default (env, config) => {
              * Specify the default shape for your input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -873,7 +873,7 @@ export default (env, config) => {
              * Specify the default depth for input items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -885,7 +885,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -897,7 +897,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -911,7 +911,7 @@ export default (env, config) => {
              * Specify the default padding inline for radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -923,7 +923,7 @@ export default (env, config) => {
              * Specify the default padding block for radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -935,7 +935,7 @@ export default (env, config) => {
              * Specify the default border radius for radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '0.5em',
             /**
@@ -947,7 +947,7 @@ export default (env, config) => {
              * Specify the default border width for radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -959,7 +959,7 @@ export default (env, config) => {
              * Specify the default transition for radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -971,7 +971,7 @@ export default (env, config) => {
              * Specify the default depth for radio items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -983,7 +983,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -995,7 +995,7 @@ export default (env, config) => {
              * Specify the default style for your radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -1007,7 +1007,7 @@ export default (env, config) => {
              * Specify the default style for your radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -1019,7 +1019,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your radio ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1033,7 +1033,7 @@ export default (env, config) => {
              * Specify the default padding inline for checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -1045,7 +1045,7 @@ export default (env, config) => {
              * Specify the default padding block for checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -1057,7 +1057,7 @@ export default (env, config) => {
              * Specify the default border radius for checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '0.2em',
             /**
@@ -1069,7 +1069,7 @@ export default (env, config) => {
              * Specify the default border width for checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -1081,7 +1081,7 @@ export default (env, config) => {
              * Specify the default transition for checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -1093,7 +1093,7 @@ export default (env, config) => {
              * Specify the default depth for checkbox items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -1105,7 +1105,7 @@ export default (env, config) => {
              * Specify the default style for your checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -1117,7 +1117,7 @@ export default (env, config) => {
              * Specify the default style for your checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -1129,7 +1129,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -1141,7 +1141,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your checkbox ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1155,7 +1155,7 @@ export default (env, config) => {
              * Specify the default padding inline for range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -1167,7 +1167,7 @@ export default (env, config) => {
              * Specify the default padding block for range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -1179,7 +1179,7 @@ export default (env, config) => {
              * Specify the default border radius for range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -1191,7 +1191,7 @@ export default (env, config) => {
              * Specify the default border width for range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -1203,7 +1203,7 @@ export default (env, config) => {
              * Specify the default transition for range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -1215,7 +1215,7 @@ export default (env, config) => {
              * Specify the default style for your range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -1227,7 +1227,7 @@ export default (env, config) => {
              * Specify the default style for your range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -1239,7 +1239,7 @@ export default (env, config) => {
              * Specify the default depth for range items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -1251,7 +1251,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -1263,7 +1263,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your range ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1277,7 +1277,7 @@ export default (env, config) => {
              * Specify the default padding inline for label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -1289,7 +1289,7 @@ export default (env, config) => {
              * Specify the default padding block for label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -1301,7 +1301,7 @@ export default (env, config) => {
              * Specify the default border radius for label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -1313,7 +1313,7 @@ export default (env, config) => {
              * Specify the default border width for label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -1325,7 +1325,7 @@ export default (env, config) => {
              * Specify the default transition for label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -1337,7 +1337,7 @@ export default (env, config) => {
              * Specify the default style for your label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'inline',
             /**
@@ -1349,7 +1349,7 @@ export default (env, config) => {
              * Specify the default shape for your label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -1361,7 +1361,7 @@ export default (env, config) => {
              * Specify the default depth for label items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -1373,7 +1373,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your label ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1387,7 +1387,7 @@ export default (env, config) => {
              * Specify the default padding inline for select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.form.paddingInline]',
             /**
@@ -1399,7 +1399,7 @@ export default (env, config) => {
              * Specify the default padding block for select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.form.paddingBlock]',
             /**
@@ -1411,7 +1411,7 @@ export default (env, config) => {
              * Specify the default border radius for select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -1423,7 +1423,7 @@ export default (env, config) => {
              * Specify the default border width for select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -1435,7 +1435,7 @@ export default (env, config) => {
              * Specify the default transition for select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.form.transition]',
             /**
@@ -1447,7 +1447,7 @@ export default (env, config) => {
              * Specify the default depth for select items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -1459,7 +1459,7 @@ export default (env, config) => {
              * Specify the default style for your select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -1471,7 +1471,7 @@ export default (env, config) => {
              * Specify the default style for your select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -1483,7 +1483,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -1495,7 +1495,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your select ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1509,7 +1509,7 @@ export default (env, config) => {
              * Specify the default border radius for switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.form.borderRadius]',
             /**
@@ -1521,7 +1521,7 @@ export default (env, config) => {
              * Specify the default border width for switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.form.borderWidth]',
             /**
@@ -1533,7 +1533,7 @@ export default (env, config) => {
              * Specify the default transition for switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -1545,7 +1545,7 @@ export default (env, config) => {
              * Specify the default depth for switch items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.form.depth]',
             /**
@@ -1557,7 +1557,7 @@ export default (env, config) => {
              * Specify the default style for your switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.form.defaultStyle]',
             /**
@@ -1569,7 +1569,7 @@ export default (env, config) => {
              * Specify the default shape for your switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.form.defaultShape]',
             /**
@@ -1581,7 +1581,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -1593,7 +1593,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your switch ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.form.rhythmVertical]',
         },
@@ -1607,7 +1607,7 @@ export default (env, config) => {
              * Specify the default padding inline for dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingBlock]',
             /**
@@ -1619,7 +1619,7 @@ export default (env, config) => {
              * Specify the default padding block for dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -1631,7 +1631,7 @@ export default (env, config) => {
              * Specify the default border radius for dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -1643,7 +1643,7 @@ export default (env, config) => {
              * Specify the default border width for dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: 0,
             /**
@@ -1655,7 +1655,7 @@ export default (env, config) => {
              * Specify the default transition for dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -1667,7 +1667,7 @@ export default (env, config) => {
              * Specify the default style for your dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -1679,7 +1679,7 @@ export default (env, config) => {
              * Specify the default shape for your dropdown ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: 'default',
             /**
@@ -1691,7 +1691,7 @@ export default (env, config) => {
              * Specify the default depth for dropdown items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: 50,
             /**
@@ -1703,7 +1703,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
         },
@@ -1717,7 +1717,7 @@ export default (env, config) => {
              * Specify the default padding inline for list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -1729,7 +1729,7 @@ export default (env, config) => {
              * Specify the default padding block for list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -1741,7 +1741,7 @@ export default (env, config) => {
              * Specify the default border radius for list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -1753,7 +1753,7 @@ export default (env, config) => {
              * Specify the default border width for list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -1765,7 +1765,7 @@ export default (env, config) => {
              * Specify the default transition for list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -1777,7 +1777,7 @@ export default (env, config) => {
              * Specify the default style for your list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'dl',
             /**
@@ -1789,7 +1789,7 @@ export default (env, config) => {
              * Specify the default depth for list items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -1801,7 +1801,7 @@ export default (env, config) => {
              * Specify if the bullet character to use
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             bulletChar: '-',
             /**
@@ -1813,7 +1813,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your list ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -1827,7 +1827,7 @@ export default (env, config) => {
              * Specify the default padding inline for fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -1839,7 +1839,7 @@ export default (env, config) => {
              * Specify the default padding block for fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -1851,7 +1851,7 @@ export default (env, config) => {
              * Specify the default border radius for fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -1863,7 +1863,7 @@ export default (env, config) => {
              * Specify the default border width for fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -1875,7 +1875,7 @@ export default (env, config) => {
              * Specify the default transition for fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -1887,7 +1887,7 @@ export default (env, config) => {
              * Specify the default style for your fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -1899,7 +1899,7 @@ export default (env, config) => {
              * Specify the default shape for your fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -1911,7 +1911,7 @@ export default (env, config) => {
              * Specify the default depth for fsTree items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -1923,7 +1923,7 @@ export default (env, config) => {
              * Specify if the bullet character to use
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             bulletChar: '●',
             /**
@@ -1935,7 +1935,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your fsTree ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -1949,7 +1949,7 @@ export default (env, config) => {
              * Specify the default padding inline for tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -1961,7 +1961,7 @@ export default (env, config) => {
              * Specify the default padding block for tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -1973,7 +1973,7 @@ export default (env, config) => {
              * Specify the default border radius for tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -1985,7 +1985,7 @@ export default (env, config) => {
              * Specify the default border width for tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -1997,7 +1997,7 @@ export default (env, config) => {
              * Specify the default transition for tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2009,7 +2009,7 @@ export default (env, config) => {
              * Specify the default style for your tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2021,7 +2021,7 @@ export default (env, config) => {
              * Specify the default style for your tabs ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -2033,7 +2033,7 @@ export default (env, config) => {
              * Specify the default depth for tabs items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2045,7 +2045,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -2057,7 +2057,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your tabe ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2071,7 +2071,7 @@ export default (env, config) => {
              * Specify the default padding inline for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -2083,7 +2083,7 @@ export default (env, config) => {
              * Specify the default padding block for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -2095,7 +2095,7 @@ export default (env, config) => {
              * Specify the default border radius for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2107,7 +2107,7 @@ export default (env, config) => {
              * Specify the default border width for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -2119,7 +2119,7 @@ export default (env, config) => {
              * Specify the default transition for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2131,7 +2131,7 @@ export default (env, config) => {
              * Specify the default color for terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: '[theme.ui.default.defaultColor]',
             /**
@@ -2143,7 +2143,7 @@ export default (env, config) => {
              * Specify the default style for your terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2155,7 +2155,7 @@ export default (env, config) => {
              * Specify the default depth for terminal items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2167,7 +2167,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your terminal ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2181,7 +2181,7 @@ export default (env, config) => {
              * Specify the default padding inline for tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingBlock]',
             /**
@@ -2193,7 +2193,7 @@ export default (env, config) => {
              * Specify the default padding block for tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -2205,7 +2205,7 @@ export default (env, config) => {
              * Specify the default border radius for tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2217,7 +2217,7 @@ export default (env, config) => {
              * Specify the default border width for tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -2229,7 +2229,7 @@ export default (env, config) => {
              * Specify the default transition for tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2241,7 +2241,7 @@ export default (env, config) => {
              * Specify the default style for your tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2253,7 +2253,7 @@ export default (env, config) => {
              * Specify the default shape for your tooltip ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -2265,7 +2265,7 @@ export default (env, config) => {
              * Specify the default depth for tooltip items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2277,7 +2277,7 @@ export default (env, config) => {
              * Specify if the arrow size of the tooltips
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             arrowSize: '15px',
         },
@@ -2291,7 +2291,7 @@ export default (env, config) => {
              * Specify the default padding inline for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.padding.50]',
             /**
@@ -2303,7 +2303,7 @@ export default (env, config) => {
              * Specify the default padding block for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.padding.50]',
             /**
@@ -2315,7 +2315,7 @@ export default (env, config) => {
              * Specify the default border radius for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2327,7 +2327,7 @@ export default (env, config) => {
              * Specify the default border width for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -2339,7 +2339,7 @@ export default (env, config) => {
              * Specify the default transition for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2351,7 +2351,7 @@ export default (env, config) => {
              * Specify the default color for code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: '[theme.ui.default.defaultColor]',
             /**
@@ -2363,7 +2363,7 @@ export default (env, config) => {
              * Specify the default style for your code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2375,7 +2375,7 @@ export default (env, config) => {
              * Specify the default depth for code items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2387,7 +2387,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your code ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2401,7 +2401,7 @@ export default (env, config) => {
              * Specify the default padding inline for blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -2413,7 +2413,7 @@ export default (env, config) => {
              * Specify the default padding block for blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -2425,7 +2425,7 @@ export default (env, config) => {
              * Specify the default border radius for blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2437,7 +2437,7 @@ export default (env, config) => {
              * Specify the default border width for blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -2449,7 +2449,7 @@ export default (env, config) => {
              * Specify the default transition for blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2461,7 +2461,7 @@ export default (env, config) => {
              * Specify the default style for your blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2473,7 +2473,7 @@ export default (env, config) => {
              * Specify the default shape for your blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -2485,7 +2485,7 @@ export default (env, config) => {
              * Specify the default color for your blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: 'accent',
             /**
@@ -2497,7 +2497,7 @@ export default (env, config) => {
              * Specify the default depth for blockquote items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2509,7 +2509,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your blockquote ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2523,7 +2523,7 @@ export default (env, config) => {
              * Specify the default padding inline for table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -2535,7 +2535,7 @@ export default (env, config) => {
              * Specify the default padding block for table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -2547,7 +2547,7 @@ export default (env, config) => {
              * Specify the default border radius for table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2559,7 +2559,7 @@ export default (env, config) => {
              * Specify the default border width for table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.border.width.10]',
             /**
@@ -2571,7 +2571,7 @@ export default (env, config) => {
              * Specify the default transition for table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2583,7 +2583,7 @@ export default (env, config) => {
              * Specify the default style for your table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2595,7 +2595,7 @@ export default (env, config) => {
              * Specify the default shape for your table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -2607,7 +2607,7 @@ export default (env, config) => {
              * Specify the default depth for table items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: '[theme.ui.default.depth]',
             /**
@@ -2619,7 +2619,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your table ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2633,7 +2633,7 @@ export default (env, config) => {
              * Specify the default padding inline for badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '.65em',
             /**
@@ -2645,7 +2645,7 @@ export default (env, config) => {
              * Specify the default padding block for badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '.35em',
             /**
@@ -2657,7 +2657,7 @@ export default (env, config) => {
              * Specify the default border radius for badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -2669,7 +2669,7 @@ export default (env, config) => {
              * Specify the default border width for badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -2681,7 +2681,7 @@ export default (env, config) => {
              * Specify the default transition for badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -2693,7 +2693,7 @@ export default (env, config) => {
              * Specify the default style for your badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: '[theme.ui.default.defaultStyle]',
             /**
@@ -2705,7 +2705,7 @@ export default (env, config) => {
              * Specify the default shape for your badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultShape: '[theme.ui.default.defaultShape]',
             /**
@@ -2717,7 +2717,7 @@ export default (env, config) => {
              * Specify the default depth for badge items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: 0,
             /**
@@ -2729,7 +2729,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your badge ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },
@@ -2743,7 +2743,7 @@ export default (env, config) => {
              * Specify the duration of a loader
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             duration: '1s',
             /**
@@ -2755,7 +2755,7 @@ export default (env, config) => {
              * Specify the easing of a loader
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             easing: 'linear',
         },
@@ -2769,7 +2769,7 @@ export default (env, config) => {
              * Specify the duration of the spinner loader
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             duration: '[theme.ui.loader.duration]',
             /**
@@ -2781,7 +2781,7 @@ export default (env, config) => {
              * Specify the easing of the spinner loader
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             easing: '[theme.ui.loader.easing]',
         },

@@ -36,7 +36,7 @@ import __isGlob from 'is-glob';
  *
  * @since       2.0.0
  * @see       https://www.npmjs.com/package/minimatch
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 const _activeSpaceCallbacksStack = {};
 const _activeSpaceStack = [];
@@ -51,7 +51,7 @@ const activeSpaceApi = {
      * @return      {String}                  The current active space
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get: () => {
         return _activeSpaceCurrent;
@@ -68,7 +68,7 @@ const activeSpaceApi = {
      * @return      {String}                  The current active space
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set: (activeSpace, history = true, silent = false) => {
         if (!silent && __isGlob(activeSpace)) {
@@ -95,7 +95,7 @@ const activeSpaceApi = {
      * @return      {String}                          Return the current active space
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     append: (activeSpace, history = true) => {
         // get the current one
@@ -119,7 +119,7 @@ const activeSpaceApi = {
      * @return      {String}                          Return the current active space
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     remove: (toRemove, history = true) => {
         // get the current
@@ -143,7 +143,7 @@ const activeSpaceApi = {
      * This function simply go back by 1 in the activeSpace stack
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      * @return      {String}                          Return the current active space
      */
     previous: () => {
@@ -165,7 +165,7 @@ const activeSpaceApi = {
      * @return      {Boolean}                                   true if the passed active space string match the current one, false if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     is: (activeSpaceToCheck, currentActiveSpace = activeSpaceApi.get()) => {
         if (!currentActiveSpace)
@@ -186,7 +186,7 @@ const activeSpaceApi = {
      * - count (-1) {Number}: Specify how many times you want the callback to be called. -1 mean unlimited.
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     on: (activeSpaceToCheck, callback, settings = {}) => {
         settings = __deepMerge({
@@ -214,7 +214,7 @@ const activeSpaceApi = {
      *
      * Call the callbacks when an activeSpace has been setted
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _callCallbacks: () => {
         // call the registered callbacks that match this activeSpace

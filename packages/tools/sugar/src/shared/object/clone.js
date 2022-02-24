@@ -29,7 +29,7 @@ import __deepClone from 'lodash.clonedeep';
  *
  * @see       https://www.npmjs.com/package/lodash
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function clone(object, settings = {}) {
     settings = Object.assign({ deep: false }, settings);

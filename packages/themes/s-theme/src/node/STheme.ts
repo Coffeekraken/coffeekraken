@@ -22,7 +22,7 @@ import __SColor from '@coffeekraken/s-color';
  * });
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class STheme extends __SThemeBase {
     /**
@@ -33,7 +33,7 @@ export default class STheme extends __SThemeBase {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(theme?: string, variant?: string) {
         super(theme, variant);
@@ -49,7 +49,7 @@ export default class STheme extends __SThemeBase {
      * @return          {STheme}                                    The STheme instance that represent the current applied theme
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getCurrentTheme(): STheme {
         // @ts-ignore
@@ -69,7 +69,7 @@ export default class STheme extends __SThemeBase {
      * @return          {SColor}                                    An SColor instance that you can make use of
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     getColor(name: string, variant?: string, state: string = 'default'): __SColor {
         const color = this.config(`color.${name}.color`);

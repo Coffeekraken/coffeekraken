@@ -26,7 +26,7 @@ import __striptags from 'striptags';
  *
  * @see       https://www.npmjs.com/package/striptags
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function striptags(html, allowedTags = '', tagReplacement = '') {
     return __striptags(html, allowedTags, tagReplacement);

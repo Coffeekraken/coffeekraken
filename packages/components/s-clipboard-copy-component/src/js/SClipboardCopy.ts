@@ -47,7 +47,7 @@ export default class SClipboardCopy extends __SLitComponent {
      * @param       {String}            text            The text you want to copy
      *
      * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     copy(text) {
         this._state = 'copy';

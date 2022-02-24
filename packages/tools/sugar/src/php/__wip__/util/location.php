@@ -11,7 +11,7 @@ namespace thorin;
  * @example    php
  * $location = Thorin::location();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function location($ip_address = null) {
 	// get ip if not passed

@@ -27,7 +27,7 @@ import __parseAuthorString from './parseAuthorString';
  * @example       js
  * import standardizeJson from '@coffeekraken/sugar/js/npm/utils/standardizeJson';
  * standardizeJson({
- *    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)"
+ *    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)"
  * }); // => {
  *    "author": {
  *      "name": "Olivier Bossel",
@@ -37,7 +37,7 @@ import __parseAuthorString from './parseAuthorString';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function standardizeJson(json) {
     // author

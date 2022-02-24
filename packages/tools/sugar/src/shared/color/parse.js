@@ -28,7 +28,7 @@ import __rgba2hsla from './rgba2hsla';
  * parse('rgba(10,20,30,100)'); // => { r: 10, b: 20, b: 30, a: 100 }
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function parse(color, format = 'rgba') {
     color = color.replace(/\s/g, '');

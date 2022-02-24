@@ -18,7 +18,7 @@ import __unescape from 'unescape';
  *
  * @see             https://www.npmjs.com/package/unescape
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function unescapeHtml(html) {
     return __unescape(html);

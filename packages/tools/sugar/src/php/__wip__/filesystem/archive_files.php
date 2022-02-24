@@ -9,7 +9,7 @@ use \wapmorgan\UnifiedArchive\UnifiedArchive;
  * @example    php
  * Thorin::archive_files('my-cool-image.jpg', 'my-archive.zip');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/wapmorgan/UnifiedArchive
  */
 function archive_files($files, $archive) {

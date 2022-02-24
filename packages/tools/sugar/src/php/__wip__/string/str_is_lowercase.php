@@ -11,7 +11,7 @@ namespace thorin;
  * Thorin::str_is_lower_case('Hello world');
  * // false
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function str_is_lower_case($string) {

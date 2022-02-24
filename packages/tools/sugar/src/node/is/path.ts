@@ -24,7 +24,7 @@ import __isPath from '../fs/isPath';
  * isPath('hello/world'); // => true
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function path(path, checkExistence = false) {
     return __isPath(path, checkExistence);

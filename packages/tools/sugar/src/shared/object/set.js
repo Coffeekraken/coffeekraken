@@ -25,7 +25,7 @@ import __unquote from '../string/unquote';
  * set('myObject.cool.value', 'Hello world'); // => Hello world
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default (obj, path, value, settings = {}) => {
     settings = Object.assign({}, settings);

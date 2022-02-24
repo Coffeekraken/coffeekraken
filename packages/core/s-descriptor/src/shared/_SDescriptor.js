@@ -16,7 +16,7 @@ class SDescriptor extends __SClass {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         // save the settings
@@ -57,7 +57,7 @@ class SDescriptor extends __SClass {
      * Access the descriptor settings
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get descriptorSettings() {
         return this._settings.descriptor;
@@ -77,7 +77,7 @@ class SDescriptor extends __SClass {
      * @return      {ISDescriptorResultObj|true}           Will return true if all is ok, and an object describing the issue if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     apply(value, settings) {
         // handle settings
@@ -164,7 +164,7 @@ class SDescriptor extends __SClass {
      * @return      {ISDescriptionValidationResult|true}        true if the validation has been made correctly, an object describing the issue if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _validate(value, propName, rulesObj, settings) {
         if (rulesObj === undefined)

@@ -33,7 +33,7 @@ import __linkLoaded from '../load/linkLoaded';
  * });
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function whenStylesheetsReady(links: HTMLLinkElement[] = null, cb: Function = null) {
     if (!links) {

@@ -21,7 +21,7 @@
  * parseHsl('hsl(20,20,20)');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function parseHsl(hslaString) {
     hslaString = hslaString.toLowerCase();

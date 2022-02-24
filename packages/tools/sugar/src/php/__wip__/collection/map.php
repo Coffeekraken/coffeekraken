@@ -18,7 +18,7 @@ namespace thorin;
  * Thorin::map([4, 8], 'square');
  * // [16, 64]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/map.php
  */
 function map($collection, $iteratee):array {

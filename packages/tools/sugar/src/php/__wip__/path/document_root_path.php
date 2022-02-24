@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::document_root_path('my/cool/file.pdf');
  * // /app/root/public/my/cool/file.pdf
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function document_root_path($slug = '') {
 	return \Thorin::root_path($slug);

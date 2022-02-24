@@ -15,7 +15,7 @@ import __faker from 'faker';
  * \@sugar.visibility.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginWrapClassesInterface extends __SInterface {
     static get _definition() {
@@ -98,7 +98,7 @@ export default function ({ params, atRule, replaceWith, }) {
         *   </p>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     [

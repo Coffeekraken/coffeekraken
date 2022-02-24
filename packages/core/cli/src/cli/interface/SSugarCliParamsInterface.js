@@ -16,7 +16,7 @@ import __SLog from '@coffeekraken/s-log';
  * @todo      tests
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SSugarCliParamsInterface extends __SInterface {
     static get _definition() {

@@ -539,7 +539,7 @@ export default class SFiltrableInput extends __SLitComponent {
  * @param           {String}        [tagName='s-filtrable-input']       The tagName associated to this custom element
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export function define(props = {}, tagName = 's-filtrable-input') {
     __SLitComponent.setDefaultProps(tagName, props);

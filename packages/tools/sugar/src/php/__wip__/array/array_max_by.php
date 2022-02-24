@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::array_max_by($objects, function($o) { return $o['n']; });
  * // ['n' => 2]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Math/maxBy.php
  */
 function array_max_by(?array $array, $iteratee) {

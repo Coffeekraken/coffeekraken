@@ -26,7 +26,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.import('../views/** /*.css');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginImportInterface extends __SInterface {
@@ -64,7 +64,7 @@ export { postcssSugarPluginImportInterface as interface };
  * \@sugar.import('./** /*.css');
  *
  * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 let _watcher;
 export default function ({

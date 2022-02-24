@@ -25,7 +25,7 @@
  * console.log(constructorName(myObj)); => MyCoolClass
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function constructorName(obj) {
     return obj.constructor && obj.constructor.name

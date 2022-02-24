@@ -29,7 +29,7 @@ class SBasicStdio extends __SStdio {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(id, sources, settings) {
         super(id, sources, __deepMerge({
@@ -46,7 +46,7 @@ class SBasicStdio extends __SStdio {
          * @param         {ISStdioComponent}      component       The component to use for logging
          *
          * @since         2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._currentLogId = '';
         this._lastLogLinesCountStack = [];
@@ -62,7 +62,7 @@ class SBasicStdio extends __SStdio {
      * Access the stdio settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get basicStdioSettings() {
         return this._settings.basicStdio;
@@ -202,7 +202,7 @@ class SBasicStdio extends __SStdio {
      * @param         {ISStdioComponent}      component       The component to use for logging
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _ask(askObj) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {

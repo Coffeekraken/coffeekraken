@@ -11,7 +11,7 @@ namespace thorin;
  * $pool = Thorin::disks('base','assets');
  * $pool->listContents();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function disks() {
 	$disks = func_get_args();

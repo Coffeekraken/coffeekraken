@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::array_sample_size([1, 2, 3], 2);
  * // [1,3]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/sampleSize.php
  */
 function array_sample_size(array $array, int $n = 1):array {

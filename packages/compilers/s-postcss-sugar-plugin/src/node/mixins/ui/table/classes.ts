@@ -226,7 +226,7 @@ export default function ({
         * `).join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -257,7 +257,7 @@ export default function ({
             * </table>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         );
         vars.code(
@@ -300,7 +300,7 @@ export default function ({
             * </table>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
             );
             vars.code(
@@ -344,7 +344,7 @@ export default function ({
             * </table>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
             );
             vars.code(
@@ -383,7 +383,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
     ).code(`
@@ -437,7 +437,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `,
     ).code(`

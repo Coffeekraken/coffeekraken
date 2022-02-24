@@ -16,7 +16,7 @@ export default (env, config) => {
              * Specify the serving img folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/dist/img',
         },
@@ -30,7 +30,7 @@ export default (env, config) => {
              * Specify the serving js folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/dist/js',
         },
@@ -44,7 +44,7 @@ export default (env, config) => {
              * Specify the serving css folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/dist/css',
         },
@@ -58,7 +58,7 @@ export default (env, config) => {
              * Specify the serving icons folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/dist/icons',
         },
@@ -72,7 +72,7 @@ export default (env, config) => {
              * Specify the serving fonts folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/dist/fonts',
         },
@@ -86,7 +86,7 @@ export default (env, config) => {
              * Specify the serving cache folder path to use in your views
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: '/cache',
         },

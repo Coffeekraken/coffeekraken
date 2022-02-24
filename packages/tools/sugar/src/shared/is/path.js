@@ -22,7 +22,7 @@ import __isValidPath from 'is-valid-path';
  * isPath('hello/world'); // => true
  *
  * @since           1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function path(path) {
     // check if the path is valid or not

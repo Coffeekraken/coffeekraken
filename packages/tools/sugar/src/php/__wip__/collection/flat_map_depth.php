@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::flat_map_depth([1, 2], 'duplicate', 2);
  * // [[1, 1], [2, 2]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/flatMapDepth.php
  */
 function flat_map_depth(iterable $collection, callable $iteratee, int $depth = 1):array {

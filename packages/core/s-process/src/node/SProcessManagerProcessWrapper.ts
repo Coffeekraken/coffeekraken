@@ -27,7 +27,7 @@ import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
  *
  * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISProcessManagerProcessWrapperExecution
@@ -65,7 +65,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * Store the initial params object
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get initialParams() {
         return Object.assign({}, this._settings.initialParams);
@@ -78,7 +78,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * Store the actual processInstance passed through the constructor
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     processInstance: typeof __SProcess;
 
@@ -90,7 +90,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * Access the process manager process settings
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerProcessSettings(): ISProcessManagerProcessWrapperSettings {
         return (<any>this)._settings.processManagerProcess;
@@ -105,7 +105,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      *
      * Constructor
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(
         processInstance,
@@ -279,7 +279,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * in order to clear some listeners, etc...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     detach(): void {
         this._isDetached = true;
@@ -319,7 +319,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _restartingProcessResolve;
     run(paramsOrStringArgs = {}, settings: Partial<ISProcessSettings> = {}) {

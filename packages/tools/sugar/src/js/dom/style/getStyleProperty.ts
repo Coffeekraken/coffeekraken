@@ -28,7 +28,7 @@ import autoCast from '../../../shared/string/autoCast';
  *
  * @see 		https://developer.mozilla.org/en-US/docs/Web/API/Window/getComputedStyle
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function getStyleProperty(elm: HTMLElement, property: string): any {
     // caching mecanisme

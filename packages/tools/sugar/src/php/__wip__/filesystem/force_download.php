@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * Thorin::force_download('/path/to/my-file.zip', 'cool-file.zip');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://www.jonasjohn.de/snippets/php/file-download.htm
  */
 function force_download($filepath, $filename) {

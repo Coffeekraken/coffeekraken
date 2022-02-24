@@ -17,7 +17,7 @@ import __faker from 'faker';
  * \@sugar.font.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginFontClassesInterface extends __SInterface {
@@ -108,7 +108,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -148,7 +148,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -185,7 +185,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -232,7 +232,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -274,7 +274,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -306,7 +306,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -327,7 +327,7 @@ export default function ({
         * <h1 class="s-font:${fontName}">Hello world</h1>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`
@@ -373,7 +373,7 @@ export default function ({
   * <h1 class="s-font:reset-size">Hello world</h1>
   * 
   * @since      2.0.0
-  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
     ).code(`
@@ -395,7 +395,7 @@ export default function ({
   * <h1 class="s-font:reset-family">Hello world</h1>
   * 
   * @since      2.0.0
-  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
     ).code(`
@@ -418,7 +418,7 @@ export default function ({
             * <h1 class="s-font:${value}">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
         ).code(`
@@ -441,7 +441,7 @@ export default function ({
             * <h1 class="s-font:italic">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
     ).code(`
@@ -463,7 +463,7 @@ export default function ({
             * <h1 class="s-font:oblique">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `,
     ).code(`
@@ -492,7 +492,7 @@ export default function ({
             )}">Hello world</h1>
             * 
             * @since      2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `,
         ).code(`

@@ -21,7 +21,7 @@ namespace thorin;
  *  }, []);
  * // ['1' => ['c', 'a'], '2' => ['b']] (iteration order is not guaranteed)
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/reduceRight.php
  */
 function reduce_right(iterable $collection, $iteratee, $accumulator = null) {

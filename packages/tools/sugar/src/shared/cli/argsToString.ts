@@ -33,7 +33,7 @@ import __isPlainObject from '../is/plainObject';
  * // => -a Hello --myOtherArg World
  *
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 // TODO: support deep object structure

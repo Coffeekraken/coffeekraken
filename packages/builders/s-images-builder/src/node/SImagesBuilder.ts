@@ -42,7 +42,7 @@ import __copySync from '@coffeekraken/sugar/node/fs/copySync';
  *
  * @see             https://www.npmjs.com/package/sharp
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISImagesBuilderSettings {
@@ -102,7 +102,7 @@ export default class SImagesBuilder extends __SBuilder {
      * Access the images compressor settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get imagesBuilderSettings(): ISImagesBuilderSettings {
         return (<any>this._settings).imagesBuilder;
@@ -116,7 +116,7 @@ export default class SImagesBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISImagesBuilderCtorSettings>) {
         super(
@@ -144,7 +144,7 @@ export default class SImagesBuilder extends __SBuilder {
      * @return      {SPromise<ISImagesBuilderResult>}        A promise resolved with the ISImagesBuilderResult object that store all the builded files stats, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(
         params: ISImagesBuilderBuildParams,

@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::array_compact([0, 1, false, 2, '', 3]);
  * // [1, 2, 3]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/compact.php
  */
 function array_compact(array $array): array {

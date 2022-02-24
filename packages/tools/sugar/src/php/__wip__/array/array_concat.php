@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::array_concat([1], 2, [3], [[4]])
  * // [1, 2, 3, [4]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/concat.php
  */
 function array_concat($array, ...$values): array {

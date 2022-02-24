@@ -24,11 +24,11 @@ import __deepMerge from '../../../shared/object/deepMerge';
  * @todo      tests
  *
  * @example 	js
- * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scrollToLocationHash'
+ * import __scrollToLocationHash from '@coffeekraken/sugar/js/dom/scroll/scrollToLocationHash'
  * __scrollToLocationHash(500, 0)
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 
 export interface IScrollToLocationHashSettings {

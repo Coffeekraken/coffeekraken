@@ -121,7 +121,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   <a tabindex="0" class="s-btn s-scale:16 s-mie:20">Click me!</a>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -136,7 +136,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <a class="s-btn">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
         .s-btn {
@@ -162,7 +162,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 .trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
         .${cls} {
@@ -189,7 +189,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
                 .trim()}">I'm a cool button</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
         .${cls} {
@@ -208,7 +208,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <a class="s-btn--block">I'm a cool block button</a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`).code(`
       .s-btn--block {
         display: block !important;
@@ -228,7 +228,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </span>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`);
     vars.code(`
       .s-btn-group {
@@ -278,7 +278,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.format.text {
@@ -312,7 +312,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.rhythm.vertical {

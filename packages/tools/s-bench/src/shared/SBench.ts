@@ -34,7 +34,7 @@ import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
  * SBench.end('myCoolProcess');
  *
  * @since       2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISBenchCtorSettings {
@@ -64,7 +64,7 @@ export default class SBench extends __SPromise {
      * Store the steps times
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _steps: ISBenchStep[] = [];
 
@@ -76,7 +76,7 @@ export default class SBench extends __SPromise {
      * Store all the instances started using a static methods
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private static _benchInstancesById: Record<string, SBench> = {};
 
@@ -100,7 +100,7 @@ export default class SBench extends __SPromise {
      * @param           {String|String[]}           benchId         One or more bench id(s) to activate
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static filter(benchId: string | string[]): void {
         let currentBenchs = __env('s-bench-filtered-ids') ?? [];
@@ -118,7 +118,7 @@ export default class SBench extends __SPromise {
      * @return      {String[]}          The list of activated bench id(s)
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static filtered(): string[] {
         return __env('s-bench-filtered-ids') ?? [];
@@ -135,7 +135,7 @@ export default class SBench extends __SPromise {
      * @return      {Boolean}           true if is active, false if not
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static isBenchActive(benchId: string): boolean {
         if (this.filtered().indexOf('*') !== -1) return true;
@@ -157,7 +157,7 @@ export default class SBench extends __SPromise {
      * @return      {SBench}                        A current SBench instance or a new one to use
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getBenchInstanceById(id: string): SBench {
         const instance = this._benchInstancesById[id];
@@ -179,7 +179,7 @@ export default class SBench extends __SPromise {
      * @return      {SBench}                    The SBench instance for this bench
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static start(id: string): SBench {
         this._benchInstancesById[id] = new SBench(id);
@@ -199,7 +199,7 @@ export default class SBench extends __SPromise {
      * @return      {SBench}                    The SBench instance for this bench
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static step(id: string, stepId: string, description = ''): SBench {
         const instance = this.getBenchInstanceById(id);
@@ -217,7 +217,7 @@ export default class SBench extends __SPromise {
      * @return      {SBench}                    The SBench instance for this bench
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static end(id: string, settings?: Partial<ISBenchSettings>): SBench {
         const instance = this.getBenchInstanceById(id);
@@ -235,7 +235,7 @@ export default class SBench extends __SPromise {
      * @return      {SBench}                    The SBench instance for this bench
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static log(id: string, settings?: Partial<ISBenchSettings>): SBench {
         const instance = this.getBenchInstanceById(id);
@@ -250,7 +250,7 @@ export default class SBench extends __SPromise {
      * Access the bench settings
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get benchSettings(): ISBenchSettings {
         return (<any>this._settings).bench;
@@ -264,7 +264,7 @@ export default class SBench extends __SPromise {
      * Constructor
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(id: string, settings?: Partial<ISBenchCtorSettings>) {
         super(
@@ -290,7 +290,7 @@ export default class SBench extends __SPromise {
      * @return          {Boolean}           true if is active, false if not
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isActive(): boolean {
         // @ts-ignore
@@ -306,7 +306,7 @@ export default class SBench extends __SPromise {
      * @return  {SBench}                                The instance to maintain chainability
      *
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(settings?: Partial<ISBenchSettings>): SBench {
         if (!this.isActive()) return this;
@@ -343,7 +343,7 @@ export default class SBench extends __SPromise {
      * @return  {SBench}                                The instance to maintain chainability
      * 
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     step(id: string, description = ''): SBench {
         if (!this.isActive()) return this;
@@ -386,7 +386,7 @@ export default class SBench extends __SPromise {
      * @return  {SBench}                                The instance to maintain chainability
      * 
      * @since           2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     end(settings?: Partial<ISBenchSettings>): SBench {
         if (!this.isActive()) return this;
@@ -428,7 +428,7 @@ export default class SBench extends __SPromise {
      * @return  {SBench}                                The instance to maintain chainability
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     log(settings?: Partial<ISBenchSettings>): SBench {
         if (!this.isActive()) return this;
@@ -448,7 +448,7 @@ export default class SBench extends __SPromise {
      * @return      {String}                The bench in string format
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString(settings?: Partial<ISBenchSettings>): string {
         const finalSettings = <ISBenchSettings>(

@@ -24,7 +24,7 @@ import __md5 from '../crypt/md5';
  * console.log(gravatarUrl('olivier.bossel@gmail.com')); // https://www.gravatar.com/avatar/b5df60055b6287bb7c90c0078ce20a5f
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function gravatarUrl(email, size = 200) {
     return `https://www.gravatar.com/avatar/${__md5.encrypt(email)}?s=${size}`;

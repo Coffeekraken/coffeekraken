@@ -15,7 +15,7 @@ namespace thorin;
  * }, 3);
  * // ['0-item','1-item','2-item']
  * 
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function array_generate_by_repeat($fn, $number) {
   $ar = [];

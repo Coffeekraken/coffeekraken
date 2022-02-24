@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $myValue = Thorin::env('MY_VARIABLE', false);
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function env($name, $default = null) {
 	$value = \getenv($name);

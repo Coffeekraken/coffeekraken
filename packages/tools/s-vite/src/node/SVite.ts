@@ -54,7 +54,7 @@ export default class SVite extends __SClass {
      * Access the vite settings
      *
      * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viteSettings(): ISViteSettings {
         return (<any>this)._settings.vite;
@@ -68,7 +68,7 @@ export default class SVite extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: ISViteCtorSettings) {
         super(
@@ -95,7 +95,7 @@ export default class SVite extends __SClass {
      * @param         {ISViteStartParams}         [params={}]             Some parameters to customize your process
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params: ISViteStartParams) {
         return new __SPromise(
@@ -169,7 +169,7 @@ export default class SVite extends __SClass {
      * @param         {ISViteStartParams}         [params={}]             Some parameters to customize your process
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params: ISViteBuildParams | String) {
         return new __SPromise(

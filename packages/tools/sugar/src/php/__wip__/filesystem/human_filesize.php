@@ -11,7 +11,7 @@ namespace thorin;
  * print Thorin::human_filesize(14356543);
  * // 13.69 MB
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function human_filesize($filesize) {
 	// Adapted from: http://www.php.net/manual/en/function.filesize.php

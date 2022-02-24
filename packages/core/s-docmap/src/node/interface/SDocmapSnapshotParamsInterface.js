@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * needed to make a docmap snapshot
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SDocMapSnapshotParamsInterface extends __SInterface {
     static get _definition() {

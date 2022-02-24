@@ -13,7 +13,7 @@ namespace thorin;
  *   return empty($name);
  * })
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/tightenco/collect
  */
 function collect($array) {

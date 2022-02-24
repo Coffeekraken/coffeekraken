@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::array_sample([1,2,3,4,5]);
  * // 2
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/sample.php
  */
 function array_sample(array $array) {

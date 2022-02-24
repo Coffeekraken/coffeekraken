@@ -24,7 +24,7 @@ import __isVisible from '../isVisible';
  * // 20
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function inViewportPercentage(elm: HTMLElement): number {
     // if not visible at all

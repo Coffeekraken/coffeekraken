@@ -15,7 +15,7 @@ namespace thorin;
  * @example    php
  * Thorin::cache('my_item', 'hello world', 60);
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function cache($key, $value = null, $expiresAfter = null, $driver = null) {
 	// generate a key

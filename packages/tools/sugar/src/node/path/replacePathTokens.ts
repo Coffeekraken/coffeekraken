@@ -42,7 +42,7 @@ import __distViewsDir from './distViewsDir';
  * replacePathTokens('%packageCacheDir/something.txt'); // => /path/to/cache/directory/something.txt'
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IReplacePathTokensSettings {
     packageTmpDir: boolean;

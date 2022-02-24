@@ -19,7 +19,7 @@ import SSvgFilter from './SSvgFilter';
  * @todo      tests
  *
  * @since         1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SOutlineSvgFilter extends SSvgFilter {
     /**
@@ -30,7 +30,7 @@ class SOutlineSvgFilter extends SSvgFilter {
      *
      * @param 		{Number} 		[radius=8] 		The amount of effect to apply
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(radius = 8) {
         super(`
@@ -46,7 +46,7 @@ class SOutlineSvgFilter extends SSvgFilter {
      *
      * Get/Set the radius to produce the effect
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set radius(value) {
         this._$morphology.setAttribute('radius', value);

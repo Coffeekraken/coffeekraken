@@ -155,7 +155,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -183,7 +183,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             *   </ul>
             * 
             * @since       2.0.0
-        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
         .s-fs-tree {
@@ -215,7 +215,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
                 *   </ul>
                 * 
                 * @since       2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .s-fs-tree${style === finalParams.defaultStyle ? '' : `--${style}`} {
@@ -248,7 +248,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
                 *   </ul>
                 * 
                 * @since       2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .s-fs-tree${shape === finalParams.defaultShape ? '' : `--${shape}`} {
@@ -284,7 +284,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.rhythm.vertical {

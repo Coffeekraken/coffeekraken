@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::query_string('https://thorin.io?query=value1&string=value2');
  * // ['query' => 'value1', 'string' => 'value2']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function query_string($url = null) {
 	if (!$url) {

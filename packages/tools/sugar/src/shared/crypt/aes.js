@@ -17,7 +17,7 @@ import parse from '../string/parse';
  * @todo        doc
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
     /**
@@ -30,7 +30,7 @@ export default {
      * @param       {String}       [key='coffeekraken.sugar.crypt.aes']       The secret key to encrypt
      * @return      {String}                       The encrypted message
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     encrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
         if (typeof message !== 'string')
@@ -47,7 +47,7 @@ export default {
      * @param       {String}      [key='coffeekraken.sugar.crypt.aes']      The secret key to decrypt
      * @return      {String}                      The decrypted message
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     decrypt: function (message, key = 'coffeekraken.sugar.crypt.aes') {
         const value = AES.decrypt(message, key).toString(utf8);

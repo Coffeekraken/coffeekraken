@@ -19,7 +19,7 @@ namespace thorin;
  * Thorin::str_start_case('__FOO_BAR__');
  * // => 'FOO BAR'
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/startCase.php
  */
 function str_start_case(string $string) {

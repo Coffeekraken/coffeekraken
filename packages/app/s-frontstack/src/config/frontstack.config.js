@@ -14,7 +14,7 @@ export default function (env, config) {
              * Specify the default recipe
              *
              * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '[config.frontstackRecipeDefault]',
             /**
@@ -26,7 +26,7 @@ export default function (env, config) {
              * Specify the next.js recipe
              *
              * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nextJs: '[config.frontstackRecipeNextJs]',
             /**
@@ -38,7 +38,7 @@ export default function (env, config) {
              * Specify the litElement recipe
              *
              * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             litElement: '[config.frontstackRecipeLitElement]',
             /**
@@ -50,7 +50,7 @@ export default function (env, config) {
              * Specify the feature recipe
              *
              * @since       2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             feature: '[config.frontstackRecipeFeature]',
         },
@@ -65,7 +65,7 @@ export default function (env, config) {
                  * Specify the frontend server action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Copy file/directory',
                 /**
@@ -77,7 +77,7 @@ export default function (env, config) {
                  * Specify the frontend server action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Copy a file or a directory from the source to the destination passed in params',
                 /**
@@ -89,7 +89,7 @@ export default function (env, config) {
                  * Specify the frontend server action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar fs.copy [arguments]`,
                 params: {},
@@ -105,7 +105,7 @@ export default function (env, config) {
                  * Rename a project (folder, package.json, etc...)
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Rename project',
                 /**
@@ -117,7 +117,7 @@ export default function (env, config) {
                  * Specify the frontstack rename action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Rename a project (folder, package.json, etc...)',
                 /**
@@ -129,7 +129,7 @@ export default function (env, config) {
                  * Specify the frontstack rename action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar package.rename [arguments]`,
                 params: {},
@@ -145,7 +145,7 @@ export default function (env, config) {
                  * Add the sugar.json file
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Adding sugar.json file',
                 /**
@@ -157,7 +157,7 @@ export default function (env, config) {
                  * Specify the frontstack addSugarJson action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Adding the sugar.json file to the project',
                 /**
@@ -169,7 +169,7 @@ export default function (env, config) {
                  * Specify the frontstack addSugarJson action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar add.sugarJson [arguments]`,
                 params: {},
@@ -185,7 +185,7 @@ export default function (env, config) {
                  * Add the manifest.json file
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Adding manifest.json file',
                 /**
@@ -197,7 +197,7 @@ export default function (env, config) {
                  * Specify the frontstack addManifestJson action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Adding the manifest.json file to the project',
                 /**
@@ -209,7 +209,7 @@ export default function (env, config) {
                  * Specify the frontstack addManifestJson action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar add.manifestJson [arguments]`,
                 params: {},
@@ -225,7 +225,7 @@ export default function (env, config) {
                  * Install dependencies like node_modules and composer if exists
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Install dependencies',
                 /**
@@ -237,7 +237,7 @@ export default function (env, config) {
                  * Specify the frontstack addManifestJson action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Install dependencies like node_modules and composer if exists',
                 /**
@@ -249,7 +249,7 @@ export default function (env, config) {
                  * Specify the frontstack addManifestJson action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: `sugar package.install [arguments]`,
                 params: {},
@@ -265,7 +265,7 @@ export default function (env, config) {
                  * Specify the frontend server action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Frontend server',
                 /**
@@ -277,7 +277,7 @@ export default function (env, config) {
                  * Specify the frontend server action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Frontend server using the @coffeekraken/s-frontend-server package',
                 /**
@@ -289,7 +289,7 @@ export default function (env, config) {
                  * Specify the frontend server action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar frontendServer.start [arguments]',
                 params: {},
@@ -304,7 +304,7 @@ export default function (env, config) {
                          * Specify the frontend server action restart behavior
                          *
                          * @since       2.0.0
-                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                          */
                         restart: true,
                     },
@@ -320,7 +320,7 @@ export default function (env, config) {
                  * Specify the postcss build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'PostCSS build action',
                 /**
@@ -332,7 +332,7 @@ export default function (env, config) {
                  * Specify the postcss build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Build css using the amazing PostCSS package',
                 /**
@@ -344,7 +344,7 @@ export default function (env, config) {
                  * Specify the postcss build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar postcss.build [arguments]',
                 params: {},
@@ -362,7 +362,7 @@ export default function (env, config) {
                  * Specify the images build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Images build action',
                 /**
@@ -374,7 +374,7 @@ export default function (env, config) {
                  * Specify the images build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Build your images with ease. Compress, resize, webp version, etc...',
                 /**
@@ -386,7 +386,7 @@ export default function (env, config) {
                  * Specify the images build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar images.build [arguments]',
                 params: {},
@@ -404,7 +404,7 @@ export default function (env, config) {
                  * Specify the vite action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Vite development stack',
                 /**
@@ -416,7 +416,7 @@ export default function (env, config) {
                  * Specify the vite action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Allow to build files easily while developing',
                 /**
@@ -428,7 +428,7 @@ export default function (env, config) {
                  * Specify the vite action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar vite [arguments]',
                 params: {},
@@ -446,7 +446,7 @@ export default function (env, config) {
                  * Specify the vite build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Vite build stack',
                 /**
@@ -458,7 +458,7 @@ export default function (env, config) {
                  * Specify the vite build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Allow to compile javascript (js, ts, riot, react, etc...) files easily',
                 /**
@@ -470,7 +470,7 @@ export default function (env, config) {
                  * Specify the vite build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar vite.build [arguments]',
                 params: {},
@@ -488,7 +488,7 @@ export default function (env, config) {
                  * Specify the doc build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Docmap build action',
                 /**
@@ -500,7 +500,7 @@ export default function (env, config) {
                  * Specify the doc build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Allow to build and maintain up to date the docmap.json file',
                 /**
@@ -512,7 +512,7 @@ export default function (env, config) {
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar docmap.build [arguments]',
                 params: {},
@@ -530,7 +530,7 @@ export default function (env, config) {
                  * Specify the doc build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Sitemap build action',
                 /**
@@ -542,7 +542,7 @@ export default function (env, config) {
                  * Specify the doc build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Allow to build and maintain up to date the sitemap.xml file',
                 /**
@@ -554,7 +554,7 @@ export default function (env, config) {
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar sitemap.build [arguments]',
                 params: {},
@@ -572,7 +572,7 @@ export default function (env, config) {
                  * Specify the doc build action title
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 title: 'Docmap build action',
                 /**
@@ -584,7 +584,7 @@ export default function (env, config) {
                  * Specify the favicon build action description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Allow to build and maintain up to date your favicon files and the manifest.json',
                 /**
@@ -596,7 +596,7 @@ export default function (env, config) {
                  * Specify the doc build action command
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 command: '%sugar favicon.build [arguments]',
                 params: {},

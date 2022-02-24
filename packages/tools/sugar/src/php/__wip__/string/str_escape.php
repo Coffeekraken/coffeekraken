@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::str_escape('fred, barney, & pebbles');
  * // fred, barney, &amp pebbles
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/escape.php
  */
 function str_escape(string $string) {

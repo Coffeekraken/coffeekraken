@@ -30,7 +30,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * promise.cancel();
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function observeMutations($target, settings = {}) {
     settings = Object.assign({ attributes: true, childList: false, subtree: false }, settings);

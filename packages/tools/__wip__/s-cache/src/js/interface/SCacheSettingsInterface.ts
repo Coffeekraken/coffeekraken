@@ -14,7 +14,7 @@ import __isNode from '@coffeekraken/sugar/src/shared/is/node';
  * Represent the SCache settings interface
  *
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SCacheSettingsInterface extends __SInterface {
     static get _definition() {

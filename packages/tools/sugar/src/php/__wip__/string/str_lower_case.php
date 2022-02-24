@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::str_lower_case('--Foo-Bar--');
  * // foo bar
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/lowerCase.php
  */
 function str_lower_case(string $string) {

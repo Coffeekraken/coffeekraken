@@ -11,7 +11,7 @@ class SBuilder extends __SClass {
      * Access the builder settings
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get builderSettings() {
         return this._settings.builder;
@@ -24,7 +24,7 @@ class SBuilder extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -44,7 +44,7 @@ class SBuilder extends __SClass {
      * @param           {Object}                        [settings={}]       Specify an object of settings to configure your compilation process
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params = {}, settings = {}) {
         settings = __deepMerge(this.builderSettings, settings);

@@ -9,7 +9,7 @@ export default function (env, config) {
          * Specify which theme this one extends from
          *
          * @since           2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         extends: 'themeLightBase',
 
@@ -22,7 +22,7 @@ export default function (env, config) {
          * Specify the default color of this theme
          *
          * @since           2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultColor: 'main',
 
@@ -38,7 +38,7 @@ export default function (env, config) {
                  * Specify the "base" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: 'hsla(198,0,100,1)',
                 /**
@@ -50,7 +50,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
                 default: {
@@ -73,7 +73,7 @@ export default function (env, config) {
                  * Specify the "main" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: 'hsla(198,10,50,1)',
                 /**
@@ -85,7 +85,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
                 default: {
@@ -108,7 +108,7 @@ export default function (env, config) {
                  * Specify the "accent" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#ffbb00',
                 /**
@@ -120,7 +120,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
             },
@@ -135,7 +135,7 @@ export default function (env, config) {
                  * Specify the "complementary" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#5100ff',
                 /**
@@ -147,7 +147,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
             },
@@ -162,7 +162,7 @@ export default function (env, config) {
                  * Specify the "success" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#91ff00',
                 /**
@@ -174,7 +174,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
                 default: {
@@ -194,7 +194,7 @@ export default function (env, config) {
                  * Specify the "warning" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#ffd500',
                 /**
@@ -206,7 +206,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
             },
@@ -221,7 +221,7 @@ export default function (env, config) {
                  * Specify the "error" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#ff003b',
                 /**
@@ -233,7 +233,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
             },
@@ -248,7 +248,7 @@ export default function (env, config) {
                  * Specify the "info" color value.
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 color: '#00ffff',
                 /**
@@ -260,7 +260,7 @@ export default function (env, config) {
                  * Extends the colorSchemas from the extended theme
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '...': '[extends.colorSchemas]',
                 default: {

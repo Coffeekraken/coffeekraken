@@ -27,7 +27,7 @@ import __SNotificationSettingsInterface from './interface/SNotificationSettingsI
  * });
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISNotificationSettings {
@@ -71,7 +71,7 @@ class SNotification extends __SClass implements ISNotification {
    * Store all the registered adapters
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredAdapters: Record<string, ISNotificationAdapter> = {};
 
@@ -86,7 +86,7 @@ class SNotification extends __SClass implements ISNotification {
    * @param       {ISNotificationAdapter}     adapter         The adapter you want to register
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerAdapter(adapter: ISNotificationAdapter) {
     if (this._registeredAdapters[adapter.id]) {
@@ -108,7 +108,7 @@ class SNotification extends __SClass implements ISNotification {
    * @return      {ISNotificationAdapter}       The adapter requested
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static getAdapter(adapterId: string) {
     if (!this._registeredAdapters[adapterId]) {
@@ -127,7 +127,7 @@ class SNotification extends __SClass implements ISNotification {
    * Access the notification settings
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get notificationSettings(): ISNotificationSettings {
     return (<any>this._settings).notification;
@@ -141,7 +141,7 @@ class SNotification extends __SClass implements ISNotification {
    * Constructor
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(settings?: Partial<ISNotificationSettings>) {
     super(
@@ -168,7 +168,7 @@ class SNotification extends __SClass implements ISNotification {
    * @return    {Promise}                                    A promise that will be resolved once the notification has been emited
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   notify(
     notificationObj: Partial<ISNotificationObj>,

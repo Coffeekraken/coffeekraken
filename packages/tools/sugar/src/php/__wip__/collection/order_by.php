@@ -23,7 +23,7 @@ namespace thorin;
  * Thorin::order_by($users, ['user', 'age'], ['asc', 'desc']);
  * // [['user' => 'barney', 'age' => 36], ['user' => 'barney', 'age' => 34], ['user' => 'fred', 'age' => 48], ['user' => 'fred', 'age' => 40]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/orderBy.php
  */
 function order_by(?iterable $collection, array $iteratee, array $orders):array {

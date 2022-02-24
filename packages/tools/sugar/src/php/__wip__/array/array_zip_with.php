@@ -15,7 +15,7 @@ namespace thorin;
  * Thorin::array_zip_with([1, 2], [10, 20], [100, 200], function($a, $b, $c) { return $a + $b + $c; });
  * // [111, 222]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/zipWith.php
  */
 function array_zip_with(...$arrays): array {

@@ -16,7 +16,7 @@ namespace thorin;
  * $domain = Thorin::app_build();
  * // 3jdujfh5g3jsd0w0s7c6nr57s3gv1yxk
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function app_build($method = null) {
 	// check if has a build.txt file at root

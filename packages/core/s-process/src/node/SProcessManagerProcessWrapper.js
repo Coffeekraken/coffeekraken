@@ -21,7 +21,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      *
      * Constructor
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(processInstance, settings) {
         super(__deepMerge({
@@ -59,7 +59,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * Store the initial params object
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get initialParams() {
         return Object.assign({}, this._settings.initialParams);
@@ -72,7 +72,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * Access the process manager process settings
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerProcessSettings() {
         return this._settings.processManagerProcess;
@@ -168,7 +168,7 @@ class SProcessManagerProcessWrapper extends __SEventEmitter {
      * in order to clear some listeners, etc...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     detach() {
         this._isDetached = true;

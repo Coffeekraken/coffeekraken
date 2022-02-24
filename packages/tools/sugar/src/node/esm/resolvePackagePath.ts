@@ -20,7 +20,7 @@ import __packageRoot from '../path/packageRoot';
  *
  * @see             https://www.npmjs.com/package/resolve-package-path
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function resolvePackagePath(pkg: string, baseDir: string = `${__packageRoot()}/node_modules`) {
     return __resolvePackagePath(pkg, baseDir)?.replace(/\/package\.json$/, '');

@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::array_drop_right_while($users, function($user) { return $user['active']; })
  * // objects for ['barney']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/dropRightWhile.php
  */
 function array_drop_right_while(array $array, callable $predicate): array {

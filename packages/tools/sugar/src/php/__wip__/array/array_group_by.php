@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::array_group_by(['one','two','three'], 'strlen');
  * // [3 => ['one', 'two'], 5 => ['three']]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function array_group_by($items, $func)

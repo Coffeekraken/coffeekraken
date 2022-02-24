@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::array_nth(['a', 'b', 'c', 'd'], 2);
  * // b
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/nth.php
  */
 function array_nth(array $array, int $n) {

@@ -21,7 +21,7 @@ import __SCacheAdapter from './SCacheAdapter';
  * });
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SCacheLsAdapter extends __SCacheAdapter {
   static id = 'ls';
@@ -34,7 +34,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    *
    * @param         {Object}          [settings={}]             An object to configure the SCacheFsAdapter instance. This is specific to each adapters.settings.settings...
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(settings = {}) {
     super(__deepMerge({}, settings));
@@ -56,7 +56,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    *    ttl: 40000
    * });
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async set(name, value) {
     // store data into localStorage
@@ -77,7 +77,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.get('myCoolItem');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async get(name) {
     return window.localStorage.getItem(`${this.cache.id}.${name}`);
@@ -95,7 +95,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.delete('myCoolItem');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async delete(name) {
     // delete the item from the localStorage
@@ -116,7 +116,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @example           js
    * await myCache.clear;
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async clear() {
     // get all the localStorage keys to filter them
@@ -148,7 +148,7 @@ export default class SCacheLsAdapter extends __SCacheAdapter {
    * @example         js
    * const keys = await myCache.keys(); // => ['item1','item2']
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async keys() {
     // get all the localStorage keys to filter them

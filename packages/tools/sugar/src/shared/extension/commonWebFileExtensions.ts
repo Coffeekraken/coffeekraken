@@ -16,7 +16,7 @@
  * const extensions = __commonWebFileExtensions();
  * 
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonWebFileExtensions(withDot = false): string[] {
     return ['asp','cer','cfm','cgi','pl','css','htm','html','js','jsp','part','php','py','rss','xhtml'].map(ext => withDot ? `.${ext}` : ext);

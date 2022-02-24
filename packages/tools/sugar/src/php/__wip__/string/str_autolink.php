@@ -14,7 +14,7 @@ use Asika\Autolink\Autolink;
  * $newText = Thorin::str_autolink($text);
  * // Hello world this is a nice <a href="http://google.com">http://google.com</a> sample of text.
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function str_autolink($text, $options = []) {
 	$options = \Thorin::extend([

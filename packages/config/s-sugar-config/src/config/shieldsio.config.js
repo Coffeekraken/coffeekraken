@@ -12,7 +12,7 @@ export default function (env, config) {
          * Specify the shieldsio style you want for your badges
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         style: 'for-the-badge',
         shields: {
@@ -26,7 +26,7 @@ export default function (env, config) {
                  * Specify the shieldsio url for the "size" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 url: 'https://shields.io/bundlephobia/min/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
@@ -38,7 +38,7 @@ export default function (env, config) {
                  * Specify the shieldsio href for the "size" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 href: 'https://www.npmjs.com/package/[packageJson.name]',
             },
@@ -52,7 +52,7 @@ export default function (env, config) {
                  * Specify the shieldsio url for the "download" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 url: 'https://shields.io/npm/dm/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
@@ -64,7 +64,7 @@ export default function (env, config) {
                  * Specify the shieldsio href for the "download" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 href: 'https://www.npmjs.com/package/[packageJson.name]',
             },
@@ -78,7 +78,7 @@ export default function (env, config) {
                  * Specify the shieldsio url for the "license" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 url: 'https://shields.io/npm/l/[packageJson.name]?style=[config.shieldsio.style]',
                 /**
@@ -90,7 +90,7 @@ export default function (env, config) {
                  * Specify the shieldsio href for the "license" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 href: './LICENSE',
             },
@@ -104,7 +104,7 @@ export default function (env, config) {
                  * Specify the shieldsio url for the "discord" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 url: 'https://shields.io/discord/[config.discord.server.id]?style=[config.shieldsio.style]',
                 /**
@@ -116,7 +116,7 @@ export default function (env, config) {
                  * Specify the shieldsio href for the "discord" shield
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 href: '[config.discord.server.url]',
             },

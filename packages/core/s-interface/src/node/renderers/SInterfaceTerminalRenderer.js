@@ -12,7 +12,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @param       {ISInterfaceTerminalRendererSettings}       [settings={}]       Some settings to configure your renderer like properties to exclude, etc...
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
     /**
@@ -23,7 +23,7 @@ class SInterfaceTerminalRenderer extends __SInterfaceRenderer {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(int, settings) {
         super(int, Object.assign({ templatesDir: `${__dirname()}/terminal` }, settings));

@@ -137,7 +137,7 @@ export default function ({
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
 
@@ -158,7 +158,7 @@ export default function ({
         * <a class="${cls.replace(/\./gm, ' ').trim()}">I'm a cool button</a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      .${cls} {
         @sugar.ui.filtrableInput($style: ${style});
@@ -189,7 +189,7 @@ export default function ({
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
             @sugar.rhythm.vertical {
                 .s-filtrable-input {

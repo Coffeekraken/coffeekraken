@@ -10,7 +10,7 @@ export default function (env, config) {
              * Specify the "default" easing for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: 'cubic-bezier(0.700, 0.000, 0.305, 0.995)',
         },
@@ -24,7 +24,7 @@ export default function (env, config) {
              * Specify the "slow" timing  for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             slow: '.6s',
             /**
@@ -36,7 +36,7 @@ export default function (env, config) {
              * Specify the "default" timing  for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '.3s',
             /**
@@ -48,7 +48,7 @@ export default function (env, config) {
              * Specify the "fast" timing  for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             fast: '.1s',
         },
@@ -62,7 +62,7 @@ export default function (env, config) {
              * Specify the "slow" transition for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             slow: 'all [theme.timing.slow] [theme.easing.default]',
             /**
@@ -74,7 +74,7 @@ export default function (env, config) {
              * Specify the "default" transition for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: 'all [theme.timing.default] [theme.easing.default]',
             /**
@@ -86,7 +86,7 @@ export default function (env, config) {
              * Specify the "fast" transition for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             fast: 'all [theme.timing.fast] [theme.easing.default]',
         },
@@ -100,7 +100,7 @@ export default function (env, config) {
              * Specify some states for which you want to generate helper classes like `s-when:mounted`, `s-until:loading`, etc...
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             states: ['mounted', 'active', 'loading'],
             clearfix: {
@@ -114,7 +114,7 @@ export default function (env, config) {
                  * Specify which clearfix method has to be used as the default one
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 default: 'overflow',
             },
@@ -129,7 +129,7 @@ export default function (env, config) {
                  * the `s-disabled` helper class
                  *
                  * @cince       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 opacity: 0.4,
             },
@@ -144,7 +144,7 @@ export default function (env, config) {
                  * so you can truncate a container up to 10 lines of texts.
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 count: 10,
             },
@@ -158,7 +158,7 @@ export default function (env, config) {
                  * Specify how many s-order:{i} classes you want to generate. By default this count is set to 20.
                  *
                  * @since           2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 count: 20,
             }
@@ -175,7 +175,7 @@ export default function (env, config) {
                      * Specify the "default" container max-width for your theme
                      *
                      * @since               2.0.0
-                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'max-width': '1280px',
                 },
@@ -189,7 +189,7 @@ export default function (env, config) {
                      * Specify the "wide" container max-width for your theme
                      *
                      * @since               2.0.0
-                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'max-width': '1640px',
                 },
@@ -203,7 +203,7 @@ export default function (env, config) {
                      * Specify the "full" container max-width for your theme
                      *
                      * @since               2.0.0
-                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'max-width': 'none',
                 },
@@ -218,7 +218,7 @@ export default function (env, config) {
                  * Specify the 1 column grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 1: 1,
                 /**
@@ -230,7 +230,7 @@ export default function (env, config) {
                  * Specify the 2 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 2: 2,
                 /**
@@ -242,7 +242,7 @@ export default function (env, config) {
                  * Specify the 3 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 3: 3,
                 /**
@@ -254,7 +254,7 @@ export default function (env, config) {
                  * Specify the 4 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 4: 4,
                 /**
@@ -266,7 +266,7 @@ export default function (env, config) {
                  * Specify the 5 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 5: 5,
                 /**
@@ -278,7 +278,7 @@ export default function (env, config) {
                  * Specify the 6 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 6: 6,
                 /**
@@ -290,7 +290,7 @@ export default function (env, config) {
                  * Specify the 7 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 7: 7,
                 /**
@@ -302,7 +302,7 @@ export default function (env, config) {
                  * Specify the 8 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 8: 8,
                 /**
@@ -314,7 +314,7 @@ export default function (env, config) {
                  * Specify the 9 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 9: 9,
                 /**
@@ -326,7 +326,7 @@ export default function (env, config) {
                  * Specify the 10 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 10: 10,
                 /**
@@ -338,7 +338,7 @@ export default function (env, config) {
                  * Specify the 11 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 11: 11,
                 /**
@@ -350,7 +350,7 @@ export default function (env, config) {
                  * Specify the 12 columns grid for your theme
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 12: 12,
             },
@@ -365,7 +365,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1': '1',
                 /**
@@ -378,7 +378,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12': '1 2',
                 /**
@@ -391,7 +391,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_2': '1 _ 2',
                 /**
@@ -404,7 +404,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '21': '2 1',
                 /**
@@ -417,7 +417,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '2_1': '2 _ 1',
                 /**
@@ -430,7 +430,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '123': '1 2 3',
                 /**
@@ -443,7 +443,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12_3': '1 2 _ 3',
                 /**
@@ -456,7 +456,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_23': '1 _ 2 3',
                 /**
@@ -469,7 +469,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_2_3': '1 _ 2 _ 3',
                 /**
@@ -482,7 +482,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '321': '3 2 1',
                 /**
@@ -495,7 +495,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '32_1': '3 2 _ 1',
                 /**
@@ -508,7 +508,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '3_21': '3 _ 2 1',
                 /**
@@ -521,7 +521,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1234': '1 2 3 4',
                 /**
@@ -534,7 +534,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12_34': '1 2 _ 3 4',
                 /**
@@ -547,7 +547,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '123_4': '1 2 3 _ 4',
                 /**
@@ -560,7 +560,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_234': '1 _ 2 3 4',
                 /**
@@ -573,7 +573,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_2_3_4': '1 _ 2 _ 3 _ 4',
                 /**
@@ -586,7 +586,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '122': '1 2 2',
                 /**
@@ -599,7 +599,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '221': '2 2 1',
                 /**
@@ -612,7 +612,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '112': '1 1 2',
                 /**
@@ -625,7 +625,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '211': '2 1 1',
                 /**
@@ -638,7 +638,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1222': '1 2 2 2',
                 /**
@@ -651,7 +651,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '2221': '2 2 2 1',
                 /**
@@ -664,7 +664,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1112': '1 1 1 2',
                 /**
@@ -677,7 +677,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12222': '1 2 2 2 2',
                 /**
@@ -690,7 +690,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '11112': '1 1 1 1 2',
                 /**
@@ -703,7 +703,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '22221': '2 2 2 2 1',
                 /**
@@ -716,7 +716,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '122222': '1 2 2 2 2 2',
                 /**
@@ -729,7 +729,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '111112': '1 1 1 1 1 2',
                 /**
@@ -742,7 +742,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12345': '1 2 3 4 5',
                 /**
@@ -755,7 +755,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '123_45': '1 2 3 _ 4 5',
                 /**
@@ -768,7 +768,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '12_345': '1 2 _ 3 4 5',
                 /**
@@ -781,7 +781,7 @@ export default function (env, config) {
                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                 *
                 * @since               2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
                 '1_2345': '1 _ 2 3 4 5',
                 /**
@@ -794,7 +794,7 @@ export default function (env, config) {
                 * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                 *
                 * @since               2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
                 '1234_5': '1 2 3 4 _ 5',
                 /**
@@ -807,7 +807,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '1_2_3_4_5': '1 _ 2 _ 3 _ 4 _ 5',
                 /**
@@ -820,7 +820,7 @@ export default function (env, config) {
                  * For more information on how layouts works, check out the `@coffeekraken/s-postcss-sugar-plugin` "layout" mixin documentation.
                  *
                  * @since               2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 '123456': '1 2 3 4 5 6',
             },
@@ -835,7 +835,7 @@ export default function (env, config) {
              * Specify the ratio 1/1 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '1': 1,
             /**
@@ -847,7 +847,7 @@ export default function (env, config) {
              * Specify the ratio 21/9 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '21-9': 21 / 9,
             /**
@@ -859,7 +859,7 @@ export default function (env, config) {
              * Specify the ratio 16/9 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '16-9': 16 / 9,
             /**
@@ -871,7 +871,7 @@ export default function (env, config) {
              * Specify the ratio 2/3 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '2-3': 2 / 3,
             /**
@@ -883,7 +883,7 @@ export default function (env, config) {
              * Specify the ratio 4/3 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '4-3': 4 / 3,
             /**
@@ -895,7 +895,7 @@ export default function (env, config) {
              * Specify the ratio 3/4 for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '3-4': 3 / 4,
         },
@@ -909,7 +909,7 @@ export default function (env, config) {
              * Specify if the "margins" are scalable in your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             margin: false,
             /**
@@ -921,7 +921,7 @@ export default function (env, config) {
              * Specify if the "paddings" are scalable in your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             padding: true,
             /**
@@ -933,7 +933,7 @@ export default function (env, config) {
              * Specify if the "offsize" are scalable in your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             offsize: false,
             /**
@@ -945,7 +945,7 @@ export default function (env, config) {
              * Specify if the "fonts" are scalable in your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             font: true,
         },
@@ -959,7 +959,7 @@ export default function (env, config) {
              * Specify the 01 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '01': 0.1,
             /**
@@ -971,7 +971,7 @@ export default function (env, config) {
              * Specify the 02 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '02': 0.2,
             /**
@@ -983,7 +983,7 @@ export default function (env, config) {
              * Specify the 03 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '03': 0.3,
             /**
@@ -995,7 +995,7 @@ export default function (env, config) {
              * Specify the 04 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '04': 0.4,
             /**
@@ -1007,7 +1007,7 @@ export default function (env, config) {
              * Specify the 05 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '05': 0.5,
             /**
@@ -1019,7 +1019,7 @@ export default function (env, config) {
              * Specify the 06 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '06': 0.6,
             /**
@@ -1031,7 +1031,7 @@ export default function (env, config) {
              * Specify the 07 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '07': 0.7,
             /**
@@ -1043,7 +1043,7 @@ export default function (env, config) {
              * Specify the 08 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '08': 0.8,
             /**
@@ -1055,7 +1055,7 @@ export default function (env, config) {
              * Specify the 09 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '09': 0.9,
             /**
@@ -1067,7 +1067,7 @@ export default function (env, config) {
              * Specify the 10 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '10': 1,
             /**
@@ -1079,7 +1079,7 @@ export default function (env, config) {
              * Specify the 11 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '11': 1.1,
             /**
@@ -1091,7 +1091,7 @@ export default function (env, config) {
              * Specify the 12 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '12': 1.2,
             /**
@@ -1103,7 +1103,7 @@ export default function (env, config) {
              * Specify the 13 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '13': 1.3,
             /**
@@ -1115,7 +1115,7 @@ export default function (env, config) {
              * Specify the 14 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '14': 1.4,
             /**
@@ -1127,7 +1127,7 @@ export default function (env, config) {
              * Specify the 15 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '15': 1.5,
             /**
@@ -1139,7 +1139,7 @@ export default function (env, config) {
              * Specify the 16 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '16': 1.6,
             /**
@@ -1151,7 +1151,7 @@ export default function (env, config) {
              * Specify the 17 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '17': 1.7,
             /**
@@ -1163,7 +1163,7 @@ export default function (env, config) {
              * Specify the 18 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '18': 1.8,
             /**
@@ -1175,7 +1175,7 @@ export default function (env, config) {
              * Specify the 19 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '19': 1.9,
             /**
@@ -1187,7 +1187,7 @@ export default function (env, config) {
              * Specify the 20 scale for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '20': 2,
         },
@@ -1201,7 +1201,7 @@ export default function (env, config) {
              * Specify the 0 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '0': 0,
             /**
@@ -1213,7 +1213,7 @@ export default function (env, config) {
              * Specify the 10 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '10': 0.1,
             /**
@@ -1225,7 +1225,7 @@ export default function (env, config) {
              * Specify the 20 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '20': 0.2,
             /**
@@ -1237,7 +1237,7 @@ export default function (env, config) {
              * Specify the 30 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '30': 0.3,
             /**
@@ -1249,7 +1249,7 @@ export default function (env, config) {
              * Specify the 40 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '40': 0.4,
             /**
@@ -1261,7 +1261,7 @@ export default function (env, config) {
              * Specify the 50 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '50': 0.5,
             /**
@@ -1273,7 +1273,7 @@ export default function (env, config) {
              * Specify the 60 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '60': 0.6,
             /**
@@ -1285,7 +1285,7 @@ export default function (env, config) {
              * Specify the 70 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '70': 0.7,
             /**
@@ -1297,7 +1297,7 @@ export default function (env, config) {
              * Specify the 80 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '80': 0.8,
             /**
@@ -1309,7 +1309,7 @@ export default function (env, config) {
              * Specify the 90 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '90': 0.9,
             /**
@@ -1321,7 +1321,7 @@ export default function (env, config) {
              * Specify the 100 opacity for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '100': 1,
         },
@@ -1335,7 +1335,7 @@ export default function (env, config) {
              * Specify the 0 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '0': '0',
             /**
@@ -1347,7 +1347,7 @@ export default function (env, config) {
              * Specify the 10 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '10': '10%',
             /**
@@ -1359,7 +1359,7 @@ export default function (env, config) {
              * Specify the 20 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '20': '20%',
             /**
@@ -1371,7 +1371,7 @@ export default function (env, config) {
              * Specify the 30 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '30': '30%',
             /**
@@ -1383,7 +1383,7 @@ export default function (env, config) {
              * Specify the 40 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '40': '40%',
             /**
@@ -1395,7 +1395,7 @@ export default function (env, config) {
              * Specify the 50 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '50': '50%',
             /**
@@ -1407,7 +1407,7 @@ export default function (env, config) {
              * Specify the 60 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '60': '60%',
             /**
@@ -1419,7 +1419,7 @@ export default function (env, config) {
              * Specify the 70 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '70': '70%',
             /**
@@ -1431,7 +1431,7 @@ export default function (env, config) {
              * Specify the 80 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '80': '80%',
             /**
@@ -1443,7 +1443,7 @@ export default function (env, config) {
              * Specify the 90 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '90': '90%',
             /**
@@ -1455,7 +1455,7 @@ export default function (env, config) {
              * Specify the 100 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '100': '100%',
         },
@@ -1469,7 +1469,7 @@ export default function (env, config) {
              * Specify the 0 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '0': '0',
             /**
@@ -1481,7 +1481,7 @@ export default function (env, config) {
              * Specify the 10 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '10': '10%',
             /**
@@ -1493,7 +1493,7 @@ export default function (env, config) {
              * Specify the 20 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '20': '20%',
             /**
@@ -1505,7 +1505,7 @@ export default function (env, config) {
              * Specify the 30 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '30': '30%',
             /**
@@ -1517,7 +1517,7 @@ export default function (env, config) {
              * Specify the 40 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '40': '40%',
             /**
@@ -1529,7 +1529,7 @@ export default function (env, config) {
              * Specify the 50 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '50': '50%',
             /**
@@ -1541,7 +1541,7 @@ export default function (env, config) {
              * Specify the 60 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '60': '60%',
             /**
@@ -1553,7 +1553,7 @@ export default function (env, config) {
              * Specify the 70 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '70': '70%',
             /**
@@ -1565,7 +1565,7 @@ export default function (env, config) {
              * Specify the 80 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '80': '80%',
             /**
@@ -1577,7 +1577,7 @@ export default function (env, config) {
              * Specify the 90 height for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '90': '90%',
             /**
@@ -1589,7 +1589,7 @@ export default function (env, config) {
              * Specify the 100 width for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             '100': '100%',
         },
@@ -1603,7 +1603,7 @@ export default function (env, config) {
              * Specify the default depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '[theme.depth.0]',
             /**
@@ -1615,7 +1615,7 @@ export default function (env, config) {
              * Specify the 0 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '0',
             /**
@@ -1627,7 +1627,7 @@ export default function (env, config) {
              * Specify the 10 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: `0px 0.6px 0.4px rgba(0, 0, 0, 0.006),
   0px 1.3px 1px rgba(0, 0, 0, 0.008),
@@ -1644,7 +1644,7 @@ export default function (env, config) {
              * Specify the 20 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: `0px 0.6px 0.4px rgba(0, 0, 0, 0.006),
   0px 1.3px 1px rgba(0, 0, 0, 0.008),
@@ -1661,7 +1661,7 @@ export default function (env, config) {
              * Specify the 30 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: `0px 0.6px 0.4px rgba(0, 0, 0, 0.008),
   0px 1.3px 1px rgba(0, 0, 0, 0.012),
@@ -1678,7 +1678,7 @@ export default function (env, config) {
              * Specify the 40 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: `0px 0.8px 0.6px rgba(0, 0, 0, 0.008),
   0px 2px 1.3px rgba(0, 0, 0, 0.012),
@@ -1695,7 +1695,7 @@ export default function (env, config) {
              * Specify the 50 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: `0px 1px 0.8px rgba(0, 0, 0, 0.011),
   0px 2.3px 2px rgba(0, 0, 0, 0.016),
@@ -1712,7 +1712,7 @@ export default function (env, config) {
              * Specify the 60 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: `0px 1px 0.7px rgba(0, 0, 0, 0.011),
   0px 2.3px 1.7px rgba(0, 0, 0, 0.016),
@@ -1729,7 +1729,7 @@ export default function (env, config) {
              * Specify the 70 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: `0px 1.1px 0.8px rgba(0, 0, 0, 0.011),
   0px 2.7px 2px rgba(0, 0, 0, 0.016),
@@ -1746,7 +1746,7 @@ export default function (env, config) {
              * Specify the 80 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: `0px 1.1px 1px rgba(0, 0, 0, 0.011),
   0px 2.7px 2.3px rgba(0, 0, 0, 0.016),
@@ -1763,7 +1763,7 @@ export default function (env, config) {
              * Specify the 90 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: `0px 1.4px 1.1px rgba(0, 0, 0, 0.011),
   0px 3.3px 2.7px rgba(0, 0, 0, 0.016),
@@ -1780,7 +1780,7 @@ export default function (env, config) {
              * Specify the 100 depth for your theme
              *
              * @since               2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: `0px 1.4px 1.4px rgba(0, 0, 0, 0.011),
   0px 3.3px 3.5px rgba(0, 0, 0, 0.016),
@@ -1800,7 +1800,7 @@ export default function (env, config) {
         //      * Specify the color extension value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     color: '[theme.color.accent.color]',
         //     /**
@@ -1812,7 +1812,7 @@ export default function (env, config) {
         //      * Specify the blade extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     blade: '#ff2d20',
         //     /**
@@ -1824,7 +1824,7 @@ export default function (env, config) {
         //      * Specify the php extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     php: '#8892BF',
         //     /**
@@ -1836,7 +1836,7 @@ export default function (env, config) {
         //      * Specify the js extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     js: '#f7df1e',
         //     /**
@@ -1848,7 +1848,7 @@ export default function (env, config) {
         //      * Specify the ts extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     ts: '#0374C1',
         //     /**
@@ -1860,7 +1860,7 @@ export default function (env, config) {
         //      * Specify the node extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     node: '#68A063',
         //     /**
@@ -1872,7 +1872,7 @@ export default function (env, config) {
         //      * Specify the css extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     css: '#498FE1',
         //     /**
@@ -1884,7 +1884,7 @@ export default function (env, config) {
         //      * Specify the scss extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     scss: '#CF649A',
         //     /**
@@ -1896,7 +1896,7 @@ export default function (env, config) {
         //      * Specify the sass extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     sass: '#CF649A',
         //     /**
@@ -1908,7 +1908,7 @@ export default function (env, config) {
         //      * Specify the json extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     json: '#000000',
         //     /**
@@ -1920,7 +1920,7 @@ export default function (env, config) {
         //      * Specify the jpg extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     jpg: '#B2C0E1',
         //     /**
@@ -1932,7 +1932,7 @@ export default function (env, config) {
         //      * Specify the jpeg extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     jpeg: '#B2C0E1',
         //     /**
@@ -1944,7 +1944,7 @@ export default function (env, config) {
         //      * Specify the pdf extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     pdf: '#E7786E',
         //     /**
@@ -1956,7 +1956,7 @@ export default function (env, config) {
         //      * Specify the doc extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     doc: '#60D7FD',
         //     /**
@@ -1968,7 +1968,7 @@ export default function (env, config) {
         //      * Specify the psd extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     psd: '#F9D659',
         //     /**
@@ -1980,7 +1980,7 @@ export default function (env, config) {
         //      * Specify the mp3 extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     mp3: '#E98C61',
         //     /**
@@ -1992,7 +1992,7 @@ export default function (env, config) {
         //      * Specify the png extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     png: '#C29DFB',
         //     /**
@@ -2004,7 +2004,7 @@ export default function (env, config) {
         //      * Specify the aac extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     aac: '#B1C5C9',
         //     /**
@@ -2016,7 +2016,7 @@ export default function (env, config) {
         //      * Specify the zip extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     zip: '#9CC04E',
         //     /**
@@ -2028,7 +2028,7 @@ export default function (env, config) {
         //      * Specify the dmg extension color value
         //      *
         //      * @since               2.0.0
-        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //      */
         //     dmg: '#E36E4B',
         // },
@@ -2043,7 +2043,7 @@ export default function (env, config) {
              * Declare the font size "default"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '16px',
             /**
@@ -2055,7 +2055,7 @@ export default function (env, config) {
              * Declare the font size "50"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '0.25rem',
             /**
@@ -2067,7 +2067,7 @@ export default function (env, config) {
              * Declare the font size "50"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             5: '0.5rem',
             /**
@@ -2079,7 +2079,7 @@ export default function (env, config) {
              * Declare the font size "10"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: '0.65rem',
             /**
@@ -2091,7 +2091,7 @@ export default function (env, config) {
              * Declare the font size "10"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             15: '0.7rem',
             /**
@@ -2103,7 +2103,7 @@ export default function (env, config) {
              * Declare the font size "20"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: '0.75rem',
             /**
@@ -2115,7 +2115,7 @@ export default function (env, config) {
              * Declare the font size "20"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             25: '0.9rem',
             /**
@@ -2127,7 +2127,7 @@ export default function (env, config) {
              * Declare the font size "30"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: '1.1rem',
             /**
@@ -2139,7 +2139,7 @@ export default function (env, config) {
              * Declare the font size "40"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: '1.25rem',
             /**
@@ -2151,7 +2151,7 @@ export default function (env, config) {
              * Declare the font size "50"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: '1.50em',
             /**
@@ -2163,7 +2163,7 @@ export default function (env, config) {
              * Declare the font size "60"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: '2rem',
             /**
@@ -2175,7 +2175,7 @@ export default function (env, config) {
              * Declare the font size "70"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: '2.5rem',
             /**
@@ -2187,7 +2187,7 @@ export default function (env, config) {
              * Declare the font size "80"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: '3rem',
             /**
@@ -2199,7 +2199,7 @@ export default function (env, config) {
              * Declare the font size "90"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: '4rem',
             /**
@@ -2211,7 +2211,7 @@ export default function (env, config) {
              * Declare the font size "100"
              *
              * @since         2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: '5rem',
         },
@@ -2227,7 +2227,7 @@ export default function (env, config) {
                      * Declare the "default" font-family
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-family': '"Titillium Web"',
                     /**
@@ -2239,7 +2239,7 @@ export default function (env, config) {
                      * Declare the "default" font-weight
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-weight': 400,
                     /**
@@ -2251,7 +2251,7 @@ export default function (env, config) {
                      * Declare the "default" import
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@400&display=swap',
                 },
@@ -2265,7 +2265,7 @@ export default function (env, config) {
                      * Declare the "default" font-family
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-family': '"Titillium Web"',
                     /**
@@ -2277,7 +2277,7 @@ export default function (env, config) {
                      * Declare the "default" font-weight
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-weight': 600,
                     /**
@@ -2289,7 +2289,7 @@ export default function (env, config) {
                      * Declare the "default" import
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     import: 'https://fonts.googleapis.com/css2?family=Titillium+Web:wght@600&display=swap',
                 },
@@ -2303,7 +2303,7 @@ export default function (env, config) {
                      * Declare the "quote" font-family
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-family': '"Palatino, Times, Georgia, serif"',
                     /**
@@ -2315,7 +2315,7 @@ export default function (env, config) {
                      * Declare the "quote" font-weight
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-weight': 'normal',
                     /**
@@ -2327,7 +2327,7 @@ export default function (env, config) {
                      * Declare the "quote" font-style
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-style': 'normal',
                     /**
@@ -2339,7 +2339,7 @@ export default function (env, config) {
                      * Declare the "quote" font-display
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-display': 'auto',
                     /**
@@ -2351,7 +2351,7 @@ export default function (env, config) {
                      * Declare the "quote" cap-height
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'cap-height': 0.65,
                 },
@@ -2365,7 +2365,7 @@ export default function (env, config) {
                      * Declare the "code" font-family
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-family': 'Menlo, Monaco, Consolas, Courier New, monospace',
                     /**
@@ -2377,7 +2377,7 @@ export default function (env, config) {
                      * Declare the "code" font-weight
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-weight': 'normal',
                     /**
@@ -2389,7 +2389,7 @@ export default function (env, config) {
                      * Declare the "code" font-style
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-style': 'normal',
                     /**
@@ -2401,7 +2401,7 @@ export default function (env, config) {
                      * Declare the "code" font-display
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'font-display': 'auto',
                     /**
@@ -2413,7 +2413,7 @@ export default function (env, config) {
                      * Declare the "code" cap-height
                      *
                      * @since       2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     'cap-height': 0.65,
                 },
@@ -2428,7 +2428,7 @@ export default function (env, config) {
                  * Declare the "default" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 default: '[theme.size.default]',
                 /**
@@ -2440,7 +2440,7 @@ export default function (env, config) {
                  * Declare the "0" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 0: '[theme.size.0]',
                 /**
@@ -2452,7 +2452,7 @@ export default function (env, config) {
                  * Declare the "5" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 5: '[theme.size.5]',
                 /**
@@ -2464,7 +2464,7 @@ export default function (env, config) {
                  * Declare the "10" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 10: '[theme.size.10]',
                 /**
@@ -2476,7 +2476,7 @@ export default function (env, config) {
                  * Declare the "20" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 20: '[theme.size.20]',
                 /**
@@ -2488,7 +2488,7 @@ export default function (env, config) {
                  * Declare the "30" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 30: '[theme.size.30]',
                 /**
@@ -2500,7 +2500,7 @@ export default function (env, config) {
                  * Declare the "40" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 40: '[theme.size.40]',
                 /**
@@ -2512,7 +2512,7 @@ export default function (env, config) {
                  * Declare the "50" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 50: '[theme.size.50]',
                 /**
@@ -2524,7 +2524,7 @@ export default function (env, config) {
                  * Declare the "60" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 60: '[theme.size.60]',
                 /**
@@ -2536,7 +2536,7 @@ export default function (env, config) {
                  * Declare the "70" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 70: '[theme.size.70]',
                 /**
@@ -2548,7 +2548,7 @@ export default function (env, config) {
                  * Declare the "80" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 80: '[theme.size.80]',
                 /**
@@ -2560,7 +2560,7 @@ export default function (env, config) {
                  * Declare the "90" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 90: '[theme.size.90]',
                 /**
@@ -2572,7 +2572,7 @@ export default function (env, config) {
                  * Declare the "100" font size
                  *
                  * @since         2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 100: '[theme.size.100]',
             },
@@ -2588,7 +2588,7 @@ export default function (env, config) {
                  * Specify the "default" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 default: '[theme.border.width.10]',
                 /**
@@ -2600,7 +2600,7 @@ export default function (env, config) {
                  * Specify the "0" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 0: '0px',
                 /**
@@ -2612,7 +2612,7 @@ export default function (env, config) {
                  * Specify the "10" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 10: '1px',
                 /**
@@ -2624,7 +2624,7 @@ export default function (env, config) {
                  * Specify the "20" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 20: '2px',
                 /**
@@ -2636,7 +2636,7 @@ export default function (env, config) {
                  * Specify the "30" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 30: '4px',
                 /**
@@ -2648,7 +2648,7 @@ export default function (env, config) {
                  * Specify the "40" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 40: '6px',
                 /**
@@ -2660,7 +2660,7 @@ export default function (env, config) {
                  * Specify the "50" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 50: '8px',
                 /**
@@ -2672,7 +2672,7 @@ export default function (env, config) {
                  * Specify the "60" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 60: '12px',
                 /**
@@ -2684,7 +2684,7 @@ export default function (env, config) {
                  * Specify the "70" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 70: '16px',
                 /**
@@ -2696,7 +2696,7 @@ export default function (env, config) {
                  * Specify the "80" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 80: '20px',
                 /**
@@ -2708,7 +2708,7 @@ export default function (env, config) {
                  * Specify the "90" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 90: '24px',
                 /**
@@ -2720,7 +2720,7 @@ export default function (env, config) {
                  * Specify the "90" border width
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 100: '30px',
             },
@@ -2734,7 +2734,7 @@ export default function (env, config) {
                  * Specify the "default" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 default: '5px',
                 /**
@@ -2746,7 +2746,7 @@ export default function (env, config) {
                  * Specify the "0" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 0: '0',
                 /**
@@ -2758,7 +2758,7 @@ export default function (env, config) {
                  * Specify the "10" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 10: '4px',
                 /**
@@ -2770,7 +2770,7 @@ export default function (env, config) {
                  * Specify the "20" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 20: '8px',
                 /**
@@ -2782,7 +2782,7 @@ export default function (env, config) {
                  * Specify the "30" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 30: '12px',
                 /**
@@ -2794,7 +2794,7 @@ export default function (env, config) {
                  * Specify the "40" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 40: '16px',
                 /**
@@ -2806,7 +2806,7 @@ export default function (env, config) {
                  * Specify the "50" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 50: '20px',
                 /**
@@ -2818,7 +2818,7 @@ export default function (env, config) {
                  * Specify the "60" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 60: '26px',
                 /**
@@ -2830,7 +2830,7 @@ export default function (env, config) {
                  * Specify the "70" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 70: '32px',
                 /**
@@ -2842,7 +2842,7 @@ export default function (env, config) {
                  * Specify the "80" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 80: '40px',
                 /**
@@ -2854,7 +2854,7 @@ export default function (env, config) {
                  * Specify the "90" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 90: '50px',
                 /**
@@ -2866,7 +2866,7 @@ export default function (env, config) {
                  * Specify the "90" border radius
                  *
                  * @since             2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 100: '60px',
             },
@@ -2881,7 +2881,7 @@ export default function (env, config) {
              * Specify the "default" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '3rem',
             /**
@@ -2893,7 +2893,7 @@ export default function (env, config) {
              * Specify the "0" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '0',
             /**
@@ -2905,7 +2905,7 @@ export default function (env, config) {
              * Specify the "10" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: '0.375rem',
             /**
@@ -2917,7 +2917,7 @@ export default function (env, config) {
              * Specify the "20" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: '0.75rem',
             /**
@@ -2929,7 +2929,7 @@ export default function (env, config) {
              * Specify the "30" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: '1.5rem',
             /**
@@ -2941,7 +2941,7 @@ export default function (env, config) {
              * Specify the "40" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: '2.25rem',
             /**
@@ -2953,7 +2953,7 @@ export default function (env, config) {
              * Specify the "50" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: '3rem',
             /**
@@ -2965,7 +2965,7 @@ export default function (env, config) {
              * Specify the "60" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: '3.75rem',
             /**
@@ -2977,7 +2977,7 @@ export default function (env, config) {
              * Specify the "70" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: '4.5rem',
             /**
@@ -2989,7 +2989,7 @@ export default function (env, config) {
              * Specify the "80" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: '5.25rem',
             /**
@@ -3001,7 +3001,7 @@ export default function (env, config) {
              * Specify the "90" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: '6rem',
             /**
@@ -3013,7 +3013,7 @@ export default function (env, config) {
              * Specify the "100" space used for margins and paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: '6.75rem',
         },
@@ -3027,7 +3027,7 @@ export default function (env, config) {
              * Specify the "default" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '[theme.space.default]',
             /**
@@ -3039,7 +3039,7 @@ export default function (env, config) {
              * Specify the "0" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '[theme.space.0]',
             /**
@@ -3051,7 +3051,7 @@ export default function (env, config) {
              * Specify the "10" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: '[theme.space.10]',
             /**
@@ -3063,7 +3063,7 @@ export default function (env, config) {
              * Specify the "20" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: '[theme.space.20]',
             /**
@@ -3075,7 +3075,7 @@ export default function (env, config) {
              * Specify the "30" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: '[theme.space.30]',
             /**
@@ -3087,7 +3087,7 @@ export default function (env, config) {
              * Specify the "40" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: '[theme.space.40]',
             /**
@@ -3099,7 +3099,7 @@ export default function (env, config) {
              * Specify the "50" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: '[theme.space.50]',
             /**
@@ -3111,7 +3111,7 @@ export default function (env, config) {
              * Specify the "60" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: '[theme.space.60]',
             /**
@@ -3123,7 +3123,7 @@ export default function (env, config) {
              * Specify the "70" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: '[theme.space.70]',
             /**
@@ -3135,7 +3135,7 @@ export default function (env, config) {
              * Specify the "80" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: '[theme.space.80]',
             /**
@@ -3147,7 +3147,7 @@ export default function (env, config) {
              * Specify the "90" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: '[theme.space.90]',
             /**
@@ -3159,7 +3159,7 @@ export default function (env, config) {
              * Specify the "100" space used for margins
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: '[theme.space.100]',
         },
@@ -3173,7 +3173,7 @@ export default function (env, config) {
              * Specify the "default" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '[theme.space.default]',
             /**
@@ -3185,7 +3185,7 @@ export default function (env, config) {
              * Specify the "0" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '[theme.space.0]',
             /**
@@ -3197,7 +3197,7 @@ export default function (env, config) {
              * Specify the "10" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: '[theme.space.10]',
             /**
@@ -3209,7 +3209,7 @@ export default function (env, config) {
              * Specify the "20" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: '[theme.space.20]',
             /**
@@ -3221,7 +3221,7 @@ export default function (env, config) {
              * Specify the "30" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: '[theme.space.30]',
             /**
@@ -3233,7 +3233,7 @@ export default function (env, config) {
              * Specify the "40" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: '[theme.space.40]',
             /**
@@ -3245,7 +3245,7 @@ export default function (env, config) {
              * Specify the "50" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: '[theme.space.50]',
             /**
@@ -3257,7 +3257,7 @@ export default function (env, config) {
              * Specify the "60" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: '[theme.space.60]',
             /**
@@ -3269,7 +3269,7 @@ export default function (env, config) {
              * Specify the "70" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: '[theme.space.70]',
             /**
@@ -3281,7 +3281,7 @@ export default function (env, config) {
              * Specify the "80" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: '[theme.space.80]',
             /**
@@ -3293,7 +3293,7 @@ export default function (env, config) {
              * Specify the "90" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: '[theme.space.90]',
             /**
@@ -3305,7 +3305,7 @@ export default function (env, config) {
              * Specify the "100" space used for paddings
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: '[theme.space.100]',
         },
@@ -3319,7 +3319,7 @@ export default function (env, config) {
              * Specify the "default" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             default: '[theme.space.default]',
             /**
@@ -3331,7 +3331,7 @@ export default function (env, config) {
              * Specify the "0" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             0: '[theme.space.0]',
             /**
@@ -3343,7 +3343,7 @@ export default function (env, config) {
              * Specify the "10" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             10: '[theme.space.10]',
             /**
@@ -3355,7 +3355,7 @@ export default function (env, config) {
              * Specify the "20" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             20: '[theme.space.20]',
             /**
@@ -3367,7 +3367,7 @@ export default function (env, config) {
              * Specify the "30" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             30: '[theme.space.30]',
             /**
@@ -3379,7 +3379,7 @@ export default function (env, config) {
              * Specify the "40" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             40: '[theme.space.40]',
             /**
@@ -3391,7 +3391,7 @@ export default function (env, config) {
              * Specify the "50" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             50: '[theme.space.50]',
             /**
@@ -3403,7 +3403,7 @@ export default function (env, config) {
              * Specify the "60" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             60: '[theme.space.60]',
             /**
@@ -3415,7 +3415,7 @@ export default function (env, config) {
              * Specify the "70" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             70: '[theme.space.70]',
             /**
@@ -3427,7 +3427,7 @@ export default function (env, config) {
              * Specify the "80" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             80: '[theme.space.80]',
             /**
@@ -3439,7 +3439,7 @@ export default function (env, config) {
              * Specify the "90" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             90: '[theme.space.90]',
             /**
@@ -3451,7 +3451,7 @@ export default function (env, config) {
              * Specify the "100" space used for offsize
              *
              * @since           1.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             100: '[theme.space.100]',
         },
@@ -3468,7 +3468,7 @@ export default function (env, config) {
              * the above media will be the same as ```@include Sugar.media('>=tablet') {...}```
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultAction: '>=',
             /**
@@ -3480,7 +3480,7 @@ export default function (env, config) {
              * Specify the default query to base all the generated ones upon
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultQuery: 'screen',
             queries: {
@@ -3493,7 +3493,7 @@ export default function (env, config) {
                  * Specify the media query arguments needed to target mobile
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 mobile: {
                     'min-width': 0,
@@ -3508,7 +3508,7 @@ export default function (env, config) {
                  * Specify the media query arguments needed to target tablet
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 tablet: {
                     'min-width': 640,
@@ -3523,7 +3523,7 @@ export default function (env, config) {
                  * Specify the media query arguments needed to target desktop
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 desktop: {
                     'min-width': 1280,
@@ -3538,11 +3538,27 @@ export default function (env, config) {
                  * Specify the media query arguments needed to target wide
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 wide: {
                     'min-width': 2048,
                     'max-width': null,
+                },
+                /**
+                 * @name          dwarf
+                 * @namespace     config.themeBase.media.queries
+                 * @type          Object
+                 * @default       {'min-width': 2048, 'max-width': null}
+                 *
+                 * Specify the media query arguments needed to target dwarf.
+                 * Dwarf here means small height screen.
+                 *
+                 * @since       2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                dwarf: {
+                    'min-height': null,
+                    'max-height': 700,
                 },
             },
         },
@@ -3557,7 +3573,7 @@ export default function (env, config) {
                  * Specify the vertical rhythm props for the "s-code-example" component
                  *
                  * @since       2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 rhythmVertical: '[theme.ui.default.rhythmVertical]',
             },
@@ -3571,7 +3587,7 @@ export default function (env, config) {
          * Reference the "themeUi" config for UI elements definition
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         ui: '[config.themeUi]',
         /**
@@ -3583,9 +3599,9 @@ export default function (env, config) {
          * Reference the "themeTypo" config for typo elements definition
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         typo: '[config.themeTypo]',
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSwwQ0FBMEM7U0FDdEQ7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7WUFDWDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEtBQUs7WUFDZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7U0FDZDtRQUVELFVBQVUsRUFBRTtZQUNSOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1lBQ3REOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsbURBQW1EO1lBQzVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1NBQ3pEO1FBRUQsT0FBTyxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNKLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBQyxRQUFRLEVBQUMsU0FBUyxDQUFDO1lBQ3RDLFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsT0FBTyxFQUFFLFVBQVU7YUFDdEI7WUFDRCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILE9BQU8sRUFBRSxHQUFHO2FBQ2Y7WUFDRCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILEtBQUssRUFBRSxFQUFFO2FBQ1o7WUFDRCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLEVBQUU7YUFDWjtTQUNKO1FBRUQsTUFBTSxFQUFFO1lBQ0osU0FBUyxFQUFFO2dCQUNQLE9BQU8sRUFBRTtv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QUFJO1lBQ2I7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxLQUFLO1lBQ2Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1NBQ2I7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7U0FDVjtRQUVELE9BQU8sRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsQ0FBQztZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsQ0FBQztTQUNYO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHO1lBQ1I7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxNQUFNO1NBQ2hCO1FBRUQsTUFBTSxFQUFF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VUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07YUFDZDtZQUVELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsS0FBSztnQkFFZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsR0FBRztnQkFFTjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTthQUNkO1NBQ0o7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLE1BQU07WUFFZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsQ0FBQyxFQUFFLEdBQUc7WUFFTjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFVBQVU7WUFFZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFNBQVM7WUFF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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVCYXNlLmNvbmZpZy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbInRoZW1lQmFzZS5jb25maWcudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsTUFBTSxDQUFDLE9BQU8sV0FBVyxHQUFHLEVBQUUsTUFBTTtJQUNoQyxPQUFPO1FBQ0gsTUFBTSxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSwwQ0FBMEM7U0FDdEQ7UUFFRCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7WUFDWDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLEtBQUs7WUFDZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEtBQUs7U0FDZDtRQUVELFVBQVUsRUFBRTtZQUNSOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1lBQ3REOzs7Ozs7Ozs7O2VBVUc7WUFDSCxPQUFPLEVBQUUsbURBQW1EO1lBQzVEOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsZ0RBQWdEO1NBQ3pEO1FBRUQsT0FBTyxFQUFFO1lBQ0o7Ozs7Ozs7Ozs7ZUFVRztZQUNKLE1BQU0sRUFBRSxDQUFDLFNBQVMsRUFBQyxRQUFRLEVBQUMsU0FBUyxDQUFDO1lBQ3RDLFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7Ozs7bUJBV0c7Z0JBQ0gsT0FBTyxFQUFFLFVBQVU7YUFDdEI7WUFDRCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILE9BQU8sRUFBRSxHQUFHO2FBQ2Y7WUFDRCxRQUFRLEVBQUU7Z0JBQ047Ozs7Ozs7Ozs7O21CQVdHO2dCQUNILEtBQUssRUFBRSxFQUFFO2FBQ1o7WUFDRCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsS0FBSyxFQUFFLEVBQUU7YUFDWjtTQUNKO1FBRUQsTUFBTSxFQUFFO1lBQ0osU0FBUyxFQUFFO2dCQUNQLE9BQU8sRUFBRTtv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QUFJO1lBQ2I7Ozs7Ozs7Ozs7ZUFVRztZQUNILE9BQU8sRUFBRSxLQUFLO1lBQ2Q7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxJQUFJO1NBQ2I7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7WUFDUDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLEdBQUc7WUFDVDs7Ozs7Ozs7OztlQVVHO1lBQ0gsSUFBSSxFQUFFLENBQUM7U0FDVjtRQUVELE9BQU8sRUFBRTtZQUNMOzs7Ozs7Ozs7O2VBVUc7WUFDSCxHQUFHLEVBQUUsQ0FBQztZQUNOOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxJQUFJLEVBQUUsR0FBRztZQUNUOzs7Ozs7Ozs7O2VBVUc7WUFDSCxLQUFLLEVBQUUsQ0FBQztTQUNYO1FBRUQsS0FBSyxFQUFFO1lBQ0g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEdBQUcsRUFBRSxHQUFHO1lBQ1I7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILElBQUksRUFBRSxLQUFLO1lBQ1g7Ozs7Ozs7Ozs7ZUFVRztZQUNILEtBQUssRUFBRSxNQUFNO1NBQ2hCO1FBRUQsTUFBTSxFQUFF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VUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsRUFBRSxFQUFFLE1BQU07Z0JBRVY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsR0FBRyxFQUFFLE1BQU07YUFDZDtZQUVELE1BQU0sRUFBRTtnQkFDSjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsS0FBSztnQkFFZDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxDQUFDLEVBQUUsR0FBRztnQkFFTjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsS0FBSztnQkFFVDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxFQUFFLEVBQUUsTUFBTTtnQkFFVjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxHQUFHLEVBQUUsTUFBTTthQUNkO1NBQ0o7UUFFRCxLQUFLLEVBQUU7WUFDSDs7Ozs7Ozs7OztlQVVHO1lBQ0gsT0FBTyxFQUFFLE1BQU07WUFFZjs7Ozs7Ozs7OztlQVVHO1lBQ0gsQ0FBQyxFQUFFLEdBQUc7WUFFTjs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFVBQVU7WUFFZDs7Ozs7Ozs7OztlQVVHO1lBQ0gsRUFBRSxFQUFFLFNBQVM7WUFF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

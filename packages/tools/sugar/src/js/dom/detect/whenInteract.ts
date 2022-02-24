@@ -27,7 +27,7 @@ import __WhenInteractSettingsInterface from './interface/WhenInteractSettingsInt
  * await whenInteract(myCoolElement, {});
  *
  * @since           1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface IWhenInteractSettings {

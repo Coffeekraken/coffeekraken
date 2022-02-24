@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::app_path('config/hello.php');
  * // /app/root/config/hello.php
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function app_path($slug = '') {
 	return \Thorin::sanitize_path(\Thorin::config('path.app')) . ltrim($slug, '/');

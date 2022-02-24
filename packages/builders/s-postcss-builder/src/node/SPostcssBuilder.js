@@ -34,7 +34,7 @@ export default class SPostcssBuilder extends __SBuilder {
      * Access the postcss builder settings
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get postcssBuilderSettings() {
         return this._settings.postcssBuilder;
@@ -46,7 +46,7 @@ export default class SPostcssBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -66,7 +66,7 @@ export default class SPostcssBuilder extends __SBuilder {
      * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(params) {
         return new __SPromise(({ resolve, reject, emit }) => __awaiter(this, void 0, void 0, function* () {

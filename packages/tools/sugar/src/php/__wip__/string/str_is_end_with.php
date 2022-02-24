@@ -13,7 +13,7 @@ namespace thorin;
  *   // do something here
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function str_is_end_with($source, $with) {
 	return strrpos($source, $with) === strlen($source)-strlen($with);

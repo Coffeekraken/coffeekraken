@@ -10,7 +10,7 @@ namespace thorin;
  * $domain = Thorin::app_domain();
  * // thorin.io
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function app_domain() {
 	// return the protocol from the config

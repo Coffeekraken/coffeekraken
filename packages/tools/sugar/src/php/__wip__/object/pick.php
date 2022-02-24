@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::pick($object, ['a','c']);
  * // (object) ['a' => 1, 'c' => 3]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Object/pick.php
  */
 function pick($object, $paths):\stdClass {

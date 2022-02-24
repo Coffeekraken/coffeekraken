@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::size([1, 2, 3]);
  * // 3
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/size.php
  */
 function size($collection):int {

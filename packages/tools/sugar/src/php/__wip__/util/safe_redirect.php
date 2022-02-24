@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * Thorin::safe_redirect('https://google.com');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://www.jonasjohn.de/snippets/php/secure-redirect.htm
  */
 function safe_redirect($url, $exit=true) {

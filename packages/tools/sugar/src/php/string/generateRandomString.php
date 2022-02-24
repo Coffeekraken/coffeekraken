@@ -20,7 +20,7 @@ namespace Sugar\string;
  * Sugar\string\generateRandomString(10); // => ak93mdkaod
  * 
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function generateRandomString($length, $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ') {
     $charactersLength = strlen($characters);

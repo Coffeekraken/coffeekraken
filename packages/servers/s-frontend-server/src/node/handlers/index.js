@@ -27,7 +27,7 @@ import __SViewRenderer from '@coffeekraken/s-view-renderer';
  * @todo      tests
  *
  * @since       2.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function doc(req, res, settings = {}) {
     return new __SPromise(({ resolve, reject, pipe, emit }) => __awaiter(this, void 0, void 0, function* () {

@@ -19,7 +19,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.when.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginActiveClassesInterface extends __SInterface {
     static get _definition() {
@@ -46,7 +46,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <s-range class="s-when:${state}" />
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             .s-when.s-when--${state}:not(.s-when--sibling):not(.s-when--siblings):not(.s-when--ancestor):not(.s-when--parent):not(.s-when--grandparent):not([${state}]):not(.${state}) {
@@ -72,7 +72,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             *:not([${state}]):not(.${state}) + .s-when.s-when--sibling.s-when--${state} {
@@ -98,7 +98,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             *:not([${state}]):not(.${state}) ~ .s-when.s-when--siblings.s-when--${state} {
@@ -124,7 +124,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             *:not([${state}]):not(.${state}) > .s-when.s-when--parent.s-when--${state} {
@@ -150,7 +150,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             *:not([${state}]):not(.${state}) > * > .s-when.s-when--grandparent.s-when--${state} {
@@ -176,7 +176,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * </div>
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             *:not([${state}]):not(.${state}) .s-when.s-when--ancestor.s-when--${state} {
@@ -203,7 +203,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`
         .s-when--dark {
@@ -230,7 +230,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since            2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`
         [theme$="dark"] .s-when--light {
@@ -256,7 +256,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <s-range class="s-when:media:${query}" />
             * 
             * @since            2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
             @sugar.media(${query}) {

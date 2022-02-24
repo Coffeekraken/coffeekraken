@@ -19,7 +19,7 @@ import __spawn from '@coffeekraken/sugar/node/process/spawn';
  * commandProcess.run('npm i');
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 // @ts-ignore
 export default class SCommandProcess extends __SProcess {
@@ -31,7 +31,7 @@ export default class SCommandProcess extends __SProcess {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(initialParams, settings) {
         super(initialParams !== null && initialParams !== void 0 ? initialParams : {}, __deepMerge({
@@ -50,7 +50,7 @@ export default class SCommandProcess extends __SProcess {
      * Access the command process settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get commandProcessSettings() {
         return this._settings.commandProcess;
@@ -68,7 +68,7 @@ export default class SCommandProcess extends __SProcess {
      * @return        {SPromise}                  An SPromise through which you can subscribe for some ```log``` and that will be resolved once the command has ended
      *
      * @since		2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     process(params, settings) {
         const set = (__deepMerge(this.commandProcessSettings, settings !== null && settings !== void 0 ? settings : {}));

@@ -24,7 +24,7 @@ export default function (env, config) {
                * Specify some items you want to integrate to the head tag. It can be everything you want
                *
                * @since       2.0.0
-               * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+               * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                */
               viteClient: env.env === 'development' ? `
         <script>

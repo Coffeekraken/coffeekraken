@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::str_camel_case('__FOO_BAR__');
  * // fooBar
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/camelCase.php
  */
 function str_camel_case(string $string):string {

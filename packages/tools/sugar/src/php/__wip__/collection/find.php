@@ -21,7 +21,7 @@ namespace thorin;
  * Thorin::find($users, function($o) { return $o['age'] < 40; });
  * // object for 'barney'
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/find.php
  */
 function find(iterable $collection, $predicate = null, int $fromIndex = 0) {

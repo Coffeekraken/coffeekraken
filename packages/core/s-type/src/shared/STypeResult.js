@@ -10,7 +10,7 @@ class STypeResult {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(data) {
         this._data = data;
@@ -23,7 +23,7 @@ class STypeResult {
      * Access the type in string format
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get typeString() {
         return this._data.typeString;
@@ -36,7 +36,7 @@ class STypeResult {
      * Access the value passed to be type validated
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get value() {
         return this._data.value;
@@ -49,7 +49,7 @@ class STypeResult {
      * Access the received descriptor object
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get received() {
         return this._data.received;
@@ -62,7 +62,7 @@ class STypeResult {
      * Access the expected descriptor object
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get expected() {
         return this._data.expected;
@@ -75,7 +75,7 @@ class STypeResult {
      * Access the issues array
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get issues() {
         return this._data.issues;
@@ -88,7 +88,7 @@ class STypeResult {
      * Access the settings object
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get settings() {
         return this._data.settings;
@@ -102,7 +102,7 @@ class STypeResult {
      * @return        {Boolean}       true if has some issues, false if not
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hasIssues() {
         if (this._data)
@@ -118,7 +118,7 @@ class STypeResult {
      * @return        {String}                The result object in string format
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         if (__isNode()) {
@@ -138,7 +138,7 @@ class STypeResult {
      * @return        {String}                A string compatible with the terminal
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toConsole() {
         // handle descriptor header

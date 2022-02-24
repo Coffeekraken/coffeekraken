@@ -36,7 +36,7 @@ class SFile extends __SEventEmitter {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(filepath, settings) {
         super(__deepMerge({
@@ -72,7 +72,7 @@ class SFile extends __SEventEmitter {
          * Store the sources files found using the specified sourcesExtensions in the settings
          *
          * @since     2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this.sourcesFiles = {};
         /**
@@ -83,7 +83,7 @@ class SFile extends __SEventEmitter {
          * Access the file stats like the updated timestamp, sizes, etc...
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._stats = {};
         /**
@@ -93,7 +93,7 @@ class SFile extends __SEventEmitter {
          * Store all the commits made before saving the file
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._commits = [];
         this._path = filepath;
@@ -142,7 +142,7 @@ class SFile extends __SEventEmitter {
      * @param     {SFile}                     cls           The class to associate to this/these extension(s)
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerClass(pattern, cls) {
         let patternsArray = [];
@@ -169,7 +169,7 @@ class SFile extends __SEventEmitter {
      * method.
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static new(path, settings) {
         const fileName = __getFilename(path);
@@ -205,7 +205,7 @@ class SFile extends __SEventEmitter {
      * specify the settings.cwd through the constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get relPath() {
         return __path.relative(this.cwd, this.path);
@@ -218,7 +218,7 @@ class SFile extends __SEventEmitter {
      * Store the path to the folder where the file lives
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get dirPath() {
         return __path.dirname(this.path);
@@ -231,7 +231,7 @@ class SFile extends __SEventEmitter {
      * Access the file settings setted in the ```settings.file``` property
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get fileSettings() {
         return this._settings.file;
@@ -244,7 +244,7 @@ class SFile extends __SEventEmitter {
      * Get the file `md5` hash
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get hash() {
         return __md5.encrypt(this.content);
@@ -288,7 +288,7 @@ class SFile extends __SEventEmitter {
      * @return        {Object}        A plain object version of this instance
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject(readContent = true) {
         const obj = {
@@ -313,7 +313,7 @@ class SFile extends __SEventEmitter {
      * This method simply updates the informations like the file size, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     update() {
         // reset some variables
@@ -366,7 +366,7 @@ class SFile extends __SEventEmitter {
      * This method allows you to stop the watching process of the file
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unwatch() {
         if (!this._watcher)
@@ -385,7 +385,7 @@ class SFile extends __SEventEmitter {
      * @return      {String}          The file path
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         return this.path;
@@ -403,7 +403,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}                      A promise that will be resolved once the file is fully duplicated and gives you access to a new SFile instance
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     duplicate(to) {
         return new Promise((resolve) => {
@@ -423,7 +423,7 @@ class SFile extends __SEventEmitter {
      * @return    {SFile}                      A new SFile instance that represent your new file
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     duplicateSync(to) {
         let destination = to;
@@ -463,7 +463,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}        A promise resolved once the file has been save
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     save() {
         return new Promise((resolve, reject) => {
@@ -481,7 +481,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}        A promise resolved once the file has been save
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     saveSync() {
         // check if some commits are waiting to be saved
@@ -524,7 +524,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise<boolean|Error}       A promise that will be resolved with true if all good, and rejected with an Error if not
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unlink() {
         return new Promise((resolve, reject) => {
@@ -546,7 +546,7 @@ class SFile extends __SEventEmitter {
      * @return      {Boolean|Error}     true if deleted properly, throw an error if not
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unlinkSync() {
         __fs.unlinkSync(this.path);
@@ -564,7 +564,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(settings = {}) {
         return new Promise((resolve, reject) => {
@@ -597,7 +597,7 @@ class SFile extends __SEventEmitter {
      * @return    {String}                                          The file content readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     readSync(settings = {}) {
         if (this.exists === false) {
@@ -637,7 +637,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     write(data, settings = {}) {
         return new Promise((resolve, reject) => __awaiter(this, void 0, void 0, function* () {
@@ -663,7 +663,7 @@ class SFile extends __SEventEmitter {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     writeSync(data, settings = {}) {
         var _a;
@@ -693,7 +693,7 @@ class SFile extends __SEventEmitter {
  * Store the registered classes map
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SFile._registeredClasses = {};
 // const Cls: ISFileCtor = SFile;

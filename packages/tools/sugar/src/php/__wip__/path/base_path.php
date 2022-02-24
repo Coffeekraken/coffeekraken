@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::base_path('my/cool/picture.jpg');
  * // /app/root/my/cool/picture.jpg
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function base_path($slug = '') {
 	return \Thorin::sanitize_path(\Thorin::config('path.base')) . ltrim($slug, '/');

@@ -26,7 +26,7 @@ import __clipboardy from 'clipboardy';
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function read() {
     return __clipboardy.readSync();

@@ -25,7 +25,7 @@ export default class SSugarJson extends __SClass {
      * Access the sugarJson settings
      *
      * @since           2.0.09
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sugarJsonSettings() {
         return this._settings.sugarJson;
@@ -38,7 +38,7 @@ export default class SSugarJson extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super(__deepMerge({
@@ -60,7 +60,7 @@ export default class SSugarJson extends __SClass {
      * @return         {JSON}                     The sanitized sugar.json dara
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     sanitizeJson(sugarJson) {
         // break reference
@@ -81,7 +81,7 @@ export default class SSugarJson extends __SClass {
      *
      *
      * @since             2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(settings) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -117,7 +117,7 @@ export default class SSugarJson extends __SClass {
      * @return      {ISSugarJsonFile}         The sugar.json file content for the current package
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     current() {
         try {
@@ -139,7 +139,7 @@ export default class SSugarJson extends __SClass {
      * @return            {String[]}                      An array of founded filed pathes
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     search(settings) {
         return __awaiter(this, void 0, void 0, function* () {

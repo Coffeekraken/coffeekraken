@@ -9,7 +9,7 @@ namespace thorin;
  * @example    php
  * $ip = Thorin::ip_address();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function ip_address() {
 	$ipaddress = '';

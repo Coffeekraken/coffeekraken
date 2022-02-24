@@ -47,7 +47,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
  * myTimer.start()
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class STimer extends __SPromise {
   /**
@@ -57,7 +57,7 @@ export default class STimer extends __SPromise {
    *
    * Store the timer duration wanted
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _duration = 0;
 
@@ -68,7 +68,7 @@ export default class STimer extends __SPromise {
    *
    * Store the remaining time
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _remaining = 0;
 
@@ -79,7 +79,7 @@ export default class STimer extends __SPromise {
    *
    * How many ticks wanted during the timeout
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _tickCount = null;
 
@@ -90,7 +90,7 @@ export default class STimer extends __SPromise {
    *
    * Computed value depending on the settings
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _tickInterval = 1000;
 
@@ -101,7 +101,7 @@ export default class STimer extends __SPromise {
    *
    * Store the setInterval instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _tickSetTimeout = null;
 
@@ -112,7 +112,7 @@ export default class STimer extends __SPromise {
    *
    * Store the time when the timer is started
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _startTime = null;
 
@@ -123,7 +123,7 @@ export default class STimer extends __SPromise {
    *
    * Store the last tick time
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _tickTime = null;
 
@@ -134,7 +134,7 @@ export default class STimer extends __SPromise {
    *
    * Store the pause time
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _pauseTime = null;
 
@@ -155,7 +155,7 @@ export default class STimer extends __SPromise {
    * });
    * timer.start();
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(duration, settings = {}) {
     super(
@@ -189,7 +189,7 @@ export default class STimer extends __SPromise {
    *
    * Internal tick function
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _tick() {
     // save the remaining timeout
@@ -227,7 +227,7 @@ export default class STimer extends __SPromise {
    *
    * Get the remaining time in ms
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get remaining() {
     if (!this._startTime) return 0;
@@ -242,7 +242,7 @@ export default class STimer extends __SPromise {
    *
    * Set or get the duration. Can be a number in milliseconds, or a time string like '1m', '2s', etc...
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   set duration(duration) {
     duration = __convert(duration, 'ms');
@@ -265,7 +265,7 @@ export default class STimer extends __SPromise {
    *
    * Set of get the tickCount
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   set tickCount(tickCount) {
     this._tickCount = tickCount;
@@ -285,7 +285,7 @@ export default class STimer extends __SPromise {
    *
    * Get the current timer advancement percentage
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get percentage() {
     if (!this.isStarted()) return 0;
@@ -301,7 +301,7 @@ export default class STimer extends __SPromise {
    * @param 	{Boolean} 	start 	If the timer has to start after reseting or not
    * @return 	{STimer}            The STimer instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   reset(start = false) {
     // stop the timeout
@@ -331,7 +331,7 @@ export default class STimer extends __SPromise {
    * @param         {Number}          [duration=null]           An optional duration for the timer session
    * @return 	{STimer}      The STimer instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   start(duration = null) {
     // clear the timeout to be sure
@@ -388,7 +388,7 @@ export default class STimer extends __SPromise {
    *
    * @return 	{STimer}        The STimer instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   pause() {
     // set the pauseTime
@@ -412,7 +412,7 @@ export default class STimer extends __SPromise {
    *
    * @return 	{STimer}      The STimer instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   stop() {
     // reset
@@ -433,7 +433,7 @@ export default class STimer extends __SPromise {
    *
    * @return        {STimer}            The STimer instance
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   destroy() {
     this.stop();
@@ -455,7 +455,7 @@ export default class STimer extends __SPromise {
    *
    * @return          {Boolean}         true if started, false if not
    *
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   isStarted() {
     return this._startTime && !this._pauseTime;

@@ -44,7 +44,7 @@ import __SViewRendererSettingsInterface from './interface/SViewRendererSettingsI
  * });
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISViewRendererSettings {
     rootDirs: string[];
@@ -92,7 +92,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the view doted path if the passed parameter is a valid path
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _viewPath = '';
     private _originalViewPath;
@@ -106,7 +106,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the view engine path to use for the instanciated view
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _enginePath;
 
@@ -119,7 +119,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the datahandler path to use with this view
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _dataHandlerPath;
 
@@ -132,7 +132,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the data file path if one exists
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _dataFilePath;
 
@@ -144,7 +144,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the registered engines using the ```registerEngine``` static method
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static engines = {};
 
@@ -156,7 +156,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Store the registered dataHandlers using the ```registerDataHandler``` static method
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static dataHandlers = {};
 
@@ -169,7 +169,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * will search for views to render
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get defaultRootDirs(): string[] {
         return [
@@ -188,7 +188,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * added correctly
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getRootDirs(rootDirs = []): string[] {
         return __unique([
@@ -265,7 +265,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @param       {String}        enginePath      The absolute path to the engine class file
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerEngine(
         enginePath: string,
@@ -304,7 +304,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @param       {String}        handlerPath      The absolute path to the engine class file
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerDataHandler(
         handlerPath: string,
@@ -343,7 +343,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @return      {Object|Boolean}              Return an object describing the view or ```false``` if not found
      *
      * @since
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getViewMetas(viewPath: string): ISViewViewMetas | undefined {
         const viewsDirs = __SSugarConfig.get('viewRenderer.rootDirs');
@@ -394,7 +394,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Access the template settings
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viewRendererSettings(): ISViewRendererSettings {
         return (<any>this)._settings.viewRenderer;
@@ -408,7 +408,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(viewPath, settings?: ISViewCtorSettings) {
         // save the settings
@@ -531,7 +531,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @return      {SPromise}                    An SPromise instance that will be resolved once the rendering process has correctly finished
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     render(
         data = {},

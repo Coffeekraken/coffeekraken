@@ -17,7 +17,7 @@ import __atob from 'atob';
  * @todo        doc
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
     /**
@@ -30,7 +30,7 @@ export default {
      * @return      {String}                       The encrypted message
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     encrypt: function (message) {
         if (typeof message !== 'string')
@@ -47,7 +47,7 @@ export default {
      * @return      {String}                      The decrypted message
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     decrypt: function (message) {
         message = __atob(message);

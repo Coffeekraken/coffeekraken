@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::invoke_map([[5, 1, 7], [3, 2, 1]], function($result) { sort($result); return $result;});
  * // [[1, 5, 7], [1, 2, 3]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/invokeMap.php
  */
 function invoke_map(iterable $collection, $path, array $args = []):array {

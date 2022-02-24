@@ -27,7 +27,7 @@ import __SDuration, { ISDurationObject } from '@coffeekraken/s-duration';
  * await __unzip('my/cool/file.zip');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface IUnzipSettings {

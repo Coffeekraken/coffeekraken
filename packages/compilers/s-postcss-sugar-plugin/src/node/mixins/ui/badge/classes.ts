@@ -151,7 +151,7 @@ export default function ({
         *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -169,7 +169,7 @@ export default function ({
             * <a class="s-badge">I'm a cool badge</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
         ).code(`
             .s-badge {
@@ -196,7 +196,7 @@ export default function ({
             }">I'm a cool ${style} badge</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`,
             ).code(`
             .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
@@ -224,7 +224,7 @@ export default function ({
         }">I'm a cool ${shape} badge</a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`,
             ).code(`
         .s-badge${shape === finalParams.defaultShape ? '' : `--${shape}`} {

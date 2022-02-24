@@ -19,7 +19,7 @@ namespace Sugar\html;
  * Sugar\html\expandPleasantCssClassnames('...html');
  * 
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function get_tag( $tag, $xml ) {
   $tag = preg_quote($tag);

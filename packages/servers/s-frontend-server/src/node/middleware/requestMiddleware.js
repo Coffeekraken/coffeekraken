@@ -34,7 +34,7 @@ import __SBench from '@coffeekraken/s-bench';
  * server.listen(3000);
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function requestMiddleware(settings = {}) {
     return function (req, res, next) {

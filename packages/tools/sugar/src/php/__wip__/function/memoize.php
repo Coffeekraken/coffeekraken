@@ -17,7 +17,7 @@ namespace thorin;
  * $memoizedAdd(6); // 16
  * $memoizedAdd(5); // 15 but cached
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/appzcoder/30-seconds-of-php-code
  */
 function memoize($func) {

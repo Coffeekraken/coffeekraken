@@ -48,7 +48,7 @@ import __SDocblockRendererSettingsInterface from './interface/SDocblockRendererS
  * }
  *
  * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDocblockRendererSettings {}
@@ -114,7 +114,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the SDocblock instance to render
    *
    * @since     2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _docblockInstance: ISDocblock;
 
@@ -126,7 +126,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the handlebar instance used to render most of the templates
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _handlebars: any;
 
@@ -139,7 +139,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered layouts
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredLayouts: Record<string, ISDocblockRendererLayout> = {};
 
@@ -152,7 +152,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered partials
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredPartials: Record<string, ISDocblockRendererPartial> = {};
 
@@ -165,7 +165,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered helpers
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredHelpers: Record<string, ISDocblockRendererHelper> = {};
 
@@ -178,7 +178,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered tags
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredTags: Record<string, ISDocblockRendererPartial> = {};
 
@@ -191,7 +191,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the registered blocks
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static _registeredBlocks: Record<string, ISDocblockRendererBlock> = {};
 
@@ -203,7 +203,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Access the docblock renderer settings
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   get docblockRendererSettings(): ISDocblockRendererSettings {
     return (<any>this)._settings.docblockRenderer;
@@ -217,7 +217,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Store the rendered blocks to avoid rendering them twice
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   private _renderedBlocks: ISDocblockBlock[] = [];
 
@@ -229,7 +229,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Constructor
    *
    * @since     2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(
     docblockInstance: ISDocblock,
@@ -264,7 +264,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Register an helper
    *
    * @since     2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerHelper(helperObj: ISDocblockRendererHelper): void {
     this._registeredHelpers[helperObj.id] = helperObj;
@@ -280,7 +280,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @todo      doc
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerLayout(layoutObj: ISDocblockRendererLayout): void {
     this._registeredLayouts[layoutObj.id] = layoutObj;
@@ -296,7 +296,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @todo      doc
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerPartial(partialObj: ISDocblockRendererPartial): void {
     this._registeredPartials[partialObj.id] = partialObj;
@@ -312,7 +312,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @todo      doc
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerTag(tagObj: ISDocblockRendererTag): void {
     this._registeredTags[tagObj.id] = tagObj;
@@ -328,7 +328,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @todo      doc
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static registerBlock(blockObj: ISDocblockRendererBlock): void {
     this._registeredBlocks[blockObj.id] = blockObj;
@@ -342,7 +342,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * Register all the helpers inside the "helpers" folders
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _registerHelpers() {
     // @ts-ignore
@@ -386,7 +386,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * This method init the handlebar instance that will be used during the rendering process
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _registerHandlerbarsHelpers() {
     this._handlebars = __promisedHandlebars(__handlebars, {
@@ -468,7 +468,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @return      {String}                            The rendered block
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async renderBlock(blockObj, settings = {}) {
     return new Promise((resolve, reject) => {
@@ -509,7 +509,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @return      {String}                            The rendered block
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async renderTag(blockObj, tagName = 'default', settings = {}) {
     return new Promise((resolve, reject) => {
@@ -547,7 +547,7 @@ class SDocblockRenderer extends __SClass implements ISDocblockRenderer {
    * @return      {SPromise}                          An SPromise instance that will be resolved with the rendered string once it has been fully rendered
    *
    * @since       2.0.0
-   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   render() {
     return new __SPromise(

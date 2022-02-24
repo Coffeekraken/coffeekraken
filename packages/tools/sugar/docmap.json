@@ -15009,13 +15009,13 @@
                         "description": ""
                     }
                 ],
-                "description": "This function simply take an author string like \"Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\" and\ntransform it into a plain object with these properties: name, email and url",
+                "description": "This function simply take an author string like \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\" and\ntransform it into a plain object with these properties: name, email and url",
                 "namespace": "@coffeekraken.sugar.js.npm",
                 "status": "beta",
                 "example": [
                     {
                         "language": "js",
-                        "code": "import parseAuthorString from '@coffeekraken/sugar/js/npm/utils/parseAuthorString';\nparseAuthorString(\"Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\")\n// => {\n  \"name\": \"Olivier Bossel\",\n  \"email\": \"olivier.bossel@gmail.com\",\n  \"url\": \"https://olivierbossel.com\"\n}"
+                        "code": "import parseAuthorString from '@coffeekraken/sugar/js/npm/utils/parseAuthorString';\nparseAuthorString(\"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\")\n// => {\n  \"name\": \"Olivier Bossel\",\n  \"email\": \"olivier.bossel@gmail.com\",\n  \"url\": \"https://olivierbossel.com\"\n}"
                     }
                 ],
                 "since": "2.0.0",
@@ -15048,7 +15048,7 @@
                 "example": [
                     {
                         "language": "js",
-                        "code": "import standardizeJson from '@coffeekraken/sugar/js/npm/utils/standardizeJson';\nstandardizeJson({\n   \"author\": \"Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)\"\n}); // => {\n   \"author\": {\n     \"name\": \"Olivier Bossel\",\n     \"email\": \"olivier.bossel@gmail.com\",\n     \"url\": \"https://olivierbossel.com\"\n   }\n}"
+                        "code": "import standardizeJson from '@coffeekraken/sugar/js/npm/utils/standardizeJson';\nstandardizeJson({\n   \"author\": \"Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)\"\n}); // => {\n   \"author\": {\n     \"name\": \"Olivier Bossel\",\n     \"email\": \"olivier.bossel@gmail.com\",\n     \"url\": \"https://olivierbossel.com\"\n   }\n}"
                     }
                 ],
                 "since": "2.0.0",

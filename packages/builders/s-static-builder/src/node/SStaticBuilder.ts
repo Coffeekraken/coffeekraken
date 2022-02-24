@@ -54,7 +54,7 @@ import __wait from '@coffeekraken/sugar/shared/time/wait';
  * });
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISStaticBuilderSettings {}
@@ -103,7 +103,7 @@ export default class SStaticBuilder extends __SBuilder {
      * Access the postcss builder settings
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get staticBuilderSettings(): ISStaticBuilderSettings {
         return (<any>this)._settings.staticBuilder;
@@ -116,7 +116,7 @@ export default class SStaticBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISStaticBuilderCtorSettings>) {
         super(
@@ -144,7 +144,7 @@ export default class SStaticBuilder extends __SBuilder {
      * @return      {SPromise}                                                          An SPromise instance that need to be resolved at the end of the build
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(params: ISStaticBuilderBuildParams): Promise<ISStaticBuilderResult> {
         return new __SPromise(

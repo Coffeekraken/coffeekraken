@@ -25,7 +25,7 @@ import __removeClassesOnAnimationEnd from './removeClassOnAnimationEnd';
  * });
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function addAnimationClass($elm, cls) {
     // make sure the cls argument is an Array

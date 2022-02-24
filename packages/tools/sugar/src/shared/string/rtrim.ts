@@ -24,7 +24,7 @@
  * rtrim('Hello World', 'ld') // Hello Wor
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function rtrim(string, needle, trimResult = true) {
     if (string.substr(needle.length * -1) === needle) {

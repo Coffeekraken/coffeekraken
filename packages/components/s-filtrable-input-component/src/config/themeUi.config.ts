@@ -10,7 +10,7 @@ export default (env, config) => {
              * Specify the default padding inline for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingInline: '[theme.ui.default.paddingInline]',
             /**
@@ -22,7 +22,7 @@ export default (env, config) => {
              * Specify the default padding block for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             paddingBlock: '[theme.ui.default.paddingBlock]',
             /**
@@ -34,7 +34,7 @@ export default (env, config) => {
              * Specify the default border radius for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderRadius: '[theme.ui.default.borderRadius]',
             /**
@@ -46,7 +46,7 @@ export default (env, config) => {
              * Specify the default border width for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             borderWidth: '[theme.ui.default.borderWidth]',
             /**
@@ -58,7 +58,7 @@ export default (env, config) => {
              * Specify the default transition for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             transition: '[theme.ui.default.transition]',
             /**
@@ -70,7 +70,7 @@ export default (env, config) => {
              * Specify the default color for filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultColor: '[theme.ui.default.defaultColor]',
             /**
@@ -82,7 +82,7 @@ export default (env, config) => {
              * Specify the default style for your filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             defaultStyle: 'solid',
             /**
@@ -94,7 +94,7 @@ export default (env, config) => {
              * Specify the default depth for input items
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             depth: 100,
             /**
@@ -106,7 +106,7 @@ export default (env, config) => {
              * Specify if the focus outline is activated for this ui element
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outline: '[theme.ui.outline.active]',
             /**
@@ -118,7 +118,7 @@ export default (env, config) => {
              * Specify the default vertical rhythm for your filtrable input ui
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             rhythmVertical: '[theme.ui.default.rhythmVertical]',
         },

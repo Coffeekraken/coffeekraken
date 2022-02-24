@@ -22,7 +22,7 @@ import __fs from 'fs';
  * packagrJson('lodash');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 interface IPackageJsonSettings {
     rootDir: string;

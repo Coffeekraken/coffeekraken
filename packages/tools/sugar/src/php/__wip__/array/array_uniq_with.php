@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::array_uniq_with($objects, 'Thorin::is_equal');
  * // [['x' => 1, 'y' => 2], ['x' => 2, 'y' => 1]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/uniqWith.php
  */
 function array_uniq_with(array $array, callable $comparator): array {

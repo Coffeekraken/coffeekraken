@@ -1,30 +1,6 @@
 import __SInterface from '@coffeekraken/s-interface';
 import __STheme from '@coffeekraken/s-theme';
 
-/**
- * @name          avatar
- * @namespace     node.mixins.ui.avatar
- * @type          PostcssMixin
- * @platform      postcss
- * @status        beta
- *
- * This mixin allows you to generate the "avatar" UI component css.
- *
- * @param       {'solid'|'gradient'|'outline'|'text'}                           [style=theme.ui.button.defaultStyle]         The style you want your avatar to have
- * @param       {'default'|'square'|'puill'}                     [shape='default']       The shape you want your badge to have
- * @param       {Boolean}                                         [outline=theme.ui.button.outline]
- * @param       {('bare'|'lnf')[]}        [scope=['bare','lnf']]      The scope you want to generate
- * @return      {Css}                   The corresponding css
- *
- * @example       css
- * .my-element {
- *      \@sugar.ui.button();
- * }
- *
- * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
- */
-
 class postcssSugarPluginUiButtonInterface extends __SInterface {
     static get _definition() {
         return {
@@ -66,7 +42,7 @@ export { postcssSugarPluginUiButtonInterface as interface };
 /**
  * @name          button
  * @namespace     ui.button
- * @type          CssMixin
+ * @type               PostcssMixin
  * @interface     ./button          interface
  * @platform      postcss
  * @status        beta
@@ -79,7 +55,7 @@ export { postcssSugarPluginUiButtonInterface as interface };
  * }
  *
  * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export default function ({

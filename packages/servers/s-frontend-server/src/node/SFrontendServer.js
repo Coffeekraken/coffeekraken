@@ -33,7 +33,7 @@ export default class SFrontendServer extends __SClass {
      * Constructor
      *
      * @since 					2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor() {
         super();
@@ -48,7 +48,7 @@ export default class SFrontendServer extends __SClass {
      * through which you can subscribe for events, etc...
      *
      * @since       2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     start(params) {
         const finalParams = __SFrontendServerStartParamsInterface.apply(params);

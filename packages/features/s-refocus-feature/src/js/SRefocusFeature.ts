@@ -42,7 +42,7 @@ export interface ISRefocusFeatureProps {
  * </div>
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SRefocusFeature extends __SFeature {
     constructor(name: string, node: HTMLElement, settings: any) {

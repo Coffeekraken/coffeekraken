@@ -18,7 +18,7 @@ import __faker from 'faker';
  * \@sugar.scale.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginScaleClassesInterface extends __SInterface {
@@ -93,7 +93,7 @@ export default function ({
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -117,7 +117,7 @@ export default function ({
   * <h1 class="s-font:40 s-scale:15">I'm a cool scaled title</h1>
   * 
   * since           2.0.0
-  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
   */
  `,
         ).code(`

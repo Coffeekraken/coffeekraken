@@ -48,7 +48,7 @@ import __deepMerge from '../object/deepMerge';
  * a.hello = 'coco';
  *
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function deepProxy(object, handlerFn, settings = {}) {
     const preproxy = new WeakMap();

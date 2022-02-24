@@ -59,7 +59,7 @@ function __toLowerCase(l = '') {
  * await docmap.read();
  *
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDocMapBuildParams {
@@ -172,7 +172,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @param               {ISDocMapTagProxyFn}      processor       The processor function
      *
      * @since           2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerTagProxy(tag: string, processor: ISDocMapTagProxyFn): any {
         this._registeredTagsProxy[tag] = processor;
@@ -186,7 +186,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * This store the docMap.json entries
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _entries: ISDocMapEntries = {};
 
@@ -198,7 +198,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * Store the docmap readed with the method "read"
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _docmapJson: any;
 
@@ -210,7 +210,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * Access the docmap settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get docmapSettings(): ISDocMapSettings {
         return (<any>this._settings).docmap;
@@ -224,7 +224,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISDocMapCtorSettings>) {
         super(
@@ -290,7 +290,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @return      {SPromise<ISDocMapObj>}                          An SPromise instance that will be resolved once the docMap.json file(s) have been correctly read
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(params?: Partial<ISDocMapReadParams>): Promise<ISDocMapObj> {
         return new __SPromise(
@@ -505,7 +505,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @return        {Record<string: SFile>}       The structured menu tree with an SFile instance attached for each source file
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _extractMenu(
         docmapJson: Partial<ISDocMapObj> = this._docmapJson,
@@ -666,7 +666,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params: Partial<ISDocMapBuildParams>): Promise<any> {
         const finalParams = <ISDocMapBuildParams>(
@@ -912,7 +912,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @returns       {Promise<any>}              A promise resolved with the installation process result
      *
      * @since   2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     installSnapshot(
         params: Partial<ISDocmapInstallSnapshotsParams>,
@@ -1085,7 +1085,7 @@ class SDocMap extends __SClass implements ISDocMap {
      * @return        {SPromise}                                     A promise resolved once the scan process has been finished
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     snapshot(params: Partial<ISDocMapSnapshotParams>): Promise<any> {
         return new __SPromise(

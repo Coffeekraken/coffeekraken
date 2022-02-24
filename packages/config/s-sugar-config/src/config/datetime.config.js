@@ -12,7 +12,7 @@ export default function (env) {
          *
          * @see             https://momentjs.com/
          * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         dateFormat: 'YYYY-MM-DD',
         /**
@@ -27,7 +27,7 @@ export default function (env) {
          *
          * @see         https://momentjs.com/
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         timeFormat: 'h:mm:ss',
         i18n: {
@@ -40,7 +40,7 @@ export default function (env) {
              * This specify the "previous month" translation
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             previousMonth: 'Previous Month',
             /**
@@ -52,7 +52,7 @@ export default function (env) {
              * This specify the "next month" translation
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             nextMonth: 'Next Month',
             /**
@@ -64,7 +64,7 @@ export default function (env) {
              * This specify the "months" translation
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             months: [
                 'January',
@@ -89,7 +89,7 @@ export default function (env) {
              * This specify the "weekdays" translation
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             weekdays: [
                 'Sunday',
@@ -109,7 +109,7 @@ export default function (env) {
              * This specify the "weekdays shorts" translation
              *
              * @since           2.0.0
-             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             weekdaysShort: ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'],
         },

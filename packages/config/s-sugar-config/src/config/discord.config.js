@@ -9,7 +9,7 @@ export default {
          * Specify the discord server id
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         id: 'Coffeekraken',
         /**
@@ -21,7 +21,7 @@ export default {
          * Specify the discord server url
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         url: 'https://discord.gg/ERsX54UE',
     },

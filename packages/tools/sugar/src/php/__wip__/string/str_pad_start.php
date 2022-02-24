@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::str_pad_start('abs', 6, '_-');
  * // '_-_abc'
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/padStart.php
  */
 function str_pad_start(string $string, int $length, string $chars = ' '):string {

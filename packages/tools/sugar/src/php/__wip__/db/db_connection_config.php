@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $config = Thorin::db_connection_config('db1');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function db_connection_config($name = null) {
 	if ($name === null) {

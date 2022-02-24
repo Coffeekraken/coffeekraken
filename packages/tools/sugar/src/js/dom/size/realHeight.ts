@@ -21,7 +21,7 @@
  * realHeight(myCoolHtmlElement);
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function realHeight(elm: HTMLElement): number {
     // apply an overflow-y to the element

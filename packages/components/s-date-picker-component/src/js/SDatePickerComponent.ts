@@ -48,7 +48,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * define();
  *
  * @example         html            Min and max dates
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *      <s-date-picker
  *          placeholder="Choose a date"
@@ -61,7 +61,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  *
  * @example         html            Disable weekends
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -73,7 +73,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  *
  * @example         html            With a button
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -85,7 +85,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            Disabled
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -98,7 +98,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            Display more than 1 month
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -111,7 +111,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  *
  * @example         html            With custom input
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *      <s-date-picker name="something">
  *          <input type="text" name="something" placeholder="Choose a date" class="s-width:40" />
@@ -119,7 +119,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            With a custom button
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -130,7 +130,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            With a custom input and button
- * <label class="s-label:resonsive">
+ * <label class="s-label:responsive">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -142,7 +142,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            Colors (non-exhaustive)
- * <label class="s-label:resonsive s-mbe:20">
+ * <label class="s-label:responsive s-mbe:20">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -152,7 +152,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     >
  *     </s-date-picker>
  * </label>
- * <label class="s-label:resonsive s-mbe:20 s-color:accent">
+ * <label class="s-label:responsive s-mbe:20 s-color:accent">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -162,7 +162,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     >
  *     </s-date-picker>
  * </label>
- * <label class="s-label:resonsive s-mbe:20 s-color:complementary">
+ * <label class="s-label:responsive s-mbe:20 s-color:complementary">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -172,7 +172,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *     >
  *     </s-date-picker>
  * </label>
- * <label class="s-label:resonsive s-mbe:20 s-color:error">
+ * <label class="s-label:responsive s-mbe:20 s-color:error">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -184,7 +184,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  * </label>
  * 
  * @example         html            RTL Support
- * <label class="s-label:resonsive" dir="rtl">
+ * <label class="s-label:responsive" dir="rtl">
  *      Choose a date
  *     <s-date-picker
  *         placeholder="Choose a date"
@@ -200,7 +200,7 @@ import __SLitComponent from '@coffeekraken/s-lit-component';
  *
  * @see             https://github.com/Pikaday/Pikaday
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDatePickerComponentProps {
@@ -422,7 +422,7 @@ export default class SDatePicker extends __SLitComponent {
  * @param           {any}           [props={}]              Some default props you want to set for your webcomponent
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export function define(
     props: Partial<ISDatePickerComponentProps> = {},

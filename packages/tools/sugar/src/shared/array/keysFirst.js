@@ -19,7 +19,7 @@ import uniq from 'lodash/uniq';
  * keysFirst(['a','b','d','g','c'], ['d','g'])
  * // ['d','g','a','b','c']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function keysFirst(array, keys) {
     // all the keys has to exist in the array stack

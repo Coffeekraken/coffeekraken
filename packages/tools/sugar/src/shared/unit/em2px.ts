@@ -23,7 +23,7 @@
  * em2px(2);
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function em2px(em, $elm = document.documentElement) {
     return em * parseFloat(getComputedStyle($elm).fontSize || '16px');

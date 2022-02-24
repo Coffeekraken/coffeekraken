@@ -123,6 +123,10 @@
                 &:last-child {
                     margin-block-end: 0;
                 }
+
+                &[actual-parent] {
+                    background-color: sugar.color(complementary, --alpha 0.8);
+                }
             }
 
         }

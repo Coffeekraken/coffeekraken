@@ -15,7 +15,7 @@ import __get from '@coffeekraken/sugar/shared/object/get';
  * __SSugarConfig.get('something.cool');
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SSugarConfig {
     /**
@@ -29,7 +29,7 @@ export default class SSugarConfig {
      * @return      {any}                                   The getted configuration
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get(dotpath: string): any {
         // @ts-ignore

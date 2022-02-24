@@ -18,7 +18,7 @@ import __fileHash from '@coffeekraken/sugar/node/fs/fileHash';
  * This class represent a SSitemap docmap source
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISSitemapBuilderDocmapSourceCtorSettings {
@@ -36,7 +36,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * Store the source id
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static id = 'docmap';
 
@@ -50,7 +50,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * Access the sitemap source docmap settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapDocmapSourceSettings(): ISSitemapBuilderDocmapSourceSettings {
         return (<any>this._settings).sitemapDocmapSource ?? {};
@@ -64,7 +64,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISSitemapBuilderDocmapSourceCtorSettings>) {
         super(
@@ -89,7 +89,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},

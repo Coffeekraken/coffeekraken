@@ -23,7 +23,7 @@
  * uncamelize('helloWorldAndUniverse') // hello-world-and-universe
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function uncamelize(text, separator = '-') {
     // Replace all capital letters by separator followed by lowercase one

@@ -40,7 +40,7 @@ import _get from 'lodash/get';
  * console.log(myObject.title) => 'Hello Youhou Universe';
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function propertyProxy(obj, property, descriptor, applySetterAtStart = false) {
     // handle property like "something.cool"

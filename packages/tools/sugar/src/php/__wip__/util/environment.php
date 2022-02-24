@@ -10,7 +10,7 @@ namespace thorin;
  * $env = Thorin::environment();
  * // development
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function environment() {
 	// return the environment from the config

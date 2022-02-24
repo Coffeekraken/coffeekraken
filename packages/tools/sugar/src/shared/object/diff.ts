@@ -48,7 +48,7 @@ import __isEqual from 'is-equal';
  *
  * @see       https://www.npmjs.com/package/is-equal
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function diff(object1, object2, settings = {}) {
     settings = {

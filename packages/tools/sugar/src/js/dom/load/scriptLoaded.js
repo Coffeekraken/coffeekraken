@@ -27,7 +27,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * })
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function loadScript($script, cb = null) {
     return new __SPromise(({ resolve, reject, emit }) => {

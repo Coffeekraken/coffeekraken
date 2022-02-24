@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::str_repeat('abc', 0);
  * // => ''
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/repeat.php
  */
 function str_repeat(string $string, int $n = 1):string {

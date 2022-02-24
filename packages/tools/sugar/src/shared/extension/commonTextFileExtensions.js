@@ -17,7 +17,7 @@ import __commonProgrammingFileExtensions from './commonProgrammingFileExtensions
  * const extensions = __commonTextFileExtensions();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonTextFileExtensions(withDot = false) {
     return ['txt', 'htm', 'html', 'md', 'json', 'csv', 'rss', 'xhtml', ...__commonProgrammingFileExtensions(withDot)].map(ext => withDot ? `.${ext}` : ext);

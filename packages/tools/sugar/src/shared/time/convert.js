@@ -22,7 +22,7 @@
  * convert('10s', 'ms'); // => 10000
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function convert(from, to = 'ms') {
     // init the fromMs variable

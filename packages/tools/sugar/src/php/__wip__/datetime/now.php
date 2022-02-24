@@ -10,7 +10,7 @@ use Carbon\Carbon;
  * Thorin::now();
  * // 2018-11-21 22:00:00
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://carbon.nesbot.com/    Carbon documentation
  */
 function now():Carbon {

@@ -23,7 +23,7 @@ import __SPromise from '@coffeekraken/s-promise';
  * removeClassOnAnimationEnd(myCoolElm, 'my-class');
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function removeClassOnAnimationEnd($elm, cls) {
     return new __SPromise(({ resolve }) => {

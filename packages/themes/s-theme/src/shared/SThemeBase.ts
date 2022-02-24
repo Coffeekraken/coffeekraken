@@ -30,7 +30,7 @@ import __isColor from '@coffeekraken/sugar/shared/is/color';
  * });
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISThemeFontFamilyStack {
@@ -176,7 +176,7 @@ export default class SThemeBase extends __SClass {
      * Store the theme name that this instance represent
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     name: string;
 
@@ -187,7 +187,7 @@ export default class SThemeBase extends __SClass {
      * Store the theme variant that this instance represent
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     variant: string;
 
@@ -198,7 +198,7 @@ export default class SThemeBase extends __SClass {
      * Store the computed theme id builded from the theme name and theme variant
      *
      * @since   2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get id(): String {
         return `${this.name}-${this.variant}`;
@@ -212,7 +212,7 @@ export default class SThemeBase extends __SClass {
      * Store the current theme setted in the config.theme namespace
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get theme(): string {
         return __SSugarConfig.get('theme.theme');
@@ -226,7 +226,7 @@ export default class SThemeBase extends __SClass {
      * Store the current variant setted in the config.variant namespace
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get variant(): string {
         return __SSugarConfig.get('theme.variant');
@@ -240,7 +240,7 @@ export default class SThemeBase extends __SClass {
      * Store the names of all the available themes
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get themes(): string[] {
         return Object.keys(__SSugarConfig.get('theme.themes'));
@@ -259,7 +259,7 @@ export default class SThemeBase extends __SClass {
      * @return    {STheme}              An instance of the STheme class representing the requested theme
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _instanciatedThemes: Record<string, SThemeBase> = {};
     static getTheme(theme?: string, variant?: string): SThemeBase {
@@ -303,7 +303,7 @@ export default class SThemeBase extends __SClass {
      * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static hash(dotPath: string = ''): string {
         const config = this.config(dotPath);
@@ -325,7 +325,7 @@ export default class SThemeBase extends __SClass {
      * cssVar('ui.button.padding'); // => var(--s-theme-ui-button-padding, 1em 1.2em)
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static cssVar(dotPath: string, fallback = true): string {
         let fb = this.getTheme().config(dotPath);
@@ -487,7 +487,7 @@ export default class SThemeBase extends __SClass {
      * @return          {String}                            The processed css string
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static jsObjectToCssProperties(
         jsObject: any,
@@ -635,7 +635,7 @@ export default class SThemeBase extends __SClass {
      * @return          {String}                            The generated css variables string
      *
      * @since       2.0.0
-     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static remapCssColor(from: string, to: string): ISThemeRemapColorResult {
         const result: ISThemeRemapColorResult = {
@@ -730,7 +730,7 @@ export default class SThemeBase extends __SClass {
      * @return      {String}                        The converted css variables string
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static toCssVars(theme?: string, variant?: string): string[] {
         // @ts-ignore
@@ -832,7 +832,7 @@ export default class SThemeBase extends __SClass {
      * @return      {any}                        The getted theme config
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static config(dotPath: string, theme?: string, variant?: string): any {
         const instance = this.getTheme(theme, variant);
@@ -847,7 +847,7 @@ export default class SThemeBase extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(theme?: string, variant?: string) {
         super({});
@@ -870,7 +870,7 @@ export default class SThemeBase extends __SClass {
      * Store the themes configuration
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get themes() {
         return __SSugarConfig.get('theme.themes');
@@ -887,7 +887,7 @@ export default class SThemeBase extends __SClass {
      * @return        {Any}                           The value of the getted configuration
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get _config() {
         // @ts-ignore
@@ -914,7 +914,7 @@ export default class SThemeBase extends __SClass {
      * @return          {String}                                    The generated hash for this config
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hash(dotPath: string = ''): string {
         const config = this.config(dotPath);
@@ -930,7 +930,7 @@ export default class SThemeBase extends __SClass {
      * @return      ISThemesConfig        The themes configuration
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     themesConfig(): ISThemesConfig {
         return __SSugarConfig.get('theme');
@@ -946,7 +946,7 @@ export default class SThemeBase extends __SClass {
      * @return      {Record<string, ISThemeColor>}          The simple base colors map object
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     baseColors(): Record<string, ISThemeColor> {
         const map = {};
@@ -984,7 +984,7 @@ export default class SThemeBase extends __SClass {
      * - value      {ISThemeColor | ISThemeColorModifiers}        The actual color object
      *
      * @since             2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async loopOnColors(
         callback: ISThemeLoopOnColorsCallback,

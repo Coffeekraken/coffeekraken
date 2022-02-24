@@ -23,7 +23,7 @@ import __SCache, { ISCacheSetSettings } from './SCache';
  * cache.set('/my/cool/file.ts');
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 interface ISFileCacheCtorSettings {
   cache: Partial<ISFileCacheSettings>;
@@ -42,7 +42,7 @@ class SFileCache extends __SCache {
    * Constructor
    *
    * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(name, settings?: ISFileCacheCtorSettings) {
     super(name, __deepMerge({}, settings || {}));
@@ -62,7 +62,7 @@ class SFileCache extends __SCache {
    * @example             js
    * const myValue = myCache.get('/my/cool/file');
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async get(path, settings?: Partial<ISFileCacheSettings>) {
     settings = {
@@ -105,7 +105,7 @@ class SFileCache extends __SCache {
    *    ttl: 1000
    * });
    *
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   async set(
     path: string,

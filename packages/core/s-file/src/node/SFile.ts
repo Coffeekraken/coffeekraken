@@ -57,7 +57,7 @@ import __path from 'path';
  * file.exists; // => true
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISFileWatchSettings {
@@ -196,7 +196,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the registered classes map
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static _registeredClasses: Record<string, ISFile> = {};
 
@@ -213,7 +213,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @param     {SFile}                     cls           The class to associate to this/these extension(s)
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerClass(pattern: string | string[], cls: any) {
         let patternsArray: string[] = [];
@@ -233,7 +233,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the sources files found using the specified sourcesExtensions in the settings
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     sourcesFiles: Record<string, SFile> = {};
 
@@ -251,7 +251,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * method.
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static new(path: string, settings?: ISFileCtorSettings): SFile {
         const fileName = __getFilename(path);
@@ -272,7 +272,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the full file name
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _name: string;
     public get name(): string {
@@ -286,7 +286,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the file name without the extension
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _nameWithoutExt: string;
     public get nameWithoutExt(): string {
@@ -321,7 +321,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * - %distViewsDir: return the absolute path to the dist views directory
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _path: string;
     get path(): string {
@@ -347,7 +347,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * To set this property, you need to pass the ```cwd``` setting through the constructor...
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     cwd;
 
@@ -358,7 +358,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Specify if the file exists on the filesystem or not
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     exists;
 
@@ -371,7 +371,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * specify the settings.cwd through the constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get relPath(): string {
         return __path.relative(this.cwd, this.path);
@@ -385,7 +385,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the path to the folder where the file lives
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get dirPath(): string {
         return __path.dirname(this.path);
@@ -398,7 +398,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store the file extension
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     extension;
 
@@ -410,7 +410,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Access the file settings setted in the ```settings.file``` property
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get fileSettings(): ISFileSettings {
         return (<any>this)._settings.file;
@@ -424,7 +424,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(filepath: string, settings?: ISFileCtorSettings) {
         super(
@@ -511,7 +511,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Get the file `md5` hash
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get hash() {
         return __md5.encrypt(this.content);
@@ -525,7 +525,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Access the file stats like the updated timestamp, sizes, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _stats: any = {};
     get stats() {
@@ -541,7 +541,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Access the raw file content in string format
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _raw?: string;
     get raw(): any {
@@ -558,7 +558,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Access the file content
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _content?: string;
     get content(): any {
@@ -586,7 +586,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * Store all the commits made before saving the file
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _commits: ISFileCommit[] = [];
     get commits(): ISFileCommit[] {
@@ -602,7 +602,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return        {Object}        A plain object version of this instance
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject(readContent = true): ISFileObject {
         const obj = <ISFileObject>{
@@ -627,7 +627,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * This method simply updates the informations like the file size, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     update() {
         // reset some variables
@@ -669,7 +669,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * This method allows you to start watching the file for events like "update", etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _watcher: any;
     watch() {
@@ -705,7 +705,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * This method allows you to stop the watching process of the file
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unwatch() {
         if (!this._watcher) return;
@@ -724,7 +724,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return      {String}          The file path
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         return this.path;
@@ -743,7 +743,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}                      A promise that will be resolved once the file is fully duplicated and gives you access to a new SFile instance
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     duplicate(to?): Promise<SFile> {
         return new Promise((resolve) => {
@@ -764,7 +764,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {SFile}                      A new SFile instance that represent your new file
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     duplicateSync(to?): SFile {
         let destination = to;
@@ -820,7 +820,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}        A promise resolved once the file has been save
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     save(): Promise<SFile> {
         return new Promise((resolve, reject) => {
@@ -839,7 +839,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}        A promise resolved once the file has been save
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     saveSync(): SFile {
         // check if some commits are waiting to be saved
@@ -885,7 +885,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise<boolean|Error}       A promise that will be resolved with true if all good, and rejected with an Error if not
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unlink(): Promise<boolean | Error> {
         return new Promise((resolve, reject) => {
@@ -907,7 +907,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return      {Boolean|Error}     true if deleted properly, throw an error if not
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     unlinkSync(): boolean {
         __fs.unlinkSync(this.path);
@@ -926,7 +926,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     read(settings: Partial<ISFileReadSettings> = {}): Promise<string> {
         return new Promise((resolve, reject) => {
@@ -968,7 +968,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {String}                                          The file content readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     readSync(settings: Partial<ISFileReadSettings> = {}): string {
         if (this.exists === false) {
@@ -1012,7 +1012,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     write(
         data: string,
@@ -1046,7 +1046,7 @@ class SFile extends __SEventEmitter implements ISFile {
      * @return    {Promise}                                          A promise that will be resolved with the file content when readed
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     writeSync(data: string, settings: Partial<ISFileWriteSettings> = {}): any {
         const set: ISFileWriteSettings = {

@@ -152,7 +152,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         *   </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -169,7 +169,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * <input type="checkbox" class="s-checkbox" value="something" name="mycheckboxItem3" />
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             .s-checkbox {
@@ -195,7 +195,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
         <input type="checkbox" class="s-checkbox${style === finalParams.defaultStyle ? '' : `:${style}`}" value="something" name="mycheckboxItem3" />
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */
      `).code(`
         .${cls} {
@@ -222,7 +222,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
                 <input type="checkbox" class="s-checkbox${shape === finalParams.defaultShape ? '' : `:${shape}`}" value="something" name="mycheckboxItem3" />
                 * 
                 * @since    2.0.0
-                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
             .${cls} {
@@ -247,7 +247,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.format.text {
@@ -275,7 +275,7 @@ export default function ({ params, atRule, applyNoScopes, CssVars, replaceWith, 
             * </div>
             * 
             * @since      2.0.0
-            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `).code(`
             @sugar.rhythm.vertical {

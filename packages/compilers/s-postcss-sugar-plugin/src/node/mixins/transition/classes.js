@@ -17,7 +17,7 @@ import __uniqid from '@coffeekraken/sugar/shared/string/uniqid';
  * \@sugar.transition.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginTransitionClassesInterface extends __SInterface {
     static get _definition() {
@@ -66,7 +66,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     Object.keys(transitionObj).forEach((transitionName) => {

@@ -16,7 +16,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.width.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginWidthClassesMixinInterface extends __SInterface {
     static get _definition() {
@@ -59,7 +59,7 @@ export default function ({ params, atRule, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     vars.push(`/**
@@ -80,7 +80,7 @@ export default function ({ params, atRule, replaceWith, }) {
     * </div>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    .s-width--viewport {
         position: relative;
@@ -107,7 +107,7 @@ export default function ({ params, atRule, replaceWith, }) {
         * </div>
         * 
         * @since        2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
       .s-width--${name} {
             width: ${widthObj[name]};

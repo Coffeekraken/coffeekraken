@@ -8,7 +8,7 @@
         "sugar": "./src/cli/sugar.cli.js"
     },
     "scripts": {},
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/s-frontstack": "^2.0.0",

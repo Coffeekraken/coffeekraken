@@ -8,7 +8,7 @@ namespace thorin;
  * @example    php
  * $langs = Thorin::available_languages();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function available_languages() {
 	$languages = \Thorin::config('i18n.available_languages');

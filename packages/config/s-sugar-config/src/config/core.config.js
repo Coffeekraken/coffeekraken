@@ -16,7 +16,7 @@ export default function (env) {
              * - {path}: The passed path parameter
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             pattern: '{path}',
             /**
@@ -30,7 +30,7 @@ export default function (env) {
              * file to get the name that serve to the namespace generation
              *
              * @since       2.0.0
-             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             context: __packageRoot(),
         },

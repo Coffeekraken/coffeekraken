@@ -11,7 +11,7 @@ use voku\helper\Hooks;
  * @example    php
  * Thorin::do_action('my-action');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/voku/php-hooks
  */
 function do_action() {

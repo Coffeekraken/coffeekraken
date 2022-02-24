@@ -14,7 +14,7 @@ use Embed\Embed;
  * Thorin::embed('https://www.youtube.com/watch?v=1qSTcxt2t74');
  * // <iframe src="...
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function embed($url) {
     $info = Embed::create($url);

@@ -17,7 +17,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * \@sugar.layout.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginLayoutClassesInterface extends __SInterface {
@@ -87,7 +87,7 @@ export default function ({
          * @name       s-grid:${id}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      postcss
+         * @platform      css
          * @status      beta
          * 
          * This class represent a grid of "<yellow>${id}</yellow> columns"
@@ -102,7 +102,7 @@ export default function ({
         * </div>
         * 
         * @since     2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
       `,
         ).code(`
@@ -123,7 +123,7 @@ export default function ({
        * @name       s-layout:${id}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      postcss
+       * @platform      css
        * @status      beta
        * 
        * This class represent a layout of "<yellow>${layout}</yellow>"
@@ -138,7 +138,7 @@ export default function ({
        * </div>
        * 
        * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
         ).code(`
@@ -154,7 +154,7 @@ export default function ({
     //    * @name       s-layout:${id}
     //    * @namespace     sugar.css.layout
     //    * @type          CssClass
-    //    * @platform      postcss
+    //    * @platform      css
     //    * @status      beta
     //    * 
     //    * This class represent a layout of "<yellow>${layout}</yellow>"
@@ -169,7 +169,7 @@ export default function ({
     //    * </div>
     //    * 
     //    * @since     2.0.0
-    //    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    //    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     //    */
     //   `,
     //     ).code(`
@@ -191,7 +191,7 @@ export default function ({
        * @name       ${clsX}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      postcss
+       * @platform      css
        * @status        beta
        * 
        * This class allows you to apply some left and right gap on your s-layout items
@@ -206,7 +206,7 @@ export default function ({
        * </div>
        * 
        * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
         ).code(`
@@ -222,7 +222,7 @@ export default function ({
        * @name       ${clsY}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      postcss
+       * @platform      css
        * @status        beta
        * 
        * This class allows you to apply some left and right gap on your s-layout items
@@ -237,7 +237,7 @@ export default function ({
        * </div>
        * 
        * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
         ).code(`
@@ -253,7 +253,7 @@ export default function ({
        * @name       ${cls}
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      postcss
+       * @platform      css
        * @status      beta
        * 
        * This class allows you to apply some left and right gap on your s-layout items
@@ -268,7 +268,7 @@ export default function ({
        * </div>
        * 
        * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
         ).code(`
@@ -284,7 +284,7 @@ export default function ({
        * @name       s-layout:gap-between
        * @namespace     sugar.css.layout
        * @type          CssClass
-       * @platform      postcss
+       * @platform      css
        * @status      beta
        * 
        * This class allows you to specify that you want only gaps between layout items
@@ -299,7 +299,7 @@ export default function ({
        * </div>
        * 
        * @since     2.0.0
-       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
     ).code(`
@@ -321,7 +321,7 @@ export default function ({
          * @name       s-layout:align-${align}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This allows you to align all the items to "${align}"
@@ -336,7 +336,7 @@ export default function ({
         * </div>
         * 
         * @since     2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`
@@ -354,7 +354,7 @@ export default function ({
          * @name       s-layout:justify-${justify}
          * @namespace     sugar.css.layout
          * @type          CssClass
-         * @platform      postcss
+         * @platform      css
          * @status        beta
          * 
          * This allows you to justify all the items to "${justify}"
@@ -369,7 +369,7 @@ export default function ({
         * </div>
         * 
         * @since     2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
        `,
         ).code(`

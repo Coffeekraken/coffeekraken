@@ -48,7 +48,7 @@ import __fileName from '@coffeekraken/sugar/node/fs/filename';
  * );
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginIconClassesInterface extends __SInterface {
@@ -180,7 +180,7 @@ export default function ({
         * );
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -211,7 +211,7 @@ export default function ({
                   * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
                   * 
                   * @since      2.0.0
-                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                   */
                 `,
                 ).code(`
@@ -240,7 +240,7 @@ export default function ({
                       * <i class="s-icon\:${iconObj.as} s-font\:100"></i>
                       * 
                       * @since      2.0.0
-                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                       */
                     `,
                 ).code(`

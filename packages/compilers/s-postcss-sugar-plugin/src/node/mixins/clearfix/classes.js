@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.clearfix.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginClearfixClassesInterface extends __SInterface {
     static get _definition() {
@@ -73,7 +73,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     clearfixes.forEach((clearfixName) => {
@@ -94,7 +94,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             : `:${clearfixName}`}">I'm a cool clearfix element</div>
                 * 
                 * @since        2.0.0
-                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                 */
             `).code(`
                 .s-clearfix${clearfixName === finalParams.defaultClearfix

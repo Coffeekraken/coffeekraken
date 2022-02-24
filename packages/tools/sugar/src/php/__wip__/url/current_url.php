@@ -11,7 +11,7 @@ namespace thorin;
  * Thorin::current_url();
  * // https://thorin.io/hello/world?query=string
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function current_url() {
 	return \Thorin::root_url(@$_SERVER['REQUEST_URI'], true);

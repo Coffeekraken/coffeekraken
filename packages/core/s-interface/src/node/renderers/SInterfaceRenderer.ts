@@ -32,7 +32,7 @@ import __SInterface, { ISInterfaceDefinitionProperty } from '../SInterface';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
     /**
@@ -44,7 +44,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * This id has to be used when you call the ```interface.render('{id}', {})``` method of the SInterface instance.
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static id = 'default';
 
@@ -56,7 +56,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * Store the interface you want to render
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _interface: __SInterface;
 
@@ -68,7 +68,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(int: __SInterface, settings?: Partial<ISInterfaceRendererSettings>) {
         super(__deepMerge({}, settings));
@@ -86,7 +86,7 @@ class SInterfaceRenderer extends __SClass implements ISInterfaceRenderer {
      * @return            {String}                    The rendered interface string
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     async render(settings?: Partial<ISInterfaceRendererSettings>): Promise<string> {
         const set = <ISInterfaceRendererSettings>__deepMerge(this._settings, {}, settings);

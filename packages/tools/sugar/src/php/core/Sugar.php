@@ -39,7 +39,7 @@ class Sugar {
 	 * the php files inside a folder
 	 * 
 	 * @since 			2.0.0
- 	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ 	 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 	 */
 	public static function requireFolder($folder, $settings = []) {
 		// generate settings

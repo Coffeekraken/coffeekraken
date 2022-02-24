@@ -15,11 +15,11 @@
  * @todo      tests
  *
  * @example     js
- * import scrollTop from '@coffeekraken/sugar/js/dom/scrollTop';
+ * import scrollTop from '@coffeekraken/sugar/js/dom/scroll/scrollTop';
  * scrollTop();
  *
  * @since       1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com) (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) (https://olivierbossel.com)
  */
 function scrollTop() {
     return window.pageYOffset || document.scrollTop || document.body.scrollTop;

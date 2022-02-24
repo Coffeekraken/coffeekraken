@@ -12,7 +12,7 @@ export default class SRequest extends __SClass {
      *
      * Constructor
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(params, settings) {
         super(__deepMerge({
@@ -25,7 +25,7 @@ export default class SRequest extends __SClass {
          *
          * Store the request settings to use
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._defaultRequestParams = {};
         /**
@@ -35,7 +35,7 @@ export default class SRequest extends __SClass {
          *
          * Store the request settings to use
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._currentRequestSettings = {};
         /**
@@ -45,7 +45,7 @@ export default class SRequest extends __SClass {
          *
          * Store how many requests have been sent
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._requestsCount = 0;
         // if the request is not an SRequestConfig, create it
@@ -59,7 +59,7 @@ export default class SRequest extends __SClass {
      * Access the request settings
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get requestSettings() {
         return this._settings.request;
@@ -73,7 +73,7 @@ export default class SRequest extends __SClass {
      *
      * @param           {Object}              response                  The axios response object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onSuccess(response) {
         // init the final response
@@ -135,7 +135,7 @@ export default class SRequest extends __SClass {
      *
      * @param           {Object}              error                  The axios error object
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onError(error) {
         // something has gone wrong with the request(s) so reject the session
@@ -150,7 +150,7 @@ export default class SRequest extends __SClass {
      *
      * @param         {Object}                [requestSettings={}]            The request settings for this particular request
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _send(requestSettings = {}) {
         // update request count
@@ -180,7 +180,7 @@ export default class SRequest extends __SClass {
      *    // do something...
      * });
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     retry() {
         return this.send();
@@ -201,7 +201,7 @@ export default class SRequest extends __SClass {
      *    // do something...
      * });
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     send(requestSettings = {}) {
         // return a promise

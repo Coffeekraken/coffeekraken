@@ -13,7 +13,7 @@ import __sanitizeJsonString from '@coffeekraken/sugar/shared/json/sanitizeJsonSt
  * environment variables in the js, etc...
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function sVitePluginSugar(settings: any = {}) {
     const jsReg = /\.(j|t)s(\?.*)?$/;

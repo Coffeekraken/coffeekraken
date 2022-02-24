@@ -15,7 +15,7 @@ use Carbon\Carbon;
  * Thorin::time(23, 30, 0)
  * // 2018-11-21 23:30:00
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://carbon.nesbot.com/    Carbon documentation
  */
 function time(int $hour=null, int $minute=null, int $second=null):Carbon {

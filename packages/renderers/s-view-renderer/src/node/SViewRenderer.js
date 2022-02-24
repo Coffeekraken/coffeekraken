@@ -30,7 +30,7 @@ class SViewRenderer extends __SClass {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(viewPath, settings) {
         // save the settings
@@ -46,7 +46,7 @@ class SViewRenderer extends __SClass {
          * Store the view doted path if the passed parameter is a valid path
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._viewPath = '';
         const defaultEngines = __SSugarConfig.get('viewRenderer.engines') || {};
@@ -139,7 +139,7 @@ class SViewRenderer extends __SClass {
      * will search for views to render
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static get defaultRootDirs() {
         return [
@@ -157,7 +157,7 @@ class SViewRenderer extends __SClass {
      * added correctly
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getRootDirs(rootDirs = []) {
         return __unique([
@@ -209,7 +209,7 @@ class SViewRenderer extends __SClass {
      * @param       {String}        enginePath      The absolute path to the engine class file
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerEngine(enginePath, extensions) {
         if (!enginePath.match(/\.js$/))
@@ -242,7 +242,7 @@ class SViewRenderer extends __SClass {
      * @param       {String}        handlerPath      The absolute path to the engine class file
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerDataHandler(handlerPath, extensions) {
         if (handlerPath.slice(-3) !== '.js')
@@ -277,7 +277,7 @@ class SViewRenderer extends __SClass {
      * @return      {Object|Boolean}              Return an object describing the view or ```false``` if not found
      *
      * @since
-     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author			        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static getViewMetas(viewPath) {
         const viewsDirs = __SSugarConfig.get('viewRenderer.rootDirs');
@@ -321,7 +321,7 @@ class SViewRenderer extends __SClass {
      * Access the template settings
      *
      * @since     2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get viewRendererSettings() {
         return this._settings.viewRenderer;
@@ -338,7 +338,7 @@ class SViewRenderer extends __SClass {
      * @return      {SPromise}                    An SPromise instance that will be resolved once the rendering process has correctly finished
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     render(data = {}, settings) {
         // @ts-ignore
@@ -396,7 +396,7 @@ class SViewRenderer extends __SClass {
  * Store the registered engines using the ```registerEngine``` static method
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SViewRenderer.engines = {};
 /**
@@ -407,7 +407,7 @@ SViewRenderer.engines = {};
  * Store the registered dataHandlers using the ```registerDataHandler``` static method
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SViewRenderer.dataHandlers = {};
 export default SViewRenderer;

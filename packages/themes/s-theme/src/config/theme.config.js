@@ -66,7 +66,7 @@ export default function (env, config) {
          * Specify the theme to use in your project. You can also specify it through a `sugar.json` file
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         theme: 'default',
         /**
@@ -77,7 +77,7 @@ export default function (env, config) {
          * Specify the theme variant to use in your project. You can also specify it through a `sugar.json` file
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         variant: 'light',
         /**
@@ -94,7 +94,7 @@ export default function (env, config) {
          *
          * @see           https://www.npmjs.com/package/micromatch
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         cssVariables: ['*'],
         /**
@@ -106,7 +106,7 @@ export default function (env, config) {
          * Store all the themes inside a property each like "default", "myCoolTheme", etc...
          *
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         themes: {},
     };

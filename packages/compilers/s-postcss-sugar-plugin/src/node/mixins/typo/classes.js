@@ -17,7 +17,7 @@ import __faker from 'faker';
  * \@sugar.typo.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginTypoClassesInterface extends __SInterface {
     static get _definition() {
@@ -65,7 +65,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     Object.keys(typosObj).forEach((typoName) => {
@@ -88,7 +88,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <span class="${cls.replace(':', ':')}">Something cool</span>
             * 
             * @since        2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
         `).code(`
         .${cls.replace(':', '--')} {
@@ -108,7 +108,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *   <${typoName}>Something cool</${typoName}>
             * 
             * @since        2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
         @sugar.format.text {
@@ -132,7 +132,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             *   <${typoName}>Something cool</${typoName}>
             * 
             * @since        2.0.0
-            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
             */
            `).code(`
         @sugar.rhythm.vertical {

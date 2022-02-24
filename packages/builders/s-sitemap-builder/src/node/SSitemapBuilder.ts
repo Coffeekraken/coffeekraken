@@ -26,7 +26,7 @@ import __SBuilder from '@coffeekraken/s-builder';
  * docmap.json, frontspec.json, etc...
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export type ISSitemapBuilderTypes = 'docmap' | 'frontspec';
@@ -85,7 +85,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * Access the sitemap settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSettings(): ISSitemapBuilderSettings {
         return (<any>this._settings).sitemapBuilder ?? {};
@@ -99,7 +99,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISSitemapBuilderCtopSettings>) {
         super(
@@ -132,7 +132,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @return      {SPromise<ISSitemapBuilderBuildResult>}                    A promise resolved with the sitemap result when success
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(
         params: Partial<ISSitemapBuilderBuildParams> = {},
@@ -232,7 +232,7 @@ export default class SSitemapBuilder extends __SBuilder {
      * @param       {String}                        path            The ourput path where you want to save yous sitemap
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     save(items: ISSitemapBuilderResultItem[], path: string): void {
         switch (__extension(path)) {

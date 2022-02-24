@@ -24,7 +24,7 @@ namespace thorin;
  * // 0
  * Thorin::array_find_index($users, 'active');
  * // 2
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/findIndex.php
  */
 function array_find_index(array $array, $predicate, int $fromIndex = null): int {

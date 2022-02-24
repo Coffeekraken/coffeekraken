@@ -21,7 +21,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginResetInterface extends __SInterface {
@@ -82,7 +82,7 @@ export default function ({
         * \@sugar.reset;
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
         `).code(`
       @sugar.reset.destyle;

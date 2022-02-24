@@ -20,7 +20,7 @@ import __extension from './extension';
  * filename('hello/world.js'); // => world.js
  *
  * @since         2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function filename(path, withExtension = true) {
     let filename = path.split('/').pop();

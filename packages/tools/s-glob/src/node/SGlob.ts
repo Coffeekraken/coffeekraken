@@ -32,7 +32,7 @@ import __isGlob from '@coffeekraken/sugar/shared/is/glob';
  * SGlob.resolve('my/cool/glob/*.js');
  *
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISGlobCtorSettings {
@@ -53,7 +53,7 @@ export default class SGlob extends __SClass {
    * Store the instance globs
    *
    * @since           2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _globs = null;
 
@@ -68,7 +68,7 @@ export default class SGlob extends __SClass {
    * @return    {Boolean}                   true if is a glob, false if not
    * 
    * @since       2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static isGlob(glob: string): boolean {
     return __isGlob(glob);
@@ -86,7 +86,7 @@ export default class SGlob extends __SClass {
    * @return      {SFile[]|string[]}                                An array of SFile instances or string if is a directory
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static resolve(globs, settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
     return __resolveGlob(globs, settings);
@@ -103,7 +103,7 @@ export default class SGlob extends __SClass {
    * @return      {String}                            The glob part of the passed string
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static extractGlob(string: string): string {
     return __extractGlob(string);
@@ -120,7 +120,7 @@ export default class SGlob extends __SClass {
    * @return      {String}                            The none glob part of the passed string
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   static extractNoneGlob(string: string): string {
     return __extractNoneGlob(string);
@@ -134,7 +134,7 @@ export default class SGlob extends __SClass {
    * Constructor
    *
    * @since          2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(globs: string|string[], settings: Partial<ISGlobCtorSettings> = {}) {
     super(__deepMerge({
@@ -157,7 +157,7 @@ export default class SGlob extends __SClass {
    * @return      {SFile[]|string[]}                                 An array of SFile instances or string if is a folder
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   resolve(settings: Partial<IResolveGlobSettings> = {}): SFile[] | string[] {
     settings = __deepMerge(this._settings.glob.resolve, {}, settings);
@@ -173,7 +173,7 @@ export default class SGlob extends __SClass {
    * @return      {String|Array<String>}                            The glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   extractGlob():string|string[] {
     if (this._globs.length === 1) {
@@ -193,7 +193,7 @@ export default class SGlob extends __SClass {
    * @return      {String|Array<String>}                            The none glob part of the glob(s) passed in constructor. If multiple globs, return an Array, otherwise a simple string
    *
    * @since         2.0.0
-   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   extractNoneGlob(): string|string[] {
     if (this._globs.length === 1) {

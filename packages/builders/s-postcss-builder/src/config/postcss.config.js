@@ -29,7 +29,7 @@ export default function (env, config) {
          * Specify the plugins to use with the postcss process
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         plugins: [
             '@coffeekraken/s-postcss-sugar-plugin',

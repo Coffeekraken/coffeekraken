@@ -152,7 +152,7 @@ class SDocblock extends __SClass {
      * @return      {Array<SDocblockBlock>}                       An array of SDocblockBlock instances
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(string = this._source) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -278,7 +278,7 @@ class SDocblock extends __SClass {
      * This method convert the parsed docblocks to a simple object
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toObject() {
         return this.blocks.map((block) => {
@@ -292,7 +292,7 @@ class SDocblock extends __SClass {
      * This method allows you to get the string version of the docblock(s)
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         return this.blocks

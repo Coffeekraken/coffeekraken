@@ -36,7 +36,7 @@ import __packageSyncJson from '@coffeekraken/sugar/node/package/jsonSync';
  *
  * @see             https://www.npmjs.com/package/favicons
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISFaviconBuilderSettings {
@@ -88,7 +88,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * Access the favicon builder settings
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get faviconBuilderSettings(): ISFaviconBuilderSettings {
         return (<any>this._settings).faviconBuilder;
@@ -102,7 +102,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * Constructor
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISFaviconBuilderCtorSettings>) {
         super(
@@ -128,7 +128,7 @@ export default class SFaviconBuilder extends __SBuilder {
      * @return      {SPromise<ISFaviconBuilderResult>}        A promise resolved with the ISFaviconBuilderResult object that store all the builded files stats, etc...
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _build(
         params: ISFaviconBuilderBuildParams,

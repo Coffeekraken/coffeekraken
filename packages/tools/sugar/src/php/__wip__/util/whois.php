@@ -9,7 +9,7 @@ namespace thorin;
  * @example    php
  * $whois = Thorin::whois('olivierbossel.com');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function whois($domain) {
 

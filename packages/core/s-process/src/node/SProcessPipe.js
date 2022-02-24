@@ -23,7 +23,7 @@ class SProcessPipe extends __SEventEmitter {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(processes, settings = {}) {
         super(__deepMerge({
@@ -41,7 +41,7 @@ class SProcessPipe extends __SEventEmitter {
      * Access the process pipe settings
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processPipeSettings() {
         return this._settings.processPipe;
@@ -58,7 +58,7 @@ class SProcessPipe extends __SEventEmitter {
      * @return        {SPromise}                              An SPromise instance through which you can get events piped from processes
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     run(params = {}, settings = {}) {
         // extends settings

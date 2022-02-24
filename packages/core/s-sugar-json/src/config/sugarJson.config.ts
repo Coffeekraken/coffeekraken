@@ -14,7 +14,7 @@ export default function (env) {
         //  * Set the directories where to search for sugar.json files
         //  *
         //  * @since             2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //  */
         // dirs: [__packageRoot(__dirname()), __packageRoot()],
         // /**
@@ -26,7 +26,7 @@ export default function (env) {
         //  * Specify what you want to import. Can be "all" or an Array of NPM packages names
         //  *
         //  * @since             2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //  */
         // imports: 'all',
         // /**
@@ -38,7 +38,7 @@ export default function (env) {
         //  * Specify some NPM packages you want to exclude by adding his name into this array
         //  *
         //  * @since             2.0.0
-        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        //  * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         //  */
         // exclude: [],
     };

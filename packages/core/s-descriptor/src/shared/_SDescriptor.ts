@@ -38,7 +38,7 @@ import __sortObject from '@coffeekraken/sugar/shared/object/sort';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISDescriptorCtorSettings {
@@ -107,7 +107,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * Store the descriptor result object
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _descriptorResult?: ISDescriptorResult;
 
@@ -181,7 +181,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * Access the descriptor settings
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get descriptorSettings(): ISDescriptorSettings {
         return (<any>this)._settings.descriptor;
@@ -195,7 +195,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: ISDescriptorCtorSettings) {
         // save the settings
@@ -230,7 +230,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @return      {ISDescriptorResultObj|true}           Will return true if all is ok, and an object describing the issue if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     apply(
         value: any,
@@ -361,7 +361,7 @@ class SDescriptor extends __SClass implements ISDescriptor {
      * @return      {ISDescriptionValidationResult|true}        true if the validation has been made correctly, an object describing the issue if not
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _validate(
         value: any,

@@ -32,7 +32,7 @@
 //  * }
 //  *
 //  * @since     2.0.0
-//  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //  */
 
 // export interface ISBlessedComponentSettings {}
@@ -57,7 +57,7 @@
 //    *
 //    * Store the component settings
 //    *
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   _settings: ISBlessedComponentSettings = {};
 
@@ -71,7 +71,7 @@
 //    * @return      {Screen}          The blessed screen instance
 //    *
 //    * @since       2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   static getScreen() {
 //     return SBlessedComponent.screen;
@@ -87,7 +87,7 @@
 //    * @return      {Screen}          The blessed screen instance
 //    *
 //    * @since       2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   static destroyScreen() {
 //     if (!SBlessedComponent.getScreen()) return;
@@ -104,7 +104,7 @@
 //    * Store the setInterval that render the screen
 //    *
 //    * @since         2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   static _framerateInterval = null;
 
@@ -116,7 +116,7 @@
 //    * Store the global screen initiated by the first component
 //    *
 //    * @since       2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   static screen;
 
@@ -127,7 +127,7 @@
 //    *
 //    * Constructor
 //    *
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   constructor(settings: ISBlessedComponentSettings = {}) {
 //     // store the settings
@@ -233,7 +233,7 @@
 //    * minus the left/right padding
 //    *
 //    * @since     2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   get innerWidth() {
 //     return __innerWidth(this);
@@ -263,7 +263,7 @@
 //    * @param       {Number}          interval          The interval between screen rendering processes in ms
 //    *
 //    * @since           2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   setFramerate(framerate) {
 //     clearInterval(SBlessedComponent._framerateInterval);
@@ -279,7 +279,7 @@
 //    *
 //    * This method simply update the screen if the component is a child of one
 //    *
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   _renderAfterNotAllowedTimeout = null;
 //   update() {
@@ -299,7 +299,7 @@
 //    * @return      {Boolean}             true if is displayed, false if not
 //    *
 //    * @since       2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   isDisplayed() {
 //     return this._isDisplayed && SBlessedComponent.getScreen() !== undefined;
@@ -312,7 +312,7 @@
 //    * Check if the component (screen) has been destroyed
 //    *
 //    * @since         2.0.0
-//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+//    * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
 //    */
 //   isDestroyed() {
 //     return this._destroyed === true;

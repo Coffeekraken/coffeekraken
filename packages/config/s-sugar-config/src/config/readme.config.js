@@ -12,7 +12,7 @@ export default function (env, config) {
              * Specify the header image to use for displaying readme. This has to be relative to your project root directory
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             headerImageUrl: '[config.serve.img.url]/doc/readmeHeader.jpg',
         },
@@ -25,7 +25,7 @@ export default function (env, config) {
          * Specify the readme shields to display in your readme.
          *
          * @since           2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         shields: '[config.shieldsio.shields]',
     };

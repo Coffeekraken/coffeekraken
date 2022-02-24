@@ -20,7 +20,7 @@ import __flatten from '../../shared/object/flatten';
  * replacePackageJsonTokens('Hello %packageJson.name'); // => Hello @coffeekraken/sugar
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IReplacePackageJsonTokensSettings {}
 export default function replacePackageJsonTokens(

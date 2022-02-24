@@ -15,7 +15,7 @@ use Intervention\Image\ImageManager;
  * @example    php
  * $url = Thorin::optimize_image('my/cool/image.jpg);
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function optimize_image($path, $saveTo = null, $settings = []) {
 	$originalSettings = (object) [

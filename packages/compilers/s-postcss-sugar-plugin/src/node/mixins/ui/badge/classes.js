@@ -100,7 +100,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         *   <a class="s-badge s-scale:20 s-mbe:20">Say hello!</a>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     if (finalParams.scope.includes('bare')) {
@@ -115,7 +115,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <a class="s-badge">I'm a cool badge</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-badge {
                 @sugar.ui.badge($scope: bare);
@@ -135,7 +135,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
             * <a class="s-badge${finalParams.defaultStyle === style ? '' : `:${style}`}">I'm a cool ${style} badge</a>
             * 
             * @since    2.0.0
-            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */`).code(`
             .s-badge${style === finalParams.defaultStyle ? '' : `--${style}`} {
                 @sugar.ui.badge($style: ${style}, $scope: lnf);
@@ -156,7 +156,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * <a class="s-badge${finalParams.defaultShape === shape ? '' : `:${shape}`}">I'm a cool ${shape} badge</a>
         * 
         * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
       */`).code(`
         .s-badge${shape === finalParams.defaultShape ? '' : `--${shape}`} {
             @sugar.ui.badge($shape: ${shape}, $scope: shape);

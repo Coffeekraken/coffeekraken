@@ -17,7 +17,7 @@ import __keysFirst from '@coffeekraken/sugar/shared/array/keysFirst';
  * \@sugar.margin.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginMarginClassesInterface extends __SInterface {
     static get _definition() {
@@ -99,7 +99,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
         * </div>
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `);
     marginsKeys.forEach((spaceName) => {
@@ -118,7 +118,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMargin.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMargin.replace(':', '--')} {
@@ -138,7 +138,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginTop.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginTop.replace(':', '--')} {
@@ -158,7 +158,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginBottom.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginBottom.replace(':', '--')} {
@@ -178,7 +178,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginLeft.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginLeft.replace(':', '--')} {
@@ -198,7 +198,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginRight.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginRight.replace(':', '--')} {
@@ -218,7 +218,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginX.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
      .${clsMarginX.replace(':', '--')} {
@@ -239,7 +239,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginY.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginY.replace(':', '--')} {
@@ -264,7 +264,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMargin.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMargin.replace(':', '--')} {
@@ -284,7 +284,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginTop.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginTop.replace(':', '--')} {
@@ -304,7 +304,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginBottom.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginBottom.replace(':', '--')} {
@@ -324,7 +324,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginLeft.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginLeft.replace(':', '--')} {
@@ -344,7 +344,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginRight.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginRight.replace(':', '--')} {
@@ -364,7 +364,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginX.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
      .${clsMarginX.replace(':', '--')} {
@@ -385,7 +385,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${clsMarginY.replace(':', ':')}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${clsMarginY.replace(':', '--')} {
@@ -406,7 +406,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-m:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-m--auto {
@@ -425,7 +425,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mbs:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mbs--auto {
@@ -444,7 +444,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mie:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mie--auto {
@@ -463,7 +463,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mbe:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mbe--auto {
@@ -482,7 +482,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mis:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mis--auto {
@@ -501,7 +501,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mi:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mi--auto {
@@ -521,7 +521,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="s-mb:auto">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .s-mb--auto {

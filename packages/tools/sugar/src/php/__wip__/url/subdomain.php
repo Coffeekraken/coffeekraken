@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::subdomain('http://hello.thorin.io/hello/world?query=value1');
  * // hello
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function subdomain($url = null) {
 	if (!$url) {

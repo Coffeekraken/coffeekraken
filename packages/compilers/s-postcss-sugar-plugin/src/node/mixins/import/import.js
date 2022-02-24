@@ -22,7 +22,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
  * \@sugar.import('../views/** /*.css');
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginImportInterface extends __SInterface {
     static get _definition() {
@@ -52,7 +52,7 @@ export { postcssSugarPluginImportInterface as interface };
  * \@sugar.import('./** /*.css');
  *
  * @since     2.0.0
- * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 let _watcher;
 export default function ({ params, atRule, postcss, registerPostProcessor, settings, }) {

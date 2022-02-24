@@ -22,7 +22,7 @@ import __STheme from '@coffeekraken/s-theme';
  * }
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 class postcssSugarPluginThemeinInterface extends __SInterface {

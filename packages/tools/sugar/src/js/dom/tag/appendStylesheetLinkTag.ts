@@ -23,7 +23,7 @@ import linkLoaded from './linkLoaded';
  * appendStylesheetLink('/dist/css/style.css')
  *
  * @since     1.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function appendStylesheetLink(href: string): Promise<HTMLLinkElement> {
     const $link = document.createElement('link');

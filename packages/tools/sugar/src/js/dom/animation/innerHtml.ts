@@ -46,7 +46,7 @@ import __convert from '../../../shared/time/convert';
  * });
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function innerHtml(node, content, settings = {}) {
     return new Promise((resolve, reject) => {

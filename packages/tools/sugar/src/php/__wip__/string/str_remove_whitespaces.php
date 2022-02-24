@@ -10,7 +10,7 @@ namespace thorin;
  * @example    php
  * $whitespaceFree = Thorin::str_remove_whitespaces('hello world');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function str_remove_whitespaces($string) {
 	return preg_replace('/\s+/', '', $string);

@@ -18,7 +18,7 @@ namespace thorin;
  * var_dump($array);
  * // [[ 'x' => 2 ]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/pullAllBy.php
  */
 function array_pull_all_by(array $array, array $values, $iteratee): array {

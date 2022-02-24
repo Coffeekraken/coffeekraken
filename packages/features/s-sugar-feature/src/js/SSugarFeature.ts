@@ -4,6 +4,7 @@ import __SSugarFeatureInterface from './interface/SSugarFeatureInterface';
 import __clearTransmations from '@coffeekraken/sugar/js/dom/transmation/clearTransmations';
 import __inputAdditionalAttributes from '@coffeekraken/sugar/js/feature/inputAdditionalAttributes';
 import __linksStateAttributes from '@coffeekraken/sugar/js/feature/linksStateAttributes';
+import __preventScrollRestoration from '@coffeekraken/sugar/js/dom/scroll/preventScrollRestoration';
 
 export interface ISSugarFeatureProps {
     scrolled: boolean;
@@ -11,6 +12,7 @@ export interface ISSugarFeatureProps {
     vhvar: boolean;
     inputAdditionalAttributes: boolean;
     linksStateAttributes: boolean;
+    preventScrollRestoration: boolean;
 }
 
 /**
@@ -34,6 +36,7 @@ export interface ISSugarFeatureProps {
  * @feature         Clear all transitions and animations on all the page during a window resize. Helps for performances and cleaner for user
  * @feature         Additional input attributes like `empty`, `dirty` and `has-value`
  * @feature         Add state attributes to links like `actual` and `actual-child` depending on the document location url
+ * @feature         Prevent the scroll restoration behavior on chrome that can usually be anoying
  * 
  * @support          chromium
  * @support          firefox
@@ -46,7 +49,7 @@ export interface ISSugarFeatureProps {
  * </bodyTag>
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SSugarFeature extends __SFeature implements ISFeature {
     _matrix;
@@ -78,6 +81,8 @@ export default class SSugarFeature extends __SFeature implements ISFeature {
         if (this.componentUtils.props.inputAdditionalAttributes) __inputAdditionalAttributes();
         // linksStateAttributes
         if (this.componentUtils.props.linksStateAttributes) __linksStateAttributes();
+        // prevent scroll restoration
+        if (this.componentUtils.props.preventScrollRestoration) __preventScrollRestoration();
     }
     _clearTransmationsOnResizeTimeout;
     _isResizing = false;

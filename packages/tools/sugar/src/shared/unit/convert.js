@@ -26,7 +26,7 @@ import __px2rem from './px2rem';
  * convert('2rem', 'px');
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function convert(from, to = 'px', $elm) {
     let fromUnit = 'px';

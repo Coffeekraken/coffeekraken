@@ -28,7 +28,7 @@ import querySelectorLive from '../dom/querySelectorLive';
  * @example    html
  * <video lazy-src="my-cool-video.mp4"></video>
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface IVideoLazySrcAttributeSettings {

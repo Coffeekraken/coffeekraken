@@ -15,7 +15,7 @@ use voku\helper\Hooks;
  *   // do something
  * });
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/voku/php-hooks
  */
 function add_action($name, $callback, $priority = 10, $accepted_args = 1) {

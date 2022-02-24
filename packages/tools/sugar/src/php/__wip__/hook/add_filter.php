@@ -17,7 +17,7 @@ use voku\helper\Hooks;
  *   return 'Hello ' . $value;
  * });
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://packagist.org/packages/voku/php-hooks
  */
 function add_filter($name, $callback, $priority = 10, $accepted_args = 1) {

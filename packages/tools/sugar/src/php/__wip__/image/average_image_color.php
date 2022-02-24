@@ -11,7 +11,7 @@ use ColorThief\ColorThief;
  * @example    php
  * $color = Thorin::average_image_color(Thorin::asset_path('img/my-cool-image.jpg'));
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/ksubileau/color-thief-php
  */
 function average_image_color($filePath) {

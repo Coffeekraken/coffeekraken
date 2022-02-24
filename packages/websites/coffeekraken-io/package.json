@@ -14,7 +14,7 @@
         "type": "git",
         "url": "https://olivierbossel.com"
     },
-    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)",
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
     "license": "MIT",
     "dependencies": {
         "@coffeekraken/cli": "^2.0.0",

@@ -14,7 +14,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * Interface that describe the settings object you can pass to the SNofication constructor
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SNotificationSettingsInterface extends __SInterface {
     static get _definition() {

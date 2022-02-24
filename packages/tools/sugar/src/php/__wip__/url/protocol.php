@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::protocol('https://thorin.io?query=value1&string=value2');
  * // https
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function protocol($url = null) {
 	if (!$url) {

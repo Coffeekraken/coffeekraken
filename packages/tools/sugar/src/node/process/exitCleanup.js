@@ -31,7 +31,7 @@ import __deepMerge from '../../shared/object/deepMerge';
  * await exitCleanup();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function exitCleanup(settings = {}) {
     return new Promise(({ resolve, reject }) => {

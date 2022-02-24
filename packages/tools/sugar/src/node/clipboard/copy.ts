@@ -26,7 +26,7 @@ import __ncp from 'copy-paste';
  *
  * @since       2.0.0
  * @see         https://www.npmjs.com/package/clipboardy
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function copy(text) {
     text = __toString(text);

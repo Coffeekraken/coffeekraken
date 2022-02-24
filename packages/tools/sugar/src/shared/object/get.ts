@@ -28,7 +28,7 @@ import __unique from '@coffeekraken/sugar/shared/array/unique';
  * get('myObject.cool.value'); // => 'Hello world'
  *
  * @since     2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function get(obj, path, settings = {}) {
     settings = {

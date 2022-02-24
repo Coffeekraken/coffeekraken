@@ -27,7 +27,7 @@ $t_pools = [];
  * $item->set('hello world');
  * $apcPool->save($item);
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function cache_factory($driver = null, $forceNewPool = false) {
 	global $t_pools;

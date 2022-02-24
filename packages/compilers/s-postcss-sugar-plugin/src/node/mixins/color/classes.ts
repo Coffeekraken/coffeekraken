@@ -24,7 +24,7 @@ export { postcssSugarPluginClassesMixinInterface as interface };
  * \@sugar.color;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function ({ params, atRule, CssVars, replaceWith }) {
     const cssArray = new CssVars();
@@ -79,7 +79,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
             .join('\n')}
         * 
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `,
     );
@@ -103,7 +103,7 @@ export default function ({ params, atRule, CssVars, replaceWith }) {
        * </label>
        * 
        * @since       2.0.0
-       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+       * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
        */
       `,
         ).code(`

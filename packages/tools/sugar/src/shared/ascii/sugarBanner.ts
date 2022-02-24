@@ -26,7 +26,7 @@ import __parseHtml from '../console/parseHtml';
  * sugarBanner();
  *
  * @since     2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 interface ISugarBannerSettings {
     version?: string;

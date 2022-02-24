@@ -15,7 +15,7 @@ import __STheme from '@coffeekraken/s-theme';
  * \@sugar.margin.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginOpacityClassesInterface extends __SInterface {
     static get _definition() {
@@ -42,7 +42,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
     * <span class="${opacityCls}">Something cool</span>
     * 
     * @since        2.0.0
-    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+    * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
     */
    `).code(`
    .${opacityCls.replace(':', '--')} {

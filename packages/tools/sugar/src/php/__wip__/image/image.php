@@ -15,7 +15,7 @@ use Intervention\Image\ImageManager;
  * $image->resize(200,300);
  * $image->save('my-cool-image.png');
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function image($path) {
 	// init manager

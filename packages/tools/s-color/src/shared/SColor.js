@@ -14,7 +14,7 @@ class SColor extends __SClass {
      *
      * Constructor
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(color, settings) {
         // save the instance settings
@@ -28,7 +28,7 @@ class SColor extends __SClass {
          *
          * Original color value
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._originalSColor = null;
         /**
@@ -38,7 +38,7 @@ class SColor extends __SClass {
          *
          * Internal red value
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._r = null;
         /**
@@ -48,7 +48,7 @@ class SColor extends __SClass {
          *
          * Internal green value
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._g = null;
         /**
@@ -58,7 +58,7 @@ class SColor extends __SClass {
          *
          * Internal blue value
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._b = null;
         /**
@@ -68,7 +68,7 @@ class SColor extends __SClass {
          *
          * Internal alpha value
          *
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._a = 1;
         // get the actual real color
@@ -87,7 +87,7 @@ class SColor extends __SClass {
      * Access the color settings
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get colorSettings() {
         return this._settings.color;
@@ -118,7 +118,7 @@ class SColor extends __SClass {
      * @param       {object}      color       The color to parse like (#ff0000 | rgba(...) | hsl(...) | {r:255,r:140,b:23,a:40})
      * @return      {object}                  The rgba representation of the passed color
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _parse(color) {
         // parse the color
@@ -145,7 +145,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor._convert2('rgba');
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _convert2(format) {
         switch (format) {
@@ -178,7 +178,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.toHex();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHex() {
         return this._convert2('hex');
@@ -194,7 +194,7 @@ class SColor extends __SClass {
      * @example       js
      * myColor.toHsl();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHsl() {
         return this._convert2('hsl');
@@ -210,7 +210,7 @@ class SColor extends __SClass {
      * @example       js
      * myColor.toHsla();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHsla() {
         return this._convert2('hsla');
@@ -226,7 +226,7 @@ class SColor extends __SClass {
      * @example         js
      * myColor.toRgb();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toRgb() {
         return this._convert2('rgb');
@@ -242,7 +242,7 @@ class SColor extends __SClass {
      * @example         js
      * myColor.toRgba();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toRgba() {
         return this._convert2('rgba');
@@ -257,7 +257,7 @@ class SColor extends __SClass {
      * myColor.r;
      * myColor.r = 128;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get r() {
         return this._r;
@@ -277,7 +277,7 @@ class SColor extends __SClass {
      * myColor.g;
      * myColor.g = 20;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get g() {
         return this._g;
@@ -297,7 +297,7 @@ class SColor extends __SClass {
      * myColor.b;
      * myColor.b = 30;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get b() {
         return this._b;
@@ -317,7 +317,7 @@ class SColor extends __SClass {
      * myColor.a;
      * myColor.a = 20;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get a() {
         return this._a;
@@ -337,7 +337,7 @@ class SColor extends __SClass {
      * myColor.l;
      * myColor.l = 10;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get l() {
         return this._convert2('hsl').l;
@@ -362,7 +362,7 @@ class SColor extends __SClass {
      * myColor.s;
      * myColor.s = 20;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get s() {
         return this._convert2('hsl').s;
@@ -387,7 +387,7 @@ class SColor extends __SClass {
      * myColor.h;
      * myColor.h = 30;
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get h() {
         return this._convert2('hsl').h;
@@ -411,7 +411,7 @@ class SColor extends __SClass {
      * @example         js
      * myColor.reset();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     reset() {
         // parse again the color
@@ -430,7 +430,7 @@ class SColor extends __SClass {
      * @return        {SColor}                    Returns you either the same instance or a new one depending on the settings ```returnNewInstance```
      *
      * @since         2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     apply(params, returnNewInstance = this.colorSettings.returnNewInstance) {
         // process params
@@ -469,7 +469,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.desaturate(20);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     desaturate(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
         amount = parseInt(amount);
@@ -494,7 +494,7 @@ class SColor extends __SClass {
      * @example         js
      * myColor.saturate(20);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     saturate(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
         amount = parseInt(amount);
@@ -518,7 +518,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.grayscale();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     grayscale(returnNewInstance = this.colorSettings.returnNewInstance) {
         if (returnNewInstance) {
@@ -542,7 +542,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.spin(230);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     spin(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
         amount = parseInt(amount);
@@ -572,7 +572,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.alpha(10);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     alpha(alpha, returnNewInstance = this.colorSettings.returnNewInstance) {
         alpha = parseFloat(alpha);
@@ -597,7 +597,7 @@ class SColor extends __SClass {
      * @example             js
      * myColor.darken(20);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     darken(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
         amount = parseInt(amount);
@@ -626,7 +626,7 @@ class SColor extends __SClass {
      * @example             js
      * myColor.lighten(20);
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     lighten(amount, returnNewInstance = this.colorSettings.returnNewInstance) {
         amount = parseInt(amount);
@@ -652,7 +652,7 @@ class SColor extends __SClass {
      * @return      {SColor}              The SColor instance that represent this new color
      *
      * @since       2.0.0
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     invert(returnNewInstance = this.colorSettings.returnNewInstance) {
         let lightness = this.l;
@@ -687,7 +687,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.toHexString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHexString() {
         return this._convert2('hex');
@@ -703,7 +703,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.toRgbString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toRgbString() {
         return `rgb(${this._r},${this._g},${this._b})`;
@@ -719,7 +719,7 @@ class SColor extends __SClass {
      * @example           js
      * myColor.toRgbaString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toRgbaString() {
         return `rgba(${this._r},${this._g},${this._b},${this._a})`;
@@ -735,7 +735,7 @@ class SColor extends __SClass {
      * @example             js
      * myColor.toHslString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHslString() {
         const hsl = this._convert2('hsl');
@@ -752,7 +752,7 @@ class SColor extends __SClass {
      * @example             js
      * myColor.toHslaString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toHslaString() {
         const hsla = this._convert2('hsla');
@@ -771,7 +771,7 @@ class SColor extends __SClass {
      * @example         js
      * myColor.toString();
      *
-     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString(format = this.colorSettings.defaultFormat) {
         switch (format) {
@@ -802,7 +802,7 @@ class SColor extends __SClass {
  *
  * Static color names map
  *
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SColor.colors = {
     aliceblue: '#f0f8ff',

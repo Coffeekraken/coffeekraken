@@ -16,7 +16,7 @@ use duncan3dc\Sessions\Session;
  * print Thorin::session_flash('my-key'); // my value
  * print Thorin::session_flash('my-key'); // null
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function session_flash($key, $value = null) {
 	if ($value === -1) {

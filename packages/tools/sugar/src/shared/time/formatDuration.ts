@@ -23,7 +23,7 @@
  * formatDuration(2000); // => 2s
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function formatDuration(duration: number): string {
     if (duration === Infinity) {

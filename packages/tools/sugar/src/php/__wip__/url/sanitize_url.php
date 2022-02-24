@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::sanitize_url('https://coco.com/hello//world');
  * // https://coco.com/hello/world
  *
- * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 		Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function sanitize_url($url) {
 	$url = filter_var($url, FILTER_SANITIZE_URL);

@@ -12,7 +12,7 @@ namespace thorin;
  * Thorin::array_flatten_deep([1, [2, [3, [4]], 5]]);
  * // [1, 2, 3, 4, 5]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/flattenDeep.php
  */
 function array_flatten_deep(array $array): array {

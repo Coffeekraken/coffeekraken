@@ -39,7 +39,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * }
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface ISTypeDescriptorIsFn {
   (value: any, settings?: ISTypeSettings): boolean | ISTypeVerboseObj;
@@ -115,7 +115,7 @@ class SType implements ISType {
    * Store the descriptor settings
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   _settings: ISTypeSettings;
 
@@ -126,7 +126,7 @@ class SType implements ISType {
    * This store the typeString passed in the constructor
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   typeString: string;
 
@@ -137,7 +137,7 @@ class SType implements ISType {
    * This specify the type represented by this SType instance
    *
    * @since       2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   types: IParseTypeStringResultObj[];
 
@@ -193,7 +193,7 @@ class SType implements ISType {
    * Constructor
    *
    * @since     2.0.0
-   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+   * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
    */
   constructor(typeString: string, settings: ISTypeSettings = {}) {
     // save the typeString

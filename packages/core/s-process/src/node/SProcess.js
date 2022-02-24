@@ -40,7 +40,7 @@ import __dirname from '@coffeekraken/sugar/node/fs/dirname';
  * @todo      tests
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SProcess extends __SEventEmitter {
     /**
@@ -51,7 +51,7 @@ class SProcess extends __SEventEmitter {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(initialParams, settings) {
         var _a;
@@ -65,7 +65,7 @@ class SProcess extends __SEventEmitter {
          * Access the stdio class initiated if exists
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this.stdio = undefined;
         /**
@@ -75,7 +75,7 @@ class SProcess extends __SEventEmitter {
          * Access the process state like 'idle', 'ready', 'running', 'killed', 'error', 'success'
          *
          * @since     2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._state = 'idle';
         /**
@@ -86,7 +86,7 @@ class SProcess extends __SEventEmitter {
          * that store the duration, startTime, endTime, state, etc...
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this.executionsStack = [];
         // save initial params
@@ -139,7 +139,7 @@ class SProcess extends __SEventEmitter {
      * @return        {SProcess}              An SProcess based class instance that you can use to execute your process
      *
      * @since
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static from(what, settings) {
         var _a, _b;
@@ -228,7 +228,7 @@ class SProcess extends __SEventEmitter {
      * @return       {SCommandProcess}               An instance of the SCommandProcess class
      *
      * @since 				2.0.0
-     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author					Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static fromCommand(initialParams = {}, settings) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -249,7 +249,7 @@ class SProcess extends __SEventEmitter {
      * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static run(paramsOrStringArgs = {}, settings = {}) {
         return __awaiter(this, void 0, void 0, function* () {
@@ -282,7 +282,7 @@ class SProcess extends __SEventEmitter {
      * track of your process state, logs, etc...
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     /**
      * @name      ready
@@ -292,7 +292,7 @@ class SProcess extends __SEventEmitter {
      * This will make the stdio initialize, etc...
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     ready() {
         if (this.state() === 'ready')
@@ -509,7 +509,7 @@ class SProcess extends __SEventEmitter {
      * on the SPromise super instance as well as on the passed "promise" instance
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     kill(data) {
         // call the cancel method on the parent SPromise instance
@@ -523,7 +523,7 @@ class SProcess extends __SEventEmitter {
      * This method allows you to cancel the process
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     cancel(data) {
         if (this.state() === 'running')
@@ -547,7 +547,7 @@ class SProcess extends __SEventEmitter {
      * @param     {String}        state       The new state
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _onStateChange(state) {
         // update the current execution state
@@ -574,7 +574,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is running, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isRunning() {
         return this.state() === 'running';
@@ -588,7 +588,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is idle, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isIdle() {
         return this.state() === 'idle';
@@ -602,7 +602,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is ready, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isReady() {
         return this.state() !== 'idle';
@@ -616,7 +616,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is killed, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isKilled() {
         return this.state() === 'killed';
@@ -630,7 +630,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is in error state, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isError() {
         return this.state() === 'error';
@@ -644,7 +644,7 @@ class SProcess extends __SEventEmitter {
      * @return      {Boolean}         true if is in success state, false if not
      *
      * @since       2.0.0
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     isSuccess() {
         return this.state() === 'success';
@@ -657,7 +657,7 @@ class SProcess extends __SEventEmitter {
      *
      * @param       {String}        message           The message you want to log
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     log(...logs) {
         logs.forEach((log) => {
@@ -675,7 +675,7 @@ class SProcess extends __SEventEmitter {
      *
      * @param       {String}        message           The message you want to error
      *
-     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     error(...errors) {
         errors.forEach((error) => {

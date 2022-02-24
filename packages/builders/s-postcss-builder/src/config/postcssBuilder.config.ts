@@ -10,7 +10,7 @@ export default function (env, config) {
          * Specify the input file to use for building your postcss
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         input: '[config.storage.src.cssDir]/index.css',
         /**
@@ -22,7 +22,7 @@ export default function (env, config) {
          * Specify the output file to save your builded postcss
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         output: '[config.storage.dist.cssDir]/index.css',
         /**
@@ -34,7 +34,7 @@ export default function (env, config) {
          * Specify the postcss compiler configuration
          *
          * @since       2.0.0
-         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         postcss: '[config.postcss]',
         /**

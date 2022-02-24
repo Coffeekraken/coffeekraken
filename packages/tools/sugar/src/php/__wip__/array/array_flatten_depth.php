@@ -14,7 +14,7 @@ namespace thorin;
  * Thorin::array_flatten_depth($array, 1);
  * // [1, 2, [3, [4]], 5]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/flattenDepth.php
  */
 function array_flatten_depth(array $array, int $depth = 1): array {

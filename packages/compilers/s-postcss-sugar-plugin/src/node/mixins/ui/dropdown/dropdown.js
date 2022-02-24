@@ -3,7 +3,7 @@ import __STheme from '@coffeekraken/s-theme';
 /**
  * @name          dropdown
  * @namespace     ui.dropdown
- * @type          CssMixin
+ * @type               PostcssMixin
  * @interface     ./dropdown          interface
  * @platform      postcss
  * @status        beta
@@ -21,7 +21,7 @@ import __STheme from '@coffeekraken/s-theme';
  * }
  *
  * @since      2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginUiDropdownInterface extends __SInterface {
     static get _definition() {

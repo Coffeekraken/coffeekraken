@@ -17,7 +17,7 @@ import __fs from 'fs';
  * \@sugar.platform.classes;
  *
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginPlatformClassesMixinInterface extends __SInterface {
     static get _definition() {
@@ -54,7 +54,7 @@ export default function ({ params, atRule, CssVars, replaceWith, }) {
          * <i class="s-platform\:${name} s-font:50"></i>
          * 
          * @since       2.0.0
-         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         `).code(`
         .s-platform--${name} {

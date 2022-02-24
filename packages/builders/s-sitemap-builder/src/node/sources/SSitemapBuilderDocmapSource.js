@@ -22,7 +22,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings) {
         super('docmap', __deepMerge({
@@ -37,7 +37,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * Access the sitemap source docmap settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapDocmapSourceSettings() {
         var _a;
@@ -54,7 +54,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
      * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(params = {}) {
         return new __SPromise(({ resolve, reject, emit, pipe }) => __awaiter(this, void 0, void 0, function* () {
@@ -97,7 +97,7 @@ export default class SSitemapBuilderDocmapSource extends __SSitemapBuilderSource
  * Store the source id
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 SSitemapBuilderDocmapSource.id = 'docmap';
 SSitemapBuilderDocmapSource.settingsId = 'sitemapDocmapSource';

@@ -23,7 +23,7 @@ import { v4 as __uuidv4 } from 'uuid';
  *
  * @see       https://www.npmjs.com/package/uuid
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function uniqid() {
     return __uuidv4();

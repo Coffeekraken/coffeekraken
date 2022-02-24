@@ -55,24 +55,29 @@
         flex-grow: 1;
     }
 
-    svg {
-        height: 40px;
-        width:140px;
-        transform-origin: 0 50%;
-        transform: translate(-10px,0px);
-        
-        @sugar.media mobile {
-            position: relative;
-            top: 0;
+
+    .__logo {
+        width: 140px;
+
+        svg {
+            height: 40px;
+            width:140px;
+            transform-origin: 0 50%;
+            transform: translate(-10px,0px);
+            
+            @sugar.media mobile {
+                position: relative;
+                top: 0;
+            }
         }
-    }
 
 
-    svg .main {
-        fill: sugar.color(base, --darken 55);
-    }
-    svg .accent {
-        fill: sugar.color(accent);
+        svg .main {
+            fill: sugar.color(base, --darken 55);
+        }
+        svg .accent {
+            fill: sugar.color(accent);
+        }
     }
 
     @sugar.theme.when(dark) {

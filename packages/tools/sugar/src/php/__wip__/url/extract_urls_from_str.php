@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::extract_urls_from_str($string);
  * // ['https://google.com']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function extract_urls_from_str($string) {
 	$urls = \Purl\Url::extract($string);

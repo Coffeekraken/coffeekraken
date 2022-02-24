@@ -19,7 +19,7 @@ namespace thorin;
  * Thorin::filter($users, function($o) { return !$o['active']; });
  * // objects for ['fred']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Collection/filter.php
  */
 function filter(iterable $array, $predicate = null) {

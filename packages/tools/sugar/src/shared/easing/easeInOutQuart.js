@@ -17,7 +17,7 @@
  * @todo      tests
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function ease(t) {
     return t < 0.5 ? 8 * t * t * t * t : 1 - 8 * --t * t * t * t;

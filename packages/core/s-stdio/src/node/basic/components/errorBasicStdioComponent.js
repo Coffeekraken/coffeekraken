@@ -8,7 +8,7 @@ import __toString from '@coffeekraken/sugar/shared/string/toString';
  * Basic stdio error component
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
     id: 'error',

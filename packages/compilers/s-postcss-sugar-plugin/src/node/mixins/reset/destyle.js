@@ -17,7 +17,7 @@ import __SInterface from '@coffeekraken/s-interface';
  *
  * @see       https://github.com/nicolas-cusan/destyle.css
  * @since       2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class postcssSugarPluginResetDestyleInterface extends __SInterface {
     static get _definition() {
@@ -59,7 +59,7 @@ export default function ({ params, CssVars, atRule, replaceWith, }) {
         * 
         * @see          https://github.com/nicolas-cusan/destyle.css
         * @since      2.0.0
-        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+        * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
         */
     `).code(`/* purgecss start ignore */
 

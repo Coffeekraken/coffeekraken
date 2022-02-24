@@ -9,7 +9,7 @@ namespace thorin;
  * @example    php
  * $configPath = Thorin::config_path();
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function config_path() {
 	if (defined('T_CONFIG_PATH')) {

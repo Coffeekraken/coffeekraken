@@ -23,7 +23,7 @@ import __toRegex from 'to-regex';
  * dedupe('hello world hello your', 'hello'); // => hello world your
  *
  * @since       2.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function dedupe(str, statement) {
     const reg = __toRegex(`(${statement})`, {

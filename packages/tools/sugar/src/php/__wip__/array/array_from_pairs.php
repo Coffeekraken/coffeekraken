@@ -13,7 +13,7 @@ namespace thorin;
  * Thorin::array_from_pairs([['a', 1], ['b', 2]]);
  * // {'a':1, 'b': 2}
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/fromPairs.php
  */
 function array_from_pairs(array $pairs): \stdClass {

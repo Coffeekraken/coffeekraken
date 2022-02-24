@@ -11,7 +11,7 @@ export default function (env) {
          * Specify if the process has to be killed (rejected) on error
          *
          * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         killOnError: true,
         /**
@@ -25,7 +25,7 @@ export default function (env) {
          * - blessed: Take the entire screen and log items using blessed
          *
          * @since             2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         stdio: 'inherit',
         /**
@@ -37,7 +37,7 @@ export default function (env) {
          * Specify if you want to process class to throw errors when some happend
          *
          * @since           2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         throw: true,
         /**
@@ -49,7 +49,7 @@ export default function (env) {
          * Specify if you want the actual node process to exist when the process has ended
          *
          * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         exitAtEnd: false,
         /**
@@ -61,7 +61,7 @@ export default function (env) {
          * Specify if you want the process to be runned into a child process
          *
          * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         runAsChild: false,
         /**
@@ -74,7 +74,7 @@ export default function (env) {
          * when specify the parameter ```runAsChild```
          *
          * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         processPath: null,
     };

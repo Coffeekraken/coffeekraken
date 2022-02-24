@@ -16,7 +16,7 @@ namespace thorin;
  * Thorin::str_pad_end('abs', 6, '_-');
  * // 'abc_-_'
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/String/padEnd.php
  */
 function str_pad_end(string $string, int $length, string $chars = ' '):string {

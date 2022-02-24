@@ -20,7 +20,7 @@ namespace thorin;
  * Thorin::array_take_right_while($users, function($value) { return $value['active']; });
  * // objects for ['fred', 'pebbles']
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/takeRightWhile.php
  */
 function array_take_right_while(array $array, $predicate): array {

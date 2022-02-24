@@ -29,7 +29,7 @@ import __SLog from '@coffeekraken/s-log';
  *
  * @see         https://www.npmjs.com/package/node-notifier
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISProcessManagerProcessSettings
@@ -53,7 +53,7 @@ class SProcessManager extends __SEventEmitter {
      * Store all the processes that this manager has launched
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _processesStack: Record<string, __SProcess> = {};
 
@@ -65,7 +65,7 @@ class SProcessManager extends __SEventEmitter {
      * Store all the processed ONLY when runInParallel is false to manage the processed queue
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _processesQueue: Record<string, __SProcess> = {};
 
@@ -77,7 +77,7 @@ class SProcessManager extends __SEventEmitter {
      * Store a flag to know if the queue is running
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _isQueueRunning: boolean = false;
     _queuePromise: Promise;
@@ -90,7 +90,7 @@ class SProcessManager extends __SEventEmitter {
      * Access the process manager process settings
      *
      * @since         2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get processManagerSettings(): ISProcessManageSettings {
         return (<any>this)._settings.processManager;
@@ -103,7 +103,7 @@ class SProcessManager extends __SEventEmitter {
      *
      * Constructor
      *
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: Partial<ISProcessManagerCtorSettings>) {
         super(
@@ -151,7 +151,7 @@ class SProcessManager extends __SEventEmitter {
      * @param       {ISProcessManagerProcessWrapperSettings}     [settings={}]       Some settings to configure your added process management like restart, etc...
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     attachProcess(
         id: string,
@@ -193,7 +193,7 @@ class SProcessManager extends __SEventEmitter {
      * @param       {String}      id        The process id to detach
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     detachProcess(id: string): void {
         if (!this._processesStack[id])
@@ -235,7 +235,7 @@ class SProcessManager extends __SEventEmitter {
      * @return    {SPromise}                                                  An SPromise instance through which you can listen for logs, and that will be resolved once the process is over
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     _parallelRunTimeout;
     run(

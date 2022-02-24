@@ -25,7 +25,7 @@ import __unique from './unique';
  * sameItems([1,2,3,4], [1,3,5]); // => [1,3]
  * 
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function sameItems(...args): any[] {
 

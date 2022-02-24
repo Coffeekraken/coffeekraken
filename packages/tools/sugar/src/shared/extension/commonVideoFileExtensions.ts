@@ -16,7 +16,7 @@
  * const extensions = __commonProgrammingFileExtensions();
  * 
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonProgrammingFileExtensions(withDot = false): string[] {
     return ['3g2','3gp','avi','flv','h264','m4v','mkv','mov','mp4','mpg','mpeg','rm','swf','vob','wmv'].map(ext => withDot ? `.${ext}` : ext);

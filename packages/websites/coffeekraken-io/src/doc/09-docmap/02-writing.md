@@ -8,7 +8,7 @@
  * @menu            Documentation / Docmap           /doc/docmap/writing-documentation
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 -->
 
@@ -76,7 +76,7 @@ This example is the documentation of the `querySelectorLive` DOM function
  * });
  *
  * @since       1.0.0
- * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 ```
 

@@ -35,7 +35,7 @@ import __SStdio from './SStdio';
  * await SStdio.new('default', proc);
  *
  * @since     2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function _new(id, sources, stdio, settings) {
     return __awaiter(this, void 0, void 0, function* () {

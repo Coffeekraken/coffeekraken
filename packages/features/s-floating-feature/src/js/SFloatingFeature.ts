@@ -31,7 +31,7 @@ import {computePosition,flip,shift,offset,arrow,getScrollParents,autoPlacement,i
  * </label>
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISFloatingFeatureProps {

@@ -23,7 +23,7 @@ import __isScrollable from '../is/scrollable';
  * __closestScrollable($myElement);
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function closestScrollable($elm: HTMLElement, selector: string | Function): HTMLElement {
     return __traverseUp($elm, ($e) => __isScrollable($e));

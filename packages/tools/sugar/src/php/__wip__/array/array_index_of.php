@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::array_index_of([1, 2, 1, 2], 2);
  * // 1
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/indexOf.php
  */
 function array_index_of(array $array, $value, int $fromIndex = null): int {

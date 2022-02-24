@@ -20,7 +20,7 @@ import __replacePackageJsonTokens from '../package/replacePackageJsonTokens';
  * replaceTokens('Hello %packageJson.name, hope you are doing well (%packageRootDir)');
  *
  * @since           2.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function replaceTokens(string: string): string {
     string = <string>__replacePathTokens(string);

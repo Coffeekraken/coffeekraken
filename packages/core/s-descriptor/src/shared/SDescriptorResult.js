@@ -12,7 +12,7 @@ class SDescriptorResult extends __SClass {
      * Constructor
      *
      * @since     2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(descriptor, value, descriptorSettings) {
         super({});
@@ -24,7 +24,7 @@ class SDescriptorResult extends __SClass {
          * Store the result objects added with the ```add``` method
          *
          * @since         2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         this._issues = {};
         this._descriptor = descriptor;
@@ -46,7 +46,7 @@ class SDescriptorResult extends __SClass {
      * @return        {Boolean}           true if no issue(s), false if not
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     hasIssues() {
         return Object.keys(this._issues).length >= 1;
@@ -60,7 +60,7 @@ class SDescriptorResult extends __SClass {
      * @param         {ISDescriptorResultRule}        ruleResult      The rule result object you want to add
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     add(ruleResult) {
         if (!ruleResult.__ruleObj.id)
@@ -76,7 +76,7 @@ class SDescriptorResult extends __SClass {
      * @return        {String}                The result object in string format
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toString() {
         if (__isNode()) {
@@ -96,7 +96,7 @@ class SDescriptorResult extends __SClass {
      * @return        {String}                The result object in string format
      *
      * @since          2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     toConsole() {
         // handle descriptor header

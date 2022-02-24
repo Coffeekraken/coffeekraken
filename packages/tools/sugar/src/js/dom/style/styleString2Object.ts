@@ -28,7 +28,7 @@ import __autoCast from '../../shared/string/autoCast';
  * // }
  *
  * @since         1.0.0
- * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function styleString2Object(style: string): any {
     if (!style || style === '') return {};

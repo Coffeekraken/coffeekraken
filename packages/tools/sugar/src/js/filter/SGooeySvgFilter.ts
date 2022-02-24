@@ -26,7 +26,7 @@ import SSvgFilter from './SSvgFilter';
  * filter.applyTo(myCoolHTMLElement);
  *
  * @since         1.0.0
- * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 class SGooeySvgFilter extends SSvgFilter {
     /**
@@ -37,7 +37,7 @@ class SGooeySvgFilter extends SSvgFilter {
      *
      * @param 		{Number} 		[amount=8] 		The amount of effect to apply
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(amount = 8) {
         super(`
@@ -57,7 +57,7 @@ class SGooeySvgFilter extends SSvgFilter {
      *
      * Get/Set the blur amount to produce the effect
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set blur(value) {
         this._blur.setAttribute('stdDeviation', value);
@@ -72,7 +72,7 @@ class SGooeySvgFilter extends SSvgFilter {
      *
      * Get the contrast amount to produce the effect
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set contrast(value) {
         // get value
@@ -90,7 +90,7 @@ class SGooeySvgFilter extends SSvgFilter {
      *
      * Get the shrink amount to produce the effect
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set shrink(value) {
         // get value
@@ -108,7 +108,7 @@ class SGooeySvgFilter extends SSvgFilter {
      *
      * Set the overall amount of effect to produce
      *
-     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author 	        Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     set amount(value) {
         this._blur.setAttribute('stdDeviation', value);

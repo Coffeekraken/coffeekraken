@@ -36,7 +36,7 @@
  * }
  *
  * @since       2.0.0
- * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author  Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function map(object, processor) {
     for (let i = 0; i < Object.keys(object).length; i++) {

@@ -19,7 +19,7 @@ use Arcanedev\NoCaptcha\NoCaptcha;
  *    // recaptcha verification failed
  * }
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/ARCANEDEV/noCAPTCHA
  */
 function recaptcha_verify($response = null, $secret = null, $sitekey = null, $lang = null, $attributes = null) {

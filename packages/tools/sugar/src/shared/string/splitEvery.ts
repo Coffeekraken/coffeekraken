@@ -26,7 +26,7 @@ import __countLine from './countLine';
  * splitEvery('Hello World', 2, true); // => ['He','ll','o ','Wo','rl','d']
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 // TODO: Add support for special characters like terminal colors, html tags, etc...

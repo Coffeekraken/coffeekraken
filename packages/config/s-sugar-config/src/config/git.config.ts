@@ -48,7 +48,7 @@ export default function (env) {
              * Specify the git user name. Usually taken automatically from your git configuration
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             name: undefined,
             /**
@@ -60,7 +60,7 @@ export default function (env) {
              * Specify the git email. Usually taken automatically from your git configuration
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             email: undefined,
         },
@@ -74,7 +74,7 @@ export default function (env) {
              * Specify the git repository url. Usually taken automatically from your git repo config
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             url: undefined,
         },

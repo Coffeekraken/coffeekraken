@@ -15,7 +15,7 @@ import { ISSitemapBuilderDocmapSourceCtorSettings } from './sources/SSitemapBuil
  * This class represent a SSitemap source like docmap, frontspec, etc...
  *
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 
 export interface ISSitemapSourceCtorSettings
@@ -36,7 +36,7 @@ export default class SSitemapSource extends __SClass {
      * Access the sitemap source settings
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     get sitemapSourceSettings(): ISSitemapSourceSettings {
         return (<any>this._settings).sitemapSource ?? {};
@@ -50,7 +50,7 @@ export default class SSitemapSource extends __SClass {
      * Constructor
      *
      * @since       2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(id: string, settings?: Partial<ISSitemapSourceCtorSettings>) {
         super(
@@ -78,7 +78,7 @@ export default class SSitemapSource extends __SClass {
      * @return          {Promise<ISSitemapSourceBuildResult>}               A promise resolved when the sitemap has been successfully generated
      *
      * @since           2.0.0
-     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     build(
         params: Partial<ISSitemapBuilderBuildParams> = {},

@@ -14,7 +14,7 @@ export default function (env, config) {
              * Specify the path of the docmap.json source file to read
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             input: `${__packageRoot()}/docmap.json`,
         },
@@ -28,7 +28,7 @@ export default function (env, config) {
              * Specify where to save the generated snapshot
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outDir: `[config.storage.package.rootDir]/.docmap`,
         },
@@ -43,7 +43,7 @@ export default function (env, config) {
              * to folder(s) where a docmap.json and a package.json exists...
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             glob: `[config.storage.package.rootDir]/.docmap/*`,
         },
@@ -60,7 +60,7 @@ export default function (env, config) {
              * - [glob]:[regex] -> This will search for files using the [glob] part, and search inside them using the [regex] part
              *
              * @since           2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             globs: [
                 '*',
@@ -77,7 +77,7 @@ export default function (env, config) {
              * to exclude some files from the buildd docMap json
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             exclude: [
                 '**/__tests__/**/*',
@@ -93,7 +93,7 @@ export default function (env, config) {
              * Specify if you want to disable the extends search process that will result in the "extends" array in the docmap.json file
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             noExtends: false,
             filters: {
@@ -112,7 +112,7 @@ export default function (env, config) {
                  * }
                  *
                  * @since       2.0.0
-                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 namespace: /#\{.*\}/gm,
             },
@@ -125,7 +125,7 @@ export default function (env, config) {
              * Specify which docblock tags you want to integrate to your docmap.json items
              *
              * @since     2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             tags: [
                 'name',
@@ -152,7 +152,7 @@ export default function (env, config) {
              * Specify if you want to save the buildd docmap.json file under the ```outPath``` path
              *
              * @since     2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             save: true,
             /**
@@ -164,7 +164,7 @@ export default function (env, config) {
              * Specify where you want to outPath the file
              *
              * @since       2.0.0
-             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+             * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             outPath: `[config.storage.package.rootDir]/docmap.json`,
         },

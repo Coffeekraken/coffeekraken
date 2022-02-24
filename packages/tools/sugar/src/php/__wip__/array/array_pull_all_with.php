@@ -17,7 +17,7 @@ namespace thorin;
  * Thorin::array_pull_all_with($array, [[ 'x' => 3, 'y' => 4 ]], 'Thorin::is_equal');
  * // [[ 'x' => 1, 'y' => 2 ], [ 'x' => 5, 'y' => 6 ]]
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  * @see    https://github.com/lodash-php/lodash-php/blob/master/src/Array/pullAllWith.php
  */
 function array_pull_all_with(array $array, array $values, callable $comparator): array {

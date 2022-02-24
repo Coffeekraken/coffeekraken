@@ -13,7 +13,7 @@ export default function (env, config) {
          * Specify the recipe name
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         title: 'Default',
         /**
@@ -25,7 +25,7 @@ export default function (env, config) {
          * Specify the recipe description
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         description: 'Default s-frontstack recipe ',
         /**
@@ -37,7 +37,7 @@ export default function (env, config) {
          * Specify the recipe template directory
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         templateDir: __path.resolve(`${__dirname()}/../templates/default`),
         /**
@@ -49,7 +49,7 @@ export default function (env, config) {
          * Specify some requirements for this recipe like commands (npm, composer, etc...)
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         requirements: {
             commands: ['[config.package.manager]', 'composer']
@@ -63,7 +63,7 @@ export default function (env, config) {
          * Specify the recipe default stack
          *
          * @since       2.0.0
-         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         defaultStack: 'dev',
         stacks: {
@@ -77,7 +77,7 @@ export default function (env, config) {
                  * Specify the recipe init stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Init a new project with this recipe',
                 actions: {
@@ -89,7 +89,7 @@ export default function (env, config) {
                      * Specify the recipe init stack copy action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     copy: {
                         extends: 'copy',
@@ -109,7 +109,7 @@ export default function (env, config) {
                      * Specify the recipe init stack rename action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     rename: {
                         extends: 'rename',
@@ -125,7 +125,7 @@ export default function (env, config) {
                      * Specify the recipe init stack addSugarJson action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addSugarJson: {
                         extends: 'addSugarJson',
@@ -143,7 +143,7 @@ export default function (env, config) {
                      * Specify the recipe init stack addManifestJson action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     addManifestJson: {
                         extends: 'addManifestJson',
@@ -159,7 +159,7 @@ export default function (env, config) {
                      * Specify the recipe init stack installDependencies action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     installDependencies: {
                         extends: 'installDependencies',
@@ -179,7 +179,7 @@ export default function (env, config) {
                  * Specify the recipe dev stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the development stack',
                 runInParallel: true,
@@ -193,7 +193,7 @@ export default function (env, config) {
                      * Specify the recipe dev stack frontendServer action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     frontendServer: '[config.frontstack.actions.frontendServer]',
                     /**
@@ -205,7 +205,7 @@ export default function (env, config) {
                      * Specify the recipe dev stack description
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     vite: '[config.frontstack.actions.vite]',
                 },
@@ -220,7 +220,7 @@ export default function (env, config) {
                  * Specify the recipe prod stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Start the production testing stack',
                 sharedParams: {
@@ -233,7 +233,7 @@ export default function (env, config) {
                      * Specify the recipe prod stack env shared param
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     env: 'production',
                 },
@@ -247,7 +247,7 @@ export default function (env, config) {
                      * Specify the recipe prod stack frontendServer action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     frontendServer: '[config.frontstack.actions.frontendServer]',
                 },
@@ -262,7 +262,7 @@ export default function (env, config) {
                  * Specify the recipe build stack description
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 description: 'Build your final production ready dist package',
                 sharedParams: {
@@ -275,7 +275,7 @@ export default function (env, config) {
                  * Specify that the build is made for production
                  *
                  * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                  */
                 // prod: true,
                 },
@@ -289,7 +289,7 @@ export default function (env, config) {
                      * Specify the recipe build stack postcssBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     postcssBuild: '[config.frontstack.actions.postcssBuild]',
                     /**
@@ -301,7 +301,7 @@ export default function (env, config) {
                      * Specify the recipe build stack viteBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     viteBuild: '[config.frontstack.actions.viteBuild]',
                     /**
@@ -313,7 +313,7 @@ export default function (env, config) {
                      * Specify the recipe build stack imagesBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     imagesBuild: '[config.frontstack.actions.imagesBuild]',
                     /**
@@ -325,24 +325,48 @@ export default function (env, config) {
                      * Specify the recipe build stack faviconBuild action
                      *
                      * @since       2.0.0
-                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     faviconBuild: '[config.frontstack.actions.faviconBuild]',
-                    // /**
-                    //  * @name            sitemapBuild
-                    //  * @namespace       config.frontstackRecipeDefault.stacks.build.actions
-                    //  * @type            String
-                    //  * @default         [config.frontstack.actions.sitemapBuild]
-                    //  *
-                    //  * Specify the recipe build stack sitemapBuild action
-                    //  *
-                    //  * @since       2.0.0
-                    //  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
-                    //  */
-                    // sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
+                    /**
+                     * @name            docmapBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.docmapBuild]
+                     *
+                     * Specify the recipe build stack docmapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    docmapBuild: '[config.frontstack.actions.docmapBuild]'
+                    /**
+                     * @name            sitemapBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.sitemapBuild]
+                     *
+                     * Specify the recipe build stack sitemapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    ,
+                    /**
+                     * @name            sitemapBuild
+                     * @namespace       config.frontstackRecipeDefault.stacks.build.actions
+                     * @type            String
+                     * @default         [config.frontstack.actions.sitemapBuild]
+                     *
+                     * Specify the recipe build stack sitemapBuild action
+                     *
+                     * @since       2.0.0
+                     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    sitemapBuild: '[config.frontstack.actions.sitemapBuild]'
                 },
             },
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUkxQixNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBQ2hCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsOEJBQThCO1FBQzNDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLFNBQVMsRUFBRSx1QkFBdUIsQ0FBQztRQUNsRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsUUFBUSxFQUFFLENBQUMsMEJBQTBCLEVBQUMsVUFBVSxDQUFDO1NBQ3BEO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxLQUFLO1FBQ25CLE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxJQUFJLEVBQUU7d0JBQ0YsT0FBTyxFQUFFLE1BQU07d0JBQ2YsS0FBSyxFQUFFLHVCQUF1Qjt3QkFDOUIsV0FBVyxFQUFFLGlDQUFpQzt3QkFDOUMsTUFBTSxFQUFFOzRCQUNKLEtBQUssRUFBRSxNQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLHdCQUF3QixDQUFDOzRCQUM1RCxNQUFNLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FB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
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRzdGFja1JlY2lwZURlZmF1bHQuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBQzVELE9BQU8sTUFBTSxNQUFNLE1BQU0sQ0FBQztBQUkxQixNQUFNLENBQUMsT0FBTyxXQUFXLEdBQUcsRUFBRSxNQUFNO0lBQ2hDLElBQUksR0FBRyxDQUFDLFFBQVEsS0FBSyxNQUFNO1FBQUUsT0FBTztJQUVwQyxPQUFPO1FBQ0g7Ozs7Ozs7Ozs7V0FVRztRQUNILEtBQUssRUFBRSxTQUFTO1FBQ2hCOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsOEJBQThCO1FBQzNDOzs7Ozs7Ozs7O1dBVUc7UUFDSCxXQUFXLEVBQUUsTUFBTSxDQUFDLE9BQU8sQ0FBQyxHQUFHLFNBQVMsRUFBRSx1QkFBdUIsQ0FBQztRQUNsRTs7Ozs7Ozs7OztXQVVHO1FBQ0gsWUFBWSxFQUFFO1lBQ1YsUUFBUSxFQUFFLENBQUMsMEJBQTBCLEVBQUMsVUFBVSxDQUFDO1NBQ3BEO1FBQ0Q7Ozs7Ozs7Ozs7V0FVRztRQUNILFlBQVksRUFBRSxLQUFLO1FBQ25CLE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxJQUFJLEVBQUU7d0JBQ0YsT0FBTyxFQUFFLE1BQU07d0JBQ2YsS0FBSyxFQUFFLHVCQUF1Qjt3QkFDOUIsV0FBVyxFQUFFLGlDQUFpQzt3QkFDOUMsTUFBTSxFQUFFOzRCQUNKLEtBQUssRUFBRSxNQUFNLENBQUMsT0FBTyxDQUFDLFNBQVMsRUFBRSxFQUFFLHdCQUF3QixDQUFDOzRCQUM1RCxNQUFNLEVBQUUsR0FBRyxPQUFPLENBQUMsR0FBRyxFQUFFLFVBQVU7NEJBQ2xDLE9BQU8sRUFBRSxJQUFJO3lCQUNoQjtxQkFDSjtvQkFDRDs7Ozs7Ozs7O3VCQVNHO29CQUNILE1BQU0sRUFBRTt3QkFDSixPQUFPLEVBQUUsUUFBUTt3QkFDakIsS0FBSyxFQUFFLGlDQUFpQzt3QkFDeEMsV0FBVyxFQUFFLHlEQUF5RDt3QkFDdEUsTUFBTSxFQUFFLEVBQ1A7cUJBQ0o7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxZQUFZLEVBQUU7d0JBQ1YsT0FBTyxFQUFFLGNBQWM7d0JBQ3ZCLEtBQUssRUFBRSx5QkFBeUI7d0JBQ2hDLFdBQVcsRUFBRSx5QkFBeUI7d0JBQ3RDLE1BQU0sRUFBRTs0QkFDSixNQUFNLEVBQUUsU0FBUzt5QkFDcEI7cUJBQ0o7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxlQUFlLEVBQUU7d0JBQ2IsT0FBTyxFQUFFLGlCQUFpQjt3QkFDMUIsS0FBSyxFQUFFLHdCQUF3Qjt3QkFDL0IsV0FBVyxFQUFFLDRCQUE0Qjt3QkFDekMsTUFBTSxFQUFFLEVBQUU7cUJBQ2I7b0JBQ0Q7Ozs7Ozs7Ozt1QkFTRztvQkFDSCxtQkFBbUIsRUFBRTt3QkFDakIsT0FBTyxFQUFFLHFCQUFxQjt3QkFDOUIsS0FBSyxFQUFFLDBCQUEwQjt3QkFDakMsV0FBVyxFQUFFLGlEQUFpRDt3QkFDOUQsTUFBTSxFQUFFLEVBQUU7cUJBQ2I7aUJBQ0o7YUFDSjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsNkJBQTZCO2dCQUMxQyxhQUFhLEVBQUUsSUFBSTtnQkFDbkIsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILGNBQWMsRUFDViw0Q0FBNEM7b0JBQ2hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILElBQUksRUFBRSxrQ0FBa0M7aUJBQzNDO2FBQ0o7WUFDRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsV0FBVyxFQUFFLG9DQUFvQztnQkFDakQsWUFBWSxFQUFFO29CQUNWOzs7Ozs7Ozs7O3VCQVVHO29CQUNILEdBQUcsRUFBRSxZQUFZO2lCQUNwQjtnQkFDRCxPQUFPLEVBQUU7b0JBQ0w7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsY0FBYyxFQUNWLDRDQUE0QztpQkFDbkQ7YUFDSjtZQUNELEtBQUssRUFBRTtnQkFDSDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsZ0RBQWdEO2dCQUM3RCxZQUFZLEVBQUU7Z0JBQ1Y7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsY0FBYztpQkFDakI7Z0JBQ0QsT0FBTyxFQUFFO29CQUNMOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFNBQVMsRUFBRSx1Q0FBdUM7b0JBQ2xEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFdBQVcsRUFBRSx5Q0FBeUM7b0JBQ3REOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFlBQVksRUFBRSwwQ0FBMEM7b0JBQ3hEOzs7Ozs7Ozs7O3VCQVVHO29CQUNILFdBQVcsRUFBRSx5Q0FBeUM7b0JBQ3REOzs7Ozs7Ozs7O3VCQVVHOztvQkFWSDs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxZQUFZLEVBQUUsMENBQTBDO2lCQUMzRDthQUNKO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9

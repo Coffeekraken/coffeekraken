@@ -16,7 +16,7 @@
  * const extensions = __commonAudioFileExtensions();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonAudioFileExtensions(withDot = false) {
     return ['aif', 'cda', 'mid', 'midi', 'mp3', 'mpa', 'ogg', 'wav', 'wma', 'wpl'].map(ext => withDot ? `.${ext}` : ext);

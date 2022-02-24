@@ -10,7 +10,7 @@ namespace thorin;
  * $protocol = Thorin::app_protocol();
  * // https
  *
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function app_protocol() {
 	// return the protocol from the config

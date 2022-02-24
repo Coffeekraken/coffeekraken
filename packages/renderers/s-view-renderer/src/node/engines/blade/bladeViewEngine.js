@@ -13,7 +13,7 @@ import __execPhp from '@coffeekraken/sugar/node/php/execPhp';
  *
  * @see             https://github.com/jenssegers/blade
  * @since           2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default {
     id: 'blade',

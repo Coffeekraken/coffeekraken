@@ -16,7 +16,7 @@
  * const extensions = __commonProgrammingFileExtensions();
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function commonProgrammingFileExtensions(withDot = false) {
     return ['asp', 'c', 'cgi', 'cfm', 'pl', 'class', 'cpp', 'cs', 'h', 'java', 'php', 'py', 'sh', 'swift', 'vb', 'js', 'jsp', 'jsx', 'css', 'ts', 'tsx', 'rs', 'dart'].map(ext => withDot ? `.${ext}` : ext);

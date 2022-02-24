@@ -12,7 +12,7 @@ import __SInterface from '@coffeekraken/s-interface';
  * This interface represent the `whenInteract` settings.
  *
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class WhenInteractSettingsInterface extends __SInterface {
     static get _definition() {

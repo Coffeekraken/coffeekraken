@@ -67,7 +67,7 @@ export interface ISActivateFeatureProps {
  * </style>
  * 
  * @since       2.0.0
- * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://olivierbossel.com)
+ * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default class SActivateFeature extends __SFeature {
     _hrefSelector?: string;

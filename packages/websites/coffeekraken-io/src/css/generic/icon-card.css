@@ -58,9 +58,13 @@
 
     &[style] {
         &:hover i {
-            transform: scale(0.3) translate(-50%, -50%);
-            top: calc(55%);
-            left: 45%;
+            transform: scale(0.3) translate(-100%);
+            top: 50%;
+            left: 50%;
+
+            @sugar.media >=wide {
+                transform: scale(0.4) translate(-170%, 70%);
+            }
         }
 
         &:hover p {

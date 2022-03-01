@@ -1,0 +1,4 @@
+import __SSliderComponent from './SSliderComponent';
+export * from './SSliderComponent';
+export default __SSliderComponent;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiaW5kZXguanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJpbmRleC50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxPQUFPLGtCQUFrQixNQUFNLG9CQUFvQixDQUFDO0FBQ3BELGNBQWMsb0JBQW9CLENBQUM7QUFDbkMsZUFBZSxrQkFBa0IsQ0FBQyJ9

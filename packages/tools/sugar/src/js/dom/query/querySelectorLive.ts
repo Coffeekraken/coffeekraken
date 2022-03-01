@@ -43,6 +43,7 @@ const _selectors = {};
 export interface IQuerySelectorLiveSettings {
     rootNode: HTMLElement;
     once: boolean;
+    onRemove: Function;
 }
 
 function querySelectorLive(
@@ -52,12 +53,15 @@ function querySelectorLive(
 ): __SPromise<HTMLElement> {
     const id = `${selector} - ${uniqid()}`;
 
+    let _emit;
+
     // extend settings
     settings = Object.assign(
         {},
         {
             rootNode: document,
             once: true,
+            onRemove: null
         },
         settings,
     );
@@ -82,85 +86,135 @@ function querySelectorLive(
         });
     }
 
-    return new __SPromise(({ resolve, reject, emit }) => {
-        function pushNewNode(node, sel, mutationId) {
-            const objs = _selectors[sel];
-            if (!objs) return;
+    function pushNewNode(node, sel, mutationId) {
+        const objs = _selectors[sel];
+        if (!objs) return;
 
-            objs.forEach((obj) => {
-                // avoid calling multiple times sams callback for the same mutation process
-                if (obj.lastMutationId && obj.lastMutationId === mutationId)
-                    return;
+        objs.forEach((obj) => {
+            // avoid calling multiple times sams callback for the same mutation process
+            if (obj.lastMutationId && obj.lastMutationId === mutationId)
+                return;
 
-                if (obj.settings.once) {
-                    if (!node._querySelectorLive) {
-                        node._querySelectorLive = {};
-                    }
-                    if (node._querySelectorLive[obj.id]) return;
-                    node._querySelectorLive[obj.id] = true;
+            if (obj.settings.once) {
+                if (!node._querySelectorLive) {
+                    node._querySelectorLive = {};
                 }
+                if (node._querySelectorLive[obj.id]) return;
+                node._querySelectorLive[obj.id] = true;
+            }
 
-                emit('node', node);
+            _emit?.('node', node);
 
-                obj.cb &&
-                    obj.cb(node, () => {
-                        delete _selectors[obj.selector];
-                    });
-            });
-        }
+            obj.cb &&
+                obj.cb(node, () => {
+                    delete _selectors[obj.selector];
+                });
+        });
+    }
 
-        // listen for updates in document
-        if (!_observer) {
-            _observer = new MutationObserver((mutations) => {
-                const mutationId = `mutation-${uniqid()}`;
+    function removeNode(node, sel, mutationId) {
+        const objs = _selectors[sel];
+        if (!objs) return;
 
-                mutations.forEach((mutation) => {
-                    if (mutation.addedNodes && mutation.addedNodes.length) {
-                        [].forEach.call(mutation.addedNodes, (node) => {
-                            // get all the selectors registered
-                            const selectors = Object.keys(_selectors);
+        objs.forEach((obj) => {
+            // avoid calling multiple times sams callback for the same mutation process
+            if (obj.lastMutationId && obj.lastMutationId === mutationId)
+                return;
 
-                            // loop on each selectors
-                            selectors.forEach((sel) => {
-                                if (matches(node, sel)) {
-                                    pushNewNode(node, sel, mutationId);
-                                }
-                            });
-                            if (!node.querySelectorAll) return;
-                            selectors.forEach((sel) => {
-                                const nestedNodes = node.querySelectorAll(sel);
-                                [].forEach.call(nestedNodes, (nestedNode) => {
-                                    pushNewNode(nestedNode, sel, mutationId);
-                                });
-                            });
-                        });
-                    } else if (mutation.attributeName) {
+            if (obj.settings.once) {
+                if (!node._querySelectorLive) {
+                    node._querySelectorLive = {};
+                }
+                if (node._querySelectorLive[obj.id]) return;
+                node._querySelectorLive[obj.id] = true;
+            }
+
+            _emit?.('removedNode', node);
+
+            obj.settings.onRemove &&
+                obj.settings.onRemove(node, () => {
+                    delete _selectors[obj.selector];
+                });
+        });
+    }
+
+    // listen for updates in document
+    if (!_observer) {
+        _observer = new MutationObserver((mutations) => {
+            const mutationId = `mutation-${uniqid()}`;
+
+            mutations.forEach((mutation) => {
+
+                if (mutation.removedNodes && mutation.removedNodes.length) {
+                    [].forEach.call(mutation.removedNodes, (node) => {
                         // get all the selectors registered
                         const selectors = Object.keys(_selectors);
+
                         // loop on each selectors
                         selectors.forEach((sel) => {
-                            if (matches(mutation.target, sel)) {
-                                pushNewNode(mutation.target, sel, mutationId);
+                            if (matches(node, sel)) {
+                                removeNode(node, sel, mutationId);
                             }
                         });
-                    }
-                });
-            });
-            _observer.observe(settings.rootNode, {
-                childList: true,
-                subtree: true,
-                attributes: true,
-                attributeFilter: ['class', 'id'],
-            });
-        }
+                        if (!node.querySelectorAll) return;
+                        selectors.forEach((sel) => {
+                            const nestedNodes = node.querySelectorAll(sel);
+                            [].forEach.call(nestedNodes, (nestedNode) => {
+                                removeNode(nestedNode, sel, mutationId);
+                            });
+                        });
+                    });
+                }
 
-        // first search
-        [].forEach.call(
-            settings.rootNode.querySelectorAll(selector),
-            (node) => {
-                pushNewNode(node, selector, 'init');
-            },
-        );
+                if (mutation.addedNodes && mutation.addedNodes.length) {
+                    [].forEach.call(mutation.addedNodes, (node) => {
+                        // get all the selectors registered
+                        const selectors = Object.keys(_selectors);
+
+                        // loop on each selectors
+                        selectors.forEach((sel) => {
+                            if (matches(node, sel)) {
+                                pushNewNode(node, sel, mutationId);
+                            }
+                        });
+                        if (!node.querySelectorAll) return;
+                        selectors.forEach((sel) => {
+                            const nestedNodes = node.querySelectorAll(sel);
+                            [].forEach.call(nestedNodes, (nestedNode) => {
+                                pushNewNode(nestedNode, sel, mutationId);
+                            });
+                        });
+                    });
+                } else if (mutation.attributeName) {
+                    // get all the selectors registered
+                    const selectors = Object.keys(_selectors);
+                    // loop on each selectors
+                    selectors.forEach((sel) => {
+                        if (matches(mutation.target, sel)) {
+                            pushNewNode(mutation.target, sel, mutationId);
+                        }
+                    });
+                }
+            });
+        });
+        _observer.observe(settings.rootNode, {
+            childList: true,
+            subtree: true,
+            attributes: true,
+            attributeFilter: ['class', 'id'],
+        });
+    }
+
+    // first search
+    [].forEach.call(
+        settings.rootNode.querySelectorAll(selector),
+        (node) => {
+            pushNewNode(node, selector, 'init');
+        },
+    );
+
+    return new __SPromise(({ resolve, reject, emit }) => {
+        _emit = emit;
     });
 }
 

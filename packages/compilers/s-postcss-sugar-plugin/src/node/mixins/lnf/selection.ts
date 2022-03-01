@@ -46,8 +46,10 @@ export default function ({
     const vars: string[] = [];
 
     const css = `
+    ::selection {
         color: sugar.color(accent, 100);
         background-color: sugar.color(accent);
+    }
   `;
 
     vars.push(css);

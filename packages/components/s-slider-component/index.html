@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <link rel="icon" href="/favicon.ico" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Slider component</title>
+
+        <!-- <link
+            rel="stylesheet"
+            href="http://coffeekraken.io/dist/css/style.css"
+        /> -->
+    </head>
+    <body>
+        <script type="module">
+            import __css from './src/css/dev.css';
+            import { define } from './src/js/index.ts';
+
+            define();
+        </script>
+
+        <br />
+        <br />
+
+        <s-slider>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randomf" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randomef" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?random3r3" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randowfwefwefm" />
+            </div>
+        </s-slider>
+
+        <s-slider side-reveal="50px" scrollable>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randomf" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randomef" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?random3r3" />
+            </div>
+            <div s-slider-item>
+                <img src="https://picsum.photos/800/450/?randowfwefwefm" />
+            </div>
+        </s-slider>
+
+    </body>
+</html>

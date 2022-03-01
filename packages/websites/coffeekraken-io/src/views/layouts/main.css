@@ -39,13 +39,13 @@
 }
 [s-sugar]:not(#homepage) .bkg,
 .scrolled .bkg {
-    opacity: 0;
+    opacity: 0.05;
 }
 [s-sugar]:not(#homepage) ,
 .scrolled {
     @sugar.theme.when dark {
         .bkg {
-            opacity: 0;
+            opacity: 0.05;
     }
     }
 }

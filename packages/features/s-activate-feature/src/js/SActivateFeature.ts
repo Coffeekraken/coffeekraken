@@ -3,6 +3,7 @@ import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SActivateFeatureInterface from './interface/SActivateFeatureInterface';
 import __unique from '@coffeekraken/sugar/shared/array/unique';
 import __closestScrollable from '@coffeekraken/sugar/js/dom/query/closestScrollable';
+import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 
 export interface ISActivateFeatureProps {
     href: string;
@@ -73,7 +74,7 @@ export default class SActivateFeature extends __SFeature {
     _hrefSelector?: string;
     _$targets?: HTMLElement[];
     _$triggerers: HTMLElement[];
-    _$groupElements?: HTMLElement[];
+    _$groupElements?: HTMLElement[] = [];
     _unactivateTimeout;
 
     constructor(name: string, node: HTMLElement, settings: any) {
@@ -108,8 +109,6 @@ export default class SActivateFeature extends __SFeature {
         );
     }
     mount() {
-        // restore the state
-        this._restoreState();
 
         if (this.props.href) {
             this._hrefSelector = this.props.href;
@@ -122,11 +121,14 @@ export default class SActivateFeature extends __SFeature {
         else this._$targets = [this.node];
 
         if (this.props.group) {
-            this._$groupElements = Array.from(
-                document.querySelectorAll(
-                    `[${this.name}][group="${this.props.group}"]`,
-                ),
-            );
+            __querySelectorLive(`[${this.name}][group="${this.props.group}"]`, ($elm) => {
+                if (this._$groupElements?.includes($elm)) return;
+                this._$groupElements?.push($elm);
+            }, {
+                onRemove($removedElm) {
+                    console.log('remobve', $removedElm);
+                }
+            });
         }
 
         this._$triggerers.forEach($triggerer => {
@@ -202,6 +204,10 @@ export default class SActivateFeature extends __SFeature {
         if (this.props.active) {
             this.activate(true);
         }
+
+        // restore the state
+        this._restoreState();
+
     }
     get saveStateId(): string {
         // @ts-ignore
@@ -313,7 +319,9 @@ export default class SActivateFeature extends __SFeature {
                     try {
                         // @ts-ignore
                         $element.unactivate?.();
-                    } catch (e) {}
+                    } catch (e) {
+                        console.log('eee', e);
+                    }
                 });
             }
 

@@ -148,7 +148,7 @@ export default class SVite extends __SClass {
                 emit('log', {
                     type: __SLog.TYPE_INFO,
                     value: [
-                        `<yellow>http://${listen.config.server.host}</yellow>:<cyan>${listen.config.server.port}</cyan>`,
+                        `<yellow>http://${config.server.host}</yellow>:<cyan>${config.server.port}</cyan>`,
                     ].join('\n'),
                 });
             },

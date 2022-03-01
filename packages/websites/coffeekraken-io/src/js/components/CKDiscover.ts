@@ -45,7 +45,6 @@ export default class CKDiscover extends __SLitComponent {
     }
 
     render() {
-        console.log(this.item);
         return html`
             <div class="ck-discover">
                 ${!this.item

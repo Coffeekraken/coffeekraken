@@ -85,6 +85,35 @@
                 "relPath": "src/config/postcssSugarPlugin.config.js",
                 "children": {}
             },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.classes.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the sugar classes like utilities for colors, fonts, margins, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.classes",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/classes.js",
+                "children": {}
+            },
             "@coffeekraken.s-postcss-sugar-plugin.node.utils.astNodesToString": {
                 "name": "astNodesToString",
                 "type": "Function",
@@ -97,9 +126,4338 @@
                     "email": "olivier.bossel@gmail.com",
                     "url": "https://coffeekraken.io"
                 },
-                "filename": "astNodesToString.js",
+                "filename": "astNodesToString.ts",
+                "extension": "ts",
+                "relPath": "src/node/utils/astNodesToString.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.border.radius": {
+                "name": "radius",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a border radius value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.border",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   border-radius: sugar.border.radius(30);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "radius.js",
                 "extension": "js",
-                "relPath": "src/node/utils/astNodesToString.js",
+                "relPath": "src/node/functions/border/radius.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.border.width": {
+                "name": "width",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a border width value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.border",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   border-width: sugar.border.width(50);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "width.js",
+                "extension": "js",
+                "relPath": "src/node/functions/border/width.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.color.color": {
+                "name": "color",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a color value depending on your theme config.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   color: sugar.color(accent);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "color.js",
+                "extension": "js",
+                "relPath": "src/node/functions/color/color.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.depth.depth": {
+                "name": "depth",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a depth (box-shadow) value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.depth",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   box-shadow: sugar.depth(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "depth.js",
+                "extension": "js",
+                "relPath": "src/node/functions/depth/depth.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.functions.filter.noise": {
+                "name": "noise",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a noise effect image back.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.functions.filter",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   filter: sugar.filter.noise();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "noise.js",
+                "extension": "js",
+                "relPath": "src/node/functions/filter/noise.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.font.family": {
+                "name": "family",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a font family value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     font-family: sugar.font.family(code);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "family.js",
+                "extension": "js",
+                "relPath": "src/node/functions/font/family.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.margin.margin": {
+                "name": "margin",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a margin value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     margin-top: sugar.margin(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "margin.js",
+                "extension": "js",
+                "relPath": "src/node/functions/margin/margin.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize.offsize": {
+                "name": "offsize",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get an offsize value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.offsize",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     margin-top: sugar.offsize(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "offsize.js",
+                "extension": "js",
+                "relPath": "src/node/functions/offsize/offsize.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity.opacity": {
+                "name": "opacity",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get an opacity value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.opacity",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     opacity: sugar.opacity(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "opacity.js",
+                "extension": "js",
+                "relPath": "src/node/functions/opacity/opacity.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.padding.padding": {
+                "name": "padding",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a padding value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     padding-top: sugar.padding(30);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "padding.js",
+                "extension": "js",
+                "relPath": "src/node/functions/padding/padding.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable.scalable": {
+                "name": "scalable",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get value that will be scaled using the \"--s-scale\" variable.\nThis allows you to make your components aware of classes like \"s-scale-10\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.scalable",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   padding: sugar.scalable(20px);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "scalable.js",
+                "extension": "js",
+                "relPath": "src/node/functions/scalable/scalable.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.space.space": {
+                "name": "space",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a space value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.space",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   padding: sugar.space(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "space.js",
+                "extension": "js",
+                "relPath": "src/node/functions/space/space.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.theme": {
+                "name": "theme",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "theme.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/theme.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.value": {
+                "name": "value",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"value\"",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   font-family: sugar.theme.value(font.family.default.font-family);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "value.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/value.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.theme.var": {
+                "name": "var",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a theme value using dot path like \"font.family.default.font-family\", etc...\nUsually the best way to access theme config is to use dedicated functions/mixins like \"sugar.margin\", \"sugar.font.family\", etc...\nThis function make the same as using the `sugar.theme` one with the parameter `return`set to \"var\"",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.theme",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   font-family: sugar.theme(font.family.default.font-family);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "var.js",
+                "extension": "js",
+                "relPath": "src/node/functions/theme/var.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.function.border.transition": {
+                "name": "transition",
+                "type": "PostcssFunction",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This function allows you to get a transition value depending on your theme config",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.function.border",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     transition: sugar.transition(fast);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "transition.js",
+                "extension": "js",
+                "relPath": "src/node/functions/transition/transition.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.lnf.abs": {
+                "name": "abs",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to center an item using the absolute method. Here's the accepted alignements:\n\n- <s-color=\"accent\">top</s-color>: Align item to the top\n- <s-color=\"accent\">left</s-color>: Align item to the left\n- <s-color=\"accent\">right</s-color>: Align item to the right\n- <s-color=\"accent\">bottom</s-color>: Align item to the bottom\n- <s-color=\"accent\">center</s-color>: Align item to the center (x and y)\n- <s-color=\"accent\">center-x</s-color>: Align item to the center-x\n- <s-color=\"accent\">center-y</s-color>: Align item to the center-y\n\nThese values can be specified like \"top right\", \"bottom center-x\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.lnf",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   @sugar.align.abs(top right);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "abs.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/align/abs.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate the borders helpers like s-radius:20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "status": "beta",
+                "example": [],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/border/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.radius": {
+                "name": "radius",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a border radius with a value coming\nfrom the config.theme.border.radius stack like 10, 20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   @sugar.border.radius(10);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "radius.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/border/radius.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border.width": {
+                "name": "width",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a border width with a value coming\nfrom the config.theme.border.width stack like 10, 20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.border",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n   @sugar.border.width(10);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "width.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/border/width.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.clearfix.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/clearfix/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix.clearfix": {
+                "name": "clearfix",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a clearfix depending on your preference. Here's are the clearfix methods available:\n- overflow (default)\n- facebook\n- float\n- micro\n- after",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.clearfix",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.clearfix();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "clearfix.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/clearfix/clearfix.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the colors helpers classes like s-tc:accent, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.color;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/color/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.color": {
+                "name": "color",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to (re)map the \"current\", \"primary\" and \"secondary\" color to any other colors you want like \"accent\", \"success, \"etc...\"\"\nNote that is you don't specify any \"primary\" and \"secondary\" color, these once will be set to the passed \"current\" color.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-section {\n     @sugar.color(accent, complementary, success);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "color.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/color/color.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.current": {
+                "name": "current",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to (re)map the \"current\" color to another one you want like \"accent\", \"success\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-section {\n     @sugar.color.current(accent);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "current.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/color/current.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.color.docblocks": {
+                "name": "docblocks",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin print the documentation docblocks for the colors\ninto your final css.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.color",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.color.docblocks;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "docblocks.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/color/docblocks.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.primary": {
+                "name": "primary",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to (re)map the \"primary\" virtual color to another like \"complementary\", \"accent\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-section {\n     @sugar.color.primary(success);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "primary.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/color/primary.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors.remap": {
+                "name": "remap",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to (re)map a color to another one like saying you want the \"warning\" color as the \"primary\" one",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.colors",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-section {\n     @sugar.color.remap(warning, primary);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "remap.ts",
+                "extension": "ts",
+                "relPath": "src/node/mixins/color/remap.ts",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.components.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to print all the ui classes for listed in the theme config components",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.components",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.components.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bospsel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/components/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.cursor.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the cusros helper classes like `.s-cursor:pointer` etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.cursor",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.cursor.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/cursor/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the depth helper classes like s-depth:20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.depth.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/depth/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth.depth": {
+                "name": "depth",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a certain depth that are defined\nin the config.theme.depth stack like 10, 20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.depth",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.depth(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "depth.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/depth/depth.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.direction.rtl": {
+                "name": "rtl",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to style an element when it is in an rtl scope",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.direction",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolItem {\n @sugar.direction.rtl {\n     // ...\n }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "rtl.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/direction/rtl.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the disabled helper classes like s-disabled",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.disabled.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/disabled/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled.disabled": {
+                "name": "disabled",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a the disabled styling to any HTMLElement.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.disabled",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.disabled();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "disabled.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/disabled/disabled.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.display.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the display helper classes like s-display:block, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.display",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.display.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/display/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.filter.noise": {
+                "name": "noise",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a noise effect on any HTMLElement using the svg turbulence filter.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.filter",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.filter.noise(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "noise.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/filter/noise.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the clearfix helper classes like s-clearfix:micro, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.clearfix.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/fit/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit.depth": {
+                "name": "depth",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a certain depth that are defined\nin the config.theme.depth stack like 10, 20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.fit",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.depth(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "fit.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/fit/fit.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.flex.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the flex helper classes like s-flex, s-flex:align-top, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.flex",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.flex.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/flex/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.float.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the float helper classes like ```.s-float:left```, ```.s-float:right```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.float",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.float.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/float/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate font helper classes like s-font:title, s-font:20, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.font.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/font/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.faces": {
+                "name": "faces",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the @font-face needed depending on the declared\nfonts in the config.theme.font.family stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.font.faces;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "faces.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/font/faces.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.family": {
+                "name": "family",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate the css needed to apply a particular font in your css.\nThe font parameter accept any defined font family from the\nconfig.theme.font.family stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.font.family(title);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "family.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/font/family.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font.size": {
+                "name": "size",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate the css needed to apply a font-size depending on the font sizes\ndefines in the config.theme.font.size stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.font",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.font.size(20);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "size.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/font/size.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate the documentation for the usage of the .s-format:... classes",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.format.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/format/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format.text": {
+                "name": "text",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to scope some css that you want to apply only in text format context.\nYour css will be scoped inside the \"s-format:text\" class.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.format",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.format.text {\n     font-size: 20px;\n     margin-bottom: 50px;\n   }\n}"
+                    },
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"my-cool-element s-rhythm\\:vertical\">Hello world</h1>\n<div class=\"s-format\\:text\">\n    <h1 class=\"my-cool-element\">Hello world</h1>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "text.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/format/text.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gap.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the gap helper classes like s-gap, s-gap:row, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gap",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.gap.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/gap/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the gradient helper classes like s-gradient:accent, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.gradient.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/gradient/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient.gradient": {
+                "name": "gradient",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the css needed to apply a gradient on your elements",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.gradient",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.gradient(accent, secondary, radial);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "gradient.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/gradient/gradient.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.height.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the height helper classes like s-height:20, s-height:50, etc...\nIt will generate all the height defined in the config.theme.height configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.height",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.height.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/height/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.highlightjs.theme": {
+                "name": "theme",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the css needed to skin \"Prism js\"\nwith the theme colors",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.highlightjs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.highlightjs.theme;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "theme.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/highlightjs/theme.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.icon.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the classes needed to display the icons you've\npassed as parameter.\nThe icons parameter define all the icons you want. Each line define a new icon and you can use these\ndifferent \"adapters\" to specify your icons:\n\n- Line syntax: {adapter}:{name}:{nameYouWant}\n\nAvailable adapters are:\n\n- Filesystem:\nHere's some example of filesystem icons declarations:",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.icon",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.icon.classes(\n   fa:user:user\n   fa:heart:heart\n   fs:src/icons/vuejs.svg:vue\n   fa:fire:fire\n   fa:copy:copy\n   fa:box-open:box\n);"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/icon/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.import.import": {
+                "name": "import",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to import other files just like the @import statement does.\nIt add the feature to specify a glob pattern to import multiple files at once.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.import",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.import('./my-cool-file.css');\n\\@sugar.import('../views /.css');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "import.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/import/import.js"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import.import": {
+                "name": "import",
+                "type": "PostcssMixin",
+                "description": "This mixin allows you to import files as default import statement does but add the glob support like \"something/*\n/.css\"",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.sugar.postcss.mixin.import",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.import('. /.css');"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "import.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/import/import.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.init.init": {
+                "name": "init",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin is the one you usually call first in your css.\nHis job is to:\n- Apply a reset.css to standardize the display across browser\n- Generate the base theme variables like colors, etc...\n- Generate all the font-faces needed",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.init",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.init;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "init.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/init/init.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the layout helper classes like s-layout:12, s-container, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.layout.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/layout/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.container": {
+                "name": "container",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the css needed for a container depending\non the config.theme.layout.container configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-container {\n   @sugar.layout.container;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "container.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/layout/container.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout.layout": {
+                "name": "layout",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate all the css needed for complex grids with multiple\ncolumns and rows like:\n\n|-|----|-|\n|--|--|--|\n|-----|--|\n\nThe mixin accept 1 parameter called layout. Here's some simple layouts to\nillustrate how it works:\n\n- layout 1: <span class=\"s-color-accent\">'1 2 3 4 5 6'</span> : This describe a simple 6 columns layout\n- layout 2: <span class=\"s-color-accent\">'1 1 2'</span>: This describe a two columns layout with the first columns taking 2/3 of the space and the second one taking 1/3 of it\n- layout 3: <span class=\"s-color-accent\">'1 2 _ 3 3'</span>: This describe 2 rows with the first having two columns and the second just one",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.layout",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n   @sugar.layout(\n     1 1 1 2 2\n     3 3 4 4 4\n   );\n}"
+                    },
+                    {
+                        "language": "html",
+                        "code": "<div class=\"my-element\">\n   <div>Area 1</div>\n   <div>Area 2</div>\n   <div>Area 3</div>\n   <div>Area 4</div>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "layout.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/layout/layout.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the height helper classes like s-link:stretch, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.link.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/link/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link.stretch": {
+                "name": "stretch",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to stretch a link clickable area without having to change the actual link css.\nIt uses the `after` pseudo class to create a new clickable area that will spend until it reach an element that as a position specified.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.link",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-cool-element {\n     @sugar.link.stretch;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "stretch.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/link/stretch.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.base": {
+                "name": "base",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin apply some base look and feel depending on the current theme like:\n\n- Page background using the <s-color=\"accent\">background</s-color> theme color\n- Text color using the <s-color=\"accent\">default</s-color> theme color",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.lnf.base;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "base.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/lnf/base.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf.selection": {
+                "name": "selection",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin apply some base look and feel depending on the current theme like:\n\n- Selection background and text color",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixin.lnf",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.lnf.selection;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "selection.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/lnf/selection.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.margin.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the margin helper classes like s-mie10, s-mis:40, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.margin",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.margin.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/margin/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to automatically generate the requested media query as well\nas updating all the direct child classnames so you will have classes that applies\nonly for these media queries.\n\nTake this as an example:\n\n```css\n\\@sugar.media.classes {\n.my-cool-element {\ncolor: green;\n}\n}\n```\n\nThis wil generate these two classes:\n- .my-cool-element: Always available\n- .my-cool-element___mobile: Available only in the mobile media query context\n- etc...\n\nNote that you can use the @sugar.media mixin parameters syntax here in the first argument.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.media.classes {\n   // any classes you want to \"duplicate\" and generate\n   // only for this media context...\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/media/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media.media": {
+                "name": "media",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply any media queries that are defined\nin the config.theme.media.queries configuration stack like \"tablet\", \"mobile\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.media",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.media >=desktop {\n     // ...\n}\n\\@sugar.media tablet {\n     // ...\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "media.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/media/media.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.offsize.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the offwidt helper classes like s-os:30, s-osi:40, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.offsize",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.offsize.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/offsize/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.opacity.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the margin helper classes like s-opacity:10, s-opacity:40, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.opacity",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.margin.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/opacity/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.order.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the order helper classes like s-order:1, s-order:2, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.order",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.order.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/order/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.outline.outline": {
+                "name": "outline",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a nice outline on any HTMLElement.\nThis outline will be display on hover and focus by default but can be displayed\nalways by passing the `on` parameter to `always` like so `@sugar.outline(always)`",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.outline",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolItem {\n     @sugar.outline();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "outline.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/outline/outline.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.overflow.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the overflow helper classes like ```.s-overflow:hidden```, ```.s-overflow:auto```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.overflow",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.overflow.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/overflow/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.padding.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the padding helper classes like s-p:10, s-pie:40, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.padding",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.padding.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/padding/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the \"platforms\" css classes like s-platform:css, etc...\n\"Platforms\" are some kind of \"icons\" of platforms like \"css\", \"node\", \"js\", \"php\", etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.platform.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/platform/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform.platform": {
+                "name": "platform",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the css needed to display correctly a \"platform\" icon like\ncss, node, js, php, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.platform",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-platform {\n   @sugar.platform(css);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "platform.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/platform/platform.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.pointer.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the pointer helper classes like ```.s-pointer-events:none```, ```.s-pointer-events:all```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.pointer",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.pointer.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/pointer/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.position.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the position helper classes like s-position:absolute, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.position",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.position.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/position/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the ratio helper classes like s-ratio:16-9, s-ratio:1, etc.\nThe generated ratios are specified in the config.theme.ratio configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.ratio.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ratio/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio.ratio": {
+                "name": "ratio",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the css needed to apply a ratio on any HTMLElement.\nIt uses the :before technique.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ratio",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.ratio(16/9);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "ratio.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ratio/ratio.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.destyle": {
+                "name": "destyle",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin print the destyle css reset\n\n@ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.reset.destyle;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "destyle.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/reset/destyle.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.reset": {
+                "name": "reset",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the reset css needed to standardize display\non all browsers.\n\n@ƒeature       Reset from https://github.com/nicolas-cusan/destyle.css",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.ratio.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "reset.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/reset/reset.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset.sugar": {
+                "name": "sugar",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin print the sugar css reset that makes:",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.reset",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.reset.sugar;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "sugar.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/reset/sugar.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm.vertical": {
+                "name": "vertical",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to scope some css that you want to apply only in vertical rhythm context.\nYour css will be scoped inside the \"s-rhythm:vertical\" class.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.rhythm.vertical {\n     margin-bottom: 50px;\n   }\n}"
+                    },
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"my-cool-element s-rhythm\\:vertical\">Hello world</h1>\n<div class=\"s-rhythm\\:vertical\">\n    <h1 class=\"my-cool-element\">Hello world</h1>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "vertical.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/rhythm/vertical.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scale.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the scale helper classes like s-scale:01, s-scale:12, etc.\nThe generated scales are specified in the config.theme.scale configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scale",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.scale.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/scale/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scope.no": {
+                "name": "no",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to exclude some scope(s) from the generated css.\nScopes are usually \"bare\" or/and \"lnf\" (look and feel).\nThis is usefull for example if you want all the classes to apply bare styling\nwithout any look and feel that you handle by yourself.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scope",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.scope.no(lnf) {\n     // ...\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "no.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/scope/no.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scrollbar.scrollbar": {
+                "name": "scrollbar",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to skin your scrollbar easily by applying a color and\na width to it.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.scrollbar",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "body {\n   @sugar.scrollbar(accent, 5px);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "scrollbar.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/scrollbar/scrollbar.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.shadow.shadow": {
+                "name": "shadow",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a linear gradient shadow to any HTMLElement.\nNote that this mixin make use of the :before pseudo class.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.shadow",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolElement {\n   @sugar.shadow.gradient(0, 10px, 10px, 0, sugar.color(accent), sugar.color(complementary));\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "gradient.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/shadow/gradient.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.focus": {
+                "name": "focus",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to target some active items to apply some styling on it.\nHere's the selector generated by this mixin:\n- &:active:not(:hover), &.active, &[active]",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolItem {\n @sugar.state.active {\n     // ...\n }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "active.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/state/active.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.disabled": {
+                "name": "disabled",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to target some disabled items to apply some styling.\nHere's the generated selector:\n- &:disabled",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolItem {\n @sugar.state.disabled {\n     // ...\n }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "disabled.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/state/disabled.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state.hover": {
+                "name": "hover",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to target some hover item to apply some styling on it.\nHere's the generated selector:\n- &:hover",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.state",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myCoolItem {\n @sugar.state.hover {\n     // ...\n }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hover.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/state/hover.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.text.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the text helper classes like s-text:center, s-text:left, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.text",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.text.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/text/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.theme.theme": {
+                "name": "theme",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin simply generate all the css needed for a theme to be applied\nin any scope. It will print all the theme variables like colors, etc, as well\nas set the correct font style and some other small things...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.theme",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.theme(light);\n.my-cool-element {\n   \\@sugar.theme(dark);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "theme.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/theme/theme.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm.when": {
+                "name": "when",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to scope some css for a particular theme.\nThis will mainly scope your css under a class named ```.s-theme:{name}``` but it's\nnice to use this mixin to make this easier and more modulable",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.rhythm",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.theme.when(dark) {\n     margin-bottom: 50px;\n   }\n}"
+                    },
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"my-cool-element\">Hello world</h1>\n<div class=\"s-theme\\:dark\">\n    <h1 class=\"my-cool-element\">Hello world</h1>\n</div>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "when.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/theme/when.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the transition helper classes like s-transition:slow, etc.\nThe generated transitions are specified in the config.theme.transition configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.transition.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/transition/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition.transition": {
+                "name": "transition",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the needed css to apply a transition setted in\nthe config.theme.transition configuration stack like \"slow\", \"default\" and \"fast\"",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.transition",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.platform.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "transition.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/transition/transition.js"
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.mixins.transition.transition": {
+                "name": "transition",
+                "type": "Mixin",
+                "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.transition(fast);\n}"
+                    },
+                    {
+                        "language": "html",
+                        "code": "<h1 class=\"my-cool-element\">Hello world</h1>"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "transition.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/transition/transition.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the truncate classes like s-truncate, s-truncate:2, etc...\nThe number of truncate classes generated is defined in the theme.helpers.truncate.count settings",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.truncate.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/truncate/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate.truncate": {
+                "name": "truncate",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to truncate some text to a number of lines",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.truncate",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-cool-element {\n   @sugar.truncate(2);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "truncate.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/truncate/truncate.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.typo.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the typo helper classes like s-typo:h1, s-typo:p, and all the typo\nelements that are defined in the config.theme.typo configuration stack.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.typo",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.typo.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/typo/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.mixins.ui.classes": {
+                "name": "classes",
+                "type": "Mixin",
+                "description": "This mixin allows you to print all the ui classes like button, form, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.mixins.ui",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.ui.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bospsel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://olivierbossel.com"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the \"until\" classes that allows you to apply some display\nstyles like \"hide\", etc... only until a certain state is reached.\nSupported states are:\n- mounted: Apply only until the state of a webcomponent for example has been reached",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.until.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/until/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until.mounted": {
+                "name": "mounted",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to set some css applied only UNTIL a specific \"state\" has been\nreached.\nSupported states are:\n- mounted: When a sugar webcomponent has the \"mounted\" attribute",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.until",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myElement {\n     display: block;\n\n     @sugar.until.mounted {\n         display: none;\n     }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "mounted.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/until/mounted.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.userSelect.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the user-select helper classes like ```.s-user-select:none```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.userSelect",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.userSelect.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/userSelect/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.utils.configToCss": {
+                "name": "configToCss",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "css",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to pass a theme config dot path that point to an object\nand to print out the result as css properties.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.utils",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-cool-element {\n     @sugar.utils.configToCss(ui.code);\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "configToCss.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/utils/configToCss.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visibility.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the overflow helper classes like ```.s-visibility:hidden```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visibility",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.visibility.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visibility/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually.hidden": {
+                "name": "hidden",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to apply a css that make the element visually hidden but not really\nhidden like when make use of `display: none;`.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".my-element {\n @sugar.visually.hidden;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "hidden.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visibility/hidden.js",
+                "children": {
+                    "transition": {
+                        "name": "transition",
+                        "type": "Mixin",
+                        "description": "This mixin allows apply a transition specified in the theme config like \"fast\", \"slow\" and \"slow\" or others you've been defined",
+                        "namespace": "@coffeekraken.s-postcss-sugar-plugin.mixins.transition",
+                        "status": "beta",
+                        "example": [
+                            {
+                                "language": "postcss",
+                                "code": ".my-cool-element {\n   @sugar.transition(fast);\n}"
+                            },
+                            {
+                                "language": "html",
+                                "code": "<h1 class=\"my-cool-element\">Hello world</h1>"
+                            }
+                        ],
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the overflow helper classes like ```.s-visually:hidden```, etc...",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.visually",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.visually.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/visually/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the \"when\" classes that allows you to apply some display\nstyles like \"hide\", etc... only when a certain state is reached.\nSupported states are:\n- mounted: Apply only when the state of a webcomponent for example has been reached\n- active: When the element has the \"active\" class or the \"active\" attribute",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.when.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/when/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when.active": {
+                "name": "active",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to set some css applied only WHEN a specific \"state\" has been\nreached.\nSupported states are:\n- mounted: When a sugar webcomponent has the \"mounted\" attribute\n- active: When the element has the \"active\" class or the \"active\" attribute",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.when",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": ".myElement {\n     display: none;\n\n     @sugar.when.mounted {\n         display: block;\n     }\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "when.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/when/when.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.width.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin generate all the width helper classes like s-width:20, s-width:50, etc...\nIt will generate all the width defined in the config.theme.width configuration stack",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.width",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "postcss",
+                        "code": "@sugar.width.classes;"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/width/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar.avatar": {
+                "name": "avatar",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate the \"avatar\" UI component css.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     @sugar.ui.badge();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "avatar.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/avatar/avatar.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar.classes": {
+                "name": "classes",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate the \"avatar\" UI component classes.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.avatar",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": "@sugar.ui.avatar.classes();"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "classes.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/avatar/classes.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.badge.badge": {
+                "name": "badge",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate the \"badge\" UI component css.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.badge",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     @sugar.ui.badge();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "badge.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/badge/badge.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.blockquote.blockquote": {
+                "name": "blockquote",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "This mixin allows you to generate the \"blockquote\" UI component css.",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.node.mixins.ui.blockquote",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-element {\n     @sugar.ui.badge();\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "blockquote.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/blockquote/blockquote.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.button.button": {
+                "name": "button",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the button style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.button",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-button {\n   @sugar.ui.button;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiButtonInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid",
+                                "gradient",
+                                "outline",
+                                "text"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "outline": {
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "button.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/button/button.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.checkbox.checkbox": {
+                "name": "checkbox",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the checkbox style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.checkbox",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-checkbox {\n   @sugar.ui.checkbox;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiCheckboxInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "checkbox.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/checkbox/checkbox.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.dropdown.dropdown": {
+                "name": "dropdown",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the dropdown style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.dropdown",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-dropdown {\n   @sugar.ui.dropdown;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiDropdownInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "position": {
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "top-start",
+                                "top-end",
+                                "bottom",
+                                "bottom-start",
+                                "bottom-end"
+                            ],
+                            "default": "bottom"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "dropdown.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/dropdown/dropdown.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.fsTree.fsTree": {
+                "name": "fsTree",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the fsTree style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.fsTree",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-fsTree {\n   @sugar.ui.fsTree;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiFsTreeInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "fsTree.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/fsTree/fsTree.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.input.input": {
+                "name": "input",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the input style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.input",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-input {\n   @sugar.ui.input;\n}"
+                    }
+                ],
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "input.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/input/input.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.label.label": {
+                "name": "label",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the label style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.label",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-label {\n   @sugar.ui.label;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiLabelInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "inline",
+                                "block",
+                                "float"
+                            ],
+                            "default": "inline"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "label.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/label/label.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.list.list": {
+                "name": "list",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the list style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.list",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-list {\n   @sugar.ui.list;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiListInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "dl",
+                                "ul",
+                                "ol",
+                                "icon"
+                            ],
+                            "default": "dl"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "list.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/list/list.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.loader.spinner": {
+                "name": "spinner",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the spinner style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.loader",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-spinner {\n   @sugar.ui.loader.spinner;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiLoaderSpinnerMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "name": {
+                            "type": "String",
+                            "default": "s-loader-spinner"
+                        },
+                        "duration": {
+                            "type": "String",
+                            "default": "1s"
+                        },
+                        "easing": {
+                            "type": "String",
+                            "default": "linear"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "spinner.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/loader/spinner.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.radio.radio": {
+                "name": "radio",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the radio style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.radio",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-radio {\n   @sugar.ui.radio;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiRadioInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "radio.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/radio/radio.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.range.range": {
+                "name": "range",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the range style to any HTMLInputElement",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.range",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-range {\n   @sugar.ui.range;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiRangeInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pull",
+                                "circle"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "range.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/range/range.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.select.select": {
+                "name": "select",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the select style to any HTMLSelectElement",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.select",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-select {\n   @sugar.ui.select;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiFormSelectInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "select.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/select/select.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.switch.switch": {
+                "name": "switch",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the switch style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.switch",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-switch {\n   @sugar.ui.switch;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiSwitchMixinInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "default"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "switch.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/switch/switch.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.table.table": {
+                "name": "table",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the table style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.table",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-table {\n   @sugar.ui.table;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTableInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "values": [
+                                "default",
+                                "square"
+                            ],
+                            "default": "default"
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "vr"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "table.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/table/table.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.tabs.tabs": {
+                "name": "tabs",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the tabs style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.tabs",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-tabs {\n   @sugar.ui.tabs;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTabInterface",
+                    "description": "",
+                    "definition": {
+                        "style": {
+                            "type": "String",
+                            "description": "Specify the style you want for your tabs",
+                            "values": [
+                                "solid"
+                            ],
+                            "default": "solid"
+                        },
+                        "shape": {
+                            "type": "String",
+                            "description": "Specify the shape you want for your tabs",
+                            "values": [
+                                "default",
+                                "square",
+                                "pill"
+                            ],
+                            "default": "default"
+                        },
+                        "grow": {
+                            "type": "Boolean",
+                            "description": "Specify if you want your tabs to take all the available place of not",
+                            "default": false
+                        },
+                        "direction": {
+                            "type": "String",
+                            "description": "Specigy the direction of your tabs",
+                            "values": [
+                                "vertical",
+                                "horizontal"
+                            ],
+                            "default": "horizontal"
+                        },
+                        "outline": {
+                            "type": "Boolean",
+                            "description": "Specify if you want your tabs to have an outline on focus",
+                            "default": true
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "description": "Specify the scope(s) you want to generate",
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "grow",
+                                "direction"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "grow",
+                                "direction"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "tabs.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tabs/tabs.js",
+                "children": {}
+            },
+            "@coffeekraken.s-postcss-sugar-plugin.ui.tooltip.tooltip": {
+                "name": "tooltip",
+                "type": "PostcssMixin",
+                "platform": [
+                    {
+                        "name": "postcss",
+                        "description": ""
+                    }
+                ],
+                "description": "Apply the tooltip style to any element",
+                "namespace": "@coffeekraken.s-postcss-sugar-plugin.ui.tooltip",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "css",
+                        "code": ".my-tooltip {\n   @sugar.ui.tooltip;\n}"
+                    }
+                ],
+                "interface": {
+                    "name": "postcssSugarPluginUiTooltipInterface",
+                    "description": "",
+                    "definition": {
+                        "position": {
+                            "type": "String",
+                            "values": [
+                                "top",
+                                "right",
+                                "bottom",
+                                "left"
+                            ],
+                            "default": "top"
+                        },
+                        "interactive": {
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "scope": {
+                            "type": {
+                                "type": "Array<String>",
+                                "splitChars": [
+                                    ",",
+                                    " "
+                                ]
+                            },
+                            "values": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position",
+                                "interactive"
+                            ],
+                            "default": [
+                                "bare",
+                                "lnf",
+                                "shape",
+                                "position",
+                                "interactive"
+                            ]
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "tooltip.js",
+                "extension": "js",
+                "relPath": "src/node/mixins/ui/tooltip/tooltip.js",
                 "children": {}
             }
         }

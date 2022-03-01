@@ -225,27 +225,22 @@ class SDocblock extends __SClass implements ISDocblock {
      */
     async parse(string = this._source): Promise<any[]> {
         // extract each docblocks
-        const regDefault = /(\/\*{2})([\s\S]+?)(\*\/)/g;
-        const regMarkup = /(<!--)([\s\S]+?)((-->))/g;
+        const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
 
         let blocksArrayStr: string[] = [];
 
         // extracting blocks
         // @ts-ignore
-        const regDefaultMatches = string.match(regDefault);
+        let regDefaultMatches = string.match(regDefault);
         if (regDefaultMatches?.length) {
-            // regDefaultMatches.forEach((matchStr) => {
-            //     string = string.replace(matchStr, '');
-            // });
+            regDefaultMatches = regDefaultMatches.filter(match => {
+                if (match.trim().match(/^['`"]/)) return false;
+                return true;
+            }).map(match => {
+                return match.trim();
+            });
             blocksArrayStr = [...regDefaultMatches];
         }
-        // const regMarkupMatches = string.match(regMarkup);
-        // if (regMarkupMatches?.length) {
-        //     regMarkupMatches.forEach((matchStr) => {
-        //         string = string.replace(matchStr, '');
-        //     });
-        //     blocksArrayStr = [...blocksArrayStr, ...regMarkupMatches];
-        // }
 
         let blocks: __SDocblockBlock[] = [];
 

@@ -184,7 +184,7 @@ export default function ({
         * </div>
         * 
         * @example      html        Scales
-        * ${['07','1','13','16'].map(scale => `
+        ${['07','1','13','16'].map(scale => `
         *   <table class="s-table s-scale:${scale}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -202,10 +202,10 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        * `).join('\n')}
+        `).join('\n')}
         * 
         * @example      html        Colors (non-exhaustive)
-        * ${['main','accent','complementary','error'].map(color => `
+        ${['main','accent','complementary','error'].map(color => `
         *   <table class="s-table s-color:${color}">
         *       <tr>
         *           <th>${__faker.name.findName()}</th>
@@ -223,7 +223,7 @@ export default function ({
         *           <td>${__faker.name.findName()}</td>
         *       </tr>
         *   </table>
-        * `).join('\n')}
+        `).join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)

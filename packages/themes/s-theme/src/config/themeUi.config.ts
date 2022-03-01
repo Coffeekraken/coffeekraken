@@ -2785,5 +2785,57 @@ export default (env, config) => {
              */
             easing: '[theme.ui.loader.easing]',
         },
+        loaderRound: {
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderRound
+             * @type          String
+             * @default      [theme.ui.loader.duration]
+             *
+             * Specify the duration of the round loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            duration: '[theme.ui.loader.duration]',
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderRound
+             * @type          String
+             * @default      [theme.ui.loader.easing]
+             *
+             * Specify the easing of the round loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            easing: '[theme.ui.loader.easing]',
+        },
+        loaderDrop: {
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderDrop
+             * @type          String
+             * @default      [theme.ui.loader.duration]
+             *
+             * Specify the duration of the drop loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            duration: '[theme.ui.loader.duration]',
+            /**
+             * @name          duration
+             * @namespace     config.themeUi.loaderDrop
+             * @type          String
+             * @default      [theme.ui.loader.easing]
+             *
+             * Specify the easing of the drop loader
+             *
+             * @since       2.0.0
+             * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+             */
+            easing: '[theme.ui.loader.easing]',
+        },
     };
 };

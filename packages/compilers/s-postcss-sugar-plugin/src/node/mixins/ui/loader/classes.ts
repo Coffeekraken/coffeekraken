@@ -10,13 +10,6 @@ export interface IPostcssSugarPluginUiLoaderClassesParams {}
 
 export { postcssSugarPluginUiLoaderClassesClassesInterface as interface };
 
-import __dirname from '@coffeekraken/sugar/node/fs/dirname';
-export function dependencies() {
-    return {
-        files: [`${__dirname()}/spinner.js`],
-    };
-}
-
 export default function ({
     params,
     atRule,
@@ -33,6 +26,7 @@ export default function ({
     };
 
     const vars = new CssVars();
+    const loaders = ['spinner','round','drop'];
 
     vars.comment(
         () => `
@@ -51,26 +45,30 @@ export default function ({
         * @support          safari
         * @support          edge
         * 
-        * @cssClass         s-loader:spinner            Display a spinner loader
+        ${loaders.map(loaderName => `
+            * @cssClass         s-loader:${loaderName}            Display a ${loaderName} loader
+        `).join('\n')}
         * 
-        * @example        html      Spinner
-        *   <div class="s-grid:5">
-        *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner"></div>
-        *       </div>
-        *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner s-color:accent"></div>
-        *       </div>
-        *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner s-color:complementary"></div>
-        *       </div>
-        *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner s-color:info"></div>
-        *       </div>
-        *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
-        *           <div class="s-loader:spinner s-color:error"></div>
-        *       </div>
-        *   </div>
+        ${loaders.map(loaderName => `
+            * @example        html      ${loaderName} loader
+            *   <div class="s-grid:5">
+            *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+            *           <div class="s-loader:${loaderName} s-scale:20"></div>
+            *       </div>
+            *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+            *           <div class="s-loader:${loaderName} s-scale:20 s-color:accent"></div>
+            *       </div>
+            *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+            *           <div class="s-loader:${loaderName} s-scale:20 s-color:complementary"></div>
+            *       </div>
+            *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+            *           <div class="s-loader:${loaderName} s-scale:20 s-color:info"></div>
+            *       </div>
+            *       <div class="s-p:30 s-text:center s-ratio:1" style="padding-block-start: 30%">
+            *           <div class="s-loader:${loaderName} s-scale:20 s-color:error"></div>
+            *       </div>
+            *   </div>
+        `).join('\n')}
         * 
         * @since      2.0.0
         * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -78,26 +76,29 @@ export default function ({
     `,
     );
 
-    vars.comment(
-        () => `/**
-        * @name           s-loader:spinner
-        * @namespace      sugar.css.ui.range
-        * @type           CssClass
-        * 
-        * This class represent a(n) "<s-color="accent">spinner</s-color>" loader
-        * 
-        * @example        html
-        * <div class="s-loader:spinner"></div>
-        * 
-        * @since    2.0.0
-        * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-      */
-     `,
-    ).code(`
-        .s-loader--spinner {
-            @sugar.ui.loader.spinner();
-        }
-        `);
+
+    loaders.forEach(loaderName => {
+        vars.comment(
+            () => `/**
+            * @name           s-loader:${loaderName}
+            * @namespace      sugar.css.ui.range
+            * @type           CssClass
+            * 
+            * This class represent a(n) "<s-color="accent">${loaderName}</s-color>" loader
+            * 
+            * @example        html
+            * <div class="s-loader:${loaderName}"></div>
+            * 
+            * @since    2.0.0
+            * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        */
+        `,
+        ).code(`
+            .s-loader--${loaderName} {
+                @sugar.ui.loader.${loaderName}();
+            }
+            `);
+    });
 
     return vars;
 }

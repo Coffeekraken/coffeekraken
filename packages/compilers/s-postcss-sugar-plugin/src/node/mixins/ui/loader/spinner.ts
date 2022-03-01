@@ -72,14 +72,15 @@ export default function ({
 
     vars.push(`
     display: inline-block;
+    pointer-events: none;
     text-indent: -9999em;
     border-top: 0.3em solid sugar.color(current, --alpha 0.8);
     border-right: 0.3em solid sugar.color(current, --alpha 0.8);
     border-bottom: 0.3em solid sugar.color(current, --alpha 0.8);
     border-left: 0.3em solid rgba(0,0,0,0);
     border-radius: 50%;
-    width: 1em;
-    height: 1em;
+    width: sugar.scalable(1em);
+    height: sugar.scalable(1em);
     animation: ${finalParams.name} ${finalParams.duration} ${finalParams.easing} infinite;
     
     @keyframes ${finalParams.name} {

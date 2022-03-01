@@ -190,7 +190,7 @@ export default class SLitComponent extends LitElement {
                 propertiesObj[prop].attribute = __dashCase(prop);
                 propertiesObj[prop].converter = {
                     toAttribute(value) {
-                        if (value === false || value === null) return null;
+                        if (value === 'false' || value === false || value === null) return null;
                         return String(value);
                     },
                 };

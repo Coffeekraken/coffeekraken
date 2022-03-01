@@ -181,9 +181,6 @@ export default class SComponent extends __SClass {
         // listen viewport status update
         this.inViewportStatusChange
             .on('enter', () => {
-                if (this.node.tagName.toLowerCase() === 'ck-blob') {
-                    console.log('IN');
-                }
                 this._isInViewport = true;
             })
             .on('leave', () => {

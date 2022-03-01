@@ -63,14 +63,6 @@ export default class SRefocusFeature extends __SFeature {
     mount() {
         this.props.trigger.forEach((trigger) => {
             switch(trigger) {
-                case 'actual':
-                    setTimeout(() => {
-                        const $targetElm = this.node.querySelector(`[href="${document.location.pathname}"]`);
-                        if ($targetElm) {
-                            this._scrollTo($targetElm);
-                        }
-                    }, this.props.timeout);
-                break;
                 case 'anchor':
                     setTimeout(() => {
                         if (document.location.hash) {

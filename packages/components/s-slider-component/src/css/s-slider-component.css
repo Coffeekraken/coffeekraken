@@ -1,0 +1,30 @@
+.s-slider {
+    display: block;
+    background: red;
+    overflow: horizontal;
+    @sugar.scrollbar($size: 0);
+
+    [direction="horizontal"][scrollable] & {
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scroll-behavior: smooth;
+    }
+    [direction="vertical"][scrollable] & {
+        overflow-x: auto;
+    }
+
+    .s-slider__items {
+        display: flex;
+        flex-basis: 100%;
+        background: green;
+        pointer-events: none;
+        user-select: none;
+    }
+
+    .s-slider__item {
+        flex-shrink: 0;
+        width: calc(100% - var(--s-slider-side-reveal, 0%) * 2);
+        scroll-snap-align: center;
+    }
+
+}

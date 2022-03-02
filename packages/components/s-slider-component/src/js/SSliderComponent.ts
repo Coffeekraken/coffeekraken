@@ -9,6 +9,12 @@ import __css from '../css/s-slider-component.css';
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
 import __onDrag from '@coffeekraken/sugar/js/dom/detect/onDrag';
+import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
+import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
+import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
+import __easeOut from '@coffeekraken/sugar/shared/easing/easeOutQuad';
+import __sugarElement from '@coffeekraken/sugar/js/dom/element/sugarElement';
+import __visibleSuface from '@coffeekraken/sugar/js/dom/element/visibleSurface';
 // import __Swiper from 'swiper';
 // import __swiperCss from 'swiper/css';
 
@@ -92,6 +98,8 @@ export default class SSlider extends __SLitComponent {
             $item.classList.add(this.componentUtils.className('__item'));
             // add item into the container
             this._$itemsContainer.append($item);
+            // make sure we have a sugar element
+            __sugarElement($item);
         });
 
         // handle scroll
@@ -100,19 +108,105 @@ export default class SSlider extends __SLitComponent {
         this._handleDrag();
 
     }
+    _getMostDisplayedItem() {
+        
+        let higherSurface = 0, $itemObj;
+
+        for (let i = 0; i < this._$items.length; i++) {
+            const $item = this._$items[i];
+
+            console.log($item, $item.visibleSurface);
+
+            if ($item.visibleSurface.percentage > higherSurface) {
+                $itemObj = $item;
+                higherSurface = $item.visibleSurface.percentage;
+            }
+        }
+
+        if (!$itemObj) {
+            const firstItem = this._$items[0],
+
+            if (firstItem.originRelLeft >= this._$itemsContainer.getBoundingClientRect().width) {
+                $itemObj = firstItem;
+            } else {
+                $itemObj = this._$items[this._$items.length - 1];
+            }
+
+        }
+
+        return $itemObj;
+
+    }
     _handleDrag() {
-        let scrollX;
+        let translateX = 0, easingScrollInterval;
         __onDrag(this._$root, (state) => {
-            switch(state.type) {
+            const translates = __getTranslateProperties(this._$itemsContainer);
+             const lastItemBounds = this._$items[this._$items.length-1].getBoundingClientRect();
+             const itemsContainerBounds = this._$itemsContainer.getBoundingClientRect();
+            
+             switch(state.type) {
                 case 'start':
-                    scrollX = this._$root.scrollLeft;
-                    this._$root.style.scrollSnapType = 'none';
+                    translateX = translates.x;
+                    easingScrollInterval?.cancel?.();
                 break;
                 case 'end':
-                    this._$root.style.scrollSnapType = 'x mandatory';
+
+                    let duration = 1000 / 3000 * Math.abs(state.pixelsXBySecond);
+                    if (duration > 1000) duration = 1000;
+
+                const mostDisplaysItem = this._getMostDisplayedItem();
+
+                console.log(mostDisplaysItem);
+
+                    easingScrollInterval = __easeInterval(duration, (percentage) => {
+                        const offsetX = state.pixelsXBySecond / 100 * percentage; 
+                        let translateX = translates.x + offsetX;
+
+                        const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
+                        if (translateX + state.deltaX < lastItemLeft * -1) {
+                            translateX = lastItemLeft * -1;
+                        } else if (translateX + state.deltaX <= 0) {
+                            translateX = translateX + state.deltaX;
+                        } else if (translateX + state.deltaX > 0) {
+                            translateX = 0;
+                        }
+
+                        this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
+                    }, {
+                        easing: __easeOut,
+                        onEnd: () => {
+                            const mostDisplaysItem = this._getMostDisplayedItem();
+                            const translates = __getTranslateProperties(this._$itemsContainer);
+
+                            easingScrollInterval = __easeInterval(700, (per) => {
+                                const offsetX = mostDisplaysItem.originRelLeft * -1 / 100 * per;
+
+                                const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
+                                let translateX = translates.x + offsetX;
+                                if (translateX + state.deltaX < lastItemLeft * -1) {
+                                    translateX = lastItemLeft * -1;
+                                } else if (translateX + state.deltaX <= 0) {
+                                    // console.log(translateX, state.deltaX);
+                                    translateX = translateX + state.deltaX;
+                                } else if (translateX + state.deltaX > 0) {
+                                    translateX = 0;
+                                }
+
+                                this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
+                            });
+                        }
+                    });
                 break;
                 default:
-                    this._$root.scrollLeft = (scrollX + state.deltaX) * -1;
+                    const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
+                    if (translateX + state.deltaX < lastItemLeft * -1) {
+                        this._$itemsContainer.style.transform = `translateX(${lastItemLeft * -1}px)`;
+                    } else if (translateX + state.deltaX <= 0) {
+                        // console.log(translateX, state.deltaX);
+                        this._$itemsContainer.style.transform = `translateX(${translateX + state.deltaX}px)`;
+                    } else if (translateX + state.deltaX > 0) {
+                        this._$itemsContainer.style.transform = `translateX(0px)`;
+                    }
                 break;
             }
         });
@@ -132,6 +226,9 @@ export default class SSlider extends __SLitComponent {
 
             const scrollXPercent = 100 / fullWidth * (scrollLeft + elmWidth),
                 scrollYPercent = 100 / fullHeight * (scrollTop + elmHeight);
+
+            this._scrollXPercent = scrollXPercent;
+            this._scrollYPercent = scrollYPercent;
 
             if (this.props.direction === 'horizontal') {
                 this._currentPage = Math.round(scrollXPercent / 100 * this._$items.length) - 1;

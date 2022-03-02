@@ -28,6 +28,10 @@
 export interface IOnDragTrackItem {
     x: number;
     y: number;
+    deltaX: number;
+    deltaY: number;
+    speedX: number;
+    speedY: number;
 }
 
 export default function onDrag($elm: HTMLElement, cb: Function): void {
@@ -36,9 +40,41 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
     
     let startPos, endPos;
 
-    const track: IOnDragTrackItem[] = [];
+    let track: IOnDragTrackItem[] = [];
+
+
+    let lastCapturedTime;
+
+    function buildTrackPoint(e) {
+        const deltaX = e.offsetX - startPos.x,
+            deltaY = e.offsetY - startPos.y,
+            time = (Date.now() - lastCapturedTime);
+
+            const secondPercentage = 100 / 1000 * time;
+
+        const lastTrackPoint = track[track.length - 1];
+
+        const lastDeltaX = e.offsetX - lastTrackPoint.x,
+            lastDeltaY = e.offsetY - lastTrackPoint.y;
+
+        const speedX = lastDeltaX / time,
+            speedY = lastDeltaY / time;
+
+        return {
+            x: e.offsetX,
+            y: e.offsetY,
+            deltaX,
+            deltaY,
+            pixelsXBySecond: lastDeltaX / secondPercentage * 100,
+            pixelsYBySecond: lastDeltaY / secondPercentage * 100,
+            speedX,
+            speedY
+        };
+    }
 
     $elm.addEventListener('mousedown', (e) => {
+        track = [];
+        lastCapturedTime = Date.now();
         // update status
         isMouseDown = true;
         // set the start position
@@ -46,6 +82,7 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
             x: e.offsetX,
             y: e.offsetY
         };
+        track.push(startPos);
         cb?.({
             type: 'start',
             x: startPos.x,
@@ -54,32 +91,22 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
     });
     $elm.addEventListener('mousemove', (e) => {
         if (!isMouseDown) return;
-
-        track.push({
-            x: e.offsetX,
-            y: e.offsetY,
-        });
-
+        const point = buildTrackPoint(e);
+        track.push(point);
         cb?.({
             type: 'track',
-            deltaX: e.offsetX - startPos.x,
-            deltaY: e.offsetY - startPos.y,
+            ...point,
             track
         });
-
+        lastCapturedTime = Date.now();
     });
     $elm.addEventListener('mouseup', (e) => {
         // update status
         isMouseDown = false;
-        // set the end position
-        endPos = {
-            x: e.offsetX,
-            y: e.offsetY
-        };
         cb?.({
             type: 'end',
-            x: endPos.x,
-            y: endPos.y
+            ...track[track.length - 1],
+            track
         });
     });
 }

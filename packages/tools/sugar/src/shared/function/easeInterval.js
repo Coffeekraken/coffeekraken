@@ -1,23 +1,33 @@
 import __easeInOutQuart from '../easing/easeInOutQuart';
 import __SPromise from '@coffeekraken/s-promise';
 export default function (duration, cb, settings = {}) {
-    return new __SPromise(({ resolve, reject, emit }) => {
-        settings = Object.assign({ interval: 1000 / 25, easing: __easeInOutQuart, from: 0, to: 100 }, settings);
-        // @ts-ignore
-        const intervalCounts = Math.round(duration / settings.interval);
-        let currentInterval = 0;
-        let timer = setInterval(function () {
-            currentInterval++;
-            const percent = (100 / intervalCounts) * currentInterval;
+    return new __SPromise(({ resolve, reject, emit, on }) => {
+        settings = Object.assign({ interval: 1000 / 25, easing: __easeInOutQuart, from: 0, to: 100, onEnd: undefined }, settings);
+        let cleared = false;
+        on('cancel', () => {
+            cleared = true;
+        });
+        const startTime = Date.now();
+        function animate() {
+            var _a;
+            if (cleared)
+                return;
+            const percent = 100 / duration * (Date.now() - startTime);
             // @ts-ignore
             const easedPercent = settings.easing(percent / 100) * 100;
-            emit('interval', easedPercent);
+            // emit('interval', easedPercent);
             cb(easedPercent);
-            if (percent >= 100) {
-                clearInterval(timer);
+            if (percent < 100) {
+                if (cleared)
+                    return;
+                requestAnimationFrame(animate);
+            }
+            else {
+                (_a = settings.onEnd) === null || _a === void 0 ? void 0 : _a.call(settings);
                 resolve(easedPercent);
             }
-        }, settings.interval);
+        }
+        animate();
     });
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWFzZUludGVydmFsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZWFzZUludGVydmFsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sMEJBQTBCLENBQUM7QUFDeEQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUE0Q2pELE1BQU0sQ0FBQyxPQUFPLFdBQ1YsUUFBZ0IsRUFDaEIsRUFBWSxFQUNaLFdBQTJDLEVBQUU7SUFFN0MsT0FBTyxJQUFJLFVBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFO1FBQ2hELFFBQVEsbUJBQ0osUUFBUSxFQUFFLElBQUksR0FBRyxFQUFFLEVBQ25CLE1BQU0sRUFBRSxnQkFBZ0IsRUFDeEIsSUFBSSxFQUFFLENBQUMsRUFDUCxFQUFFLEVBQUUsR0FBRyxJQUNKLFFBQVEsQ0FDZCxDQUFDO1FBRUYsYUFBYTtRQUNiLE1BQU0sY0FBYyxHQUFHLElBQUksQ0FBQyxLQUFLLENBQUMsUUFBUSxHQUFHLFFBQVEsQ0FBQyxRQUFRLENBQUMsQ0FBQztRQUNoRSxJQUFJLGVBQWUsR0FBRyxDQUFDLENBQUM7UUFDeEIsSUFBSSxLQUFLLEdBQUcsV0FBVyxDQUFDO1lBQ3BCLGVBQWUsRUFBRSxDQUFDO1lBQ2xCLE1BQU0sT0FBTyxHQUFHLENBQUMsR0FBRyxHQUFHLGNBQWMsQ0FBQyxHQUFHLGVBQWUsQ0FBQztZQUN6RCxhQUFhO1lBQ2IsTUFBTSxZQUFZLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxPQUFPLEdBQUcsR0FBRyxDQUFDLEdBQUcsR0FBRyxDQUFDO1lBQzFELElBQUksQ0FBQyxVQUFVLEVBQUUsWUFBWSxDQUFDLENBQUM7WUFDL0IsRUFBRSxDQUFDLFlBQVksQ0FBQyxDQUFDO1lBQ2pCLElBQUksT0FBTyxJQUFJLEdBQUcsRUFBRTtnQkFDaEIsYUFBYSxDQUFDLEtBQUssQ0FBQyxDQUFDO2dCQUNyQixPQUFPLENBQUMsWUFBWSxDQUFDLENBQUM7YUFDekI7UUFDTCxDQUFDLEVBQUUsUUFBUSxDQUFDLFFBQVEsQ0FBQyxDQUFDO0lBQzFCLENBQUMsQ0FBQyxDQUFDO0FBQ1AsQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZWFzZUludGVydmFsLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZWFzZUludGVydmFsLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUFBLE9BQU8sZ0JBQWdCLE1BQU0sMEJBQTBCLENBQUM7QUFDeEQsT0FBTyxVQUFVLE1BQU0seUJBQXlCLENBQUM7QUE2Q2pELE1BQU0sQ0FBQyxPQUFPLFdBQ1YsUUFBZ0IsRUFDaEIsRUFBWSxFQUNaLFdBQTJDLEVBQUU7SUFFN0MsT0FBTyxJQUFJLFVBQVUsQ0FBQyxDQUFDLEVBQUUsT0FBTyxFQUFFLE1BQU0sRUFBRSxJQUFJLEVBQUUsRUFBRSxFQUFFLEVBQUUsRUFBRTtRQUNwRCxRQUFRLG1CQUNKLFFBQVEsRUFBRSxJQUFJLEdBQUcsRUFBRSxFQUNuQixNQUFNLEVBQUUsZ0JBQWdCLEVBQ3hCLElBQUksRUFBRSxDQUFDLEVBQ1AsRUFBRSxFQUFFLEdBQUcsRUFDUCxLQUFLLEVBQUUsU0FBUyxJQUNiLFFBQVEsQ0FDZCxDQUFDO1FBRUYsSUFBSSxPQUFPLEdBQUcsS0FBSyxDQUFDO1FBQ3BCLEVBQUUsQ0FBQyxRQUFRLEVBQUUsR0FBRyxFQUFFO1lBQ2QsT0FBTyxHQUFHLElBQUksQ0FBQztRQUNuQixDQUFDLENBQUMsQ0FBQztRQUVILE1BQU0sU0FBUyxHQUFHLElBQUksQ0FBQyxHQUFHLEVBQUUsQ0FBQztRQUU3QixTQUFTLE9BQU87O1lBQ1osSUFBSSxPQUFPO2dCQUFFLE9BQU87WUFDcEIsTUFBTSxPQUFPLEdBQUcsR0FBRyxHQUFHLFFBQVEsR0FBRyxDQUFDLElBQUksQ0FBQyxHQUFHLEVBQUUsR0FBRyxTQUFTLENBQUMsQ0FBQztZQUMxRCxhQUFhO1lBQ2IsTUFBTSxZQUFZLEdBQUcsUUFBUSxDQUFDLE1BQU0sQ0FBQyxPQUFPLEdBQUcsR0FBRyxDQUFDLEdBQUcsR0FBRyxDQUFDO1lBQzFELGtDQUFrQztZQUNsQyxFQUFFLENBQUMsWUFBWSxDQUFDLENBQUM7WUFDakIsSUFBSSxPQUFPLEdBQUcsR0FBRyxFQUFFO2dCQUNmLElBQUksT0FBTztvQkFBRSxPQUFPO2dCQUNwQixxQkFBcUIsQ0FBQyxPQUFPLENBQUMsQ0FBQzthQUNsQztpQkFBTTtnQkFDSCxNQUFBLFFBQVEsQ0FBQyxLQUFLLCtDQUFkLFFBQVEsQ0FBVSxDQUFDO2dCQUNuQixPQUFPLENBQUMsWUFBWSxDQUFDLENBQUM7YUFDekI7UUFDTCxDQUFDO1FBQ0QsT0FBTyxFQUFFLENBQUM7SUFDZCxDQUFDLENBQUMsQ0FBQztBQUNQLENBQUMifQ==

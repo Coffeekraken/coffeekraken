@@ -41,6 +41,7 @@ export interface IEaseIntervalSettings {
     easing: Function;
     from: number;
     to: number;
+    onEnd?: Function;
 }
 
 export default function (
@@ -48,29 +49,38 @@ export default function (
     cb: Function,
     settings: Partial<IEaseIntervalSettings> = {},
 ) {
-    return new __SPromise(({ resolve, reject, emit }) => {
+    return new __SPromise(({ resolve, reject, emit, on }) => {
         settings = {
             interval: 1000 / 25,
             easing: __easeInOutQuart,
             from: 0,
             to: 100,
+            onEnd: undefined,
             ...settings,
         };
 
-        // @ts-ignore
-        const intervalCounts = Math.round(duration / settings.interval);
-        let currentInterval = 0;
-        let timer = setInterval(function () {
-            currentInterval++;
-            const percent = (100 / intervalCounts) * currentInterval;
+        let cleared = false;
+        on('cancel', () => {
+            cleared = true;
+        });
+
+        const startTime = Date.now();
+
+        function animate() {
+            if (cleared) return;
+            const percent = 100 / duration * (Date.now() - startTime);
             // @ts-ignore
             const easedPercent = settings.easing(percent / 100) * 100;
-            emit('interval', easedPercent);
+            // emit('interval', easedPercent);
             cb(easedPercent);
-            if (percent >= 100) {
-                clearInterval(timer);
+            if (percent < 100) {
+                if (cleared) return;
+                requestAnimationFrame(animate);
+            } else {
+                settings.onEnd?.();
                 resolve(easedPercent);
             }
-        }, settings.interval);
+        }
+        animate();
     });
 }

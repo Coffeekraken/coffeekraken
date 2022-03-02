@@ -1,16 +1,11 @@
 .s-slider {
     display: block;
     background: red;
-    overflow: horizontal;
+    overflow: hidden;
     @sugar.scrollbar($size: 0);
 
     [direction="horizontal"][scrollable] & {
-        overflow-x: auto;
-        scroll-snap-type: x mandatory;
-        scroll-behavior: smooth;
-    }
-    [direction="vertical"][scrollable] & {
-        overflow-x: auto;
+        transform: translateX(0);
     }
 
     .s-slider__items {
@@ -24,7 +19,7 @@
     .s-slider__item {
         flex-shrink: 0;
         width: calc(100% - var(--s-slider-side-reveal, 0%) * 2);
-        scroll-snap-align: center;
+        /* scroll-snap-align: center; */
     }
 
 }

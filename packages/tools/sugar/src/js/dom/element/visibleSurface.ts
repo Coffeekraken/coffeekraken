@@ -32,8 +32,10 @@ export interface IVisibleSurfaceResult {
     percentageY: number;
     width: number;
     height: number;
-    x: number;
-    y: number;
+    top: number;
+    relTop: number;
+    left: number;
+    relLeft: number;
 }
 
 export interface IVisibleSurfaceSettings {
@@ -66,33 +68,48 @@ export default function visibleSurface($elm: HTMLElement, settings?: IVisibleSur
 
     let percentageX, percentageY;
 
-    if (boundingRect.top < rootBoundingRect.top) {
-        percentageY = 100 / boundingRect.height * (rootBoundingRect.top - boundingRect.top);
-    } else if (top + boundingRect.height < rootBoundingRect.height) {
-        percentageY = 100;
-    } else if (top + boundingRect.height > rootBoundingRect.height) {
-        percentageY = 100 / boundingRect.height * (rootBoundingRect.height - top);
-        if (percentageY < 0) percentageY = 0;
-    } else if (top > rootBoundingRect.height || top < rootBoundingRect.height * -1) {
-        percentageY = 0;
-    } else {
-        const offsetY = boundingRect.height - top;
-        percentageY =  100 - Math.abs(100 / rootBoundingRect.height * (rootBoundingRect.height - offsetY));
+    // percentageX
+    if (boundingRect.left + boundingRect.width < rootBoundingRect.left) {
+        // fully out on left
+        percentageX = 0;
+    } else if (boundingRect.left > rootBoundingRect.left + rootBoundingRect.width) {
+        // fully out on right
+        percentageX = 0;
+    } else if (boundingRect.left >= rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
+        // fully inside
+        percentageX = 100;
+    } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width)  {
+        // partially outside on left and right
+        percentageX = 100 / boundingRect.width * rootBoundingRect.width;
+    } else if (boundingRect.left < rootBoundingRect.left && boundingRect.left + boundingRect.width <= rootBoundingRect.left + rootBoundingRect.width) {
+        // partially inside on left
+        percentageX = 100 / boundingRect.width * (boundingRect.left + boundingRect.width - rootBoundingRect.left);
+    } else if (boundingRect.left < rootBoundingRect.left + rootBoundingRect.width && boundingRect.left + boundingRect.width > rootBoundingRect.left + rootBoundingRect.width) {
+        // partially inside on right
+        percentageX = 100 / boundingRect.width * ( boundingRect.width - ((boundingRect.left + boundingRect.width) - (rootBoundingRect.left + rootBoundingRect.width)));
     }
 
-    if (boundingRect.left < rootBoundingRect.left) {
-        percentageX = 100 / boundingRect.width * (rootBoundingRect.left - boundingRect.left);
-    } else if (left + boundingRect.width < rootBoundingRect.width) {
-        percentageX = 100;
-    } else if (left + boundingRect.width > rootBoundingRect.width) {
-        percentageX = 100 / boundingRect.width * (rootBoundingRect.width - left);
-        if (percentageX < 0) percentageX = 0;
-    } else if (left > rootBoundingRect.width || left < rootBoundingRect.width * -1) {
-        percentageX = 0;
-    } else {
-        const offsetY = boundingRect.width - left;
-        percentageX =  100 - Math.abs(100 / rootBoundingRect.width * (rootBoundingRect.width - offsetY));
+    // percentageY
+    if (boundingRect.left + boundingRect.height < rootBoundingRect.top) {
+        // fully out on top
+        percentageY = 0;
+    } else if (boundingRect.top > rootBoundingRect.top + rootBoundingRect.height) {
+        // fully out on bottom
+        percentageY = 0;
+    } else if (boundingRect.top >= rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
+        // fully inside
+        percentageY = 100;
+    } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height)  {
+        // partially outside on top and bottom
+        percentageY = 100 / boundingRect.height * rootBoundingRect.height;
+    } else if (boundingRect.top < rootBoundingRect.top && boundingRect.top + boundingRect.height <= rootBoundingRect.top + rootBoundingRect.height) {
+        // partially inside on top
+        percentageY = 100 / boundingRect.height * (boundingRect.top + boundingRect.height - rootBoundingRect.top);
+    } else if (boundingRect.top < rootBoundingRect.top + rootBoundingRect.height && boundingRect.top + boundingRect.height > rootBoundingRect.top + rootBoundingRect.height) {
+        // partially inside on bottom
+        percentageY = 100 / boundingRect.height * ( boundingRect.height - ((boundingRect.top + boundingRect.height) - (rootBoundingRect.top + rootBoundingRect.height)));
     }
+
 
     const surfaceX = boundingRect.width / 100 * percentageX,
         surfaceY = boundingRect.height / 100 * percentageY;
@@ -105,7 +122,9 @@ export default function visibleSurface($elm: HTMLElement, settings?: IVisibleSur
         percentageY: percentageX > 0 ? percentageY : 0,
         width: percentageX > 0 && percentageY > 0 ? surfaceX : 0,
         height: percentageY > 0 && percentageX > 0 ? surfaceY : 0,
-        x: percentageX > 0 && percentageY > 0 ? left : undefined,
-        y: percentageX > 0 && percentageY > 0 ? top : undefined
+        left: boundingRect.left,
+        relLeft: left,
+        top: boundingRect.top,
+        relTop: top
     };
 }

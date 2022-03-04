@@ -151,12 +151,8 @@ export default class SSlider extends __SLitComponent {
                 break;
                 case 'end':
 
-                    let duration = 1000 / 3000 * Math.abs(state.pixelsXBySecond);
-                    if (duration > 1000) duration = 1000;
-
-                const mostDisplaysItem = this._getMostDisplayedItem();
-
-                console.log(mostDisplaysItem);
+                    let duration = 1000 / 2000 * Math.abs(state.pixelsXBySecond);
+                    if (duration > 2000) duration = 2000;
 
                     easingScrollInterval = __easeInterval(duration, (percentage) => {
                         const offsetX = state.pixelsXBySecond / 100 * percentage; 

@@ -1,7 +1,7 @@
 // @ts-nocheck
 
 import __uniqid from '../../../shared/string/uniqid';
-import __injectStyle from '../../css/injectStyle';
+import __injectStyle from '../../dom/css/injectStyle';
 import __emptyNode from '../manipulate/emptyNode';
 import __convert from '../../../shared/time/convert';
 

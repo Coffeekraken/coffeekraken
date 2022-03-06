@@ -3,8 +3,8 @@
 
 // import __mustache from 'mustache';
 import __SInterface from '@coffeekraken/s-interface';
-import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';
-import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
+import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
+import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';

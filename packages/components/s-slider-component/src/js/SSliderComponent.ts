@@ -15,6 +15,7 @@ import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __easeOut from '@coffeekraken/sugar/shared/easing/easeOutQuad';
 import __sugarElement from '@coffeekraken/sugar/js/dom/element/sugarElement';
 import __visibleSuface from '@coffeekraken/sugar/js/dom/element/visibleSurface';
+import __draggable from '@coffeekraken/sugar/js/dom/drag/draggable';
 // import __Swiper from 'swiper';
 // import __swiperCss from 'swiper/css';
 
@@ -139,6 +140,14 @@ export default class SSlider extends __SLitComponent {
     }
     _handleDrag() {
         let translateX = 0, easingScrollInterval;
+
+        __draggable(this._$root, {
+            horizontal: this.props.direction === 'horizontal',
+            vertical: this.props.direction === 'vertical',
+        });
+
+        return;
+
         __onDrag(this._$root, (state) => {
             const translates = __getTranslateProperties(this._$itemsContainer);
              const lastItemBounds = this._$items[this._$items.length-1].getBoundingClientRect();
@@ -153,6 +162,8 @@ export default class SSlider extends __SLitComponent {
 
                     let duration = 1000 / 2000 * Math.abs(state.pixelsXBySecond);
                     if (duration > 2000) duration = 2000;
+
+                    console.log(duration);
 
                     easingScrollInterval = __easeInterval(duration, (percentage) => {
                         const offsetX = state.pixelsXBySecond / 100 * percentage; 
@@ -171,25 +182,25 @@ export default class SSlider extends __SLitComponent {
                     }, {
                         easing: __easeOut,
                         onEnd: () => {
-                            const mostDisplaysItem = this._getMostDisplayedItem();
-                            const translates = __getTranslateProperties(this._$itemsContainer);
+                            // const mostDisplaysItem = this._getMostDisplayedItem();
+                            // const translates = __getTranslateProperties(this._$itemsContainer);
 
-                            easingScrollInterval = __easeInterval(700, (per) => {
-                                const offsetX = mostDisplaysItem.originRelLeft * -1 / 100 * per;
+                            // easingScrollInterval = __easeInterval(700, (per) => {
+                            //     const offsetX = mostDisplaysItem.originRelLeft * -1 / 100 * per;
 
-                                const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                                let translateX = translates.x + offsetX;
-                                if (translateX + state.deltaX < lastItemLeft * -1) {
-                                    translateX = lastItemLeft * -1;
-                                } else if (translateX + state.deltaX <= 0) {
-                                    // console.log(translateX, state.deltaX);
-                                    translateX = translateX + state.deltaX;
-                                } else if (translateX + state.deltaX > 0) {
-                                    translateX = 0;
-                                }
+                            //     const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
+                            //     let translateX = translates.x + offsetX;
+                            //     if (translateX + state.deltaX < lastItemLeft * -1) {
+                            //         translateX = lastItemLeft * -1;
+                            //     } else if (translateX + state.deltaX <= 0) {
+                            //         // console.log(translateX, state.deltaX);
+                            //         translateX = translateX + state.deltaX;
+                            //     } else if (translateX + state.deltaX > 0) {
+                            //         translateX = 0;
+                            //     }
 
-                                this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
-                            });
+                            //     this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
+                            // });
                         }
                     });
                 break;

@@ -4,7 +4,7 @@ import __SClass from '@coffeekraken/s-class';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SInterface from '@coffeekraken/s-interface';
 import __mustache from 'mustache';
-import __stylesheetToString from '@coffeekraken/sugar/js/css/stylesheetToString';
+import __stylesheetToString from '@coffeekraken/sugar/js/dom/css/stylesheetToString';
 
 import {
   onMount as __onMount,

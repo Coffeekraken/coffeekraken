@@ -1,4 +1,4 @@
-import __uniqid from '../../shared/string/uniqid';
+import __uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            adoptStyleInShadowRoot
@@ -16,7 +16,7 @@ import __uniqid from '../../shared/string/uniqid';
  * @todo        tests
  *
  * @example         js
- * import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';
+ * import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
  * const myShadowRoot = $myElement.shadowRoot;
  * await __adoptStyleInShadowRoot(myShadowRoot);
  *

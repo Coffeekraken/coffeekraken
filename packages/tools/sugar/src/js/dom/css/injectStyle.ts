@@ -1,5 +1,5 @@
 // @ts-nocheck
-import __uniqid from '../../shared/string/uniqid';
+import __uniqid from '../../../shared/string/uniqid';
 
 /**
  * @name            injectStyle
@@ -18,7 +18,7 @@ import __uniqid from '../../shared/string/uniqid';
  * @todo        doc
  *
  * @example       js
- * import injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
+ * import injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
  * injectStyle('a { color: red; }');
  *
  * @since       2.0.0
@@ -29,6 +29,7 @@ function injectStyle(
     id: string = `injected-style-${__uniqid()}`,
     node = document.head,
 ) {
+    if (document.querySelector(`#${id}`)) return;
     const $tag = document.createElement('style');
     $tag.type = 'text/css';
     $tag.setAttribute('id', `injected-style-${id.toLowerCase()}`);

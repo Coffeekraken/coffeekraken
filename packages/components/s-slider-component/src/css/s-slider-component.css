@@ -12,7 +12,6 @@
         display: flex;
         flex-basis: 100%;
         background: green;
-        pointer-events: none;
         user-select: none;
     }
 

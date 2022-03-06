@@ -14,7 +14,7 @@
  * @return      {String}                            The css string
  *
  * @example         js
- * import stylesheetToString from '@coffeekraken/sugar/js/css/stylesheetToString';
+ * import stylesheetToString from '@coffeekraken/sugar/js/dom/css/stylesheetToString';
  * stylesheetToString(document.stylesheets); // => body { ... }
  *
  * @since       2.0.0

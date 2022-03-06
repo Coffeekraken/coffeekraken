@@ -23,7 +23,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
  * @todo        tests
  *
  * @example         js
- * import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/css/adoptStyleInShadowRoot';
+ * import __adoptStyleInShadowRoot from '@coffeekraken/sugar/js/dom/css/adoptStyleInShadowRoot';
  * const myShadowRoot = $myElement.shadowRoot;
  * await __adoptStyleInShadowRoot(myShadowRoot);
  *

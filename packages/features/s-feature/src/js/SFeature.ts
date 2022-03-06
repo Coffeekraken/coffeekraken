@@ -7,7 +7,7 @@ import __striptags from '@coffeekraken/sugar/shared/html/striptags';
 import __camelCase from '@coffeekraken/sugar/shared/string/camelCase';
 import __whenInViewport from '@coffeekraken/sugar/js/dom/detect/whenInViewport';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
-import __injectStyle from '@coffeekraken/sugar/js/css/injectStyle';
+import __injectStyle from '@coffeekraken/sugar/js/dom/css/injectStyle';
 import __dashCase from '@coffeekraken/sugar/shared/string/dashCase';
 import __cloneClass from '@coffeekraken/sugar/shared/class/utils/cloneClass';
 import __clone from '@coffeekraken/sugar/shared/object/clone';

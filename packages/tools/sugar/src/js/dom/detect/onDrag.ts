@@ -38,7 +38,7 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
 
     let isMouseDown = false;
     
-    let startPos, endPos;
+    let startPos, endPos, $target;
 
     let track: IOnDragTrackItem[] = [];
 
@@ -46,23 +46,23 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
     let lastCapturedTime;
 
     function buildTrackPoint(e) {
-        const deltaX = e.offsetX - startPos.x,
-            deltaY = e.offsetY - startPos.y,
+        const deltaX = e.pageX - startPos.left,
+            deltaY = e.pageY - startPos.top,
             time = (Date.now() - lastCapturedTime);
 
             const secondPercentage = 100 / 1000 * time;
 
         const lastTrackPoint = track[track.length - 1];
 
-        const lastDeltaX = e.offsetX - lastTrackPoint.x,
-            lastDeltaY = e.offsetY - lastTrackPoint.y;
+        const lastDeltaX = e.pageX - lastTrackPoint.x,
+            lastDeltaY = e.pageY - lastTrackPoint.y;
 
         const speedX = lastDeltaX / time,
             speedY = lastDeltaY / time;
 
         return {
-            x: e.offsetX,
-            y: e.offsetY,
+            x: e.pageX,
+            y: e.pageY,
             deltaX,
             deltaY,
             pixelsXBySecond: lastDeltaX / secondPercentage * 100,
@@ -72,15 +72,21 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
         };
     }
 
-    $elm.addEventListener('mousedown', (e) => {
+    document.addEventListener('mousedown', (e) => {
+
+        if (e.target !== $elm && !$elm.contains(e.target)) return;
+        $target = e.target;
+
+        $target.style.pointerEvents = 'none';
+
         track = [];
         lastCapturedTime = Date.now();
         // update status
         isMouseDown = true;
         // set the start position
         startPos = {
-            x: e.offsetX,
-            y: e.offsetY
+            top: e.pageY,
+            left: e.pageX,
         };
         track.push(startPos);
         cb?.({
@@ -89,7 +95,7 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
             y: startPos.y
         });
     });
-    $elm.addEventListener('mousemove', (e) => {
+    document.addEventListener('mousemove', (e) => {
         if (!isMouseDown) return;
         const point = buildTrackPoint(e);
         track.push(point);
@@ -100,7 +106,10 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
         });
         lastCapturedTime = Date.now();
     });
-    $elm.addEventListener('mouseup', (e) => {
+    document.addEventListener('mouseup', (e) => {
+        if (!isMouseDown) return;
+        $target.style.pointerEvents = 'unset';
+
         // update status
         isMouseDown = false;
         cb?.({

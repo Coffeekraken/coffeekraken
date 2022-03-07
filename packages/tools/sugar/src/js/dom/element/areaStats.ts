@@ -6,7 +6,7 @@ import __scrollTop from '../scroll/scrollTop';
 import __scrollLeft from '../scroll/scrollLeft';
 
 /**
- * @name            visibleSurface
+ * @name            areaStats
  * @namespace       js.dom.element
  * @type            Function
  * @platform          js
@@ -14,19 +14,20 @@ import __scrollLeft from '../scroll/scrollLeft';
  *
  * This function returns you an object with informations about the visible surface of the element like the `percentage`, `percentageX`, etc...
  * 
- *
  * @param       {HTMLElement}       elm             The element you want to enhance
  * @return      {HTMLElement}                  The enhanced element
  *
+ * @setting         {HTMLElement|'visible'}     [relativeTo='visible']         The element to calculate the visible surface relative to
+ * 
  * @example         js
- * import visibleSurface from '@coffeekraken/sugar/js/dom/element/visibleSurface';
+ * import areaStats from '@coffeekraken/sugar/js/dom/element/areaStats';
  * const $myElement = document.querySelector('#my-element');
- * const data = visibleSurface($myElement);
+ * const data = areaStats($myElement);
  * 
  * @since       2.0.0
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export interface IVisibleSurfaceResult {
+export interface IAreaStatsResult {
     percentage: number;
     percentageX: number;
     percentageY: number;
@@ -38,20 +39,28 @@ export interface IVisibleSurfaceResult {
     relLeft: number;
 }
 
-export interface IVisibleSurfaceSettings {
-
+export interface IAreaStatsSettings {
+    relativeTo?: HTMLElement | 'visible';
 }
 
-export default function visibleSurface($elm: HTMLElement, settings?: IVisibleSurfaceSettings = {}): IVisibleSurfaceResult {
-    let $overflowParent = <HTMLElement>__traverseUp($elm, $item => {
-        const style = window.getComputedStyle($item);
-        if (style.overflow === 'hidden') return $item;
-        return false;
-    });
+export default function areaStats($elm: HTMLElement, settings?: IAreaStatsSettings): IAreaStatsResult {
+
+    const finalSettings = <IAreaStatsSettings>{
+        relativeTo: 'visible',
+        ...settings ?? {}
+    };
+
+    if (finalSettings.relativeTo === 'visible') {
+        finalSettings.relativeTo = <HTMLElement>__traverseUp($elm, $item => {
+            const style = window.getComputedStyle($item);
+            if (style.overflow === 'hidden') return $item;
+            return false;
+        });
+    }
 
     let rootBoundingRect;
-    if ($overflowParent) {
-        rootBoundingRect = $overflowParent.getBoundingClientRect();
+    if (finalSettings?.relativeTo && finalSettings.relativeTo instanceof HTMLElement) {
+        rootBoundingRect = finalSettings?.relativeTo.getBoundingClientRect();
     } else {
         rootBoundingRect = {
             top: __scrollTop(),

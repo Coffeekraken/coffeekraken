@@ -13,8 +13,7 @@ import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTransl
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
 import __easeOut from '@coffeekraken/sugar/shared/easing/easeOutQuad';
-import __sugarElement from '@coffeekraken/sugar/js/dom/element/sugarElement';
-import __visibleSuface from '@coffeekraken/sugar/js/dom/element/visibleSurface';
+import __areaStats from '@coffeekraken/sugar/js/dom/element/areaStats';
 import __draggable from '@coffeekraken/sugar/js/dom/drag/draggable';
 // import __Swiper from 'swiper';
 // import __swiperCss from 'swiper/css';
@@ -99,8 +98,6 @@ export default class SSlider extends __SLitComponent {
             $item.classList.add(this.componentUtils.className('__item'));
             // add item into the container
             this._$itemsContainer.append($item);
-            // make sure we have a sugar element
-            __sugarElement($item);
         });
 
         // handle scroll
@@ -116,11 +113,11 @@ export default class SSlider extends __SLitComponent {
         for (let i = 0; i < this._$items.length; i++) {
             const $item = this._$items[i];
 
-            console.log($item, $item.visibleSurface);
+            console.log($item, $item.areaStats);
 
-            if ($item.visibleSurface.percentage > higherSurface) {
+            if ($item.areaStats.percentage > higherSurface) {
                 $itemObj = $item;
-                higherSurface = $item.visibleSurface.percentage;
+                higherSurface = $item.areaStats.percentage;
             }
         }
 
@@ -139,83 +136,8 @@ export default class SSlider extends __SLitComponent {
 
     }
     _handleDrag() {
-        let translateX = 0, easingScrollInterval;
-
         __draggable(this._$root, {
-            horizontal: this.props.direction === 'horizontal',
-            vertical: this.props.direction === 'vertical',
-        });
-
-        return;
-
-        __onDrag(this._$root, (state) => {
-            const translates = __getTranslateProperties(this._$itemsContainer);
-             const lastItemBounds = this._$items[this._$items.length-1].getBoundingClientRect();
-             const itemsContainerBounds = this._$itemsContainer.getBoundingClientRect();
-            
-             switch(state.type) {
-                case 'start':
-                    translateX = translates.x;
-                    easingScrollInterval?.cancel?.();
-                break;
-                case 'end':
-
-                    let duration = 1000 / 2000 * Math.abs(state.pixelsXBySecond);
-                    if (duration > 2000) duration = 2000;
-
-                    console.log(duration);
-
-                    easingScrollInterval = __easeInterval(duration, (percentage) => {
-                        const offsetX = state.pixelsXBySecond / 100 * percentage; 
-                        let translateX = translates.x + offsetX;
-
-                        const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                        if (translateX + state.deltaX < lastItemLeft * -1) {
-                            translateX = lastItemLeft * -1;
-                        } else if (translateX + state.deltaX <= 0) {
-                            translateX = translateX + state.deltaX;
-                        } else if (translateX + state.deltaX > 0) {
-                            translateX = 0;
-                        }
-
-                        this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
-                    }, {
-                        easing: __easeOut,
-                        onEnd: () => {
-                            // const mostDisplaysItem = this._getMostDisplayedItem();
-                            // const translates = __getTranslateProperties(this._$itemsContainer);
-
-                            // easingScrollInterval = __easeInterval(700, (per) => {
-                            //     const offsetX = mostDisplaysItem.originRelLeft * -1 / 100 * per;
-
-                            //     const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                            //     let translateX = translates.x + offsetX;
-                            //     if (translateX + state.deltaX < lastItemLeft * -1) {
-                            //         translateX = lastItemLeft * -1;
-                            //     } else if (translateX + state.deltaX <= 0) {
-                            //         // console.log(translateX, state.deltaX);
-                            //         translateX = translateX + state.deltaX;
-                            //     } else if (translateX + state.deltaX > 0) {
-                            //         translateX = 0;
-                            //     }
-
-                            //     this._$itemsContainer.style.transform = `translateX(${translateX}px)`;
-                            // });
-                        }
-                    });
-                break;
-                default:
-                    const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                    if (translateX + state.deltaX < lastItemLeft * -1) {
-                        this._$itemsContainer.style.transform = `translateX(${lastItemLeft * -1}px)`;
-                    } else if (translateX + state.deltaX <= 0) {
-                        // console.log(translateX, state.deltaX);
-                        this._$itemsContainer.style.transform = `translateX(${translateX + state.deltaX}px)`;
-                    } else if (translateX + state.deltaX > 0) {
-                        this._$itemsContainer.style.transform = `translateX(0px)`;
-                    }
-                break;
-            }
+            direction: this.props.direction
         });
     }
     _handleScroll() {
@@ -224,7 +146,6 @@ export default class SSlider extends __SLitComponent {
             let scrollTop = e.target.scrollTop;
             let scrollLeft = e.target.scrollLeft;
 
-            let docHeight = document.body.offsetHeight;
             let elmWidth = e.target.offsetWidth,
                 elmHeight = e.target.offsetHeight;
 

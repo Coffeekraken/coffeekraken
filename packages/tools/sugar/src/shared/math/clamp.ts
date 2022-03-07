@@ -24,5 +24,12 @@
  * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function clamp(num, min, max) {
+
+    // console.log('NUM', num, 'MIN', min, 'MAX', max);
+
+    // if (num < min) num = min;
+    // else if (num > max) num = max;
+    // return num;
+
     return  Math.min(Math.max(num, min), max);
 }

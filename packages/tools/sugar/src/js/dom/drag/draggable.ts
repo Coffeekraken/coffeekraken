@@ -8,8 +8,12 @@ import __injectStyle from '../css/injectStyle';
 import __wrapInner from '../manipulate/wrapInner';
 import __wrap from '../manipulate/wrap';
 import __clamp from '../../../shared/math/clamp';
+import __areaStats from '../element/areaStats';
+
+import __easeClamp from '../../../shared/math/easeClamp';
 
 import __easeOutQuad from '../../../shared/easing/easeOutQuad';
+import easeInterval from '../../../shared/function/easeInterval';
 
 /**
  * @name      draggable
@@ -38,17 +42,57 @@ import __easeOutQuad from '../../../shared/easing/easeOutQuad';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export interface IDraggableSettings {
-    horizontal:    boolean;
-    vertical:      boolean;
+    direction: 'vertical' | 'horizontal';
+    maxOffset: number;
+    maxOffsetX: number;
+    maxOffsetY: number;
+    refocus: number;
+}
+
+function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
+    
+
+
+    let higherSurface = 0, $itemObj;
+
+    for (let i = 0; i < $items.length; i++) {
+        const $item = $items[i];
+        const areaStats = __areaStats($item, {
+            relativeTo: <HTMLElement>$item.parentNode?.parentNode
+        });
+        if (areaStats.percentage > higherSurface) {
+            $itemObj = $item;
+            higherSurface = areaStats.percentage;
+        }
+    }
+
+    // if (!$itemObj) {
+    //     const firstItem = $items[0];
+
+    //     if (firstItem.originRelLeft >= this._$itemsContainer.getBoundingClientRect().width) {
+    //         $itemObj = firstItem;
+    //     } else {
+    //         $itemObj = this._$items[this._$items.length - 1];
+    //     }
+
+    // }
+
+    return $itemObj ?? $items[0];
+
 }
 
 export default function draggable($elm: HTMLElement, settings?: IDraggableSettings): HTMLElement {
 
     const finalSettings = <IDraggableSettings>{
-        horizontal: true,
-        vertical: true,
+        direction: 'horizontal',
+        maxOffset: 10,
+        maxOffsetX: undefined,
+        maxOffsetY: undefined,
+        refocus: true,
         ...settings ?? {}
     };
+    finalSettings.maxOffsetX = finalSettings.maxOffsetX ?? finalSettings.maxOffset;
+    finalSettings.maxOffsetY = finalSettings.maxOffsetY ?? finalSettings.maxOffset;
 
     const id = $elm.getAttribute('draggable-id') ?? __uniqid();
     $elm.setAttribute('draggable-id', id);
@@ -68,99 +112,116 @@ export default function draggable($elm: HTMLElement, settings?: IDraggableSettin
         throw new Error(`[draggable] The draggable element must have at least one child that will be translated`);
     }
 
+    let lastComputedTranslatesStr = '';
+    let cancelFromClick = false;
+
     __onDrag($elm, (state) => {
         const translates = __getTranslateProperties($child);
-
         switch(state.type) {
             case 'start':
                 translateX = translates.x;
                 translateY = translates.y;
+                cancelFromClick = true;
                 easingScrollInterval?.cancel?.();
+                setTimeout(() => {
+                    cancelFromClick = false;
+                });
             break;
             case 'end':
 
-                let duration = 1000 / 2000 * Math.abs(state.pixelsXBySecond);
-                if (duration > 2000) duration = 2000;
-                if (duration < 500) duration = 500;
+                const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.pixelsXBySecond : state.pixelsYBySecond, -2000, 2000);
+                const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000);
+
+                let sameIdx = 0;
+
+                easingScrollInterval = __easeInterval(duration, (percentage) => {
+                    const offsetX = pixelsBySecond / 100 * percentage,
+                        offsetY = pixelsBySecond / 100 * percentage; 
+
+                    let computedTranslateX, computedTranslateY;
+
+                    if (finalSettings.direction === 'horizontal') {
+                        computedTranslateX = translates.x + offsetX;
+                        computedTranslateX = __easeClamp(computedTranslateX * -1, finalSettings.maxOffsetX * -1, 0, $child.scrollWidth - $child.offsetWidth, $child.scrollWidth - $child.offsetWidth + finalSettings.maxOffsetX);
+                        computedTranslateX *= -1;
+                    } else {
+                        computedTranslateY = translates.y + offsetY;
+                        computedTranslateY = __easeClamp(computedTranslateY * -1, finalSettings.maxOffsetY * -1, 0, $child.scrollHeight - $child.offsetHeight, $child.scrollHeight - $child.offsetHeight + finalSettings.maxOffsetY);
+                        computedTranslateY *= -1;
+                    }
+
+                    if (lastComputedTranslatesStr === `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`) {
+                        sameIdx++;
+                        if (sameIdx >= 10) {
+                            easingScrollInterval.cancel();
+                            sameIdx = 0;
+                            return;
+                        }
+                    }
+                    lastComputedTranslatesStr = `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`;
 
 
-                // easingScrollInterval = __easeInterval(duration, (percentage) => {
-                //     const offsetX = state.pixelsXBySecond / 100 * percentage; 
-                //     let translateX = translates.x + offsetX;
+                    // generate transform string
+                    let translateStr = ``;
+                    if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
+                    else translateStr += ` translateY(${computedTranslateY}px)`;
 
-                //     const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                //     if (translateX + state.deltaX < lastItemLeft * -1) {
-                //         translateX = lastItemLeft * -1;
-                //     } else if (translateX + state.deltaX <= 0) {
-                //         translateX = translateX + state.deltaX;
-                //     } else if (translateX + state.deltaX > 0) {
-                //         translateX = 0;
-                //     }
+                    // apply translation
+                    $child.style.transform = translateStr;
+                }, {
+                    easing: __easeOut
+                });
 
-                //     $elm.style.transform = `translateX(${translateX}px)`;
-                // }, {
-                //     easing: __easeOut,
-                //     onEnd: () => {
-                //         // const mostDisplaysItem = this._getMostDisplayedItem();
-                //         // const translates = __getTranslateProperties($elm);
+                easingScrollInterval.on('finally', (data) => {
 
-                //         // easingScrollInterval = __easeInterval(700, (per) => {
-                //         //     const offsetX = mostDisplaysItem.originRelLeft * -1 / 100 * per;
+                    if (cancelFromClick) return;
 
-                //         //     const lastItemLeft = lastItemBounds.left - itemsContainerBounds.left;
-                //         //     let translateX = translates.x + offsetX;
-                //         //     if (translateX + state.deltaX < lastItemLeft * -1) {
-                //         //         translateX = lastItemLeft * -1;
-                //         //     } else if (translateX + state.deltaX <= 0) {
-                //         //         // console.log(translateX, state.deltaX);
-                //         //         translateX = translateX + state.deltaX;
-                //         //     } else if (translateX + state.deltaX > 0) {
-                //         //         translateX = 0;
-                //         //     }
+                    // stop if not refocus wanted
+                    if (!finalSettings.refocus) return;
 
-                //         //     $elm.style.transform = `translateX(${translateX}px)`;
-                //         // });
-                //     }
-                // });
+                    const translates = __getTranslateProperties($child);
+
+                    const $mostDisplaysItem = _getMostDisplayedItem($child.children);
+
+                    const diffX = $mostDisplaysItem.getBoundingClientRect().left - $elm.getBoundingClientRect().left,
+                        diffY = $mostDisplaysItem.getBoundingClientRect().top - $elm.getBoundingClientRect().top;
+
+                    easingScrollInterval = __easeInterval(500, (per) => {
+                        const offsetX = diffX / 100 * per,
+                            offsetY = diffY / 100 * per;
+
+                        let translateStr = ``;
+                        if (finalSettings.direction === 'horizontal') translateStr += `translateX(${translates.x + offsetX * -1}px)`;
+                        else translateStr += ` translateY(${translates.y + offsetY * -1}px)`;
+
+                        $child.style.transform = translateStr;
+                    });
+
+                });
+
             break;
             default:
 
-                const childBounds = $child.getBoundingClientRect(),
-                    elmBounds = $elm.getBoundingClientRect();
+                let computedTranslateY, computedTranslateX;
 
-                let computedTranslateX = translateX + state.deltaX;
-
-                const offsetX = childBounds.left - elmBounds.left;
-
-                const maxOffsetX = 150;
-
-                if (computedTranslateX >= maxOffsetX) {
-                    computedTranslateX = maxOffsetX;
-                } else if (computedTranslateX > 0) {
-                    const damp = 1 - __clamp(__easeOutQuad(1 / maxOffsetX * state.deltaX), 0, 1); 
-                    const newComputedX = __clamp(maxOffsetX * damp, 0, maxOffsetX);
-                    computedTranslateX = maxOffsetX - newComputedX;
+                if (finalSettings.direction === 'horizontal') {
+                    computedTranslateX = translateX + state.deltaX;
+                    computedTranslateX = __easeClamp(computedTranslateX * -1, finalSettings.maxOffsetX * -1, 0, $child.scrollWidth - $child.offsetWidth, $child.scrollWidth - $child.offsetWidth + finalSettings.maxOffsetX);
+                    computedTranslateX *= -1;
+                } else {
+                    computedTranslateY = translateY + state.deltaY;
+                    computedTranslateY = __easeClamp(computedTranslateY * -1, finalSettings.maxOffsetY * -1, 0, $child.scrollHeight - $child.offsetHeight, $child.scrollHeight - $child.offsetHeight + finalSettings.maxOffsetY);
+                    computedTranslateY *= -1;
                 }
 
-
-
+                // generate transform string
                 let translateStr = ``;
-                if (finalSettings.horizontal) translateStr += `translateX(${computedTranslateX}px)`;
-                if (finalSettings.vertical) translateStr += ` translateY(${translateY + state.deltaY}px)`;
+                if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
+                else translateStr += ` translateY(${computedTranslateY}px)`;
 
-
-
+                // apply translation
                 $child.style.transform = translateStr;
 
-                // scope if needed
-                // if ($child.getBoundingClientRect().right < 0) {
-                //     $child.style.transform = `translateX(-100%)`;
-                //     return;
-                // }   
-                // if (translateX + state.deltaX > 0) {
-                //     $child.style.transform = `translateX(0px)`;
-                //     return;
-                // }
             break;
         }
     });

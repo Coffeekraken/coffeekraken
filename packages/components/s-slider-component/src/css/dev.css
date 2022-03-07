@@ -1,8 +1,11 @@
 @sugar.init;
 @sugar.classes;
 
-.s-slider {
+s-slider {
     width: 50%;
+}
+s-slider[direction="vertical"] {
+    height: 400px;
 }
 
 .s-slider__item {

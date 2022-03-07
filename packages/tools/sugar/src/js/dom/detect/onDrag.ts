@@ -34,14 +34,22 @@ export interface IOnDragTrackItem {
     speedY: number;
 }
 
-export default function onDrag($elm: HTMLElement, cb: Function): void {
+export interface IOnDragSettings {
+    maxSpeed: number;
+}
+
+export default function onDrag($elm: HTMLElement, cb: Function, settings?: Partial<IOnDragSettings>): void {
+
+    const finalSettings = <IOnDragSettings>{
+        maxSpeed: 0.01,
+        ...settings ?? {}
+    };
 
     let isMouseDown = false;
     
-    let startPos, endPos, $target;
+    let startPos, $target;
 
     let track: IOnDragTrackItem[] = [];
-
 
     let lastCapturedTime;
 
@@ -50,16 +58,23 @@ export default function onDrag($elm: HTMLElement, cb: Function): void {
             deltaY = e.pageY - startPos.top,
             time = (Date.now() - lastCapturedTime);
 
-            const secondPercentage = 100 / 1000 * time;
+        const secondPercentage = 100 / 1000 * time;
 
         const lastTrackPoint = track[track.length - 1];
 
         const lastDeltaX = e.pageX - lastTrackPoint.x,
             lastDeltaY = e.pageY - lastTrackPoint.y;
 
-        const speedX = lastDeltaX / time,
-            speedY = lastDeltaY / time;
-
+        let speedX = lastDeltaX / time || 0,
+            speedY = lastDeltaY / time || 0;
+        
+        if (Math.abs(speedX) > finalSettings.maxSpeed) {
+            speedX = finalSettings.maxSpeed * (speedX < 0 ? -1 : 1);
+        }
+        if (Math.abs(speedY) > finalSettings.maxSpeed) {
+            speedY = finalSettings.maxSpeed * (speedY < 0 ? -1 : 1);
+        }
+            
         return {
             x: e.pageX,
             y: e.pageY,

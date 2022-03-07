@@ -1,4 +1,5 @@
 import __SInterface from '@coffeekraken/s-interface';
+import __easeOutQuad from '@coffeekraken/sugar/shared/easing/easeOutQuad';
 
 /**
  * @name                SSliderComponentInterface
@@ -39,11 +40,25 @@ export default class SSliderComponentInterface extends __SInterface {
                 type: 'String',
                 default: '0px'
             },
-            scrollable: {
-                description: 'Specify if the slider is scrollable or not',
+            slideable: {
+                description: 'Specify if the slider is slideable or not',
                 type: 'Boolean',
                 physical: true,
                 default: true
+            },
+            transitionDuration: {
+                description: 'Specify the transition duration of the slider in ms',
+                type: 'Number',
+                default: 500
+            },
+            transitionEasing: {
+                description: 'Specify the transition easing of the slider',
+                type: 'Function',
+                default: __easeOutQuad
+            },
+            transitionHandler: {
+                description: 'Specify a function that will take care of transitioning the slider from the current item to the next/previous',
+                type: 'Function'
             }
         };
     }

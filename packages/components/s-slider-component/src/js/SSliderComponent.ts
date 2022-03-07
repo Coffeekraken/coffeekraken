@@ -3,20 +3,13 @@
 import __SLitComponent, {
     ISLitComponentDefaultProps
 } from '@coffeekraken/s-lit-component';
+import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
 import __css from '../css/s-slider-component.css';
 import __SSliderComponentInterface from './interface/SSliderComponentInterface';
-import __querySelectorLive from '@coffeekraken/sugar/js/dom/query/querySelectorLive';
-import __onDrag from '@coffeekraken/sugar/js/dom/detect/onDrag';
 import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
-import __scrollTo from '@coffeekraken/sugar/js/dom/scroll/scrollTo';
-import __easeOut from '@coffeekraken/sugar/shared/easing/easeOutQuad';
-import __areaStats from '@coffeekraken/sugar/js/dom/element/areaStats';
-import __draggable from '@coffeekraken/sugar/js/dom/drag/draggable';
-// import __Swiper from 'swiper';
-// import __swiperCss from 'swiper/css';
 
 /**
  * @name                Range
@@ -53,6 +46,9 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     itemsByPage: number;
     sideReveal: number;
+    transitionDuration: number;
+    transitionEasing: number;
+    transitionHandler: Function;
 }
 
 export default class SSlider extends __SLitComponent {
@@ -70,10 +66,11 @@ export default class SSlider extends __SLitComponent {
 
     _$root: HTMLElement;
     _$items: HTMLElement[] = [];
+    _$navs: HTMLElement[] = [];
     _$itemsContainer: HTMLElement;
 
-    _currentPage = 0;
-    _currentItem = 0;
+    _currentPageIdx = 0;
+    _currentItemIdx = 0;
 
     constructor() {
         super(
@@ -88,10 +85,14 @@ export default class SSlider extends __SLitComponent {
         );
     }
     async firstUpdated() {
-
         this._$itemsContainer = this.querySelector('[ref="itemsContainer"]');
         this._$root = this.querySelector('[ref="root"]');
 
+        this._$navs = this.querySelectorAll('[s-slider-nav]');
+        this._$navs.forEach($nav => {
+            $nav.classList.add(this.componentUtils.className('__nav'));
+            this._$root.append($nav);
+        });
         this._$items = this.querySelectorAll('[s-slider-item]');
         this._$items.forEach($item => {
             // add the item class
@@ -102,42 +103,103 @@ export default class SSlider extends __SLitComponent {
 
         // handle scroll
         this._handleScroll();
-        // handle drag
-        this._handleDrag();
+        // handle slide
+        this._handleSlide();
+
+        // setTimeout(() => {
+        //     this.next();
+        // }, 1000);
+        // setTimeout(() => {
+        //     this.next();
+        // }, 2000);
+        // setTimeout(() => {
+        //     this.next();
+        // }, 3000);
+        // setTimeout(() => {
+        //     this.goTo(0);
+        // }, 4000);
 
     }
-    _getMostDisplayedItem() {
+
+    getCurrentSlideIdx() {
+        return this._currentItemIdx;
+    }
+    getCurrentSlideItem() {
+        return this._$items[this._currentItemIdx]
+    }
+    getNextSlideIdx() {
+        const nextSlideIdx = this._currentItemIdx + 1;
+        if (nextSlideIdx >= this._$items.length - 1) return this._$items.length - 1;
+        return nextSlideIdx;
+    }
+    getPreviousSlideIdx() {
+        const previousSlideIdx = this._currentItemIdx - 1;
+        if (previousSlideIdx <= 0) return 0;
+        return previousSlideIdx;
+    }
+    getNextSlideItem() {
+        return this._$items[this.getNextSlideIdx()];
+    }
+    getPreviousSlideItem() {
+        return this._$items[this.getPreviousSlideIdx()];
+    }
+    goTo(slideIdx: number) {
+        if (!this._$items[slideIdx]) return;
+        const $nextItem = this._$items[slideIdx];
+        const $currentItem = this.getCurrentSlideItem();
+        this._currentItemIdx = slideIdx;
+        this._transitionHandler($currentItem, $nextItem);
+    }
+    next() {
+        const $nextItem = this.getNextSlideItem();
+        const $currentItem = this.getCurrentSlideItem();
+        this._currentItemIdx = this.getNextSlideIdx();
+        this._transitionHandler($currentItem, $nextItem);
+    }
+    previous() {
+        const $previousItem = this.getPreviousSlideItem();
+        const $currentItem = this.getCurrentSlideItem();
+        this._currentItemIdx = this.getPreviousSlideIdx();
+        this._transitionHandler($currentItem, $previousItem);
+    }
+    _transitionHandler($from, $to) {
         
-        let higherSurface = 0, $itemObj;
+        const $slideableItem = this._$root.children[0];
+        const translates = __getTranslateProperties($slideableItem);
 
-        for (let i = 0; i < this._$items.length; i++) {
-            const $item = this._$items[i];
-
-            console.log($item, $item.areaStats);
-
-            if ($item.areaStats.percentage > higherSurface) {
-                $itemObj = $item;
-                higherSurface = $item.areaStats.percentage;
-            }
+        if (this.props.transitionHandler) {
+            this.props.transitionHandler($from, $to);
+            return;
         }
 
-        if (!$itemObj) {
-            const firstItem = this._$items[0],
+        const nextBounds = $to.getBoundingClientRect();
+        const sliderBounds = this._$root.getBoundingClientRect();
 
-            if (firstItem.originRelLeft >= this._$itemsContainer.getBoundingClientRect().width) {
-                $itemObj = firstItem;
+        const deltaX = nextBounds.left - sliderBounds.left,
+            deltaY = nextBounds.top;
+
+        __easeInterval(this.props.transitionDuration, (percent) => {
+            if (this.props.direction === 'horizontal') {
+                const computedDelta = translates.x + (deltaX / 100 * percent) * -1;
+                $slideableItem.style.transform = `translateX(${computedDelta}px)`;
             } else {
-                $itemObj = this._$items[this._$items.length - 1];
+                const computedDelta = translates.y + (deltaY * -1 / 100 * percent) * -1;
+                $slideableItem.style.transform = `translateY(${computedDelta}px)`;
             }
 
-        }
+        }, {
+            easing: this.props.transitionEasing
+        });
 
-        return $itemObj;
-
+        this.requestUpdate();
     }
-    _handleDrag() {
-        __draggable(this._$root, {
-            direction: this.props.direction
+    _handleSlide() {
+        __slideable(this._$root, {
+            direction: this.props.direction,
+            onRefocus: ($slide) => {
+                this._currentItemIdx = [...this._$items].indexOf($slide);
+                this.requestUpdate();
+            }
         });
     }
     _handleScroll() {
@@ -159,11 +221,11 @@ export default class SSlider extends __SLitComponent {
             this._scrollYPercent = scrollYPercent;
 
             if (this.props.direction === 'horizontal') {
-                this._currentPage = Math.round(scrollXPercent / 100 * this._$items.length) - 1;
-                this._currentItem = Math.round(this.props.itemsByPage * this._currentPage);
+                this._currentPageIdx = Math.round(scrollXPercent / 100 * this._$items.length) - 1;
+                this._currentItemIdx = Math.round(this.props.itemsByPage * this._currentPageIdx);
             } else if (this.props.direction === 'vertical') {
-                this._currentPage = Math.round(scrollYPercent / 100 * this._$items.length) - 1;
-                this._currentItem = Math.round(this.props.itemsByPage * this._currentPage);
+                this._currentPageIdx = Math.round(scrollYPercent / 100 * this._$items.length) - 1;
+                this._currentItemIdx = Math.round(this.props.itemsByPage * this._currentPageIdx);
             }
             this.requestUpdate();
         });
@@ -175,9 +237,9 @@ export default class SSlider extends __SLitComponent {
                     '',
                 )}"
                 style="
-                    --s-slider-side-reveal: ${this.props.sideReveal};
-                    --s-slider-page: ${this._currentPage};
-                    --s-slider-item: ${this._currentItem};
+                    --s-slider-block-reveal: ${this.props.sideReveal};
+                    --s-slider-page: ${this._currentPageIdx};
+                    --s-slider-item: ${this._currentItemIdx};
                     --s-slider-total: ${this._$items.length};
                 "
             >

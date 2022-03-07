@@ -1,7 +1,7 @@
 import __onDrag from '../detect/onDrag';
 import __easeOut from '../../../shared/easing/easeOutQuad';
 import __easeInterval from '../../../shared/function/easeInterval';
-import __getTranslateProperties from '../../dom/style/getTranslateProperties';
+import __getTranslateProperties from '../style/getTranslateProperties';
 import __querySelectorLive from '../query/querySelectorLive';
 import __uniqid from '../../../shared/string/uniqid';
 import __injectStyle from '../css/injectStyle';
@@ -16,18 +16,18 @@ import __easeOutQuad from '../../../shared/easing/easeOutQuad';
 import easeInterval from '../../../shared/function/easeInterval';
 
 /**
- * @name      draggable
+ * @name      slideable
  * @namespace            js.dom.drag
  * @type      Function
  * @async
  * @platform          js
  * @status          beta
  *
- * Simulate the drag gesture with optional inertia and direction restriction
+ * Simulate the slide gesture with optional inertia and direction restriction
  *
  * @setting     {Number}      [threshold=100]       The minimum distance the user has to swipe before detection
  *
- * @param       {HTMLElement}         elm         The HTMLElement on which to apply the draggable behavior
+ * @param       {HTMLElement}         elm         The HTMLElement on which to apply the slideable behavior
  * @param       {Function}            cb          The function to call on swipe. The callback function has as parameter an object that containthe swipe direction like left, right, up and down
  * @param       {Number}              [threshold=100]       The swipe threshold
  *
@@ -36,12 +36,12 @@ import easeInterval from '../../../shared/function/easeInterval';
  * @todo      tests
  *
  * @example 	js
- * import draggable from '@coffeekraken/sugar/js/drag/draggable';
+ * import slideable from '@coffeekraken/sugar/js/drag/slideable';
  *
  * @since         1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-export interface IDraggableSettings {
+export interface ISlideableSettings {
     direction: 'vertical' | 'horizontal';
     maxOffset: number;
     maxOffsetX: number;
@@ -50,8 +50,6 @@ export interface IDraggableSettings {
 }
 
 function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
-    
-
 
     let higherSurface = 0, $itemObj;
 
@@ -81,35 +79,36 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 
 }
 
-export default function draggable($elm: HTMLElement, settings?: IDraggableSettings): HTMLElement {
+export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): HTMLElement {
 
-    const finalSettings = <IDraggableSettings>{
+    const finalSettings = <ISlideableSettings>{
         direction: 'horizontal',
         maxOffset: 10,
         maxOffsetX: undefined,
         maxOffsetY: undefined,
         refocus: true,
+        onRefocus: undefined,
         ...settings ?? {}
     };
     finalSettings.maxOffsetX = finalSettings.maxOffsetX ?? finalSettings.maxOffset;
     finalSettings.maxOffsetY = finalSettings.maxOffsetY ?? finalSettings.maxOffset;
 
-    const id = $elm.getAttribute('draggable-id') ?? __uniqid();
-    $elm.setAttribute('draggable-id', id);
+    const id = $elm.getAttribute('slideable-id') ?? __uniqid();
+    $elm.setAttribute('slideable-id', id);
 
     let translateX = 0, easingScrollInterval,
         translateY = 0;
 
     __injectStyle(`
-        [draggable-id] {
+        [slideable-id] {
             user-select: none;
         }
-    `, 's-draggable');
+    `, 's-slideable');
 
     const $child = <HTMLElement>$elm.firstElementChild;
 
     if (!$child) {
-        throw new Error(`[draggable] The draggable element must have at least one child that will be translated`);
+        throw new Error(`[slideable] The slideable element must have at least one child that will be translated`);
     }
 
     let lastComputedTranslatesStr = '';
@@ -182,6 +181,8 @@ export default function draggable($elm: HTMLElement, settings?: IDraggableSettin
                     const translates = __getTranslateProperties($child);
 
                     const $mostDisplaysItem = _getMostDisplayedItem($child.children);
+
+                    finalSettings.onRefocus?.($mostDisplaysItem);
 
                     const diffX = $mostDisplaysItem.getBoundingClientRect().left - $elm.getBoundingClientRect().left,
                         diffY = $mostDisplaysItem.getBoundingClientRect().top - $elm.getBoundingClientRect().top;

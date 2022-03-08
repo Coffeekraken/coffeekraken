@@ -3,7 +3,12 @@
 
 s-slider {
     width: 50%;
+    display: none;
 }
+s-slider[mounted] {
+    display: block;
+}
+
 s-slider[direction="vertical"] {
     height: 400px;
 }

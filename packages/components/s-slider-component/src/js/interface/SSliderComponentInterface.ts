@@ -30,6 +30,11 @@ export default class SSliderComponentInterface extends __SInterface {
                 physical: true,
                 default: 'horizontal',
             },
+            behavior: {
+                description: 'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
+                type: 'Object',
+                default: undefined
+            },
             itemsByPage: {
                 description: 'Specify how many items a slider "page" contains. By default it\'s 1',
                 type: 'Number',

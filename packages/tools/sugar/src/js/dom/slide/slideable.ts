@@ -9,6 +9,11 @@ import __wrapInner from '../manipulate/wrapInner';
 import __wrap from '../manipulate/wrap';
 import __clamp from '../../../shared/math/clamp';
 import __areaStats from '../element/areaStats';
+import * as __rematrix from 'rematrix';
+
+import __SSugarElement from '@coffeekraken/s-sugar-element';
+
+import __getRotateProperties from '../style/getRotateProperties';
 
 import __easeClamp from '../../../shared/math/easeClamp';
 
@@ -81,6 +86,8 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 
 export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): HTMLElement {
 
+    const $sElm = new __SSugarElement($elm);
+
     const finalSettings = <ISlideableSettings>{
         direction: 'horizontal',
         maxOffset: 10,
@@ -111,11 +118,13 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
         throw new Error(`[slideable] The slideable element must have at least one child that will be translated`);
     }
 
+    const $sChild = new __SSugarElement($child);
+
     let lastComputedTranslatesStr = '';
     let cancelFromClick = false;
 
     __onDrag($elm, (state) => {
-        const translates = __getTranslateProperties($child);
+        const translates = $sChild.getTranslates();
         switch(state.type) {
             case 'start':
                 translateX = translates.x;
@@ -159,14 +168,12 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
                     }
                     lastComputedTranslatesStr = `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`;
 
-
-                    // generate transform string
-                    let translateStr = ``;
-                    if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
-                    else translateStr += ` translateY(${computedTranslateY}px)`;
-
                     // apply translation
-                    $child.style.transform = translateStr;
+                    if (finalSettings.direction === 'horizontal') {
+                        $sChild.setTranslate(computedTranslateX);
+                    } else {
+                        $sChild.setTranslate(0, computedTranslateY);
+                    }
                 }, {
                     easing: __easeOut
                 });
@@ -178,7 +185,7 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
                     // stop if not refocus wanted
                     if (!finalSettings.refocus) return;
 
-                    const translates = __getTranslateProperties($child);
+                    const translates = $sChild.getTranslates();
 
                     const $mostDisplaysItem = _getMostDisplayedItem($child.children);
 
@@ -195,7 +202,11 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
                         if (finalSettings.direction === 'horizontal') translateStr += `translateX(${translates.x + offsetX * -1}px)`;
                         else translateStr += ` translateY(${translates.y + offsetY * -1}px)`;
 
-                        $child.style.transform = translateStr;
+                        if (finalSettings.direction === 'horizontal') {
+                            $sChild.setTranslate(translates.x + offsetX * -1);
+                        } else {
+                            $sChild.setTranslate(0, translates.y + offsetY * -1);
+                        }
                     });
 
                 });
@@ -216,12 +227,18 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
                 }
 
                 // generate transform string
-                let translateStr = ``;
-                if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
-                else translateStr += ` translateY(${computedTranslateY}px)`;
+                // let translateStr = ``;
+                // if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
+                // else translateStr += ` translateY(${computedTranslateY}px)`;
+
+                if (finalSettings.direction === 'horizontal') {
+                    $sChild.setTranslate(computedTranslateX);
+                } else {
+                    $sChild.setTranslate(0, computedTranslateY);
+                }
 
                 // apply translation
-                $child.style.transform = translateStr;
+                // $child.style.transform = translateStr;
 
             break;
         }

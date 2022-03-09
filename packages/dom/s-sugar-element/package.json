@@ -1,0 +1,19 @@
+{
+    "name": "@coffeekraken/s-sugar-element",
+    "version": "2.0.0",
+    "description": "",
+    "type": "module",
+    "main": "./src/js/exports.js",
+    "scripts": {
+        "dev": "sugar frontstack dev",
+        "build": "sugar frontstack build",
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)",
+    "license": "MIT",
+    "dependencies": {
+        "@coffeekraken/s-class": "^2.0.0",
+        "@coffeekraken/s-interface": "^2.0.0",
+        "@coffeekraken/sugar": "^2.0.0"
+    }
+}

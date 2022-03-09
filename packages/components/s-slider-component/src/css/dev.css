@@ -1,16 +1,60 @@
 @sugar.init;
-@sugar.classes;
+/* @sugar.classes; */
 
-s-slider {
-    width: 50%;
+.s-slider {
+    width: 800px;
+    height: 450px;
     display: none;
+    margin: 0 auto;
+    margin-bottom: 50px;
 }
-s-slider[mounted] {
+s-slider[mounted] .s-slider {
     display: block;
 }
 
-s-slider[direction="vertical"] {
-    height: 400px;
+s-slider.cards .s-slider {
+    overflow: visible;
+    /* perspective: 800px; */
+
+    .s-slider__slides {
+        /* transform: translateZ(-100px) rotateX(0deg); */
+    }
+    .s-slider__slide {
+        /* perspective: 800px; */
+
+        /* &.active{
+            img {
+                transform: scale(1);
+            }
+        } */
+
+        &.in-50 {
+            img {
+                transform: scale(0.85);
+            }
+        }
+        &.in-70 {
+            img {
+                transform: scale(0.9);
+            }
+        }
+        &.in-90 {
+            img {
+                transform: scale(0.95);
+            }
+        }
+        &.in-100 {
+            img {
+                transform: scale(1);
+            }
+        }
+
+        img {
+            transform: scale(0.85);
+            transition: all .3s ease-in-out;
+        }
+    }
+
 }
 
 .s-slider__item {

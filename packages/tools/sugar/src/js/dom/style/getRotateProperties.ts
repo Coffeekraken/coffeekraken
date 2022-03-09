@@ -1,15 +1,15 @@
 // @ts-nocheck
 
-import * as __rematrix from 'rematrix';
+import * as rematrix from 'rematrix';
 
 /**
- * @name      getTranslateProperties
+ * @name      getRotateProperties
  * @namespace            js.dom.style
  * @type      Function
  * @platform          js
  * @status        beta
  *
- * Get a translate properties of an HTMLElement
+ * Get a rotate properties of an HTMLElement
  *
  * @param 		{HTMLElement} 					$elm  		The element to get the properties from
  * @return 		{Object} 									The translate x,y and z properties
@@ -19,8 +19,8 @@ import * as __rematrix from 'rematrix';
  * @todo      tests
  *
  * @example  	js
- * import getTranslateProperties from '@coffeekraken/sugar/js/dom/getTranslateProperties'
- * const props = getTranslateProperties(myCoolHTMLElement);
+ * import getRotateProperties from '@coffeekraken/sugar/js/dom/getRotateProperties'
+ * const props = getRotateProperties(myCoolHTMLElement);
  * // output format
  * // {
  * // 	x : 100,
@@ -31,18 +31,15 @@ import * as __rematrix from 'rematrix';
  * @since           1.0.0
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
-function getTranslateProperties(
-    $elm: HTMLElement,
+function getRotateProperties(
+    $elm: HTMLElement
 ): {
     x: number;
     y: number;
     z: number;
 } {
-    if (!window.getComputedStyle) return {
-        x: 0,
-        y: 0,
-        z: 0
-    };
+    if (!window.getComputedStyle) return;
+    let idx, mat;
     const style = getComputedStyle($elm);
     const transform =
         style.transform ||
@@ -56,11 +53,22 @@ function getTranslateProperties(
             z: 0,
         };
 
-    const matrix3d = __rematrix.fromString(transform);
+    const matrix = rematrix.fromString(transform).toString();
+    var values = matrix.split(','),
+        pi = Math.PI,
+        sinB = parseFloat(values[8]),
+        b = Math.round(Math.asin(sinB) * 180 / pi),
+        cosB = Math.cos(b * pi / 180),
+        matrixVal10 = parseFloat(values[9]),
+        a = Math.round(Math.asin(-matrixVal10 / cosB) * 180 / pi),
+        matrixVal1 = parseFloat(values[0]),
+        c = Math.round(Math.acos(matrixVal1 / cosB) * 180 / pi);
+
     return {
-        x: matrix3d[12],
-        y: matrix3d[13],
-        z: matrix3d[14],
+        x: a,
+        y: b,
+        z: c,
     };
+
 }
-export default getTranslateProperties;
+export default getRotateProperties;

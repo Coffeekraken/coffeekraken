@@ -37,7 +37,6 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
         __slideable(this.$slider.$root, {
             direction: this.$slider.props.direction,
             onRefocus: ($slide) => {
-                console.log('re', $slide);
                 this.$slider.setCurrentSlideIdx([...this.$slider.$slides].indexOf($slide));
             }
         });

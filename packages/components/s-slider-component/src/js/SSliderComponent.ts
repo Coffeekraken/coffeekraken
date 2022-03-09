@@ -115,6 +115,9 @@ export default class SSlider extends __SLitComponent {
             this.behavior.firstUpdated?.();
         }
 
+        // listen for intersections
+        this._handleIntersections();
+
         // handle scroll
         // this._handleScroll();
 
@@ -134,6 +137,65 @@ export default class SSlider extends __SLitComponent {
         //     this.goTo(0);
         // }, 4000);
 
+    }
+
+    /**
+     * This function listen for intersection changes on slides and apply classes depending on this
+     */
+    _handleIntersections() {
+         this.$slides?.forEach($slide => {
+
+            function buildThresholdList() {
+                let thresholds = [];
+                let numSteps = 10;
+                for (let i=1.0; i<=numSteps; i++) {
+                    let ratio = i/numSteps;
+                    thresholds.push(ratio);
+                }
+                thresholds.push(0);
+                return thresholds;
+            }
+
+            function handleIntersect(entries, observer) {
+                let highestRatio = 0;
+                entries.forEach((entry) => {
+                    if (entry.intersectionRatio > highestRatio) {
+                        highestRatio = entry.intersectionRatio;
+                    } 
+                });
+                [0.1,0.2,0.3,0.4,0.5,0.6,0.7,0.8,0.9,1].forEach((threshold, idx) => {
+                    if (highestRatio >= threshold) {
+                        $slide.classList.add(`in-${threshold*100}`);
+                    } else {
+                        $slide.classList.remove(`in-${threshold*100}`);
+                    }
+                });
+            }
+
+            let observer;
+
+            let options = {
+                root: this.$root,
+                rootMargin: "0px",
+                threshold: buildThresholdList()
+            };
+
+            observer = new IntersectionObserver(handleIntersect, options);
+            observer.observe($slide);
+
+        });
+    }
+
+    /**
+     * This function simply apply the current state of the slider
+     */
+    requestUpdate() {
+        super.requestUpdate();
+        // update slides classes
+        this.$slides?.forEach(($slide, i) => {
+            if (i === this.currentSlideIdx) $slide.classList.add('active');
+            else $slide.classList.remove('active');
+        });
     }
 
     /**

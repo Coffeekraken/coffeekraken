@@ -69,24 +69,11 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
         }
     }
 
-    // if (!$itemObj) {
-    //     const firstItem = $items[0];
-
-    //     if (firstItem.originRelLeft >= this._$itemsContainer.getBoundingClientRect().width) {
-    //         $itemObj = firstItem;
-    //     } else {
-    //         $itemObj = this._$items[this._$items.length - 1];
-    //     }
-
-    // }
-
     return $itemObj ?? $items[0];
 
 }
 
 export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): HTMLElement {
-
-    const $sElm = new __SSugarElement($elm);
 
     const finalSettings = <ISlideableSettings>{
         direction: 'horizontal',
@@ -137,9 +124,8 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
             break;
             case 'end':
 
-                const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.pixelsXBySecond : state.pixelsYBySecond, -2000, 2000);
+                const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.speedX : state.speedY, -2000, 2000);
                 const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000);
-
                 let sameIdx = 0;
 
                 easingScrollInterval = __easeInterval(duration, (percentage) => {

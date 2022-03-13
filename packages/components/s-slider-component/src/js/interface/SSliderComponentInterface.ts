@@ -51,6 +51,11 @@ export default class SSliderComponentInterface extends __SInterface {
                 physical: true,
                 default: true
             },
+            intersectionClasses: {
+                description: 'Specify if you want the classes that describe each slide intersection classes like "in-10", "in-20", etc...',
+                type: 'Boolean',
+                default: true
+            },
             transitionDuration: {
                 description: 'Specify the transition duration of the slider in ms',
                 type: 'Number',

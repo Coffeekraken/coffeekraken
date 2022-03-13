@@ -1,3 +1,5 @@
+import __getPositionFromEvent from '../position/getPositionFromEvent';
+
 /**
  * @name      onDrag
  * @namespace            js.dom.detect
@@ -54,16 +56,17 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
     let lastCapturedTime;
 
     function buildTrackPoint(e) {
-        const deltaX = e.pageX - startPos.left,
-            deltaY = e.pageY - startPos.top,
+        const { x, y } = __getPositionFromEvent(e);
+        const deltaX = x - startPos.x,
+            deltaY = y - startPos.y,
             time = (Date.now() - lastCapturedTime);
 
         const secondPercentage = 100 / 1000 * time;
 
         const lastTrackPoint = track[track.length - 1];
 
-        const lastDeltaX = e.pageX - lastTrackPoint.x,
-            lastDeltaY = e.pageY - lastTrackPoint.y;
+        const lastDeltaX = x - lastTrackPoint.x,
+            lastDeltaY = y - lastTrackPoint.y;
 
         let speedX = lastDeltaX / time || 0,
             speedY = lastDeltaY / time || 0;
@@ -74,44 +77,59 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
         if (Math.abs(speedY) > finalSettings.maxSpeed) {
             speedY = finalSettings.maxSpeed * (speedY < 0 ? -1 : 1);
         }
-            
-        return {
-            x: e.pageX,
-            y: e.pageY,
+                    
+        const point = {
+            x,
+            y,
             deltaX,
             deltaY,
-            pixelsXBySecond: lastDeltaX / secondPercentage * 100,
-            pixelsYBySecond: lastDeltaY / secondPercentage * 100,
-            speedX,
-            speedY
+            speedX: lastDeltaX / secondPercentage * 100,
+            speedY: lastDeltaY / secondPercentage * 100
         };
+        return point;
     }
 
-    document.addEventListener('mousedown', (e) => {
-
+    function down(e) {
         if (e.target !== $elm && !$elm.contains(e.target)) return;
+
         $target = e.target;
 
-        $target.style.pointerEvents = 'none';
+        const { x, y } = __getPositionFromEvent(e);
 
-        track = [];
+        // set the start position
+        startPos = {
+            x,
+            y,
+        };
+        // set the first tracked point
+        track = [{
+            x: startPos.x,
+            y: startPos.y,
+            deltaX: 0,
+            deltaY: 0,
+            speedX: 0,
+            speedY: 0
+        }];
         lastCapturedTime = Date.now();
         // update status
         isMouseDown = true;
-        // set the start position
-        startPos = {
-            top: e.pageY,
-            left: e.pageX,
-        };
-        track.push(startPos);
-        cb?.({
-            type: 'start',
-            x: startPos.x,
-            y: startPos.y
-        });
-    });
-    document.addEventListener('mousemove', (e) => {
+    }
+    document.addEventListener('mousedown', down);
+    document.addEventListener('touchstart', down);
+    
+    function move(e) {
         if (!isMouseDown) return;
+
+        // if first point tracked, trigger the "start" event
+        if (track.length === 1) {
+            cb?.({
+                type: 'start',
+                track: track[0]
+            });
+        }
+
+        $target.style.pointerEvents = 'none';
+
         const point = buildTrackPoint(e);
         track.push(point);
         cb?.({
@@ -120,17 +138,26 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
             track
         });
         lastCapturedTime = Date.now();
-    });
-    document.addEventListener('mouseup', (e) => {
+    }
+    document.addEventListener('mousemove', move);
+    document.addEventListener('touchmove', move);
+
+    function up(e) {
         if (!isMouseDown) return;
         $target.style.pointerEvents = 'unset';
 
         // update status
         isMouseDown = false;
-        cb?.({
-            type: 'end',
-            ...track[track.length - 1],
-            track
-        });
-    });
+
+        // callback if moved
+        if (track.length > 1) {
+            cb?.({
+                type: 'end',
+                ...track[track.length - 1],
+                track
+            });
+        }
+    }
+    document.addEventListener('mouseup', up);
+    document.addEventListener('touchend', up);
 }

@@ -174,9 +174,9 @@ export default class SSugarElement {
      */
     getTranslates(): ISugarElementTranslates {
         return {
-            x: this.matrix[12],
-            y: this.matrix[13],
-            z: this.matrix[14],
+            x: isNaN(this.matrix[12]) ? 0 : this.matrix[12],
+            y: isNaN(this.matrix[13]) ? 0 : this.matrix[13],
+            z: isNaN(this.matrix[14]) ? 0 : this.matrix[14]
         };
     }
 

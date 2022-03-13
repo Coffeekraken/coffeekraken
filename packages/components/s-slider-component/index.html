@@ -13,7 +13,7 @@
             import __SSliderSlideableBehavior from './src/js/behaviors/SSliderSlideableBehavior.ts';
 
             define({
-                behavior: new __SSliderSlideableBehavior()
+                behavior: __SSliderSlideableBehavior
             });
         </script>
 
@@ -21,19 +21,26 @@
         <br />
 
         <s-slider>
-            <div s-slider-slide>
+            <div s-slider-slide="welcome-1">
                 <img src="https://picsum.photos/800/450/?randomf" />
             </div>
-            <div s-slider-slide>
+            <div s-slider-slide="welcome-2">
                 <img src="https://picsum.photos/800/450/?randomef" />
             </div>
-            <div s-slider-slide>
+            <div s-slider-slide="welcome-3">
                 <img src="https://picsum.photos/800/450/?random3r3" />
             </div>
-            <div s-slider-slide>
+            <div s-slider-slide="plop">
                 <img src="https://picsum.photos/800/450/?randowfwefwefm" />
             </div>
-            <div s-slider-nav></div>
+
+            <div s-slider-nav="welcome-1">Go to slide 1</div>
+            <div s-slider-nav="plop">Go to slide plop</div>
+            <div s-slider-nav="welcome-2">Go to slide 2</div>
+            <div s-slider-nav="welcome-3">Go to slide 3</div>
+
+            <!-- <div s-slider-nav="plop">Go to slide 1</div>
+            <div s-slider-nav></div> -->
         </s-slider>
 
         <s-slider class="cards">

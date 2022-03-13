@@ -14,6 +14,8 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
 
     static id = 'slideable';
 
+    _$lastGoToSlide: HTMLElement;
+
     /**
      * @name            constructor
      * @type        Function
@@ -31,13 +33,20 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
     firstUpdated() {
         // handle slide
         this._handleSlide();
+
+        this.$slider.addEventListener('s-slider-goto', (e) => {
+            console.log('gogo');
+            this._$lastGoToSlide = e.detail.$slide;
+        });
+
     }
 
     _handleSlide() {
         __slideable(this.$slider.$root, {
             direction: this.$slider.props.direction,
             onRefocus: ($slide) => {
-                this.$slider.setCurrentSlideIdx([...this.$slider.$slides].indexOf($slide));
+                // if (this._$lastGoToSlide !== $slide) return;
+                this.$slider.setCurrentSlide($slide)
             }
         });
     }

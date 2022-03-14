@@ -26,6 +26,7 @@ export interface ISLitComponentCtorSettings {
 
 export interface ISLitComponentDefaultProps {
     id: string;
+    lnf: string;
     mountWhen: 'directly' | 'direct' | 'inViewport';
     adoptStyle: boolean;
     defaultStyle: boolean;
@@ -126,6 +127,7 @@ export default class SLitComponent extends LitElement {
                     '',
             },
         });
+
         this.props = this.componentUtils.props;
 
         // shadow handler
@@ -169,32 +171,35 @@ export default class SLitComponent extends LitElement {
         })();
     }
 
-    static properties(properties: any, int: typeof __SInterface): any {
+    static properties(properties: any, ...ints: typeof __SInterface): any {
         const propertiesObj = {};
-        const InterfaceToApply = __SComponentUtils.getFinalInterface(int);
 
-        // @ts-ignore
-        Object.keys(InterfaceToApply.definition).forEach((prop) => {
+        ints.forEach(int => {
+
+            const InterfaceToApply = __SComponentUtils.getFinalInterface(int);
             // @ts-ignore
-            const definition = InterfaceToApply.definition[prop];
-            propertiesObj[prop] = {
-                ...(definition.lit ?? {}),
-            };
-            // const type = definition.type?.type ?? definition.type ?? 'string';
-            if (
-                definition.physical ||
-                definition.type?.toLowerCase?.() === 'boolean' ||
-                definition.type?.type?.toLowerCase?.() === 'boolean'
-            ) {
-                propertiesObj[prop].reflect = true;
-                propertiesObj[prop].attribute = __dashCase(prop);
-                propertiesObj[prop].converter = {
-                    toAttribute(value) {
-                        if (value === 'false' || value === false || value === null) return null;
-                        return String(value);
-                    },
+            Object.keys(InterfaceToApply.definition).forEach((prop) => {
+                // @ts-ignore
+                const definition = InterfaceToApply.definition[prop];
+                propertiesObj[prop] = {
+                    ...(definition.lit ?? {}),
                 };
-            }
+                // const type = definition.type?.type ?? definition.type ?? 'string';
+                if (
+                    definition.physical ||
+                    definition.type?.toLowerCase?.() === 'boolean' ||
+                    definition.type?.type?.toLowerCase?.() === 'boolean'
+                ) {
+                    propertiesObj[prop].reflect = true;
+                    propertiesObj[prop].attribute = __dashCase(prop);
+                    propertiesObj[prop].converter = {
+                        toAttribute(value) {
+                            if (value === 'false' || value === false || value === null) return null;
+                            return String(value);
+                        },
+                    };
+                }
+            });
         });
 
         const props = {

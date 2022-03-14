@@ -189,7 +189,7 @@ export default class SComponent extends __SClass {
 
         // build the final interface class to apply on props
         let InterfaceToApply = class InlineSComponentUtilsInterface extends __SInterface {
-            static definition = {};
+            // static definition = {};
         };
         // @ts-ignore
         InterfaceToApply.definition = {

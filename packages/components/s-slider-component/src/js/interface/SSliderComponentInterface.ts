@@ -35,21 +35,23 @@ export default class SSliderComponentInterface extends __SInterface {
                 type: 'Object',
                 default: undefined
             },
-            itemsByPage: {
+            nextIconClass: {
+                description: 'Specify the class of the next icon',
+                type: 'String'
+            },
+            previousIconClass: {
+                description: 'Specify the class of the previous icon',
+                type: 'String'
+            },
+            controls: {
+                description: 'Specify if you want to display the controls or not. Controls are the previous and next icons',
+                type: 'Boolean',
+                default: false,
+            },
+            slidesByPage: {
                 description: 'Specify how many items a slider "page" contains. By default it\'s 1',
                 type: 'Number',
                 default: 1
-            },
-            sideReveal: {
-                description: 'Specify the amount of "previous" and "next" item to display',
-                type: 'String',
-                default: '0px'
-            },
-            slideable: {
-                description: 'Specify if the slider is slideable or not',
-                type: 'Boolean',
-                physical: true,
-                default: true
             },
             intersectionClasses: {
                 description: 'Specify if you want the classes that describe each slide intersection classes like "in-10", "in-20", etc...',

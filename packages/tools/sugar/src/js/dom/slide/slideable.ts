@@ -48,6 +48,7 @@ import easeInterval from '../../../shared/function/easeInterval';
  */
 export interface ISlideableSettings {
     direction: 'vertical' | 'horizontal';
+    friction: number;
     maxOffset: number;
     maxOffsetX: number;
     maxOffsetY: number;
@@ -77,6 +78,7 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
 
     const finalSettings = <ISlideableSettings>{
         direction: 'horizontal',
+        friction: 0.5,
         maxOffset: 10,
         maxOffsetX: undefined,
         maxOffsetY: undefined,
@@ -125,12 +127,15 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
             case 'end':
 
                 const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.speedX : state.speedY, -2000, 2000);
-                const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000);
+                const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000) * (1 - finalSettings.friction);
                 let sameIdx = 0;
 
                 easingScrollInterval = __easeInterval(duration, (percentage) => {
-                    const offsetX = pixelsBySecond / 100 * percentage,
+                    let offsetX = pixelsBySecond / 100 * percentage,
                         offsetY = pixelsBySecond / 100 * percentage; 
+
+                    offsetX *= 1 - finalSettings.friction;
+                    offsetY *= 1 - finalSettings.friction;
 
                     let computedTranslateX, computedTranslateY;
 

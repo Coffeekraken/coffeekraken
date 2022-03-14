@@ -158,6 +158,31 @@ export default class SInterface extends __SClass {
     }
 
     /**
+     * @name      mix
+     * @type      Function
+     * @static
+     *
+     * This static method allows you to mix multiple interfaces into one
+     *
+     * @param     {SInterface[]}      ...ints       The interfaces to mix together
+     * @return    {SInterface}                          The mixed interface
+     *
+     * @since     2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static mix(...ints: SInterface[]): SInterface {
+        const newInt = new SInterface();
+        ints.forEach(int => {
+            // @ts-ignore
+            if (int.definition) {
+                // @ts-ignore
+                newInt.definition = __deepMerge(newInt.definition, int.definition);
+            }
+        });
+        return newInt;
+    }
+
+    /**
      * @name      overrie
      * @type      Function
      * @static

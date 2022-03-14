@@ -1,4 +1,5 @@
 import SSliderComponent from './SSliderComponent';
+import __SLitComponent from '@coffeekraken/s-lit-component';
 
 export default class SSliderBehavior {
 
@@ -24,6 +25,8 @@ export default class SSliderBehavior {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     $slider: SSliderComponent;
+
+    static properties = __SLitComponent.properties;
 
     /**
      * @name        constructor

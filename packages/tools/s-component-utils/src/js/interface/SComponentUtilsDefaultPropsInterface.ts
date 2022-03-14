@@ -46,12 +46,12 @@ export default class SComponentUtilsDefaultPropsInterface extends __SInterface {
                 default: true,
                 physical: true,
             },
-            bare: {
-                description: 'Specify if your component has to not use default styles. If true, only structural (bare) style will be applied',
-                type: 'Boolean',
-                default: false,
-                physical: true,
-            },
+            lnf: {
+                description: 'Specify the lnf (look-and-feel) of your component. This is used by the css to style your component',
+                type: 'String',
+                default: 'default',
+                physical: true
+            }
         };
     }
 }

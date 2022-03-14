@@ -77,7 +77,7 @@ export default function onDrag($elm: HTMLElement, cb: Function, settings?: Parti
         if (Math.abs(speedY) > finalSettings.maxSpeed) {
             speedY = finalSettings.maxSpeed * (speedY < 0 ? -1 : 1);
         }
-                    
+
         const point = {
             x,
             y,

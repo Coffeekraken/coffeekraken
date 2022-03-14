@@ -5,6 +5,8 @@ import __SSliderSlideableBehavior from './behaviors/SSliderSlideableBehavior';
 import __SLitComponent, {
     ISLitComponentDefaultProps
 } from '@coffeekraken/s-lit-component';
+import __SInterface from '@coffeekraken/s-interface';
+import __SComponentUtils from '@coffeekraken/s-component-utils';
 import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import { css, html, unsafeCSS } from 'lit';
@@ -49,7 +51,9 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behavior: __SSliderBehavior;
     itemsByPage: number;
-    sideReveal: number;
+    controls: boolean;
+    nextIconClass: string;
+    previousIconClass: string;
     transitionDuration: number;
     transitionEasing: number;
     transitionHandler: Function;
@@ -63,7 +67,7 @@ export interface ISSlideComponentSlide {
 
 export default class SSlider extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SSliderComponentInterface);
+        return __SLitComponent.properties({}, __SInterface.mix(__SSliderComponentInterface, __SComponentUtils.getDefaultProps('s-slider').behavior?.interface ?? {}));
     }
 
     static get styles() {
@@ -75,6 +79,7 @@ export default class SSlider extends __SLitComponent {
     }
 
     $root: HTMLElement;
+    $slidesContainer: HTMLElement;
     $slides: HTMLElement[] = [];
     $navs: HTMLElement[] = [];
     $slidesContainer: HTMLElement;
@@ -89,10 +94,10 @@ export default class SSlider extends __SLitComponent {
                     shadowDom: false,
                 },
                 componentUtils: {
-                    interface: __SSliderComponentInterface,
+                    interface: __SInterface.mix(__SSliderComponentInterface, __SComponentUtils.getDefaultProps('s-slider').behavior?.interface ?? {}),
                 },
             }),
-        );
+        ); 
     }
     async firstUpdated() {
 
@@ -101,6 +106,8 @@ export default class SSlider extends __SLitComponent {
         this.$root = this.querySelector(`.${this.componentUtils.className('')}`);
 
         // slides
+        this.$slidesWrapper = this.querySelector(`.${this.componentUtils.className('__slides-wrapper')}`);
+        this.$slidesContainer = this.querySelector(`.${this.componentUtils.className('__slides')}`);
         this.$slides = this.querySelectorAll('[s-slider-slide]');
         this.$slides.forEach($item => {
             // add the item class
@@ -231,6 +238,36 @@ export default class SSlider extends __SLitComponent {
             if (i === this.currentSlideIdx) $slide.classList.add('active');
             else $slide.classList.remove('active');
         });
+    }
+
+    /**
+     * @name        isLast
+     * @type        Function
+     * 
+     * This method allows you to check if the actual slide is the last one
+     * 
+     * @return      {Boolean}           true if the actual slide is the last one, false otherwise
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    isLast() {
+        return this.currentSlideIdx >= this.$slides.length - 1;
+    }
+
+    /**
+     * @name        isFirst
+     * @type        Function
+     * 
+     * This method allows you to check if the actual slide is the first one
+     * 
+     * @return      {Boolean}           true if the actual slide is the first one, false otherwise
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    isFirst() {
+        return this.currentSlideIdx <= 0;
     }
 
     /**
@@ -608,7 +645,7 @@ export default class SSlider extends __SLitComponent {
      */
     _transitionHandler($from, $to) {
       
-        const $slideableItem = this.$root.children[0];
+        const $slideableItem = this.$slidesWrapper.children[0];
         const translates = __getTranslateProperties($slideableItem);
 
         if (this.props.transitionHandler) {
@@ -617,7 +654,7 @@ export default class SSlider extends __SLitComponent {
         }
 
         const nextBounds = $to.getBoundingClientRect();
-        const sliderBounds = this.$root.getBoundingClientRect();
+        const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
 
         const deltaX = nextBounds.left - sliderBounds.left,
             deltaY = nextBounds.top;
@@ -678,10 +715,12 @@ export default class SSlider extends __SLitComponent {
                     --s-slider-total: ${this.$slides.length};
                 "
             >
-                    <div class="${this.componentUtils.className('__slides')}">
-                        ${Array.from(this.$slides).map(($slide, idx) => {
-                            return $slide;
-                        })}
+                    <div class="${this.componentUtils.className('__slides-wrapper')}">
+                        <div class="${this.componentUtils.className('__slides')}">
+                            ${Array.from(this.$slides).map(($slide, idx) => {
+                                return $slide;
+                            })}
+                        </div>
                     </div>
                     <div class="${this.componentUtils.className('__nav')}">
                         ${Array.from(this.$navs).map(($nav, idx) => {
@@ -702,6 +741,20 @@ export default class SSlider extends __SLitComponent {
                             return $nav;
                         })}
                     </div>
+                    ${this.props.controls ? html`
+                        <div class="${this.componentUtils.className('__controls')}">
+                            <div class="${this.componentUtils.className('__controls-previous')} ${this.isFirst() ? '' : 'active' }" @click=${() => this.previous()}>
+                                ${this.props.previousIconClass ? html`
+                                    <i class="${this.props.previousIconClass}"></i>
+                                ` : html`<div class="${this.componentUtils.className('__controls-previous-arrow')}"></div>`}
+                            </div>
+                            <div class="${this.componentUtils.className('__controls-next')} ${this.isLast() ? '' : 'active' }" @click=${() => this.next()}>
+                                ${this.props.nextIconClass ? html`
+                                    <i class="${this.props.nextIconClass}"></i>
+                                ` : html`<div class="${this.componentUtils.className('__controls-next-arrow')}"></div>`}
+                            </div>
+                        </div>
+                    `:''}
             </div>
         `;
     }

@@ -17,14 +17,14 @@ export default function (env, config) {
              * @name          transition
              * @namespace     config.themeUi.button
              * @type          String
-             * @default      [theme.ui.default.transition]
+             * @default      all .5s ease-in-out
              *
              * Specify the default transition for button ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            transition: 'all .5s ease-in-out',
             /**
              * @name          depth
              * @namespace     config.themeUi.button
@@ -40,4 +40,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVVaS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVVpLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFVLEdBQUcsRUFBRSxNQUFNO0lBQy9CLE9BQU87UUFDSCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLGlDQUFpQztZQUMvQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLCtCQUErQjtZQUMzQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLDBCQUEwQjtTQUNwQztLQUNKLENBQUE7QUFDTCxDQUFDIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGhlbWVVaS5jb25maWcuanMiLCJzb3VyY2VSb290IjoiIiwic291cmNlcyI6WyJ0aGVtZVVpLmNvbmZpZy50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiQUFBQSxNQUFNLENBQUMsT0FBTyxXQUFVLEdBQUcsRUFBRSxNQUFNO0lBQy9CLE9BQU87UUFDSCxNQUFNLEVBQUU7WUFDSjs7Ozs7Ozs7OztlQVVHO1lBQ0gsWUFBWSxFQUFFLGlDQUFpQztZQUMvQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsVUFBVSxFQUFFLHFCQUFxQjtZQUNqQzs7Ozs7Ozs7OztlQVVHO1lBQ0gsS0FBSyxFQUFFLDBCQUEwQjtTQUNwQztLQUNKLENBQUE7QUFDTCxDQUFDIn0=

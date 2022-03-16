@@ -17,14 +17,14 @@ export default function(env, config) {
              * @name          transition
              * @namespace     config.themeUi.button
              * @type          String
-             * @default      [theme.ui.default.transition]
+             * @default      all .5s ease-in-out
              *
              * Specify the default transition for button ui
              *
              * @since       2.0.0
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
-            transition: '[theme.ui.default.transition]',
+            transition: 'all .5s ease-in-out',
             /**
              * @name          depth
              * @namespace     config.themeUi.button

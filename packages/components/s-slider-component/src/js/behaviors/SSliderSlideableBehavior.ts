@@ -48,12 +48,13 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
 
     _handleSlide() {
         __slideable(this.$slider.$slidesWrapper, {
-            friction: 0.5,
-            direction: this.$slider.props.direction,
-            onRefocus: ($slide) => {
-                // if (this._$lastGoToSlide !== $slide) return;
-                this.$slider.setCurrentSlide($slide)
-            }
+            friction: 0.7,
+            direction: this.$slider.props.direction
+        }).on('start', () => {
+            this.$slider.stop();
+        }).on('refocusStart', ($slide) => {
+            // if (this._$lastGoToSlide !== $slide) return;
+            this.$slider.setCurrentSlide($slide)
         });
     }
 

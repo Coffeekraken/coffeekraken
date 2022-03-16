@@ -23,7 +23,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        root: '[config.storage.package.rootDir]',
+        root: '[config.storage.package.rootDir]/public',
         /**
          * @name          base
          * @namespace     config.vite
@@ -103,14 +103,14 @@ export default function (env, config) {
          * @name          publicDir
          * @namespace     config.vite
          * @type          String
-         * @default      [config.storage.src.rootDir]
+         * @default      [config.storage.src.rootDir]/public
          *
          * Specify the public directory to use
          *
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        publicDir: '[config.storage.src.rootDir]/src',
+        publicDir: '[config.storage.src.rootDir]/public',
         /**
          * @name          cacheDir
          * @namespace     config.vite

@@ -32,8 +32,7 @@ export default class SSliderComponentInterface extends __SInterface {
             },
             behavior: {
                 description: 'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
-                type: 'Object',
-                default: undefined
+                type: 'Object'
             },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
@@ -48,15 +47,44 @@ export default class SSliderComponentInterface extends __SInterface {
                 type: 'Boolean',
                 default: false,
             },
-            slidesByPage: {
-                description: 'Specify how many items a slider "page" contains. By default it\'s 1',
+            nav: {
+                description: 'Specify if you want to display the nav or not. Nav are the dots',
+                type: 'Boolean',
+                default: false
+            },
+            mousewheel: {
+                description: 'Specify if you want to enable the mousewheel event on the slider or not',
+                type: 'Boolean',
+                default: false
+            },
+            clickOnSlide: {
+                description: 'Specify if you want to enable the click on the slides to navigate or not', 
+                type: 'Boolean',
+                default: true
+            },
+            loop: {
+                description: 'Specify if you want to enable the loop behavior or not',
+                type: 'Boolean',
+                default: false
+            },
+            progress: {
+                description: 'Specify if you want to display the progress bar or not',
+                type: 'Boolean',
+                default: false
+            },
+            timer: {
+                description: 'Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer="1200"` attribute on the slides you want',
                 type: 'Number',
-                default: 1
+            },
+            autoplay: {
+                description: 'Specify if you want the slider to auto play itself when some timer(s) has been set',
+                type: 'Boolean',
+                default: true
             },
             intersectionClasses: {
                 description: 'Specify if you want the classes that describe each slide intersection classes like "in-10", "in-20", etc...',
                 type: 'Boolean',
-                default: true
+                default: false
             },
             transitionDuration: {
                 description: 'Specify the transition duration of the slider in ms',

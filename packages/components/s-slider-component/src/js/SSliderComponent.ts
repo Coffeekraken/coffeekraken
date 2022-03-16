@@ -40,8 +40,25 @@ import __parse from '@coffeekraken/sugar/shared/string/parse';
  * import { define } from '@coffeekraken/s-range-component';
  * define();
  * 
- * @example         html        Simple range
- * <s-range name="myCoolRange" value="90" class="s-color:accent s-mbe:30"></s-range>
+ * @example         html        Simple slider
+ * <s-slider controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo--h1">Slide #1</h1>
+ *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg--complementary">
+ *           <h1 class="s-typo--h1">Slide #1</h1>
+ *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg--info">
+ *           <h1 class="s-typo--h1">Slide #1</h1>
+ *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg--error">
+ *           <h1 class="s-typo--h1">Slide #1</h1>
+ *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
  *
  * @since           2.0.0
  * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
@@ -50,8 +67,14 @@ import __parse from '@coffeekraken/sugar/shared/string/parse';
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
     behavior: __SSliderBehavior;
-    itemsByPage: number;
     controls: boolean;
+    nav: boolean;
+    mousewheel: boolean;
+    clickOnSlide: boolean;
+    loop: boolean;
+    progress: boolean;
+    timer: number;
+    autoplay: boolean;
     nextIconClass: string;
     previousIconClass: string;
     transitionDuration: number;
@@ -59,10 +82,17 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     transitionHandler: Function;
 }
 
-export interface ISSlideComponentSlide {
+export interface ISSliderComponentSlide {
     id: string;
     idx: number;
-    $slide: HTMLElement
+    $slide: HTMLElement;
+    timer: ISSliderComponentTimer
+}
+
+export interface ISSliderComponentTimer {
+    total: number;
+    current: number;
+    percentage: number;
 }
 
 export default class SSlider extends __SLitComponent {
@@ -86,6 +116,12 @@ export default class SSlider extends __SLitComponent {
 
     _currentPageIdx = 0;
     _currentSlideIdx = 0;
+    _timer = {
+        total: 0,
+        current: 0,
+        percentage: 0
+    };
+    _playing = true;
 
     constructor() {
         super(
@@ -102,7 +138,6 @@ export default class SSlider extends __SLitComponent {
     async firstUpdated() {
 
         // bare elements
-        this.$slidesContainer = this.querySelector(`.${this.componentUtils.className('__slides')}`);
         this.$root = this.querySelector(`.${this.componentUtils.className('')}`);
 
         // slides
@@ -127,11 +162,16 @@ export default class SSlider extends __SLitComponent {
         // listen for intersections
         this.props.intersectionClasses && this._handleIntersections();
 
-        // handle scroll
-        // this._handleScroll();
+        // listen for mousewheel
+        this.props.mousewheel && this._handleMousewheel();
 
-        // handle slide
-        // this._handleSlide();
+        // click on slide
+        this.props.clickOnSlide && this._handleClickOnSlide();
+
+        // timer
+        if (this.props.autoplay && this.props.timer) {
+            this.play();
+        }
 
         // setTimeout(() => {
         //     this.goTo('welcome');
@@ -159,7 +199,7 @@ export default class SSlider extends __SLitComponent {
         // navs
         this.$navs = this.querySelectorAll('[s-slider-nav]');
 
-        if (!this.$navs.length) {
+        if (!this.$navs.length && this.props.nav) {
             Array(this.$slides.length).fill().forEach((v,i) => {
                 const $nav = document.createElement('div');
                 $nav.setAttribute('s-slider-nav', i);
@@ -169,8 +209,33 @@ export default class SSlider extends __SLitComponent {
             this.$navs = this.querySelectorAll('[s-slider-nav]');
         }
 
-
         this.requestUpdate();
+    }
+
+    /**
+     * This function listen for mousewheel events and will handle the scroll
+     */
+    _handleMousewheel() {
+        this.addEventListener('wheel', (e) => {
+            if (e.deltaY < 0) {
+                this.previous();
+            } else if (e.deltaY > 0) {
+                this.next();
+            }
+        });
+    }
+
+    /**
+     * This function listen for click on slides and navigate to it
+     */
+    _handleClickOnSlide() {
+        this.$slidesContainer.addEventListener('click', (e) => {
+            for (let [i, $slide] of this.$slides.entries()) {
+                if ($slide.contains(e.target) || $slide === e.target) {
+                    this.goTo($slide);
+                }
+            }   
+        });
     }
 
     /**
@@ -530,49 +595,112 @@ export default class SSlider extends __SLitComponent {
      * @name        getCurrentSlide
      * @type        Function
      * 
-     * This method allows you to get back the current slide object <ISSlideComponentSlide> either by it's id, or by it's idx.
+     * This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
      * 
-     * @return      {ISSlideComponentSlide}        The slide object
+     * @return      {ISSliderComponentSlide}        The slide object
      * 
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
      */
-    getCurrentSlide(): ISSlideComponentSlide {
+    getCurrentSlide(): ISSliderComponentSlide {
         return this.getSlide(this.currentSlideIdx);
+    }
+
+    /**
+     * @name            currentSlide
+     * @type            ISSliderComponentSlide
+     * 
+     * Access the current slide object
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    get currentSlide(): ISSliderComponentSlide {
+        return this.getCurrentSlide();
     }
 
     /**
      * @name        getSlide
      * @type        Function
      * 
-     * This method allows you to get back a slide object <ISSlideComponentSlide> either by it's id, or by it's idx.
+     * This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.
      * 
      * @param       {String|Number}    idIdxOrElement    The slide id or idx
-     * @return      {ISSlideComponentSlide}        The slide object
+     * @return      {ISSliderComponentSlide}        The slide object
      * 
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
      */
-    getSlide(idIdxOrElement: string | number | HTMLElement): ISSlideComponentSlide {
-        let $slide, id, idx;
+    getSlide(idIdxOrElement: string | number | HTMLElement): ISSliderComponentSlide {
+        let $slide, id, idx, timer;
         if (idIdxOrElement instanceof HTMLElement) {
             const id = idIdxOrElement.getAttribute('s-slider-slide');
-            return this.getSlide(id);
+            if (id) return this.getSlide(id);
+            return this.getSlide(Array.from(this.$slides).indexOf(idIdxOrElement));
         } else if (typeof idIdxOrElement === 'number') {
             idx = idIdxOrElement;
             $slide = this.getSlideElementByIdx(idx);
             id = $slide.getAttribute('s-slider-slide');
+            timer = $slide._sSliderComponentTimer;
+            if (!timer) {
+                timer = {
+                    total: $slide.getAttribute('timer') ?? this.props.timer,
+                    current: 0,
+                    percentage: 0
+                };
+                $slide._sSliderComponentTimer = timer;
+            }
         } else if (typeof idIdxOrElement === 'string') {
             idx = this.getSlideIdxById(idIdxOrElement);
             id = idIdxOrElement;
             $slide = this.getSlideElementByIdx(idx);
+            timer = $slide._sSliderComponentTimer;
+            if (!timer) {
+                timer = {
+                    total: $slide.getAttribute('timer') ?? this.props.timer,
+                    current: 0,
+                    percentage: 0
+                };
+                $slide._sSliderComponentTimer = timer;
+            }
         }
         if (!$slide) return;
         return {
             id,
             idx,
-            $slide
+            $slide,
+            timer
         };
+    }
+
+    /**
+     * @name            getFirstSlide
+     * @type           Function
+     * 
+     * This method allows you to get the first slide of the slider
+     * 
+     * @return      {ISSliderComponentSlide}       The first slide object
+     * 
+     * @since      2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    getFirstSlide(): ISSliderComponentSlide {
+        return this.getSlide(0);
+    }
+
+    /**
+     * @name            getLastSlide
+     * @type           Function
+     * 
+     * This method allows you to get the last slide of the slider
+     * 
+     * @return      {ISSliderComponentSlide}       The last slide object
+     * 
+     * @since      2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    getLastSlide(): ISSliderComponentSlide {
+        return this.getSlide(this.$slides.length - 1);
     }
 
     /**
@@ -587,9 +715,9 @@ export default class SSlider extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
      */
-    async goTo(slideIdIdxOrElement: number): SSliderComponent {
+    async goTo(slideIdIdxOrElement: number | string | HTMLElement, userAction: boolean = true): SSliderComponent {
         const nextSlide = this.getSlide(slideIdIdxOrElement);
-        if (!nextSlide) return;
+        if (!nextSlide || nextSlide.idx === this.currentSlide.idx) return;
         const currentSlide = this.getCurrentSlide();
         this._currentSlideIdx = nextSlide.idx;
 
@@ -605,6 +733,12 @@ export default class SSlider extends __SLitComponent {
             nextSlide
         });
 
+        this.requestUpdate();
+
+        if (this.isPlaying()) {
+            this._playSlide(this.currentSlideIdx);
+        }
+
         return this;
     }
 
@@ -619,8 +753,11 @@ export default class SSlider extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
      */
-    next(): SSliderComponent {
-        return this.goTo(this.nextSlideIdx);
+    next(userAction: boolean): SSliderComponent {
+        if (this.props.loop && this.isLast()) {
+            return this.goTo(0, userAction);
+        }
+        return this.goTo(this.nextSlideIdx, userAction);
     }
 
     /**
@@ -634,9 +771,133 @@ export default class SSlider extends __SLitComponent {
      * @since       2.0.0
      * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
      */
-    previous(): SSliderComponent {
-        return this.goTo(this.getPreviousSlideIdx());
+    previous(userAction: boolean): SSliderComponent {
+        if (this.props.loop && this.isFirst()) {
+            return this.goTo(this.getLastSlide().id, userAction);
+        }
+        return this.goTo(this.getPreviousSlideIdx(), userAction);
     }
+
+    /**
+     * @name        getTimer
+     * @type        Function
+     * 
+     * This method allows you to get back the timer object
+     * 
+     * @return      {ISSliderComponentTimer}      The timer object
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    getTimer(slideIdIdxOrElement?: number | string | HTMLElement): ISSliderComponentTimer {
+        // return global timer if no slide is specified
+        if (!slideIdIdxOrElement) {
+            let total = 0, current = 0;
+            for (let i = 0; i < this.$slides.length; i++) {
+                const slide = this.getSlide(i);
+                if (i < this.currentSlideIdx) {
+                    current += slide.timer.total;
+                } else if (i === this.currentSlideIdx) {
+                    current += slide.timer.current;
+                }
+                total+=slide.timer.total ?? 0;
+            }
+            this._timer.total = total;
+            this._timer.current = current;
+            this._timer.percentage = Math.round(100 / total * current);
+            return this._timer
+        };
+        // get the slide timer
+        const slide = this.getSlide(slideIdIdxOrElement);
+        return slide.timer;
+    }
+
+    /**
+     * @name        isPlaying
+     * @type    Function
+     * 
+     * This method allows you to know if the slider is currently playing or not
+     * 
+     * @return      {Boolean}           trie if the slider is playing or not
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    isPlaying(): boolean {
+        if (!this._playing) return false;
+        return this.props.timer !== undefined;
+    }
+
+    /**
+     * @name        play
+     * @type    Function
+     * 
+     * This method allows you to play the slider when a `timer` has been defined
+     * 
+     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    play(): SSliderComponent {
+        if (!this.props.timer) return;
+        this._playing = true;
+        this._playSlide(this.currentSlide.idx);
+        return this;
+    }
+
+    /**
+     * @name        stop
+     * @type    Function
+     * 
+     * This method allows you to stop the slider
+     * 
+     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    stop(): SSliderComponent {
+        this._playing = false;
+        return this;
+    }
+
+    /**
+     * @name        _playSlide
+     * @type    Function
+     * 
+     * This method allows you to play a particular slide
+     * 
+     * @return      {SSliderComponent}          The slider element to maintain chainability
+     * 
+     * @since       2.0.0
+     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
+     */
+    _playSlide(idIdxOrElement: number | string | HTMLElement): SSliderComponent {
+        const slide = this.getSlide(idIdxOrElement);
+        if (!slide || !slide.timer) return;
+
+        const interval = 100;
+        let elapsed = 0;
+
+        const slideInterval = setInterval(() => {
+            if (!this.isPlaying()) return;
+            elapsed += interval;
+            slide.timer.current = elapsed;
+            slide.timer.percentage = 100 / slide.timer.total * elapsed;
+            this.requestUpdate();
+            if (elapsed >= slide.timer.total) {
+                clearInterval(slideInterval);
+                slide.timer.current = 0;
+                slide.timer.percentage = 0;
+                this.next(false);
+            }
+        }, interval);
+
+        return this;
+    }
+
+
 
     /**
      * Function that is in charge of making the transition happend.
@@ -657,14 +918,14 @@ export default class SSlider extends __SLitComponent {
         const sliderBounds = this.$slidesWrapper.getBoundingClientRect();
 
         const deltaX = nextBounds.left - sliderBounds.left,
-            deltaY = nextBounds.top;
+            deltaY = nextBounds.top - sliderBounds.top;
 
         __easeInterval(this.props.transitionDuration, (percent) => {
             if (this.props.direction === 'horizontal') {
                 const computedDelta = translates.x + (deltaX / 100 * percent) * -1;
                 $slideableItem.style.transform = `translateX(${computedDelta}px)`;
             } else {
-                const computedDelta = translates.y + (deltaY * -1 / 100 * percent) * -1;
+                const computedDelta = translates.y + (deltaY / 100 * percent) * -1;
                 $slideableItem.style.transform = `translateY(${computedDelta}px)`;
             }
 
@@ -674,45 +935,22 @@ export default class SSlider extends __SLitComponent {
 
         this.requestUpdate();
     }
-    // _handleScroll() {
-    //     // handle scroll
-    //     this.$root.addEventListener('scroll', (e) => {
-    //         let scrollTop = e.target.scrollTop;
-    //         let scrollLeft = e.target.scrollLeft;
-
-    //         let elmWidth = e.target.offsetWidth,
-    //             elmHeight = e.target.offsetHeight;
-
-    //         const fullWidth = elmWidth * this.$slides.length,
-    //             fullHeight = elmHeight * this.$slides.length;
-
-    //         const scrollXPercent = 100 / fullWidth * (scrollLeft + elmWidth),
-    //             scrollYPercent = 100 / fullHeight * (scrollTop + elmHeight);
-
-    //         this._scrollXPercent = scrollXPercent;
-    //         this._scrollYPercent = scrollYPercent;
-
-    //         if (this.props.direction === 'horizontal') {
-    //             this._currentPageIdx = Math.round(scrollXPercent / 100 * this.$slides.length) - 1;
-    //             this._currentSlideIdx = Math.round(this.props.itemsByPage * this._currentPageIdx);
-    //         } else if (this.props.direction === 'vertical') {
-    //             this._currentPageIdx = Math.round(scrollYPercent / 100 * this.$slides.length) - 1;
-    //             this._currentSlideIdx = Math.round(this.props.itemsByPage * this._currentPageIdx);
-    //         }
-    //         this.requestUpdate();
-    //     });
-    // }
     render() {
+        let slide;
+        try {
+            slide = this.getCurrentSlide();
+        } catch(e) {}
         return html`
             <div class="${this.componentUtils.className(
                     '',
                 )}"
                 behavior="${this.props.behavior?.id}"
                 style="
-                    --s-slider-block-reveal: ${this.props.sideReveal};
-                    --s-slider-page: ${this.currentPageIdx};
-                    --s-slider-item: ${this.currentSlideIdx};
+                    --s-slider-slide: ${this.currentSlideIdx};
                     --s-slider-total: ${this.$slides.length};
+                    ${slide ? `
+                        --s-slider-slide-timer-total: ${slide.timer.total / 1000}s;
+                    `: ''}
                 "
             >
                     <div class="${this.componentUtils.className('__slides-wrapper')}">
@@ -722,6 +960,11 @@ export default class SSlider extends __SLitComponent {
                             })}
                         </div>
                     </div>
+                    ${this.props.progress ? html`
+                            <div class="${this.componentUtils.className('__progress')}">
+                                <div class="${this.componentUtils.className('__progress-bar')}"></div>
+                            </div>
+                    ` : ''}
                     <div class="${this.componentUtils.className('__nav')}">
                         ${Array.from(this.$navs).map(($nav, idx) => {
                             if (!$nav._navInited) {
@@ -732,7 +975,8 @@ export default class SSlider extends __SLitComponent {
                                 $nav._navInited = true;
                             }
                             if ($nav.getAttribute('s-slider-nav')) {
-                                if ($nav.getAttribute('s-slider-nav') === this.getCurrentSlide().id) $nav.classList.add('active');
+                                const id = __parse($nav.getAttribute('s-slider-nav'));
+                                if (id === this.getCurrentSlide().id || id === this.getCurrentSlide().idx) $nav.classList.add('active');
                                 else $nav.classList.remove('active');
                             } else {
                                 if (this.currentSlideIdx === idx) $nav.classList.add('active');
@@ -743,12 +987,12 @@ export default class SSlider extends __SLitComponent {
                     </div>
                     ${this.props.controls ? html`
                         <div class="${this.componentUtils.className('__controls')}">
-                            <div class="${this.componentUtils.className('__controls-previous')} ${this.isFirst() ? '' : 'active' }" @click=${() => this.previous()}>
+                            <div class="${this.componentUtils.className('__controls-previous')} ${this.isFirst() && !this.props.loop ? '' : 'active' }" @click=${() => this.previous()}>
                                 ${this.props.previousIconClass ? html`
                                     <i class="${this.props.previousIconClass}"></i>
                                 ` : html`<div class="${this.componentUtils.className('__controls-previous-arrow')}"></div>`}
                             </div>
-                            <div class="${this.componentUtils.className('__controls-next')} ${this.isLast() ? '' : 'active' }" @click=${() => this.next()}>
+                            <div class="${this.componentUtils.className('__controls-next')} ${this.isLast() && !this.props.loop ? '' : 'active' }" @click=${() => this.next()}>
                                 ${this.props.nextIconClass ? html`
                                     <i class="${this.props.nextIconClass}"></i>
                                 ` : html`<div class="${this.componentUtils.className('__controls-next-arrow')}"></div>`}

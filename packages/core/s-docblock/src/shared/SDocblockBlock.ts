@@ -5,6 +5,8 @@ import __map from '@coffeekraken/sugar/shared/object/map';
 import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __marked from 'marked';
 import __isPlainObject from '@coffeekraken/sugar/shared/is/plainObject';
+import __SPromise from '@coffeekraken/s-promise';
+import __SLog from '@coffeekraken/s-log';
 
 import __installTag from './tags/install';
 import __authorTag from './tags/author';
@@ -231,7 +233,7 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     parse(): Promise<any> {
-        return new Promise(async (resolve) => {
+        return new __SPromise(async ({resolve, reject, emit}) => {
             // some variables
             let currentTag: string;
             let currentContent: string[] = [];
@@ -330,9 +332,18 @@ class SDocblockBlock extends __SClass implements ISDocblockBlock {
 
                 // process with tags
                 if (this.docblockBlockSettings.tags[prop] && prop !== 'src') {
-                    const res = await this.docblockBlockSettings.tags[
-                        prop
-                    ](value, this.docblockBlockSettings);
+                    
+                    let res;
+                    try {
+                        res = await this.docblockBlockSettings.tags[
+                            prop
+                        ](value, this.docblockBlockSettings);
+                    } catch(e) {
+                        emit('log', {
+                            type: __SLog.TYPE_WARN,
+                            value: `<red>[SDocblockBlock]</red> An error occured during the parsing of the docblock bellow on the tag <yellow>${prop}</yellow>:\n\n${this._source}\n\n${e.stack}`
+                        });  
+                    }
                     if (res !== undefined) {
                         finalDocblockObj[prop] = res;
                     }

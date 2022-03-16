@@ -23,7 +23,7 @@ import __upperFirst from '@coffeekraken/sugar/shared/string/upperFirst';
  */
 function returnTag(data, blockSettings) {
     const stringArray = data.value.trim().split(/(?<=^\S+)\s/);
-
+    
     let type =
         stringArray && stringArray[0]
             ? __upperFirst(stringArray[0].replace('{', '').replace('}', ''))

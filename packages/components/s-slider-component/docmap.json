@@ -1,0 +1,740 @@
+{
+    "map": {},
+    "extends": [],
+    "generated": {
+        "extends": [
+            "@coffeekraken/cli",
+            "@coffeekraken/coffeekraken-io",
+            "@coffeekraken/prettier-plugin-coffeekraken",
+            "@coffeekraken/s-activate-feature",
+            "@coffeekraken/s-bench",
+            "@coffeekraken/s-builder",
+            "@coffeekraken/s-class",
+            "@coffeekraken/s-clipboard-copy-component",
+            "@coffeekraken/s-code-example-component",
+            "@coffeekraken/s-color-picker-component",
+            "@coffeekraken/s-color",
+            "@coffeekraken/s-component-utils",
+            "@coffeekraken/s-conductor",
+            "@coffeekraken/s-config",
+            "@coffeekraken/s-date-picker-component",
+            "@coffeekraken/s-descriptor",
+            "@coffeekraken/s-docblock",
+            "@coffeekraken/s-docmap",
+            "@coffeekraken/s-duration",
+            "@coffeekraken/s-env",
+            "@coffeekraken/s-event-emitter",
+            "@coffeekraken/s-favicon-builder",
+            "@coffeekraken/s-feature",
+            "@coffeekraken/s-file",
+            "@coffeekraken/s-filtrable-input-component",
+            "@coffeekraken/s-form-validate-feature",
+            "@coffeekraken/s-frontend-server",
+            "@coffeekraken/s-frontspec",
+            "@coffeekraken/s-frontstack",
+            "@coffeekraken/s-glob",
+            "@coffeekraken/s-handlebars",
+            "@coffeekraken/s-images-builder",
+            "@coffeekraken/s-interface",
+            "@coffeekraken/s-lit-component",
+            "@coffeekraken/s-log",
+            "@coffeekraken/s-markdown-builder",
+            "@coffeekraken/s-notification",
+            "@coffeekraken/s-page-transition-feature",
+            "@coffeekraken/s-parallax-feature",
+            "@coffeekraken/s-postcss-builder",
+            "@coffeekraken/s-postcss-sugar-plugin",
+            "@coffeekraken/s-process",
+            "@coffeekraken/s-promise",
+            "@coffeekraken/s-range-component",
+            "@coffeekraken/s-refocus-feature",
+            "@coffeekraken/s-request",
+            "@coffeekraken/s-riotjs-plugin-postcss-preprocessor",
+            "@coffeekraken/s-side-panel-component",
+            "@coffeekraken/s-sitemap-builder",
+            "@coffeekraken/s-static-builder",
+            "@coffeekraken/s-stdio",
+            "@coffeekraken/s-sugar-config",
+            "@coffeekraken/s-sugar-feature",
+            "@coffeekraken/s-sugar-json",
+            "@coffeekraken/s-theme",
+            "@coffeekraken/s-timer",
+            "@coffeekraken/s-type",
+            "@coffeekraken/s-url",
+            "@coffeekraken/s-view-renderer",
+            "@coffeekraken/s-vite-plugin-postcss",
+            "@coffeekraken/s-vite-plugin-riotjs",
+            "@coffeekraken/s-vite-plugin-sugar",
+            "@coffeekraken/s-vite",
+            "@coffeekraken/sugar"
+        ],
+        "map": {
+            "@coffeekraken.s-slider-component.config.themeUi.button.borderRadius": {
+                "name": "borderRadius",
+                "type": "String",
+                "default": "[theme.ui.default.borderRadius]",
+                "description": "Specify the default border radius for button ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-slider-component.config.themeUi.button.transition": {
+                "name": "transition",
+                "type": "String",
+                "default": "all .5s ease-in-out",
+                "description": "Specify the default transition for button ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js"
+            },
+            "@coffeekraken.s-slider-component.config.themeUi.button.depth": {
+                "name": "depth",
+                "type": "Number",
+                "default": "[theme.ui.default.depth]",
+                "description": "Specify the default depth for your button ui",
+                "namespace": "@coffeekraken.s-slider-component.config.themeUi.button",
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "themeUi.config.js",
+                "extension": "config",
+                "relPath": "src/config/themeUi.config.js",
+                "children": {}
+            },
+            "@coffeekraken.s-slider-component.js.Range": {
+                "name": "Range",
+                "type": "CustomElement",
+                "menu": {
+                    "tree": [
+                        "Styleguide",
+                        "Forms"
+                    ],
+                    "slug": "/styleguide/form/s-range"
+                },
+                "platform": [
+                    {
+                        "name": "html",
+                        "description": ""
+                    }
+                ],
+                "description": "This component specify a range with some additional features than the native one like\ndisplaying the value automatically in tooltip or inline.",
+                "namespace": "@coffeekraken.s-slider-component.js",
+                "status": "beta",
+                "example": [
+                    {
+                        "language": "html",
+                        "title": "Simple slider",
+                        "code": "<s-slider controls nav>\n   <div s-slider-slide class=\"s-bg--accent\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--complementary\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--info\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n      <div s-slider-slide class=\"s-bg--error\">\n          <h1 class=\"s-typo--h1\">Slide #1</h1>\n          <p class=\"s-typo s-typo--p\">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>\n      </div>\n  </s-slider>"
+                    }
+                ],
+                "interface": {
+                    "name": "SSliderComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "direction": {
+                            "description": "Specify the slider direction. Can be `horizontal` or `vertical`",
+                            "values": [
+                                "horizontal",
+                                "vertical"
+                            ],
+                            "type": "String",
+                            "physical": true,
+                            "default": "horizontal"
+                        },
+                        "behavior": {
+                            "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
+                            "type": "Object"
+                        },
+                        "nextIconClass": {
+                            "description": "Specify the class of the next icon",
+                            "type": "String"
+                        },
+                        "previousIconClass": {
+                            "description": "Specify the class of the previous icon",
+                            "type": "String"
+                        },
+                        "controls": {
+                            "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "nav": {
+                            "description": "Specify if you want to display the nav or not. Nav are the dots",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "mousewheel": {
+                            "description": "Specify if you want to enable the mousewheel event on the slider or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "clickOnSlide": {
+                            "description": "Specify if you want to enable the click on the slides to navigate or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "loop": {
+                            "description": "Specify if you want to enable the loop behavior or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "progress": {
+                            "description": "Specify if you want to display the progress bar or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "timer": {
+                            "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
+                            "type": "Number"
+                        },
+                        "autoplay": {
+                            "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "intersectionClasses": {
+                            "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "transitionDuration": {
+                            "description": "Specify the transition duration of the slider in ms",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "transitionEasing": {
+                            "description": "Specify the transition easing of the slider",
+                            "type": "Function"
+                        },
+                        "transitionHandler": {
+                            "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
+                            "type": "Function"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSliderComponent.ts",
+                "extension": "ts",
+                "relPath": "src/js/SSliderComponent.ts",
+                "children": {
+                    "islast": {
+                        "name": "isLast",
+                        "type": "Function",
+                        "description": "This method allows you to check if the actual slide is the last one",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "isfirst": {
+                        "name": "isFirst",
+                        "type": "Function",
+                        "description": "This method allows you to check if the actual slide is the first one",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "currentpageidx": {
+                        "name": "currentPageIdx",
+                        "type": "HTMLElement",
+                        "description": "Access the current page idx. Begin from 0...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getcurrentslideidx": {
+                        "name": "getCurrentSlideIdx",
+                        "type": "Function",
+                        "description": "Access the current slide idx. Begin from 0...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "setcurrentslidebyidx": {
+                        "name": "setCurrentSlideByIdx",
+                        "type": "Function",
+                        "description": "Set the current slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "setcurrentslide": {
+                        "name": "setCurrentSlide",
+                        "type": "Function",
+                        "description": "This method allows you to get the current clide using an id or an idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "currentslideidx": {
+                        "name": "currentSlideIdx",
+                        "type": "Number",
+                        "description": "Access the current slide idx. Begin from 0...",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getcurrentslideelement": {
+                        "name": "getCurrentSlideElement",
+                        "type": "Function",
+                        "description": "Access the current slide item.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "currentslideelement": {
+                        "name": "currentSlideElement",
+                        "type": "HTMLElement",
+                        "description": "Access the current slide item.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getnextslideidx": {
+                        "name": "getNextSlideIdx",
+                        "type": "HTMLElement",
+                        "description": "Access the next slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "nextslideidx": {
+                        "name": "nextSlideIdx",
+                        "type": "Number",
+                        "description": "Access the next slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getnextslideelement": {
+                        "name": "getNextSlideElement",
+                        "type": "Function",
+                        "description": "Access the next slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "nextslideelement": {
+                        "name": "nextSlideElement",
+                        "type": "Function",
+                        "description": "Access the next slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getpreviousslideidx": {
+                        "name": "getPreviousSlideIdx",
+                        "type": "Function",
+                        "description": "Access the previous slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "previousslideidx": {
+                        "name": "previousSlideIdx",
+                        "type": "Number",
+                        "description": "Access the previous slide idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getpreviousslideelement": {
+                        "name": "getPreviousSlideElement",
+                        "type": "Function",
+                        "description": "Access the previous slide element.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "previousslideelement": {
+                        "name": "previousSlideElement",
+                        "type": "Function",
+                        "description": "Access the previous slide element.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getslideidxbyid": {
+                        "name": "getSlideIdxById",
+                        "type": "Function",
+                        "description": "This method allows you to get back the slide idx by its id.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getslideelementbyidx": {
+                        "name": "getSlideElementByIdx",
+                        "type": "Function",
+                        "description": "This method allows you to get back a slide HTMLElement by its index.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getcurrentslide": {
+                        "name": "getCurrentSlide",
+                        "type": "Function",
+                        "description": "This method allows you to get back the current slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "currentslide": {
+                        "name": "currentSlide",
+                        "type": "ISSliderComponentSlide",
+                        "description": "Access the current slide object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getslide": {
+                        "name": "getSlide",
+                        "type": "Function",
+                        "description": "This method allows you to get back a slide object <ISSliderComponentSlide> either by it's id, or by it's idx.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getfirstslide": {
+                        "name": "getFirstSlide",
+                        "type": "Function",
+                        "description": "This method allows you to get the first slide of the slider",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "getlastslide": {
+                        "name": "getLastSlide",
+                        "type": "Function",
+                        "description": "This method allows you to get the last slide of the slider",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "goto": {
+                        "name": "goTo",
+                        "type": "Function",
+                        "description": "Go to a specific slide.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "next": {
+                        "name": "next",
+                        "type": "Function",
+                        "description": "Go to the next slide",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "previous": {
+                        "name": "previous",
+                        "type": "Function",
+                        "description": "Go to the previous slide",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "gettimer": {
+                        "name": "getTimer",
+                        "type": "Function",
+                        "description": "This method allows you to get back the timer object",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "isplaying": {
+                        "name": "isPlaying",
+                        "type": "Function",
+                        "description": "This method allows you to know if the slider is currently playing or not",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "play": {
+                        "name": "play",
+                        "type": "Function",
+                        "description": "This method allows you to play the slider when a `timer` has been defined",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "stop": {
+                        "name": "stop",
+                        "type": "Function",
+                        "description": "This method allows you to stop the slider",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    },
+                    "webcomponent": {
+                        "name": "webcomponent",
+                        "type": "Function",
+                        "description": "This function allows you to define (register) your webcomponent with some default\nprops if needed.",
+                        "since": "2.0.0",
+                        "author": {
+                            "name": "Olivier Bossel",
+                            "email": "olivier.bossel@gmail.com",
+                            "url": "https://coffeekraken.io"
+                        }
+                    }
+                }
+            },
+            "@coffeekraken.s-slider-component.js.interface.SSliderComponentInterface": {
+                "name": "SSliderComponentInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSliderComponent",
+                "namespace": "@coffeekraken.s-slider-component.js.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSliderComponentInterface",
+                    "description": "",
+                    "definition": {
+                        "direction": {
+                            "description": "Specify the slider direction. Can be `horizontal` or `vertical`",
+                            "values": [
+                                "horizontal",
+                                "vertical"
+                            ],
+                            "type": "String",
+                            "physical": true,
+                            "default": "horizontal"
+                        },
+                        "behavior": {
+                            "description": "Specify which behavior your want to use for your slider. Behavior are like \"presets\" with different animations, etc...",
+                            "type": "Object"
+                        },
+                        "nextIconClass": {
+                            "description": "Specify the class of the next icon",
+                            "type": "String"
+                        },
+                        "previousIconClass": {
+                            "description": "Specify the class of the previous icon",
+                            "type": "String"
+                        },
+                        "controls": {
+                            "description": "Specify if you want to display the controls or not. Controls are the previous and next icons",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "nav": {
+                            "description": "Specify if you want to display the nav or not. Nav are the dots",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "mousewheel": {
+                            "description": "Specify if you want to enable the mousewheel event on the slider or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "clickOnSlide": {
+                            "description": "Specify if you want to enable the click on the slides to navigate or not",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "loop": {
+                            "description": "Specify if you want to enable the loop behavior or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "progress": {
+                            "description": "Specify if you want to display the progress bar or not",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "timer": {
+                            "description": "Specify a timer that will be applied on each slides and go to the next one after the timer is over. For custom timer by slide, specify the `timer=\"1200\"` attribute on the slides you want",
+                            "type": "Number"
+                        },
+                        "autoplay": {
+                            "description": "Specify if you want the slider to auto play itself when some timer(s) has been set",
+                            "type": "Boolean",
+                            "default": true
+                        },
+                        "intersectionClasses": {
+                            "description": "Specify if you want the classes that describe each slide intersection classes like \"in-10\", \"in-20\", etc...",
+                            "type": "Boolean",
+                            "default": false
+                        },
+                        "transitionDuration": {
+                            "description": "Specify the transition duration of the slider in ms",
+                            "type": "Number",
+                            "default": 500
+                        },
+                        "transitionEasing": {
+                            "description": "Specify the transition easing of the slider",
+                            "type": "Function"
+                        },
+                        "transitionHandler": {
+                            "description": "Specify a function that will take care of transitioning the slider from the current item to the next/previous",
+                            "type": "Function"
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSliderComponentInterface.js",
+                "extension": "js",
+                "relPath": "src/js/interface/SSliderComponentInterface.js",
+                "children": {}
+            },
+            "@coffeekraken.s-slider-component.js.behaviors.interface.SSliderSlideableBehaviorInterface": {
+                "name": "SSliderSlideableBehaviorInterface",
+                "type": ".                      Class",
+                "platform": [
+                    {
+                        "name": "js",
+                        "description": ""
+                    }
+                ],
+                "description": "This class represent the interface that describe parameters of the SSliderSlideableBehavior behavior",
+                "namespace": "@coffeekraken.s-slider-component.js.behaviors.interface",
+                "status": "beta",
+                "interface": {
+                    "name": "SSliderSlideableBehaviorInterface",
+                    "description": "",
+                    "definition": {
+                        "friction": {
+                            "description": "Specify the friction to apply when you release the pointer. 1 mean full friction, 0 mean no friction",
+                            "type": "Number",
+                            "default": 0.5
+                        }
+                    }
+                },
+                "since": "2.0.0",
+                "author": {
+                    "name": "Olivier Bossel",
+                    "email": "olivier.bossel@gmail.com",
+                    "url": "https://coffeekraken.io"
+                },
+                "filename": "SSliderSlideableBehaviorInterface.js",
+                "extension": "js",
+                "relPath": "src/js/behaviors/interface/SSliderSlideableBehaviorInterface.js",
+                "children": {}
+            }
+        }
+    }
+}

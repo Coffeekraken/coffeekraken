@@ -1,14 +1,24 @@
 @sugar.init;
-/* @sugar.classes; */
+@sugar.classes;
 
 body {
-    overflow: hidden;
+    text-align: center;
+}
+
+h1 {
+    font-size: 50px;
+    margin-bottom: sugar.margin(30);
+    margin-top: sugar.margin(100);
 }
 
 s-slider {
-    width: 800px;
+    width: 1200px;
     margin: 0 auto;
     margin-bottom: 50px;
+    color: white;
+
+    @sugar.color(accent);
+
 }
 
 .s-slider {
@@ -18,59 +28,12 @@ s-slider[mounted] .s-slider {
     display: block;
 }
 
-s-slider.cards .s-slider {
-    overflow: visible;
-    /* perspective: 800px; */
-
-    .s-slider__slides {
-        /* transform: translateZ(-100px) rotateX(0deg); */
-    }
-    .s-slider__slide {
-        /* perspective: 800px; */
-
-        img {
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        /* &.active{
-            img {
-                transform: scale(1);
-            }
-        } */
-
-        &.in-50 {
-            img {
-                transform: scale(0.85);
-            }
-        }
-        &.in-70 {
-            img {
-                transform: scale(0.9);
-            }
-        }
-        &.in-90 {
-            img {
-                transform: scale(0.95);
-            }
-        }
-        &.in-100 {
-            img {
-                transform: scale(1);
-            }
-        }
-
-        img {
-            transform: scale(0.85);
-            transition: all .3s ease-in-out;
-        }
-    }
-
-}
-
-.s-slider__item {
+.s-slider__slide {
     position: relative;
-    
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
     img {
         width: 100%; height: 100%; 
         object-fit: cover;

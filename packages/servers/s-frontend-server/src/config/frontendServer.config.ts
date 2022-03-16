@@ -58,7 +58,7 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         staticDirs: {
-            '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
+            // '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
             '/cache': `[config.storage.package.cacheDir]`,
             // '/src': `[config.storage.src.rootDir]`,
         },
@@ -117,6 +117,46 @@ export default function (env, config) {
                      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
                      */
                     target: '[config.vite.server.hostname]',
+                    /**
+                     * @name        changeOrigin
+                     * @namespace       config.frontendServer.proxy.vitePing.settings
+                     * @type        Boolean
+                     * @default         true
+                     *
+                     * Specify if you want the redirection to change the origin or not
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    changeOrigin: true,
+                },
+            },
+            vite: {
+                /**
+                 * @name            route
+                 * @namespace       config.frontendServer.proxy.vite
+                 * @type            String
+                 * @default         [config.storage.serve.rootDir]
+                 *
+                 * Specify which route to proxy for the vitePing
+                 *
+                 * @since           2.0.0
+                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                 */
+                route: '/dist',
+                settings: {
+                    /**
+                     * @name        target
+                     * @namespace   config.frontendServer.proxy.vitePing.settings
+                     * @type         String
+                     * @default         [config.vite.server.hostname]
+                     *
+                     * Specify where to redirect the vitePing requests
+                     *
+                     * @since           2.0.0
+                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+                     */
+                    target: '[config.vite.server.hostname]/src',
                     /**
                      * @name        changeOrigin
                      * @namespace       config.frontendServer.proxy.vitePing.settings

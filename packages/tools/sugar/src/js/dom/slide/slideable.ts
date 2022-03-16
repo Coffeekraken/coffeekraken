@@ -1,24 +1,14 @@
-import __onDrag from '../detect/onDrag';
+import __SPromise from '@coffeekraken/s-promise';
+import __SSugarElement from '@coffeekraken/s-sugar-element';
 import __easeOut from '../../../shared/easing/easeOutQuad';
 import __easeInterval from '../../../shared/function/easeInterval';
-import __getTranslateProperties from '../style/getTranslateProperties';
-import __querySelectorLive from '../query/querySelectorLive';
+import __clamp from '../../../shared/math/clamp';
+import __easeClamp from '../../../shared/math/easeClamp';
 import __uniqid from '../../../shared/string/uniqid';
 import __injectStyle from '../css/injectStyle';
-import __wrapInner from '../manipulate/wrapInner';
-import __wrap from '../manipulate/wrap';
-import __clamp from '../../../shared/math/clamp';
+import __onDrag from '../detect/onDrag';
 import __areaStats from '../element/areaStats';
-import * as __rematrix from 'rematrix';
-
-import __SSugarElement from '@coffeekraken/s-sugar-element';
-
-import __getRotateProperties from '../style/getRotateProperties';
-
-import __easeClamp from '../../../shared/math/easeClamp';
-
-import __easeOutQuad from '../../../shared/easing/easeOutQuad';
-import easeInterval from '../../../shared/function/easeInterval';
+import __roundWithSign from '../../../shared/math/roundWithSign';
 
 /**
  * @name      slideable
@@ -52,6 +42,11 @@ export interface ISlideableSettings {
     maxOffset: number;
     maxOffsetX: number;
     maxOffsetY: number;
+    onStart: Function;
+    onDrag: Function;
+    onEnd: Function;
+    onRefocusStart: Function;
+    onRefocusEnd: Function;
     refocus: number;
 }
 
@@ -74,167 +69,178 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 
 }
 
-export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): HTMLElement {
+export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): Promise<void> {
 
-    const finalSettings = <ISlideableSettings>{
-        direction: 'horizontal',
-        friction: 0.5,
-        maxOffset: 10,
-        maxOffsetX: undefined,
-        maxOffsetY: undefined,
-        refocus: true,
-        onRefocus: undefined,
-        ...settings ?? {}
-    };
-    finalSettings.maxOffsetX = finalSettings.maxOffsetX ?? finalSettings.maxOffset;
-    finalSettings.maxOffsetY = finalSettings.maxOffsetY ?? finalSettings.maxOffset;
+    return new __SPromise(({resolve, reject, emit}) => {
 
-    const id = $elm.getAttribute('slideable-id') ?? __uniqid();
-    $elm.setAttribute('slideable-id', id);
+        const finalSettings = <ISlideableSettings>{
+            direction: 'horizontal',
+            friction: 9,
+            maxOffset: 10,
+            maxOffsetX: undefined,
+            maxOffsetY: undefined,
+            refocus: true,
+            onStart: undefined,
+            onDrag: undefined,
+            onEnd: undefined,
+            onRefocusStart: undefined,
+            onRefocusEnd: undefined,
+            ...settings ?? {}
+        };
+        finalSettings.maxOffsetX = finalSettings.maxOffsetX ?? finalSettings.maxOffset;
+        finalSettings.maxOffsetY = finalSettings.maxOffsetY ?? finalSettings.maxOffset;
 
-    let translateX = 0, easingScrollInterval,
-        translateY = 0;
+        const id = $elm.getAttribute('slideable-id') ?? __uniqid();
+        $elm.setAttribute('slideable-id', id);
 
-    __injectStyle(`
-        [slideable-id] {
-            user-select: none;
+        let translateX = 0, easingScrollInterval,
+            translateY = 0;
+
+        __injectStyle(`
+            [slideable-id] {
+                user-select: none;
+            }
+        `, 's-slideable');
+
+        const $child = <HTMLElement>$elm.firstElementChild;
+
+        if (!$child) {
+            throw new Error(`[slideable] The slideable element must have at least one child that will be translated`);
         }
-    `, 's-slideable');
 
-    const $child = <HTMLElement>$elm.firstElementChild;
+        const $sChild = new __SSugarElement($child);
 
-    if (!$child) {
-        throw new Error(`[slideable] The slideable element must have at least one child that will be translated`);
-    }
+        let lastComputedTranslatesStr = '';
+        let cancelFromClick = false;
 
-    const $sChild = new __SSugarElement($child);
+        __onDrag($elm, (state) => {
+            const translates = $sChild.getTranslates();
+            switch(state.type) {
+                case 'start':
+                    translateX = translates.x;
+                    translateY = translates.y;
+                    cancelFromClick = true;
+                    easingScrollInterval?.cancel?.();
+                    setTimeout(() => {
+                        cancelFromClick = false;
+                    });
+                    emit('start', state);
+                    finalSettings.onStart?.(state);
+                break;
+                case 'end':
+                    const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.speedX : state.speedY, -2000, 2000);
+                    const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000) * (1 - finalSettings.friction);
+                    let sameIdx = 0;
 
-    let lastComputedTranslatesStr = '';
-    let cancelFromClick = false;
+                    emit('end', state);
+                    finalSettings.onEnd?.(state);
 
-    __onDrag($elm, (state) => {
-        const translates = $sChild.getTranslates();
-        switch(state.type) {
-            case 'start':
-                translateX = translates.x;
-                translateY = translates.y;
-                cancelFromClick = true;
-                easingScrollInterval?.cancel?.();
-                setTimeout(() => {
-                    cancelFromClick = false;
-                });
-            break;
-            case 'end':
+                    easingScrollInterval = __easeInterval(duration, (percentage) => {
+                        let offsetX = pixelsBySecond / 100 * percentage,
+                            offsetY = pixelsBySecond / 100 * percentage; 
 
-                const pixelsBySecond = __clamp(finalSettings.direction === 'horizontal' ? state.speedX : state.speedY, -2000, 2000);
-                const duration = __clamp(Math.abs(pixelsBySecond), 100, 1000) * (1 - finalSettings.friction);
-                let sameIdx = 0;
+                        offsetX *= 1 - finalSettings.friction;
+                        offsetY *= 1 - finalSettings.friction;
 
-                easingScrollInterval = __easeInterval(duration, (percentage) => {
-                    let offsetX = pixelsBySecond / 100 * percentage,
-                        offsetY = pixelsBySecond / 100 * percentage; 
+                        let computedTranslateX, computedTranslateY;
 
-                    offsetX *= 1 - finalSettings.friction;
-                    offsetY *= 1 - finalSettings.friction;
+                        if (finalSettings.direction === 'horizontal') {
+                            computedTranslateX = translates.x + offsetX;
+                            computedTranslateX = __easeClamp(computedTranslateX * -1, finalSettings.maxOffsetX * -1, 0, $child.scrollWidth - $child.offsetWidth, $child.scrollWidth - $child.offsetWidth + finalSettings.maxOffsetX);
+                            computedTranslateX *= -1;
+                        } else {
+                            computedTranslateY = translates.y + offsetY;
+                            computedTranslateY = __easeClamp(computedTranslateY * -1, finalSettings.maxOffsetY * -1, 0, $child.scrollHeight - $child.offsetHeight, $child.scrollHeight - $child.offsetHeight + finalSettings.maxOffsetY);
+                            computedTranslateY *= -1;
+                        }
 
-                    let computedTranslateX, computedTranslateY;
+                        if (lastComputedTranslatesStr === `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`) {
+                            sameIdx++;
+                            if (sameIdx >= 10) {
+                                easingScrollInterval.cancel();
+                                sameIdx = 0;
+                                return;
+                            }
+                        }
+                        lastComputedTranslatesStr = `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`;
+
+                        // apply translation
+                        if (finalSettings.direction === 'horizontal') {
+                            $sChild.setTranslate(computedTranslateX);
+                        } else {
+                            $sChild.setTranslate(0, computedTranslateY);
+                        }
+                    }, {
+                        easing: __easeOut
+                    });
+
+                    easingScrollInterval.on('finally', (data) => {
+
+                        if (cancelFromClick) return;
+
+                        // stop if not refocus wanted
+                        if (!finalSettings.refocus) {
+                            resolve(data);
+                            return;
+                        }
+
+                        const translates = $sChild.getTranslates();
+
+                        // @ts-ignore
+                        const $mostDisplaysItem = _getMostDisplayedItem($child.children);
+
+                        emit('refocusStart', $mostDisplaysItem);
+                        finalSettings.onRefocusStart?.($mostDisplaysItem);
+
+                        const diffX = $mostDisplaysItem.getBoundingClientRect().left - $elm.getBoundingClientRect().left,
+                            diffY = $mostDisplaysItem.getBoundingClientRect().top - $elm.getBoundingClientRect().top;
+
+                        easingScrollInterval = __easeInterval(500, (per) => {
+                            const offsetX = diffX / 100 * per,
+                                offsetY = diffY / 100 * per;
+
+                            if (finalSettings.direction === 'horizontal') {
+                                $sChild.setTranslate(translates.x + offsetX * -1);
+                            } else {
+                                $sChild.setTranslate(0, translates.y + offsetY * -1);
+                            }
+
+                            if (per >= 100) {
+                                emit('refocusEnd', $mostDisplaysItem);
+                                resolve(data);
+                            }
+
+                        });
+
+                    });
+
+                break;
+                default:
+
+                    let computedTranslateY, computedTranslateX;
 
                     if (finalSettings.direction === 'horizontal') {
-                        computedTranslateX = translates.x + offsetX;
+                        computedTranslateX = translateX + state.deltaX;
                         computedTranslateX = __easeClamp(computedTranslateX * -1, finalSettings.maxOffsetX * -1, 0, $child.scrollWidth - $child.offsetWidth, $child.scrollWidth - $child.offsetWidth + finalSettings.maxOffsetX);
                         computedTranslateX *= -1;
                     } else {
-                        computedTranslateY = translates.y + offsetY;
+                        computedTranslateY = translateY + state.deltaY;
                         computedTranslateY = __easeClamp(computedTranslateY * -1, finalSettings.maxOffsetY * -1, 0, $child.scrollHeight - $child.offsetHeight, $child.scrollHeight - $child.offsetHeight + finalSettings.maxOffsetY);
                         computedTranslateY *= -1;
                     }
 
-                    if (lastComputedTranslatesStr === `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`) {
-                        sameIdx++;
-                        if (sameIdx >= 10) {
-                            easingScrollInterval.cancel();
-                            sameIdx = 0;
-                            return;
-                        }
-                    }
-                    lastComputedTranslatesStr = `${computedTranslateX || 'x'}-${computedTranslateY || 'y'}`;
-
-                    // apply translation
                     if (finalSettings.direction === 'horizontal') {
                         $sChild.setTranslate(computedTranslateX);
                     } else {
                         $sChild.setTranslate(0, computedTranslateY);
                     }
-                }, {
-                    easing: __easeOut
-                });
 
-                easingScrollInterval.on('finally', (data) => {
+                    emit('drag', state);
+                    finalSettings.onDrag?.(state);
 
-                    if (cancelFromClick) return;
-
-                    // stop if not refocus wanted
-                    if (!finalSettings.refocus) return;
-
-                    const translates = $sChild.getTranslates();
-
-                    const $mostDisplaysItem = _getMostDisplayedItem($child.children);
-
-                    finalSettings.onRefocus?.($mostDisplaysItem);
-
-                    const diffX = $mostDisplaysItem.getBoundingClientRect().left - $elm.getBoundingClientRect().left,
-                        diffY = $mostDisplaysItem.getBoundingClientRect().top - $elm.getBoundingClientRect().top;
-
-                    easingScrollInterval = __easeInterval(500, (per) => {
-                        const offsetX = diffX / 100 * per,
-                            offsetY = diffY / 100 * per;
-
-                        let translateStr = ``;
-                        if (finalSettings.direction === 'horizontal') translateStr += `translateX(${translates.x + offsetX * -1}px)`;
-                        else translateStr += ` translateY(${translates.y + offsetY * -1}px)`;
-
-                        if (finalSettings.direction === 'horizontal') {
-                            $sChild.setTranslate(translates.x + offsetX * -1);
-                        } else {
-                            $sChild.setTranslate(0, translates.y + offsetY * -1);
-                        }
-                    });
-
-                });
-
-            break;
-            default:
-
-                let computedTranslateY, computedTranslateX;
-
-                if (finalSettings.direction === 'horizontal') {
-                    computedTranslateX = translateX + state.deltaX;
-                    computedTranslateX = __easeClamp(computedTranslateX * -1, finalSettings.maxOffsetX * -1, 0, $child.scrollWidth - $child.offsetWidth, $child.scrollWidth - $child.offsetWidth + finalSettings.maxOffsetX);
-                    computedTranslateX *= -1;
-                } else {
-                    computedTranslateY = translateY + state.deltaY;
-                    computedTranslateY = __easeClamp(computedTranslateY * -1, finalSettings.maxOffsetY * -1, 0, $child.scrollHeight - $child.offsetHeight, $child.scrollHeight - $child.offsetHeight + finalSettings.maxOffsetY);
-                    computedTranslateY *= -1;
-                }
-
-                // generate transform string
-                // let translateStr = ``;
-                // if (finalSettings.direction === 'horizontal') translateStr += `translateX(${computedTranslateX}px)`;
-                // else translateStr += ` translateY(${computedTranslateY}px)`;
-
-                if (finalSettings.direction === 'horizontal') {
-                    $sChild.setTranslate(computedTranslateX);
-                } else {
-                    $sChild.setTranslate(0, computedTranslateY);
-                }
-
-                // apply translation
-                // $child.style.transform = translateStr;
-
-            break;
-        }
+                break;
+            }
+        });
     });
 
-
-    return $elm;
 }

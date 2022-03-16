@@ -23,7 +23,7 @@
                 "id": "dev",
                 "type": "module",
                 "defer": true,
-                "src": "http://localhost:3000/src/js/index.ts",
+                "src": "/dist/js/index.ts",
                 "env": "development"
             },
             "module": {
@@ -42,17 +42,10 @@
             }
         },
         "css": {
-            "dev": {
-                "id": "dev",
-                "defer": true,
-                "src": "http://localhost:3000/src/css/index.css",
-                "env": "development"
-            },
             "main": {
                 "id": "main",
                 "defer": true,
-                "src": "/dist/css/index.css",
-                "env": "production"
+                "src": "/dist/css/index.css"
             }
         },
         "html": {

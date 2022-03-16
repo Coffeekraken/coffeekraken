@@ -6,8 +6,10 @@ import __isNode from '@coffeekraken/sugar/shared/is/node';
 import __isPath from '@coffeekraken/sugar/node/fs/isPath';
 import __packageJsonSync from '@coffeekraken/sugar/node/package/jsonSync';
 import __require from '@coffeekraken/sugar/node/esm/require';
+import __SPromise from '@coffeekraken/s-promise';
 
 /**
+ * 
  * @name                  SDockblock
  * @namespace           shared
  * @type                  Class
@@ -223,133 +225,136 @@ class SDocblock extends __SClass implements ISDocblock {
      * @since       2.0.0
      * @author 	Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    async parse(string = this._source): Promise<any[]> {
-        // extract each docblocks
-        const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
+    parse(string = this._source): Promise<any[]> {
+        return new __SPromise(async ({resolve, reject, emit, pipe}) => {
+    
+            // extract each docblocks
+            const regDefault = /(['"`\s]+)?(\/\*{2})([\s\S]+?)(\*\/)/g;
 
-        let blocksArrayStr: string[] = [];
+            let blocksArrayStr: string[] = [];
 
-        // extracting blocks
-        // @ts-ignore
-        let regDefaultMatches = string.match(regDefault);
-        if (regDefaultMatches?.length) {
-            regDefaultMatches = regDefaultMatches.filter(match => {
-                if (match.trim().match(/^['`"]/)) return false;
-                return true;
-            }).map(match => {
-                return match.trim();
-            });
-            blocksArrayStr = [...regDefaultMatches];
-        }
+            // extracting blocks
+            // @ts-ignore
+            let regDefaultMatches = string.match(regDefault);
+            if (regDefaultMatches?.length) {
+                regDefaultMatches = regDefaultMatches.filter(match => {
+                    if (match.trim().match(/^['`"]/)) return false;
+                    return true;
+                }).map(match => {
+                    return match.trim();
+                });
+                blocksArrayStr = [...regDefaultMatches];
+            }
 
-        let blocks: __SDocblockBlock[] = [];
+            let blocks: __SDocblockBlock[] = [];
 
-        if (!Array.isArray(blocksArrayStr)) {
-            blocksArrayStr = [];
-        } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
-            blocksArrayStr = blocksArrayStr.map((t) => t.trim());
-            if (!blocksArrayStr || !blocksArrayStr.length) return [];
-            blocksArrayStr = blocksArrayStr.filter((blockStr) => {
-                const lines = blockStr.split('\n');
-                for (let i = 0; i < lines.length; i++) {
-                    const line = lines[i];
-                    if (line.trim().slice(0, 2) === '//') return false;
-                }
+            if (!Array.isArray(blocksArrayStr)) {
+                blocksArrayStr = [];
+            } else if (Array.isArray(blocksArrayStr) && blocksArrayStr.length) {
+                blocksArrayStr = blocksArrayStr.map((t) => t.trim());
+                if (!blocksArrayStr || !blocksArrayStr.length) return [];
+                blocksArrayStr = blocksArrayStr.filter((blockStr) => {
+                    const lines = blockStr.split('\n');
+                    for (let i = 0; i < lines.length; i++) {
+                        const line = lines[i];
+                        if (line.trim().slice(0, 2) === '//') return false;
+                    }
 
-                if (this.docblockSettings.filterByTag) {
-                    let isBlockMatchFilter = true;
-                    for (
-                        let i = 0;
-                        i <
-                        Object.keys(this.docblockSettings.filterByTag).length;
-                        i++
-                    ) {
-                        const tagName = Object.keys(
-                            this.docblockSettings.filterByTag,
-                        )[i];
-                        const tagFilter =
-                            this.docblockSettings.filterByTag[tagName];
-                        const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
-                        const tagValue = blockStr.match(tagValueReg);
-                        const tagFilterArray = Array.isArray(tagFilter)
-                            ? tagFilter
-                            : [tagFilter];
-                        let isMatchOrCondition = false;
-                        if (tagValue && tagValue[1]) {
-                            const tagValueValue = tagValue[1].trim();
-                            for (let j = 0; j < tagFilterArray.length; j++) {
-                                const tagFilterFilter = tagFilterArray[j];
-                                if (typeof tagFilterFilter === 'string') {
-                                    if (tagValueValue === tagFilterFilter) {
-                                        isMatchOrCondition = true;
-                                        break;
-                                    }
-                                } else if (tagFilterFilter instanceof RegExp) {
-                                    if (
-                                        tagValueValue
-                                            .trim()
-                                            .match(tagFilterFilter)
+                    if (this.docblockSettings.filterByTag) {
+                        let isBlockMatchFilter = true;
+                        for (
+                            let i = 0;
+                            i <
+                            Object.keys(this.docblockSettings.filterByTag).length;
+                            i++
+                        ) {
+                            const tagName = Object.keys(
+                                this.docblockSettings.filterByTag,
+                            )[i];
+                            const tagFilter =
+                                this.docblockSettings.filterByTag[tagName];
+                            const tagValueReg = new RegExp(`@${tagName}([^\n]+)`);
+                            const tagValue = blockStr.match(tagValueReg);
+                            const tagFilterArray = Array.isArray(tagFilter)
+                                ? tagFilter
+                                : [tagFilter];
+                            let isMatchOrCondition = false;
+                            if (tagValue && tagValue[1]) {
+                                const tagValueValue = tagValue[1].trim();
+                                for (let j = 0; j < tagFilterArray.length; j++) {
+                                    const tagFilterFilter = tagFilterArray[j];
+                                    if (typeof tagFilterFilter === 'string') {
+                                        if (tagValueValue === tagFilterFilter) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    } else if (tagFilterFilter instanceof RegExp) {
+                                        if (
+                                            tagValueValue
+                                                .trim()
+                                                .match(tagFilterFilter)
+                                        ) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    } else if (
+                                        typeof tagFilterFilter === 'function'
                                     ) {
-                                        isMatchOrCondition = true;
-                                        break;
+                                        if (tagFilterFilter(tagValueValue.trim())) {
+                                            isMatchOrCondition = true;
+                                            break;
+                                        }
+                                    } else {
+                                        throw new Error(
+                                            `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
+                                        );
                                     }
-                                } else if (
-                                    typeof tagFilterFilter === 'function'
-                                ) {
-                                    if (tagFilterFilter(tagValueValue.trim())) {
-                                        isMatchOrCondition = true;
-                                        break;
-                                    }
-                                } else {
-                                    throw new Error(
-                                        `<red>[${this.constructor.name}]</red> Sorry but the passed "<yellow>${tagName}</yellow>" filterByTag filter can be only a RegExp or a function`,
-                                    );
                                 }
                             }
+                            if (!isMatchOrCondition) isBlockMatchFilter = false;
                         }
-                        if (!isMatchOrCondition) isBlockMatchFilter = false;
+                        if (isBlockMatchFilter) return true;
+                        return false;
                     }
-                    if (isBlockMatchFilter) return true;
-                    return false;
-                }
 
-                return true;
-            });
-        }
+                    return true;
+                });
+            }
 
-        for (let i = 0; i < blocksArrayStr.length; i++) {
-            const block = blocksArrayStr[i];
-            const docblockBlock = new __SDocblockBlock(block || ' ', {
-                docblockBlock: {
-                    packageJson: this._packageJson,
-                    filepath: this.docblockSettings.filepath || '',
-                    renderMarkdown: this.docblockSettings.renderMarkdown,
-                    markedOptions: this.docblockSettings.markedOptions,
-                },
-            });
+            for (let i = 0; i < blocksArrayStr.length; i++) {
+                const block = blocksArrayStr[i];
+                const docblockBlock = new __SDocblockBlock(block || ' ', {
+                    docblockBlock: {
+                        packageJson: this._packageJson,
+                        filepath: this.docblockSettings.filepath || '',
+                        renderMarkdown: this.docblockSettings.renderMarkdown,
+                        markedOptions: this.docblockSettings.markedOptions,
+                    },
+                });
 
+                await pipe(docblockBlock.parse());
+                blocks[i] = docblockBlock;
+            }
 
-            await docblockBlock.parse();
-            blocks[i] = docblockBlock;
-        }
+            if (blocks && blocks.length) {
+                this._blocks = blocks;
+            }
 
-        if (blocks && blocks.length) {
-            this._blocks = blocks;
-        }
-
-        if (typeof this.docblockSettings.filter === 'function') {
-            // @ts-ignore
-            this._blocks = this._blocks.filter((docblockBlock) => {
+            if (typeof this.docblockSettings.filter === 'function') {
                 // @ts-ignore
-                return this.docblockSettings.filter(docblockBlock.toObject(), docblockBlock);
-            });        
-        }
+                this._blocks = this._blocks.filter((docblockBlock) => {
+                    // @ts-ignore
+                    return this.docblockSettings.filter(docblockBlock.toObject(), docblockBlock);
+                });        
+            }
 
-        // sort
-        this.sort();
+            // sort
+            this.sort();
 
-        // return the class instance itself
-        return this._blocks;
+            // return the class instance itself
+            resolve(this._blocks);
+
+        });
     }
 
     /**

@@ -4,12 +4,29 @@ s-slider,
     font-size: sugar.scalable(1rem);
 }
 
-s-slider[lnf="default"] {
+s-slider[lnf^="default"] {
     position: relative;
-    padding-bottom: calc(sugar.margin(30) + 0.5em);
 
     &[mounted] {
         display: block;
+    }
+
+    &[lnf*="tight"][direction="horizontal"][controls] {
+        padding-left: calc(sugar.margin(30) + 1em);
+        padding-right: calc(sugar.margin(30) + 1em);
+        
+    }
+    &[lnf*="tight"][direction="horizontal"][nav] {
+        padding-bottom: calc(sugar.margin(30) + 1em);
+    }
+
+    &[lnf*="tight"][direction="vertical"][controls] {
+        padding-top: calc(sugar.margin(30) + 1em);
+        padding-bottom: calc(sugar.margin(30) + 1em);
+        
+    }
+    &[lnf*="tight"][direction="vertical"][nav] {
+        padding-right: calc(sugar.margin(30) + 1em);
     }
 
     .s-slider {
@@ -18,6 +35,9 @@ s-slider[lnf="default"] {
     }
 
     .s-slider__slides-wrapper {
+        position: absolute;
+        top: 0; left: 0;
+        width: 100%; height: 100%;
         overflow: hidden;
         border-radius: sugar.theme(ui.slider.borderRadius);
     }
@@ -27,10 +47,10 @@ s-slider[lnf="default"] {
         flex-basis: 100%;
         user-select: none;
         width: 100%; height: 100%;
+    }
 
-        [direction="vertical"] & {
-            flex-direction: column;
-        }
+    &[direction="vertical"] .s-slider__slides {
+        flex-direction: column;
     }
 
     .s-slider__slide {
@@ -64,11 +84,45 @@ s-slider[lnf="default"] {
             }
         }
     }
+    &[lnf*="contained"] .s-slider__nav {
+        top: auto;
+        bottom: calc(sugar.margin(30) - 0.5em);
+        transform: translate(-50%, -100%);
+    }
+    &[direction="vertical"] .s-slider__nav {
+        top: 50%; left: calc(100% + sugar.margin(30));
+        transform: translate(0, -50%);
+        flex-direction: column;
+        gap: sugar.margin(10);
+    }
+    &[lnf*="contained"][direction="vertical"] .s-slider__nav {
+        bottom: auto;
+        left: auto;
+        right: calc(sugar.margin(30));
+        transform: translate(0, -50%);
+    }
+
+    .s-slider__progress {
+        position: absolute;
+        bottom: sugar.margin(30); left: sugar.margin(30);
+        right: sugar.margin(30);
+        height: 0.5em;
+        border-radius: sugar.theme(ui.slider.borderRadius);
+        background: sugar.color(current, --alpha 0.3);
+    }
+    .s-slider__progress-bar {
+        position: absolute;
+        top: 0; left: 0;
+        height: 100%; width: calc(100% / (var(--s-slider-total)) * (var(--s-slider-slide) + 1));
+        border-radius: sugar.theme(ui.slider.borderRadius);
+        background: sugar.color(current);
+        transition: sugar.theme(ui.slider.transition);
+        /* transition: all var(--s-slider-slide-timer-total) linear; */
+    }
 
     .s-slider__controls {
 
     }
-
     .s-slider__controls-next,
     .s-slider__controls-previous {
         width: 1em; height: 1em;
@@ -78,6 +132,7 @@ s-slider[lnf="default"] {
         cursor: pointer;
         opacity: 0.3;
         pointer-events: none;
+        transition: sugar.theme(ui.slider.transition);
 
         &.active {
             pointer-events: all;
@@ -85,11 +140,38 @@ s-slider[lnf="default"] {
         }
     }
     .s-slider__controls-previous {
-        left: sugar.margin(30);
+        right: calc(100% + sugar.margin(30));
     }
     .s-slider__controls-next {
-        right: sugar.margin(30);
+        left: calc(100% + sugar.margin(30));
     }
+    &[lnf*="contained"] .s-slider__controls-previous {
+        left: calc(sugar.margin(30));
+        transform: translate(0, -50%);
+    }
+    &[lnf*="contained"] .s-slider__controls-next {
+        left: auto;
+        right: calc(sugar.margin(30));
+        transform: translate(0, -50%);
+    }
+
+
+    &[direction="vertical"] .s-slider__controls-next {
+        left: 50%; top: calc(100% + sugar.margin(30));
+        transform: translate(-50%, 0) rotate(90deg);
+    }
+    &[direction="vertical"] .s-slider__controls-previous {
+        left: 50%; top: calc(sugar.margin(30) * -1);
+        transform: translate(-50%, 0) rotate(90deg);
+    }
+    &[direction="vertical"][lnf*="contained"] .s-slider__controls-previous {
+        top: calc(sugar.margin(30));
+    }
+    &[direction="vertical"][lnf*="contained"] .s-slider__controls-next {
+        top: auto;
+        bottom: calc(sugar.margin(30));
+    }
+
 
     .s-slider__controls-next-arrow,
     .s-slider__controls-previous-arrow {

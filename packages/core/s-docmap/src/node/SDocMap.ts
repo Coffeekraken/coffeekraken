@@ -782,7 +782,7 @@ class SDocMap extends __SClass implements ISDocMap {
                         },
                     });
 
-                    await docblocksInstance.parse();
+                    await pipe(docblocksInstance.parse());
 
                     const docblocks = docblocksInstance.toObject();
 

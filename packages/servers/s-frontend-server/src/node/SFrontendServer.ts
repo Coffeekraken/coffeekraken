@@ -244,7 +244,7 @@ export default class SFrontendServer extends __SClass {
                                 frontendServerConfig.handlers[routeObj.handler];
                             const handlerPath = handlerObj.path;
                             if (!handlerPath) {
-                                return;
+                                 return;
                             }
 
                             const { default: handlerFn } = await import(

@@ -1,7 +1,7 @@
 {
     "metas": {
         "lang": "en",
-        "title": "Plop",
+        "title": "Coffeekraken",
         "description": "Hello world",
         "themeColor": "#FFBB00",
         "author": {
@@ -10,7 +10,7 @@
             "url": "https://olivierbossel.com"
         },
         "og": {
-            "title": "plop",
+            "title": "Coffeekraken",
             "description": "wiufhweiufh wiuehfiuwehf",
             "type": "website",
             "url": "https://olivierbossel.com",

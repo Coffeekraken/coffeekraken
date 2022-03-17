@@ -79,6 +79,7 @@
         "@coffeekraken/s-vite-plugin-sugar": "^2.0.0",
         "@coffeekraken/sugar": "^2.0.0",
         "animejs": "^3.2.1",
+        "canvas": "^2.9.0",
         "http-server": "^14.0.0",
         "lit-element": "^2.5.1",
         "minisearch": "^3.0.4",

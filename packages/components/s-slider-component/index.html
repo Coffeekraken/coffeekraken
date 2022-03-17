@@ -13,7 +13,15 @@
             import __SSliderSlideableBehavior from './src/js/behaviors/SSliderSlideableBehavior.ts';
 
             define({
-                behavior: __SSliderSlideableBehavior
+                behavior: 'slideable',
+                availableBehaviors: {
+                    slideable: {
+                        class: __SSliderSlideableBehavior,
+                        settings: {
+                            friction: 0.7
+                        }
+                    }
+                }
             });
         </script>
 

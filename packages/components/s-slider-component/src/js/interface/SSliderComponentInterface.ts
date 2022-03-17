@@ -30,6 +30,10 @@ export default class SSliderComponentInterface extends __SInterface {
                 physical: true,
                 default: 'horizontal',
             },
+            availableBehaviors: {
+                description: 'Specify the available behaviors for the slider',
+                type: 'Array<Object>'
+            },
             behavior: {
                 description: 'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
                 type: 'Object'

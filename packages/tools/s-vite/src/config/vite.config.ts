@@ -23,7 +23,7 @@ export default function (env, config) {
          * @since       2.0.0
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
-        root: '[config.storage.package.rootDir]/public',
+        root: '[config.storage.package.rootDir]',
         /**
          * @name          base
          * @namespace     config.vite
@@ -63,6 +63,7 @@ export default function (env, config) {
          */
         mode: 'development',
         resolve: {
+            preserveSymlinks: true,
             alias: {
 
                 static: '',
@@ -148,6 +149,7 @@ export default function (env, config) {
              * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
              */
             // exclude: ['static'],
+             entries: ['index.html']
         },
         build: {
             lib: {
@@ -228,18 +230,19 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
-                '/dist': 'http://localhost:[config.frontendServer.port]',
-                '/cache': 'http://localhost:[config.frontendServer.port]',
-                '/api/config': 'http://localhost:[config.frontendServer.port]',
-            },
-            // watch: {
-            //     ignored: [/\/static\//],
-            // },
-            // watch: false,
+                '^.*(?!.css)$': {
+                    target: `http://localhost:${config.frontendServer.port}`,
+                    changeOrigin: true,
+                    rewrite: (path) => {
+                        console.log('pah', path);
+                        return path;
+                    }
+                },
+                // '/dist': 'http://localhost:[config.frontendServer.port]',
+                // '/cache': 'http://localhost:[config.frontendServer.port]',
+                // '/api/config': 'http://localhost:[config.frontendServer.port]',
+            }
         },
-        // optimizeDeps: {
-        //     exclude: ['static'],
-        // },
         css: {},
         rewrites: [
             __path.resolve(`${__dirname()}/../node/rewrites/handlebars`),

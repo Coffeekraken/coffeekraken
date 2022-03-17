@@ -132,7 +132,7 @@ class SPromise
      * @since       2.0.0
      * @author 		Olivier Bossel<olivier.bossel@gmail.com>
      */
-    static queue(promises: Record<string, Promise | Function>, before?: function, after?: function): Promise<Promise[]> {
+    static queue(promises: Record<string, Promise | Function>, before?: Function, after?: Function): Promise<Promise[]> {
         return new SPromise(async ({resolve, reject}) => {
             const results = {};
             let i=0;

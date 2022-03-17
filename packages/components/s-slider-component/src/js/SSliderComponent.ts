@@ -15,13 +15,14 @@ import __SSliderComponentInterface from './interface/SSliderComponentInterface';
 import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTranslateProperties';
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
+import __isClass from '@coffeekraken/sugar/shared/is/class';
 
 /**
- * @name                Range
+ * @name                Slider
  * @namespace           js
  * @type                CustomElement
  * @interface           ./interface/SSliderComponentInterface.js
- * @menu                Styleguide / Forms              /styleguide/form/s-range
+ * @menu                Styleguide / UI              /styleguide/ui/s-slider
  * @platform            html
  * @status              beta
  *
@@ -34,29 +35,56 @@ import __parse from '@coffeekraken/sugar/shared/string/parse';
  * @support         edge
  *
  * @install          bash 
- * npm i @coffeekraken/s-range-component
+ * npm i @coffeekraken/s-slider-component
  * 
  * @install         js
- * import { define } from '@coffeekraken/s-range-component';
- * define();
+ * import { define, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
+ * define({
+ *      availableBehaviors: {
+ *          slideable: {
+ *              class: SSliderSlideableBehavior
+ *              settings: {}
+ *          }
+ *      }
+ * });
  * 
  * @example         html        Simple slider
  * <s-slider controls nav>
  *    <div s-slider-slide class="s-bg--accent">
- *           <h1 class="s-typo--h1">Slide #1</h1>
- *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
- *       <div s-slider-slide class="s-bg--complementary">
- *           <h1 class="s-typo--h1">Slide #1</h1>
- *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
- *       <div s-slider-slide class="s-bg--info">
- *           <h1 class="s-typo--h1">Slide #1</h1>
- *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
- *       <div s-slider-slide class="s-bg--error">
- *           <h1 class="s-typo--h1">Slide #1</h1>
- *           <p class="s-typo s-typo--p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Slideable slider
+ * <s-slider behavior="slideable" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *   </s-slider>
  *
@@ -66,7 +94,8 @@ import __parse from '@coffeekraken/sugar/shared/string/parse';
 
 export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     direction: 'horizontal' | 'vertical';
-    behavior: __SSliderBehavior;
+    availableBehaviors: __SSliderBehavior[];
+    behavior: __SSliderBehavior | string;
     controls: boolean;
     nav: boolean;
     mousewheel: boolean;
@@ -97,7 +126,7 @@ export interface ISSliderComponentTimer {
 
 export default class SSlider extends __SLitComponent {
     static get properties() {
-        return __SLitComponent.properties({}, __SInterface.mix(__SSliderComponentInterface, __SComponentUtils.getDefaultProps('s-slider').behavior?.interface ?? {}));
+        return __SLitComponent.properties({}, __SSliderComponentInterface);
     }
 
     static get styles() {
@@ -114,7 +143,6 @@ export default class SSlider extends __SLitComponent {
     $navs: HTMLElement[] = [];
     $slidesContainer: HTMLElement;
 
-    _currentPageIdx = 0;
     _currentSlideIdx = 0;
     _timer = {
         total: 0,
@@ -154,7 +182,30 @@ export default class SSlider extends __SLitComponent {
 
         // default behavior
         if (this.props.behavior) {
-            this.behavior = new this.props.behavior({});
+            if (typeof this.props.behavior === 'string') {
+
+                let behavior;
+                for (let [behaviorId, behaviorObj] of Object.entries(this.props.availableBehaviors)) {
+                    const id = behaviorObj.class?.id ?? behaviorObj.id;
+                    if (id === this.props.behavior) {
+                        behavior = behaviorObj;
+                        break;
+                    }
+                }
+                if (!behavior) {
+                    throw new Error(`The behavior "${this.props.behavior}" is not available`);
+                }
+                if (!behavior.class) {
+                    throw new Error(`The behavior "${this.props.behavior}" is not valid. You must provide the "<yellow>class</yellow>" property and an optional "<yellow>settings</yellow>" one...`);
+                }
+                this.behavior = new behavior.class(behavior.settings ?? {});
+            } else if (__isClass(this.props.behavior)) {
+                this.behavior = new this.props.behavior({});
+            } else if (this.props.behavior instanceof __SSliderBehavior) {
+                this.behavior = this.props.behavior;
+            } else {
+                throw new Error(`Invalid behavior type, must be a string, an SSliderBehavior extended class or an SSliderBehavior instance`);
+            }
             this.behavior.$slider = this;
             this.behavior.firstUpdated?.();
         }
@@ -172,20 +223,6 @@ export default class SSlider extends __SLitComponent {
         if (this.props.autoplay && this.props.timer) {
             this.play();
         }
-
-        // setTimeout(() => {
-        //     this.goTo('welcome');
-        // }, 1000);
-        // setTimeout(() => {
-        //     this.next();
-        // }, 2000);
-        // setTimeout(() => {
-        //     this.next();
-        // }, 3000);
-        // setTimeout(() => {
-        //     this.goTo(0);
-        // }, 4000);
-
     }
 
     /**
@@ -333,19 +370,6 @@ export default class SSlider extends __SLitComponent {
      */
     isFirst() {
         return this.currentSlideIdx <= 0;
-    }
-
-    /**
-     * @name        currentPageIdx
-     * @type    HTMLElement
-     * 
-     * Access the current page idx. Begin from 0...
-     * 
-     * @since       2.0.0
-     * @author          Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io) 
-     */
-    get currentPageIdx(): number {
-        return this._currentPageIdx;
     }
 
     /**

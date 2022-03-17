@@ -142,6 +142,7 @@ export default class SFrontendServer extends __SClass {
                     Object.keys(frontendServerConfig.staticDirs).forEach(
                         (dir) => {
                             const fsPath = frontendServerConfig.staticDirs[dir];
+                            console.log(dir, fsPath);
                             emit('log', {
                                 value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
                                     process.cwd(),
@@ -158,10 +159,11 @@ export default class SFrontendServer extends __SClass {
                         (proxyId) => {
                             const proxyObj =
                                 frontendServerConfig.proxy[proxyId];
+                            console.log(proxyObj);
                             // @ts-ignore
                             express.use(
                                 createProxyMiddleware(proxyObj.route, {
-                                    logLevel: 'silent',
+                                    // logLevel: 'silent',
                                     ...(proxyObj.settings ?? {}),
                                 }),
                             );

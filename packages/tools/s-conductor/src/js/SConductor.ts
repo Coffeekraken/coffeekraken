@@ -64,9 +64,9 @@ export interface ISConductorTaskObj extends ISDurationObject {
     registerTime: number;
     triggers: TSConductorTrigger[];
     $elm: HTMLElement;
-    task: function;
-    watchers: function[];
-    resolve: function;
+    task: Function;
+    watchers: Function[];
+    resolve: Function;
 }
 
 export default class SConductor extends __SClass {

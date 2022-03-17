@@ -118,15 +118,15 @@
                 "relPath": "src/config/themeUi.config.js",
                 "children": {}
             },
-            "@coffeekraken.s-slider-component.js.Range": {
-                "name": "Range",
+            "@coffeekraken.s-slider-component.js.Slider": {
+                "name": "Slider",
                 "type": "CustomElement",
                 "menu": {
                     "tree": [
                         "Styleguide",
-                        "Forms"
+                        "UI"
                     ],
-                    "slug": "/styleguide/form/s-range"
+                    "slug": "/styleguide/ui/s-slider"
                 },
                 "platform": [
                     {

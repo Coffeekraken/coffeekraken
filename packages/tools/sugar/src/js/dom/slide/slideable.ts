@@ -75,7 +75,7 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
 
         const finalSettings = <ISlideableSettings>{
             direction: 'horizontal',
-            friction: 9,
+            friction: 0.7,
             maxOffset: 10,
             maxOffsetX: undefined,
             maxOffsetY: undefined,

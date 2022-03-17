@@ -91,86 +91,136 @@ export default function (env, config) {
         logLevel: 'info',
 
         proxy: {
-            vitePing: {
-                /**
-                 * @name            route
-                 * @namespace       config.frontendServer.proxy.vitePing
-                 * @type            String
-                 * @default         [config.storage.serve.rootDir]
-                 *
-                 * Specify which route to proxy for the vitePing
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                route: '/__vite_ping',
-                settings: {
-                    /**
-                     * @name        target
-                     * @namespace   config.frontendServer.proxy.vitePing.settings
-                     * @type         String
-                     * @default         [config.vite.server.hostname]
-                     *
-                     * Specify where to redirect the vitePing requests
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    target: '[config.vite.server.hostname]',
-                    /**
-                     * @name        changeOrigin
-                     * @namespace       config.frontendServer.proxy.vitePing.settings
-                     * @type        Boolean
-                     * @default         true
-                     *
-                     * Specify if you want the redirection to change the origin or not
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    changeOrigin: true,
-                },
-            },
-            vite: {
-                /**
-                 * @name            route
-                 * @namespace       config.frontendServer.proxy.vite
-                 * @type            String
-                 * @default         [config.storage.serve.rootDir]
-                 *
-                 * Specify which route to proxy for the vitePing
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                route: '/dist',
-                settings: {
-                    /**
-                     * @name        target
-                     * @namespace   config.frontendServer.proxy.vitePing.settings
-                     * @type         String
-                     * @default         [config.vite.server.hostname]
-                     *
-                     * Specify where to redirect the vitePing requests
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    target: '[config.vite.server.hostname]/src',
-                    /**
-                     * @name        changeOrigin
-                     * @namespace       config.frontendServer.proxy.vitePing.settings
-                     * @type        Boolean
-                     * @default         true
-                     *
-                     * Specify if you want the redirection to change the origin or not
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    changeOrigin: true,
-                },
-            },
+            // vitePing: {
+            //     /**
+            //      * @name            route
+            //      * @namespace       config.frontendServer.proxy.vitePing
+            //      * @type            String
+            //      * @default         [config.storage.serve.rootDir]
+            //      *
+            //      * Specify which route to proxy for the vitePing
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     route: ['/__vite_ping'],
+            //     settings: {
+            //         /**
+            //          * @name        target
+            //          * @namespace   config.frontendServer.proxy.vitePing.settings
+            //          * @type         String
+            //          * @default         [config.vite.server.hostname]
+            //          *
+            //          * Specify where to redirect the vitePing requests
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         target: '[config.vite.server.hostname]',
+            //         /**
+            //          * @name        changeOrigin
+            //          * @namespace       config.frontendServer.proxy.vitePing.settings
+            //          * @type        Boolean
+            //          * @default         true
+            //          *
+            //          * Specify if you want the redirection to change the origin or not
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         changeOrigin: true,
+            //     },
+            // },
+            // cssTs: {
+            //     /**
+            //      * @name            route
+            //      * @namespace       config.frontendServer.proxy.vitePing
+            //      * @type            String
+            //      * @default         [config.storage.serve.rootDir]
+            //      *
+            //      * Specify which route to proxy for the vitePing
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     route: ['**/*.css','**/*.ts'],
+            //     settings: {
+            //         /**
+            //          * @name        target
+            //          * @namespace   config.frontendServer.proxy.vitePing.settings
+            //          * @type         String
+            //          * @default         [config.vite.server.hostname]
+            //          *
+            //          * Specify where to redirect the vitePing requests
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         target: '[config.vite.server.hostname]',
+            //         /**
+            //          * @name        changeOrigin
+            //          * @namespace       config.frontendServer.proxy.vitePing.settings
+            //          * @type        Boolean
+            //          * @default         true
+            //          *
+            //          * Specify if you want the redirection to change the origin or not
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         changeOrigin: true,
+            //         pathRewrite: function (path, req) {
+            //             const newPath = path.replace(/^\/dist/, '/src');
+            //             console.log('re', newPath);
+            //             return newPath;
+            //         }
+            //     },
+            // },
+            // devDist: {
+            //     /**
+            //      * @name            route
+            //      * @namespace       config.frontendServer.proxy.vitePing
+            //      * @type            String
+            //      * @default         [config.storage.serve.rootDir]
+            //      *
+            //      * Specify which route to proxy for the vitePing
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     route: ['/dist','/src'],
+            //     settings: {
+            //         /**
+            //          * @name        target
+            //          * @namespace   config.frontendServer.proxy.vitePing.settings
+            //          * @type         String
+            //          * @default         [config.vite.server.hostname]
+            //          *
+            //          * Specify where to redirect the vitePing requests
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         target: '[config.vite.server.hostname]',
+            //         /**
+            //          * @name        changeOrigin
+            //          * @namespace       config.frontendServer.proxy.vitePing.settings
+            //          * @type        Boolean
+            //          * @default         true
+            //          *
+            //          * Specify if you want the redirection to change the origin or not
+            //          *
+            //          * @since           2.0.0
+            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //          */
+            //         changeOrigin: true,
+            //         // autoRewrite: true,
+            //         pathRewrite: function (path, req) {
+            //             const newPath = path.replace(/^\/dist/, '/src');
+            //             return newPath;
+            //         }
+            //     },
+            // }
         },
 
         middlewares: {

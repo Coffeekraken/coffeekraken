@@ -1,5 +1,5 @@
-import __easeInQuad from '../../../shared/easing/easeInQuad';
-import __easeOutQuad from '../../../shared/easing/easeOutQuad';
+import __easeInQuad from '../easing/easeInQuad';
+import __easeOutQuad from '../easing/easeOutQuad';
 import __clamp from './clamp';
 
 /**

@@ -7,6 +7,7 @@ import { define as __sRefocusFeature } from '@coffeekraken/s-refocus-feature';
 import { define as __sSugarFeature } from '@coffeekraken/s-sugar-feature';
 import { define as __sFloatingFeature } from '@coffeekraken/s-floating-feature';
 import { define as __sPageTransitionFeature } from '@coffeekraken/s-page-transition-feature';
+import { define as __SSliderComponent, SSliderSlideableBehavior } from '@coffeekraken/s-slider-component';
 
 import __SLitComponent from '@coffeekraken/s-lit-component';
 import { define as __sParallaxFeature } from '@coffeekraken/s-parallax-feature';
@@ -76,6 +77,14 @@ __SConductor.setup({
     __SColorPickerWebcomponent();
     __SDatePickerWebcomponent();
     __SRangeWebcomponent();
+    __SSliderComponent({
+        availableBehaviors: {
+            slideable: {
+                class: SSliderSlideableBehavior,
+                settings: {}
+            }
+        }
+    });
 
     // features
     __sSugarFeature();
@@ -95,6 +104,6 @@ __SConductor.setup({
         },
     });
 
-    __krakenLogo();
+    // __krakenLogo();
 
 })();

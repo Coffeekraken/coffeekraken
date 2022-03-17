@@ -5,6 +5,7 @@ import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBeh
 
 export interface ISSliderBehaviorSettings {
     direction: 'horizontal' | 'vertical';
+    friction: number;
 }
 
 export default class SSliderSlideableBehavior extends __SSliderBehavior {
@@ -48,7 +49,7 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
 
     _handleSlide() {
         __slideable(this.$slider.$slidesWrapper, {
-            friction: 0.7,
+            friction: this.settings.friction,
             direction: this.$slider.props.direction
         }).on('start', () => {
             this.$slider.stop();

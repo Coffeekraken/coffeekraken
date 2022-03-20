@@ -23,7 +23,7 @@
                 "id": "dev",
                 "type": "module",
                 "defer": true,
-                "src": "/dist/js/index.ts",
+                "src": "/src/js/index.ts",
                 "env": "development"
             },
             "module": {

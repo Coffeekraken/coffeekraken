@@ -138,11 +138,26 @@ export default class SFrontendServer extends __SClass {
                     }
                 }
 
+                if (frontendServerConfig.proxy) {
+                    Object.keys(frontendServerConfig.proxy).forEach(
+                        (proxyId) => {
+                            const proxyObj =
+                                frontendServerConfig.proxy[proxyId];
+                            // @ts-ignore
+                            express.use(
+                                createProxyMiddleware(proxyObj.route, {
+                                    logLevel: 'silent',
+                                    ...(proxyObj.settings ?? {}),
+                                }),
+                            );
+                        },
+                    );
+                }
+
                 if (frontendServerConfig.staticDirs) {
                     Object.keys(frontendServerConfig.staticDirs).forEach(
                         (dir) => {
                             const fsPath = frontendServerConfig.staticDirs[dir];
-                            console.log(dir, fsPath);
                             emit('log', {
                                 value: `<cyan>[static]</cyan> Exposing static folder "<cyan>${__path.relative(
                                     process.cwd(),
@@ -150,23 +165,6 @@ export default class SFrontendServer extends __SClass {
                                 )}</cyan>" behind "<yellow>${dir}</yellow>" url`,
                             });
                             express.use(dir, __express.static(fsPath));
-                        },
-                    );
-                }
-
-                if (frontendServerConfig.proxy) {
-                    Object.keys(frontendServerConfig.proxy).forEach(
-                        (proxyId) => {
-                            const proxyObj =
-                                frontendServerConfig.proxy[proxyId];
-                            console.log(proxyObj);
-                            // @ts-ignore
-                            express.use(
-                                createProxyMiddleware(proxyObj.route, {
-                                    // logLevel: 'silent',
-                                    ...(proxyObj.settings ?? {}),
-                                }),
-                            );
                         },
                     );
                 }

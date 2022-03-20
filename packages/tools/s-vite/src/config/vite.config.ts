@@ -230,17 +230,34 @@ export default function (env, config) {
             hostname:
                 'http://[config.vite.server.host]:[config.vite.server.port]',
             proxy: {
-                '^.*(?!.css)$': {
-                    target: `http://localhost:${config.frontendServer.port}`,
-                    changeOrigin: true,
-                    rewrite: (path) => {
-                        console.log('pah', path);
-                        return path;
-                    }
-                },
-                // '/dist': 'http://localhost:[config.frontendServer.port]',
-                // '/cache': 'http://localhost:[config.frontendServer.port]',
-                // '/api/config': 'http://localhost:[config.frontendServer.port]',
+                // '^[^\\.]+\\.(?=css|js|ts|tsx|jsx)(\\?)?(.+)': {
+                //     target: `http://localhost:3000`,
+                //     changeOrigin: true,
+                //     rewrite: (path) => {
+                //         console.log('33pah', path);
+                //         return path.replace(/\/dist\//, '/src/');
+                //     }
+                // },
+                // '^[^\\.]+\\.(?!css|js|ts|tsx|jsx)(\\?)?(.+)': {
+                //     target: `http://localhost:8080`,
+                //     changeOrigin: true,
+                //     rewrite: (path) => {
+                //         console.log('pah', path);
+                //         return path.replace(/\/dist\//, '/src/');
+                //     }
+                // },
+                // '/dist': {
+                //     target: `http://localhost:3000`,
+                //     changeOrigin: true,
+                //     rewrite: (path) => {
+                //         console.log('fefwfwfwfw ef ewpah', path);
+                //         return path.replace(/\/dist\//, '/src/');
+                //     }
+                // },
+                // '^/$': {
+                //     target: `http://localhost:8080`,
+                //     changeOrigin: true
+                // }
             }
         },
         css: {},

@@ -63,7 +63,7 @@ export default function (env, config) {
          */
         mode: 'development',
         resolve: {
-            preserveSymlinks: true,
+            // preserveSymlinks: true,
             alias: {
 
                 static: '',
@@ -192,6 +192,9 @@ export default function (env, config) {
             outDir: '[config.storage.dist.jsDir]',
         },
         server: {
+            // watch: {
+            //     usePolling: true
+            //     },
             /**
              * @name          host
              * @namespace     config.vite.server
@@ -238,14 +241,21 @@ export default function (env, config) {
                 //         return path.replace(/\/dist\//, '/src/');
                 //     }
                 // },
-                // '^[^\\.]+\\.(?!css|js|ts|tsx|jsx)(\\?)?(.+)': {
-                //     target: `http://localhost:8080`,
-                //     changeOrigin: true,
-                //     rewrite: (path) => {
-                //         console.log('pah', path);
-                //         return path.replace(/\/dist\//, '/src/');
-                //     }
-                // },
+                '^(?:(?!\\.css|\\.ts|\\.js|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|@fs|__vite_ping|index\.html).)*$': {
+                    target: `http://localhost:8080`,
+                    changeOrigin: true,
+                    rewrite: (path) => {
+                        return path.replace(/\/dist\//, '/src/');
+                    }
+                },
+                '/dist': {
+                    target: `http://localhost:3000`,
+                    changeOrigin: true,
+                    ws: true,
+                    rewrite: (path) => {
+                        return path.replace(/\/dist\//, '/src/');
+                    }
+                }
                 // '/dist': {
                 //     target: `http://localhost:3000`,
                 //     changeOrigin: true,

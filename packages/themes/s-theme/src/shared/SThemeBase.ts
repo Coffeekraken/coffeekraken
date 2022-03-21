@@ -646,10 +646,10 @@ export default class SThemeBase extends __SClass {
         if (__isColor(to)) {
             const color = new __SColor(to);
             result.vars = [
-                `--s-theme-color-${from}-h: ${color.h}`,
-                `--s-theme-color-${from}-s: ${color.s}`,
-                `--s-theme-color-${from}-l: ${color.l}`,
-                `--s-theme-color-${from}-a: ${color.a}`
+                `--s-theme-color-${from}-h: ${color.h};`,
+                `--s-theme-color-${from}-s: ${color.s};`,
+                `--s-theme-color-${from}-l: ${color.l};`,
+                `--s-theme-color-${from}-a: ${color.a};`
             ];
             result.properties[`--s-theme-color-${from}-h`] = color.h;
             result.properties[`--s-theme-color-${from}-s`] = color.s;

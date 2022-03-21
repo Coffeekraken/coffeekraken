@@ -39,3 +39,11 @@ s-slider[mounted] .s-slider {
         object-fit: cover;
     }
 }
+
+s-slider[lnf*="contained"] {
+    @sugar.color.current(#ffffff);
+}
+
+.s-slider__progress {
+    @sugar.color.current(#ffffff);
+}

@@ -16,6 +16,7 @@ import __getTranslateProperties from '@coffeekraken/sugar/js/dom/style/getTransl
 import __easeInterval from '@coffeekraken/sugar/shared/function/easeInterval';
 import __parse from '@coffeekraken/sugar/shared/string/parse';
 import __isClass from '@coffeekraken/sugar/shared/is/class';
+import __onSwipe from '@coffeekraken/sugar/js/dom/detect/onSwipe';
 
 /**
  * @name                Slider
@@ -34,6 +35,18 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
  * @support         safari
  * @support         edge
  *
+ * @feature         Exteremely customizable
+ * @feature         Simply controls (next, previous) built-in
+ * @feature         Default dots navigation built-in
+ * @feature         Custom navigation capabilities built-in
+ * @feature         Horizontal and vertical direction built-in
+ * @ƒeature         Mousewheel navigation built-in
+ * @feature         Swipe navigation built-in 
+ * @feature         Loop capability built-in
+ * @feature         Timer capability built-in
+ * @feature         Custom behavior (extensions) capabilities built-in
+ * @feature         Slideable behavior available
+ * 
  * @install          bash 
  * npm i @coffeekraken/s-slider-component
  * 
@@ -72,6 +85,146 @@ import __isClass from '@coffeekraken/sugar/shared/is/class';
  * <s-slider behavior="slideable" controls nav>
  *    <div s-slider-slide class="s-bg--accent">
  *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:lead">Click and drag</p>          
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Tight slider
+ * <s-slider behavior="slideable" lnf="default-tight" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Contained slider
+ * <s-slider behavior="slideable" lnf="default-contained" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Vertical slider
+ * <s-slider behavior="slideable" direction="vertical" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Vertical tight slider
+ * <s-slider behavior="slideable" direction="vertical" lnf="default-tight" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Vertical contained slider
+ * <s-slider behavior="slideable" direction="vertical" lnf="default-contained" controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Slider with progressbar
+ * <s-slider behavior="slideable" progress controls nav>
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:complementary">
+ *           <h1 class="s-typo:h1">Slide #2</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:info">
+ *           <h1 class="s-typo:h1">Slide #3</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *       <div s-slider-slide class="s-bg:error">
+ *           <h1 class="s-typo:h1">Slide #4</h1>
+ *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
+ *       </div>
+ *   </s-slider>
+ * 
+ * @example         html        Slider with progressbar, loop and timer
+ * <s-slider behavior="slideable" progress loop controls nav timer="2500">
+ *    <div s-slider-slide class="s-bg--accent">
+ *           <h1 class="s-typo:h1">Slide #1</h1>
  *           <p class="s-typo:p">iowfj woijf iowj foiwj fiowjofijw oiefjw </p>
  *       </div>
  *       <div s-slider-slide class="s-bg:complementary">
@@ -103,6 +256,7 @@ export interface ISSliderComponentProps extends ISLitComponentDefaultProps {
     loop: boolean;
     progress: boolean;
     timer: number;
+    swipe: boolean;
     autoplay: boolean;
     nextIconClass: string;
     previousIconClass: string;
@@ -138,10 +292,10 @@ export default class SSlider extends __SLitComponent {
     }
 
     $root: HTMLElement;
-    $slidesContainer: HTMLElement;
     $slides: HTMLElement[] = [];
     $navs: HTMLElement[] = [];
     $slidesContainer: HTMLElement;
+    $slidesWrapper: HTMLElement;
 
     _currentSlideIdx = 0;
     _timer = {
@@ -152,6 +306,9 @@ export default class SSlider extends __SLitComponent {
     _playing = true;
 
     constructor() {
+
+        console.log('SSS___Y');
+
         super(
             __deepMerge({
                 litComponent: {
@@ -164,7 +321,6 @@ export default class SSlider extends __SLitComponent {
         ); 
     }
     async firstUpdated() {
-
         // bare elements
         this.$root = this.querySelector(`.${this.componentUtils.className('')}`);
 
@@ -219,10 +375,34 @@ export default class SSlider extends __SLitComponent {
         // click on slide
         this.props.clickOnSlide && this._handleClickOnSlide();
 
+        // swipe
+        this.props.swipe && this._handleSwipe();
+
         // timer
         if (this.props.autoplay && this.props.timer) {
             this.play();
         }
+    }
+
+    /**
+     * This function init the swipe listener to pass from slides to slides
+     */
+    _handleSwipe() {
+        __onSwipe(this.$root, (swipe) => {
+            if (this.props.direction === 'horizontal') {
+                if (swipe.left) {
+                    this.next();
+                } else if (swipe.right) {
+                    this.previous();
+                }
+            } else if (this.props.direction === 'vertical') {
+                if (swipe.top) {
+                    this.next();
+                } else if (swipe.down) {
+                    this.previous();
+                }
+            }
+        });
     }
 
     /**

@@ -161,7 +161,8 @@ s-slider[lnf^="default"] {
         transform: translate(-50%, 0) rotate(90deg);
     }
     &[direction="vertical"] .s-slider__controls-previous {
-        left: 50%; top: calc(sugar.margin(30) * -1);
+        left: 50%; bottom: calc(100% + sugar.margin(30));
+        top: auto;
         transform: translate(-50%, 0) rotate(90deg);
     }
     &[direction="vertical"][lnf*="contained"] .s-slider__controls-previous {

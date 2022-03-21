@@ -36,7 +36,7 @@ export default class SSliderComponentInterface extends __SInterface {
             },
             behavior: {
                 description: 'Specify which behavior your want to use for your slider. Behavior are like "presets" with different animations, etc...',
-                type: 'Object'
+                type: 'String'
             },
             nextIconClass: {
                 description: 'Specify the class of the next icon',
@@ -53,6 +53,11 @@ export default class SSliderComponentInterface extends __SInterface {
             },
             nav: {
                 description: 'Specify if you want to display the nav or not. Nav are the dots',
+                type: 'Boolean',
+                default: false
+            },
+            swipe: {
+                description: 'Specify if you want your slider to support swipe navigation or not',
                 type: 'Boolean',
                 default: false
             },

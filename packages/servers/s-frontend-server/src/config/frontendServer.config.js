@@ -52,9 +52,9 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         staticDirs: {
-            '/dist': env.env === 'production' ? `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
-            // '/cache': `[config.storage.package.cacheDir]`,
-            '/src': `[config.storage.src.rootDir]`,
+        // '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
+        // '/cache': `[config.storage.package.cacheDir]`,
+        // '/src': `[config.storage.src.rootDir]`,
         },
         /**
          * @name            viewsDir
@@ -82,90 +82,92 @@ export default function (env, config) {
          */
         logLevel: 'info',
         proxy: {
-            // vitePing: {
-            //     /**
-            //      * @name            route
-            //      * @namespace       config.frontendServer.proxy.vitePing
-            //      * @type            String
-            //      * @default         [config.storage.serve.rootDir]
-            //      *
-            //      * Specify which route to proxy for the vitePing
-            //      *
-            //      * @since           2.0.0
-            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //      */
-            //     route: ['/__vite_ping'],
-            //     settings: {
-            //         /**
-            //          * @name        target
-            //          * @namespace   config.frontendServer.proxy.vitePing.settings
-            //          * @type         String
-            //          * @default         [config.vite.server.hostname]
-            //          *
-            //          * Specify where to redirect the vitePing requests
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         target: '[config.vite.server.hostname]',
-            //         /**
-            //          * @name        changeOrigin
-            //          * @namespace       config.frontendServer.proxy.vitePing.settings
-            //          * @type        Boolean
-            //          * @default         true
-            //          *
-            //          * Specify if you want the redirection to change the origin or not
-            //          *
-            //          * @since           2.0.0
-            //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-            //          */
-            //         changeOrigin: true,
-            //     },
-            // },
-            vite: {
-                /**
-                 * @name            route
-                 * @namespace       config.frontendServer.proxy.vitePing
-                 * @type            String
-                 * @default         [config.storage.serve.rootDir]
-                 *
-                 * Specify which route to proxy for the vitePing
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                route: ['/@fs/**', '/@vite/**', '/.local/**/*', '**/*.css', '**/*.ts', '**/*.js', '**/*.tsx', '**/*.jsx'],
-                settings: {
-                    /**
-                     * @name        target
-                     * @namespace   config.frontendServer.proxy.vitePing.settings
-                     * @type         String
-                     * @default         [config.vite.server.hostname]
-                     *
-                     * Specify where to redirect the vitePing requests
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    target: '[config.vite.server.hostname]',
-                    /**
-                     * @name        changeOrigin
-                     * @namespace       config.frontendServer.proxy.vitePing.settings
-                     * @type        Boolean
-                     * @default         true
-                     *
-                     * Specify if you want the redirection to change the origin or not
-                     *
-                     * @since           2.0.0
-                     * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                     */
-                    changeOrigin: true,
-                    pathRewrite: function (path, req) {
-                        const newPath = path.replace(/^\/dist/, '/src');
-                        return newPath;
-                    }
-                },
-            },
+        // vitePing: {
+        //     /**
+        //      * @name            route
+        //      * @namespace       config.frontendServer.proxy.vitePing
+        //      * @type            String
+        //      * @default         [config.storage.serve.rootDir]
+        //      *
+        //      * Specify which route to proxy for the vitePing
+        //      *
+        //      * @since           2.0.0
+        //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //      */
+        //     route: ['/__vite_ping'],
+        //     settings: {
+        //         /**
+        //          * @name        target
+        //          * @namespace   config.frontendServer.proxy.vitePing.settings
+        //          * @type         String
+        //          * @default         [config.vite.server.hostname]
+        //          *
+        //          * Specify where to redirect the vitePing requests
+        //          *
+        //          * @since           2.0.0
+        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //          */
+        //         target: '[config.vite.server.hostname]',
+        //         /**
+        //          * @name        changeOrigin
+        //          * @namespace       config.frontendServer.proxy.vitePing.settings
+        //          * @type        Boolean
+        //          * @default         true
+        //          *
+        //          * Specify if you want the redirection to change the origin or not
+        //          *
+        //          * @since           2.0.0
+        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //          */
+        //         changeOrigin: true,
+        //     },
+        // },
+        // vite: {
+        //     /**
+        //      * @name            route
+        //      * @namespace       config.frontendServer.proxy.vitePing
+        //      * @type            String
+        //      * @default         [config.storage.serve.rootDir]
+        //      *
+        //      * Specify which route to proxy for the vitePing
+        //      *
+        //      * @since           2.0.0
+        //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //      */
+        //     route: ['/@fs/**','/@vite/**','/.local/**/*','**/*.css','**/*.ts','**/*.js','**/*.tsx','**/*.jsx'],
+        //     settings: {
+        //         /**
+        //          * @name        target
+        //          * @namespace   config.frontendServer.proxy.vitePing.settings
+        //          * @type         String
+        //          * @default         [config.vite.server.hostname]
+        //          *
+        //          * Specify where to redirect the vitePing requests
+        //          *
+        //          * @since           2.0.0
+        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //          */
+        //         target: '[config.vite.server.hostname]',
+        //         /**
+        //          * @name        changeOrigin
+        //          * @namespace       config.frontendServer.proxy.vitePing.settings
+        //          * @type        Boolean
+        //          * @default         true
+        //          *
+        //          * Specify if you want the redirection to change the origin or not
+        //          *
+        //          * @since           2.0.0
+        //          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+        //          */
+        //         changeOrigin: true,
+        //         ws: true,
+        //         pathRewrite: function (path, req) {
+        //             const newPath = path.replace(/^\/dist/, '/src');
+        //             console.log('rewrite', path, newPath);
+        //             return newPath;
+        //         }
+        //     },
+        // },
         },
         middlewares: {
             bench: {
@@ -619,4 +621,4 @@ export default function (env, config) {
         },
     };
 }
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1lBQ1IsT0FBTyxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBRSwrQkFBK0IsQ0FBQyxDQUFDLENBQUMsOEJBQThCO1lBQ3JHLGlEQUFpRDtZQUNqRCxNQUFNLEVBQUUsOEJBQThCO1NBQ3pDO1FBRUQ7Ozs7Ozs7Ozs7V0FVRztRQUNILFFBQVEsRUFBRSxvQ0FBb0M7UUFFOUM7Ozs7Ozs7Ozs7O1dBV0c7UUFDSCxRQUFRLEVBQUUsTUFBTTtRQUVoQixLQUFLLEVBQUU7WUFDSCxjQUFjO1lBQ2QsVUFBVTtZQUNWLGdDQUFnQztZQUNoQywrREFBK0Q7WUFDL0QsaUNBQWlDO1lBQ2pDLHlEQUF5RDtZQUN6RCxTQUFTO1lBQ1QsdURBQXVEO1lBQ3ZELFNBQVM7WUFDVCxnQ0FBZ0M7WUFDaEMsc0dBQXNHO1lBQ3RHLFVBQVU7WUFDViwrQkFBK0I7WUFDL0Isa0JBQWtCO1lBQ2xCLGNBQWM7WUFDZCxpQ0FBaUM7WUFDakMsd0VBQXdFO1lBQ3hFLGtDQUFrQztZQUNsQyw0REFBNEQ7WUFDNUQsYUFBYTtZQUNiLDZEQUE2RDtZQUM3RCxhQUFhO1lBQ2Isb0NBQW9DO1lBQ3BDLDBHQUEwRztZQUMxRyxjQUFjO1lBQ2QsbURBQW1EO1lBQ25ELGNBQWM7WUFDZCx1Q0FBdUM7WUFDdkMsNEVBQTRFO1lBQzVFLGtDQUFrQztZQUNsQyxtQ0FBbUM7WUFDbkMsYUFBYTtZQUNiLDZFQUE2RTtZQUM3RSxhQUFhO1lBQ2Isb0NBQW9DO1lBQ3BDLDBHQUEwRztZQUMxRyxjQUFjO1lBQ2QsOEJBQThCO1lBQzlCLFNBQVM7WUFDVCxLQUFLO1lBQ0wsSUFBSSxFQUFFO2dCQUNGOzs7Ozs7Ozs7O21CQVVHO2dCQUNILEtBQUssRUFBRSxDQUFDLFNBQVMsRUFBQyxXQUFXLEVBQUMsY0FBYyxFQUFDLFVBQVUsRUFBQyxTQUFTLEVBQUMsU0FBUyxFQUFDLFVBQVUsRUFBQyxVQUFVLENBQUM7Z0JBQ2xHLFFBQVEsRUFBRTtvQkFDTjs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxNQUFNLEVBQUUsK0JBQStCO29CQUN2Qzs7Ozs7Ozs7Ozt1QkFVRztvQkFDSCxZQUFZLEVBQUUsSUFBSTtvQkFDbEIsV0FBVyxFQUFFLFVBQVUsSUFBSSxFQUFFLEdBQUc7d0JBQzVCLE1BQU0sT0FBTyxHQUFHLElBQUksQ0FBQyxPQUFPLENBQUMsU0FBUyxFQUFFLE1BQU0sQ0FBQyxDQUFDO3dCQUNoRCxPQUFPLE9BQU8sQ0FBQztvQkFDbkIsQ0FBQztpQkFDSjthQUNKO1NBQ0o7UUFFRCxXQUFXLEVBQUU7WUFDVCxLQUFLLEVBQUU7Z0JBQ0g7Ozs7Ozs7OzttQkFTRztnQkFDSCxXQUFXLEVBQUUscUNBQXFDO2dCQUNsRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUscUNBQXFDO2dCQUN6RCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsT0FBTyxFQUFFO2dCQUNMOzs7Ozs7Ozs7bUJBU0c7Z0JBQ0gsV0FBVyxFQUFFLHVDQUF1QztnQkFDcEQ7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHVDQUF1QztnQkFDM0QsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxXQUFXLEVBQUUsc0NBQXNDO2dCQUNuRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsbUNBQW1DO2dCQUN2RCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsV0FBVyxFQUFFO2dCQUNUOzs7Ozs7Ozs7O21CQVVHO2dCQUNILFdBQVcsRUFBRSw2Q0FBNkM7Z0JBQzFEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSwyQ0FBMkM7Z0JBQy9ELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7U0FDSjtRQUVELE9BQU8sRUFBRTtZQUNMLFNBQVMsRUFBRTtnQkFDUDs7Ozs7Ozs7O21CQVNHO2dCQUNILFdBQVcsRUFBRSwrREFBK0Q7Z0JBQzVFOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSxzQ0FBc0M7Z0JBQzFELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxNQUFNLEVBQUU7Z0JBQ0o7Ozs7Ozs7OzttQkFTRztnQkFDSCxXQUFXLEVBQUUsZ0VBQWdFO2dCQUM3RTs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsZ0NBQWdDO2dCQUNwRCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsUUFBUSxFQUFFO2dCQUNMOzs7Ozs7Ozs7a0JBU0U7Z0JBQ0gsV0FBVyxFQUFFLHlFQUF5RTtnQkFDdEY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLG9DQUFvQztnQkFDeEQsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELFVBQVUsRUFBRTtnQkFDUDs7Ozs7Ozs7O2tCQVNFO2dCQUNILFdBQVcsRUFBRSxzREFBc0Q7Z0JBQ25FOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSx3Q0FBd0M7Z0JBQzVELFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxNQUFNLEVBQUU7Z0JBQ0g7Ozs7Ozs7OztrQkFTRTtnQkFDSCxXQUFXLEVBQUUsc0ZBQXNGO2dCQUNuRzs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsZ0NBQWdDO2dCQUNwRCxRQUFRLEVBQUUsRUFBRTthQUNmO1lBQ0QsU0FBUyxFQUFFO2dCQUNOOzs7Ozs7Ozs7a0JBU0U7Z0JBQ0gsV0FBVyxFQUFFLHFFQUFxRTtnQkFDbEY7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHNDQUFzQztnQkFDMUQsUUFBUSxFQUFFLEVBQUU7YUFDZjtZQUNELEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7O21CQVNHO2dCQUNILFdBQVcsRUFBRSwrQ0FBK0M7Z0JBQzVEOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSwwQkFBMEI7Z0JBQzlDLFFBQVEsRUFBRSxFQUFFO2FBQ2Y7WUFDRCxJQUFJLEVBQUU7Z0JBQ0Y7Ozs7Ozs7OzttQkFTRztnQkFDSCxXQUFXLEVBQUUsZ0RBQWdEO2dCQUM3RDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsNEJBQTRCO2dCQUVoRCxRQUFRLEVBQUU7b0JBQ047Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsSUFBSSxFQUFFLFNBQVM7b0JBRWY7Ozs7Ozs7Ozs7dUJBVUc7b0JBQ0gsU0FBUyxFQUFFLE9BQU87aUJBQ3JCO2FBQ0o7U0FDSjtRQUVELE1BQU0sRUFBRTtZQUNKLEdBQUcsRUFBRTtnQkFDRDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsTUFBTTthQUNsQjtZQUNELGNBQWMsRUFBRTtnQkFDWjs7Ozs7Ozs7OzttQkFVRztnQkFDSCxPQUFPLEVBQUUsUUFBUTthQUNwQjtTQUNKO1FBRUQsUUFBUSxFQUFFO1lBQ04sR0FBRyxFQUFFO2dCQUNEOzs7Ozs7Ozs7bUJBU0c7Z0JBQ0gsV0FBVyxFQUFFLHdEQUF3RDtnQkFDckU7Ozs7Ozs7Ozs7bUJBVUc7Z0JBQ0gsSUFBSSxFQUFFLEdBQUcsU0FBUyxFQUFFLHVCQUF1QjthQUM5QztZQUNELFFBQVEsRUFBRTtnQkFDTjs7Ozs7Ozs7O21CQVNHO2dCQUNILFdBQVcsRUFBRSx3REFBd0Q7Z0JBQ3JFOzs7Ozs7Ozs7O21CQVVHO2dCQUNILElBQUksRUFBRSxHQUFHLFNBQVMsRUFBRSw0QkFBNEI7YUFDbkQ7WUFDRCxNQUFNLEVBQUU7Z0JBQ0o7Ozs7Ozs7OzttQkFTRztnQkFDSCxXQUFXLEVBQUUsZ0RBQWdEO2dCQUM3RDs7Ozs7Ozs7OzttQkFVRztnQkFDSCxJQUFJLEVBQUUsR0FBRyxTQUFTLEVBQUUsMEJBQTBCO2FBQ2pEO1NBQ0o7S0FDSixDQUFDO0FBQ04sQ0FBQyJ9
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLmpzIiwic291cmNlUm9vdCI6IiIsInNvdXJjZXMiOlsiZnJvbnRlbmRTZXJ2ZXIuY29uZmlnLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiJBQUNBLE9BQU8sU0FBUyxNQUFNLHFDQUFxQyxDQUFDO0FBRzVELE1BQU0sQ0FBQyxPQUFPLFdBQVcsR0FBRyxFQUFFLE1BQU07SUFDaEMsSUFBSSxHQUFHLENBQUMsUUFBUSxLQUFLLE1BQU07UUFBRSxPQUFPO0lBRXBDLE9BQU87UUFDSDs7Ozs7Ozs7OztXQVVHO1FBQ0gsSUFBSSxFQUFFLEdBQUcsQ0FBQyxHQUFHLEtBQUssWUFBWSxDQUFDLENBQUMsQ0FBQyxJQUFJLENBQUMsQ0FBQyxDQUFDLElBQUk7UUFFNUM7Ozs7Ozs7Ozs7V0FVRztRQUNILDJCQUEyQjtRQUMzQixRQUFRLEVBQUUsV0FBVztRQUVyQjs7Ozs7Ozs7OztXQVVHO1FBQ0gsT0FBTyxFQUFFLGtDQUFrQztRQUUzQzs7Ozs7Ozs7OztXQVVHO1FBQ0gsVUFBVSxFQUFFO1FBQ1IseUdBQXlHO1FBQ3pHLGlEQUFpRDtRQUNqRCwwQ0FBMEM7U0FDN0M7UUFFRDs7Ozs7Ozs7OztXQVVHO1FBQ0gsUUFBUSxFQUFFLG9DQUFvQztRQUU5Qzs7Ozs7Ozs7Ozs7V0FXRztRQUNILFFBQVEsRUFBRSxNQUFNO1FBRWhCLEtBQUssRUFBRTtRQUNILGNBQWM7UUFDZCxVQUFVO1FBQ1YsZ0NBQWdDO1FBQ2hDLCtEQUErRDtRQUMvRCxpQ0FBaUM7UUFDakMseURBQXlEO1FBQ3pELFNBQVM7UUFDVCx1REFBdUQ7UUFDdkQsU0FBUztRQUNULGdDQUFnQztRQUNoQyxzR0FBc0c7UUFDdEcsVUFBVTtRQUNWLCtCQUErQjtRQUMvQixrQkFBa0I7UUFDbEIsY0FBYztRQUNkLGlDQUFpQztRQUNqQyx3RUFBd0U7UUFDeEUsa0NBQWtDO1FBQ2xDLDREQUE0RDtRQUM1RCxhQUFhO1FBQ2IsNkRBQTZEO1FBQzdELGFBQWE7UUFDYixvQ0FBb0M7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

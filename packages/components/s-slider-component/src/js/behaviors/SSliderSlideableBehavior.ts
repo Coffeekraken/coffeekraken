@@ -1,10 +1,10 @@
 import __slideable from '@coffeekraken/sugar/js/dom/slide/slideable';
 import __SSliderBehavior from '../SSliderBehavior';
+// @ts-ignore
 import __css from '../../css/s-slider-slideable-behavior.css';
 import __SSliderSlideableBehaviorInterface from './interface/SSliderSlideableBehaviorInterface';
 
 export interface ISSliderBehaviorSettings {
-    direction: 'horizontal' | 'vertical';
     friction: number;
 }
 
@@ -21,6 +21,7 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
     static interface = __SSliderSlideableBehaviorInterface;
     static id = 'slideable';
 
+    // @ts-ignore
     _$lastGoToSlide: HTMLElement;
 
     /**
@@ -34,20 +35,24 @@ export default class SSliderSlideableBehavior extends __SSliderBehavior {
      * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     constructor(settings?: ISSliderBehaviorSettings) {
-        super(settings);
+        super({
+            ...__SSliderSlideableBehaviorInterface.defaults(),
+            ...settings
+        });
     }
     
     firstUpdated() {
         // handle slide
         this._handleSlide();
-
         this.$slider.addEventListener('s-slider-goto', (e) => {
+            // @ts-ignore
             this._$lastGoToSlide = e.detail.$slide;
         });
 
     }
 
     _handleSlide() {
+        console.log('SSS', this.settings);
         __slideable(this.$slider.$slidesWrapper, {
             friction: this.settings.friction,
             direction: this.$slider.props.direction

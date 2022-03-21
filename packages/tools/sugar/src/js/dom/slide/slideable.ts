@@ -69,7 +69,7 @@ function _getMostDisplayedItem($items: HTMLElement[]): HTMLElement {
 
 }
 
-export default function slideable($elm: HTMLElement, settings?: ISlideableSettings): Promise<void> {
+export default function slideable($elm: HTMLElement, settings?: Partial<ISlideableSettings>): Promise<void> {
 
     return new __SPromise(({resolve, reject, emit}) => {
 
@@ -136,6 +136,7 @@ export default function slideable($elm: HTMLElement, settings?: ISlideableSettin
                     finalSettings.onEnd?.(state);
 
                     easingScrollInterval = __easeInterval(duration, (percentage) => {
+
                         let offsetX = pixelsBySecond / 100 * percentage,
                             offsetY = pixelsBySecond / 100 * percentage; 
 

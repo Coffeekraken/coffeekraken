@@ -58,7 +58,7 @@ export default function (env, config) {
          * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
          */
         staticDirs: {
-            // '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
+            '/dist': env.env === 'production' ?  `[config.storage.dist.rootDir]` : `[config.storage.src.rootDir]`,
             // '/cache': `[config.storage.package.cacheDir]`,
             // '/src': `[config.storage.src.rootDir]`,
         },
@@ -289,32 +289,32 @@ export default function (env, config) {
         },
 
         modules: {
-            rootFiles: {
-                /**
-                 * @name            description
-                 * @namespace       config.frontendServer.modules.rootFiles
-                 * @type            String
-                 *
-                 * Specify the module description
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                description: 'This module allows you to serve files from the root directory',
-                /**
-                 * @name            path
-                 * @namespace       config.frontendServer.modules.rootFiles
-                 * @type            String
-                 * @default             ${__dirname()}/../node/modules/rootFiles/rootFiles
-                 *
-                 * Specify where to find the "rootFiles" module
-                 *
-                 * @since           2.0.0
-                 * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
-                settings: {},
-            },
+            // rootFiles: {
+            //     /**
+            //      * @name            description
+            //      * @namespace       config.frontendServer.modules.rootFiles
+            //      * @type            String
+            //      *
+            //      * Specify the module description
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     description: 'This module allows you to serve files from the root directory',
+            //     /**
+            //      * @name            path
+            //      * @namespace       config.frontendServer.modules.rootFiles
+            //      * @type            String
+            //      * @default             ${__dirname()}/../node/modules/rootFiles/rootFiles
+            //      *
+            //      * Specify where to find the "rootFiles" module
+            //      *
+            //      * @since           2.0.0
+            //      * @author 	                Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+            //      */
+            //     path: `${__dirname()}/../node/modules/rootFiles/rootFiles`,
+            //     settings: {},
+            // },
             docmap: {
                 /**
                  * @name            description

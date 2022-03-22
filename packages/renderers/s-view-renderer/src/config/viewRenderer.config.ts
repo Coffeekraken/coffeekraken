@@ -31,65 +31,30 @@ export default function (env, config) {
          */
         cacheDir: `[config.storage.package.cacheDir]/views`,
 
-        engines: {
-            bladePhp: {
-                /**
-                 * @name          extensions
-                 * @namespace     config.viewRenderer.engines.bladePhp
-                 * @type          String
-                 * @default         ['blade.php']
-                 *
-                 * Store which extensions match this engine
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                extensions: ['blade.php'],
+        /**
+         * @name          engines
+         * @namespace     config.viewRenderer
+         * @type          String[]
+         * @default       ['@coffeekraken/s-view-renderer-engine-blade']
+         *
+         * Store which engines are available for this renderer
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+       engines: ['@coffeekraken/s-view-renderer-engine-blade'],
 
-                /**
-                 * @name          path
-                 * @namespace     config.viewRenderer.engines.bladePhp
-                 * @type          String
-                 *
-                 * Store the path where to find the blade.php template engine
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: __path.resolve(
-                    __dirname(),
-                    '../node/engines/blade/bladeViewEngine',
-                ),
-            },
-        },
-
-        dataHandlers: {
-            jsJson: {
-                /**
-                 * @name          extensions
-                 * @namespace     config.viewRenderer.dataHandlers.jsJson
-                 * @type          String
-                 * @default         ['js','json']
-                 *
-                 * Store which extensions match this handler
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                extensions: ['js', 'json'],
-                /**
-                 * @name          path
-                 * @namespace     config.viewRenderer.dataHandlers.jsJson
-                 * @type          String
-                 * @default         __path.resolve(__dirname(), '../node/dataHandlers/js.js')
-                 *
-                 * Store the path to the jsJson handler
-                 *
-                 * @since       2.0.0
-                 * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
-                 */
-                path: __path.resolve(__dirname(), '../node/dataHandlers/js.js'),
-            },
-        },
+       /**
+         * @name          dataHandlers
+         * @namespace     config.viewRenderer
+         * @type          String[]
+         * @default       ['@coffeekraken/s-view-renderer-data-handler-json']
+         *
+         * Store which data handlers are available for this renderer
+         *
+         * @since       2.0.0
+         * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+         */
+        dataHandlers: ['@coffeekraken/s-view-renderer-data-handler-js'],
     };
 }

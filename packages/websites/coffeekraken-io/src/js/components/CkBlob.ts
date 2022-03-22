@@ -109,14 +109,14 @@ export default class CKBlob extends __SLitComponent {
         this.querySelector('.ck-blob').appendChild(this._renderer.domElement);
 
         // load env map
-        this._envMap = await this.loadEnvMap();
+        // this._envMap = await this.loadEnvMap();
 
         let backLight;
         if (this._isDark) {
-            backLight = new THREE.PointLight(0xffffff, 0.5);
+            backLight = new THREE.PointLight(0xffffff, 2);
             backLight.position.set(8, 8, -10);
         } else {
-            backLight = new THREE.PointLight(0xffffff, 2);
+            backLight = new THREE.PointLight(0xffffff, 1);
             backLight.position.set(8, 8, -10);
         }
 
@@ -158,9 +158,9 @@ export default class CKBlob extends __SLitComponent {
 
         var ambientLight;
         if (this._isDark) {
-            ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.8);
         } else {
-            ambientLight = new THREE.AmbientLight(0xffffff, 0.3);
+            ambientLight = new THREE.AmbientLight(0xffffff, 0.9);
         }
 
         //Create a helper for the shadow camera (optional)
@@ -187,8 +187,8 @@ export default class CKBlob extends __SLitComponent {
         // this._pointSpheres = [pointsSphere1];
 
         if (this._isDark) {
-            this._scene.add(backLight);
         }
+        this._scene.add(backLight);
         this._scene.add(light);
         this._scene.add(ambientLight);
         // this._scene.add(sphere);
@@ -371,7 +371,7 @@ export default class CKBlob extends __SLitComponent {
         const ballMaterial = {
             ...matSettings,
             map: texture,
-            envMap: this._envMap.texture,
+            // envMap: this._envMap.texture,
         };
 
         const ballMat = new THREE.MeshStandardMaterial(ballMaterial);
@@ -550,9 +550,9 @@ export default class CKBlob extends __SLitComponent {
     createGrainMaterial(texturePath) {
         return new Promise(async (resolve) => {
             const texture = await this.loadTexture(texturePath);
-            // const bumpMap = await this.loadTexture(
-            //     '/src/3d/coffeeGrain/coffeeGrainBumpMap.jpg',
-            // );
+            const bumpMap = await this.loadTexture(
+                `${__SSugarConfig.get('serve.img.url')}/3d/coffeeGrain/coffeeGrainBumpMap.jpg`,
+            );
 
             let grainMat = new THREE.MeshStandardMaterial({
                 metalness: 0,
@@ -560,11 +560,13 @@ export default class CKBlob extends __SLitComponent {
                 color: 0xffffff,
                 // displacementMap: bumpMap,
                 // normalMap: bumpMap,
-                // bumpMap: bumpMap,
-                // bumpScale: 3,
+                bumpMap: bumpMap,
+                bumpScale: 0.1,
                 // normalScale: new THREE.Vector2(0.15, 2),
                 map: texture,
-                envMap: this._envMap.texture,
+                // emissive: 0xffffff,
+                // emissiveIntensity: 0.5,
+                // envMap: this._envMap.texture,
             });
 
             resolve(grainMat);

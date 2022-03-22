@@ -11,7 +11,7 @@ describe('sugar.shared.time.formatDuration', () => {
     });
     it('Should format an estimation under 1m with ms correctly', () => {
         const res = __formatDuration(1000 * 25 + 345);
-        expect(res).toBe('25s 345ms');
+        expect(res).toBe('25.345s');
     });
     it('Should format an estimation under 1h correctly', () => {
         const res = __formatDuration(1000 * 60 * 45);
@@ -19,7 +19,7 @@ describe('sugar.shared.time.formatDuration', () => {
     });
     it('Should format an estimation under 1h with some seconds correctly', () => {
         const res = __formatDuration(1000 * 60 * 45 + 1000 * 35);
-        expect(res).toBe('45m 35s');
+        expect(res).toBe('45m35s');
     });
     it('Should format an estimation above 1h correctly', () => {
         const res = __formatDuration(1000 * 60 * 60 * 3);
@@ -27,6 +27,6 @@ describe('sugar.shared.time.formatDuration', () => {
     });
     it('Should format an estimation above 1h with some minutes correctly', () => {
         const res = __formatDuration(1000 * 60 * 60 * 3 + 1000 * 60 * 32);
-        expect(res).toBe('3h 32m');
+        expect(res).toBe('3h32m');
     });
 });

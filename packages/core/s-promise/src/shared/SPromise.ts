@@ -7,7 +7,7 @@ import __SEventEmitter, { ISEventEmitter } from '@coffeekraken/s-event-emitter';
 import __deepMerge from '@coffeekraken/sugar/src/shared/object/deepMerge';
 import __wait from '@coffeekraken/sugar/shared/time/wait';
 import __SLog from '@coffeekraken/s-log';
-import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
+// import __SPromiseSettingsInterface from './interface/SPromiseSettingsInterface';
 import __treatAsValue, {
     ITreatAsValueProxy,
     ITreatAsValueSettings,
@@ -236,7 +236,16 @@ class SPromise
         super(
             __deepMerge(
                 {
-                    promise: __SPromiseSettingsInterface.defaults()
+                    promise: {
+                        treatCancelAs: 'resolve',
+                        destroyTimeout: 1,
+                        preventRejectOnThrow: true,
+                        emitLogErrorEventOnThrow: true,
+                        resolveAtResolveEvent: false,
+                        rejectAtRejectEvent: false,
+                        resolveProxies: [],
+                        rejectProxies: [],
+                    }
                 },
                 typeof executorFnOrSettings === 'object'
                     ? executorFnOrSettings

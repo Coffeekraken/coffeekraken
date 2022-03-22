@@ -36,6 +36,7 @@ function formatDuration(duration: number): string {
         const s = (duration / 1000).toFixed(0);
         const ms = (duration - s * 1000).toFixed(0);
 
+        if (ms <= 0) return `${s}s`;
         return `${s}.${ms}s`;
         
         // if (s > 10) {

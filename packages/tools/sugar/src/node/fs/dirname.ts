@@ -25,8 +25,15 @@ import { fileURLToPath } from 'url';
 export default function () {
     if (process.env.NODE_ENV === 'test') {
         // @ts-ignore
-        return __callsites()[1].getFileName().split('/').slice(0, -1).join('/');
+
+        // const call = __callsites()[1].getFileName();
+        //     console.log('TEDT', __callsites()[1].getFileName());
+        //     console.log(__callsites()[1].getFileName());
+        return __callsites()[1].getFileName().split('/')
+        .slice(0, -1)
+        .join('/');
     }
+
     // @ts-ignore
     return fileURLToPath(__callsites()[1].getFileName())
         .split('/')

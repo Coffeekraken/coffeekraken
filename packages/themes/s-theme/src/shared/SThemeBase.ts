@@ -992,8 +992,9 @@ export default class SThemeBase extends __SClass {
         const colorsObj = this.config('color');
         let triggeredStop = false;
 
-        Object.keys(colorsObj).forEach((colorName, i) => {
-            if (triggeredStop) return;
+        for (let [colorName, colorObj] of Object.entries(colorsObj)) {
+
+            // if (triggeredStop) return;
             const colorObj = colorsObj[colorName];
 
             const defaultColorObj = Object.assign({}, colorObj.default ?? {});
@@ -1006,7 +1007,7 @@ export default class SThemeBase extends __SClass {
 
             const c = new __SColor(colorObj.color);
 
-            callback({
+            const _res = callback({
                 name: colorName,
                 variant: '',
                 state: '',
@@ -1023,9 +1024,13 @@ export default class SThemeBase extends __SClass {
                     a: c.a,
                 },
             });
+            // @ts-ignore
+            if (_res === false || _res === -1) {
+                return true;
+            }
 
-            Object.keys(colorObj).forEach((stateName, j) => {
-                if (triggeredStop) return;
+            for (let [stateName, stateObj] of Object.entries(colorObj)) {
+                // if (triggeredStop) return;
                 const originalStateName = stateName;
 
                 if (stateName === 'default') stateName = ':default';
@@ -1046,9 +1051,10 @@ export default class SThemeBase extends __SClass {
 
                 if (stateName === 'color') {
                 } else if (stateName.match(/^:/)) {
-                    Object.keys(variantColorObj).forEach((variant) => {
+                    for (let [variant, variantObj] of Object.entries(variantColorObj)) {
+
                         const newColor = c.apply(
-                            variantColorObj[variant],
+                            variantObj,
                             true,
                         );
                         res = callback(<ISThemeLoopOnColorsColor>{
@@ -1071,9 +1077,9 @@ export default class SThemeBase extends __SClass {
                             },
                         });
                         if (res === false || res === -1) {
-                            triggeredStop = true;
+                            return true;
                         }
-                    });
+                    }
                 } else {
                     const newColor = c.apply(variantColorObj, true);
                     res = callback(<ISThemeLoopOnColorsColor>{
@@ -1095,11 +1101,11 @@ export default class SThemeBase extends __SClass {
                         },
                     });
                     if (res === false || res === -1) {
-                        triggeredStop = true;
+                        return true;
                     }
                 }
-            });
-        });
+            }
+        }
 
         return true;
     }

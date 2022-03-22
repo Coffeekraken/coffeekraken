@@ -96,7 +96,7 @@ describe('s-docblock.shared.SDocblockBlock', () => {
             author: {
                 name: 'Olivier Bossel',
                 email: 'olivier.bossel@gmail.com',
-                url: 'https://olivierbossel.com',
+                url: 'https://coffeekraken.io',
             },
             raw:
                 '/**\n' +

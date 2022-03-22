@@ -10,8 +10,6 @@
 }
 
 s-slider {
-    
-
     @sugar.theme.when(dark) {
         @sugar.color.current(#ffffff);
     }

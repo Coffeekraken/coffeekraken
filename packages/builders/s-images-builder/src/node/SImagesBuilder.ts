@@ -431,7 +431,7 @@ export default class SImagesBuilder extends __SBuilder {
                                     quality: params.quality,
                                 })
                                 .toFile(imgObj.outPath);
-                            const buildedFile = __SFile.new(outPath);
+                            const buildedFile = __SFile.new(imgObj.outPath);
                             buildedStats.bytes += buildedFile.stats.bytes;
                             filesStack[path].builded.push(buildedFile);
 

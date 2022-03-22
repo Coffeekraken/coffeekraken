@@ -6,7 +6,7 @@ import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __parseHtml from '@coffeekraken/sugar/shared/console/parseHtml';
 import __env from '@coffeekraken/sugar/shared/env/env';
 import __minimatch from 'minimatch';
-import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
+// import __SBenchSettingsInterface from './interface/SBenchSettingsInterface';
 
 /**
  * @name            SBench
@@ -273,7 +273,10 @@ export default class SBench extends __SPromise {
                     metas: {
                         id,
                     },
-                    bench: __SBenchSettingsInterface.defaults(),
+                    bench: {},
+                    // do not use interface directly to avoir circular dependency with JEST
+                    // @todo        find a way to fix this
+                    // bench: __SBenchSettingsInterface.defaults(),
                     promise: {},
                 },
                 settings ?? {},

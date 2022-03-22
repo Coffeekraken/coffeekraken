@@ -1,0 +1,4 @@
+import SViewRendererDataHandlerJs from "./SViewRendererDataHandlerJs";
+export * from './SViewRendererDataHandlerJs';
+export default SViewRendererDataHandlerJs;
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoiZXhwb3J0cy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbImV4cG9ydHMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IkFBQUEsT0FBTywwQkFBMEIsTUFBTSw4QkFBOEIsQ0FBQztBQUN0RSxjQUFjLDhCQUE4QixDQUFDO0FBQzdDLGVBQWUsMEJBQTBCLENBQUMifQ==

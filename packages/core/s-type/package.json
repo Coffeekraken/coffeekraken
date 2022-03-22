@@ -11,6 +11,7 @@
   "dependencies": {
     "@coffeekraken/s-class": "^2.0.0",
     "@coffeekraken/s-descriptor": "^2.0.0",
+    "@coffeekraken/s-promise": "^2.0.0",
     "@coffeekraken/s-interface": "^2.0.0",
     "@coffeekraken/sugar": "^2.0.0"
   }

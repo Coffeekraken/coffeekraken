@@ -79,7 +79,7 @@ export default function applyScope(
 
     function recursive(obj) {
         // break reference
-        // obj = Object.assign({}, obj);
+        obj = Object.assign({}, obj);
 
         Object.keys(obj).forEach((prop) => {
             const value = obj[prop];

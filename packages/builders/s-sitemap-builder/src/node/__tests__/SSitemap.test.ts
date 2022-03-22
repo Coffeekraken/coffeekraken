@@ -1,4 +1,4 @@
-import __SSitemap from '../SSitemap';
+import __SSitemap from '../SSitemapBuilder';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 
 describe('s-sitemap.node.SSitemap', () => {

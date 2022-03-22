@@ -86,7 +86,6 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     /**
      * @name      _viewPath
      * @type      String
-     * @default   undefined
      * @private
      *
      * Store the view doted path if the passed parameter is a valid path
@@ -95,33 +94,54 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     private _viewPath = '';
+
+    /**
+     * @name      _originalViewPath
+     * @type      String
+     * @private
+     *
+     * Store the original view doted path if the passed parameter is a valid path
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
     private _originalViewPath;
 
     /**
-     * @name      _enginePath
+     * @name      _viewExt
      * @type      String
-     * @default   undefined
      * @private
      *
-     * Store the view engine path to use for the instanciated view
+     * Store the view extension
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private _enginePath;
+    private _viewExt;
 
     /**
-     * @name      _dataHandlerPath
+     * @name      _DataHandlerClass
      * @type      String
-     * @default   undefined
      * @private
      *
-     * Store the datahandler path to use with this view
+     * Store the data handler class that fit with the current view
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
-    private _dataHandlerPath;
+    private _DataHandlerClass;
+
+    /**
+     * @name      _EngineClass
+     * @type      String
+     * @private
+     *
+     * Store the engine class that fit with the current view
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    private _EngineClass;
 
     /**
      * @name      _dataFilePath
@@ -174,6 +194,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
     static get defaultRootDirs(): string[] {
         return [
             ...__SSugarConfig.get('viewRenderer.rootDirs'),
+            // @ts-ignore
             __path.resolve(__dirname(), '../php/views/blade'),
         ];
     }
@@ -261,35 +282,25 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * This static method can be used to register a compatible __SViewEngine engine class
      * into the available SViews engines.
      *
+     * @param       {Class}        EngineClass      The class of the engine
      * @param       {String}        extension       The file extension to detect the engine. For example "blade.php" will be used to render all the files names "%name.blade.php"
-     * @param       {String}        enginePath      The absolute path to the engine class file
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerEngine(
-        enginePath: string,
-        extensions: string | string[],
+        EngineClass: string,
+        extensions?: string | string[],
     ): void {
-        if (!enginePath.match(/\.js$/)) enginePath += '.js';
-
-        // make sure the engine path exists
-        if (!__fs.existsSync(enginePath)) {
-            throw new Error(
-                `Sorry but the engine "<yellow>${enginePath}</yellow>" that you want to register does not exists...`,
-            );
-        }
         // register the engine under each names
         const exts = Array.isArray(extensions)
             ? extensions
-            : extensions.split(',').map((l) => l.trim());
-        exts.forEach((ext) => {
+            : extensions?.split(',').map((l) => l.trim());
+        exts?.forEach((ext) => {
             if (SViewRenderer.engines[ext]) return;
 
             // register the engine in the stack
-            SViewRenderer.engines[ext] = {
-                path: enginePath,
-            };
+            SViewRenderer.engines[ext] = EngineClass;
         });
     }
 
@@ -301,22 +312,15 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
      * This static method can be used to register a compatible __SViewEngine engine class
      * into the available SViews engines.
      *
-     * @param       {String}        handlerPath      The absolute path to the engine class file
+     * @param       {Class}        DataHandlerClass      The absolute path to the engine class file
      *
      * @since       2.0.0
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static registerDataHandler(
-        handlerPath: string,
+        DataHandlerClass: string,
         extensions: string | string[],
     ): void {
-        if (handlerPath.slice(-3) !== '.js') handlerPath += '.js';
-        // make sure the engine path exists
-        if (!__fs.existsSync(handlerPath)) {
-            throw new Error(
-                `Sorry but the data handler "<yellow>${handlerPath}</yellow>" that you want to register does not exists...`,
-            );
-        }
         // register the engine under each names
         const exts = Array.isArray(extensions)
             ? extensions
@@ -324,9 +328,7 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         exts.forEach((extension) => {
             if (SViewRenderer.dataHandlers[extension]) return;
             // register the engine in the stack
-            SViewRenderer.dataHandlers[extension] = {
-                path: handlerPath,
-            };
+            SViewRenderer.dataHandlers[extension] = DataHandlerClass;
         });
     }
 
@@ -421,102 +423,101 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
             ),
         );
 
-        const defaultEngines = __SSugarConfig.get('viewRenderer.engines') || {};
-        Object.keys(defaultEngines).forEach((id) => {
-            const engineObj = defaultEngines[id];
-            engineObj.extensions.forEach((ext) => {
-                SViewRenderer.registerEngine(engineObj.path, ext);
-            });
-        });
+        (async ()  => {
+            const defaultEngines = __SSugarConfig.get('viewRenderer.engines') || [];
+            for (let i = 0; i < defaultEngines.length; i++) {
+                const path = defaultEngines[i];
 
-        const defaultDataHandlers =
-            __SSugarConfig.get('viewRenderer.dataHandlers') || {};
-        Object.keys(defaultDataHandlers).forEach((id) => {
-            const handlerObj = defaultDataHandlers[id];
-            handlerObj.extensions.forEach((ext) => {
-                SViewRenderer.registerDataHandler(handlerObj.path, ext);
+                const { default: EngineClass } = await import(path)
+                EngineClass.extensions.forEach((ext) => {
+                    SViewRenderer.registerEngine(EngineClass, ext);
+                });
+            }
+
+             const defaultDataHandlers = __SSugarConfig.get('viewRenderer.dataHandlers') || [];
+            for (let i = 0; i < defaultDataHandlers.length; i++) {
+                const path = defaultDataHandlers[i];
+                const { default: DataHandlerClass } = await import(path)
+                DataHandlerClass.extensions.forEach((ext) => {
+                    SViewRenderer.registerDataHandler(DataHandlerClass, ext);
+                });
+            }
+
+            Object.keys(SViewRenderer.engines).forEach((ext) => {
+                viewPath = viewPath.replace(`.${ext}`, '');
             });
-        });
+
+            // detect and save the view doted path or the view template string
+            if (viewPath.split(' ').length === 1 && viewPath.trim() === viewPath) {
+                // check if we can find the view path passed
+                if (__path.isAbsolute(viewPath)) {
+                    if (__fs.existsSync(viewPath)) {
+                        // throw new Error(
+                        //   `Sorry but the absolute path to the view "<cyan>${viewPath}</cyan>" does not exist...`
+                        // );
+                        this._viewPath = viewPath;
+                    }
+                } else if (!viewPath.match(/\//gm)) {
+                    // doted path
+                    for (let i = 0; i < this.viewRendererSettings.rootDirs.length; i++) {
+                        const rootDir = this.viewRendererSettings.rootDirs[i];
+                        const potentialViewPath = `${rootDir}/${viewPath
+                            .split('.')
+                            .join('/')}.[!data]*`;
+                        const matches = __glob.sync(potentialViewPath);
+                        if (matches && matches.length) {
+                            this._viewPath = matches[0];
+                            break;
+                        }
+                    }
+                }
+            } else {
+                // throw new Error(
+                //   `<red>[SView]</red> It seems that the passed viewPath "<yellow>${viewPath}</yellow>" argument is not a valid path`
+                // );
+            }
+
+            // try to get an engine for this view
+            if (this._viewPath) {
+                for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
+                    const engineExt = Object.keys(SViewRenderer.engines)[i];
+                    const reg = new RegExp(`${engineExt}$`);
+                    if (reg.test(this._viewPath)) {
+                        this._viewExt = engineExt;
+                        this._EngineClass = SViewRenderer.engines[engineExt];
+                        break;
+                    }
+                }
+            }
+
+            // get the datahandler path
+            if (this._viewPath) {
+                const viewPathWithoutExtension = this._viewPath.replace(
+                    `.${this._viewExt}`,
+                    '',
+                );
+
+                // loop on each dataHandlers available
+                Object.keys(SViewRenderer.dataHandlers).forEach((extension) => {
+                    if (this._DataHandlerClass) return;
+                    if (
+                        __fs.existsSync(
+                            `${viewPathWithoutExtension}.data.${extension}`,
+                        )
+                    ) {
+                        this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
+                        this._DataHandlerClass = SViewRenderer.dataHandlers[extension];
+                    }
+                });
+            }
+
+        })();
 
         this._originalViewPath = viewPath;
 
         this.viewRendererSettings.rootDirs = (<any>this.constructor).getRootDirs(
             this.viewRendererSettings.rootDirs || [],
         );
-
-        Object.keys(SViewRenderer.engines).forEach((ext) => {
-            viewPath = viewPath.replace(`.${ext}`, '');
-        });
-
-        // detect and save the view doted path or the view template string
-        if (viewPath.split(' ').length === 1 && viewPath.trim() === viewPath) {
-            // check if we can find the view path passed
-            if (__path.isAbsolute(viewPath)) {
-                if (__fs.existsSync(viewPath)) {
-                    // throw new Error(
-                    //   `Sorry but the absolute path to the view "<cyan>${viewPath}</cyan>" does not exist...`
-                    // );
-                    this._viewPath = viewPath;
-                }
-            } else if (!viewPath.match(/\//gm)) {
-                // doted path
-                for (let i = 0; i < this.viewRendererSettings.rootDirs.length; i++) {
-                    const rootDir = this.viewRendererSettings.rootDirs[i];
-                    const potentialViewPath = `${rootDir}/${viewPath
-                        .split('.')
-                        .join('/')}.[!data]*`;
-                    const matches = __glob.sync(potentialViewPath);
-                    if (matches && matches.length) {
-                        this._viewPath = matches[0];
-                        // const extension = this._viewPath
-                        //     .split('.')
-                        //     .slice(1)
-                        //     .join('.');
-                        break;
-                    }
-                }
-            }
-        } else {
-            // throw new Error(
-            //   `<red>[SView]</red> It seems that the passed viewPath "<yellow>${viewPath}</yellow>" argument is not a valid path`
-            // );
-        }
-
-        let viewExt;
-
-        // try to get an engine for this view
-        if (this._viewPath) {
-            for (let i = 0; i < Object.keys(SViewRenderer.engines).length; i++) {
-                const engineExt = Object.keys(SViewRenderer.engines)[i];
-                const reg = new RegExp(`${engineExt}$`);
-                if (reg.test(this._viewPath)) {
-                    viewExt = engineExt;
-                    this._enginePath = SViewRenderer.engines[engineExt].path;
-                    break;
-                }
-            }
-        }
-
-        // get the datahandler path
-        if (this._viewPath) {
-            const viewPathWithoutExtension = this._viewPath.replace(
-                `.${viewExt}`,
-                '',
-            );
-
-            // loop on each dataHandlers available
-            Object.keys(SViewRenderer.dataHandlers).forEach((extension) => {
-                if (this._dataHandlerPath) return;
-                if (
-                    __fs.existsSync(
-                        `${viewPathWithoutExtension}.data.${extension}`,
-                    )
-                ) {
-                    this._dataFilePath = `${viewPathWithoutExtension}.data.${extension}`;
-                    this._dataHandlerPath = SViewRenderer.dataHandlers[extension].path;
-                }
-            });
-        }
     }
 
     /**
@@ -553,38 +554,34 @@ class SViewRenderer extends __SClass implements ISViewRenderer {
         // }
 
         return new __SPromise(async ({ resolve, reject }) => {
+            
             const viewRendererSettings = Object.assign(
                 {},
                 <ISViewRendererSettings>(
                     __deepMerge(this.viewRendererSettings, settings || {})
-                ),
-            );
+                    ),
+                    );
             data = __deepMerge(viewRendererSettings.defaultData, data);
-
+                    
             const duration = new __SDuration();
 
-            // load engine, datahandler, etc...
-            const { default: engineObj } = await import(this._enginePath);
-
-            let dataHandlerObj;
-            if (this._dataHandlerPath && this._dataFilePath) {
-                dataHandlerObj = (await import(this._dataHandlerPath)).default;
-                const gettedData = await dataHandlerObj.handle(
+            if (this._DataHandlerClass && this._dataFilePath) {
+                const gettedData = await this._DataHandlerClass.handle(
                     this._dataFilePath,
                 );
                 if (gettedData) data = __deepMerge(gettedData, data);
             }
 
             const engineSettings = __deepMerge(
-                engineObj.settings ?? {},
-                viewRendererSettings.enginesSettings[engineObj.id] ?? {},
+                this._EngineClass.interface?.defaults() ?? {},
+                viewRendererSettings.enginesSettings[this._EngineClass.id] ?? {},
             );
-            viewRendererSettings.enginesSettings = engineSettings;
 
-            if (engineObj) {
-                const renderFn = engineObj.render.bind(this);
+            if (this._EngineClass) {
 
-                const renderPromise = renderFn(
+                const rendererInstance = new this._EngineClass(engineSettings);
+
+                const renderPromise = rendererInstance.render(
                     this._viewPath,
                     data,
                     viewRendererSettings,

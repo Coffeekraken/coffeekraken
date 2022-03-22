@@ -19,7 +19,6 @@ describe('s-view.blade', () => {
         expect(res.startTime).not.toBeUndefined();
         expect(res.endTime).not.toBeUndefined();
         expect(res.duration).not.toBeUndefined();
-        expect(res.convertedDuration).not.toBeUndefined();
         expect(res.formatedDuration).not.toBeUndefined();
     });
 });

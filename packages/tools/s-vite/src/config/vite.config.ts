@@ -241,12 +241,12 @@ export default function (env, config) {
                 //         return path.replace(/\/dist\//, '/src/');
                 //     }
                 // },
-                '^(?:(?!\\.css|\\.ts|\\.js|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|@fs|__vite_ping|index\.html).)*$': {
+                '^(?:(?!\\.css|\\.ts|\\.js(?!on)|\\.tsx|\\.jsx|\\.mjs|@vite|\\.local|@fs|__vite_ping|index\.html).)*$': {
                     target: `http://localhost:8080`,
                     changeOrigin: true,
-                    rewrite: (path) => {
-                        return path.replace(/\/dist\//, '/src/');
-                    }
+                    // rewrite: (path) => {
+                    //     return path.replace(/\/dist\//, '/src/');
+                    // }
                 },
                 '/dist': {
                     target: `http://localhost:3000`,
@@ -256,18 +256,6 @@ export default function (env, config) {
                         return path.replace(/\/dist\//, '/src/');
                     }
                 }
-                // '/dist': {
-                //     target: `http://localhost:3000`,
-                //     changeOrigin: true,
-                //     rewrite: (path) => {
-                //         console.log('fefwfwfwfw ef ewpah', path);
-                //         return path.replace(/\/dist\//, '/src/');
-                //     }
-                // },
-                // '^/$': {
-                //     target: `http://localhost:8080`,
-                //     changeOrigin: true
-                // }
             }
         },
         css: {},

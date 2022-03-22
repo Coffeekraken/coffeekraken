@@ -146,7 +146,7 @@ class SBasicStdio extends __SStdio implements ISBasicStdio {
         if (logObj.group !== this._lastLogObj?.group) {
             console.log(groupObj.prefix);
             // @ts-ignore
-            console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${'-'.repeat(process.stdout.columns - 2 - logObj.group.length)}</${groupObj.color}>`);
+            console.log(`<bg${__upperFirst(groupObj.color)}><black> ${logObj.group} </black></bg${__upperFirst(groupObj.color)}><${groupObj.color}>${'-'.repeat(process.stdout.columns - 2 - logObj.group?.length ?? 0)}</${groupObj.color}>`);
             console.log(groupObj.prefix);
         }
 

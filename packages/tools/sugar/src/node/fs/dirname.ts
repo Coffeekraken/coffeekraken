@@ -23,6 +23,7 @@ import { fileURLToPath } from 'url';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 export default function () {
+
     if (process.env.NODE_ENV === 'test') {
         // @ts-ignore
 

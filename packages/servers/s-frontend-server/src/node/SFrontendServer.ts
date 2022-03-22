@@ -85,6 +85,12 @@ export default class SFrontendServer extends __SClass {
                     express.use(__compression());
                 }
 
+                setTimeout(() => {
+                    emit('info', {
+                        value: 'COCO'
+                    });
+                }, 3000)
+
                 const logLevelInt = [
                     'silent',
                     'error',

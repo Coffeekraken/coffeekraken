@@ -1,15 +1,11 @@
-import {
-  ISCommandProcessSettings,
-  ISCommandProcessCtorSettings,
-  ISCommandProcessParams,
-  ISProcessResultObject
-} from './ISProcess';
-import __SProcess from './SProcess';
+import __spawn from '@coffeekraken/sugar/node/process/spawn';
 import __deepMerge from '@coffeekraken/sugar/shared/object/deepMerge';
 import __SCommandProcessInterface from './interface/SCommandProcessInterface';
-import __spawn, {
-  ISpawnSettings
-} from '@coffeekraken/sugar/node/process/spawn';
+import {
+  ISCommandProcessCtorSettings,
+  ISCommandProcessParams, ISCommandProcessSettings, ISProcessResultObject
+} from './ISProcess';
+import __SProcess from './SProcess';
 
 /**
  * @name            SCommandProcess

@@ -24,7 +24,7 @@ describe('s-process.SProcessManager', () => {
         expect(res.value).toEqual({
             param1: 'Hello',
             param2: true,
-            isChildProcess: false,
+            isChildProcess: true,
             crash: false,
             crashTimeout: 100,
         });

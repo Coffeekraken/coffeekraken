@@ -30,6 +30,7 @@ interface IProcessRunChildOptions {
     const settings = Object.assign({}, args._settings);
     const processPath = settings.processPath;
     delete settings.processPath;
+    delete args['0'];
     delete args._settings;
 
     const pro = await __SProcess.from(processPath, {
@@ -42,5 +43,13 @@ interface IProcessRunChildOptions {
     if (pro && pro.run) {
         const proPromise = pro.run(args);
         const res = await proPromise;
+
+        try {
+            console.log(JSON.stringify(res.value));
+        } catch(e) {
+            console.log(res.value?.toString?.() ?? res.value);
+        }
+
+        process.exit(0);
     }
 })();

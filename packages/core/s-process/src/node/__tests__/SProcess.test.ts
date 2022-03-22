@@ -26,7 +26,7 @@ describe('s-process', () => {
             param2: false,
             crash: false,
             crashTimeout: 100,
-            isChildProcess: false,
+            isChildProcess: true,
         });
     });
     it('Should start a simple process as child correctly', async () => {
@@ -98,6 +98,8 @@ describe('s-process', () => {
         expect(res.value.state).toBe('success');
         expect(res.value.isChildProcess).toBe(true);
     });
+
+    //
 
     // it('Should initiate correctly a promise based process', async () => {
     //     const pro = await __SProcess.from(

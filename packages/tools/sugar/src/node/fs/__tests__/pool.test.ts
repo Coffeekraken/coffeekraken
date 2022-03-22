@@ -6,6 +6,8 @@ import __packageTmpDir from '../../path/packageTmpDir';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __wait from '../../../shared/time/wait';
 
+jest.setTimeout(20000);
+
 describe('sugar.node.fs.pool', () => {
     it('Should correctly start a pool and listen for updates, deletion, etc...', () => {
         return new Promise(async (resolve) => {

@@ -5,7 +5,7 @@ import __SBench from '@coffeekraken/s-bench';
 import __SEnv from '@coffeekraken/s-env';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
 import __SInterface from '@coffeekraken/s-interface';
-import __SStdio, { STerminalStdio } from '@coffeekraken/s-stdio';
+import __SStdio, { ISStdio } from '@coffeekraken/s-stdio';
 import __SSugarConfig from '@coffeekraken/s-sugar-config';
 import __SSugarJson from '@coffeekraken/s-sugar-json';
 import '@coffeekraken/sugar/node/index';
@@ -78,7 +78,8 @@ export interface ISSugarCliArgs {
 }
 
 export default class SSugarCli {
-    _stdio: STerminalStdio;
+    _stdio: ISStdio;
+    _websocketStdio: ISStdio;
     _eventEmitter: __SEventEmitter;
     _treatAsMain: boolean;
     _sugarJsons: any;
@@ -266,6 +267,8 @@ export default class SSugarCli {
     }
 
     _setNodeEnv() {
+        // do not touch if is jest
+        if (process.env.JEST_WORKER_ID) return;
         if (this.args.params.env) {
             switch (this.args.params.env) {
                 case 'dev':
@@ -331,6 +334,8 @@ export default class SSugarCli {
     }
 
     _proxyConsole() {
+        // do not proxy text environment
+        if (process.env.NODE_ENV === 'test') return;
         // hooking the consoles methods to parse html at output
         const originalConsole = {};
         ['log', 'warn', 'error', 'trace'].forEach((method) => {
@@ -347,12 +352,31 @@ export default class SSugarCli {
         });
     }
 
+    _initStdio(def = true, websocket = true) {
+        if (this._isStdioNeeded()) {
+            if (def) {
+                this._stdio = __SStdio.existingOrNew(
+                    'default',
+                    this._eventEmitter,
+                    __SStdio.NO_UI,
+                    // sugarCliSettings?.stdio ?? null,
+                );
+            }
+            if (websocket) {
+                this._websocketStdio = __SStdio.existingOrNew(
+                    'websocket',
+                    this._eventEmitter,
+                    __SStdio.UI_WEBSOCKET
+                );
+            }
+        }
+    }
+
     _isStdioNeeded() {
         return !__isChildProcess() || this._treatAsMain;
     }
 
     _getCliObj() {
-
         const defaultStackAction =
             this._availableCli.defaultByStack[this.args.stack];
 
@@ -362,7 +386,7 @@ export default class SSugarCli {
             ]
         ) {
             this._displayHelpAfterError();
-            process.exit();
+            process.exit(0);
         }
         let cliObj =
             this._availableCli.endpoints[
@@ -405,14 +429,8 @@ export default class SSugarCli {
                 cliObj.processPath
             );
 
-            if (this._isStdioNeeded()) {
-                this._stdio = __SStdio.existingOrNew(
-                    'default',
-                    this._eventEmitter,
-                    __SStdio.NO_UI,
-                    // sugarCliSettings?.stdio ?? null,
-                );
-            }
+            // init stdio
+            this._initStdio(true, true);
 
             await __wait(100);
 
@@ -438,16 +456,12 @@ export default class SSugarCli {
             await proPromise;
             await __wait(1000);
             // if (!__isChildProcess()) {
-                process.exit();
+                process.exit(0);
             // }
         } else if (cliObj.command) {
-            if (this._isStdioNeeded()) {
-                this._stdio = __SStdio.existingOrNew(
-                    'default',
-                    this._eventEmitter,
-                    // 'terminal',
-                );
-            }
+
+            // init stdio
+            this._initStdio(true, true);
 
             const promise = __spawn(
                 SSugarCli.replaceTokens(cliObj.command),
@@ -457,7 +471,7 @@ export default class SSugarCli {
             this._eventEmitter.pipe(promise);
             const res = await promise;
             // if (!__isChildProcess()) {
-                process.exit();
+                process.exit(0);
             // }
         }
     }
@@ -683,10 +697,10 @@ export default class SSugarCli {
     }
 
     async _displayHelp() {
-        if (this._isStdioNeeded()) {
-            this._stdio = __SStdio.existingOrNew('default', this._eventEmitter);
-        }
 
+        // init stdop
+        this._initStdio(true, false);
+        
         await __wait(100);
 
         this._newStep();
@@ -739,7 +753,7 @@ export default class SSugarCli {
             await __wait(1000);
 
             // if (!__isChildProcess()) {
-                process.exit();
+                process.exit(0);
             // }
         }
 
@@ -787,7 +801,7 @@ export default class SSugarCli {
         await __wait(1000);
 
         // if (!__isChildProcess()) {
-            process.exit();
+            process.exit(0);
         // }
     }
 
@@ -807,6 +821,7 @@ export default class SSugarCli {
     }
 }
 
-if (!global._sugarCli) {
+// instanciate the cli only once and not for test environment
+if (!global._sugarCli && process.env.NODE_ENV !== 'test') {
     global._sugarCli = new SSugarCli();
 }

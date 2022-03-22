@@ -22,6 +22,7 @@ import __filter from '@coffeekraken/sugar/shared/object/filter';
 import __commandExists from '@coffeekraken/sugar/node/command/commandExists';
 
 import __SFrontspec from '@coffeekraken/s-frontspec';
+import __SEventEmitter from '@coffeekraken/s-event-emitter';
 
 export interface ISFrontstackSettings {}
 export interface ISFrontstackCtorSettings {
@@ -366,7 +367,7 @@ export default class SFrontstack extends __SClass {
                     if (recipeObj.requirements.commands) {
                         for (let i=0; i<recipeObj.requirements.commands.length; i++) {
                             emit('log', {
-                                type: __SLog.TYPE_INFO,
+                                type: __SLog.TYPE_VERBOSE,
                                 value: `<yellow>[requirements]</yellow> Checking for the "<magenta>${recipeObj.requirements.commands[i]}</magenta>" command to exists...`
                             });
                             const version = await __commandExists(recipeObj.requirements.commands[i])
@@ -376,7 +377,7 @@ export default class SFrontstack extends __SClass {
                                 );
                             } else {
                                 emit('log', {
-                                    type: __SLog.TYPE_INFO,
+                                    type: __SLog.TYPE_VERBOSE,
                                     value: `<green>[requirements]</green> Command "<magenta>${recipeObj.requirements.commands[i]}</magenta>" available in version <cyan>${__stripAnsi(String(version).replace('\n',''))}</cyan>.`
                                 });
                             }

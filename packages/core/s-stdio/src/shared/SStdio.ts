@@ -29,7 +29,7 @@ export interface ISStdioComponent {
     render(logObj: ISLog, settings: any);
 }
 
-export type ISStdioUi = -1 | 'terminal' | 'console';
+export type ISStdioUi = -1 | 'websocket';
 
 export interface ISStdioLogFn {
     (...logObj: ISLog[]): void;
@@ -127,6 +127,18 @@ export default class SStdio extends __SClass implements ISStdio {
      * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
      */
     static UI_BASIC: ISStdioUi = -1;
+
+    /**
+     * @name      UI_WEBSOCKER
+     * @type      ISStdioUi
+     * @static
+     *
+     * Represent the "websocket" stdio
+     *
+     * @since       2.0.0
+     * @author    Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
+     */
+    static UI_WEBSOCKET: ISStdioUi = 'websocket';
 
     /**
      * @name      _logsBuffer
@@ -505,16 +517,23 @@ export default class SStdio extends __SClass implements ISStdio {
             let componentObj = (<any>this).constructor.registeredComponents[
                 this.constructor.name
             ][logType];
-            // if (!componentObj)
-            //     throw new Error(
-            //         `Sorry but the requested "<yellow>${
-            //             log.type || 'default'
-            //         }</yellow>" in the "<cyan>${
-            //             this.constructor.name
-            //         }</cyan>" stdio class does not exists...`,
-            //     );
-
             if (!componentObj) {
+                // @ts-ignore
+                this._log({
+                    type: 'default',
+                    metas: {},
+                    group: this.constructor.name,
+                    value: `The requested "<yellow>${
+                        log.type || 'default'
+                    }</yellow>" component in the "<cyan>${
+                        this.constructor.name
+                    }</cyan>" stdio class does not exists...`
+                }, {
+                    id: 'default',
+                    render(logObj) {
+                        return `⚠️  ${logObj.value}`;
+                    }
+                });
                 componentObj = (<any>this).constructor.registeredComponents[
                     this.constructor.name
                 ].default;

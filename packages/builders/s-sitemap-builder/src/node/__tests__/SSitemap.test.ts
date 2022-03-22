@@ -13,7 +13,7 @@ describe('s-sitemap.node.SSitemap', () => {
         });
         const res = await resPromise;
 
-        console.log(res);
+        // console.log(res);
 
         expect(true).toBe(true);
     });

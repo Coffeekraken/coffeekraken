@@ -49,8 +49,7 @@ export default class MyProcess extends __SProcess {
             // @ts-ignore
             if (params.crash) {
                 await __wait(params.crashTimeout);
-                throw new Error('COCO');
-                // reject(params);
+                reject(params);
             } else {
                 resolve({
                     ...params,

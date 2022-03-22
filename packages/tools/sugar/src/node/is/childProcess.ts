@@ -24,7 +24,6 @@ import __isTestEnv from '../../shared/is/testEnv';
  * @author         Olivier Bossel <olivier.bossel@gmail.com> (https://coffeekraken.io)
  */
 function isChildProcess() {
-    if (__isTestEnv()) return false;
     return (
         process.send !== undefined || process.env.IS_CHILD_PROCESS !== undefined
     );

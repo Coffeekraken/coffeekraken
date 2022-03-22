@@ -458,7 +458,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
             return;
         }
 
-        if (!__isChildProcess() && processSettings.stdio && !this.stdio) {
+        if (process.env.NODE_ENV !== 'test' && !__isChildProcess() && processSettings.stdio && !this.stdio) {
             this.stdio = __SStdio.existingOrNew(
                 'default',
                 this,
@@ -533,6 +533,7 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
         processSettings.before?.(this);
         
         if (processSettings.runAsChild && !__isChildProcess()) {
+
             // build the command to run depending on the passed command in the constructor and the params
             const commandToRun = __buildCommandLine(
                 `node --experimental-specifier-resolution=node ${__path.resolve(
@@ -547,7 +548,6 @@ class SProcess extends __SEventEmitter implements ISProcessInternal {
                     keepFalsy: true,
                 },
             );
-
             // run child process
             this._processPromise = __spawn(commandToRun, [], {
                 ...(processSettings.spawnSettings || {}),

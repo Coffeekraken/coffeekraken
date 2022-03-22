@@ -1,15 +1,13 @@
 // @ts-nocheck
 
-import __uniquid from '../../shared/string/uniqid';
-import __deepMerge from '../../shared/object/deepMerge';
-import { spawn as __spawn, SpawnOptions } from 'child_process';
-import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
-import __onProcessExit from './onProcessExit';
-import __SDuration from '@coffeekraken/s-duration';
-import __isTestEnv from '../../shared/is/testEnv';
-import __SLog from '@coffeekraken/s-log';
 import __SSugarCli from '@coffeekraken/cli';
+import __SDuration from '@coffeekraken/s-duration';
 import __SEventEmitter from '@coffeekraken/s-event-emitter';
+import __SLog from '@coffeekraken/s-log';
+import __SPromise, { ISPromise } from '@coffeekraken/s-promise';
+import { spawn as __spawn, SpawnOptions } from 'child_process';
+import __deepMerge from '../../shared/object/deepMerge';
+import __onProcessExit from './onProcessExit';
 
 /**
  * @name            spawn
@@ -86,13 +84,13 @@ export default function spawn(
 
         // replace tokens using the SSugarCli replaceTokens function
         command = __SSugarCli.replaceTokens(command);
-
         const eventEmitter = await __SEventEmitter.ipcServer();
         pipe(eventEmitter);
-
+        
         childProcess = __spawn(command, [], {
             shell: true,
             stdio: ['pipe', 'pipe', 'pipe'],
+            // stdio: 'inherit',
             // detached: true,
             cwd: settings.cwd || process.cwd(),
             ...settings,
@@ -102,7 +100,8 @@ export default function spawn(
                 CHILD_PROCESS_LEVEL: process.env.CHILD_PROCESS_LEVEL
                     ? process.env.CHILD_PROCESS_LEVEL + 1
                     : 1,
-                NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
+                // @todo        Check if this needed or not...
+                // NODE_ENV: __isTestEnv() ? 'development' : process.env.NODE_ENV,
                 IS_CHILD_PROCESS: true,
             },
         });
@@ -128,20 +127,28 @@ export default function spawn(
             childProcess.stdout.on('data', (data) => {
                 if (!data) return;
                 stdout.push(data.toString());
-                emit('log', {
-                    type: __SLog.TYPE_CHILD_PROCESS,
-                    value: data.toString(),
-                });
+                if (process.env.NODE_ENV === 'test') {
+                    console.log(data.toString());
+                } else {
+                    emit('log', {
+                        type: __SLog.TYPE_CHILD_PROCESS,
+                        value: data.toString(),
+                    });
+                }
             });
         }
         if (childProcess.stderr) {
             childProcess.stderr.on('data', (data) => {
                 if (!data) return;
                 stderr.push(data.toString());
-                emit('log', {
-                    type: __SLog.TYPE_CHILD_PROCESS,
-                    value: data.toString(),
-                });
+                if (process.env.NODE_ENV === 'test') {
+                    console.error(data.toString());
+                } else {
+                    emit('log', {
+                        type: __SLog.TYPE_CHILD_PROCESS,
+                        value: data.toString(),
+                    });
+                }
             });
         }
 
@@ -149,14 +156,20 @@ export default function spawn(
         childProcess.on('close', (code, signal) => {
             if (isEnded) return;
             isEnded = true;
+
+            // build and parse the value if possible
+            let value = resolveValue ||
+                    rejectValue ||
+                    stdout.length ? stdout.join('\n') : stderr.length ? stderr.join('\n') : '';
+            try {
+                value = JSON.parse(value)
+            } catch(e) {}
+
             // build the result object
             const resultObj = {
                 code,
                 signal,
-                value:
-                    resolveValue ||
-                    rejectValue ||
-                    `${stdout.toString()}\n${stderr.toString()}`,
+                value,
                 stdout,
                 stderr,
                 spawn: true,
